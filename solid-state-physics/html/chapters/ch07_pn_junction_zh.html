@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>第七章：pn 接面 — 半導體物理與元件</title>
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']],tags:'ams'},options:{ignoreHtmlClass:'no-math'}};</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+:root{--bg:#fff;--b2:#F5F5F7;--b3:#E8F0FE;--tx:#1D1D1F;--t2:#1D1D1F;--ac:#007AFF;--bd:#D2D2D7;--sh:0 2px 8px rgba(0,0,0,.08);--fbd:#E5E5EA;--wbg:#FFF9F0;--wbd:#FFB340;--wtx:#B8700A;--nw:260px}
+[data-theme="dark"]{--bg:#1C1C1E;--b2:#2C2C2E;--b3:#1A2332;--tx:#F5F5F7;--t2:#A1A1A6;--ac:#0A84FF;--bd:#48484A;--fbd:#3A3A3C;--wbg:#2C2416;--wbd:#8B6914;--wtx:#FFB340}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth;scroll-padding-top:16px}
+body{font-family:-apple-system,BlinkMacSystemFont,'Noto Sans TC','Microsoft JhengHei',sans-serif;background:var(--b2);color:var(--tx);line-height:1.9;display:flex;min-height:100vh}
+.sidebar{position:fixed;top:0;left:0;width:var(--nw);height:100vh;background:var(--bg);border-right:1px solid var(--bd);overflow-y:auto;z-index:100;padding:20px 16px;display:flex;flex-direction:column}
+.sh{margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--fbd)}.sh h2{font-size:14px;font-weight:600;color:var(--ac)}.sh .bk{font-size:11px;color:var(--t2)}
+.sn{flex:1}.sn ul{list-style:none}.sn a{display:block;padding:4px 10px;font-size:11px;color:var(--t2);text-decoration:none;border-radius:5px;transition:.12s}.sn a:hover{background:var(--b3);color:var(--ac)}.sn a.active{background:var(--b3);color:var(--ac);font-weight:500}.sn .ns{font-weight:600;font-size:12px;color:var(--tx);margin-top:10px;padding:2px 10px}.sn .nsub a{padding-left:20px;font-size:10px}
+.st{margin-top:auto;padding-top:12px;border-top:1px solid var(--fbd)}.st button{width:100%;padding:6px;border:1px solid var(--bd);border-radius:6px;background:var(--b2);color:var(--tx);cursor:pointer;font-size:12px}
+.main{margin-left:var(--nw);flex:1;max-width:1050px;padding:32px 40px 80px}
+.header{margin-bottom:32px;padding-bottom:20px;border-bottom:2px solid var(--ac)}.header .cl{font-size:12px;font-weight:600;color:var(--ac);letter-spacing:1px}.header h1{font-size:28px;font-weight:700;margin:6px 0}.header .meta{font-size:13px;color:var(--t2)}
+section{margin-bottom:44px}h2{font-size:20px;font-weight:700;color:var(--ac);margin-bottom:14px;padding-bottom:6px;border-bottom:1px solid var(--bd)}h3{font-size:16px;font-weight:600;color:var(--tx);margin:24px 0 10px}p{font-size:14px;color:var(--t2);margin-bottom:12px}strong{font-weight:600;color:var(--tx)}
+.eq{text-align:center;margin:16px 0;font-size:15px}
+.figure{margin:24px 0;text-align:center}.figure img{max-width:100%;border-radius:8px;box-shadow:var(--sh);cursor:pointer}.figure img:hover{transform:scale(1.01)}.figure figcaption{margin-top:8px;font-size:12px;color:var(--t2)}
+.callout{background:var(--b3);border:1px solid var(--fbd);border-radius:8px;padding:14px 18px;margin:16px 0;font-size:13px}.callout strong{color:var(--ac)}
+.callout-warn{background:var(--wbg);border:1px solid var(--wbd);border-radius:8px;padding:14px 18px;margin:16px 0;font-size:13px}.callout-warn strong{color:var(--wtx)}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}thead th{background:var(--b3);padding:8px 12px;font-size:12px;font-weight:600;border-bottom:2px solid var(--bd)}tbody td{padding:8px 12px;border-bottom:1px solid var(--fbd)}tbody tr:nth-child(even){background:var(--b2)}
+@media(max-width:768px){.sidebar{transform:translateX(-100%);transition:.3s}.sidebar.open{transform:translateX(0)}.main{margin-left:0;padding:20px 16px 60px}}
+@media print{.sidebar{display:none}.main{margin-left:0;max-width:100%;padding:0}}
+</style>
+<script src="../../../reading-preferences.js" defer></script></head>
+<body><a class="portal-home-link" href="../../../index.html">返回學習中心</a><style id="portal-home-link-style">.portal-home-link{position:fixed;top:16px;right:16px;z-index:1000;display:inline-flex;align-items:center;min-height:36px;padding:7px 11px;border:1px solid #cbd5e1;border-radius:8px;background:#fff;color:#1d4ed8;font:600 13px/1.2 -apple-system,BlinkMacSystemFont,"Noto Sans TC","Microsoft JhengHei",sans-serif;text-decoration:none;box-shadow:0 2px 10px rgba(15,23,42,.08)}.portal-home-link:hover{background:#eff6ff}.portal-home-link:focus-visible{outline:3px solid rgba(37,99,235,.35);outline-offset:2px}@media(max-width:768px){.portal-home-link{top:10px;right:10px;min-height:34px;padding:7px 9px;font-size:12px}}</style>
+<nav class="sidebar"><div class="sh"><div class="bk">半導體物理與元件·第四版</div><h2>第七章</h2></div><div class="sn"><ul>
+<div class="figure"><img src="../../../images/solid-state-physics/ch07_pages/ch7_page_273.png" alt="圖 7.3" loading="lazy"><figcaption>圖 7.3：pn 接面空乏區的電荷分布、電場分布、電位分布——三角形電場、S 形電位。</figcaption></div>
+<li><a href="#preview">📋 7.0 本章預覽</a></li>
+<li class="ns">7.1–7.2 零偏壓</li><li class="nsub"><a href="#s7-1">7.1 基本結構</a></li><li class="nsub"><a href="#s7-2a">7.2.1 內建電位差 ⭐</a></li><li class="nsub"><a href="#s7-2b">7.2.2–7.2.3 電場·空乏區 ⭐</a></li>
+<li class="ns">7.3 反向偏壓</li><li class="nsub"><a href="#s7-3">7.3 反向偏壓·接面電容</a></li>
+<li class="ns">7.4–7.5</li><li class="nsub"><a href="#s7-4">7.4 接面崩潰</a></li><li class="nsub"><a href="#s7-5">7.5 非均勻摻雜接面</a></li>
+<li><a href="#summary">📋 本章摘要</a></li>
+</ul></div><div class="st"><button onclick="toggleTheme()">🌓 <span id="tl">深色模式</span></button></div></nav>
+<main class="main">
+<header class="header"><div class="cl">第七章</div><h1>pn 接面</h1><div class="meta">Donald A. Neamen·《半導體物理與元件：基本原理》第四版·第 232–277 頁</div></header>
+
+<section id="preview"><div class="callout"><strong>📋 7.0 本章預覽</strong>
+<p>前面六章建立了半導體材料物理的完整基礎。現在我們把 p 型和 n 型半導體放在一起，觀察它們的界面處發生什麼——這就形成了<strong>pn 接面</strong>，半導體元件物理中最基本也最重要的結構。</p>
+<p>本章討論 pn 接面的<strong>靜態特性</strong>——在零偏壓和反向偏壓下的能帶圖、空間電荷分布、電場、電位、以及接面電容。這是理解所有半導體元件（二極體、BJT、MOSFET、太陽能電池）的第一步。第八章將討論順向偏壓下的電流-電壓特性。</p>
+<div class="callout-warn"><strong>⚡ pn 接面在全書中的核心位置：</strong>第一至三章→固態物理基礎（能帶、態密度、統計）。第四章→平衡態載子濃度。第五章→載子傳輸（漂移+擴散）。第六章→非平衡過量載子。這些<strong>全部</strong>被用來分析 pn 接面——能帶彎曲來自第四章的 Fermi 能階概念；空乏區電場來自 Poisson 方程；接面電流（第八章）來自第五章的漂移-擴散方程和第六章的連續性方程。本章是前面所有知識的集大成應用。</div></div></section>
+
+<div class="figure"><img src="../../../images/solid-state-physics/ch07_pages/ch07_overview.png" alt="第七章總覽圖" loading="lazy"><figcaption>📌 第七章總覽圖：pn 接面 — 接面形成、空乏區分析、反向偏壓、崩潰機制、Zener vs Avalanche</figcaption></div>
+
+<section id="s7-1"><h2>7.1 pn 接面的基本結構</h2>
+<p>最簡單的 pn 接面是<strong>突變接面（abrupt junction）</strong>——摻雜濃度在冶金界面處從 $N_a$（p 側）突然變為 $N_d$（n 側）。雖然真實元件中的接面是透過擴散或離子植入形成的（摻雜分布較漸進），突變接面是最容易分析的理想化模型，也是理解所有真實接面的出發點。</p>
+<div class="figure"><img src="../../../images/solid-state-physics/ch07_pages/ch7_page_267.png" alt="圖 7.1, 7.2" loading="lazy"><figcaption>圖 7.1：pn 接面的二維示意圖——p 區和 n 區在冶金接面處接觸。圖 7.2：摻雜濃度分布——突變接面假設 $N_a$ 和 $N_d$ 在界面處階梯式變化。</figcaption></div>
+
+<p><strong>接面形成的物理過程——四個步驟：</strong></p>
+<p><strong>第一步：巨大的濃度梯度。</strong>在接面形成的瞬間，p 側有高濃度電洞（∼$10^{17}$ cm⁻³），n 側有高濃度電子（∼$10^{16}$ cm⁻³）。濃度梯度驅動載子擴散——電洞從 p 側擴散到 n 側，電子從 n 側擴散到 p 側。</p>
+<p><strong>第二步：留下帶電的雜質離子。</strong>當電洞離開 p 側時，原本被電洞中和的負受體離子 $N_a^-$ 被「揭露」出來——它們固定在晶格中，無法移動。同理，n 側留下正的施體離子 $N_d^+$。這些不可移動的雜質離子形成<strong>空間電荷區（space charge region）</strong>。</p>
+<p><strong>第三步：內建電場的形成。</strong>正離子（n 側）和負離子（p 側）之間產生從 n 指向 p 的內建電場。這個電場<strong>阻止</strong>進一步的載子擴散——它把電洞推回 p 側、把電子推回 n 側。</p>
+<p><strong>第四步：動態平衡。</strong>擴散電流（載子從高濃度往低濃度）和漂移電流（內建電場推動載子）達到精確平衡→淨電流為零→接面處於熱平衡。</p>
+
+<div class="callout"><strong>💡 空乏區（depletion region）名字的由來：</strong>在這個區域中，自由載子（電子和電洞）已被「空乏」掉——它們被內建電場掃出或被擴散帶走。剩下的只有不可移動的雜質離子。空乏區是 pn 接面所有有趣物理的發生地——能帶彎曲、電場、電容、崩潰都在這裡。</div>
+</section>
+
+<section id="s7-2a"><h2>7.2.1 內建電位差 ⭐</h2>
+<p>在熱平衡下，一個系統只能有一個 Fermi 能階——如果 $E_F$ 在各處不同，電子就會流動直到均勻。n 側的 $E_F$ 原本靠近 $E_c$（因摻雜施體），p 側的 $E_F$ 原本靠近 $E_v$（因摻雜受體）。為了讓同一個 $E_F$ 貫穿整個結構，能帶<strong>必須彎曲</strong>。</p>
+<div class="figure"><img src="../../../images/solid-state-physics/ch07_pages/ch7_page_269.png" alt="圖 7.3" loading="lazy"><figcaption>圖 7.3：pn 接面在熱平衡下的能帶圖。$E_F$ 在整個結構中為常數。能帶在空乏區中彎曲，彎曲量 $=eV_{bi}$——內建電位差。</figcaption></div>
+
+<p>能帶彎曲量對應一個<strong>內建電位差 $V_{bi}$</strong>（也稱為 diffusion potential 或 built-in potential）。它是 p 側和 n 側原始 Fermi 能階位置之差的直接度量：</p>
+<div class="eq">$$\boxed{V_{bi} = \frac{kT}{e}\ln\!\left(\frac{N_a N_d}{n_i^2}\right)}$$</div>
+
+<p><strong>推導思路：</strong>n 側的電子濃度 $n_{n0} = n_i e^{(E_F-E_{Fi})_n/kT}$。p 側的電子濃度 $n_{p0} = n_i e^{(E_F-E_{Fi})_p/kT}$。兩側的 $(E_{Fi})_n$ 和 $(E_{Fi})_p$ 不同——它們的差 $=eV_{bi}$。而 $n_{n0}\approx N_d$, $n_{p0}=n_i^2/N_a$。代入取對數即得上式。</p>
+
+<p><strong>$V_{bi}$ 的數值範圍：</strong>對 Si（$n_i=1.5\times10^{10}$ cm⁻³），$N_a=10^{17}$, $N_d=10^{16}$ cm⁻³→$V_{bi}=0.0259\ln(10^{33}/2.25\times10^{20})=0.754$ V。對 Ge（$n_i=2.4\times10^{13}$）相同摻雜→$V_{bi}=0.0259\ln(10^{33}/5.76\times10^{26})=0.368$ V。對 GaAs（$n_i=1.8\times10^6$）→$V_{bi}\approx1.2$ V。</p>
+
+<div class="callout"><strong>💡 為什麼你不能用電壓表量到 $V_{bi}$？</strong>因為金屬探針與半導體的接觸處也會產生內建電位（金半接面，見第九章），這些接觸電位與 pn 接面的 $V_{bi}$ 互相抵消。在一個封閉迴路中，所有內建電位的代數和為零（熱力學的要求）。$V_{bi}$ 只能透過電容-電壓（C-V）量測或光電子能譜等間接方法來測定。</div>
+</section>
+
+<section id="s7-2b"><h2>7.2.2–7.2.3 電場分布與空乏區寬度 ⭐</h2>
+<p>空間電荷區中的電場由 <strong>Poisson 方程</strong>決定：$d^2\phi/dx^2 = -\rho(x)/\epsilon_s$。在<strong>空乏近似（depletion approximation）</strong>下，我們假設空乏區內完全沒有自由載子，空間電荷僅來自離子化的雜質：</p>
+<div class="eq">$$\rho(x) = \begin{cases} -eN_a & (-x_p < x < 0) \\ +eN_d & (0 < x < x_n) \end{cases}$$</div>
+<p>在空乏區外，假設材料為電中性（$\rho=0$）。空乏近似雖然是一個理想化，但它給出了極其準確的結果（因為自由載子濃度在空乏區中確實遠小於雜質離子濃度）。</p>
+<div class="figure"><img src="../../../images/solid-state-physics/ch07_pages/ch7_page_271.png" alt="圖 7.4" loading="lazy"><figcaption>圖 7.4：(a) pn 接面的空間電荷密度——p 側均勻 $-eN_a$，n 側均勻 $+eN_d$。(b) 電場——從 n 側的零線性變化到冶金界面的最大值，再回到 p 側的零。(c) 電位——平滑 S 形曲線，總電位差 $=V_{bi}$。</figcaption></div>
+
+<p>Poisson 方程積分一次得電場。在 n 側（$0<x<x_n$）：$dE/dx = +eN_d/\epsilon_s$，積分得 $E(x) = (eN_d/\epsilon_s)(x-x_n)$。冶金界面 $x=0$ 處電場最大：</p>
+<div class="eq">$$\boxed{E_{\text{max}} = -\frac{eN_a x_p}{\epsilon_s} = -\frac{eN_d x_n}{\epsilon_s}}$$</div>
+<p>負號表示方向（從 n 指向 p）。<strong>電荷守恆</strong>要求總正電荷等於總負電荷：$N_a x_p = N_d x_n$。這意味著<strong>重摻雜側的空乏區比輕摻雜側窄</strong>——因為重摻雜側的空間電荷密度更高，只需較短的距離就能建立相同的總電荷量。</p>
+
+<p>再積分一次得電位，總電位差 $=V_{bi}$。由此解出空乏區總寬度：</p>
+<div class="eq">$$\boxed{W = x_n + x_p = \sqrt{\frac{2\epsilon_s V_{bi}}{e}\left(\frac{N_a+N_d}{N_a N_d}\right)}}$$</div>
+
+<p><strong>$W$ 的數量級：</strong>對 Si，$N_a=10^{17}$, $N_d=10^{16}$ cm⁻³，$\epsilon_s=11.7\epsilon_0=1.04\times10^{-12}$ F/cm，$V_{bi}=0.754$ V→$W=\sqrt{2\cdot1.04\times10^{-12}\cdot0.754/[1.6\times10^{-19}\cdot(1.1\times10^{17}/10^{33})]}\approx3.3\times10^{-5}$ cm $=0.33$ µm。</p>
+
+<div class="callout"><strong>💡 $W\propto\sqrt{V_{bi}}$ 的直覺：</strong>空乏區就像一個平行板電容器。要建立更大的電位差，你需要更多的空間電荷→空乏區必須更寬（以容納更多離子）。但摻雜濃度越高→空間電荷密度越大→只需較短距離就能累積所需的電荷→$W$ 越小。這就是為什麼重摻雜接面的空乏區更窄。</div>
+</section>
+
+<section id="s7-3"><h2>7.3 反向偏壓與接面電容</h2>
+<p>當外加<strong>反向偏壓 $V_R$</strong>（p 側接負、n 側接正）時，外加電場的方向與內建電場<strong>相同</strong>→總電位障壁增大為 $V_{bi}+V_R$→空乏區變寬：</p>
+<div class="eq">$$\boxed{W = \sqrt{\frac{2\epsilon_s(V_{bi}+V_R)}{e}\left(\frac{N_a+N_d}{N_a N_d}\right)}}$$</div>
+<div class="figure"><img src="../../../images/solid-state-physics/ch07_pages/ch7_page_276.png" alt="圖 7.7" loading="lazy"><figcaption>圖 7.7：反向偏壓下的能帶圖——能帶彎曲增大（$=e(V_{bi}+V_R)$），空乏區變寬。注意 $E_{Fn}$ 和 $E_{Fp}$ 的分離（準 Fermi 能階，第六章），兩者之差 $=eV_R$。</figcaption></div>
+
+<p><strong>接面電容（junction capacitance）或空乏層電容：</strong>空乏區兩側的空間電荷 $Q = eN_d x_n = eN_a x_p$ 形成一個平行板電容器。當反向偏壓變化時，$W$ 變化→$Q$ 變化→表現為電容：</p>
+<div class="eq">$$\boxed{C_j = \frac{\epsilon_s}{W} = \sqrt{\frac{e\epsilon_s N_a N_d}{2(V_{bi}+V_R)(N_a+N_d)}}}$$</div>
+
+<p><strong>$C_j \propto 1/\sqrt{V_{bi}+V_R}$：</strong>反向偏壓越大→$W$ 越大→$C_j$ 越小。這就是<strong>變容二極體（varactor diode）</strong>的工作原理——用電壓來控制電容值，用於射頻電路的頻率調諧。</p>
+
+<div class="figure"><img src="../../../images/solid-state-physics/ch07_pages/ch7_page_282.png" alt="圖 7.11" loading="lazy"><figcaption>圖 7.11：$1/C_j^2$ 對 $V_R$ 的關係圖——直線！截距 $=-V_{bi}$（給出內建電位），斜率 $\propto 1/N_d$（給出輕摻雜側的摻雜濃度）。這是實驗量測 pn 接面參數的標準方法。</figcaption></div>
+
+<p><strong>單側突變接面（one-sided abrupt junction，如 p⁺n）：</strong>當一側的摻雜遠重於另一側（$N_a\gg N_d$），空乏區幾乎完全在輕摻雜側。$W\approx x_n = \sqrt{2\epsilon_s(V_{bi}+V_R)/(eN_d)}$，$C_j = \sqrt{e\epsilon_s N_d/[2(V_{bi}+V_R)]}$。$C_j$ 完全由輕摻雜側的濃度決定——這對變容二極體的設計很重要。</p>
+</section>
+
+<section id="s7-4"><h2>7.4 接面崩潰</h2>
+<p>反向偏壓不能無限增大。當空乏區中的電場達到某一<strong>臨界值 $E_{\text{crit}}$</strong>時，載子透過碰撞游離倍增→反向電流急劇增大→pn 接面<strong>崩潰（breakdown）</strong>。</p>
+<p><strong>雪崩倍增（avalanche multiplication）的物理機制：</strong>空乏區中的少數載子（反向漏電流中的電子或電洞）被高電場加速到極高動能。當它們撞擊晶格原子時，如果動能超過 $E_g$（Si: 1.12 eV），就可以把價帶電子撞入導帶→產生一個新的電子-電洞對。這些新生載子也被加速→撞出更多載子→正回授連鎖反應→電流倍增。</p>
+<div class="figure"><img src="../../../images/solid-state-physics/ch07_pages/ch7_page_284.png" alt="圖 7.13" loading="lazy"><figcaption>圖 7.13：雪崩倍增過程——一個高能電子撞擊產生多個電子-電洞對，每個新生載子又被加速撞出更多載子。</figcaption></div>
+<p>崩潰電壓取決於輕摻雜側的濃度：</p>
+<div class="eq">$$\boxed{V_B \approx \frac{\epsilon_s E_{\text{crit}}^2}{2e N_B}}$$</div>
+<p>其中 $N_B$ 是輕摻雜側的濃度，$E_{\text{crit}}\approx3\times10^5$ V/cm（Si）。$V_B\propto1/N_B$——輕摻雜（低 $N_B$）→高崩潰電壓。功率二極體（需要耐壓數百至數千伏）使用極輕摻雜的集極/基極區域。</p>
+
+<p><strong>雪崩 vs 齊納——兩種不同的崩潰機制：</strong></p>
+<table><thead><tr><th>特性</th><th>雪崩崩潰（Avalanche）</th><th>齊納崩潰（Zener）</th></tr></thead><tbody>
+<tr><td>摻雜濃度</td><td>輕摻雜（$N_B < 10^{17}$）</td><td>重摻雜（$N_B > 10^{18}$）</td></tr>
+<tr><td>空乏區寬度</td><td>寬（>100 nm）</td><td>極窄（<20 nm）</td></tr>
+<tr><td>機制</td><td>碰撞游離倍增</td><td>帶對帶直接穿隧</td></tr>
+<tr><td>$V_B$ 範圍</td><td>> 6 V（Si）</td><td>< 5 V（Si）</td></tr>
+<tr><td>溫度係數</td><td><strong>正</strong>（$V_B$ 隨 $T$ 增加）</td><td><strong>負</strong>（$V_B$ 隨 $T$ 下降）</td></tr>
+<tr><td>物理原因</strong></td><td>高溫→聲子散射增加→平均自由程縮短→需要更高電場才能碰撞游離</td><td>高溫→$E_g$ 縮小→穿隧所需的電場降低</td></tr></tbody></table>
+<p>$V_B \approx 6$ V 時，兩種機制同時存在且溫度係數互相抵消——這是齊納二極體用作電壓參考的最佳工作點。</p>
+
+<div class="callout"><strong>💡 崩潰不一定是壞事——齊納二極體（Zener diode）。</strong>齊納二極體故意設計在崩潰區操作，利用崩潰電壓的高精確性和低溫度係數作為電壓參考。重摻雜（$N_B>10^{18}$）→空乏區極窄→$E_{\text{max}}$ 極高→崩潰電壓僅數伏→適合低壓參考。輕摻雜→高崩潰電壓→適合高壓箝位。每個電源電路中幾乎都有一顆齊納二極體或等效的能隙參考（bandgap reference）電路。</div>
+</section>
+
+<section id="s7-5"><h2>7.5 非均勻摻雜接面</h2>
+<p>真實的擴散或離子植入接面不是突變的——摻雜濃度在接面附近是<strong>漸進變化</strong>的。最簡單的非均勻模型是<strong>線性梯度接面（linearly graded junction）</strong>：$N_d-N_a = ax$（$a$ = 摻雜梯度，單位 cm⁻⁴）。</p>
+<p>線性梯度接面的特性與突變接面有質的不同：空間電荷不再是均勻分布（$\rho(x)=eax$），Poisson 方程積分後得到 $W\propto(V_{bi}+V_R)^{1/3}$（而非突變接面的 $V^{1/2}$），$C_j\propto V^{-1/3}$（而非 $V^{-1/2}$）。</p>
+
+<h3>超突變接面（Hyperabrupt Junction）與變容二極體</h3>
+<p>超突變接面透過特殊設計的摻雜分布（在接面附近刻意增加摻雜濃度梯度），使 $C_j$ 對電壓的依賴更強：</p>
+<div class="eq">$$C_j = C_{j0}\left(1 + \frac{V_R}{V_{bi}}\right)^{-m}, \quad m > \frac{1}{2}$$</div>
+<p>其中 $m$ 可達 2 或更高（對比突變接面 $m=1/2$，線性梯度 $m=1/3$）。$m$ 越大→$C_j$ 隨 $V_R$ 的變化越劇烈。</p>
+<p><strong>變容二極體（Varactor Diode）的應用：</strong>利用電壓控制的電容 $C_j(V)$ 來實現壓控振盪器（VCO）。振盪頻率 $f = 1/(2\pi\sqrt{LC_j})$→$f \propto V^{m/2}$。$m=2$ 時，$f \propto V$——頻率與電壓成<strong>線性</strong>關係，這對 FM 調變和鎖相迴路（PLL）至關重要。超突變接面 varactor 是手機射頻電路中頻率合成器的核心元件。</p>
+<div class="callout"><strong>💡 三種接面類型的 $C_j$-$V$ 關係比較：</strong>突變接面（離子植入）：$C_j \propto V^{-1/2}$。線性梯度（擴散）：$C_j \propto V^{-1/3}$。超突變（特殊摻雜）：$C_j \propto V^{-m}$，$m=1$–$2$。在電路設計中，$m$ 的選擇取決於應用：VCO 需要大 $m$（線性頻率調諧），一般濾波器用突變接面就夠了。</div>
+</section>
+
+<section id="summary"><h2>本章摘要</h2>
+<ol style="font-size:14px;color:var(--t2);margin-left:18px">
+<li><strong>接面形成四步驟：</strong>濃度梯度→載子擴散→留下雜質離子（空間電荷區）→內建電場→擴散與漂移平衡。</li>
+<li><strong>內建電位 $V_{bi}$：</strong>$(kT/e)\ln(N_a N_d/n_i^2)$。Si 典型 0.6–0.8 V。不能直接用電壓表量到。</li>
+<li><strong>空乏近似：</strong>$\rho=-eN_a$（p 側）、$+eN_d$（n 側）。Poisson 方程→電場（三角分布）→電位（S 形曲線）。</li>
+<li><strong>空乏區寬度 $W$：</strong>$\propto\sqrt{V_{bi}}$。重摻雜→窄 $W$。電荷守恆：$N_a x_p=N_d x_n$（重摻雜側更窄）。</li>
+<li><strong>反向偏壓：</strong>$V_R$→$V_{bi}+V_R$→$W$ 變寬。$C_j=\epsilon_s/W\propto1/\sqrt{V_{bi}+V_R}$→變容二極體原理。</li>
+<li><strong>崩潰：</strong>$V_B\approx\epsilon_s E_{\text{crit}}^2/(2eN_B)$。輕摻雜→高耐壓。雪崩倍增機制。</li>
+<li><strong>非均勻接面：</strong>線性梯度 $W\propto V^{1/3}$。超突變接面 $C_j\propto V^{-m}$（$m>1/2$）→VCO 應用。</li></ol></section>
+</main>
+<script>
+function toggleTheme(){const h=document.documentElement;const n=h.getAttribute('data-theme')==='light'?'dark':'light';h.setAttribute('data-theme',n);localStorage.setItem('theme',n);document.getElementById('tl').textContent=n==='dark'?'淺色模式':'深色模式';}
+const s=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',s);if(s==='dark')document.getElementById('tl').textContent='淺色模式';
+const secs=document.querySelectorAll('section[id]');const navs=document.querySelectorAll('.sn a');window.addEventListener('scroll',()=>{let c='';secs.forEach(s=>{if(window.scrollY>=s.offsetTop-80)c=s.getAttribute('id');});navs.forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+c);});});
+document.querySelectorAll('.figure img').forEach(i=>i.addEventListener('click',()=>window.open(i.src,'_blank')));
+</script>
+</body>
+</html>

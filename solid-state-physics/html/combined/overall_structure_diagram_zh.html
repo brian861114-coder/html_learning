@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>整體結構脈絡圖｜Semiconductor Physics and Devices</title>
+  <style>
+    :root {
+      --bg: #eef5ff;
+      --panel: rgba(248, 252, 255, 0.94);
+      --ink: #10233a;
+      --muted: #61758d;
+      --line: rgba(126, 170, 216, 0.36);
+      --blue: #3c7cbb;
+      --blue-2: #74b5ea;
+      --blue-3: #d9ecfb;
+      --shadow: 0 18px 38px rgba(72, 119, 171, 0.12);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(126, 190, 245, 0.20), transparent 26%),
+        radial-gradient(circle at top right, rgba(116, 181, 234, 0.16), transparent 22%),
+        linear-gradient(180deg, #f8fbff 0%, #edf4fb 55%, #e8f0f8 100%);
+      line-height: 1.7;
+    }
+
+    .wrap {
+      width: min(1180px, calc(100vw - 28px));
+      margin: 0 auto;
+      padding: 28px 0 48px;
+    }
+
+    .hero,
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+    }
+
+    .hero {
+      padding: 32px;
+      margin-bottom: 20px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: rgba(116, 181, 234, 0.12);
+      color: var(--blue);
+      border: 1px solid rgba(116, 181, 234, 0.18);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+    }
+
+    h1, h2 {
+      margin: 0;
+      font-family: "Segoe UI", "Noto Sans TC", sans-serif;
+    }
+
+    h1 {
+      margin-top: 14px;
+      font-size: clamp(2rem, 4vw, 3.1rem);
+      line-height: 1.08;
+    }
+
+    h2 {
+      font-size: 1.7rem;
+      margin-bottom: 10px;
+    }
+
+    .lead {
+      margin-top: 14px;
+      max-width: 920px;
+      color: var(--muted);
+      font-size: 1.02rem;
+    }
+
+    .hero-links,
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .link-btn,
+    .legend-chip {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 15px;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .link-btn {
+      background: rgba(255, 255, 255, 0.82);
+      border: 1px solid rgba(116, 181, 234, 0.24);
+      color: var(--blue);
+    }
+
+    .panel {
+      padding: 24px;
+    }
+
+    .diagram-shell {
+      margin-top: 16px;
+      padding: 16px;
+      border-radius: 22px;
+      background: linear-gradient(180deg, rgba(228, 242, 255, 0.76), rgba(248, 252, 255, 0.98));
+      border: 1px solid rgba(126, 170, 216, 0.22);
+    }
+
+    .diagram-scroll {
+      overflow-x: auto;
+    }
+
+    svg {
+      width: 100%;
+      min-width: 980px;
+      height: auto;
+      display: block;
+    }
+
+    .node {
+      fill: rgba(255, 255, 255, 0.92);
+      stroke: rgba(126, 170, 216, 0.42);
+      stroke-width: 1.5;
+      rx: 18;
+    }
+
+    .node.root {
+      fill: url(#rootGrad);
+      stroke: rgba(60, 124, 187, 0.45);
+    }
+
+    .node.group {
+      fill: rgba(217, 236, 251, 0.72);
+      stroke: rgba(116, 181, 234, 0.44);
+    }
+
+    .line {
+      stroke: rgba(98, 145, 192, 0.44);
+      stroke-width: 2.2;
+      fill: none;
+      stroke-linecap: round;
+    }
+
+    .arrow {
+      fill: rgba(98, 145, 192, 0.72);
+    }
+
+    .t-root {
+      font-size: 28px;
+      font-weight: 800;
+      fill: #0f2740;
+    }
+
+    .t-group {
+      font-size: 19px;
+      font-weight: 800;
+      fill: #1f4f7e;
+    }
+
+    .t-node {
+      font-size: 17px;
+      font-weight: 700;
+      fill: #17314c;
+    }
+
+    .t-sub {
+      font-size: 13px;
+      fill: #65798f;
+    }
+
+    .legend-chip {
+      background: rgba(116, 181, 234, 0.10);
+      border: 1px solid rgba(116, 181, 234, 0.16);
+      color: var(--blue);
+      font-size: 0.92rem;
+    }
+
+    .notes {
+      margin-top: 18px;
+      display: grid;
+      gap: 14px;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    }
+
+    .note {
+      border-radius: 18px;
+      padding: 16px;
+      background: rgba(255, 255, 255, 0.76);
+      border: 1px solid rgba(126, 170, 216, 0.20);
+    }
+
+    .note strong {
+      color: var(--blue);
+    }
+
+    @media (max-width: 720px) {
+      .wrap {
+        width: min(100vw - 18px, 1180px);
+        padding-top: 18px;
+      }
+
+      .hero,
+      .panel {
+        padding: 20px;
+        border-radius: 20px;
+      }
+    }
+  </style>
+<script src="../../../reading-preferences.js" defer></script></head>
+<body><a class="portal-home-link" href="../../../index.html">返回學習中心</a><style id="portal-home-link-style">.portal-home-link{position:fixed;top:16px;right:16px;z-index:1000;display:inline-flex;align-items:center;min-height:36px;padding:7px 11px;border:1px solid #cbd5e1;border-radius:8px;background:#fff;color:#1d4ed8;font:600 13px/1.2 -apple-system,BlinkMacSystemFont,"Noto Sans TC","Microsoft JhengHei",sans-serif;text-decoration:none;box-shadow:0 2px 10px rgba(15,23,42,.08)}.portal-home-link:hover{background:#eff6ff}.portal-home-link:focus-visible{outline:3px solid rgba(37,99,235,.35);outline-offset:2px}@media(max-width:768px){.portal-home-link{top:10px;right:10px;min-height:34px;padding:7px 9px;font-size:12px}}</style>
+  <div class="wrap">
+    <section class="hero">
+      <span class="tag">Overall Structure Diagram</span>
+      <h1>整體結構脈絡圖</h1>
+      <p class="lead">這張圖不是把章節號碼排一列，而是把《Semiconductor Physics and Devices》真正的依賴關係畫出來：材料與量子基礎先長出能帶與平衡，再長出傳輸與接面，最後才分叉成 MOS、BJT、光電與高頻功率元件。</p>
+      <div class="hero-links">
+        <a class="link-btn" href="./semiconductor_book_structure_map_zh.html">回到主頁</a>
+        <a class="link-btn" href="./semiconductor_derivations_complete_zh.html">開啟完整推導版</a>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>結構圖</h2>
+      <p>讀這本書時，真正該追的是這條主幹：<strong>結構與量子 → 能帶與平衡 → 傳輸與非平衡 → 接面 → 主動元件 → 應用端</strong>。</p>
+
+      <div class="diagram-shell">
+        <div class="diagram-scroll">
+          <svg viewBox="0 0 1120 740" aria-label="Semiconductor Physics and Devices overall structure diagram" role="img">
+            <defs>
+              <linearGradient id="rootGrad" x1="0%" x2="100%" y1="0%" y2="100%">
+                <stop offset="0%" stop-color="#e6f3ff"></stop>
+                <stop offset="100%" stop-color="#cfe8fb"></stop>
+              </linearGradient>
+            </defs>
+
+            <path class="line" d="M560 118 L560 168"></path>
+            <path class="line" d="M560 218 L560 266"></path>
+            <path class="line" d="M560 314 L560 360"></path>
+            <path class="line" d="M560 408 L560 446"></path>
+            <path class="line" d="M560 486 L560 530"></path>
+            <path class="line" d="M560 530 L260 530"></path>
+            <path class="line" d="M560 530 L860 530"></path>
+            <path class="line" d="M260 578 L260 634"></path>
+            <path class="line" d="M860 578 L860 634"></path>
+            <path class="line" d="M350 634 L440 634"></path>
+            <path class="line" d="M770 634 L680 634"></path>
+
+            <polygon class="arrow" points="554,164 566,164 560,174"></polygon>
+            <polygon class="arrow" points="554,262 566,262 560,272"></polygon>
+            <polygon class="arrow" points="554,356 566,356 560,366"></polygon>
+            <polygon class="arrow" points="554,442 566,442 560,452"></polygon>
+            <polygon class="arrow" points="264,628 256,634 264,640"></polygon>
+            <polygon class="arrow" points="856,628 864,634 856,640"></polygon>
+
+            <rect class="node root" x="330" y="32" width="460" height="86"></rect>
+            <text class="t-root" x="560" y="72" text-anchor="middle">Semiconductor Physics and Devices</text>
+            <text class="t-sub" x="560" y="98" text-anchor="middle">從晶體中的量子電子，一路走到可設計的裝置</text>
+
+            <rect class="node group" x="338" y="168" width="444" height="50"></rect>
+            <text class="t-group" x="560" y="199" text-anchor="middle">第一層：材料與量子基礎</text>
+
+            <rect class="node" x="90" y="266" width="280" height="48"></rect>
+            <rect class="node" x="420" y="266" width="280" height="48"></rect>
+            <rect class="node" x="750" y="266" width="280" height="48"></rect>
+            <text class="t-node" x="230" y="295" text-anchor="middle">Chapter 1</text>
+            <text class="t-node" x="560" y="295" text-anchor="middle">Chapter 2</text>
+            <text class="t-node" x="890" y="295" text-anchor="middle">Chapter 3</text>
+            <text class="t-sub" x="230" y="315" text-anchor="middle">晶格與週期性</text>
+            <text class="t-sub" x="560" y="315" text-anchor="middle">量子力學與穿隧</text>
+            <text class="t-sub" x="890" y="315" text-anchor="middle">能帶、DOS、effective mass</text>
+
+            <rect class="node group" x="338" y="360" width="444" height="48"></rect>
+            <text class="t-group" x="560" y="390" text-anchor="middle">第二層：平衡、傳輸、非平衡載子</text>
+
+            <rect class="node" x="90" y="446" width="280" height="40"></rect>
+            <rect class="node" x="420" y="446" width="280" height="40"></rect>
+            <rect class="node" x="750" y="446" width="280" height="40"></rect>
+            <text class="t-node" x="230" y="471" text-anchor="middle">Chapter 4｜平衡濃度與 Fermi level</text>
+            <text class="t-node" x="560" y="471" text-anchor="middle">Chapter 5｜drift / diffusion / mobility</text>
+            <text class="t-node" x="890" y="471" text-anchor="middle">Chapter 6｜generation / recombination</text>
+
+            <rect class="node group" x="372" y="530" width="376" height="48"></rect>
+            <text class="t-group" x="560" y="560" text-anchor="middle">第三層：接面核心</text>
+
+            <rect class="node" x="90" y="634" width="260" height="54"></rect>
+            <rect class="node" x="430" y="634" width="260" height="54"></rect>
+            <rect class="node" x="770" y="634" width="260" height="54"></rect>
+            <text class="t-node" x="220" y="663" text-anchor="middle">Chapter 7</text>
+            <text class="t-node" x="560" y="663" text-anchor="middle">Chapter 8</text>
+            <text class="t-node" x="900" y="663" text-anchor="middle">Chapter 9</text>
+            <text class="t-sub" x="220" y="683" text-anchor="middle">pn 接面、空乏區、內建電位</text>
+            <text class="t-sub" x="560" y="683" text-anchor="middle">理想二極體、實際 I-V、擊穿</text>
+            <text class="t-sub" x="900" y="683" text-anchor="middle">Schottky、ohmic、heterojunction</text>
+
+            <rect class="node group" x="70" y="530" width="240" height="48"></rect>
+            <text class="t-group" x="190" y="560" text-anchor="middle">第四層 A：MOS / FET 分支</text>
+            <rect class="node" x="70" y="634" width="170" height="54"></rect>
+            <rect class="node" x="270" y="634" width="170" height="54"></rect>
+            <text class="t-node" x="155" y="663" text-anchor="middle">MOS 路線</text>
+            <text class="t-node" x="355" y="663" text-anchor="middle">Chapter 13</text>
+            <text class="t-sub" x="155" y="683" text-anchor="middle">MOS capacitor → MOSFET</text>
+            <text class="t-sub" x="355" y="683" text-anchor="middle">JFET / MESFET</text>
+
+            <rect class="node group" x="810" y="530" width="240" height="48"></rect>
+            <text class="t-group" x="930" y="560" text-anchor="middle">第四層 B：BJT / 光電 / 高頻</text>
+            <rect class="node" x="680" y="634" width="170" height="54"></rect>
+            <rect class="node" x="880" y="634" width="170" height="54"></rect>
+            <text class="t-node" x="765" y="663" text-anchor="middle">BJT 路線</text>
+            <text class="t-node" x="965" y="663" text-anchor="middle">Chapter 14-15</text>
+            <text class="t-sub" x="765" y="683" text-anchor="middle">注入 → 薄基區 → 放大</text>
+            <text class="t-sub" x="965" y="683" text-anchor="middle">光電元件 → 高頻與功率</text>
+          </svg>
+        </div>
+      </div>
+
+      <div class="legend">
+        <span class="legend-chip">根節點：整本書的核心問題</span>
+        <span class="legend-chip">淡藍大框：知識層級</span>
+        <span class="legend-chip">白色節點：章節與分支</span>
+        <span class="legend-chip">箭頭：依賴關係與推進方向</span>
+      </div>
+
+      <div class="notes">
+        <article class="note">
+          <strong>先打底：</strong> Chapter 1-3 不是前言，而是後面所有 carrier、band、device 公式的物理來源。
+        </article>
+        <article class="note">
+          <strong>中段最關鍵：</strong> Chapter 4-8 是整本書的主心骨，因為平衡、傳輸、非平衡、接面、二極體都在這裡連成一條。
+        </article>
+        <article class="note">
+          <strong>後段是分支：</strong> MOS、BJT、光電、高頻不是各自獨立宇宙，而是從同一套接面與傳輸骨架分叉出去。
+        </article>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

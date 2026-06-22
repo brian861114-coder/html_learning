@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>第十三章：雙極性電晶體進階概念 — 半導體物理與元件</title>
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']],tags:'ams'},options:{ignoreHtmlClass:'no-math'}};</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+:root{--bg:#fff;--b2:#F5F5F7;--b3:#E8F0FE;--tx:#1D1D1F;--t2:#1D1D1F;--ac:#007AFF;--bd:#D2D2D7;--sh:0 2px 8px rgba(0,0,0,.08);--fbd:#E5E5EA;--wbg:#FFF9F0;--wbd:#FFB340;--wtx:#B8700A;--nw:260px}
+[data-theme="dark"]{--bg:#1C1C1E;--b2:#2C2C2E;--b3:#1A2332;--tx:#F5F5F7;--t2:#A1A1A6;--ac:#0A84FF;--bd:#48484A;--fbd:#3A3A3C;--wbg:#2C2416;--wbd:#8B6914;--wtx:#FFB340}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth;scroll-padding-top:16px}
+body{font-family:-apple-system,BlinkMacSystemFont,'Noto Sans TC','Microsoft JhengHei',sans-serif;background:var(--b2);color:var(--tx);line-height:1.9;display:flex;min-height:100vh}
+.sidebar{position:fixed;top:0;left:0;width:var(--nw);height:100vh;background:var(--bg);border-right:1px solid var(--bd);overflow-y:auto;z-index:100;padding:20px 16px;display:flex;flex-direction:column}
+.sh{margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--fbd)}.sh h2{font-size:14px;font-weight:600;color:var(--ac)}.sh .bk{font-size:11px;color:var(--t2)}
+.sn{flex:1}.sn ul{list-style:none}.sn a{display:block;padding:4px 10px;font-size:11px;color:var(--t2);text-decoration:none;border-radius:5px;transition:.12s}.sn a:hover{background:var(--b3);color:var(--ac)}.sn a.active{background:var(--b3);color:var(--ac);font-weight:500}.sn .ns{font-weight:600;font-size:12px;color:var(--tx);margin-top:10px;padding:2px 10px}.sn .nsub a{padding-left:20px;font-size:10px}
+.st{margin-top:auto;padding-top:12px;border-top:1px solid var(--fbd)}.st button{width:100%;padding:6px;border:1px solid var(--bd);border-radius:6px;background:var(--b2);color:var(--tx);cursor:pointer;font-size:12px}
+.main{margin-left:var(--nw);flex:1;max-width:1050px;padding:32px 40px 80px}
+.header{margin-bottom:32px;padding-bottom:20px;border-bottom:2px solid var(--ac)}.header .cl{font-size:12px;font-weight:600;color:var(--ac);letter-spacing:1px}.header h1{font-size:28px;font-weight:700;margin:6px 0}.header .meta{font-size:13px;color:var(--t2)}
+section{margin-bottom:44px}h2{font-size:20px;font-weight:700;color:var(--ac);margin-bottom:14px;padding-bottom:6px;border-bottom:1px solid var(--bd)}h3{font-size:16px;font-weight:600;color:var(--tx);margin:24px 0 10px}p{font-size:14px;color:var(--t2);margin-bottom:12px}strong{font-weight:600;color:var(--tx)}
+.eq{text-align:center;margin:16px 0;font-size:15px}
+.figure{margin:24px 0;text-align:center}.figure img{max-width:100%;border-radius:8px;box-shadow:var(--sh);cursor:pointer}.figure img:hover{transform:scale(1.01)}.figure figcaption{margin-top:8px;font-size:12px;color:var(--t2)}
+.callout{background:var(--b3);border:1px solid var(--fbd);border-radius:8px;padding:14px 18px;margin:16px 0;font-size:13px}.callout strong{color:var(--ac)}
+.callout-warn{background:var(--wbg);border:1px solid var(--wbd);border-radius:8px;padding:14px 18px;margin:16px 0;font-size:13px}.callout-warn strong{color:var(--wtx)}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}thead th{background:var(--b3);padding:8px 12px;font-size:12px;font-weight:600;border-bottom:2px solid var(--bd)}tbody td{padding:8px 12px;border-bottom:1px solid var(--fbd)}tbody tr:nth-child(even){background:var(--b2)}
+@media(max-width:768px){.sidebar{transform:translateX(-100%);transition:.3s}.sidebar.open{transform:translateX(0)}.main{margin-left:0;padding:20px 16px 60px}}
+@media print{.sidebar{display:none}.main{margin-left:0;max-width:100%;padding:0}}
+</style>
+<script src="../../../reading-preferences.js" defer></script></head>
+<body><a class="portal-home-link" href="../../../index.html">返回學習中心</a><style id="portal-home-link-style">.portal-home-link{position:fixed;top:16px;right:16px;z-index:1000;display:inline-flex;align-items:center;min-height:36px;padding:7px 11px;border:1px solid #cbd5e1;border-radius:8px;background:#fff;color:#1d4ed8;font:600 13px/1.2 -apple-system,BlinkMacSystemFont,"Noto Sans TC","Microsoft JhengHei",sans-serif;text-decoration:none;box-shadow:0 2px 10px rgba(15,23,42,.08)}.portal-home-link:hover{background:#eff6ff}.portal-home-link:focus-visible{outline:3px solid rgba(37,99,235,.35);outline-offset:2px}@media(max-width:768px){.portal-home-link{top:10px;right:10px;min-height:34px;padding:7px 9px;font-size:12px}}</style>
+<nav class="sidebar"><div class="sh"><div class="bk">半導體物理與元件·第四版</div><h2>第十三章</h2></div><div class="sn"><ul>
+<div class="figure"><img src="../../../images/solid-state-physics/ch13_pages/ch13_page_575.png" alt="圖 12.43" loading="lazy"><figcaption>圖 12.43：BJT 開關波形——儲存時間 $t_s$ 和下降時間 $t_f$ 的定義與測量。</figcaption></div>
+<li><a href="#preview">📋 13.0 本章預覽</a></li><li class="ns">13.1 基礎回顧</li><li class="nsub"><a href="#s13-1">13.1 BJT 作用·多邊結構</a></li><li class="ns">13.2 頻率限制</li><li class="nsub"><a href="#s13-2">13.2 $f_T$·$f_{\max}$·四時間常數 ⭐</a></li><li class="ns">13.3–13.5</li><li class="nsub"><a href="#s13-3">13.3 大訊號開關·延遲</a></li><li class="nsub"><a href="#s13-4">13.4 小訊號·窄基極效應</a></li><li class="nsub"><a href="#s13-5">13.5 HBT·SiGe·$f_T>500$ GHz</a></li>
+<li><a href="#summary">📋 本章摘要</a></li>
+</ul></div><div class="st"><button onclick="toggleTheme()">🌓 <span id="tl">深色模式</span></button></div></nav>
+<main class="main">
+<header class="header"><div class="cl">第十三章</div><h1>雙極性電晶體——進階概念</h1><div class="meta">Donald A. Neamen·《半導體物理與元件：基本原理》第四版·第 491–550 頁</div></header>
+
+<section id="preview"><div class="callout"><strong>📋 13.0 本章預覽</strong>
+<p>第十章建立了 BJT 的直流模型（操作模式、電流增益、Early 效應）。本章在此基礎上深入三個實用面向：<strong>頻率響應</strong>（BJT 能跑多快？什麼限制了速度？）、<strong>開關行為</strong>（從 ON 到 OFF 需要多久？）、以及<strong>先進 BJT 技術</strong>（HBT、SiGe——現代 RF 電路的核心元件）。</p>
+<p>如果第十章是「BJT 如何運作」，本章就是「BJT 在高速應用中會出什麼問題，以及如何克服」。$f_T$ 和 $f_{\max}$ 是衡量 BJT 速度的兩個關鍵指標，它們由四個物理時間常數決定——射極充電、基極傳輸、集極渡越、集極充電。理解這四個延遲成分是設計高速 BJT 的基礎。本章最具啟發性的概念是：<strong>BJT 的速度極限不在於載子速度本身，而在於充放電各種寄生電容所需的時間。</strong></p></div></section>
+
+<div class="figure"><img src="../../../images/solid-state-physics/ch13_pages/ch13_overview.png" alt="第十三章總覽圖" loading="lazy"><figcaption>📌 第十三章總覽圖：BJT進階 — 頻率限制、非理想效應、開關特性、HBT、SiGe HBT</figcaption></div>
+
+<section id="s13-1"><h2>13.1 BJT 作用回顧與多邊結構</h2>
+<p>本章假設你已經熟悉第十章的基本 BJT 物理——npn/pnp 結構、順向主動模式、$\alpha=\gamma\cdot\alpha_T$、$\beta=\alpha/(1-\alpha)$、Ebers-Moll 模型。在此基礎上，本節介紹幾種實際積體電路中使用的變體結構。</p>
+
+<h3>多射極 BJT（Multi-Emitter BJT）</h3>
+<p>這是 TTL（Transistor-Transistor Logic，1970–1980 年代的主流數位邏輯家族）的輸入級結構。一個電晶體有多個獨立的射極，所有射極共用同一個基極和集極。哪一個射極被拉低（接地），哪一個射極就注入載子→電晶體導通。多射極結構使 TTL 能夠實現多輸入的邏輯閘（NAND、AND），同時節省晶片面積。</p>
+
+<h3>橫向 pnp（Lateral pnp）</h3>
+<p>標準的 npn BJT 是<strong>縱向</strong>結構——射極在頂部、基極在中間、集極在底部。載子<strong>垂直</strong>於晶圓表面流動。橫向 pnp 則不同——射極和集極在同一個平面上（兩側都是 p⁺ 擴散），載子<strong>平行</strong>於晶圓表面（橫向）流動。這種結構可以在標準 npn 製程中自然形成——不需要額外的光罩或製程步驟。</p>
+<div class="figure"><img src="../../../images/solid-state-physics/ch13_pages/ch13_page_518.png" alt="圖 13.2" loading="lazy"><figcaption>圖 13.2：橫向 pnp 結構——射極和集極在同一平面上，載子平行表面流動。製程簡單但 $\beta$ 較低。</figcaption></div>
+<p>橫向 pnp 的缺點是 $\beta$ 較低（∼10–50），因為基極寬度由光罩間距決定（而非像縱向 npn 那樣由擴散深度決定→難以做到極窄）。但在 BiCMOS 電路中，它們提供了寶貴的互補元件——不需要複雜的額外製程就能得到 pnp 電晶體。</p>
+</section>
+
+<section id="s13-2"><h2>13.2 BJT 的頻率限制——什麼決定了 BJT 能跑多快 ⭐</h2>
+<p>BJT 不是瞬間響應的。從射極電壓變化到集極電流變化，需要一段延遲——這就是<strong>射極-集極傳輸時間 $\tau_{ec}$</strong>。當信號頻率超過 $f_T = 1/(2\pi\tau_{ec})$ 時，BJT 不再能放大電流（電流增益降為 1）。</p>
+
+<div class="eq">$$\boxed{\frac{1}{2\pi f_T} = \tau_{ec} = \tau_e + \tau_b + \tau_d + \tau_c}$$</div>
+
+<p>這四個時間常數各自代表一個物理過程——理解它們的來源和大小，就是理解如何設計高速 BJT：</p>
+
+<h3>① 射極充電時間 $\tau_e = r_e C_{je}$</h3>
+<p>$C_{je}$ 是 BE 接面電容（空乏層電容 + 擴散電容）。$r_e = V_T/I_E$ 是射極的小訊號電阻。$\tau_e = (V_T/I_E)C_{je}$——物理圖像是：要改變 $V_{BE}$，你必須先對 $C_{je}$ 充放電，而充放電的電流路徑經過 $r_e$。$\tau_e \propto 1/I_E$——射極電流越大，$\tau_e$ 越小。這就是為什麼高速 BJT 傾向操作在較高的偏壓電流。</p>
+
+<h3>② 基極傳輸時間 $\tau_b = W_B^2/(2D_B)$</h3>
+<p>這是最重要的時間常數——少數載子擴散跨越基極所需的平均時間。它來自擴散方程的解：一個粒子從 $x=0$ 擴散到 $x=W_B$ 的平均時間是 $W_B^2/(2D_B)$。</p>
+<p><strong>數值例子：</strong>$W_B=0.1$ µm，$D_B=30$ cm²/s→$\tau_b=(10^{-5})^2/(2\times30)=1.7\times10^{-12}$ s = 1.7 ps。單這個時間常數對應的 $f_T$ 約為 100 GHz。如果 $W_B=0.5$ µm→$\tau_b=42$ ps→$f_T$ 僅 ∼4 GHz。這就是為什麼所有高速 BJT 的首要設計目標就是<strong>縮小基極寬度</strong>。</p>
+<div class="figure"><img src="../../../images/solid-state-physics/ch13_pages/ch13_page_520.png" alt="圖 13.4, 13.5" loading="lazy"><figcaption>圖 13.4–13.5：基極中少數載子分布和傳輸時間。$W_B$ 越小→濃度梯度越大→擴散越快→$\tau_b$ 越小。</figcaption></div>
+
+<h3>③ 集極空乏層渡越時間 $\tau_d = x_d/(2v_{\text{sat}})$</h3>
+<p>電子穿過 BC 空乏區時，該區域電場極高→電子以飽和速度 $v_{\text{sat}}\approx10^7$ cm/s 運動。$x_d$ 是 BC 空乏區寬度（隨 $V_{CB}$ 增加）。$\tau_d = x_d/(2v_{\text{sat}})$——因子 1/2 來自平均（從 0 加速到 $v_{\text{sat}}$ 的過程）。$x_d=0.2$ µm→$\tau_d=0.2\times10^{-4}/(2\times10^7)=1$ ps。</p>
+
+<h3>④ 集極充電時間 $\tau_c = r_c C_{jc}$</h3>
+<p>$C_{jc}$ 是 BC 接面電容。$r_c$ 是集極串聯電阻（集極中性區的電阻）。這與 $\tau_e$ 對稱——充放電 BC 接面電容所需的時間。</p>
+
+<h3>⭐ $f_{\max}$——比 $f_T$ 更嚴格的指標</h3>
+<p>$f_T$ 只考慮電流增益，但對於功率放大器設計，更重要的是<strong>功率增益</strong>。$f_{\max}$（最大振盪頻率）是功率增益降至 1 的頻率：</p>
+<div class="eq">$$\boxed{f_{\max} = \sqrt{\frac{f_T}{8\pi\,r_b\,C_{jc}}}}$$</div>
+<p>$r_b$（基極電阻）和 $C_{jc}$（BC 接面電容）形成一個低通 RC 濾波器——訊號必須先對 $C_{jc}$ 充放電才能到達輸出。$r_b C_{jc}$ 時間常數限制了功率增益。$f_{\max} > f_T$ 是可能的（如果 $r_b C_{jc}$ 很小），但通常 $f_{\max}$ 是比 $f_T$ 更難提升的指標。</p>
+
+<div class="callout-warn"><strong>⚡ BJT vs MOSFET 的速度比較：</strong>現代 SiGe HBT 的 $f_T$ 可達 300–500 GHz，$f_{\max}$ 可達 500–800 GHz。這遠高於相同節點的 Si MOSFET（$f_T$∼300 GHz for $L_g=14$ nm FinFET）。BJT 的速度優勢來自兩個物理事實：① 基極寬度（∼10–50 nm）可以比 MOSFET 的通道長度更窄，因為 BJT 的 $W_B$ 由磊晶控制（而非光罩）。② BJT 的跨導 $g_m=I_C/V_T$ 比 MOSFET 的 $g_m$ 大數倍→充放電寄生電容更快。這就是為什麼毫米波（30–300 GHz）和太赫茲電路仍然主要使用 III-V 或 SiGe HBT。</div>
+</section>
+
+<section id="s13-3"><h2>13.3 大訊號開關特性——BJT 從 ON 到 OFF 需要多久</h2>
+<p>在數位電路中，BJT 頻繁地在截止（OFF）和飽和（ON）之間切換。切換速度受限於兩個物理過程：</p>
+<p><strong>導通延遲（Turn-on delay）：</strong>從施加基極驅動到 $I_C$ 開始上升。主要是對 BE 接面電容充電的時間。</p>
+<p><strong>截止延遲（Turn-off delay）——更大的問題：</strong>當 BJT 在飽和區操作時，基極中儲存了大量的過量少數載子（兩個接面都順偏→載子從兩側注入基極）。要關斷 BJT，必須先把這些儲存電荷<strong>移除</strong>（透過復合或反向基極電流抽取）。儲存時間 $t_s \approx \tau_s\ln[(I_F+I_R)/I_R]$，其中 $\tau_s$ 是飽和區的等效壽命。</p>
+<div class="figure"><img src="../../../images/solid-state-physics/ch13_pages/ch13_page_541.png" alt="圖 13.20" loading="lazy"><figcaption>圖 13.20：BJT 開關波形——導通延遲、上升時間、儲存時間、下降時間。儲存時間是飽和 BJT 的主要速度限制。</figcaption></div>
+<div class="callout"><strong>💡 蕭特基箝位——防止 BJT 進入飽和的經典技術。</strong>在基極和集極之間並聯一個蕭特基二極體（順向壓降 ∼0.3 V）。當 BJT 嘗試進入飽和時（$V_{CE}\to0.1$ V），蕭特基二極體導通→多餘的基極電流被旁路到集極→$V_{CE}$ 被箝在 ∼0.3 V→BJT 無法進入深度飽和→儲存時間大幅降低。這就是 74S/74LS 系列 TTL 邏輯（蕭特基 TTL）的核心創新。</div>
+</section>
+
+<section id="s13-4"><h2>13.4 小訊號等效電路與窄基極效應</h2>
+<div class="figure"><img src="../../../images/solid-state-physics/ch13_pages/ch13_page_562.png" alt="圖 12.36" loading="lazy"><figcaption>圖 12.36：BJT 混合-π 小訊號等效電路——$r_\pi$、$g_m$、$C_\pi$、$C_\mu$ 的完整模型。</figcaption></div>
+<p>第十章介紹了基本的混合-π 模型（$g_m, r_\pi, r_o$）。本節補充<strong>電容元件</strong>——這是高頻行為的關鍵。完整的混合-π 模型包含兩個電容：</p>
+<div class="eq">$$C_\pi = C_{je} + \tau_F g_m,\qquad C_\mu = C_{jc}$$</div>
+<p>$C_\pi$（輸入電容）有兩部分：$C_{je}$（BE 空乏層電容，逆向偏壓相關）和 $\tau_F g_m$（擴散電容，$\propto I_C$）。順向偏壓時擴散電容主導 $C_\pi$。</p>
+<p>$C_\mu$（回授電容）= BC 接面電容。$C_\mu$ 雖然小，但因為 Miller 效應，它在輸入端被放大 $(1+g_m R_L)$ 倍→對高頻增益有顯著影響。高速 BJT 設計的一個重要目標是最小化 $C_{jc}$（透過小面積集極、高 $V_{CB}$ 偏壓）。</p>
+</section>
+
+<section id="s13-gp"><h2>12.5.2 Gummel-Poon 模型——比 Ebers-Moll 更精確</h2>
+<div class="figure"><img src="../../../images/solid-state-physics/ch13_pages/ch13_page_565.png" alt="圖 12.31" loading="lazy"><figcaption>圖 12.31：Gummel-Poon 等效電路——比 Ebers-Moll 更精確的 BJT 大訊號模型，包含電荷控制項。</figcaption></div>
+<p>Ebers-Moll 模型（第十章）用兩個互相耦合的二極體和兩個受控電流源來描述 BJT。它在大多數情況下夠用，但有一個重要限制：<strong>它假設 $\alpha_F$ 和 $\alpha_R$ 是常數</strong>——不隨電流變化。現實中，$\beta$ 隨 $I_C$ 變化很大（低電流時復合損失主導、高電流時高注入效應主導）。</p>
+<p><strong>Gummel-Poon 模型</strong>通過引入<strong>電荷控制方程</strong>來解決這個問題。核心思想：$I_S$ 不再是常數，而是與基極中的總存儲電荷 $Q_B$ 相關：</p>
+<div class="eq">$$I_C = \frac{qA n_i^2 D_B}{Q_B} \cdot Q_{B0} \left(e^{V_{BE}/V_T} - e^{V_{BC}/V_T}\right)$$</div>
+<p>其中 $Q_B = Q_{B0} + Q_{BE} + Q_{BC}$（包含 BE 和 BC 接面的充電電荷）。當 $Q_B$ 增大（高電流）→$I_C$ 增長速度減緩→自動包含了 Webster 效應和 Kirk 效應。</p>
+<div class="callout"><strong>💡 Gummel-Poon 的實際價值。</strong>所有現代 SPICE 電路模擬器中的 BJT 模型都基於 Gummel-Poon（或更先進的 VBIC/MEXTRAM 模型）。Gummel-Poon 的參數可以直接從 Gummel plot（$\log I_C$ vs $V_{BE}$ 和 $\log I_B$ vs $V_{BE}$ 的曲線）中提取。工程師量測 Gummel plot 後，用曲線擬合得到 $I_S$、$\beta_F$、$\beta_R$、$V_A$、$\tau_F$ 等參數→灌入 SPICE→模擬電路行為。</div>
+</section>
+
+<section id="s13-nonideal"><h2>12.4 BJT 非理想效應——詳細分析</h2>
+<p>第十章已介紹了基極寬度調變（Early 效應）。本節補充三個在高電流和高壓操作下的重要非理想效應。</p>
+
+<h3>12.4.2 高注入效應（Webster Effect）</h3>
+<p>順向主動模式下，$I_C = I_S e^{V_{BE}/V_T}$ 在低電流時成立。當 $V_{BE}$ 增大到使注入基極的少數載子濃度 $\delta n_B$ 接近基極多數載子濃度 $p_{B0}$ 時，<strong>電中性條件</strong>要求 $p$ 也必須增加（$p = p_{B0} + \delta n_B$）→有效摻雜濃度增大→$I_S$ 的表觀值增大→$\beta$ 在高電流時下降。這稱為 Webster 效應。</p>
+<p>在 Gummel plot 中，$\log I_C$ vs $V_{BE}$ 曲線在高 $V_{BE}$ 處開始<strong>偏離直線</strong>（斜率降低）——這就是高注入的實驗特徵。</p>
+
+<h3>12.4.3 射極能隙窄化（Emitter Bandgap Narrowing）</h3>
+<p>當射極摻雜濃度 $N_E$ 超過 $\sim10^{18}$ cm$^{-3}$ 時，重摻雜帶來兩個效應：① 雜質能帶形成（impurity band）→禁帶寬度 $E_g$ 縮小。② 多體效應（exchange-correlation）→進一步縮小 $E_g$。</p>
+<p>能隙窄化的直接後果：$n_i^2 \propto e^{-E_g/kT}$→$E_g$ 縮小→$n_i^2$ 增大→射極中的少數載子（電洞）濃度增大→注入射極的電洞電流 $I_{pE}$ 增大→$\gamma$ 下降→$\beta$ 下降。</p>
+<p>這就是為什麼射極摻雜<strong>不能無限提高</strong>——超過 $\sim5\times10^{19}$ cm$^{-3}$ 後，$\beta$ 反而下降。最佳射極摻雜通常在 $10^{18}$–$10^{19}$ cm$^{-3}$ 之間。</p>
+
+<h3>12.4.4 電流集中（Current Crowding）</h3>
+<p>基極電流 $I_B$ 從基極接觸橫向流過基區到達基極-射極接面下方。基區有歐姆電阻 $r_b$（基極擴散電阻）→$I_B$ 在 $r_b$ 上產生壓降→射極邊緣的實際 $V_{BE}$ 高於射極中央的 $V_{BE}$→射極邊緣注入更多電流。</p>
+<p>結果：<strong>射極電流集中在邊緣</strong>，中央部分貢獻較少。在高 $I_C$ 下，邊緣的 $V_{BE}$ 最高→先進入高注入→$\beta$ 先下降。這使有效射極面積小於幾何面積→$g_m$ 低於預期。</p>
+<div class="callout"><strong>💡 電流集中的工程對策。</strong>多射極指狀結構（multi-finger emitter）：把一個大射極分成多個窄條，每條的寬度只有幾 µm→橫向壓降減小→電流分布更均勻。這是高頻功率 BJT 和 HBT 的標準設計。</div>
+</section>
+
+<section id="s13-5"><h2>13.5 HBT 與 SiGe 技術——現代 RF 的基石</h2>
+<p>第十章討論的 BJT 是同質接面（Si 射極/Si 基極/Si 集極）。<strong>異質接面雙極性電晶體（HBT）</strong>用一個<strong>寬能隙材料</strong>作為射極（如 SiGe 中的 Si 射極+漸進 Ge 基極，或 AlGaAs/GaAs HBT）。</p>
+<p><strong>HBT 如何突破 $\beta$ 的限制：</strong>在同質接面 BJT 中，$\gamma$（射極注入效率）受限於射極和基極的摻雜比 $N_E/N_B$。$N_E$ 不能無限提高（重摻雜→能隙縮小→$\gamma$ 實際上會降）。HBT 的寬能隙射極創造了一個<strong>價帶能障</strong>——阻止電洞從基極注入射極→$I_{pE}$ 幾乎消失→$\gamma\approx1$，即使射極摻雜不比基極重。這使設計者可以<strong>重摻雜基極</strong>（降低 $r_b$）而不犧牲 $\gamma$→同時實現高 $\beta$ 和高 $f_{\max}$。</p>
+<div class="figure"><img src="../../../images/solid-state-physics/ch13_pages/ch13_page_548.png" alt="圖 13.22" loading="lazy"><figcaption>圖 13.22：SiGe HBT 的能帶圖——基極中漸進的 Ge 組成使能隙漸進縮小，產生內建加速電場。這個電場將注入的電子「推」向集極→$\tau_b$ 大幅降低→$f_T$ 可達 500 GHz。</figcaption></div>
+<h3>SiGe HBT——矽基高速的王者</h3>
+<p>SiGe HBT 是目前商用頻率最高的矽基元件：$f_T$ 達 300–500 GHz，$f_{\max}$ 達 500–800 GHz。關鍵創新是<strong>基極中漸進的 Ge 組成</strong>——Ge 含量從射極端向集極端逐漸增加→能隙逐漸縮小→導帶產生一個內建電場（類似於重力場）→注入的電子被這個「準電場」加速→基極傳輸時間 $\tau_b$ 降至亞皮秒級。SiGe HBT 是手機 RF 前端、光纖通訊驅動器（100 Gbps）、汽車雷達（77 GHz）的主力元件。</p>
+</section>
+
+<section id="summary"><h2>本章摘要</h2>
+<ol style="font-size:14px;color:var(--t2);margin-left:18px">
+<li><strong>$f_T$ 的四個時間常數：</strong>$\tau_e=r_e C_{je}$、$\tau_b=W_B^2/(2D_B)$（⭐ 設計焦點）、$\tau_d=x_d/(2v_{\text{sat}})$、$\tau_c=r_c C_{jc}$。</li>
+<li><strong>$f_{\max}=\sqrt{f_T/(8\pi r_b C_{jc})}$：</strong>功率增益的頻率上限。$r_b C_{jc}$ 時間常數是瓶頸。</li>
+<li><strong>BJT 開關：</strong>延遲來自基極儲存電荷的移除。蕭特基箝位防止飽和→儲存時間大幅降低。</li>
+<li><strong>完整混合-π：</strong>$C_\pi=C_{je}+\tau_F g_m$（輸入電容），$C_\mu=C_{jc}$（Miller 回授電容）。</li>
+<li><strong>HBT：</strong>寬能隙射極→$\gamma\approx1$→可重摻雜基極→$r_b$ 降低→$f_{\max}$ 提升。</li>
+<li><strong>SiGe HBT：</strong>漸進 Ge 組成→內建加速電場→$\tau_b$ 降至亞皮秒→$f_T>500$ GHz→毫米波/太赫茲應用。</li></ol></section>
+</main>
+<script>
+function toggleTheme(){const h=document.documentElement;const n=h.getAttribute('data-theme')==='light'?'dark':'light';h.setAttribute('data-theme',n);localStorage.setItem('theme',n);document.getElementById('tl').textContent=n==='dark'?'淺色模式':'深色模式';}
+const s=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',s);if(s==='dark')document.getElementById('tl').textContent='淺色模式';
+const secs=document.querySelectorAll('section[id]');const navs=document.querySelectorAll('.sn a');window.addEventListener('scroll',()=>{let c='';secs.forEach(s=>{if(window.scrollY>=s.offsetTop-80)c=s.getAttribute('id');});navs.forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+c);});});
+document.querySelectorAll('.figure img').forEach(i=>i.addEventListener('click',()=>window.open(i.src,'_blank')));
+</script>
+</body>
+</html>

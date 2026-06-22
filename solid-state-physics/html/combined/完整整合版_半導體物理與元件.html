@@ -1,0 +1,2101 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>半導體物理與元件 — 完整整合版</title>
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']],tags:'ams'},options:{ignoreHtmlClass:'no-math'}};</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+:root{--bg:#fff;--b2:#F5F5F7;--b3:#E8F0FE;--tx:#1D1D1F;--t2:#1D1D1F;--ac:#007AFF;--bd:#D2D2D7;--sh:0 2px 8px rgba(0,0,0,.08);--fbd:#E5E5EA;--wbg:#FFF9F0;--wbd:#FFB340;--wtx:#B8700A;--nw:260px}
+[data-theme="dark"]{--bg:#1C1C1E;--b2:#2C2C2E;--b3:#1A2332;--tx:#F5F5F7;--t2:#A1A1A6;--ac:#0A84FF;--bd:#48484A;--fbd:#3A3A3C;--wbg:#2C2416;--wbd:#8B6914;--wtx:#FFB340}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth;scroll-padding-top:16px}
+body{font-family:-apple-system,BlinkMacSystemFont,'Noto Sans TC','Microsoft JhengHei',sans-serif;background:var(--b2);color:var(--tx);line-height:1.9;display:flex;min-height:100vh}
+.sidebar{position:fixed;top:0;left:0;width:var(--nw);height:100vh;background:var(--bg);border-right:1px solid var(--bd);overflow-y:auto;z-index:100;padding:20px 16px;display:flex;flex-direction:column}
+.sh{margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--fbd)}.sh h2{font-size:14px;font-weight:600;color:var(--ac)}.sh .bk{font-size:11px;color:var(--t2)}
+.sn{flex:1}.sn ul{list-style:none}.sn a{display:block;padding:4px 10px;font-size:11px;color:var(--t2);text-decoration:none;border-radius:5px;transition:.12s}.sn a:hover{background:var(--b3);color:var(--ac)}.sn a.active{background:var(--b3);color:var(--ac);font-weight:500}.sn .ns{font-weight:600;font-size:12px;color:var(--tx);margin-top:10px;padding:2px 10px}.sn .nsub a{padding-left:20px;font-size:10px}
+.st{margin-top:auto;padding-top:12px;border-top:1px solid var(--fbd)}.st button{width:100%;padding:6px;border:1px solid var(--bd);border-radius:6px;background:var(--b2);color:var(--tx);cursor:pointer;font-size:12px}
+.main{margin-left:var(--nw);flex:1;max-width:1050px;padding:32px 40px 80px}
+.header{margin-bottom:32px;padding-bottom:20px;border-bottom:2px solid var(--ac)}.header .cl{font-size:12px;font-weight:600;color:var(--ac);letter-spacing:1px}.header h1{font-size:28px;font-weight:700;margin:6px 0}.header .meta{font-size:13px;color:var(--t2)}
+section{margin-bottom:44px}h2{font-size:20px;font-weight:700;color:var(--ac);margin-bottom:14px;padding-bottom:6px;border-bottom:1px solid var(--bd)}h3{font-size:16px;font-weight:600;color:var(--tx);margin:24px 0 10px}h4{font-size:14px;font-weight:600;color:var(--t2);margin:18px 0 6px}
+p{font-size:14px;color:var(--t2);margin-bottom:12px}strong{font-weight:600;color:var(--tx)}
+.eq{text-align:center;margin:16px 0;font-size:15px}
+.figure{margin:24px 0;text-align:center}.figure img{max-width:100%;border-radius:8px;box-shadow:var(--sh);cursor:pointer}.figure img:hover{transform:scale(1.01)}.figure figcaption{margin-top:8px;font-size:12px;color:var(--t2)}
+.exbox{background:var(--wbg);border-left:3px solid var(--wbd);border-radius:0 8px 8px 0;padding:14px 18px;margin:16px 0;font-size:13px}.exbox .ext{font-weight:700;color:var(--wtx);font-size:11px;margin-bottom:4px}
+.callout{background:var(--b3);border:1px solid var(--fbd);border-radius:8px;padding:14px 18px;margin:16px 0;font-size:13px}.callout strong{color:var(--ac)}
+.callout-warn{background:var(--wbg);border:1px solid var(--wbd);border-radius:8px;padding:14px 18px;margin:16px 0;font-size:13px}.callout-warn strong{color:var(--wtx)}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}thead th{background:var(--b3);padding:8px 12px;font-size:12px;font-weight:600;border-bottom:2px solid var(--bd)}tbody td{padding:8px 12px;border-bottom:1px solid var(--fbd)}tbody tr:nth-child(even){background:var(--b2)}
+@media(max-width:768px){.sidebar{transform:translateX(-100%);transition:.3s}.sidebar.open{transform:translateX(0)}.main{margin-left:0;padding:20px 16px 60px}}
+@media print{.sidebar{display:none}.main{margin-left:0;max-width:100%;padding:0}}
+</style>
+<script src="../../../reading-preferences.js" defer></script></head>
+<body><a class="portal-home-link" href="../../../index.html">返回學習中心</a><style id="portal-home-link-style">.portal-home-link{position:fixed;top:16px;right:16px;z-index:1000;display:inline-flex;align-items:center;min-height:36px;padding:7px 11px;border:1px solid #cbd5e1;border-radius:8px;background:#fff;color:#1d4ed8;font:600 13px/1.2 -apple-system,BlinkMacSystemFont,"Noto Sans TC","Microsoft JhengHei",sans-serif;text-decoration:none;box-shadow:0 2px 10px rgba(15,23,42,.08)}.portal-home-link:hover{background:#eff6ff}.portal-home-link:focus-visible{outline:3px solid rgba(37,99,235,.35);outline-offset:2px}@media(max-width:768px){.portal-home-link{top:10px;right:10px;min-height:34px;padding:7px 9px;font-size:12px}}</style>
+<nav class="sidebar"><div class="sh"><div class="bk">半導體物理與元件·第四版</div><h2>完整整合版</h2></div><div class="sn"><ul>
+<li><a href="#top">📋 回到頂部</a></li>
+<li class="ns">第一章 固體的晶體結構</li>
+<li class="nsub"><a href="#ch01_preview">1.1 半導體材料</a></li>
+<li class="nsub"><a href="#ch01_s1-2">1.2 固體的三種分類</a></li>
+<li class="nsub"><a href="#ch01_s1-3-1">1.3.1 原始晶胞與單位晶胞</a></li>
+<li class="nsub"><a href="#ch01_s1-3-2">1.3.2 基本晶體結構</a></li>
+<li class="nsub"><a href="#ch01_s1-3-3">1.3.3 晶面與米勒指數</a></li>
+<li class="nsub"><a href="#ch01_s1-3-4">1.3.4 晶體中的方向</a></li>
+<li class="nsub"><a href="#ch01_s1-4">1.4 鑽石結構</a></li>
+<li class="nsub"><a href="#ch01_s1-5">1.5 原子鍵結</a></li>
+<li class="nsub"><a href="#ch01_s1-6">1.6 固體中的缺陷與雜質</a></li>
+<li class="nsub"><a href="#ch01_s1-7">1.7 半導體材料的成長</a></li>
+<li class="nsub"><a href="#ch01_summary">本章摘要</a></li>
+<li class="ns">第二章 量子力學導論</li>
+<li class="nsub"><a href="#ch02_preview">2.1.1 能量量子化——光電效應</a></li>
+<li class="nsub"><a href="#ch02_s2-1-2">2.1.2 波粒二象性</a></li>
+<li class="nsub"><a href="#ch02_s2-1-3">2.1.3 海森堡不確定性原理</a></li>
+<li class="nsub"><a href="#ch02_s2-2">2.2 薛丁格波動方程式</a></li>
+<li class="nsub"><a href="#ch02_s2-2-2">2.2.2 波函數的物理意義</a></li>
+<li class="nsub"><a href="#ch02_s2-2-3">2.2.3 邊界條件</a></li>
+<li class="nsub"><a href="#ch02_s2-3-1">2.3.2 無限位能井 ⭐</a></li>
+<li class="nsub"><a href="#ch02_s2-3-3">2.3.3 階梯位能——滲入古典禁區</a></li>
+<li class="nsub"><a href="#ch02_s2-3-4">2.3.4 位能障壁與穿隧效應 ⭐</a></li>
+<li class="nsub"><a href="#ch02_s2-4">2.4 波理論在原子中的延伸</a></li>
+<li class="nsub"><a href="#ch02_summary">本章摘要</a></li>
+<li class="ns">第三章 固體的量子理論導論</li>
+<li class="nsub"><a href="#ch03_preview">3.1.1 能帶的形成</a></li>
+<li class="nsub"><a href="#ch03_s3-1-2">3.1.2 Kronig-Penney 模型</a></li>
+<li class="nsub"><a href="#ch03_s3-1-3">3.1.3 k 空間圖與能帶結構</a></li>
+<li class="nsub"><a href="#ch03_s3-2-1">3.2.1–3.2.2 電傳導與漂移電流</a></li>
+<li class="nsub"><a href="#ch03_s3-2-3">3.2.3 電子有效質量 ⭐</a></li>
+<li class="nsub"><a href="#ch03_s3-2-4">3.2.4–3.2.5 電洞·金屬/絕緣體/半導體</a></li>
+<li class="nsub"><a href="#ch03_s3-3">3.3 三維延伸：Si 與 GaAs</a></li>
+<li class="nsub"><a href="#ch03_s3-4">3.4 態密度函數 ⭐</a></li>
+<li class="nsub"><a href="#ch03_s3-5">3.5 統計力學：Fermi-Dirac 分布 ⭐</a></li>
+<li class="nsub"><a href="#ch03_summary">本章摘要</a></li>
+<li class="ns">第四章 平衡態半導體</li>
+<li class="nsub"><a href="#ch04_preview">4.1.1 平衡態電子與電洞的分布</a></li>
+<li class="nsub"><a href="#ch04_s4-1-2">4.1.2 $n_0$ 與 $p_0$ 的公式推導</a></li>
+<li class="nsub"><a href="#ch04_s4-1-3">4.1.3 本徵載子濃度 $n_i$</a></li>
+<li class="nsub"><a href="#ch04_s4-1-4">4.1.4 本徵 Fermi 能階 $E_{Fi}$</a></li>
+<li class="nsub"><a href="#ch04_s4-2">4.2 摻雜原子與能階</a></li>
+<li class="nsub"><a href="#ch04_s4-3">4.3 外質半導體</a></li>
+<li class="nsub"><a href="#ch04_s4-4">4.4 施體與受體的統計</a></li>
+<li class="nsub"><a href="#ch04_s4-5">4.5 電荷中性</a></li>
+<li class="nsub"><a href="#ch04_s4-6">4.6 Fermi 能階的位置</a></li>
+<li class="nsub"><a href="#ch04_summary">本章摘要</a></li>
+<li class="ns">第五章 載子傳輸現象</li>
+<li class="nsub"><a href="#ch05_preview">5.1.1 漂移電流密度</a></li>
+<li class="nsub"><a href="#ch05_s5-1-2">5.1.2 散射機制與遷移率</a></li>
+<li class="nsub"><a href="#ch05_s5-1-3">5.1.3 導電率——Ohm 定律的微觀基礎</a></li>
+<li class="nsub"><a href="#ch05_s5-1-4">5.1.4 速度飽和</a></li>
+<li class="nsub"><a href="#ch05_s5-2">5.2 載子擴散</a></li>
+<li class="nsub"><a href="#ch05_s5-3">5.3 Einstein 關係——漂移與擴散不是獨立的</a></li>
+<li class="nsub"><a href="#ch05_s5-4">5.4 霍爾效應——半導體診斷的萬能工具</a></li>
+<li class="nsub"><a href="#ch05_summary">本章摘要</a></li>
+<li class="ns">第六章 非平衡過量載子</li>
+<li class="nsub"><a href="#ch06_preview">6.1 載子產生與復合</a></li>
+<li class="nsub"><a href="#ch06_s6-2">6.2 連續性方程與擴散長度</a></li>
+<li class="nsub"><a href="#ch06_s6-3">6.3 雙極傳輸 ⭐</a></li>
+<li class="nsub"><a href="#ch06_s6-3-5">6.3.5 Haynes-Shockley 實驗——直接測量 $D$, $\mu</a></li>
+<li class="nsub"><a href="#ch06_s6-4">6.4 準 Fermi 能階</a></li>
+<li class="nsub"><a href="#ch06_s6-5">6.5 過量載子壽命</a></li>
+<li class="nsub"><a href="#ch06_s6-6">6.6 表面效應</a></li>
+<li class="nsub"><a href="#ch06_summary">本章摘要</a></li>
+<li class="ns">第七章 pn 接面</li>
+<li class="nsub"><a href="#ch07_preview">7.1 pn 接面的基本結構</a></li>
+<li class="nsub"><a href="#ch07_s7-2a">7.2.1 內建電位差 ⭐</a></li>
+<li class="nsub"><a href="#ch07_s7-2b">7.2.2–7.2.3 電場分布與空乏區寬度 ⭐</a></li>
+<li class="nsub"><a href="#ch07_s7-3">7.3 反向偏壓與接面電容</a></li>
+<li class="nsub"><a href="#ch07_s7-4">7.4 接面崩潰</a></li>
+<li class="nsub"><a href="#ch07_s7-5">7.5 非均勻摻雜接面</a></li>
+<li class="nsub"><a href="#ch07_summary">本章摘要</a></li>
+<li class="ns">第八章 pn 接面二極體</li>
+<li class="nsub"><a href="#ch08_preview">8.1.1–8.1.3 Shockley 邊界條件——電壓如何「注射」少數載子 </a></li>
+<li class="nsub"><a href="#ch08_s8-1b">8.1.4 理想二極體電流-電壓關係 ⭐</a></li>
+<li class="nsub"><a href="#ch08_s8-1c">8.1.5 溫度效應與串聯電阻——真實二極體的 I-V 特性</a></li>
+<li class="nsub"><a href="#ch08_s8-1d">8.1.6 物理總結——電流機制的完整圖像</a></li>
+<li class="nsub"><a href="#ch08_s8-1e">8.1.8 短二極體（$W_n \ll L_p$）</a></li>
+<li class="nsub"><a href="#ch08_s8-2">8.2 產生-復合電流——空乏區中的電流</a></li>
+<li class="nsub"><a href="#ch08_s8-3">8.3 小訊號模型——pn 二極體的 AC 行為 ⭐</a></li>
+<li class="nsub"><a href="#ch08_s8-4">8.4–8.5 電荷儲存暫態與穿隧二極體</a></li>
+<li class="nsub"><a href="#ch08_summary">本章摘要</a></li>
+<li class="ns">第九章 金屬-半導體接面與異質接面</li>
+<li class="nsub"><a href="#ch09_preview">9.1.1 蕭特基能障——金屬碰到半導體會怎樣？</a></li>
+<li class="nsub"><a href="#ch09_s9-1-2">9.1.2 空乏區、電場、電容</a></li>
+<li class="nsub"><a href="#ch09_s9-1-3">9.1.3 費米能階釘札——為什麼理想預測總是錯的？</a></li>
+<li class="nsub"><a href="#ch09_s9-1-4">9.1.4 蕭特基二極體的電流-電壓特性</a></li>
+<li class="nsub"><a href="#ch09_s9-1-5">9.1.5 歐姆接觸——每個元件的必要結構</a></li>
+<li class="nsub"><a href="#ch09_s9-2">9.2 異質接面</a></li>
+<li class="nsub"><a href="#ch09_summary">本章摘要</a></li>
+<li class="ns">第十章 雙極性接面電晶體（BJT）</li>
+<li class="nsub"><a href="#ch10_preview">10.1.1–10.1.3 BJT 的結構、電流關係、操作模式</a></li>
+<li class="nsub"><a href="#ch10_s10-1b">10.1.4 基極中少數載子的分布</a></li>
+<li class="nsub"><a href="#ch10_s10-2a">10.2.1–10.2.2 電流增益的物理根源 ⭐</a></li>
+<li class="nsub"><a href="#ch10_s10-2b">10.2.3 Ebers-Moll 模型——BJT 的通用等效電路</a></li>
+<li class="nsub"><a href="#ch10_s10-3">10.3 非理想效應</a></li>
+<li class="nsub"><a href="#ch10_s10-4">10.4 小訊號等效電路——混合-π 模型</a></li>
+<li class="nsub"><a href="#ch10_summary">本章摘要</a></li>
+<li class="ns">第十一章 場效電晶體（MOSFET）</li>
+<li class="nsub"><a href="#ch11_preview">11.1.1–11.1.2 MOS 結構與氧化層電容</a></li>
+<li class="nsub"><a href="#ch11_s11-1b">11.1.3–11.1.5 能帶彎曲的三個階段——空乏到反轉</a></li>
+<li class="nsub"><a href="#ch11_s11-2">11.2 臨界電壓 $V_T$ 的完整推導 ⭐</a></li>
+<li class="nsub"><a href="#ch11_s11-3a">11.3.1–11.3.3 線性區 I-V 關係的完整推導 ⭐</a></li>
+<li class="nsub"><a href="#ch11_s11-3b">11.3.4–11.3.5 飽和區——通道夾止與平方律 ⭐</a></li>
+<li class="nsub"><a href="#ch11_s11-3c">10.3.5 基板偏壓效應（Body Effect）⭐</a></li>
+<li class="nsub"><a href="#ch11_s11-cv">10.2 電容-電壓（C-V）特性</a></li>
+<li class="nsub"><a href="#ch11_s11-4">11.4 小訊號參數與頻率響應</a></li>
+<li class="nsub"><a href="#ch11_s11-cmos">10.5 CMOS 技術</a></li>
+<li class="nsub"><a href="#ch11_s11-5">11.5 短通道效應——當 $L$ 不再「長」</a></li>
+<li class="nsub"><a href="#ch11_summary">本章摘要</a></li>
+<li class="ns">第十二章 MOSFET 進階概念</li>
+<li class="nsub"><a href="#ch12_preview">12.1 定電場縮小法則——Moore 定律的物理基礎 ⭐</a></li>
+<li class="nsub"><a href="#ch12_s12-2a">12.2.1 遷移率退化——當閘極壓得太緊</a></li>
+<li class="nsub"><a href="#ch12_s12-2b">12.2.2 速度飽和——短通道元件最根本的限制</a></li>
+<li class="nsub"><a href="#ch12_s12-3">12.3 熱載子效應——高速電子的破壞力</a></li>
+<li class="nsub"><a href="#ch12_s12-4">12.4 SOI、FinFET 與先進 CMOS 結構</a></li>
+<li class="nsub"><a href="#ch12_s12-5">12.5–12.6 終極尺寸的物理限制——我們能縮到多小？</a></li>
+<li class="nsub"><a href="#ch12_s12-ballistic">11.1.5 彈道傳輸——當通道比平均自由程還短</a></li>
+<li class="nsub"><a href="#ch12_s12-implant">11.4.3 離子植入閾值調整</a></li>
+<li class="nsub"><a href="#ch12_s12-rad">11.5 輻射與熱載子效應</a></li>
+<li class="nsub"><a href="#ch12_summary">本章摘要</a></li>
+<li class="ns">第十三章 雙極性電晶體——進階概念</li>
+<li class="nsub"><a href="#ch13_preview">13.1 BJT 作用回顧與多邊結構</a></li>
+<li class="nsub"><a href="#ch13_s13-2">13.2 BJT 的頻率限制——什麼決定了 BJT 能跑多快 ⭐</a></li>
+<li class="nsub"><a href="#ch13_s13-3">13.3 大訊號開關特性——BJT 從 ON 到 OFF 需要多久</a></li>
+<li class="nsub"><a href="#ch13_s13-4">13.4 小訊號等效電路與窄基極效應</a></li>
+<li class="nsub"><a href="#ch13_s13-gp">12.5.2 Gummel-Poon 模型——比 Ebers-Moll 更精確</a></li>
+<li class="nsub"><a href="#ch13_s13-nonideal">12.4 BJT 非理想效應——詳細分析</a></li>
+<li class="nsub"><a href="#ch13_s13-5">13.5 HBT 與 SiGe 技術——現代 RF 的基石</a></li>
+<li class="nsub"><a href="#ch13_summary">本章摘要</a></li>
+</ul></div><div class="st"><button onclick="toggleTheme()">🌓 <span id="tl">深色模式</span></button></div></nav>
+
+<main class="main">
+<div id="top"></div>
+
+<!-- ===== 第一章 固體的晶體結構 ===== -->
+
+<header class="header"><div class="cl">第一章</div><h1>固體的晶體結構</h1><div class="meta">Donald A. Neamen·《半導體物理與元件：基本原理》第四版·第 1–24 頁</div></header>
+
+<section id="ch01_preview"><div class="callout"><strong>📋 1.0 本章預覽</strong>
+<p>本書旨在探討半導體材料與元件的電特性。半導體通常為<strong>單晶材料</strong>——整個晶片上的數十億個電晶體都製造在同一塊近乎完美的矽單晶上。單晶材料的電特性不僅取決於化學組成（是 Si 還是 GaAs），更取決於<strong>原子在三維空間中的排列方式</strong>。</p>
+<div class="callout-warn"><strong>⚡ 為什麼第一章是整個半導體物理的基礎？</strong>晶體結構直接決定了能帶結構（第三章）→能帶結構決定了載子傳輸（第五章）→載子傳輸決定了元件性能。此外，晶圓的晶體取向（(100)還是(111)面）決定了蝕刻速率、氧化層品質、以及磊晶生長的品質——這些都是實際半導體製造中的關鍵參數。本章的每一個概念在後續章節都會反覆出現。</div>
+<p><strong>在本章中，我們將學習：</strong></p>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px">
+<li>固體的三種分類——非晶、多晶與單晶</li><li>單位晶胞與原始晶胞的概念</li>
+<li>三種簡單晶體結構（sc, bcc, fcc）的原子密度計算</li>
+<li>米勒指數——如何用數學描述晶面和方向</li><li>矽的鑽石結構及其與共價鍵結的關係</li><li>單晶半導體材料的生長方法（柴氏法、磊晶）</li>
+</ul></div></section>
+
+<section id="ch01_s1-1"><h2>1.1 半導體材料</h2>
+<p>半導體是一類導電率介於金屬與絕緣體之間的材料。但它們真正的特別之處不在於導電率的大小，而在於導電率<strong>可以被精確控制</strong>——透過摻雜（第四章）可以將導電率調整超過十個數量級。這是金屬和絕緣體做不到的。</p>
+<p>半導體分為兩大類：</p>
+<table><thead><tr><th>類別</th><th>代表材料</th><th>特點</th></tr></thead><tbody>
+<tr><td><strong>元素半導體</strong>（第 IV 族）</td><td>Si（矽）、Ge（鍺）</td><td>單一元素，Si 是主流（佔全球半導體市場 >95%）</td></tr>
+<tr><td><strong>化合物半導體</strong>（III–V 族）</td><td>GaAs、GaN、InP</td><td>直接能隙→適合光電；高電子遷移率→適合高頻</td></tr></tbody></table>
+<div class="figure"><img src="../../../images/solid-state-physics/ch01_pages/ch1_page_27.png" alt="表 1.1, 1.2" loading="lazy"><figcaption>表 1.1：週期表中半導體元素的位置。表 1.2：常見半導體材料列表。</figcaption></div>
+<div class="callout"><strong>💡 為什麼 Si 稱霸半導體產業？</strong>不只是因為便宜。Si 有天然的絕緣體 SiO₂——只要把 Si 加熱就能在表面長出完美的氧化層。這層 SiO₂ 是 MOSFET 閘極的基礎。其他半導體（如 GaAs）沒有這麼理想的自然氧化物，這是 Si 無可取代的優勢。</div>
+</section>
+
+<section id="ch01_s1-2"><h2>1.2 固體的三種分類</h2>
+<h3>非晶（Amorphous）</h3>
+<p>原子排列沒有長程有序——就像一袋隨機堆放的彈珠。非晶矽（a-Si）用於薄膜太陽能電池和 LCD 顯示器的薄膜電晶體，因為它可以在大面積玻璃基板上低溫沉積，不需要單晶的高溫製程。代價是載子遷移率遠低於單晶矽。</p>
+<h3>多晶（Polycrystalline）</h3>
+<p>由許多小單晶區域（<strong>晶粒</strong>）組成，晶粒之間由<strong>晶界</strong>分隔。晶界處原子排列紊亂→載子散射→遷移率降低。多晶矽用於太陽能電池和某些閘極材料，成本比單晶低但性能也較差。</p>
+<h3>單晶（Single Crystal）</h3>
+<p>整個材料中原子呈完美的週期排列——沒有晶界，沒有缺陷（理想上）。<strong>所有高效能半導體元件都必須使用單晶</strong>。為什麼？因為晶界會引入額外的能態（陷阱），捕捉載子、增加漏電流、降低元件速度。你能想像一個有數十億個電晶體的處理器，如果每個電晶體的性能都因晶界而不同，會有多混亂嗎？</p>
+<div class="figure"><img src="../../../images/solid-state-physics/ch01_pages/ch1_page_28.png" alt="圖 1.1" loading="lazy"><figcaption>圖 1.1：非晶、多晶與單晶材料的二維示意圖。注意單晶的完美週期排列。</figcaption></div>
+<div class="callout"><strong>💡 三種分類的量化比較：</strong></div>
+<table><thead><tr><th>性質</th><th>非晶</th><th>多晶</th><th>單晶</th></tr></thead><tbody>
+<tr><td>遷移率（Si, cm²/V·s）</td><td>∼0.1–1</td><td>∼10–100</td><td>∼1350（電子）</td></tr>
+<tr><td>有序範圍</td><td>< 1 nm</td><td>晶粒 10 nm–µm</td><td>整個晶片</td></tr>
+<tr><td>製備溫度</td><td>200–400°C</td><td>500–800°C</td><td>>1000°C</td></tr>
+<tr><td>典型應用</td><td>TFT、薄膜太陽能</td><td>太陽能電池、閘極</td><td>IC、功率元件</td></tr></tbody></table>
+</section>
+
+<section id="ch01_s1-3-1"><h2>1.3.1 原始晶胞與單位晶胞</h2>
+<p>要描述一個含有 $10^{22}$ 個原子的晶體，不必逐一列出每個原子的位置。只需要找出<strong>最小的重複單元</strong>——這就是<strong>單位晶胞（unit cell）</strong>的概念。把這個單元在三個方向上無限複製，就得到整個晶體。</p>
+<p>每個晶格點可以用向量來表示：</p>
+<div class="eq">$$\vec{r} = p\vec{a} + q\vec{b} + s\vec{c} \tag{1.1}$$</div>
+<p>其中 $\vec{a}, \vec{b}, \vec{c}$ 是晶格的基本平移向量（不必互相垂直，長度也不必相等）；$p, q, s$ 是整數。這三個向量的大小 $|\vec{a}|, |\vec{b}|, |\vec{c}|$ 就是<strong>晶格常數（lattice constants）</strong>——晶體最基本的幾何參數。</p>
+<p><strong>原始晶胞（primitive cell）</strong>是體積最小的單位晶胞。但有時候為了方便（例如希望邊互相垂直），我們會使用體積更大的「非原始」單位晶胞。對於立方晶系，通常使用一個立方體作為單位晶胞（即使它可能不是原始晶胞）。</p>
+<div class="figure"><img src="../../../images/solid-state-physics/ch01_pages/ch1_page_29.png" alt="圖 1.2, 1.3" loading="lazy"><figcaption>圖 1.2：二維晶格中晶格點的週期排列。圖 1.3：同一晶格可選取多種不同的單位晶胞——A 和 B 都可以用來重現整個晶格。</figcaption></div>
+</section>
+
+<section id="ch01_s1-3-2"><h2>1.3.2 基本晶體結構</h2>
+<p>三種最基本的立方晶體結構（圖 1.5）：</p>
+<table><thead><tr><th>結構</th><th>角落原子</th><th>額外原子</th><th>每單位晶胞等效原子數</th></tr></thead><tbody>
+<tr><td>簡單立方 (sc)</td><td>8 個，各共享 1/8</td><td>無</td><td><strong>1</strong></td></tr>
+<tr><td>體心立方 (bcc)</td><td>8 個角落</td><td>1 個在中心</td><td><strong>2</strong></td></tr>
+<tr><td>面心立方 (fcc)</td><td>8 個角落</td><td>6 個在面心（各共享 1/2）</td><td><strong>4</strong></td></tr>
+</tbody></table>
+<div class="figure"><img src="../../../images/solid-state-physics/ch01_pages/ch1_page_30.png" alt="圖 1.5" loading="lazy"><figcaption>圖 1.5：(a) 簡單立方、(b) 體心立方、(c) 面心立方。注意角落原子被相鄰晶胞共享。</figcaption></div>
+<p><strong>原子體密度</strong>——每 cm³ 有多少個原子——是晶體最基本的參數之一。計算公式：</p>
+<div class="eq">$$\text{Volume Density} = \frac{\text{# atoms per unit cell}}{a^3}$$</div>
+<div class="exbox"><div class="ext">📐 例題 1.1 — bcc 原子體密度</div>$a = 5\ \text{Å}$。bcc 每晶胞 2 個原子。<br>體密度 $= 2/(5\times10^{-8})^3 = 1.6\times10^{22}$ atoms/cm³。<br>這是一個極大的數字——每立方公分有 $1.6\times10^{22}$ 個原子。對比之下，典型的摻雜濃度只有 $10^{14}$–$10^{18}$ cm⁻³，也就是說雜質原子僅佔總原子數的十億分之一到百萬分之一。</div>
+<p><strong>配位數（Coordination Number）：</strong>每個原子的最近鄰原子數。sc = 6（上下左右前後）、bcc = 8（體心到 8 個角落）、fcc = 12（每個面心原子接觸 4 個同面角落 + 4 個相鄰面心 + 4 個下一層面心）。配位數越高→原子堆積越緊密→鍵結越強。</p>
+<p><strong>堆積因子（Packing Fraction）：</strong>假設原子是硬球，計算原子球體積佔單位晶胞體積的比例。sc = 52%、bcc = 68%、fcc = 74%。fcc 的 74% 是等徑球最密堆積的理論極限。Si 的鑽石結構只有 34%——因為共價鍵的方向性限制了原子不能任意緊密排列。</p>
+<div class="callout"><strong>💡 原子密度直接影響晶圓的重量、機械強度、以及化學蝕刻速率。面密度（每 cm² 有多少原子被某個晶面切割）則決定了氧化層和金屬接觸的界面品質——原子排列越密，界面缺陷越少。fcc 的 (111) 面是最密面（原子密度最高），這就是為什麼 Au 和 Cu 的最穩定表面是 (111)。</strong></div>
+</section>
+
+<section id="ch01_s1-3-3"><h2>1.3.3 晶面與米勒指數</h2>
+<div class="figure"><img src="../../../images/solid-state-physics/ch01_pages/ch1_page_34.png" alt="圖 1.9" loading="lazy"><figcaption>圖 1.9：如何從晶面的截距決定米勒指數——取倒數、化整數、加括號。</figcaption></div>
+<p>真實晶體不是無限大的——它必定在某個表面終止。半導體元件就是在這個表面上製造的。我們需要一種方法來<strong>命名和描述</strong>晶體中的不同平面。這就是米勒指數的用途。</p>
+<p><strong>求米勒指數的三步驟：</strong></p><ol style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li>找出平面在 $\vec{a}, \vec{b}, \vec{c}$ 軸上的截距（以晶格常數為單位）</li>
+<li>取截距的倒數</li>
+<li>乘以最小公分母，得到三個整數 $(hkl)$</li></ol>
+<p>三個最常用的晶面：</p>
+<table><thead><tr><th>平面</th><th>截距</th><th>米勒指數</th><th>面原子密度（sc, 相對）</th></tr></thead><tbody>
+<tr><td>平行於 $b$ 和 $c$ 軸</td><td>$p=1,q=\infty,s=\infty$</td><td><strong>(100)</strong></td><td>$1/a^2$</td></tr>
+<tr><td>對角線貫穿一面</td><td>$p=1,q=1,s=\infty$</td><td><strong>(110)</strong></td><td>$1/(\sqrt{2}a^2)$</td></tr>
+<tr><td>體對角線</td><td>$p=1,q=1,s=1$</td><td><strong>(111)</strong></td><td>$1/(\sqrt{3}a^2)$</td></tr></tbody></table>
+<div class="figure"><img src="../../../images/solid-state-physics/ch01_pages/ch1_page_32.png" alt="圖 1.8" loading="lazy"><figcaption>圖 1.8：(a) (100) 面、(b) (110) 面、(c) (111) 面。注意不同晶面的原子排列密度不同。</figcaption></div>
+<div class="callout-warn"><strong>⚡ 米勒指數不是抽象數學——它直接影響半導體製造。</strong>(100) 面是矽晶圓的標準選擇，因為它的表面態密度最低、氧化層品質最好、且晶圓切割最容易（沿 (100) 面自然解理）。(111) 面的原子密度最高→蝕刻速率最慢→在 MEMS 中用作蝕刻停止層。不同的晶面有不同的化學反應性（因為表面懸鍵密度不同）——這直接決定了蝕刻、氧化、和磊晶生長的速率。</div>
+</section>
+
+<section id="ch01_s1-3-4"><h2>1.3.4 晶體中的方向</h2>
+<p>方向用方括號 $[hkl]$ 表示（區別於表示晶面的圓括號 $(hkl)$）。方向代表晶格中的一條直線——從原點出發，沿向量 $h\vec{a}+k\vec{b}+l\vec{c}$ 前進。</p>
+<p><strong>決定方向指數的步驟：</strong></p>
+<ol style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li>從原點到方向上任意一點，寫出以晶格常數為單位的座標 $(u,v,w)$</li>
+<li>如果座標有分數，乘以最小公分母化為整數</li>
+<li>用方括號表示：$[uvw]$</li>
+</ol>
+<p><strong>三個基本方向（立方晶系）：</strong></p>
+<table><thead><tr><th>方向</th><th>描述</th><th>對應的垂直晶面</th></tr></thead><tbody>
+<tr><td><strong>[100]</strong></td><td>沿 $a$ 軸正向</td><td>(100)</td></tr>
+<tr><td><strong>[010]</strong></td><td>沿 $b$ 軸正向</td><td>(010)</td></tr>
+<tr><td><strong>[001]</strong></td><td>沿 $c$ 軸正向</td><td>(001)</td></tr></tbody></table>
+<p><strong>方向族 $\langle hkl \rangle$：</strong>晶體的對稱性使某些方向等效。例如在立方晶系中，$[100]$、$[\bar{1}00]$、$[010]$、$[0\bar{1}0]$、$[001]$、$[00\bar{1}]$ 六個方向在物理上等效——統稱為 $\langle100\rangle$ 方向族。$\langle110\rangle$ 包含 12 個等效方向（六個面的對角線）。$\langle111\rangle$ 包含 4 個等效方向（四條體對角線）。</p>
+<p><strong>重要關係（僅限立方晶系）：</strong>$[hkl]$ 方向<strong>垂直</strong>於 $(hkl)$ 面。這是因為立方晶系的三個軸互相垂直。在六方晶系中，這個垂直關係不成立——需要用四指數系統 $[hkil]$。</p>
+<div class="callout"><strong>💡 方向在半導體製造中的實際意義。</strong>① 晶圓上的「平坦面（flat）」沿 $[110]$ 方向切割——這是晶圓定向的標準標記。② 矽晶體沿 $\{111\}$ 面最容易解理（因為 (111) 面間距最大、鍵密度最低）→雷射二極體的解理面就是 (111) 面。③ 各向異性蝕刻：KOH 蝕刻 (100) Si 的速率是 (111) 面的 ∼400 倍→可以在晶片上精確刻出 V 型溝槽——這是 MEMS 壓力感測器的基礎。</div>
+<div class="figure"><img src="../../../images/solid-state-physics/ch01_pages/ch1_page_35.png" alt="圖 1.10" loading="lazy"><figcaption>圖 1.10：三個基本方向和對應的晶面——注意 [100] 垂直於 (100) 面。</figcaption></div>
+</section>
+
+<section id="ch01_s1-4"><h2>1.4 鑽石結構</h2>
+<p>矽（Si）的晶體結構被稱為<strong>鑽石結構（diamond structure）</strong>——因為碳（鑽石）也是同樣的結構。它不是簡單的 sc、bcc 或 fcc，而是兩個 fcc 次晶格沿體對角線方向偏移 1/4 的結果。每個 Si 原子有<strong>四個最近鄰原子</strong>，排列成<strong>正四面體</strong>——這就是為什麼 Si 的共價鍵夾角是 109.5°。</p>
+<div class="figure"><img src="../../../images/solid-state-physics/ch01_pages/ch1_page_36.png" alt="圖 1.11, 1.12" loading="lazy"><figcaption>圖 1.11：鑽石結構的單位晶胞——每晶胞含 8 個原子。圖 1.12：四面體結構——每個原子有 4 個最近鄰。</figcaption></div>
+<p><strong>閃鋅礦結構（zincblende）</strong>與鑽石結構完全相同，只是兩種次晶格由不同原子佔據——例如 GaAs 中 Ga 在一個 fcc 次晶格，As 在另一個。這種不對稱性賦予 GaAs 許多 Si 所沒有的光電特性（如直接能隙，見第三章）。</p>
+<div class="figure"><img src="../../../images/solid-state-physics/ch01_pages/ch1_page_37.png" alt="圖 1.14, 1.15" loading="lazy"><figcaption>圖 1.14：GaAs 的閃鋅礦晶格。圖 1.15：GaAs 中四面體鍵結——每個 Ga 有 4 個 As 鄰居，每個 As 有 4 個 Ga 鄰居。</figcaption></div>
+<div class="callout"><strong>💡 鑽石 vs 閃鋅礦——為什麼 GaAs 能發光而 Si 不能？</strong>鑽石結構有對稱中心（inversion symmetry），而閃鋅礦結構沒有。這個看似微小的差異導致 GaAs 是直接能隙半導體、Si 是間接能隙半導體（第三章）。直接能隙意味著電子可以直接從導帶跳回價帶並發出光子——這就是 LED 和雷射的基礎。Si 的間接能隙需要聲子參與，發光效率極低。這一切都源自晶體結構的對稱性。</div>
+</section>
+
+<section id="ch01_s1-5"><h2>1.5 原子鍵結</h2>
+<p>為什麼 Si 形成鑽石結構而不是 bcc？為什麼 NaCl 形成岩鹽結構？答案在於<strong>原子鍵結</strong>——原子之間的交互作用力求使系統總能量最小化。四種主要鍵結類型：</p>
+<h3>離子鍵（Ionic）</h3><p>第 I 族（如 Na）失去電子→正離子；第 VII 族（如 Cl）獲得電子→負離子。庫侖吸引力把離子排列成晶格。NaCl 是典型例子。離子鍵很強→高熔點、硬、但脆。</p>
+<h3>共價鍵（Covalent）⭐</h3><p>半導體最重要的鍵結類型。原子<strong>共享</strong>電子以達成滿殼層。Si 有 4 個價電子，需要 4 個來填滿外殼→與 4 個鄰居各共享 1 個電子→每個 Si 等效擁有 8 個外層電子。這 4 個共價鍵的方向正好指向正四面體的四個頂點→形成鑽石結構。共價鍵是<strong>方向性</strong>的——這與金屬鍵的非方向性形成對比。</p>
+<div class="figure"><img src="../../../images/solid-state-physics/ch01_pages/ch1_page_38.png" alt="圖 1.16, 1.17" loading="lazy"><figcaption>圖 1.16：H₂ 分子中的共價鍵。圖 1.17：Si 晶體中的共價鍵——每個 Si 與 4 個鄰居共享電子。</figcaption></div>
+<h3>金屬鍵（Metallic）</h3><p>正離子浸在「電子海」中。價電子脫離個別原子成為整個晶體共有的自由電子→非方向性→金屬可塑性高、可被錘成薄片或拉成絲。金屬鍵的強度中等（Cu 的內聚能 ∼3.5 eV/atom），但因為自由電子的存在，金屬是良導體——這些電子在外加電場下可以輕易流動。</p>
+<h3>凡得瓦鍵（Van der Waals）</h3><p>最弱的鍵（∼0.01–0.1 eV），來自瞬時偶極–偶極交互作用。室溫下 $kT \approx 0.026$ eV → 凡得瓦鍵能與 $kT$ 可比或更弱→靠凡得瓦鍵結合的分子在室溫下通常是液體或氣體（如 Ar、N₂）。石墨中的層間也是凡得瓦鍵→層間很容易滑動→石墨可用作潤滑劑。</p>
+<div class="callout"><strong>💡 鍵結強度的定量比較：</strong>共價鍵（Si: 1.8 eV/bond）> 離子鍵（NaCl: 0.75 eV/pair）> 金屬鍵（Cu: 3.5 eV/atom 但每個原子有多個鍵）> 凡得瓦鍵（Ar: 0.08 eV/atom）。鍵結強度直接反映在熔點上：Si（1414°C）> NaCl（801°C）> Cu（1085°C，金屬鍵有多個配位）> Ar（-189°C）。</div>
+<div class="callout-warn"><strong>⚡ 鍵結類型直接決定電性。</strong>共價鍵中的電子被侷限在鍵中→純 Si 是絕緣體（$T=0$ K）。要讓 Si 導電，必須「打斷」共價鍵——可以靠熱能（本徵載子，$n_i$）或靠摻雜（第四章）。離子晶體（如 NaCl）即使高溫也幾乎不導電，因為沒有可移動的電子或離子。</div>
+</section>
+
+<section id="ch01_s1-6"><h2>1.6 固體中的缺陷與雜質</h2>
+<p>到目前為止我們假設晶體是完美的。現實中沒有完美晶體。而且——<strong>沒有缺陷就沒有半導體元件</strong>。以下是幾種關鍵的缺陷類型：</p>
+<h3>晶格振動（聲子 Phonons）</h3><p>原子在平衡位置附近熱振動。溫度越高→振幅越大→電子被散射的機率越大→遷移率降低（第五章）。這是為什麼電腦晶片需要散熱的根本物理原因。</p>
+<h3>點缺陷</h3>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li><strong>空位（Vacancy）：</strong>晶格點上缺少一個原子。熱平衡空位濃度 $n_v = N\exp(-E_v/kT)$，其中 $E_v \sim 0.5$–$3$ eV（形成能）。在 Si 的熔點附近，空位濃度可達 $10^{15}$ cm$^{-3}$。</li>
+<li><strong>間隙（Interstitial）：</strong>多餘原子擠在晶格間隙中。形成能通常比空位高→濃度較低。</li>
+<li><strong>Frenkel 缺陷：</strong>空位+間隙對——原子從晶格點跳進間隙位置。總數不變但產生局部畸變。</li>
+<li><strong>Schottky 缺陷：</strong>正負離子成對的空位（離子晶體中）。電中性要求空位成對出現。</li>
+</ul>
+
+<h3>線缺陷——差排（Dislocations）</h3>
+<p>差排是晶體中一整排原子的錯位。兩種基本類型：</p>
+<p><strong>螺旋差排（Screw Dislocation）：</strong>原子面圍繞差排線形成螺旋樓梯。螺旋差排在晶體成長中扮演關鍵角色——它提供了天然的「階梯」讓新原子可以附著，使晶體能在遠低於熔點的溫度下持續生長。</p>
+<p><strong>刃差排（Edge Dislocation）：</strong>額外插入的半原子面。差排線附近的晶格嚴重畸變→成為載子的散射中心和複合中心。</p>
+<p>典型柴氏法矽晶圓的差排密度：優質晶圓 < 100 cm$^{-2}$（近完美晶體），但製程中的熱應力可能引入 $10^3$–$10^4$ cm$^{-2}$ 的差排。現代直拉矽晶圓幾乎是「零差排」的。</p>
+<div class="figure"><img src="../../../images/solid-state-physics/ch01_pages/ch1_page_40.png" alt="圖 1.18, 1.19" loading="lazy"><figcaption>圖 1.18：(a) 空位、(b) 間隙。圖 1.19：線差排——一整排原子的錯位。</figcaption></div>
+<h3>雜質（Impurities）— 摻雜的基礎</h3>
+<p>雜質原子可以是<strong>取代型</strong>（佔據正規晶格點）或<strong>間隙型</strong>（擠在晶格間）。<strong>刻意加入特定雜質就是摻雜（doping）</strong>——這是半導體技術的基石。施體（P, As）多一個價電子→n 型。受體（B）少一個價電子→p 型。詳細分析見第四章。</p>
+<div class="figure"><img src="../../../images/solid-state-physics/ch01_pages/ch1_page_41.png" alt="圖 1.20" loading="lazy"><figcaption>圖 1.20：(a) 取代雜質——外來原子佔據 Si 的位置；(b) 間隙雜質——外來原子擠在 Si 原子之間。</figcaption></div>
+</section>
+
+<section id="ch01_s1-7"><h2>1.7 半導體材料的成長</h2>
+<h3>柴氏法（Czochralski, CZ）</h3>
+<p>全球 >90% 的矽晶圓使用柴氏法生產。原理看似簡單：把一小塊單晶「種子」浸入熔融矽中，然後緩慢向上拉——熔融矽在種子下方凝固，複製種子的晶體取向。關鍵參數：</p>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li>拉速：太慢→生產效率低；太快→晶體品質下降</li>
+<li>旋轉：使熔體均勻混合，防止雜質局部堆積</li>
+<li>溫度梯度：控制固液界面形狀</li></ul>
+<div class="figure"><img src="../../../images/solid-state-physics/ch01_pages/ch1_page_43.png" alt="圖 1.21" loading="lazy"><figcaption>圖 1.21：(a) 柴氏法晶體拉提器示意圖；(b) 帶有積體電路陣列的矽晶圓（Intel 提供）。</figcaption></div>
+<p>晶棒拉出後→切割成晶圓→研磨→化學蝕刻→拋光→成為<strong>基板（substrate）</strong>。過程中晶圓邊緣會磨出一個<strong>平坦面（flat）</strong>來標示晶體取向（通常沿 [110] 方向）。</p>
+<h3>磊晶成長（Epitaxy）</h3>
+<p>在基板上<strong>再長一層</strong>單晶薄膜。基板充當種子，但溫度遠低於熔點。三種方法比較：</p>
+<table><thead><tr><th>方法</th><th>溫度</th><th>精度</th><th>應用</th></tr></thead><tbody>
+<tr><td>CVD</td><td>1000–1200°C</td><td>中等</td><td>Si 磊晶層（$\text{SiCl}_4 + 2\text{H}_2 \to \text{Si} + 4\text{HCl}$）</td></tr>
+<tr><td>LPE</td><td>低於熔點</td><td>中等</td><td>III–V 化合物</td></tr>
+<tr><td>MBE</td><td>400–800°C</td><td>原子級</td><td>量子井、超晶格、雷射</td></tr></tbody></table>
+<div class="callout"><strong>💡 為什麼磊晶如此重要？</strong>柴氏法生產的晶圓是「塊材」——均勻摻雜、均勻特性。但現代元件需要在極薄的表層中精確控制摻雜濃度和材料組成。磊晶可以在基板上生長出摻雜濃度截然不同的薄膜（例如在 p 型基板上長 n 型磊晶層），這對雙極性元件和功率元件至關重要。MBE 更可以做到原子層級的精確度——交替沉積 GaAs 和 AlGaAs 單層來製造量子井雷射。</div>
+</section>
+
+<section id="ch01_summary"><h2>本章摘要</h2>
+<ol style="font-size:14px;color:var(--t2);margin-left:18px">
+<li><strong>固體分類：</strong>非晶（無序）→多晶（晶粒+晶界）→單晶（完美週期性）。半導體元件必須使用單晶。</li>
+<li><strong>晶格與晶胞：</strong>$\vec{r}=p\vec{a}+q\vec{b}+s\vec{c}$。單位晶胞是重複單元；原始晶胞是最小體積的單位晶胞。</li>
+<li><strong>三種立方結構：</strong>sc（1原子/晶胞）、bcc（2）、fcc（4）。體密度 = 原子數/$a^3$。</li>
+<li><strong>米勒指數 $(hkl)$：</strong>取截距倒數→描述晶面。方括號 $[hkl]$ 描述方向。(100)面是矽晶圓標準。</li>
+<li><strong>鑽石結構：</strong>兩個 fcc 偏移 1/4 體對角線。每原子 4 個最近鄰（正四面體）。閃鋅礦結構用兩種不同原子。</li>
+<li><strong>共價鍵→鑽石結構：</strong>Si 的 4 個 sp³ 混成軌域指向四面體頂點。鍵結的方向性決定了晶體結構。</li>
+<li><strong>缺陷：</strong>聲子（熱振動→散射→遷移率降低）、點缺陷（空位、間隙）、線缺陷（差排）。</li>
+<li><strong>摻雜：</strong>刻意加入取代型雜質——V 族→n 型，III 族→p 型。第四章展開。</li>
+<li><strong>柴氏法：</strong>種子拉晶→晶棒→切割→晶圓→拋光→基板。磊晶在基板上生長薄膜層。</li></ol></section>
+
+
+<!-- ===== 第二章 量子力學導論 ===== -->
+
+<header class="header"><div class="cl">第二章</div><h1>量子力學導論</h1><div class="meta">Donald A. Neamen·《半導體物理與元件：基本原理》第四版·第 25–57 頁</div></header>
+
+<section id="ch02_preview"><div class="callout"><strong>📋 2.0 本章預覽</strong>
+<p>古典物理學（牛頓力學、馬克士威電磁學）在描述日常尺度的物體時極其成功。但在原子尺度——電子的行為完全不符合古典預測。電子不是微小的撞球；它們是<strong>機率波</strong>，同時具有粒子和波的性質，能量是量子化的。</p>
+<div class="callout-warn"><strong>⚡ 為什麼半導體工程師需要量子力學？</strong>你不會在日常工作中手動解薛丁格方程。但你<strong>必須</strong>理解它的結果：束縛電子→能量量子化→離散能階。這個概念是整個半導體物理的基石——沒有量子化，就沒有能帶理論（第三章）、沒有 $E_g$、就沒有半導體。不理解無限位能井，你就無法理解為什麼縮小電晶體的通道寬度會改變它的電性（量子侷限效應）。本章建立的每個概念都直接服務於第三章和第五章。</div>
+<p><strong>本章邏輯鏈：</strong>古典物理的失敗（光電效應）→普朗克/愛因斯坦（能量量子）→德布羅意（物質波）→海森堡（不確定性）→薛丁格（波動方程）→求解各種位能下的電子行為→延伸到原子（量子數、週期表）。</p></div></section>
+
+<section id="ch02_s2-1-1"><h2>2.1.1 能量量子化——光電效應</h2>
+<p>古典物理預測：只要光夠強，任何頻率都能打出電子。實驗事實：<strong>低於某個截止頻率 $\nu_0$，再強的光也打不出電子。</strong>高於 $\nu_0$，即使極微弱的光也能打出電子。古典物理完全無法解釋。</p>
+<p>普朗克（1900）提出了一個革命性的假設：熱輻射的能量不是連續的，而是以<strong>離散的能量包（量子）</strong>形式發射。每個量子的能量為 $E = h\nu$，其中 $h = 6.625\times10^{-34}$ J·s——這就是<strong>普朗克常數</strong>，量子力學的標誌性常數。</p>
+<p>愛因斯坦（1905）更進一步：光本身也是由離散的能量包組成的——<strong>光子（photon）</strong>。光電效應的完整解釋：</p>
+<div class="eq">$$\boxed{T_{\text{max}} = \frac{1}{2}mv^2 = h\nu - \phi = h(\nu - \nu_0)} \tag{2.1}$$</div>
+<p><strong>物理圖像：</strong>一個光子擊中金屬表面。如果光子能量 $h\nu$ 大於金屬的功函數 $\phi$（把電子從表面拉出來所需的最小能量），多餘的能量變成光電子的動能。光子能量不夠（$\nu < \nu_0$）→電子出不來。光強度只改變光子的<strong>數量</strong>（每秒多少個光子），不改變每個光子的<strong>能量</strong>→光強度影響光電子發射率，不影響最大動能。</p>
+<div class="figure"><img src="../../../images/solid-state-physics/ch02_pages/ch2_page_52.png" alt="圖 2.1" loading="lazy"><figcaption>圖 2.1：(a) 光電效應——光子擊出電子；(b) 光電子最大動能 vs 頻率——線性關係，截距 $\nu_0$。</figcaption></div>
+<div class="callout"><strong>💡 實用換算：</strong>$E(\text{eV}) = 12400 / \lambda(\text{Å})$。可見光（$\lambda\sim5000$ Å）→ $E\sim2.5$ eV。X 射線（$\lambda\sim1$ Å）→ $E\sim12400$ eV。半導體的光學微影從可見光發展到紫外（193 nm）再到極紫外（13.5 nm），就是為了用更短波長（更高能量）的光來刻出更小的圖案。</div>
+</section>
+
+<section id="ch02_s2-1-2"><h2>2.1.2 波粒二象性</h2>
+<p>光（傳統認為是波）表現出粒子性→那粒子是否也表現出波動性？德布羅意（1924）大膽假設：<strong>是。</strong>任何運動的粒子都有一個對應的波長：</p>
+<div class="eq">$$\boxed{\lambda = \frac{h}{p} = \frac{h}{mv}} \tag{2.3}$$</div>
+<p>這不只是理論臆測。Davisson 和 Germer（1927）用電子束照射鎳單晶，觀測到電子散射的<strong>繞射圖案</strong>——就像光通過光柵產生的干涉條紋。電子真的表現得像波。</p>
+<p><strong>數值直覺：</strong>一個被 150 V 電壓加速的電子，動能 $E = eV = 150$ eV→$v = 7.3\times10^6$ m/s→$\lambda = h/(mv) = 6.63\times10^{-34}/(9.11\times10^{-31}\times7.3\times10^6) = 1.0$ Å。這正好是原子間距的量級→電子束可以在晶體上產生 Bragg 繞射。相比之下，一個 1 kg 的棒球以 30 m/s 運動：$\lambda = 6.63\times10^{-34}/(1\times30) = 2.2\times10^{-35}$ m——比普朗克長度還小，完全無法觀測到波動性。</p>
+<div class="figure"><img src="../../../images/solid-state-physics/ch02_pages/ch2_page_54.png" alt="圖 2.2, 2.3" loading="lazy"><figcaption>圖 2.2：Davisson–Germer 實驗裝置。圖 2.3：散射電子通量 vs 角度——峰值來自 Bragg 繞射，證實 $\lambda=h/p$。</figcaption></div>
+<div class="callout"><strong>💡 電子顯微鏡的解析度遠超光學顯微鏡</strong>——因為電子波長（$\sim0.05$ Å）比可見光波長（$\sim5000$ Å）短了十萬倍。繞射極限決定了你能看到的最小特徵——波長越短，解析度越高。TEM（穿透式電子顯微鏡）的解析度可達 0.5 Å——足以「看到」單個原子。SEM（掃描式電子顯微鏡）解析度 ∼1 nm——用於觀察奈米結構和元件截面。</div>
+</section>
+
+<section id="ch02_s2-1-3"><h2>2.1.3 海森堡不確定性原理</h2>
+<p>在古典物理中，你可以同時精確知道粒子的位置和動量。量子力學說：<strong>不行。</strong></p>
+<div class="eq">$$\Delta p \cdot \Delta x \geq \hbar \qquad \Delta E \cdot \Delta t \geq \hbar \tag{2.4, 2.5}$$</div>
+<p>其中 $\hbar = h/2\pi = 1.054\times10^{-34}$ J·s。這不是測量儀器的限制——這是自然的<strong>本質限制</strong>。電子<strong>本質上</strong>不具有同時確定的位置和動量。</p>
+<p><strong>數值估算——為什麼電子不能靜止：</strong>假設把一個電子侷限在 $a = 1$ nm 的範圍內（$\Delta x \approx 10^{-9}$ m）。不確定性原理要求 $\Delta p \geq \hbar/\Delta x = 1.054\times10^{-34}/10^{-9} = 1.054\times10^{-25}$ kg·m/s。對應的動能 $E \approx (\Delta p)^2/(2m) = (1.054\times10^{-25})^2/(2\times9.11\times10^{-31}) \approx 6\times10^{-21}$ J $\approx 0.04$ eV。這就是<strong>零點能</strong>——即使在 $T=0$ K，侷限在 1 nm 範圍內的電子仍有 0.04 eV 的動能。侷限範圍越小，零點能越大（$E \propto 1/a^2$）。</p>
+<div class="callout-warn"><strong>⚡ 不確定性原理的直接後果：</strong>我們不能說「電子在 $x=3$ Å 處」。我們只能說「在 $x=3$ Å 附近找到電子的機率是 $P$」。這就是為什麼我們需要<strong>機率密度函數</strong> $|\psi(x)|^2$——它告訴我們在每個位置找到電子的機率，而不是電子的確切位置。這也直接導致了第三章的 Fermi-Dirac 統計——每個量子態不是「有一個電子」而是「有一定機率被電子佔據」。</div>
+<div class="callout"><strong>💡 不確定性原理在半導體中的實際影響。</strong>當 MOSFET 的通道長度縮小到 5 nm 以下，電子在通道方向的位置不確定性 $\Delta x \approx 5$ nm→動量不確定性 $\Delta p \approx \hbar/5\times10^{-9} \approx 2\times10^{-26}$ kg·m/s→速度不確定性 $\Delta v \approx 2\times10^4$ m/s。這意味著電子的行為越來越「模糊」，古典的漂移-擴散模型逐漸失效→需要量子力學的 transport 理論（彈道傳輸、量子穿隧）。</div>
+</section>
+
+<section id="ch02_s2-2"><h2>2.2 薛丁格波動方程式</h2>
+<p>如果粒子是波，那支配它們的「運動方程」是什麼？薛丁格（1926）給出了答案：</p>
+<div class="eq">$$-\frac{\hbar^2}{2m}\frac{\partial^2\Psi}{\partial x^2} + V\Psi = j\hbar\frac{\partial\Psi}{\partial t} \tag{2.6}$$</div>
+<p>這看起來像擴散方程和波動方程的混合體。左邊第一項是動能項（$\partial^2/\partial x^2$ 來自動量平方，除以 $2m$ 就是動能）；第二項是位能。右邊是時間變化。虛數 $j$ 的出現意味著 $\Psi$ 是複數函數——它本身不是可測量的物理量。</p>
+<p>透過<strong>分離變數法</strong> $\Psi(x,t)=\psi(x)\phi(t)$，可將時間和空間部分分開。關鍵結果是<strong>時間無關的薛丁格方程式</strong>：</p>
+<div class="eq">$$\boxed{\frac{d^2\psi}{dx^2} + \frac{2m}{\hbar^2}[E - V(x)]\psi = 0} \tag{2.13}$$</div>
+<p>這是本章的核心——所有後續的應用（自由電子、無限位能井、穿隧）都是對不同 $V(x)$ 求解 (2.13)。</p>
+</section>
+
+<section id="ch02_s2-2-2"><h2>2.2.2 波函數的物理意義</h2>
+<p>$\psi(x)$ 本身是<strong>複數函數</strong>，沒有直接的物理意義。你不能用任何儀器「測量」$\psi$。那它有什麼用？</p>
+<p><strong>Born 的機率詮釋（1926）：</strong>$|\psi(x)|^2 dx$ = 在 $x$ 和 $x+dx$ 之間找到粒子的<strong>機率</strong>。$|\psi|^2 = \psi^*\psi$ 是<strong>機率密度</strong>——一個實數、非負的函數。</p>
+<div class="eq">$$\int_{-\infty}^{\infty}|\psi|^2 dx = 1 \tag{2.18}$$</div>
+<p>這就是<strong>歸一化條件</strong>——粒子一定在宇宙中的某個地方。所有合法的波函數都必須滿足這個條件。</p>
+<div class="callout"><strong>💡 為什麼波函數必須是複數？</strong>薛丁格方程含有虛數 $j$（方程式 2.6 的右邊），所以解天然是複數。如果你強迫 $\psi$ 為實數，就無法描述行進波（$e^{jkx}$ 是複數）。複數波函數的相位攜帶了動量資訊——$e^{jkx}$ 代表向右運動的粒子，$e^{-jkx}$ 代表向左運動。$|\psi|^2$ 把相位消掉，只留下可測量的機率。</div>
+<div class="callout-warn"><strong>⚡ 機率密度 ≠ 電荷密度。</strong>一個電子的機率密度是 $|\psi|^2$，但這不等於電荷密度。電荷密度 = $(-e)|\psi|^2$。在半導體中，我們常把 $|\psi|^2$ 積分來計算「在某個區域找到電子的機率」，這在量子穿隧（2.3.4）和量子井（第三章）的分析中至關重要。</div>
+</section>
+
+<section id="ch02_s2-2-3"><h2>2.2.3 邊界條件</h2>
+<p>薛丁格方程是二階微分方程，需要<strong>邊界條件</strong>來確定唯一解。物理上，邊界條件來自對波函數合理性的要求：</p>
+<p><strong>條件一：$\psi$ 必須連續。</strong>如果 $\psi$ 在某點不連續，$\partial\psi/\partial x$ 在該點會變成狄拉克 delta 函數→$\partial^2\psi/\partial x^2$ 發散→薛丁格方程無解。物理上：機率密度不能瞬間跳變。</p>
+<p><strong>條件二：$\partial\psi/\partial x$ 必須連續</strong>（除非 $V(x)$ 在該點發散到無窮大）。理由同上——如果一階導數不連續，二階導數就發散。唯一例外是 $V=\infty$ 的邊界（如無限位能井的壁），此時 $\psi$ 本身在邊界處為零。</p>
+<p><strong>條件三：$\psi$ 必須有界。</strong>$|\psi(x)|^2$ 代表機率密度→在無窮遠處必須趨近於零（粒子不可能出現在無窮遠處）。</p>
+<p><strong>條件四：$\psi$ 必須是單值函數。</strong>在任何位置 $x$，$|\psi(x)|^2$ 只能有一個值——否則機率密度就不唯一。</p>
+<div class="callout"><strong>💡 邊界條件 → 量子化。</strong>這些邊界條件是能量量子化的根本原因。以無限位能井為例：$\psi(0)=\psi(a)=0$ 強制波函數只能是駐波 $\sin(n\pi x/a)$，而駐波的波數 $k$ 只能取離散值 $k_n=n\pi/a$→$E_n$ 量子化。如果邊界條件不同（如週期性邊界條件，$\psi(0)=\psi(L)$），得到的量子化規則也不同——但物理本質相同：<strong>有限空間中的波只能以特定模式存在</strong>。</div>
+<div class="callout-warn"><strong>⚡ 與第三章的連結：</strong>Kronig-Penney 模型（3.1.2）使用的是<strong>週期性邊界條件</strong>——因為晶體中的位能是週期性的。正是這種週期性邊界條件產生了能帶結構（允帶和禁帶交替出現）。所以邊界條件不只是數學技巧——它直接決定了材料是導體、半導體還是絕緣體。</div>
+</section>
+
+<section id="ch02_s2-3-1">
+<p>最簡單的情況：$V=0$（沒有力作用在電子上）。解 (2.13) 得：</p>
+<div class="eq">$$\psi(x) = Ae^{jkx} + Be^{-jkx},\quad k = \frac{\sqrt{2mE}}{\hbar} \tag{2.20, 2.21}$$</div>
+<p>這是一個<strong>行進波</strong>——$Ae^{jkx}$ 向右傳播，$Be^{-jkx}$ 向左傳播。<strong>物理圖像：</strong>自由電子像一個在空間中均勻分布的波。$|\psi|^2 = |A|^2$ 是常數——電子在任何位置被找到的機率<strong>完全相同</strong>。這與不確定性原理一致：動量完全確定（$p=\hbar k$，單一波數）→位置完全不定。</p>
+<p>波數 $k$ 是量子力學中最重要的參數之一，它串聯了多個物理量：</p>
+<div class="eq">$$k = \frac{\sqrt{2mE}}{\hbar} = \frac{p}{\hbar} = \frac{2\pi}{\lambda}$$</div>
+</section>
+
+<section id="ch02_s2-3-2"><h2>2.3.2 無限位能井 ⭐</h2>
+<p>把電子關在一個寬度為 $a$ 的「盒子」裡——$V=0$（$0<x<a$），$V=\infty$（外面）。電子完全無法逃脫。</p>
+<div class="figure"><img src="../../../images/solid-state-physics/ch02_pages/ch2_page_63.png" alt="圖 2.6" loading="lazy"><figcaption>圖 2.6：無限位能井——電子被限制在 $0<x<a$ 的區域。</figcaption></div>
+<p><strong>物理圖像：</strong>想像一條兩端固定的琴弦。弦只能以特定頻率（諧波）振動——你不能讓弦以任意頻率振動。電子的波函數也是如此：兩端必須為零（$\psi(0)=\psi(a)=0$），就像琴弦的兩端固定。這導致波函數只能是<strong>駐波</strong>——不是行進波。</p>
+<p>數學推導：$\psi(0)=0$→$A_1=0$（只剩正弦項）。$\psi(a)=0$→$\sin(ka)=0$→<strong>$ka=n\pi$</strong>。這是量子化的來源——$k$ 只能取離散值 $k_n = n\pi/a$。代入 $k=\sqrt{2mE}/\hbar$：</p>
+<div class="eq">$$\boxed{E_n = \frac{\hbar^2\pi^2 n^2}{2ma^2},\quad n=1,2,3,\ldots} \tag{2.38}$$</div>
+<div class="eq">$$\boxed{\psi_n(x) = \sqrt{\frac{2}{a}}\sin\!\left(\frac{n\pi x}{a}\right)} \tag{2.36}$$</div>
+<div class="figure"><img src="../../../images/solid-state-physics/ch02_pages/ch2_page_64.png" alt="圖 2.7" loading="lazy"><figcaption>圖 2.7：(a) 四個最低能階；(b) 對應駐波波函數；(c) 機率密度。注意 $n=2$ 在 $x=a/2$ 處有一個節點。</figcaption></div>
+<div class="callout-warn"><strong>⚡ 無限位能井的三個核心結論（考試必考）：</strong><br>① <strong>駐波而非行進波：</strong>束縛粒子的標誌。自由電子→行進波；束縛電子→駐波。<br>② <strong>零點能 $E_1 \neq 0$：</strong>即使 $T=0$ K，電子也不能靜止。如果靜止（$p=0$），$\Delta x=0$，違反不確定性原理。量子力學強制電子永遠在運動。<br>③ <strong>$E_n \propto n^2/a^2$：</strong>能階間距隨 $n$ 增大而增大（非等距！）。$a$ 越小（井越窄），能階越高。這是量子侷限效應——把電子關在更小的空間裡需要更多能量。</div>
+<div class="callout"><strong>💡 從無限位能井到半導體量子井。</strong>現代量子井雷射利用的正是同樣的物理：用奈米厚度的 GaAs 層夾在 AlGaAs 之間（AlGaAs 的 $E_g$ 更寬→形成位能井），電子被侷限在 GaAs 層中。改變 GaAs 層的厚度 $a$ 就能調控量子化能階的位置→從而調控雷射的波長。你剛學到的 $E_n \propto 1/a^2$ 直接應用在數十億美元的產業中。</div>
+</section>
+
+<section id="ch02_s2-3-3"><h2>2.3.3 階梯位能——滲入古典禁區</h2>
+<p>現在考慮一個更有趣的場景：位能在 $x=0$ 處從 0 跳到 $V_0$。電子從左邊來，能量 $E < V_0$（古典物理中電子不可能越過障壁）。</p>
+<div class="figure"><img src="../../../images/solid-state-physics/ch02_pages/ch2_page_67.png" alt="圖 2.8" loading="lazy"><figcaption>圖 2.8：階梯位能的能帶圖與波函數——區域 I 的振盪波函數在進入區域 II 後指數衰減。</figcaption></div>
+<div class="figure"><img src="../../../images/solid-state-physics/ch02_pages/ch2_page_65.png" alt="圖 2.8 附圖" loading="lazy"><figcaption>圖 2.8 附：波函數 $|\psi|^2$ 在 $x>0$ 處不為零但快速衰減，穿透深度 $1/k_2$ 取決於 $(V_0-E)$。</figcaption></div>
+<p>區域 I 的解仍是行進波（入射+反射）。區域 II 呢？
+<div class="eq">$$\psi_2(x) = A_2 e^{-k_2 x},\quad k_2 = \frac{\sqrt{2m(V_0-E)}}{\hbar} \tag{2.46}$$</div>
+<p><strong>穿透深度的數值估算：</strong>$1/k_2$ 是波函數衰減到 $1/e$ 的特徵長度。對 Si 中的電子（$m^* = 0.26\,m_0$）越過一個 1 eV 的障壁，且 $E = 0.5$ eV（$V_0-E = 0.5$ eV）：</p>
+<div class="eq">$$\frac{1}{k_2} = \frac{\hbar}{\sqrt{2\times0.26\times9.11\times10^{-31}\times0.5\times1.6\times10^{-19}}} \approx 0.5\ \text{nm}$$</div>
+<p>穿透深度只有 ∼0.5 nm（約 2 個原子層）！這就是為什麼穿隧效應只在極薄的障壁（< 3 nm）中才顯著。</p>
+<p><strong>反射係數：</strong>即使電子被「反射」回去，反射機率 $R$ 不是 1——有一部分波函數滲入障壁。$R$ 取決於 $(V_0-E)/E$ 的比值。$E$ 越接近 $V_0$，反射越少。</p>
+<div class="callout-warn"><strong>⚡ 這是純量子效應：</strong>古典物理中，粒子不可能出現在 $E<V_0$ 的區域（動能會變負）。但量子力學中，波函數<strong>不為零</strong>——電子有一定的機率<strong>滲入</strong>障壁。雖然機率隨深度指數衰減（典型的穿透深度只有幾個 Å），但這不是零。這個「滲入」是穿隧效應的前奏。</div>
+</section>
+
+<section id="ch02_s2-3-4"><h2>2.3.4 位能障壁與穿隧效應 ⭐</h2>
+<p>如果障壁的寬度是<strong>有限的</strong>（寬度 $a$），電子可以從左邊「穿隧」到右邊：</p>
+<div class="figure"><img src="../../../images/solid-state-physics/ch02_pages/ch2_page_70.png" alt="圖 2.9" loading="lazy"><figcaption>圖 2.9：位能障壁的能帶圖——波函數在區域 I（入射+反射）、區域 II（指數衰減）、區域 III（透射波）中的行為。</figcaption></div>
+<div class="figure"><img src="../../../images/solid-state-physics/ch02_pages/ch2_page_81.png" alt="圖 2.9 附圖" loading="lazy"><figcaption>圖 2.9 附：穿隧機率 $T$ 隨障壁寬度 $a$ 和粒子能量 $E$ 的變化——$T$ 對 $a$ 呈指數衰減。</figcaption></div>
+<div class="eq">$$\boxed{T \approx 16\frac{E}{V_0}\left(1-\frac{E}{V_0}\right)e^{-2k_2 a}} \tag{2.63}$$</div>
+<p><strong>物理直覺：</strong>穿隧機率隨障壁寬度 $a$ <strong>指數衰減</strong>（不是線性！）。$a$ 每增加一個 $1/k_2$（約 1–2 Å），穿隧機率就減少 $e^2 \approx 7.4$ 倍。這就是為什麼穿隧效應只對極薄的障壁（奈米尺度）重要。</p>
+<p><strong>數值例題：</strong>SiO₂ 中的電子穿隧（$m^* \approx 0.5\,m_0$，$V_0 = 3.1$ eV，$E = 0$）：$k_2 = \sqrt{2\times0.5\times9.11\times10^{-31}\times3.1\times1.6\times10^{-19}}/(1.054\times10^{-34}) \approx 6.4\times10^9$ m$^{-1}$。對 $a = 3$ nm：$T \propto e^{-2\times6.4\times10^9\times3\times10^{-9}} = e^{-38.4} \approx 2\times10^{-17}$——幾乎不可能。對 $a = 1$ nm：$T \propto e^{-12.8} \approx 3\times10^{-6}$——微小但非零。對 $a = 0.5$ nm：$T \propto e^{-6.4} \approx 1.6\times10^{-3}$——可觀測！這就是為什麼 Flash 記憶體的隧穿氧化層厚度必須 < 8 nm。</p>
+<div class="callout-warn"><strong>⚡ 穿隧效應在半導體中的實際應用：</strong><br>• <strong>快閃記憶體（Flash）：</strong>電子透過穿隧穿過 10 nm 的氧化層進入浮動閘極→寫入資料。氧化層越薄→穿隧機率越大→寫入越快，但漏電也越多→資料保持時間越短。這是 Flash 記憶體設計的核心取捨。<br>• <strong>穿隧二極體（Tunnel Diode）：</strong>重摻雜的 pn 接面，空乏層極薄→電子可直接穿隧。<br>• <strong>STM（掃描穿隧顯微鏡）：</strong>探針尖端與樣品表面之間有真空障壁→穿隧電流對距離極其敏感（指數關係）→可解析單個原子。</div>
+</section>
+
+<section id="ch02_s2-4"><h2>2.4 波理論在原子中的延伸</h2>
+<p>將薛丁格方程應用於氫原子——一個電子和一個質子之間的庫侖吸引力：$V(r) = -e^2/(4\pi\epsilon_0 r)$。因為位能是球對稱的，在球座標中求解。</p>
+<p>求解過程產生三個<strong>量子數</strong>（加上自旋就是四個）：</p>
+<table><thead><tr><th>量子數</th><th>符號</th><th>取值</th><th>物理意義</th></tr></thead><tbody>
+<tr><td>主量子數</td><td>$n$</td><td>$1,2,3,\ldots$</td><td>決定能量 $E_n = -13.6/n^2$ eV</td></tr>
+<tr><td>角動量量子數</td><td>$l$</td><td>$0,\ldots,n-1$</td><td>決定軌域形狀（s,p,d,f）</td></tr>
+<tr><td>磁量子數</td><td>$m$</td><td>$-l,\ldots,+l$</td><td>決定軌域空間取向</td></tr>
+<tr><td>自旋量子數</td><td>$s$</td><td>$\pm 1/2$</td><td>電子內稟角動量</td></tr></tbody></table>
+<div class="figure"><img src="../../../images/solid-state-physics/ch02_pages/ch2_page_73.png" alt="圖 2.10" loading="lazy"><figcaption>圖 2.10：氫原子徑向機率密度。基態電子最可能出現在 $r=a_0=0.529$ Å（波耳半徑）。</figcaption></div>
+<p><strong>包立不相容原理</strong>——每個量子態 $(n,l,m,s)$ 只能被一個電子佔據——決定了原子中電子的排列方式，進而決定了整個週期表的結構。每個殼層 $n$ 最多容納 $2n^2$ 個電子（K:2, L:8, M:18, N:32）。</p>
+<p><strong>電子組態的填入規則：</strong></p>
+<ol style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li><strong>能量最低原則（Aufbau）：</strong>電子從最低能階開始填入。順序：1s → 2s → 2p → 3s → 3p → 4s → 3d → 4p → ...（注意 4s 在 3d 之前填入，因為 4s 能量較低）。</li>
+<li><strong>包立不相容：</strong>每個軌域最多 2 個電子（自旋相反）。</li>
+<li><strong>Hund 規則：</strong>同一亞層（如 2p 的三個軌域）中，電子先單獨佔據不同軌域且自旋平行，再配對。這降低了電子間的庫侖排斥。</li>
+</ol>
+<p><strong>矽的電子組態：</strong>$1s^2 2s^2 2p^6 3s^2 3p^2$——最外層有 4 個價電子（$3s^2 3p^2$）。這 4 個電子參與 sp³ 混成→形成 4 個共價鍵→鑽石結構。內層 10 個電子被原子核緊密束縛→不參與化學鍵結→在半導體物理中通常忽略。</p>
+<div class="figure"><img src="../../../images/solid-state-physics/ch02_pages/ch2_page_76.png" alt="圖 2.12" loading="lazy"><figcaption>圖 2.12：基於量子力學的週期表建構——電子按能量從低到高填滿量子態。</figcaption></div>
+<div class="callout"><strong>💡 從氫原子到半導體摻雜。</strong>施體原子（如 P）在 Si 晶格中的行為類似一個「固態氫原子」——多餘的電子被施體離子束縛，束縛能約 0.045 eV（遠小於氫原子的 13.6 eV，因為 Si 的高介電常數屏蔽了庫侖力）。這個類比是理解摻雜能階的關鍵——第四章將以此為基礎。</div>
+</section>
+
+<section id="ch02_summary"><h2>本章摘要</h2>
+<ol style="font-size:14px;color:var(--t2);margin-left:18px">
+<li><strong>能量量子化：</strong>$E=h\nu$。光電效應——光的粒子性。功函數 $\phi$ = 電子脫離所需最小能量。</li>
+<li><strong>波粒二象性：</strong>$\lambda=h/p$。電子繞射實驗證實。波數 $k=2\pi/\lambda$。</li>
+<li><strong>不確定性原理：</strong>$\Delta p\Delta x\geq\hbar$。無法同時精確測量→只能以機率描述。</li>
+<li><strong>薛丁格方程：</strong>量子力學的「$F=ma$」。時間無關形式 (2.13) 是本章核心。</li>
+<li><strong>Born 詮釋：</strong>$|\psi|^2$ = 機率密度。$\int|\psi|^2dx=1$（歸一化）。</li>
+<li><strong>自由電子→行進波：</strong>$k=\sqrt{2mE}/\hbar=p/\hbar$。$|\psi|^2$ 為常數。</li>
+<li><strong>束縛電子→駐波：</strong>無限位能井→$E_n=\hbar^2\pi^2n^2/(2ma^2)$。能量量子化！</li>
+<li><strong>穿隧效應：</strong>$T\propto e^{-2k_2a}$。障壁越薄/越矮→穿透機率越大。</li>
+<li><strong>氫原子→量子數 $(n,l,m,s)$：</strong>$E_n=-13.6/n^2$ eV。包立原理→$2n^2$。</li></ol></section>
+
+
+<!-- ===== 第三章 固體的量子理論導論 ===== -->
+
+<header class="header"><div class="cl">第三章</div><h1>固體的量子理論導論</h1><div class="meta">Donald A. Neamen·《半導體物理與元件：基本原理》第四版·第 58–105 頁</div></header>
+
+<section id="ch03_preview"><div class="callout"><strong>📋 3.0 本章預覽</strong>
+<p>第二章教會我們單個電子在各種位能下的行為。但在固體中，我們面對的不是一個電子，而是<strong>每立方公分約 $10^{22}$ 個原子、每個原子有多個電子</strong>的集體行為。本章將量子力學從「一個電子+一個原子」擴展到「海量電子+週期性晶格」，回答兩個核心問題：</p>
+<p>① 在晶格的週期性位能中，電子的允許能量是什麼？→ <strong>能帶理論</strong><br>② 在熱平衡下，大量電子如何分布在各能態中？→ <strong>Fermi-Dirac 統計</strong></p>
+<div class="callout-warn"><strong>⚡ 第三章是第二章和第四章之間的關鍵橋樑。</strong>第二章給了我們薛丁格方程→第三章把它應用在晶格上得到能帶結構、態密度、和統計分布→第四章利用這些結果計算實際的載子濃度。沒有第三章，你就無法理解為什麼 Si 是半導體而 SiO₂ 是絕緣體、為什麼 GaAs 能發光而 Si 不行、以及摻雜為什麼能改變導電性。</div></div></section>
+
+<section id="ch03_s3-1-1"><h2>3.1.1 能帶的形成</h2>
+<div class="figure"><img src="../../../images/solid-state-physics/ch03_pages/ch3_page_85.png" alt="圖 3.2" loading="lazy"><figcaption>圖 3.2：從孤立原子到晶體的能帶演化——離散能階→允帶+禁帶。</figcaption></div>
+<p>回顧第二章：單一孤立原子的電子有分立的能階（$E_n = -13.6/n^2$ eV）。現在想像把兩個原子慢慢靠近。當它們的波函數開始重疊時，電子之間產生交互作用→原來的一個能階<strong>分裂成兩個</strong>。這不是巧合——Pauli 原理要求每個電子有獨特的量子態，兩個電子不能佔據同一個態，所以能階必須分裂。</p>
+<div class="figure"><img src="../../../images/solid-state-physics/ch03_pages/ch3_page_84.png" alt="圖 3.1" loading="lazy"><figcaption>圖 3.1：(a) 孤立氫原子的徑向機率密度；(b) 兩個靠近的氫原子波函數重疊；(c) n=1 能階分裂成兩個。</figcaption></div>
+<p>現在把這個圖像擴展到 $10^{22}$ 個原子（一個晶體）：每個原始能階分裂成含有<strong>極大量離散能階的能帶</strong>。在平衡原子間距處，能帶內相鄰能階的間距只有約 $10^{-19}$ eV——遠小於室溫下的 $kT$（0.026 eV）→實際可視為<strong>准連續的能量分布</strong>。</p>
+<p><strong>以矽為例（圖 3.4）：</strong>Si 原子有 4 個價電子（3s²3p²）。當原子形成晶體時，3s 和 3p 態交互作用→分裂成兩個能帶，每個能帶每原子有 4 個量子態。$T=0$ K 時，下方能帶（<strong>價帶</strong>）完全填滿，上方能帶（<strong>導帶</strong>）完全空著。兩者之間是<strong>禁帶（能隙 $E_g$）</strong>——沒有任何量子態存在。</p>
+<div class="figure"><img src="../../../images/solid-state-physics/ch03_pages/ch3_page_87.png" alt="圖 3.3, 3.4" loading="lazy"><figcaption>圖 3.3：三個能態分裂成允帶。圖 3.4：(a) 孤立 Si 原子；(b) Si 的 3s/3p 態分裂成價帶和導帶，中間為能隙 $E_g$。</figcaption></div>
+<div class="callout"><strong>💡 能帶理論是半導體物理的「大統一理論」。</strong>為什麼有些材料導電、有些不導電？答案全在 $E_g$：金屬（$E_g=0$，能帶重疊或部分填充）→導電。絕緣體（$E_g>3$–$5$ eV）→不導電。半導體（$E_g=0.5$–$2$ eV）→可以導電，但需要一些幫助（熱能或摻雜）。第四章的全部公式（$n_i$、$n_0$、$p_0$、Fermi 能階）都建立在這個能帶圖景上。</div>
+</section>
+
+<section id="ch03_s3-1-2"><h2>3.1.2 Kronig-Penney 模型</h2>
+<p>能帶的形成可以透過量子力學嚴格證明。Kronig-Penney 模型使用一維週期方阱位能來近似晶格（圖 3.6），然後求解薛丁格方程。</p>
+<div class="figure"><img src="../../../images/solid-state-physics/ch03_pages/ch3_page_89.png" alt="圖 3.5, 3.6" loading="lazy"><figcaption>圖 3.5：孤立原子位能→重疊→一維晶格淨位能。圖 3.6：Kronig-Penney 簡化模型——週期方阱位能。</figcaption></div>
+<p><strong>Bloch 定理</strong>是關鍵：在週期性位能中，波函數必須具有 $\psi(x) = u(x)e^{jkx}$ 的形式——一個平面波（$e^{jkx}$）乘以一個與晶格同週期的調制函數（$u(x)$）。</p>
+<p>經過繁複的邊界條件匹配（四個方程、四個未知係數），得到決定性的<strong>色散關係</strong>：</p>
+<div class="eq">$$\boxed{-\frac{\alpha^2+\beta^2}{2\alpha\beta}\sin(\alpha a)\sin(\beta b)+\cos(\alpha a)\cos(\beta b)=\cos k(a+b)} \tag{3.19}$$</div>
+<p><strong>物理意義：</strong>右邊 $\cos k(a+b)$ 必須在 $[-1,1]$ 範圍內。這限制了左邊 $\alpha$ 和 $\beta$ 的取值（$\alpha^2=2mE/\hbar^2$，與能量有關）→只有特定的 $E$ 值能使左邊也落在 $[-1,1]$ 內→這些 $E$ 構成<strong>允帶</strong>；其餘為<strong>禁帶</strong>。週期性晶格自然導致能帶結構——這不是假設，是薛丁格方程的直接後果。</p>
+<p><strong>$P$ 參數的物理意義：</strong>方程式 (3.19) 中的 $P = \alpha^2 b/(2a)$（在 $\beta b \ll 1$ 的極限下）衡量的是「位能障壁的強度」。$P \to 0$：障壁消失→自由電子→$E$-$k$ 連續拋物線，沒有能隙。$P \to \infty$：障壁無限強→$E$-$k$ 完全平坦（每個原子都是孤立的→離散能階）。實際晶體在兩者之間：$P$ 越大→能隙越寬、允帶越窄→電子越被「束縛」在原子附近。金屬的 $P$ 較小（能帶寬、重疊），絕緣體的 $P$ 較大（能帶窄、能隙寬）。</p>
+</section>
+
+<section id="ch03_s3-1-3"><h2>3.1.3 k 空間圖與能帶結構</h2>
+<div class="figure"><img src="../../../images/solid-state-physics/ch03_pages/ch3_page_96.png" alt="圖 3.10" loading="lazy"><figcaption>圖 3.10：Brillouin 區邊界的能隙形成——Bragg 反射導致駐波→禁帶。</figcaption></div>
+<p>由 Kronig-Penney 模型可繪製 $E$ 對 $k$ 的關係圖。$k$ 的範圍（第一 Brillouin 區）為 $-\pi/a \leq k \leq \pi/a$。在每個 Brillouin 區邊界處，$E$–$k$ 曲線不連續→能隙。</p>
+<p><strong>Brillouin 區的物理意義：</strong>$k = \pm\pi/a$ 代表什麼？當 $k = \pi/a$ 時，de Broglie 波長 $\lambda = 2\pi/k = 2a$——正好是晶格常數的兩倍。這個波長的波在晶格中產生 Bragg 反射（相鄰原子散射的波相位差 = $\pi$→完全破壞性干涉）。波無法在晶體中傳播→形成駐波→能隙出現。所以能隙<strong>不是</strong>來自某個神秘的量子效應，而是來自波在週期結構中的 Bragg 反射——這與 X 射線在晶體中的繞射完全相同的物理。</p>
+<div class="figure"><img src="../../../images/solid-state-physics/ch03_pages/ch3_page_95.png" alt="圖 3.9" loading="lazy"><figcaption>圖 3.9：由 Kronig-Penney 模型得出的 $E$–$k$ 圖——允帶（曲線段）被禁帶（水平缺口）分隔。</figcaption></div>
+<div class="figure"><img src="../../../images/solid-state-physics/ch03_pages/ch3_page_97.png" alt="圖 3.9 附圖" loading="lazy"><figcaption>圖 3.9 附：擴展的 $E$–$k$ 能帶圖——多個 Brillouin 區的能帶結構，注意能隙出現在 $k = \pm n\pi/a$ 處。</figcaption></div>
+<p><strong>如何讀 $E$–$k$ 圖：</strong></p>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li><strong>斜率 $dE/dk = \hbar v$（群速度）：</strong>斜率越大→電子移動越快。$k=0$ 處斜率為零→電子靜止。</li>
+<li><strong>曲率 $d^2E/dk^2 = \hbar^2/m^*$（有效質量）：</strong>向上彎（$d^2E/dk^2 > 0$）→$m^* > 0$（電子）。向下彎→$m^* < 0$（電洞的來源）。</li>
+<li><strong>能隙出現在 $k = \pm n\pi/a$：</strong>Brillouin 區邊界。允帶之間的禁帶寬度取決於晶格散射的強度（$P$ 參數）。</li>
+</ul>
+<p>在能帶邊緣附近（導帶底部或價帶頂部），$E$–$k$ 關係可以用<strong>拋物線近似</strong>：</p>
+<div class="eq">$$E = \frac{\hbar^2 k^2}{2m^*} \tag{3.24}$$</div>
+<p>這和自由電子的 $E=\hbar^2k^2/2m$ 形式完全相同——只是用<strong>有效質量 $m^*$</strong>取代了自由電子質量 $m_0$。晶格的影響全部被吸收進了 $m^*$。</p>
+<div class="callout"><strong>💡 $E$–$k$ 圖是半導體物理的「地圖」。</strong>它決定了：① 有效質量（第三章）→遷移率（第五章）→元件速度。② 直接/間接能隙（Si vs GaAs）→能否發光（LED/雷射）。③ 能帶重疊（金屬 vs 半導體）。學會讀 $E$–$k$ 圖，就像學會讀地圖——之後所有章節的導航都靠它。</div>
+</section>
+
+<section id="ch03_s3-2-1"><h2>3.2.1–3.2.2 電傳導與漂移電流</h2>
+<p>現在把電場加在晶體上。電子受到 $F=-e\mathcal{E}$ 的力。如果導帶中有空的量子態（電子可以移動到更高能的態），電子就會加速→產生<strong>漂移電流</strong>。</p>
+<p>關鍵公式：漂移速度 $v_d = \mu\mathcal{E}$（$\mu$ = 遷移率），電流密度 $J = -env_d$。結合起來：</p>
+<div class="eq">$$\boxed{J = e n \mu \mathcal{E}} \tag{3.31}$$</div>
+<div class="eq">$$\boxed{\sigma = e n \mu} \quad\text{（導電率）} \tag{3.32}$$</div>
+<p><strong>物理圖像：</strong>導電率 $\sigma$ 取決於兩個因素——有多少載子（$n$）以及它們跑多快（$\mu$）。金屬的 $n$ 極大→高導電率。半導體的 $n$ 可透過摻雜調控→導電率可控。遷移率 $\mu = e\tau/m^*$ 取決於有效質量（晶格結構決定）和散射時間 $\tau$（缺陷和聲子決定）。</p>
+<div class="figure"><img src="../../../images/solid-state-physics/ch03_pages/ch3_page_99.png" alt="圖 3.13" loading="lazy"><figcaption>圖 3.13：漂移電流——電子在電場作用下沿導帶移動，每次碰撞後重新加速。</figcaption></div>
+</section>
+
+<section id="ch03_s3-2-3"><h2>3.2.3 電子有效質量 ⭐</h2>
+<p>這可能是第三章最優雅的概念。電子在真空中的運動遵守 $F=m_0a$。在晶體中呢？</p>
+<p>電子的群速度：$v_g = \frac{1}{\hbar}\frac{dE}{dk}$（波包的移動速度）。施加外力 $F$ 時 $F = dp/dt = \hbar\,dk/dt$。加速度：</p>
+<div class="eq">$$a = \frac{dv_g}{dt} = \frac{1}{\hbar}\frac{d^2E}{dk^2}\frac{dk}{dt} = \frac{1}{\hbar^2}\frac{d^2E}{dk^2}F$$</div>
+<p>與 $F=m^*a$ 比較→</p>
+<div class="eq">$$\boxed{m^* = \frac{\hbar^2}{\dfrac{d^2E}{dk^2}}} \tag{3.34}$$</div>
+<div class="callout-warn"><strong>⚡ 有效質量的物理直覺：</strong>$m^*$ 取決於 $E$–$k$ 曲線的<strong>曲率</strong>。曲率越大→$m^*$ 越小→同樣的力產生更大的加速度→電子「感覺」更輕。<br><br>導帶底部 $d^2E/dk^2>0$→$m^*>0$——電子正常加速。<br>價帶頂部 $d^2E/dk^2<0$→$m^*<0$——電子對電場的反應與正電荷相同！這就是<strong>電洞（hole）</strong>概念的來源：與其追蹤價帶中數十億個電子的複雜集體運動，不如把它們等效為少數幾個帶正電、有正有效質量的「電洞」。<br><br>GaAs 的 $m^*=0.067m_0$——電子在 GaAs 中「感覺」比在真空中輕 15 倍。Si 的 $m^*=0.98m_0$——重了近 15 倍。這就是為什麼 GaAs 元件比 Si 元件快（高頻應用偏好 GaAs）。</div>
+<div class="figure"><img src="../../../images/solid-state-physics/ch03_pages/ch3_page_102.png" alt="圖 3.15" loading="lazy"><figcaption>圖 3.15：$E$–$k$ 曲線——注意導帶底（曲率正）和價帶頂（曲率負）的有效質量符號不同。</figcaption></div>
+</section>
+
+<section id="ch03_s3-2-4"><h2>3.2.4–3.2.5 電洞·金屬/絕緣體/半導體</h2>
+<p>價帶中一個空的量子態 = <strong>電洞（hole）</strong>。電洞的行為等效於一個帶 $+e$ 電荷、有正有效質量 $m_p^*$ 的粒子。用電洞取代對數十億個價帶電子的描述，是半導體物理最強大的簡化之一。</p>
+<p><strong>為什麼「缺失的電子」像正電荷？</strong>想像一個坐滿人的劇院（= 滿價帶），每個座位代表一個量子態。如果中間有一個空座位，旁邊的人可以移到空座位上→空座位向反方向移動。要追蹤所有人的移動很困難，但追蹤「空座位的移動」很簡單——空座位看起來像一個帶正電的粒子在移動。數學上：$N$ 個電子的總電流 = $-e\sum v_i$。如果其中一個態是空的，總電流改變了 $+ev_k$——等效於一個帶 $+e$ 的粒子以速度 $v_k$ 運動。</p>
+<p><strong>電洞的有效質量：</strong>價帶頂附近的 $E$-$k$ 曲線向下彎（$d^2E/dk^2 < 0$）→$m^* = \hbar^2/(d^2E/dk^2)$ 為負值。但我們定義電洞的有效質量為正：$m_p^* = -m^*$（取絕對值）。電洞的能量方向也反轉——電洞「向上」移動代表能量增加（電子向下填充低能態）。</p>
+<div class="callout"><strong>💡 電洞不只是數學便利——它有獨立的物理存在。</strong>p 型半導體中的電流確實由電洞傳導，不是由電子反向傳導。實驗證據：霍爾效應（第五章）可以獨立測量電洞的濃度和遷移率——結果與電洞作為正電荷載子的預測完全一致。在 pn 接面中，p 側的電洞注入 n 側成為少數載子——這個過程只能用電洞的語言來描述。</div>
+<p>材料的導電性完全由能帶填充情況決定：</p>
+<table><thead><tr><th>類型</th><th>能帶結構</th><th>$E_g$</th><th>室溫電阻率</th></tr></thead><tbody>
+<tr><td>金屬</td><td>能帶部分填充或重疊</td><td>0</td><td>∼10⁻⁶ Ω·cm</td></tr>
+<tr><td>半導體</td><td>滿價帶+空導帶，$E_g$ 適中</td><td>0.5–2 eV</td><td>10⁻³–10⁹</td></tr>
+<tr><td>絕緣體</td><td>滿價帶+空導帶，$E_g$ 很大</td><td>>3–5 eV</td><td>>10¹²</td></tr></tbody></table>
+<div class="figure"><img src="../../../images/solid-state-physics/ch03_pages/ch3_page_107.png" alt="圖 3.19, 3.20" loading="lazy"><figcaption>圖 3.19–3.20：金屬、絕緣體、半導體的能帶填充情況對比。</figcaption></div>
+<div class="figure"><img src="../../../images/solid-state-physics/ch03_pages/ch3_page_106.png" alt="圖 3.19 附圖" loading="lazy"><figcaption>圖 3.19 附：金屬（部分填充或能帶重疊）、半導體（$E_g$ 適中）、絕緣體（$E_g$ 很大）的能帶結構示意。</figcaption></div>
+<div class="callout"><strong>💡 半導體的獨特之處在於 $E_g$ 的「剛好」大小。</strong>$E_g$ 太小（< 0.5 eV，如 InSb 的 0.17 eV）→室溫下熱激發產生大量載子→本徵載子濃度太高→無法有效摻雜控制。$E_g$ 太大（> 5 eV，如金剛石的 5.5 eV）→室溫下幾乎沒有載子→需要極高溫才能導電。Si 的 1.12 eV 和 GaAs 的 1.42 eV 正好在「甜蜜點」——室溫下本徵載子很少（$n_i \sim 10^{10}$ cm$^{-3}$），摻雜可以輕鬆將載子濃度控制在 $10^{14}$–$10^{20}$ cm$^{-3}$ 的範圍。</div>
+</section>
+
+<section id="ch03_s3-3"><h2>3.3 三維延伸：Si 與 GaAs</h2>
+<p>真實晶體是三維的，$E$–$\mathbf{k}$ 關係更複雜：</p>
+<div class="eq">$$E = \frac{\hbar^2}{2}\left(\frac{k_x^2}{m_x^*} + \frac{k_y^2}{m_y^*} + \frac{k_z^2}{m_z^*}\right)$$</div>
+<p><strong>Si（間接能隙，$E_g=1.12$ eV）：</strong>導帶最小值不在 $k=0$，而是在 $\langle100\rangle$ 方向的六個等效點。電子從價帶頂（$k=0$）跳到導帶底需要改變動量→必須有<strong>聲子</strong>參與→躍遷機率低→Si 不適合做發光元件。</p>
+<p><strong>GaAs（直接能隙，$E_g=1.42$ eV）：</strong>導帶底和價帶頂都在 $k=0$（Γ 點）。電子可以「垂直」躍遷（動量守恆不需要聲子）→高發光效率→LED、雷射的理想材料。</p>
+<div class="figure"><img src="../../../images/solid-state-physics/ch03_pages/ch3_page_109.png" alt="圖 3.21, 3.22" loading="lazy"><figcaption>圖 3.21–3.22：Si（間接能隙）和 GaAs（直接能隙）的 $E$–$k$ 能帶結構對比。</figcaption></div>
+
+<h3>3.3.2 額外有效質量概念</h3>
+<p>在 3.2.3 節我們定義了基本的電導率有效質量 $m^* = \hbar^2/(d^2E/dk^2)$。但在三維晶體中，導帶底和價帶頂附近的等能面通常是<strong>橢球形</strong>（不是球形），不同方向的有效質量不同。這引出了幾種重要的「組合」有效質量：</p>
+<p><strong>態密度有效質量（Density-of-States Effective Mass）$m_n^*$：</strong>出現在態密度公式 $g_c(E)$ 中的組合量。對於有多個等效能谷的材料（如 Si 的六個橢球），</p>
+<div class="eq">$$m_n^* = (m_l m_t^2)^{1/3} \cdot (\text{等效能谷數})^{2/3}$$</div>
+<p>其中 $m_l$ 是縱向有效質量，$m_t$ 是橫向有效質量。Si 的 $m_n^* = 1.08\,m_0$，GaAs 只有一個球形能谷所以 $m_n^* = 0.067\,m_0$。</p>
+<p><strong>電導率有效質量（Conductivity Effective Mass）$m_c^*$：</strong>出現在遷移率公式 $\mu = e\tau/m_c^*$ 中的組合量：</p>
+<div class="eq">$$\frac{1}{m_c^*} = \frac{1}{3}\left(\frac{1}{m_l} + \frac{2}{m_t}\right)$$</div>
+<p>這是三個方向的平均值（一個縱向 + 兩個橫向）。Si 的 $m_c^* = 0.26\,m_0$。</p>
+<div class="callout"><strong>💡 為什麼需要區分不同有效質量？</strong>因為不同物理量取決於不同方向的平均方式。態密度取決於「k 空間中有多少態」→用幾何平均。遷移率取決於「電場加速電子有多快」→用調和平均。考試時常見陷阱：用錯有效質量的類型。記住：$g(E)$ 用 $m_n^*$，$\mu$ 用 $m_c^*$，兩者數值不同！</div>
+</section>
+
+<section id="ch03_s3-4"><h2>3.4 態密度函數 ⭐</h2>
+<p>知道了允帶的能量範圍，下一步問題是：<strong>在能量 $E$ 附近，每單位能量、每單位體積有多少個量子態？</strong>——這就是態密度 $g(E)$。</p>
+
+<h3>3.4.1 態密度的數學推導</h3>
+<p>推導從 $k$ 空間計數開始：</p>
+<p><strong>步驟一：k 空間中的態密度。</strong>3D 無限位能井中，$k_x=n_x\pi/a$，$k_y=n_y\pi/a$，$k_z=n_z\pi/a$。每個量子態在 $k$ 空間佔體積 $(\pi/a)^3 = \pi^3/V$（$V=a^3$ 是晶體體積）。考慮自旋簡併（每個 $(k_x,k_y,k_z)$ 可容納兩個電子：自旋↑和↓），$k$ 空間態密度 $= 2V/\pi^3$。</p>
+<p><strong>步驟二：球殼計數。</strong>在 $k$ 空間中，能量 $E$ 以下的所有態佔據一個半徑為 $k = \sqrt{2m^*E}/\hbar$ 的球。在 $k$ 到 $k+dk$ 的球殼中的態數：</p>
+<div class="eq">$$g(k)\,dk = \frac{2V}{\pi^3}\cdot 4\pi k^2\,dk = \frac{8\pi V}{h^3}\,p^2\,dp$$</div>
+<p>其中用了 $k=p/\hbar$，$dk=dp/\hbar$。</p>
+<p><strong>步驟三：轉換到能量空間。</strong>$E = p^2/(2m^*)$→$p = \sqrt{2m^*E}$→$dp = \sqrt{m^*/2E}\,dE$。代入得每單位能量的態數 $g(E)$。再除以體積 $V$ 得到單位體積的態密度：</p>
+<div class="eq">$$\boxed{g_c(E) = \frac{4\pi(2m_n^*)^{3/2}}{h^3}\sqrt{E-E_c}} \quad\text{（導帶）} \tag{3.56}$$</div>
+<div class="eq">$$\boxed{g_v(E) = \frac{4\pi(2m_p^*)^{3/2}}{h^3}\sqrt{E_v-E}} \quad\text{（價帶）} \tag{3.58}$$</div>
+
+<h3>3.4.2 延伸到半導體：有效態密度</h3>
+<p>態密度 $g_c(E)$ 和 $g_v(E)$ 是能量的函數。但在半導體物理中，我們常需要一個「簡化」的數字來描述整個導帶（或價帶）的態密度總量。這就是<strong>有效態密度</strong> $N_c$ 和 $N_v$。</p>
+<p>概念：把導帶中所有量子態「集中」到導帶邊緣 $E_c$ 一個等效能量上。數學上，$N_c$ 定義為：</p>
+<div class="eq">$$\boxed{N_c = 2\left(\frac{2\pi m_n^* kT}{h^2}\right)^{3/2}} \tag{3.47}$$</div>
+<div class="eq">$$\boxed{N_v = 2\left(\frac{2\pi m_p^* kT}{h^2}\right)^{3/2}} \tag{3.48}$$</div>
+<p>在室溫（$T=300$ K）下：Si 的 $N_c = 2.8\times10^{19}$ cm$^{-3}$，$N_v = 1.04\times10^{19}$ cm$^{-3}$。GaAs 的 $N_c = 4.7\times10^{17}$ cm$^{-3}$（因為 $m_n^*$ 很小）。</p>
+<div class="callout"><strong>💡 $N_c$ 和 $N_v$ 是第四章的核心工具。</strong>有了有效態密度，載子濃度的計算變得極其簡單：$n_0 = N_c \exp[-(E_c-E_F)/kT]$，$p_0 = N_v \exp[-(E_F-E_v)/kT]$。不需要每次做態密度積分——$N_c$ 和 $N_v$ 已經幫你做好了。這就像化學中的「簡化平衡常數」——把複雜的積分結果打包成一個方便使用的數字。</div>
+<div class="figure"><img src="../../../images/solid-state-physics/ch03_pages/ch3_page_115.png" alt="圖 3.27" loading="lazy"><figcaption>圖 3.27：態密度 $g(E) \propto \sqrt{E}$——從能帶邊緣開始以拋物線形式增長。</figcaption></div>
+<div class="callout"><strong>💡 態密度的物理意義：</strong>$g(E)dE$ = 能量在 $E$ 到 $E+dE$ 之間可供電子佔據的「座位數」。$g(E)$ 越大，能容納的電子越多。$g(E)$ 與第四章的 $f_F(E)$ 相乘再積分，就得到載子濃度——這是整個半導體統計的基礎。</div>
+</section>
+
+<section id="ch03_s3-5"><h2>3.5 統計力學：Fermi-Dirac 分布 ⭐</h2>
+<p>態密度告訴我們有多少「座位」。現在需要知道這些座位被佔據的機率。電子是<strong>Fermi 子</strong>（自旋 1/2），服從 Pauli 原理→佔據機率由 <strong>Fermi-Dirac 函數</strong>給出：</p>
+<div class="eq">$$\boxed{f_F(E) = \frac{1}{1 + \exp\!\left(\dfrac{E - E_F}{kT}\right)}} \tag{3.63}$$</div>
+<p><strong>$E_F$ = Fermi 能階——系統的電化學勢。</strong>在 $T=0$ K：$f_F=1$（$E<E_F$），全部填滿；$f_F=0$（$E>E_F$），全部空著——像一個完美的階梯。$T>0$ 時，階梯在 $E_F$ 附近「模糊化」，模糊寬度約 $kT$（室溫 0.026 eV）。</p>
+<p><strong>$E_F$ 在不同材料中的位置：</strong></p>
+<table><thead><tr><th>材料</th><th>$E_F$ 位置</th><th>物理意義</th></tr></thead><tbody>
+<tr><td>金屬</td><td>在能帶內部</td><td>$f_F(E_F) = 0.5$，附近有大量可用態→高導電性</td></tr>
+<tr><td>本徵半導體</td><td>能隙正中央（近似）</td><td>$E_{Fi} \approx (E_c+E_v)/2 + (3/4)kT\ln(m_p^*/m_n^*)$</td></tr>
+<tr><td>n 型半導體</td><td>靠近 $E_c$</td><td>$E_F$ 上移→$f_F(E_c)$ 增大→導帶電子增多</td></tr>
+<tr><td>p 型半導體</td><td>靠近 $E_v$</td><td>$E_F$ 下移→價帶空態增多→電洞增多</td></tr>
+<tr><td>簡併半導體</td><td>進入導帶或價帶</td><td>$E_F$ 在能帶內→行為接近金屬</td></tr></tbody></table>
+<div class="figure"><img src="../../../images/solid-state-physics/ch03_pages/ch3_page_120.png" alt="圖 3.28" loading="lazy"><figcaption>圖 3.28：Fermi-Dirac 函數在不同溫度下的變化——注意 $T>0$ 時在 $E_F$ 附近平滑過渡。</figcaption></div>
+<p><strong>Boltzmann 近似：</strong>當 $E-E_F \gg kT$（半導體的典型情況，$E_F$ 在能隙中），</p>
+<div class="eq">$$f_F(E) \approx \exp\!\left(-\frac{E-E_F}{kT}\right) \tag{3.68}$$</div>
+<p>這大大簡化了積分→第四章的所有公式（$n_0$, $p_0$, $n_i$）都是基於這個近似。</p>
+<div class="callout-warn"><strong>⚡ Fermi-Dirac 統計是第三章和第四章的核心連結。</strong>態密度 $g(E)$（第三章）+ 佔據機率 $f_F(E)$（第三章）= 載子濃度 $n_0$, $p_0$（第四章）。這就像知道了一個停車場有多少車位（$g$），以及每個車位的佔用機率（$f_F$），就可以算出總共停了多少車（$n_0$）。</div>
+</section>
+
+<section id="ch03_summary"><h2>本章摘要</h2>
+<ol style="font-size:14px;color:var(--t2);margin-left:18px">
+<li><strong>能帶形成：</strong>原子靠近→波函數重疊→Pauli 原理→能階分裂成能帶。允帶之間為禁帶。</li>
+<li><strong>Bloch 定理：</strong>$\psi=u(x)e^{jkx}$。Kronig-Penney 模型證明週期位能→能帶結構。</li>
+<li><strong>$E$–$k$ 關係：</strong>能帶邊緣 $E=\hbar^2k^2/(2m^*)$。Brillouin 區邊界處不連續→能隙。</li>
+<li><strong>有效質量：</strong>$m^*=\hbar^2/(d^2E/dk^2)$。導帶底 $m^*>0$；價帶頂 $m^*<0$→電洞。</li>
+<li><strong>漂移電流：</strong>$J=en\mu\mathcal{E}$，$\sigma=en\mu$。遷移率 $\mu=e\tau/m^*$。</li>
+<li><strong>直接 vs 間接能隙：</strong>Si 間接（1.12 eV）→不發光。GaAs 直接（1.42 eV）→LED/雷射。</li>
+<li><strong>態密度：</strong>$g_c(E)\propto\sqrt{E-E_c}$，$g_v(E)\propto\sqrt{E_v-E}$。決定能量區間內可用的量子態數。</li>
+<li><strong>Fermi-Dirac：</strong>$f_F=1/[1+e^{(E-E_F)/kT}]$。$E_F$ = 50% 佔據機率的能量。Boltzmann 近似用於非簡併半導體。</li></ol></section>
+
+
+<!-- ===== 第四章 平衡態半導體 ===== -->
+
+<header class="header"><div class="cl">第四章</div><h1>平衡態半導體</h1><div class="meta">Donald A. Neamen·《半導體物理與元件：基本原理》第四版·第 106–155 頁</div></header>
+
+<section id="ch04_preview"><div class="callout"><strong>📋 4.0 本章預覽</strong>
+<p>前面三章建立了量子力學和固態理論的基礎：我們學會了薛丁格方程、能帶理論、態密度、以及 Fermi-Dirac 統計。現在我們終於要把這些工具<strong>全部組裝起來</strong>，回答半導體元件物理中最核心的問題：</p>
+<p><strong>在熱平衡下，半導體中有多少電子？有多少電洞？Fermi 能階在哪裡？</strong></p>
+<p>這三個問題的答案是所有半導體元件分析的起點。無論你要設計一個 pn 接面、一個 MOSFET、還是一個太陽能電池，第一步永遠是計算熱平衡載子濃度。</p>
+<p>本章的邏輯鏈非常清晰：態密度 × Fermi 機率 → 積分 → $n_0$ 和 $p_0$ → $n_i$ → 質量作用定律 → 加入摻雜 → 電荷中性 → 解出 Fermi 能階位置。每一步都建立在前一步的基礎上。</p></div></section>
+
+<!-- 4.1.1 -->
+<section id="ch04_s4-1-1"><h2>4.1.1 平衡態電子與電洞的分布</h2>
+
+<p>在第三章中我們得到了兩個關鍵函數：<strong>態密度 $g_c(E)$</strong>（導帶中每單位能量、每單位體積有多少個「空位」可以給電子坐），以及 <strong>Fermi-Dirac 機率 $f_F(E)$</strong>（能量為 $E$ 的量子態被電子佔據的機率）。</p>
+
+<p>要知道導帶中某個能量 $E$ 處的電子濃度，就是把這兩個函數相乘：</p>
+<div class="eq">$$n(E) = g_c(E) \cdot f_F(E) \tag{4.1}$$</div>
+
+<p><strong>物理圖像（圖 4.1）：</strong>態密度 $g_c(E)$ 從 $E_c$ 開始以 $\sqrt{E-E_c}$ 的形式增長——能量越高，可用的量子態越多。但 Fermi-Dirac 機率 $f_F(E)$ 隨能量指數衰減——能量越高的態越難被佔據（因為電子傾向待在低能態）。兩者相乘的結果是一個<strong>先升後降的鐘形曲線</strong>：在 $E_c$ 附近，$g_c$ 還很小；在遠高於 $E_c$ 處，$f_F$ 已衰減到幾乎為零。電子主要分布在導帶底部往上約 $kT$（室溫約 0.026 eV）的範圍內。</p>
+
+<div class="figure"><img src="../../../images/solid-state-physics/ch04_pages/ch4_page_134.png" alt="圖 4.1" loading="lazy"><figcaption>圖 4.1：(a) 態密度 $g_c(E)$、(b) Fermi-Dirac 機率 $f_F(E)$、(c) 電子濃度分布 $n(E)=g_c(E)f_F(E)$。注意 $f_F$ 在 $E_F$ 以上的指數衰減決定了 $n(E)$ 的形狀。</figcaption></div>
+
+<p>將 $n(E)$ 從 $E_c$ 積分到 $\infty$，就得到導帶中的總電子濃度 $n_0$。對於電洞，同理：價帶態密度 $g_v(E)$ 乘以「沒有電子的機率」$[1-f_F(E)]$，積分得到 $p_0$。</p>
+</section>
+
+<!-- 4.1.2 -->
+<section id="ch04_s4-1-2"><h2>4.1.2 $n_0$ 與 $p_0$ 的公式推導</h2>
+
+<p>對於<strong>非簡併半導體</strong>（即 $E_F$ 位於能隙中，且距 $E_c$ 和 $E_v$ 都超過 $3kT$），$E_c - E_F \gg kT$，因此 $f_F(E) \approx \exp[-(E-E_F)/kT]$——這就是 <strong>Boltzmann 近似</strong>。這個近似使積分可以解析求解，得到本章最重要的兩個公式：</p>
+
+<div class="eq">$$\boxed{n_0 = N_c\,\exp\!\left(-\frac{E_c - E_F}{kT}\right)} \tag{4.11}$$</div>
+<div class="eq">$$\boxed{p_0 = N_v\,\exp\!\left(-\frac{E_F - E_v}{kT}\right)} \tag{4.19}$$</div>
+
+<p>其中 $N_c$ 和 $N_v$ 分別是導帶和價帶的<strong>有效態密度（effective density of states）</strong>：</p>
+<div class="eq">$$N_c = 2\left(\frac{2\pi m_n^* kT}{h^2}\right)^{3/2} \tag{4.13}$$</div>
+
+<div class="callout"><strong>💡 有效態密度的物理意義：</strong>$N_c$ 可以理解為「如果導帶底部 $E_c$ 處的所有量子態被濃縮到一個單一能階，這個等效能階的態密度就是 $N_c$」。換句話說，$N_c$ 把整個導帶中複雜的 $g_c(E)$ 分布簡化成一個數字。對 Si 而言室溫 $N_c = 2.8 \times 10^{19}$ cm⁻³——這大約是每立方公分有 $2.8 \times 10^{19}$ 個等效量子態可用。</div>
+
+<p>$N_c$ 和 $N_v$ 隨溫度以 $T^{3/2}$ 增加。直觀理解：溫度越高，電子的熱能越大，能夠「看到」越高能量的量子態，等效態密度因此增大。</p>
+
+<p><strong>公式 (4.11) 的直觀理解：</strong>$n_0$ =（等效態密度）×（Boltzmann 機率因子）。$N_c$ 告訴我們導帶底部有多少「座位」；$\exp[-(E_c-E_F)/kT]$ 告訴我們這些座位被佔據的機率。$E_c - E_F$ 越大（Fermi 能階離導帶越遠），機率越小→電子越少。這完全類似化學反應中的 Arrhenius 公式。</p>
+
+<div class="exbox"><div class="ext">📐 例題 4.1 — 計算 $n_0$</div>Si 在 $T=300$ K，$E_c-E_F=0.25$ eV。$N_c=2.8\times10^{19}$ cm⁻³。<br>$n_0 = 2.8\times10^{19} \cdot e^{-0.25/0.0259} = 2.8\times10^{19} \cdot e^{-9.65} = 1.8\times10^{15}$ cm⁻³。<br>注意：$E_c-E_F$ 僅 0.25 eV，但 $n_0$ 比 $N_c$ 小了四個數量級——這是因為 Boltzmann 因子指數衰減的威力。</div>
+</section>
+
+<!-- 4.1.3 -->
+<section id="ch04_s4-1-3"><h2>4.1.3 本徵載子濃度 $n_i$</h2>
+
+<p><strong>本徵半導體（intrinsic semiconductor）</strong>是指完全沒有雜質的完美晶體。在本徵半導體中，每一個被激發到導帶的電子，都在價帶中留下一個電洞，因此 $n_0 = p_0 \equiv n_i$。</p>
+
+<p>將 $n_0 p_0$ 相乘，$E_F$ 被消去（注意 $n_0$ 含 $e^{+E_F/kT}$，$p_0$ 含 $e^{-E_F/kT}$），得到一個與 $E_F$ 無關、僅取決於材料和溫度的常數：</p>
+<div class="eq">$$\boxed{n_0 p_0 = n_i^2} \tag{4.23}$$</div>
+
+<p>這就是赫赫有名的<strong>質量作用定律（mass action law）</strong>。它的物理意義是：在熱平衡下，$n_0$ 和 $p_0$ 的乘積是一個常數。如果你用摻雜提高 $n_0$（n 型），$p_0$ 必定以 $n_i^2/n_0$ 的比例下降。這就像化學平衡中的 $K_{eq}$——你可以改變反應物濃度，但平衡常數不變。</p>
+
+<div class="eq">$$n_i = \sqrt{N_c N_v}\,\exp\!\left(-\frac{E_g}{2kT}\right) \tag{4.20}$$</div>
+
+<div class="figure"><img src="../../../images/solid-state-physics/ch04_pages/ch4_page_141.png" alt="圖 4.2" loading="lazy"><figcaption>圖 4.2：Si、GaAs、Ge 的本徵載子濃度 $n_i$ 隨溫度變化。注意對數坐標——$n_i$ 隨溫度指數增長。</figcaption></div>
+
+<div class="callout"><strong>💡 $n_i$ 公式的物理直覺：</strong>$\sqrt{N_c N_v}$ ≈ 可用能態的幾何平均值。$\exp(-E_g/2kT)$ = 電子從價帶跨越能隙 $E_g$ 到達導帶的 Boltzmann 機率。$E_g$ 越大或 $T$ 越低，$n_i$ 越小——直觀上，跨越更大的能隙更困難，溫度越低熱能越不足以激發電子。</div>
+
+<table><thead><tr><th>材料</th><th>$E_g$ (eV)</th><th>$n_i$ at 300K (cm⁻³)</th><th>直觀理解</th></tr></thead><tbody>
+<tr><td>Ge</td><td>0.66</td><td>$2.4\times10^{13}$</td><td>能隙最小→最多本徵載子</td></tr>
+<tr><td>Si</td><td>1.12</td><td>$1.5\times10^{10}$</td><td>能隙適中</td></tr>
+<tr><td>GaAs</td><td>1.42</td><td>$1.8\times10^{6}$</td><td>能隙最大→本徵載子極少（少了 4 個數量級！）</td></tr>
+</tbody></table>
+
+<div class="exbox"><div class="ext">📐 例題 4.3 — $n_i$ 的溫度效應</div>Si 在 $T=300$ K：$n_i=1.5\times10^{10}$ cm⁻³。若 $T=400$ K：<br>$N_c \propto T^{3/2}$ → $N_c(400)/N_c(300)=(400/300)^{3/2}=1.54$<br>$e^{-E_g/2kT}$ 從 $e^{-21.6}$ 變為 $e^{-16.2}$ → 增加了 $e^{5.4}\approx 220$ 倍<br>故 $n_i(400\text{K}) \approx 1.54 \times 220 \times 1.5\times10^{10} \approx 5\times10^{12}$ cm⁻³<br>溫度僅升 100°C，$n_i$ 增加了 300 倍！這就是為什麼半導體元件對溫度極其敏感。</div>
+</section>
+
+<!-- 4.1.4 -->
+<section id="ch04_s4-1-4"><h2>4.1.4 本徵 Fermi 能階 $E_{Fi}$</h2>
+
+<p>在本徵半導體中，令 $n_0 = p_0 = n_i$ 代入 (4.11) 和 (4.19)，可解得本徵 Fermi 能階的位置：</p>
+<div class="eq">$$\boxed{E_{Fi} = \frac{E_c + E_v}{2} + \frac{3}{4}kT\ln\!\left(\frac{m_p^*}{m_n^*}\right)} \tag{4.25}$$</div>
+
+<p>$E_{Fi}$ 非常接近能隙中央（midgap）。對 Si，$m_p^* > m_n^*$，修正項為負（約 −0.013 eV），所以 $E_{Fi}$ 略低於正中央。</p>
+
+<p>有了 $n_i$ 和 $E_{Fi}$ 作為基準，我們可以把 $n_0$ 和 $p_0$ 改寫成極其實用的形式——不再需要知道 $N_c$ 和 $N_v$ 的具體數值：</p>
+<div class="eq">$$\boxed{n_0 = n_i\,\exp\!\left(\frac{E_F - E_{Fi}}{kT}\right)} \tag{4.26}$$</div>
+<div class="eq">$$\boxed{p_0 = n_i\,\exp\!\left(-\frac{E_F - E_{Fi}}{kT}\right)} \tag{4.27}$$</div>
+
+<div class="callout-warn"><strong>⚡ 這兩個公式是第四章最重要的工具：</strong>只要知道 $E_F$ 相對於 $E_{Fi}$ 的位置，就能立刻判斷半導體是 n 型還是 p 型、以及載子濃度的大小。<br><br>$E_F > E_{Fi}$ → $n_0 > n_i > p_0$ → <strong>n 型</strong>（多數載子為電子）<br>$E_F < E_{Fi}$ → $p_0 > n_i > n_0$ → <strong>p 型</strong>（多數載子為電洞）<br>$E_F$ 每遠離 $E_{Fi}$ 一個 $kT$（約 0.026 eV），多數載子濃度就增加 $e$ 倍（約 2.72 倍）。</div>
+</section>
+
+<!-- 4.2 -->
+<section id="ch04_s4-2"><h2>4.2 摻雜原子與能階</h2>
+
+<p>純淨的本徵半導體導電性很差——Si 的 $n_i$ 只有 $10^{10}$ cm⁻³，而 Si 的原子密度是 $5\times10^{22}$ cm⁻³，也就是說每 $5\times10^{12}$ 個原子中才有一個自由電子。要靠本徵載子做元件是完全不現實的。</p>
+
+<p><strong>摻雜（doping）</strong>是半導體技術的基石：刻意加入極少量的特定雜質原子，精確控制導電性。典型的摻雜濃度是 $10^{14}$–$10^{18}$ cm⁻³——相比 Si 原子密度仍然極低（約百萬分之一到百分之一），但已經比 $n_i$ 高出 4 到 8 個數量級。</p>
+
+<div class="figure"><img src="../../../images/solid-state-physics/ch04_pages/ch4_page_143.png" alt="圖 4.3" loading="lazy"><figcaption>圖 4.3：(a) 施體（P）和受體（B）在矽晶格中的二維示意圖——注意 P 多出一個價電子，B 缺少一個。(b) 對應的能帶圖——施體能階 $E_d$ 靠近 $E_c$，受體能階 $E_a$ 靠近 $E_v$。</figcaption></div>
+
+<h3>施體（Donor）— n 型摻雜</h3>
+<p>用<strong>第 V 族元素</strong>（P、As、Sb）取代 Si 原子。V 族元素有 5 個價電子。其中 4 個與相鄰 Si 形成共價鍵；第 5 個電子多餘出來，只被施體離子微弱束縛。這個多餘電子的束縛能（游離能）極小——對 Si 中的 P 僅約 0.045 eV。室溫下 $kT\approx0.026$ eV，熱能足以使絕大部分施體電子脫離束縛進入導帶，成為自由電子。施體離子本身固定在晶格中，帶正電。</p>
+
+<h3>受體（Acceptor）— p 型摻雜</h3>
+<p>用<strong>第 III 族元素</strong>（B、Al、Ga）取代 Si。III 族元素只有 3 個價電子，與相鄰 Si 形成共價鍵時<strong>缺少一個電子</strong>。這個空缺可以被鄰近 Si-Si 鍵中的電子填補——相當於從價帶中「接受」一個電子，在價帶中留下一個電洞。受體能階距價帶頂部也僅約 0.045 eV，室溫下幾乎全部游離。</p>
+
+<table><thead><tr><th>雜質</th><th>族別</th><th>類型</th><th>Si 中能階位置</th><th>束縛能 (eV)</th></tr></thead><tbody>
+<tr><td>P（磷）</td><td>V</td><td>施體</td><td>$E_c - 0.045$ eV</td><td>0.045</td></tr>
+<tr><td>As（砷）</td><td>V</td><td>施體</td><td>$E_c - 0.054$ eV</td><td>0.054</td></tr>
+<tr><td>Sb（銻）</td><td>V</td><td>施體</td><td>$E_c - 0.039$ eV</td><td>0.039</td></tr>
+<tr><td>B（硼）</td><td>III</td><td>受體</td><td>$E_v + 0.045$ eV</td><td>0.045</td></tr>
+</tbody></table>
+
+<div class="callout"><strong>💡 完全游離（complete ionization）的概念：</strong>因為雜質的束縛能（∼0.045 eV）與室溫 $kT$（0.026 eV）同數量級，在室溫下絕大多數雜質原子都已經游離——電子從施體跳到導帶，或價帶電子跳到受體。這意味著 $N_d^+ \approx N_d$、$N_a^- \approx N_a$。完全游離是後續所有分析的基礎假設。</div>
+</section>
+
+<!-- 4.3 -->
+<section id="ch04_s4-3"><h2>4.3 外質半導體</h2>
+
+<p>加入摻雜後的半導體稱為<strong>外質半導體（extrinsic semiconductor）</strong>。摻雜濃度記為 $N_d$（施體濃度）和 $N_a$（受體濃度）。</p>
+
+<div class="callout-warn"><strong>⚡ 關鍵事實：</strong>質量作用定律 $n_0 p_0 = n_i^2$ <strong>在外質半導體中仍然嚴格成立</strong>（只要 Boltzmann 近似有效）。這不是巧合——它是熱平衡統計力學的必然結果。摻雜改變了 $n_0$ 和 $p_0$ 的個別值，但它們的乘積僅由溫度和材料決定。</div>
+
+<p><strong>外質半導體的三個溫度區域：</strong></p>
+<p>① <strong>凍結區（Freeze-out）：</strong>極低溫（$T < 50$ K）。$kT$ 遠小於雜質束縛能（0.045 eV）→大部分雜質未游離→$n_0$ 隨 $T$ 急劇上升（$\propto e^{-E_d/2kT}$）。載子濃度遠低於 $N_d$。</p>
+<p>② <strong>外質區（Extrinsic）：</strong>室溫附近（$50 < T < 500$ K）。$kT$ 足以完全游離所有雜質→$n_0 \approx N_d$（n 型）。同時 $n_i$ 仍然很小→$n_0$ 基本不隨溫度變化。這是半導體元件的正常操作區域。</p>
+<p>③ <strong>本徵區（Intrinsic）：</strong>高溫（$T > 500$ K）。$n_i(T)$ 指數增長→$n_i \gg N_d$→本徵載子濃度遠超過摻雜提供的載子→$n_0 \approx n_i$。此時摻雜失去意義——材料表現得像本徵半導體。</p>
+
+<p><strong>為什麼這三個區域很重要？</strong>① 凍結區：低溫電子元件（如太空探測器）必須考慮載子載子凍結。② 外質區：所有正常操作的半導體元件都在此區域。③ 本徵區：功率元件在高溫下可能進入本徵區→漏電流急劇增大→元件失效。</p>
+
+<p>外質半導體的一個重要參數區分是<strong>簡併（degenerate）與非簡併（nondegenerate）</strong>：</p>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li><strong>非簡併：</strong>$E_F$ 在能隙中，距能帶邊緣 $> 3kT$。Boltzmann 近似有效。大多數實際元件都在此範圍。</li>
+<li><strong>簡併：</strong>摻雜濃度極高（$>10^{19}$ cm⁻³），$E_F$ 進入導帶或價帶。必須使用完整的 Fermi-Dirac 積分。簡併半導體的行為更接近金屬。</li>
+</ul>
+
+<div class="figure"><img src="../../../images/solid-state-physics/ch04_pages/ch4_page_144.png" alt="圖 4.5" loading="lazy"><figcaption>圖 4.5：(a) n 型半導體的能帶圖——$E_F$ 靠近 $E_c$，電子為多數載子。(b) p 型半導體——$E_F$ 靠近 $E_v$，電洞為多數載子。箭頭表示載子濃度的大小關係。</figcaption></div>
+</section>
+
+<!-- 4.4 -->
+<section id="ch04_s4-4"><h2>4.4 施體與受體的統計</h2>
+
+<p>嚴格來說，並非所有雜質原子都一定游離——這取決於溫度和 Fermi 能階的位置。游離施體濃度的精確表達式為：</p>
+<div class="eq">$$N_d^+ = \frac{N_d}{1 + g_d\,\exp\!\left(\dfrac{E_F - E_d}{kT}\right)} \tag{4.53}$$</div>
+
+<p>其中 $g_d = 2$ 是施體基態的簡併度（電子可以自旋向上或向下佔據施體能階）。當 $E_F$ 遠低於 $E_d$ 時（n 型半導體的典型情況），分母中的指數項很小 → $N_d^+ \approx N_d$——這就是完全游離。</p>
+
+<p>對受體同理：</p>
+<div class="eq">$$N_a^- = \frac{N_a}{1 + g_a\,\exp\!\left(\dfrac{E_a - E_F}{kT}\right)} \tag{4.56}$$</div>
+<p>$g_a = 4$（價帶頂部的雙重簡併 + 自旋簡併）。當 $E_F$ 遠高於 $E_a$ 時（p 型的典型情況）→ 完全游離。</p>
+
+<div class="callout"><strong>💡 物理圖像：</strong>可以把施體能階想像成一個陷阱——它有一個能量位階 $E_d$，電子可以被困在那裡。如果 Fermi 能階 $E_F$ 低於 $E_d$，電子傾向待在導帶（能量更低）而不是施體能階上 → 施體游離。如果 $E_F$ 高於 $E_d$（只有在極低溫或極高摻雜時），電子反而傾向佔據施體能階 → 部分游離。</div>
+
+<h3>凍結溫度的定量估算</h3>
+<p>什麼溫度下，一半的施體已經游離？令 $N_d^+ = N_d/2$，代入 (4.53)：$1 + 2\exp[(E_F-E_d)/kT] = 2$→$\exp[(E_F-E_d)/kT] = 0.5$→$E_d - E_F = kT\ln 2 \approx 0.69 kT$。對 Si 中的 P（$E_d = E_c - 0.045$ eV）：若 $E_F \approx E_c - 0.02$ eV（半游離時的近似），則 $0.025 \approx 0.69 kT$→$T \approx 0.025/(0.69\times8.617\times10^{-5}) \approx 420$ K。但實際上因為 $E_F$ 本身隨溫度變化，凍結開始的溫度更低（∼50–100 K）。</p>
+<p><strong>工程意義：</strong>在太空應用中（衛星電子元件），環境溫度可低至 −55°C（218 K）——仍在外質區。但在深空探測器的陰影面，溫度可降至 < 30 K——必須使用特殊設計（如更高的摻雜濃度或不同的材料）來避免載子凍結。</p>
+</section>
+
+<!-- 4.5 -->
+<section id="ch04_s4-5"><h2>4.5 電荷中性</h2>
+
+<p>熱平衡下的半導體整體必須是<strong>電中性</strong>的——總負電荷等於總正電荷。這給出本章第三個核心方程：</p>
+<div class="eq">$$\boxed{n_0 + N_a^- = p_0 + N_d^+} \tag{4.60}$$</div>
+
+<p><strong>物理意義：</strong>負電荷來源有二：導帶中的電子 $n_0$，以及游離的受體離子 $N_a^-$（受體接受了電子，帶負電）。正電荷來源也有二：價帶中的電洞 $p_0$，以及游離的施體離子 $N_d^+$（施體給出了電子，帶正電）。</p>
+
+<p>結合 (4.60) 和質量作用定律 $n_0 p_0 = n_i^2$，以及完全游離假設（室溫下合理），可以對任何摻雜情況求解 $n_0$ 和 $p_0$：</p>
+
+<h3>n 型半導體（$N_d \gg n_i$，$N_a \approx 0$）</h3>
+<div class="eq">$$n_0 = \frac{N_d}{2} + \sqrt{\left(\frac{N_d}{2}\right)^2 + n_i^2} \approx N_d \tag{4.62}$$</div>
+<div class="eq">$$p_0 = \frac{n_i^2}{n_0} \approx \frac{n_i^2}{N_d} \tag{4.64}$$</div>
+
+<h3>p 型半導體（$N_a \gg n_i$，$N_d \approx 0$）</h3>
+<div class="eq">$$p_0 = \frac{N_a}{2} + \sqrt{\left(\frac{N_a}{2}\right)^2 + n_i^2} \approx N_a \tag{4.66}$$</div>
+<div class="eq">$$n_0 = \frac{n_i^2}{p_0} \approx \frac{n_i^2}{N_a} \tag{4.68}$$</div>
+
+<h3>補償半導體（$N_d \neq 0$ 且 $N_a \neq 0$）</h3>
+<p>當 n 型和 p 型雜質同時存在時，它們會互相「抵消」——電子從施體落入受體能階，等效淨摻雜為 $|N_d - N_a|$。</p>
+<div class="eq">$$n_0 = \frac{N_d - N_a}{2} + \sqrt{\left(\frac{N_d - N_a}{2}\right)^2 + n_i^2} \quad (N_d > N_a) \tag{4.69}$$</div>
+
+<div class="exbox"><div class="ext">📐 例題 4.7 — n 型 Si 的載子濃度</div>Si，$N_d=10^{16}$ cm⁻³，$T=300$ K。<br>$n_0 \approx N_d = 10^{16}$ cm⁻³<br>$p_0 = n_i^2/n_0 = (1.5\times10^{10})^2 / 10^{16} = 2.25\times10^4$ cm⁻³<br>多數載子（電子）比少數載子（電洞）多了 12 個數量級！在 n 型 Si 中，電洞幾乎不存在——這就是為什麼我們說「多數載子主導導電性」。</div>
+</section>
+
+<!-- 4.6 -->
+<section id="ch04_s4-6"><h2>4.6 Fermi 能階的位置</h2>
+<div class="figure"><img src="../../../images/solid-state-physics/ch04_pages/ch4_page_169.png" alt="圖 4.17" loading="lazy"><figcaption>圖 4.17：Fermi 能階隨摻雜濃度和溫度的完整變化圖。</figcaption></div>
+
+<p>有了 $n_0$（從摻雜濃度得知）和 $n_i$（從材料參數得知），就可以反推 Fermi 能階的位置。這是本章的收尾——把前面所有的推導串在一起：</p>
+<div class="eq">$$\boxed{E_F - E_{Fi} = kT\ln\!\left(\frac{n_0}{n_i}\right)} \tag{4.73}$$</div>
+
+<p><strong>物理圖像：</strong>Fermi 能階是系統的「電化學勢」。當你加入施體雜質（給予電子），系統的化學勢上升→ $E_F$ 向 $E_c$ 移動。加入受體（拿走電子），化學勢下降→ $E_F$ 向 $E_v$ 移動。摻雜濃度每增加 10 倍，$E_F$ 移動約 $kT\ln10 \approx 0.06$ eV（室溫）。</p>
+
+<div class="figure"><img src="../../../images/solid-state-physics/ch04_pages/ch4_page_145.png" alt="圖 4.7" loading="lazy"><figcaption>圖 4.7：Si 中 Fermi 能階位置隨摻雜濃度和溫度的變化。n 型（上半部）：$E_F$ 從 $E_{Fi}$ 向 $E_c$ 移動。p 型（下半部）：$E_F$ 向 $E_v$ 移動。注意高溫時 $E_F$ 趨近 $E_{Fi}$——因為 $n_i$ 變大，本徵行為主導。</figcaption></div>
+
+<div class="exbox"><div class="ext">📐 例題 4.12 — n 型 Si 的 $E_F$ 位置</div>Si，$N_d=10^{16}$ cm⁻³，$T=300$ K。<br>$E_F - E_{Fi} = 0.0259 \cdot \ln(10^{16}/1.5\times10^{10}) = 0.0259 \cdot 13.4 = 0.347$ eV<br>$E_{Fi}$ 約在能隙中央下方 0.013 eV → $E_c - E_F \approx 1.12/2 + 0.013 - 0.347 \approx 0.21$ eV。<br>Fermi 能階距導帶底部僅 0.21 eV——摻雜有效地把 $E_F$ 從能隙中央「拉」向了導帶。</div>
+
+<h3>溫度對 Fermi 能階的影響</h3>
+<p>圖 4.7 的一個重要特徵是：<strong>高溫時所有曲線都趨近 $E_{Fi}$</strong>。這是因為當溫度升高，$n_i$ 急劇增加（$\propto e^{-E_g/2kT}$）。當 $n_i$ 超過 $N_d$（或 $N_a$）時，本徵載子主導，半導體回歸本徵行為——$E_F \to E_{Fi}$。對 $N_d=10^{14}$ cm⁻³ 的 Si，這大約發生在 500 K 左右。</p>
+<div class="figure"><img src="../../../images/solid-state-physics/ch04_pages/ch4_page_150.png" alt="圖 4.9" loading="lazy"><figcaption>圖 4.9：Fermi 能階位置隨溫度的變化——不同摻雜濃度下，$E_F$ 從低溫的接近能帶邊緣逐漸回歸高溫的能隙中央。</figcaption></div>
+</section>
+
+<section id="ch04_summary"><h2>本章摘要</h2>
+<ol style="font-size:14px;color:var(--t2);margin-left:18px">
+<li><strong>載子濃度公式：</strong>$n_0 = N_c e^{-(E_c-E_F)/kT}$，$p_0 = N_v e^{-(E_F-E_v)/kT}$。核心在於 Boltzmann 近似——適用於非簡併半導體。</li>
+<li><strong>有效態密度 $N_c$, $N_v$：</strong>將複雜的能帶態密度簡化為等效能階的態密度，隨 $T^{3/2}$ 增加。Si 室溫：$N_c=2.8\times10^{19}$ cm⁻³。</li>
+<li><strong>質量作用定律 $n_0 p_0 = n_i^2$：</strong>熱平衡下的不變量——提高一種載子濃度必然壓低另一種。這是統計力學的結果，與摻雜無關。</li>
+<li><strong>$n_i$ 隨溫度指數增長：</strong>$n_i = \sqrt{N_c N_v} e^{-E_g/2kT}$。Si 從 300K 到 400K，$n_i$ 增加約 300 倍。</li>
+<li><strong>本徵 Fermi 能階 $E_{Fi}$：</strong>幾乎在能隙正中央，是判斷 n/p 型的基準。$E_F > E_{Fi}$ → n 型，$E_F < E_{Fi}$ → p 型。</li>
+<li><strong>摻雜：</strong>V 族（P, As）→ n 型；III 族（B）→ p 型。室溫下完全游離（束縛能 ∼0.045 eV vs $kT$ ∼0.026 eV）。</li>
+<li><strong>電荷中性：</strong>$n_0 + N_a^- = p_0 + N_d^+$。結合 $n_0 p_0 = n_i^2$ 可解出任何摻雜情況下的 $n_0$ 和 $p_0$。</li>
+<li><strong>Fermi 能階位置：</strong>$E_F - E_{Fi} = kT\ln(n_0/n_i)$。摻雜使 $E_F$ 移動——n 型向 $E_c$，p 型向 $E_v$。高溫時 $E_F$ 回歸 $E_{Fi}$。</li></ol></section>
+
+
+<!-- ===== 第五章 載子傳輸現象 ===== -->
+
+<header class="header"><div class="cl">第五章</div><h1>載子傳輸現象</h1><div class="meta">Donald A. Neamen·《半導體物理與元件：基本原理》第四版·第 156–191 頁</div></header>
+
+<section id="ch05_preview"><div class="callout"><strong>📋 5.0 本章預覽</strong>
+<p>第四章回答了「有多少載子」。本章回答下一個邏輯問題：<strong>載子如何移動？</strong>答案有兩種基本機制——<strong>漂移（drift）</strong>和<strong>擴散（diffusion）</strong>。這兩種機制結合起來構成了半導體元件中所有電流流動的基礎。</p>
+<p>想像一條河流。水分子可以因兩種原因移動：重力（類似電場→漂移），或濃度差（一滴墨水在水中擴散→擴散）。半導體中的載子也是如此——電場推它們（漂移），濃度梯度分散它們（擴散）。</p>
+<div class="callout-warn"><strong>⚡ 第五章是第四章和第六章之間的關鍵轉折點。</strong>第四章給了我們 $n_0, p_0$（有多少載子）；第五章教我們 $\mu, D$（載子跑多快）；第六章將結合這兩者來分析<strong>非平衡</strong>情況下的過量載子行為。沒有本章，你無法計算任何元件的電流。</div></div></section>
+
+<section id="ch05_s5-1-1"><h2>5.1.1 漂移電流密度</h2>
+<div class="figure"><img src="../../../images/solid-state-physics/ch05_pages/ch5_page_185.png" alt="圖 5.1" loading="lazy"><figcaption>圖 5.1：漂移電流示意——外加電場使電子和電洞產生淨漂移運動。</figcaption></div>
+<p>把一塊半導體放在電場中會發生什麼？電子（帶負電）受到與電場相反的力 $F = -e\mathcal{E}$；電洞（帶正電）受到與電場同向的力 $F = +e\mathcal{E}$。兩者都開始加速。</p>
+<p>但如果只有加速，載子速度會無限增長。實際上，載子在晶體中不斷與晶格振動（聲子）和雜質離子碰撞。每次碰撞後，載子失去大部分動能，重新開始加速。淨效果是一個<strong>平均漂移速度</strong> $v_d$——載子不是一直在加速，而是在加速與碰撞之間達到動態平衡。</p>
+<div class="figure"><img src="../../../images/solid-state-physics/ch05_pages/ch5_page_184.png" alt="圖 5.1" loading="lazy"><figcaption>圖 5.1：電洞在半導體中的運動。(a) 無電場——純隨機熱運動，淨位移為零。(b) 有電場 $E$——隨機熱運動疊加一個沿電場方向的淨漂移。</figcaption></div>
+<p>漂移電流密度等於電荷密度乘以漂移速度。一般定義：</p>
+<div class="eq">$$J_{\text{drf}} = \rho\,v_d \tag{5.1a}$$</div>
+<p>單位驗證也很重要——這不是繁瑣的細節，而是確保你不會搞混單位制的關鍵步驟：</p>
+<div class="eq">$$J\;(\text{A/cm}^2) = \rho\;(\text{C/cm}^3) \times v_d\;(\text{cm/s}) \tag{5.1b}$$</div>
+<p>對於電洞（$\rho = ep$）：$J_p = (ep)v_{dp}$ (5.2)。對於電子（$\rho = -en$）：$J_n = (-en)v_{dn}$ (5.6)。</p>
+<p>在低電場下——這是一般元件操作的最常見情況——漂移速度與電場成正比：</p>
+<div class="eq">$$v_{dp} = \mu_p\mathcal{E} \quad\text{（電洞）}\qquad v_{dn} = -\mu_n\mathcal{E} \quad\text{（電子）} \tag{5.4, 5.7}$$</div>
+<p><strong>為什麼電子漂移速度有負號？</strong>因為電子帶負電，受力方向與電場相反，所以漂移方向也相反。$\mu_n$ 本身定義為正值。把 (5.7) 代入 (5.6)：$J_n = (-en)(-\mu_n\mathcal{E}) = e\mu_n n\mathcal{E}$——負負得正，電子漂移電流與電場<strong>同向</strong>（符合傳統電流定義）。</p>
+<p>結合電子和電洞的貢獻，得到總漂移電流密度：</p>
+<div class="eq">$$\boxed{J_{\text{drf}} = e(\mu_n n + \mu_p p)\mathcal{E}} \tag{5.9}$$</div>
+<div class="callout"><strong>💡 物理直覺：</strong>電流就像一條雙向公路。$e\mu_n n$ 是「電子車道」的導電能力——有多少電子（$n$）、它們跑多快（$\mu_n$）。$e\mu_p p$ 是「電洞車道」。總交通流量 = 兩條車道之和乘以電場（電場就像公路的坡度——越陡，車速越快）。</div>
+<div class="exbox"><div class="ext">📐 例題 5.1 — GaAs 中的漂移電流</div>n 型 GaAs，$N_d=10^{16}$ cm⁻³，$\mathcal{E}=10$ V/cm，$\mu_n=8500$ cm²/V·s。<br>$n_0\approx N_d=10^{16}$ cm⁻³。$p_0=n_i^2/n_0\approx3.2\times10^{-4}$ cm⁻³——比 $n_0$ 小了 20 個數量級，完全可以忽略。<br>$J_{\text{drf}}\approx e\mu_n N_d\mathcal{E} = (1.6\times10^{-19})(8500)(10^{16})(10)=136$ A/cm²。<br><strong>10 V/cm 看似極小的電場（1 cm 的矽片上加 10 V），但已能產生 136 A/cm² 的電流密度。</strong>這顯示了半導體中電流對電場的敏感性。</div>
+</section>
+
+<section id="ch05_s5-1-2"><h2>5.1.2 散射機制與遷移率</h2>
+<p>遷移率 $\mu$ 是衡量載子在晶體中「跑多快」的指標。但它不是常數——它取決於載子被散射的頻率。要理解遷移率，必須先理解散射。</p>
+<h3>兩種主要散射機制</h3>
+<p><strong>① 晶格散射（聲子散射）：</strong>原子在晶格點附近熱振動→週期位能被擾動→電子波被散射。溫度越高→原子振動越劇烈→散射越頻繁→遷移率越低。理論給出 $\mu_L \propto T^{-3/2}$。在室溫附近，這是純淨半導體中遷移率的主要限制。</p>
+<p><strong>② 雜質散射（游離雜質散射）：</strong>游離的施體（帶 +e）和受體（帶 −e）離子→庫侖力使經過的帶電載子偏轉→散射。想像一個高爾夫球滾過一個充滿凹坑的果嶺——凹坑（雜質離子）越多，球的路徑越容易被偏轉。摻雜濃度越高→雜質離子越多→遷移率越低。但溫度越高→載子熱速度越快→經過離子附近的時間越短→散射截面越小→$\mu_I \propto T^{3/2}/N_I$。</p>
+<div class="figure"><img src="../../../images/solid-state-physics/ch05_pages/ch5_page_186.png" alt="圖 5.2" loading="lazy"><figcaption>圖 5.2：Si 中電子遷移率隨溫度變化——三條曲線對應不同摻雜濃度。低溫區：雜質散射主導（$\mu$ 隨 $T$ 上升）；高溫區：晶格散射主導（$\mu$ 隨 $T$ 下降）。峰值出現在兩種機制轉換處。</figcaption></div>
+<h3>Matthiessen 規則——散射的「並聯電阻」</h3>
+<div class="figure"><img src="../../../images/solid-state-physics/ch05_pages/ch5_page_192.png" alt="圖 5.6" loading="lazy"><figcaption>圖 5.6：Si 和 GaAs 中電子/電洞遷移率隨摻雜濃度的變化——高摻雜時雜質散射主導→遷移率急劇下降。</figcaption></div>
+<p>兩種散射同時存在時，散射率（單位時間碰撞次數 $1/\tau$）相加。因為 $\mu = e\tau/m^*$，遷移率的倒數也相加：</p>
+<div class="eq">$$\frac{1}{\mu} = \frac{1}{\mu_L} + \frac{1}{\mu_I} \tag{5.13}$$</div>
+<p>這和並聯電阻一模一樣——總遷移率由<strong>較小的那個</strong>主導（瓶頸效應）。如果 $\mu_L=1000$ 和 $\mu_I=500$，總 $\mu=333$——接近較小的 500 而不是 1000。這就是為什麼高摻雜樣品（$\mu_I$ 小）的遷移率遠低於純淨樣品。</p>
+<div class="figure"><img src="../../../images/solid-state-physics/ch05_pages/ch5_page_188.png" alt="圖 5.3" loading="lazy"><figcaption>圖 5.3：室溫下 Si 的電子與電洞遷移率隨摻雜濃度變化。注意遷移率隨摻雜增加而單調下降（雜質散射增加）。電子遷移率始終高於電洞——因為 $m_n^* < m_p^*$。</figcaption></div>
+<div class="callout"><strong>💡 為什麼電子遷移率始終高於電洞？</strong>回顧第三章：$\mu = e\tau/m^*$。電子的有效質量 $m_n^*$（Si 約 $0.26m_0$，考慮態密度有效質量）小於電洞的 $m_p^*$（約 $0.39m_0$）。同樣的力→較輕的粒子加速更快→電子比電洞「跑得快」。這也是為什麼 n 通道 MOSFET 比 p 通道 MOSFET 快的原因之一。</div>
+</section>
+
+<section id="ch05_s5-1-3"><h2>5.1.3 導電率——Ohm 定律的微觀基礎</h2>
+<p>我們從小學的 Ohm 定律 $V=IR$ 是一個<strong>巨觀</strong>描述——它告訴你元件的整體行為，但不告訴你為什麼。本章給出 Ohm 定律的<strong>微觀</strong>推導。</p>
+<p>由 $J_{\text{drf}} = e(\mu_n n + \mu_p p)\mathcal{E}$ 和 $J = \sigma\mathcal{E}$（Ohm 定律的場形式），比較係數：</p>
+<div class="eq">$$\boxed{\sigma = e(\mu_n n + \mu_p p)} \tag{5.17}$$</div>
+<div class="eq">$$\rho = \frac{1}{\sigma} = \frac{1}{e(\mu_n n + \mu_p p)} \tag{5.18}$$</div>
+<p><strong>這兩個公式揭示了 Ohm 定律的本質：</strong>導電率取決於兩件事——有多少載子（$n, p$，來自第四章的摻雜）以及它們跑多快（$\mu_n, \mu_p$，來自本章的散射分析）。</p>
+<p>對於 n 型材料（$n \gg p$）：$\sigma \approx e\mu_n n \approx e\mu_n N_d$。這給出一個極其實用的關係：知道摻雜濃度→查圖 5.3 得 $\mu_n$→立即算出導電率/電阻率。這是半導體製程監控中<strong>四點探針</strong>測量電阻率來推算摻雜濃度的物理基礎。</p>
+<div class="figure"><img src="../../../images/solid-state-physics/ch05_pages/ch5_page_190.png" alt="圖 5.4" loading="lazy"><figcaption>圖 5.4：室溫下 Si 和 GaAs 的電阻率隨摻雜濃度變化——對數-對數圖。斜率約 −1，因為 $\rho \propto 1/N_d$（假設 $\mu$ 隨 $N_d$ 變化較慢）。</figcaption></div>
+<p>一個長度 $L$、截面積 $A$ 的半導體棒的電阻為：</p>
+<div class="eq">$$R = \frac{\rho L}{A} = \frac{L}{\sigma A} = \frac{L}{e\mu_n n A} \tag{5.22, 5.23}$$</div>
+<div class="callout"><strong>💡 本徵導電率 vs 外質導電率。</strong>本徵 Si 的 $\sigma_i = e n_i(\mu_n+\mu_p) \approx 4\times10^{-6}$ (Ω·cm)⁻¹→幾乎是絕緣體。摻雜 $10^{16}$ cm⁻³ 的 n 型 Si：$\sigma \approx e\mu_n N_d \approx 2$ (Ω·cm)⁻¹→導電率增加了<strong>五十萬倍</strong>。摻雜的威力就在這裡——不是微調，是數量級的控制。</div>
+</section>
+
+<section id="ch05_s5-1-4"><h2>5.1.4 速度飽和</h2>
+<p>低電場時 $v_d = \mu\mathcal{E}$——線性關係。但這個線性關係不會永遠持續。當電場超過約 $10^3$–$10^4$ V/cm 時，載子從電場獲得的能量速率超過了它們能透過聲子發射散失的速率→載子「變熱」→漂移速度趨向一個<strong>飽和值</strong>：</p>
+<div class="eq">$$v_d \to v_{\text{sat}} \approx 10^7\ \text{cm/s} \quad (\mathcal{E} > 10^4\ \text{V/cm})$$</div>
+<div class="figure"><img src="../../../images/solid-state-physics/ch05_pages/ch5_page_196.png" alt="圖 5.8" loading="lazy"><figcaption>圖 5.8：Si 和 GaAs 中載子漂移速度隨電場的變化。低電場→線性（斜率=遷移率）；高電場→飽和至 $v_{\text{sat}}$。GaAs 在 $E\approx3$ kV/cm 處出現負微分遷移率區域（Gunn 效應）。</figcaption></div>
+<p><strong>GaAs 的特殊行為——Gunn 效應：</strong>GaAs 的導帶有兩個「谷」——低能量的 $\Gamma$ 谷（高遷移率）和高能量的 $L$ 谷（低遷移率）。在足夠高的電場下，電子獲得足夠能量從 $\Gamma$ 谷散射到 $L$ 谷→有效遷移率<strong>驟降</strong>→漂移速度隨電場增加而<strong>下降</strong>→負微分遷移率。這導致 GaAs 中的電流振盪（Gunn 振盪），可用於微波振盪器。</p>
+<div class="callout-warn"><strong>⚡ 速度飽和對現代 CMOS 元件的影響——為什麼 Moore 定律在放緩？</strong>在 90 年代，MOSFET 通道長度是微米級→通道電場 $\sim 10^4$ V/cm→載子仍在線性區。到了 2020 年代，通道長度縮小到 5 nm→即使 $V_{DS}=0.7$ V 也產生 $\sim 1.4\times10^6$ V/cm 的電場→載子處於深度速度飽和→$I_D \propto v_{\text{sat}}$ 而非 $V_{DS}$→電流不再隨電壓線性增加→元件性能無法透過單純縮小尺寸持續提升。這是 Moore 定律放緩的<strong>根本物理限制</strong>之一。</div>
+</section>
+
+<section id="ch05_s5-2"><h2>5.2 載子擴散</h2>
+<p>到目前為止我們只討論了電場驅動的運動（漂移）。現在考慮另一種驅動力——<strong>濃度梯度</strong>。</p>
+<p>想像你在一個擁擠的房間的一端噴了香水。即使沒有風（沒有「電場」），香味也會逐漸擴散到整個房間。為什麼？因為香水分子在房間一端濃度高、另一端濃度低→隨機熱運動使分子從高濃度區<strong>淨移動</strong>到低濃度區。這就是擴散的本質——<strong>隨機熱運動 + 濃度梯度 = 淨粒子流</strong>。</p>
+<p>半導體中的載子也是如此。如果電子濃度在空間中不均勻（$dn/dx \neq 0$），就會有淨電子流從高濃度流向低濃度。擴散電流密度與濃度梯度成正比——這就是 <strong>Fick 第一定律</strong>的半導體版本：</p>
+<div class="eq">$$J_n = e D_n \frac{dn}{dx} \tag{5.35}$$</div>
+<div class="eq">$$J_p = -e D_p \frac{dp}{dx} \tag{5.36}$$</div>
+<div class="figure"><img src="../../../images/solid-state-physics/ch05_pages/ch5_page_197.png" alt="圖 5.9" loading="lazy"><figcaption>圖 5.9：電子濃度隨 $x$ 遞減→電子從左向右淨擴散（擴散電流方向與電子流動方向相反，因為電子帶負電）。</figcaption></div>
+<p><strong>電洞擴散電流的負號</strong>困擾了許多學生。電洞從高濃度流向低濃度（沿 $+x$ 方向），所以 $dp/dx<0$。但電流方向定義為<strong>正電荷流動方向</strong>→電洞流向右（$+x$），電流也向右（$+x$）。然而 $dp/dx<0$，所以 $J_p$ 必須是正的→需要負號：$J_p = -eD_p(dp/dx)$ = 正數。</p>
+<div class="callout"><strong>💡 漂移 vs 擴散的物理類比。</strong>漂移 = 風吹樹葉（外力驅動，方向與外力一致）。擴散 = 樹葉從堆積處自然散開（濃度驅動，方向與濃度梯度相反）。在真實半導體元件中，兩者<strong>同時作用</strong>——例如 pn 接面：空乏區電場很強（漂移主導），中性區濃度梯度很大（擴散主導）。</div>
+<h3>⭐ 總電流密度——半導體元件分析的核心方程</h3>
+<p>在一般情況下，漂移和擴散同時存在。總電流密度為兩者之和：</p>
+<div class="eq">$$\boxed{J = en\mu_n\mathcal{E} + eD_n\frac{dn}{dx} + ep\mu_p\mathcal{E} - eD_p\frac{dp}{dx}} \tag{5.39}$$</div>
+<div class="callout-warn"><strong>⚡ 這就是所有半導體元件分析的起點。</strong>pn 接面的 Shockley 方程→從 (5.39) 出發，加上邊界條件推導。BJT 的 Ebers-Moll 模型→從 (5.39) 出發。MOSFET 的緩變通道近似→從 (5.39) 出發。如果你只記一條半導體物理公式，就是這條。理解每一項的物理意義，比記住推導細節重要一百倍。</div>
+</section>
+
+<section id="ch05_s5-3"><h2>5.3 Einstein 關係——漂移與擴散不是獨立的</h2>
+<p>漂移係數 $\mu$ 和擴散係數 $D$ 看起來是兩個獨立的材料參數。但它們本質上由同一個物理過程驅動——<strong>熱運動</strong>。Einstein 關係揭示了它們之間的深刻連結：</p>
+
+<h3>5.3.1 漸變雜質分布的內建電場</h3>
+<p>在許多實際元件中，摻雜濃度不是均勻的。例如：離子植入後的退火擴散會造成濃度梯度；BJT 的基區有漂移場（grading）設計。當施體濃度 $N_d(x)$ 隨位置變化時，平衡態的電子濃度 $n_0(x) \approx N_d(x)$ 也隨位置變化。</p>
+<p>如果沒有電場，電子會從高濃度區擴散到低濃度區。但擴散導致電荷分離（電子離開的區域留下帶正電的施體離子）→產生一個<strong>內建電場 $\mathcal{E}$</strong>。在熱平衡下，這個電場恰好阻止淨電子流動：</p>
+<div class="eq">$$J_n = en\mu_n\mathcal{E} + eD_n\frac{dn}{dx} = 0 \quad\Rightarrow\quad \mathcal{E} = -\frac{D_n}{\mu_n}\frac{1}{n}\frac{dn}{dx} = -\frac{kT}{e}\frac{1}{N_d}\frac{dN_d}{dx}$$</div>
+<p>這個內建電場在 BJT 的緩變基區（graded base）中被<strong>刻意利用</strong>——在基區中製造一個 Ge 組成的梯度（SiGe HBT）或摻雜梯度→產生一個「漂移場」→加速少數載子穿越基區→降低 $\tau_b$→提高 $f_T$。</p>
+<div class="eq">$$\boxed{\frac{D_n}{\mu_n} = \frac{D_p}{\mu_p} = \frac{kT}{e}} \tag{5.46}$$</div>
+<p><strong>為什麼這個關係成立？</strong>考慮一塊有梯度摻雜的半導體。載子傾向從高濃度區擴散到低濃度區。但擴散導致電荷分離（例如電子跑掉了，留下正的施體離子）→產生<strong>內建電場</strong>。這個內建電場驅動載子往反方向漂移。在熱平衡下（沒有外部電壓、沒有淨電流），漂移和擴散<strong>恰好互相抵消</strong>。這個平衡條件強制了 $D/\mu = kT/e$。</p>
+<div class="eq">$$J_p = e\mu_p p\mathcal{E} - eD_p\frac{dp}{dx} = 0 \quad\Rightarrow\quad \frac{D_p}{\mu_p} = \frac{kT}{e} \tag{5.48–5.49}$$</div>
+<p><strong>物理意義：</strong>室溫下 $kT/e = 0.0259$ V——這就是「熱電壓」。它告訴我們漂移和擴散的相對重要性：要產生與一個 $kT/e$ 的濃度變化（約 2.7 倍）等效的電流，需要施加 0.0259 V 的電壓。換言之，<strong>濃度梯度是一種「等效電壓」</strong>。</p>
+<div class="callout"><strong>💡 Einstein 關係的實用價值：</strong>已知遷移率→立即可得擴散係數。室溫 Si：$D_n = 0.0259 \times 1350 \approx 35$ cm²/s。不需要單獨測量擴散係數——你只需要測量遷移率（透過霍爾效應），Einstein 關係自動給你 $D$。這大大簡化了材料表徵。</div>
+</section>
+
+<section id="ch05_s5-4"><h2>5.4 霍爾效應——半導體診斷的萬能工具</h2>
+<p>如果你拿到一塊未知的半導體樣品，你需要知道三件事：它是 n 型還是 p 型？載子濃度多少？遷移率多大？<strong>霍爾效應一次回答所有三個問題。</strong></p>
+<p><strong>原理：</strong>將樣品放在垂直磁場 $B$ 中，沿 $x$ 方向通以電流 $I$。移動的載子受到 Lorentz 力 $\mathbf{F} = q(\mathbf{v} \times \mathbf{B})$，被推向樣品的 $+y$ 或 $-y$ 側→一側累積電荷→產生橫向<strong>霍爾電壓 $V_H$</strong>。</p>
+<div class="figure"><img src="../../../images/solid-state-physics/ch05_pages/ch5_page_205.png" alt="圖 5.13" loading="lazy"><figcaption>圖 5.13：霍爾效應測量幾何結構。電流 $I_x$，磁場 $B_z$，測量橫向霍爾電壓 $V_H$。$V_H$ 的<strong>正負號</strong>直接標示多數載子的類型（n 或 p）。</figcaption></div>
+<p>平衡時 Lorentz 力與霍爾電場的力互相抵消：</p>
+<div class="eq">$$eE_H = ev_d B \quad\Rightarrow\quad V_H = E_H W = v_d B W$$</div>
+<p>代換 $v_d = I/(epWd)$（由 $J = I/(Wd) = epv_d$）：</p>
+<div class="eq">$$\boxed{V_H = \frac{IB}{epd}} \quad\text{（p 型）} \tag{5.55}$$</div>
+<p>定義<strong>霍爾係數</strong> $R_H$：</p>
+<div class="eq">$$R_H = \frac{V_H d}{IB} = \frac{1}{ep}\ \text{(p 型)}\qquad R_H = -\frac{1}{en}\ \text{(n 型)} \tag{5.56, 5.57}$$</div>
+<div class="callout-warn"><strong>⚡ $R_H$ 的正負號直接告訴你載子類型。</strong>$R_H > 0$ → p 型（多數載子是電洞）；$R_H < 0$ → n 型（多數載子是電子）。這是判別半導體類型最直接的方法。<br><br><strong>$|R_H|$ 的大小告訴你載子濃度：</strong>$p = 1/(eR_H)$。霍爾遷移率：$\mu_H = |R_H|\sigma$。<strong>一次測量：類型 + 濃度 + 遷移率——三個關鍵參數全部到手。</strong></div>
+<div class="callout"><strong>💡 霍爾效應是半導體產業的基石技術。</strong>每張「遷移率 vs 摻雜濃度」的圖表（如圖 5.3）都是用霍爾效應測量的。半導體廠的 incoming QC（進料品質控制）用霍爾測量來驗證晶圓的摻雜濃度。物理系和研究機構用它來探索新材料（如二維材料、拓樸絕緣體）的傳輸特性。</div>
+</section>
+
+<section id="ch05_summary"><h2>本章摘要</h2>
+<ol style="font-size:14px;color:var(--t2);margin-left:18px">
+<li><strong>漂移：</strong>電場驅動載子運動。$v_d = \mu\mathcal{E}$。$J_{\text{drf}} = e(\mu_n n + \mu_p p)\mathcal{E}$。</li>
+<li><strong>遷移率：</strong>$\mu = e\tau/m^*$。受晶格散射（$\mu_L \propto T^{-3/2}$）和雜質散射（$\mu_I \propto T^{3/2}/N_I$）限制。Matthiessen 規則合併兩者：$1/\mu = 1/\mu_L + 1/\mu_I$。</li>
+<li><strong>導電率：</strong>$\sigma = e(\mu_n n + \mu_p p)$。Ohm 定律的微觀基礎。電阻率 $\rho = 1/\sigma$。</li>
+<li><strong>速度飽和：</strong>高電場時 $v_d \to v_{\text{sat}} \approx 10^7$ cm/s。GaAs 有負微分遷移率（Gunn 效應）。速度飽和是奈米級 CMOS 性能的物理限制。</li>
+<li><strong>擴散：</strong>濃度梯度驅動。$J_n = eD_n(dn/dx)$，$J_p = -eD_p(dp/dx)$。電洞公式的負號來自電流方向定義。</li>
+<li><strong>總電流方程 (5.39)：</strong>$J =$ 漂移項 $+$ 擴散項。所有半導體元件分析的基礎。</li>
+<li><strong>Einstein 關係：</strong>$D/\mu = kT/e$。漂移和擴散由同一熱運動驅動，非獨立參數。熱平衡時兩者抵消產生此關係。</li>
+<li><strong>霍爾效應：</strong>$V_H = IB/(epd)$。一次測量得到載子類型（$R_H$ 正負號）、濃度（$1/eR_H$）、遷移率（$|R_H|\sigma$）。</li></ol></section>
+
+
+<!-- ===== 第六章 非平衡過量載子 ===== -->
+
+<header class="header"><div class="cl">第六章</div><h1>非平衡過量載子</h1><div class="meta">Donald A. Neamen·《半導體物理與元件：基本原理》第四版·第 193–231 頁</div></header>
+
+<section id="ch06_preview"><div class="callout"><strong>📋 6.0 本章預覽</strong>
+<p>第四章假設半導體處於<strong>熱平衡</strong>——沒有外部激發，$n_0 p_0 = n_i^2$。但實際的半導體元件<strong>永遠在非平衡狀態下運作</strong>。當你把 pn 接面順向偏壓時，你<strong>注入</strong>了過量少數載子。當光照射太陽能電池時，光子<strong>產生</strong>了電子-電洞對。當 MOSFET 的通道導通時，閘極電壓<strong>吸引</strong>了過量載子到表面。</p>
+<p>本章回答：過量載子從哪裡來（產生）、去哪裡（復合）、如何移動（雙極傳輸）、活多久（壽命）、以及如何用 Fermi 統計描述非平衡狀態（準 Fermi 能階）。</p>
+<div class="callout-warn"><strong>⚡ 第六章是從「材料物理」到「元件物理」的轉折點。</strong>前五章建立了平衡態的完整圖像。本章打開了非平衡的大門——而所有半導體元件的操作都是非平衡過程。pn 接面（第七章）的電流來自過量少數載子的注入與復合；BJT 的增益來自基極中過量載子的傳輸；太陽能電池的效率取決於光產生載子的收集。</div></div></section>
+
+<section id="ch06_s6-1"><h2>6.1 載子產生與復合</h2>
+<div class="figure"><img src="../../../images/solid-state-physics/ch06_pages/ch6_page_218.png" alt="圖 6.1" loading="lazy"><figcaption>圖 6.1：半導體中的載子產生與復合過程——熱產生、光產生、SRH 復合、直接復合。</figcaption></div>
+<p>在熱平衡下，熱產生率 $G_0$ 和復合率 $R_0$ 精確相等——電子不斷從價帶被熱激發到導帶（產生），同時導帶中的電子也不斷落回價帶（復合）。兩個過程速率相等→淨載子濃度不變。</p>
+<p>但當你<strong>外加激發</strong>時（光照、電壓注入），產生率超過復合率→出現<strong>過量載子</strong>：</p>
+<div class="eq">$$\delta n = n - n_0,\qquad \delta p = p - p_0 \tag{6.1}$$</div>
+<p>因為電子和電洞成對產生（一個電子跳到導帶必然在價帶留下一個電洞），過量電子和過量電洞的濃度<strong>相等</strong>：$\delta n = \delta p$。這稱為<strong>電中性條件</strong>。</p>
+<h3>低階注入 vs 高階注入</h3>
+<p><strong>低階注入（low-level injection）：</strong>過量載子濃度遠小於多數載子熱平衡濃度。例如 n 型 Si（$n_0=10^{16}$ cm⁻³）中注入 $\delta n = \delta p = 10^{12}$ cm⁻³→$\delta n \ll n_0$（小了四個數量級）→多數載子濃度幾乎不變（$n\approx n_0$），但少數載子濃度變化劇烈（$p$ 從 $p_0=2.25\times10^4$ 變成 $\sim10^{12}$——增加了<strong>八個數量級</strong>）。</p>
+<p><strong>高階注入（high-level injection）：</strong>$\delta n$ 與 $n_0$（或 $p_0$）可比擬甚至更大。</p>
+<div class="callout-warn"><strong>⚡ 低階注入是半導體元件分析中最常見的假設。</strong>pn 接面順向偏壓、BJT 主動區操作、光電二極體——這些都在低階注入條件下。因為少數載子濃度在過量注入下<strong>劇烈</strong>變化，而多數載子幾乎不變，所以元件的電流主要由<strong>少數載子的行為</strong>決定。這就是為什麼我們花了這麼多力氣研究少數載子的傳輸。</div>
+<h3>SRH 復合理論——陷阱輔助復合</h3>
+<p>直接能帶間復合（電子從導帶直接跳到價帶）在間接能隙半導體（如 Si）中效率極低，因為需要聲子參與來保持動量守恆。實際上，Si 中的復合主要透過<strong>陷阱（trap）</strong>——能隙中的深層缺陷能階。</p>
+<div class="figure"><img src="../../../images/solid-state-physics/ch06_pages/ch6_page_220.png" alt="圖 6.2" loading="lazy"><figcaption>圖 6.2：Shockley-Read-Hall 復合的四步驟——(1)電子被捕獲、(2)電洞被捕獲、(3)電子發射、(4)電洞發射。陷阱能階 $E_t$ 在能隙中央時復合效率最高。</figcaption></div>
+<p><strong>物理圖像：</strong>陷阱就像一個「中途島」——電子不會直接從導帶跳到價帶（能量差太大），而是先跳到陷阱能階 $E_t$（第一步），再從 $E_t$ 跳到價帶（第二步）。陷阱越靠近能隙中央（$E_t\approx E_{Fi}$），兩步的能量差都適中→復合效率最高。</p>
+</section>
+
+<section id="ch06_s6-2"><h2>6.2 連續性方程與擴散長度</h2>
+<p>第五章的漂移-擴散方程告訴我們載子<strong>如何移動</strong>。但移動中的載子還會<strong>產生和消失</strong>。連續性方程把這三者結合在一起：</p>
+<div class="eq">$$\frac{\partial p}{\partial t} = -\frac{1}{e}\frac{\partial J_p}{\partial x} + G_p - R_p \tag{6.24}$$</div>
+<p><strong>逐項物理解讀：</strong></p>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li><strong>$\partial p/\partial t$：</strong>某點電洞濃度的時間變化率。穩態下為零。</li>
+<li><strong>$-(1/e)\partial J_p/\partial x$：</strong>電流的散度——如果 $J_p$ 隨 $x$ 增大（流入多於流出），該點的電洞濃度增加。注意負號：$J_p$ 向右增大意味著更多電洞流出→濃度下降。</li>
+<li><strong>$G_p$：</strong>產生率（cm⁻³s⁻¹）。光照射（光電效應）、碰撞電離（崩潰）、熱產生（空乏區中 $np < n_i^2$ 時）。</li>
+<li><strong>$R_p = \delta p/\tau_{p0}$：</strong>復合率。過量載子以壽命 $\tau$ 為時間尺度衰減。$R_p$ 正比於 $\delta p$——載子越多，復合越快。</li>
+</ul>
+<p>這就像一個浴缸的水位變化 = 水龍頭進水（產生）+ 排水孔出水（復合）+ 從隔壁浴缸流過來的水（電流）。</p>
+<p>在半導體中，通常沒有外部產生（$G'=0$），也沒有電場（中性區），只剩下擴散和復合：</p>
+<div class="eq">$$D_p\frac{d^2\delta p}{dx^2} - \frac{\delta p}{\tau_{p0}} = 0 \quad\text{（穩態）}$$</div>
+<p>這個微分方程的解是 $\delta p(x) = \delta p(0)\,e^{-x/L_p}$，其中：</p>
+<div class="eq">$$\boxed{L_p = \sqrt{D_p\tau_{p0}}} \tag{6.34}$$</div>
+<p><strong>擴散長度的數值：</strong>對 Si 中的少數載子電洞（$D_p \approx 12$ cm²/s，$\tau_{p0} = 1$ µs）：$L_p = \sqrt{12\times10^{-6}} \approx 35$ µm。若 $\tau_{p0} = 1$ ms（高品質 FZ-Si）：$L_p \approx 1.1$ mm。這就是為什麼太陽能電池的基板厚度通常在 100–200 µm——必須薄於 $L_p$ 才能有效收集光生載子。</p>
+<div class="callout"><strong>💡 擴散長度的物理意義：</strong>$L_p$ 是少數載子在復合之前平均能走多遠。如果一個 pn 接面的中性區寬度 $W \ll L_p$→大部分注入的少數載子能活著到達接面→高效率。如果 $W \gg L_p$→大部分載子在到達接面前就復合了→低效率。這就是為什麼太陽能電池和光電二極體的設計要確保擴散長度大於吸收深度。</div>
+<div class="figure"><img src="../../../images/solid-state-physics/ch06_pages/ch6_page_239.png" alt="圖 6.10" loading="lazy"><figcaption>圖 6.10：過量少數載子濃度隨距離的指數衰減——每經過一個 $L_p$，濃度降為 $1/e$。</figcaption></div>
+</section>
+
+<section id="ch06_s6-3"><h2>6.3 雙極傳輸 ⭐</h2>
+<div class="figure"><img src="../../../images/solid-state-physics/ch06_pages/ch6_page_241.png" alt="圖 6.11" loading="lazy"><figcaption>圖 6.11：介電弛豫過程——多數載子重新分布以維持電中性的時間尺度（皮秒級）。</figcaption></div>
+<p>一個常見的誤解是：過量電子和過量電洞各自獨立地擴散和漂移。這是錯的。</p>
+<p>因為電子和電洞帶<strong>相反電荷</strong>，它們之間有庫侖吸引力。如果電子試圖擴散得比電洞快（電子的 $D_n$ 通常大於 $D_p$），就會產生微小的電荷分離→產生內建電場→這個電場<strong>拖慢電子、加快電洞</strong>→迫使兩者以相同的有效速度一起移動。這就是<strong>雙極傳輸（ambipolar transport）</strong>的本質。</p>
+<div class="figure"><img src="../../../images/solid-state-physics/ch06_pages/ch6_page_226.png" alt="圖 6.5" loading="lazy"><figcaption>圖 6.5：雙極傳輸——電子和電洞因庫侖耦合而一起移動。注意內建電場 $E$-field 的方向。</figcaption></div>
+<p>雙極傳輸方程與單一載子的擴散方程<strong>形式完全相同</strong>，但用等效的雙極參數取代：</p>
+<div class="eq">$$D'\frac{\partial^2\delta p}{\partial x^2} - \mu'\mathcal{E}\frac{\partial\delta p}{\partial x} + G' - \frac{\delta p}{\tau_{p0}} = \frac{\partial\delta p}{\partial t} \tag{6.67}$$</div>
+<p><strong>關鍵簡化（低階注入 n 型）：</strong>$D' \approx D_p$（雙極擴散係數≈少數載子擴散係數），$\mu' \approx \mu_p$。這意味著在 n 型材料中，過量載子的傳輸由<strong>少數載子（電洞）的參數</strong>決定。這是一個巨大的簡化——我們不需要解兩個耦合的傳輸方程，只需要解少數載子的擴散方程。</p>
+<div class="callout"><strong>💡 介電弛豫時間——為什麼多數載子能「瞬間」響應。</strong>當過量少數載子注入時，多數載子必須重新分布以維持電中性。這個重新分布的速度由 $\tau_d = \epsilon/\sigma$ 決定。對 Si（$\sigma\sim1$ (Ω·cm)⁻¹）：$\tau_d\sim10^{-12}$ 秒——皮秒級！相比少數載子壽命（$\tau_{p0}\sim10^{-6}$ 秒），多數載子響應快了<strong>一百萬倍</strong>。這就是為什麼我們可以假設多數載子永遠處於準平衡狀態。</div>
+</section>
+
+<section id="ch06_s6-3-5"><h2>6.3.5 Haynes-Shockley 實驗——直接測量 $D$, $\mu$, $\tau$</h2>
+<p>1951 年，Haynes 和 Shockley 做了一個優美的實驗，首次<strong>直接</strong>測量了少數載子的遷移率、擴散係數和壽命——這三個參數是半導體物理的核心。</p>
+<p><strong>實驗裝置：</strong>一根長條形的 n 型 Ge 晶體。左端有一個「注入點」（用脈衝光或電脈衝注入過量電洞），右端有一個「探測點」（測量電洞到達時產生的電壓訊號）。晶體兩端施加一個縱向電場 $\mathcal{E}$。</p>
+<p><strong>測量原理：</strong></p>
+<p>① <strong>遷移率 $\mu_p$：</strong>施加電場後，過量電洞的「波包」以漂移速度 $v_d = \mu_p \mathcal{E}$ 向探測點移動。測量注入到偵測的時間 $t_d$，已知距離 $d$ 和電場 $\mathcal{E}$：$\mu_p = d/(t_d \mathcal{E})$。</p>
+<p>② <strong>擴散係數 $D_p$：</strong>電洞波包在漂移的同時也會擴散（變寬）。偵測到的訊號 pulse 寬度 $\Delta t$ 反映了擴散程度：$D_p = (\Delta x)^2/(2t_d)$，其中 $\Delta x$ 是 pulse 的空間寬度。</p>
+<p>③ <strong>壽命 $\tau_{p0}$：</strong>隨著距離增加，pulse 的<strong>振幅</strong>逐漸衰減（因為復合）。從振幅衰減的速率可推算壽命。</p>
+<div class="callout"><strong>💡 Haynes-Shockley 實驗的歷史意義。</strong>這是半導體物理的「Rutherford 散射實驗」——用簡單優雅的裝置直接測量了微觀參數。在此之前，$\mu$ 和 $D$ 只能間接估算。這個實驗也驗證了 Einstein 關係 $D/\mu = kT/e$——Haynes 和 Shockley 分別測得的 $D$ 和 $\mu$ 完美符合這個關係。</div>
+</section>
+
+<section id="ch06_s6-4"><h2>6.4 準 Fermi 能階</h2>
+<p>在熱平衡下，整個系統只有<strong>一個</strong> Fermi 能階 $E_F$。但在非平衡狀態下，電子和電洞不再處於同一熱平衡→必須引入<strong>兩個獨立的</strong> Fermi 能階：</p>
+<div class="eq">$$n = n_i\,\exp\!\left(\frac{E_{Fn} - E_{Fi}}{kT}\right) \tag{6.83}$$</div>
+<div class="eq">$$p = n_i\,\exp\!\left(-\frac{E_{Fp} - E_{Fi}}{kT}\right) \tag{6.84}$$</div>
+<p><strong>何時需要準 Fermi 能階？</strong>只要系統偏離熱平衡（有外加電壓、光照、或注入），$np \neq n_i^2$，就必須用 $E_{Fn}$ 和 $E_{Fp}$ 來分別描述電子和電洞的統計分布。在平衡態中性區，$E_{Fn} = E_{Fp} = E_F$（統一的 Fermi 能階）。在空乏區或有注入的區域，$E_{Fn} \neq E_{Fp}$。</p>
+<div class="figure"><img src="../../../images/solid-state-physics/ch06_pages/ch6_page_245.png" alt="圖 6.15" loading="lazy"><figcaption>圖 6.15：pn 接面順向偏壓時的準 Fermi 能階——$E_{Fn}$ 和 $E_{Fp}$ 在空乏區中分離，在中性區中趨近。</figcaption></div>
+<p><strong>物理意義：</strong>$E_{Fn} - E_{Fp}$ 的大小是偏離熱平衡程度的直接度量。平衡時 $E_{Fn}=E_{Fp}=E_F$。順向偏壓注入過量載子→$np>n_i^2$→$E_{Fn}>E_{Fp}$。反向偏壓抽取載子→$np<n_i^2$→$E_{Fn}<E_{Fp}$。</p>
+<p><strong>在 pn 接面中的行為：</strong>順向偏壓下，$E_{Fn}$ 在 n 側高、$E_{Fp}$ 在 p 側低。在空乏區中，$E_{Fn}$ 和 $E_{Fp}$ 逐漸趨近——但它們<strong>不在空乏區內對齊</strong>（這是常見的誤解）。它們在空乏區邊緣才恢復到統一的 $E_F$。$eV_a = E_{Fn}(n\text{側}) - E_{Fp}(p\text{側})$——施加的電壓直接對應於兩個準 Fermi 能階的差。</p>
+<div class="callout-warn"><strong>⚡ 準 Fermi 能階是理解 pn 接面電流-電壓特性的關鍵。</strong>Shockley 理想二極體方程的推導中，邊界條件 $pn=n_i^2e^{eV_a/kT}$ 就是來自準 Fermi 能階在空乏區邊緣的對齊。第七章會大量使用這個概念。記住：$E_{Fn} - E_{Fp} = eV_a$ 是整個 pn 接面理論的核心關係。</div>
+</section>
+
+<section id="ch06_s6-5"><h2>6.5 過量載子壽命</h2>
+<p>少數載子不會永遠活著——它們最終會與多數載子復合。從產生到復合的<strong>平均存活時間</strong>就是<strong>少數載子壽命</strong> $\tau$。</p>
+
+<h3>SRH 復合理論——陷阱輔助復合的定量分析</h3>
+<p>在禁帶中存在深層陷阱能階（來自晶格缺陷、雜質、或界面態）。這些陷阱提供了「台階」——電子先從導帶落入陷阱，再從陷阱落入價帶。兩步的總速率比直接復合快得多（因為每步的能量差都適中）。</p>
+<div class="figure"><img src="../../../images/solid-state-physics/ch06_pages/ch6_page_235.png" alt="圖 6.7" loading="lazy"><figcaption>圖 6.7：SRH 復合機制——電子從導帶落入禁帶中的陷阱能階 $E_t$，再從陷阱進入價帶。陷阱在禁帶中央時復合效率最高。</figcaption></div>
+<p>SRH 穩態壽命：</p>
+<div class="eq">$$\tau_{p0} = \frac{1}{\sigma_p v_{th} N_t}$$</div>
+<p>其中 $\sigma_p$ 是陷阱的捕獲截面（$\sim10^{-15}$ cm²），$v_{th}$ 是載子熱速度（$\sim10^7$ cm/s），$N_t$ 是陷阱密度（cm$^{-3}$）。對 $N_t = 10^{12}$ cm$^{-3}$：$\tau_{p0} = 1/(10^{-15}\times10^7\times10^{12}) = 10^{-4}$ s = 100 µs。</p>
+
+<p><strong>陷阱能階位置的重要性：</strong>最有效的復合陷阱位於禁帶<strong>中央</strong>（$E_t \approx E_i$）。為什麼？因為兩步過程（導帶→陷阱→價帶）的速率取決於兩步中較慢的一步。如果陷阱靠近導帶→第一步快但第二步慢（陷阱到價帶的能量差大）。如果陷阱在中央→兩步都適中→總速率最大。這就是為什麼 Au、Cu、Fe 等深能階雜質對 Si 的壽命影響巨大——它們的能階恰好在禁帶中央附近。</p>
+
+<p><strong>壽命與摻雜濃度的關係：</strong>典型 Si 的少數載子壽命在 $10^{-7}$ 到 $10^{-3}$ 秒範圍內：</p>
+<table><thead><tr><th>材料</th><th>壽命範圍</th><th>限制因素</th></tr></thead><tbody>
+<tr><td>浮區（FZ）高純 Si</td><td>∼1 ms</td><td>Auger 復合（高注入時）</td></tr>
+<tr><td>Czochralski（CZ）Si</td><td>∼1–10 µs</td><td>氧相關缺陷（Czochralski 氧沉澱）</td></tr>
+<tr><td>含重金屬污染的 Si</td><td>∼0.1–1 µs</td><td>深能階雜質（Au, Cu, Fe）</td></tr>
+<tr><td>多晶 Si</td><td>∼1–100 ns</td><td>晶界復合</td></tr></tbody></table>
+<div class="figure"><img src="../../../images/solid-state-physics/ch06_pages/ch6_page_247.png" alt="圖 6.16" loading="lazy"><figcaption>圖 6.16：少數載子壽命與摻雜濃度和注入程度的關係——高摻雜時 Auger 復合主導，低摻雜時 SRH 復合主導。</figcaption></div>
+
+<div class="callout"><strong>💡 壽命對元件的影響無處不在。</strong>太陽能電池：壽命越長→光產生的載子越有機會到達電極→效率越高（高效 PERC 太陽能電池用背面鈍化將壽命提升到 >1 ms）。BJT：基極中的少數載子壽命決定了基極傳輸因子 $\alpha_T$→直接影響電流增益 $\beta$。功率 MOSFET 中的內建二極體（body diode）：壽命決定了反向恢復時間和開關損耗——工程師有時會刻意用電子束或金摻雜來降低壽命以加快開關速度，代價是漏電流增大。</div>
+</section>
+
+<section id="ch06_s6-6"><h2>6.6 表面效應</h2>
+<p>到目前為止我們假設晶體是無限大的。但真實元件有<strong>表面</strong>——晶體突然終止的地方。表面有大量的<strong>懸鍵（dangling bonds）</strong>——未飽和的共價鍵，它們是極其有效的復合中心。</p>
+<p><strong>表面態密度 $D_{it}$：</strong>未處理的 Si 表面有 $\sim10^{15}$ cm$^{-2}$eV$^{-1}$ 的表面態——相當於每平方公分有 $10^{15}$ 個「復合陷阱」。以表面態均勻分布在禁帶中計算，等效的表面復合中心密度極高。</p>
+<div class="figure"><img src="../../../images/solid-state-physics/ch06_pages/ch6_page_252.png" alt="圖 6.17" loading="lazy"><figcaption>圖 6.17：表面態的能階分布和表面復合機制——懸鍵在禁帶中形成連續分布的陷阱態，捕獲載子並促進表面復合。</figcaption></div>
+<p><strong>表面復合速度 $s$</strong> 定義為表面處的復合率除以過量載子濃度：</p>
+<div class="eq">$$D_p\frac{\partial\delta p}{\partial x}\bigg|_{x=0} = s_p\,\delta p(0) \tag{6.117}$$</div>
+<p>$s$ 的物理意義：載子到達表面後被復合的「有效速度」。$s$ 越大→表面復合越劇烈。</p>
+<table><thead><tr><th>表面處理</th><th>$s$ (cm/s)</th><th>$D_{it}$ (cm⁻²eV⁻¹)</th></tr></thead><tbody>
+<tr><td>未處理裸 Si 表面</td><td>$10^3$–$10^5$</td><td>$\sim10^{15}$</td></tr>
+<tr><td>熱氧化 SiO₂（未退火）</td><td>$10^2$–$10^3$</td><td>$\sim10^{11}$–$10^{12}$</td></tr>
+<tr><td>SiO₂ + 含氫退火</td><td>1–10</td><td>$\sim10^{10}$</td></tr>
+<tr><td>Al₂O₃ 鈍化（PERC 太陽能電池）</td><td>< 5</td><td>$\sim10^{10}$–$10^{11}$</td></tr>
+<tr><td>a-Si:H 鈍化（HIT 太陽能電池）</td><td>< 2</td><td>$<10^{10}$</td></tr></tbody></table>
+
+<p><strong>鈍化技術的物理原理：</strong>SiO₂ 鈍化的關鍵是氫原子——氫可以填補 Si/SiO₂ 界面處的懸鍵→將 $D_{it}$ 從 $10^{15}$ 降到 $10^{10}$。含氫退火（Forming Gas Anneal, FGA：400°C 的 H₂/N₂ 氣氛）是半導體製程的標準步驟。Al₂O₃ 的優勢是帶有<strong>固定負電荷</strong>→在 p 型 Si 表面形成反轉層→場效應鈍化（與化學鈍化互補）。</p>
+
+<div class="callout-warn"><strong>⚡ 表面復合是太陽能電池效率的頭號殺手。</strong>光在表面附近被吸收→產生的載子若在表面復合→永遠無法被收集。這就是為什麼高效太陽能電池要使用<strong>表面鈍化層</strong>（如 SiNₓ、Al₂O₃）來降低表面復合速度。PERC（Passivated Emitter and Rear Cell）技術將電池效率從 ~20% 提升到 >23%——核心就是背面鈍化。這也是 FinFET 等三維電晶體面臨的挑戰——表面積對體積的比例更大→表面效應更顯著→需要更先進的鈍化方案。</div>
+</section>
+
+<section id="ch06_summary"><h2>本章摘要</h2>
+<ol style="font-size:14px;color:var(--t2);margin-left:18px">
+<li><strong>過量載子：</strong>$\delta n=n-n_0$，$\delta p=p-p_0$。電中性要求 $\delta n=\delta p$。</li>
+<li><strong>低階注入：</strong>$\delta n\ll n_0$（n 型）——最常見的元件操作條件。</li>
+<li><strong>SRH 復合：</strong>陷阱輔助兩步驟復合。$E_t\approx E_{Fi}$ 時最有效。</li>
+<li><strong>連續性方程：</strong>濃度變化 = 傳輸 + 產生 − 復合。</li>
+<li><strong>擴散長度：</strong>$L_p=\sqrt{D_p\tau_{p0}}$——少數載子復合前的平均行進距離。</li>
+<li><strong>雙極傳輸：</strong>電子電洞庫侖耦合→一起移動。低階注入下由少數載子參數主導。</li>
+<li><strong>介電弛豫時間：</strong>$\tau_d=\epsilon/\sigma$∼皮秒——多數載子響應極快。</li>
+<li><strong>準 Fermi 能階：</strong>$E_{Fn}$ 和 $E_{Fp}$ 分離→度量偏離平衡程度。</li>
+<li><strong>載子壽命：</strong>SRH 理論決定 $\tau$ 與摻雜和陷阱密度的關係。</li>
+<li><strong>表面復合：</strong>懸鍵提供額外復合中心。鈍化可將 $s$ 降低數千倍。</li></ol></section>
+
+
+<!-- ===== 第七章 pn 接面 ===== -->
+
+<header class="header"><div class="cl">第七章</div><h1>pn 接面</h1><div class="meta">Donald A. Neamen·《半導體物理與元件：基本原理》第四版·第 232–277 頁</div></header>
+
+<section id="ch07_preview"><div class="callout"><strong>📋 7.0 本章預覽</strong>
+<p>前面六章建立了半導體材料物理的完整基礎。現在我們把 p 型和 n 型半導體放在一起，觀察它們的界面處發生什麼——這就形成了<strong>pn 接面</strong>，半導體元件物理中最基本也最重要的結構。</p>
+<p>本章討論 pn 接面的<strong>靜態特性</strong>——在零偏壓和反向偏壓下的能帶圖、空間電荷分布、電場、電位、以及接面電容。這是理解所有半導體元件（二極體、BJT、MOSFET、太陽能電池）的第一步。第八章將討論順向偏壓下的電流-電壓特性。</p>
+<div class="callout-warn"><strong>⚡ pn 接面在全書中的核心位置：</strong>第一至三章→固態物理基礎（能帶、態密度、統計）。第四章→平衡態載子濃度。第五章→載子傳輸（漂移+擴散）。第六章→非平衡過量載子。這些<strong>全部</strong>被用來分析 pn 接面——能帶彎曲來自第四章的 Fermi 能階概念；空乏區電場來自 Poisson 方程；接面電流（第八章）來自第五章的漂移-擴散方程和第六章的連續性方程。本章是前面所有知識的集大成應用。</div></div></section>
+
+<section id="ch07_s7-1"><h2>7.1 pn 接面的基本結構</h2>
+<p>最簡單的 pn 接面是<strong>突變接面（abrupt junction）</strong>——摻雜濃度在冶金界面處從 $N_a$（p 側）突然變為 $N_d$（n 側）。雖然真實元件中的接面是透過擴散或離子植入形成的（摻雜分布較漸進），突變接面是最容易分析的理想化模型，也是理解所有真實接面的出發點。</p>
+<div class="figure"><img src="../../../images/solid-state-physics/ch07_pages/ch7_page_267.png" alt="圖 7.1, 7.2" loading="lazy"><figcaption>圖 7.1：pn 接面的二維示意圖——p 區和 n 區在冶金接面處接觸。圖 7.2：摻雜濃度分布——突變接面假設 $N_a$ 和 $N_d$ 在界面處階梯式變化。</figcaption></div>
+
+<p><strong>接面形成的物理過程——四個步驟：</strong></p>
+<p><strong>第一步：巨大的濃度梯度。</strong>在接面形成的瞬間，p 側有高濃度電洞（∼$10^{17}$ cm⁻³），n 側有高濃度電子（∼$10^{16}$ cm⁻³）。濃度梯度驅動載子擴散——電洞從 p 側擴散到 n 側，電子從 n 側擴散到 p 側。</p>
+<p><strong>第二步：留下帶電的雜質離子。</strong>當電洞離開 p 側時，原本被電洞中和的負受體離子 $N_a^-$ 被「揭露」出來——它們固定在晶格中，無法移動。同理，n 側留下正的施體離子 $N_d^+$。這些不可移動的雜質離子形成<strong>空間電荷區（space charge region）</strong>。</p>
+<p><strong>第三步：內建電場的形成。</strong>正離子（n 側）和負離子（p 側）之間產生從 n 指向 p 的內建電場。這個電場<strong>阻止</strong>進一步的載子擴散——它把電洞推回 p 側、把電子推回 n 側。</p>
+<p><strong>第四步：動態平衡。</strong>擴散電流（載子從高濃度往低濃度）和漂移電流（內建電場推動載子）達到精確平衡→淨電流為零→接面處於熱平衡。</p>
+
+<div class="callout"><strong>💡 空乏區（depletion region）名字的由來：</strong>在這個區域中，自由載子（電子和電洞）已被「空乏」掉——它們被內建電場掃出或被擴散帶走。剩下的只有不可移動的雜質離子。空乏區是 pn 接面所有有趣物理的發生地——能帶彎曲、電場、電容、崩潰都在這裡。</div>
+</section>
+
+<section id="ch07_s7-2a"><h2>7.2.1 內建電位差 ⭐</h2>
+<p>在熱平衡下，一個系統只能有一個 Fermi 能階——如果 $E_F$ 在各處不同，電子就會流動直到均勻。n 側的 $E_F$ 原本靠近 $E_c$（因摻雜施體），p 側的 $E_F$ 原本靠近 $E_v$（因摻雜受體）。為了讓同一個 $E_F$ 貫穿整個結構，能帶<strong>必須彎曲</strong>。</p>
+<div class="figure"><img src="../../../images/solid-state-physics/ch07_pages/ch7_page_269.png" alt="圖 7.3" loading="lazy"><figcaption>圖 7.3：pn 接面在熱平衡下的能帶圖。$E_F$ 在整個結構中為常數。能帶在空乏區中彎曲，彎曲量 $=eV_{bi}$——內建電位差。</figcaption></div>
+
+<p>能帶彎曲量對應一個<strong>內建電位差 $V_{bi}$</strong>（也稱為 diffusion potential 或 built-in potential）。它是 p 側和 n 側原始 Fermi 能階位置之差的直接度量：</p>
+<div class="eq">$$\boxed{V_{bi} = \frac{kT}{e}\ln\!\left(\frac{N_a N_d}{n_i^2}\right)}$$</div>
+
+<p><strong>推導思路：</strong>n 側的電子濃度 $n_{n0} = n_i e^{(E_F-E_{Fi})_n/kT}$。p 側的電子濃度 $n_{p0} = n_i e^{(E_F-E_{Fi})_p/kT}$。兩側的 $(E_{Fi})_n$ 和 $(E_{Fi})_p$ 不同——它們的差 $=eV_{bi}$。而 $n_{n0}\approx N_d$, $n_{p0}=n_i^2/N_a$。代入取對數即得上式。</p>
+
+<p><strong>$V_{bi}$ 的數值範圍：</strong>對 Si（$n_i=1.5\times10^{10}$ cm⁻³），$N_a=10^{17}$, $N_d=10^{16}$ cm⁻³→$V_{bi}=0.0259\ln(10^{33}/2.25\times10^{20})=0.754$ V。對 Ge（$n_i=2.4\times10^{13}$）相同摻雜→$V_{bi}=0.0259\ln(10^{33}/5.76\times10^{26})=0.368$ V。對 GaAs（$n_i=1.8\times10^6$）→$V_{bi}\approx1.2$ V。</p>
+
+<div class="callout"><strong>💡 為什麼你不能用電壓表量到 $V_{bi}$？</strong>因為金屬探針與半導體的接觸處也會產生內建電位（金半接面，見第九章），這些接觸電位與 pn 接面的 $V_{bi}$ 互相抵消。在一個封閉迴路中，所有內建電位的代數和為零（熱力學的要求）。$V_{bi}$ 只能透過電容-電壓（C-V）量測或光電子能譜等間接方法來測定。</div>
+</section>
+
+<section id="ch07_s7-2b"><h2>7.2.2–7.2.3 電場分布與空乏區寬度 ⭐</h2>
+<p>空間電荷區中的電場由 <strong>Poisson 方程</strong>決定：$d^2\phi/dx^2 = -\rho(x)/\epsilon_s$。在<strong>空乏近似（depletion approximation）</strong>下，我們假設空乏區內完全沒有自由載子，空間電荷僅來自離子化的雜質：</p>
+<div class="eq">$$\rho(x) = \begin{cases} -eN_a & (-x_p < x < 0) \\ +eN_d & (0 < x < x_n) \end{cases}$$</div>
+<p>在空乏區外，假設材料為電中性（$\rho=0$）。空乏近似雖然是一個理想化，但它給出了極其準確的結果（因為自由載子濃度在空乏區中確實遠小於雜質離子濃度）。</p>
+<div class="figure"><img src="../../../images/solid-state-physics/ch07_pages/ch7_page_271.png" alt="圖 7.4" loading="lazy"><figcaption>圖 7.4：(a) pn 接面的空間電荷密度——p 側均勻 $-eN_a$，n 側均勻 $+eN_d$。(b) 電場——從 n 側的零線性變化到冶金界面的最大值，再回到 p 側的零。(c) 電位——平滑 S 形曲線，總電位差 $=V_{bi}$。</figcaption></div>
+
+<p>Poisson 方程積分一次得電場。在 n 側（$0<x<x_n$）：$dE/dx = +eN_d/\epsilon_s$，積分得 $E(x) = (eN_d/\epsilon_s)(x-x_n)$。冶金界面 $x=0$ 處電場最大：</p>
+<div class="eq">$$\boxed{E_{\text{max}} = -\frac{eN_a x_p}{\epsilon_s} = -\frac{eN_d x_n}{\epsilon_s}}$$</div>
+<p>負號表示方向（從 n 指向 p）。<strong>電荷守恆</strong>要求總正電荷等於總負電荷：$N_a x_p = N_d x_n$。這意味著<strong>重摻雜側的空乏區比輕摻雜側窄</strong>——因為重摻雜側的空間電荷密度更高，只需較短的距離就能建立相同的總電荷量。</p>
+
+<p>再積分一次得電位，總電位差 $=V_{bi}$。由此解出空乏區總寬度：</p>
+<div class="eq">$$\boxed{W = x_n + x_p = \sqrt{\frac{2\epsilon_s V_{bi}}{e}\left(\frac{N_a+N_d}{N_a N_d}\right)}}$$</div>
+
+<p><strong>$W$ 的數量級：</strong>對 Si，$N_a=10^{17}$, $N_d=10^{16}$ cm⁻³，$\epsilon_s=11.7\epsilon_0=1.04\times10^{-12}$ F/cm，$V_{bi}=0.754$ V→$W=\sqrt{2\cdot1.04\times10^{-12}\cdot0.754/[1.6\times10^{-19}\cdot(1.1\times10^{17}/10^{33})]}\approx3.3\times10^{-5}$ cm $=0.33$ µm。</p>
+
+<div class="callout"><strong>💡 $W\propto\sqrt{V_{bi}}$ 的直覺：</strong>空乏區就像一個平行板電容器。要建立更大的電位差，你需要更多的空間電荷→空乏區必須更寬（以容納更多離子）。但摻雜濃度越高→空間電荷密度越大→只需較短距離就能累積所需的電荷→$W$ 越小。這就是為什麼重摻雜接面的空乏區更窄。</div>
+</section>
+
+<section id="ch07_s7-3"><h2>7.3 反向偏壓與接面電容</h2>
+<p>當外加<strong>反向偏壓 $V_R$</strong>（p 側接負、n 側接正）時，外加電場的方向與內建電場<strong>相同</strong>→總電位障壁增大為 $V_{bi}+V_R$→空乏區變寬：</p>
+<div class="eq">$$\boxed{W = \sqrt{\frac{2\epsilon_s(V_{bi}+V_R)}{e}\left(\frac{N_a+N_d}{N_a N_d}\right)}}$$</div>
+<div class="figure"><img src="../../../images/solid-state-physics/ch07_pages/ch7_page_276.png" alt="圖 7.7" loading="lazy"><figcaption>圖 7.7：反向偏壓下的能帶圖——能帶彎曲增大（$=e(V_{bi}+V_R)$），空乏區變寬。注意 $E_{Fn}$ 和 $E_{Fp}$ 的分離（準 Fermi 能階，第六章），兩者之差 $=eV_R$。</figcaption></div>
+
+<p><strong>接面電容（junction capacitance）或空乏層電容：</strong>空乏區兩側的空間電荷 $Q = eN_d x_n = eN_a x_p$ 形成一個平行板電容器。當反向偏壓變化時，$W$ 變化→$Q$ 變化→表現為電容：</p>
+<div class="eq">$$\boxed{C_j = \frac{\epsilon_s}{W} = \sqrt{\frac{e\epsilon_s N_a N_d}{2(V_{bi}+V_R)(N_a+N_d)}}}$$</div>
+
+<p><strong>$C_j \propto 1/\sqrt{V_{bi}+V_R}$：</strong>反向偏壓越大→$W$ 越大→$C_j$ 越小。這就是<strong>變容二極體（varactor diode）</strong>的工作原理——用電壓來控制電容值，用於射頻電路的頻率調諧。</p>
+
+<div class="figure"><img src="../../../images/solid-state-physics/ch07_pages/ch7_page_282.png" alt="圖 7.11" loading="lazy"><figcaption>圖 7.11：$1/C_j^2$ 對 $V_R$ 的關係圖——直線！截距 $=-V_{bi}$（給出內建電位），斜率 $\propto 1/N_d$（給出輕摻雜側的摻雜濃度）。這是實驗量測 pn 接面參數的標準方法。</figcaption></div>
+
+<p><strong>單側突變接面（one-sided abrupt junction，如 p⁺n）：</strong>當一側的摻雜遠重於另一側（$N_a\gg N_d$），空乏區幾乎完全在輕摻雜側。$W\approx x_n = \sqrt{2\epsilon_s(V_{bi}+V_R)/(eN_d)}$，$C_j = \sqrt{e\epsilon_s N_d/[2(V_{bi}+V_R)]}$。$C_j$ 完全由輕摻雜側的濃度決定——這對變容二極體的設計很重要。</p>
+</section>
+
+<section id="ch07_s7-4"><h2>7.4 接面崩潰</h2>
+<p>反向偏壓不能無限增大。當空乏區中的電場達到某一<strong>臨界值 $E_{\text{crit}}$</strong>時，載子透過碰撞游離倍增→反向電流急劇增大→pn 接面<strong>崩潰（breakdown）</strong>。</p>
+<p><strong>雪崩倍增（avalanche multiplication）的物理機制：</strong>空乏區中的少數載子（反向漏電流中的電子或電洞）被高電場加速到極高動能。當它們撞擊晶格原子時，如果動能超過 $E_g$（Si: 1.12 eV），就可以把價帶電子撞入導帶→產生一個新的電子-電洞對。這些新生載子也被加速→撞出更多載子→正回授連鎖反應→電流倍增。</p>
+<div class="figure"><img src="../../../images/solid-state-physics/ch07_pages/ch7_page_284.png" alt="圖 7.13" loading="lazy"><figcaption>圖 7.13：雪崩倍增過程——一個高能電子撞擊產生多個電子-電洞對，每個新生載子又被加速撞出更多載子。</figcaption></div>
+<p>崩潰電壓取決於輕摻雜側的濃度：</p>
+<div class="eq">$$\boxed{V_B \approx \frac{\epsilon_s E_{\text{crit}}^2}{2e N_B}}$$</div>
+<p>其中 $N_B$ 是輕摻雜側的濃度，$E_{\text{crit}}\approx3\times10^5$ V/cm（Si）。$V_B\propto1/N_B$——輕摻雜（低 $N_B$）→高崩潰電壓。功率二極體（需要耐壓數百至數千伏）使用極輕摻雜的集極/基極區域。</p>
+
+<p><strong>雪崩 vs 齊納——兩種不同的崩潰機制：</strong></p>
+<table><thead><tr><th>特性</th><th>雪崩崩潰（Avalanche）</th><th>齊納崩潰（Zener）</th></tr></thead><tbody>
+<tr><td>摻雜濃度</td><td>輕摻雜（$N_B < 10^{17}$）</td><td>重摻雜（$N_B > 10^{18}$）</td></tr>
+<tr><td>空乏區寬度</td><td>寬（>100 nm）</td><td>極窄（<20 nm）</td></tr>
+<tr><td>機制</td><td>碰撞游離倍增</td><td>帶對帶直接穿隧</td></tr>
+<tr><td>$V_B$ 範圍</td><td>> 6 V（Si）</td><td>< 5 V（Si）</td></tr>
+<tr><td>溫度係數</td><td><strong>正</strong>（$V_B$ 隨 $T$ 增加）</td><td><strong>負</strong>（$V_B$ 隨 $T$ 下降）</td></tr>
+<tr><td>物理原因</strong></td><td>高溫→聲子散射增加→平均自由程縮短→需要更高電場才能碰撞游離</td><td>高溫→$E_g$ 縮小→穿隧所需的電場降低</td></tr></tbody></table>
+<p>$V_B \approx 6$ V 時，兩種機制同時存在且溫度係數互相抵消——這是齊納二極體用作電壓參考的最佳工作點。</p>
+
+<div class="callout"><strong>💡 崩潰不一定是壞事——齊納二極體（Zener diode）。</strong>齊納二極體故意設計在崩潰區操作，利用崩潰電壓的高精確性和低溫度係數作為電壓參考。重摻雜（$N_B>10^{18}$）→空乏區極窄→$E_{\text{max}}$ 極高→崩潰電壓僅數伏→適合低壓參考。輕摻雜→高崩潰電壓→適合高壓箝位。每個電源電路中幾乎都有一顆齊納二極體或等效的能隙參考（bandgap reference）電路。</div>
+</section>
+
+<section id="ch07_s7-5"><h2>7.5 非均勻摻雜接面</h2>
+<p>真實的擴散或離子植入接面不是突變的——摻雜濃度在接面附近是<strong>漸進變化</strong>的。最簡單的非均勻模型是<strong>線性梯度接面（linearly graded junction）</strong>：$N_d-N_a = ax$（$a$ = 摻雜梯度，單位 cm⁻⁴）。</p>
+<p>線性梯度接面的特性與突變接面有質的不同：空間電荷不再是均勻分布（$\rho(x)=eax$），Poisson 方程積分後得到 $W\propto(V_{bi}+V_R)^{1/3}$（而非突變接面的 $V^{1/2}$），$C_j\propto V^{-1/3}$（而非 $V^{-1/2}$）。</p>
+
+<h3>超突變接面（Hyperabrupt Junction）與變容二極體</h3>
+<p>超突變接面透過特殊設計的摻雜分布（在接面附近刻意增加摻雜濃度梯度），使 $C_j$ 對電壓的依賴更強：</p>
+<div class="eq">$$C_j = C_{j0}\left(1 + \frac{V_R}{V_{bi}}\right)^{-m}, \quad m > \frac{1}{2}$$</div>
+<p>其中 $m$ 可達 2 或更高（對比突變接面 $m=1/2$，線性梯度 $m=1/3$）。$m$ 越大→$C_j$ 隨 $V_R$ 的變化越劇烈。</p>
+<p><strong>變容二極體（Varactor Diode）的應用：</strong>利用電壓控制的電容 $C_j(V)$ 來實現壓控振盪器（VCO）。振盪頻率 $f = 1/(2\pi\sqrt{LC_j})$→$f \propto V^{m/2}$。$m=2$ 時，$f \propto V$——頻率與電壓成<strong>線性</strong>關係，這對 FM 調變和鎖相迴路（PLL）至關重要。超突變接面 varactor 是手機射頻電路中頻率合成器的核心元件。</p>
+<div class="callout"><strong>💡 三種接面類型的 $C_j$-$V$ 關係比較：</strong>突變接面（離子植入）：$C_j \propto V^{-1/2}$。線性梯度（擴散）：$C_j \propto V^{-1/3}$。超突變（特殊摻雜）：$C_j \propto V^{-m}$，$m=1$–$2$。在電路設計中，$m$ 的選擇取決於應用：VCO 需要大 $m$（線性頻率調諧），一般濾波器用突變接面就夠了。</div>
+</section>
+
+<section id="ch07_summary"><h2>本章摘要</h2>
+<ol style="font-size:14px;color:var(--t2);margin-left:18px">
+<li><strong>接面形成四步驟：</strong>濃度梯度→載子擴散→留下雜質離子（空間電荷區）→內建電場→擴散與漂移平衡。</li>
+<li><strong>內建電位 $V_{bi}$：</strong>$(kT/e)\ln(N_a N_d/n_i^2)$。Si 典型 0.6–0.8 V。不能直接用電壓表量到。</li>
+<li><strong>空乏近似：</strong>$\rho=-eN_a$（p 側）、$+eN_d$（n 側）。Poisson 方程→電場（三角分布）→電位（S 形曲線）。</li>
+<li><strong>空乏區寬度 $W$：</strong>$\propto\sqrt{V_{bi}}$。重摻雜→窄 $W$。電荷守恆：$N_a x_p=N_d x_n$（重摻雜側更窄）。</li>
+<li><strong>反向偏壓：</strong>$V_R$→$V_{bi}+V_R$→$W$ 變寬。$C_j=\epsilon_s/W\propto1/\sqrt{V_{bi}+V_R}$→變容二極體原理。</li>
+<li><strong>崩潰：</strong>$V_B\approx\epsilon_s E_{\text{crit}}^2/(2eN_B)$。輕摻雜→高耐壓。雪崩倍增機制。</li>
+<li><strong>非均勻接面：</strong>線性梯度 $W\propto V^{1/3}$。超突變接面 $C_j\propto V^{-m}$（$m>1/2$）→VCO 應用。</li></ol></section>
+
+
+<!-- ===== 第八章 pn 接面二極體 ===== -->
+
+<header class="header"><div class="cl">第八章</div><h1>pn 接面二極體</h1><div class="meta">Donald A. Neamen·《半導體物理與元件：基本原理》第四版·第 278–327 頁</div></header>
+
+<section id="ch08_preview"><div class="callout"><strong>📋 8.0 本章預覽</strong>
+<p>第七章告訴我們 pn 接面「長什麼樣子」——能帶彎曲、空乏區、內建電位。本章回答工程師最關心的問題：<strong>當外加電壓時，pn 接面中有多少電流流動？</strong>答案就是半導體物理中最著名的公式——<strong>Shockley 理想二極體方程</strong>：$I = I_S(e^{eV_a/kT}-1)$。</p>
+<p>本章的推導邏輯極其清晰，每一步都建立在前幾章的堅實基礎上：外加電壓→準 Fermi 能階分離（第六章）→少數載子邊界濃度改變（Shockley 邊界條件）→少數載子擴散進入中性區（第五章擴散方程）→擴散電流（第五章）→總電流。將所有前面學到的工具串聯起來，得到一個極其簡潔的結果。</p>
+<p>在此基礎上，我們加入非理想效應（空乏區產生-復合電流、串聯電阻、高階注入）、頻率響應（擴散電容和小訊號模型）、和開關行為（反向恢復暫態）。這些是連接「理想 pn 接面物理」和「真實二極體元件行為」的橋樑。</p></div></section>
+
+<section id="ch08_s8-1a"><h2>8.1.1–8.1.3 Shockley 邊界條件——電壓如何「注射」少數載子 ⭐</h2>
+<div class="figure"><img src="../../../images/solid-state-physics/ch08_pages/ch8_page_303.png" alt="圖 8.1" loading="lazy"><figcaption>圖 8.1：pn 二極體中的電流路徑——電子從 n 側注入 p 側，電洞從 p 側注入 n 側。</figcaption></div>
+<p>在熱平衡時（$V_a=0$），空乏區邊緣的少數載子濃度等於熱平衡值：p 側邊界的電子濃度 $=n_{p0}=n_i^2/N_a$；n 側邊界的電洞濃度 $=p_{n0}=n_i^2/N_d$。</p>
+<p>當施加順向偏壓 $V_a>0$（p 側接正、n 側接負）時，空乏區的電位障壁從 $V_{bi}$ 降低到 $V_{bi}-V_a$。降低的障壁使得 n 側的大量電子更容易越過障壁進入 p 側，p 側的大量電洞更容易越過障壁進入 n 側→<strong>少數載子注入</strong>。</p>
+<div class="figure"><img src="../../../images/solid-state-physics/ch08_pages/ch8_page_307.png" alt="圖 8.4" loading="lazy"><figcaption>圖 8.4：順向偏壓下的少數載子注入——電洞從 p 側注入 n 側，成為 n 側的過量少數載子（上）；電子從 n 側注入 p 側（下）。注入的少數載子在空乏區邊緣濃度最高，然後以指數衰減擴散進入中性區。</figcaption></div>
+
+<p><strong>Shockley 邊界條件</strong>是本章最關鍵的公式——它將外加電壓與少數載子濃度連結起來：</p>
+<div class="eq">$$\boxed{p_n(x_n) = p_{n0}\,e^{eV_a/kT} \qquad n_p(-x_p) = n_{p0}\,e^{eV_a/kT}}$$</div>
+
+<p>這個公式的物理圖像來自第六章的準 Fermi 能階：在順向偏壓下，空乏區中 $E_{Fn}$ 和 $E_{Fp}$ 分離 $eV_a$。在空乏區邊緣，$pn = n_i^2 e^{eV_a/kT}$。因為多數載子濃度幾乎不變（低階注入），少數載子濃度必然增至 $p_{n0}e^{eV_a/kT}$。</p>
+
+<div class="callout"><strong>💡 邊界條件的直覺——為什麼 0.6 V 就能產生巨大電流？</strong>室溫下 $kT/e=0.026$ V。當 $V_a=0.6$ V：$e^{0.6/0.026}=e^{23}\approx10^{10}$。n 側邊界的少數載子濃度從 $p_{n0}$（∼$10^4$ cm⁻³）暴增到 $10^{14}$ cm⁻³——增加了<strong>一百億倍</strong>。這個巨大的濃度梯度驅動強烈的擴散電流。這就是為什麼 pn 接面在 ∼0.6–0.7 V 附近從「幾乎不導通」急劇切換到「高度導通」——本質上是指數函數的門檻行為。</div>
+</section>
+
+<section id="ch08_s8-1b"><h2>8.1.4 理想二極體電流-電壓關係 ⭐</h2>
+<div class="figure"><img src="../../../images/solid-state-physics/ch08_pages/ch8_page_309.png" alt="圖 8.3" loading="lazy"><figcaption>圖 8.3：pn 二極體中少數載子的穩態分布——線性衰減（短二極體）或指數衰減（長二極體）。</figcaption></div>
+<p>注入的過量少數載子從空乏區邊緣擴散進入中性區，同時與多數載子復合。在中性區中沒有電場→只有擴散。穩態擴散方程：$D_p\,d^2\delta p_n/dx^2 = \delta p_n/\tau_{p0}$。</p>
+<p>解為指數衰減：$\delta p_n(x) = \delta p_n(x_n)\,e^{-(x-x_n)/L_p}$。$L_p=\sqrt{D_p\tau_{p0}}$ 是電洞擴散長度。</p>
+
+<div class="figure"><img src="../../../images/solid-state-physics/ch08_pages/ch8_page_318.png" alt="圖 8.11" loading="lazy"><figcaption>圖 8.11：pn 接面二極體的 I-V 特性。(a) 線性坐標——順向指數增長，反向飽和。(b) 對數坐標——順向區為直線（斜率 $=e/kT$），可清楚看到不同電流區的斜率變化（$n=1$ vs $n=2$）。</figcaption></div>
+
+<p>擴散電流在 $x=x_n$ 處：$J_p(x_n) = -eD_p(d\delta p_n/dx)|_{x_n} = (eD_p/L_p)\,\delta p_n(x_n) = (eD_p p_{n0}/L_p)(e^{eV_a/kT}-1)$。</p>
+<p>同理可得 $J_n(-x_p)$。總電流為兩者之和：</p>
+<div class="eq">$$\boxed{I = I_S\left(e^{eV_a/kT} - 1\right)}$$</div>
+<div class="eq">$$I_S = eA\left(\frac{D_p p_{n0}}{L_p} + \frac{D_n n_{p0}}{L_n}\right) = eA n_i^2\left(\frac{D_p}{L_p N_d} + \frac{D_n}{L_n N_a}\right)$$</div>
+
+<p><strong>$I_S$ 的物理意義：</strong>$I_S$ 是反向飽和電流——當 $V_a$ 為大負值（逆偏）時 $I\to -I_S$。$I_S\propto n_i^2\propto e^{-E_g/kT}$→對溫度極其敏感。室溫 Si pn 接面的 $I_S$ 通常在 $10^{-15}$–$10^{-9}$ A 範圍，取決於面積和摻雜。</p>
+
+<div class="callout"><strong>💡 為什麼 $I_S\propto n_i^2$？</strong>因為少數載子濃度 $p_{n0}=n_i^2/N_d$ 出現在公式中。$n_i^2$ 的物理意義是 $np$ 乘積的熱平衡值。反向飽和電流來自少數載子的熱產生——而少數載子數量正比於 $n_i^2$。這也解釋了為什麼寬能隙半導體（GaAs, GaN）的 $I_S$ 遠小於 Si——它們的 $n_i$ 小了數個數量級。</div>
+</section>
+
+<section id="ch08_s8-1c"><h2>8.1.5 溫度效應與串聯電阻——真實二極體的 I-V 特性</h2>
+<p>真實二極體的 I-V 特性偏離理想方程。兩個最重要的修正來自<strong>溫度</strong>和<strong>串聯電阻</strong>。</p>
+<h3>溫度效應</h3>
+<p>$I_S$ 對溫度極其敏感：$I_S \propto T^3 e^{-E_g/kT}$（$T^3$ 來自 $N_c N_v\propto T^3$ 以及 $D,L$ 的溫度關係）。取對數微分：</p>
+<div class="eq">$$\frac{1}{I_S}\frac{dI_S}{dT} = \frac{3}{T} + \frac{E_g}{kT^2} \approx \frac{E_g}{kT^2}$$</div>
+<p>室溫下 Si：$E_g/kT^2 = 1.12/(0.026\times300) \approx 0.144$ K$^{-1}$。即溫度每升高 1°C，$I_S$ 增大約 14.4%。近似規則：<strong>溫度每升 10°C，$I_S$ 約增加一倍</strong>（$2^{10\times0.0072} \approx 1.05$，更精確是 ∼7%/°C 對 $I_S$ 的影響）。</p>
+<p>順向電壓降的溫度係數：在固定電流下，$V_D$ 隨溫度變化：</p>
+<div class="eq">$$\frac{dV_D}{dT} \approx -\frac{E_g/e - V_D}{T} \approx -2\ \text{mV/°C}$$</div>
+<p>這正是矽二極體可作為廉價溫度感測器的原因——測量固定電流下的 $V_D$ 變化即可推算溫度。</p>
+<h3>串聯電阻 $R_s$</h3>
+<p>中性 n 區和 p 區、以及金屬接觸都有歐姆電阻。高電流時 $IR_s$ 壓降不可忽略→有效接面電壓 $=V_a-IR_s<V_a$→I-V 曲線在高電流區偏離指數：</p>
+<div class="eq">$$I = I_S\left[\exp\!\left(\frac{e(V_a-IR_s)}{kT}\right) - 1\right]$$</div>
+<p>$R_s$ 的典型值：小訊號二極體 ∼1–5 Ω，功率二極體 ∼0.01–0.1 Ω。$R_s$ 可從 I-V 曲線的高電流偏離程度中提取：$\Delta V = IR_s$。</p>
+<div class="figure"><img src="../../../images/solid-state-physics/ch08_pages/ch8_page_313.png" alt="圖 8.8" loading="lazy"><figcaption>圖 8.8：真實二極體的 I-V 特性（對數坐標）。低電流（A 區）：復合電流主導，斜率 $=e/2kT$（$n\approx2$）。中電流（B 區）：理想擴散，斜率 $=e/kT$（$n\approx1$）。高電流（C 區）：串聯電阻主導，偏離指數。極高電流（D 區）：高階注入效應。</figcaption></div>
+</section>
+
+<section id="ch08_s8-1d"><h2>8.1.6 物理總結——電流機制的完整圖像</h2>
+<p>在進入非理想效應之前，讓我們先整合 8.1 的所有結果。pn 二極體的電流由以下步驟串聯而成：</p>
+<p>① <strong>外加電壓改變接面處的少數載子濃度</strong>（Shockley 邊界條件）→$np = n_i^2 e^{eV_a/kT}$。</p>
+<p>② <strong>注入的少數載子以擴散方式遠離接面</strong>（濃度梯度驅動）→擴散長度 $L = \sqrt{D\tau}$ 決定了載子能走多遠。</p>
+<p>③ <strong>擴散電流正比於邊界處的濃度梯度</strong>→梯度正比於 $e^{eV_a/kT}-1$→指數 I-V 關係。</p>
+<p>④ <strong>少數載子在中性區內復合</strong>→電流隨距離衰減→被多數載子傳導到外部電路。</p>
+<div class="callout"><strong>💡 整條鏈條的限制步驟是「擴散」。</strong>如果中性區寬度 $W \ll L$（短二極體），所有注入的載子都到達金屬接觸→梯度 = $\delta p/W$（線性分布）。如果 $W \gg L$（長二極體），載子在到達接觸前就已復合→梯度 = $\delta p/L$。這就是為什麼長二極體的電流正比於 $D/L$，短二極體正比於 $D/W$。</div>
+</section>
+
+<section id="ch08_s8-1e"><h2>8.1.8 短二極體（$W_n \ll L_p$）</h2>
+<p>前面推導的理想二極體方程假設中性區寬度 $W_n$ 和 $W_p$ <strong>遠大於</strong>擴散長度 $L_p$ 和 $L_n$。但在許多實際元件中，中性區很短——例如薄基區的 BJT。</p>
+<p><strong>關鍵差異：</strong>在長二極體中，少數載子在中性區內指數衰減（$e^{-x/L}$）。在短二極體中，少數載子到達金屬接觸前幾乎不復合→濃度分布近似<strong>線性</strong>。</p>
+<p>邊界條件：$\delta p(0) = p_{n0}(e^{eV_a/kT}-1)$，$\delta p(W_n) = 0$（金屬接觸處快速復合）。線性梯度：</p>
+<div class="eq">$$\frac{d(\delta p)}{dx}\bigg|_{x=0} = -\frac{\delta p(0)}{W_n} = -\frac{p_{n0}(e^{eV_a/kT}-1)}{W_n}$$</div>
+<p>因此短二極體的電流：</p>
+<div class="eq">$$I = \frac{eAD_p p_{n0}}{W_n}\left(e^{eV_a/kT}-1\right)$$</div>
+<p>對比長二極體：$I = (eAD_p p_{n0}/L_p)(e^{eV_a/kT}-1)$。差別只在分母是 $W_n$ 還是 $L_p$——物理上完全合理：短二極體的梯度更大（$W_n < L_p$）→電流更大。</p>
+<div class="callout-warn"><strong>⚡ 短二極體公式在 BJT 中的核心地位。</strong>BJT 的基區就是一個短二極體——$W_B \ll L_B$。BJT 的集極電流 $I_C$ 直接正比於 $D_B/W_B$（而不是 $D_B/L_B$）。這就是為什麼 BJT 的電流增益 $\beta$ 隨 $W_B$ 減小而增大——基區越薄，少數載子的梯度越大，注入效率越高。</div>
+</section>
+
+<section id="ch08_s8-2"><h2>8.2 產生-復合電流——空乏區中的電流</h2>
+<p>理想二極體方程只考慮了<strong>中性區</strong>中的擴散電流。但空乏區內部也有電流——來自深層陷阱能階的 SRH 產生和復合（第六章）。</p>
+<h3>順向偏壓——復合電流</h3>
+<div class="figure"><img src="../../../images/solid-state-physics/ch08_pages/ch8_page_321.png" alt="圖 8.12" loading="lazy"><figcaption>圖 8.12：空乏區中的復合電流和產生電流——順偏時復合（斜率 $e/2kT$），反偏時產生。</figcaption></div>
+<p>在順向偏壓下，空乏區中的 $np>n_i^2$→淨復合。復合率最高的地方在 $n\approx p$ 的區域（空乏區中的某處）。復合電流 $I_{\text{rec}}\propto e^{eV_a/2kT}$——斜率只有理想擴散電流的一半。在低順向偏壓時（$V_a<0.4$ V），$I_{\text{rec}}$ 可能大於擴散電流→非理想因子 $n\approx2$。</p>
+<h3>反向偏壓——產生電流</h3>
+<p>在反向偏壓下，空乏區中的 $np<n_i^2$→淨產生。產生電流 $I_{\text{gen}} = en_i W/\tau_0$。注意 $I_{\text{gen}}\propto n_i$ 而 $I_S\propto n_i^2$——對 Si（$n_i=1.5\times10^{10}$），$n_i\gg n_i^2$→反向電流主要由空乏區產生電流主導，而非理想飽和電流。這就是為什麼實際 Si 二極體的反向電流通常遠大於 $I_S$ 的理論值。</p>
+<h3>8.2.2 高注入效應——當理想方程失效</h3>
+<p>理想二極體方程假設<strong>低階注入</strong>：注入的少數載子濃度 $\delta p$ 遠小於多數載子濃度 $n_0$。當順向電壓增大到使 $\delta p \approx n_0$ 時，高注入效應開始出現：</p>
+<p>① <strong>注入的少數載子改變了空乏區邊緣的電場</strong>→有效接面電壓降低→電流增長速度減慢（偏離 $e^{eV_a/kT}$ 指數）。</p>
+<p>② <strong>多數載子濃度必須增加以維持電中性</strong>→多數載子也參與擴散→雙極傳輸效應更加顯著。</p>
+<p>③ <strong>I-V 關係從 $I \propto e^{eV_a/kT}$ 過渡到 $I \propto e^{eV_a/2kT}$</strong>——斜率減半，類似復合電流的行為，但物理機制完全不同。</p>
+<div class="callout"><strong>💡 高注入的工程意義。</strong>大功率二極體和 BJT 的集極電流在高注入下飽和。在圖 8.8 的 D 區，串聯電阻 + 高注入效應共同限制了最大電流。BJT 在高注入下 $\beta$ 急劇下降（Kirk effect）——這是功率電晶體設計的核心限制。理解高注入的物理圖像，是理解元件「天花板」的關鍵。</div>
+</section>
+
+<section id="ch08_s8-3"><h2>8.3 小訊號模型——pn 二極體的 AC 行為 ⭐</h2>
+<div class="figure"><img src="../../../images/solid-state-physics/ch08_pages/ch8_page_329.png" alt="圖 8.17" loading="lazy"><figcaption>圖 8.17：pn 二極體的小訊號等效電路——$r_d$ 並聯 $C_d$，再串聯 $r_s$ 和 $C_j$。</figcaption></div>
+<p>當二極體操作在 DC 偏壓點 $(V_{DQ}, I_{DQ})$ 附近疊加一個小 AC 信號時，非線性的指數關係可以<strong>線性化</strong>。</p>
+<p><strong>小訊號等效電路：</strong>順向偏壓的 pn 二極體在 AC 小訊號下等效為以下元件的並聯/串聯組合：</p>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li><strong>$r_d$（擴散電阻）</strong>並聯 <strong>$C_d$（擴散電容）</strong>：這兩個元件描述中性區中少數載子的充放電行為。</li>
+<li>串聯 <strong>$r_s$（串聯電阻）</strong>：中性區的歐姆電阻 + 接觸電阻。高頻時 $r_s$ 限制了二極體的品質因子 $Q$。</li>
+<li>並聯 <strong>$C_j$（接面電容）</strong>：空乏區電容。反向偏壓時 $C_j$ 主導；順向偏壓時 $C_d \gg C_j$。</li>
+</ul>
+
+<h3>擴散電導 $g_d$</h3>
+<div class="eq">$$g_d = \frac{dI}{dV}\bigg|_{V_{DQ}} = \frac{e}{kT}I_{DQ} \approx \frac{I_{DQ}}{0.026}$$</div>
+<p>$g_d$（單位：S，西門子）或等效擴散電阻 $r_d=1/g_d=0.026/I_{DQ}$ Ω。$I_{DQ}=1$ mA→$r_d=26$ Ω。$I_{DQ}=1$ µA→$r_d=26$ kΩ。偏壓電流直接控制小訊號電阻。</p>
+<h3>擴散電容 $C_d$——二極體速度的物理限制</h3>
+<p>順向偏壓下注入中性區的過量少數載子需要時間來建立和消散→表現為電容：</p>
+<div class="eq">$$C_d = \frac{e}{kT}I_{DQ}\,\tau_{p0}$$</div>
+<p>對 $I_{DQ}=1$ mA，$\tau_{p0}=1$ µs：$C_d = (1/0.026)\times10^{-3}\times10^{-6} = 38$ nF。這遠大於典型的 $C_j$（∼pF 級）。</p>
+
+<p><strong>截止頻率：</strong>二極體的小訊號響應在 $f_c = 1/(2\pi r_d C_d) = 1/(2\pi\tau_{p0})$ 處開始衰減。對 $\tau_{p0}=1$ µs：$f_c \approx 160$ kHz。這就是為什麼普通 pn 二極體不適合高頻整流——需要使用壽命極短的快速恢復二極體或蕭特基二極體。</p>
+
+<div class="callout-warn"><strong>⚡ $C_j$ vs $C_d$——兩種電容的物理區別：</strong><br>• <strong>接面電容 $C_j$（第七章）：</strong>空乏區邊界空間電荷隨電壓變化。主導反向偏壓和低順向偏壓。$C_j\propto1/\sqrt{V_{bi}+V_R}$。<br>• <strong>擴散電容 $C_d$（本章）：</strong>中性區中儲存的過量少數載子隨電流變化。主導順向偏壓。$C_d\propto I_{DQ}$。<br>• 順向偏壓下 $C_d\gg C_j$。這就是為什麼 pn 二極體在順向操作時速度受限——擴散電容使二極體無法快速響應高頻信號。蕭特基二極體（第九章）沒有少數載子儲存→$C_d\approx0$→開關速度遠快。</div>
+</section>
+
+<section id="ch08_s8-4"><h2>8.4–8.5 電荷儲存暫態與穿隧二極體</h2>
+<h3>反向恢復暫態——為什麼二極體不能瞬間關斷</h3>
+<div class="figure"><img src="../../../images/solid-state-physics/ch08_pages/ch8_page_340.png" alt="圖 8.24" loading="lazy"><figcaption>圖 8.24：反向恢復暫態波形——儲存時間 $t_s$ 和下降時間 $t_f$ 的定義。</figcaption></div>
+<p>當二極體從順向突然切換到反向時，順向期間在中性區儲存的大量過量少數載子必須先被<strong>移除</strong>，二極體才能開始阻斷反向電壓。移除過程包括兩個階段：</p>
+<p><strong>儲存時間 $t_s$（storage time）：</strong>過量少數載子被反向電流抽取，或透過復合消失，直到空乏區邊緣的濃度降至熱平衡值。$t_s \approx \tau_{p0}\ln(1+I_F/I_R)$（$I_F$=順向電流，$I_R$=反向抽取電流）。</p>
+<p><strong>下降時間 $t_f$（fall time）：</strong>空乏區電容充放電的時間。總反向恢復時間 $t_{rr}=t_s+t_f$。快速開關二極體需要短 $\tau_{p0}$——可透過掺金（Au）或電子輻照引入復合中心來降低壽命。</p>
+<h3>穿隧二極體（Tunnel Diode / Esaki Diode）</h3>
+<p>當 pn 接面兩側都極重摻雜（$>10^{19}$ cm⁻³）→空乏區極窄（<10 nm）→量子穿隧成為主導的電流機制。</p>
+<p><strong>NDR（負微分電阻）的完整物理圖像：</strong></p>
+<p>① <strong>零偏壓：</strong>n 側導帶中的電子與 p 側價帶中能量對應的空態對齊→穿隧可以雙向進行→淨電流為零。</p>
+<p>② <strong>小順向偏壓（峰值電流 $I_P$）：</strong>偏壓使 n 側導帶底與 p 側價帶頂對齊→最大數量的電子態與空態對齊→穿隧電流達到<strong>峰值</strong> $I_P$。</p>
+<p>③ <strong>中等偏壓（NDR 區域）：</strong>偏壓繼續增大→n 側導帶底高於 p 側價帶頂→可穿隧的態逐漸減少→電流<strong>反而下降</strong>→這就是負微分電阻。</p>
+<p>④ <strong>較大偏壓（谷值電流 $I_V$）：</strong>穿隧幾乎停止（沒有重疊的態），但熱離子發射電流開始增大。電流達到<strong>谷值</strong> $I_V$。</p>
+<p>⑤ <strong>大偏壓：</strong>普通擴散電流（類似普通二極體）主導→電流隨電壓指數增長。</p>
+<p>峰谷比 $I_P/I_V$ 是穿隧二極體的關鍵品質指標。典型值：Ge 穿隧二極體 ∼8:1，GaAs ∼15:1。$I_P/I_V$ 越大→NDR 越明顯→振盪器的功率效率越高。</p>
+<div class="figure"><img src="../../../images/solid-state-physics/ch08_pages/ch8_page_343.png" alt="圖 8.27" loading="lazy"><figcaption>圖 8.27：穿隧二極體的 I-V 特性曲線——注意峰值電流 $I_P$、谷值電流 $I_V$、以及兩者之間的負微分電阻（NDR）區域。</figcaption></div>
+<div class="figure"><img src="../../../images/solid-state-physics/ch08_pages/ch8_page_346.png" alt="圖 8.30" loading="lazy"><figcaption>圖 8.30：穿隧二極體在五個偏壓點的能帶圖——從零偏壓到大偏壓，解釋 NDR 的物理起源：可穿隧態的重疊區域隨偏壓增大而減少。</figcaption></div>
+<div class="callout-warn"><strong>⚡ NDR 區域使穿隧二極體成為天然的振盪元件。</strong>在 NDR 區域操作時，微小的電壓擾動會被正回饋放大→產生自持振盪。穿隧二極體振盪器可達 100 GHz 以上——遠超普通電晶體的頻率極限。它也被用作超快速開關（切換時間 ∼ps 級，因為穿隧是瞬時過程）。缺點：NDR 區域的電壓範圍很窄（∼0.3 V），電路設計難度高，且輸出功率有限。</div>
+</section>
+
+<section id="ch08_summary"><h2>本章摘要</h2>
+<ol style="font-size:14px;color:var(--t2);margin-left:18px">
+<li><strong>Shockley 邊界條件：</strong>$p_n(x_n)=p_{n0}e^{eV_a/kT}$。$V_a=0.6$ V→邊界濃度增 $10^{10}$ 倍。這是指數 I-V 的根源。</li>
+<li><strong>理想二極體方程：</strong>$I=I_S(e^{eV_a/kT}-1)$。$I_S\propto n_i^2$。所有 pn 接面分析的基石。</li>
+<li><strong>溫度效應：</strong>$I_S\propto T^3 e^{-E_g/kT}$。$\partial V/\partial T\approx-2$ mV/°C→可用作溫度感測。</li>
+<li><strong>非理想效應：</strong>低電流復合（$n\approx2$）→中電流理想擴散（$n\approx1$）→高電流串聯電阻→極高電流高階注入。</li>
+<li><strong>產生-復合電流：</strong>順偏 $I_{\text{rec}}\propto e^{eV_a/2kT}$。逆偏 $I_{\text{gen}}=en_iW/\tau_0$（對 Si 常大於 $I_S$）。</li>
+<li><strong>小訊號模型：</strong>$g_d=I_{DQ}/V_T$，$r_d=V_T/I_{DQ}$，$C_d=(e/kT)I_{DQ}\tau_{p0}$。$C_d$ 限制二極體頻率響應。</li>
+<li><strong>反向恢復：</strong>$t_s\approx\tau_{p0}\ln(1+I_F/I_R)$。少數載子儲存導致開關延遲。</li>
+<li><strong>穿隧二極體：</strong>重摻雜→極窄空乏區→量子穿隧→負微分電阻→高頻振盪。</li></ol></section>
+
+
+<!-- ===== 第九章 金屬-半導體接面與異質接面 ===== -->
+
+<header class="header"><div class="cl">第九章</div><h1>金屬-半導體接面與異質接面</h1><div class="meta">Donald A. Neamen·《半導體物理與元件：基本原理》第四版·第 328–347 頁</div></header>
+
+<section id="ch09_preview"><div class="callout"><strong>📋 9.0 本章預覽</strong>
+<p>到目前為止，我們討論的「接面」都是同一種材料中 p 型和 n 型的接觸——所謂的<strong>同質接面（homojunction）</strong>。但真實的半導體元件不只包含 pn 接面。每一個電晶體、每一個二極體都需要<strong>金屬電極</strong>把信號和電力從外部世界引入半導體內部。金屬與半導體的接觸就是本章的第一個主題——<strong>金屬-半導體接面</strong>。</p>
+<p>更進一步，把兩種<strong>不同能隙</strong>的半導體放在一起會發生什麼？這種<strong>異質接面（heterojunction）</strong>能實現同質接面無法達到的功能——例如把電子和電洞侷限在奈米尺度的薄層中，從而製造出雷射和超高速電晶體。這是本章的第二個主題。</p>
+<p>這兩類接面看似冷門，但它們在每一個半導體元件中都是不可或缺的。沒有好的歐姆接觸，你的 MOSFET 源極電阻會吞噬掉大部分的驅動電流。沒有異質接面，就沒有光纖通訊用的雷射二極體、沒有手機中的 HBT 功率放大器、沒有衛星通訊中的 HEMT 低雜訊放大器。</p>
+<div class="callout-warn"><strong>⚡ 本章在全書中的位置：</strong>第七章（pn 接面靜態）→第八章（pn 二極體 I-V）→<strong>第九章（金半接面 + 異質接面）</strong>→第十章（BJT）。本章補足了「非 pn 接面」的接面物理，是理解蕭特基二極體、歐姆接觸、和異質接面元件的必要基礎。</div></div></section>
+
+<section id="ch09_s9-1-1"><h2>9.1.1 蕭特基能障——金屬碰到半導體會怎樣？</h2>
+<p>想像你把一塊金屬（例如鋁）和一塊 n 型矽緊緊貼在一起。在接觸的瞬間，兩側的電子處於不同的「化學勢」——金屬的 Fermi 能階 $E_{Fm}$ 和半導體的 Fermi 能階 $E_{Fs}$ 通常不同。如果 $E_{Fs} > E_{Fm}$（半導體的電子「更想逃離」），電子就會從半導體流向金屬，直到兩側的 Fermi 能階對齊。</p>
+<p>電子的淨流動在界面附近留下<strong>不可移動的帶電雜質離子</strong>——n 型半導體側留下正的 $N_d^+$ 離子，形成<strong>空乏區</strong>。這個空間電荷產生<strong>內建電場</strong>——指向金屬，阻止更多電子從半導體流向金屬。最終達到動態平衡。</p>
+<div class="figure"><img src="../../../images/solid-state-physics/ch09_pages/ch9_page_359.png" alt="圖 9.2" loading="lazy"><figcaption>圖 9.2：金屬與 n 型半導體接觸前（左）和接觸後（右）的能帶圖。$\phi_m$ = 金屬功函數（把電子從金屬 Fermi 能階拉到真空所需的能量），$\chi$ = 半導體電子親和力（把電子從導帶底拉到真空所需的能量）。$\phi_{Bn}=\phi_m-\chi$ 是金屬端的電子能障。</figcaption></div>
+
+<p>在理想情況下（蕭特基-Mott 模型），金屬端的能障高度就是金屬功函數與半導體電子親和力的差值：</p>
+<div class="eq">$$\boxed{\phi_{Bn} = \phi_m - \chi} \quad\text{（n 型半導體）}$$</div>
+
+<p>這個公式極其直觀：電子在金屬中的 Fermi 能階比真空能階低 $\phi_m$。在接觸後的平衡態，金屬和半導體的真空能階對齊（它們共用同一個表面），而半導體導帶底比真空能階低 $\chi$。所以金屬的 $E_{Fm}$ 比半導體的 $E_c$ 高 $\phi_m-\chi$——這正好是電子從金屬進入半導體導帶需要跨越的能障。</p>
+
+<p><strong>半導體側的能帶彎曲——內建電位 $V_{bi}$：</strong>$\phi_{Bn}$ 是從金屬端看的能障。從半導體端看，電子要進入金屬需要克服的能障是 $V_{bi}$。這兩者之間的關係是 $V_{bi} = \phi_{Bn} - \phi_n$，其中 $\phi_n = E_c - E_F = (kT/e)\ln(N_c/N_d)$ 是 n 型半導體中導帶底與 Fermi 能階的能量差。$\phi_n$ 的物理意義是：把半導體的 Fermi 能階「參考」到導帶底需要補上的能量差。</p>
+
+<div class="callout"><strong>💡 $V_{bi}$ 隨摻雜而變，$\phi_{Bn}$ 不隨摻雜而變（理想情況）。</strong>這是一個重要的區別。$\phi_{Bn}$ 只取決於金屬和半導體的種類（$\phi_m$ 和 $\chi$）。但 $V_{bi}$ 還取決於摻雜濃度——$N_d$ 越大→$\phi_n$ 越小→$V_{bi}$ 越大→空乏區越窄（因為空間電荷密度更大）。這與 pn 接面的行為完全類似。</div>
+
+<p>對於 p 型半導體，類似推導給出能障高度 $\phi_{Bp} = \chi + E_g - \phi_m$。注意 $\phi_{Bn} + \phi_{Bp} = E_g$——這不是巧合，而是能帶對齊的自洽要求。對 Si：$E_g=1.12$ eV，所以如果你知道 $\phi_{Bn}$，就自動知道 $\phi_{Bp} = 1.12 - \phi_{Bn}$。</p>
+
+<table><thead><tr><th>金屬</th><th>$\phi_m$ (eV)</th><th>Si $\phi_{Bn}$ 理想 (eV)</th><th>Si $\phi_{Bn}$ 實際 (eV)</th></tr></thead><tbody>
+<tr><td>Al</td><td>4.1</td><td>0.05</td><td>0.50–0.70</td></tr>
+<tr><td>Ti</td><td>4.3</td><td>0.25</td><td>0.50–0.60</td></tr>
+<tr><td>Au</td><td>5.1</td><td>1.05</td><td>0.75–0.80</td></tr>
+<tr><td>Pt</td><td>5.7</td><td>1.65</td><td>0.85–0.90</td></tr>
+</tbody></table>
+<p>注意「理想」和「實際」的差異——這就是下一節費米能階釘札的主題。</p>
+</section>
+
+<section id="ch09_s9-1-2"><h2>9.1.2 空乏區、電場、電容</h2>
+<div class="figure"><img src="../../../images/solid-state-physics/ch09_pages/ch9_page_392.png" alt="圖 9.5" loading="lazy"><figcaption>圖 9.5：Mott-Schottky $1/C^2$ vs $V_R$ 圖——直線斜率給出 $N_d$，x 截距給出 $V_{bi}$。</figcaption></div>
+<div class="figure"><img src="../../../images/solid-state-physics/ch09_pages/ch9_page_362.png" alt="圖 9.3" loading="lazy"><figcaption>圖 9.3：蕭特基接面的電荷分布和電場分布——與 p⁺n 單側突變接面相同。</figcaption></div>
+<p>一旦理解了 $\phi_{Bn}$ 和 $V_{bi}$，空乏區的分析與 pn 接面幾乎完全相同。金屬側電子濃度極高（∼$10^{22}$ cm⁻³）→空乏區厚度可忽略。半導體側的空乏區與<strong>單側突變 p⁺n 接面</strong>完全一致（金屬類似 p⁺ 側，無限重摻雜）。</p>
+<p>Poisson 方程推導給出空乏區寬度：</p>
+<div class="eq">$$W = \sqrt{\frac{2\epsilon_s(V_{bi}+V_R)}{e N_d}}$$</div>
+<p>這裡 $V_R$ 是外加反向偏壓（如果金屬接負、n 型半導體接正）。$V_R>0$→$W$ 變寬。最大電場在冶金界面處：$E_{\text{max}} = eN_d W/\epsilon_s$。單位面積接面電容：$C_j = \epsilon_s/W$。</p>
+
+<div class="figure"><img src="../../../images/solid-state-physics/ch09_pages/ch9_page_365.png" alt="圖 9.5, 9.6" loading="lazy"><figcaption>圖 9.5–9.6：金半接面的電荷密度和電場分布——與 p⁺n 單側突變接面相同。金屬側無空乏區（無限重摻雜近似）。</figcaption></div>
+
+<div class="callout"><strong>💡 Mott-Schottky 分析——從電容量出 $V_{bi}$ 和 $N_d$。</strong>將 $1/C_j^2$ 對 $V_R$ 作圖：$1/C_j^2 = 2(V_{bi}+V_R)/(e\epsilon_s N_d)$。這是一條直線——斜率 = $2/(e\epsilon_s N_d)$→得摻雜濃度；x 截距 = $-V_{bi}$→得內建電位；y 截距可外插得 $\phi_{Bn}$。這是實驗量測蕭特基接面參數的標準方法，不需要知道金屬的功函數。</div>
+<div class="callout"><strong>💡 蕭特基 vs pn 接面的空乏區比較。</strong>蕭特基接面的空乏區只在半導體側（金屬側沒有空乏區）→$W$ 較窄→$C_j$ 較大→高頻響應較好。pn 接面的空乏區在兩側都有→$W$ 較寬。此外，蕭特基接面的 $V_{bi}$ 通常比 pn 接面小（$\phi_{Bn} < E_g/e$）→相同反向偏壓下，蕭特基的 $W$ 更窄。這在 RF 混頻器和檢波器中是優勢（較低的串聯電阻）。</div>
+</section>
+
+<section id="ch09_s9-1-3"><h2>9.1.3 費米能階釘札——為什麼理想預測總是錯的？</h2>
+<p>如果你對照上一節的表格，會發現蕭特基-Mott 模型預測的 $\phi_{Bn}$ 與實驗值有巨大偏差。例如 Al/Si 的理想 $\phi_{Bn}=0.05$ eV（幾乎是歐姆接觸！），但實際量到 0.5–0.7 eV（明顯的整流接觸）。為什麼？</p>
+<p>答案在半導體的<strong>表面</strong>。晶體在表面突然終止→大量共價鍵懸空（<strong>表面態，surface states</strong>或稱 dangling bonds）。這些表面態的能階分布在能隙中，密度高達 $10^{12}$–$10^{14}$ cm⁻²eV⁻¹。表面態可以接受或給出電子→在表面建立一個電偶極層→這個偶極層<strong>強制</strong>半導體表面的 Fermi 能階鎖定在特定的能隙位置——與接觸的金屬種類幾乎無關。</p>
+
+<div class="figure"><img src="../../../images/solid-state-physics/ch09_pages/ch9_page_367.png" alt="圖 9.7" loading="lazy"><figcaption>圖 9.7：表面態對能障的影響。左：低表面態密度，$\phi_{Bn}$ 與 $\phi_m$ 線性相關。右：高表面態密度，$\phi_{Bn}$ 幾乎與 $\phi_m$ 無關→Fermi level pinning。</figcaption></div>
+
+<p><strong>量化 Fermi level pinning：</strong>定義表面態的中性能階 $\phi_0$（charge neutrality level）。如果表面態密度 $D_{it} \to \infty$，$\phi_{Bn}$ 被完全釘在 $E_g - \phi_0$。Si 的 $\phi_0$ 約在價帶上方 0.3–0.4 eV→$\phi_{Bn}$ 被釘在 0.7–0.8 eV 附近。GaAs 的 $D_{it}$ 更高→$\phi_{Bn}$ 固定在 ∼0.8 eV，幾乎完全與金屬種類無關。</p>
+
+<div class="callout-warn"><strong>⚡ 費米能階釘札是半導體元件物理中最困擾的問題之一。</strong>它意味著你無法透過選擇不同金屬來自由調控蕭特基能障。這對兩個方面有重大影響：① 蕭特基二極體的順向壓降被限制在 ∼0.3–0.5 V（無法再降低）→功率損耗下限。② 難以實現低能障歐姆接觸→必須改走重摻雜穿隧路線。在 CMOS 技術節點推進到 3nm 以下的今天，接觸電阻已成為元件性能的主要瓶頸之一——而 Fermi level pinning 正是這個問題的物理根源。</div>
+</section>
+
+<section id="ch09_s9-1-4"><h2>9.1.4 蕭特基二極體的電流-電壓特性</h2>
+<div class="figure"><img src="../../../images/solid-state-physics/ch09_pages/ch9_page_369.png" alt="圖 9.8" loading="lazy"><figcaption>圖 9.8：蕭特基二極體的 I-V 特性——注意順向壓降（0.3–0.5 V）比 pn 二極體（0.7 V）低。</figcaption></div>
+<p>蕭特基二極體的電流傳輸機制與 pn 接面<strong>不同</strong>。pn 接面中，少數載子先被注入、然後擴散、最後復合——這是一個擴散主導的過程。蕭特基接面中，電子<strong>不需要</strong>先成為少數載子——它們直接靠熱能跨越（或穿隧通過）能障頂部。這個過程稱為<strong>熱離子發射（thermionic emission）</strong>。</p>
+
+<p><strong>物理圖像：</strong>金屬中有海量的電子分布在 Fermi 能階附近。這些電子以隨機熱速度運動。其中只有那些能量夠高、且速度方向朝向界面（向 +x 方向）的電子，才有機會跨越 $\phi_{Bn}$ 能障進入半導體。跨越能障的機率自然是 Boltzmann 因子 $e^{-e\phi_{Bn}/kT}$。</p>
+
+<div class="eq">$$\boxed{J = A^*T^2 e^{-e\phi_{Bn}/kT}\!\left(e^{eV_a/kT} - 1\right)}$$</div>
+
+<p>其中 $A^* = 4\pi e m^* k^2/h^3$ 是有效 Richardson 常數。對 n-Si，$A^*\approx120$ A/cm²K²；對 n-GaAs，$A^*\approx8$ A/cm²K²（因 $m^*$ 較小）。室溫下 $A^*T^2\approx10^7$ A/cm²。</p>
+
+<p><strong>$J_S = A^*T^2 e^{-e\phi_{Bn}/kT}$ 的數值：</strong>對 Si（$\phi_{Bn}=0.7$ eV，$kT=0.026$ eV）：$e^{-0.7/0.026}=e^{-27}\approx2\times10^{-12}$→$J_S\approx2\times10^{-5}$ A/cm²。這比典型 Si pn 接面的 $J_S$（∼$10^{-10}$–$10^{-12}$ A/cm²）大了<strong>五到七個數量級</strong>。為什麼？因為 pn 接面的 $J_S\propto n_i^2\propto e^{-E_g/kT}=e^{-1.12/0.026}\approx e^{-43}$，衰減遠比 $e^{-\phi_{Bn}/kT}=e^{-27}$ 劇烈。</p>
+
+<div class="callout"><strong>💡 蕭特基 vs pn 二極體——為什麼有兩種二極體？</strong><br>• <strong>蕭特基優勢：多數載子元件</strong>——無少數載子注入→無儲存電荷→無擴散電容→開關速度可達 GHz 級。順向壓降低（0.3–0.5 V vs pn 的 0.7 V）。<br>• <strong>pn 優勢：</strong>反向漏電流極低（$J_S$ 小 5–7 個數量級）、崩潰電壓高（適合高壓整流）。<br>• <strong>典型取捨：</strong>電源供應器的輸出整流→蕭特基（效率高）；高壓功率整流→pn（耐壓高）；RF 混頻器/檢波器→蕭特基（速度快）；TTL 邏輯中的蕭特基箝位→防止 BJT 進入飽和（利用蕭特基的 0.3 V 低順向壓降）。</div>
+</section>
+
+<section id="ch09_s9-1-5"><h2>9.1.5 歐姆接觸——每個元件的必要結構</h2>
+<p>一個二極體需要一個整流接觸（蕭特基或 pn）來實現非線性 I-V。但每個元件<strong>還需要</strong>歐姆接觸來連接外部電路——這些接觸必須是純電阻性的，不能有整流效應。如果你把一個交流信號加到一個有整流效應的接觸上，信號會被削波、失真。</p>
+
+<p><strong>特定接觸電阻率 $\rho_c$（specific contact resistivity）</strong>是衡量歐姆接觸品質的指標——單位 Ω·cm²。現代 CMOS 技術要求 $\rho_c < 10^{-8}$ Ω·cm²（接觸電阻小於通道電阻）。</p>
+
+<p>實現低 $\rho_c$ 有兩條路徑：</p>
+
+<h3>路徑一：低能障接觸</h3>
+<p>如果 $\phi_m < \chi$（n 型），$\phi_{Bn}$ 理論上為負→能障不存在→電子可自由雙向流動→$\rho_c$ 極低。然而因為 Fermi level pinning，純低能障策略在 Si 上幾乎不可行——無論你選什麼金屬，$\phi_{Bn}$ 都卡在 0.5–0.9 eV 之間。但在某些 III-V 材料上（如 InAs，表面態密度低），低能障歐姆接觸是可行的。</p>
+
+<h3>路徑二：重摻雜穿隧接觸（現代 CMOS 的標準方法）</h3>
+<p>即使 $\phi_{Bn}$ 不低，如果把半導體表面摻雜到極重（$>10^{19}$ cm⁻³），空乏區變得極窄（<5 nm）。在這個尺度下，電子不再需要熱激發越過能障頂部——它們可以直接<strong>量子穿隧</strong>穿過能障。穿隧機率對寬度呈指數敏感：</p>
+<div class="eq">$$\rho_c \propto \exp\!\left(\frac{2\sqrt{2m^*}}{\hbar}\frac{\phi_{Bn}}{\sqrt{N_d}}\right)$$</div>
+<p>$N_d$ 越大→$W$ 越窄→穿隧機率越高→$\rho_c$ 越低。在現代 CMOS 中，源極/汲極區域上方會額外沉積一層金屬矽化物（silicide，如 TiSi₂、NiSi），然後在矽化物下方極淺的區域進行超高劑量離子植入（$>10^{20}$ cm⁻³）來形成穿隧歐姆接觸。</p>
+
+<div class="callout-warn"><strong>⚡ 接觸電阻是奈米級 CMOS 的頭號瓶頸。</strong>當電晶體通道長度縮小到 5 nm 以下，通道本身的電阻變得極小。此時，源極/汲極金屬接觸的寄生電阻佔了總電阻的很大比例。即使 $\rho_c=10^{-8}$ Ω·cm²，在一個截面積只有 $10^{-11}$ cm² 的接觸上，電阻高達 1000 Ω——這對驅動電流是致命的。這是為什麼業界投入巨大資源研發新的接觸材料（如 TiSi₂→NiSi→CoSi₂）和介面工程技術。</div>
+</section>
+
+<section id="ch09_s9-2"><h2>9.2 異質接面</h2>
+<p>到目前為止我們的所有接面都是同一種材料的不同摻雜類型（同質接面）。<strong>異質接面</strong>把兩種能隙不同的半導體接在一起。最經典的例子是 GaAs（$E_g=1.42$ eV）和 Al$_x$Ga$_{1-x}$As——後者的能隙可隨 Al 成分 $x$ 從 1.42 eV（$x=0$）調整到超過 2.1 eV（$x>0.45$）。</p>
+
+<div class="figure"><img src="../../../images/solid-state-physics/ch09_pages/ch9_page_374.png" alt="圖 9.11" loading="lazy"><figcaption>圖 9.11：Type I（跨立型）異質接面的能帶圖——GaAs/AlGaAs 是典型例子。$\Delta E_c$ 和 $\Delta E_v$ 將電子和電洞都侷限在窄能隙的 GaAs 層中。</figcaption></div>
+
+<p>兩種材料接觸時，Anderson 定則描述了能帶如何對齊：</p>
+<div class="eq">$$\boxed{\Delta E_c = \chi_1 - \chi_2 \qquad \Delta E_v = \Delta E_g - \Delta E_c}$$</div>
+
+<p><strong>物理圖像：</strong>電子親和力 $\chi$ 告訴你導帶底相對於真空能階的位置。如果材料 1 的 $\chi_1$ 小於材料 2 的 $\chi_2$，材料 1 的導帶底在能量上更高→電子傾向於從材料 1 流向材料 2 的導帶。$\Delta E_c$ 就是這個導帶偏移量。價帶偏移 $\Delta E_v$ 則由能隙差扣除導帶偏移得來。</p>
+
+<h3>9.3.4 異質接面的平衡態靜電學</h3>
+<p>異質接面在熱平衡下的能帶彎曲比同質接面更複雜——因為兩側的能隙、介電常數、摻雜濃度都不同。平衡條件要求兩側的 Fermi 能階對齊。</p>
+<p>以 n-AlGaAs/p-GaAs 為例：電子從 n-AlGaAs 流向 p-GaAs（跨越 $\Delta E_c$ 能障）→在界面兩側形成空乏區。但與同質 pn 接面不同的是，空乏區的電場分布<strong>不對稱</strong>——因為兩側的介電常數和摻雜不同。Poisson 方程必須在兩側分別求解，界面處的邊界條件是電位移連續：$\epsilon_1 \mathcal{E}_1 = \epsilon_2 \mathcal{E}_2$。</p>
+<p><strong>調變摻雜（Modulation Doping）的關鍵：</strong>在 HEMT 結構中，只有 AlGaAs 層摻雜（$N_d \sim 10^{18}$ cm$^{-3}$），GaAs 層不摻雜。電子從 AlGaAs 轉移到 GaAs 的導帶中→在界面形成 2DEG。這些電子與母體施體離子<strong>空間分離</strong>（距離 ∼10 nm）→雜質散射被大幅壓制→遷移率比均勻摻雜的 GaAs 高 10–100 倍。</p>
+
+<h3>9.3.5 異質接面的電流-電壓特性</h3>
+<p>異質接面的電流傳輸比同質接面複雜得多——因為存在多種並行的傳輸機制：</p>
+<p>① <strong>熱離子發射（Thermionic Emission）：</strong>載子獲得足夠熱能越過 $\Delta E_c$ 能障→主導高溫和低偏壓下的電流。$I \propto e^{-e\phi_B/kT}(e^{eV_a/kT}-1)$。</p>
+<p>② <strong>場助穿隧（Field-Assisted Tunneling）：</strong>在高偏壓下，能障被電場壓窄→載子可穿隧通過→電流快速增大。</p>
+<p>③ <strong>缺陷輔助復合（Recombination via Interface States）：</strong>界面處的缺陷態作為復合中心→類似 pn 接面的 SRH 復合電流。$I \propto e^{eV_a/2kT}$。</p>
+<div class="callout"><strong>💡 異質接面 I-V 的實用意義。</strong>在 HBT 中，射極-基極異質接面的 $\Delta E_c$ 很大→電子注入效率極高但反向漏電很小→$\beta$ 大且穩定。在 HEMT 中，2DEG 的密度由 $\Delta E_c$ 和 AlGaAs 層的摻雜和厚度精確控制→閾值電壓可設計。理解異質接面的 I-V 特性是設計這些高頻元件的基礎。</div>
+
+<h3>異質接面的三種類型</h3>
+<div class="figure"><img src="../../../images/solid-state-physics/ch09_pages/ch9_page_376.png" alt="圖 9.11" loading="lazy"><figcaption>圖 9.11：Type I 異質接面能帶圖——$\Delta E_c$ 和 $\Delta E_v$ 將載子侷限在窄能隙層中。</figcaption></div>
+<table><thead><tr><th>類型</th><th>能帶排列</th><th>載子侷限</th><th>例子</th></tr></thead><tbody>
+<tr><td><strong>Type I（跨立）</strong></td><td>$\Delta E_c$ 和 $\Delta E_v$ 同側</td><td>電子和電洞在同一層</td><td>GaAs/AlGaAs</td></tr>
+<tr><td><strong>Type II（錯開）</strong></td><td>$\Delta E_c$ 和 $\Delta E_v$ 反向</td><td>電子在一層、電洞在另一層</td><td>InP/InGaAs</td></tr>
+<tr><td><strong>Type III（斷開）</strong></td><td>一個的價帶頂 > 另一個的導帶底</td><td>半金屬行為</td><td>InAs/GaSb</td></tr></tbody></table>
+
+<div class="callout-warn"><strong>⚡ 異質接面改變了半導體技術的面貌——三個最重要的應用：</strong><br><br><strong>• 雙異質接面雷射（DH Laser）：</strong>AlGaAs/GaAs/AlGaAs 三明治結構。寬能隙的 AlGaAs 層將注入的電子和電洞<strong>同時侷限</strong>在 GaAs 主動層中。這大幅提高了復合效率→降低了雷射的閾值電流→實現了室溫連續波操作。CD/DVD/Blu-ray 的光讀取頭、光纖通訊的光源，都是異質接面雷射的後代。<br><br><strong>• 異質接面雙極性電晶體（HBT）：</strong>射極用寬能隙材料（如 AlGaAs）取代 GaAs→$\gamma$（射極注入效率）因為 $N_E$ 項不再出現而大幅提高→$\beta$ 可達數千（傳統 BJT 的 $\beta$ 受 $\gamma$ 限制在 50–200）。HBT 是手機功率放大器和光纖通訊驅動電路的主力。<br><br><strong>• 高電子遷移率電晶體（HEMT）：</strong>在 AlGaAs/GaAs 異質接面界面處，電子從 AlGaAs 層轉移到 GaAs 層→在界面形成一層極薄的<strong>二維電子氣（2DEG）</strong>。2DEG 中的電子與其母體施體離子在空間上分離→雜質散射大幅降低→遷移率可達 $10^6$ cm²/V·s（低溫）→極低雜訊、極高頻率的放大。HEMT 是衛星通訊、雷達、和射頻天文望遠鏡中低雜訊放大器的核心元件。</div>
+</section>
+
+<section id="ch09_summary"><h2>本章摘要</h2>
+<ol style="font-size:14px;color:var(--t2);margin-left:18px">
+<li><strong>蕭特基能障（理想）：</strong>$\phi_{Bn}=\phi_m-\chi$。$\phi_{Bn}$ 是金屬端電子跨越的能障，$V_{bi}=\phi_{Bn}-\phi_n$ 是半導體側能帶彎曲。</li>
+<li><strong>空乏區分析：</strong>與 p⁺n 接面完全相同。$W\propto\sqrt{V_{bi}+V_R}$。Mott-Schottky 分析是實驗量測的標準方法。</li>
+<li><strong>費米能階釘札：</strong>表面態（懸鍵）密度使 $\phi_{Bn}$ 對金屬功函數不敏感。Si 的 $\phi_{Bn}$ 通常卡在 0.5–0.9 eV。這是接觸工程的主要挑戰。</li>
+<li><strong>蕭特基二極體：</strong>$J=A^*T^2e^{-e\phi_{Bn}/kT}(e^{eV_a/kT}-1)$。熱離子發射機制的多數載子元件→無擴散電容→極快開關速度。</li>
+<li><strong>歐姆接觸：</strong>低能障（$\phi_m<\chi$）或重摻雜穿隧實現低 $\rho_c$。奈米級 CMOS 中接觸電阻是關鍵瓶頸。</li>
+<li><strong>異質接面：</strong>Anderson 定則 $\Delta E_c=\chi_1-\chi_2$。Type I/II/III 三類。應用：DH 雷射、HBT、HEMT。</li></ol></section>
+
+
+<!-- ===== 第十章 雙極性接面電晶體（BJT） ===== -->
+
+<header class="header"><div class="cl">第十章</div><h1>雙極性接面電晶體（BJT）</h1><div class="meta">Donald A. Neamen·《半導體物理與元件：基本原理》第四版·第 370–403 頁</div></header>
+
+<section id="ch10_preview"><div class="callout"><strong>📋 10.0 本章預覽</strong>
+<p>pn 接面二極體（第七、八章）是兩端元件——你只能控制它導通或不導通，無法實現<strong>放大</strong>。放大的本質是<strong>用小信號控制大信號</strong>。這需要第三個端點。</p>
+<p>BJT 是第一個被發明的三端固態放大元件（1947 年，Bardeen、Brattain、Shockley）。它的基本結構是兩個 pn 接面背靠背放置，讓它們<strong>互相作用</strong>——一個接面注入少數載子，另一個接面收集它們。透過這種「注入→傳輸→收集」的機制，一個從基極流入的<strong>小電流</strong> $I_B$（微安級）可以控制一個從集極流入的<strong>大電流</strong> $I_C$（毫安級），實現電流放大。</p>
+<p>雖然 MOSFET 後來取代 BJT 成為數位電路的主流，但 BJT 在類比領域（音頻放大器、射頻前端、電源管理）仍然佔有重要地位——它的跨導更高、匹配更好、雜訊更低。</p>
+<div class="callout-warn"><strong>⚡ 本章的邏輯鏈：</strong>BJT 結構（10.1.1）→ 四種操作模式（10.1.3）→ 基極中少數載子分布（10.1.4）→ 射極注入效率 $\gamma$（10.2.1）→ 基極傳輸因子 $\alpha_T$（10.2.1）→ 電流增益 $\alpha,\beta$（10.2.2）→ Ebers-Moll 完整模型（10.2.3）→ 非理想效應：Early 效應等（10.3）→ 小訊號混合-π 模型（10.4）。每一步都精確建立在前一步的物理基礎上。</div></div></section>
+
+<section id="ch10_s10-1a"><h2>10.1.1–10.1.3 BJT 的結構、電流關係、操作模式</h2>
+<h3>從兩個二極體到一個電晶體</h3>
+<div class="figure"><img src="../../../images/solid-state-physics/ch10_pages/ch10_page_399.png" alt="圖 10.3" loading="lazy"><figcaption>圖 10.3：npn BJT 的截面結構和電流路徑——電子從射極注入基極，擴散穿越基極後被集極收集。</figcaption></div>
+<p>如果你只是把兩個 pn 二極體背靠背放在一起（p-n-p 或 n-p-n），而不讓它們的基極區域<strong>共用</strong>，你得到的只是兩個獨立的二極體——沒有放大功能。BJT 的奧妙在於：兩個接面<strong>共用同一個狹窄的基極區域</strong>。射極注入的少數載子跨過這個狹窄基極，被集極收集。基極寬度 $W_B$ 必須遠小於少數載子的擴散長度 $L_B$——這是 BJT 能夠放大的根本原因。</p>
+
+<div class="figure"><img src="../../../images/solid-state-physics/ch10_pages/ch10_page_397.png" alt="圖 10.1, 10.2" loading="lazy"><figcaption>圖 10.1–10.2：npn BJT 的截面結構與電路符號。n⁺ 射極（重摻雜 ∼$10^{19}$ cm⁻³）、p 基極（輕摻雜 ∼$10^{17}$ cm⁻³，寬度 $W_B\sim0.1$–1 µm）、n 集極（輕摻雜 ∼$10^{16}$ cm⁻³）。</figcaption></div>
+
+<p><strong>為什麼射極要重摻雜？</strong>射極的任務是注入大量電子到基極。重摻雜 n⁺ 射極確保射極電流中以電子為主（$\gamma\approx1$）——相較之下從基極注入射極的電洞很少。如果射極和基極摻雜相同，兩種載子的注入量相當→沒有淨放大。</p>
+
+<p><strong>為什麼基極要極窄？</strong>注入的電子在基極中是少數載子，會與多數載子（電洞）復合。如果基極太寬，大部分電子在到達集極前就復合了→沒有集極電流→沒有放大。$W_B \ll L_B$ 確保絕大多數電子存活並被收集。</p>
+
+<p><strong>為什麼集極要輕摻雜？</strong>集極的主要任務是收集電子，但 BC 接面的空乏區主要在輕摻雜側→輕摻雜的集極側承擔了大部分電壓降→提高了崩潰電壓（$V_{CE}$ 耐壓）。</p>
+
+<h3>四種操作模式</h3>
+<table><thead><tr><th>模式</th><th>BE 接面</th><th>BC 接面</th><th>物理行為</th><th>用途</th></tr></thead><tbody>
+<tr><td><strong>順向主動</strong> (Forward-active)</td><td>順偏</td><td>逆偏</td><td>射極注入→基極傳輸→集極收集</td><td>線性放大器</td></tr>
+<tr><td><strong>截止</strong> (Cutoff)</td><td>逆偏</td><td>逆偏</td><td>兩個接面都不注入→$I_C\approx0$</td><td>數位 OFF</td></tr>
+<tr><td><strong>飽和</strong> (Saturation)</td><td>順偏</td><td>順偏</td><td>兩個接面都注入→基極充滿過量載子</td><td>數位 ON</td></tr>
+<tr><td><strong>反向主動</strong> (Inverse)</td><td>逆偏</td><td>順偏</td><td>集極當射極用→$\beta_R\ll\beta_F$</td><td>少用</td></tr></tbody></table>
+
+<p>在順向主動模式下，$V_{BE}\approx0.7$ V（順偏），$V_{BC}<0$（逆偏）。三個端點電流滿足 Kirchhoff 電流律：$I_E = I_B + I_C$。</p>
+
+<div class="figure"><img src="../../../images/solid-state-physics/ch10_pages/ch10_page_400.png" alt="圖 10.5, 10.6" loading="lazy"><figcaption>圖 10.5–10.6：順向主動模式下的電流成分。粗箭頭 $I_{nE}$→$I_{nC}$（電子從射極到集極）是主要電流路徑。細箭頭為浪費的電流（基極復合 $I_{rB}$、電洞注入射極 $I_{pE}$），這些合起來構成了 $I_B$。</figcaption></div>
+
+<div class="callout"><strong>💡 BJT 的電流放大本質上是一個「效率遊戲」。</strong>射極發射了 100 個電子。其中 99 個成功跨越基極被集極收集（$\alpha=0.99$），只有 1 個在半路復合。基極必須從外部補充 1 個電洞來維持電中性——這就是 $I_B$。所以 $I_C/I_B=99/1=99=\beta$。$\beta$ 衡量的就是這個收集過程的效率。</div>
+
+<h3>12.1.4 BJT 放大原理——為什麼三端元件能放大？</h3>
+<p>BJT 能放大訊號的根本原因：用<strong>小的基極電流 $I_B$</strong> 控制<strong>大的集極電流 $I_C = \beta I_B$</strong>。在共射極組態中，輸入加在 BE 端，輸出從 CE 端取出。</p>
+<p><strong>電壓放大：</strong>輸入端的 BE 接面是順偏二極體→小訊號電阻 $r_\pi = \beta/g_m$（通常幾 kΩ）。輸出端的 CE 之間有大電阻 $r_o = V_A/I_C$（通常幾百 kΩ）。電壓增益 $A_v = -g_m R_L$——輸入電阻低、輸出電阻高→用一個小的輸入電壓變化就能控制一個大的輸出電壓變化。</p>
+<div class="callout"><strong>💡 放大的能量從哪裡來？</strong>不是無中生有！BJT 用小的輸入訊號控制從電源（$V_{CC}$）流向負載的大電流。就像水龍頭——你用很小的力轉動閥門（$I_B$），就能控制大量的水流（$I_C$）。能量來自電源 $V_{CC}$，不是來自輸入訊號。放大器的本質是<strong>能量轉換器</strong>，不是能量產生器。</div>
+</section>
+
+<section id="ch10_s10-1b"><h2>10.1.4 基極中少數載子的分布</h2>
+<p>這節是 BJT 物理的核心。基極中沒有電場（中性區）→注入的電子只能靠<strong>擴散</strong>移動。電子的穩態擴散方程為 $D_B\,d^2\delta n_B/dx^2 = \delta n_B/\tau_B$。</p>
+
+<p>因為基極極窄（$W_B\ll L_B = \sqrt{D_B\tau_B}$），電子在基極中的<strong>傳輸時間遠短於復合時間</strong>→復合項可忽略→$d^2\delta n_B/dx^2\approx0$。這意味著電子濃度在基極中呈<strong>線性分布</strong>——這是 BJT 分析中最關鍵的簡化結果。</p>
+<p><strong>為什麼線性分布如此重要？</strong>① 擴散電流 $J_n = eD_B(dn/dx)$ 與梯度成正比。線性分布→梯度為常數→電流在整個基極中<strong>不隨位置變化</strong>→沒有載子在半路「消失」。② 梯度 $= \delta n_B(0)/W_B$→$I_C \propto 1/W_B$→基極越薄，電流越大。③ 這是「短二極體」近似（8.1.8）的直接應用——BJT 的基極本質上就是一個短二極體。</p>
+
+<div class="figure"><img src="../../../images/solid-state-physics/ch10_pages/ch10_page_401.png" alt="圖 10.7" loading="lazy"><figcaption>圖 10.7：基極中少數載子（電子）濃度的線性分布。$x=0$ 處（BE 邊界）濃度 $=n_{B0}e^{V_{BE}/V_T}$，$x=W_B$ 處（BC 邊界）濃度 $\approx0$（因 BC 逆偏收集）。斜率 $=\delta n_B(0)/W_B$。</figcaption></div>
+
+<p>在 BE 接面邊界（$x=0$），Shockley 邊界條件給出：$\delta n_B(0)=n_{B0}(e^{V_{BE}/V_T}-1)$。在 BC 接面邊界（$x=W_B$），逆偏將所有到達的電子掃入集極→$\delta n_B(W_B)\approx0$。直線連接兩點→斜率為常數→擴散電流 $J_n=eD_B\,\delta n_B(0)/W_B$ 在整個基極中為<strong>常數</strong>。</p>
+
+<div class="callout"><strong>💡 $W_B$ 越小→$I_C$ 越大——為什麼？</strong>$I_C\propto1/W_B$：基極越窄，濃度梯度越陡→擴散越強。這就是為什麼 BJT 的電流增益和速度都隨基極寬度縮小而提升。現代 SiGe HBT 的基極寬度僅有 ∼10 nm——透過精確的 SiGe 磊晶來實現。</div>
+</section>
+
+<section id="ch10_s10-2a"><h2>10.2.1–10.2.2 電流增益的物理根源 ⭐</h2>
+<div class="figure"><img src="../../../images/solid-state-physics/ch10_pages/ch10_page_405.png" alt="圖 10.10" loading="lazy"><figcaption>圖 10.10：射極注入效率 $\gamma$ 和基極傳輸因子 $lpha_T$ 的圖示——決定 BJT 電流增益的兩個關鍵因素。</figcaption></div>
+<p>BJT 的電流放大本質上由兩個因子乘積決定：</p>
+<div class="eq">$$\boxed{\alpha = \frac{I_C}{I_E} = \gamma \cdot \alpha_T}$$</div>
+
+<h3>射極注入效率 $\gamma$：「有用的 vs 浪費的」</h3>
+<p>射極電流 $I_E$ 有兩個成分：從射極注入基極的電子電流 $I_{nE}$（有用），和從基極注入射極的電洞電流 $I_{pE}$（浪費——這些電洞只在射極中與多數載子復合，對集極電流無貢獻）。</p>
+<div class="eq">$$\gamma = \frac{I_{nE}}{I_{nE}+I_{pE}} = \frac{1}{1+\dfrac{D_E N_B W_B}{D_B N_E L_E}}$$</div>
+<p>要使 $\gamma\to1$，分母中的修正項必須 $\ll1$。這要求：$N_E\gg N_B$（射極遠重於基極）、$W_B$ 小、$L_E$ 大（射極中電洞擴散長度大→電洞在射極深處復合而非在界面附近堆積）。這就是為什麼射極是 n⁺、基極是 p、且基極極窄的根本原因。</p>
+
+<h3>基極傳輸因子 $\alpha_T$：「活著到達 vs 半路復合」</h3>
+<p>射極注入的電子不會全部到達集極。有些在基極中與電洞復合。復合損失的比例取決於基極寬度與擴散長度的比值：</p>
+<div class="eq">$$\alpha_T \approx 1 - \frac{1}{2}\left(\frac{W_B}{L_B}\right)^2$$</div>
+<p>$W_B/L_B$ 越小→$\alpha_T$ 越接近 1。典型 BJT：$W_B\sim0.2$ µm，$L_B\sim10$ µm→$W_B/L_B\sim0.02$→$\alpha_T\approx0.9998$。</p>
+
+<h3>⭐ 共射極電流增益 $\beta$</h3>
+<div class="eq">$$\boxed{\beta = \frac{I_C}{I_B} = \frac{\alpha}{1-\alpha}}$$</div>
+<p>$I_B$ 主要由兩部分組成：補充基極復合損失的電洞（$I_{rB}$），和從基極注入射極的浪費電洞電流（$I_{pE}$）。</p>
+
+<div class="callout-warn"><strong>⚡ $\beta$ 對 $\alpha$ 的極端敏感性——BJT 電路設計的關鍵教訓。</strong><br>$\alpha=0.99$→$\beta=99$；$\alpha=0.98$→$\beta=49$；$\alpha=0.995$→$\beta=199$；$\alpha=0.9$→$\beta=9$。<br><br>$\alpha$ 從 0.99 降到 0.98 僅有 <strong>1% 的變化</strong>，但 $\beta$ 從 99 降到 49——<strong>下降了 50%</strong>！這就是為什麼 BJT 電路<strong>不能</strong>假設 $\beta$ 是精確值——你必須透過負回授（射極電阻、集極回授）來穩定偏壓點。這也是為什麼 BJT 放大器通常設計為對 $\beta>\beta_{\min}$ 都能正常工作。<br><br>也是因為這個敏感性，MOSFET 在數位電路中取代了 BJT：MOSFET 的「增益」由 $g_m$ 決定，$g_m$ 對製程變異的敏感度遠低於 BJT 的 $\beta$。</div>
+</section>
+
+<section id="ch10_s10-2b"><h2>10.2.3 Ebers-Moll 模型——BJT 的通用等效電路</h2>
+<p>Ebers-Moll 模型是 BJT 最通用的描述——兩個背靠背的二極體（代表 BE 和 BC 接面），加上兩個互相控制的電流源。它能夠預測 BJT 在所有四個操作模式下的行為，是 SPICE 中 BJT 模型的基礎。</p>
+<p><strong>等效電路的四個元件：</strong></p>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li><strong>BE 二極體：</strong>$I_F = I_{ES}(e^{V_{BE}/V_T}-1)$——BE 接面的順向電流。</li>
+<li><strong>BC 二極體：</strong>$I_R = I_{CS}(e^{V_{BC}/V_T}-1)$——BC 接面的電流（順向或反向取決於偏壓）。</li>
+<li><strong>$\alpha_F I_F$（受控電流源）：</strong>BE 電流中成功穿越基極到達集極的比例。$\alpha_F \approx 0.99$。</li>
+<li><strong>$\alpha_R I_R$（受控電流源）：</strong>BC 電流中穿越基極到達射極的比例。$\alpha_R \ll \alpha_F$（因為集極設計不是為了高效注入）。</li>
+</ul>
+<div class="eq">$$I_E = I_{ES}(e^{V_{BE}/V_T}-1) - \alpha_R I_{CS}(e^{V_{BC}/V_T}-1)$$</div>
+<div class="eq">$$I_C = \alpha_F I_{ES}(e^{V_{BE}/V_T}-1) - I_{CS}(e^{V_{BC}/V_T}-1)$$</div>
+
+<div class="figure"><img src="../../../images/solid-state-physics/ch10_pages/ch10_page_410.png" alt="圖 10.16" loading="lazy"><figcaption>圖 10.16：Ebers-Moll 等效電路——$I_F$（順向二極體電流）和 $I_R$（反向二極體電流）加上耦合係數 $\alpha_F,\alpha_R$。</figcaption></div>
+
+<p><strong>在順向主動模式（$V_{BE}>0$, $V_{BC}<0$）：</strong>$e^{V_{BC}/V_T}\approx0$→$I_C\approx\alpha_F I_{ES}e^{V_{BE}/V_T} = \alpha_F I_E\approx I_S e^{V_{BE}/V_T}$。這就是我們熟悉的指數關係。</p>
+<p><strong>在飽和模式（$V_{BE}>0$, $V_{BC}>0$）：</strong>兩個二極體都導通→$I_C = \alpha_F I_F - I_R$。$I_R$ 開始抵消 $\alpha_F I_F$→$V_{CE}$ 降得很低（$V_{CE,sat} \approx 0.1$–$0.2$ V）。飽和區中兩個接面都順偏→基極中儲存大量過量載子→開關延遲（第十三章）。</p>
+<p><strong>互易關係（reciprocity）：</strong>$\alpha_F I_{ES} = \alpha_R I_{CS}$——這不是巧合，而是半導體物理的自洽要求（來自二極體飽和電流的微觀定義）。這個關係減少了獨立參數的數量——Ebers-Moll 模型只需要 3 個獨立參數（$I_{ES}$, $\alpha_F$, $\alpha_R$）而非 4 個。</p>
+<div class="callout"><strong>💡 Ebers-Moll vs 混合-π 模型。</strong>Ebers-Moll 是大訊號 DC 模型——描述 BJT 在任意偏壓點的電流。混合-π 模型（10.4）是小訊號 AC 模型——描述 BJT 在特定偏壓點附近的小訊號響應。在 SPICE 模擬中，大訊號 Ebers-Moll（或更先進的 Gummel-Poon）用於 DC 和暫態分析；小訊號混合-π 用於 AC 分析。兩者是同一物理的不同數學近似。</div>
+</section>
+
+<section id="ch10_s10-3"><h2>10.3 非理想效應</h2>
+<h3>基極寬度調變與 Early 效應</h3>
+<div class="figure"><img src="../../../images/solid-state-physics/ch10_pages/ch10_page_460.png" alt="圖 10.21" loading="lazy"><figcaption>圖 10.21：BJT 輸出特性——$I_C$ 隨 $V_{CE}$ 輕微上傾（Early 效應），外插交於 $-V_A$。</figcaption></div>
+<p>在理想 BJT 中，$I_C$ 只取決於 $V_{BE}$，與 $V_{CE}$ 無關。但現實中 $V_{CE}$ 增加→BC 接面逆偏增加→BC 空乏區向基極側擴展→<strong>有效基極寬度 $W_B$ 變窄</strong>。</p>
+<p>$W_B$ 變窄有兩個效應：① 電子濃度梯度 $\delta n_B(0)/W_B$ 變大→$I_C$ 增加。② 基極傳輸時間變短→$\alpha_T$ 輕微增大。兩者都使 $I_C$ 隨 $V_{CE}$ 增加而增加——這就是 <strong>Early 效應</strong>。</p>
+
+<div class="figure"><img src="../../../images/solid-state-physics/ch10_pages/ch10_page_416.png" alt="圖 10.21" loading="lazy"><figcaption>圖 10.21：BJT 的 $I_C$–$V_{CE}$ 輸出特性。注意曲線的輕微上傾（Early 效應）。所有曲線外插交於 $V_{CE}=-V_A$，$V_A$ = Early 電壓。</figcaption></div>
+
+<div class="eq">$$I_C = I_S\,e^{V_{BE}/V_T}\!\left(1 + \frac{V_{CE}}{V_A}\right)$$</div>
+
+<p><strong>$V_A$（Early 電壓）的物理意義：</strong>$V_A$ 越大→$I_C$–$V_{CE}$ 曲線越平→輸出電阻 $r_o=V_A/I_C$ 越大→放大器增益越高。$V_A$ 取決於基極寬度——$W_B$ 越大，BC 空乏區的變化對 $W_B$ 的<strong>比例影響</strong>越小→$V_A$ 越高。但 $W_B$ 大也會降低 $\beta$（因 $\alpha_T$ 下降）。這是 BJT 設計中的經典取捨：$\beta$ vs $V_A$。</p>
+
+<h3>其他非理想效應</h3>
+<p><strong>Webster 效應（高階注入）：</strong>當 $I_C$ 很大時，注入基極的電子濃度與基極多數載子電洞濃度可比（$\delta n_B\approx p_{B0}$）→為維持電中性，電洞濃度也必須增加→注入射極的電洞電流增大→$\gamma$ 下降→$\beta$ 隨 $I_C$ 增加而下降。</p>
+<p><strong>Kirk 效應（基極推擠）：</strong>在極高 $I_C$ 下，集極電流的空間電荷在 BC 空乏區中產生顯著的附加電場→空乏區向集極側移動→有效基極向集極延伸→$W_B$ 增加→截止頻率 $f_T$ 下降。</p>
+<p><strong>崩潰（Breakdown）：</strong>$V_{CE}$ 太高→BC 接面雪崩倍增→$I_C$ 急劇增大（與 pn 接面崩潰機制相同）。BJT 中崩潰電壓記為 $BV_{CEO}$（基極開路）或 $BV_{CBO}$（射極開路）。</p>
+
+<h3>12.4.6 崩潰電壓——BJT 的電壓天花板</h3>
+<p>BJT 有兩個關鍵的崩潰電壓指標：</p>
+<p><strong>$BV_{CBO}$（射極開路）：</strong>純粹是 BC 接面的雪崩崩潰電壓——與一個獨立的 pn 接面相同。取決於集極側的摻雜濃度 $N_C$：$N_C$ 越低→空乏區越寬→崩潰電壓越高。典型值：50–300 V。</p>
+<p><strong>$BV_{CEO}$（基極開路）：</strong>比 $BV_{CBO}$ <strong>低得多</strong>。為什麼？因為在共射極組態中，雪崩倍增產生的額外電子被掃到集極→增加了 $I_C$→增加了 $I_B$（通過 $\beta$ 反饋）→進一步增加 $I_C$→正反饋迴路→在更低的電壓下就發生崩潰。</p>
+<div class="eq">$$BV_{CEO} \approx \frac{BV_{CBO}}{\beta^{1/n}}$$</div>
+<p>其中 $n$ 是雪崩倍增指數（通常 3–4 對 Si）。對 $\beta=100$，$n=4$：$BV_{CEO} \approx BV_{CBO}/100^{0.25} \approx BV_{CBO}/3.2$。所以一個 $BV_{CBO}=100$ V 的 BJT，$BV_{CEO}$ 只有約 30 V。</p>
+<div class="callout-warn"><strong>⚡ 崩潰電壓 vs $\beta$ 的兩難。</strong>$\beta$ 越大→$BV_{CEO}$ 越低。高壓 BJT 必須犧牲 $\beta$（用較寬的基極）。功率 BJT 通常用厚集極區（低 $N_C$）來提高 $BV_{CBO}$，同時用較寬的基極來控制 $\beta$——但這會犧牲速度。這就是為什麼功率 BJT 的 $f_T$ 通常只有幾 MHz，而小訊號 BJT 可達 GHz。</div>
+</section>
+
+<section id="ch10_s10-4"><h2>10.4 小訊號等效電路——混合-π 模型</h2>
+<p>在 DC 偏壓點 $(I_{CQ}, V_{CEQ})$ 附近，如果疊加一個小 AC 信號，BJT 的非線性指數關係可以<strong>線性化</strong>。這就是<strong>混合-π 模型（hybrid-π model）</strong>的由來。整個模型只有三個主參數，卻精確描述了 BJT 在低到中頻範圍內的所有小訊號行為。</p>
+
+<div class="eq">$$\boxed{g_m = \frac{I_{CQ}}{V_T} \qquad r_\pi = \frac{\beta}{g_m} \qquad r_o = \frac{V_A}{I_{CQ}}}$$</div>
+
+<p><strong>$g_m$（跨導）——最核心的參數：</strong>$g_m = \partial I_C/\partial V_{BE} = I_{CQ}/V_T$。它告訴你 $V_{BE}$ 的微小變化能產生多大的 $I_C$ 變化：$i_c = g_m v_{be}$。室溫（$V_T=0.026$ V）：$I_C=1$ mA→$g_m=38.5$ mS。$I_C=10$ µA→$g_m=0.385$ mS。注意 $g_m\propto I_{CQ}$——偏壓電流直接控制增益。</p>
+
+<p><strong>$r_\pi$（輸入電阻）：</strong>$r_\pi = v_{be}/i_b = \beta/g_m = \beta V_T/I_{CQ}$。$I_C=1$ mA、$\beta=100$→$r_\pi=2.6$ kΩ。$r_\pi$ 是從基極看向射極的等效電阻。</p>
+
+<p><strong>$r_o$（輸出電阻）：</strong>$r_o = \partial V_{CE}/\partial I_C = V_A/I_{CQ}$。來自 Early 效應的有限輸出阻抗。$I_C=1$ mA、$V_A=100$ V→$r_o=100$ kΩ。</p>
+
+<div class="callout"><strong>💡 BJT 的 $g_m$ 比 MOSFET 大——這是 BJT 在類比電路中仍占優勢的根本原因。</strong><br><br>BJT：$g_m=I_C/V_T=38.5$ mS/mA（每毫安偏壓電流產生 38.5 mS 的跨導）。<br>MOSFET（飽和區）：$g_m=2I_D/(V_{GS}-V_{TH})$。同樣 1 mA：若 $V_{GS}-V_{TH}=0.2$ V→$g_m=10$ mS；若 $V_{GS}-V_{TH}=0.5$ V→$g_m=4$ mS。<br><br>BJT 的 $g_m$ 大了 4–10 倍。更大的 $g_m$→更大的電壓增益（$A_v=-g_m R_C$）、更低的輸入參考雜訊。這就是為什麼低雜訊放大器（LNA）、高速運算放大器輸入級、和射頻功率放大器仍然偏好使用 BJT（或 BiCMOS 製程中的 BJT 部分）。<br><br>但 BJT 有 $r_\pi$ 的負載效應（輸入阻抗有限）和基極電流的散粒雜訊——這在極高阻抗信號源應用中不利。</div>
+</section>
+
+<section id="ch10_summary"><h2>本章摘要</h2>
+<ol style="font-size:14px;color:var(--t2);margin-left:18px">
+<li><strong>BJT 結構：</strong>n⁺-p-n（或 p⁺-n-p）。射極重摻雜→$\gamma\approx1$；基極極窄（$W_B\ll L_B$）→$\alpha_T\approx1$；集極輕摻雜→高崩潰電壓。</li>
+<li><strong>順向主動模式：</strong>BE 順偏（注入）、BC 逆偏（收集）。$I_E=I_B+I_C$。</li>
+<li><strong>基極傳輸：</strong>$W_B\ll L_B$→無復合→少數載子線性分布→擴散電流 $J_n\propto1/W_B$。$W_B$ 越窄→$I_C$ 越大。</li>
+<li><strong>電流增益：</strong>$\alpha=\gamma\cdot\alpha_T$。$\beta=\alpha/(1-\alpha)$。$\alpha$ 的微小變化（1%）使 $\beta$ 劇烈波動（50%）。</li>
+<li><strong>Ebers-Moll 模型：</strong>兩個背靠背二極體+耦合電流源。BJT 所有四種操作模式的統一描述。SPICE BJT 模型的基礎。</li>
+<li><strong>Early 效應：</strong>$V_{CE}$ 調變 $W_B$→$I_C=I_Se^{V_{BE}/V_T}(1+V_{CE}/V_A)$。$r_o=V_A/I_C$。$W_B$ 大→$V_A$ 大但 $\beta$ 小→設計取捨。</li>
+<li><strong>小訊號混合-π 模型：</strong>$g_m=I_{CQ}/V_T$（BJT 的 $g_m$ 比 MOSFET 大 4–10×），$r_\pi=\beta/g_m$，$r_o=V_A/I_{CQ}$。</li></ol></section>
+
+
+<!-- ===== 第十一章 場效電晶體（MOSFET） ===== -->
+
+<header class="header"><div class="cl">第十一章</div><h1>場效電晶體（MOSFET）</h1><div class="meta">Donald A. Neamen·《半導體物理與元件：基本原理》第四版·第 396–445 頁</div></header>
+
+<section id="ch11_preview"><div class="callout"><strong>📋 11.0 本章預覽</strong>
+<p>如果說 pn 接面是半導體物理中最基本的結構，那麼 MOSFET 就是半導體產業中<strong>最重要的元件</strong>。你手中的手機處理器、電腦 CPU、DRAM 記憶體、NAND Flash 儲存——這些晶片內部數十億至數兆個基本單元全部是 MOSFET。</p>
+<p>MOSFET 的運作原理與 BJT（第十章）截然不同。BJT 是<strong>電流控制</strong>元件——基極電流 $I_B$ 控制集極電流 $I_C$。MOSFET 是<strong>電壓控制</strong>元件——閘極電壓 $V_{GS}$ 透過氧化層電容<strong>靜電控制</strong>通道的導電性，閘極幾乎不消耗直流電流（$I_G\approx0$）。這個根本差異使 MOSFET 在數位電路中遠優於 BJT：零靜態輸入電流→零靜態功耗（理想上）→可以堆積數十億個電晶體在一個晶片上。</p>
+<div class="callout-warn"><strong>⚡ MOSFET 為何統治了半導體產業？</strong>BJT 發明在先（1947），但 MOSFET（1960, Kahng 和 Atalla）後來居上成為主流（1980 年代至今），三個關鍵優勢：①<strong>電壓控制</strong>→零 DC 閘極電流→近乎零靜態功耗。②<strong>結構簡單、對稱</strong>→容易按比例縮小（Moore 定律的物理基礎：把 $L$ 和 $t_{ox}$ 都縮小 $k$ 倍→$I_D$ 增加 $k$ 倍、速度增加 $k^2$ 倍、密度增加 $k^2$ 倍）。③<strong>CMOS 互補式結構</strong>（nMOS+pMOS）→只有在切換瞬間才消耗功率。理解 MOSFET，就是理解現代數位文明的物理基礎。</div></div></section>
+
+<section id="ch11_s11-1a"><h2>11.1.1–11.1.2 MOS 結構與氧化層電容</h2>
+<div class="figure"><img src="../../../images/solid-state-physics/ch11_pages/ch11_page_420.png" alt="圖 10.23" loading="lazy"><figcaption>圖 10.23：MOS 結構的能帶圖——金屬、氧化層、半導體的能帶彎曲與 Fermi 能階對齊。</figcaption></div>
+<p>一個 n 通道增強型 MOSFET 的核心結構是四層堆疊：<strong>金屬</strong>（或重摻雜多晶矽）閘極 / <strong>氧化物</strong>（SiO₂）絕緣層 / <strong>p 型矽</strong>基板 / <strong>n⁺</strong> 源極和汲極區域。這四層的縮寫 M-O-S 賦予了這個元件它的名字。</p>
+<div class="figure"><img src="../../../images/solid-state-physics/ch11_pages/ch11_page_422.png" alt="圖 11.1" loading="lazy"><figcaption>圖 11.1：n 通道增強型 MOSFET 的截面結構。閘極、氧化層、半導體三層構成一個平行板電容器。$V_{GS}>V_T$ 時，p 型基板表面形成 n 型反轉層（通道），連接源極和汲極。</figcaption></div>
+
+<p><strong>「場效」的本質——為什麼閘極不消耗電流？</strong>MOSFET 的閘極和通道之間有一層<strong>絕緣的</strong>氧化層。在直流條件下，氧化層不導電→$I_G=0$。閘極完全靠<strong>靜電感應</strong>（電場效應）來控制通道中的載子濃度——就像你用一根帶靜電的塑膠棒靠近碎紙屑，紙屑被吸引而不需要任何電流流動。這是 MOSFET 與 BJT 最根本的差別：BJT 的基極需要持續注入電流來補充復合損失（$I_B\neq0$）；MOSFET 的閘極只需充電一個電容器（$C_{ox}$），充完之後就不需要再供電。</p>
+
+<h3>氧化層電容——MOSFET 最重要的結構參數</h3>
+<div class="eq">$$\boxed{C_{ox} = \frac{\epsilon_{ox}}{t_{ox}}}$$</div>
+<p>$C_{ox}$ 是單位面積的氧化層電容。$\epsilon_{ox}=3.9\epsilon_0=3.45\times10^{-13}$ F/cm。$t_{ox}$ 越小→$C_{ox}$ 越大→給定 $V_{GS}$ 能感應更多的反轉層電荷→$I_D$ 越大。</p>
+<p><strong>$t_{ox}$ 的演進史就是 Moore 定律的縮影：</strong>1970 年代 $t_{ox}\sim100$ nm→1990 年代 $t_{ox}\sim10$ nm→2010 年代 $t_{ox}\sim1.2$ nm（僅約 4–5 層 SiO₂ 分子！）。當 $t_{ox}$ 縮小到 ∼1 nm 時，量子穿隧效應使電子可以直接穿過氧化層→閘極漏電流急劇增大（從 ∼10⁻¹² A 增加到 ∼10⁻⁶ A）→待機功耗失控。這就是 2007 年 Intel 從 SiO₂ 轉向 <strong>high-κ 材料（HfO₂，$\kappa\sim25$）</strong>的原因：$\kappa$ 提高 6 倍→可用 6 倍厚的物理厚度達到相同的等效電容→穿隧漏電流以指數衰減（$\propto e^{-t_{ox}}$）→功耗大幅降低。</p>
+
+<h3>平帶電壓 $V_{FB}$——能帶彎曲的起點</h3>
+<p>即使 $V_{GS}=0$，能帶也可能有彎曲——因為金屬（或多晶矽）閘極和半導體的功函數不同。$V_{FB}$ 是使能帶<strong>恢復平坦</strong>（無彎曲、無空乏、無反轉）所需的閘極電壓：$V_{FB} = \phi_{ms} - Q_f/C_{ox}$。對 n⁺ 多晶矽閘極 / p 型 Si 基板：$\phi_{ms}\approx-0.9$ V→$V_{FB}$ 約為 −0.9 V。這意味著即使 $V_{GS}=0$，能帶也已經向下彎曲，p 型表面已處於<strong>空乏</strong>狀態。</p>
+</section>
+
+<section id="ch11_s11-1b"><h2>11.1.3–11.1.5 能帶彎曲的三個階段——空乏到反轉</h2>
+<p>當你從 $V_{GS}=V_{FB}$ 開始慢慢增加閘極電壓時，p 型矽表面經歷三個截然不同的狀態——這三個狀態是理解 MOSFET 運作的關鍵。</p>
+<div class="figure"><img src="../../../images/solid-state-physics/ch11_pages/ch11_page_424.png" alt="圖 11.4" loading="lazy"><figcaption>圖 11.4：MOS 結構在不同閘極電壓下的能帶圖。(a) 平帶 ($V_{GS}=V_{FB}$)——能帶完全平坦。(b) 空乏——正的 $V_{GS}$ 排斥電洞，表面形成空乏層。(c) 強反轉——表面能帶彎曲達 $2\phi_f$，電子濃度超過電洞濃度，形成 n 型反轉層。</figcaption></div>
+
+<h3>階段一：空乏（$V_{FB}<V_{GS}<V_T$）</h3>
+<p>正的閘極電壓排斥 p 型基板中的多數載子（電洞），在表面留下一層<strong>不可移動的負受體離子</strong>——這就是空乏層。電場從閘極正電荷出發，終止在空乏層的負離子上。此時表面雖有少量電子（因為能帶向下彎曲，$E_c$ 更靠近 $E_F$），但電子濃度仍遠小於 $N_a$。</p>
+<p>空乏層的電荷密度隨表面電位 $\phi_s$ 增加而增加：$Q_d = -\sqrt{2\epsilon_s e N_a\phi_s}$。空乏層寬度 $x_d = \sqrt{2\epsilon_s\phi_s/(eN_a)}$。表面電位 $\phi_s$ 越大→空乏層越深→需要支付的閘極電壓越多。</p>
+
+<h3>階段二：弱反轉（$\phi_s$ 接近 $2\phi_f$）</h3>
+<p>當 $\phi_s > \phi_f$ 時，表面電子濃度開始超過電洞濃度——表面已從 p 型<strong>反轉</strong>為 n 型。但電子濃度仍遠小於 $N_a$→通道導電性極弱。</p>
+
+<h3>階段三：強反轉（$\phi_s = 2\phi_f$，$V_{GS}=V_T$）</h3>
+<p>當表面能帶彎曲達到 $2\phi_f$ 時，表面電子濃度 $=N_a$（與基板摻雜相等）→形成<strong>n 型反轉層</strong>→一個連接源極和汲極的導電通道正式建立。此時若再加閘極電壓，額外的電壓<strong>只用於</strong>增加反轉層中的電子數量（$Q_n$），而空乏層不再增寬（達到最大寬度 $x_{d,\max}$）。</p>
+
+<div class="callout"><strong>💡 $2\phi_f$ 的物理意義：</strong>在 p 型基板中，$E_F$ 比 $E_{Fi}$（本徵 Fermi 能階）低 $\phi_f$。要使表面從 p 型變成 n 型，$E_{Fi}$ 必須在表面處跨過 $E_F$ 並繼續向 $E_c$ 移動。當表面的 $E_{Fi}$ 比 $E_F$ 高 $\phi_f$ 時（即表面 $E_{Fi}-E_F=+\phi_f$，而體內 $E_{Fi}-E_F=-\phi_f$），總彎曲量正好是 $2\phi_f$。此時表面電子濃度 $n_s=n_i e^{\phi_f/kT}=N_a$——與體內的電洞濃度相等。這就是「強反轉」的精確定義。</div>
+</section>
+
+<section id="ch11_s11-2"><h2>11.2 臨界電壓 $V_T$ 的完整推導 ⭐</h2>
+<p>$V_T$ 是 MOSFET 最重要的參數——它決定了電晶體何時開始導通。以下是從閘極電壓方程式到 $V_T$ 的完整推導。</p>
+
+<p><strong>閘極電壓方程式：</strong>任何閘極電壓 $V_G$ 都分攤在三處——氧化層上的壓降 $V_{ox}$、半導體表面電位 $\phi_s$（能帶彎曲量）、以及金屬-半導體功函數差 $\phi_{ms}$：</p>
+<div class="eq">$$V_G = \phi_{ms} + \phi_s + V_{ox} = \phi_{ms} + \phi_s - \frac{Q_d+Q_n}{C_{ox}}$$</div>
+<p>其中 $Q_d$ = 空乏層電荷（負值），$Q_n$ = 反轉層電子電荷（負值）。負號來自電荷守恆——閘極上的正電荷必須被半導體側的總負電荷（空乏層 + 反轉層）平衡。</p>
+
+<p><strong>強反轉條件（定義 $V_T$）：</strong>$\phi_s = 2\phi_f$，$Q_n\approx0$（剛好開始強反轉，反轉層電荷還極少），$Q_d = Q_{d,\max} = -\sqrt{4\epsilon_s e N_a\phi_f}$。</p>
+<p>同時平帶時（$\phi_s=0$，$Q_d=0$，$Q_n=0$），$V_G = \phi_{ms} - Q_f/C_{ox} \equiv V_{FB}$（$Q_f$ = 氧化層固定電荷）。移項後代回：</p>
+<div class="eq">$$\boxed{V_T = V_{FB} + 2\phi_f + \frac{\sqrt{4\epsilon_s e N_a\phi_f}}{C_{ox}}}$$</div>
+
+<p><strong>數值計算（n⁺ 多晶矽閘極 / p-Si, $N_a=10^{17}$ cm⁻³, $t_{ox}=10$ nm）：</strong></p>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li>$C_{ox}=3.45\times10^{-13}/10^{-6}=3.45\times10^{-7}$ F/cm²</li>
+<li>$\phi_f=0.0259\ln(10^{17}/1.5\times10^{10})=0.407$ V → $2\phi_f=0.814$ V</li>
+<li>$Q_{d,\max}=\sqrt{4\cdot1.04\times10^{-12}\cdot1.6\times10^{-19}\cdot10^{17}\cdot0.407}=1.03\times10^{-7}$ C/cm²</li>
+<li>$Q_{d,\max}/C_{ox}=1.03\times10^{-7}/3.45\times10^{-7}=0.299$ V ≈ 0.30 V</li>
+<li>$V_{FB}\approx-0.9$ V → $V_T=-0.9+0.814+0.30=0.21$ V</li></ul>
+<p>這個 $V_T$ 太低（僅 0.21 V），會導致電晶體難以關斷（OFF 漏電流過大）。因此實際製程會透過<strong>通道離子植入</strong>來提高 $V_T$：植入額外的 p 型雜質（硼）→有效 $N_a$ 增加→$Q_{d,\max}$ 增大→第三項增大→$V_T$ 提高至 0.4–0.7 V。</p>
+
+<div class="figure"><img src="../../../images/solid-state-physics/ch11_pages/ch11_page_434.png" alt="圖 11.10" loading="lazy"><figcaption>圖 11.10：臨界電壓 $V_T$ 對氧化層厚度和基板摻雜的依賴關係。$t_{ox}$ 越小→$C_{ox}$ 越大→第三項越小→$V_T$ 越低。$N_a$ 越大→$2\phi_f$ 和 $Q_{d,\max}$ 都增大→$V_T$ 越高。</figcaption></div>
+</section>
+
+<section id="ch11_s11-3a"><h2>11.3.1–11.3.3 線性區 I-V 關係的完整推導 ⭐</h2>
+<p>當 $V_{GS}>V_T$ 且 $V_{DS}$ 很小時，反轉層通道就像一個<strong>電壓控制的電阻</strong>。以下是從反轉層電荷出發，逐步推導至 $I_D$ 公式的完整過程。</p>
+
+<p><strong>第一步：通道中任意點的電荷。</strong>在通道中距離源極 $y$ 處，該點的通道電位為 $V(y)$（源極端 $V(0)=0$，汲極端 $V(L)=V_{DS}$）。該點的有效閘極控制電壓為 $V_{GS}-V_T-V(y)$——因為 $V(y)$ 抵消了一部分閘極電壓。單位面積的反轉層電荷：</p>
+<div class="eq">$$Q_n(y) = -C_{ox}[V_{GS}-V_T-V(y)]$$</div>
+<p>（負號表示電子帶負電；括號中只取超過 $V_T$ 的部分，因為低於 $V_T$ 時通道尚未形成。）</p>
+
+<p><strong>第二步：通道中的漂移電流。</strong>通道中的電場沿 $y$ 方向：$E_y = -dV/dy$。電子在通道中的漂移速度 $v_y = -\mu_n E_y = \mu_n(dV/dy)$（負負得正——電子從低電位漂向高電位，即從源極漂向汲極）。通道中 $y$ 處的電流：</p>
+<div class="eq">$$I_D = W \cdot (-Q_n(y)) \cdot |v_y| = W\mu_n C_{ox}[V_{GS}-V_T-V(y)]\,\frac{dV}{dy}$$</div>
+<p>$W$ 是通道寬度。$I_D$ 在通道中每一點都相等（電流連續性，沒有電流在半路消失）。</p>
+
+<p><strong>第三步：從 $y=0$ 積分到 $y=L$。</strong>將含 $y$ 的項分離到左邊、含 $V$ 的項分離到右邊，然後積分：</p>
+<div class="eq">$$I_D\int_0^L dy = W\mu_n C_{ox}\int_0^{V_{DS}}[V_{GS}-V_T-V]\,dV$$</div>
+<div class="eq">$$I_D L = W\mu_n C_{ox}\left[(V_{GS}-V_T)V_{DS} - \frac{V_{DS}^2}{2}\right]$$</div>
+<div class="eq">$$\boxed{I_D = \mu_n C_{ox}\frac{W}{L}\left[(V_{GS}-V_T)V_{DS} - \frac{V_{DS}^2}{2}\right]}$$</div>
+
+<div class="callout"><strong>💡 線性區的兩個極限行為：</strong>① $V_{DS}\ll V_{GS}-V_T$ 時，二次項可忽略→$I_D\approx\mu_n C_{ox}(W/L)(V_{GS}-V_T)V_{DS}$——純 Ohm 定律，通道電阻 $R_{ch}=1/[\mu_n C_{ox}(W/L)(V_{GS}-V_T)]$。改變 $V_{GS}$ 就能連續調控這個電阻。② $V_{DS}$ 增大→二次項變重要→$I_D$ 偏離線性→曲線變平。</div>
+</section>
+
+<section id="ch11_s11-3b"><h2>11.3.4–11.3.5 飽和區——通道夾止與平方律 ⭐</h2>
+<p>當 $V_{DS}$ 增加到 <strong>$V_{GS}-V_T$</strong> 時，汲極端的有效閘極控制電壓降為零：$V_{GS}-V_T-V_{DS}=0$→$Q_n(L)=0$。通道在汲極端<strong>夾止（pinch-off）</strong>——該處的反轉層厚度變為零。</p>
+
+<div class="figure"><img src="../../../images/solid-state-physics/ch11_pages/ch11_page_437.png" alt="圖 11.20" loading="lazy"><figcaption>圖 11.20：n 通道 MOSFET 的輸出特性（$I_D$–$V_{DS}$）。注意 $V_{DS}$ 小時的線性關係和 $V_{DS}>V_{GS}-V_T$ 後的飽和行為。$V_{GS}$ 越大→飽和電流越大（平方律）。</figcaption></div>
+
+<p>將 $V_{DS}=V_{GS}-V_T$ 代入線性區公式，得到飽和區電流：</p>
+<div class="eq">$$\boxed{I_D(\text{sat}) = \frac{\mu_n C_{ox}}{2}\frac{W}{L}(V_{GS}-V_T)^2}$$</div>
+
+<p><strong>夾止之後是什麼？</strong>$V_{DS}$ 繼續增加→夾止點（$V=V_{GS}-V_T$ 處）向源極移動一小段距離 $\Delta L$。額外的 $V_{DS}$ 全部降落在夾止點與汲極之間的<strong>空乏區</strong>中（該區域沒有通道）。由於通道長度從 $L$ 變為 $L-\Delta L$，$I_D$ 輕微增加——這就是<strong>通道長度調變（channel length modulation）</strong>：</p>
+<div class="eq">$$I_D = \frac{\mu_n C_{ox}}{2}\frac{W}{L}(V_{GS}-V_T)^2\!\left(1 + \frac{V_{DS}}{V_A}\right)$$</div>
+<p>$V_A$ 類似 BJT 的 Early 電壓。對長通道元件 $V_A$ 很大（飽和區很平）；對短通道元件 $V_A$ 較小（輸出電阻較低）。</p>
+
+<div class="callout-warn"><strong>⚡ 平方律的深刻意義——MOSFET 是平方律元件。</strong>$I_D\propto(V_{GS}-V_T)^2$。對比 BJT：$I_C\propto e^{V_{BE}/V_T}$（指數律）。BJT 的I-V 曲線比 MOSFET 陡峭得多（指數 > 平方）。這意味著 BJT 的 $g_m$ 更大（$g_m\propto I_C$ vs $g_m\propto\sqrt{I_D}$），但 BJT 的偏壓控制更難（$V_{BE}$ 的微小變化導致 $I_C$ 的巨大變化）。MOSFET 的平方律給出了較溫和的增益特性→更容易設計穩定偏壓點。</div>
+</section>
+
+<section id="ch11_s11-3c"><h2>10.3.5 基板偏壓效應（Body Effect）⭐</h2>
+<p>前面的 $V_T$ 推導假設源極和基板（substrate）接地（$V_{BS}=0$）。但在實際電路中，源極和基板的電位常常不同——例如在 CMOS 反相器中，nMOS 的基板接地但源極可能不為零。</p>
+<p>當 $V_{BS}<0$（對 nMOS，基板相對源極為負偏壓）時，基板-通道接面的空乏區變寬→更多的空間電荷 $Q_{B0}$ 需要被閘極電壓「覆蓋」→$V_T$ <strong>升高</strong>：</p>
+<div class="eq">$$\boxed{V_T = V_{FB} + 2\phi_f + \frac{\sqrt{2\epsilon_s e N_a(2\phi_f - V_{BS})}}{C_{ox}}}$$</div>
+<p>最後一項就是基板偏壓的貢獻。當 $V_{BS}=0$ 時回到原本的 $V_T$ 公式。$V_{BS}$ 越負→$V_T$ 越高→$I_D$ 越小。</p>
+<p><strong>Body effect 係數 $\gamma$：</strong>將 $V_T$ 變化簡化為：</p>
+<div class="eq">$$\Delta V_T = \gamma\left(\sqrt{2\phi_f - V_{BS}} - \sqrt{2\phi_f}\right), \quad \gamma = \frac{\sqrt{2\epsilon_s e N_a}}{C_{ox}}$$</div>
+<p>$\gamma$ 的典型值：$t_{ox}=10$ nm，$N_a=10^{16}$ cm$^{-3}$→$\gamma \approx 0.4$ V$^{1/2}$。$V_{BS}=-3$ V 時：$\Delta V_T \approx 0.4\times(\sqrt{0.6+3}-\sqrt{0.6}) \approx 0.4\times(1.9-0.77) \approx 0.45$ V——$V_T$ 升高了 0.45 V，對低壓電路影響顯著。</p>
+<div class="callout"><strong>💡 Body effect 的電路影響。</strong>在串聯的 MOSFET 開關（如 NAND 閘的堆疊結構）中，上方的 nMOS 的源極電位不為零→$V_T$ 升高→切換速度變慢。這是 CMOS 電路設計中必須考慮的寄生效應。工程師用「body effect 係數」$\gamma$ 來量化：$\Delta V_T = \gamma(\sqrt{2\phi_f - V_{BS}} - \sqrt{2\phi_f})$。</div>
+</section>
+
+<section id="ch11_s11-cv"><h2>10.2 電容-電壓（C-V）特性</h2>
+<p>MOS 結構的 C-V 特性是<strong>表徵氧化層品質和界面態</strong>的最重要工具。對一個 MOS 電容施加 DC 偏壓 $V_G$，同時疊加一個小 AC 訊號，測量等效電容 $C = dQ/dV$。</p>
+<p><strong>理想 C-V 曲線的三個區域：</strong></p>
+<p>① <strong>累積區（Accumulation）：</strong>$V_G < V_{FB}$。多數載子被吸引到界面→電容 = $C_{ox}$（氧化層電容，最大值）。</p>
+<p>② <strong>空乏區（Depletion）：</strong>$V_{FB} < V_G < V_T$。界面處多數載子被排斥→空乏區形成→等效電容 = $C_{ox}$ 和空乏層電容 $C_d$ 的串聯→電容下降。</p>
+<p>③ <strong>反轉區（Inversion）：</strong>$V_G > V_T$。反轉層形成。在<strong>低頻</strong>下，反轉層中的少數載子能跟上 AC 訊號→電容回到 $C_{ox}$。在<strong>高頻</strong>下，少數載子的產生-復合跟不上→電容保持在空乏層的最小值 $C_{\min}$。</p>
+<p><strong>$C_{\min}$ 的定量公式：</strong></p>
+<div class="eq">$$C_{\min} = \frac{C_{ox} C_{d,\max}}{C_{ox} + C_{d,\max}}, \quad C_{d,\max} = \frac{\epsilon_s}{W_{\max}}, \quad W_{\max} = \sqrt{\frac{4\epsilon_s \phi_f}{eN_a}}$$</div>
+<p>其中 $W_{\max}$ 是反轉開始時的最大空乏區寬度。$C_{\min}/C_{ox}$ 的比值取決於氧化層厚度和基板摻雜：$t_{ox}$ 越厚或 $N_a$ 越高→$C_{\min}/C_{ox}$ 越小→C-V 曲線的「下降」越明顯。</p>
+<div class="callout-warn"><strong>⚡ C-V 測量是半導體製程監控的標準工具。</strong>從 C-V 曲線可以提取：氧化層厚度 $t_{ox}$（從 $C_{ox}$）、基板摻雜濃度 $N_a$（從空乏區斜率）、平帶電壓 $V_{FB}$（從曲線位移）、界面態密度 $D_{it}$（從高頻和低頻曲線的差異）。每一批晶圓在製程結束後都會做 C-V 測量——它是製程品質的「體檢報告」。</div>
+</section>
+
+<section id="ch11_s11-4"><h2>11.4 小訊號參數與頻率響應</h2>
+<h3>跨導 $g_m$——MOSFET 的放大能力</h3>
+<div class="eq">$$g_m = \frac{\partial I_D}{\partial V_{GS}} = \mu_n C_{ox}\frac{W}{L}(V_{GS}-V_T) = \frac{2I_D}{V_{GS}-V_T} = \sqrt{2\mu_n C_{ox}\frac{W}{L}I_D}$$</div>
+
+<p><strong>MOSFET vs BJT 的 $g_m$ 效率比較：</strong>BJT：$g_m=I_C/V_T=38.5$ mS/mA（線性，每 mA 固定 38.5 mS）。MOSFET：$g_m=2I_D/(V_{GS}-V_T)$。若 $V_{GS}-V_T=0.3$ V→$g_m=6.7$ mS/mA；若過驅動電壓降到 0.1 V→$g_m=20$ mS/mA。MOSFET 的 $g_m$ 效率通常為 BJT 的 1/6 到 1/2。</p>
+<p>但 MOSFET 的優勢在於<strong>零閘極電流</strong>——基極電流 $I_B=I_C/\beta$ 在 BJT 中不可忽略，而 MOSFET 的 $I_G=0$ 使它在高輸入阻抗應用（如運算放大器輸入級、電壓緩衝器）中無可比擬。</p>
+
+<h3>截止頻率 $f_T$——MOSFET 能跑多快</h3>
+<p>$f_T$ 是電晶體的電流增益（$i_d/i_g$）降至 1 的頻率：</p>
+<div class="eq">$$f_T = \frac{g_m}{2\pi(C_{gs}+C_{gd})} \approx \frac{\mu_n(V_{GS}-V_T)}{2\pi L^2}$$</div>
+<p>$f_T\propto1/L^2$——通道長度縮小一半→$f_T$ 增為<strong>四倍</strong>。這就是為什麼每一代新製程都讓電晶體變得更快：$L$ 從 1 µm（1990）→100 nm（2000）→14 nm（2014）→3 nm（2022），$f_T$ 從 ∼10 GHz 提升到 ∼400 GHz。</p>
+
+<h3>10.4.1 MOSFET 小訊號等效電路</h3>
+<p>在飽和區操作的 MOSFET，小訊號等效電路包含以下元件：</p>
+<p><strong>受控電流源：</strong>$i_d = g_m v_{gs}$（閘極電壓控制汲極電流）。</p>
+<p><strong>輸入電容：</strong>$C_{gs} = \frac{2}{3}C_{ox}WL + C_{ov}$（$\frac{2}{3}$ 因子來自通道電荷的分布，$C_{ov}$ 是閘極-源極重疊電容）。</p>
+<p><strong>回授電容：</strong>$C_{gd} = C_{ov}$（在飽和區，閘極-汲極重疊區很小→$C_{gd}$ 很小，但 Miller 效應會放大它的影響）。</p>
+<p><strong>輸出電阻：</strong>$r_o = 1/(\lambda I_D) = V_A/I_D$（通道長度調變效應導致 $I_D$ 隨 $V_{DS}$ 微增→有限的輸出電阻）。</p>
+<p><strong>基板跨導：</strong>$g_{mb} = \chi g_m$（body effect：$V_{BS}$ 變化→$V_T$ 變化→$I_D$ 變化。$\chi = \gamma/(2\sqrt{2\phi_f-V_{BS}})$）。</p>
+<div class="callout"><strong>💡 MOSFET vs BJT 小訊號模型的關鍵差異。</strong>BJT 的 $C_\mu$（BC 電容）跨接輸入和輸出→Miller 效應嚴重。MOSFET 的 $C_{gd}$ 很小（飽和區）→高頻性能更好。但 MOSFET 有 $g_{mb}$（body effect）而 BJT 沒有——這是 MOSFET 的額外寄生效應。在模擬電路設計中，這些電容和電阻共同決定了增益帶寬積（GBW）。</div>
+</section>
+
+<section id="ch11_s11-cmos"><h2>10.5 CMOS 技術</h2>
+<p><strong>CMOS（Complementary MOS）</strong>把 nMOS 和 pMOS 製作在同一個晶片上。核心優勢：<strong>靜態功耗幾乎為零</strong>——在穩態下，nMOS 和 pMOS 之中總有一個截止（$I_D=0$），只有在切換瞬間兩者同時導通時才有電流。</p>
+<p><strong>CMOS 反相器：</strong>pMOS 接 $V_{DD}$（上拉），nMOS 接 GND（下拉）。輸入高→nMOS 導通、pMOS 截止→輸出拉到 GND。輸入低→pMOS 導通、nMOS 截止→輸出拉到 $V_{DD}$。穩態時沒有從 $V_{DD}$ 到 GND 的直接通路→功耗只來自切換時的充放電（$P = CV_{DD}^2 f$）和微小的漏電流。</p>
+<p><strong>CMOS 的主流地位：</strong>自 1980 年代以來，CMOS 是數位積體電路的絕對主流（>99% 的邏輯晶片）。原因是功耗優勢——在有數十億電晶體的現代 SoC 中，如果用 NMOS 邏輯或 BJT 邏輯（TTL），靜態功耗會大到無法散熱。</p>
+<div class="callout-warn"><strong>⚡ Latch-up——CMOS 的結構性風險。</strong>CMOS 結構中存在一個寄生的 pnpn 閘流體（SCR）結構：p 型基板中的 n-well 形成 pn 接面，n-well 中的 p⁺ 源極又形成另一個 pn 接面。如果某個瞬態事件（如電壓過衝或離子輻射）觸發了這個寄生 SCR→它會自鎖導通→從 $V_{DD}$ 到 GND 形成低阻抗通路→大電流→晶片燒毀。防止 latch-up 的方法：增加 n-well 和 p-well 之間的距離、使用 guard ring、SOI 基板（消除寄生路徑）。</div>
+</section>
+
+<section id="ch11_s11-5"><h2>11.5 短通道效應——當 $L$ 不再「長」</h2>
+<p>長通道 MOSFET 的理想公式（$V_T$ 與 $L$ 無關、$I_D$ 飽和後平坦）在 $L$ 縮小到 ∼100 nm 以下時開始失效。源極和汲極的電場開始<strong>分攤</strong>閘極對通道的控制——這就是短通道效應的根源。</p>
+
+<h3>DIBL（汲極引發能障降低）</h3>
+<div class="figure"><img src="../../../images/solid-state-physics/ch12_pages/ch12_page_470.png" alt="圖 11.1" loading="lazy"><figcaption>圖 11.1：短通道效應示意——源極和汲極的電場穿入通道，分攤閘極對通道的控制力。</figcaption></div>
+<p>在長通道中，源極端的能障完全由閘極控制。在短通道中，汲極的正電壓產生的電場<strong>穿透</strong>到源極側→降低了源極端的電子能障→電子更容易從源極流入通道→$V_T$ 隨 $V_{DS}$ 增加而下降。DIBL 使 OFF 電流（$V_{GS}=0$）增大→待機功耗上升。</p>
+
+<h3>次臨界斜率——MOSFET 開關的陡峭度</h3>
+<p>理想上 $V_{GS}<V_T$ 時 $I_D=0$。實際上 $I_D$ 隨 $V_{GS}$ 指數衰減（少數載子從源極擴散到汲極，類似 BJT 的基極傳輸）：</p>
+<div class="eq">$$\boxed{S = \frac{dV_{GS}}{d(\log I_D)} \approx 60\left(1 + \frac{C_d}{C_{ox}}\right)\ \text{mV/dec}}$$</div>
+<p>室溫下 $S$ 的<strong>物理下限是 60 mV/dec</strong>（來自 Boltzmann 統計 $kT/e\ln10=0.0259\times2.303=0.060$ V）。$S$ 越小→開關越陡峭→從 ON（$V_{GS}=0.7$ V）切到 OFF（$V_{GS}=0$ V）時 $I_D$ 降得越多。理想 $S=60$→$V_{GS}$ 降 0.3 V→$I_D$ 降 $10^5$ 倍。實際 $S=100$→同樣壓降只能降 $10^3$ 倍。這就是為什麼降低 $S$ 對降低漏電至關重要。</p>
+
+<div class="callout-warn"><strong>⚡ FinFET 和 GAAFET——對抗短通道效應的三維結構。</strong>在平面 MOSFET 中，閘極只從上方控制通道。短通道時汲極電場從下方（基板側）繞過，削弱了閘極的控制。FinFET（Intel, 2011）把通道豎起來變成一個「鰭」——閘極從<strong>三面</strong>包圍通道，大幅增強了靜電控制。GAAFET（Gate-All-Around, Samsung 2022, 預計 TSMC 2025）更進一步——閘極<strong>完全環繞</strong>通道（四面或圓柱形），理論上實現了最佳的靜電完整性。這些三維結構是 Moore 定律能在 3 nm 以下繼續推進的關鍵技術。</div>
+</section>
+
+<section id="ch11_summary"><h2>本章摘要</h2>
+<ol style="font-size:14px;color:var(--t2);margin-left:18px">
+<li><strong>MOSFET 結構：</strong>金屬閘極 + SiO₂氧化層 + Si 基板。電壓控制→零 DC 閘極電流→可堆積數十億個。</li>
+<li><strong>氧化層電容：</strong>$C_{ox}=\epsilon_{ox}/t_{ox}$。$t_{ox}$ 從 100 nm 縮到 ∼1 nm→high-κ(HfO₂)取代 SiO₂。</li>
+<li><strong>三階段：</strong>平帶→空乏（排斥電洞）→強反轉（$\phi_s=2\phi_f$，表面形成 n 型通道）。強反轉條件定義 $V_T$。</li>
+<li><strong>$V_T$ 推導：</strong>$V_T=V_{FB}+2\phi_f+\sqrt{4\epsilon_s e N_a\phi_f}/C_{ox}$。通道離子植入精確調控 $V_T$。</li>
+<li><strong>線性區：</strong>$I_D=\mu_n C_{ox}(W/L)[(V_{GS}-V_T)V_{DS}-V_{DS}^2/2]$。低 $V_{DS}$→線性電阻。</li>
+<li><strong>飽和區：</strong>$I_D=\frac{1}{2}\mu_n C_{ox}(W/L)(V_{GS}-V_T)^2$。平方律。夾止後電流基本不變。</li>
+<li><strong>$g_m$：</strong>$\mu_n C_{ox}(W/L)(V_{GS}-V_T)=2I_D/(V_{GS}-V_T)$。效率約 BJT 的 1/6–1/2，但 $I_G=0$。</li>
+<li><strong>$f_T$：</strong>$\propto1/L^2$。$L$ 從 1 µm→3 nm，$f_T$ 從 ∼10 GHz→∼400 GHz。</li>
+<li><strong>短通道：</strong>DIBL 使 $V_T$ 隨 $V_{DS}$ 下降。$S\approx60(1+C_d/C_{ox})$ mV/dec。FinFET/GAAFET 是三維解決方案。</li></ol></section>
+
+
+<!-- ===== 第十二章 MOSFET 進階概念 ===== -->
+
+<header class="header"><div class="cl">第十二章</div><h1>MOSFET 進階概念</h1><div class="meta">Donald A. Neamen·《半導體物理與元件：基本原理》第四版·第 446–504 頁</div></header>
+
+<section id="ch12_preview"><div class="callout"><strong>📋 12.0 本章預覽</strong>
+<p>第十一章建立了 MOSFET 的理想模型——長通道、均勻摻雜、無短通道效應。這個理想模型對於理解 MOSFET 的基本原理至關重要。但任何嘗試過用長通道公式來預測現代奈米級 MOSFET 行為的人都會立刻發現：理想模型完全不準。</p>
+<p>本章討論<strong>讓理想模型失效的所有效應</strong>——以及克服它們的工程解決方案。這些非理想效應不是學術好奇心；它們是每天困擾著晶片設計者和製程工程師的實際問題。每一個效應背後都有一個對應的製程解決方案（LDD、SOI、high-κ、FinFET）——了解這些方案需要先了解它們要解決的問題。</p>
+<div class="callout-warn"><strong>⚡ 本章的兩個核心主題：</strong>① <strong>縮小（Scaling）</strong>——把電晶體越做越小帶來的物理挑戰。定電場縮小法則告訴我們如何理想地縮小；速度飽和、DIBL、熱載子效應告訴我們現實中會出什麼問題。② <strong>工程解決方案</strong>——LDD 對抗熱載子、SOI 降低寄生電容、high-κ 對抗閘極漏電、FinFET 對抗短通道效應。本章連接了「元件物理」和「實際 CMOS 製程」。</div></div></section>
+
+<section id="ch12_s12-1"><h2>12.1 定電場縮小法則——Moore 定律的物理基礎 ⭐</h2>
+<div class="figure"><img src="../../../images/solid-state-physics/ch12_pages/ch12_page_480.png" alt="圖 11.12" loading="lazy"><figcaption>圖 11.12：Dennard 定電場縮小法則——尺寸和電壓同時縮小 $\kappa$ 倍，內部電場不變，功耗密度降低 $\kappa^2$ 倍。</figcaption></div>
+<p>1965 年，Gordon Moore 觀察到積體電路上的電晶體數量大約每兩年翻一倍。但這條著名的「定律」如果沒有物理上的可行性論證，就只是一條經驗曲線。1974 年，Robert Dennard 發表了<strong>定電場縮小法則</strong>——論證了MOSFET 可以持續縮小而不會遭遇根本性的物理障礙。</p>
+<p><strong>核心思想：</strong>如果你把電晶體的所有尺寸（$L$, $W$, $t_{ox}$）和所有電壓（$V_{DD}$, $V_T$）同時除以同一個因子 $\kappa$，並把基板摻雜增加 $\kappa$ 倍，那麼：</p>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li>內部電場保持不變（因為電壓和距離以相同比例縮小）→可靠性不受影響</li>
+<li>每單位面積的電晶體數量增加 $\kappa^2$ 倍→密度平方增長</li>
+<li>每個電晶體的延遲時間縮短 $\kappa$ 倍→速度提升</li>
+<li>每個電晶體的功耗降低 $\kappa^2$ 倍→功耗急劇下降（因為 $P\propto CV^2f$，$C\propto1/\kappa$, $V\propto1/\kappa$, $f\propto\kappa$→$P\propto1/\kappa^2$）</li>
+</ul>
+
+<div class="figure"><img src="../../../images/solid-state-physics/ch12_pages/ch12_page_483.png" alt="圖 12.13" loading="lazy"><figcaption>圖 12.13：定電場縮小法則的圖解。左：原始元件。右：縮小 $\kappa$ 倍後的元件——所有尺寸和電壓同步縮小，內部電場保持不變。</figcaption></div>
+
+<table><thead><tr><th>參數</th><th>縮小因子</th><th>實際效益</th></tr></thead><tbody>
+<tr><td>$L, W, t_{ox}$</td><td>$1/\kappa$</td><td>尺寸縮小</td></tr>
+<tr><td>$V_{DD}, V_T, V_{DS}$</td><td>$1/\kappa$</td><td>電壓降低→功耗降低</td></tr>
+<tr><td>$N_a$（基板摻雜）</td><td>$\kappa$</td><td>保持空乏層寬度同步縮小</td></tr>
+<tr><td>延遲時間 $\tau$</td><td>$1/\kappa$</td><td>速度提升 $\kappa$ 倍</td></tr>
+<tr><td>功耗 $P$</td><td>$1/\kappa^2$</td><td>⭐ 功耗急劇降低</td></tr>
+<tr><td>功率-延遲積</td><td>$1/\kappa^3$</td><td>整體性能指標大幅改善</td></tr>
+<tr><td>密度</td><td>$\kappa^2$</td><td>每晶片電晶體數量平方增加</td></tr></tbody></table>
+
+<p><strong>為什麼 $N_a$ 必須增加？</strong>空乏層寬度 $x_d\propto1/\sqrt{N_a}$。當 $L$ 縮小 $\kappa$ 倍時，空乏層寬度也必須同步縮小——否則空乏區會延伸到通道中不該延伸的地方（例如源極和汲極的空乏區在通道下方相遇→產生穿通效應）。增加 $N_a$ 使 $x_d$ 縮小至所需的尺寸。</p>
+
+<div class="callout-warn"><strong>⚡ Dennard 縮小在 2005 年前後失效——「功耗牆」的物理根源。</strong>Dennard 縮小要求 $V_{DD}$ 和 $V_T$ 隨 $L$ 同步降低。但 $V_T$ 不能低於某個下限——因為次臨界漏電流 $I_{OFF}\propto e^{-V_T/(S/\ln10)}$。如果 $V_T$ 從 0.5 V 降到 0.2 V→$I_{OFF}$ 增加 $e^{0.3/(0.1)}\approx20$ 倍（假設 $S=100$ mV/dec）→待機功耗爆炸。<br><br>Dennard 縮小失效後，$V_{DD}$ 不再能隨 $L$ 同步縮小（從 ∼1 V 降到 ∼0.7 V 後就卡住了）。但 $L$ 繼續縮小→內部電場增大→速度飽和、熱載子效應加劇→每代新製程的性能提升幅度從之前的 ∼40% 降到 ∼10–15%。這就是為什麼 Moore 定律在放緩——不是因為電晶體不能再縮小，而是因為縮小不再帶來同等的性能回報。</div>
+</section>
+
+<section id="ch12_s12-2a"><h2>12.2.1 遷移率退化——當閘極壓得太緊</h2>
+<p>第十一章假設反轉層中的載子遷移率 $\mu_n$ 為常數（等於塊材中的低電場遷移率）。現實中，當 $V_{GS}$ 增大時，<strong>垂直於通道方向的電場</strong>（從閘極指向基板）將反轉層中的電子<strong>壓向</strong> Si/SiO₂ 界面。這個界面不是原子級平坦的——存在約 0.2–0.5 nm RMS 的粗糙度。載子被壓在粗糙界面上→界面粗糙度散射增加→有效遷移率下降。</p>
+
+<div class="eq">$$\mu_{\text{eff}} = \frac{\mu_0}{1 + \theta(V_{GS}-V_T)}$$</div>
+
+<p>$\theta$（遷移率退化因子）取決於氧化層厚度（$t_{ox}$ 越小→垂直電場越大→$\theta$ 越大）和界面品質。典型值 ∼0.1–0.5 V⁻¹。當 $V_{GS}-V_T=2$ V 且 $\theta=0.3$ 時，$\mu_{\text{eff}}=\mu_0/1.6=0.625\mu_0$——遷移率下降了近 40%。</p>
+
+<p><strong>物理機制——不只是界面粗糙度：</strong>除了界面粗糙度散射，垂直電場還會改變載子在反轉層中的<strong>量子侷限</strong>狀態。反轉層極薄（∼1–5 nm），電子在垂直方向的運動被量子化為離散的次能帶（subbands）。垂直電場越大→電子被壓得越緊→量子侷限越強→最低次能帶的能量升高→更多的電子佔據較高有效質量的次能帶→遷移率進一步下降。這是「表面粗糙度散射+量子侷限效應」的協同作用。</p>
+
+<div class="callout"><strong>💡 遷移率退化對類比電路設計的影響：</strong>類比設計師通常希望 $g_m$ 越大越好→傾向用大的 $V_{GS}-V_T$。但遷移率退化限制了 $g_m$ 在高過驅動電壓下的增長→存在一個最優的 $V_{GS}-V_T$（通常在 0.15–0.3 V），超過之後 $g_m/I_D$（跨導效率）開始下降。這就是為什麼低功耗類比電路傾向於操作在弱反轉區（$V_{GS}<V_T$）——該區域雖然 $g_m$ 小，但 $g_m/I_D$ 達到最大值（類似 BJT 的 $g_m/I_C=1/V_T$）。</div>
+</section>
+
+<section id="ch12_s12-2b"><h2>12.2.2 速度飽和——短通道元件最根本的限制</h2>
+<p>第十一章的長通道模型中，$I_D$ 的平方律來自一個關鍵假設：載子漂移速度與電場成正比（$v_d=\mu_n E$）。這個假設在電場低於 ∼$10^4$ V/cm 時成立。但在短通道元件中——以 $L=20$ nm、$V_{DS}=1$ V 為例——通道中的平均電場高達 $5\times10^5$ V/cm。在這個電場強度下，載子已經遠遠進入<strong>速度飽和區</strong>（$v_d\approx v_{\text{sat}}\approx10^7$ cm/s，見第五章圖 5.8）。</p>
+
+<p>速度飽和對 $I_D$ 的影響是質變而非量變。當載子以 $v_{\text{sat}}$ 穿越整個通道時：</p>
+<div class="eq">$$\boxed{I_D(\text{sat}) = W C_{ox}(V_{GS}-V_T)v_{\text{sat}}}$$</div>
+
+<div class="figure"><img src="../../../images/solid-state-physics/ch12_pages/ch12_page_474.png" alt="圖 12.7" loading="lazy"><figcaption>圖 12.7：速度飽和對 $I_D$–$V_{GS}$ 特性的轉變。長通道（左）：$I_D\propto(V_{GS}-V_T)^2$（平方律）。短通道（右）：$I_D\propto(V_{GS}-V_T)$（線性律）。這是一個根本性的轉變——所有以平方律為基礎的設計直覺都需要修正。</figcaption></div>
+
+<p><strong>速度飽和的三個連鎖後果：</strong></p>
+
+<p><strong>① $I_D$ 變為線性而非平方律。</strong>$I_D$ 不再隨 $(V_{GS}-V_T)^2$ 增長，而只隨 $(V_{GS}-V_T)$ 線性增長→給定 $V_{GS}$ 下的驅動電流顯著降低。這直接影響了數位電路的開關速度。</p>
+
+<p><strong>② $g_m$ 趨向常數。</strong>在長通道飽和區：$g_m=\mu_n C_{ox}(W/L)(V_{GS}-V_T)$→隨 $V_{GS}$ 線性增長。在速度飽和極限：$g_m = WC_{ox}v_{\text{sat}}$→<strong>常數</strong>——加大 $V_{GS}$ 不再能提高跨導。這對類比放大器設計是災難性的——增益 $A_v=-g_m R_L$ 被固定上限。</p>
+
+<p><strong>③ 飽和提前發生。</strong>在長通道中，飽和發生在 $V_{DS}=V_{GS}-V_T$（夾止條件）。在速度飽和極限下，載子在通道中途（$V\ll V_{GS}-V_T$ 處）就已達到 $v_{\text{sat}}$→飽和發生在 $V_{DS}$ 遠小於 $V_{GS}-V_T$ 時→可用的電壓餘裕（voltage headroom）被壓縮。</p>
+
+<div class="callout-warn"><strong>⚡ 速度飽和是為什麼 FinFET 的 $I_D$–$V_{GS}$ 是線性的。</strong>如果你量測一顆現代 FinFET（$L_g\sim14$ nm）的 $I_D$–$V_{GS}$ 曲線，你會發現它幾乎完全是直線——平方律完全消失。這就是速度飽和的指紋。速度飽和不是一個「可以用更好的製程消除」的問題——它是載子基本物理的限制（$v_{\text{sat}}\approx10^7$ cm/s 是 Si 中的材料常數，由聲子發射速率決定）。除非換用更高 $v_{\text{sat}}$ 的材料（如 GaAs、InGaAs），否則速度飽和是 Si MOSFET 無法逾越的物理限制。</div>
+</section>
+
+<section id="ch12_s12-3"><h2>12.3 熱載子效應——高速電子的破壞力</h2>
+<p>在短通道元件中，即使 $V_{DS}$ 只有 1 V，汲極端的峰值電場也可達 $>10^5$ V/cm。電子在汲極端空乏區中被這個高電場加速→獲得遠高於熱平衡（$kT=0.026$ eV）的動能——成為「熱」載子。某些電子的能量可達數 eV。</p>
+
+<p><strong>熱載子能造成三種破壞：</strong></p>
+
+<p><strong>① 注入氧化層。</strong>電子要從 Si 的導帶進入 SiO₂ 的導帶，需要克服 ∼3.1 eV 的能障。熱載子的能量夠高→可以直接越過這個能障進入氧化層。注入的電子在氧化層中移動，可能被氧化層中的缺陷（氧空缺等）捕獲→形成固定電荷→$V_T$ 漂移。這是長期操作中 $V_T$ 不穩定的主要原因。</p>
+
+<p><strong>② 產生界面態。</strong>高能電子撞擊 Si/SiO₂ 界面→打斷 Si-H 鍵（鈍化鍵）→產生懸鍵（dangling bond）→這些懸鍵形成能隙中的界面態。界面態會捕捉和釋放通道中的載子→$g_m$ 退化、次臨界斜率劣化、低頻雜訊增加。</p>
+
+<p><strong>③ 氧化層崩潰。</strong>長期累積的注入和陷阱充電最終導致氧化層局部電場超過 SiO₂ 的介電強度（∼$10^7$ V/cm）→氧化層永久性擊穿→閘極短路。</p>
+
+<h3>輕摻雜汲極（LDD）——對抗熱載子的工程解決方案</h3>
+<div class="figure"><img src="../../../images/solid-state-physics/ch12_pages/ch12_page_486.png" alt="圖 12.16, 12.17" loading="lazy"><figcaption>圖 12.16–12.17：傳統汲極結構 vs 輕摻雜汲極（LDD）結構。LDD 在汲極端加入一段輕摻雜 n⁻ 區域，使空乏區延伸→電場分布更平滑→峰值電場降低 30–50%。</figcaption></div>
+<p>LDD 的核心思想：在通道和重摻雜 n⁺ 汲極之間插入一段<strong>輕摻雜的 n⁻ 區域</strong>。n⁻ 區域的空間電荷密度低→Poisson 方程積分出的電場曲線更平緩→峰值電場降低。LDD 結構中的峰值電場可以從 ∼$5\times10^5$ V/cm 降到 ∼$3\times10^5$ V/cm。因為熱載子注入率對電場有極強的超線性依賴（$\propto e^{-E_0/E}$），電場降低 40% 可以使元件壽命延長數個數量級。</p>
+</section>
+
+<section id="ch12_s12-4"><h2>12.4 SOI、FinFET 與先進 CMOS 結構</h2>
+<h3>SOI——把電晶體放在絕緣體上</h3>
+<p>在傳統塊材（bulk）MOSFET 中，通道和汲極與基板之間存在 pn 接面→寄生接面電容 $C_{j,DB}$、接面漏電流、以及基板效應（body effect：$V_{SB}$ 增加會使 $V_T$ 增加）。SOI 技術在通道下方放置一層<strong>埋入氧化層（Buried Oxide, BOX, 通常 ∼100–200 nm 厚的 SiO₂）</strong>→通道完全被絕緣體包圍→消除所有寄生接面。</p>
+<p>SOI 的優勢：寄生電容降低 30–50%→開關速度更快、動態功耗更低；接面漏電流消失→待機功耗降低；基板效應消失→$V_T$ 不受 $V_{SB}$ 調變；抗軟錯誤（soft error）能力增強（埋入氧化層阻擋 α 粒子從封裝材料進入通道）。</p>
+
+<h3>FinFET——從平面到三維的革命</h3>
+<div class="figure"><img src="../../../images/solid-state-physics/ch12_pages/ch12_page_503.png" alt="圖 12.32" loading="lazy"><figcaption>圖 12.32：FinFET 的三維結構——矽「鰭」從基板豎起，閘極從三面包圍鰭。靜電控制遠優於平面 MOSFET，使 $L_g$ 能從 ∼20 nm 繼續縮小到 ∼3 nm。</figcaption></div>
+<p>在平面 MOSFET 中，閘極只從<strong>上方</strong>控制通道。當 $L_g$ 縮小到 ∼20 nm 以下時，源極和汲極的電場從通道<strong>下方</strong>（基板側）繞過——閘極失去了對通道底部區域的控制。這些不受控的區域成為次臨界漏電流的路徑。FinFET 把通道豎起來變成一個矽「鰭」→閘極從<strong>三面包圍</strong>鰭（上方+左右兩側）→閘極的靜電控制力大幅增強→短通道效應被有效抑制。這是為什麼 $L_g$ 能從 20 nm（平面 MOSFET 的極限）繼續縮小到 5 nm 以下的關鍵技術。</p>
+<p><strong>GAAFET（閘極全環繞）：</strong>FinFET 的下一步進化——通道變成水平奈米線或奈米片，閘極<strong>完全環繞</strong>通道四面。這實現了終極的靜電完整性。Samsung 2022 年發布了 3 nm GAAFET 製程，TSMC 預計在 2 nm 節點（2025）引入。</p>
+</section>
+
+<section id="ch12_s12-5"><h2>12.5–12.6 終極尺寸的物理限制——我們能縮到多小？</h2>
+<div class="figure"><img src="../../../images/solid-state-physics/ch12_pages/ch12_page_469.png" alt="圖 11.1" loading="lazy"><figcaption>圖 11.1：短通道 MOSFET 的二維電勢分布——源極和汲極的電場穿入通道中央，分攤閘極控制力。</figcaption></div>
+<p>Moore 定律不可能永遠持續。本節討論限制 MOSFET 繼續縮小的<strong>根本物理障壁</strong>——這些不是工程問題（可透過更聰明的設計克服），而是物理定律設定硬性限制。</p>
+
+<h3>氧化層的量子穿隧限制</h3>
+<p>SiO₂ 氧化層的厚度不能小於 ∼0.5 nm（約兩個分子層）。當 $t_{ox}<1$ nm 時，直接量子穿隧（direct tunneling）導致閘極漏電流密度呈指數增長：$J_G \propto e^{-t_{ox}\sqrt{2m^*\phi_B}/\hbar}$。對 $t_{ox}=1.5$ nm→$J_G\sim1$ A/cm²；$t_{ox}=0.8$ nm→$J_G\sim10^3$ A/cm²→閘極漏電功耗超過通道導通功耗→電晶體失去意義。high-κ 材料（HfO₂, $\kappa\sim25$）可以物理厚度 5 nm 達到等效 0.8 nm 的電容→穿隧漏電降低 ∼$10^4$ 倍。但當等效厚度也縮到 ∼0.5 nm 時，穿隧限制再次出現。</p>
+
+<h3>摻雜波動（Random Dopant Fluctuation, RDF）</h3>
+<p>在 $L_g=10$ nm 的 MOSFET 中，通道體積約為 $10\times10\times10$ nm³ $=10^{-18}$ cm³。若 $N_a=10^{18}$ cm⁻³→通道中僅有 ∼<strong>10 個摻雜原子</strong>。這 10 個原子的確切數量和位置因每個電晶體而異（Poisson 統計→標準差 $\sqrt{10}\approx3$）→每個電晶體的 $V_T$ 都不同。在一個有 100 億個電晶體的晶片上，$V_T$ 的統計分布寬度可達 ∼50–100 mV——大到足以破壞 SRAM 單元的讀寫穩定性和邏輯時序。</p>
+
+<h3>功耗密度——黑暗矽（Dark Silicon）</h3>
+<p>即使每個電晶體的功耗隨縮小而降低，但密度以 $\kappa^2$ 增長→每單位面積的總功耗可能增加。現代高效能晶片的功耗密度已接近 ∼100 W/cm²——接近核反應爐的熱通量。散熱能力（空冷∼50 W/cm²，液冷∼200 W/cm²）限制了能同時全速運行的電晶體比例。這就是「黑暗矽」現象——晶片上有大比例的電晶體必須關閉或降頻以避免過熱。</p>
+
+<h3>11.3.2 窄通道效應（Narrow-Channel Effects）</h3>
+<p>短通道效應是通道<strong>長度</strong>縮小的問題。通道<strong>寬度</strong>縮小同樣帶來效應——<strong>窄通道效應</strong>。當 $W$ 縮小到與空乏區寬度可比時，閘極邊緣的電場線「繞射」到通道側面的空乏區中→需要額外的閘極電壓來覆蓋側面空乏電荷→$V_T$ <strong>升高</strong>。</p>
+<p>與短通道效應（$V_T$ 下降）相反，窄通道效應使 $V_T$ 上升。在現代 FinFET 中，通道是三維的鰭片（fin），$W$ 的定義不再是簡單的平面寬度，而是鰭片高度×2+鰭片寬度——窄通道效應的物理圖像需要重新理解。</p>
+</section>
+
+<section id="ch12_s12-ballistic"><h2>11.1.5 彈道傳輸——當通道比平均自由程還短</h2>
+<p>在傳統的漂移-擴散模型中，載子在通道中經過多次散射（碰撞）才從源極到達汲極。平均自由程 $\ell = v_{th}\tau \approx 10$–$50$ nm（室溫 Si）。當通道長度 $L$ 縮小到與 $\ell$ 可比（$L < 50$ nm）時，載子可能在<strong>不經過任何散射</strong>的情況下從源極飛到汲極——這就是<strong>彈道傳輸</strong>。</p>
+<p><strong>平均自由程的數值計算：</strong>$\ell = v_{th}\tau$。Si 中 $\mu_n = 300$ cm²/V·s（短通道中的有效遷移率）→$\tau = m^*\mu/e = 0.26\times9.11\times10^{-31}\times300\times10^{-4}/(1.6\times10^{-19}) \approx 4.4\times10^{-14}$ s。$v_{th} = \sqrt{8kT/(\pi m^*)} \approx 2.3\times10^7$ cm/s。$\ell = 2.3\times10^7\times4.4\times10^{-14} \approx 10$ nm。所以 $L < 10$ nm 的通道確實進入彈道區域。</p>
+<p>在完全彈道極限下，$I_D$ 不再受通道中的散射限制，而是受源極端的<strong>熱離子注入率</strong>限制——就像蕭特基二極體的 thermionic emission。飽和電流：</p>
+<div class="eq">$$I_{\text{ballistic}} = WC_{ox}(V_{GS}-V_T)v_{\text{inj}}$$</div>
+<p>其中 $v_{\text{inj}} \approx v_{th}/2$（注入速度≈熱速度的一半）。對 Si，$v_{th}\sim10^7$ cm/s→$v_{\text{inj}}\sim5\times10^6$ cm/s。這比速度飽和的 $v_{sat}\sim10^7$ cm/s 還低——所以彈道傳輸在 Si 中<strong>不一定</strong>比速度飽和更優。但在高遷移率材料（如 InGaAs，$v_{th}$ 更高）中，彈道傳輸可能是突破速度瓶頸的途徑。</p>
+<div class="callout"><strong>💡 彈道傳輸的工程現實。</strong>目前最先進的電晶體（3 nm FinFET/GAA）的通道長度約 12 nm——接近但不完全進入彈道區域。實際傳輸是「準彈道」的：載子在通道中只經歷 1-2 次散射。業界正在研究 InGaAs 和 Ge 通道來利用更高的注入速度，但這些材料的界面品質仍是挑戰。</div>
+</section>
+
+<section id="ch12_s12-implant"><h2>11.4.3 離子植入閾值調整</h2>
+<p>$V_T$ 的精確控制對數位電路至關重要——同一晶片上的所有 nMOS 必須有相同的 $V_T$。$V_T$ 取決於 $N_a$（基板摻雜）和 $C_{ox}$（氧化層厚度），但這些參數的製程控制精度有限。</p>
+<p><strong>離子植入（Ion Implantation）</strong>是精確調整 $V_T$ 的標準方法：在通道表面下方植入一層極薄的摻雜層（通常用 B 對 nMOS，P 或 As 對 pMOS）。植入劑量 $Q_I$（atoms/cm²）直接改變 $V_T$：</p>
+<div class="eq">$$\Delta V_T = \frac{eQ_I}{C_{ox}}$$</div>
+<p>植入深度（由離子能量決定）必須在反轉層形成的位置附近——太深則對 $V_T$ 無效，太淺則影響載子遷移率。典型的調整範圍：$\pm 100$–$300$ mV，植入劑量 $10^{12}$–$10^{13}$ cm$^{-2}$。</p>
+<p><strong>植入能量與深度的關係：</strong>離子進入 Si 後會與晶格原子碰撞而減速。投影射程 $R_p$（平均停止深度）取決於離子能量和質量：</p>
+<table><thead><tr><th>離子</th><th>能量 (keV)</th><th>$R_p$ (nm)</th><th>用途</th></tr></thead><tbody>
+<tr><td>B（硼）</td><td>10</td><td>∼30</td><td>淺接面 $V_T$ 調整</td></tr>
+<tr><td>B（硼）</td><td>50</td><td>∼150</td><td>標準 $V_T$ 調整</td></tr>
+<tr><td>P（磷）</td><td>50</td><td>∼60</td><td>nMOS $V_T$ 調整</td></tr>
+<tr><td>As（砷）</td><td>50</td><td>∼30</td><td>極淺 S/D 擴展</td></tr></tbody></table>
+<p><strong>退火（Annealing）：</strong>植入過程會嚴重破壞晶格（每個離子撞出數千個 Si 原子）→必須在 900–1100°C 退火來修復晶格損傷並活化摻雜原子。現代製程使用快速熱退火（RTA，∼1 秒）或雷射退火（毫秒級）以防止摻雜原子過度擴散。</p>
+<div class="callout"><strong>💡 多閾值電壓（Multi-$V_T$）技術。</strong>現代 SoC 中不同電路區塊對速度和功耗的要求不同。高效能核心用低 $V_T$（快但漏電大），低功耗 I/O 用高 $V_T$（慢但漏電小）。透過多次離子植入（不同區域不同劑量），可以在同一晶片上實現多種 $V_T$ 的 MOSFET。這是現代手機 SoC（如 Apple A 系列、Qualcomm Snapdragon）能在效能和續航之間取得平衡的關鍵技術。</div>
+</section>
+
+<section id="ch12_s12-rad"><h2>11.5 輻射與熱載子效應</h2>
+<p>除了前節討論的熱載子效應（通道中的高能電子注入氧化層），輻射環境也會在氧化層中產生電荷。</p>
+<p><strong>輻射效應的兩種類型：</strong></p>
+<p>① <strong>總劑量效應（TID, Total Ionizing Dose）：</strong>累積的輻射劑量在氧化層中產生永久性電荷。$\gamma$ 射線或質子撞擊 SiO₂→產生電子-電洞對。電子很快被掃出（$\sim10^{-5}$ cm²/V·s），但電洞被陷阱捕獲（$\sim10^{-11}$ cm²/V·s）→形成正的固定氧化層電荷→$V_{FB}$ 負移→$V_T$ 下降。典型漂移量：</p>
+<table><thead><tr><th>輻射劑量 (rad(Si))</th><th>$\Delta V_T$（未加固）</th><th>$\Delta V_T$（加固後）</th></tr></thead><tbody>
+<tr><td>100</td><td>∼50 mV</td><td>< 10 mV</td></tr>
+<tr><td>10k</td><td>∼1 V</td><td>∼100 mV</td></tr>
+<tr><td>100k</td><td>元件失效</td><td>∼500 mV</td></tr></tbody></table>
+<p>② <strong>單一事件效應（SEE, Single Event Effects）：</strong>高能粒子（宇宙射線中的重離子或質子）穿過電晶體→沿路產生大量電子-電洞對→瞬間電流脈衝。可能導致：SEU（單一事件翻轉，SRAM 位元翻轉→軟錯誤）、SEL（單一事件鎖定，觸發寄生 SCR→大電流→永久損壞）、SEB（單一事件崩潰，功率元件中）。</p>
+<p><strong>抗輻射設計方法：</strong></p>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li>薄氧化層（$<10$ nm）：減少電洞陷阱數量→TID 敏感度降低。</li>
+<li>SOI 結構：埋入氧化層消除體矽中的寄生路徑→抗 SEL。</li>
+<li>特殊的退火處理（含氫退火→減少界面態）。</li>
+<li>三模冗餘（TMR）：三個 SRAM 單元投票→容忍 SEU。</li>
+<li>矽化物閘極取代多晶矽閘極：消除空乏區中的電荷陷阱。</li>
+</ul>
+<div class="callout"><strong>💡 輻射加固是航太和軍事電子的專屬需求。</strong>國際太空站上的電子設備需要耐受 ∼100 krad/年的輻射劑量。衛星在 Van Allen 輻射帶中面臨更嚴苛的環境。軍規元件（如 BAE Systems 的 RAD750 處理器）使用特殊的抗輻射製程，代價是速度降低 5-10×、成本增加 100×。消費電子通常不需要考慮輻射效應，但在高海拔飛行（如民航飛機）中，宇宙射線仍可能導致 SRAM 軟錯誤——ECC（錯誤校正碼）是標準的防護措施。</div>
+</section>
+
+<section id="ch12_summary"><h2>本章摘要</h2>
+<ol style="font-size:14px;color:var(--t2);margin-left:18px">
+<li><strong>定電場縮小（Dennard Scaling）：</strong>尺寸和電壓同時除以 $\kappa$→內部電場不變→功耗 $\propto1/\kappa^2$。在 ∼90 nm 後因 $V_T$ 無法繼續降低而失效。</li>
+<li><strong>遷移率退化：</strong>$\mu_{\text{eff}}=\mu_0/[1+\theta(V_{GS}-V_T)]$。垂直電場壓迫載子至粗糙 Si/SiO₂ 界面→界面散射+量子侷限→$\mu$ 下降。</li>
+<li><strong>速度飽和：</strong>短通道 $I_D=WC_{ox}(V_{GS}-V_T)v_{\text{sat}}$（線性取代平方律）。$g_m$→$WC_{ox}v_{\text{sat}}$（常數上限）。Si 中 $v_{\text{sat}}$ 是材料常數→無法繞過。</li>
+<li><strong>熱載子效應：</strong>高能電子（數 eV）注入氧化層→$V_T$ 漂移、界面態、氧化層崩潰。LDD 結構降低峰值電場 30–50%。</li>
+<li><strong>SOI：</strong>埋入氧化層消除寄生接面電容和基板效應→更快、更低功耗。FinFET：三面閘極→靜電控制增強→$L_g$ 可縮小至 3 nm。</li>
+<li><strong>終極限制：</strong>量子穿隧→$t_{ox}>0.5$ nm。RDF→$V_T$ 統計變異（通道中 ∼10 原子）。功耗密度→散熱限制→黑暗矽。</li></ol></section>
+
+
+<!-- ===== 第十三章 雙極性電晶體——進階概念 ===== -->
+
+<header class="header"><div class="cl">第十三章</div><h1>雙極性電晶體——進階概念</h1><div class="meta">Donald A. Neamen·《半導體物理與元件：基本原理》第四版·第 491–550 頁</div></header>
+
+<section id="ch13_preview"><div class="callout"><strong>📋 13.0 本章預覽</strong>
+<p>第十章建立了 BJT 的直流模型（操作模式、電流增益、Early 效應）。本章在此基礎上深入三個實用面向：<strong>頻率響應</strong>（BJT 能跑多快？什麼限制了速度？）、<strong>開關行為</strong>（從 ON 到 OFF 需要多久？）、以及<strong>先進 BJT 技術</strong>（HBT、SiGe——現代 RF 電路的核心元件）。</p>
+<p>如果第十章是「BJT 如何運作」，本章就是「BJT 在高速應用中會出什麼問題，以及如何克服」。$f_T$ 和 $f_{\max}$ 是衡量 BJT 速度的兩個關鍵指標，它們由四個物理時間常數決定——射極充電、基極傳輸、集極渡越、集極充電。理解這四個延遲成分是設計高速 BJT 的基礎。本章最具啟發性的概念是：<strong>BJT 的速度極限不在於載子速度本身，而在於充放電各種寄生電容所需的時間。</strong></p></div></section>
+
+<section id="ch13_s13-1"><h2>13.1 BJT 作用回顧與多邊結構</h2>
+<p>本章假設你已經熟悉第十章的基本 BJT 物理——npn/pnp 結構、順向主動模式、$\alpha=\gamma\cdot\alpha_T$、$\beta=\alpha/(1-\alpha)$、Ebers-Moll 模型。在此基礎上，本節介紹幾種實際積體電路中使用的變體結構。</p>
+
+<h3>多射極 BJT（Multi-Emitter BJT）</h3>
+<p>這是 TTL（Transistor-Transistor Logic，1970–1980 年代的主流數位邏輯家族）的輸入級結構。一個電晶體有多個獨立的射極，所有射極共用同一個基極和集極。哪一個射極被拉低（接地），哪一個射極就注入載子→電晶體導通。多射極結構使 TTL 能夠實現多輸入的邏輯閘（NAND、AND），同時節省晶片面積。</p>
+
+<h3>橫向 pnp（Lateral pnp）</h3>
+<p>標準的 npn BJT 是<strong>縱向</strong>結構——射極在頂部、基極在中間、集極在底部。載子<strong>垂直</strong>於晶圓表面流動。橫向 pnp 則不同——射極和集極在同一個平面上（兩側都是 p⁺ 擴散），載子<strong>平行</strong>於晶圓表面（橫向）流動。這種結構可以在標準 npn 製程中自然形成——不需要額外的光罩或製程步驟。</p>
+<div class="figure"><img src="../../../images/solid-state-physics/ch13_pages/ch13_page_518.png" alt="圖 13.2" loading="lazy"><figcaption>圖 13.2：橫向 pnp 結構——射極和集極在同一平面上，載子平行表面流動。製程簡單但 $\beta$ 較低。</figcaption></div>
+<p>橫向 pnp 的缺點是 $\beta$ 較低（∼10–50），因為基極寬度由光罩間距決定（而非像縱向 npn 那樣由擴散深度決定→難以做到極窄）。但在 BiCMOS 電路中，它們提供了寶貴的互補元件——不需要複雜的額外製程就能得到 pnp 電晶體。</p>
+</section>
+
+<section id="ch13_s13-2"><h2>13.2 BJT 的頻率限制——什麼決定了 BJT 能跑多快 ⭐</h2>
+<p>BJT 不是瞬間響應的。從射極電壓變化到集極電流變化，需要一段延遲——這就是<strong>射極-集極傳輸時間 $\tau_{ec}$</strong>。當信號頻率超過 $f_T = 1/(2\pi\tau_{ec})$ 時，BJT 不再能放大電流（電流增益降為 1）。</p>
+
+<div class="eq">$$\boxed{\frac{1}{2\pi f_T} = \tau_{ec} = \tau_e + \tau_b + \tau_d + \tau_c}$$</div>
+
+<p>這四個時間常數各自代表一個物理過程——理解它們的來源和大小，就是理解如何設計高速 BJT：</p>
+
+<h3>① 射極充電時間 $\tau_e = r_e C_{je}$</h3>
+<p>$C_{je}$ 是 BE 接面電容（空乏層電容 + 擴散電容）。$r_e = V_T/I_E$ 是射極的小訊號電阻。$\tau_e = (V_T/I_E)C_{je}$——物理圖像是：要改變 $V_{BE}$，你必須先對 $C_{je}$ 充放電，而充放電的電流路徑經過 $r_e$。$\tau_e \propto 1/I_E$——射極電流越大，$\tau_e$ 越小。這就是為什麼高速 BJT 傾向操作在較高的偏壓電流。</p>
+
+<h3>② 基極傳輸時間 $\tau_b = W_B^2/(2D_B)$</h3>
+<p>這是最重要的時間常數——少數載子擴散跨越基極所需的平均時間。它來自擴散方程的解：一個粒子從 $x=0$ 擴散到 $x=W_B$ 的平均時間是 $W_B^2/(2D_B)$。</p>
+<p><strong>數值例子：</strong>$W_B=0.1$ µm，$D_B=30$ cm²/s→$\tau_b=(10^{-5})^2/(2\times30)=1.7\times10^{-12}$ s = 1.7 ps。單這個時間常數對應的 $f_T$ 約為 100 GHz。如果 $W_B=0.5$ µm→$\tau_b=42$ ps→$f_T$ 僅 ∼4 GHz。這就是為什麼所有高速 BJT 的首要設計目標就是<strong>縮小基極寬度</strong>。</p>
+<div class="figure"><img src="../../../images/solid-state-physics/ch13_pages/ch13_page_520.png" alt="圖 13.4, 13.5" loading="lazy"><figcaption>圖 13.4–13.5：基極中少數載子分布和傳輸時間。$W_B$ 越小→濃度梯度越大→擴散越快→$\tau_b$ 越小。</figcaption></div>
+
+<h3>③ 集極空乏層渡越時間 $\tau_d = x_d/(2v_{\text{sat}})$</h3>
+<p>電子穿過 BC 空乏區時，該區域電場極高→電子以飽和速度 $v_{\text{sat}}\approx10^7$ cm/s 運動。$x_d$ 是 BC 空乏區寬度（隨 $V_{CB}$ 增加）。$\tau_d = x_d/(2v_{\text{sat}})$——因子 1/2 來自平均（從 0 加速到 $v_{\text{sat}}$ 的過程）。$x_d=0.2$ µm→$\tau_d=0.2\times10^{-4}/(2\times10^7)=1$ ps。</p>
+
+<h3>④ 集極充電時間 $\tau_c = r_c C_{jc}$</h3>
+<p>$C_{jc}$ 是 BC 接面電容。$r_c$ 是集極串聯電阻（集極中性區的電阻）。這與 $\tau_e$ 對稱——充放電 BC 接面電容所需的時間。</p>
+
+<h3>⭐ $f_{\max}$——比 $f_T$ 更嚴格的指標</h3>
+<p>$f_T$ 只考慮電流增益，但對於功率放大器設計，更重要的是<strong>功率增益</strong>。$f_{\max}$（最大振盪頻率）是功率增益降至 1 的頻率：</p>
+<div class="eq">$$\boxed{f_{\max} = \sqrt{\frac{f_T}{8\pi\,r_b\,C_{jc}}}}$$</div>
+<p>$r_b$（基極電阻）和 $C_{jc}$（BC 接面電容）形成一個低通 RC 濾波器——訊號必須先對 $C_{jc}$ 充放電才能到達輸出。$r_b C_{jc}$ 時間常數限制了功率增益。$f_{\max} > f_T$ 是可能的（如果 $r_b C_{jc}$ 很小），但通常 $f_{\max}$ 是比 $f_T$ 更難提升的指標。</p>
+
+<div class="callout-warn"><strong>⚡ BJT vs MOSFET 的速度比較：</strong>現代 SiGe HBT 的 $f_T$ 可達 300–500 GHz，$f_{\max}$ 可達 500–800 GHz。這遠高於相同節點的 Si MOSFET（$f_T$∼300 GHz for $L_g=14$ nm FinFET）。BJT 的速度優勢來自兩個物理事實：① 基極寬度（∼10–50 nm）可以比 MOSFET 的通道長度更窄，因為 BJT 的 $W_B$ 由磊晶控制（而非光罩）。② BJT 的跨導 $g_m=I_C/V_T$ 比 MOSFET 的 $g_m$ 大數倍→充放電寄生電容更快。這就是為什麼毫米波（30–300 GHz）和太赫茲電路仍然主要使用 III-V 或 SiGe HBT。</div>
+</section>
+
+<section id="ch13_s13-3"><h2>13.3 大訊號開關特性——BJT 從 ON 到 OFF 需要多久</h2>
+<p>在數位電路中，BJT 頻繁地在截止（OFF）和飽和（ON）之間切換。切換速度受限於兩個物理過程：</p>
+<p><strong>導通延遲（Turn-on delay）：</strong>從施加基極驅動到 $I_C$ 開始上升。主要是對 BE 接面電容充電的時間。</p>
+<p><strong>截止延遲（Turn-off delay）——更大的問題：</strong>當 BJT 在飽和區操作時，基極中儲存了大量的過量少數載子（兩個接面都順偏→載子從兩側注入基極）。要關斷 BJT，必須先把這些儲存電荷<strong>移除</strong>（透過復合或反向基極電流抽取）。儲存時間 $t_s \approx \tau_s\ln[(I_F+I_R)/I_R]$，其中 $\tau_s$ 是飽和區的等效壽命。</p>
+<div class="figure"><img src="../../../images/solid-state-physics/ch13_pages/ch13_page_541.png" alt="圖 13.20" loading="lazy"><figcaption>圖 13.20：BJT 開關波形——導通延遲、上升時間、儲存時間、下降時間。儲存時間是飽和 BJT 的主要速度限制。</figcaption></div>
+<div class="callout"><strong>💡 蕭特基箝位——防止 BJT 進入飽和的經典技術。</strong>在基極和集極之間並聯一個蕭特基二極體（順向壓降 ∼0.3 V）。當 BJT 嘗試進入飽和時（$V_{CE}\to0.1$ V），蕭特基二極體導通→多餘的基極電流被旁路到集極→$V_{CE}$ 被箝在 ∼0.3 V→BJT 無法進入深度飽和→儲存時間大幅降低。這就是 74S/74LS 系列 TTL 邏輯（蕭特基 TTL）的核心創新。</div>
+</section>
+
+<section id="ch13_s13-4"><h2>13.4 小訊號等效電路與窄基極效應</h2>
+<div class="figure"><img src="../../../images/solid-state-physics/ch13_pages/ch13_page_562.png" alt="圖 12.36" loading="lazy"><figcaption>圖 12.36：BJT 混合-π 小訊號等效電路——$r_\pi$、$g_m$、$C_\pi$、$C_\mu$ 的完整模型。</figcaption></div>
+<p>第十章介紹了基本的混合-π 模型（$g_m, r_\pi, r_o$）。本節補充<strong>電容元件</strong>——這是高頻行為的關鍵。完整的混合-π 模型包含兩個電容：</p>
+<div class="eq">$$C_\pi = C_{je} + \tau_F g_m,\qquad C_\mu = C_{jc}$$</div>
+<p>$C_\pi$（輸入電容）有兩部分：$C_{je}$（BE 空乏層電容，逆向偏壓相關）和 $\tau_F g_m$（擴散電容，$\propto I_C$）。順向偏壓時擴散電容主導 $C_\pi$。</p>
+<p>$C_\mu$（回授電容）= BC 接面電容。$C_\mu$ 雖然小，但因為 Miller 效應，它在輸入端被放大 $(1+g_m R_L)$ 倍→對高頻增益有顯著影響。高速 BJT 設計的一個重要目標是最小化 $C_{jc}$（透過小面積集極、高 $V_{CB}$ 偏壓）。</p>
+</section>
+
+<section id="ch13_s13-gp"><h2>12.5.2 Gummel-Poon 模型——比 Ebers-Moll 更精確</h2>
+<div class="figure"><img src="../../../images/solid-state-physics/ch13_pages/ch13_page_565.png" alt="圖 12.31" loading="lazy"><figcaption>圖 12.31：Gummel-Poon 等效電路——比 Ebers-Moll 更精確的 BJT 大訊號模型，包含電荷控制項。</figcaption></div>
+<p>Ebers-Moll 模型（第十章）用兩個互相耦合的二極體和兩個受控電流源來描述 BJT。它在大多數情況下夠用，但有一個重要限制：<strong>它假設 $\alpha_F$ 和 $\alpha_R$ 是常數</strong>——不隨電流變化。現實中，$\beta$ 隨 $I_C$ 變化很大（低電流時復合損失主導、高電流時高注入效應主導）。</p>
+<p><strong>Gummel-Poon 模型</strong>通過引入<strong>電荷控制方程</strong>來解決這個問題。核心思想：$I_S$ 不再是常數，而是與基極中的總存儲電荷 $Q_B$ 相關：</p>
+<div class="eq">$$I_C = \frac{qA n_i^2 D_B}{Q_B} \cdot Q_{B0} \left(e^{V_{BE}/V_T} - e^{V_{BC}/V_T}\right)$$</div>
+<p>其中 $Q_B = Q_{B0} + Q_{BE} + Q_{BC}$（包含 BE 和 BC 接面的充電電荷）。當 $Q_B$ 增大（高電流）→$I_C$ 增長速度減緩→自動包含了 Webster 效應和 Kirk 效應。</p>
+<div class="callout"><strong>💡 Gummel-Poon 的實際價值。</strong>所有現代 SPICE 電路模擬器中的 BJT 模型都基於 Gummel-Poon（或更先進的 VBIC/MEXTRAM 模型）。Gummel-Poon 的參數可以直接從 Gummel plot（$\log I_C$ vs $V_{BE}$ 和 $\log I_B$ vs $V_{BE}$ 的曲線）中提取。工程師量測 Gummel plot 後，用曲線擬合得到 $I_S$、$\beta_F$、$\beta_R$、$V_A$、$\tau_F$ 等參數→灌入 SPICE→模擬電路行為。</div>
+</section>
+
+<section id="ch13_s13-nonideal"><h2>12.4 BJT 非理想效應——詳細分析</h2>
+<p>第十章已介紹了基極寬度調變（Early 效應）。本節補充三個在高電流和高壓操作下的重要非理想效應。</p>
+
+<h3>12.4.2 高注入效應（Webster Effect）</h3>
+<p>順向主動模式下，$I_C = I_S e^{V_{BE}/V_T}$ 在低電流時成立。當 $V_{BE}$ 增大到使注入基極的少數載子濃度 $\delta n_B$ 接近基極多數載子濃度 $p_{B0}$ 時，<strong>電中性條件</strong>要求 $p$ 也必須增加（$p = p_{B0} + \delta n_B$）→有效摻雜濃度增大→$I_S$ 的表觀值增大→$\beta$ 在高電流時下降。這稱為 Webster 效應。</p>
+<p>在 Gummel plot 中，$\log I_C$ vs $V_{BE}$ 曲線在高 $V_{BE}$ 處開始<strong>偏離直線</strong>（斜率降低）——這就是高注入的實驗特徵。</p>
+
+<h3>12.4.3 射極能隙窄化（Emitter Bandgap Narrowing）</h3>
+<p>當射極摻雜濃度 $N_E$ 超過 $\sim10^{18}$ cm$^{-3}$ 時，重摻雜帶來兩個效應：① 雜質能帶形成（impurity band）→禁帶寬度 $E_g$ 縮小。② 多體效應（exchange-correlation）→進一步縮小 $E_g$。</p>
+<p>能隙窄化的直接後果：$n_i^2 \propto e^{-E_g/kT}$→$E_g$ 縮小→$n_i^2$ 增大→射極中的少數載子（電洞）濃度增大→注入射極的電洞電流 $I_{pE}$ 增大→$\gamma$ 下降→$\beta$ 下降。</p>
+<p>這就是為什麼射極摻雜<strong>不能無限提高</strong>——超過 $\sim5\times10^{19}$ cm$^{-3}$ 後，$\beta$ 反而下降。最佳射極摻雜通常在 $10^{18}$–$10^{19}$ cm$^{-3}$ 之間。</p>
+
+<h3>12.4.4 電流集中（Current Crowding）</h3>
+<p>基極電流 $I_B$ 從基極接觸橫向流過基區到達基極-射極接面下方。基區有歐姆電阻 $r_b$（基極擴散電阻）→$I_B$ 在 $r_b$ 上產生壓降→射極邊緣的實際 $V_{BE}$ 高於射極中央的 $V_{BE}$→射極邊緣注入更多電流。</p>
+<p>結果：<strong>射極電流集中在邊緣</strong>，中央部分貢獻較少。在高 $I_C$ 下，邊緣的 $V_{BE}$ 最高→先進入高注入→$\beta$ 先下降。這使有效射極面積小於幾何面積→$g_m$ 低於預期。</p>
+<div class="callout"><strong>💡 電流集中的工程對策。</strong>多射極指狀結構（multi-finger emitter）：把一個大射極分成多個窄條，每條的寬度只有幾 µm→橫向壓降減小→電流分布更均勻。這是高頻功率 BJT 和 HBT 的標準設計。</div>
+</section>
+
+<section id="ch13_s13-5"><h2>13.5 HBT 與 SiGe 技術——現代 RF 的基石</h2>
+<p>第十章討論的 BJT 是同質接面（Si 射極/Si 基極/Si 集極）。<strong>異質接面雙極性電晶體（HBT）</strong>用一個<strong>寬能隙材料</strong>作為射極（如 SiGe 中的 Si 射極+漸進 Ge 基極，或 AlGaAs/GaAs HBT）。</p>
+<p><strong>HBT 如何突破 $\beta$ 的限制：</strong>在同質接面 BJT 中，$\gamma$（射極注入效率）受限於射極和基極的摻雜比 $N_E/N_B$。$N_E$ 不能無限提高（重摻雜→能隙縮小→$\gamma$ 實際上會降）。HBT 的寬能隙射極創造了一個<strong>價帶能障</strong>——阻止電洞從基極注入射極→$I_{pE}$ 幾乎消失→$\gamma\approx1$，即使射極摻雜不比基極重。這使設計者可以<strong>重摻雜基極</strong>（降低 $r_b$）而不犧牲 $\gamma$→同時實現高 $\beta$ 和高 $f_{\max}$。</p>
+<div class="figure"><img src="../../../images/solid-state-physics/ch13_pages/ch13_page_548.png" alt="圖 13.22" loading="lazy"><figcaption>圖 13.22：SiGe HBT 的能帶圖——基極中漸進的 Ge 組成使能隙漸進縮小，產生內建加速電場。這個電場將注入的電子「推」向集極→$\tau_b$ 大幅降低→$f_T$ 可達 500 GHz。</figcaption></div>
+<h3>SiGe HBT——矽基高速的王者</h3>
+<p>SiGe HBT 是目前商用頻率最高的矽基元件：$f_T$ 達 300–500 GHz，$f_{\max}$ 達 500–800 GHz。關鍵創新是<strong>基極中漸進的 Ge 組成</strong>——Ge 含量從射極端向集極端逐漸增加→能隙逐漸縮小→導帶產生一個內建電場（類似於重力場）→注入的電子被這個「準電場」加速→基極傳輸時間 $\tau_b$ 降至亞皮秒級。SiGe HBT 是手機 RF 前端、光纖通訊驅動器（100 Gbps）、汽車雷達（77 GHz）的主力元件。</p>
+</section>
+
+<section id="ch13_summary"><h2>本章摘要</h2>
+<ol style="font-size:14px;color:var(--t2);margin-left:18px">
+<li><strong>$f_T$ 的四個時間常數：</strong>$\tau_e=r_e C_{je}$、$\tau_b=W_B^2/(2D_B)$（⭐ 設計焦點）、$\tau_d=x_d/(2v_{\text{sat}})$、$\tau_c=r_c C_{jc}$。</li>
+<li><strong>$f_{\max}=\sqrt{f_T/(8\pi r_b C_{jc})}$：</strong>功率增益的頻率上限。$r_b C_{jc}$ 時間常數是瓶頸。</li>
+<li><strong>BJT 開關：</strong>延遲來自基極儲存電荷的移除。蕭特基箝位防止飽和→儲存時間大幅降低。</li>
+<li><strong>完整混合-π：</strong>$C_\pi=C_{je}+\tau_F g_m$（輸入電容），$C_\mu=C_{jc}$（Miller 回授電容）。</li>
+<li><strong>HBT：</strong>寬能隙射極→$\gamma\approx1$→可重摻雜基極→$r_b$ 降低→$f_{\max}$ 提升。</li>
+<li><strong>SiGe HBT：</strong>漸進 Ge 組成→內建加速電場→$\tau_b$ 降至亞皮秒→$f_T>500$ GHz→毫米波/太赫茲應用。</li></ol></section>
+
+</main>
+
+<script>
+function toggleTheme(){const h=document.documentElement;const n=h.getAttribute('data-theme')==='light'?'dark':'light';h.setAttribute('data-theme',n);localStorage.setItem('theme',n);document.getElementById('tl').textContent=n==='dark'?'淺色模式':'深色模式';}
+const s=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',s);if(s==='dark')document.getElementById('tl').textContent='淺色模式';
+const secs=document.querySelectorAll('section[id]');const navs=document.querySelectorAll('.sn a');window.addEventListener('scroll',()=>{let c='';secs.forEach(s=>{if(window.scrollY>=s.offsetTop-80)c=s.getAttribute('id');});navs.forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+c);});});
+document.querySelectorAll('.figure img').forEach(i=>i.addEventListener('click',()=>window.open(i.src,'_blank')));
+</script>
+</body>
+</html>

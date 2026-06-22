@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>第三章 公式摘要 — 固體的量子理論（81 條完整版）</title>
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']],tags:'ams'},options:{ignoreHtmlClass:'no-math'}};</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+:root{--bg:#fff;--b2:#F5F5F7;--b3:#E8F0FE;--tx:#1D1D1F;--t2:#1D1D1F;--ac:#007AFF;--bd:#D2D2D7;--sh:0 2px 8px rgba(0,0,0,.08);--fbg:#FAFBFC;--fbd:#E5E5EA;--dbg:#E8F0FE;--dac:#007AFF;--wbg:#FFF9F0;--wbd:#FFB340;--wtx:#B8700A;--hv:#F0F4FF;--nw:240px}
+[data-theme="dark"]{--bg:#1C1C1E;--b2:#2C2C2E;--b3:#1A2332;--tx:#F5F5F7;--t2:#A1A1A6;--ac:#0A84FF;--bd:#48484A;--fbg:#252528;--fbd:#3A3A3C;--dbg:#1A2332;--dac:#0A84FF;--wbg:#2C2416;--wbd:#8B6914;--wtx:#FFB340;--hv:#1E2A3A}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth;scroll-padding-top:16px}
+body{font-family:-apple-system,BlinkMacSystemFont,'Noto Sans TC','Microsoft JhengHei',sans-serif;background:var(--b2);color:var(--tx);line-height:1.75;display:flex;min-height:100vh}
+.sidebar{position:fixed;top:0;left:0;width:var(--nw);height:100vh;background:var(--bg);border-right:1px solid var(--bd);overflow-y:auto;z-index:100;padding:20px 16px;display:flex;flex-direction:column}
+.sh{margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--fbd)}.sh h2{font-size:14px;font-weight:600;color:var(--ac)}.sh .bk{font-size:11px;color:var(--t2);margin-bottom:2px}
+.sn{flex:1}.sn ul{list-style:none;padding:0}.sn li{margin-bottom:1px}
+.sn a{display:block;padding:3px 10px;font-size:10.5px;color:var(--t2);text-decoration:none;border-radius:5px;transition:all .12s;line-height:1.3}
+.sn a:hover{background:var(--b3);color:var(--ac)}.sn a.active{background:var(--b3);color:var(--ac);font-weight:500}
+.sn .ns{font-weight:600;font-size:11.5px;color:var(--tx);margin-top:8px;margin-bottom:1px;padding:2px 10px}
+.sn .nsub a{padding-left:18px;font-size:10px}
+.st{margin-top:auto;padding-top:12px;border-top:1px solid var(--fbd)}.st button{width:100%;padding:6px;border:1px solid var(--bd);border-radius:6px;background:var(--b2);color:var(--tx);cursor:pointer;font-size:12px}
+.main{margin-left:var(--nw);flex:1;max-width:1100px;padding:32px 40px 80px}
+.header{margin-bottom:24px;padding-bottom:20px;border-bottom:2px solid var(--ac)}.header .tag{font-size:12px;font-weight:600;color:var(--ac);letter-spacing:1px}.header h1{font-size:26px;font-weight:700;margin:6px 0}.header .sub{font-size:13px;color:var(--t2)}
+.tbar{display:flex;gap:8px;margin-bottom:20px}.tbar button{padding:5px 16px;font-size:12px;border:1px solid var(--ac);border-radius:20px;background:var(--bg);color:var(--ac);cursor:pointer;font-weight:500;transition:all .15s}.tbar button:hover{background:var(--ac);color:#fff}
+.section{margin-bottom:44px}.section h2{font-size:19px;font-weight:700;color:var(--ac);margin-bottom:4px;padding-bottom:6px;border-bottom:1px solid var(--bd)}
+.fcard{background:var(--bg);border:1px solid var(--fbd);border-radius:10px;padding:16px 20px;margin:14px 0;box-shadow:var(--sh)}.fcard .lbl{font-size:11px;font-weight:700;color:var(--ac);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}.fcard .eq{text-align:center;padding:8px 0;font-size:15px}.fcard .note{font-size:12px;color:var(--t2);margin-top:6px;padding-top:6px;border-top:1px solid var(--fbd);line-height:1.6}
+details.derive{background:var(--dbg);border-left:4px solid var(--dac);border-radius:0 10px 10px 0;margin:16px 0;transition:all .2s}details.derive[open]{background:var(--bg)}
+details.derive>summary{padding:14px 18px;cursor:pointer;list-style:none;display:flex;align-items:center;gap:8px;font-weight:700;color:var(--ac);font-size:13px;letter-spacing:.3px;user-select:none}details.derive>summary::-webkit-details-marker{display:none}details.derive>summary::before{content:'▸';display:inline-block;font-size:11px;transition:transform .2s;width:14px;text-align:center}details.derive[open]>summary::before{transform:rotate(90deg)}details.derive>summary:hover{background:var(--hv);border-radius:0 10px 0 0}
+details.derive .dbo{padding:0 18px 16px 18px}details.derive .step{margin:8px 0;padding:6px 0}details.derive .snb{display:inline-block;background:var(--ac);color:#fff;width:22px;height:22px;border-radius:50%;text-align:center;font-size:11px;font-weight:700;line-height:22px;margin-right:8px}details.derive .sl{font-weight:700;font-size:13px;color:var(--tx)}details.derive .sc{margin:4px 0 4px 30px;font-size:13px;color:var(--t2)}details.derive .sc .math{display:block;text-align:center;padding:6px 0}
+details.example{background:#FFF9F0;border:1px solid #FFB340;border-radius:10px;margin:14px 0}[data-theme="dark"] details.example{background:#2C2416;border-color:#8B6914}details.example>summary{padding:10px 16px;cursor:pointer;list-style:none;display:flex;align-items:center;gap:8px;font-weight:700;color:#B8700A;font-size:12px;user-select:none}[data-theme="dark"] details.example>summary{color:#FFB340}details.example>summary::-webkit-details-marker{display:none}details.example>summary::before{content:'▸';display:inline-block;font-size:11px;transition:transform .2s;width:14px;text-align:center}details.example[open]>summary::before{transform:rotate(90deg)}details.example .ebo{padding:0 16px 12px 16px;font-size:13px}
+.warn-box{background:var(--wbg);border:1px solid var(--wbd);border-radius:10px;padding:14px 18px;margin:16px 0;font-size:14px}.warn-box .wt{font-weight:700;color:var(--wtx);font-size:12px;margin-bottom:6px}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:13px}thead th{background:var(--b3);padding:8px 12px;text-align:left;font-size:12px;font-weight:600;border-bottom:2px solid var(--bd)}tbody td{padding:8px 12px;border-bottom:1px solid var(--fbd)}
+.constants{display:grid;grid-template-columns:1fr 1fr;gap:6px 16px;font-size:13px}.constants dt{color:var(--t2)}.constants dd{font-weight:600}
+@media(max-width:768px){.sidebar{transform:translateX(-100%);transition:.3s}.sidebar.open{transform:translateX(0)}.main{margin-left:0;padding:20px 16px 60px}}
+@media print{.sidebar,.tbar{display:none}details.derive,details.example{display:block!important}details.derive>summary::before,details.example>summary::before{display:none}.main{margin-left:0;max-width:100%;padding:0}}
+</style>
+<script src="../../../reading-preferences.js" defer></script></head>
+<body><a class="portal-home-link" href="../../../index.html">返回學習中心</a><style id="portal-home-link-style">.portal-home-link{position:fixed;top:16px;right:16px;z-index:1000;display:inline-flex;align-items:center;min-height:36px;padding:7px 11px;border:1px solid #cbd5e1;border-radius:8px;background:#fff;color:#1d4ed8;font:600 13px/1.2 -apple-system,BlinkMacSystemFont,"Noto Sans TC","Microsoft JhengHei",sans-serif;text-decoration:none;box-shadow:0 2px 10px rgba(15,23,42,.08)}.portal-home-link:hover{background:#eff6ff}.portal-home-link:focus-visible{outline:3px solid rgba(37,99,235,.35);outline-offset:2px}@media(max-width:768px){.portal-home-link{top:10px;right:10px;min-height:34px;padding:7px 9px;font-size:12px}}</style>
+<nav class="sidebar"><div class="sh"><div class="bk">半導體物理與元件·第四版</div><h2>第三章 公式摘要</h2></div><div class="sn"><ul>
+<li><a href="#constants">🔢 物理常數</a></li>
+<li class="ns">3.1 能帶理論</li><li class="nsub"><a href="#s1">3.1.1 能帶形成</a></li><li class="nsub"><a href="#s2">3.1.2 Kronig-Penney (3.1–3.19)</a></li><li class="nsub"><a href="#s3">3.1.3 k 空間圖 (3.20–3.24)</a></li>
+<li class="ns">3.2 電傳導</li><li class="nsub"><a href="#s4">3.2.1–3.2.2 漂移電流 (3.25–3.33)</a></li><li class="nsub"><a href="#s5">3.2.3 有效質量 ⭐ (3.34–3.36)</a></li><li class="nsub"><a href="#s6">3.2.4–3.2.5 電洞/金屬-絕緣體</a></li>
+<li class="ns">3.3 三維延伸</li><li class="nsub"><a href="#s7">3.3 Si/GaAs k 空間 (3.37–3.43)</a></li>
+<li class="ns">3.4 態密度</li><li class="nsub"><a href="#s8">3.4 態密度推導 ⭐ (3.44–3.58)</a></li>
+<li class="ns">3.5 統計力學</li><li class="nsub"><a href="#s9">3.5 Fermi-Dirac ⭐ (3.59–3.79)</a></li>
+<li><a href="#cheatsheet">📋 公式速查表</a></li>
+</ul></div><div class="st"><button onclick="toggleTheme()">🌓 <span id="tl">深色模式</span></button></div></nav>
+<main class="main">
+<div class="header"><div class="tag">81 條公式完整版·含 8 例題+7 TYU</div><h1>第三章：固體的量子理論導論</h1><div class="sub">Semiconductor Physics & Devices, 4th Ed.·Donald A. Neamen·pp.58–105</div></div>
+<div class="tbar"><button onclick="document.querySelectorAll('details').forEach(d=>d.open=true)">📖 展開全部</button><button onclick="document.querySelectorAll('details').forEach(d=>d.open=false)">📕 收合全部</button></div>
+
+<div class="section" id="constants"><h2>常用物理常數</h2><div class="constants">
+<dt>$h$（普朗克常數）</dt><dd>$6.625\times10^{-34}$ J·s</dd>
+<dt>$\hbar=h/2\pi$</dt><dd>$1.054\times10^{-34}$ J·s</dd>
+<dt>$m_e$（電子質量）</dt><dd>$9.11\times10^{-31}$ kg</dd>
+<dt>$e$（電子電荷）</dt><dd>$1.6\times10^{-19}$ C</dd>
+<dt>$k$（波茲曼常數）</dt><dd>$1.38\times10^{-23}$ J/K = $8.617\times10^{-5}$ eV/K</dd>
+<dt>$kT$（室溫 300K）</dt><dd>$0.0259$ eV</dd>
+<dt>$\epsilon_0$（真空電容率）</dt><dd>$8.85\times10^{-14}$ F/cm</dd>
+</div></div>
+
+<!-- 3.1.1 -->
+<div class="section" id="s1"><h2>3.1.1 能帶的形成</h2>
+<div class="warn-box"><div class="wt">⚡ 核心概念</div>原子靠近→波函數重疊→分立能階分裂成能帶。Pauli 原理要求每個電子有不同量子態→准連續能帶。Si：3s(2電子)+3p(2電子)→價帶(4N態,全滿)+導帶(4N態,全空)，中間為能隙 $E_g$。</div>
+<details class="example" open><summary>📐 例題 3.1 — 能態間距極小</summary><div class="ebo">$10^{19}$ 原子，能帶寬 1 eV→態間距 $10^{-19}$ eV。電子 $v=10^7$ cm/s，$\Delta v=1$ cm/s→$\Delta E=mv\Delta v=5.7\times10^{-9}$ eV ≫ $10^{-19}$ eV→能態可視為准連續。</div></details>
+</div>
+
+<!-- 3.1.2 -->
+<div class="section" id="s2"><h2>3.1.2 Kronig-Penney 模型 (3.1–3.19)</h2>
+<div class="warn-box"><div class="wt">⚡ Kronig-Penney 是能帶理論的數學基礎，週期性位能→允許/禁止能帶。</div></div>
+<details class="derive" open><summary>🔍 Bloch 定理 + Kronig-Penney 推導 — 19 條公式</summary><div class="dbo">
+<div class="step"><span class="snb">1</span><span class="sl">Bloch 定理 (3.1–3.3)</span><div class="sc"><span class="math">$$\psi(x)=u(x)e^{jkx}\tag{3.1}$$</span>$u(x)$ 為週期函數，週期 $a+b$。<span class="math">$$\Psi(x,t)=u(x)e^{j(kx-(E/\hbar)t)}\tag{3.3}$$</span>行進波解，振幅受晶格週期調制。</div></div>
+<div class="step"><span class="snb">2</span><span class="sl">區域 I ($V=0$) (3.4–3.5)</span><div class="sc"><span class="math">$$\frac{d^2u_1}{dx^2}+2jk\frac{du_1}{dx}-(k^2-\alpha^2)u_1=0\tag{3.4}$$</span><span class="math">$$\alpha^2=\frac{2mE}{\hbar^2}\tag{3.5}$$</span></div></div>
+<div class="step"><span class="snb">3</span><span class="sl">區域 II ($V=V_0$) (3.6–3.8)</span><div class="sc"><span class="math">$$\frac{d^2u_2}{dx^2}+2jk\frac{du_2}{dx}-\left(k^2-\alpha^2+\frac{2mV_0}{\hbar^2}\right)u_2=0\tag{3.6}$$</span><span class="math">$$\beta^2=\frac{2m(E-V_0)}{\hbar^2}=\alpha^2-\frac{2mV_0}{\hbar^2}\tag{3.7}$$</span><span class="math">$$\frac{d^2u_2}{dx^2}+2jk\frac{du_2}{dx}-(k^2-\beta^2)u_2=0\tag{3.8}$$</span></div></div>
+<div class="step"><span class="snb">4</span><span class="sl">解的形式 (3.9–3.10)</span><div class="sc"><span class="math">$$u_1(x)=Ae^{j(\alpha-k)x}+Be^{-j(\alpha+k)x}\;(0<x<a)\tag{3.9}$$</span><span class="math">$$u_2(x)=Ce^{j(\beta-k)x}+De^{-j(\beta+k)x}\;(-b<x<0)\tag{3.10}$$</span></div></div>
+<div class="step"><span class="snb">5</span><span class="sl">邊界條件 (3.11–3.18)</span><div class="sc">$x=0$：$u_1(0)=u_2(0)$→$A+B-C-D=0$ (3.11–3.12)<br>$u'_1(0)=u'_2(0)$→$(\alpha-k)A-(\alpha+k)B-(\beta-k)C+(\beta+k)D=0$ (3.13–3.14)<br>$x=a$（週期性 $u_1(a)=u_2(-b)$）→ (3.15–3.16)<br>$u'_1(a)=u'_2(-b)$→ (3.17–3.18)</div></div>
+<div class="step"><span class="snb">6</span><span class="sl">⭐ 色散關係 (3.19) — 決定允帶/禁帶</span><div class="sc"><span class="math">$$\boxed{-\frac{\alpha^2+\beta^2}{2\alpha\beta}\sin(\alpha a)\sin(\beta b)+\cos(\alpha a)\cos(\beta b)=\cos k(a+b)}\tag{3.19}$$</span>右邊 $\cos k(a+b)$ 必須在 $[-1,1]$ → 限制 $\alpha,\beta$ → 僅特定 $E$ 範圍有解→<strong>允帶與禁帶</strong>。</div></div>
+</div></details>
+</div>
+
+<!-- 3.1.3 -->
+<div class="section" id="s3"><h2>3.1.3 k 空間圖與能帶結構 (3.20–3.24)</h2>
+<div class="fcard"><div class="lbl">⭐ E–k 關係（拋物線近似，能帶邊緣）</div><div class="eq">$$E = \frac{\hbar^2 k^2}{2m^*}\tag{3.24}$$</div><div class="note">$m^*$ = 有效質量。導帶底部和價帶頂部可用拋物線近似。</div></div>
+<details class="derive" open><summary>🔍 Kronig-Penney → E–k 圖</summary><div class="dbo">
+<div class="step"><span class="snb">1</span><span class="sl">簡化 K-P 模型（$b→0, V_0→∞$，保持 $bV_0$ 有限）</span><div class="sc"><span class="math">$$P'\frac{\sin\alpha a}{\alpha a}+\cos\alpha a=\cos ka\tag{3.20}$$</span>其中 $P'=\frac{mV_0ba}{\hbar^2}$ 為位能障壁強度參數。</div></div>
+<div class="step"><span class="snb">2</span><span class="sl">允帶條件</span><div class="sc">(3.20) 左邊必須在 $[-1,1]$ → 僅當 $\alpha a$（即 $E$）落在特定範圍才有解。<br>這些範圍即為<strong>Brillouin 區</strong>中的允帶。</div></div>
+<div class="step"><span class="snb">3</span><span class="sl">$k$ 的範圍—Brillouin 區</span><div class="sc">$k$ 的範圍：$-\pi/(a+b)\leq k\leq\pi/(a+b)$（第一 Brillouin 區）<br>能帶在 $k=\pm n\pi/(a+b)$ 處不連續→能隙 $E_g$。</div></div>
+</div></details>
+<details class="example" open><summary>📐 例題 3.2 — Kronig-Penney 能隙</summary><div class="ebo">$P'=10$，$a=5$ Å。由 (3.20)，$\cos ka$ 在允帶邊界 $=\pm1$。解得第一能隙 $E_g\approx 3.12$ eV。</div></details>
+</div>
+
+<!-- 3.2.1-3.2.2 -->
+<div class="section" id="s4"><h2>3.2.1–3.2.2 電傳導與漂移電流 (3.25–3.33)</h2>
+<div class="fcard"><div class="lbl">Drift 電流密度 (3.25–3.31)</div><div class="eq">$$J = -e\sum_{i=1}^{n}v_i\tag{3.25}$$</div><div class="note">(3.26) $J = -env_d$ (3.27) $v_d = \mu E$（$\mu$=遷移率）<br>(3.31) $\boxed{J = e n \mu E}$（電子電流）<br>(3.32) $\boxed{\sigma = e n \mu}$（導電率）<br>$n$=電子濃度, $\mu$=遷移率 (cm²/V·s)</div></div>
+<details class="derive" open><summary>🔍 漂移電流推導</summary><div class="dbo">
+<div class="step"><span class="snb">1</span><span class="sl">電子受力 $F=-eE$，由牛頓第二定律</span><div class="sc"><span class="math">$$F = m^* a = -eE \quad\Rightarrow\quad a = -\frac{eE}{m^*}\tag{3.28}$$</span></div></div>
+<div class="step"><span class="snb">2</span><span class="sl">碰撞限制—平均漂移速度</span><div class="sc">電子在 $\tau$（平均自由時間）內加速，碰撞後歸零：<span class="math">$$v_d = \frac{1}{2}a\tau = \frac{1}{2}\frac{eE}{m^*}\tau\tag{3.29}$$</span></div></div>
+<div class="step"><span class="snb">3</span><span class="sl">遷移率定義 (3.30)</span><div class="sc"><span class="math">$$\mu = \frac{v_d}{E} = \frac{e\tau}{2m^*}\tag{3.30}$$</span>更精確：$\mu = e\tau/m^*$（考慮統計分布）</div></div>
+</div></details>
+</div>
+
+<!-- 3.2.3 -->
+<div class="section" id="s5"><h2>3.2.3 電子有效質量 ⭐ (3.34–3.36)</h2>
+<div class="fcard"><div class="lbl">⭐ 有效質量定義 (3.34)</div><div class="eq">$$\boxed{m^* = \frac{\hbar^2}{\dfrac{d^2E}{dk^2}}}\tag{3.34}$$</div><div class="note">$E$–$k$ 曲線的曲率決定 $m^*$。<br>導帶底部 $d^2E/dk^2>0$ → $m^*>0$<br>價帶頂部 $d^2E/dk^2<0$ → $m^*<0$ → 引入<strong>電洞</strong>概念。</div></div>
+<details class="derive" open><summary>🔍 有效質量推導</summary><div class="dbo">
+<div class="step"><span class="snb">1</span><span class="sl">群速度 (3.33)</span><div class="sc"><span class="math">$$v_g = \frac{1}{\hbar}\frac{dE}{dk}\tag{3.33}$$</span></div></div>
+<div class="step"><span class="snb">2</span><span class="sl">加速度</span><div class="sc"><span class="math">$$a = \frac{dv_g}{dt} = \frac{1}{\hbar}\frac{d}{dt}\!\left(\frac{dE}{dk}\right) = \frac{1}{\hbar}\frac{d^2E}{dk^2}\frac{dk}{dt}$$</span>外力 $F = \hbar\,dk/dt$（由 $p=\hbar k$, $F=dp/dt$）<span class="math">$$F = \hbar\frac{dk}{dt}\tag{3.35}$$</span></div></div>
+<div class="step"><span class="snb">3</span><span class="sl">$F=m^*a$ (3.36)</span><div class="sc"><span class="math">$$F = \frac{\hbar^2}{d^2E/dk^2}\cdot a \;\equiv\; m^*a \quad\Rightarrow\quad \boxed{m^* = \frac{\hbar^2}{d^2E/dk^2}}\tag{3.36}$$</span></div></div>
+</div></details>
+</div>
+
+<!-- 3.2.4-3.2.5 -->
+<div class="section" id="s6"><h2>3.2.4–3.2.5 電洞·金屬/絕緣體/半導體</h2>
+<div class="fcard"><div class="lbl">電洞（Hole）</div><div class="eq">價帶中缺少一個電子 = 等效正電荷載子<br>電洞電流：$J = e p \mu_p E$<br>總電流：$J = e(n\mu_n + p\mu_p)E$</div></div>
+<div class="fcard"><div class="lbl">金屬/絕緣體/半導體判據</div><table><thead><tr><th>材料</th><th>$E_g$</th><th>室溫行為</th></tr></thead><tbody>
+<tr><td>金屬</td><td>無（能帶重疊或部分填充）</td><td>高導電率</td></tr>
+<tr><td>絕緣體</td><td>$E_g > 3$–$5$ eV</td><td>幾乎無自由電子</td></tr>
+<tr><td>半導體</td><td>$E_g \approx 0.5$–$2$ eV</td><td>熱激發可產生載子</td></tr>
+</tbody></table></div>
+</div>
+
+<!-- 3.3 -->
+<div class="section" id="s7"><h2>3.3 三維延伸：Si 與 GaAs 的能帶結構 (3.37–3.43)</h2>
+<div class="fcard"><div class="lbl">3D E–k 關係</div><div class="eq">$$E = \frac{\hbar^2}{2}\left(\frac{k_x^2}{m_x^*} + \frac{k_y^2}{m_y^*} + \frac{k_z^2}{m_z^*}\right)\tag{3.41}$$</div><div class="note">等能面為橢球。Si：導帶在 $\langle100\rangle$ 方向有 6 個等效橢球（$m_l=0.98m_0, m_t=0.19m_0$）。</div></div>
+<div class="fcard"><div class="lbl">⭐ 直接/間接能隙</div><table><thead><tr><th>材料</th><th>$E_g$ (eV)</th><th>類型</th><th>導帶最小位置</th></tr></thead><tbody>
+<tr><td>Si</td><td>1.12</td><td><strong>間接</strong></td><td>$\langle100\rangle$ 方向, $k\approx0.85(2\pi/a)$</td></tr>
+<tr><td>GaAs</td><td>1.42</td><td><strong>直接</strong></td><td>$k=0$（Γ 點）</td></tr>
+<tr><td>Ge</td><td>0.66</td><td><strong>間接</strong></td><td>$\langle111\rangle$ 方向, L 點</td></tr>
+</tbody></table><div class="note">直接能隙：導帶底和價帶頂在同一個 $k$ → 適合光電元件（LED、雷射）<br>間接能隙：不同 $k$ → 需要聲子輔助躍遷</div></div>
+</div>
+
+<!-- 3.4 -->
+<div class="section" id="s8"><h2>3.4 態密度函數 ⭐ (3.44–3.58)</h2>
+<div class="warn-box"><div class="wt">⚡ 態密度 $g(E)$ = 單位能量、單位體積中可用的量子態數目。</div></div>
+<details class="derive" open><summary>🔍 完整推導 — $k$ 空間計數→$g(E)$ — 15 條公式</summary><div class="dbo">
+<div class="step"><span class="snb">1</span><span class="sl">$k$ 空間中的態密度</span><div class="sc">3D 無限位能井：$k_x=n_x\pi/a$, $k_y=n_y\pi/a$, $k_z=n_z\pi/a$<br>每個量子態在 $k$ 空間佔體積 $(\pi/a)^3$，每單位 $k$ 空間體積的態數 = $V/\pi^3$。<br>考慮自旋簡併（×2）：<span class="math">$$\text{態密度 in k-space} = \frac{2V}{\pi^3}\tag{3.44}$$</span></div></div>
+<div class="step"><span class="snb">2</span><span class="sl">$k$ 空間球殼中的態數</span><div class="sc">半徑 $k$、厚度 $dk$ 的球殼體積 = $4\pi k^2 dk$：<span class="math">$$dN = \frac{2V}{\pi^3}\cdot 4\pi k^2 dk = \frac{8Vk^2}{\pi^2}dk$$</span></div></div>
+<div class="step"><span class="snb">3</span><span class="sl">⭐ 態密度 $g(E)$ (3.49)</span><div class="sc">由 $E=\hbar^2k^2/2m^*$ → $k=\sqrt{2m^*E}/\hbar$，$dk = \frac{m^*}{\hbar^2k}dE$<span class="math">$$g(E) = \frac{1}{V}\frac{dN}{dE} = \frac{4\pi(2m^*)^{3/2}}{h^3}\sqrt{E}\tag{3.49}$$</span></div></div>
+<div class="step"><span class="snb">4</span><span class="sl">半導體中的態密度 (3.56–3.58)</span><div class="sc">導帶（從 $E_c$ 起算）：<span class="math">$$\boxed{g_c(E) = \frac{4\pi(2m_n^*)^{3/2}}{h^3}\sqrt{E-E_c}}\tag{3.56}$$</span>價帶（從 $E_v$ 往下算）：<span class="math">$$\boxed{g_v(E) = \frac{4\pi(2m_p^*)^{3/2}}{h^3}\sqrt{E_v-E}}\tag{3.58}$$</span>$m_n^*$ = 電子 DOS 有效質量, $m_p^*$ = 電洞 DOS 有效質量。</div></div>
+</div></details>
+<details class="example" open><summary>📐 例題 3.3 — Si 導帶態密度</summary><div class="ebo">$m_n^*=1.08m_0$。在 $E-E_c=0.1$ eV 處：<br>$g_c = \frac{4\pi(2\cdot1.08\cdot9.11\times10^{-31})^{3/2}}{(6.625\times10^{-34})^3}\sqrt{0.1\cdot1.6\times10^{-19}} = 7.9\times10^{20}$ cm⁻³eV⁻¹</div></details>
+</div>
+
+<!-- 3.5 -->
+<div class="section" id="s9"><h2>3.5 統計力學：Fermi-Dirac 分布 ⭐ (3.59–3.79)</h2>
+<div class="fcard"><div class="lbl">⭐ Fermi-Dirac 機率函數 (3.63)</div><div class="eq">$$\boxed{f_F(E) = \frac{1}{1 + \exp\!\left(\dfrac{E - E_F}{kT}\right)}}\tag{3.63}$$</div><div class="note">$E_F$ = Fermi 能階（化學勢）。$T=0$ K：$f_F=1$ ($E<E_F$)，$f_F=0$ ($E>E_F$)。</div></div>
+<details class="derive" open><summary>🔍 Fermi-Dirac 推導與性質</summary><div class="dbo">
+<div class="step"><span class="snb">1</span><span class="sl">Pauli 原理+Fermi-Dirac 統計 (3.59–3.62)</span><div class="sc">電子為 Fermi 子（自旋 1/2），服從 Pauli 原理。$N(E)=g(E)f_F(E)$ = 佔據態密度。<span class="math">$$n = \int g(E)f_F(E)\,dE\tag{3.59}$$</span></div></div>
+<div class="step"><span class="snb">2</span><span class="sl">Fermi 能階的性質</span><div class="sc">$E=E_F$ 時 $f_F=1/2$（50% 佔據機率）<br>$\lim_{T\to0}f_F(E< E_F)=1$, $\lim_{T\to0}f_F(E>E_F)=0$（階梯函數）</div></div>
+<div class="step"><span class="snb">3</span><span class="sl">Boltzmann 近似 (3.68) — $E-E_F \gg kT$ 時</span><div class="sc"><span class="math">$$f_F(E) \approx \exp\!\left(-\frac{E-E_F}{kT}\right)\tag{3.68}$$</span>適用於非簡併半導體（$E_F$ 在能隙中，遠離能帶邊緣）。</div></div>
+<div class="step"><span class="snb">4</span><span class="sl">$f_F$ 隨溫度變化</span><div class="sc">$T>0$ 時 Fermi 函數在 $E_F$ 附近「模糊化」，寬度 $\sim kT$。<br>室溫 $kT\approx0.026$ eV → 僅靠近 $E_F$ 的電子受熱激發。</div></div>
+</div></details>
+<div class="fcard"><div class="lbl">電子/電洞濃度（Boltzmann 近似）</div><div class="eq">$$n_0 = N_c\,\exp\!\left(-\frac{E_c-E_F}{kT}\right),\quad N_c = 2\left(\frac{2\pi m_n^*kT}{h^2}\right)^{3/2}\tag{3.74}$$</div><div class="note">$p_0 = N_v\exp[-(E_F-E_v)/kT]$，$N_v$ 同理。<br>(3.79) $n_0p_0 = N_cN_v\exp(-E_g/kT) = n_i^2$（質量作用定律）</div></div>
+<details class="example" open><summary>📐 例題 3.4 — Fermi 函數計算</summary><div class="ebo">$T=300$ K。求 $E-E_F = 0.05$ eV 處的 $f_F$：<br>$f_F = 1/[1+\exp(0.05/0.0259)] = 1/[1+e^{1.93}] = 0.127$（約 12.7% 佔據機率）</div></details>
+</div>
+
+<!-- CHEATSHEET -->
+<div class="section" id="cheatsheet"><h2>公式速查表（81 條收錄）</h2>
+<table><thead><tr><th>Eq</th><th>公式</th><th>備註</th></tr></thead><tbody>
+<tr><td>3.1</td><td>$\psi=u(x)e^{jkx}$</td><td>Bloch 定理</td></tr>
+<tr><td>3.3</td><td>$\Psi=u(x)e^{j(kx-\omega t)}$</td><td>晶體中行進波</td></tr>
+<tr><td>3.4–3.8</td><td>K-P 波方程（I,II 區）</td><td>$\alpha^2=2mE/\hbar^2$, $\beta^2=2m(E-V_0)/\hbar^2$</td></tr>
+<tr><td>3.9–3.10</td><td>$u_1, u_2$ 解形式</td><td>—</td></tr>
+<tr><td>3.19</td><td>$-\frac{\alpha^2+\beta^2}{2\alpha\beta}\sin\alpha a\sin\beta b+\cos\alpha a\cos\beta b=\cos k(a+b)$</td><td>⭐ K-P 色散關係</td></tr>
+<tr><td>3.20</td><td>$P'\frac{\sin\alpha a}{\alpha a}+\cos\alpha a=\cos ka$</td><td>簡化 K-P（$b\to0$）</td></tr>
+<tr><td>3.24</td><td>$E=\hbar^2k^2/(2m^*)$</td><td>⭐ 拋物線能帶近似</td></tr>
+<tr><td>3.25–3.27</td><td>$J=-env_d$, $v_d=\mu E$</td><td>漂移電流</td></tr>
+<tr><td>3.28–3.30</td><td>$\mu=e\tau/m^*$</td><td>遷移率</td></tr>
+<tr><td>3.31–3.32</td><td>$J=en\mu E$, $\sigma=en\mu$</td><td>⭐ 導電率</td></tr>
+<tr><td>3.33</td><td>$v_g=(1/\hbar)dE/dk$</td><td>群速度</td></tr>
+<tr><td>3.34–3.36</td><td>$m^*=\hbar^2/(d^2E/dk^2)$</td><td>⭐ 有效質量</td></tr>
+<tr><td>3.37–3.43</td><td>3D $E(\mathbf{k})$、Si/GaAs 能帶</td><td>直接/間接能隙</td></tr>
+<tr><td>3.44–3.49</td><td>$g(E)=\frac{4\pi(2m^*)^{3/2}}{h^3}\sqrt{E}$</td><td>⭐ 態密度推導</td></tr>
+<tr><td>3.56</td><td>$g_c(E)=\frac{4\pi(2m_n^*)^{3/2}}{h^3}\sqrt{E-E_c}$</td><td>⭐ 導帶態密度</td></tr>
+<tr><td>3.58</td><td>$g_v(E)=\frac{4\pi(2m_p^*)^{3/2}}{h^3}\sqrt{E_v-E}$</td><td>⭐ 價帶態密度</td></tr>
+<tr><td>3.59–3.62</td><td>Fermi-Dirac 統計基礎</td><td>$n=\int g(E)f_F(E)dE$</td></tr>
+<tr><td>3.63</td><td>$f_F(E)=1/[1+e^{(E-E_F)/kT}]$</td><td>⭐ Fermi-Dirac 函數</td></tr>
+<tr><td>3.68</td><td>$f_F\approx e^{-(E-E_F)/kT}$</td><td>Boltzmann 近似</td></tr>
+<tr><td>3.74</td><td>$n_0=N_c e^{-(E_c-E_F)/kT}$</td><td>⭐ 電子濃度</td></tr>
+<tr><td>3.75</td><td>$N_c=2(2\pi m_n^*kT/h^2)^{3/2}$</td><td>導帶有效態密度</td></tr>
+<tr><td>3.79</td><td>$n_0p_0=n_i^2$</td><td>⭐ 質量作用定律</td></tr>
+</tbody></table></div>
+</main>
+<script>
+function toggleTheme(){const h=document.documentElement;const n=h.getAttribute('data-theme')==='light'?'dark':'light';h.setAttribute('data-theme',n);localStorage.setItem('theme',n);document.getElementById('tl').textContent=n==='dark'?'淺色模式':'深色模式';}
+const s=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',s);if(s==='dark')document.getElementById('tl').textContent='淺色模式';
+const secs=document.querySelectorAll('.section[id]');const navs=document.querySelectorAll('.sn a');
+window.addEventListener('scroll',()=>{let c='';secs.forEach(s=>{if(window.scrollY>=s.offsetTop-80)c=s.getAttribute('id');});navs.forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+c);});});
+</script>
+</body>
+</html>

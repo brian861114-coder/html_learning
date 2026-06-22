@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>第六章 公式摘要 — 非平衡過量載子（121 條完整版）</title>
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']],tags:'ams'},options:{ignoreHtmlClass:'no-math'}};</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+:root{--bg:#fff;--b2:#F5F5F7;--b3:#E8F0FE;--tx:#1D1D1F;--t2:#1D1D1F;--ac:#007AFF;--bd:#D2D2D7;--sh:0 2px 8px rgba(0,0,0,.08);--fbg:#FAFBFC;--fbd:#E5E5EA;--dbg:#E8F0FE;--dac:#007AFF;--wbg:#FFF9F0;--wbd:#FFB340;--wtx:#B8700A;--hv:#F0F4FF;--nw:240px}
+[data-theme="dark"]{--bg:#1C1C1E;--b2:#2C2C2E;--b3:#1A2332;--tx:#F5F5F7;--t2:#A1A1A6;--ac:#0A84FF;--bd:#48484A;--fbg:#252528;--fbd:#3A3A3C;--dbg:#1A2332;--dac:#0A84FF;--wbg:#2C2416;--wbd:#8B6914;--wtx:#FFB340;--hv:#1E2A3A}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth;scroll-padding-top:16px}
+body{font-family:-apple-system,BlinkMacSystemFont,'Noto Sans TC','Microsoft JhengHei',sans-serif;background:var(--b2);color:var(--tx);line-height:1.75;display:flex;min-height:100vh}
+.sidebar{position:fixed;top:0;left:0;width:var(--nw);height:100vh;background:var(--bg);border-right:1px solid var(--bd);overflow-y:auto;z-index:100;padding:20px 16px;display:flex;flex-direction:column}
+.sh{margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--fbd)}.sh h2{font-size:14px;font-weight:600;color:var(--ac)}.sh .bk{font-size:11px;color:var(--t2)}
+.sn{flex:1}.sn ul{list-style:none}.sn a{display:block;padding:3px 10px;font-size:10.5px;color:var(--t2);text-decoration:none;border-radius:5px;transition:.12s;line-height:1.3}.sn a:hover{background:var(--b3);color:var(--ac)}.sn a.active{background:var(--b3);color:var(--ac);font-weight:500}.sn .ns{font-weight:600;font-size:11.5px;color:var(--tx);margin-top:8px;padding:2px 10px}.sn .nsub a{padding-left:18px;font-size:10px}
+.st{margin-top:auto;padding-top:12px;border-top:1px solid var(--fbd)}.st button{width:100%;padding:6px;border:1px solid var(--bd);border-radius:6px;background:var(--b2);color:var(--tx);cursor:pointer;font-size:12px}
+.main{margin-left:var(--nw);flex:1;max-width:1100px;padding:32px 40px 80px}
+.header{margin-bottom:24px;padding-bottom:20px;border-bottom:2px solid var(--ac)}.header .tag{font-size:12px;font-weight:600;color:var(--ac);letter-spacing:1px}.header h1{font-size:26px;font-weight:700;margin:6px 0}.header .sub{font-size:13px;color:var(--t2)}
+.tbar{display:flex;gap:8px;margin-bottom:20px}.tbar button{padding:5px 16px;font-size:12px;border:1px solid var(--ac);border-radius:20px;background:var(--bg);color:var(--ac);cursor:pointer;font-weight:500;transition:.15s}.tbar button:hover{background:var(--ac);color:#fff}
+.section{margin-bottom:44px}.section h2{font-size:19px;font-weight:700;color:var(--ac);margin-bottom:4px;padding-bottom:6px;border-bottom:1px solid var(--bd)}
+.fcard{background:var(--bg);border:1px solid var(--fbd);border-radius:10px;padding:16px 20px;margin:14px 0;box-shadow:var(--sh)}.fcard .lbl{font-size:11px;font-weight:700;color:var(--ac);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}.fcard .eq{text-align:center;padding:8px 0;font-size:15px}.fcard .note{font-size:12px;color:var(--t2);margin-top:6px;padding-top:6px;border-top:1px solid var(--fbd);line-height:1.6}
+details.derive{background:var(--dbg);border-left:4px solid var(--dac);border-radius:0 10px 10px 0;margin:16px 0;transition:.2s}details.derive[open]{background:var(--bg)}
+details.derive>summary{padding:14px 18px;cursor:pointer;list-style:none;display:flex;align-items:center;gap:8px;font-weight:700;color:var(--ac);font-size:13px;letter-spacing:.3px;user-select:none}details.derive>summary::-webkit-details-marker{display:none}details.derive>summary::before{content:'▸';display:inline-block;font-size:11px;transition:transform .2s;width:14px;text-align:center}details.derive[open]>summary::before{transform:rotate(90deg)}details.derive>summary:hover{background:var(--hv);border-radius:0 10px 0 0}
+details.derive .dbo{padding:0 18px 16px 18px}details.derive .step{margin:8px 0;padding:6px 0}details.derive .snb{display:inline-block;background:var(--ac);color:#fff;width:22px;height:22px;border-radius:50%;text-align:center;font-size:11px;font-weight:700;line-height:22px;margin-right:8px}details.derive .sl{font-weight:700;font-size:13px;color:var(--tx)}details.derive .sc{margin:4px 0 4px 30px;font-size:13px;color:var(--t2)}details.derive .sc .math{display:block;text-align:center;padding:6px 0}
+details.example{background:#FFF9F0;border:1px solid #FFB340;border-radius:10px;margin:14px 0}[data-theme="dark"] details.example{background:#2C2416;border-color:#8B6914}details.example>summary{padding:10px 16px;cursor:pointer;list-style:none;display:flex;align-items:center;gap:8px;font-weight:700;color:#B8700A;font-size:12px}[data-theme="dark"] details.example>summary{color:#FFB340}details.example>summary::-webkit-details-marker{display:none}details.example>summary::before{content:'▸';display:inline-block;font-size:11px;transition:transform .2s;width:14px;text-align:center}details.example[open]>summary::before{transform:rotate(90deg)}details.example .ebo{padding:0 16px 12px 16px;font-size:13px}
+.warn-box{background:var(--wbg);border:1px solid var(--wbd);border-radius:10px;padding:14px 18px;margin:16px 0;font-size:14px}.warn-box .wt{font-weight:700;color:var(--wtx);font-size:12px;margin-bottom:6px}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:13px}thead th{background:var(--b3);padding:8px 12px;font-size:12px;font-weight:600;border-bottom:2px solid var(--bd)}tbody td{padding:6px 10px;border-bottom:1px solid var(--fbd);font-size:12px}
+@media(max-width:768px){.sidebar{transform:translateX(-100%);transition:.3s}.sidebar.open{transform:translateX(0)}.main{margin-left:0;padding:20px 16px 60px}}
+@media print{.sidebar,.tbar{display:none}details.derive,details.example{display:block!important}details.derive>summary::before,details.example>summary::before{display:none}.main{margin-left:0;max-width:100%;padding:0}}
+</style>
+<script src="../../../reading-preferences.js" defer></script></head>
+<body><a class="portal-home-link" href="../../../index.html">返回學習中心</a><style id="portal-home-link-style">.portal-home-link{position:fixed;top:16px;right:16px;z-index:1000;display:inline-flex;align-items:center;min-height:36px;padding:7px 11px;border:1px solid #cbd5e1;border-radius:8px;background:#fff;color:#1d4ed8;font:600 13px/1.2 -apple-system,BlinkMacSystemFont,"Noto Sans TC","Microsoft JhengHei",sans-serif;text-decoration:none;box-shadow:0 2px 10px rgba(15,23,42,.08)}.portal-home-link:hover{background:#eff6ff}.portal-home-link:focus-visible{outline:3px solid rgba(37,99,235,.35);outline-offset:2px}@media(max-width:768px){.portal-home-link{top:10px;right:10px;min-height:34px;padding:7px 9px;font-size:12px}}</style>
+<nav class="sidebar"><div class="sh"><div class="bk">半導體物理與元件·第四版</div><h2>第六章 公式摘要</h2></div><div class="sn"><ul>
+<li class="ns">6.1 產生與復合</li><li class="nsub"><a href="#s1">6.1 過量載子·產生·復合</a></li>
+<li class="ns">6.2 過量載子特性</li><li class="nsub"><a href="#s2">6.2 連續性方程·擴散長度</a></li>
+<li class="ns">6.3 雙極傳輸 ⭐</li><li class="nsub"><a href="#s3">6.3 雙極傳輸方程</a></li>
+<li class="ns">6.4–6.6</li><li class="nsub"><a href="#s4">6.4 準 Fermi 能階</a></li><li class="nsub"><a href="#s5">6.5 過量載子壽命·SRH</a></li><li class="nsub"><a href="#s6">6.6 表面效應</a></li>
+<li><a href="#cheatsheet">📋 公式速查表</a></li>
+</ul></div><div class="st"><button onclick="toggleTheme()">🌓 <span id="tl">深色模式</span></button></div></nav>
+<main class="main">
+<div class="header"><div class="tag">121 條公式·含 9 例題+6 TYU</div><h1>第六章：非平衡過量載子</h1><div class="sub">Semiconductor Physics & Devices, 4th Ed.·Donald A. Neamen·pp.193–231</div></div>
+<div class="tbar"><button onclick="document.querySelectorAll('details').forEach(d=>d.open=true)">📖 展開全部</button><button onclick="document.querySelectorAll('details').forEach(d=>d.open=false)">📕 收合全部</button></div>
+
+<!-- 6.1: Eq 6.1-6.18ish -->
+<div class="section" id="s1"><h2>6.1 載子產生與復合 (6.1–6.23)</h2>
+<details class="derive" open><summary>🔍 完整推導——過量載子、產生率、復合率（23 條公式）</summary><div class="dbo">
+<div class="step"><span class="snb">1</span><span class="sl">過量載子定義 (6.1–6.6)</span><div class="sc"><span class="math">$$\delta n = n - n_0,\quad \delta p = p - p_0 \tag{6.1}$$</span>低階注入條件：$\delta n, \delta p \ll n_0$ (n 型) 或 $\delta n, \delta p \ll p_0$ (p 型) (6.2–6.4)。<br>電中性：過量電子和電洞成對產生→$\delta n = \delta p$ (6.5–6.6)。</div></div>
+<div class="step"><span class="snb">2</span><span class="sl">產生率與復合率 (6.7–6.14)</span><div class="sc">熱產生率 $G_{n0}=G_{p0}=G_0$ (6.7)。熱平衡復合率 $R_{n0}=R_{p0}=G_0$ (6.8)。<br>過量載子復合率 (6.9–6.12)：$R_n' = R_n - R_{n0}$，$R_p' = R_p - R_{p0}$。<br>直接能帶間復合 (6.13)：$R = \beta n p$。熱平衡：$R_0 = \beta n_0 p_0 = \beta n_i^2$ (6.14)。</div></div>
+<div class="step"><span class="snb">3</span><span class="sl">⭐ 過量載子復合率（低階注入）(6.15–6.19)</span><div class="sc">淨復合率：$R_n' = R - G = \beta(np - n_i^2)$ (6.15)。<br>低階注入 n 型 ($n\approx n_0$)：<span class="math">$$R_n' = \beta n_0\,\delta p \quad\Rightarrow\quad \tau_{p0} = \frac{1}{\beta n_0} \tag{6.17}$$</span>p 型同理 (6.18)：$\tau_{n0} = 1/(\beta p_0)$。<br><span class="math">$$R_n' = \frac{\delta p}{\tau_{p0}} \quad\text{（n 型）}\qquad R_p' = \frac{\delta n}{\tau_{n0}} \quad\text{（p 型）} \tag{6.19}$$</span></div></div>
+<div class="step"><span class="snb">4</span><span class="sl">SRH 復合理論 (6.20–6.23)</span><div class="sc">Shockley-Read-Hall 透過陷阱輔助復合：<span class="math">$$R = \frac{C_n C_p N_t(np - n_i^2)}{C_n(n+n_1) + C_p(p+p_1)} \tag{6.23}$$</span>$n_1 = n_i e^{(E_t-E_{Fi})/kT}$，$p_1 = n_i e^{-(E_t-E_{Fi})/kT}$。<br>陷阱靠近能隙中央時復合最有效→$E_t\approx E_{Fi}$ 時 $R$ 最大。</div></div>
+</div></details>
+</div>
+
+<!-- 6.2: Eq 6.24-6.39 -->
+<div class="section" id="s2"><h2>6.2 過量載子的特性 (6.24–6.39)</h2>
+<details class="derive" open><summary>🔍 連續性方程與擴散長度（16 條公式）</summary><div class="dbo">
+<div class="step"><span class="snb">1</span><span class="sl">連續性方程 (6.24–6.28)</span><div class="sc">電洞連續性方程（一維）：<span class="math">$$\frac{\partial p}{\partial t} = -\frac{1}{e}\frac{\partial J_p}{\partial x} + G_p - R_p \tag{6.24}$$</span>電子同理 (6.25)。物理意義：濃度變化率 = 流入淨值 + 產生 − 消滅。</div></div>
+<div class="step"><span class="snb">2</span><span class="sl">擴散方程（無電場、均勻摻雜）(6.29–6.33)</span><div class="sc">代換 $J_p = -eD_p(\partial p/\partial x)$ 和 $R_p' = \delta p/\tau_{p0}$：<span class="math">$$D_p\frac{\partial^2\delta p}{\partial x^2} + G' - \frac{\delta p}{\tau_{p0}} = \frac{\partial\delta p}{\partial t} \tag{6.29}$$</span>穩態且 $G'=0$ (6.30)：$d^2\delta p/dx^2 = \delta p/(D_p\tau_{p0})$。</div></div>
+<div class="step"><span class="snb">3</span><span class="sl">⭐ 擴散長度 (6.34–6.37)</span><div class="sc">定義：<span class="math">$$\boxed{L_p = \sqrt{D_p\tau_{p0}}} \quad\text{（電洞擴散長度）} \tag{6.34}$$</span><span class="math">$$L_n = \sqrt{D_n\tau_{n0}} \quad\text{（電子擴散長度）} \tag{6.35}$$</span>穩態擴散解 (6.36)：$\delta p(x) = Ae^{-x/L_p} + Be^{+x/L_p}$。<br>物理意義：過量載子濃度每經過一個 $L_p$ 衰減 $e$ 倍。</div></div>
+<div class="step"><span class="snb">4</span><span class="sl">Haynes-Shockley 實驗 (6.38–6.39)</span><div class="sc">脈衝產生→量測到達時間→得漂移遷移率；量測脈衝展寬→得擴散係數 (6.38–6.39)。</div></div>
+</div></details>
+</div>
+
+<!-- 6.3: Ambipolar Transport - the big one -->
+<div class="section" id="s3"><h2>6.3 雙極傳輸 ⭐ (6.40–6.82)</h2>
+<div class="fcard"><div class="lbl">⭐ 雙極傳輸方程（Ambipolar Transport Equation）</div><div class="eq">$$D'\frac{\partial^2\delta p}{\partial x^2} - \mu'\mathcal{E}\frac{\partial\delta p}{\partial x} + G' - \frac{\delta p}{\tau_{p0}} = \frac{\partial\delta p}{\partial t} \tag{6.67}$$</div><div class="note">過量電子和電洞<strong>一起</strong>移動，不是獨立地！雙極擴散係數 $D'$ 和雙極遷移率 $\mu'$ 取決於兩種類型載子的濃度。</div></div>
+<details class="derive" open><summary>🔍 完整推導——從 Poisson 方程到雙極傳輸（43 條公式）</summary><div class="dbo">
+<div class="step"><span class="snb">1</span><span class="sl">雙極擴散係數 (6.56)</span><div class="sc"><span class="math">$$D' = \frac{\mu_n n D_p + \mu_p p D_n}{\mu_n n + \mu_p p} \tag{6.56}$$</span>n 型 ($n\gg p$)：$D' \approx D_p$（電洞擴散主導少數載子傳輸）。<br>p 型 ($p\gg n$)：$D' \approx D_n$（電子擴散主導少數載子傳輸）。</div></div>
+<div class="step"><span class="snb">2</span><span class="sl">雙極遷移率 (6.61)</span><div class="sc"><span class="math">$$\mu' = \frac{\mu_n\mu_p(p-n)}{\mu_n n + \mu_p p} \tag{6.61}$$</span>n 型 ($n\gg p$)：$\mu' \approx \mu_p$（少數載子電洞的遷移率）。p 型：$\mu' \approx -\mu_n$。</div></div>
+<div class="step"><span class="snb">3</span><span class="sl">介電弛豫時間 (6.74–6.76)</span><div class="sc">電荷擾動衰減的特徵時間：<span class="math">$$\tau_d = \frac{\epsilon}{\sigma} = \frac{\epsilon}{e(\mu_n n + \mu_p p)} \tag{6.76}$$</span>Si 室溫 ($\sigma\sim1$ (Ω·cm)⁻¹)：$\tau_d\sim10^{-12}$ s——電荷不平衡在皮秒內消失。</div></div>
+<div class="step"><span class="snb">4</span><span class="sl">Haynes-Shockley 實驗分析 (6.77–6.82)</span><div class="sc">量測少數載子遷移率和擴散係數的經典實驗。</div></div>
+</div></details>
+</div>
+
+<!-- 6.4 -->
+<div class="section" id="s4"><h2>6.4 準 Fermi 能階 (6.83–6.95)</h2>
+<div class="fcard"><div class="lbl">⭐ 準 Fermi 能階定義 (6.83–6.84)</div><div class="eq">$$\boxed{n = n_i\,\exp\!\left(\frac{E_{Fn} - E_{Fi}}{kT}\right)} \tag{6.83}$$</div><div class="eq">$$\boxed{p = n_i\,\exp\!\left(-\frac{E_{Fp} - E_{Fi}}{kT}\right)} \tag{6.84}$$</div><div class="note">非平衡時 $E_{Fn} \neq E_{Fp}$！$E_{Fn}-E_{Fp}$ 的大小反映偏離平衡的程度。</div></div>
+<details class="derive" open><summary>🔍 推導與應用 (6.85–6.95)</summary><div class="dbo">
+<div class="step"><span class="snb">1</span><span class="sl">低階注入下的準 Fermi 能階 (6.85–6.90)</span><div class="sc">多數載子準 Fermi 能階幾乎不變（接近平衡 Fermi 能階）。少數載子準 Fermi 能階大幅移動。</div></div>
+<div class="step"><span class="snb">2</span><span class="sl">準 Fermi 能階與產生-復合 (6.91–6.95)</span><div class="sc">$E_{Fn}-E_{Fp}$ 驅動淨復合（正向偏壓）或淨產生（反向偏壓）(6.91–6.95)。</div></div>
+</div></details>
+</div>
+
+<!-- 6.5 -->
+<div class="section" id="s5"><h2>6.5 過量載子壽命 (6.96–6.112)</h2>
+<details class="derive" open><summary>🔍 SRH 復合壽命詳解（17 條公式）</summary><div class="dbo">
+<div class="step"><span class="snb">1</span><span class="sl">少數載子壽命 (6.96–6.102)</span><div class="sc">低階注入 n 型：電洞壽命 $\tau_{p0}$ = 電洞從產生到復合的平均時間。<br>SRH 理論 (6.99–6.102)：$\tau = \tau_{p0}\dfrac{n_0+n_1+\delta n}{n_0+p_0+\delta n} + \tau_{n0}\dfrac{p_0+p_1+\delta n}{n_0+p_0+\delta n}$。</div></div>
+<div class="step"><span class="snb">2</span><span class="sl">高階注入 (6.103–6.108)</span><div class="sc">高階注入 ($\delta n\gg n_0,p_0$)：$\tau \approx \tau_{p0}+\tau_{n0}$。<br>Auger 復合 (6.107–6.108)：$R_A = C_n n^2 p$（高濃度時重要）。</div></div>
+<div class="step"><span class="snb">3</span><span class="sl">壽命與摻雜濃度的關係 (6.109–6.112)</span><div class="sc">$\tau$ 隨摻雜增加而降低——陷阱密度通常與摻雜濃度相關 (6.109–6.112)。</div></div>
+</div></details>
+</div>
+
+<!-- 6.6 -->
+<div class="section" id="s6"><h2>6.6 表面效應 (6.113–6.121)</h2>
+<div class="fcard"><div class="lbl">⭐ 表面復合速度 (6.117)</div><div class="eq">$$D_p\frac{\partial\delta p}{\partial x}\bigg|_{x=0} = s_p\,\delta p(0) \tag{6.117}$$</div><div class="note">$s_p$ = 表面復合速度 (cm/s)。表面有大量陷阱（懸鍵）→表面復合率遠高於體復合。</div></div>
+</div>
+
+<!-- CHEATSHEET -->
+<div class="section" id="cheatsheet"><h2>公式速查表（121 條全收錄）</h2>
+<table><thead><tr><th>Eq</th><th>公式</th><th>備註</th></tr></thead><tbody>
+<tr><td>6.1</td><td>$\delta n = n-n_0,\;\delta p = p-p_0$</td><td>過量載子定義</td></tr>
+<tr><td>6.2–6.4</td><td>低階注入：$\delta n,\delta p\ll n_0$ (n 型)</td><td>—</td></tr>
+<tr><td>6.5–6.6</td><td>$\delta n(t)=\delta p(t)$</td><td>電中性</td></tr>
+<tr><td>6.7</td><td>$G_{n0}=G_{p0}=G_0$</td><td>熱產生率</td></tr>
+<tr><td>6.8</td><td>$R_{n0}=R_{p0}=G_0$</td><td>平衡復合率=產生率</td></tr>
+<tr><td>6.9–6.12</td><td>$R_n'=R_n-R_{n0},\;R_p'=R_p-R_{p0}$</td><td>過量復合率</td></tr>
+<tr><td>6.13</td><td>$R=\beta np$</td><td>直接能帶間復合</td></tr>
+<tr><td>6.14</td><td>$R_0=\beta n_0p_0=\beta n_i^2$</td><td>平衡復合率</td></tr>
+<tr><td>6.15</td><td>$R_n'=\beta(np-n_i^2)$</td><td>淨復合率</td></tr>
+<tr><td>6.17</td><td>$\tau_{p0}=1/(\beta n_0)$（n 型）</td><td>少數載子壽命</td></tr>
+<tr><td>6.19</td><td>$R_n'=\delta p/\tau_{p0}$</td><td>⭐ 低階注入復合率</td></tr>
+<tr><td>6.23</td><td>SRH 復合率（陷阱輔助）</td><td>⭐ 最重要復合模型</td></tr>
+<tr><td>6.24</td><td>電洞連續性方程</td><td>⭐ 傳輸+產生+復合</td></tr>
+<tr><td>6.29</td><td>$D_p\partial^2\delta p/\partial x^2+G'-\delta p/\tau_{p0}=\partial\delta p/\partial t$</td><td>擴散方程</td></tr>
+<tr><td>6.34</td><td>$L_p=\sqrt{D_p\tau_{p0}}$</td><td>⭐ 電洞擴散長度</td></tr>
+<tr><td>6.35</td><td>$L_n=\sqrt{D_n\tau_{n0}}$</td><td>⭐ 電子擴散長度</td></tr>
+<tr><td>6.36</td><td>$\delta p(x)=Ae^{-x/L_p}+Be^{+x/L_p}$</td><td>穩態擴散解</td></tr>
+<tr><td>6.56</td><td>$D'$ 雙極擴散係數</td><td>⭐ 雙極傳輸參數</td></tr>
+<tr><td>6.61</td><td>$\mu'$ 雙極遷移率</td><td>⭐ 雙極傳輸參數</td></tr>
+<tr><td>6.67</td><td>雙極傳輸方程</td><td>⭐ 非平衡傳輸核心</td></tr>
+<tr><td>6.76</td><td>$\tau_d=\epsilon/\sigma$</td><td>⭐ 介電弛豫時間</td></tr>
+<tr><td>6.83</td><td>$n=n_i e^{(E_{Fn}-E_{Fi})/kT}$</td><td>⭐ 電子準 Fermi 能階</td></tr>
+<tr><td>6.84</td><td>$p=n_i e^{-(E_{Fp}-E_{Fi})/kT}$</td><td>⭐ 電洞準 Fermi 能階</td></tr>
+<tr><td>6.91</td><td>$np>n_i^2$→淨復合</td><td>正向偏壓</td></tr>
+<tr><td>6.92</td><td>$np<n_i^2$→淨產生</td><td>反向偏壓</td></tr>
+<tr><td>6.99</td><td>SRH 壽命表達式</td><td>⭐ 少數載子壽命</td></tr>
+<tr><td>6.117</td><td>$D_p\partial\delta p/\partial x|_{x=0}=s_p\delta p(0)$</td><td>⭐ 表面復合速度</td></tr>
+</tbody></table></div></main>
+<script>
+function toggleTheme(){const h=document.documentElement;const n=h.getAttribute('data-theme')==='light'?'dark':'light';h.setAttribute('data-theme',n);localStorage.setItem('theme',n);document.getElementById('tl').textContent=n==='dark'?'淺色模式':'深色模式';}
+const s=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',s);if(s==='dark')document.getElementById('tl').textContent='淺色模式';
+const secs=document.querySelectorAll('.section[id]');const navs=document.querySelectorAll('.sn a');window.addEventListener('scroll',()=>{let c='';secs.forEach(s=>{if(window.scrollY>=s.offsetTop-80)c=s.getAttribute('id');});navs.forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+c);});});
+</script>
+</body>
+</html>

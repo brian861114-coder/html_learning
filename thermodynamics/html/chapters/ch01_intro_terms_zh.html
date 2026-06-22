@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>第一章：導論與術語定義 — 材料熱力學</title>
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']],tags:'ams'},options:{ignoreHtmlClass:'no-math'}};</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+:root{--bg:#fff;--b2:#F5F5F7;--b3:#E8F0FE;--tx:#1D1D1F;--t2:#1D1D1F;--ac:#007AFF;--bd:#D2D2D7;--sh:0 2px 8px rgba(0,0,0,.08);--fbd:#E5E5EA;--wbg:#FFF9F0;--wbd:#FFB340;--wtx:#B8700A;--nw:260px}
+[data-theme="dark"]{--bg:#1C1C1E;--b2:#2C2C2E;--b3:#1A2332;--tx:#F5F5F7;--t2:#A1A1A6;--ac:#0A84FF;--bd:#48484A;--fbd:#3A3A3C;--wbg:#2C2416;--wbd:#8B6914;--wtx:#FFB340}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth;scroll-padding-top:16px}
+body{font-family:-apple-system,BlinkMacSystemFont,'Noto Sans TC','Microsoft JhengHei',sans-serif;background:var(--b2);color:var(--tx);line-height:1.9;display:flex;min-height:100vh}
+.sidebar{position:fixed;top:0;left:0;width:var(--nw);height:100vh;background:var(--bg);border-right:1px solid var(--bd);overflow-y:auto;z-index:100;padding:20px 16px;display:flex;flex-direction:column}
+.sh{margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--fbd)}.sh h2{font-size:14px;font-weight:600;color:var(--ac)}.sh .bk{font-size:11px;color:var(--t2)}
+.sn{flex:1}.sn ul{list-style:none}.sn a{display:block;padding:4px 10px;font-size:11px;color:var(--t2);text-decoration:none;border-radius:5px;transition:.12s}.sn a:hover{background:var(--b3);color:var(--ac)}.sn a.active{background:var(--b3);color:var(--ac);font-weight:500}.sn .ns{font-weight:600;font-size:12px;color:var(--tx);margin-top:10px;padding:2px 10px}.sn .nsub a{padding-left:20px;font-size:10px}
+.st{margin-top:auto;padding-top:12px;border-top:1px solid var(--fbd)}.st button{width:100%;padding:6px;border:1px solid var(--bd);border-radius:6px;background:var(--b2);color:var(--tx);cursor:pointer;font-size:12px}
+.main{margin-left:var(--nw);flex:1;max-width:1050px;padding:32px 40px 80px}
+.header{margin-bottom:32px;padding-bottom:20px;border-bottom:2px solid var(--ac)}.header .cl{font-size:12px;font-weight:600;color:var(--ac);letter-spacing:1px}.header h1{font-size:28px;font-weight:700;margin:6px 0}.header .meta{font-size:13px;color:var(--t2)}
+section{margin-bottom:44px}h2{font-size:20px;font-weight:700;color:var(--ac);margin-bottom:14px;padding-bottom:6px;border-bottom:1px solid var(--bd)}h3{font-size:16px;font-weight:600;color:var(--tx);margin:24px 0 10px}h4{font-size:14px;font-weight:600;color:var(--t2);margin:18px 0 6px}
+p{font-size:14px;color:var(--t2);margin-bottom:12px}strong{font-weight:600;color:var(--tx)}
+.eq{text-align:center;margin:16px 0;font-size:15px}
+.figure{margin:24px 0;text-align:center}.figure img{max-width:100%;border-radius:8px;box-shadow:var(--sh);cursor:pointer}.figure img:hover{transform:scale(1.01)}.figure figcaption{margin-top:8px;font-size:12px;color:var(--t2)}
+.callout{background:var(--b3);border:1px solid var(--fbd);border-radius:8px;padding:14px 18px;margin:16px 0;font-size:13px}.callout strong{color:var(--ac)}
+.callout-warn{background:var(--wbg);border:1px solid var(--wbd);border-radius:8px;padding:14px 18px;margin:16px 0;font-size:13px}.callout-warn strong{color:var(--wtx)}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}thead th{background:var(--b3);padding:8px 12px;font-size:12px;font-weight:600;border-bottom:2px solid var(--bd)}tbody td{padding:8px 12px;border-bottom:1px solid var(--fbd)}tbody tr:nth-child(even){background:var(--b2)}
+/* derive blocks */
+.derive{border:1px solid var(--bd);border-radius:10px;margin:20px 0;overflow:hidden;background:var(--bg)}
+.derive summary{padding:12px 16px;font-size:15px;font-weight:600;cursor:pointer;background:var(--b3);color:var(--ac);border-bottom:1px solid var(--bd);user-select:none}
+.derive[open] summary{border-bottom:1px solid var(--bd)}
+.dbo{padding:16px}
+.step{display:flex;gap:10px;margin-bottom:14px;align-items:flex-start}
+.step:last-child{margin-bottom:0}
+.sn{background:var(--ac);color:#fff;font-size:12px;font-weight:600;border-radius:50%;width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center;flex:none;text-align:center;margin-right:8px;line-height:22px}
+.sl{font-weight:600;font-size:14px;color:var(--tx);white-space:nowrap;margin-top:3px}
+.sc{font-size:13px;color:var(--t2);line-height:1.8;margin-top:3px}
+.sc .math{display:block;margin:6px 0}
+@media(max-width:768px){.sidebar{transform:translateX(-100%);transition:.3s}.sidebar.open{transform:translateX(0)}.main{margin-left:0;padding:20px 16px 60px}}
+@media print{.sidebar{display:none}.main{margin-left:0;max-width:100%;padding:0}}
+</style>
+<script src="../../../reading-preferences.js" defer></script></head>
+<body><a class="portal-home-link" href="../../../index.html">返回學習中心</a><style id="portal-home-link-style">.portal-home-link{position:fixed;top:16px;right:16px;z-index:1000;display:inline-flex;align-items:center;min-height:36px;padding:7px 11px;border:1px solid #cbd5e1;border-radius:8px;background:#fff;color:#1d4ed8;font:600 13px/1.2 -apple-system,BlinkMacSystemFont,"Noto Sans TC","Microsoft JhengHei",sans-serif;text-decoration:none;box-shadow:0 2px 10px rgba(15,23,42,.08)}.portal-home-link:hover{background:#eff6ff}.portal-home-link:focus-visible{outline:3px solid rgba(37,99,235,.35);outline-offset:2px}@media(max-width:768px){.portal-home-link{top:10px;right:10px;min-height:34px;padding:7px 9px;font-size:12px}}</style>
+<nav class="sidebar"><div class="sh"><div class="bk">材料熱力學·Gaskell</div><h2>第一章</h2></div><div class="sn"><ul>
+<li><a href="#preview">📋 1.0 本章預覽</a></li>
+<li class="ns">1.1–1.3 基本概念</li><li class="nsub"><a href="#s1-1">1.1 導論</a></li><li class="nsub"><a href="#s1-2">1.2 狀態的概念</a></li><li class="nsub"><a href="#s1-2a">1.2a 晶體結構基礎</a></li><li class="nsub"><a href="#s1-3">1.3 平衡的範例</a></li>
+<li class="ns">1.4–1.6 理想氣體與變數</li><li class="nsub"><a href="#s1-4">1.4 理想氣體狀態方程式</a></li><li class="nsub"><a href="#s1-5">1.5 能量與功的單位</a></li><li class="nsub"><a href="#s1-6">1.6 廣延量與強度量</a></li>
+<li class="ns">1.7–1.8 相圖與定律</li><li class="nsub"><a href="#s1-7">1.7 平衡相圖與熱力學成分</a></li><li class="nsub"><a href="#s1-8">1.8 熱力學定律概述</a></li>
+<li class="nsub"><a href="#s1-9">1.9 例題與應用</a></li><li><a href="#summary">📋 本章摘要</a></li>
+</ul></div><div class="st"><button onclick="toggleTheme()">🌓 <span id="tl">深色模式</span></button></div></nav>
+<main class="main">
+<header class="header"><div class="cl">第一章</div><h1>導論與術語定義</h1><div class="meta">David R. Gaskell·《Introduction to the Thermodynamics of Materials》·第 24–43 頁</div></header>
+
+<section id="preview"><div class="callout"><strong>📋 1.0 本章預覽</strong>
+<p>熱力學是材料科學的語言。無論是預測相變化、計算化學反應的可行性、還是設計熱處理製程，熱力學提供了統一的理論框架。本章建立熱力學的<strong>基本詞彙</strong>——狀態、平衡、狀態方程式、廣延量與強度量——這些概念將貫穿全書。</p>
+<div class="callout-warn"><strong>⚡ 為什麼第一章是整個材料熱力學的基礎？</strong>「狀態」和「平衡」是熱力學最核心的兩個概念。沒有對狀態的明確定義，就無法討論狀態函數（如內能 $U$、焓 $H$、熵 $S$、吉布斯自由能 $G$）。沒有對平衡的理解，就無法判斷反應方向。本章的每一個定義在後續章節都會反覆使用。</div>
+<p><strong>在本章中，我們將學習：</strong></p>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px">
+<li>熱力學「狀態」的定義——用少數宏觀變數描述系統</li>
+<li>熱平衡、力學平衡、化學平衡的條件</li>
+<li>理想氣體狀態方程式 $PV = nRT$ 及其應用</li>
+<li>廣延量（extensive）與強度量（intensive）的區別</li>
+<li>單成分系統的 $P$–$T$ 相圖與相律</li>
+<li>熱力學四大定律的概述</li>
+</ul></div></section>
+
+<section id="s1-1"><h2>1.1 導論（Introduction）</h2>
+<p>熱力學（thermodynamics）源自希臘文 <em>therme</em>（熱）和 <em>dynamis</em>（力），最初研究熱與機械功之間的轉換關係。現代的熱力學遠不止於此——它是描述<strong>能量轉換</strong>和<strong>物質平衡</strong>的普適理論，廣泛應用於材料科學、冶金、化學工程、甚至生物學。</p>
+<p>在材料科學中，熱力學幫助我們回答以下問題：</p>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li>給定溫度和壓力下，材料會處於什麼相？（固相、液相、氣相？）</li>
+<li>兩種金屬混合後會形成固溶體還是金屬間化合物？</li>
+<li>一個化學反應是否自發進行？平衡產率是多少？</li>
+<li>需要多少能量來將礦石還原為金屬？</li>
+</ul>
+<div class="callout"><strong>💡 熱力學的獨特之處：</strong>它不依賴物質的微觀模型（不需要知道原子如何排列），只依靠少數宏觀可測量（溫度、壓力、體積、成分），就能對系統的行為做出精確預測。當然，統計熱力學（第四章）為這些宏觀定律提供了微觀基礎，但熱力學定律本身的效力不依賴於微觀詮釋。</div>
+</section>
+
+<section id="s1-2"><h2>1.2 狀態的概念（The Concept of State）</h2>
+<p>熱力學中，一個系統的<strong>狀態（state）</strong>由一組宏觀可測量的變數來定義。當這些變數的值被指定後，系統的所有其他性質就被<strong>完全確定</strong>——這就是狀態的概念。</p>
+<p>對於一個簡單可壓縮系統（如單成分氣體），只需要<strong>兩個獨立的狀態變數</strong>就能完全定義其狀態。例如，指定了理想氣體的溫度和壓力，其體積就被 $V = nRT/P$ 唯一確定。</p>
+<div class="callout"><strong>💡 關鍵概念：狀態函數（state function）</strong>——其值只取決於系統的當前狀態，與如何達到該狀態的<strong>路徑無關</strong>。內能 $U$、焓 $H$、熵 $S$ 都是狀態函數。這與「功」和「熱」形成對比——它們是路徑函數（path function），取決於過程的具體方式。</div>
+</section>
+
+<section id="s1-2a"><h2>1.2a 晶體結構基礎（Crystal Structure Basics）</h2>
+<p>雖然熱力學不直接依賴微觀結構，但理解材料的晶體結構對於解釋熱力學性質（如比熱、熵、相穩定性）至關重要。晶體結構的對稱性與原子堆積方式決定了材料的鍵結能、振動頻譜和缺陷形成能——這些都是影響熱力學性質的微觀因素。本章介紹幾種基本的晶體結構分類與幾何參數，為後續章節的熱力學分析提供結構背景。</p>
+
+<h3>固體的分類</h3>
+<p>根據原子排列的有序程度，固體可分為三大類：</p>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li><strong>單晶體（Single Crystal）：</strong>原子在三維空間中呈現週期性排列，整個晶體具有長程有序（long-range order）。單晶體的宏觀性質通常是各向異性的（anisotropic），即不同晶向上的物理性質不同。</li>
+<li><strong>多晶體（Polycrystalline）：</strong>由許多小單晶（晶粒，grain）組成，晶粒之間由晶界（grain boundary）分隔。每個晶粒內部是週期性的，但不同晶粒的取向不同。多晶體的宏觀性質通常是各向同性的（isotropic）。</li>
+<li><strong>非晶體（Amorphous）：</strong>原子排列缺乏長程有序，僅在短距離內有局域有序（short-range order），如玻璃。非晶體的熵高於對應的晶體，因為原子排列的混亂度更高。</li>
+</ul>
+<div class="figure"><img src="../../../images/thermodynamics/ch01_pages/ch01_page_27_c.png" alt="圖 1.1" loading="lazy"><figcaption>圖 1.1：固體的分類示意圖。從左至右為非晶體（無序結構）、多晶體（多個晶粒）、單晶體（完整週期性排列）。</figcaption></div>
+<div class="callout"><strong>💡 結構與熵的連結：</strong>晶體結構的長程有序性直接影響材料的熱力學性質。晶界的存在增加了系統的微觀狀態數，因此多晶體的熵略高於同成分的單晶體。非晶體的熵更高。這些熵的差異決定了相變溫度和平衡缺陷濃度。這一概念將在<strong>第三章（熵與統計熱力學）</strong>中深入討論——那時我們將從 Boltzmann 公式 $S = k \ln W$ 出發，定量計算不同結構狀態的熵值。</div>
+
+<h3>二維點陣的週期性</h3>
+<p>理解三維晶體結構的基礎是二維點陣（lattice）的概念。一個二維點陣由一組基向量（basis vectors）$\mathbf{a}_1$ 和 $\mathbf{a}_2$ 定義，任意點陣點的位置可由 $\mathbf{R} = n_1\mathbf{a}_1 + n_2\mathbf{a}_2$ 表示，其中 $n_1, n_2$ 為整數。這種週期性結構是晶體的最基本特徵。</p>
+<p>點陣（lattice）與基元（basis）的區別至關重要：<strong>點陣 + 基元 = 晶體結構</strong>。點陣描述了空間排列的週期性，而基元是附著在每個點陣點上的原子或分子集合。例如，NaCl 結構可以看作 fcc 點陣加上 Na⁺ 和 Cl⁻ 離子組成的基元。</p>
+<div class="figure"><img src="../../../images/thermodynamics/ch01_pages/ch01_page_29_c.png" alt="圖 1.2" loading="lazy"><figcaption>圖 1.2：二維點陣的週期性示意圖。基向量 $\mathbf{a}_1$ 和 $\mathbf{a}_2$ 定義了點陣的單位網格（parallelogram）。任意點陣點 $P$ 的位置可表示為整數線性組合。</figcaption></div>
+
+<h3>單位晶胞的選擇</h3>
+<p>同一個點陣可以用不同的方式劃分單位晶胞（unit cell）。例如，二維點陣中可選擇平行四邊形、矩形或菱形作為重複單元。習慣上選擇具有最高對稱性且體積最小的晶胞作為<strong>慣用晶胞（conventional cell）</strong>。在三維中，慣用晶胞通常比原始晶胞（primitive cell）大，但更能直觀反映晶體的對稱性。</p>
+<div class="figure"><img src="../../../images/thermodynamics/ch01_pages/ch01_page_29_c.png" alt="圖 1.3" loading="lazy"><figcaption>圖 1.3：同一點陣的不同單位晶胞選擇。陰影區域顯示了三種可能的晶胞，慣用選擇是最小且對稱性最高的那一種（通常選擇矩形或菱形而不是任意平行四邊形）。</figcaption></div>
+<div class="callout-warn"><strong>⚡ 原始晶胞 vs 慣用晶胞：</strong>原始晶胞（primitive cell）只包含一個點陣點，體積最小；慣用晶胞（conventional cell）可能包含多個點陣點，但能更清楚地顯示晶體的對稱性。例如，fcc 的慣用晶胞是立方體（含 4 個原子），原始晶胞是平行六面體（含 1 個原子）。在熱力學計算中，慣用晶胞更常用。</div>
+
+<h3>三種基本立方晶體結構</h3>
+<p>材料科學中最常見的晶體結構包括以下三種基本立方結構。下表總結了它們的關鍵幾何參數：</p>
+<div class="figure"><img src="../../../images/thermodynamics/ch01_pages/ch01_page_31_c.png" alt="圖 1.5" loading="lazy"><figcaption>圖 1.5：三種基本立方晶體結構。（a）簡單立方（simple cubic, sc）：原子僅位於立方體的八個頂點；（b）體心立方（body-centered cubic, bcc）：在 sc 的基礎上增加了體心原子；（c）面心立方（face-centered cubic, fcc）：在 sc 的基礎上增加了六個面心原子。</figcaption></div>
+<table><thead><tr><th>結構</th><th>符號</th><th>原子數/晶胞</th><th>配位數</th><th>最近鄰距離</th></tr></thead><tbody>
+<tr><td>簡單立方（sc）</td><td>cP</td><td>1</td><td>6</td><td>$a$</td></tr>
+<tr><td>體心立方（bcc）</td><td>cI</td><td>2</td><td>8</td><td>$\sqrt{3}a/2$</td></tr>
+<tr><td>面心立方（fcc）</td><td>cF</td><td>4</td><td>12</td><td>$a/\sqrt{2}$</td></tr>
+</tbody></table>
+<p>配位數（coordination number）是每個原子最近鄰原子的數目。配位數越高，原子堆積越緊密，通常鍵合能越高、熔點越高。例如，fcc 的配位數為 12，意味著每個原子有 12 個最近鄰——這是密集堆積結構的特徵。</p>
+
+<details class="derive" open>
+<summary>🔍 推導 1：體密度（Volume Density）——單位體積內的原子數</summary>
+<div class="dbo">
+<div class="step"><span class="sn">1</span><span class="sl">確定原子數</span>
+<div class="sc">對於每種立方結構，計算每個單位晶胞中包含的原子數 $n$。注意原子位於頂點、面心和體心時對晶胞的貢獻：頂點原子被 8 個晶胞共享（貢獻 $1/8$），面心原子被 2 個晶胞共享（貢獻 $1/2$），體心原子完全屬於該晶胞（貢獻 $1$）。<span class="math">$$\text{sc: } n = 8 \times \frac{1}{8} = 1 \quad\quad \text{bcc: } n = 8 \times \frac{1}{8} + 1 = 2 \quad\quad \text{fcc: } n = 8 \times \frac{1}{8} + 6 \times \frac{1}{2} = 4$$</span></div></div>
+<div class="step"><span class="sn">2</span><span class="sl">計算晶胞體積</span>
+<div class="sc">對於立方晶系，晶胞體積為 $V_{\text{cell}} = a^3$，其中 $a$ 為晶格常數（lattice constant）。原子體密度 $\rho_v$ 定義為單位體積內的原子數：<span class="math">$$\rho_v = \frac{n}{a^3}$$</span>單位通常為 atoms/m³ 或 atoms/cm³。</div></div>
+<div class="step"><span class="sn">3</span><span class="sl">數值範例：bcc 鐵</span>
+<div class="sc">對於 bcc 結構的鐵（$\alpha$-Fe），晶格常數 $a = 2.87\ \text{Å} = 2.87 \times 10^{-10}\ \text{m}$：<span class="math">$$\rho_v = \frac{2}{(2.87 \times 10^{-10})^3} = 8.46 \times 10^{28}\ \text{atoms/m}^3$$</span>這個量在擴散理論（第九章）中非常重要——原子跳躍頻率與體密度直接相關。在熱力學中，體密度用於計算莫耳體積 $V_m = N_A / (\rho_v)$。</div></div>
+</div></details>
+
+<details class="derive" open>
+<summary>🔍 推導 2：原子堆積因子（Atomic Packing Factor, APF）——sc、bcc、fcc 的堆積效率</summary>
+<div class="dbo">
+<div class="step"><span class="sn">1</span><span class="sl">定義堆積因子</span>
+<div class="sc">原子堆積因子（APF）是晶胞中原子所佔體積與晶胞總體積的比值。假設原子為不可壓縮的剛性球體，半徑為 $r$：<span class="math">$$\text{APF} = \frac{n \cdot \frac{4}{3}\pi r^3}{a^3}$$</span>APF 的數值介於 0 與 1 之間，反映了原子堆積的緊密程度。</div></div>
+<div class="step"><span class="sn">2</span><span class="sl">簡單立方（sc）</span>
+<div class="sc">在 sc 結構中，原子沿晶胞邊緣方向相接（最近鄰接觸），因此 $a = 2r$。$n = 1$：<span class="math">$$\text{APF}_{\text{sc}} = \frac{1 \cdot \frac{4}{3}\pi r^3}{(2r)^3} = \frac{\pi}{6} \approx 0.524$$</span>因此簡單立方結構有 52.4% 的空間被原子填滿，其餘 47.6% 為空隙。</div></div>
+<div class="step"><span class="sn">3</span><span class="sl">體心立方（bcc）</span>
+<div class="sc">在 bcc 結構中，原子沿體對角線方向相接。體對角線長度為 $\sqrt{3}a$，包含了兩個原子半徑：$\sqrt{3}a = 4r$，因此 $a = 4r/\sqrt{3}$。$n = 2$：<span class="math">$$\text{APF}_{\text{bcc}} = \frac{2 \cdot \frac{4}{3}\pi r^3}{\left(4r/\sqrt{3}\right)^3} = \frac{\pi\sqrt{3}}{8} \approx 0.680$$</span>bcc 的堆積效率（68.0%）明顯高於 sc。</div></div>
+<div class="step"><span class="sn">4</span><span class="sl">面心立方（fcc）</span>
+<div class="sc">在 fcc 結構中，原子沿面對角線方向相接。面對角線長度為 $\sqrt{2}a = 4r$，因此 $a = 4r/\sqrt{2} = 2\sqrt{2}r$。$n = 4$：<span class="math">$$\text{APF}_{\text{fcc}} = \frac{4 \cdot \frac{4}{3}\pi r^3}{\left(2\sqrt{2}r\right)^3} = \frac{\pi\sqrt{2}}{6} \approx 0.740$$</span>fcc 的 APF 為 0.740，這是等徑球體最密集堆積（close-packed）的極限值。</div></div>
+<div class="step"><span class="sn">5</span><span class="sl">物理意義與熱力學連結</span>
+<div class="sc">fcc 具有最高的堆積效率（74.0%），這也是為什麼 fcc 金屬（如 Al、Cu、Au、Ni）通常具有較高的密度和較低的擴散速率。堆積效率影響材料的<strong>比熱容</strong>和<strong>熱膨脹係數</strong>——原子堆積越緊密，熱振動受限越強，德拜溫度越高。此外，APF 與<strong>內聚能（cohesive energy）</strong>相關：APF 越高，原子間距越小，金屬鍵或共價鍵的強度通常越高。這些關係將在<strong>第四章（統計熱力學）</strong>和<strong>第六章（第三定律與絕對熵）</strong>中量化討論。下表總結了三種立方結構的關鍵參數：<span class="math">$$
+\begin{array}{lccc}
+\hline
+\text{參數} & \text{sc} & \text{bcc} & \text{fcc} \\
+\hline
+\text{原子數/晶胞} & 1 & 2 & 4 \\
+\text{配位數} & 6 & 8 & 12 \\
+a \text{ 與 } r \text{ 的關係} & a = 2r & a = 4r/\sqrt{3} & a = 2\sqrt{2}r \\
+\text{APF} & \pi/6 \approx 0.524 & \pi\sqrt{3}/8 \approx 0.680 & \pi\sqrt{2}/6 \approx 0.740 \\
+\text{空隙類型} & \text{八面體} & \text{四面體 + 八面體} & \text{四面體 + 八面體} \\
+\hline
+\end{array}
+$$</span></div></div>
+</div></details>
+
+<details class="derive" open>
+<summary>🔍 推導 3：米勒指數（Miller Indices）——從截距推導晶面指數</summary>
+<div class="dbo">
+<div class="step"><span class="sn">1</span><span class="sl">確定截距</span>
+<div class="sc">找出晶面在三條晶軸（$x$, $y$, $z$）上的截距，以晶格常數 $a$, $b$, $c$ 為單位表示。若晶面與某軸平行，截距為 $\infty$。例如，一個平面在 $x$ 軸上截於 $2a$，在 $y$ 軸上截於 $3b$，在 $z$ 軸上截於 $1c$。</div></div>
+<div class="step"><span class="sn">2</span><span class="sl">取倒數</span>
+<div class="sc">對三個截距分別取倒數。上例中：$1/2$, $1/3$, $1$。</div></div>
+<div class="step"><span class="sn">3</span><span class="sl">化為最小整數比</span>
+<div class="sc">將三個倒數乘以最小公倍數（通常不需要——取最小整數比即可）。上例中乘以 6：<span class="math">$$\left(\frac{1}{2} \times 6,\ \frac{1}{3} \times 6,\ 1 \times 6\right) = (3,\ 2,\ 6)$$</span>所得整數三元組記為 $(3\ 2\ 6)$，即為該晶面的<strong>米勒指數（Miller indices）</strong>。若指數為負值，寫為 $(\bar{h}\ k\ l)$，例如 $(\bar{1}\ 0\ 0)$ 表示在 $x$ 軸負方向截距為 $-1$ 的平面。</div></div>
+<div class="step"><span class="sn">4</span><span class="sl">立方晶系常用晶面</span>
+<div class="sc">以下是最常見的幾個晶面及其性質：<span class="math">$$\text{立方體面 (100): 截距 } 1a, \infty b, \infty c \rightarrow (1\ 0\ 0)$$</span><span class="math">$$\text{體對角面 (110): 截距 } 1a, 1b, \infty c \rightarrow (1\ 1\ 0)$$</span><span class="math">$$\text{八面體面 (111): 截距 } 1a, 1b, 1c \rightarrow (1\ 1\ 1)$$</span>注意：(100) 面原子密度最低，(111) 面在 fcc 中原子密度最高。不同晶面的表面能不同，這影響晶體生長速率和腐蝕行為。</div></div>
+<div class="step"><span class="sn">5</span><span class="sl">熱力學中的應用</span>
+<div class="sc">米勒指數在材料熱力學中有多項重要應用：<ul style="font-size:13px;color:var(--t2);margin-left:14px;margin-top:4px"><li><strong>表面熱力學：</strong>不同晶面的表面張力（surface tension）不同，影響晶體形貌和異質成核速率。</li><li><strong>第七章（相圖）：</strong>固態相變中，新相的慣習面（habit plane）通常對應特定的晶面指數。</li><li><strong>第九章（擴散）：</strong>擴散係數在立方晶系中是各向同性的，但在非立方晶系（如六方）中與晶面指數有關。</li><li><strong>差排與滑移：</strong>晶體塑性變形發生在特定的滑移面上（如 fcc 的 {111} 面），這直接影響材料的力學性質與熱力學穩定性。</li></ul></div></div>
+</div></details>
+
+<div class="callout"><strong>💡 結構–熱力學連結總結：</strong>晶體結構不僅決定了材料的力學性質，也直接影響熱力學性質。fcc 結構的較高堆積因子意味著更強的原鍵結、更高的熔點和較低的蒸氣壓。晶體缺陷（如空位、差排）的平衡濃度由熱力學決定——這是<strong>第八章（缺陷熱力學）</strong>的核心內容。在<strong>第三章</strong>中，我們將學習如何用統計力學計算晶體結構的熵：$S = k \ln W$，其中 $W$ 是微觀狀態數，直接與原子排列方式相關。因此，本章的晶體結構基礎是連結宏觀熱力學與微觀結構的重要橋樑。</div>
+
+<h3>補充例題：晶面間距計算</h3>
+<p>立方晶系中，相鄰平行晶面 $(h\ k\ l)$ 之間的距離 $d_{hkl}$ 可由下式計算：</p>
+<div class="eq">$$d_{hkl} = \frac{a}{\sqrt{h^2 + k^2 + l^2}}$$</div>
+<p>這個公式在 X 射線繞射（XRD）分析中至關重要——布拉格定律 $n\lambda = 2d\sin\theta$ 利用 $d_{hkl}$ 來確定晶體結構和晶格常數。例如，對於銅（fcc, $a = 3.615\ \text{Å}$），$(111)$ 面的間距為 $d_{111} = 3.615 / \sqrt{3} = 2.087\ \text{Å}$。</p>
+</section>
+
+<section id="s1-3"><h2>1.3 平衡的範例（Example of Equilibrium）</h2>
+<p>一個系統處於<strong>熱力學平衡（thermodynamic equilibrium）</strong>時，必須同時滿足三種平衡：</p>
+<ol style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li><strong>熱平衡（Thermal equilibrium）：</strong>系統內部各處溫度均勻，且與環境溫度相同——沒有熱流。</li>
+<li><strong>力學平衡（Mechanical equilibrium）：</strong>系統內部各處壓力均勻，且與環境壓力平衡——沒有淨力。</li>
+<li><strong>化學平衡（Chemical equilibrium）：</strong>系統內部沒有淨化學反應發生，各相的化學位（chemical potential）均勻。</li>
+</ol>
+<p>本章以氣缸–活塞系統為例，說明力學平衡與熱平衡的交互關係。當氣體被活塞壓縮時，若過程夠慢（準靜態），系統在每一步都近似處於平衡，這就是<strong>可逆過程</strong>的理想化模型。</p>
+<div class="callout-warn"><strong>⚡ 平衡 ≠ 靜止。</strong>在微觀尺度，原子和分子仍然不斷運動（擴散、碰撞），但在宏觀尺度上，所有可觀察量（$T$, $P$, $V$, 成分）保持不變。平衡是動態的——正向和反向的微觀速率相等。</div>
+</section>
+
+<section id="s1-4"><h2>1.4 理想氣體狀態方程式（The Equation of State of an Ideal Gas）</h2>
+<p><strong>狀態方程式（equation of state）</strong>是聯繫狀態變數之間的數學關係。最簡單也最重要的狀態方程式是<strong>理想氣體定律</strong>：</p>
+<div class="eq">$$PV = nRT \tag{1.1}$$</div>
+<p>其中 $R = 8.3144\ \text{J/mol·K}$ 是通用氣體常數（universal gas constant）。這個方程式描述了低壓下真實氣體的行為——壓力越低，真實氣體越接近理想行為。</p>
+<p>理想氣體定律基於兩個假設：(1) 氣體分子本身佔據的體積可忽略不計；(2) 分子之間沒有交互作用力（除了彈性碰撞瞬間）。在高壓或低溫下，這兩個假設不再成立——真實氣體需要用更複雜的狀態方程式（如 van der Waals 方程式，第八章）。</p>
+<p>在標準溫度和壓力（STP：0°C、1 atm）下，1 莫耳理想氣體的體積為 22.414 升。這是一個常用的參考值。</p>
+<div class="callout"><strong>💡 理想氣體定律是材料熱力學中使用頻率最高的公式之一。</strong>它不僅用於氣相反應的計算（第十一章），也是推導許多熱力學關係的起點。例如，理想氣體的內能只取決於溫度（$U = U(T)$），與體積無關——這是因為理想氣體分子之間沒有位能。</div>
+</section>
+
+<section id="s1-5"><h2>1.5 能量與功的單位（The Units of Energy and Work）</h2>
+<p>在材料熱力學中，能量的主要單位是<strong>焦耳（Joule, J）</strong>：</p>
+<div class="eq">$$1\ \text{J} = 1\ \text{N·m} = 1\ \text{kg·m}^2\text{/s}^2$$</div>
+<p>另一常見的能量單位是<strong>卡路里（calorie）</strong>，定義為將 1 克水從 14.5°C 加熱到 15.5°C 所需的熱量。與焦耳的換算關係：</p>
+<div class="eq">$$1\ \text{cal} = 4.184\ \text{J}$$</div>
+<p>功（work）的定義為力乘以位移。在熱力學中，最常見的功是<strong>壓力–體積功（$P$–$V$ work）</strong>——系統對抗外壓膨脹所做的功：</p>
+<div class="eq">$$w = \int_{V_1}^{V_2} P_{\text{ext}}\ dV \tag{1.7}$$</div>
+<div class="callout-warn"><strong>⚡ 單位換算陷阱：</strong>使用 $PV = nRT$ 時，$R$ 的數值取決於單位。常用值：$R = 8.3144\ \text{J/mol·K} = 0.082057\ \text{L·atm/mol·K} = 1.987\ \text{cal/mol·K}$。計算前務必確認單位一致。</div>
+</section>
+
+<section id="s1-6"><h2>1.6 廣延量與強度量（Extensive and Intensive Thermodynamic Variables）</h2>
+<p>熱力學變數分為兩類：</p>
+<table><thead><tr><th>類型</th><th>定義</th><th>範例</th></tr></thead><tbody>
+<tr><td><strong>廣延量（Extensive）</strong></td><td>與系統大小成正比</td><td>體積 $V$、質量 $m$、內能 $U$、焓 $H$、熵 $S$</td></tr>
+<tr><td><strong>強度量（Intensive）</strong></td><td>與系統大小無關</td><td>溫度 $T$、壓力 $P$、密度 $\rho$、莫耳體積 $V/n$</td></tr></tbody></table>
+<p>一個簡單的判斷法則：將系統均分為兩半：廣延量減半，強度量不變。</p>
+<p><strong>莫耳量（molar quantity）</strong>是廣延量除以莫耳數，因此轉化為強度量。例如莫耳體積 $v = V/n$、莫耳內能 $u = U/n$。在材料熱力學中，我們大量使用莫耳量，因為它們便於比較不同大小的系統。</p>
+<div class="callout"><strong>💡 狀態方程式只涉及強度量。</strong>$PV = nRT$ 可改寫為 $Pv = RT$，其中 $v = V/n$ 是莫耳體積。這三個變數（$P$, $v$, $T$）都是強度量——指定其中兩個，第三個就被確定。</div>
+
+<h3>更多實例說明</h3>
+<p>為了加深理解，考慮一個具體的數值範例：將 2 莫耳的理想氣體（$n = 2$）置於 300 K、1 atm 下，計算其體積：</p>
+<div class="eq">$$V = \frac{nRT}{P} = \frac{2 \times 0.082057 \times 300}{1} = 49.23\ \text{L}$$</div>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li><strong>體積 $V$ 是廣延量</strong>——如果氣體的量減半為 1 莫耳（保持 $T$ 和 $P$ 不變），體積也減半為 24.62 L。</li>
+<li><strong>溫度 $T = 300$ K 和壓力 $P = 1$ atm 是強度量</strong>——無論系統大小，只要處於平衡，這些值保持不變。</li>
+<li><strong>密度 $\rho = m/V$ 是強度量</strong>：1 莫耳與 2 莫耳的理想氣體在相同 $T$ 和 $P$ 下密度完全相同。</li>
+<li><strong>莫耳體積 $v = V/n$ 是強度量</strong>：在給定的 $T$ 和 $P$ 下，$v$ 是常數（$v = RT/P = 24.62\ \text{L/mol}$），與氣體總量無關。</li>
+</ul>
+<p><strong>廣延量與強度量的區分在熱力學中至關重要</strong>，因為狀態函數的微分關係——特別是 Maxwell 關係——建立在這個區分之上。當對一個熱力學勢（如內能 $U$）求全微分時，廣延量是自然變數：$dU = TdS - PdV$，其中熵 $S$ 和體積 $V$ 都是廣延量。如果希望將變數切換為強度量（如 $T$ 和 $P$），就需要透過 <strong>Legendre 變換</strong>引入新的熱力學勢（如吉布斯自由能 $G = U - TS + PV$）。這個核心技巧將在<strong>第五章（Maxwell 關係與熱力學勢）</strong>中系統介紹。</p>
+
+<h3>偏莫耳量（Partial Molar Quantities）</h3>
+<p>在多成分系統中，一個重要的概念延伸是<strong>偏莫耳量</strong>——在固定 $T$、$P$ 和其他成分的條件下，一個廣延量對某一成分莫耳數的偏導數。以吉布斯自由能 $G$ 為例，定義偏莫耳吉布斯自由能——即<strong>化學位（chemical potential）</strong> $\mu_i$：</p>
+<div class="eq">$$\mu_i = \left(\frac{\partial G}{\partial n_i}\right)_{T,P,n_{j \neq i}}$$</div>
+<p>化學位是強度量，是決定相平衡和化學平衡的核心變數。它告訴我們：如果向系統中加入極微量的成分 $i$，系統的吉布斯自由能會變化多少。當各相中同一成分的化學位相等時，系統達到相平衡。這個概念將在<strong>第十章（多元系統熱力學）</strong>中詳細展開，屆時我們將推導 Gibbs–Duhem 方程式和二元相圖的熱力學基礎。</p>
+
+<h3>廣延量判別表</h3>
+<table><thead><tr><th>物理量</th><th>符號</th><th>類型</th><th>判斷理由</th></tr></thead><tbody>
+<tr><td>質量</td><td>$m$</td><td>廣延</td><td>系統加倍，質量加倍</td></tr>
+<tr><td>體積</td><td>$V$</td><td>廣延</td><td>系統加倍，體積加倍</td></tr>
+<tr><td>內能</td><td>$U$</td><td>廣延</td><td>系統加倍，內能加倍</td></tr>
+<tr><td>熵</td><td>$S$</td><td>廣延</td><td>系統加倍，熵加倍</td></tr>
+<tr><td>溫度</td><td>$T$</td><td>強度</td><td>與系統大小無關</td></tr>
+<tr><td>壓力</td><td>$P$</td><td>強度</td><td>與系統大小無關</td></tr>
+<tr><td>密度</td><td>$\rho$</td><td>強度</td><td>廣延量之比 $m/V$</td></tr>
+<tr><td>莫耳體積</td><td>$v$</td><td>強度</td><td>廣延量之比 $V/n$</td></tr>
+<tr><td>化學位</td><td>$\mu$</td><td>強度</td><td>偏導數，與系統大小無關</td></tr>
+</tbody></table>
+</section>
+
+<section id="s1-7"><h2>1.7 平衡相圖與熱力學成分（Equilibrium Phase Diagrams and Thermodynamic Components）</h2>
+<p><strong>相（phase）</strong>是系統中物理和化學性質均勻的區域。例如冰水混合物有兩個相（固相和液相），雖然化學成分相同（都是 H₂O）。</p>
+<p><strong>成分（component）</strong>是獨立可變化學物種的最小數目，足以描述系統中所有相的組成。對於純水系統，成分數 $C = 1$（只需要 H₂O 就能描述所有相）。</p>
+<p>單成分系統的<strong>壓力–溫度相圖（$P$–$T$ diagram）</strong>展示了不同相在什麼溫度和壓力下穩定存在。三條曲線（固–氣、固–液、液–氣）將圖分成三個區域，三條曲線交於<strong>三相點（triple point）</strong>——這是唯一固、液、氣三相共存的溫度和壓力。</p>
+<div class="figure"><img src="../../../images/thermodynamics/ch01_pages/ch01_page_35_c.png" alt="圖 1.4" loading="lazy"><figcaption>圖 1.4：單成分系統的壓力–溫度相圖示意圖。三條曲線對應兩相平衡，交點為三相點。</figcaption></div>
+<div class="callout-warn"><strong>⚡ 吉布斯相律（Gibbs Phase Rule）：</strong>$F = C - P + 2$，其中 $F$ 是自由度、$C$ 是成分數、$P$ 是相數。對於單成分系統：三相點時 $F = 1 - 3 + 2 = 0$——沒有任何自由度，溫度和壓力完全固定。這就是為什麼水的三相點被用作國際溫標的定義點（273.16 K）。</div>
+
+<h3>三相點的深入分析</h3>
+<p>以水為例，三相點（$T = 273.16$ K, $P = 611.73$ Pa ≈ 0.00604 atm）是唯一固、液、氣三相共存的狀態。根據相律 $F = 1 - 3 + 2 = 0$，這個點沒有任何自由度——壓力和溫度完全鎖定，無法改變其中一個而不破壞三相共存。</p>
+<p><strong>三相點與熔點（melting point）不同：</strong></p>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li>三相點是固、液、氣三相平衡的獨特狀態（$F = 0$）。</li>
+<li>熔點指 1 atm 下固–液兩相平衡的溫度（$F = 1$——沿固–液平衡線移動）。</li>
+<li>對於水，熔點約為 273.15 K（0°C），與三相點溫度（273.16 K）相差僅 0.01 K。這 0.01 K 的差異源自壓力對固–液平衡的微小影響（水的固–液線斜率為負值）。</li>
+</ul>
+
+<h3>相律的直觀理解</h3>
+<p>相律 $F = C - P + 2$ 中的「2」代表兩個外部變數——溫度和壓力。在單成分系統中：</p>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li><strong>單相區（$P = 1$）：</strong>$F = 1 - 1 + 2 = 2$——可以在一定範圍內自由改變 $T$ 和 $P$ 而不產生新相。例如，在液相區內，我們可以同時升高溫度和降低壓力，系統仍保持為液相。</li>
+<li><strong>兩相線（$P = 2$）：</strong>$F = 1 - 2 + 2 = 1$——只有一個自由度。若改變溫度，壓力必須沿相平衡曲線（Clausius–Clapeyron 關係）相應變化才能維持兩相共存。</li>
+<li><strong>三相點（$P = 3$）：</strong>$F = 1 - 3 + 2 = 0$——唯一確定的 $T$–$P$ 組合。</li>
+</ul>
+<p>相律的威力在於：它不需要任何具體的物質信息，僅憑相數和成分數就能預測系統的自由度數——這是熱力學普適性的最佳體現。</p>
+
+<h3>從單成分到多成分系統</h3>
+<p>相圖是材料熱力學的核心工具。單成分系統的 $P$–$T$ 相圖（圖 1.4）是理解更複雜系統的必要基礎：</p>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li>在<strong>第七章（相圖熱力學）</strong>中，我們將推導相邊界斜率的 Clausius–Clapeyron 方程式：$\displaystyle\frac{dP}{dT} = \frac{\Delta S}{\Delta V}$，並討論如何從熱力學數據（如熔化焓和體積變化）構建完整的相圖。</li>
+<li>在<strong>第十章（二元相圖）</strong>中，相律推廣為 $F = C - P + 2$（其中 $C$ 為成分數），二元系統（$C = 2$）的相圖引入了成分作為第三個軸，衍生出共晶、包晶、共析等豐富的相平衡類型。</li>
+<li><strong>固–固相變：</strong>除了固–液–氣相變，許多材料還存在固–固相變（如鐵在 912°C 從 bcc 轉變為 fcc、在 1394°C 從 fcc 轉變回 bcc）。這些同素異構轉變（allotropic transformation）在材料熱處理中至關重要。</li>
+</ul>
+<div class="callout"><strong>💡 固–固相變的熱力學：</strong>固–固相變發生時，兩相的吉布斯自由能相等（$G_{\alpha} = G_{\beta}$）。由於固體的體積變化 $\Delta V$ 通常很小，Clausius–Clapeyron 斜率 $dP/dT = \Delta S/\Delta V$ 可能非常大。這意味著固–固相變溫度對壓力不敏感——這與固–液相變和液–氣相變形成鮮明對比。這些現象將在第七章中定量分析。</div>
+</section>
+
+<section id="s1-8"><h2>1.8 熱力學定律概述（Laws of Thermodynamics）</h2>
+<p>熱力學建立在四個基本定律之上。本章僅做概述，後續章節將深入展開：</p>
+<table><thead><tr><th>定律</th><th>核心陳述</th><th>展開章節</th></tr></thead><tbody>
+<tr><td><strong>第零定律</strong></td><td>若 A 與 B 熱平衡，B 與 C 熱平衡，則 A 與 C 熱平衡——這定義了溫度的概念。</td><td>本章</td></tr>
+<tr><td><strong>第一定律</strong></td><td>能量守恆：$\Delta U = q + w$（內能變化 = 輸入熱 + 輸入功）</td><td>第二章</td></tr>
+<tr><td><strong>第二定律</strong></td><td>熵增原理：孤立系統的自發過程總是朝熵增加的方向進行。</td><td>第三章</td></tr>
+<tr><td><strong>第三定律</strong></td><td>絕對零度時，完美晶體的熵為零：$S(0\ \text{K}) = 0$。</td><td>第六章</td></tr></tbody></table>
+<p>這四個定律共同構成了熱力學的邏輯骨架。第一定律告訴我們<strong>什麼過程是可能的</strong>（能量必須守恆）；第二定律告訴我們<strong>可能的過程中哪些是自發的</strong>（熵必須增加）。</p>
+<div class="callout"><strong>💡 熱力學定律的獨特性：</strong>與大多數物理定律不同，熱力學定律不是從更基本的原理推導出來的——它們是從無數實驗觀察中歸納出的基本公理。至今沒有發現任何違反熱力學定律的現象。愛因斯坦曾說：「熱力學是唯一一個我確信永遠不會被推翻的物理理論。」</div>
+
+<h3>歷史發展背景</h3>
+<p>熱力學定律的發展歷程是科學史上最精彩的故事之一，每一位參與者都留下了不可磨滅的印記：</p>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li><strong>第零定律</strong>雖然在邏輯上是最基本的（它定義了溫度），但在歷史上是最晚被正式命名的——1930 年代科學家們才意識到需要一個單獨的定律來為「溫度」這個概念提供操作型定義。在此之前，人們憑直覺使用溫度，但沒有認識到溫度可比性需要一個公理基礎。</li>
+<li><strong>第一定律</strong>的奠基來自 James Joule（焦耳）在 1840–1850 年代的一系列精巧實驗。他在不同形式的實驗中（摩擦生熱、電流通過電阻、氣體壓縮）反覆測量了熱和功的轉換比率，最終確定 $1\ \text{cal} = 4.184\ \text{J}$。這個看似簡單的數字是能量守恆定律的實驗基石。</li>
+<li><strong>第二定律</strong>由 Sadi Carnot（卡諾，1824）、Rudolf Clausius（克勞修斯，1850）和 Lord Kelvin（開爾文，1851）共同建立。Carnot 發現了熱機效率的上限與工作物質無關，僅取決於熱源和冷源的溫度。Clausius 則引入了「熵」這個概念——他創造了這個詞（源自希臘文「轉變」），並給出了數學表達 $\oint \frac{dq_{\text{rev}}}{T} = 0$。</li>
+<li><strong>第三定律</strong>由 Walther Nernst（能斯特，1906）基於低溫實驗提出。它為計算絕對熵值提供了基準：$S(0\ \text{K}) = 0$ 對於完美晶體。這個看似簡單的陳述在低溫物理和化學平衡計算中有深遠的影響。</li>
+</ul>
+
+<h3>定量範例：第一定律的簡單應用</h3>
+<p>考慮 1 莫耳理想氣體在 300 K 下等溫膨脹，從 $V_1 = 10$ L 到 $V_2 = 20$ L。比較兩種不同的路徑：</p>
+
+<p><strong>路徑 A：對抗恆外壓 $P_{\text{ext}} = 1$ atm 的不可逆膨脹</strong></p>
+<div class="eq">$$w_A = -P_{\text{ext}}\Delta V = -1\ \text{atm} \times (20 - 10)\ \text{L} = -10\ \text{L·atm}$$</div>
+<p>將單位轉換為焦耳：$10\ \text{L·atm} \times 101.325\ \text{J/L·atm} = -1013\ \text{J}$。由於理想氣體等溫過程 $\Delta U = 0$，因此 $q_A = -w_A = +1013\ \text{J}$。系統從環境吸收了 1013 J 的熱量，並對環境做了 1013 J 的功。</p>
+
+<p><strong>路徑 B：可逆等溫膨脹</strong></p>
+<p>在可逆過程中，外壓始終等於系統壓力：$P_{\text{ext}} = P = nRT/V$。</p>
+<div class="eq">$$w_B = -\int_{V_1}^{V_2} P\,dV = -nRT\ln\frac{V_2}{V_1} = -1 \times 8.314 \times 300 \times \ln\frac{20}{10} = -1729\ \text{J}$$</div>
+<p>同樣 $\Delta U = 0$，因此 $q_B = -w_B = +1729\ \text{J}$。</p>
+
+<p><strong>對比兩個路徑：</strong></p>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li>兩條路徑的 $\Delta U$ 均為 0（狀態函數，與路徑無關）——驗證了狀態函數的核心特徵。</li>
+<li>但 $w$ 和 $q$ 的值完全不同（分別為 -1013 J vs -1729 J，以及 +1013 J vs +1729 J）——功和熱是路徑函數。</li>
+<li><strong>可逆過程做的功更多</strong>（|$w_B$| > |$w_A$|），這是可逆過程效率最高的體現。在 $P$–$V$ 圖上，可逆膨脹曲線下的面積（功）大於恆外壓直線下的面積。</li>
+</ul>
+<p>這些計算將在<strong>第二章（熱力學第一定律）</strong>中系統學習，並推廣到等容、等壓、絕熱和多方過程。</p>
+
+<h3>熱力學定律的適用範圍</h3>
+<p>值得注意的是，經典熱力學只適用於<strong>宏觀系統</strong>——包含大量粒子的集合。對於少數粒子組成的微觀系統（如幾個原子），熱力學定律的統計本質會導致明顯的漲落。此外，熱力學第二定律是一個統計定律——雖然自發過程總是朝熵增加的方向進行，但微觀尺度上存在暫時的熵減波動（漲落定理）。這些邊界條件在<strong>第四章（統計熱力學入門）</strong>中會有更深層次的討論。</p>
+</section>
+
+<section id="s1-9"><h2>1.9 例題與應用（Example Problem）</h2>
+<p>本章結尾我們通過一個典型例題來鞏固所學概念。這個例題結合了狀態方程式、廣延量與強度量的應用，以及熱力學第一定律的初步計算。</p>
+
+<div class="figure"><img src="../../../images/thermodynamics/ch01_pages/ch01_page_41_c.png" alt="圖 1.6" loading="lazy"><figcaption>圖 1.6：例題示意圖——氣缸–活塞系統在不同熱力學狀態間的轉換過程。$P$–$V$ 圖上的每一條路徑對應一個不同的熱力學過程，分別為等壓、等容和等溫過程的組合。</figcaption></div>
+
+<h3>例題：理想氣體的循環過程</h3>
+<p>設有 2 莫耳理想氣體進行一個由三個步驟組成的循環：</p>
+<ol style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li><strong>步驟 1 → 2（等壓膨脹）：</strong>氣體在 $P_1 = 2$ atm 下從 $V_1 = 25$ L 膨脹到 $V_2 = 50$ L。</li>
+<li><strong>步驟 2 → 3（等容降壓）：</strong>體積固定在 $V_2 = 50$ L，壓力下降到 $P_3 = 1$ atm。</li>
+<li><strong>步驟 3 → 1（等溫壓縮）：</strong>在 $T_3 = T_1$ 下壓縮回到初始狀態。</li>
+</ol>
+
+<h4>解題步驟</h4>
+<p><strong>第一步：</strong>先確定初始溫度 $T_1$。使用理想氣體定律：</p>
+<div class="eq">$$T_1 = \frac{P_1 V_1}{nR} = \frac{2\ \text{atm} \times 25\ \text{L}}{2\ \text{mol} \times 0.082057\ \text{L·atm/mol·K}} = 304.7\ \text{K}$$</div>
+<p><strong>第二步：</strong>步驟 1→2 等壓膨脹中，$T_2 = (V_2/V_1) \times T_1 = (50/25) \times 304.7 = 609.4$ K。</p>
+<p><strong>第三步：</strong>步驟 2→3 等容降壓中，$T_3 = (P_3/P_2) \times T_2 = (1/2) \times 609.4 = 304.7$ K（確實回到初始溫度）。</p>
+<p><strong>第四步：</strong>根據第一定律計算各步驟的 $\Delta U$、$w$ 和 $q$。每個步驟的具體計算將在第二章中完成。關鍵觀察：經過一個循環回到初始狀態後，$\Delta U_{\text{cycle}} = 0$——因為內能是狀態函數，循環變化為零。總功 $w_{\text{cycle}}$ 在 $P$–$V$ 圖上等於循環曲線所圍的面積（圖 1.6 中的陰影區域）。</p>
+
+<div class="callout"><strong>💡 解題核心提示：</strong>處理熱力學問題時，始終遵循以下順序：(1) 確定系統的初始狀態（$P, V, T, n$）；(2) 根據過程類型（等溫、等壓、等容、絕熱）確定各狀態之間的變數關係；(3) 計算狀態函數的變化（$\Delta U$、$\Delta H$）——這些與路徑無關；(4) 計算功和熱——這些與路徑有關；(5) 驗證第一定律 $\Delta U = q + w$。</div>
+
+<p>熟練掌握本章的基本概念（狀態、平衡、狀態方程式、廣延量與強度量）是學習後續所有章節的必要前提。從第二章開始，我們將正式進入熱力學第一定律的系統學習。</p>
+</section>
+
+<section id="summary"><h2>本章摘要</h2>
+<ol style="font-size:14px;color:var(--t2);margin-left:18px">
+<li><strong>狀態與狀態函數：</strong>系統的狀態由少數宏觀變數定義。狀態函數（$U$, $H$, $S$, $G$）只取決於當前狀態，與路徑無關。</li>
+<li><strong>平衡：</strong>熱力學平衡需要同時滿足熱平衡、力學平衡、化學平衡。平衡是動態的，微觀過程仍在進行。</li>
+<li><strong>理想氣體定律：</strong>$PV = nRT$（或 $Pv = RT$）。$R = 8.3144\ \text{J/mol·K}$。</li>
+<li><strong>廣延量 vs 強度量：</strong>廣延量與系統大小成正比，強度量與系統大小無關。莫耳量是強度量。</li>
+<li><strong>相圖與相律：</strong>$F = C - P + 2$。單成分系統的 $P$–$T$ 圖有三個單相區、三條兩相線、一個三相點。</li>
+<li><strong>四大定律：</strong>第零定律定義溫度，第一定律表述能量守恆，第二定律表述熵增，第三定律定義熵的絕對零點。</li>
+</ol></section>
+</main>
+<script>
+function toggleTheme(){const h=document.documentElement;const n=h.getAttribute('data-theme')==='light'?'dark':'light';h.setAttribute('data-theme',n);localStorage.setItem('theme',n);document.getElementById('tl').textContent=n==='dark'?'淺色模式':'深色模式';}
+const s=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',s);if(s==='dark')document.getElementById('tl').textContent='淺色模式';
+const secs=document.querySelectorAll('section[id]');const navs=document.querySelectorAll('.sn a');window.addEventListener('scroll',()=>{let c='';secs.forEach(s=>{if(window.scrollY>=s.offsetTop-80)c=s.getAttribute('id');});navs.forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+c);});});
+document.querySelectorAll('.figure img').forEach(i=>i.addEventListener('click',()=>window.open(i.src,'_blank')));
+</script>
+</body>
+</html>

@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>第十三章：含凝態溶液組分的反應平衡 — 材料熱力學</title>
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']],tags:'ams'},options:{ignoreHtmlClass:'no-math'}};</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+:root{--bg:#fff;--b2:#F5F5F7;--b3:#E8F0FE;--tx:#1D1D1F;--t2:#1D1D1F;--ac:#007AFF;--bd:#D2D2D7;--sh:0 2px 8px rgba(0,0,0,.08);--fbd:#E5E5EA;--wbg:#FFF9F0;--wbd:#FFB340;--wtx:#B8700A;--nw:260px}
+[data-theme="dark"]{--bg:#1C1C1E;--b2:#2C2C2E;--b3:#1A2332;--tx:#F5F5F7;--t2:#A1A1A6;--ac:#0A84FF;--bd:#48484A;--fbd:#3A3A3C;--wbg:#2C2416;--wbd:#8B6914;--wtx:#FFB340}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth;scroll-padding-top:16px}
+body{font-family:-apple-system,BlinkMacSystemFont,'Noto Sans TC','Microsoft JhengHei',sans-serif;background:var(--b2);color:var(--tx);line-height:1.9;display:flex;min-height:100vh}
+.sidebar{position:fixed;top:0;left:0;width:var(--nw);height:100vh;background:var(--bg);border-right:1px solid var(--bd);overflow-y:auto;z-index:100;padding:20px 16px;display:flex;flex-direction:column}
+.sh{margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--fbd)}.sh h2{font-size:14px;font-weight:600;color:var(--ac)}.sh .bk{font-size:11px;color:var(--t2)}
+.sn{flex:1}.sn ul{list-style:none}.sn a{display:block;padding:4px 10px;font-size:11px;color:var(--t2);text-decoration:none;border-radius:5px;transition:.12s}.sn a:hover{background:var(--b3);color:var(--ac)}.sn a.active{background:var(--b3);color:var(--ac);font-weight:500}.sn .ns{font-weight:600;font-size:12px;color:var(--tx);margin-top:10px;padding:2px 10px}.sn .nsub a{padding-left:20px;font-size:10px}
+.st{margin-top:auto;padding-top:12px;border-top:1px solid var(--fbd)}.st button{width:100%;padding:6px;border:1px solid var(--bd);border-radius:6px;background:var(--b2);color:var(--tx);cursor:pointer;font-size:12px}
+.main{margin-left:var(--nw);flex:1;max-width:1050px;padding:32px 40px 80px}
+.header{margin-bottom:32px;padding-bottom:20px;border-bottom:2px solid var(--ac)}.header .cl{font-size:12px;font-weight:600;color:var(--ac);letter-spacing:1px}.header h1{font-size:28px;font-weight:700;margin:6px 0}.header .meta{font-size:13px;color:var(--t2)}
+section{margin-bottom:44px}h2{font-size:20px;font-weight:700;color:var(--ac);margin-bottom:14px;padding-bottom:6px;border-bottom:1px solid var(--bd)}h3{font-size:16px;font-weight:600;color:var(--tx);margin:24px 0 10px}h4{font-size:14px;font-weight:600;color:var(--t2);margin:18px 0 6px}
+p{font-size:14px;color:var(--t2);margin-bottom:12px}strong{font-weight:600;color:var(--tx)}
+.eq{text-align:center;margin:16px 0;font-size:15px}
+.callout{background:var(--b3);border:1px solid var(--fbd);border-radius:8px;padding:14px 18px;margin:16px 0;font-size:13px}.callout strong{color:var(--ac)}
+.callout-warn{background:var(--wbg);border:1px solid var(--wbd);border-radius:8px;padding:14px 18px;margin:16px 0;font-size:13px}.callout-warn strong{color:var(--wtx)}
+.figure{background:var(--bg);border:1px solid var(--bd);border-radius:10px;padding:16px;margin:20px 0;text-align:center}.figure img{max-width:100%;height:auto;border-radius:6px;box-shadow:var(--sh)}.figure figcaption{font-size:12px;color:var(--t2);margin-top:10px;padding-top:8px;border-top:1px solid var(--fbd);text-align:left;line-height:1.6}
+.derivation{background:var(--bg);border-left:4px solid var(--ac);border-radius:0 8px 8px 0;padding:16px 20px;margin:20px 0;font-size:13px}.derivation summary{font-weight:700;color:var(--ac);cursor:pointer;padding:4px 0;font-size:14px}.derivation summary:hover{opacity:.8}.derivation .eq{margin:10px 0;font-size:14px}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}thead th{background:var(--b3);padding:8px 12px;font-size:12px;font-weight:600;border-bottom:2px solid var(--bd)}tbody td{padding:8px 12px;border-bottom:1px solid var(--fbd)}tbody tr:nth-child(even){background:var(--b2)}
+@media(max-width:768px){.sidebar{transform:translateX(-100%);transition:.3s}.sidebar.open{transform:translateX(0)}.main{margin-left:0;padding:20px 16px 60px}}
+@media print{.sidebar{display:none}.main{margin-left:0;max-width:100%;padding:0}}
+</style>
+<script src="../../../reading-preferences.js" defer></script></head>
+<body><a class="portal-home-link" href="../../../index.html">返回學習中心</a><style id="portal-home-link-style">.portal-home-link{position:fixed;top:16px;right:16px;z-index:1000;display:inline-flex;align-items:center;min-height:36px;padding:7px 11px;border:1px solid #cbd5e1;border-radius:8px;background:#fff;color:#1d4ed8;font:600 13px/1.2 -apple-system,BlinkMacSystemFont,"Noto Sans TC","Microsoft JhengHei",sans-serif;text-decoration:none;box-shadow:0 2px 10px rgba(15,23,42,.08)}.portal-home-link:hover{background:#eff6ff}.portal-home-link:focus-visible{outline:3px solid rgba(37,99,235,.35);outline-offset:2px}@media(max-width:768px){.portal-home-link{top:10px;right:10px;min-height:34px;padding:7px 9px;font-size:12px}}</style>
+<nav class="sidebar"><div class="sh"><div class="bk">材料熱力學·Gaskell</div><h2>第十三章</h2></div><div class="sn"><ul>
+<li><a href="#preview">📋 13.0 本章預覽</a></li>
+<li class="ns">13.1–13.3 凝態反應平衡基礎</li><li class="nsub"><a href="#s13-1">13.1–13.2 凝態溶液中反應平衡的判據</a></li><li class="nsub"><a href="#s13-3">13.3 替代標準態</a></li>
+<li class="ns">13.4 相律與相穩定圖</li><li class="nsub"><a href="#s13-4">13.4 吉布斯平衡相律</a></li><li class="nsub"><a href="#s13-5">13.5 相穩定圖</a></li>
+<li class="ns">13.6–13.8 化合物與非化學計量</li><li class="nsub"><a href="#s13-6">13.6 含化合物的二元系統</a></li><li class="nsub"><a href="#s13-7">13.7 相平衡的圖示</a></li><li class="nsub"><a href="#s13-8">13.8 可變組成氧化物相</a></li>
+<li class="ns">13.9–13.10 氣體溶解度與多溶質</li><li class="nsub"><a href="#s13-9">13.9 氣體在金屬中的溶解度</a></li><li class="nsub"><a href="#s13-10">13.10 含多種稀溶質的溶液</a></li>
+<li><a href="#num-ex">🧮 數值範例</a></li>
+<li><a href="#summary">📋 本章摘要</a></li>
+</ul></div><div class="st"><button onclick="toggleTheme()">🌓 <span id="tl">深色模式</span></button></div></nav>
+<main class="main">
+<header class="header"><div class="cl">第十三章</div><h1>含凝態溶液組分的反應平衡</h1><div class="meta">David R. Gaskell·《Introduction to the Thermodynamics of Materials》·第 488–587 頁（全書最長章節，~100 頁）</div></header>
+
+<section id="preview"><div class="callout"><strong>📋 13.0 本章預覽</strong>
+<p>第十二章的 Ellingham 圖處理了<strong>純凝態相</strong>（純固體、純液體）與氣體的反應——活性恆為 1，平衡常數只涉及氣體分壓。但實際冶金反應遠比這複雜：煉鋼時，碳<strong>溶解</strong>在鐵液中（$a_\text{C} \neq 1$）；脫氧時，鋁和氧在鋼液中反應生成<strong>溶解在熔渣中</strong>的 Al₂O₃；不鏽鋼中的鉻會與溶解的氧反應生成 Cr₂O₃ 爐渣。這些反應的平衡不能用簡單的氣體分壓比來描述——必須使用<strong>活性（activity）</strong>。</p>
+<p>第十三章將第九章的溶液熱力學和第十一、十二章的反應平衡<strong>融合</strong>為統一的框架。這是全書最長的一章（~100 頁），因為它涵蓋了從高溫煉鋼到半導體晶體生長的幾乎所有實際材料製程中的反應平衡計算。</p>
+<div class="callout-warn"><strong>⚡ 第十三章是材料熱力學的「實戰手冊」。</strong>如果你是一位煉鋼工程師，你需要計算在 1600°C 下，加入多少鋁才能將鋼液中的氧含量降到 10 ppm 以下；如果你設計半導體晶體生長爐，你需要知道在給定氬氣壓力下，熔融矽中會溶解多少氧。本章提供的工具——活性標準態轉換、Sieverts 定律、Wagner 交互作用參數——是這些計算的基礎。</div>
+<p><strong>在本章中，我們將學習：</strong></p>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px">
+<li>當反應物和產物溶解在凝態相中時，如何寫出正確的平衡常數（使用活性而非濃度）</li>
+<li>Raoultian 與 Henrian（1 wt%）標準態的區別，以及如何在它們之間轉換</li>
+<li>吉布斯相律在含化學反應系統中的應用</li>
+<li>相穩定圖（Kellogg 圖）——在 $\log P_\text{O₂}$–$\log P_\text{SO₂}$ 空間中預測哪一相穩定</li>
+<li>含化合物的二元系統的熱力學描述</li>
+<li>非化學計量化合物（如 wüstite Fe₁₋ₓO）的熱力學</li>
+<li>Sieverts 定律——雙原子氣體在金屬中溶解度的平方根關係</li>
+<li>Wagner 交互作用參數——多溶質系統中活性係數的修正</li>
+</ul></div></section>
+
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<!-- 13.1–13.2 凝態溶液中反應平衡的判據 -->
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<section id="s13-1"><h2>13.1–13.2 凝態溶液中反應平衡的判據</h2>
+
+<h3>從純相到溶液——為什麼活性不可或缺</h3>
+<p>在第十一、十二章中，我們處理的反應涉及純凝態相（如 Fe(s)、FeO(s)、C(s)）。純固體和純液體的活性定義為 1（$a = 1$），因此平衡常數簡化為僅由氣體分壓決定：</p>
+<div class="eq">$$\text{FeO}(s) + \text{CO}(g) \rightleftharpoons \text{Fe}(s) + \text{CO}_2(g), \quad K = \frac{P_{\text{CO}_2}}{P_{\text{CO}}}$$</div>
+
+<p>但當反應物或產物<strong>溶解</strong>在另一個凝態相中時——例如碳溶解在液態鐵中、MnO 溶解在熔渣中——它們的活性不再是 1。平衡常數必須使用活性來表示：</p>
+<div class="eq">$$\boxed{K = \prod_i (a_i)^{\nu_i}} \tag{13.1}$$</div>
+<p>其中 $\nu_i$ 是計量係數（產物為正、反應物為負），$a_i$ 是成分 $i$ 在其實際所處相中的活性。這條方程式是整章的基石。</p>
+
+<div class="callout"><strong>💡 物理直覺——為什麼活性不是濃度：</strong>假設你在一個擁擠的房間裡（鐵液），裡面有碳原子和氧原子。碳和氧想要反應生成 CO 氣泡。但碳原子不是孤立的——它們與周圍的鐵原子有交互作用。如果碳–鐵交互作用很強（負偏離理想性，$\gamma_\text{C} < 1$），碳「不太想離開」鐵液——它的有效濃度（活性）低於實際濃度。反應平衡取決於這個「有效濃度」——活性——而非莫耳分率。</div>
+
+<h3>以活性表示的平衡常數</h3>
+<p>對於一個典型的煉鋼反應：</p>
+<div class="eq">$$\text{C}\text{（溶解在鐵液中）} + \text{O}\text{（溶解在鐵液中）} \rightleftharpoons \text{CO}(g)$$</div>
+<p>平衡常數為：</p>
+<div class="eq">$$K = \frac{P_{\text{CO}}/P^\circ}{a_\text{C} \cdot a_\text{O}} \tag{13.2}$$</div>
+<p>注意：C 和 O 的活性指的是它們<strong>在鐵液中的活性</strong>，使用 Henrian 標準態（以 1 wt% 為參考）；CO 的分壓以標準壓力 $P^\circ = 1\ \text{atm}$（或 1 bar）歸一化。如果使用 Raoultian 標準態（以純物質為參考），則 $a_\text{C}$ 和 $a_\text{O}$ 的數值不同，$K$ 的數值也隨之改變——但平衡時的實際組成是相同的。</p>
+
+<p>碳在鐵液中的溶解反應可以寫為：</p>
+<div class="eq">$$\text{C}(s) \rightleftharpoons \underline{\text{C}}\text{（在鐵液中，1 wt% 標準態）}$$</div>
+<p>其標準自由能變 $\Delta G^\circ$ 不是碳的標準生成自由能，而是碳從<strong>純固態</strong>轉移到<strong>鐵液中 1 wt% 溶液</strong>的自由能變。這個數值需要從實驗測定。</p>
+
+<h3>與純相反應的關鍵區別</h3>
+<table>
+<thead><tr><th>特徵</th><th>純凝態相反應（Ch12）</th><th>凝態溶液反應（Ch13）</th></tr></thead>
+<tbody>
+<tr><td>凝態組分活性</td><td>$a = 1$（常數）</td><td>$a_i = \gamma_i x_i$ 或 $a_i = f_i [\%i]$（組成相關）</td></tr>
+<tr><td>平衡常數</td><td>僅涉及氣體分壓</td><td>涉及氣體分壓 <strong>和</strong> 凝態組分活性</td></tr>
+<tr><td>平衡組成求解</td><td>直接從 $K$ 得到氣體分壓</td><td>需聯立 $K$ 和活性–組成關係求解</td></tr>
+<tr><td>Ellingham 圖適用性</td><td>直接適用</td><td>需修正：考慮溶解自由能</td></tr>
+<tr><td>標準態</td><td>純物質（唯一選擇）</td><td>Raoultian 或 Henrian（可選）</td></tr>
+</tbody>
+</table>
+
+<div class="callout-warn"><strong>⚡ 關鍵認知轉變：</strong>第十一、十二章中，平衡常數 $K$ 只有一個「正確」的數值（因為純物質的標準態是唯一的）。但在第十三章，$K$ 的數值<strong>取決於你為每個溶質選擇的標準態</strong>。Raoultian $K$ 和 Henrian $K$ 是不同的數字——但它們描述的是同一個物理平衡。標準態的選擇是為了方便，不是物理本質。</div>
+
+<!-- Fig 13.1: Equilibrium between pure M and MO2 -->
+<div class="figure">
+<img src="../../../images/thermodynamics/ch13_pages/ch13_page_492_c.png" alt="純M與MO₂之間的平衡" loading="lazy">
+<figcaption><strong>圖 13.1</strong>（PDF p.492）— 純金屬 M 與其氧化物 MO₂ 之間的平衡示意圖。當反應物與產物皆為純凝態相時（$a_\\text{M}=1$，$a_{\\text{MO}_2}=1$），平衡常數僅取決於氣相中的 O₂ 分壓：$K = 1/(P_{\\text{O}_2}/P^\\circ)$。這是第十二章 Ellingham 圖處理的典型情況，也是本章討論凝態溶液反應平衡的起點——將純相擴展為溶液。</figcaption>
+</div>
+
+<!-- Fig 13.2: Equilibrated metal and oxide solutions -->
+<div class="figure">
+<img src="../../../images/thermodynamics/ch13_pages/ch13_page_496_c.png" alt="平衡的金屬溶液與氧化物溶液" loading="lazy">
+<figcaption><strong>圖 13.2</strong>（PDF p.495）— 金屬 M 溶解在另一金屬（溶劑）中形成溶液，氧化物 MO₂ 也溶解在熔渣中形成溶液的示意圖。此時反應 M + O₂ ⇌ MO₂ 中，M 的活性不再是 1，MO₂ 的活性也不再是 1。平衡常數必須使用活性：$K = a_{\\text{MO}_2}/(a_\\text{M} \\cdot P_{\\text{O}_2}/P^\\circ)$。這是本章的核心——將純相反應熱力學推廣到溶液反應。</figcaption>
+</div>
+
+<div class="callout"><strong>🔗 跨章節連結：</strong>此處活性 $a_i$ 的概念來自<a href="../ch09_behavior_of_solutions_zh.html"><strong>第九章</strong>（溶液的行為）</a>，其中詳細介紹了 Raoult 定律、Henry 定律、活性係數 $\\gamma_i$ 以及 Gibbs–Duhem 方程式。平衡常數 $K$ 與 $\\Delta G^\\circ$ 的關係 $\\Delta G^\\circ = -RT\\ln K$ 則由<a href="../ch11_reaction_equilibria_gas_zh.html"><strong>第十一章</strong>（涉及氣體的反應平衡）</a>建立。本章將這兩條知識線索合而為一。</div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<!-- 13.3 替代標準態 -->
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<section id="s13-3"><h2>13.3 替代標準態（Alternative Standard States）</h2>
+
+<h3>兩種標準態的並存</h3>
+<p>第九章介紹了兩種活性標準態：</p>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li><strong>Raoultian 標準態：</strong>標準態是<strong>純物質</strong>（$x_i = 1$，$a_i = 1$）。活性係數 $\gamma_i \to 1$ 當 $x_i \to 1$。適用於溶劑（或高濃度成分）。$a_i^\text{R} = \gamma_i x_i$。</li>
+<li><strong>Henrian 標準態：</strong>標準態是<strong>無限稀溶液的外插</strong>——可以是莫耳分率基準（$a_i \to x_i$ 當 $x_i \to 0$）或重量百分濃度基準（1 wt% 標準態，$a_i \to [\%i]$ 當 $[\%i] \to 0$）。活性係數 $f_i \to 1$ 當 $[\%i] \to 0$。適用於溶質（低濃度成分）。$a_i^\text{H} = f_i [\%i]$。</li>
+</ul>
+
+<h3>1 wt% 標準態——煉鋼的通用語言</h3>
+<p>在鋼鐵冶金中，溶質濃度幾乎總是以<strong>重量百分濃度（wt%）</strong>表示——因為化學分析給出的就是 wt%。使用莫耳分率需要知道所有成分的分子量並進行轉換——對於含有十幾種合金元素和雜質的鋼，這非常繁瑣。因此，Henrian 1 wt% 標準態成為鋼鐵冶金的標準做法。</p>
+<p>1 wt% 標準態的定義：當溶質濃度趨近於零（無限稀溶液）時，活性等於重量百分濃度：</p>
+<div class="eq">$$a_i \to [\%i] \quad \text{當 } [\%i] \to 0$$</div>
+<p>活性係數（Henrian）定義為：</p>
+<div class="eq">$$f_i = \frac{a_i}{[\%i]} \quad \text{且 } \lim_{[\%i] \to 0} f_i = 1$$</div>
+
+<h3>標準態之間的轉換</h3>
+<p>兩種標準態下的活性關係為：</p>
+<div class="eq">$$a_i^\text{H} = a_i^\text{R} \cdot \frac{\gamma_i^\circ M_\text{solvent}}{100 M_i} \tag{13.3}$$</div>
+<p>其中 $\gamma_i^\circ$ 是溶質 $i$ 在無限稀溶液中的 Raoultian 活性係數（Henry 常數與純物質蒸氣壓的比值），$M_\text{solvent}$ 和 $M_i$ 分別是溶劑和溶質的分子量。</p>
+<p>對應的標準自由能變之間的關係為：</p>
+<div class="eq">$$\Delta G^\circ_\text{H} = \Delta G^\circ_\text{R} + RT\ln\left(\frac{\gamma_i^\circ M_\text{solvent}}{100 M_i}\right) \tag{13.4}$$</div>
+
+<div class="callout"><strong>💡 標準態轉換的直覺：</strong>將標準態從「純碳（固體）」改為「鐵液中 1 wt% 的碳」，本質上是將參考點從 $x_\text{C}=1$ 移到 $x_\text{C} \approx 0.045$（1 wt% C 在鐵中的莫耳分率，取決於碳的原子量 12 和鐵的原子量 56）。如果碳–鐵交互作用使碳在鐵液中比理想溶液更穩定（$\gamma_\text{C}^\circ < 1$），那麼從純碳到 1 wt% 溶液的 $\Delta G^\circ$ 會比純粹稀釋效應所預測的更負。</div>
+
+<h3>煉鋼中的實際範例</h3>
+<p>碳溶解於液態鐵（1600°C）的反應：</p>
+<div class="eq">$$\text{C}(s) \rightleftharpoons \underline{\text{C}}\text{（1 wt% 在 Fe 液中）} \quad \Delta G^\circ = 22,590 - 42.26\,T\ \text{J/mol}$$</div>
+<p>在 1600°C（1873 K）：</p>
+<div class="eq">$$\Delta G^\circ = 22,590 - 42.26 \times 1873 = -56,560\ \text{J/mol}$$</div>
+<p>這表示碳從純固態轉移到鐵液中的 1 wt% 溶液是<strong>自發的</strong>（$\Delta G^\circ < 0$）——碳喜歡溶解在鐵中。這與直覺一致：你把石墨放進鐵水，它會溶解。</p>
+
+<!-- Fig 13.3: Raoultian standard state illustration -->
+<div class="figure">
+<img src="../../../images/thermodynamics/ch13_pages/ch13_page_499_c.png" alt="Raoultian標準態圖示" loading="lazy">
+<figcaption><strong>圖 13.3</strong>（PDF p.498）— Raoultian 標準態的圖示。標準態定義為純物質（$x_i=1$，$a_i=1$），化學位 $\mu_i^\circ$。活性 $a_i = \gamma_i x_i$，Raoultian 標準態適用於溶劑或高濃度成分。</figcaption>
+</div>
+
+<!-- Fig 13.4: a_Si in Fe-Si liquid alloys at two temperatures -->
+<div class="figure">
+<img src="../../../images/thermodynamics/ch13_pages/ch13_page_504_c.png" alt="Fe-Si液態合金中Si的活性" loading="lazy">
+<figcaption><strong>圖 13.4</strong>（PDF p.503）— Fe-Si 液態合金中矽的活性（$a_\text{Si}$）在兩個溫度下與組成的關係。低 $x_\text{Si}$ 時活性偏離 Henry 定律（虛線），顯示 Fe-Si 交互作用。此類實驗數據是標準態轉換的關鍵輸入。</figcaption>
+</div>
+
+<!-- DERIVATION: Raoultian ↔ Henrian (1 wt%) 標準態轉換 -->
+<div class="derivation">
+<summary>📐 推導：Raoultian 與 Henrian (1 wt%) 標準態之間的轉換</summary>
+<p><strong>步驟 1：定義兩標準態下的化學位。</strong>化學位 $\mu_i$ 是物理實量，不隨標準態選擇而變：</p>
+<div class="eq">$$\mu_i = \mu_i^{\circ,\text{R}} + RT\ln a_i^\text{R} = \mu_i^{\circ,\text{R}} + RT\ln(\gamma_i x_i)$$</div>
+<div class="eq">$$\mu_i = \mu_i^{\circ,\text{H}} + RT\ln a_i^\text{H} = \mu_i^{\circ,\text{H}} + RT\ln(f_i [\%i])$$</div>
+<p><strong>步驟 2：在無限稀溶液極限下關聯兩標準態。</strong>當 $[\%i] \to 0$：$f_i \to 1$，$a_i^\text{R} = \gamma_i^\circ x_i$。莫耳分率與 wt% 的轉換（二元稀溶液）：</p>
+<div class="eq">$$x_i \approx \frac{M_s}{100 M_i}\,[\%i]$$</div>
+<p>因此 $a_i^\text{R} = \gamma_i^\circ \frac{M_s}{100 M_i}[\%i]$，而 $a_i^\text{H} = [\%i]$。</p>
+<p><strong>步驟 3：等同兩化學位表達式，求解 $\Delta G^\circ_\text{H}$。</strong></p>
+<div class="eq">$$\mu_i^{\circ,\text{R}} + RT\ln\left(\gamma_i^\circ \frac{M_s}{100 M_i}[\%i]\right) = \mu_i^{\circ,\text{H}} + RT\ln[\%i]$$</div>
+<div class="eq">$$\Rightarrow \boxed{\Delta G^\circ_\text{H} = \Delta G^\circ_\text{R} + RT\ln\left(\frac{\gamma_i^\circ M_\text{solvent}}{100 M_i}\right)} \tag{推導 13.1}$$</div>
+<p><strong>步驟 4：活性之間的轉換。</strong>$a_i^\text{H} = a_i^\text{R} \cdot \frac{\gamma_i^\circ M_s}{100 M_i}$。修正項同時考慮了莫耳分率↔wt% 的轉換因子和溶液的非理想性。</p>
+<div class="callout"><strong>💡 數值範例——碳在鐵液中：</strong>$M_\text{Fe}=55.85$，$M_\text{C}=12.01$。若 $\gamma_\text{C}^\circ \approx 0.57$（實驗值），修正項為 $RT\ln(0.0265) = -3.73\,RT$。1600°C 下約 −58 kJ/mol，與 $\Delta G^\circ_\text{H}$ 和 $\Delta G^\circ_\text{R}$ 的觀察差值吻合。</div>
+</div>
+
+<div class="callout"><strong>🔗 跨章節連結：</strong>標準態的概念根源於<a href="../ch09_behavior_of_solutions_zh.html"><strong>第九章</strong></a>（活性與活性係數）。Ellingham 圖（<a href="../ch12_ellingham_diagrams_zh.html"><strong>第十二章</strong></a>）僅使用純物質標準態 $a=1$。本章將標準態從「唯一」擴展為「可選」，使熱力學能描述真實的冶金溶液。</div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<!-- 13.4 吉布斯平衡相律 -->
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<section id="s13-4"><h2>13.4 吉布斯平衡相律（The Gibbs Equilibrium Phase Rule）</h2>
+
+<h3>相律回顧與延伸</h3>
+<p>第七章介紹了吉布斯相律的基本形式：</p>
+<div class="eq">$$\boxed{F = C - P + 2} \tag{13.5}$$</div>
+<p>其中 $F$ = 自由度數（可獨立改變的強度變數數量），$C$ = 獨立組分數，$P$ = 相數。數字 2 對應於溫度 $T$ 和壓力 $P$ 兩個強度變數。</p>
+
+<h3>化學反應對組分數的影響</h3>
+<p>當系統中存在化學反應時，組分數 $C$ 的計算需要修正。每一個<strong>獨立的化學反應</strong>引入一個約束（平衡常數關係），減少一個自由度。獨立組分數定義為：</p>
+<div class="eq">$$C = N - R$$</div>
+<p>其中 $N$ = 存在的化學物種數，$R$ = 獨立化學反應數（或獨立化學平衡約束數）。</p>
+
+<h3>經典範例：CaCO₃ 分解</h3>
+<div class="eq">$$\text{CaCO}_3(s) \rightleftharpoons \text{CaO}(s) + \text{CO}_2(g)$$</div>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li>$N = 3$（三種化學物種：CaCO₃、CaO、CO₂）</li>
+<li>$R = 1$（一個化學反應）</li>
+<li>$C = 3 - 1 = 2$ 個獨立組分（例如可選 CaO 和 CO₂）</li>
+<li>$P = 3$（兩個固相 + 一個氣相）</li>
+<li>$F = 2 - 3 + 2 = 1$：只有一個自由度。在給定溫度下，$P_{\text{CO}_2}$ 被唯一確定——這正是第七章的結論。</li>
+</ul>
+
+<h3>擴展示例 1：NH₄Cl 分解（一個固相產生兩種氣體）</h3>
+<div class="eq">$$\text{NH}_4\text{Cl}(s) \rightleftharpoons \text{NH}_3(g) + \text{HCl}(g)$$</div>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li>$N = 3$（NH₄Cl、NH₃、HCl）</li>
+<li>$R = 1$（一個化學反應）</li>
+<li>$C = 3 - 1 = 2$</li>
+<li>$P = 2$（一個固相 + 一個氣相）</li>
+<li>$F = 2 - 2 + 2 = 2$：兩個自由度。但若有<strong>特殊限制</strong>（初始只有 NH₄Cl，故 $P_{\text{NH}_3} = P_{\text{HCl}}$），則增加一個約束，$F$ 降為 1——固定溫度後系統完全確定。</li>
+</ul>
+
+<h3>擴展示例 2：煉鋼中的 Fe–C–O 系統</h3>
+<p>考慮鋼液中同時存在碳和氧：</p>
+<div class="eq">$$\underline{\text{C}} + \underline{\text{O}} \rightleftharpoons \text{CO}(g)$$</div>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li>物種：溶解 C、溶解 O、CO 氣體、Fe 溶劑 → $N = 3$（不計溶劑）</li>
+<li>$R = 1$（一個化學反應）</li>
+<li>$C = 3 - 1 = 2$</li>
+<li>$P = 2$（液態鋼 + 氣相）</li>
+<li>$F = 2 - 2 + 2 = 2$：固定 $T$ 後仍有 1 個自由度——可在一定範圍內調整 C 濃度，O 濃度隨平衡常數自動確定</li>
+</ul>
+<p>如果加上<strong>特殊約束</strong>——如 $P_{\text{CO}}$ 被外界固定為 1 atm（開放系統吹氬氣）——則自由度再減 1：固定 $T$ 後，$a_\text{C} \cdot a_\text{O} = P_{\text{CO}}/K$ 為常數，但 C 和 O 仍可獨立調整其一。</p>
+
+<h3>擴展示例 3：三元凝聚系統 SiO₂–Al₂O₃–MgO</h3>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li>$N = 3$ 氧化物，無化學反應 → $C = 3$</li>
+<li>忽略氣相（凝聚系統），壓力影響甚微 → 相律中「+2」變為「+1」（僅溫度為強度變數）</li>
+<li>$F = C - P + 1 = 4 - P$</li>
+<li>若有 $P = 3$ 相共存（如液相 + 兩個固溶體），$F = 1$——在固定溫度下，三相共存僅發生在特定組成點（三元共晶點）</li>
+</ul>
+
+<h3>凝態溶液反應的相律</h3>
+<p>當反應涉及凝態溶液時，相律變得更加微妙。考慮煉鋼中的脫碳反應：</p>
+<div class="eq">$$\underline{\text{C}}\text{（在 Fe 液中）} + \underline{\text{O}}\text{（在 Fe 液中）} \rightleftharpoons \text{CO}(g)$$</div>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li>物種數 $N = 3$（溶解 C、溶解 O、CO 氣體），但鐵是溶劑不計入獨立組分</li>
+<li>反應數 $R = 1$</li>
+<li>$C = 3 - 1 = 2$（可選 C 和 O）</li>
+<li>$P = 2$（液態鐵溶液 + 氣相）</li>
+<li>$F = 2 - 2 + 2 = 2$：兩個自由度。固定 $T$ 和 $P$ 後，系統仍有 0 個自由度？不——固定 $T$ 後，還可以在一定範圍內調整 C 和 O 的濃度（受平衡常數約束：$a_\text{C} \cdot a_\text{O} = P_{\text{CO}}/K$）。如果 CO 壓力固定（如 1 atm），則 $a_\text{C} \cdot a_\text{O}$ 固定，但仍可獨立調整 $a_\text{C}$（意味著 $a_\text{O}$ 必須隨之改變）。系統有 1 個自由度（在給定 $T$ 和 $P_{\text{CO}}$ 下）。</li>
+</ul>
+
+<!-- Fig 13.5: Phase stability with carbon activity -->
+<div class="figure">
+<img src="../../../images/thermodynamics/ch13_pages/ch13_page_513_c.png" alt="碳活性對相穩定性的影響" loading="lazy">
+<figcaption><strong>圖 13.5</strong>（PDF p.512）— 碳活性（$a_\text{C}$）對 Fe–C–O 系統中相穩定性的影響。橫軸為碳活性（對數尺度），縱軸為氧分壓（對數尺度）。不同的碳活性區間對應不同的穩定凝態相（Fe、FeO、Fe₃O₄、Fe₂O₃）。此圖是將相律與反應平衡結合的範例——給定溫度下，系統的自由度決定了哪些變數可以獨立變化。</figcaption>
+</div>
+
+<div class="callout-warn"><strong>⚡ 相律是診斷工具而非計算工具。</strong>相律告訴你系統有幾個自由度，但不告訴你這些自由度對應的具體數值是多少——那是平衡常數的工作。但相律可以幫助你判斷：你的實驗觀察是否與熱力學一致？如果你認為系統只有一個自由度但觀察到兩個獨立變化的變數——你漏掉了一個相或者一個化學反應。</div>
+
+<h3>Duhem 定理——當總量也被指定時</h3>
+<p>相律基於<strong>強度變數</strong>（$T$、$P$、組成）。但在實際問題中，我們通常還知道系統的<strong>總質量</strong>或<strong>初始組成</strong>（廣度變數）。Duhem 定理指出：對於一個封閉系統（已知初始各元素的總莫耳數），平衡狀態完全由<strong>兩個獨立變數</strong>確定——通常是 $T$ 和 $P$。這意味著無論系統有多少相和反應，只要指定了初始總組成和 $T$、$P$，平衡狀態就完全確定了。</p>
+
+<div class="callout"><strong>🔗 跨章節連結：</strong>相律在<a href="../ch07_phase_rule_zh.html"><strong>第七章</strong></a>首次引入，在<a href="../ch10_binary_phase_diagrams_zh.html"><strong>第十章</strong></a>用於分析二元相圖的自由度。本章將相律擴展至含化學反應的系統，為 13.5 節的相穩定圖奠定基礎。</div>
+</section>
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<!-- 13.5 相穩定圖 -->
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<section id="s13-5"><h2>13.5 相穩定圖（Phase Stability Diagrams）</h2>
+
+<h3>Kellogg 圖——高溫腐蝕的相圖</h3>
+<p>相穩定圖（又稱 Kellogg 圖或優勢區圖，predominance area diagrams）是冶金熱力學中最重要的圖形工具之一——與 Ellingham 圖（第十二章）和 Pourbaix 圖（第十四章）並列為三大熱力學圖。它們在 $\log P_\text{O₂}$–$\log P_\text{SO₂}$（或 $\log P_\text{O₂}$–$\log P_\text{S₂}$）空間中標示出金屬、氧化物、硫化物、硫酸鹽各自的穩定區域。</p>
+<p>這對於理解高溫腐蝕至關重要：鍋爐管在含硫煙氣中的腐蝕、燃氣渦輪葉片在燃燒產物中的退化、以及銅/鎳冶煉中冰銅（matte）與爐渣的平衡，都可以用相穩定圖來分析。</p>
+
+<h3>相邊界的推導</h3>
+<p>以鎳的氧–硫系統為例，考慮以下反應和平衡條件：</p>
+
+<p><strong>Ni/NiO 邊界：</strong></p>
+<div class="eq">$$\text{Ni}(s) + \tfrac{1}{2}\text{O}_2(g) \rightleftharpoons \text{NiO}(s) \quad K_1 = \frac{1}{(P_{\text{O}_2}/P^\circ)^{1/2}}$$</div>
+<div class="eq">$$\Rightarrow \log P_{\text{O}_2} = -2\log K_1 \quad \text{（一條水平線，因為不涉及硫）}$$</div>
+
+<p><strong>Ni/NiS 邊界：</strong></p>
+<div class="eq">$$\text{Ni}(s) + \tfrac{1}{2}\text{S}_2(g) \rightleftharpoons \text{NiS}(s) \quad K_2 = \frac{1}{(P_{\text{S}_2}/P^\circ)^{1/2}}$$</div>
+<div class="eq">$$\Rightarrow \log P_{\text{S}_2} = -2\log K_2$$</div>
+
+<p><strong>NiO/NiSO₄ 邊界：</strong></p>
+<div class="eq">$$\text{NiO}(s) + \text{SO}_3(g) \rightleftharpoons \text{NiSO}_4(s)$$</div>
+<p>由於 $\text{SO}_3$ 與 $\text{O}_2$ 和 $\text{S}_2$ 通過 $\text{S}_2 + 3\text{O}_2 \rightleftharpoons 2\text{SO}_3$ 相關，邊界在 $\log P_{\text{O}_2}$–$\log P_{\text{SO}_2}$ 圖中是一條斜線。</p>
+
+<!-- DERIVATION: Phase stability diagram boundary line (Ni/NiO) -->
+<div class="derivation">
+<summary>📐 詳細推導：Ni/NiO 相邊界線</summary>
+<p><strong>給定反應：</strong></p>
+<div class="eq">$$\text{Ni}(s) + \tfrac{1}{2}\text{O}_2(g) \rightleftharpoons \text{NiO}(s)$$</div>
+<p>標準生成自由能（來自熱力學資料庫）：</p>
+<div class="eq">$$\Delta G_f^\circ(\text{NiO}) = -234,300 + 84.9\,T \ \text{J/mol} \quad (T \text{ in K})$$</div>
+
+<p><strong>步驟 1：寫出平衡常數。</strong></p>
+<div class="eq">$$K = \exp\left(-\frac{\Delta G^\circ}{RT}\right) = \frac{a_{\text{NiO}}}{a_{\text{Ni}} \cdot (P_{\text{O}_2}/P^\circ)^{1/2}}$$</div>
+<p>對於純固體 Ni 和 NiO：$a_{\text{Ni}} = 1$，$a_{\text{NiO}} = 1$。</p>
+
+<p><strong>步驟 2：求解 $P_{\text{O}_2}$。</strong></p>
+<div class="eq">$$K = \frac{1}{(P_{\text{O}_2}/P^\circ)^{1/2}} \quad \Rightarrow \quad \frac{P_{\text{O}_2}}{P^\circ} = \frac{1}{K^2}$$</div>
+
+<p><strong>步驟 3：取對數，得到邊界方程式。</strong></p>
+<div class="eq">$$\log_{10}\left(\frac{P_{\text{O}_2}}{P^\circ}\right) = -2\log_{10}K = \frac{2\Delta G^\circ}{RT\ln 10}$$</div>
+<div class="eq">$$\boxed{\log_{10} P_{\text{O}_2} = \frac{2\Delta G_f^\circ(\text{NiO})}{RT\ln 10}} \\tag{推導 13.2}$$</div>
+
+<p><strong>步驟 4：代入數值（以 1000 K 為例）。</strong></p>
+<div class="eq">$$\Delta G_f^\circ(1000\text{K}) = -234,300 + 84.9 \times 1000 = -149,400 \ \text{J/mol}$$</div>
+<div class="eq">$$\log_{10} P_{\text{O}_2} = \frac{2 \times (-149,400)}{8.314 \times 1000 \times \ln 10} = \frac{-298,800}{19,145} = -15.6$$</div>
+<p>因此在 1000 K 下，Ni/NiO 邊界是 $\log P_{\text{O}_2} = -15.6$ 的一條<strong>水平線</strong>。當 $\log P_{\text{O}_2} > -15.6$ 時 NiO 穩定；當 $\log P_{\text{O}_2} < -15.6$ 時 Ni 金屬穩定。</p>
+
+<p><strong>步驟 5：推廣至含硫化學位的情況。</strong>當系統中同時存在 O₂ 和 S₂ 時，NiO 與 NiSO₄ 之間的邊界由以下反應決定：</p>
+<div class="eq">$$\text{NiO}(s) + \tfrac{1}{2}\text{S}_2(g) + \tfrac{3}{2}\text{O}_2(g) \rightleftharpoons \text{NiSO}_4(s)$$</div>
+<div class="eq">$$K_3 = \frac{1}{(P_{\text{S}_2}/P^\circ)^{1/2} \cdot (P_{\text{O}_2}/P^\circ)^{3/2}}$$</div>
+<p>取對數後得到一條斜率為 $-3$ 的直線（在 $\log P_{\text{S}_2}$ vs $\log P_{\text{O}_2}$ 圖中）：</p>
+<div class="eq">$$\log P_{\text{O}_2} = -\frac{1}{3}\log P_{\text{S}_2} - \frac{2}{3}\log K_3$$</div>
+</div>
+
+<!-- Fig 13.6: Si-O-C equilibrium lines -->
+<div class="figure">
+<img src="../../../images/thermodynamics/ch13_pages/ch13_page_518_c.png" alt="Si-O-C系統的平衡線" loading="lazy">
+<figcaption><strong>圖 13.6</strong>（PDF p.517）— Si–O–C 系統的平衡線。圖中顯示了 Si/SiO₂、Si/SiC 及 SiO₂/SiC 之間的相邊界。每條線對應一個化學反應的平衡條件——類似於上述 Ni/NiO 推導，但涉及三個元素（Si、O、C）和三個凝態相。</figcaption>
+</div>
+
+<!-- Fig 13.7: Si melting effect on equilibrium -->
+<div class="figure">
+<img src="../../../images/thermodynamics/ch13_pages/ch13_page_522_c.png" alt="Si熔融對平衡的影響" loading="lazy">
+<figcaption><strong>圖 13.7</strong>（PDF p.521）— 矽的熔融對反應平衡的影響。矽在 1685 K 熔化，熔融導致 $\\Delta G^\\circ$ 曲線出現斜率變化（因為液態 Si 的 $\\Delta G_f^\\circ$ 與固態不同）。此圖說明了相變如何影響相穩定圖中的邊界位置——在 Kellogg 圖中表現為邊界線的彎折。</figcaption>
+</div>
+
+<div class="callout"><strong>💡 Kellogg 圖的使用方法：</strong>在給定溫度下，找到操作點的 $\log P_{\text{O}_2}$ 和 $\log P_{\text{SO}_2}$（由氣相組成決定）。該點落在哪個區域，就表示在那個氣氛下哪個凝聚相是穩定的。例如，如果操作點落在 NiO 區域，鎳金屬在該氣氛下會氧化——你需要增加還原性氣體（降低 $P_{\text{O}_2}$）來保護鎳。</div>
+
+<h3>金屬–氧–硫系統的典型特徵</h3>
+<table>
+<thead><tr><th>區域</th><th>$\log P_{\text{O}_2}$</th><th>$\log P_{\text{SO}_2}$（或 $\log P_{\text{S}_2}$）</th><th>穩定相</th></tr></thead>
+<tbody>
+<tr><td>低氧、低硫</td><td>很負（還原性）</td><td>很負</td><td>金屬</td></tr>
+<tr><td>中等氧、低硫</td><td>中等</td><td>低</td><td>氧化物</td></tr>
+<tr><td>低氧、中等硫</td><td>低</td><td>中等</td><td>硫化物</td></tr>
+<tr><td>高氧、高硫</td><td>較正（氧化性）</td><td>較高</td><td>硫酸鹽</td></tr>
+</tbody>
+</table>
+<p>這些圖在給定溫度下繪製——不同溫度對應不同的圖（因為平衡常數隨溫度變化）。</p>
+
+<h3>與 Ellingham 圖和 Pourbaix 圖的關係</h3>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li><strong>Ellingham 圖（Ch12）：</strong>$\Delta G^\circ$ vs $T$，每條線對應一個氧化反應。適合比較不同氧化物的相對穩定性，溫度是變數。</li>
+<li><strong>Kellogg 圖（Ch13.5）：</strong>$\log P_{\text{O}_2}$ vs $\log P_{\text{SO}_2}$（或 $\log P_{\text{S}_2}$），在固定溫度下。適合分析複雜氣氛中的腐蝕行為。</li>
+<li><strong>Pourbaix 圖（Ch14）：</strong>電位 vs pH，在水溶液中。Kellogg 圖可視為高溫、非水系統的對應物。</li>
+</ul>
+
+<!-- Fig 13.18: Stability diagram in log pO2-log aMg space -->
+<div class="figure">
+<img src="../../../images/thermodynamics/ch13_pages/ch13_page_539_c.png" alt="log pO2-log aMg空間中的穩定性圖" loading="lazy">
+<figcaption><strong>圖 13.18</strong>（PDF p.539）— MgO–Al₂O₃ 系統在 $\log P_{\text{O}_2}$–$\log a_\text{Mg}$ 空間中的相穩定圖。不同於簡單的金屬/氧化物/硫化物圖，此圖的縱軸使用鎂的活性而非硫分壓——因為 Al₂O₃ 和 MgO 競爭與 Mg 和 Al 反應。圖中顯示了 MgO、Al₂O₃ 和 MgAl₂O₄（尖晶石）各自的穩定區域。</figcaption>
+</div>
+
+<!-- Fig 13.19: Oxygen pressure effect on phase stability -->
+<div class="figure">
+<img src="../../../images/thermodynamics/ch13_pages/ch13_page_540_c.png" alt="氧壓對相穩定性的影響" loading="lazy">
+<figcaption><strong>圖 13.19</strong>（PDF p.540）— 氧分壓對 Fe–O 系統中相穩定性的詳細影響。圖中顯示 wüstite（Fe₁₋ₓO）的均勻性範圍如何隨 $P_{\text{O}_2}$ 變化——非化學計量相在 Kellogg 圖中表現為<strong>區域</strong>而非<strong>線</strong>。這是 13.8 節討論的可變組成相的圖形化表達。</figcaption>
+</div>
+
+<div class="callout"><strong>🔗 跨章節連結：</strong>Kellogg 圖直接繼承自<a href="../ch12_ellingham_diagrams_zh.html"><strong>第十二章</strong></a> Ellingham 圖的熱力學資料（$\\Delta G_f^\\circ$ 數值）。它與<a href="../ch11_reaction_equilibria_gas_zh.html"><strong>第十一章</strong></a>的氣相反應平衡共享相同的 $K$–$\\Delta G^\\circ$ 關係。第十四章的 Pourbaix 圖是 Kellogg 圖在水溶液體系中的對應物。</div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<!-- 13.6 含化合物的二元系統 -->
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<section id="s13-6"><h2>13.6 含化合物的二元系統（Binary Systems Containing Compounds）</h2>
+
+<h3>化合物的生成自由能與相圖</h3>
+<p>第十章討論了二元相圖的熱力學基礎——當液態和固態的自由能–組成（$G$–$x$）曲線相交時，通過公切線構造（common tangent construction）得到平衡相組成。當 A–B 系統中形成<strong>中間化合物</strong>（如 Fe₃C 在 Fe–C 系統、CaSiO₃ 在 CaO–SiO₂ 系統）時，$G$–$x$ 曲線在化合物組成處出現一個<strong>尖銳的凹陷</strong>（deep cusp）——因為化合物的自由能遠低於同組成的機械混合物。</p>
+
+<p>化合物的標準生成自由能：</p>
+<div class="eq">$$\Delta G_f^\circ(\text{A}_m\text{B}_n) = G^\circ(\text{A}_m\text{B}_n) - m\mu_\text{A}^\circ - n\mu_\text{B}^\circ \tag{13.6}$$</div>
+<p>如果 $\Delta G_f^\circ$ 很負，則化合物非常穩定——它在相圖上表現為一個<strong>線化合物（line compound）</strong>（熔點尖峰，幾乎沒有均勻性範圍）。如果 $\Delta G_f^\circ$ 不太負，化合物可能有一定程度的非化學計量（見 13.8 節）。</p>
+
+<h3>Fe–C 系統中的 Fe₃C</h3>
+<p>滲碳體（cementite，Fe₃C）是鋼鐵中最重要的化合物。它的生成自由能決定了碳在鐵中的固溶度極限（$\alpha$-Fe 中約 0.02 wt% C，$\gamma$-Fe 中約 2.1 wt% C）。Fe₃C 相對於石墨是<strong>亞穩的</strong>（metastable）——$\Delta G_f^\circ(\text{Fe}_3\text{C}) > \Delta G_f^\circ(\text{石墨} + 3\text{Fe})$ 在高溫下為正（石墨更穩定），但在低溫下動力學阻礙了石墨的生成，所以我們看到的是 Fe–Fe₃C 亞穩相圖。</p>
+
+<div class="callout"><strong>💡 化合物穩定性決定工藝窗口：</strong>灰口鑄鐵（碳以石墨片形式存在）和球墨鑄鐵（石墨球化）利用了石墨是穩定相的事實；白口鑄鐵（碳以 Fe₃C 形式存在）則是快速冷卻使系統凍結在亞穩的 Fe₃C 狀態。熱處理（石墨化退火）是熱力學驅動亞穩相轉變為穩定相的過程。</div>
+
+<h3>CaO–SiO₂ 系統中的矽酸鈣</h3>
+<p>煉鋼爐渣主要由 CaO 和 SiO₂ 組成。CaO–SiO₂ 系統形成多種化合物：CaSiO₃（矽灰石，wollastonite）、Ca₂SiO₄（正矽酸鈣，dicalcium silicate）、Ca₃SiO₅（矽酸三鈣，tricalcium silicate）。這些化合物的生成自由能決定了爐渣中各成分的活性——進而影響脫磷、脫硫反應的平衡。</p>
+<p>爐渣的鹼度通常定義為 $V = \%\text{CaO}/\%\text{SiO}_2$。高鹼度爐渣（$V > 2$）中 CaO 活性高——有利於脫磷（生成 Ca₃(PO₄)₂）和脫硫（生成 CaS）。</p>
+
+<!-- Fig 13.8: Binary phase diagram with negative deviation -->
+<div class="figure">
+<img src="../../../images/thermodynamics/ch13_pages/ch13_page_525_c.png" alt="具負偏離的二元相圖" loading="lazy">
+<figcaption><strong>圖 13.8</strong>（PDF p.525）— 具有負偏離理想性（$\\Omega < 0$，即 A–B 交互作用強於 A–A 和 B–B）的二元相圖。負偏離使液相和固相的 $G$–$x$ 曲線下凹更深，液相線和固相線之間出現<strong>中間化合物</strong>的穩定區域。比較<a href="../ch10_binary_phase_diagrams_zh.html"><strong>第十章</strong></a>中的理想溶液相圖，可見交互作用參數對相圖形貌的巨大影響。</figcaption>
+</div>
+
+<!-- Fig 13.9: G-x curves corresponding to Fig 13.8 -->
+<div class="figure">
+<img src="../../../images/thermodynamics/ch13_pages/ch13_page_526_c.png" alt="對應於圖13.8的G-x曲線" loading="lazy">
+<figcaption><strong>圖 13.9</strong>（PDF p.525）— 對應於圖 13.8 的 $G$–$x$ 曲線。在不同溫度（$T_1$、$T_2$、$T_3$）下，液相和固相的 $G$–$x$ 曲線相對位置發生變化。公切線構造（虛線）連接共存相的組成——這正是<a href="../ch10_binary_phase_diagrams_zh.html"><strong>第十章</strong></a>中相圖的熱力學起源。化合物相的 $G^\\circ$ 值遠低於機械混合物，因此在公切線構造中形成深的凹陷。</figcaption>
+</div>
+
+<!-- Fig 13.14: Mg-Si phase diagram -->
+<div class="figure">
+<img src="../../../images/thermodynamics/ch13_pages/ch13_page_533_c.png" alt="Mg-Si相圖" loading="lazy">
+<figcaption><strong>圖 13.14</strong>（PDF p.533）— Mg–Si 二元相圖。此系統形成一個穩定的中間化合物 Mg₂Si（熔點約 1085°C），在相圖中表現為尖銳的熔點峰。Mg₂Si 是鋁合金中重要的析出強化相——在 6xxx 系鋁合金（Al–Mg–Si）中，Mg₂Si 的析出提供了顯著的時效硬化效果。</figcaption>
+</div>
+
+<!-- Fig 13.15: ΔG for Mg2Si formation -->
+<div class="figure">
+<img src="../../../images/thermodynamics/ch13_pages/ch13_page_534_c.png" alt="Mg₂Si的生成ΔG" loading="lazy">
+<figcaption><strong>圖 13.15</strong>（PDF p.534）— Mg₂Si 的標準生成自由能 $\\Delta G_f^\\circ$ 隨溫度變化。$\\Delta G_f^\\circ$ 很負（約 −80 kJ/mol-atom），說明 Mg₂Si 是穩定的化合物——對應圖 13.14 中的尖銳熔點峰。</figcaption>
+</div>
+
+<!-- Fig 13.16: Si liquidus line calculation -->
+<div class="figure">
+<img src="../../../images/thermodynamics/ch13_pages/ch13_page_536_c.png" alt="Si液相線計算" loading="lazy">
+<figcaption><strong>圖 13.16</strong>（PDF p.535）— Si 在 Mg–Si 系統中的液相線計算。利用 Mg₂Si 的 $\\Delta G_f^\\circ$ 和液相溶液的熱力學模型，可以計算出不同溫度下與 Mg₂Si 平衡的液態組成——即相圖中的液相線。</figcaption>
+</div>
+
+<!-- Fig 13.17: MgO-Al2O3 phase diagram -->
+<div class="figure">
+<img src="../../../images/thermodynamics/ch13_pages/ch13_page_538_c.png" alt="MgO-Al₂O₃相圖" loading="lazy">
+<figcaption><strong>圖 13.17</strong>（PDF p.538）— MgO–Al₂O₃ 偽二元相圖。系統中存在一個三元化合物 MgAl₂O₄（尖晶石，spinel），熔點高達 2135°C。尖晶石是高溫耐火材料的重要成分，也是煉鋼爐渣中的常見礦物相。</figcaption>
+</div>
+
+<div class="callout"><strong>🔗 跨章節連結：</strong>二元相圖與 $G$–$x$ 曲線的對應關係詳見<a href="../ch10_binary_phase_diagrams_zh.html"><strong>第十章</strong></a>。本章的貢獻在於將化合物的 $\\Delta G_f^\\circ$ 正式引入 $G$–$x$ 曲線，從而將相圖計算從「定性」推向「定量」。</div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<!-- 13.7 相平衡的圖示 -->
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<section id="s13-7"><h2>13.7 相平衡的圖示（Graphical Representation of Phase Equilibria）</h2>
+
+<h3>整合 $G$–$x$ 曲線與反應平衡</h3>
+<p>第十章使用 $G$–$x$ 曲線和公切線構造來決定兩相平衡。當系統中還存在<strong>化學反應</strong>時（例如一個相可以分解為另外兩個相），我們需要同時考慮：</p>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li><strong>相平衡條件：</strong>每個成分在共存相中的化學位相等（$\mu_i^\alpha = \mu_i^\beta$）</li>
+<li><strong>化學反應平衡條件：</strong>$\sum \nu_i \mu_i = 0$（即 $\Delta G = 0$）</li>
+</ul>
+
+<h3>三元系統中的反應平衡圖</h3>
+<p>在三元系統（如金屬–氧–硫）中，我們可以繪製 Gibbs 三角圖（組成三角形），並在上面標示出反應平衡線——這些線將圖分為不同相穩定區域。對於凝態溶液系統，這與 13.5 節的 Kellogg 圖是等價的——只是變數從氣體分壓換成了凝態相的組成。</p>
+
+<p>公切線構造在含反應系統中的推廣：當一個相（如液態溶液）與兩個固相（如 AO 和 BO）平衡時，液態的 $G$–$x$ 曲線必須同時與兩個固相的 $G^\circ$ 值相切——這給出了液態的平衡組成範圍。</p>
+
+<div class="callout"><strong>💡 公切線構造是熱力學的「幾何直覺」。</strong>數學上等價於求解非線性聯立方程式；幾何上，你只需要畫一條直線同時切於兩條曲線。對於複雜的多相多反應系統，圖解法（在 Gaskell 時代）是發現解是否存在的第一道檢查——如果找不到公切線，就沒有平衡。</div>
+
+<!-- Fig 13.10: Phase diagram at T1 for 1 mole -->
+<div class="figure">
+<img src="../../../images/thermodynamics/ch13_pages/ch13_page_527_c.png" alt="T1溫度下1莫耳的相圖" loading="lazy">
+<figcaption><strong>圖 13.10</strong>（PDF p.526）— 在溫度 $T_1$ 下，1 莫耳總組成的 $G$–$x$ 圖。當系統總組成落在兩相區內時，平衡由公切線決定——液相和固相的組成由切點給出，各相的相對量由槓桿規則（lever rule）決定。此圖統一了<a href="../ch10_binary_phase_diagrams_zh.html"><strong>第十章</strong></a>的相圖熱力學與本章的反應平衡熱力學。</figcaption>
+</div>
+
+<!-- Fig 13.11: G-x curves at T2 and T3 -->
+<div class="figure">
+<img src="../../../images/thermodynamics/ch13_pages/ch13_page_530_c.png" alt="T2和T3溫度下的G-x曲線" loading="lazy">
+<figcaption><strong>圖 13.11</strong>（PDF p.529）— 在溫度 $T_2$ 和 $T_3$ 下的 $G$–$x$ 曲線。隨著溫度升高，液相 $G$–$x$ 曲線相對於固相曲線下降（因為液相的熵更高，$TS$ 項更大）。化合物的熔點對應於固態化合物的 $G^\\circ$ 值與液相 $G$–$x$ 曲線通過公切線構造首次可以共存時的溫度。</figcaption>
+</div>
+
+<!-- Fig 13.12: Phase diagram with nonstoichiometry -->
+<div class="figure">
+<img src="../../../images/thermodynamics/ch13_pages/ch13_page_532_c.png" alt="具非化學計量的相圖" loading="lazy">
+<figcaption><strong>圖 13.12</strong>（PDF p.531）— 具有非化學計量範圍的化合物相圖。與線化合物不同，此化合物（如 GaAs、Fe₁₋ₓO）在相圖中表現為一個狹窄但有限的均勻性範圍——固相區不是一條垂直線，而是一個區域。這直接關聯到 13.8 節的討論。</figcaption>
+</div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<!-- 13.8 可變組成氧化物相 -->
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<section id="s13-8"><h2>13.8 可變組成氧化物相（Formation of Oxide Phases of Variable Composition）</h2>
+
+<h3>非化學計量化合物——當道爾頓定律失效時</h3>
+<p>大多數氧化物不是嚴格的化學計量化合物。最著名的例子是<strong>wüstite（方鐵礦，Fe₁₋ₓO）</strong>——它在 570°C 以上穩定存在，但即使在理想配比下，它的組成也不是 FeO，而是 Fe₀.₉₅O 到 Fe₀.₈₄O（即 5–16% 的鐵空位）。這種非化學計量性來自<strong>點缺陷（point defects）</strong>——晶格中的空位、間隙原子或電子電洞。</p>
+
+<h3>Wüstite 的熱力學</h3>
+<p>Wüstite 相（Fe₁₋ₓO）的均勻性範圍（homogeneity range）從 $x \approx 0.05$（富鐵側）到 $x \approx 0.16$（富氧側）。氧分壓越高，鐵空位濃度越高（$x$ 越大）。</p>
+<p>Wüstite 的生成反應可寫為：</p>
+<div class="eq">$$(1-x)\text{Fe}(s) + \tfrac{1}{2}\text{O}_2(g) \rightleftharpoons \text{Fe}_{1-x}\text{O}(s)$$</div>
+<p>但因為 $x$ 隨 $P_{\text{O}_2}$ 變化，$\Delta G^\circ$ 不是常數——它是 $x$ 的函數。Wüstite 的吉布斯自由能隨組成變化：</p>
+<div class="eq">$$G(\text{Fe}_{1-x}\text{O}) = (1-x)\mu_\text{Fe} + x\mu_\text{O} + G_{\text{defect}}(x)$$</div>
+<p>其中 $G_{\text{defect}}(x)$ 來自鐵空位的生成焓和組態熵（configurational entropy）。</p>
+
+<h3>缺陷化學的熱力學語言</h3>
+<p>使用 Kröger–Vink 記號，鐵空位的生成反應為：</p>
+<div class="eq">$$\tfrac{1}{2}\text{O}_2(g) \rightleftharpoons \text{O}_\text{O}^\times + V_\text{Fe}'' + 2h^\bullet$$</div>
+<p>（一個氧分子進入晶格，佔據氧位置，同時生成一個帶雙負電荷的鐵空位和兩個電子電洞）。</p>
+<p>運用質量作用定律：</p>
+<div class="eq">$$K = \frac{[V_\text{Fe}'']\,[h^\bullet]^2}{P_{\text{O}_2}^{1/2}}$$</div>
+<p>由此得到鐵空位濃度（即 $x$）與 $P_{\text{O}_2}$ 的關係。實驗發現對於 wüstite，$x \propto P_{\text{O}_2}^{1/n}$，其中 $n \approx 5$–$6$——證明缺陷不是簡單的孤立空位，而是形成了<strong>缺陷團簇（defect clusters）</strong>。</p>
+
+<div class="callout"><strong>💡 非化學計量 = 可調控的材料性質：</strong>Wüstite 的催化活性、電導率、離子傳導率都取決於鐵空位濃度——也就是取決於合成時的氧分壓。這不是「不完美」——這是功能。固體氧化物燃料電池（SOFC）的電極材料、氧感測器中的氧化物電解質，都依賴於可控的非化學計量性。</div>
+
+<!-- Fig 13.21: Oxide phases of variable composition (wüstite) -->
+<div class="figure">
+<img src="../../../images/thermodynamics/ch13_pages/ch13_page_545_c.png" alt="可變組成氧化物相（wüstite）" loading="lazy">
+<figcaption><strong>圖 13.21</strong>（PDF p.544）— Fe–O 系統中 wüstite（Fe₁₋ₓO）的可變組成範圍。圖中顯示了在給定溫度下，wüstite 相的鐵/氧比如何隨氧分壓連續變化——從富鐵側（$x \\approx 0.05$，與 $\\gamma$-Fe 平衡）到富氧側（$x \\approx 0.16$，與 Fe₃O₄ 平衡）。此圖是固態化學中「非化學計量」概念的經典範例。</figcaption>
+</div>
+
+<h3>其他重要的非化學計量化合物</h3>
+<table>
+<thead><tr><th>化合物</th><th>均勻性範圍</th><th>主缺陷類型</th><th>應用</th></tr></thead>
+<tbody>
+<tr><td>Fe₁₋ₓO（wüstite）</td><td>$x = 0.05$–$0.16$</td><td>鐵空位 + 缺陷團簇</td><td>煉鋼中間產物、催化劑</td></tr>
+<tr><td>TiO₂₋ₓ</td><td>$x = 0$–$0.01$</td><td>氧空位 + Ti³⁺</td><td>光催化、氣體感測器</td></tr>
+<tr><td>CeO₂₋ₓ</td><td>$x = 0$–$0.3$</td><td>氧空位</td><td>SOFC 電解質、汽車觸媒</td></tr>
+<tr><td>YBa₂Cu₃O₇₋ₓ</td><td>$x = 0$–$1$</td><td>氧空位有序化</td><td>高溫超導體</td></tr>
+<tr><td>LiₓCoO₂</td><td>$x = 0$–$1$</td><td>鋰空位/間隙</td><td>鋰離子電池正極</td></tr>
+</tbody>
+</table>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<!-- 13.9 氣體在金屬中的溶解度 -->
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<section id="s13-9"><h2>13.9 氣體在金屬中的溶解度（Solubility of Gases in Metals）</h2>
+
+<h3>Sieverts 定律——平方根關係的由來</h3>
+<p>許多雙原子氣體（H₂、N₂、O₂）溶解在金屬中時，會<strong>解離為原子</strong>。以氫在鐵中的溶解為例：</p>
+<div class="eq">$$\tfrac{1}{2}\text{H}_2(g) \rightleftharpoons \underline{\text{H}}\text{（溶解在鐵中）}$$</div>
+<p>平衡常數：</p>
+<div class="eq">$$K = \frac{a_\text{H}}{(P_{\text{H}_2}/P^\circ)^{1/2}} \tag{13.7}$$</div>
+<p>在稀溶液範圍內（$a_\text{H} \approx [\%\text{H}]$，Henrian 標準態），得到<strong>Sieverts 定律</strong>：</p>
+<div class="eq">$$\boxed{[\%\text{H}] = K \cdot \sqrt{P_{\text{H}_2}/P^\circ}} \tag{13.8}$$</div>
+<p>溶解的氫濃度與氫氣分壓的<strong>平方根</strong>成正比——這是雙原子氣體解離溶解的熱力學印記。如果氣體以分子形式溶解（不解離），則會是線性關係（$[\%\text{X}] \propto P_{\text{X}_2}$）。</p>
+
+<!-- DERIVATION: Sieverts' law from equilibrium thermodynamics -->
+<div class="derivation">
+<summary>📐 推導：Sieverts 定律——從平衡熱力學到平方根關係</summary>
+<p><strong>步驟 1：寫出溶解反應。</strong>雙原子氣體 X₂ 在金屬 M 中的溶解涉及解離：</p>
+<div class="eq">$$\tfrac{1}{2}\text{X}_2(g) \rightleftharpoons \underline{\text{X}}\text{（溶解在 M 中）}$$</div>
+
+<p><strong>步驟 2：寫出平衡常數。</strong></p>
+<div class="eq">$$K = \frac{a_\text{X}}{(P_{\text{X}_2}/P^\circ)^{1/2}}$$</div>
+
+<p><strong>步驟 3：使用 Henrian 標準態（1 wt%）。</strong>在稀溶液範圍內，$a_\text{X} = f_\text{X} [\%\text{X}]$，且當 $[\%\text{X}] \to 0$ 時 $f_\text{X} \to 1$。因此：</p>
+<div class="eq">$$[\%%\text{X}] = K \cdot f_\text{X}^{-1} \cdot \sqrt{P_{\text{X}_2}/P^\circ}$$</div>
+
+<p><strong>步驟 4：在無限稀溶液極限下得到 Sieverts 定律。</strong>當 $f_\text{X} = 1$：</p>
+<div class="eq">$$\boxed{[\%\text{X}] = K \cdot \sqrt{P_{\text{X}_2}/P^\circ}} \tag{推導 13.3}$$</div>
+
+<p><strong>步驟 5：$K$ 的溫度依賴性。</strong>由 van't Hoff 方程式（<a href="../ch11_reaction_equilibria_gas_zh.html"><strong>第十一章</strong></a>）：</p>
+<div class="eq">$$\frac{d\ln K}{dT} = \frac{\Delta H^\circ}{RT^2}$$</div>
+<p>因此 $K$（以及溶解度）隨溫度變化——對於吸熱溶解（$\Delta H^\circ > 0$，如 H 在 Fe 中），溶解度隨溫度升高而增加；對於放熱溶解（$\Delta H^\circ < 0$，如 H 在 Pd 中），溶解度隨溫度升高而降低。</p>
+
+<p><strong>步驟 6：偏離 Sieverts 定律的情況。</strong></p>
+<ul style="font-size:13px;color:var(--t2);margin-left:18px">
+<li><strong>高濃度時：</strong>$f_\text{X} \neq 1$，需使用 Wagner 交互作用參數修正（見 13.10 節推導 13.4）</li>
+<li><strong>陷阱效應：</strong>晶格缺陷捕獲溶質原子，使表觀溶解度高於晶格溶解度</li>
+<li><strong>氫化物形成：</strong>在 Ti、Zr、Pd 等金屬中，高濃度下形成氫化物相——化學位不再隨濃度連續變化</li>
+</ul>
+</div>
+
+<div class="callout"><strong>💡 平方根關係的物理意義：</strong>氣相中的 H₂ 分子必須分裂成兩個 H 原子才能進入金屬晶格的間隙位置。分裂需要能量（鍵能的一半），但原子狀態的 H 可以與金屬原子形成化學鍵。淨效應由 $\Delta H^\circ$ 決定——對於吸氫金屬（如 Pd、Ti、Zr），$\Delta H^\circ$ 很負，溶解度極大。</div>
+
+<h3>氫在鋼中的溶解度——實際數據</h3>
+<p>對於液態鐵（1600°C）：</p>
+<div class="eq">$$\tfrac{1}{2}\text{H}_2(g) \rightleftharpoons \underline{\text{H}}\text{（1 wt% 在 Fe 液中）} \quad \Delta G^\circ = 36,480 + 30.46\,T\ \text{J/mol}$$</div>
+<p>在 1873 K：</p>
+<div class="eq">$$\Delta G^\circ = 36,480 + 30.46 \times 1873 = 93,540\ \text{J/mol}$$</div>
+<div class="eq">$$K = \exp\left(-\frac{93,540}{8.314 \times 1873}\right) = 2.47 \times 10^{-3}$$</div>
+<p>在 $P_{\text{H}_2} = 1\ \text{atm}$ 下：$[\%\text{H}] = 2.47 \times 10^{-3} \times \sqrt{1} \approx 0.0025\ \text{wt%}$（即 25 ppm）。這看起來很少——但在鋼的凝固過程中，氫的溶解度急劇下降（固態中更低），導致氫氣析出形成<strong>氫致裂紋（hydrogen-induced cracking）</strong>——這是高強度鋼焊接中最頭痛的問題之一。</p>
+
+<h3>氮在鋼中的溶解度</h3>
+<p>氮在鐵中的溶解與氫類似：</p>
+<div class="eq">$$\tfrac{1}{2}\text{N}_2(g) \rightleftharpoons \underline{\text{N}}\text{（1 wt% 在 Fe 液中）} \quad \Delta G^\circ = 3,600 + 23.89\,T\ \text{J/mol}$$</div>
+<p>在 1873 K、$P_{\text{N}_2} = 1\ \text{atm}$ 下：$[\%\text{N}] \approx 0.045\ \text{wt%}$（450 ppm）。氮在鋼中遠比氫更可溶——因為 N 原子與 Fe 的化學交互作用更強。氮可以是有益的（提高強度、穩定沃斯田鐵——如不鏽鋼中）也可以是有害的（導致時效脆化）。</p>
+
+<h3>Sieverts 定律的偏離</h3>
+<p>在較高溶質濃度下，Sieverts 定律可能偏離：</p>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li><strong>活性係數效應：</strong>$f_\text{H} \neq 1$，特別是在有其他溶質存在時（見 13.10 節）</li>
+<li><strong>陷阱效應（trapping）：</strong>氫原子被晶格缺陷（差排、空位、晶界）捕獲——有效溶解度大於晶格溶解度</li>
+<li><strong>氫化物形成：</strong>對於 Ti、Zr、Pd 等金屬，氫在高濃度下形成氫化物相——完全偏離 Sieverts 定律</li>
+</ul>
+<div class="callout-warn"><strong>⚡ 氫脆是材料失效中最危險的模式之一。</strong>它沒有預警——高強度螺栓可能在遠低於降伏應力的負載下突然斷裂。熱力學告訴你氫<strong>會</strong>進入金屬，動力學告訴你它需要多長時間擴散到裂紋尖端。第十三章的 Sieverts 定律是氫脆分析的起點。</div>
+
+<h3>氧在液態銅中的溶解度——另一範例</h3>
+<p>與鐵不同，液態銅中氧的溶解度很高：</p>
+<div class="eq">$$\tfrac{1}{2}\text{O}_2(g) \rightleftharpoons \underline{\text{O}}\text{（1 wt% 在 Cu 液中）} \quad \Delta G^\circ = -85,350 + 18.54\,T\ \text{J/mol}$$</div>
+<p>在 1373 K（1100°C）下 $\Delta G^\circ$ 為負——氧自發溶解於銅。這在銅的火法精煉中至關重要：粗銅中的雜質（Fe、Zn、Sn 等）被吹入的空氣中的氧氧化進入爐渣，而銅本身也被部分氧化。最後階段用「插木還原」（poling）——利用木材乾餾產生的還原性氣體將溶解的 Cu₂O 還原回金屬銅。</p>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<!-- 13.10 含多種稀溶質的溶液 -->
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<section id="s13-10"><h2>13.10 含多種稀溶質的溶液（Solutions Containing Several Dilute Solutes）</h2>
+
+<h3>Wagner 交互作用參數——多溶質系統中的活性係數</h3>
+<p>在第九章中，活性係數 $\gamma_i$（或 $f_i$）是針對<strong>二元</strong>溶液（溶劑 A + 溶質 i）定義的。但實際的鋼含有十幾種元素——C、Mn、Si、P、S、Cr、Ni、Al、O、N 等——它們之間的交互作用會顯著改變彼此的活性係數。</p>
+<p>Carl Wagner（1952 年）提出了一個優雅的解決方案：在稀溶液極限下，活性係數的對數可以<strong>線性疊加</strong>各溶質的貢獻：</p>
+<div class="eq">$$\boxed{\log f_i = \sum_{j} e_i^j\,[\%j]} \tag{13.9}$$</div>
+<p>這就是<strong>Wagner 交互作用參數公式</strong>。其中：</p>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li>$f_i$：溶質 $i$ 的 Henrian 活性係數（1 wt% 標準態）</li>
+<li>$e_i^j$：<strong>交互作用參數</strong>（interaction parameter）——溶質 $j$ 對溶質 $i$ 的活性係數的影響</li>
+<li>$[\%j]$：溶質 $j$ 的重量百分濃度</li>
+<li>總和包括所有溶質（包括 $i$ 自身：$e_i^i$ 是自身交互作用參數）</li>
+</ul>
+
+<h3>交互作用參數的物理意義</h3>
+<table>
+<thead><tr><th>$e_i^j$ 的符號</th><th>物理意義</th><th>範例</th></tr></thead>
+<tbody>
+<tr><td>$e_i^j > 0$（正）</td><td>$j$ 增加 $i$ 的活性係數 → $i$ 更「不舒適」在溶液中 → $i$ 更容易逸出（蒸氣壓增高、更容易反應）</td><td>$e_\text{O}^\text{C} > 0$：碳增加氧的活性 → 碳和氧更容易反應生成 CO</td></tr>
+<tr><td>$e_i^j < 0$（負）</td><td>$j$ 降低 $i$ 的活性係數 → $i$ 更「舒適」在溶液中 → $i$ 更穩定、活性更低</td><td>$e_\text{O}^\text{Al} < 0$：鋁降低氧的活性 → 這是鋁脫氧的熱力學基礎</td></tr>
+<tr><td>$e_i^j \approx 0$</td><td>$j$ 對 $i$ 幾乎無影響</td><td>$e_\text{C}^\text{Cu} \approx 0$（銅與碳交互作用很弱）</td></tr>
+</tbody>
+</table>
+
+<p>交互作用參數是溫度的函數，通常在 1600°C（1873 K）下報告。它們從實驗測定——測量三元（或更多元）合金中溶質的蒸氣壓或化學位。</p>
+
+<div class="callout"><strong>💡 Wagner 模型是一階微擾展開。</strong>想像 $f_i$ 是各溶質濃度 $[\%j]$ 的函數。在 $[\%j] \to 0$ 附近做泰勒展開：$\ln f_i = \ln f_i(0) + \sum_j (\partial \ln f_i / \partial [\%j]) \cdot [\%j] + \cdots$。由於 $f_i(0) = 1$，$\ln f_i(0) = 0$。保留一階項即得 Wagner 公式。當溶質濃度很高時（> 幾 wt%），可能需要二階交互作用參數 $r_i^j$。</div>
+
+<!-- DERIVATION: Wagner interaction parameter formalism -->
+<div class="derivation">
+<summary>📐 推導：Wagner 交互作用參數公式</summary>
+<p><strong>步驟 1：將活性係數視為組成的函數。</strong>在多溶質系統中，溶質 $i$ 的 Henrian 活性係數 $f_i$ 取決於所有溶質的濃度：$f_i = f_i([\%1], [\%2], \ldots, [\%n])$。</p>
+
+<p><strong>步驟 2：在無限稀溶液附近做泰勒展開。</strong></p>
+<div class="eq">$$\ln f_i = \ln f_i(0) + \sum_{j=1}^{n} \left(\frac{\partial \ln f_i}{\partial [\%j]}\right)_{[\%k] \to 0} \cdot [\%j] + \frac{1}{2}\sum_{j,k} \left(\frac{\partial^2 \ln f_i}{\partial [\%j]\partial [\%k]}\right) [\%j][\%k] + \cdots$$</div>
+
+<p><strong>步驟 3：利用 $f_i(0) = 1$ 並定義一階交互作用參數。</strong></p>
+<div class="eq">$$e_i^j \equiv \left(\frac{\partial \log_{10} f_i}{\partial [\%j]}\right)_{[\%k] \to 0}$$</div>
+<p>（注意：$e_i^j$ 使用以 10 為底的對數，而非自然對數。兩者之間的轉換：$\partial \ln f_i / \partial [\%j] = (\ln 10) \cdot e_i^j \approx 2.303\\,e_i^j$。）</p>
+
+<p><strong>步驟 4：截斷至一階項，得到 Wagner 公式。</strong></p>
+<div class="eq">$$\boxed{\log_{10} f_i = \sum_{j} e_i^j\,[\%j]} \tag{推導 13.4}$$</div>
+
+<p><strong>步驟 5：交互作用參數的熱力學意義。</strong>由 Gibbs–Duhem 關係可證明交互作用參數之間存在倒數關係（reciprocity relation）：</p>
+<div class="eq">$$e_i^j = e_j^i \quad \\text{（在以莫耳分率為基準時嚴格成立；以 wt% 為基準時需修正因子）}$$</div>
+<p>修正關係為：$e_i^j M_j \approx e_j^i M_i$，其中 $M_i$、$M_j$ 是分子量。</p>
+
+<p><strong>步驟 6：高階修正。</strong>當溶質濃度超過 ~1 wt% 時，需引入二階交互作用參數 $r_i^j$ 和 $r_i^{j,k}$：</p>
+<div class="eq">$$\log f_i = \sum_j e_i^j [\%j] + \sum_j r_i^j [\%j]^2 + \sum_{j<k} r_i^{j,k} [\%j][\%k] + \cdots$$</div>
+</div>
+
+<h3>關鍵的煉鋼交互作用參數（1600°C）</h3>
+<table>
+<thead><tr><th>$i$</th><th>$j$</th><th>$e_i^j$</th><th>冶金意義</th></tr></thead>
+<tbody>
+<tr><td>O</td><td>Al</td><td>$-3.9$（極負）</td><td>鋁是最強的脫氧劑——Al 極大降低 O 的活性</td></tr>
+<tr><td>O</td><td>Si</td><td>$-0.14$</td><td>矽是常用脫氧劑（Si 脫氧 → SiO₂）</td></tr>
+<tr><td>O</td><td>C</td><td>$-0.45$</td><td>碳也降低氧的活性（真空脫碳的基礎）</td></tr>
+<tr><td>O</td><td>Mn</td><td>$-0.02$</td><td>錳的脫氧能力較弱</td></tr>
+<tr><td>O</td><td>Cr</td><td>$-0.04$</td><td>鉻略微降低氧的活性</td></tr>
+<tr><td>S</td><td>Mn</td><td>$-0.025$</td><td>錳降低硫的活性——MnS 析出，避免 FeS 熱脆</td></tr>
+<tr><td>C</td><td>Si</td><td>$+0.08$</td><td>矽增加碳的活性（促進石墨化）</td></tr>
+<tr><td>C</td><td>Mn</td><td>$-0.012$</td><td>錳略微降低碳的活性</td></tr>
+<tr><td>N</td><td>Al</td><td>$-0.058$</td><td>鋁降低氮的活性——AlN 析出細化晶粒</td></tr>
+</tbody>
+</table>
+
+<div class="callout-warn"><strong>⚡ 交互作用參數的實用性：</strong>如果你知道 $e_\text{O}^\text{Al} = -3.9$，你可以計算加入 0.05 wt% Al 後氧的活性係數：$\log f_\text{O} = -3.9 \times 0.05 = -0.195$，$f_\text{O} \approx 0.64$。這意味著鋁將氧的活性降低了 36%——這就是為什麼只需很少的鋁就能將鋼中的溶解氧從 ~500 ppm 降到 < 10 ppm。</div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<!-- 數值範例 -->
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<section id="num-ex"><h2>🧮 數值範例：煉鋼脫氧計算</h2>
+
+<h3>範例 1：鋁脫氧平衡</h3>
+<p><strong>問題：</strong>在 1600°C 下，鋼液中含 0.05 wt% Al。假設 $P_{\text{CO}} = 1\ \text{atm}$ 且鋼中不含碳，計算平衡時鋼液中的氧含量。</p>
+
+<p><strong>脫氧反應：</strong></p>
+<div class="eq">$$2\underline{\text{Al}} + 3\underline{\text{O}} \rightleftharpoons \text{Al}_2\text{O}_3(s)$$</div>
+
+<p><strong>熱力學數據：</strong></p>
+<div class="eq">$$\Delta G^\circ = -1,202,000 + 386.3\,T\ \text{J/mol}$$</div>
+<p>在 1873 K：</p>
+<div class="eq">$$\Delta G^\circ = -1,202,000 + 386.3 \times 1873 = -478,440\ \text{J/mol}$$</div>
+<div class="eq">$$K = \exp\left(\frac{478,440}{8.314 \times 1873}\right) = \exp(30.72) = 2.19 \times 10^{13}$$</div>
+
+<p><strong>平衡常數（純 Al₂O₃ 活性 = 1）：</strong></p>
+<div class="eq">$$K = \frac{1}{a_\text{Al}^2 \cdot a_\text{O}^3} = \frac{1}{(f_\text{Al}[\%\text{Al}])^2 \cdot (f_\text{O}[\%\text{O}])^3}$$</div>
+
+<p><strong>使用 Wagner 交互作用參數計算活性係數：</strong></p>
+<p>對於 Al：$\log f_\text{Al} = e_\text{Al}^\text{Al}[\%\text{Al}] + e_\text{Al}^\text{O}[\%\text{O}]$。已知 $e_\text{Al}^\text{Al} \approx 0.045$，$e_\text{Al}^\text{O} \approx -6.6$。</p>
+<p>對於 O：$\log f_\text{O} = e_\text{O}^\text{O}[\%\text{O}] + e_\text{O}^\text{Al}[\%\text{Al}]$。已知 $e_\text{O}^\text{O} \approx -0.20$，$e_\text{O}^\text{Al} = -3.9$。</p>
+
+<p>由於 $[\%\text{O}]$ 很小（預期 < 0.01），氧對活性係數的貢獻可以忽略：</p>
+<div class="eq">$$\log f_\text{Al} \approx 0.045 \times 0.05 = 0.00225,\quad f_\text{Al} \approx 1.005$$</div>
+<div class="eq">$$\log f_\text{O} \approx -3.9 \times 0.05 = -0.195,\quad f_\text{O} \approx 0.638$$</div>
+
+<p><strong>求解 $[\%\text{O}]$：</strong></p>
+<div class="eq">$$2.19 \times 10^{13} = \frac{1}{(1.005 \times 0.05)^2 \cdot (0.638 \times [\%\text{O}])^3}$$</div>
+<div class="eq">$$(1.005 \times 0.05)^2 = 0.002525$$</div>
+<div class="eq">$$(0.638 \times [\%\text{O}])^3 = \frac{1}{2.19 \times 10^{13} \times 0.002525} = 1.808 \times 10^{-11}$$</div>
+<div class="eq">$$0.638 \times [\%\text{O}] = (1.808 \times 10^{-11})^{1/3} = 2.62 \times 10^{-4}$$</div>
+<div class="eq">$$[\%\text{O}] = \frac{2.62 \times 10^{-4}}{0.638} = 4.11 \times 10^{-4}\ \text{wt%} \approx 4\ \text{ppm}$$</div>
+
+<p><strong>結論：</strong>加入 0.05 wt% Al 可以將鋼液中的氧含量從 ~500 ppm 降到 ~4 ppm——這就是鋁是「最強脫氧劑」的定量證明。注意鋁將 $f_\text{O}$ 降到 0.638（即降低氧的活性）是達成如此低氧濃度的關鍵——如果忽略交互作用參數（即假設 $f_\text{O} = 1$），計算出的 $[\%\text{O}]$ 為 2.6 ppm——低估了約 35%。</p>
+
+<div class="callout"><strong>💡 為什鋁脫氧這麼有效？</strong>三個原因：（1）Al₂O₃ 的生成自由能極負（$\Delta G^\circ \ll 0$，$K$ 極大）；（2）$e_\text{O}^\text{Al} = -3.9$——鋁大幅降低氧的活性，使殘留的氧「不容易反應」；（3）Al₂O₃ 的熔點極高（2054°C），在鋼液中以固體顆粒形式析出，容易上浮進入爐渣。</div>
+
+<h3>範例 2：碳脫氧（真空脫碳）</h3>
+<p><strong>問題：</strong>在 1600°C、$P_{\text{CO}} = 0.01\ \text{atm}$（真空條件）下，鋼液中 $[\%\text{C}] = 0.10$。計算平衡氧含量。</p>
+
+<p><strong>反應：</strong></p>
+<div class="eq">$$\underline{\text{C}} + \underline{\text{O}} \rightleftharpoons \text{CO}(g)$$</div>
+<p>$\Delta G^\circ = -22,200 - 38.34\,T\ \text{J/mol}$（使用 1 wt% 標準態）</p>
+<p>在 1873 K：$\Delta G^\circ = -22,200 - 38.34 \times 1873 = -94,010\ \text{J/mol}$</p>
+<div class="eq">$$K = \exp\left(\frac{94,010}{8.314 \times 1873}\right) = \exp(6.04) = 419$$</div>
+
+<p><strong>平衡常數：</strong></p>
+<div class="eq">$$K = \frac{P_{\text{CO}}/P^\circ}{f_\text{C}[\%\text{C}] \cdot f_\text{O}[\%\text{O}]}$$</div>
+<div class="eq">$$[\%\text{C}] \cdot [\%\text{O}] = \frac{P_{\text{CO}}/P^\circ}{K \cdot f_\text{C} \cdot f_\text{O}} \approx \frac{0.01}{419 \times 1 \times 1} = 2.39 \times 10^{-5}$$</div>
+<p>（忽略交互作用參數作為初步估計。如需更精確，可使用 $e_\text{C}^\text{C}$、$e_\text{O}^\text{O}$、$e_\text{C}^\text{O}$、$e_\text{O}^\text{C}$ 進行迭代。）</p>
+<p>$[\%\text{O}] = 2.39 \times 10^{-5} / 0.10 = 2.39 \times 10^{-4}\ \text{wt%} \approx 2.4\ \text{ppm}$。</p>
+
+<p>這說明<strong>真空脫碳</strong>的威力：只需將 CO 分壓降到 0.01 atm，碳就可以將氧降到極低水平——在真空感應熔煉（VIM）和真空氧氣脫碳（VOD）製程中用於生產超低碳鋼和超低氧鋼。</p>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<!-- 本章摘要 -->
+<!-- ═══════════════════════════════════════════════════════════════════ -->
+<section id="summary"><h2>本章摘要</h2>
+<ol style="font-size:14px;color:var(--t2);margin-left:18px">
+<li><strong>凝態溶液中的反應平衡：</strong>$K = \prod (a_i)^{\nu_i}$。活性 $a_i = \gamma_i x_i$（Raoultian）或 $a_i = f_i [\%i]$（Henrian, 1 wt%）。平衡組成由 $K$ 和活性–組成關係聯立求解。</li>
+<li><strong>標準態選擇：</strong>Raoultian（純物質參考）適合溶劑/高濃度成分；Henrian 1 wt%（無限稀溶液參考）是鋼鐵冶金的標準。標準態之間可以轉換，$K$ 的數值隨之改變但描述相同的物理平衡。</li>
+<li><strong>Gibbs 相律（含反應）：</strong>$F = C - P + 2$，其中 $C = N - R$（$N$ = 物種數，$R$ = 獨立反應數）。每個化學反應減少一個自由度。Duhem 定理：封閉系統（已知初始總組成）的平衡由 $T$ 和 $P$ 兩個變數完全確定。</li>
+<li><strong>相穩定圖（Kellogg 圖）：</strong>在 $\log P_{\text{O}_2}$–$\log P_{\text{SO}_2}$ 空間中標示金屬、氧化物、硫化物、硫酸鹽的穩定區域。用於分析高溫腐蝕和冶煉氣氛。與 Ellingham 圖（Ch12）和 Pourbaix 圖（Ch14）並列為三大熱力學圖。</li>
+<li><strong>含化合物的二元系統：</strong>化合物的 $\Delta G_f^\circ$ 決定 $G$–$x$ 曲線的凹陷深度 → 決定相圖中化合物的熔點和均勻性範圍。Fe₃C（滲碳體）是亞穩相，石墨是穩定相——這決定了鑄鐵的微觀組織。</li>
+<li><strong>非化學計量化合物：</strong>Wüstite（Fe₁₋ₓO）等氧化物的組成在一定範圍內可變。缺陷化學（空位、間隙原子）決定非化學計量性。$x$ 隨 $P_{\text{O}_2}$ 變化——可用於調控材料的功能性質（催化、離子傳導）。</li>
+<li><strong>Sieverts 定律：</strong>雙原子氣體在金屬中的溶解度與氣體分壓的平方根成正比：$[\%\text{X}] = K\sqrt{P_{\text{X}_2}}$。來自氣體分子解離為原子後溶解的熱力學。氫在鋼中的溶解度 ∼25 ppm（1600°C, 1 atm H₂）→ 凝固時析出導致氫致裂紋。</li>
+<li><strong>Wagner 交互作用參數：</strong>多溶質系統中 $\log f_i = \sum_j e_i^j [\%j]$。$e_i^j > 0$ → $j$ 增加 $i$ 的活性（$i$ 更易逸出）；$e_i^j < 0$ → $j$ 降低 $i$ 的活性（$i$ 更穩定）。$e_\text{O}^\text{Al} = -3.9$ 是鋁脫氧的熱力學核心——只需 0.05 wt% Al 即可將氧從 ~500 ppm 降至 ~4 ppm。</li>
+<li><strong>本章在全書中的位置：</strong>Ch9（溶液熱力學）+ Ch10（相圖）+ Ch11–12（反應平衡）→ Ch13（凝態溶液反應平衡）。這是 Gaskell 全書的頂峰——將前三部分的知識融為一體，應用於真實的材料製程。</li>
+</ol>
+
+<table>
+<thead><tr><th>章節</th><th>核心方程式</th><th>關鍵物理量</th><th>應用領域</th></tr></thead>
+<tbody>
+<tr><td>13.1–13.2</td><td>$K = \prod (a_i)^{\nu_i}$</td><td>$a_i$, $\gamma_i$, $f_i$</td><td>所有凝態溶液反應</td></tr>
+<tr><td>13.3</td><td>$a_i^\text{H} / a_i^\text{R}$ 轉換式</td><td>$\gamma_i^\circ$, 標準態選擇</td><td>鋼鐵冶金、非鐵冶金</td></tr>
+<tr><td>13.4</td><td>$F = C - P + 2$, $C = N - R$</td><td>自由度、獨立組分</td><td>系統自由度分析</td></tr>
+<tr><td>13.5</td><td>$K = f(P_{\text{O}_2}, P_{\text{SO}_2})$</td><td>$\log P_{\text{O}_2}$, $\log P_{\text{SO}_2}$</td><td>高溫腐蝕、焙燒、熔煉</td></tr>
+<tr><td>13.6–13.7</td><td>$\Delta G_f^\circ$、公切線構造</td><td>$G$–$x$ 曲線</td><td>相圖計算、爐渣設計</td></tr>
+<tr><td>13.8</td><td>$G(x)$ 缺陷模型</td><td>$x$, $P_{\text{O}_2}$</td><td>非化學計量氧化物</td></tr>
+<tr><td>13.9</td><td>$[\%\text{X}] = K\sqrt{P_{\text{X}_2}}$</td><td>$K$, $P_{\text{X}_2}$</td><td>氫脆、氮化、氧化</td></tr>
+<tr><td>13.10</td><td>$\log f_i = \sum e_i^j [\%j]$</td><td>$e_i^j$</td><td>脫氧、脫硫、合金設計</td></tr>
+</tbody>
+</table>
+
+<div class="callout"><strong>📖 跨章節連結：</strong>
+<ul style="font-size:13px;margin-left:14px;margin-top:6px">
+<li><strong>第九章（溶液的行為）：</strong>Raoult/Henry 定律、活性 $a_i$、活性係數 $\gamma_i$、Gibbs–Duhem 方程式——Ch13 的語言基礎。</li>
+<li><strong>第十章（二元相圖）：</strong>$G$–$x$ 曲線、公切線構造——Ch13.6–13.7 用於含化合物的相圖分析。</li>
+<li><strong>第十一章（涉及氣體的反應）：</strong>$K$、$\Delta G^\circ = -RT\ln K$、van't Hoff——Ch13 沿用所有這些工具，只是在 $K$ 中加入活性項。</li>
+<li><strong>第十二章（Ellingham 圖）：</strong>純凝態相的氧化還原——Ch13 是 Ch12 的推廣，將純相擴展到凝態溶液。</li>
+<li><strong>第十四章（Pourbaix 圖）：</strong>電化學平衡圖——Ch13.5 的 Kellogg 圖是 Pourbaix 圖的高溫非水對應物。</li>
+</ul></div>
+</section>
+
+</main>
+<script>
+function toggleTheme(){const h=document.documentElement;const n=h.getAttribute('data-theme')==='light'?'dark':'light';h.setAttribute('data-theme',n);localStorage.setItem('theme',n);document.getElementById('tl').textContent=n==='dark'?'淺色模式':'深色模式';}
+const s=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',s);if(s==='dark')document.getElementById('tl').textContent='淺色模式';
+const secs=document.querySelectorAll('section[id]');const navs=document.querySelectorAll('.sn a');window.addEventListener('scroll',()=>{let c='';secs.forEach(s=>{if(window.scrollY>=s.offsetTop-80)c=s.getAttribute('id');});navs.forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+c);});});
+</script>
+</body>
+</html>

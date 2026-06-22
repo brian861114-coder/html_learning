@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>第十章：吉布斯自由能–組成圖與二元系統相圖 — 材料熱力學</title>
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']],tags:'ams'},options:{ignoreHtmlClass:'no-math'}};</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+:root{--bg:#fff;--b2:#F5F5F7;--b3:#E8F0FE;--tx:#1D1D1F;--t2:#1D1D1F;--ac:#007AFF;--bd:#D2D2D7;--sh:0 2px 8px rgba(0,0,0,.08);--fbd:#E5E5EA;--wbg:#FFF9F0;--wbd:#FFB340;--wtx:#B8700A;--nw:260px}
+[data-theme="dark"]{--bg:#1C1C1E;--b2:#2C2C2E;--b3:#1A2332;--tx:#F5F5F7;--t2:#A1A1A6;--ac:#0A84FF;--bd:#48484A;--fbd:#3A3A3C;--wbg:#2C2416;--wbd:#8B6914;--wtx:#FFB340}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth;scroll-padding-top:16px}
+body{font-family:-apple-system,BlinkMacSystemFont,'Noto Sans TC','Microsoft JhengHei',sans-serif;background:var(--b2);color:var(--tx);line-height:1.9;display:flex;min-height:100vh}
+.sidebar{position:fixed;top:0;left:0;width:var(--nw);height:100vh;background:var(--bg);border-right:1px solid var(--bd);overflow-y:auto;z-index:100;padding:20px 16px;display:flex;flex-direction:column}
+.sh{margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--fbd)}.sh h2{font-size:14px;font-weight:600;color:var(--ac)}.sh .bk{font-size:11px;color:var(--t2)}
+.sn{flex:1}.sn ul{list-style:none}.sn a{display:block;padding:4px 10px;font-size:11px;color:var(--t2);text-decoration:none;border-radius:5px;transition:.12s}.sn a:hover{background:var(--b3);color:var(--ac)}.sn a.active{background:var(--b3);color:var(--ac);font-weight:500}.sn .ns{font-weight:600;font-size:12px;color:var(--tx);margin-top:10px;padding:2px 10px}.sn .nsub a{padding-left:20px;font-size:10px}
+.st{margin-top:auto;padding-top:12px;border-top:1px solid var(--fbd)}.st button{width:100%;padding:6px;border:1px solid var(--bd);border-radius:6px;background:var(--b2);color:var(--tx);cursor:pointer;font-size:12px}
+.main{margin-left:var(--nw);flex:1;max-width:1050px;padding:32px 40px 80px}
+.header{margin-bottom:32px;padding-bottom:20px;border-bottom:2px solid var(--ac)}.header .cl{font-size:12px;font-weight:600;color:var(--ac);letter-spacing:1px}.header h1{font-size:28px;font-weight:700;margin:6px 0}.header .meta{font-size:13px;color:var(--t2)}
+section{margin-bottom:44px}h2{font-size:20px;font-weight:700;color:var(--ac);margin-bottom:14px;padding-bottom:6px;border-bottom:1px solid var(--bd)}h3{font-size:16px;font-weight:600;color:var(--tx);margin:24px 0 10px}h4{font-size:14px;font-weight:600;color:var(--t2);margin:18px 0 6px}
+p{font-size:14px;color:var(--t2);margin-bottom:12px}strong{font-weight:600;color:var(--tx)}
+.eq{text-align:center;margin:16px 0;font-size:15px}
+.figure{margin:24px 0;text-align:center}.figure img{max-width:100%;border-radius:8px;box-shadow:var(--sh);cursor:pointer}.figure img:hover{transform:scale(1.01)}.figure figcaption{margin-top:8px;font-size:12px;color:var(--t2)}
+.callout{background:var(--b3);border:1px solid var(--fbd);border-radius:8px;padding:14px 18px;margin:16px 0;font-size:13px}.callout strong{color:var(--ac)}
+.callout-warn{background:var(--wbg);border:1px solid var(--wbd);border-radius:8px;padding:14px 18px;margin:16px 0;font-size:13px}.callout-warn strong{color:var(--wtx)}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}thead th{background:var(--b3);padding:8px 12px;font-size:12px;font-weight:600;border-bottom:2px solid var(--bd)}tbody td{padding:8px 12px;border-bottom:1px solid var(--fbd)}tbody tr:nth-child(even){background:var(--b2)}
+@media(max-width:768px){.sidebar{transform:translateX(-100%);transition:.3s}.sidebar.open{transform:translateX(0)}.main{margin-left:0;padding:20px 16px 60px}}
+@media print{.sidebar{display:none}.main{margin-left:0;max-width:100%;padding:0}}
+</style>
+<script src="../../../reading-preferences.js" defer></script></head>
+<body><a class="portal-home-link" href="../../../index.html">返回學習中心</a><style id="portal-home-link-style">.portal-home-link{position:fixed;top:16px;right:16px;z-index:1000;display:inline-flex;align-items:center;min-height:36px;padding:7px 11px;border:1px solid #cbd5e1;border-radius:8px;background:#fff;color:#1d4ed8;font:600 13px/1.2 -apple-system,BlinkMacSystemFont,"Noto Sans TC","Microsoft JhengHei",sans-serif;text-decoration:none;box-shadow:0 2px 10px rgba(15,23,42,.08)}.portal-home-link:hover{background:#eff6ff}.portal-home-link:focus-visible{outline:3px solid rgba(37,99,235,.35);outline-offset:2px}@media(max-width:768px){.portal-home-link{top:10px;right:10px;min-height:34px;padding:7px 9px;font-size:12px}}</style>
+<nav class="sidebar"><div class="sh"><div class="bk">材料熱力學·Gaskell</div><h2>第十章</h2></div><div class="sn"><ul>
+<li><a href="#preview">📋 10.0 本章預覽</a></li>
+<li class="ns">10.1–10.4 $G$–$x$ 曲線基礎</li><li class="nsub"><a href="#s10-1">10.1–10.2 $G$ 與活性、化學位截距</a></li><li class="nsub"><a href="#s10-1a">10.2A 截距法推導</a></li><li class="nsub"><a href="#s10-3">10.3–10.4 二元相圖類型與標準態</a></li>
+<li class="ns">10.5–10.8 相圖建構</li><li class="nsub"><a href="#s10-5">10.5–10.6 正規溶液的相穩定性</a></li><li class="nsub"><a href="#s10-5a">10.5A 混溶間隙與臨界條件</a></li><li class="nsub"><a href="#s10-7">10.7–10.8 從 $G$–$x$ 到相圖：共切線方法</a></li><li class="nsub"><a href="#s10-7a">10.7A 液固相線計算</a></li>
+<li class="ns">跨章連結</li><li class="nsub"><a href="#xlink">🔗 與 Ch7、Ch9、Ch13 的聯繫</a></li>
+<li><a href="#summary">📋 本章摘要</a></li>
+</ul></div><div class="st"><button onclick="toggleTheme()">🌓 <span id="tl">深色模式</span></button></div></nav>
+<main class="main">
+<header class="header"><div class="cl">第十章</div><h1>吉布斯自由能–組成圖與二元系統相圖</h1><div class="meta">David R. Gaskell·《Introduction to the Thermodynamics of Materials》·第 342–399 頁</div></header>
+
+<section id="preview"><div class="callout"><strong>📋 10.0 本章預覽</strong>
+<p>第九章建立了溶液熱力學的理論基礎——活性、理想溶液、正規溶液模型。第十章是<strong>應用章節</strong>：展示如何使用 $G$–$x$ 曲線（吉布斯自由能對組成的圖）來<strong>建構和詮釋二元相圖</strong>。核心工具是<strong>共切線法則（Common Tangent Rule）</strong>——兩相平衡對應於兩條 $G$–$x$ 曲線的共切線，切點給出平衡相的組成。這使我們能夠從純熱力學數據「計算」出相圖，而不只是「觀察」它。</p>
+<div class="callout-warn"><strong>⚡ 第十章是材料科學家「讀懂相圖」的理論基礎。</strong>為什麼共晶系統有 V 形液相線？為什麼混溶間隙在等莫耳組成處最寬？為什麼某些系統有金屬間化合物而其他沒有？所有這些相圖特徵都源自 $G$–$x$ 曲線的形狀——而 $G$–$x$ 曲線的形狀又源自交互作用參數 $\Omega$ 和溫度 $T$ 的競爭。本章教你從源頭理解相圖。</div>
+<p><strong>在本章中，我們將學習：</strong></p>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px">
+<li>$G$–$x$ 曲線的幾何意義——截距給出化學位，曲率決定穩定性</li>
+<li>共切線法則——兩相平衡條件 $\mu_A^\alpha = \mu_A^\beta$、$\mu_B^\alpha = \mu_B^\beta$ 的圖形詮釋</li>
+<li>三種基本二元相圖——完全互溶、共晶、混溶間隙——的 $G$–$x$ 曲線起源</li>
+<li>正規溶液模型在相圖計算中的應用：$\Omega$、$T_c$、和相邊界</li>
+<li>液相和固相標準態的選擇對 $G$–$x$ 曲線的影響</li>
+</ul></div></section>
+
+<section id="s10-1"><h2>10.1–10.2 導論：$G$–$x$ 曲線與化學位的幾何意義</h2>
+<p>對於一個二元系統，在定溫定壓下，吉布斯自由能是組成的函數：$G = G(x_B)$。這條曲線包含了決定相行為的<strong>所有熱力學資訊</strong>。</p>
+
+<figure class="figure">
+<img src="../../../images/thermodynamics/ch10_pages/ch10_page_343_c.png" alt="Fig 10.1 — 理想溶液的 G-x 曲線" loading="lazy">
+<figcaption><strong>圖 10.1</strong>（Gaskell 第 343 頁）理想溶液的 $G$–$x$ 曲線。由於混合熵的貢獻，自由能曲線向下彎曲，$\partial^2 G/\partial x^2 > 0$。</figcaption>
+</figure>
+
+<p>化學位可以從 $G$–$x$ 曲線的幾何構造中直接讀出。在任意組成 $x_B$ 處，畫一條切線——這條切線在 $x_B = 0$（純 A）和 $x_B = 1$（純 B）軸上的截距就是 $\mu_A$ 和 $\mu_B$：</p>
+<div class="eq">$$\boxed{\mu_A = G - x_B\frac{dG}{dx_B}, \quad \mu_B = G + (1-x_B)\frac{dG}{dx_B}} \tag{10.1}$$</div>
+
+<figure class="figure">
+<img src="../../../images/thermodynamics/ch10_pages/ch10_page_343_c.png" alt="Fig 10.2 — 化學位從切線截距讀出" loading="lazy">
+<figcaption><strong>圖 10.2</strong>（Gaskell 第 344 頁）$G$–$x$ 曲線的切線在兩端軸上的截距給出 $\mu_A$ 和 $\mu_B$。這是偏莫耳自由能的幾何詮釋。</figcaption>
+</figure>
+
+<p>這個「截距法」極其有用：</p>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li>對於純 A（$x_B = 0$）：$\mu_A = G_A^\circ$（純 A 的 $G$），$\mu_B$ 為有限值（但在此極限下 $x_B \to 0$，$\mu_B \to -\infty$ 如 $RT\ln x_B$）</li>
+<li>對於理想溶液：$G = x_A G_A^\circ + x_B G_B^\circ + RT(x_A\ln x_A + x_B\ln x_B)$，代入截距公式可得 $\mu_A = G_A^\circ + RT\ln x_A$——完全符合預期。</li>
+</ul>
+<div class="callout"><strong>💡 截距法的物理直覺：</strong>想像 $G$–$x$ 曲線是一道彎曲的繩索。繩索在兩端的「高度」就是純成分的 $G^\circ$。在任何中間組成，繩索的切線在兩端的截距告訴你該成分在此溶液中的化學位——這就是偏莫耳自由能。如果切線的一端高於純成分的 $G^\circ$，該成分在溶液中「不舒服」，傾向離開（$\gamma > 1$）。</div>
+</section>
+
+<section id="s10-1a"><h2>10.2A 化學位截距公式的推導</h2>
+<p>截距公式（10.1）可以從偏莫耳量的定義嚴格導出。對於二元溶液 A–B，總吉布斯自由能可以寫為各成分化學位的加權和：</p>
+<div class="eq">$$G = n_A\mu_A + n_B\mu_B \tag{10.1a}$$</div>
+<p>其中 $n_A$ 和 $n_B$ 是莫耳數。對 (10.1a) 取全微分：</p>
+<div class="eq">$$dG = \mu_A\,dn_A + \mu_B\,dn_B + n_A\,d\mu_A + n_B\,d\mu_B \tag{10.1b}$$</div>
+<p>但 Gibbs–Duhem 關係告訴我們，在定溫定壓下：</p>
+<div class="eq">$$n_A\,d\mu_A + n_B\,d\mu_B = 0 \tag{10.1c}$$</div>
+<p>因此 (10.1b) 化簡為：</p>
+<div class="eq">$$dG = \mu_A\,dn_A + \mu_B\,dn_B \tag{10.1d}$$</div>
+<p>將組成用莫耳分數表達：$x_B = n_B/(n_A+n_B)$，$n = n_A+n_B$。則 $n_A = n(1-x_B)$，$n_B = n x_B$。固定總莫耳數 $n$（即 $dn = 0$），有 $dn_A = -n\,dx_B$，$dn_B = n\,dx_B$。代入 (10.1d)：</p>
+<div class="eq">$$dG = -\mu_A n\,dx_B + \mu_B n\,dx_B = n(\mu_B - \mu_A)\,dx_B \tag{10.1e}$$</div>
+<p>所以：</p>
+<div class="eq">$$\frac{1}{n}\frac{dG}{dx_B} = \frac{d(G/n)}{dx_B} = \mu_B - \mu_A \tag{10.1f}$$</div>
+<p>令 $G_m = G/n$ 為莫耳吉布斯自由能，則：</p>
+<div class="eq">$$\frac{dG_m}{dx_B} = \mu_B - \mu_A \tag{10.1g}$$</div>
+<p>結合 $G_m = (1-x_B)\mu_A + x_B\mu_B$，解出 $\mu_A$ 和 $\mu_B$：</p>
+<div class="eq">$$\boxed{\mu_A = G_m - x_B\frac{dG_m}{dx_B}}, \qquad \boxed{\mu_B = G_m + (1-x_B)\frac{dG_m}{dx_B}} \tag{10.1h}$$</div>
+<p>這就完成了截距公式的嚴格導出。其幾何意義非常清晰：在 $G_m$–$x_B$ 圖上，任意點 $(x_B, G_m)$ 處的切線斜率是 $dG_m/dx_B = \mu_B - \mu_A$，而該切線在 $x_B=0$ 和 $x_B=1$ 的截距分別為 $\mu_A$ 和 $\mu_B$。</p>
+
+<div class="callout"><strong>🔗 跨章連結 — 第九章：</strong>這個推導完全基於第九章中的偏莫耳量關係。回顧 Ch9 §9.1，我們定義了偏莫耳吉布斯自由能 $\bar{G}_i = \mu_i$，並證明了 Gibbs–Duhem 方程 $\sum n_i d\mu_i = 0$。這裡的截距法是 Gibbs–Duhem 方程在幾何上的直接體現。</div>
+</section>
+
+<section id="s10-3"><h2>10.3–10.4 常見二元相圖類型與標準態</h2>
+<p>定性上，二元相圖的形狀完全由<strong>液相和固相的 $G$–$x$ 曲線的相對位置</strong>決定。三種最基本的類型：</p>
+
+<h3>1. 完全互溶系統（Isomorphous）</h3>
+<p>液相和固相的 $G$–$x$ 曲線都是簡單的 U 形（$\Omega_{\text{liq}}$ 和 $\Omega_{\text{sol}}$ 都小於臨界值）。兩條曲線在不同的溫度範圍內交叉——在高溫時液相的 $G$ 最低（所有組成下液態穩定），在低溫時固相的 $G$ 最低。中間溫度時，存在一個組成範圍內兩相共存——由共切線決定。</p>
+
+<figure class="figure">
+<img src="../../../images/thermodynamics/ch10_pages/ch10_page_348_c.png" alt="Fig 10.4 — 完全互溶相圖" loading="lazy">
+<figcaption><strong>圖 10.4</strong>（Gaskell 第 346 頁）完全互溶（isomorphous）系統的相圖。液相線和固相線從純 A 的熔點延伸到純 B 的熔點，兩相區由共切線決定。</figcaption>
+</figure>
+
+<p><strong>經典例子：</strong>Cu–Ni（銅–鎳）、Ag–Au（銀–金）、Mo–W（鉬–鎢）。這些系統中兩種原子的晶體結構相同、原子半徑相近、化學性質相似，因此無論液態還是固態都能完全互溶。</p>
+
+<h3>2. 共晶系統（Eutectic）</h3>
+<p>液相 $G$–$x$ 曲線為簡單 U 形，但固相的 $G$–$x$ 曲線有很高的 $\Omega_{\text{sol}} > 0$——在全組成範圍內，固相的 $G$ 都很高（因為異類原子尺寸或化學性質不匹配）。液相在組成範圍的中間部分「勝出」到遠低於純成分熔點的溫度。這導致 V 形液相線在共晶點交匯。</p>
+
+<figure class="figure">
+<img src="../../../images/thermodynamics/ch10_pages/ch10_page_348_c.png" alt="Fig 10.5 — 共晶相圖" loading="lazy">
+<figcaption><strong>圖 10.5</strong>（Gaskell 第 347 頁）共晶系統相圖。兩條液相線在共晶點 $E$ 相交，在該點液體直接凝固為兩個固相 $\alpha + \beta$ 的混合物。</figcaption>
+</figure>
+
+<p><strong>經典例子：</strong>Pb–Sn（鉛–錫，焊料）、Al–Si（鋁–矽，鑄造合金）、Fe–C（鐵–碳，在 1147°C 的萊氏體反應）。共晶反應：$L \rightleftharpoons \alpha + \beta$。</p>
+
+<h3>3. 包晶系統（Peritectic）</h3>
+<p>當固相有較大的負混合焓（$\Omega < 0$）時，可能會出現包晶反應。在包晶溫度，液體和一個固相反應生成另一個固相：$L + \alpha \rightleftharpoons \beta$。</p>
+
+<figure class="figure">
+<img src="../../../images/thermodynamics/ch10_pages/ch10_page_348_c.png" alt="Fig 10.6 — 包晶相圖" loading="lazy">
+<figcaption><strong>圖 10.6</strong>（Gaskell 第 348 頁）包晶（peritectic）系統相圖。包晶反應 $L + \alpha \rightleftharpoons \beta$ 發生在 $P$ 點。</figcaption>
+</figure>
+
+<p><strong>經典例子：</strong>Fe–C（鐵–碳，1495°C 的包晶反應）、Pt–Ag（鉑–銀）、Cu–Zn（銅–鋅，黃銅）。</p>
+
+<h3>4. 混溶間隙（Miscibility Gap）</h3>
+<p>當 $\Omega > 2RT$ 時，固相（或液相）的 $G$–$x$ 曲線出現雙凹形狀——在中間組成，$\partial^2 G/\partial x^2 < 0$。這意味著均勻溶液不穩定——它會自發分為兩個不同組成的相（由共切線的兩個切點給出）。這是第九章正規溶液模型的直接應用。</p>
+
+<figure class="figure">
+<img src="../../../images/thermodynamics/ch10_pages/ch10_page_349_c.png" alt="Fig 10.12 — Spinodal 曲線與雙節線" loading="lazy">
+<figcaption><strong>圖 10.12</strong>（Gaskell 第 362 頁）具有混溶間隙的系統。$G$–$x$ 曲線在中間組成區域向上凸起（$\partial^2 G/\partial x^2 < 0$），兩個切點定義了 binodal（雙節線），反曲點定義了 spinodal（旋節線）。</figcaption>
+</figure>
+
+<p><strong>經典例子：</strong>Al–Zn（鋁–鋅，室溫附近）、Cu–Co（銅–鈷）、Fe–Cu（鐵–銅）、以及許多氧化物和聚合物混合物。</p>
+
+<figure class="figure">
+<img src="../../../images/thermodynamics/ch10_pages/ch10_page_363_c.png" alt="Fig 10.3 — 共切線建構" loading="lazy">
+<figcaption><strong>圖 10.3</strong>（Gaskell 第 345 頁）兩條 $G$–$x$ 曲線的共切線。兩個切點 $x_1$ 和 $x_2$ 是兩相平衡的組成。切點處滿足 $\mu_A^\alpha = \mu_A^\beta$ 和 $\mu_B^\alpha = \mu_B^\beta$。</figcaption>
+</figure>
+
+<h3>標準態的選擇</h3>
+<p>在繪製 $G$–$x$ 曲線時，標準態的選擇至關重要。如果液相和固相使用不同的標準態，兩條 $G$–$x$ 曲線的相對位置會發生位移。通常，液相的標準態選為純液態成分，固相的標準態選為純固態成分——兩者之差就是熔化自由能 $\Delta G_{\text{fus}}(T)$。這決定了 $G$–$x$ 曲線在純成分端的間距。</p>
+
+<figure class="figure">
+<img src="../../../images/thermodynamics/ch10_pages/ch10_page_346_c.png" alt="Fig 10.7 — 標準態示意" loading="lazy">
+<figcaption><strong>圖 10.7</strong>（Gaskell 第 350 頁）不同標準態選擇對 $G$–$x$ 曲線的影響示意圖。</figcaption>
+</figure>
+
+<figure class="figure">
+<img src="../../../images/thermodynamics/ch10_pages/ch10_page_351_c.png" alt="Fig 10.8 — 液固標準態" loading="lazy">
+<figcaption><strong>圖 10.8</strong>（Gaskell 第 352 頁）液相和固相標準態的相對位置。液相的 $G$ 在純成分端高於固相——因為液態比固態有更高的焓。</figcaption>
+</figure>
+
+<figure class="figure">
+<img src="../../../images/thermodynamics/ch10_pages/ch10_page_351_c.png" alt="Fig 10.9 — 熔化自由能" loading="lazy">
+<figcaption><strong>圖 10.9</strong>（Gaskell 第 355 頁）吉布斯熔化自由能 $\Delta G_{\text{fus}}(T) = \Delta H_{\text{fus}} - T\Delta S_{\text{fus}}$。在熔點處 $\Delta G_{\text{fus}} = 0$。</figcaption>
+</figure>
+
+<div class="callout"><strong>💡 從 $G$–$x$ 曲線到相圖——一步步：</strong>(1) 選擇溫度，(2) 繪製液相和固相的 $G$–$x$ 曲線，(3) 畫出兩條曲線的共切線，(4) 記錄兩個切點的組成。對一系列溫度重複——你就得到了完整的相圖。這就是 CALPHAD（CALculation of PHAse Diagrams）方法的本質——只是使用更複雜的模型來描述 $G$–$x$。</div>
+</section>
+
+<section id="s10-5"><h2>10.5–10.6 正規溶液的相穩定性準則</h2>
+<p>對於正規溶液，我們可以從第九章的結果精確推導相穩定性的條件。$\Delta G_{\text{mix}}$ 曲線的穩定性由其二階導數決定。回顧第九章中正規溶液的混合自由能：</p>
+<div class="eq">$$\Delta G_{\text{mix}} = \Omega x_A x_B + RT(x_A\ln x_A + x_B\ln x_B) \tag{10.2}$$</div>
+<p>對 $x_B$ 求二階導數（令 $x_A = 1 - x_B$）：</p>
+<div class="eq">$$\frac{\partial^2 \Delta G_{\text{mix}}}{\partial x_B^2} = -2\Omega + RT\left(\frac{1}{1-x_B} + \frac{1}{x_B}\right) \tag{10.2a}$$</div>
+<p>或等價地：</p>
+<div class="eq">$$\boxed{\frac{\partial^2 \Delta G_{\text{mix}}}{\partial x_B^2} = -2\Omega + \frac{RT}{x_B(1-x_B)}} \tag{10.2b}$$</div>
+<p><strong>穩定性判據：</strong></p>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li>$\partial^2 G/\partial x^2 > 0$：溶液對組成漲落<strong>穩定</strong>——均勻相</li>
+<li>$\partial^2 G/\partial x^2 < 0$：溶液對組成漲落<strong>不穩定</strong>——自發分相（spinodal 分解）</li>
+<li>$\partial^2 G/\partial x^2 = 0$：定義了 <strong>spinodal 曲線</strong>——穩定與不穩定的邊界</li>
+</ul>
+<p>對於對稱的正規溶液（$\Omega$ 與組成無關），spinodal 曲線的解析形式為：</p>
+<div class="eq">$$T_s = \frac{2\Omega}{R}x_B(1-x_B) \tag{10.3}$$</div>
+<p>這是一條拋物線，在 $x_B = 0.5$ 處達到最高點 $T_s = \Omega/2R$——這恰好是臨界溫度 $T_c$。在 $T_s$ 以下，中間組成區域不穩定。</p>
+<p><strong>Binodal（共存曲線）</strong>由共切線條件決定，位於 spinodal 外部。在 binodal 和 spinodal 之間，溶液處於<strong>亞穩（metastable）</strong>狀態——對小漲落穩定，但可以通過成核–成長機制分相。</p>
+
+<figure class="figure">
+<img src="../../../images/thermodynamics/ch10_pages/ch10_page_365_c.png" alt="Fig 10.13 — 雙節線與旋節線" loading="lazy">
+<figcaption><strong>圖 10.13</strong>（Gaskell 第 363 頁）對稱正規溶液的 binodal 與 spinodal 曲線。兩條曲線在臨界點 $T_c$、$x=0.5$ 處相切。</figcaption>
+</figure>
+
+<figure class="figure">
+<img src="../../../images/thermodynamics/ch10_pages/ch10_page_365_c.png" alt="Fig 10.14 — Spinodal 分解示意" loading="lazy">
+<figcaption><strong>圖 10.14</strong>（Gaskell 第 364 頁）Spinodal 分解的組成–空間圖。週期性的組成調幅是 spinodal 分解的特徵，有別於成核–成長的離散顆粒。</figcaption>
+</figure>
+
+<div class="callout-warn"><strong>⚡ Spinodal 分解 vs 成核–成長——兩種完全不同的微觀機制：</strong>Spinodal 分解產生週期性的組成調幅（如調幅分解玻璃 Vycor 中的互連奈米孔結構），因為任何波長的漲落都不穩定，最快增長的波長主導了最終結構。成核–成長則產生離散的顆粒——需要克服界面能障，結構由形核速率和擴散控制。兩種機制在工業上都有應用——spinodal 用於製造奈米多孔材料，成核–成長用於時效硬化合金。</div>
+
+<figure class="figure">
+<img src="../../../images/thermodynamics/ch10_pages/ch10_page_366_c.png" alt="Fig 10.10-10.11 — 正規溶液 G-x 隨溫度變化" loading="lazy">
+<figcaption><strong>圖 10.10–10.11</strong>（Gaskell 第 359 頁）正規溶液的 $G$–$x$ 曲線隨溫度變化的序列。在 $T > T_c$ 時曲線為 U 形（穩定），$T = T_c$ 時出現反曲點，$T < T_c$ 時出現雙凹（不穩定區域）。</figcaption>
+</figure>
+</section>
+
+<section id="s10-5a"><h2>10.5A 混溶間隙與臨界條件的完整推導</h2>
+<p>本節對混溶間隙的臨界條件進行完整的數學推導，展示 $\Omega_c = 2RT_c$ 的來源。</p>
+
+<h3>臨界點條件</h3>
+<p>在臨界點，binodal 和 spinodal 重合。數學上，這要求：</p>
+<div class="eq">$$\frac{\partial^2 \Delta G_{\text{mix}}}{\partial x_B^2} = 0 \quad \text{（spinodal 條件）} \tag{10.4a}$$</div>
+<div class="eq">$$\frac{\partial^3 \Delta G_{\text{mix}}}{\partial x_B^3} = 0 \quad \text{（臨界點）} \tag{10.4b}$$</div>
+
+<p>從 (10.2b) 出發，令其二階導數為零：</p>
+<div class="eq">$$-2\Omega + \frac{RT}{x_B(1-x_B)} = 0 \quad \Rightarrow \quad T = \frac{2\Omega}{R}x_B(1-x_B) \tag{10.4c}$$</div>
+<p>這是 spinodal 曲線。再求三階導數：</p>
+<div class="eq">$$\frac{\partial^3 \Delta G_{\text{mix}}}{\partial x_B^3} = RT\frac{-(1-2x_B)}{x_B^2(1-x_B)^2} \tag{10.4d}$$</div>
+<p>令其為零：$-RT(1-2x_B)/[x_B^2(1-x_B)^2] = 0$，解得 $x_B = 0.5$。</p>
+<p>代入 (10.4c)：</p>
+<div class="eq">$$T_c = \frac{2\Omega}{R} \cdot 0.5 \cdot 0.5 = \frac{\Omega}{2R} \tag{10.4e}$$</div>
+<p>反解 $\Omega$：</p>
+<div class="eq">$$\boxed{\Omega_c = 2RT_c} \tag{10.4f}$$</div>
+<p>這就是正規溶液模型給出的臨界交互作用參數。如果系統的 $\Omega > 2RT_c$，就會出現混溶間隙。</p>
+
+<h3>數值實例</h3>
+<table>
+<thead><tr><th>系統</th><th>$\Omega$ (kJ/mol)</th><th>$T_c$ (K)</th><th>$2RT_c$ (kJ/mol)</th><th>實際行為</th></tr></thead>
+<tbody>
+<tr><td>Cu–Ni</td><td>≈ 0 (近似理想)</td><td>—</td><td>—</td><td>完全互溶</td></tr>
+<tr><td>Al–Zn</td><td>~13</td><td>~620</td><td>~10.3</td><td>$\Omega > 2RT_c$ → 混溶間隙</td></tr>
+<tr><td>Au–Pt</td><td>~20</td><td>~1150</td><td>~19.1</td><td>$\Omega > 2RT_c$ → 高溫混溶間隙</td></tr>
+</tbody>
+</table>
+
+<h3>Binodal（共存曲線）的求解</h3>
+<p>Binodal 由共切線條件決定。對於對稱正規溶液，由於曲線對稱於 $x_B=0.5$，平衡的兩相組成 $x_B^\alpha$ 和 $x_B^\beta$ 滿足 $x_B^\alpha + x_B^\beta = 1$。共切線條件給出：</p>
+<div class="eq">$$\mu_B^\alpha - \mu_A^\alpha = \mu_B^\beta - \mu_A^\beta \tag{10.4g}$$</div>
+<p>對於正規溶液，$\mu_B - \mu_A = (G_B^\circ - G_A^\circ) + \Omega(1-2x_B) + RT\ln[x_B/(1-x_B)]$。</p>
+<p>利用對稱性 $x_B^\beta = 1 - x_B^\alpha$，可以得到：</p>
+<div class="eq">$$\ln\left(\frac{x_B^\alpha}{1-x_B^\alpha}\right) = \frac{\Omega}{RT}(1-2x_B^\alpha) \tag{10.4h}$$</div>
+<p>這是一個超越方程，需要數值求解。在 $T$ 接近 $T_c$ 時，binodal 近似為：</p>
+<div class="eq">$$x_B^\alpha \approx \frac{1}{2} - \frac{1}{2}\sqrt{\frac{T_c - T}{T_c}}, \quad x_B^\beta \approx \frac{1}{2} + \frac{1}{2}\sqrt{\frac{T_c - T}{T_c}} \tag{10.4i}$$</div>
+<p>這是典型 mean-field 臨界指數 $1/2$ 的體現。</p>
+
+<figure class="figure">
+<img src="../../../images/thermodynamics/ch10_pages/ch10_page_371_c.png" alt="Fig 10.18 — 混溶間隙相圖" loading="lazy">
+<figcaption><strong>圖 10.18</strong>（Gaskell 第 370 頁）對稱正規溶液的混溶間隙相圖。頂點即臨界點 $T_c = \Omega/2R$。</figcaption>
+</figure>
+
+<figure class="figure">
+<img src="../../../images/thermodynamics/ch10_pages/ch10_page_371_c.png" alt="Fig 10.22 — T0 曲線" loading="lazy">
+<figcaption><strong>圖 10.22</strong>（Gaskell 第 374 頁）$T_0$ 曲線——兩相吉布斯自由能相等的組成–溫度軌跡。$T_0$ 曲線是無擴散相變的預測上限。</figcaption>
+</figure>
+
+<div class="callout"><strong>💡 $T_0$ 曲線的物理意義：</strong>$T_0$ 曲線上每一點滿足 $G^\alpha = G^\beta$。它是無成分變化的馬氏體相變的熱力學上限——如果實際溫度高於 $T_0$，即使無擴散也無法發生相變。$T_0$ 曲線在快速凝固和相變誘導塑性（TRIP）鋼的設計中非常重要。</div>
+</section>
+
+<section id="s10-7"><h2>10.7–10.8 從 $G$–$x$ 曲線建構相圖</h2>
+<p>這是最終的綜合步驟。對於一個二元系統，在任何給定溫度 $T$：</p>
+<ol style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li>繪製所有可能相的 $G$–$x$ 曲線（液相、固相 $\alpha$、固相 $\beta$……）</li>
+<li>找出<strong>最低的 $G$ 包絡線</strong>——在所有 $x_B$ 處，最穩定的狀態是 $G$ 最低的那個（或那幾個相的混合物）。</li>
+<li>如果存在兩相共存區，畫出共切線——兩個切點就是該溫度下的平衡相組成。</li>
+<li>在不同溫度重複——將共切線切點的組成對溫度作圖，就是相圖的邊界。</li>
+</ol>
+<p>這整套流程可以完全自動化（現代 CALPHAD 軟體就是這樣做的），但理解其背後的幾何原理至關重要——否則你只是在點擊按鈕，而不理解輸出結果的物理意義。</p>
+
+<figure class="figure">
+<img src="../../../images/thermodynamics/ch10_pages/ch10_page_368_c.png" alt="Fig 10.15 — 從 G-x 到相圖步驟1" loading="lazy">
+<figcaption><strong>圖 10.15</strong>（Gaskell 第 367 頁）在不同溫度下繪製液相和固相的 $G$–$x$ 曲線序列。紅線為液相，藍線為固相。</figcaption>
+</figure>
+
+<figure class="figure">
+<img src="../../../images/thermodynamics/ch10_pages/ch10_page_368_c.png" alt="Fig 10.16 — 從 G-x 到相圖步驟2" loading="lazy">
+<figcaption><strong>圖 10.16</strong>（Gaskell 第 368 頁）共切線切點的軌跡在 $T$–$x$ 圖上形成液相線和固相線。</figcaption>
+</figure>
+
+<figure class="figure">
+<img src="../../../images/thermodynamics/ch10_pages/ch10_page_368_c.png" alt="Fig 10.17 — 完整相圖" loading="lazy">
+<figcaption><strong>圖 10.17</strong>（Gaskell 第 369 頁）從 $G$–$x$ 曲線系列建構完成的完全互溶相圖。</figcaption>
+</figure>
+
+<figure class="figure">
+<img src="../../../images/thermodynamics/ch10_pages/ch10_page_369_c.png" alt="Fig 10.24 — 共晶 G-x 序列" loading="lazy">
+<figcaption><strong>圖 10.24</strong>（Gaskell 第 376 頁）共晶系統在不同溫度的 $G$–$x$ 曲線序列展示共晶反應的熱力學來源。</figcaption>
+</figure>
+
+<h3>共切線條件的嚴格推導</h3>
+<p>當兩相 $\alpha$ 和 $\beta$ 在定溫定壓下平衡時，對每一個成分，化學位必須相等：</p>
+<div class="eq">$$\mu_A^\alpha(T,P,x^\alpha) = \mu_A^\beta(T,P,x^\beta) \tag{10.5a}$$</div>
+<div class="eq">$$\mu_B^\alpha(T,P,x^\alpha) = \mu_B^\beta(T,P,x^\beta) \tag{10.5b}$$</div>
+<p>從截距公式 (10.1)，$\mu_A$ 和 $\mu_B$ 分別是 $G$–$x$ 曲線上 $x_B=0$ 和 $x_B=1$ 處的切線截距。因此，兩個切點 $(x^\alpha, G^\alpha)$ 和 $(x^\beta, G^\beta)$ 在相同的直線上（共切線），當且僅當：</p>
+<div class="eq">$$\begin{aligned}
+G^\alpha - x^\alpha\frac{dG^\alpha}{dx} &= G^\beta - x^\beta\frac{dG^\beta}{dx} \\
+G^\alpha + (1-x^\alpha)\frac{dG^\alpha}{dx} &= G^\beta + (1-x^\beta)\frac{dG^\beta}{dx}
+\end{aligned} \tag{10.5c}$$</div>
+<p>這兩個條件等價於以下兩個幾何條件：</p>
+<div class="eq">$$\frac{G^\beta - G^\alpha}{x^\beta - x^\alpha} = \frac{dG^\alpha}{dx}\bigg|_{x^\alpha} = \frac{dG^\beta}{dx}\bigg|_{x^\beta} \tag{10.5d}$$</div>
+<p>即：兩點連線的斜率等於各自曲線在該點的切線斜率。這是共切線法則的標準表述。</p>
+
+<h3>數值實例：正規溶液共晶系統</h3>
+<p>考慮一個假想二元系統：液相互溶（$\Omega_{\text{liq}} \approx 0$），固相有正混合焓（$\Omega_{\text{sol}} = +20\ \text{kJ/mol}$）。純 A 的熔點 $T_A = 1200\ \text{K}$，純 B 的熔點 $T_B = 900\ \text{K}$。熔化熵取 Richard 規則值 $\Delta S_{\text{fus}} \approx R$。</p>
+<p>在 800 K（低於兩個純成分的熔點），固相的 $G$ 在純 A 和純 B 端低於液相——但中間組成處，固相的 $G$–$x$ 由於 $\Omega_{\text{sol}} > 0$ 而向上彎曲，液相的 $G$ 反而更低。這導致典型的 V 形共晶相圖——共晶點估計在約 600 K、$x_B \approx 0.4$。</p>
+
+<figure class="figure">
+<img src="../../../images/thermodynamics/ch10_pages/ch10_page_380_c.png" alt="Fig 10.25 — 例題" loading="lazy">
+<figcaption><strong>圖 10.25</strong>（Gaskell 第 379 頁）例題：利用共切線法則從給定的 $G$–$x$ 曲線推導相邊界。</figcaption>
+</figure>
+
+<figure class="figure">
+<img src="../../../images/thermodynamics/ch10_pages/ch10_page_380_c.png" alt="Fig 10.33 — 綜合例題" loading="lazy">
+<figcaption><strong>圖 10.33</strong>（Gaskell 第 394 頁）綜合例題：展示由正規溶液參數計算完整相圖的流程。</figcaption>
+</figure>
+
+<div class="callout"><strong>💡 數值直覺——$\Omega$ 如何影響共晶溫度：</strong>$\Omega$ 越大，固相 $G$–$x$ 曲線在中間彎曲越厲害，共晶點越低。這就是為什麼某些系統形成「深共晶」（deep eutectic）——交互作用參數大導致固相極不穩定，液相穩定到遠低於純成分熔點的溫度。深共晶溶劑（DES）在綠色化學中是新興的研究熱點。</div>
+</section>
+
+<section id="s10-7a"><h2>10.7A 液相線與固相線的計算：正規溶液模型</h2>
+<p>本節展示如何從正規溶液模型定量計算液–固相邊界。</p>
+
+<h3>問題設定</h3>
+<p>考慮一個二元系統 A–B，其中：</p>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li>液體為理想溶液，$\Omega_{\text{liq}} = 0$</li>
+<li>固體為正規溶液，$\Omega_{\text{sol}} = \Omega_0$</li>
+<li>純 A 的熔點 $T_{m,A}$，熔化熵 $\Delta S_{\text{fus},A}$</li>
+<li>純 B 的熔點 $T_{m,B}$，熔化熵 $\Delta S_{\text{fus},B}$</li>
+</ul>
+
+<h3>液相吉布斯自由能</h3>
+<div class="eq">$$G_{\text{liq}}(x,T) = (1-x)G_A^{\circ,\text{liq}} + x G_B^{\circ,\text{liq}} + RT[(1-x)\ln(1-x) + x\ln x] \tag{10.6a}$$</div>
+
+<h3>固相吉布斯自由能</h3>
+<div class="eq">$$G_{\text{sol}}(x,T) = (1-x)G_A^{\circ,\text{sol}} + x G_B^{\circ,\text{sol}} + \Omega_0 x(1-x) + RT[(1-x)\ln(1-x) + x\ln x] \tag{10.6b}$$</div>
+
+<p>兩者之差涉及純成分的熔化自由能：</p>
+<div class="eq">$$\Delta G_{\text{fus},A}(T) = G_A^{\circ,\text{liq}} - G_A^{\circ,\text{sol}} \approx \Delta S_{\text{fus},A}(T_{m,A} - T) \tag{10.6c}$$</div>
+<div class="eq">$$\Delta G_{\text{fus},B}(T) = G_B^{\circ,\text{liq}} - G_B^{\circ,\text{sol}} \approx \Delta S_{\text{fus},B}(T_{m,B} - T) \tag{10.6d}$$</div>
+<p>其中採用了近似 $\Delta H_{\text{fus}}$ 和 $\Delta S_{\text{fus}}$ 與溫度無關。</p>
+
+<h3>平衡條件</h3>
+<p>在液相線和固相線上，液–固兩相平衡，滿足共切線條件：</p>
+<div class="eq">$$\mu_A^{\text{liq}}(x_{\text{liq}},T) = \mu_A^{\text{sol}}(x_{\text{sol}},T) \tag{10.6e}$$</div>
+<div class="eq">$$\mu_B^{\text{liq}}(x_{\text{liq}},T) = \mu_B^{\text{sol}}(x_{\text{sol}},T) \tag{10.6f}$$</div>
+<p>代入化學位表達式：</p>
+<div class="eq">$$\mu_A^{\text{liq}} = G_A^{\circ,\text{liq}} + RT\ln(1-x_{\text{liq}}) \tag{10.6g}$$</div>
+<div class="eq">$$\mu_A^{\text{sol}} = G_A^{\circ,\text{sol}} + \Omega_0 x_{\text{sol}}^2 + RT\ln(1-x_{\text{sol}}) \tag{10.6h}$$</div>
+<div class="eq">$$\mu_B^{\text{liq}} = G_B^{\circ,\text{liq}} + RT\ln x_{\text{liq}} \tag{10.6i}$$</div>
+<div class="eq">$$\mu_B^{\text{sol}} = G_B^{\circ,\text{sol}} + \Omega_0 (1-x_{\text{sol}})^2 + RT\ln x_{\text{sol}} \tag{10.6j}$$</div>
+
+<p>整理得到一組耦合超越方程：</p>
+<div class="eq">$$\begin{aligned}
+\Delta S_{\text{fus},A}(T_{m,A} - T) &= \Omega_0 x_{\text{sol}}^2 + RT\ln\frac{1-x_{\text{sol}}}{1-x_{\text{liq}}} \\
+\Delta S_{\text{fus},B}(T_{m,B} - T) &= \Omega_0 (1-x_{\text{sol}})^2 + RT\ln\frac{x_{\text{sol}}}{x_{\text{liq}}}
+\end{aligned} \tag{10.6k}$$</div>
+
+<p>對給定的 $x_{\text{sol}}$，可以數值求解 $x_{\text{liq}}$ 和 $T$。這就是 CALPHAD 核心計算的簡化版。</p>
+
+<h3>極限情況</h3>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li><strong>理想系統（$\Omega_0 = 0$）：</strong>方程簡化為 $x_{\text{liq}}$ 和 $x_{\text{sol}}$ 透過熔化自由能直接關聯。這是標準的液–固理想溶液模型。</li>
+<li><strong>稀釋極限（$x_B \ll 1$）：</strong>液相線斜率由 van't Hoff 關係給出 $dT/dx_{\text{B}} \approx RT_m^2/\Delta H_{\text{fus}}$。</li>
+<li><strong>共晶極限：</strong>當 $\Omega_0$ 足夠大時，兩個固相溶解度極限在低溫相交，形成共晶點。</li>
+</ul>
+
+<div class="callout"><strong>🔗 跨章連結 — 第七章：</strong>純成分的熔化自由能 $\Delta G_{\text{fus}}(T)$ 來自 Clapeyron 方程（Ch7 §7.3）。Clapeyron 方程給出 $dP/dT = \Delta S/\Delta V$，對固–液平衡積分得到熔化曲線的 $T$–$P$ 關係。在此處，我們在定壓下使用 $\Delta G_{\text{fus}}(T) \approx \Delta S_{\text{fus}}(T_m - T)$。</div>
+</section>
+
+<section id="xlink"><h2>🔗 跨章節聯繫：從單組元到多組元相圖</h2>
+<p>本章的內容不是孤立的——它建立在之前章節的基礎上，並為後續章節鋪平道路。以下是主要的跨章連結：</p>
+
+<h3>與第七章（Clapeyron 方程與單組元相圖）的聯繫</h3>
+<p>第七章（Ch7）介紹了單組元系統的相平衡——Clapeyron 方程 $dP/dT = \Delta S/\Delta V$ 描述了純物質的相邊界。我們在第十章中遇到的每個二元相圖都「繼承」了其純成分的單組元相圖特徵：</p>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li>純 A 和純 B 的熔點 $T_{m,A}$、$T_{m,B}$ 是二元相圖的錨點——共晶和包晶溫度由這些純成分熔點和交互作用參數共同決定。</li>
+<li>熔化自由能 $\Delta G_{\text{fus}}(T) = \Delta H_{\text{fus}} - T\Delta S_{\text{fus}}$ 直接來自 Clapeyron 關係對液–固平衡的積分（Ch7 §7.4）。</li>
+<li>在二元相圖的邊界（純 A 或純 B 附近），相邊界斜率可以與 Clapeyron 方程的推廣形式——van't Hoff 關係——連結。</li>
+</ul>
+
+<h3>與第九章（溶液熱力學）的聯繫</h3>
+<p>第九章是第十章最直接的理論基礎。以下是從第九章「繼承」的核心概念：</p>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li><strong>正規溶液模型（Ch9 §9.5）：</strong>$\Delta G_{\text{mix}} = \Omega x_A x_B + RT(x_A\ln x_A + x_B\ln x_B)$ 是第十章的「原料」。第十章中所有 $G$–$x$ 曲線都基於這個表達式（或其推廣形式）。</li>
+<li><strong>活性與活度係數（Ch9 §9.2–9.3）：</strong>$\mu_i = \mu_i^\circ + RT\ln a_i$。活性 $a_i$ 偏離理想值的程度決定了 $G$–$x$ 曲線偏離理想曲線的程度，進而決定相圖形狀。</li>
+<li><strong>偏莫耳量與 Gibbs–Duhem 方程（Ch9 §9.1）：</strong>化學位截距法（10.1）和共切線條件（10.5）都是 Gibbs–Duhem 方程的直接應用。</li>
+<li><strong>Richard 規則（Ch9 §9.6）：</strong>許多金屬的熔化熵 $\Delta S_{\text{fus}} \approx R$（或更準確地，約 8–10 J/mol·K），這簡化了相圖計算。</li>
+</ul>
+
+<h3>與第十三章（反應系統的相穩定性）的聯繫</h3>
+<p>第十三章（Ch13）將相圖的概念推廣到化學反應系統：</p>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li>在第十章中，我們討論了<strong>物理平衡</strong>——液–固、液–液、固–固相變，不涉及化學反應。</li>
+<li>在第十三章中，引入了<strong>化學反應</strong>的平衡——例如氧化物、硫化物的還原反應。$G$–$x$ 曲線推廣為 $G$–組成圖，其中「成分」包括化合物。</li>
+<li>第十章中的共切線法在第十三章中推廣為<strong>優勢區圖（Predominance Diagram）</strong>和<strong>相穩定性圖（Phase Stability Diagram）</strong>——在 $T$ 和 $P$ 或 $T$ 和化學位空間中繪製穩定相區域。</li>
+<li>混合焓 $\Omega$ 的概念在第十三章中推廣為化合物的生成自由能 $\Delta G_f^\circ$。</li>
+</ul>
+
+<figure class="figure">
+<img src="../../../images/thermodynamics/ch10_pages/ch10_page_370_c.png" alt="Fig 10.17 — 相圖計算流程" loading="lazy">
+<figcaption><strong>圖 10.17</strong>（Gaskell 第 366 頁）從 $G$–$x$ 曲線到完整相圖的計算流程圖。這是 CALPHAD 方法的基礎。</figcaption>
+</figure>
+
+<figure class="figure">
+<img src="../../../images/thermodynamics/ch10_pages/ch10_page_370_c.png" alt="Fig 10.24b — 共晶系統完整 G-x 序列" loading="lazy">
+<figcaption><strong>圖 10.24</strong>（Gaskell 第 377 頁）共晶系統在不同溫度的 $G$–$x$ 曲線。隨著溫度降低，液相線從中間組成向兩端移動。</figcaption>
+</figure>
+
+<div class="callout"><strong>📚 總結——從第七章到第十三章的脈絡：</strong>
+<ol>
+<li><strong>Ch7：</strong>單組元相圖 ← Clapeyron 方程（$dP/dT$）</li>
+<li><strong>Ch9：</strong>溶液熱力學 ← 活性、正規溶液模型（$\Omega$、$\Delta G_{\text{mix}}$）</li>
+<li><strong>Ch10：</strong>二元相圖 ← 共切線法 + $G$–$x$ 曲線 ← 當前章節</li>
+<li><strong>Ch13：</strong>反應系統相穩定性 ← 優勢區圖、化學位空間</li>
+</ol>
+這一系列是熱力學從「純物質」到「溶液」再到「化學反應系統」的自然延伸。</div>
+</section>
+
+<section id="summary"><h2>本章摘要</h2>
+<ol style="font-size:14px;color:var(--t2);margin-left:18px">
+<li><strong>化學位截距法：</strong>$\mu_A = G - x_B(dG/dx_B)$。$G$–$x$ 曲線的切線截距直接給出各成分的化學位。推導基於偏莫耳量定義和 Gibbs–Duhem 關係。</li>
+<li><strong>相穩定性判據：</strong>$\partial^2 G/\partial x^2 > 0$→穩定；$<0$→不穩定（spinodal 分解）。臨界條件 $\Omega_c = 2RT_c$ 來自正規溶液模型。</li>
+<li><strong>共切線法則：</strong>兩相共存 ⇔ 共切線。切點 → 平衡相的組成。這是建構相圖的幾何核心。嚴格推導給出 $\mu_A^\alpha = \mu_A^\beta$、$\mu_B^\alpha = \mu_B^\beta$。</li>
+<li><strong>四種基本相圖：</strong>完全互溶（$\Omega$ 小）、共晶（$\Omega_{\text{sol}} \gg 0$）、包晶（$\Omega < 0$）、混溶間隙（$\Omega > 2RT$→分相）。</li>
+<li><strong>從 $G$–$x$ 到相圖：</strong>在不同溫度畫 $G$–$x$ 曲線→找共切線→記錄切點→繪製 $T$–$x$ 圖。CALPHAD 方法的原理。</li>
+<li><strong>液固相線計算：</strong>正規溶液模型給出耦合超越方程 (10.6k)，可數值求解液相線和固相線。</li>
+<li><strong>跨章節聯繫：</strong>Ch7 提供純物質熔點和 Clapeyron 基礎，Ch9 提供溶液模型和活性框架，Ch10 整合為二元相圖，Ch13 推廣到化學反應系統。</li>
+</ol>
+
+<figure class="figure">
+<img src="../../../images/thermodynamics/ch10_pages/ch10_page_394_c.png" alt="Fig 10.33 — 第十章開篇圖" loading="lazy">
+<figcaption><strong>圖 10.33</strong>（Gaskell 第 342 頁）第十章開篇的 G-x 曲線示意圖。展示了不同溫度下液相和固相自由能曲線的相對變化。</figcaption>
+</figure>
+</section>
+</main>
+<script>
+function toggleTheme(){const h=document.documentElement;const n=h.getAttribute('data-theme')==='light'?'dark':'light';h.setAttribute('data-theme',n);localStorage.setItem('theme',n);document.getElementById('tl').textContent=n==='dark'?'淺色模式':'深色模式';}
+const s=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',s);if(s==='dark')document.getElementById('tl').textContent='淺色模式';
+const secs=document.querySelectorAll('section[id]');const navs=document.querySelectorAll('.sn a');window.addEventListener('scroll',()=>{let c='';secs.forEach(s=>{if(window.scrollY>=s.offsetTop-80)c=s.getAttribute('id');});navs.forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+c);});});
+document.querySelectorAll('.figure img').forEach(i=>i.addEventListener('click',()=>window.open(i.src,'_blank')));
+</script>
+</body>
+</html>

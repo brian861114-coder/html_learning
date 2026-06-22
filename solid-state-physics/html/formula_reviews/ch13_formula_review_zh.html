@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>第十三章 公式摘要 — BJT 進階概念（完整版）</title>
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']],tags:'ams'},options:{ignoreHtmlClass:'no-math'}};</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+:root{--bg:#fff;--b2:#F5F5F7;--b3:#E8F0FE;--tx:#1D1D1F;--t2:#1D1D1F;--ac:#007AFF;--bd:#D2D2D7;--sh:0 2px 8px rgba(0,0,0,.08);--fbg:#FAFBFC;--fbd:#E5E5EA;--dbg:#E8F0FE;--dac:#007AFF;--wbg:#FFF9F0;--wbd:#FFB340;--wtx:#B8700A;--hv:#F0F4FF;--nw:240px}
+[data-theme="dark"]{--bg:#1C1C1E;--b2:#2C2C2E;--b3:#1A2332;--tx:#F5F5F7;--t2:#A1A1A6;--ac:#0A84FF;--bd:#48484A;--fbg:#252528;--fbd:#3A3A3C;--dbg:#1A2332;--dac:#0A84FF;--wbg:#2C2416;--wbd:#8B6914;--wtx:#FFB340;--hv:#1E2A3A}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth;scroll-padding-top:16px}
+body{font-family:-apple-system,BlinkMacSystemFont,'Noto Sans TC','Microsoft JhengHei',sans-serif;background:var(--b2);color:var(--tx);line-height:1.75;display:flex;min-height:100vh}
+.sidebar{position:fixed;top:0;left:0;width:var(--nw);height:100vh;background:var(--bg);border-right:1px solid var(--bd);overflow-y:auto;z-index:100;padding:20px 16px;display:flex;flex-direction:column}
+.sh{margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--fbd)}.sh h2{font-size:14px;font-weight:600;color:var(--ac)}.sh .bk{font-size:11px;color:var(--t2)}
+.sn{flex:1}.sn ul{list-style:none}.sn a{display:block;padding:3px 10px;font-size:10.5px;color:var(--t2);text-decoration:none;border-radius:5px;transition:.12s;line-height:1.3}.sn a:hover{background:var(--b3);color:var(--ac)}.sn a.active{background:var(--b3);color:var(--ac);font-weight:500}.sn .ns{font-weight:600;font-size:11.5px;color:var(--tx);margin-top:8px;padding:2px 10px}.sn .nsub a{padding-left:18px;font-size:10px}
+.st{margin-top:auto;padding-top:12px;border-top:1px solid var(--fbd)}.st button{width:100%;padding:6px;border:1px solid var(--bd);border-radius:6px;background:var(--b2);color:var(--tx);cursor:pointer;font-size:12px}
+.main{margin-left:var(--nw);flex:1;max-width:1100px;padding:32px 40px 80px}
+.header{margin-bottom:24px;padding-bottom:20px;border-bottom:2px solid var(--ac)}.header .tag{font-size:12px;font-weight:600;color:var(--ac);letter-spacing:1px}.header h1{font-size:26px;font-weight:700;margin:6px 0}.header .sub{font-size:13px;color:var(--t2)}
+.tbar{display:flex;gap:8px;margin-bottom:20px}.tbar button{padding:5px 16px;font-size:12px;border:1px solid var(--ac);border-radius:20px;background:var(--bg);color:var(--ac);cursor:pointer;font-weight:500;transition:.15s}.tbar button:hover{background:var(--ac);color:#fff}
+.section{margin-bottom:44px}.section h2{font-size:19px;font-weight:700;color:var(--ac);margin-bottom:4px;padding-bottom:6px;border-bottom:1px solid var(--bd)}
+.fcard{background:var(--bg);border:1px solid var(--fbd);border-radius:10px;padding:16px 20px;margin:14px 0;box-shadow:var(--sh)}.fcard .lbl{font-size:11px;font-weight:700;color:var(--ac);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}.fcard .eq{text-align:center;padding:8px 0;font-size:15px}.fcard .note{font-size:12px;color:var(--t2);margin-top:6px;padding-top:6px;border-top:1px solid var(--fbd);line-height:1.6}
+details.derive{background:var(--dbg);border-left:4px solid var(--dac);border-radius:0 10px 10px 0;margin:16px 0;transition:.2s}details.derive[open]{background:var(--bg)}
+details.derive>summary{padding:14px 18px;cursor:pointer;list-style:none;display:flex;align-items:center;gap:8px;font-weight:700;color:var(--ac);font-size:13px;letter-spacing:.3px;user-select:none}details.derive>summary::-webkit-details-marker{display:none}details.derive>summary::before{content:'▸';display:inline-block;font-size:11px;transition:transform .2s;width:14px;text-align:center}details.derive[open]>summary::before{transform:rotate(90deg)}details.derive>summary:hover{background:var(--hv);border-radius:0 10px 0 0}
+details.derive .dbo{padding:0 18px 16px 18px}details.derive .step{margin:8px 0;padding:6px 0}details.derive .snb{display:inline-block;background:var(--ac);color:#fff;width:22px;height:22px;border-radius:50%;text-align:center;font-size:11px;font-weight:700;line-height:22px;margin-right:8px}details.derive .sl{font-weight:700;font-size:13px;color:var(--tx)}details.derive .sc{margin:4px 0 4px 30px;font-size:13px;color:var(--t2)}details.derive .sc .math{display:block;text-align:center;padding:6px 0}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12px}thead th{background:var(--b3);padding:8px 12px;font-size:12px;font-weight:600;border-bottom:2px solid var(--bd)}tbody td{padding:6px 10px;border-bottom:1px solid var(--fbd);font-size:11px}
+@media(max-width:768px){.sidebar{transform:translateX(-100%);transition:.3s}.sidebar.open{transform:translateX(0)}.main{margin-left:0;padding:20px 16px 60px}}
+@media print{.sidebar,.tbar{display:none}details.derive{display:block!important}.main{margin-left:0;max-width:100%;padding:0}}
+</style>
+<script src="../../../reading-preferences.js" defer></script></head>
+<body><a class="portal-home-link" href="../../../index.html">返回學習中心</a><style id="portal-home-link-style">.portal-home-link{position:fixed;top:16px;right:16px;z-index:1000;display:inline-flex;align-items:center;min-height:36px;padding:7px 11px;border:1px solid #cbd5e1;border-radius:8px;background:#fff;color:#1d4ed8;font:600 13px/1.2 -apple-system,BlinkMacSystemFont,"Noto Sans TC","Microsoft JhengHei",sans-serif;text-decoration:none;box-shadow:0 2px 10px rgba(15,23,42,.08)}.portal-home-link:hover{background:#eff6ff}.portal-home-link:focus-visible{outline:3px solid rgba(37,99,235,.35);outline-offset:2px}@media(max-width:768px){.portal-home-link{top:10px;right:10px;min-height:34px;padding:7px 9px;font-size:12px}}</style>
+<nav class="sidebar"><div class="sh"><div class="bk">半導體物理與元件·第四版</div><h2>第十三章 公式摘要</h2></div><div class="sn"><ul>
+<li class="ns">13.1 BJT 結構</li><li class="nsub"><a href="#s1">13.1 BJT 物理回顧·多邊結構</a></li>
+<li class="ns">13.2 頻率限制</li><li class="nsub"><a href="#s2">13.2 $f_T$·$f_{\max}$·四時間常數 ⭐</a></li>
+<li class="ns">13.3 開關</li><li class="nsub"><a href="#s3">13.3 大訊號開關·儲存時間</a></li>
+<li class="ns">13.4–13.5</li><li class="nsub"><a href="#s4">13.4 小訊號模型·$C_\pi$·$C_\mu$</a></li>
+<li class="nsub"><a href="#s5">13.5 HBT·SiGe·$\beta$ 突破</a></li>
+<li><a href="#cheatsheet">📋 公式速查表</a></li>
+</ul></div><div class="st"><button onclick="toggleTheme()">🌓 <span id="tl">深色模式</span></button></div></nav>
+<main class="main">
+<div class="header"><div class="tag">全部公式·含完整推導</div><h1>第十三章：BJT 進階概念</h1><div class="sub">Semiconductor Physics & Devices, 4th Ed.·Donald A. Neamen·pp.491–550</div></div>
+<div class="tbar"><button onclick="document.querySelectorAll('details').forEach(d=>d.open=true)">📖 展開全部</button><button onclick="document.querySelectorAll('details').forEach(d=>d.open=false)">📕 收合全部</button></div>
+
+<div class="section" id="s1"><h2>13.1 BJT 作用回顧與多邊結構</h2>
+<div class="fcard"><div class="lbl">BJT 核心參數回顧</div><div class="eq">$$\alpha = \gamma \cdot \alpha_T,\quad \beta = \frac{\alpha}{1-\alpha}$$</div><div class="eq">$$I_C = I_S e^{V_{BE}/V_T},\quad I_E = I_B + I_C$$</div></div>
+</div>
+
+<div class="section" id="s2"><h2>13.2 BJT 頻率限制——四個時間常數 ⭐</h2>
+<details class="derive" open><summary>🔍 $f_T$ 的完整推導——四個延遲成分的物理來源</summary><div class="dbo">
+<div class="step"><span class="snb">1</span><span class="sl">⭐ 截止頻率定義 (12.97)</span><div class="sc"><span class="math">$$\boxed{f_T = \frac{1}{2\pi\tau_{ec}}},\quad \tau_{ec} = \tau_e + \tau_b + \tau_d + \tau_c \tag{12.97}$$</span></div></div>
+<div class="step"><span class="snb">2</span><span class="sl">① 射極充電時間 $\tau_e = r_e C_{je}$</span><div class="sc">$r_e = V_T/I_E \approx 25.9/I_E(\text{mA})$ Ω。$C_{je}$ = BE 接面電容。充放電 BE 接面的 RC 延遲。</div></div>
+<div class="step"><span class="snb">3</span><span class="sl">② 基極傳輸時間 $\tau_b = W_B^2/(2D_B)$</span><div class="sc">⭐ 最重要的延遲成分。來自擴散方程：粒子從 $x=0$ 擴散到 $x=W_B$ 的平均時間。<br>數值：$W_B=0.1$ µm, $D_B=30$ cm²/s→$\tau_b=1.7$ ps→$f_T\approx100$ GHz（僅此項）。</div></div>
+<div class="step"><span class="snb">4</span><span class="sl">③ 集極空乏層渡越時間 $\tau_d = x_d/(2v_{\text{sat}})$</span><div class="sc">$v_{\text{sat}}\approx10^7$ cm/s。$x_d$ 隨 $V_{CB}$ 增加→高速 BJT 需低 $V_{CB}$ 操作。</div></div>
+<div class="step"><span class="snb">5</span><span class="sl">④ 集極充電時間 $\tau_c = r_c C_{jc}$</span><div class="sc">$r_c$ = 集極串聯電阻。$C_{jc}$ = BC 接面電容。</div></div>
+</div></details>
+<div class="fcard"><div class="lbl">⭐ 最大振盪頻率 $f_{\max}$ (12.102)</div><div class="eq">$$\boxed{f_{\max} = \sqrt{\frac{f_T}{8\pi\,r_b\,C_{jc}}}} \tag{12.102}$$</div><div class="note">功率增益 = 1 的頻率。$r_b$（基極電阻）和 $C_{jc}$（BC 接面電容）形成輸入-輸出耦合的 RC 濾波器。$r_b C_{jc}$ 是功率增益的瓶頸。</div></div>
+<div class="fcard"><div class="lbl">共射極截止頻率 $f_\beta$ (12.105–12.106)</div><div class="eq">$$f_\beta = \frac{f_T}{\beta_0} \tag{12.105}$$</div><div class="eq">$$\beta(f) = \frac{\beta_0}{1 + j(f/f_\beta)} \tag{12.106a, 12.106b}$$</div><div class="note">$f_\beta$ = 電流增益 $\beta$ 降至低頻值 $\beta_0$ 的 $1/\sqrt{2}$ 時的頻率。$f_\beta \ll f_T$（差 $\beta_0$ 倍）。</div></div>
+<div class="fcard"><div class="lbl">射極-集極延遲完整表達式 (12.107–12.108)</div><div class="eq">$$\tau_{ec} = \frac{V_T}{I_E}C_{je} + \frac{W_B^2}{2D_B} + \frac{x_d}{2v_{\text{sat}}} + r_c C_{jc} \tag{12.107}$$</div><div class="note">(12.108) 給出各成分的相對重要性——基極傳輸時間通常主導。</div></div>
+</div>
+
+<div class="section" id="s3"><h2>13.3 大訊號開關</h2>
+<div class="fcard"><div class="lbl">開關延遲時間</div><div class="eq">$$t_s \approx \tau_s\ln\!\left(1 + \frac{I_F}{I_R}\right)$$</div><div class="note">$\tau_s$ = 飽和區等效壽命。$I_F$ = 順向基極電流，$I_R$ = 反向抽取電流。<br>蕭特基箝位防止飽和→$t_s$ 大幅降低（$\tau_s$ 變為主動區壽命，短得多）。</div></div>
+</div>
+
+<div class="section" id="s4"><h2>13.4 小訊號模型</h2>
+<div class="fcard"><div class="lbl">⭐ 完整混合-π 模型（含電容）</div><div class="eq">$$g_m = \frac{I_C}{V_T},\quad r_\pi = \frac{\beta}{g_m},\quad r_o = \frac{V_A}{I_C}$$</div><div class="eq">$$C_\pi = C_{je} + \tau_F g_m,\quad C_\mu = C_{jc}$$</div><div class="note">$C_\pi$（輸入電容）= 接面電容 $C_{je}$ + 擴散電容 $\tau_F g_m$（$\propto I_C$）。<br>$C_\mu$ = BC 接面電容（Miller 效應→輸入端放大 $(1+g_m R_L)$ 倍）。</div></div>
+</div>
+
+<div class="section" id="s5"><h2>13.5 HBT 與 SiGe 技術</h2>
+<div class="fcard"><div class="lbl">HBT 射極注入效率的突破</div><div class="eq">$$\gamma_{\text{HBT}} \approx 1,\quad \beta_{\text{HBT}} \gg \beta_{\text{BJT}}$$</div><div class="note">寬能隙射極→價帶能障阻止電洞從基極注入射極→$I_{pE}\approx0$→$\gamma\approx1$ 即使 $N_E$ 不重於 $N_B$。<br>可重摻雜基極→$r_b$ 降低→$f_{\max}$ 提升。</div></div>
+</div>
+
+<div class="section" id="cheatsheet"><h2>公式速查表（完整）</h2>
+<table><thead><tr><th>Eq</th><th>公式</th><th>備註</th></tr></thead><tbody>
+<tr><td>12.97</td><td>$f_T=1/(2\pi\tau_{ec})$, $\tau_{ec}=\tau_e+\tau_b+\tau_d+\tau_c$</td><td>⭐ 截止頻率定義</td></tr>
+<tr><td>—</td><td>$\tau_e=r_e C_{je}=V_T C_{je}/I_E$</td><td>射極充電時間</td></tr>
+<tr><td>—</td><td>$\tau_b=W_B^2/(2D_B)$</td><td>⭐ 基極傳輸時間</td></tr>
+<tr><td>—</td><td>$\tau_d=x_d/(2v_{\text{sat}})$</td><td>集極空乏層渡越</td></tr>
+<tr><td>—</td><td>$\tau_c=r_c C_{jc}$</td><td>集極充電時間</td></tr>
+<tr><td>12.102</td><td>$f_{\max}=\sqrt{f_T/(8\pi r_b C_{jc})}$</td><td>⭐ 最大振盪頻率</td></tr>
+<tr><td>12.105</td><td>$f_\beta=f_T/\beta_0$</td><td>共射極截止頻率</td></tr>
+<tr><td>12.106</td><td>$\beta(f)=\beta_0/[1+j(f/f_\beta)]$</td><td>頻率相關的電流增益</td></tr>
+<tr><td>12.107</td><td>$\tau_{ec}$ 完整表達式</td><td>四項總和</td></tr>
+<tr><td>—</td><td>$C_\pi=C_{je}+\tau_F g_m$, $C_\mu=C_{jc}$</td><td>⭐ 混合-π 電容</td></tr>
+<tr><td>—</td><td>$t_s\approx\tau_s\ln(1+I_F/I_R)$</td><td>儲存時間</td></tr>
+</tbody></table></div></main>
+<script>
+function toggleTheme(){const h=document.documentElement;const n=h.getAttribute('data-theme')==='light'?'dark':'light';h.setAttribute('data-theme',n);localStorage.setItem('theme',n);document.getElementById('tl').textContent=n==='dark'?'淺色模式':'深色模式';}
+const s=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',s);if(s==='dark')document.getElementById('tl').textContent='淺色模式';
+const secs=document.querySelectorAll('.section[id]');const navs=document.querySelectorAll('.sn a');window.addEventListener('scroll',()=>{let c='';secs.forEach(s=>{if(window.scrollY>=s.offsetTop-80)c=s.getAttribute('id');});navs.forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+c);});});
+</script>
+</body>
+</html>

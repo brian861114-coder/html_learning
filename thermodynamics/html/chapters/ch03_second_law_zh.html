@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>第三章：熱力學第二定律 — 材料熱力學</title>
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']],tags:'ams'},options:{ignoreHtmlClass:'no-math'}};</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+:root{--bg:#fff;--b2:#F5F5F7;--b3:#E8F0FE;--tx:#1D1D1F;--t2:#1D1D1F;--ac:#007AFF;--bd:#D2D2D7;--sh:0 2px 8px rgba(0,0,0,.08);--fbd:#E5E5EA;--wbg:#FFF9F0;--wbd:#FFB340;--wtx:#B8700A;--nw:260px}
+[data-theme="dark"]{--bg:#1C1C1E;--b2:#2C2C2E;--b3:#1A2332;--tx:#F5F5F7;--t2:#A1A1A6;--ac:#0A84FF;--bd:#48484A;--fbd:#3A3A3C;--wbg:#2C2416;--wbd:#8B6914;--wtx:#FFB340}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth;scroll-padding-top:16px}
+body{font-family:-apple-system,BlinkMacSystemFont,'Noto Sans TC','Microsoft JhengHei',sans-serif;background:var(--b2);color:var(--tx);line-height:1.9;display:flex;min-height:100vh}
+.sidebar{position:fixed;top:0;left:0;width:var(--nw);height:100vh;background:var(--bg);border-right:1px solid var(--bd);overflow-y:auto;z-index:100;padding:20px 16px;display:flex;flex-direction:column}
+.sh{margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--fbd)}.sh h2{font-size:14px;font-weight:600;color:var(--ac)}.sh .bk{font-size:11px;color:var(--t2)}
+.sn{flex:1}.sn ul{list-style:none}.sn a{display:block;padding:4px 10px;font-size:11px;color:var(--t2);text-decoration:none;border-radius:5px;transition:.12s}.sn a:hover{background:var(--b3);color:var(--ac)}.sn a.active{background:var(--b3);color:var(--ac);font-weight:500}.sn .ns{font-weight:600;font-size:12px;color:var(--tx);margin-top:10px;padding:2px 10px}.sn .nsub a{padding-left:20px;font-size:10px}
+.st{margin-top:auto;padding-top:12px;border-top:1px solid var(--fbd)}.st button{width:100%;padding:6px;border:1px solid var(--bd);border-radius:6px;background:var(--b2);color:var(--tx);cursor:pointer;font-size:12px}
+.main{margin-left:var(--nw);flex:1;max-width:1050px;padding:32px 40px 80px}
+.header{margin-bottom:32px;padding-bottom:20px;border-bottom:2px solid var(--ac)}.header .cl{font-size:12px;font-weight:600;color:var(--ac);letter-spacing:1px}.header h1{font-size:28px;font-weight:700;margin:6px 0}.header .meta{font-size:13px;color:var(--t2)}
+section{margin-bottom:44px}h2{font-size:20px;font-weight:700;color:var(--ac);margin-bottom:14px;padding-bottom:6px;border-bottom:1px solid var(--bd)}h3{font-size:16px;font-weight:600;color:var(--tx);margin:24px 0 10px}h4{font-size:14px;font-weight:600;color:var(--t2);margin:18px 0 6px}
+p{font-size:14px;color:var(--t2);margin-bottom:12px}strong{font-weight:600;color:var(--tx)}
+.eq{text-align:center;margin:16px 0;font-size:15px}
+.figure{margin:24px 0;text-align:center}.figure img{max-width:100%;border-radius:8px;box-shadow:var(--sh);cursor:pointer}.figure img:hover{transform:scale(1.01)}.figure figcaption{margin-top:8px;font-size:12px;color:var(--t2)}
+.callout{background:var(--b3);border:1px solid var(--fbd);border-radius:8px;padding:14px 18px;margin:16px 0;font-size:13px}.callout strong{color:var(--ac)}
+.callout-warn{background:var(--wbg);border:1px solid var(--wbd);border-radius:8px;padding:14px 18px;margin:16px 0;font-size:13px}.callout-warn strong{color:var(--wtx)}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}thead th{background:var(--b3);padding:8px 12px;font-size:12px;font-weight:600;border-bottom:2px solid var(--bd)}tbody td{padding:8px 12px;border-bottom:1px solid var(--fbd)}tbody tr:nth-child(even){background:var(--b2)}
+.derivation{background:var(--bg);border:2px solid var(--ac);border-left:5px solid var(--ac);border-radius:10px;padding:18px 22px;margin:18px 0;font-size:13px;box-shadow:var(--sh)}.derivation h4{font-size:15px;font-weight:700;color:var(--ac);margin:0 0 10px;padding:0 0 8px;border-bottom:1px solid var(--bd)}.derivation p{font-size:13px;color:var(--tx);margin-bottom:8px;line-height:1.8}.derivation .eq{margin:10px 0;font-size:14px}
+@media(max-width:768px){.sidebar{transform:translateX(-100%);transition:.3s}.sidebar.open{transform:translateX(0)}.main{margin-left:0;padding:20px 16px 60px}}
+@media print{.sidebar{display:none}.main{margin-left:0;max-width:100%;padding:0}}
+</style>
+<script src="../../../reading-preferences.js" defer></script></head>
+<body><a class="portal-home-link" href="../../../index.html">返回學習中心</a><style id="portal-home-link-style">.portal-home-link{position:fixed;top:16px;right:16px;z-index:1000;display:inline-flex;align-items:center;min-height:36px;padding:7px 11px;border:1px solid #cbd5e1;border-radius:8px;background:#fff;color:#1d4ed8;font:600 13px/1.2 -apple-system,BlinkMacSystemFont,"Noto Sans TC","Microsoft JhengHei",sans-serif;text-decoration:none;box-shadow:0 2px 10px rgba(15,23,42,.08)}.portal-home-link:hover{background:#eff6ff}.portal-home-link:focus-visible{outline:3px solid rgba(37,99,235,.35);outline-offset:2px}@media(max-width:768px){.portal-home-link{top:10px;right:10px;min-height:34px;padding:7px 9px;font-size:12px}}</style>
+<nav class="sidebar"><div class="sh"><div class="bk">材料熱力學·Gaskell</div><h2>第三章</h2></div><div class="sn"><ul>
+<li><a href="#preview">📋 3.0 本章預覽</a></li>
+<li class="ns">3.1–3.3 自發性與熵</li><li class="nsub"><a href="#s3-1">3.1 導論</a></li><li class="nsub"><a href="#s3-2">3.2 自發過程</a></li><li class="nsub"><a href="#s3-3">3.3 熵與不可逆性的量化</a></li>
+<li class="ns">3.4–3.9 可逆與不可逆</li><li class="nsub"><a href="#s3-4">3.4–3.6 可逆過程的說明</a></li><li class="nsub"><a href="#s3-7">3.7–3.8 理想氣體的壓縮與絕熱膨脹</a></li><li class="nsub"><a href="#s3-9">3.9 小結</a></li>
+<li class="ns">3.10–3.12 熱機與溫標</li><li class="nsub"><a href="#s3-10">3.10 熱機的性質</a></li><li class="nsub"><a href="#s3-11">3.11 熱力學溫標</a></li><li class="nsub"><a href="#s3-12">3.12 第二定律的表述</a></li>
+<li class="ns">3.13–3.15 功與平衡</li><li class="nsub"><a href="#s3-13">3.13 最大功</a></li><li class="nsub"><a href="#s3-14">3.14 熵與平衡判據</a></li><li class="nsub"><a href="#s3-15">3.15 第一與第二定律的結合</a></li>
+<li class="ns">例題與應用</li><li class="nsub"><a href="#s3-16">定性例題 1</a></li><li class="nsub"><a href="#s3-17">定量例題 2</a></li><li class="nsub"><a href="#s3-18">定量例題 3</a></li><li class="nsub"><a href="#s3-19">3.19 材料科學意義</a></li>
+<li><a href="#summary">📋 本章摘要</a></li>
+</ul></div><div class="st"><button onclick="toggleTheme()">🌓 <span id="tl">深色模式</span></button></div></nav>
+<main class="main">
+<header class="header"><div class="cl">第三章</div><h1>熱力學第二定律</h1><div class="meta">David R. Gaskell·《Introduction to the Thermodynamics of Materials》·第 78–113 頁</div></header>
+
+<section id="preview"><div class="callout"><strong>📋 3.0 本章預覽</strong>
+<p>第一定律告訴我們<strong>能量必須守恆</strong>，但它沒有告訴我們一個過程<strong>是否會發生</strong>。熱從高溫物體流向低溫物體——第一定律不禁止反過來，但你從未見過冰塊自發變熱而周圍的水變冷。第二定律提供了這個方向性：<strong>孤立系統的自發過程總是朝熵增加的方向進行</strong>。</p>
+<div class="callout-warn"><strong>⚡ 為什麼第二定律是熱力學的靈魂？</strong>如果說第一定律是熱力學的「會計規則」（能量進出必須平衡），第二定律就是「價值判斷」（什麼過程可能、什麼不可能）。它定義了時間箭頭的方向，解釋了為什麼永動機不可能存在，並為第三章之後的所有平衡計算（化學反應平衡、相平衡、電化學平衡）提供了統一的判據——$\Delta S_{\text{univ}} \geq 0$ 或 $\Delta G \leq 0$。</div>
+<p><strong>在本章中，我們將學習：</strong></p>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px">
+<li>自發過程的共同特徵——不可逆性</li>
+<li>熵的定義：$dS = \delta q_{\text{rev}}/T$</li>
+<li>可逆過程與不可逆過程中熵變的計算</li>
+<li>卡諾循環（Carnot cycle）與熱機效率上限</li>
+<li>熱力學溫標——獨立於任何物質的絕對溫標</li>
+<li>第二定律的多種等價表述（Clausius、Kelvin-Planck）</li>
+<li>最大功定理與平衡的熵判據</li>
+<li>合併第一和第二定律的基本方程式：$dU = T\,dS - P\,dV$</li>
+</ul>
+<div class="callout"><strong>🔗 全書導航：</strong>本章引入的熵 $S$ 和基本方程 $dU = T\,dS - P\,dV$ 是後續所有章節的理論基礎。<strong>第四章</strong>從統計力學 $S = k\ln\Omega$ 解釋熵的微觀本質；<strong>第五章</strong>推廣到 $H, A, G$ 等熱力學位；<strong>第七章</strong>用 $dG$ 推導相變 Clapeyron 方程；<strong>第十一–十四章</strong>用 $\Delta G$ 判斷化學反應和電化學反應的自發性。</div>
+</div></section>
+
+<section id="s3-1"><h2>3.1 導論（Introduction）</h2>
+<p>第一定律建立了能量守恆，但它有一個根本的局限性——它不區分<strong>可逆過程</strong>和<strong>不可逆過程</strong>。從能量的角度看，熱從低溫流向高溫並不違反第一定律（只要有人提供等量的功）。但我們從未觀察到這自發發生。第二定律正是用來區分<strong>可能</strong>和<strong>不可能</strong>的過程。</p>
+<p>第二定律的核心概念是<strong>熵（entropy, $S$）</strong>——一個衡量系統無序度或能量「品質」的狀態函數。熵的引入使我們能夠量化不可逆性，並精確預測平衡條件。</p>
+<p><strong>物理直覺：</strong>想像一盒氣體，所有分子集中在一側（低熵），然後撤去隔板——分子會自發擴散到整個盒子（高熵）。這個過程不會自發反過來。同樣，一滴墨水落入水中會擴散，不會自發聚集。這些日常現象反映了一個深刻的自然法則：<strong>孤立系統自發趨向於最可能（即熵最大）的宏觀狀態</strong>。</p>
+<p><strong>為什麼需要一個新的狀態函數？</strong>第一定律的 $U$ 告訴我們能量有多少，但沒有告訴我們能量有多「有用」。$100\ \text{J}$ 在 $1000\ \text{K}$ 的熱庫中比在 $300\ \text{K}$ 的熱庫中能產生更多的有用功。熵 $S$ 正是量化能量「品質」（即可用性）的工具——熵越低，能量品質越高。</p>
+<div class="callout"><strong>💡 Clausius 在 1865 年創造了「熵」這個詞，</strong>源自希臘文 $\eta\ \tau\rho o\pi\eta$（tropē，意為「轉變」）。他選擇這個詞是因為它聽起來像「能量」（energy），且與「轉變」有關——熵是衡量能量轉變為不可用形式的量。</div>
+</section>
+
+<section id="s3-2"><h2>3.2 自發或自然過程（Spontaneous or Natural Processes）</h2>
+<p><strong>自發過程</strong>是指不需要外界干預就能自然發生的過程。所有自發過程有一個共同特徵——它們是<strong>不可逆的（irreversible）</strong>。也就是說，一旦發生，系統和環境<strong>不可能同時恢復原狀</strong>而不引起其他變化。</p>
+<div class="figure"><img src="../../../images/thermodynamics/ch03_pages/ch03_page_81_c.png" alt="圖 3.1" loading="lazy"><figcaption>圖 3.1：自發過程（左）與非自發過程（右）的示意。自發過程沿熵增加的方向進行，非自發過程需要外界做功才能實現。</figcaption></div>
+<p>常見的自發/不可逆過程：</p>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li>熱從高溫流向低溫（自發；反向需要熱泵做功）</li>
+<li>氣體向真空自由膨脹（自發；反向需要壓縮做功）</li>
+<li>兩種氣體的互相擴散（自發；反向需要分離做功）</li>
+<li>摩擦產生熱（自發；反向不可能——熱不能完全轉化為機械功而不引起其他變化）</li>
+</ul>
+<p><strong>數值例：</strong>考慮 1 mol 理想氣體在 300 K 下向真空膨脹，體積從 1 L 增加到 10 L。</p>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li>系統熵變：$\Delta S_{\text{sys}} = nR\ln(V_2/V_1) = (1)(8.314)\ln(10) \approx 19.14\ \text{J/K}$</li>
+<li>因為是自由膨脹（$q = 0$），環境無熱交換：$\Delta S_{\text{surr}} = 0$</li>
+<li>宇宙總熵變：$\Delta S_{\text{univ}} = 19.14\ \text{J/K} > 0$——不可逆！</li>
+</ul>
+<p>再考慮熱傳導：300 K 物體與 310 K 物體接觸，傳遞 100 J 熱量。</p>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li>低溫物體吸熱：$\Delta S_{\text{cold}} = 100/300 = 0.333\ \text{J/K}$</li>
+<li>高溫物體放熱：$\Delta S_{\text{hot}} = -100/310 = -0.323\ \text{J/K}$</li>
+<li>總熵變：$\Delta S_{\text{univ}} = 0.010\ \text{J/K} > 0$——自發且不可逆</li>
+</ul>
+<p><strong>共同特徵：</strong>所有自發過程都涉及能量從「集中」形式（功、有序動能）向「分散」形式（熱、隨機分子運動）的轉化。這種分散化趨勢是熵增的微觀根源。</p>
+<div class="callout"><strong>💡 不可逆性不是因為我們技術不夠好。</strong>即使擁有完美的設備，自由膨脹的氣體也不會自發回到瓶中——這是自然法則，不是工程限制。第四章將從統計力學的角度解釋：宏觀不可逆性源自微觀狀態數目增加的極高機率。</div>
+<div class="callout"><strong>🔗 跨章鏈接：第四章（統計力學）</strong>將以 $S = k\ln\Omega$（Boltzmann 關係）從微觀角度解釋為什麼自發過程總是朝熵增加的方向進行——因為熵與微觀狀態數 $\Omega$ 直接相關，系統總是趨向於最可能的宏觀狀態。詳見 ch04_entropy_statistical_zh.html。</div>
+</section>
+
+<section id="s3-3"><h2>3.3 熵與不可逆性的量化（Entropy and the Quantification of Irreversibility）</h2>
+<p>Clausius 的關鍵洞察是：對於一個<strong>可逆過程</strong>，$\delta q_{\text{rev}}/T$ 的積分與路徑無關——這意味著存在一個狀態函數，他稱之為<strong>熵 $S$</strong>：</p>
+<div class="eq">$$\boxed{dS = \frac{\delta q_{\text{rev}}}{T}} \tag{3.1}$$</div>
+<p>對於有限的可逆過程：</p>
+<div class="eq">$$\Delta S = \int_{A}^{B} \frac{\delta q_{\text{rev}}}{T} \tag{3.2}$$</div>
+<div class="derivation"><h4>推導 1：$dS = \delta q_{\text{rev}}/T$ 作為正合微分（Exact Differential）</h4>
+<p>要證明 $S$ 是狀態函數，只需證明 $\oint \delta q_{\text{rev}}/T = 0$ 沿任意可逆循環成立。考慮卡諾循環——它由兩個等溫過程和兩個絕熱過程組成：</p>
+<p>步驟 1→2（等溫膨脹，$T = T_h$）：$\displaystyle \int_1^2 \frac{\delta q_{\text{rev}}}{T} = \frac{q_h}{T_h}$</p>
+<p>步驟 2→3（絕熱膨脹）：$\delta q = 0 \;\Rightarrow\; \int_2^3 \frac{\delta q_{\text{rev}}}{T} = 0$</p>
+<p>步驟 3→4（等溫壓縮，$T = T_c$）：$\displaystyle \int_3^4 \frac{\delta q_{\text{rev}}}{T} = \frac{q_c}{T_c}$</p>
+<p>步驟 4→1（絕熱壓縮）：$\delta q = 0 \;\Rightarrow\; \int_4^1 \frac{\delta q_{\text{rev}}}{T} = 0$</p>
+<p>由卡諾定理知 $\displaystyle \frac{q_h}{T_h} + \frac{q_c}{T_c} = 0$，因此：</p>
+<div class="eq">$$\oint \frac{\delta q_{\text{rev}}}{T} = \frac{q_h}{T_h} + \frac{q_c}{T_c} = 0 \tag{3.2a}$$</div>
+<p>由於任意可逆循環都可以分解為無數個微小卡諾循環的疊加，上式對任意可逆循環成立。因此 $\delta q_{\text{rev}}/T$ 是正合微分，$S$ 是狀態函數。</p>
+</div>
+<div class="derivation"><h4>推導 2：理想氣體等溫膨脹的 $\Delta S$</h4>
+<p>對於 $n$ mol 理想氣體在溫度 $T$ 下從 $V_1$ 可逆地膨脹到 $V_2$：</p>
+<p>由第一定律：$dU = \delta q_{\text{rev}} + \delta w_{\text{rev}}$。等溫下理想氣體 $dU = 0$，且 $\delta w_{\text{rev}} = -P\,dV$。</p>
+<p>因此 $\delta q_{\text{rev}} = P\,dV = \dfrac{nRT}{V}\,dV$。</p>
+<p>代入熵定義：</p>
+<div class="eq">$$dS = \frac{\delta q_{\text{rev}}}{T} = \frac{nR}{V}\,dV$$</div>
+<p>積分：</p>
+<div class="eq">$$\Delta S = \int_{V_1}^{V_2} \frac{nR}{V}\,dV = nR\ln\frac{V_2}{V_1} \tag{3.2b}$$</div>
+<p>此結果獨立於過程的可逆性——即使實際過程是不可逆的自由膨脹，系統的 $\Delta S$ 仍然等於 $nR\ln(V_2/V_1)$，因為熵是狀態函數。</p>
+</div>
+<p>關鍵點：雖然 $\delta q$ 是路徑函數，但 $\delta q_{\text{rev}}/T$ 是正合微分（exact differential）——這是第二定律最深刻的數學結果。</p>
+<p>對於<strong>不可逆過程</strong>，Clausius 不等式成立：</p>
+<div class="eq">$$dS > \frac{\delta q_{\text{irrev}}}{T} \tag{3.3}$$</div>
+<p>合併可逆與不可逆情況：</p>
+<div class="eq">$$\boxed{dS \geq \frac{\delta q}{T}} \tag{3.4}$$</div>
+<p>對於<strong>孤立系統</strong>（$\delta q = 0$）：</p>
+<div class="eq">$$dS_{\text{isolated}} \geq 0 \tag{3.5}$$</div>
+<p>這是第二定律最簡潔的表述：<strong>孤立系統的熵永不減少</strong>。自發過程使熵增加（$dS > 0$）；平衡時熵達到最大值（$dS = 0$）。</p>
+<div class="callout-warn"><strong>⚡ 熵是狀態函數——計算時永遠走可逆路徑。</strong>即使實際過程是不可逆的，$\Delta S$ 只取決於初始和最終狀態。因此你可以設計一個連接相同兩狀態的<strong>可逆路徑</strong>來計算 $\Delta S$。這是熱力學中最實用的計算技巧之一。</div>
+</section>
+
+<section id="s3-4"><h2>3.4–3.6 可逆與不可逆過程的說明</h2>
+<p>本節通過理想氣體的等溫膨脹來具體展示可逆與不可逆過程的區別。</p>
+<h3>可逆等溫膨脹</h3>
+<p>氣體對抗的壓力始終等於系統壓力（$P_{\text{ext}} = P_{\text{sys}}$），過程無限緩慢。系統從恒溫熱庫吸熱 $q_{\text{rev}}$，對外做功 $w_{\text{rev}}$：</p>
+<div class="eq">$$q_{\text{rev}} = -w_{\text{rev}} = nRT\ln\frac{V_2}{V_1}$$</div>
+<div class="eq">$$\Delta S_{\text{sys}} = \frac{q_{\text{rev}}}{T} = nR\ln\frac{V_2}{V_1}$$</div>
+<p>環境的熵變：$\Delta S_{\text{surr}} = -q_{\text{rev}}/T = -nR\ln(V_2/V_1)$。總熵變：$\Delta S_{\text{univ}} = \Delta S_{\text{sys}} + \Delta S_{\text{surr}} = 0$——可逆過程的總熵不變。</p>
+<h3>不可逆等溫膨脹（自由膨脹）</h3>
+<p>氣體向真空膨脹（$P_{\text{ext}} = 0$），$w = 0$，等溫下 $q = 0$。但 $\Delta S_{\text{sys}}$ 仍是 $nR\ln(V_2/V_1)$（因為 $S$ 是狀態函數！）。環境熵變為 0（無熱交換）。總熵變 $> 0$——不可逆過程使宇宙的熵增加。</p>
+<div class="figure"><img src="../../../images/thermodynamics/ch03_pages/ch03_page_83_c.png" alt="圖 3.2" loading="lazy"><figcaption>圖 3.2：可逆等溫膨脹（左）vs 自由膨脹（右）。兩者 $\Delta S_{\text{sys}}$ 相同，但總熵變不同。</figcaption></div>
+<div class="callout"><strong>💡 核心教訓：</strong>熵變的計算只依賴初始和最終狀態，與過程的可逆性無關。但環境的熵變取決於實際過程的細節。因此 $\Delta S_{\text{univ}}$ 是判斷過程可逆性的終極指標。</div>
+<div class="callout"><strong>🔗 跨章鏈接：第四章（統計力學）</strong>將揭示 $S = k\ln\Omega$（Boltzmann 關係），其中 $\Omega$ 是微觀狀態數。可逆過程對應 $\Omega$ 不變，不可逆過程對應 $\Omega$ 增加。這從微觀粒子的排列方式解釋了為什麼不可逆過程總使宇宙熵增加。詳見 ch04_entropy_statistical_zh.html。</div>
+</section>
+
+<section id="s3-7"><h2>3.7–3.8 理想氣體的壓縮與絕熱膨脹</h2>
+<h3>可逆 vs 不可逆壓縮</h3>
+<p>將理想氣體從 $(P_1, V_1)$ 壓縮到 $(P_2, V_2)$：</p>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li><strong>可逆壓縮：</strong>功最小（對系統做功最少），系統可以完全恢復原狀。$\Delta S_{\text{univ}} = 0$。</li>
+<li><strong>不可逆壓縮：</strong>需要更多的功，多餘的功變成熱。$\Delta S_{\text{univ}} > 0$。</li>
+</ul>
+<p><strong>數值例：</strong>1 mol 理想氣體在 300 K 下從 1 atm 被壓縮到 10 atm。</p>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li>可逆壓縮功：$w_{\text{rev}} = nRT\ln(P_2/P_1) = (1)(8.314)(300)\ln(10) = 5743\ \text{J}$（系統接受外界做功）</li>
+<li>不可逆壓縮（如恆外壓 $P_{\text{ext}} = 10\ \text{atm}$）：$w_{\text{irrev}} = P_{\text{ext}}\Delta V$，做功更多，多餘部分以熱形式散失</li>
+<li>無論可逆不可逆，$\Delta S_{\text{sys}} = nR\ln(V_1/V_2) = -19.14\ \text{J/K}$（熵減少，因為體積減小）</li>
+<li>但總熵變：可逆時 $\Delta S_{\text{univ}} = 0$；不可逆時 $\Delta S_{\text{univ}} > 0$</li>
+</ul>
+<h3>可逆絕熱過程的熵</h3>
+<p>可逆絕熱過程中 $q = 0$，因此：</p>
+<div class="eq">$$\Delta S = \int \frac{\delta q_{\text{rev}}}{T} = 0$$</div>
+<p>可逆絕熱過程是<strong>等熵過程（isentropic process）</strong>——熵保持不變。這就是為什麼 $PV^\gamma = \text{constant}$ 也稱為等熵關係。</p>
+<p>對於不可逆絕熱過程（如自由膨脹），雖然 $q = 0$，但 $\Delta S > 0$——因為過程不可逆，Clausius 不等式中的等號不成立。</p>
+<div class="callout-warn"><strong>⚡ 常見混淆：</strong>「絕熱」只意味著 $q = 0$，不意味著 $\Delta S = 0$。只有<strong>可逆</strong>絕熱過程才是等熵的。不可逆絕熱過程中熵仍然增加。</div>
+</section>
+
+<section id="s3-9"><h2>3.9 小結（Summary Statements）</h2>
+<p>在進入熱機的討論之前，Gaskell 總結了三個關鍵陳述：</p>
+<ol style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li>存在一個狀態函數 $S$（熵），其變化定義為 $dS = \delta q_{\text{rev}}/T$。</li>
+<li>對於任何過程，$dS \geq \delta q/T$。等號對應可逆過程，不等號對應不可逆過程。</li>
+<li>孤立系統中自發過程使熵增加（$\Delta S > 0$），平衡時熵最大（$\Delta S = 0$）。</li>
+</ol>
+<p><strong>可逆與不可逆過程的對比：</strong></p>
+<table><thead><tr><th>性質</th><th>可逆過程</th><th>不可逆過程</th></tr></thead><tbody>
+<tr><td>$\Delta S_{\text{sys}}$</td><td>等於 $\int \delta q_{\text{rev}}/T$</td><td>等於 $\int \delta q_{\text{rev}}/T$（狀態函數！）</td></tr>
+<tr><td>$\Delta S_{\text{surr}}$</td><td>$-\int \delta q_{\text{rev}}/T$</td><td>取決於實際 $\delta q$</td></tr>
+<tr><td>$\Delta S_{\text{univ}}$</td><td>$= 0$</td><td>$> 0$</td></tr>
+<tr><td>過程方向</td><td>可沿原路返回</td><td>不可沿原路返回</td></tr>
+<tr><td>能量品質</td><td>保持不變</td><td>退化（功→熱）</td></tr>
+</tbody></table>
+<p><strong>熵變計算的通用策略：</strong></p>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li><strong>純物質相變：</strong>$\Delta S = \Delta H_{\text{trans}}/T_{\text{trans}}$（可逆相變點）</li>
+<li><strong>理想氣體狀態變化：</strong>$\Delta S = nC_V\ln(T_2/T_1) + nR\ln(V_2/V_1)$ 或 $\Delta S = nC_P\ln(T_2/T_1) - nR\ln(P_2/P_1)$</li>
+<li><strong>等溫混合：</strong>$\Delta S_{\text{mix}} = -R\sum n_i\ln x_i$</li>
+<li><strong>等溫熱傳導：</strong>$\Delta S = q(1/T_{\text{cold}} - 1/T_{\text{hot}})$</li>
+</ul>
+<p>這些公式將在後續章節中反覆使用。</p>
+</section>
+
+<section id="s3-10"><h2>3.10 熱機的性質（The Properties of Heat Engines）</h2>
+<p>熱機是將熱轉化為功的裝置。Sadi Carnot 在 1824 年（比第一定律的建立還早 20 年！）分析了理想熱機的效率，奠定了第二定律的基礎。</p>
+<p><strong>卡諾循環（Carnot Cycle）</strong>由四個可逆步驟組成：</p>
+<ol style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li><strong>等溫膨脹</strong>（$T = T_h$）：從高溫熱庫吸熱 $q_h$</li>
+<li><strong>絕熱膨脹</strong>（$q = 0$）：溫度從 $T_h$ 降至 $T_c$</li>
+<li><strong>等溫壓縮</strong>（$T = T_c$）：向低溫熱庫放熱 $q_c$</li>
+<li><strong>絕熱壓縮</strong>（$q = 0$）：溫度從 $T_c$ 回升至 $T_h$</li>
+</ol>
+<div class="figure"><img src="../../../images/thermodynamics/ch03_pages/ch03_page_89_c.png" alt="圖 3.3" loading="lazy"><figcaption>圖 3.3：卡諾循環在 $P$–$V$ 圖上的表示。四個可逆步驟圍成的面積等於淨功輸出 $w_{\text{net}}$。</figcaption></div>
+<div class="figure"><img src="../../../images/thermodynamics/ch03_pages/ch03_page_89_c.png" alt="圖 3.4" loading="lazy"><figcaption>圖 3.4：卡諾循環在 $T$–$S$ 圖上的表示。等溫過程為水平線，絕熱（等熵）過程為垂直線。矩形面積等於淨熱量 $q_h - |q_c| = w_{\text{net}}$。</figcaption></div>
+<div class="derivation"><h4>推導 3：卡諾效率 $\eta = 1 - T_c/T_h$</h4>
+<p>設工作物質為 $n$ mol 理想氣體，四個步驟的具體分析如下：</p>
+<p><strong>步驟 1→2（等溫膨脹，$T_h$）：</strong> $dU = 0$，因此：</p>
+<div class="eq">$$q_h = -w_{12} = nRT_h\ln\frac{V_2}{V_1} \quad (>0)$$</div>
+<p><strong>步驟 2→3（絕熱膨脹）：</strong> $q = 0$，$PV^\gamma = \text{常數}$，$T_h V_2^{\gamma-1} = T_c V_3^{\gamma-1}$。</p>
+<p><strong>步驟 3→4（等溫壓縮，$T_c$）：</strong> $dU = 0$：</p>
+<div class="eq">$$q_c = -w_{34} = nRT_c\ln\frac{V_4}{V_3} = -nRT_c\ln\frac{V_3}{V_4} \quad (<0)$$</div>
+<p><strong>步驟 4→1（絕熱壓縮）：</strong> $q = 0$，$T_c V_4^{\gamma-1} = T_h V_1^{\gamma-1}$。</p>
+<p>由絕熱關係：$T_h V_2^{\gamma-1} = T_c V_3^{\gamma-1}$ 和 $T_h V_1^{\gamma-1} = T_c V_4^{\gamma-1}$，可得：</p>
+<div class="eq">$$\frac{V_2}{V_1} = \frac{V_3}{V_4}$$</div>
+<p>因此：</p>
+<div class="eq">$$\frac{q_h}{T_h} = nR\ln\frac{V_2}{V_1} = nR\ln\frac{V_3}{V_4} = -\frac{q_c}{T_c}$$</div>
+<p>即 $\displaystyle \frac{q_h}{T_h} + \frac{q_c}{T_c} = 0$。卡諾效率為：</p>
+<div class="eq">$$\eta = \frac{w_{\text{net}}}{q_h} = \frac{q_h + q_c}{q_h} = 1 + \frac{q_c}{q_h} = 1 - \frac{T_c}{T_h} \tag{3.6}$$</div>
+<p>這是任何在 $T_h$ 和 $T_c$ 之間運行的熱機的<strong>理論最高效率</strong>。實際熱機的效率永遠低於卡諾效率（因為不可逆性）。</p>
+</div>
+<p><strong>卡諾效率：</strong></p>
+<div class="eq">$$\eta = \frac{w_{\text{net}}}{q_h} = \frac{q_h + q_c}{q_h} = 1 - \frac{T_c}{T_h} \tag{3.6}$$</div>
+<p>這是任何在 $T_h$ 和 $T_c$ 之間運行的熱機的<strong>理論最高效率</strong>。實際熱機的效率永遠低於卡諾效率（因為不可逆性）。</p>
+<div class="figure"><img src="../../../images/thermodynamics/ch03_pages/ch03_page_92_c.png" alt="圖 3.5" loading="lazy"><figcaption>圖 3.5：卡諾循環在 $P$–$V$ 圖上的表示。四個步驟圍成的面積等於淨功輸出。</figcaption></div>
+<div class="callout"><strong>💡 反直覺的事實：</strong>卡諾效率只取決於兩個熱庫的溫度比，與工作物質的性質無關——無論是用理想氣體、水蒸汽還是任何其他介質，效率都相同。這導出了熱力學溫標的定義。</div>
+<p><strong>效率計算例：</strong>一座核電站的反應堆溫度 $T_h = 600\ \text{K}$，冷卻水溫度 $T_c = 300\ \text{K}$。</p>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li>卡諾極限效率：$\eta_{\text{Carnot}} = 1 - 300/600 = 0.5\ (50\%)$</li>
+<li>實際效率（考慮各種不可逆損失）：約 $33\%$</li>
+<li>不可逆性造成的功損失比例：$1 - 0.33/0.50 = 34\%$ 的潛在功被「浪費」</li>
+</ul>
+<p>這就是為什麼工程師努力提高 $T_h$（開發耐高溫材料）和降低 $T_c$（改進散熱系統）——任何 $T_h$ 和 $T_c$ 之間的差距擴大都能提高效率上限。</p>
+</section>
+
+<section id="s3-11"><h2>3.11 熱力學溫標（The Thermodynamic Temperature Scale）</h2>
+<p>卡諾定理的一個重要推論是：<strong>所有可逆熱機的效率只取決於兩個熱庫的溫度，與工作物質無關。</strong>這為定義一個<strong>絕對溫標</strong>提供了基礎——不需要依賴任何特定物質的性質（如水銀的膨脹係數）。</p>
+<div class="figure"><img src="../../../images/thermodynamics/ch03_pages/ch03_page_95_c.png" alt="圖 3.6" loading="lazy"><figcaption>圖 3.6：熱力學溫標的建立——卡諾循環的 $q_h/q_c$ 比值定義絕對溫度比 $T_h/T_c$，與工作物質無關。</figcaption></div>
+<p>對於可逆熱機：</p>
+<div class="eq">$$\frac{|q_h|}{|q_c|} = \frac{T_h}{T_c} \tag{3.7}$$</div>
+<div class="derivation"><h4>推導 4：$\oint \delta q_{\text{rev}}/T = 0$——熵是狀態函數</h4>
+<p>由卡諾循環已得 $\displaystyle \frac{q_h}{T_h} + \frac{q_c}{T_c} = 0$。對於任意可逆循環，可將其劃分為無窮多個微小卡諾循環：</p>
+<p>考慮每個微小卡諾循環 $i$，有 $\displaystyle \frac{\delta q_{h,i}}{T_{h,i}} + \frac{\delta q_{c,i}}{T_{c,i}} = 0$。</p>
+<p>對所有微小循環求和（積分）：</p>
+<div class="eq">$$\oint \frac{\delta q_{\text{rev}}}{T} = \sum_i \left( \frac{\delta q_{h,i}}{T_{h,i}} + \frac{\delta q_{c,i}}{T_{c,i}} \right) = 0 \tag{3.8}$$</div>
+<p>這直接證明了 $\delta q_{\text{rev}}/T$ 是一個正合微分（exact differential），因此存在一個狀態函數 $S$ 使其 $dS = \delta q_{\text{rev}}/T$。</p>
+<p>等價地，從狀態 A 到 B 的任意可逆路徑給出相同的熵變：</p>
+<div class="eq">$$\Delta S = \int_A^B \frac{\delta q_{\text{rev}}}{T} \quad \text{（與路徑無關）}$$</div>
+</div>
+<p>或等價地，對於卡諾循環：</p>
+<div class="eq">$$\oint \frac{\delta q_{\text{rev}}}{T} = 0 \tag{3.8}$$</div>
+<p>這證明了 $dS = \delta q_{\text{rev}}/T$ 是正合微分——熵是狀態函數。</p>
+<p><strong>熱力學溫標的詳細推導：</strong></p>
+<p>設有三個熱庫，溫度分別為 $T_1$、$T_2$、$T_3$。在 $T_1$ 和 $T_2$ 之間運行的可逆熱機滿足：</p>
+<div class="eq">$$\frac{q_1}{q_2} = f(T_1, T_2)$$</div>
+<p>同樣，$T_2$ 和 $T_3$ 之間：$\displaystyle \frac{q_2}{q_3} = f(T_2, T_3)$；$T_1$ 和 $T_3$ 之間：$\displaystyle \frac{q_1}{q_3} = f(T_1, T_3)$。</p>
+<p>由於 $q_1/q_3 = (q_1/q_2)(q_2/q_3)$，可得：</p>
+<div class="eq">$$f(T_1, T_3) = f(T_1, T_2) \cdot f(T_2, T_3)$$</div>
+<p>這要求 $f(T_i, T_j) = \phi(T_i)/\phi(T_j)$ 的形式。Kelvin 選擇 $\phi(T) = T$（理想氣體溫標的形式），從而定義熱力學溫標：</p>
+<div class="eq">$$\frac{T_1}{T_2} = \frac{q_1}{q_2}$$</div>
+<p>熱力學溫標（單位：Kelvin）以水的三相點為固定點，定義為 273.16 K。這與理想氣體溫標完全一致，但具有更嚴格的理論基礎。</p>
+<div class="callout"><strong>💡 為什麼熱力學溫標是「絕對」的？</strong>因為它不依賴任何物質的特定性質（如水銀的熱膨脹、鉑電阻的溫度係數），而是基於卡諾定理這一普遍熱力學原理。任何溫標只要能與熱力學溫標保持一致，就是一個合理的溫標。</div>
+<div class="callout-warn"><strong>⚡ Clausius 不等式的根源：</strong>$\oint \delta q/T \leq 0$ 是第二定律最根本的數學表述。對可逆循環取等號，對不可逆循環取不等號。從這個不等式可以推導出所有其他形式的第二定律表述。</div>
+</section>
+
+<section id="s3-12"><h2>3.12 第二定律的表述（The Second Law of Thermodynamics）</h2>
+<p>第二定律有多種等價表述，每種都從不同角度捕捉了同一個物理事實：</p>
+<table><thead><tr><th>表述</th><th>內容</th></tr></thead><tbody>
+<tr><td><strong>Clausius 表述</strong></td><td>不可能將熱從低溫物體傳遞到高溫物體而不引起其他變化。</td></tr>
+<tr><td><strong>Kelvin-Planck 表述</strong></td><td>不可能從單一熱庫取熱並將其完全轉化為功而不引起其他變化。</td></tr>
+<tr><td><strong>熵表述</strong></td><td>孤立系統的熵永不減少：$\Delta S_{\text{univ}} \geq 0$。</td></tr>
+<tr><td><strong>Carathéodory 表述</strong></td><td>在任何狀態的任意鄰近，存在無法通過絕熱可逆路徑到達的狀態。</td></tr>
+</tbody></table>
+<p><strong>等價性證明概要：</strong></p>
+<ol style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li><strong>Kelvin-Planck ⇒ Clausius：</strong>若 Clausius 表述不成立（熱可自發從低溫流向高溫），則可構造一台熱機：從 $T_h$ 吸熱 $Q$，做功 $W$，並用 $W$ 驅動此「反 Clausius」裝置將 $Q_c$ 從 $T_c$ 泵回 $T_h$，淨效果是從 $T_h$ 取熱 $Q - Q_c$ 完全轉化為功 $W$，違反 Kelvin-Planck。</li>
+<li><strong>Clausius ⇒ 熵表述：</strong>若 $\Delta S_{\text{univ}} < 0$ 可能，則可構造一台違反 Clausius 的裝置。</li>
+<li><strong>熵表述 ⇒ Carathéodory：</strong>若所有狀態都可通過絕熱可逆路徑到達，則 $\Delta S = 0$ 對任意變化成立，矛盾。</li>
+</ol>
+<p>這些等價性表明第二定律是一個深刻的、自洽的物理原理，而不僅僅是工程經驗總結。</p>
+<div class="callout"><strong>💡 這些表述是等價的——</strong>可以用反證法互相推導。例如，如果 Kelvin-Planck 表述不成立（可以從單一熱庫取熱完全轉化為功），就可以製造違反 Clausius 表述的裝置（用這份功驅動熱泵）。</div>
+</section>
+
+<section id="s3-13"><h2>3.13 最大功（Maximum Work）</h2>
+<p>第二定律的一個重要應用是計算一個過程可以產生的<strong>最大功</strong>。</p>
+<div class="figure"><img src="../../../images/thermodynamics/ch03_pages/ch03_page_100_c.png" alt="圖 3.7" loading="lazy"><figcaption>圖 3.7：最大功的示意——可逆過程沿平衡路徑進行，做功最大；不可逆過程偏離平衡路徑，損失部分可用功。</figcaption></div>
+<p>對於一個從狀態 1 到狀態 2 的過程，系統對外做的最大功發生在過程<strong>完全可逆</strong>時。合併第一和第二定律：</p>
+<div class="eq">$$dU = T\,dS + \delta w_{\text{max}}$$</div>
+<p>因此：</p>
+<div class="eq">$$\delta w_{\text{max}} = dU - T\,dS \tag{3.9}$$</div>
+<p>對於等溫過程：</p>
+<div class="eq">$$w_{\text{max}} = \Delta U - T\Delta S = \Delta A \tag{3.10}$$</div>
+<p>其中 $A = U - TS$ 是<strong>亥姆霍茲自由能（Helmholtz free energy）</strong>——將在第五章詳細展開。</p>
+<p><strong>最大功的實際意義：</strong>任何不可逆因素（摩擦、有限溫差傳熱、自由膨脹等）都會導致有用功的損失。損失的功等於 $T_0 \Delta S_{\text{univ}}$，其中 $T_0$ 是環境溫度。換言之，宇宙熵增直接度量了「浪費」的功。</p>
+<div class="callout"><strong>💡 最大功定理的實用意義：</strong>在電化學中（第十四章），電池的可逆電動勢給出最大電功 $w_{\text{max}} = \Delta G$。在冶金中，Ellingham 圖（第十二章）用 $\Delta G$ 判斷金屬氧化物能否被碳還原。</div>
+</section>
+
+<section id="s3-14"><h2>3.14 熵與平衡判據（Entropy and the Criterion for Equilibrium）</h2>
+<p>對於一個<strong>孤立系統</strong>（$U$、$V$ 固定），平衡條件是熵達到最大值：</p>
+<div class="eq">$$dS_{U,V} = 0 \quad \text{（平衡）} \tag{3.11}$$</div>
+<p>這是最基本的平衡判據。從它出發，結合不同的約束條件，可以推導出其他熱力學位（potential）的平衡判據：</p>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li>孤立系統（$U$, $V$ 固定）：$S$ 最大 → 平衡</li>
+<li>封閉系統（$T$, $V$ 固定）：$A$（亥姆霍茲自由能）最小 → 平衡</li>
+<li>封閉系統（$T$, $P$ 固定）：$G$（吉布斯自由能）最小 → 平衡 ← <strong>最常用</strong></li>
+</ul>
+<p>這些判據貫穿全書——從相平衡（第七章）到化學反應平衡（第十一章）到電化學（第十四章）。</p>
+<p><strong>熵平衡（Entropy Balance）的進一步分析：</strong></p>
+<p>對於任何過程，我們可以將熵變拆分為兩部分：</p>
+<div class="eq">$$\Delta S_{\text{sys}} = \Delta S_{\text{exchange}} + \Delta S_{\text{generation}}$$</div>
+<p>其中 $\Delta S_{\text{exchange}} = \int \delta q/T$ 是由熱交換引起的熵流，$\Delta S_{\text{generation}} \geq 0$ 是由不可逆性引起的熵產生（entropy generation）。這個「熵產生」的概念在工程熱力學中極為重要——它直接度量了過程的不可逆程度。</p>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li>可逆過程：$\Delta S_{\text{generation}} = 0$，系統熵變完全來自熱交換</li>
+<li>不可逆過程：$\Delta S_{\text{generation}} > 0$，系統熵變大於熱交換引起的部分</li>
+<li>絕熱過程（$\delta q = 0$）：$\Delta S_{\text{sys}} = \Delta S_{\text{generation}} \geq 0$</li>
+</ul>
+<p><strong>從熵判據到自由能判據的推導（示意）：</strong></p>
+<p>考慮系統+環境作為孤立系統。平衡時 $dS_{\text{univ}} = dS_{\text{sys}} + dS_{\text{surr}} = 0$。</p>
+<p>若環境是溫度 $T$ 和壓力 $P$ 固定的熱庫，則 $dS_{\text{surr}} = -\delta q/T$。代入 $dU = \delta q + \delta w$ 可得：</p>
+<div class="eq">$$dS_{\text{univ}} = dS_{\text{sys}} - \frac{dU_{\text{sys}} - \delta w}{T} \geq 0$$</div>
+<p>定溫定壓下 $\delta w = -P\,dV$，整理得：</p>
+<div class="eq">$$d(U_{\text{sys}} - TS_{\text{sys}} + PV_{\text{sys}}) = dG_{\text{sys}} \leq 0$$</div>
+<p>這就是為什麼 $\Delta G \leq 0$ 是定溫定壓下自發性的判據。</p>
+<div class="callout-warn"><strong>⚡ 選擇正確的平衡判據</strong>取決於系統的約束條件。大多數材料製程是在定溫定壓下進行的，因此 $\Delta G \leq 0$ 是最常用的自發性判據。第五章將全面展開這些熱力學位。</div>
+<div class="callout"><strong>🔗 跨章鏈接：第七章（相平衡）</strong>將從 $dG = -S\,dT + V\,dP$ 推導 Clapeyron 方程 $\displaystyle \frac{dP}{dT} = \frac{\Delta S}{\Delta V}$，描述純物質的相變溫度與壓力的關係。該方程是 $dG$ 作為相平衡判據的直接應用。詳見 ch07_phase_equil_zh.html。</div>
+</section>
+
+<section id="s3-15"><h2>3.15 第一與第二定律的結合（The Combined Statement）</h2>
+<p>合併第一定律（$dU = \delta q + \delta w$）和第二定律（$dS = \delta q_{\text{rev}}/T$，且可逆時 $\delta w_{\text{rev}} = -P\,dV$），得到熱力學最基本的方程式：</p>
+<div class="eq">$$\boxed{dU = T\,dS - P\,dV} \tag{3.12}$$</div>
+<div class="figure"><img src="../../../images/thermodynamics/ch03_pages/ch03_page_102_c.png" alt="圖 3.8" loading="lazy"><figcaption>圖 3.8：第一和第二定律的結合——$dU = T\,dS - P\,dV$ 是平衡熱力學的基石，統一了能量守恆與熵增原理。</figcaption></div>
+<p>這條看似簡單的方程式是<strong>整個平衡熱力學的基石</strong>。從它出發，配合 Legendre 變換，可以推導出所有其他熱力學關係。</p>
+<div class="derivation"><h4>推導 5：從 $dU$ 到四個基本方程——Legendre 變換</h4>
+<p><strong>什麼是 Legendre 變換？</strong>將一個函數對其自然變數的導數作為新變數，從而變換到一個新的特徵函數。在熱力學中，我們用 Legendre 變換從 $U(S, V)$ 生成 $H(S, P)$、$A(T, V)$ 和 $G(T, P)$。</p>
+<p><strong>由 $dU = T\,dS - P\,dV$：</strong></p>
+<p>自然變數為 $S$ 和 $V$，且 $T = (\partial U/\partial S)_V$，$-P = (\partial U/\partial V)_S$。</p>
+<p><strong>焓 $H$：</strong> 將 $V$ 變換為 $P$：</p>
+<div class="eq">$$H = U + PV \quad\Rightarrow\quad dH = dU + P\,dV + V\,dP = T\,dS + V\,dP \tag{3.13}$$</div>
+<p><strong>亥姆霍茲自由能 $A$：</strong> 將 $S$ 變換為 $T$：</p>
+<div class="eq">$$A = U - TS \quad\Rightarrow\quad dA = dU - T\,dS - S\,dT = -S\,dT - P\,dV \tag{3.14}$$</div>
+<p><strong>吉布斯自由能 $G$：</strong> 同時將 $S$ 變換為 $T$，$V$ 變換為 $P$：</p>
+<div class="eq">$$G = U - TS + PV \quad\Rightarrow\quad dG = -S\,dT + V\,dP \tag{3.15}$$</div>
+<p>這四個方程統稱為<strong>基本方程式（Fundamental Equations）</strong>，每個方程對應一組特定的自然變數。選擇最方便的一組取決於系統的約束條件。</p>
+</div>
+<div class="eq">$$dH = T\,dS + V\,dP \tag{3.13}$$</div>
+<div class="eq">$$dA = -S\,dT - P\,dV \tag{3.14}$$</div>
+<div class="eq">$$dG = -S\,dT + V\,dP \tag{3.15}$$</div>
+<p>這些基本方程式（fundamental equations）是第五章的主題。但概念根植於此——第二定律引入的 $T\,dS$ 項。</p>
+<div class="callout"><strong>💡 $dU = T\,dS - P\,dV$ 被稱為「組合定律」</strong>——它將第一定律的能量守恆和第二定律的熵增統一在一個方程式中。注意：這個方程式只對<strong>可逆過程</strong>嚴格成立（或對任何過程的初始和最終平衡狀態之間的變化）。對於包含不可逆步驟的過程，$T\,dS > \delta q$，因此 $dU < T\,dS - P\,dV$。</div>
+<div class="callout"><strong>🔗 跨章鏈接：第五章（熱力學位）</strong>將從本節的四個基本方程式出發，系統討論 $U$、$H$、$A$、$G$ 的性質、Maxwell 關係、以及它們在材料熱力學中的應用。詳見 ch05_thermo_potentials_zh.html。</div>
+</section>
+
+<section id="s3-16"><h2>3.16 定性例題 1：熵變的方向判斷</h2>
+<div class="figure"><img src="../../../images/thermodynamics/ch03_pages/ch03_page_106_c.png" alt="圖 3.9" loading="lazy"><figcaption>圖 3.9：定性例題 1——判斷下列過程是否自發：(a) 氣體混合，(b) 冰塊融化，(c) 彈簧鬆弛。</figcaption></div>
+<p><strong>例題：</strong>判斷以下過程在給定條件下是否自發，並說明理由。</p>
+<ol style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li><strong>兩種理想氣體在定溫定壓下混合：</strong>自發。$\Delta S_{\text{mix}} = -R\sum n_i\ln x_i > 0$（$x_i$ 為摩爾分數）。混合熵恆為正，因此混合過程總是自發的。</li>
+<li><strong>0°C 的冰在 25°C 的空氣中融化：</strong>自發。冰的融化熵 $\Delta S_{\text{fus}} = \Delta H_{\text{fus}}/T_{\text{fus}} > 0$，且環境溫度高於冰點，熱量從環境流向冰，使總熵增加。</li>
+<li><strong>壓縮彈簧在真空中釋放：</strong>自發。彈簧的勢能轉化為內能（彈性介質的分子運動加劇），雖然系統內能增加，但這是自發的不可逆過程，總熵增加。</li>
+</ol>
+<div class="callout"><strong>💡 判斷自發性的通用步驟：</strong>(1) 確定系統和環境，(2) 計算 $\Delta S_{\text{sys}}$（通過可逆路徑），(3) 計算 $\Delta S_{\text{surr}}$（基於實際熱交換），(4) 判斷 $\Delta S_{\text{univ}} = \Delta S_{\text{sys}} + \Delta S_{\text{surr}}$ 是否大於 0。</div>
+</section>
+
+<section id="s3-17"><h2>3.17 定量例題 2：理想氣體熵變計算</h2>
+<div class="figure"><img src="../../../images/thermodynamics/ch03_pages/ch03_page_107_c.png" alt="圖 3.10" loading="lazy"><figcaption>圖 3.10：定量例題 2——2 mol 理想氣體從 300 K、2 atm 經不同路徑到 400 K、1 atm 的熵變計算。</figcaption></div>
+<p><strong>例題：</strong>2 mol 理想氣體（$C_{V,m} = 3R/2$）初始狀態為 300 K、2 atm，經以下過程達到 400 K、1 atm。求 $\Delta S$。</p>
+<p><strong>解：</strong>熵是狀態函數，我們可以設計一條可逆路徑來計算。選擇先等溫後等壓，或先等壓後等溫。</p>
+<p><strong>路徑 A：先等溫膨脹到 1 atm，再加熱到 400 K</strong></p>
+<p>步驟 1（等溫，300 K，2 atm → 1 atm）：</p>
+<div class="eq">$$\Delta S_1 = nR\ln\frac{P_1}{P_2} = (2)(8.314)\ln\frac{2}{1} = 11.53\ \text{J/K}$$</div>
+<p>步驟 2（等壓加熱，300 K → 400 K）：</p>
+<div class="eq">$$\Delta S_2 = nC_{P,m}\ln\frac{T_2}{T_1} = (2)\left(\frac{5R}{2}\right)\ln\frac{400}{300} = 5R\ln\frac{4}{3} = 11.94\ \text{J/K}$$</div>
+<p>總熵變：$\Delta S = \Delta S_1 + \Delta S_2 = 11.53 + 11.94 = 23.47\ \text{J/K}$</p>
+<div class="callout"><strong>💡 解題關鍵：</strong>由於 $S$ 是狀態函數，你可以選擇任意方便的可逆路徑。典型的分解策略是 (a) 等溫步驟 + (b) 等壓或等容步驟。務必使用與實際過程相同初末態的路徑。</div>
+</section>
+
+<section id="s3-18"><h2>3.18 定量例題 3：相變的熵變計算</h2>
+<div class="figure"><img src="../../../images/thermodynamics/ch03_pages/ch03_page_109_c.png" alt="圖 3.11" loading="lazy"><figcaption>圖 3.11：定量例題 3——水在 100°C、1 atm 下汽化的熵變。可逆相變的 $\Delta S = \Delta H_{\text{vap}}/T$。</figcaption></div>
+<p><strong>例題：</strong>計算 1 mol 水在 100°C、1 atm 下汽化為水蒸氣的 $\Delta S$。已知水的汽化熱 $\Delta H_{\text{vap}} = 40.7\ \text{kJ/mol}$。</p>
+<p><strong>解：</strong>在正常沸點下，汽化是可逆相變（液體和蒸汽在 100°C、1 atm 下平衡共存）。因此可以直接使用熵定義：</p>
+<div class="eq">$$\Delta S_{\text{vap}} = \frac{q_{\text{rev}}}{T} = \frac{\Delta H_{\text{vap}}}{T_b} = \frac{40.7 \times 10^3\ \text{J/mol}}{373.15\ \text{K}} = 109.1\ \text{J/(mol·K)}$$</div>
+<p><strong>檢驗：</strong>汽化過程中，水分子從有序的液態變為氣態，微觀狀態數 $\Omega$ 大幅增加，因此熵增加是合理的。</p>
+<p><strong>延伸：</strong>如果將 1 mol 水從 25°C 加熱到 100°C 然後汽化，總熵變為：</p>
+<div class="eq">$$\Delta S_{\text{total}} = nC_{P,l}\ln\frac{T_b}{T_1} + \frac{n\Delta H_{\text{vap}}}{T_b}$$</div>
+<div class="eq">$$= (1)(75.3)\ln\frac{373.15}{298.15} + 109.1 = 16.9 + 109.1 = 126.0\ \text{J/K}$$</div>
+<div class="callout-warn"><strong>⚡ 可逆相變的捷徑：</strong>在平衡相變點（如 100°C、1 atm 的汽化），$\Delta G = 0$，且 $\Delta S = \Delta H/T$。這是一個非常有用的捷徑，因為直接測量 $\Delta H$ 比測量 $\Delta S$ 容易得多。第七章將詳細討論相變熱力學。</div>
+</section>
+
+<section id="s3-19"><h2>3.19 第二定律在材料科學中的意義</h2>
+<p>第二定律不僅是基礎物理原理，它在材料科學與工程中具有深遠的實際影響：</p>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li><strong>合金穩定性：</strong>給定成分和溫度，Gibbs 自由能最小的相是最穩定的。這解釋了為什麼某些合金成分會自發形成特定微結構。</li>
+<li><strong>擴散驅動力：</strong>原子從高化學勢區域向低化學勢區域擴散，是 $\Delta G < 0$ 的驅動結果。熵增原理預測了濃度梯度如何隨時間衰減。</li>
+<li><strong>相變溫度預測：</strong>Clapeyron 方程（第七章）從 $dG$ 推導，給出壓力如何影響熔點和沸點——直接來自第二定律和平衡條件 $dG = 0$。</li>
+<li><strong>腐蝕與氧化：</strong>金屬自發氧化的趨勢由 $\Delta G$ 決定。Ellingham 圖（第十二章）是第二定律在提取冶金學中最直接的應用。</li>
+<li><strong>熱處理工藝：</strong>淬火、回火等工藝利用不可逆過程控制微結構——工程師通過控制冷卻速率（從而控制不可逆程度）來獲得所需的材料性能。</li>
+</ul>
+<p>理解第二定律使材料科學家能夠預測反應方向、設計工藝流程、優化能源效率——而不必依賴試錯法。</p>
+<div class="callout"><strong>💡 一個統一的視角：</strong>第二定律告訴我們，<strong>一切自發過程都是「能量品質」退化的過程</strong>——有用功退化為熱，有序結構退化為無序。但正是這種退化驅動了宇宙中的一切變化——從恆星中的核反應到材料中的擴散。生命本身也依賴於局部熵減（通過消耗環境中的能量來維持有序結構），而整體上宇宙熵仍然增加。</div>
+</section>
+
+<section id="summary"><h2>本章摘要</h2>
+<ol style="font-size:14px;color:var(--t2);margin-left:18px">
+<li><strong>熵的定義：</strong>$dS = \delta q_{\text{rev}}/T$。熵是狀態函數——計算時走可逆路徑。</li>
+<li><strong>第二定律（不等號形式）：</strong>$dS \geq \delta q/T$。孤立系統中 $\Delta S \geq 0$。</li>
+<li><strong>可逆 vs 不可逆：</strong>可逆過程 $\Delta S_{\text{univ}} = 0$；不可逆過程 $\Delta S_{\text{univ}} > 0$。</li>
+<li><strong>卡諾循環：</strong>效率 $\eta = 1 - T_c/T_h$，是所有熱機的理論上限。</li>
+<li><strong>熱力學溫標：</strong>基於卡諾定理，$|q_h|/|q_c| = T_h/T_c$。獨立於任何物質。</li>
+<li><strong>最大功定理：</strong>可逆過程產生最大功。等溫可逆功 $w_{\text{max}} = \Delta U - T\Delta S = \Delta A$。</li>
+<li><strong>平衡判據：</strong>孤立系統 $S$ 最大；定溫定容 $A$ 最小；<strong>定溫定壓 $G$ 最小</strong>。</li>
+<li><strong>組合定律：</strong>$dU = T\,dS - P\,dV$——整個平衡熱力學的基石。</li>
+</ol>
+<h3>關鍵方程式總結</h3>
+<table><thead><tr><th>方程式</th><th>名稱</th><th>適用條件</th></tr></thead><tbody>
+<tr><td>$dS = \delta q_{\text{rev}}/T$</td><td>熵的定義</td><td>可逆過程</td></tr>
+<tr><td>$dS \geq \delta q/T$</td><td>Clausius 不等式</td><td>任何過程</td></tr>
+<tr><td>$\Delta S = nR\ln(V_2/V_1)$</td><td>等溫熵變（理想氣體）</td><td>等溫過程</td></tr>
+<tr><td>$\Delta S = nC_P\ln(T_2/T_1)$</td><td>等壓熵變（理想氣體）</td><td>等壓過程</td></tr>
+<tr><td>$\Delta S = nC_V\ln(T_2/T_1)$</td><td>等容熵變（理想氣體）</td><td>等容過程</td></tr>
+<tr><td>$\eta = 1 - T_c/T_h$</td><td>卡諾效率</td><td>可逆熱機</td></tr>
+<tr><td>$dU = T\,dS - P\,dV$</td><td>組合定律</td><td>可逆/平衡過程</td></tr>
+<tr><td>$dH = T\,dS + V\,dP$</td><td>焓的基本方程</td><td>可逆/平衡過程</td></tr>
+<tr><td>$dA = -S\,dT - P\,dV$</td><td>亥姆霍茲自由能</td><td>可逆/平衡過程</td></tr>
+<tr><td>$dG = -S\,dT + V\,dP$</td><td>吉布斯自由能</td><td>可逆/平衡過程</td></tr>
+</tbody></table></section>
+</main>
+<script>
+function toggleTheme(){const h=document.documentElement;const n=h.getAttribute('data-theme')==='light'?'dark':'light';h.setAttribute('data-theme',n);localStorage.setItem('theme',n);document.getElementById('tl').textContent=n==='dark'?'淺色模式':'深色模式';}
+const s=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',s);if(s==='dark')document.getElementById('tl').textContent='淺色模式';
+const secs=document.querySelectorAll('section[id]');const navs=document.querySelectorAll('.sn a');window.addEventListener('scroll',()=>{let c='';secs.forEach(s=>{if(window.scrollY>=s.offsetTop-80)c=s.getAttribute('id');});navs.forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+c);});});
+document.querySelectorAll('.figure img').forEach(i=>i.addEventListener('click',()=>window.open(i.src,'_blank')));
+</script>
+</body>
+</html>

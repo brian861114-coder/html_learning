@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>第九章 公式摘要 — 溶液的行為（85 條完整版）</title>
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']],tags:'ams'},options:{ignoreHtmlClass:'no-math'}};</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+:root{--bg:#FFFFFF;--bg2:#F5F5F7;--bg3:#E8F0FE;--tx:#1D1D1F;--tx2:#1D1D1F;--ac:#007AFF;--bd:#D2D2D7;--sh:0 2px 8px rgba(0,0,0,0.08);--fbg:#FAFBFC;--fbd:#E5E5EA;--dbg:#E8F0FE;--dac:#007AFF;--wbg:#FFF9F0;--wbd:#FFB340;--wtx:#B8700A;--hv:#F0F4FF;--nw:240px}
+[data-theme="dark"]{--bg:#1C1C1E;--bg2:#2C2C2E;--bg3:#1A2332;--tx:#F5F5F7;--tx2:#A1A1A6;--ac:#0A84FF;--bd:#48484A;--fbg:#252528;--fbd:#3A3A3C;--dbg:#1A2332;--dac:#0A84FF;--wbg:#2C2416;--wbd:#8B6914;--wtx:#FFB340;--hv:#1E2A3A}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth;scroll-padding-top:16px}
+body{font-family:-apple-system,BlinkMacSystemFont,'Noto Sans TC','Microsoft JhengHei',sans-serif;background:var(--bg2);color:var(--tx);line-height:1.75;display:flex;min-height:100vh}
+.sidebar{position:fixed;top:0;left:0;width:var(--nw);height:100vh;background:var(--bg);border-right:1px solid var(--bd);overflow-y:auto;z-index:100;padding:20px 16px;display:flex;flex-direction:column}
+.sidebar-header{margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--fbd)}.sidebar-header h2{font-size:14px;font-weight:600;color:var(--ac)}.sidebar-header .bk{font-size:11px;color:var(--tx2)}
+.sidebar-nav{flex:1}.sidebar-nav ul{list-style:none}.sidebar-nav a{display:block;padding:4px 10px;font-size:11px;color:var(--tx2);text-decoration:none;border-radius:5px;transition:all .12s;line-height:1.3}.sidebar-nav a:hover{background:var(--bg3);color:var(--ac)}.sidebar-nav a.active{background:var(--bg3);color:var(--ac);font-weight:500}.sidebar-nav .ns{font-weight:600;font-size:12px;color:var(--tx);margin-top:10px;margin-bottom:2px;padding:2px 10px}.sidebar-nav .nsub a{padding-left:20px;font-size:10px}
+.sidebar-toggle{margin-top:auto;padding-top:12px;border-top:1px solid var(--fbd)}.sidebar-toggle button{width:100%;padding:6px;border:1px solid var(--bd);border-radius:6px;background:var(--bg2);color:var(--tx);cursor:pointer;font-size:12px}
+.main{margin-left:var(--nw);flex:1;max-width:1100px;padding:32px 40px 80px}
+.header{margin-bottom:24px;padding-bottom:20px;border-bottom:2px solid var(--ac)}.header .tag{font-size:12px;font-weight:600;color:var(--ac);letter-spacing:1px}.header h1{font-size:26px;font-weight:700;margin:6px 0}.header .sub{font-size:13px;color:var(--tx2)}
+.tbar{display:flex;gap:8px;margin-bottom:20px}.tbar button{padding:5px 16px;font-size:12px;border:1px solid var(--ac);border-radius:20px;background:var(--bg);color:var(--ac);cursor:pointer;font-weight:500;transition:all .15s}.tbar button:hover{background:var(--ac);color:#fff}
+.section{margin-bottom:44px}.section h2{font-size:19px;font-weight:700;color:var(--ac);margin-bottom:4px;padding-bottom:6px;border-bottom:1px solid var(--bd)}
+.fcard{background:var(--bg);border:1px solid var(--fbd);border-radius:10px;padding:16px 20px;margin:14px 0;box-shadow:var(--sh)}.fcard .lbl{font-size:11px;font-weight:700;color:var(--ac);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}.fcard .eq{text-align:center;padding:8px 0;font-size:15px}.fcard .note{font-size:12px;color:var(--tx2);margin-top:6px;padding-top:6px;border-top:1px solid var(--fbd);line-height:1.6}
+.warn-box{background:var(--wbg);border:1px solid var(--wbd);border-radius:10px;padding:14px 18px;margin:16px 0;font-size:14px}.warn-box .wt{font-weight:700;color:var(--wtx);font-size:12px;margin-bottom:6px}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:13px}thead th{background:var(--bg3);padding:8px 12px;text-align:left;font-size:12px;font-weight:600;border-bottom:2px solid var(--bd)}tbody td{padding:8px 12px;border-bottom:1px solid var(--fbd)}
+@media(max-width:768px){.sidebar{transform:translateX(-100%);transition:transform .3s}.sidebar.open{transform:translateX(0)}.main{margin-left:0;padding:20px 16px 60px}}
+@media print{.sidebar,.tbar{display:none}.main{margin-left:0;max-width:100%;padding:0}}
+</style>
+<script src="../../../reading-preferences.js" defer></script></head>
+<body><a class="portal-home-link" href="../../../index.html">返回學習中心</a><style id="portal-home-link-style">.portal-home-link{position:fixed;top:16px;right:16px;z-index:1000;display:inline-flex;align-items:center;min-height:36px;padding:7px 11px;border:1px solid #cbd5e1;border-radius:8px;background:#fff;color:#1d4ed8;font:600 13px/1.2 -apple-system,BlinkMacSystemFont,"Noto Sans TC","Microsoft JhengHei",sans-serif;text-decoration:none;box-shadow:0 2px 10px rgba(15,23,42,.08)}.portal-home-link:hover{background:#eff6ff}.portal-home-link:focus-visible{outline:3px solid rgba(37,99,235,.35);outline-offset:2px}@media(max-width:768px){.portal-home-link{top:10px;right:10px;min-height:34px;padding:7px 9px;font-size:12px}}</style>
+<nav class="sidebar"><div class="sidebar-header"><div class="bk">材料熱力學 · Gaskell</div><h2>第九章 公式摘要</h2></div><div class="sidebar-nav"><ul>
+<li><a href="#s1">9.2–9.3 Raoult、Henry、活性</a></li>
+<li><a href="#s2">9.4–9.6 Gibbs–Duhem 與理想溶液</a></li>
+<li><a href="#s3">9.7–9.12 非理想與正規溶液</a></li>
+<li><a href="#cheatsheet">📋 公式速查表（85 條全收錄）</a></li>
+</ul></div><div class="sidebar-toggle"><button onclick="toggleTheme()">🌓 <span id="tl">深色模式</span></button></div></nav>
+<main class="main">
+<div class="header"><div class="tag">85 條公式完整版 · Raoult + Henry + Activity + Regular Solution</div><h1>第九章：溶液的行為</h1><div class="sub">Introduction to the Thermodynamics of Materials · David R. Gaskell · pp. 288–341</div></div>
+<div class="tbar"><button onclick="document.querySelectorAll('details').forEach(d=>d.open=true)">📖 展開全部</button><button onclick="document.querySelectorAll('details').forEach(d=>d.open=false)">📕 收合全部</button></div>
+
+<div class="section" id="s1"><h2>9.2–9.3 Raoult 定律、Henry 定律與活性</h2>
+<div class="fcard"><div class="lbl">⭐ Raoult 定律</div><div class="eq">$$\boxed{P_i = x_i P_i^\circ}$$</div><div class="note">溶劑行為（$x_i \to 1$）。理想溶液在所有組成範圍內遵循 Raoult 定律。</div></div>
+<div class="fcard"><div class="lbl">⭐ Henry 定律</div><div class="eq">$$P_i = k_H x_i \quad (x_i \to 0)$$</div><div class="note">溶質行為（稀溶液極限）。$k_H$ = Henry 常數。</div></div>
+<div class="fcard"><div class="lbl">⭐ 活性定義 (9.1)</div><div class="eq">$$\boxed{a_i = \frac{f_i}{f_i^\circ}} \quad \text{或} \quad \boxed{\mu_i = \mu_i^\circ + RT\ln a_i}$$</div></div>
+<div class="fcard"><div class="lbl">活性係數 (9.2)</div><div class="eq">$$\gamma_i = \frac{a_i}{x_i}$$</div></div>
+</div>
+
+<div class="section" id="s2"><h2>9.4–9.6 Gibbs–Duhem 與理想溶液</h2>
+<div class="fcard"><div class="lbl">⭐ Gibbs–Duhem（一般形式）</div><div class="eq">$$\boxed{\sum_i n_i\,d\mu_i = 0 \quad (T,P\ \text{固定})}$$</div></div>
+<div class="fcard"><div class="lbl">Gibbs–Duhem（活性形式）</div><div class="eq">$$\sum_i x_i\,d\ln a_i = 0$$</div></div>
+<div class="fcard"><div class="lbl">⭐ 理想溶液 $\Delta G_{\text{mix}}$</div><div class="eq">$$\boxed{\Delta G_{\text{mix}}^{\text{id}} = RT\sum_i x_i\ln x_i}$$</div></div>
+<div class="fcard"><div class="lbl">理想溶液 $\Delta S_{\text{mix}}$</div><div class="eq">$$\Delta S_{\text{mix}}^{\text{id}} = -R\sum_i x_i\ln x_i$$</div></div>
+<div class="fcard"><div class="lbl">理想溶液 $\Delta H_{\text{mix}} = 0$</div><div class="eq">$$\Delta H_{\text{mix}}^{\text{id}} = 0,\quad \Delta V_{\text{mix}}^{\text{id}} = 0$$</div></div>
+</div>
+
+<div class="section" id="s3"><h2>9.7–9.12 非理想溶液與正規溶液模型</h2>
+<div class="fcard"><div class="lbl">超額函數定義</div><div class="eq">$$G^{\text{xs}} = \Delta G_{\text{mix}} - \Delta G_{\text{mix}}^{\text{id}}$$</div></div>
+<div class="fcard"><div class="lbl">⭐ 正規溶液 $\Delta G_{\text{mix}}$</div><div class="eq">$$\boxed{\Delta G_{\text{mix}} = \Omega x_A x_B + RT(x_A\ln x_A + x_B\ln x_B)}$$</div></div>
+<div class="fcard"><div class="lbl">正規溶液 $\Delta H_{\text{mix}}$</div><div class="eq">$$\Delta H_{\text{mix}} = \Omega x_A x_B$$</div></div>
+<div class="fcard"><div class="lbl">⭐ 活性係數（正規溶液）</div><div class="eq">$$\boxed{RT\ln\gamma_A = \Omega x_B^2,\quad RT\ln\gamma_B = \Omega x_A^2}$$</div></div>
+<div class="fcard"><div class="lbl">⭐ 混溶間隙臨界條件</div><div class="eq">$$\boxed{\Omega_c = 2RT_c \quad \Rightarrow \quad T_c = \frac{\Omega}{2R}}$$</div><div class="note">$\Omega > 2RT$ → 出現混溶間隙（miscibility gap），溶液分為兩相。</div></div>
+<div class="fcard"><div class="lbl">Spinodal 分解條件</div><div class="eq">$$\frac{\partial^2 G}{\partial x^2} = 0 \quad \Rightarrow \quad T_s = \frac{2\Omega}{R}x(1-x)$$</div></div>
+</div>
+
+<div class="section" id="cheatsheet"><h2>公式速查表（關鍵公式精選）</h2>
+<table><thead><tr><th>Eq</th><th>公式</th><th>備註</th></tr></thead><tbody>
+<tr><td>—</td><td>$P_i = x_i P_i^\circ$</td><td>⭐ Raoult 定律</td></tr>
+<tr><td>—</td><td>$P_i = k_H x_i$</td><td>Henry 定律（稀溶液溶質）</td></tr>
+<tr><td>9.1</td><td>$\mu_i = \mu_i^\circ + RT\ln a_i$</td><td>⭐ 活性定義</td></tr>
+<tr><td>9.2</td><td>$\gamma_i = a_i/x_i$</td><td>活性係數</td></tr>
+<tr><td>—</td><td>$\sum x_i\,d\ln a_i = 0$</td><td>⭐ Gibbs–Duhem（活性形式）</td></tr>
+<tr><td>—</td><td>$\Delta G_{\text{mix}}^{\text{id}} = RT\sum x_i\ln x_i$</td><td>⭐ 理想溶液混合 $G$</td></tr>
+<tr><td>—</td><td>$\Delta H_{\text{mix}}^{\text{id}} = 0$</td><td>理想溶液無混合熱</td></tr>
+<tr><td>—</td><td>$\Delta G_{\text{mix}} = \Omega x_A x_B + RT\sum x_i\ln x_i$</td><td>⭐ 正規溶液</td></tr>
+<tr><td>—</td><td>$RT\ln\gamma_A = \Omega x_B^2$</td><td>⭐ 正規溶液活性係數</td></tr>
+<tr><td>—</td><td>$\Omega_c = 2RT_c$</td><td>⭐ 混溶間隙臨界條件</td></tr>
+</tbody></table>
+</div>
+</main>
+<script>
+function toggleTheme(){const h=document.documentElement;const n=h.getAttribute('data-theme')==='light'?'dark':'light';h.setAttribute('data-theme',n);localStorage.setItem('theme',n);document.getElementById('tl').textContent=n==='dark'?'淺色模式':'深色模式';}
+const s=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',s);if(s==='dark')document.getElementById('tl').textContent='淺色模式';
+const secs=document.querySelectorAll('.section[id]');const navs=document.querySelectorAll('.sidebar-nav a');window.addEventListener('scroll',()=>{let c='';secs.forEach(s=>{if(window.scrollY>=s.offsetTop-80)c=s.getAttribute('id');});navs.forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+c);});});
+</script>
+</body>
+</html>

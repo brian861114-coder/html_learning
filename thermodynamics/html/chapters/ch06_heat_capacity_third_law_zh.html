@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>第六章：熱容量、焓、熵與熱力學第三定律 — 材料熱力學</title>
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']],tags:'ams'},options:{ignoreHtmlClass:'no-math'}};</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+:root{--bg:#fff;--b2:#F5F5F7;--b3:#E8F0FE;--tx:#1D1D1F;--t2:#1D1D1F;--ac:#007AFF;--bd:#D2D2D7;--sh:0 2px 8px rgba(0,0,0,.08);--fbd:#E5E5EA;--wbg:#FFF9F0;--wbd:#FFB340;--wtx:#B8700A;--nw:260px}
+[data-theme="dark"]{--bg:#1C1C1E;--b2:#2C2C2E;--b3:#1A2332;--tx:#F5F5F7;--t2:#A1A1A6;--ac:#0A84FF;--bd:#48484A;--fbd:#3A3A3C;--wbg:#2C2416;--wbd:#8B6914;--wtx:#FFB340}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth;scroll-padding-top:16px}
+body{font-family:-apple-system,BlinkMacSystemFont,'Noto Sans TC','Microsoft JhengHei',sans-serif;background:var(--b2);color:var(--tx);line-height:1.9;display:flex;min-height:100vh}
+.sidebar{position:fixed;top:0;left:0;width:var(--nw);height:100vh;background:var(--bg);border-right:1px solid var(--bd);overflow-y:auto;z-index:100;padding:20px 16px;display:flex;flex-direction:column}
+.sh{margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--fbd)}.sh h2{font-size:14px;font-weight:600;color:var(--ac)}.sh .bk{font-size:11px;color:var(--t2)}
+.sn{flex:1}.sn ul{list-style:none}.sn a{display:block;padding:4px 10px;font-size:11px;color:var(--t2);text-decoration:none;border-radius:5px;transition:.12s}.sn a:hover{background:var(--b3);color:var(--ac)}.sn a.active{background:var(--b3);color:var(--ac);font-weight:500}.sn .ns{font-weight:600;font-size:12px;color:var(--tx);margin-top:10px;padding:2px 10px}.sn .nsub a{padding-left:20px;font-size:10px}
+.st{margin-top:auto;padding-top:12px;border-top:1px solid var(--fbd)}.st button{width:100%;padding:6px;border:1px solid var(--bd);border-radius:6px;background:var(--b2);color:var(--tx);cursor:pointer;font-size:12px}
+.main{margin-left:var(--nw);flex:1;max-width:1050px;padding:32px 40px 80px}
+.header{margin-bottom:32px;padding-bottom:20px;border-bottom:2px solid var(--ac)}.header .cl{font-size:12px;font-weight:600;color:var(--ac);letter-spacing:1px}.header h1{font-size:28px;font-weight:700;margin:6px 0}.header .meta{font-size:13px;color:var(--t2)}
+section{margin-bottom:44px}h2{font-size:20px;font-weight:700;color:var(--ac);margin-bottom:14px;padding-bottom:6px;border-bottom:1px solid var(--bd)}h3{font-size:16px;font-weight:600;color:var(--tx);margin:24px 0 10px}h4{font-size:14px;font-weight:600;color:var(--t2);margin:18px 0 6px}
+p{font-size:14px;color:var(--t2);margin-bottom:12px}strong{font-weight:600;color:var(--tx)}
+.eq{text-align:center;margin:16px 0;font-size:15px}
+.figure{margin:24px 0;text-align:center}.figure img{max-width:100%;border-radius:8px;box-shadow:var(--sh);cursor:pointer}.figure img:hover{transform:scale(1.01)}.figure figcaption{margin-top:8px;font-size:12px;color:var(--t2)}
+.deriv{background:var(--bg);border:1px solid var(--fbd);border-radius:10px;padding:18px 22px;margin:20px 0;font-size:13px}.deriv h4{font-size:14px;font-weight:700;color:var(--ac);margin:0 0 12px 0}.deriv p{margin-bottom:8px}.deriv .eq{margin:10px 0}
+.callout{background:var(--b3);border:1px solid var(--fbd);border-radius:8px;padding:14px 18px;margin:16px 0;font-size:13px}.callout strong{color:var(--ac)}
+.callout-warn{background:var(--wbg);border:1px solid var(--wbd);border-radius:8px;padding:14px 18px;margin:16px 0;font-size:13px}.callout-warn strong{color:var(--wtx)}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}thead th{background:var(--b3);padding:8px 12px;font-size:12px;font-weight:600;border-bottom:2px solid var(--bd)}tbody td{padding:8px 12px;border-bottom:1px solid var(--fbd)}tbody tr:nth-child(even){background:var(--b2)}
+@media(max-width:768px){.sidebar{transform:translateX(-100%);transition:.3s}.sidebar.open{transform:translateX(0)}.main{margin-left:0;padding:20px 16px 60px}}
+@media print{.sidebar{display:none}.main{margin-left:0;max-width:100%;padding:0}}
+</style>
+<script src="../../../reading-preferences.js" defer></script></head>
+<body><a class="portal-home-link" href="../../../index.html">返回學習中心</a><style id="portal-home-link-style">.portal-home-link{position:fixed;top:16px;right:16px;z-index:1000;display:inline-flex;align-items:center;min-height:36px;padding:7px 11px;border:1px solid #cbd5e1;border-radius:8px;background:#fff;color:#1d4ed8;font:600 13px/1.2 -apple-system,BlinkMacSystemFont,"Noto Sans TC","Microsoft JhengHei",sans-serif;text-decoration:none;box-shadow:0 2px 10px rgba(15,23,42,.08)}.portal-home-link:hover{background:#eff6ff}.portal-home-link:focus-visible{outline:3px solid rgba(37,99,235,.35);outline-offset:2px}@media(max-width:768px){.portal-home-link{top:10px;right:10px;min-height:34px;padding:7px 9px;font-size:12px}}</style>
+<nav class="sidebar"><div class="sh"><div class="bk">材料熱力學·Gaskell</div><h2>第六章</h2></div><div class="sn"><ul>
+<li><a href="#preview">📋 6.0 本章預覽</a></li>
+<li class="ns">6.1–6.3 熱容理論與經驗</li><li class="nsub"><a href="#s6-1">6.1 導論</a></li><li class="nsub"><a href="#s6-2">6.2 熱容量的理論計算</a></li><li class="nsub"><a href="#s6-3">6.3 熱容量的經驗表示</a></li>
+<li class="ns">6.4–6.5 焓、熵與第三定律</li><li class="nsub"><a href="#s6-4">6.4 焓隨溫度與組成的變化</a></li><li class="nsub"><a href="#s6-5">6.5 熵的溫度依賴與第三定律</a></li>
+<li class="ns">6.6–6.7 驗證與壓力效應</li><li class="nsub"><a href="#s6-6">6.6 第三定律的實驗驗證</a></li><li class="nsub"><a href="#s6-7">6.7 壓力對焓和熵的影響</a></li>
+<li><a href="#summary">📋 本章摘要</a></li>
+</ul></div><div class="st"><button onclick="toggleTheme()">🌓 <span id="tl">深色模式</span></button></div></nav>
+<main class="main">
+<header class="header"><div class="cl">第六章</div><h1>熱容量、焓、熵與熱力學第三定律</h1><div class="meta">David R. Gaskell·《Introduction to the Thermodynamics of Materials》·第 176–217 頁</div></header>
+
+<section id="preview"><div class="callout"><strong>📋 6.0 本章預覽</strong>
+<p>前五章建立了熱力學的理論框架——狀態函數、三大定律、統計詮釋、基本方程式和 Maxwell 關係。第六章是<strong>轉向應用</strong>的橋樑：它展示如何使用最容易測量的熱力學量——<strong>熱容量 $C_P(T)$</strong>——來計算任意溫度和壓力下的焓變和熵變。沒有本章的計算方法，第十一章到第十五章的所有反應平衡計算都將缺乏數據基礎。</p>
+<div class="callout-warn"><strong>⚡ 為什麼第六章是「計算熱力學」的基石？</strong>理論告訴我們 $\Delta G = \Delta H - T\Delta S$，但要實際算出 $\Delta G$，我們需要知道 $\Delta H(T)$ 和 $\Delta S(T)$。本章提供完整的工作流程：從低溫熱容量測量 → $C_P(T)$ 擬合 → Kirchhoff 積分求 $\Delta H(T)$ → 第三定律積分求 $S^\circ(T)$ → 組合成 $\Delta G^\circ(T)$。這是材料熱力學中最常用的計算路徑。</div>
+<p><strong>在本章中，我們將學習：</strong></p>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px">
+<li>Dulong–Petit 定律、愛因斯坦模型、德拜模型——固體熱容的古典、量子、和連續介質理論</li>
+<li>$C_P$ 的經驗多項式 $C_P = a + bT + cT^{-2}$——實際計算的起點</li>
+<li>Kirchhoff 定律——如何從 $C_P$ 數據計算焓變的溫度依賴</li>
+<li>熱力學第三定律——$S(0\ \text{K}) = 0$ 作為熵的絕對參考點</li>
+<li>絕對熵的計算——分段積分 $C_P/T$，含相變貢獻和德拜低溫外插</li>
+<li>壓力對 $H$ 和 $S$ 的影響——何時可以忽略、何時必須考慮</li>
+</ul></div></section>
+
+<section id="s6-1"><h2>6.1 導論（Introduction）</h2>
+<p>第二章定義了熱容量（$C_V = (\partial U/\partial T)_V$ 和 $C_P = (\partial H/\partial T)_P$），但沒有討論如何<strong>獲取</strong>這些數據。在實際工作中，$C_P$ 是通過熱卡計（calorimeter）直接測量的——將樣品加熱，記錄所需的熱量隨溫度的變化。這些測量數據是計算 $\Delta H$ 和 $\Delta S$ 的唯一實驗輸入。</p>
+<p>本章從兩個切入點探討熱容量：理論（為什麼 $C_P$ 隨溫度變化）和應用（如何使用測量到的 $C_P(T)$ 進行計算）。理論部分展示了古典物理的局限性如何催生了量子理論；應用部分則建立了貫穿後續所有章節的計算方法。</p>
+<p>第三定律在本章首次被完整引入——它為熵提供了一個絕對參考點（$S(0\ \text{K}) = 0$），使得計算物質的<strong>絕對熵</strong>（而非僅是熵變）成為可能。附錄 A 的表 A.3 列出了數百種物質在 298 K 的標準絕對熵——這些數字的每一個都是通過本章描述的方法從 $C_P$ 數據積分得到的。</p>
+<div class="callout"><strong>💡 古典 vs 量子熱容——一個歷史轉折點：</strong>Dulong 和 Petit 在 1819 年發現大多數固體元素的 $C_V \approx 3R$。這在古典物理框架內被能量均分定理完美解釋。但當低溫實驗顯示 $C_V$ 隨溫度下降趨近於零時，古典理論完全無法解釋——這成為量子理論發展的主要驅動力之一。愛因斯坦（1907）和德拜（1912）的熱容模型是早期量子理論最成功的應用。</div>
+</section>
+
+<section id="s6-2"><h2>6.2 熱容量的理論計算（Theoretical Calculation of the Heat Capacity）</h2>
+
+<h3>Dulong–Petit 定律（1819）</h3>
+<p>對於固態元素，古典能量均分定理預測每個原子有三個振動自由度，每個自由度有動能和位能兩個二次方項，共六個，每項貢獻 $\frac{1}{2}R$：</p>
+<div class="eq">$$C_V \approx 3R \approx 24.94\ \text{J/mol·K}$$</div>
+<p>這個簡單的規則對室溫下的多數金屬元素驚人地準確。例如：Cu（298 K）：$C_P = 24.44\ \text{J/mol·K}$；Ag：$25.35$；Au：$25.42$——全部接近 $3R$。但 Dulong–Petit 定律無法解釋兩個關鍵現象：</p>
+<ol style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li><strong>低溫失效：</strong>當溫度降低時，$C_V$ 不是保持 $3R$，而是單調下降趨近於零。</li>
+<li><strong>輕元素例外：</strong>鑽石（碳）在室溫下的 $C_V$ 只有約 $6\ \text{J/mol·K}$，遠低於 $3R$——因為其德拜溫度 $\Theta_D \approx 2230\ \text{K}$ 遠高於室溫。</li>
+</ol>
+
+<h3>愛因斯坦模型（Einstein Model, 1907）</h3>
+<p>愛因斯坦應用 Planck 的量子假說：固體中的每個原子以相同頻率 $\nu_E$ 獨立振動，但振動能量是量子化的（$\varepsilon = n h \nu_E$）。使用第四章的 Boltzmann 分布導出：</p>
+<div class="eq">$$C_V = 3R\left(\frac{\Theta_E}{T}\right)^2 \frac{e^{\Theta_E/T}}{(e^{\Theta_E/T} - 1)^2} \tag{6.1}$$</div>
+<p>其中 $\Theta_E = h\nu_E/k_B$ 是<strong>愛因斯坦特徵溫度</strong>。此模型預測了兩個關鍵特徵：</p>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li>$T \gg \Theta_E$ 時，$C_V \to 3R$（恢復 Dulong–Petit 極限）</li>
+<li>$T \ll \Theta_E$ 時，$C_V \to 3R(\Theta_E/T)^2 e^{-\Theta_E/T} \to 0$（量子凍結）</li>
+</ul>
+<p>愛因斯坦模型的成功在於它解釋了 $C_V$ 為什麼會下降。但它預測的低溫下降速率（指數衰減 $e^{-\Theta_E/T}$）比實驗觀測到的（$T^3$ 冪律）快得多。這是因為愛因斯坦假設所有原子以<strong>相同頻率</strong>振動——實際固體中原子振動頻率有一個連續的分布。</p>
+
+<figure class="figure"><img src="../../../images/thermodynamics/ch06_pages/ch06_page_178_c.png" alt="Fig 6.1 愛因斯坦模型熱容曲線" loading="lazy"><figcaption><strong>圖 6.1</strong> 愛因斯坦模型預測的 $C_V$ 隨 $T/\Theta_E$ 變化曲線。注意低溫區的指數衰減行為。</figcaption></figure>
+
+<div class="deriv"><h4>📐 推導 6.1：愛因斯坦模型的 $C_V$ 公式推導</h4>
+<p><strong>出發點：</strong>每個原子是獨立的量子諧振子，能量 $\varepsilon_n = (n + \tfrac12)h\nu_E$。第四章的 Boltzmann 分布給出單個振子處於能級 $n$ 的機率正比於 $e^{-\varepsilon_n/k_B T}$。</p>
+<p><strong>步驟 1——單振子配分函數：</strong>
+$q = \sum_{n=0}^\infty e^{-(n+\frac12)h\nu_E/k_B T} = e^{-h\nu_E/2k_B T} \sum_{n=0}^\infty e^{-n h\nu_E/k_B T} = \dfrac{e^{-h\nu_E/2k_B T}}{1 - e^{-h\nu_E/k_B T}}$</p>
+<p><strong>步驟 2——平均能量：</strong>
+$\langle\varepsilon\rangle = -\dfrac{\partial \ln q}{\partial (1/k_B T)} = \dfrac{h\nu_E}{2} + \dfrac{h\nu_E}{e^{h\nu_E/k_B T} - 1}$</p>
+<p><strong>步驟 3——摩爾熱容（一莫耳原子 = $N_A$ 個振子，每個三維 → $3N_A$ 個諧振子）：</strong>
+$C_V = 3N_A \dfrac{\partial\langle\varepsilon\rangle}{\partial T} = 3R\left(\dfrac{h\nu_E}{k_B T}\right)^2 \dfrac{e^{h\nu_E/k_B T}}{(e^{h\nu_E/k_B T} - 1)^2}$</p>
+<p>代入 $\Theta_E = h\nu_E/k_B$ 即得 Eq (6.1)。注意 $T \to \infty$ 時 $C_V \to 3R$（Dulong–Petit），$T \to 0$ 時 $C_V \propto e^{-\Theta_E/T} \to 0$。</p>
+</div>
+
+<h3>德拜模型（Debye Model, 1912）⭐</h3>
+<p>德拜的關鍵洞察是將固體視為<strong>連續彈性介質</strong>，振動頻率從零到一個最大值 $\nu_D$ 連續分布。這給出：</p>
+<div class="eq">$$C_V = 9R\left(\frac{T}{\Theta_D}\right)^3 \int_0^{\Theta_D/T} \frac{x^4 e^x}{(e^x - 1)^2}\,dx \tag{6.2}$$</div>
+<p>其中 $\Theta_D = h\nu_D/k_B$ 是<strong>德拜特徵溫度</strong>——這是固體物理中最重要的材料參數之一。$\Theta_D$ 反映晶格的剛性：$\Theta_D$ 越高，晶格越硬，高頻振動越困難。</p>
+
+<figure class="figure"><img src="../../../images/thermodynamics/ch06_pages/ch06_page_182_c.png" alt="Fig 6.2 德拜模型與愛因斯坦模型比較" loading="lazy"><figcaption><strong>圖 6.2</strong> 德拜模型（實線）與愛因斯坦模型（虛線）的 $C_V$ 預測比較。在低溫區，德拜模型預測 $T^3$ 行為，與實驗吻合；愛因斯坦模型預測的指數衰減則下降過快。</figcaption></figure>
+
+<p><strong>低溫極限（$T \ll \Theta_D$）：</strong>積分上限趨近無窮大，積分值為常數 $4\pi^4/15$：</p>
+<div class="eq">$$\boxed{C_V = \frac{12\pi^4}{5}R\left(\frac{T}{\Theta_D}\right)^3} \propto T^3 \tag{6.3}$$</div>
+<p>這就是著名的<strong>德拜 $T^3$ 定律</strong>——低溫下固體的熱容量與 $T^3$ 成正比。這與低溫實驗數據完美吻合，是量子固態物理最早的重大勝利之一。</p>
+
+<figure class="figure"><img src="../../../images/thermodynamics/ch06_pages/ch06_page_182_c.png" alt="Fig 6.3 德拜模型 $C_V$ 曲線" loading="lazy"><figcaption><strong>圖 6.3</strong> 德拜模型預測的 $C_V$ 隨 $T/\Theta_D$ 的完整曲線。低溫區為 $T^3$ 行為（紅色虛線），高溫區趨近 $3R$（Dulong–Petit 極限）。</figcaption></figure>
+
+<div class="deriv"><h4>📐 推導 6.2：德拜模型的 $C_V$ 公式——從連續頻譜到熱容</h4>
+<p><strong>物理圖像：</strong>將固體視為各向同性連續彈性介質。根據彈性波理論，振動頻率 $\nu$ 的態密度為 $g(\nu) = \dfrac{12\pi V}{v^3}\nu^2$（$v$ 為平均聲速，$V$ 為體積）。整個晶體有 $3N$ 個振動模式，因此最大截止頻率 $\nu_D$ 由 $\int_0^{\nu_D} g(\nu)\,d\nu = 3N$ 決定。</p>
+<p><strong>步驟 1——態密度歸一化：</strong>$\displaystyle \int_0^{\nu_D} \frac{12\pi V}{v^3} \nu^2 d\nu = \frac{4\pi V}{v^3}\nu_D^3 = 3N$ → $\nu_D^3 = \dfrac{9N v^3}{4\pi V}$</p>
+<p><strong>步驟 2——總內能：</strong>每個頻率 $\nu$ 的量子諧振子平均能量 $\langle\varepsilon(\nu)\rangle = \dfrac{h\nu}{e^{h\nu/k_B T} - 1}$（略去零點能），積分：</p>
+<p>$U = \displaystyle \int_0^{\nu_D} \langle\varepsilon(\nu)\rangle g(\nu) d\nu = \frac{12\pi V}{v^3} \int_0^{\nu_D} \frac{h\nu^3}{e^{h\nu/k_B T} - 1} d\nu$</p>
+<p><strong>步驟 3——化簡為德拜積分：</strong>令 $x = h\nu/k_B T$，$\Theta_D = h\nu_D/k_B$：</p>
+<p>$U = 9N k_B T \left(\dfrac{T}{\Theta_D}\right)^3 \displaystyle \int_0^{\Theta_D/T} \frac{x^3}{e^x - 1} dx$</p>
+<p><strong>步驟 4——對溫度求導得 $C_V$：</strong></p>
+<p>$C_V = \left(\dfrac{\partial U}{\partial T}\right)_V = 9N k_B \left(\dfrac{T}{\Theta_D}\right)^3 \displaystyle \int_0^{\Theta_D/T} \frac{x^4 e^x}{(e^x - 1)^2} dx$</p>
+<p>乘以 $R/N_A k_B$ 將 $N k_B$ 轉換為 $R$（每莫耳）即得 Eq (6.2)。</p>
+</div>
+
+<div class="deriv"><h4>📐 推導 6.3：德拜 $T^3$ 定律（低溫極限）</h4>
+<p><strong>低溫極限的物理條件：</strong>$T \ll \Theta_D$ 時，$x_{\max} = \Theta_D/T \to \infty$。此時德拜積分趨近於一個常數：</p>
+<p>$\displaystyle \int_0^{\infty} \frac{x^4 e^x}{(e^x - 1)^2} dx = \int_0^{\infty} \frac{x^4}{e^x - 1} \cdot \frac{e^x}{e^x - 1} dx = \cdots = \frac{4\pi^4}{15}$</p>
+<p>此積分的值可通過 Riemann Zeta 函數求得：$\displaystyle \int_0^\infty \frac{x^n}{e^x - 1} dx = n!\,\zeta(n+1)$，而 $\zeta(4) = \pi^4/90$。</p>
+<p>代入 Eq (6.2)：</p>
+<p>$C_V = 9R \left(\dfrac{T}{\Theta_D}\right)^3 \cdot \dfrac{4\pi^4}{15} = \dfrac{36\pi^4}{15} R \left(\dfrac{T}{\Theta_D}\right)^3$</p>
+<p>化簡得 Eq (6.3)：$C_V = \dfrac{12\pi^4}{5} R \left(\dfrac{T}{\Theta_D}\right)^3$。</p>
+<p><strong>實用形式：</strong>$C_V = \beta T^3$，其中 $\beta = \dfrac{12\pi^4 R}{5\Theta_D^3}$。在低溫熱容量測量中，通常從 $C_P$ vs $T^3$ 圖的斜率直接提取 $\Theta_D$。</p>
+</div>
+
+<table><thead><tr><th>物質</th><th>$\Theta_D$ (K)</th><th>室溫 $C_P$ (J/mol·K)</th><th>熔點 (K)</th><th>結構</th></tr></thead><tbody>
+<tr><td>鉛 Pb</td><td>105</td><td>26.4</td><td>601</td><td>fcc</td></tr>
+<tr><td>金 Au</td><td>165</td><td>25.4</td><td>1337</td><td>fcc</td></tr>
+<tr><td>銅 Cu</td><td>343</td><td>24.4</td><td>1358</td><td>fcc</td></tr>
+<tr><td>鐵 Fe</td><td>470</td><td>25.1</td><td>1811</td><td>bcc</td></tr>
+<tr><td>矽 Si</td><td>645</td><td>20.0</td><td>1687</td><td>鑽石</td></tr>
+<tr><td>鑽石 C</td><td>2230</td><td>6.1</td><td>∼4000</td><td>鑽石</td></tr></tbody></table>
+<div class="callout"><strong>💡 $\Theta_D$ 作為材料設計參數：</strong>德拜溫度與材料的許多性質直接相關——高 $\Theta_D$ 意味著強鍵結→高熔點、高硬度、低熱膨脹係數、高熱導率。在選擇高溫結構材料或散熱基板時，$\Theta_D$ 是一個有用的快速篩選指標。例如鑽石的 $\Theta_D = 2230\ \text{K}$（室溫下熱容遠低於古典值），同時也是已知熱導率最高的材料。</div>
+<div class="callout-warn"><strong>⚡ 德拜模型的局限性：</strong>它假設固體是連續彈性介質（忽略原子離散性），且振動頻譜被簡化為 $\propto \nu^2$。對於複雜晶體結構（如鈣鈦礦、金屬有機框架），德拜模型只能提供定性描述。現代計算使用聲子色散關係（phonon dispersion）和第一原理方法（DFT）來精確計算 $C_V(T)$。</div>
+</section>
+
+<section id="s6-3"><h2>6.3 熱容量的經驗表示（The Empirical Representation of Heat Capacities）</h2>
+<p>理論模型（愛因斯坦、德拜）在寬溫度範圍內不夠精確——它們需要調整參數且無法捕捉所有細節（如電子熱容、相變前驅效應）。因此，實際熱力學計算中，我們使用從實驗數據擬合的<strong>經驗多項式</strong>：</p>
+<div class="eq">$$\boxed{C_P = a + bT + cT^{-2} + dT^2} \tag{6.4}$$</div>
+<p>不同物質有不同的係數 $a, b, c, d$（見附錄 A 表 A.2）。這個形式在大多數物質的穩定溫度範圍內（從室溫到熔點）精度優於 1%。</p>
+<p>為什麼使用 $T^{-2}$ 項而非其他形式？這不是隨意選擇——$T^{-2}$ 來自低溫晶格熱容展開式的下一項（超越德拜積分的 $T^3$ 項）。在高溫端，$T^2$ 項捕捉了非諧效應（anharmonic effects）——原子振動偏離簡諧近似的修正。</p>
+
+<figure class="figure"><img src="../../../images/thermodynamics/ch06_pages/ch06_page_184_c.png" alt="Fig 6.4 多種金屬的實驗 Cp 數據" loading="lazy"><figcaption><strong>圖 6.4</strong> 幾種金屬的實驗 $C_P$ 隨溫度變化。注意低溫區域 $C_P$ 趨於零，高溫區域趨近 $3R$ 極限。曲線形狀由 $\Theta_D$ 決定：Pb（$\Theta_D = 105$ K）在很低溫度即達到古典極限，而 C（$\Theta_D = 2230$ K）在室溫仍遠低於 $3R$。</figcaption></figure>
+
+<figure class="figure"><img src="../../../images/thermodynamics/ch06_pages/ch06_page_184_c.png" alt="Fig 6.5 Cp 多項式擬合示例" loading="lazy"><figcaption><strong>圖 6.5</strong> $C_P$ 經驗多項式 $a + bT + cT^{-2}$ 的擬合示例。散點為實驗數據，實線為最小二乘法擬合結果。擬合通常需要至少 10–15 個數據點以確保係數的統計穩定性。</figcaption></figure>
+
+<div class="callout"><strong>💡 選擇正確的 $C_P$ 表達式是計算精度的關鍵。</strong>例如計算 Fe 從 298 K 到 1185 K（$\alpha \to \gamma$ 相變）的 $\Delta H$，如果只用常數 $C_P \approx 3R$ 而不是完整的 $a + bT + cT^{-2}$ 表達式，誤差可能超過 10%。對於需要精確 $\Delta G$ 來判斷反應可行性的情況，10% 的誤差可能完全改變結論。</div>
+</section>
+
+<section id="s6-4"><h2>6.4 焓隨溫度與組成的變化（Enthalpy as a Function of Temperature and Composition）</h2>
+
+<h3>Kirchhoff 定律</h3>
+<p>化學反應的焓變隨溫度變化——這是因為反應物和產物的熱容量不同（$\Delta C_P \neq 0$）。Kirchhoff 定律精確描述了這個變化：</p>
+<div class="eq">$$\boxed{\left(\frac{\partial \Delta H}{\partial T}\right)_P = \Delta C_P} \tag{6.5}$$</div>
+<p>積分形式給出從參考溫度（通常是 298 K）到任意溫度 $T$ 的反應焓：</p>
+<div class="eq">$$\Delta H^\circ(T) = \Delta H^\circ(298) + \int_{298}^{T} \Delta C_P\,dT \tag{6.6}$$</div>
+<p>其中 $\Delta C_P = \sum_i \nu_i C_{P,i}$（產物為正、反應物為負）。將 $C_P$ 的經驗多項式代入：</p>
+<div class="eq">$$\Delta H^\circ(T) = \Delta H^\circ(298) + \Delta a(T-298) + \frac{\Delta b}{2}(T^2-298^2) - \Delta c\left(\frac{1}{T} - \frac{1}{298}\right)$$</div>
+
+<figure class="figure"><img src="../../../images/thermodynamics/ch06_pages/ch06_page_185_c.png" alt="Fig 6.6 Kirchhoff 定律積分示意" loading="lazy"><figcaption><strong>圖 6.6</strong> Kirchhoff 定律的積分示意。陰影面積 $\int_{298}^T \Delta C_P\,dT$ 即為 $\Delta H^\circ(T)$ 相對於 298 K 值的修正量。當 $\Delta C_P > 0$ 時，$\Delta H$ 隨溫度升高而增加。</figcaption></figure>
+
+<div class="deriv"><h4>📐 推導 6.4：Kirchhoff 定律的推導</h4>
+<p><strong>出發點：</strong>定義 $\Delta H = H_{\text{產物}} - H_{\text{反應物}}$。對溫度求偏導（定壓）：</p>
+<p>$\displaystyle \left(\frac{\partial \Delta H}{\partial T}\right)_P = \left(\frac{\partial H_{\text{產物}}}{\partial T}\right)_P - \left(\frac{\partial H_{\text{反應物}}}{\partial T}\right)_P = C_{P,\text{產物}} - C_{P,\text{反應物}} = \Delta C_P$</p>
+<p>這是 Eq (6.5) 的直接來源。積分即得 Eq (6.6)。</p>
+<p><strong>從基本定義出發的等價推導：</strong></p>
+<p>$H(T,P,\mathbf{n}) = \sum_i n_i \bar{H}_i(T,P)$，其中 $\bar{H}_i$ 為偏摩爾焓。化學反應的 $\Delta H$ 可寫為：</p>
+<p>$\displaystyle \left[\frac{\partial (\Delta H)}{\partial T}\right]_P = \frac{\partial}{\partial T}\left( \sum_i \nu_i \bar{H}_i \right)_P = \sum_i \nu_i \left(\frac{\partial \bar{H}_i}{\partial T}\right)_P = \sum_i \nu_i C_{P,i} = \Delta C_P$</p>
+<p><strong>實用提醒：</strong> Kirchhoff 積分中 $\Delta C_P$ 本身也是溫度的函數（因為 $C_{P,i}$ 是溫度的函數），因此必須代入 $C_P(T)$ 的多項式形式進行積分，不能簡單假設 $\Delta C_P$ 為常數。</p>
+</div>
+
+<h3>跨越相變的處理</h3>
+<p>如果積分範圍內有相變化（熔化、同素異形體轉變），必須分段積分並加入相變熱：</p>
+<div class="eq">$$\Delta H(T) = \int_{T_1}^{T_{\text{tr}}} C_P^I\,dT + \Delta H_{\text{tr}} + \int_{T_{\text{tr}}}^{T_2} C_P^{II}\,dT \tag{6.7}$$</div>
+<p>這是實際計算中最容易出錯的地方——漏掉相變熱會導致巨大的誤差。例如計算鐵從 298 K 升溫到 2000 K（液態）的焓變，必須依次加入：固態升溫（$\alpha$-Fe）→ $\alpha$-$\gamma$ 相變 → 固態升溫（$\gamma$-Fe）→ $\gamma$-$\delta$ 相變 → 固態升溫（$\delta$-Fe）→ 熔化熱 → 液態升溫。五段積分，四個相變熱。</p>
+
+<figure class="figure"><img src="../../../images/thermodynamics/ch06_pages/ch06_page_187_c.png" alt="Fig 6.7 焓隨溫度變化含相變" loading="lazy"><figcaption><strong>圖 6.7</strong> 焓 $H(T)$ 隨溫度變化的示意圖。在相變溫度處，焓呈現垂直跳躍（一階相變），跳躍高度即為相變焓 $\Delta H_{\text{tr}}$。斜率（$\partial H/\partial T = C_P$）在相變前後也可能不同。</figcaption></figure>
+
+<div class="callout-warn"><strong>⚡ Kirchhoff 定律的實際應用——煉鋼的熱平衡：</strong>轉爐煉鋼中，熔融生鐵（∼1400°C）被吹入氧氣，雜質（C, Si, Mn, P）的氧化反應放熱使鋼水溫度升至 ∼1650°C。要精確預測吹煉終點的鋼水溫度，必須使用 Kirchhoff 定律計算每個氧化反應在不同溫度下的實際放熱量——不能簡單地使用 298 K 的標準反應熱。</div>
+<div class="callout"><strong>💡 Kirchhoff 定律與第三章的 Gibbs–Helmholtz 方程式相輔相成。</strong>Kirchhoff 給出 $\Delta H(T)$，Gibbs–Helmholtz 給出 $\Delta G(T)$ 的溫度依賴：$d(\Delta G/T)/dT = -\Delta H/T^2$。兩者結合，可以從 298 K 的熱化學數據完整推算高溫下的反應平衡。這是第十一章和第十二章的計算核心。</div>
+
+<h3>跨章關聯：Kirchhoff 定律與反應平衡（第十一章）</h3>
+<p>在第十一章中，我們將計算化學反應的標準 Gibbs 自由能變化 $\Delta G^\circ(T)$ 隨溫度的變化：</p>
+<div class="eq">$$\Delta G^\circ(T) = \Delta H^\circ(T) - T\Delta S^\circ(T)$$</div>
+<p>其中 $\Delta H^\circ(T)$ 正是通過本節的 Kirchhoff 定律 (Eq 6.6) 計算的。將 $\Delta H^\circ(T)$ 和 $\Delta S^\circ(T)$（通過第三定律積分 Eq 6.9 得到）代入上式，即可得到任意溫度下的 $\Delta G^\circ(T)$，進而計算反應平衡常數 $K = e^{-\Delta G^\circ/RT}$。換言之，<strong>本章的 Kirchhoff 定律是第十一章所有反應平衡計算的數據基礎</strong>——沒有 $\Delta C_P$ 的溫度修正，高溫下的反應方向判斷將完全失去準確性。</p>
+</section>
+
+<section id="s6-5"><h2>6.5 熵的溫度依賴與熱力學第三定律</h2>
+
+<h3>熱力學第三定律的表述</h3>
+<p>第三定律由 Walther Nernst 在 1906 年提出，經過 Planck 和 Lewis 的完善，最常用的表述為：</p>
+<div class="eq">$$\boxed{S(0\ \text{K}) = 0 \quad \text{（完美晶體）}} \tag{6.8}$$</div>
+<p>這個看似簡單的陳述有深遠的後果。在第三章中，我們只能計算熵的<strong>變化</strong> $\Delta S$；有了第三定律，我們可以計算熵的<strong>絕對值</strong>。附錄 A 表 A.3 中列出的每個物質的 $S^\circ(298)$，都是從 $T = 0$ 開始積分 $C_P/T$ 得到的。</p>
+<p>「完美晶體」這個條件至關重要。如果晶體有缺陷（如空位、差排）或殘留無序（如 CO 晶體中分子取向的隨機性），在 0 K 時熵不為零——這稱為<strong>殘留熵（residual entropy）</strong>。例如，CO 晶體在 0 K 的殘留熵約為 $R\ln 2 \approx 5.76\ \text{J/mol·K}$，因為每個 CO 分子可以取兩個方向。</p>
+
+<h3>絕對熵的計算</h3>
+<p>從 $C_P(T)$ 數據計算任意溫度 $T$ 下的絕對熵：</p>
+<div class="eq">$$S^\circ(T) = \int_0^T \frac{C_P}{T}\,dT \tag{6.9}$$</div>
+<p>實務上這個積分分為三個區域處理：</p>
+<div class="eq">$$\boxed{S^\circ(T) = \underbrace{\int_0^{T_{\text{low}}} \frac{C_P}{T}dT}_{\text{德拜外插}} + \underbrace{\int_{T_{\text{low}}}^T \frac{C_P}{T}dT}_{\text{實驗數據積分}} + \underbrace{\sum \frac{\Delta H_{\text{trans}}}{T_{\text{trans}}}}_{\text{相變貢獻}}} \tag{6.10}$$</div>
+
+<ol style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li><strong>極低溫區（$T < 15\ \text{K}$）：</strong>$C_P$ 太小無法直接測量。使用德拜 $T^3$ 定律外插：$C_P \approx C_V = aT^3$。$a$ 由最低可測溫度處的 $C_P$ 值確定。此區域的熵貢獻：$S_{\text{low}} = \int_0^{T_{\text{low}}} aT^2\,dT = \frac{1}{3}C_P(T_{\text{low}})$。</li>
+<li><strong>可測量區（$T_{\text{low}} < T < T_2$）：</strong>使用實驗 $C_P$ 數據（或經驗多項式）進行 $\int C_P/T\,dT$ 的數值積分。</li>
+<li><strong>相變貢獻：</strong>在每個一階相變溫度 $T_{\text{tr}}$，加入 $\Delta S_{\text{tr}} = \Delta H_{\text{tr}}/T_{\text{tr}}$。熔化（fusion）和同素異形體轉變（allotropic transformation）都需要加入。</li>
+</ol>
+
+<figure class="figure"><img src="../../../images/thermodynamics/ch06_pages/ch06_page_191_c.png" alt="Fig 6.8 Cp/T vs T 曲線" loading="lazy"><figcaption><strong>圖 6.8</strong> $C_P/T$ 對 $T$ 作圖。曲線下面積即為 $\int C_P/T\,dT = S(T) - S(0)$。相變處以垂直線表示 $\Delta S_{\text{tr}} = \Delta H_{\text{tr}}/T_{\text{tr}}$。</figcaption></figure>
+
+<figure class="figure"><img src="../../../images/thermodynamics/ch06_pages/ch06_page_191_c.png" alt="Fig 6.9 熵隨溫度變化曲線" loading="lazy"><figcaption><strong>圖 6.9</strong> 絕對熵 $S^\circ(T)$ 隨溫度的變化。從 $S(0)=0$ 開始，經過相變時熵階梯式增加，最終在熔點以上趨近氣相的高熵值。</figcaption></figure>
+
+<div class="deriv"><h4>📐 推導 6.5：絕對熵的分段積分——完整計算流程</h4>
+<p><strong>目標：</strong>計算 $S^\circ(T)$，從 $T = 0$ K 到任意 $T$，例如 298 K。</p>
+<p><strong>輸入數據：</strong>低溫 $C_P$ 測量值（15 K 以上），相變溫度和相變焓，$C_P(T)$ 經驗多項式（室溫以上）。</p>
+<p><strong>步驟 1——德拜 $T^3$ 外插（0 → 15 K）：</strong></p>
+<p>在極低溫區，$C_P \approx C_V = aT^3$。係數 $a$ 由最低測量點確定：$a = C_P(T_{\min}) / T_{\min}^3$。</p>
+<p>$S_{0\to 15} = \displaystyle \int_0^{15} \frac{aT^3}{T} dT = \int_0^{15} aT^2 dT = \frac{a}{3}(15)^3 = \frac{1}{3} C_P(15\ \text{K})$</p>
+<p>例如，若 $C_P(15\ \text{K}) = 0.45\ \text{J/mol·K}$，則 $S_{0\to 15} = 0.15\ \text{J/mol·K}$。</p>
+<p><strong>步驟 2——實驗數據數值積分（15 K → $T_1$）：</strong></p>
+<p>使用梯形法則或 Simpson 法則對 $\int C_P/T\,dT$ 進行數值積分。若測量間距夠密（每 1–2 K 一個點），梯形法則即可達到優於 0.1% 的精度。</p>
+<p>$\displaystyle \int_{T_a}^{T_b} \frac{C_P}{T} dT \approx \sum_{i} \frac{C_{P,i} + C_{P,i+1}}{2} \cdot \frac{T_{i+1} - T_i}{T_i}$</p>
+<p><strong>步驟 3——相變貢獻（如有）：</strong></p>
+<p>在每個相變溫度 $T_{\text{tr}}$，加入 $\Delta S_{\text{tr}} = \Delta H_{\text{tr}} / T_{\text{tr}}$。</p>
+<p><strong>步驟 4——高溫積分（$T_{\text{tr}} \to T$）：</strong></p>
+<p>若 $C_P(T)$ 有經驗多項式，可直接解析積分：</p>
+<p>$\displaystyle \int \frac{C_P}{T} dT = \int \left( \frac{a}{T} + b + \frac{c}{T^3} + dT \right) dT = a\ln T + bT - \frac{c}{2T^2} + \frac{d}{2} T^2$</p>
+<p><strong>完整結果：</strong>$S^\circ(T) = S_{0\to 15} + \int_{15}^{T} \frac{C_P}{T} dT + \sum \frac{\Delta H_{\text{tr}}}{T_{\text{tr}}}$</p>
+</div>
+
+<figure class="figure"><img src="../../../images/thermodynamics/ch06_pages/ch06_page_195_c.png" alt="Fig 6.10 Nernst 熱定理" loading="lazy"><figcaption><strong>圖 6.10</strong> Nernst 熱定理的圖示。當 $T \to 0$ 時，所有等溫過程的 $\Delta S$ 趨近於零——這意味著不同物質的熵曲線在絕對零度收斂到同一個值（零）。</figcaption></figure>
+
+<div class="callout"><strong>💡 為什麼 $\int C_P/T\,dT$ 而不是 $\int C_P\,dT$？</strong>因為 $dS = \delta q_{\text{rev}}/T = C_P\,dT/T$（定壓可逆加熱）。分母的 $T$ 至關重要——同樣的熱量輸入在低溫時產生更大的熵增（因為低溫時系統的無序度基線很低， perturbations 相對更大）。這與日常直覺一致：在一個整齊的房間裡弄亂一本書比在已經混亂的房間裡弄亂一本書造成的「無序增加」更明顯。</div>
+<div class="callout-warn"><strong>⚡ 第三定律的統計力學基礎（第四章）：</strong>完美晶體在 $T = 0$ 時只有一種微觀態——所有原子都在它們的最低能量位置。$\Omega = 1$，因此 $S = k_B\ln 1 = 0$。這是 Boltzmann 熵公式最直接的應用之一。如果晶體不完美（有缺陷或無序），$\Omega > 1$，$S(0) > 0$。</div>
+
+<h3>跨章關聯：Boltzmann 分布與愛因斯坦模型（第四章）</h3>
+<p>本節的愛因斯坦模型直接使用了第四章的 Boltzmann 分布。回憶第四章的基本公式：在熱平衡下，系統處於能量 $\varepsilon_i$ 的機率為 $p_i = e^{-\varepsilon_i/k_B T} / \sum_j e^{-\varepsilon_j/k_B T}$。在推導 6.1 中，我們正是利用這個分布計算了諧振子的平均能量 $\langle\varepsilon\rangle = \sum_n \varepsilon_n p_n$，然後對溫度求導得到 $C_V$。沒有第四章的統計力學基礎，就無法推導愛因斯坦和德拜模型的 $C_V$ 公式——這是統計熱力學在材料科學中最經典的應用之一。</p>
+
+<h3>殘留熵的統計力學解釋</h3>
+<p>如前所述，殘留熵的產生源於 0 K 時晶體中殘留的微觀無序。Boltzmann 公式 $S = k_B \ln \Omega$ 提供了精確的定量描述：</p>
+
+<div class="deriv"><h4>📐 推導 6.6：殘留熵——從 Boltzmann 公式 $S = k_B \ln W$ 出發</h4>
+<p><strong>物理圖像：</strong>考慮 $N$ 個 CO 分子形成的晶體。每個 CO 分子在晶格位置上可以有兩種取向：C≡O 或 O≡C。如果這兩種取向的能量完全相同（或能量差 $\ll k_B T$ 但在 0 K 時被凍結），則每個分子有兩個等可能的取向。</p>
+<p><strong>步驟 1——微觀態數：</strong>$N$ 個分子，每個 2 種取向，總微觀態數 $\Omega = 2^N$。</p>
+<p><strong>步驟 2——殘留熵：</strong>$S = k_B \ln \Omega = k_B \ln(2^N) = N k_B \ln 2$</p>
+<p>對於一莫耳（$N = N_A$）：$S = N_A k_B \ln 2 = R \ln 2 \approx 5.76\ \text{J/mol·K}$</p>
+<p><strong>其他實例：</strong></p>
+<ul style="font-size:13px;color:var(--t2);margin-left:18px">
+<li><strong>冰（H₂O 冰 Ih）：</strong>實驗測得殘留熵約 $3.4\ \text{J/mol·K}$。Pauling 的計算：每個水分子有 6 種可能的氫鍵構型，但需滿足 Bernal–Fowler 規則（每個氧原子周圍有兩個近質子和兩個遠質子），平均微觀態數 $\Omega \approx (3/2)^N$，因此 $S \approx R \ln(3/2) \approx 3.37\ \text{J/mol·K}$——與實驗完美吻合。</li>
+<li><strong>一氧化二氮（N₂O）：</strong>類似於 CO，殘留熵 $R\ln 2$。</li>
+<li><strong>混合晶體（如 (NH₄)₂SO₄）：</strong>殘留熵來自 NH₄⁺ 離子的取向無序。</li>
+</ul>
+<p><strong>如何從量熱實驗「看到」殘留熵：</strong></p>
+<p>量熱實驗測得 $C_P(T)$ 從很低溫度到室溫，積分得到 $S_{\text{cal}}(T) = \int_0^T C_P/T\,dT$。將 $S_{\text{cal}}$ 外插到 $T \to 0$ 的截距即為殘留熵。如果這個截距不為零，說明低於最低測量溫度 $T_{\min}$ 以下仍有未被捕獲的無序自由度。因此殘留熵的測量精度直接取決於 $T_{\min}$ 有多低——這也是為什麼低溫熱容量測量需要將溫度降到 1 K 以下。</p>
+</div>
+
+<figure class="figure"><img src="../../../images/thermodynamics/ch06_pages/ch06_page_198_c.png" alt="Fig 6.11 第三定律實驗驗證" loading="lazy"><figcaption><strong>圖 6.11</strong> 第三定律的實驗驗證之一：硫的同素異形體轉變（斜方硫→單斜硫）的熱力學循環。從 0 K 到轉變溫度的 $C_P$ 積分加上相變熵，與獨立的光譜熵測量結果一致。</figcaption></figure>
+</section>
+
+<section id="s6-6"><h2>6.6 第三定律的實驗驗證（Experimental Verification of the Third Law）</h2>
+<p>第三定律的一個可直接驗證的預測是：對於任何等溫過程，當 $T \to 0$ 時 $\Delta S \to 0$。這意味著低溫下不同相的熵應該收斂到相同的值（零）。</p>
+<p><strong>實驗驗證方法 1——同素異形體轉變：</strong>測量兩個不同固相的 $C_P(T)$，分別從 0 K 積分到轉變溫度。如果第三定律正確，兩個積分的差值應該等於 $\Delta H_{\text{tr}}/T_{\text{tr}}$。對於硫的斜方晶→單斜晶轉變，實驗結果與理論預測高度一致——差值在實驗誤差範圍內。</p>
+<p><strong>實驗驗證方法 2——光譜法比較：</strong>對於氣體，熵也可以從光譜數據（分子轉動和振動頻率）使用統計力學方法獨立計算。比較「熱化學熵」（從 $C_P$ 積分）和「光譜熵」（從分子常數計算配分函數），兩者在大多數情況下吻合到優於 0.1%——這是第三定律最嚴格的驗證。</p>
+
+<figure class="figure"><img src="../../../images/thermodynamics/ch06_pages/ch06_page_200_c.png" alt="Fig 6.12 低溫 Cp 測量數據" loading="lazy"><figcaption><strong>圖 6.12</strong> 極低溫下 $C_P$ 的精確測量數據。注意 $T < 10$ K 時 $C_P$ 降至 ∼0.1 J/mol·K 以下，需要非常靈敏的熱卡計才能準確測量。</figcaption></figure>
+
+<h3>更詳細的實驗驗證案例</h3>
+<p><strong>案例 A——鉛的熱化學熵 vs 光譜熵：</strong>鉛（Pb）因其低 $\Theta_D$（105 K）成為驗證第三定律的理想物質。低溫 $C_P$ 測量可輕鬆達到 1 K 以下（$T/\Theta_D < 0.01$），此時 $C_P$ 已完全遵循 $T^3$ 行為。將 $C_P/T$ 從 0 K 積分到 298 K，得到的 $S^\circ(298) = 64.80\ \text{J/mol·K}$。從光譜數據計算的配分函數給出 $S^\circ(298) = 64.82\ \text{J/mol·K}$——兩者差距僅 0.02 J/mol·K，遠小於實驗誤差（∼0.1 J/mol·K）。</p>
+<p><strong>案例 B——金剛石（鑽石）的特殊地位：</strong>金剛石的 $\Theta_D = 2230$ K，意味著在室溫下 $T/\Theta_D \approx 0.13$，仍處在德拜 $T^3$ 區域。這使得金的 $C_P$ 在室溫下僅約 6 J/mol·K（遠低於 $3R$），是古典 Dulong–Petit 定律最著名的「例外」。但德拜模型精確預測了其 $C_P(T)$ 曲線形狀——從 0 K 到 >2000 K，與實驗數據完全一致。金剛石的案例有力地證明了德拜模型和第三定律的有效性。</p>
+<p><strong>案例 C——殘留熵的經典案例：</strong>下表比較了幾種物質的熱化學熵和光譜熵，殘留熵的差值直接揭示了低溫晶體中的無序：</p>
+<table><thead><tr><th>物質</th><th>$S_{\text{cal}}^\circ(298)$ (J/mol·K)</th><th>$S_{\text{spec}}^\circ(298)$ (J/mol·K)</th><th>差值 (J/mol·K)</th><th>殘留熵來源</th></tr></thead><tbody>
+<tr><td>CO</td><td>197.7</td><td>193.4</td><td>4.3</td><td>分子取向無序 ($R\ln 2 \approx 5.76$)</td></tr>
+<tr><td>N₂O</td><td>220.0</td><td>215.1</td><td>4.9</td><td>分子取向無序 ($R\ln 2 \approx 5.76$)</td></tr>
+<tr><td>H₂O（冰）</td><td>44.3</td><td>41.9</td><td>2.4</td><td>氫鍵質子無序 ($R\ln\frac32 \approx 3.37$)</td></tr>
+<tr><td>D₂O（重冰）</td><td>46.3</td><td>44.1</td><td>2.2</td><td>氫鍵質子無序 ($R\ln\frac32 \approx 3.37$)</td></tr>
+</tbody></table>
+<p><strong>注意：</strong>表中的實驗差值略小於理論預測值，原因是低溫測量通常只到 10–15 K，低於此溫度的殘留熵貢獻未被完全捕獲——這恰恰說明了低溫 $C_P$ 測量的極限和德拜 $T^3$ 外插的重要性。</p>
+
+<figure class="figure"><img src="../../../images/thermodynamics/ch06_pages/ch06_page_201_c.png" alt="Fig 6.13 德拜 T³ 外插" loading="lazy"><figcaption><strong>圖 6.13</strong> 德拜 $T^3$ 外插示意圖。將 $C_P$ 對 $T^3$ 作圖（$T < 15$ K），數據點呈直線，斜率 $\beta = 12\pi^4 R/5\Theta_D^3$。由此可外插到 0 K 以獲得 $C_P$ 在極低溫下的完整行為。</figcaption></figure>
+
+<figure class="figure"><img src="../../../images/thermodynamics/ch06_pages/ch06_page_202_c.png" alt="Fig 6.14 CO 殘留熵示意" loading="lazy"><figcaption><strong>圖 6.14</strong> CO 晶體中殘留熵的示意。在 0 K 時，CO 分子仍保留隨機取向（C≡O 或 O≡C），導致 $\Omega = 2^N$ 種微觀態，殘留熵 $S = R\ln 2$。</figcaption></figure>
+
+<figure class="figure"><img src="../../../images/thermodynamics/ch06_pages/ch06_page_203_c.png" alt="Fig 6.15 Cp 實測數據點" loading="lazy"><figcaption><strong>圖 6.15</strong> 典型的低溫 $C_P$ 實測數據點（散點）及德拜 $T^3$ 擬合曲線（實線）。測量溫度範圍通常從 1.5 K 到 300 K。</figcaption></figure>
+
+<div class="callout"><strong>💡 殘留熵的發現——第三定律「失效」其實是資訊：</strong>當熱化學熵和光譜熵不一致時，差值指示了殘留熵的存在。例如，CO 的熱化學熵比光譜熵大 $R\ln 2$——這揭示了 CO 晶體中分子的隨機取向。H₂O（冰）也有殘留熵 $R\ln(3/2)$，來自氫鍵網路中質子的無序排列。所以第三定律的「例外」實際上提供了固體中微觀無序的寶貴資訊。</div>
+
+<h3>第三定律的更深遠後果</h3>
+<p>除了解釋殘留熵，第三定律還有以下重要的理論後果：</p>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li><strong>絕對零度的不可達性：</strong>通過有限次操作無法將系統的溫度降至絕對零度。這是第三定律的另一種表述——因為 $T \to 0$ 時 $\Delta S \to 0$，任何降溫過程的效率都會趨近於零。</li>
+<li><strong>低溫物理性質的約束：</strong>第三定律要求 $T \to 0$ 時 $C_P \to 0$、$\alpha \to 0$（熱膨脹係數為零）、$(\partial P/\partial T)_V \to 0$。這些預測均被低溫實驗所證實。</li>
+<li><strong>化學平衡的溫度依賴：</strong>結合 $S(0) = 0$ 和 Gibbs–Helmholtz 方程式，第三定律預測 $T \to 0$ 時 $\Delta G^\circ \to \Delta H^\circ$——即低溫下反應的方向完全由焓變決定。</li>
+</ul>
+</section>
+
+<section id="s6-7"><h2>6.7 壓力對焓和熵的影響（The Influence of Pressure on Enthalpy and Entropy）</h2>
+<p>到目前為止我們只討論了溫度對 $H$ 和 $S$ 的影響。壓力的影響可以通過第五章的 Maxwell 關係處理：</p>
+<div class="eq">$$\left(\frac{\partial H}{\partial P}\right)_T = V - T\left(\frac{\partial V}{\partial T}\right)_P = V(1 - T\alpha) \tag{6.11}$$</div>
+<div class="eq">$$\left(\frac{\partial S}{\partial P}\right)_T = -\left(\frac{\partial V}{\partial T}\right)_P = -V\alpha \tag{6.12}$$</div>
+<p>其中 $\alpha = (1/V)(\partial V/\partial T)_P$ 是熱膨脹係數。</p>
+<p><strong>對固體和液體：</strong>$\alpha$ 通常很小（∼$10^{-5}$ 到 $10^{-4}\ \text{K}^{-1}$），$V$ 也很小，因此壓力對 $H$ 和 $S$ 的影響在常規壓力下（<100 atm）通常可以忽略。例如，對於 1 mol 鐵（$V \approx 7.1\ \text{cm}^3$，$\alpha \approx 3.5 \times 10^{-5}\ \text{K}^{-1}$），壓力從 1 atm 增加到 100 atm 時，$\Delta S \approx -0.003\ \text{J/mol·K}$——完全可以忽略。</p>
+<p><strong>對氣體：</strong>壓力效應巨大且不可忽略（第八章的焦點）。對於理想氣體，$V = RT/P$，$\alpha = 1/T$，因此 $(\partial H/\partial P)_T = 0$（理想氣體的焓與壓力無關），但 $(\partial S/\partial P)_T = -R/P$——壓縮氣體顯著降低其熵。</p>
+
+<figure class="figure"><img src="../../../images/thermodynamics/ch06_pages/ch06_page_211_c.png" alt="Fig 6.16 壓力對焓和熵的影響" loading="lazy"><figcaption><strong>圖 6.16</strong> 壓力對 $H$ 和 $S$ 的影響示意圖。對於凝聚相（固體/液體），壓力效應在常規範圍內可忽略，但在 GPa 級壓力下變得顯著。對於氣體，即使 moderate 壓力變化也能產生可觀的熵變。</figcaption></figure>
+
+<h3>壓力效應的深入分析與實際數據</h3>
+<p><strong>定量評估——壓力對固體焓的貢獻：</strong></p>
+<p>對 Eq (6.11) 從 $P_1$ 到 $P_2$ 積分：</p>
+<div class="eq">$$\Delta H_P = \int_{P_1}^{P_2} V(1 - T\alpha)\,dP$$</div>
+<p>對於固體，$V$ 和 $\alpha$ 近似為常數（在 moderate 壓力範圍內），因此 $\Delta H_P \approx V(1 - T\alpha)(P_2 - P_1)$。</p>
+<p><strong>實際數據——幾種材料在 1 GPa 壓力下的焓變：</strong></p>
+<table><thead><tr><th>材料</th><th>$V$ (cm³/mol)</th><th>$\alpha$ (10⁻⁵ K⁻¹)</th><th>$\Delta H$ (1 GPa, 300 K) (J/mol)</th><th>對比：$\Delta H$ 升溫 100 K</th></tr></thead><tbody>
+<tr><td>Al</td><td>10.0</td><td>6.9</td><td>~860</td><td>~2500</td></tr>
+<tr><td>Cu</td><td>7.1</td><td>5.0</td><td>~600</td><td>~2400</td></tr>
+<tr><td>Fe</td><td>7.1</td><td>3.5</td><td>~640</td><td>~2500</td></tr>
+<tr><td>MgO</td><td>11.2</td><td>3.1</td><td>~1020</td><td>~4500</td></tr>
+<tr><td>NaCl</td><td>27.0</td><td>12.0</td><td>~2000</td><td>~5000</td></tr>
+</tbody></table>
+<p>可以看出，即使在 1 GPa（約 10,000 atm）的極高壓力下，固體的 $\Delta H_P$ 仍比升溫 100 K 的 $\Delta H_T$ 小一個量級左右。但在地球深部（下地幔壓力 > 100 GPa）或行星內部條件下，壓力效應變得主導——例如地球內核的鐵在 360 GPa 下，壓力對焓的貢獻與溫度效應相當。</p>
+
+<p><strong>高壓材料科學：</strong>在地球內部（GPa 級壓力）或高壓合成（如人造金剛石）條件下，壓力對固體 $H$ 和 $S$ 的效應不能再忽略。在這些情況下，需要使用狀態方程式（如 Birch–Murnaghan）配合 Maxwell 關係進行計算。</p>
+
+<h3>跨章關聯：Maxwell 關係與壓力效應（第五章）</h3>
+<p>Eq (6.11) 和 Eq (6.12) 的推導直接來自第五章的 Maxwell 關係。具體來說，從 Helmholtz 自由能 $A$ 的恰當微分 $dA = -SdT - PdV$ 出發，其混合偏導數相等給出 $(\partial S/\partial V)_T = (\partial P/\partial T)_V$。結合鏈式法則和 $H = U + PV$ 的定義，可以導出 Eq (6.11)。<strong>這是一個完美的跨章應用：</strong>第五章的純粹數學關係（Maxwell 方程）到了第六章變成了計算壓力對焓和熵影響的實用工具。如果沒有第五章的理論基礎，這些重要的壓力效應公式將無從推導。</p>
+
+<div class="callout"><strong>💡 壓力效應的實際判斷法則：</strong>如果 $P\Delta V \ll RT$（∼2.5 kJ/mol 在室溫），壓力對凝聚相的影響可以安全忽略。對於固體，這意味著壓力需要達到 ∼10 kbar（∼10⁹ Pa）才開始顯著。對於氣體，即使在 1 atm 下壓力效應也必須計入——這就是為什麼我們需要第八章。</div>
+</section>
+
+<section id="summary"><h2>本章摘要</h2>
+<ol style="font-size:14px;color:var(--t2);margin-left:18px">
+<li><strong>熱容理論：</strong>Dulong–Petit 給出 $C_V \approx 3R$（古典）。愛因斯坦模型引入量子化→低溫下降（指數）。德拜模型使用連續頻譜→低溫 $T^3$ 定律（與實驗完美吻合）。$\Theta_D$ 反映晶格剛性。</li>
+<li><strong>經驗 $C_P$：</strong>$C_P = a + bT + cT^{-2} + dT^2$。從實驗數據擬合，是計算 $\Delta H$ 和 $\Delta S$ 的輸入。</li>
+<li><strong>Kirchhoff 定律：</strong>$(\partial\Delta H/\partial T)_P = \Delta C_P$ 和它的積分形式。跨越相變時必須分段積分並加入 $\Delta H_{\text{tr}}$。</li>
+<li><strong>第三定律：</strong>$S(0\ \text{K}) = 0$（完美晶體）。提供熵的絕對參考點。非完美晶體有殘留熵。</li>
+<li><strong>絕對熵計算：</strong>$S^\circ(T) = \int_0^{T_{\text{low}}} + \int_{T_{\text{low}}}^T + \sum \Delta H_{\text{tr}}/T_{\text{tr}}$。低溫區使用德拜 $T^3$ 外插。</li>
+<li><strong>壓力效應：</strong>$(\partial H/\partial P)_T = V(1-T\alpha)$，$(\partial S/\partial P)_T = -V\alpha$。固體/液體通常可忽略（除非 GPa 級壓力）。</li>
+<li><strong>跨章總結：</strong>本章的 Kirchhoff 定律和絕對熵計算是第十一章 $\Delta G^\circ(T)$ 計算的數據基礎；愛因斯坦模型的推導直接使用第四章的 Boltzmann 分布；壓力效應公式來自第五章的 Maxwell 關係。</li>
+</ol>
+<div class="callout"><strong>📖 繼續前進：</strong>從第六章學到的計算方法將在第七章（$C_P$ 在溶液熱力學中的應用）、第八章（氣體的熱力學性質，壓力效應的完整處理）、第十一章（反應平衡的完整計算）和第十二章（相圖的熱力學計算）中被反覆使用。特別是第十一章，將完整展示如何從 $C_P$ 數據出發，經過 Kirchhoff 積分和第三定律積分，最終得到 $\Delta G^\circ(T)$ 和反應平衡常數——這是材料熱力學中最標準的計算流程。</div>
+</section>
+</main>
+<script>
+function toggleTheme(){const h=document.documentElement;const n=h.getAttribute('data-theme')==='light'?'dark':'light';h.setAttribute('data-theme',n);localStorage.setItem('theme',n);document.getElementById('tl').textContent=n==='dark'?'淺色模式':'深色模式';}
+const s=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',s);if(s==='dark')document.getElementById('tl').textContent='淺色模式';
+const secs=document.querySelectorAll('section[id]');const navs=document.querySelectorAll('.sn a');window.addEventListener('scroll',()=>{let c='';secs.forEach(s=>{if(window.scrollY>=s.offsetTop-80)c=s.getAttribute('id');});navs.forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+c);});});
+document.querySelectorAll('.figure img').forEach(i=>i.addEventListener('click',()=>window.open(i.src,'_blank')));
+</script>
+</body>
+</html>

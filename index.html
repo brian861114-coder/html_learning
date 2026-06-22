@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>📚 材料學習資源中心</title>
+<style>
+:root {
+  --bg: #f8fafc;
+  --card-bg: #FFFFFF;
+  --tx: #1D1D1F;
+  --tx2: #6E6E73;
+  --ac: #007AFF;
+  --bd: #D2D2D7;
+  --shadow: 0 2px 12px rgba(0,0,0,0.08);
+  --hover-shadow: 0 8px 30px rgba(0,0,0,0.12);
+  --ssp-accent: #007AFF;
+  --ssp-light: #E8F0FE;
+  --thermo-accent: #FF6B35;
+  --thermo-light: #FFF3E0;
+  --tag-bg: #F5F5F7;
+  --tag-tx: #6E6E73;
+  --divider: #E5E5EA;
+  --link-hover-bg: #F5F5F7;
+}
+[data-theme="dark"] {
+  --bg: #1C1C1E;
+  --card-bg: #2C2C2E;
+  --tx: #F5F5F7;
+  --tx2: #A1A1A6;
+  --ac: #0A84FF;
+  --bd: #48484A;
+  --shadow: 0 2px 12px rgba(0,0,0,0.3);
+  --hover-shadow: 0 8px 30px rgba(0,0,0,0.5);
+  --ssp-light: #1A2332;
+  --thermo-light: #2C2416;
+  --tag-bg: #3A3A3C;
+  --tag-tx: #A1A1A6;
+  --divider: #48484A;
+  --link-hover-bg: #3A3A3C;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
+  background: var(--bg);
+  color: var(--tx);
+  min-height: 100vh;
+  line-height: 1.6;
+  transition: background 0.3s, color 0.3s;
+}
+
+/* ── Header ── */
+header {
+  text-align: left;
+  padding: 64px 24px 40px;
+  background: var(--card-bg);
+  border-bottom: 1px solid var(--divider);
+}
+header h1 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 6px;
+}
+header p {
+  color: var(--tx2);
+  font-size: 0.95rem;
+}
+.portal-search { max-width: 760px; margin: 20px auto 0; position: relative; }
+.portal-search input { width: 100%; padding: 12px 14px; border: 1px solid var(--bd); border-radius: 10px; color: var(--tx); background: var(--card-bg); font: inherit; }
+.portal-search input:focus { outline: 3px solid color-mix(in srgb, var(--ac) 25%, transparent); border-color: var(--ac); }
+.search-results { display:none; position:absolute; inset:calc(100% + 6px) 0 auto; z-index:500; max-height:300px; overflow:auto; padding:6px; border:1px solid var(--bd); border-radius:10px; background:var(--card-bg); box-shadow:var(--shadow); }
+.search-results.is-visible { display:block; }.search-results a { display:block; padding:9px 10px; border-radius:7px; color:var(--tx); text-decoration:none; font-size:.9rem; }.search-results a:hover { background:var(--link-hover-bg); }.search-results small { display:block; color:var(--tx2); margin-top:2px; }
+
+/* ── Theme toggle ── */
+.theme-toggle {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 100;
+}
+.theme-toggle button {
+  background: var(--card-bg);
+  border: 1px solid var(--bd);
+  border-radius: 20px;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-size: 14px;
+  color: var(--tx);
+  transition: all 0.2s;
+  font-family: inherit;
+}
+.theme-toggle button:hover {
+  background: var(--tag-bg);
+}
+
+/* ── Container ── */
+.container {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 32px 24px 64px;
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* ── Subject Card ── */
+.subject-card {
+  background: var(--card-bg);
+  border-radius: 16px;
+  box-shadow: var(--shadow);
+  padding: 0;
+  overflow: hidden;
+  flex: 1 1 500px;
+  max-width: 540px;
+  transition: box-shadow 0.2s, transform 0.2s;
+  border: 1px solid var(--bd);
+}
+.subject-card:hover {
+  box-shadow: var(--hover-shadow);
+  transform: translateY(-2px);
+}
+
+.card-header {
+  padding: 28px 28px 20px;
+  border-bottom: 1px solid var(--divider);
+}
+.card-icon {
+  display: none;
+}
+.card-header h2 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.card-header .subtitle {
+  color: var(--tx2);
+  font-size: 0.85rem;
+}
+.card-stats {
+  display: flex;
+  gap: 16px;
+  margin-top: 12px;
+}
+.stat-badge {
+  font-size: 0.78rem;
+  padding: 3px 10px;
+  border-radius: 12px;
+  background: var(--tag-bg);
+  color: var(--tag-tx);
+}
+
+/* ── Chapter list ── */
+.chapter-list {
+  padding: 16px 16px 24px;
+}
+.chapter-group {
+  margin-bottom: 8px;
+}
+.group-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--tx2);
+  padding: 8px 12px 4px;
+}
+.chapter-link {
+  display: flex;
+  align-items: center;
+  padding: 11px 12px;
+  border-radius: 8px;
+  text-decoration: none;
+  color: var(--tx);
+  transition: background 0.15s;
+  font-size: 0.92rem;
+  gap: 10px;
+}
+.chapter-link:hover {
+  background: var(--link-hover-bg);
+}
+.chapter-link .ch-num {
+  font-weight: 600;
+  font-size: 0.8rem;
+  color: var(--tx2);
+  min-width: 36px;
+}
+.chapter-link .ch-title {
+  flex: 1;
+}
+.chapter-link .ch-arrow {
+  color: var(--tx2);
+  font-size: 0.8rem;
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+.chapter-link:hover .ch-arrow {
+  opacity: 1;
+}
+
+/* ── Extra resources ── */
+.extra-section {
+  margin-top: 8px;
+  padding: 12px 12px 4px;
+}
+.extra-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--tx2);
+  padding: 0 0 6px 0;
+}
+.extra-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  margin: 2px 4px 6px 0;
+  border-radius: 6px;
+  text-decoration: none;
+  color: var(--ac);
+  font-size: 0.85rem;
+  font-weight: 500;
+  background: var(--tag-bg);
+  transition: background 0.15s;
+}
+.extra-link:hover {
+  background: var(--link-hover-bg);
+}
+
+/* ── Footer ── */
+footer {
+  text-align: center;
+  padding: 24px;
+  color: var(--tx2);
+  font-size: 0.8rem;
+  border-top: 1px solid var(--divider);
+}
+
+/* ── Responsive ── */
+@media (max-width: 800px) {
+  .container { padding: 16px 12px 32px; }
+  .subject-card { max-width: 100%; }
+  header h1 { font-size: 1.5rem; }
+}
+
+/* Static, GitHub Pages-friendly portal refinements. */
+.header-inner { max-width: 760px; margin: 0 auto; }
+.header-kicker { color: var(--tx2); font-size: .78rem; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; margin-bottom: 12px; }
+.course-mark { display: block; width: 42px; height: 6px; border-radius: 99px; background: var(--course-accent, var(--ac)); margin-bottom: 20px; }
+.subject-card { --course-accent: var(--ssp-accent); border-radius: 18px; }
+.subject-card[data-course="thermodynamics"] { --course-accent: var(--thermo-accent); }
+.card-header { border-left: 0 !important; padding: 30px 28px 22px !important; }
+.card-header h2 { font-size: 1.5rem; }
+.card-stats { flex-wrap: wrap; gap: 8px; }
+.stat-badge { background: color-mix(in srgb, var(--course-accent) 9%, var(--card-bg)); color: var(--tx2); border: 1px solid color-mix(in srgb, var(--course-accent) 18%, var(--bd)); }
+.course-actions { padding: 0 28px 20px; display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.course-toggle { appearance: none; border: 1px solid var(--bd); color: var(--tx); background: var(--card-bg); font: inherit; font-size: .88rem; font-weight: 650; padding: 8px 12px; border-radius: 8px; cursor: pointer; }
+.course-toggle:hover { border-color: var(--course-accent); color: var(--course-accent); }
+.course-resume { display:none; padding:8px 12px; border-radius:8px; background:var(--course-accent); color:#fff; text-decoration:none; font-size:.88rem; font-weight:650; }
+.course-resume.is-visible { display:inline-flex; }
+.course-progress { width:100%; color:var(--tx2); font-size:.8rem; }
+.course-toggle:focus-visible, .chapter-link:focus-visible, .extra-link:focus-visible, .theme-toggle button:focus-visible { outline: 3px solid color-mix(in srgb, var(--ac) 35%, transparent); outline-offset: 2px; }
+.subject-card.is-condensed .chapter-group:nth-of-type(n+2), .subject-card.is-condensed .extra-section, .subject-card.is-condensed .chapter-group:first-child .chapter-link:nth-of-type(n+4) { display: none; }
+.group-label { color: var(--course-accent); padding-top: 14px; }
+@media (max-width: 560px) { header { padding: 48px 20px 30px; } .theme-toggle { top: 12px; right: 12px; } .theme-toggle button { padding: 7px 11px; } .card-header, .course-actions { padding-left: 20px !important; padding-right: 20px !important; } .chapter-list { padding: 12px 12px 20px; } }
+</style>
+<script src="reading-preferences.js" defer></script></head>
+<body>
+
+<header>
+  <div class="header-inner">
+  <div class="header-kicker">Learning library</div>
+  <h1>材料學習資源中心</h1>
+  <p>半導體物理 &amp; 材料熱力學 — 互動式 HTML 學習筆記</p>
+  </div>
+</header>
+
+<div class="portal-search">
+  <input id="portal-search" type="search" placeholder="搜尋章節、公式、例題或資源" autocomplete="off" aria-label="搜尋學習資源">
+  <div id="search-results" class="search-results" role="listbox"></div>
+</div>
+
+<div class="container">
+
+  <!-- ═══════ 半導體物理 ═══════ -->
+  <div class="subject-card is-condensed" data-course="semiconductor">
+    <div class="card-header" style="border-left: 4px solid var(--ssp-accent); padding-left: 24px;">
+      <span class="course-mark" aria-hidden="true"></span>
+      <h2>半導體物理與元件</h2>
+      <div class="subtitle">Semiconductor Physics and Devices<br>Donald A. Neamen, 4th Edition</div>
+      <div class="card-stats">
+        <span class="stat-badge">16 章</span>
+        <span class="stat-badge">12 份公式摘要</span>
+        <span class="stat-badge">16 組習題</span>
+      </div>
+    </div>
+    <div class="chapter-list">
+
+      <div class="chapter-group">
+        <div class="group-label">Part I — 半導體材料性質</div>
+        <a class="chapter-link" href="solid-state-physics/html/chapters/ch01_crystal_structure_zh.html">
+          <span class="ch-num">Ch 1</span>
+          <span class="ch-title">固體的晶體結構</span>
+          <span class="ch-arrow">→</span>
+        </a>
+        <a class="chapter-link" href="solid-state-physics/html/chapters/ch02_intro_qm_zh.html">
+          <span class="ch-num">Ch 2</span>
+          <span class="ch-title">量子力學導論</span>
+          <span class="ch-arrow">→</span>
+        </a>
+        <a class="chapter-link" href="solid-state-physics/html/chapters/ch03_quantum_theory_solids_zh.html">
+          <span class="ch-num">Ch 3</span>
+          <span class="ch-title">固體的量子理論導論</span>
+          <span class="ch-arrow">→</span>
+        </a>
+        <a class="chapter-link" href="solid-state-physics/html/chapters/ch04_semiconductor_equilibrium_zh.html">
+          <span class="ch-num">Ch 4</span>
+          <span class="ch-title">平衡態半導體</span>
+          <span class="ch-arrow">→</span>
+        </a>
+        <a class="chapter-link" href="solid-state-physics/html/chapters/ch05_carrier_transport_zh.html">
+          <span class="ch-num">Ch 5</span>
+          <span class="ch-title">載子傳輸現象</span>
+          <span class="ch-arrow">→</span>
+        </a>
+        <a class="chapter-link" href="solid-state-physics/html/chapters/ch06_nonequilibrium_excess_carriers_zh.html">
+          <span class="ch-num">Ch 6</span>
+          <span class="ch-title">非平衡過量載子</span>
+          <span class="ch-arrow">→</span>
+        </a>
+      </div>
+
+      <div class="chapter-group">
+        <div class="group-label">Part II — 半導體元件基礎</div>
+        <a class="chapter-link" href="solid-state-physics/html/chapters/ch07_pn_junction_zh.html">
+          <span class="ch-num">Ch 7</span>
+          <span class="ch-title">pn 接面</span>
+          <span class="ch-arrow">→</span>
+        </a>
+        <a class="chapter-link" href="solid-state-physics/html/chapters/ch08_pn_junction_diode_zh.html">
+          <span class="ch-num">Ch 8</span>
+          <span class="ch-title">pn 接面二極體</span>
+          <span class="ch-arrow">→</span>
+        </a>
+        <a class="chapter-link" href="solid-state-physics/html/chapters/ch09_ms_heterojunction_zh.html">
+          <span class="ch-num">Ch 9</span>
+          <span class="ch-title">金半接面與異質接面</span>
+          <span class="ch-arrow">→</span>
+        </a>
+        <a class="chapter-link" href="solid-state-physics/html/chapters/ch10_bjt_zh.html">
+          <span class="ch-num">Ch 10</span>
+          <span class="ch-title">雙極性接面電晶體 (BJT)</span>
+          <span class="ch-arrow">→</span>
+        </a>
+        <a class="chapter-link" href="solid-state-physics/html/chapters/ch11_mosfet_zh.html">
+          <span class="ch-num">Ch 11</span>
+          <span class="ch-title">場效電晶體 (MOSFET)</span>
+          <span class="ch-arrow">→</span>
+        </a>
+        <a class="chapter-link" href="solid-state-physics/html/chapters/ch12_mosfet_advanced_zh.html">
+          <span class="ch-num">Ch 12</span>
+          <span class="ch-title">MOSFET 進階概念</span>
+          <span class="ch-arrow">→</span>
+        </a>
+      </div>
+
+      <div class="chapter-group">
+        <div class="group-label">Part III — 進階與特殊元件</div>
+        <a class="chapter-link" href="solid-state-physics/html/chapters/ch13_bjt_advanced_zh.html">
+          <span class="ch-num">Ch 13a</span>
+          <span class="ch-title">BJT 進階概念</span>
+          <span class="ch-arrow">→</span>
+        </a>
+        <a class="chapter-link" href="solid-state-physics/html/chapters/ch13_jfet_mesfet_zh.html">
+          <span class="ch-num">Ch 13b</span>
+          <span class="ch-title">JFET / MESFET / HEMT</span>
+          <span class="ch-arrow">→</span>
+        </a>
+        <a class="chapter-link" href="solid-state-physics/html/chapters/ch14_optical_devices_zh.html">
+          <span class="ch-num">Ch 14</span>
+          <span class="ch-title">光學元件</span>
+          <span class="ch-arrow">→</span>
+        </a>
+        <a class="chapter-link" href="solid-state-physics/html/chapters/ch15_microwave_power_devices_zh.html">
+          <span class="ch-num">Ch 15</span>
+          <span class="ch-title">微波與功率元件</span>
+          <span class="ch-arrow">→</span>
+        </a>
+      </div>
+
+      <div class="extra-section">
+        <div class="extra-label">📦 其他資源</div>
+        <a class="extra-link" href="solid-state-physics/html/formula_reviews/">公式摘要（12 章）</a>
+        <a class="extra-link" href="solid-state-physics/html/problems_examples/">習題與例題</a>
+        <a class="extra-link" href="solid-state-physics/html/combined/完整整合版_半導體物理與元件.html">完整整合版</a>
+        <a class="extra-link" href="solid-state-physics/html/combined/semiconductor_book_structure_map_zh.html">結構地圖</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════ 材料熱力學 ═══════ -->
+  <div class="subject-card is-condensed" data-course="thermodynamics">
+    <div class="card-header" style="border-left: 4px solid var(--thermo-accent); padding-left: 24px;">
+      <span class="course-mark" aria-hidden="true"></span>
+      <h2>材料熱力學</h2>
+      <div class="subtitle">Introduction to the Thermodynamics of Materials<br>David R. Gaskell, 6th Edition</div>
+      <div class="card-stats">
+        <span class="stat-badge">15 章</span>
+        <span class="stat-badge">12 份公式摘要</span>
+        <span class="stat-badge">Part I–III</span>
+      </div>
+    </div>
+    <div class="chapter-list">
+
+      <div class="chapter-group">
+        <div class="group-label">Part I — 熱力學基本原理</div>
+        <a class="chapter-link" href="thermodynamics/html/chapters/ch01_intro_terms_zh.html">
+          <span class="ch-num">Ch 1</span>
+          <span class="ch-title">導論與術語定義</span>
+          <span class="ch-arrow">→</span>
+        </a>
+        <a class="chapter-link" href="thermodynamics/html/chapters/ch02_first_law_zh.html">
+          <span class="ch-num">Ch 2</span>
+          <span class="ch-title">熱力學第一定律</span>
+          <span class="ch-arrow">→</span>
+        </a>
+        <a class="chapter-link" href="thermodynamics/html/chapters/ch03_second_law_zh.html">
+          <span class="ch-num">Ch 3</span>
+          <span class="ch-title">熱力學第二定律</span>
+          <span class="ch-arrow">→</span>
+        </a>
+        <a class="chapter-link" href="thermodynamics/html/chapters/ch04_statistical_entropy_zh.html">
+          <span class="ch-num">Ch 4</span>
+          <span class="ch-title">熵的統計詮釋</span>
+          <span class="ch-arrow">→</span>
+        </a>
+        <a class="chapter-link" href="thermodynamics/html/chapters/ch05_fundamental_eqs_zh.html">
+          <span class="ch-num">Ch 5</span>
+          <span class="ch-title">基本方程式與其關係</span>
+          <span class="ch-arrow">→</span>
+        </a>
+        <a class="chapter-link" href="thermodynamics/html/chapters/ch06_heat_capacity_third_law_zh.html">
+          <span class="ch-num">Ch 6</span>
+          <span class="ch-title">熱容、焓、熵與第三定律</span>
+          <span class="ch-arrow">→</span>
+        </a>
+      </div>
+
+      <div class="chapter-group">
+        <div class="group-label">Part II — 相平衡與溶液</div>
+        <a class="chapter-link" href="thermodynamics/html/chapters/ch07_phase_equilibrium_one_comp_zh.html">
+          <span class="ch-num">Ch 7</span>
+          <span class="ch-title">單成分系統相平衡</span>
+          <span class="ch-arrow">→</span>
+        </a>
+        <a class="chapter-link" href="thermodynamics/html/chapters/ch08_behavior_of_gases_zh.html">
+          <span class="ch-num">Ch 8</span>
+          <span class="ch-title">氣體的行為</span>
+          <span class="ch-arrow">→</span>
+        </a>
+        <a class="chapter-link" href="thermodynamics/html/chapters/ch09_behavior_of_solutions_zh.html">
+          <span class="ch-num">Ch 9</span>
+          <span class="ch-title">溶液的行為</span>
+          <span class="ch-arrow">→</span>
+        </a>
+        <a class="chapter-link" href="thermodynamics/html/chapters/ch10_binary_phase_diagrams_zh.html">
+          <span class="ch-num">Ch 10</span>
+          <span class="ch-title">吉布斯自由能與二元相圖</span>
+          <span class="ch-arrow">→</span>
+        </a>
+      </div>
+
+      <div class="chapter-group">
+        <div class="group-label">Part III — 化學反應與應用</div>
+        <a class="chapter-link" href="thermodynamics/html/chapters/ch11_reactions_gases_zh.html">
+          <span class="ch-num">Ch 11</span>
+          <span class="ch-title">涉及氣體的反應</span>
+          <span class="ch-arrow">→</span>
+        </a>
+        <a class="chapter-link" href="thermodynamics/html/chapters/ch12_ellingham_zh.html">
+          <span class="ch-num">Ch 12</span>
+          <span class="ch-title">純凝態與氣相反應</span>
+          <span class="ch-arrow">→</span>
+        </a>
+        <a class="chapter-link" href="thermodynamics/html/chapters/ch13_condensed_solution_reactions_zh.html">
+          <span class="ch-num">Ch 13</span>
+          <span class="ch-title">凝態溶液反應平衡</span>
+          <span class="ch-arrow">→</span>
+        </a>
+        <a class="chapter-link" href="thermodynamics/html/chapters/ch14_electrochemistry_zh.html">
+          <span class="ch-num">Ch 14</span>
+          <span class="ch-title">電化學</span>
+          <span class="ch-arrow">→</span>
+        </a>
+        <a class="chapter-link" href="thermodynamics/html/chapters/ch15_phase_transformations_zh.html">
+          <span class="ch-num">Ch 15</span>
+          <span class="ch-title">相變態熱力學</span>
+          <span class="ch-arrow">→</span>
+        </a>
+      </div>
+
+      <div class="extra-section">
+        <div class="extra-label">📦 其他資源</div>
+        <a class="extra-link" href="thermodynamics/html/formula_reviews/">公式摘要（12 章）</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  最後更新：2026/06/22 &nbsp;|&nbsp; 
+  <a href="solid-state-physics/" style="color:var(--ac);text-decoration:none;">半導體物理專案</a> &nbsp;·&nbsp; 
+  <a href="thermodynamics/" style="color:var(--ac);text-decoration:none;">熱力學專案</a>
+</footer>
+
+<script>
+function toggleTheme() {
+  const html = document.documentElement;
+  const btn = document.getElementById('theme-btn');
+  const isDark = html.getAttribute('data-theme') === 'dark';
+  if (isDark) {
+    html.removeAttribute('data-theme');
+    btn.textContent = '切換深色模式';
+    btn.setAttribute('aria-label', '切換深色模式');
+    localStorage.setItem('theme', 'light');
+  } else {
+    html.setAttribute('data-theme', 'dark');
+    btn.textContent = '切換淺色模式';
+    btn.setAttribute('aria-label', '切換淺色模式');
+    localStorage.setItem('theme', 'dark');
+  }
+}
+// Load saved theme
+if (false && localStorage.getItem('theme') === 'dark') {
+  document.documentElement.setAttribute('data-theme', 'dark');
+  document.getElementById('theme-btn').textContent = '切換淺色模式';
+  document.getElementById('theme-btn').setAttribute('aria-label', '切換淺色模式');
+}
+
+document.querySelectorAll('.subject-card').forEach((card) => {
+  const actions = document.createElement('div');
+  actions.className = 'course-actions';
+  const progress = document.createElement('span');
+  progress.className = 'course-progress';
+  const completed = JSON.parse(localStorage.getItem('learning-portal-completed-pages') || '[]');
+  const chapterLinks = [...card.querySelectorAll('.chapter-link')];
+  const completedChapters = chapterLinks.filter((link) => completed.includes(link.getAttribute('href'))).length;
+  progress.textContent = `${completedChapters} / ${chapterLinks.length} 章已完成`;
+  const resume = document.createElement('a');
+  resume.className = 'course-resume';
+  resume.textContent = '從上次繼續';
+  const lastRead = JSON.parse(localStorage.getItem('learning-portal-last-chapter') || 'null');
+  if (lastRead && lastRead.course === card.dataset.course) {
+    resume.href = lastRead.href;
+    resume.classList.add('is-visible');
+  }
+  const button = document.createElement('button');
+  button.className = 'course-toggle';
+  button.type = 'button';
+  button.textContent = '瀏覽完整目錄';
+  button.setAttribute('aria-expanded', 'false');
+  button.addEventListener('click', () => {
+    const condensed = card.classList.toggle('is-condensed');
+    button.textContent = condensed ? '瀏覽完整目錄' : '收合目錄';
+    button.setAttribute('aria-expanded', String(!condensed));
+  });
+  actions.append(progress, resume, button);
+  card.querySelector('.chapter-list').before(actions);
+});
+
+document.querySelectorAll('.subject-card .chapter-link, .subject-card .extra-link').forEach((link) => {
+  link.addEventListener('click', () => {
+    const card = link.closest('.subject-card');
+    localStorage.setItem('learning-portal-last-chapter', JSON.stringify({
+      course: card.dataset.course,
+      href: link.getAttribute('href'),
+      title: link.querySelector('.ch-title')?.textContent.trim() || '章節',
+    }));
+  });
+});
+
+const searchInput = document.getElementById('portal-search');
+const searchResults = document.getElementById('search-results');
+const searchableLinks = [...document.querySelectorAll('.subject-card .chapter-link, .subject-card .extra-link')];
+searchInput?.addEventListener('input', () => {
+  const query = searchInput.value.trim().toLowerCase();
+  if (!query) { searchResults.classList.remove('is-visible'); searchResults.replaceChildren(); return; }
+  const matches = searchableLinks.filter((link) => link.textContent.toLowerCase().includes(query)).slice(0, 12);
+  searchResults.replaceChildren(...matches.map((link) => {
+    const item = document.createElement('a'); item.href = link.href; item.innerHTML = `${link.textContent.trim()}<small>${link.closest('.subject-card').querySelector('h2').textContent.trim()}</small>`; return item;
+  }));
+  searchResults.classList.toggle('is-visible', matches.length > 0);
+});
+document.addEventListener('pointerdown', (event) => { if (!event.target.closest('.portal-search')) searchResults?.classList.remove('is-visible'); });
+const requestedCourse = new URLSearchParams(location.search).get('course');
+if (requestedCourse) document.querySelector(`.subject-card[data-course="${requestedCourse}"]`)?.classList.remove('is-condensed');
+</script>
+
+</body>
+</html>

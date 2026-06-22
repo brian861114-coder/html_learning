@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第14章：電化學 — Gaskell 材料熱力學導論 學習指南</title>
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']],tags:'ams'},options:{ignoreHtmlClass:'no-math'}};</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+:root{--bg:#fff;--b2:#F5F5F7;--b3:#E8F0FE;--tx:#1D1D1F;--t2:#1D1D1F;--ac:#007AFF;--bd:#D2D2D7;--sh:0 2px 8px rgba(0,0,0,.08);--fbd:#E5E5EA;--wbg:#FFF9F0;--wbd:#FFB340;--wtx:#B8700A;--nw:260px}
+[data-theme="dark"]{--bg:#1C1C1E;--b2:#2C2C2E;--b3:#1A2332;--tx:#F5F5F7;--t2:#A1A1A6;--ac:#0A84FF;--bd:#48484A;--fbd:#3A3A3C;--wbg:#2C2416;--wbd:#8B6914;--wtx:#FFB340}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth;scroll-padding-top:16px}
+body{font-family:-apple-system,BlinkMacSystemFont,'Noto Sans TC','Microsoft JhengHei',sans-serif;background:var(--b2);color:var(--tx);line-height:1.9;display:flex;min-height:100vh}
+.sidebar{position:fixed;top:0;left:0;width:var(--nw);height:100vh;background:var(--bg);border-right:1px solid var(--bd);overflow-y:auto;z-index:100;padding:20px 16px;display:flex;flex-direction:column}
+.sh{margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--fbd)}.sh h2{font-size:14px;font-weight:600;color:var(--ac)}.sh .bk{font-size:11px;color:var(--t2)}
+.sn{flex:1}.sn ul{list-style:none}.sn a{display:block;padding:4px 10px;font-size:11px;color:var(--t2);text-decoration:none;border-radius:5px;transition:.12s}.sn a:hover{background:var(--b3);color:var(--ac)}.sn a.active{background:var(--b3);color:var(--ac);font-weight:500}.sn .ns{font-weight:600;font-size:12px;color:var(--tx);margin-top:10px;padding:2px 10px}.sn .nsub a{padding-left:20px;font-size:10px}
+.st{margin-top:auto;padding-top:12px;border-top:1px solid var(--fbd)}.st button{width:100%;padding:6px;border:1px solid var(--bd);border-radius:6px;background:var(--b2);color:var(--tx);cursor:pointer;font-size:12px}
+.main{margin-left:var(--nw);flex:1;max-width:1050px;padding:32px 40px 80px}
+.header{margin-bottom:32px;padding-bottom:20px;border-bottom:2px solid var(--ac)}.header .cl{font-size:12px;font-weight:600;color:var(--ac);letter-spacing:1px}.header h1{font-size:28px;font-weight:700;margin:6px 0}.header .meta{font-size:13px;color:var(--t2)}
+section{margin-bottom:44px}h2{font-size:20px;font-weight:700;color:var(--ac);margin-bottom:14px;padding-bottom:6px;border-bottom:1px solid var(--bd)}h3{font-size:16px;font-weight:600;color:var(--tx);margin:24px 0 10px}
+p{font-size:14px;color:var(--t2);margin-bottom:12px}strong{font-weight:600;color:var(--tx)}
+.eq{text-align:center;margin:16px 0;font-size:15px}
+.callout{background:var(--b3);border:1px solid var(--fbd);border-radius:8px;padding:14px 18px;margin:16px 0;font-size:13px}.callout strong{color:var(--ac)}
+.callout-warn{background:var(--wbg);border:1px solid var(--wbd);border-radius:8px;padding:14px 18px;margin:16px 0;font-size:13px}.callout-warn strong{color:var(--wtx)}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}thead th{background:var(--b3);padding:8px 12px;font-size:12px;font-weight:600;border-bottom:2px solid var(--bd)}tbody td{padding:8px 12px;border-bottom:1px solid var(--fbd)}tbody tr:nth-child(even){background:var(--b2)}
+@media(max-width:768px){.sidebar{transform:translateX(-100%);transition:.3s}.sidebar.open{transform:translateX(0)}.main{margin-left:0;padding:20px 16px 60px}}
+.figure{text-align:center;margin:24px 0;padding:12px;background:var(--b2);border-radius:8px;border:1px solid var(--bd)}.figure img{max-width:100%;height:auto;border-radius:4px;box-shadow:var(--sh)}.figure figcaption{margin-top:10px;font-size:13px;color:var(--t2);line-height:1.7;font-style:italic;padding:0 20px;text-align:left}
+.derivation{background:var(--b3);border-left:4px solid var(--ac);border-radius:4px;padding:16px 20px;margin:20px 0;font-size:13px}.derivation h4{font-size:14px;font-weight:600;color:var(--ac);margin:0 0 10px}.derivation .step{margin:6px 0;padding-left:8px;border-left:2px solid var(--fbd)}.derivation .result{text-align:center;font-weight:700;font-size:15px;margin:10px 0;padding:8px;background:var(--bg);border-radius:4px;color:var(--ac)}
+.pourbaix-expanded{margin:16px 0}.pourbaix-expanded h4{font-size:15px;font-weight:600;color:var(--tx);margin:16px 0 8px}.pourbaix-expanded .boundary-type{background:var(--b2);border:1px solid var(--bd);border-radius:6px;padding:12px 16px;margin:10px 0}.pourbaix-expanded .boundary-type h5{font-size:13px;font-weight:600;color:var(--ac);margin:0 0 6px}.pourbaix-expanded .boundary-type p{font-size:12px;margin:4px 0}
+.crossref-enhanced table{font-size:12px} .crossref-enhanced td{padding:6px 10px}
+@media print{.sidebar{display:none}.main{margin-left:0;max-width:100%;padding:0}}
+</style>
+<script src="../../../reading-preferences.js" defer></script></head>
+<body><a class="portal-home-link" href="../../../index.html">返回學習中心</a><style id="portal-home-link-style">.portal-home-link{position:fixed;top:16px;right:16px;z-index:1000;display:inline-flex;align-items:center;min-height:36px;padding:7px 11px;border:1px solid #cbd5e1;border-radius:8px;background:#fff;color:#1d4ed8;font:600 13px/1.2 -apple-system,BlinkMacSystemFont,"Noto Sans TC","Microsoft JhengHei",sans-serif;text-decoration:none;box-shadow:0 2px 10px rgba(15,23,42,.08)}.portal-home-link:hover{background:#eff6ff}.portal-home-link:focus-visible{outline:3px solid rgba(37,99,235,.35);outline-offset:2px}@media(max-width:768px){.portal-home-link{top:10px;right:10px;min-height:34px;padding:7px 9px;font-size:12px}}</style>
+
+<!-- ========== SIDEBAR NAVIGATION ========== -->
+<nav class="sidebar" id="sidebar">
+  <div class="sh">
+    <h2>📘 Gaskell 材料熱力學</h2>
+    <div class="bk">第14章 學習指南</div>
+  </div>
+  <div class="sn">
+    <ul>
+      <li><a href="#intro">本章概述</a></li>
+      <li class="ns">14.1–14.2 驅動力</li>
+      <li class="nsub"><a href="#s14_1">化學驅動力與電驅動力</a></li>
+      <li class="nsub"><a href="#s14_1b">基本橋樑公式 ΔG = −nFℰ</a></li>
+      <li class="ns">14.3 能斯特方程式</li>
+      <li class="nsub"><a href="#s14_3">濃度對電動勢的影響</a></li>
+      <li class="nsub"><a href="#s14_3b">能斯特方程推導與應用</a></li>
+      <li class="ns">14.4 生成電池</li>
+      <li class="nsub"><a href="#s14_4">由元素生成化合物之電池</a></li>
+      <li class="ns">14.5 濃差電池</li>
+      <li class="nsub"><a href="#s14_5">濃度差驅動之電動勢</a></li>
+      <li class="nsub"><a href="#s14_5b">氧氣濃差電池與氧化鋯傳感器</a></li>
+      <li class="ns">14.6 電動勢的溫度係數</li>
+      <li class="nsub"><a href="#s14_6">(∂ℰ/∂T) 與熵變</a></li>
+      <li class="nsub"><a href="#s14_6b">由電化學量測求焓變</a></li>
+      <li class="ns">14.7 熱效應</li>
+      <li class="nsub"><a href="#s14_7">可逆電池之熱量</a></li>
+      <li class="ns">14.8 水溶液熱力學</li>
+      <li class="nsub"><a href="#s14_8">離子活度與平均離子活度係數</a></li>
+      <li class="nsub"><a href="#s14_8b">德拜-休克爾極限定律</a></li>
+      <li class="ns">14.9 標準還原電位</li>
+      <li class="nsub"><a href="#s14_9">電化學序列</a></li>
+      <li class="nsub"><a href="#s14_9b">標準氫電極與半反應電位表</a></li>
+      <li class="ns">14.10 普爾貝圖</li>
+      <li class="nsub"><a href="#s14_10">電位-pH 圖</a></li>
+      <li class="nsub"><a href="#s14_10b">水的穩定區域與腐蝕科學應用</a></li>
+      <li class="ns">綜合專題</li>
+      <li class="nsub"><a href="#examples">數值計算例題</a></li>
+      <li class="nsub"><a href="#applications">工業應用</a></li>
+      <li class="nsub"><a href="#crossref">與其他章節之關聯</a></li>
+      <li class="nsub"><a href="#summary">章節總結</a></li>
+    </ul>
+  </div>
+  <div class="st">
+    <button id="themeToggle" onclick="toggleTheme()">🌙 切換深色模式</button>
+  </div>
+</nav>
+
+<!-- ========== MAIN CONTENT ========== -->
+<main class="main">
+
+<!-- HEADER -->
+<div class="header">
+  <div class="cl">第 14 章</div>
+  <h1>電化學 (Electrochemistry)</h1>
+  <div class="meta">Gaskell《Introduction to the Thermodynamics of Materials》§14 · pp. 588–641 · 繁體中文學習指南</div>
+</div>
+
+<!-- ====== INTRODUCTION ====== -->
+<section id="intro">
+  <h2>本章概述</h2>
+  <p>
+    電化學是熱力學中將<strong>化學能與電能互相轉換</strong>的關鍵橋樑。第14章系統性地將熱力學原理應用於電化學系統，從最基本的關係式 <strong>ΔG = −nFℰ</strong> 出發，逐步深入能斯特方程式、各類電池的熱力學分析、水溶液中離子活度的處理、標準還原電位表，以及工程上極為重要的普爾貝圖（Pourbaix diagram）。本章涵蓋的範圍從基礎理論到實際應用，包括電池設計、腐蝕防護、pH 量測與高溫氧氣傳感器等。
+  </p>
+  <p>
+    本章的核心思想在於：<strong>自發的化學反應（ΔG &lt; 0）可對外輸出電功，產生正的電動勢（ℰ &gt; 0）；反之，施加外部電壓則可驅動非自發反應進行</strong>。這一原理不僅是電化學電池的理論基礎，也為電解、電鍍、金屬提煉等工業過程提供了熱力學依據。通過量測電池的電動勢及其溫度係數，我們可以極其精確地獲得化學反應的 ΔG、ΔS 和 ΔH，這使得電化學方法成為熱力學數據測定的首選工具之一。
+  </p>
+
+  <div class="callout">
+    <strong>🔑 核心公式總覽：</strong>本章所有內容皆圍繞以下關鍵方程式展開：
+    <br>• ΔG = −nFℰ（化學能與電能之橋樑）
+    <br>• ℰ = ℰ° − (RT/nF) ln Q（能斯特方程式）
+    <br>• ΔS = nF(∂ℰ/∂T)<sub>P</sub>（由電動勢溫度係數求熵變）
+    <br>• ΔH = −nF[ℰ − T(∂ℰ/∂T)]（由電動勢及其溫度係數求焓變）
+    <br>• ℰ°<sub>cell</sub> = ℰ°<sub>cathode</sub> − ℰ°<sub>anode</sub>（由標準還原電位計算電池電位）
+    <br>• log γ<sub>±</sub> = −A|z<sub>+</sub>z<sub>−</sub>|√I（德拜-休克爾極限定律）
+  </div>
+
+  <div class="callout-warn">
+    <strong>⚠️ 重要提示：</strong>本章大量使用 <strong>法拉第常數 F = 96,485 C/mol</strong>（約 96.5 kC/mol）。在 298 K 下，RT/F = 0.02569 V，而 2.303 RT/F = 0.05916 V（用於以 log<sub>10</sub> 表示的能斯特方程式）。這些數值在計算中頻繁出現，務必牢記。此外，電化學中的「電位」一律指<strong>還原電位</strong>（reduction potential），即半反應寫成還原形式時的電位。
+  </div>
+</section>
+
+<!-- ====== 14.1–14.2 CHEMICAL AND ELECTRICAL DRIVING FORCES ====== -->
+<section id="s14_1">
+  <h2>14.1–14.2 化學驅動力與電驅動力</h2>
+
+  <!-- FIGURE 14.1: Electrochemical cell schematic -->
+  <figure class="figure">
+    <img src="../../../images/thermodynamics/ch14_pages/ch14_page_589_c.png" alt="電化學電池示意圖" loading="lazy">
+    <figcaption><strong>圖 14.1：電化學電池結構示意圖。</strong>此圖展示了電化學電池的基本組成部分：兩個電極（陰極和陽極）浸入電解質溶液中，通過外部導線連接。陰極發生還原反應（獲得電子），陽極發生氧化反應（釋放電子）。鹽橋或隔膜維持電中性，允許離子遷移但防止溶液直接混合。圖中標示了電子流動方向（從陽極到陰極，通過外部電路）和離子流動方向（在電解質內部），有助於理解電池中電荷傳遞的完整迴路。注意：傳統電流方向與電子流動方向相反。</figcaption>
+  </figure>
+
+  <!-- FIGURE 14.2: Daniell cell -->
+  <figure class="figure">
+    <img src="../../../images/thermodynamics/ch14_pages/ch14_page_590.png" alt="丹尼爾電池" loading="lazy">
+    <figcaption><strong>圖 14.2：丹尼爾電池（Daniell cell）的經典構造。</strong>此電池由鋅電極浸入 ZnSO₄ 溶液和銅電極浸入 CuSO₄ 溶液組成，兩溶液通過鹽橋或多孔隔膜連接。電池總反應為 Zn(s) + Cu²⁺(aq) → Zn²⁺(aq) + Cu(s)，標準電動勢 ℰ° = 1.10 V。觀察重點：(1) 鋅極（陽極）溶解釋放電子，質量減少；(2) 銅極（陰極）上 Cu²⁺ 沉積，質量增加；(3) 鹽橋中離子遷移維持電荷平衡——陰離子向鋅側移動，陽離子向銅側移動。此電池是理解電化學基本原理的典範。</figcaption>
+  </figure>
+
+  <h3 id="s14_1b">基本橋樑：ΔG = −nFℰ</h3>
+  <p>
+    熱力學第一和第二定律告訴我們，在恆溫恆壓下，一個系統所能做的最大非體積功（non-pV work）等於其吉布斯自由能的減少：<strong>w<sub>max,非pV</sub> = −ΔG</strong>。在電化學系統中，這個非體積功就是電功。當 n 莫耳的電子在電位差 ℰ 下通過時，所作的電功為：
+  </p>
+  <div class="eq"><strong>w<sub>elec</sub> = nFℰ</strong></div>
+  <p>
+    因此，對於一個可逆運行的電化學電池，其吉布斯自由能變化與電動勢之間的關係為：
+  </p>
+  <div class="eq"><strong>ΔG = −nFℰ</strong></div>
+  <p>
+    其中 <strong>n</strong> 為反應中轉移的電子莫耳數，<strong>F = 96,485 C/mol</strong> 為法拉第常數（即一莫耳電子所帶的電荷量），<strong>ℰ</strong> 為電池的電動勢（單位：伏特 V）。注意：若 ℰ 以伏特表示，則 nFℰ 的單位為 J/mol（因為 1 C·V = 1 J）。
+  </p>
+  <p>
+    此式的物理意義極為深刻：<strong>一個自發的化學反應（ΔG &lt; 0）對應 ℰ &gt; 0，即電池可輸出正電壓；而若 ΔG &gt; 0（非自發），則 ℰ &lt; 0，表示需要外加至少 |ℰ| 的電壓才能驅動反應進行。</strong>這就是電解過程的熱力學基礎。例如，水的電解需要施加至少 1.23 V 的電壓（在標準條件下），因為水分解反應的 ΔG° = +237.2 kJ/mol，對應 ℰ° = −1.23 V。
+  </p>
+
+  <div class="callout">
+    <strong>📐 法拉第常數 F 的由來：</strong>F = N<sub>A</sub> × e = (6.022×10<sup>23</sup> mol<sup>−1</sup>) × (1.602×10<sup>−19</sup> C) = 96,485 C/mol。在大多數工程計算中，使用 <strong>F ≈ 96,500 C/mol</strong> 或 <strong>96.5 kC/mol</strong> 已足夠精確。在 298 K 下，關鍵組合常數 <strong>RT/F = 0.02569 V</strong>（自然對數）和 <strong>2.303 RT/F = 0.05916 V</strong>（常用對數）是能斯特方程中的核心參數。
+  </div>
+
+  <p>
+    以 Daniell 電池為例：Zn(s) + Cu<sup>2+</sup>(aq) → Zn<sup>2+</sup>(aq) + Cu(s)。此反應中 n = 2，在標準條件下 ℰ° = 1.10 V，因此 ΔG° = −2 × 96,485 × 1.10 = −212.3 kJ/mol。這說明該反應在標準條件下是高度自發的。
+  </p>
+
+  <!-- FIGURE 14.3: Electrode potential measurement -->
+  <figure class="figure">
+    <img src="../../../images/thermodynamics/ch14_pages/ch14_page_591_c.png" alt="電極電位量測" loading="lazy">
+    <figcaption><strong>圖 14.3：電極電位量測裝置示意圖。</strong>單一電極的絕對電位無法直接量測，必須與參考電極組成完整電池。圖中展示了使用標準氫電極（SHE）作為參考電極，通過高阻抗電壓表（電位計）量測待測電極相對於 SHE 的電位差。關鍵要點：(1) 高阻抗量測確保幾乎無電流通過（可逆條件）；(2) 鹽橋消除液接電位；(3) 量測得到的電位差即為待測電極的相對還原電位。所有標準還原電位均以此方式測定。</figcaption>
+  </figure>
+
+  <!-- FIGURE 14.4: Potential variation in Daniell cell -->
+  <figure class="figure">
+    <img src="../../../images/thermodynamics/ch14_pages/ch14_page_592_c.png" alt="丹尼爾電池電位變化" loading="lazy">
+    <figcaption><strong>圖 14.4：丹尼爾電池中各界面電位變化的示意圖。</strong>此圖以垂直剖面方式展示了從鋅電極到銅電極的電位變化。電位在以下界面發生跳躍：(a) Zn/Zn²⁺ 界面（陽極半電池電位）；(b) 液接界面（鹽橋兩端，通常較小）；(c) Cu²⁺/Cu 界面（陰極半電池電位）。總電池電動勢 ℰ 等於這些界面電位差的代數和。觀察重點：金屬/溶液界面的電位跳躍是電池電動勢的主要來源；鹽橋設計旨在最小化液接電位。</figcaption>
+  </figure>
+
+  <p>
+    更一般地，對於任意非標準條件下的反應，我們有 ΔG = ΔG° + RT ln Q，代入 ΔG = −nFℰ 及 ΔG° = −nFℰ°，即可得到能斯特方程式。此推導將化學反應的質量作用定律與電化學量測直接聯繫起來，是本章後續所有分析的基礎。
+  </p>
+</section>
+
+<!-- ====== 14.3 NERNST EQUATION ====== -->
+<section id="s14_3">
+  <h2>14.3 濃度對電動勢的影響——能斯特方程式</h2>
+
+  <p>
+    對於一般化學反應 <strong>aA + bB ⇌ cC + dD</strong>，其吉布斯自由能變化可寫為：
+  </p>
+  <div class="eq">ΔG = ΔG° + RT ln (a<sub>C</sub><sup>c</sup> a<sub>D</sub><sup>d</sup> / a<sub>A</sub><sup>a</sup> a<sub>B</sub><sup>b</sup>) = ΔG° + RT ln Q</div>
+  <p>
+    代入 ΔG = −nFℰ 和 ΔG° = −nFℰ°，得：
+  </p>
+  <div class="eq"><strong>ℰ = ℰ° − (RT/nF) ln Q</strong></div>
+  <p>
+    這就是著名的<strong>能斯特方程式（Nernst equation）</strong>，由德國物理化學家 Walther Nernst 於 1889 年提出。在 298 K 下，使用常用對數（log<sub>10</sub>）表示：
+  </p>
+  <div class="eq"><strong>ℰ = ℰ° − (0.05916 / n) log<sub>10</sub> Q</strong> &nbsp; (at 298 K)</div>
+
+  <!-- DERIVATION: Nernst Equation -->
+  <div class="derivation">
+    <h4>📐 推導：能斯特方程式（Nernst Equation Derivation）</h4>
+    <p>從兩個基本熱力學關係出發：</p>
+    <div class="step">
+      <strong>步驟 1：</strong>化學反應等溫式（van't Hoff isotherm）——
+      <br>ΔG = ΔG° + RT ln Q
+      <br>其中 Q 為反應商（reaction quotient），對於反應 aA + bB ⇌ cC + dD：
+      <br>Q = (a<sub>C</sub><sup>c</sup> · a<sub>D</sub><sup>d</sup>) / (a<sub>A</sub><sup>a</sup> · a<sub>B</sub><sup>b</sup>)
+    </div>
+    <div class="step">
+      <strong>步驟 2：</strong>化學能與電能的基本橋樑——
+      <br>ΔG = −nFℰ（非標準條件）
+      <br>ΔG° = −nFℰ°（標準條件）
+      <br>此關係來自於：可逆電池所做的最大電功 w<sub>elec</sub> = nFℰ 必須等於吉布斯自由能的減少 −ΔG。
+    </div>
+    <div class="step">
+      <strong>步驟 3：</strong>將步驟 2 代入步驟 1——
+      <br>−nFℰ = −nFℰ° + RT ln Q
+      <br>兩邊同時除以 −nF：
+    </div>
+    <div class="result">
+      ℰ = ℰ° − (RT/nF) ln Q &nbsp;&nbsp;← <strong>能斯特方程式（Nernst Equation, 1889）</strong>
+    </div>
+    <p>在 298 K 下，RT/F = (8.314 × 298.15) / 96,485 = 0.02569 V。轉換為常用對數（log<sub>10</sub>）：</p>
+    <div class="result">
+      ℰ = ℰ° − (0.05916 / n) log<sub>10</sub> Q &nbsp;&nbsp;(at 298 K)
+    </div>
+    <p><strong>物理意義：</strong>能斯特方程式表明，電池的電動勢取決於 (a) 反應的固有傾向（ℰ°）和 (b) 反應物與產物的活度比（Q 項）。當產物積累或反應物消耗（Q 增大），驅動力降低，ℰ 下降——這是電池放電過程中電壓逐漸衰減的熱力學根源。當 ℰ = 0（電池「耗盡」），系統達到化學平衡，此時 Q = K。</p>
+  </div>
+
+  <h3 id="s14_3b">能斯特方程式的深入理解</h3>
+  <p>
+    能斯特方程式告訴我們，電池的電動勢取決於兩個因素：(1) 標準電動勢 ℰ°（由反應的本質決定，即標準吉布斯自由能變），以及 (2) 反應物與產物的活度（濃度）之比 Q。當 Q = 1（所有物質處於標準狀態）時，ℰ = ℰ°。當產物濃度增加或反應物濃度減少（Q 增大）時，ℰ 降低；反之則 ℰ 升高。這與勒沙特列原理（Le Chatelier's principle）完全一致。
+  </p>
+  <p>
+    當電池達到平衡時，ℰ = 0，此時 Q = K（平衡常數），因此：
+  </p>
+  <div class="eq"><strong>ℰ° = (RT/nF) ln K</strong> &nbsp; 或 &nbsp; <strong>ln K = nFℰ°/RT</strong></div>
+  <p>
+    這提供了一個由電化學量測獲取平衡常數的極其強大的方法。例如，若某反應的 ℰ° = +0.50 V 且 n = 2，在 298 K 下：ln K = (2 × 96,485 × 0.50) / (8.314 × 298) = 38.9，從而 K ≈ 8 × 10<sup>16</sup>。如此巨大的平衡常數無法通過常規的濃度分析法測定，但電化學方法卻可輕鬆獲得。
+  </p>
+
+  <div class="callout">
+    <strong>📝 能斯特方程式的使用要點：</strong>
+    <br>• <strong>Q 的正確寫法：</strong>Q 與化學反應的書寫方式相對應。若反應式乘以係數，n 也隨之改變，但 ℰ 保持不變（因為 ℰ 是強度量）。
+    <br>• <strong>純固體與純液體：</strong>其活度定義為 1，不出現在 Q 中。
+    <br>• <strong>氣體：</strong>以分壓（通常以 bar 或 atm 為單位，除以標準壓力）表示。在電化學中常使用 fugacity ≈ pressure。
+    <br>• <strong>溶質：</strong>以活度（約等於濃度 mol/L，稀溶液中）表示。對於電解質，需使用平均離子活度（見 §14.8）。
+    <br>• <strong>電子：</strong>不出現在 Q 中（電子通過外部電路傳遞，不作為溶液中的物種）。
+  </div>
+
+  <!-- FIGURE 14.14: Cell EMF and concentration dependence -->
+  <figure class="figure">
+    <img src="../../../images/thermodynamics/ch14_pages/ch14_page_616_c.png" alt="電池電動勢與濃度關係" loading="lazy">
+    <figcaption><strong>圖 14.14：電池電動勢 ℰ 隨反應商 Q 的變化關係。</strong>此圖以能斯特方程式 ℰ = ℰ° − (RT/nF) ln Q 為基礎，展示了 ℰ 對 log Q 的線性關係。觀察重點：(1) 當 Q = 1（所有物種活度均為 1），ℰ = ℰ°；(2) 斜率為 −(RT/nF) ≈ −0.05916/n V（298 K），負號表示產物增加導致電壓下降；(3) ℰ = 0 時 Q = K（平衡常數），該點對應化學平衡；(4) 不同 n 值對應不同的斜率，電子數越多對濃度變化越不敏感。此圖直觀地展示了勒沙特列原理在電化學中的體現。</figcaption>
+  </figure>
+</section>
+
+<!-- ====== 14.4 FORMATION CELLS ====== -->
+<section id="s14_4">
+  <h2>14.4 生成電池 (Formation Cells)</h2>
+
+  <p>
+    生成電池是一種特殊的電化學電池，其總反應為<strong>由元素生成某種化合物</strong>。在這種電池中，測得的電動勢 ℰ 直接對應該化合物的標準生成吉布斯自由能：
+  </p>
+  <div class="eq"><strong>ΔG<sub>f</sub>° = −nFℰ°</strong></div>
+  <p>
+    Gaskell 以 <strong>AgCl 的生成電池</strong>為經典範例。考慮以下電池：
+  </p>
+  <div class="eq">Ag(s) | AgCl(s) | Cl<sub>2</sub>(g, 1 bar) | Pt</div>
+
+  <!-- FIGURE 14.6: Formation cell for AgCl -->
+  <figure class="figure">
+    <img src="../../../images/thermodynamics/ch14_pages/ch14_page_597.png" alt="AgCl生成電池" loading="lazy">
+    <figcaption><strong>圖 14.6：AgCl 生成電池的構造示意圖。</strong>此電池用於測定 AgCl 的標準生成吉布斯自由能。電池由以下部分組成：(a) 銀電極（Ag 片），同時作為電極和反應物；(b) 固體 AgCl 塗層覆蓋在 Ag 表面，作為電解質（AgCl 在室溫下為 Ag⁺ 離子導體）；(c) 鉑電極浸入 Cl₂ 氣氛中（1 bar），鉑僅作為惰性電子導體，不參與化學反應。電池總反應 Ag(s) + ½Cl₂(g) → AgCl(s) 就是 AgCl 的生成反應。關鍵觀察：(1) 固態電解質 AgCl 的使用——無液態溶液，避免了液接電位和溶劑干擾；(2) ℰ° = +1.136 V (298 K) 直接給出 ΔG<sub>f</sub>°(AgCl) = −109.6 kJ/mol。這種固態電化學方法無需量熱，精度高，可擴展至高溫系統。</figcaption>
+  </figure>
+
+  <p>
+    此電池的總反應為：<strong>Ag(s) + ½Cl<sub>2</sub>(g) → AgCl(s)</strong>，即 AgCl 的生成反應。量測此電池的標準電動勢 ℰ° = +1.136 V（在 298 K），由於 n = 1，可得：
+  </p>
+  <div class="eq">ΔG<sub>f</sub>°(AgCl) = −1 × 96,485 × 1.136 = −109.6 kJ/mol</div>
+  <p>
+    此方法對於許多金屬氧化物、硫化物、鹵化物的熱力學數據測定具有重大意義。與量熱法相比，電化學方法通常更為精確且操作更為簡便。在固態電化學中，使用固體電解質（如氧化鋯 ZrO<sub>2</sub> 或氧化釷 ThO<sub>2</sub>）可以在高溫下構建生成電池，從而測定高熔點化合物（如氧化物、矽化物）的生成自由能。
+  </p>
+
+  <div class="callout-warn">
+    <strong>⚡ 生成電池的關鍵條件：</strong>要從 ℰ° 準確獲得 ΔG<sub>f</sub>°，必須確保：(1) 電池反應確實是化合物的生成反應；(2) 電池在可逆條件下運行（即無電流通過，或電流極小）；(3) 所有物種處於標準狀態（或經過適當的活度修正）；(4) 電解質為純離子導體（電子導電會造成內部短路，降低量測電壓）。
+  </div>
+</section>
+
+<!-- ====== 14.5 CONCENTRATION CELLS ====== -->
+<section id="s14_5">
+  <h2>14.5 濃差電池 (Concentration Cells)</h2>
+
+  <!-- FIGURE 14.5: Concentration cell -->
+  <figure class="figure">
+    <img src="../../../images/thermodynamics/ch14_pages/ch14_page_594_c.png" alt="濃差電池" loading="lazy">
+    <figcaption><strong>圖 14.5：濃差電池（濃度電池）的基本結構。</strong>兩個相同的金屬電極（如 Ag 或 Cu）浸入不同濃度的同一金屬離子溶液中，通過鹽橋連接。由於兩側金屬離子的化學勢不同（μ = μ° + RT ln a），電池產生電動勢。觀察要點：(1) 高濃度側傾向於沉積金屬（還原），低濃度側傾向於溶解金屬（氧化）；(2) ℰ° = 0（兩個半反應相同），電動勢完全來自混合自由能；(3) 淨效應是將金屬離子從高濃度側「轉移」到低濃度側，趨向均勻化。這類電池是理解「濃度梯度驅動電化學過程」的基礎模型。</figcaption>
+  </figure>
+
+  <p>
+    濃差電池是一種特殊的電化學電池，其兩個電極在化學上完全相同，但處於<strong>不同濃度（或分壓）的電解質或氣體環境</strong>中。由於兩側的化學勢不同，電池產生電動勢。對於電極濃差電池（兩個相同金屬電極浸入不同濃度的同一金屬離子溶液中），其電動勢由能斯特方程式給出：
+  </p>
+  <div class="eq">ℰ = (RT/nF) ln (a<sub>+</sub><sup>II</sup> / a<sub>+</sub><sup>I</sup>)</div>
+  <p>
+    其中 a<sub>+</sub><sup>I</sup> 和 a<sub>+</sub><sup>II</sup> 分別為兩個半電池中的離子活度。值得注意的是，濃差電池的 <strong>ℰ° = 0</strong>（因為兩個半反應相同），其電動勢完全來自於濃度差異所產生的混合吉布斯自由能。
+  </p>
+
+  <h3 id="s14_5b">氧氣濃差電池與氧化鋯傳感器</h3>
+  <p>
+    在工業和實驗室中最為重要的濃差電池之一是<strong>氧氣濃差電池</strong>，它使用固體電解質——穩定化氧化鋯（yttria-stabilized zirconia, YSZ）。在高溫下（通常 &gt; 600°C），ZrO<sub>2</sub> 中的氧離子 O<sup>2−</sup> 具有可觀的導電性。電池結構為：
+  </p>
+  <div class="eq">Pt, O<sub>2</sub>(p<sub>ref</sub>) | ZrO<sub>2</sub>(Y<sub>2</sub>O<sub>3</sub>) | O<sub>2</sub>(p<sub>sample</sub>), Pt</div>
+
+  <!-- FIGURE 14.8: Oxygen concentration cell (zirconia electrolyte) -->
+  <figure class="figure">
+    <img src="../../../images/thermodynamics/ch14_pages/ch14_page_600_c.png" alt="氧化鋯氧氣濃差電池" loading="lazy">
+    <figcaption><strong>圖 14.8：氧化鋯（YSZ）氧氣濃差電池的結構與工作原理。</strong>此圖展示了基於固體電解質的氧傳感器核心結構。YSZ（釔穩定氧化鋯）陶瓷管將兩個氣體空間隔開：內側通入參考氣體（通常為空氣，p<sub>O₂</sub> ≈ 0.21 bar），外側暴露於待測氣體。多孔鉑電極塗覆在 YSZ 兩側，既作為電子導體又催化氧分子的解離反應。工作原理：(1) 在高氧分壓側，O₂ 分子在鉑電極上獲得電子分解為 O²⁻ 離子（O₂ + 4e⁻ → 2O²⁻）；(2) O²⁻ 離子通過 YSZ 中的氧空缺遷移至低氧分壓側；(3) 在低氧分壓側，O²⁻ 釋放電子重新結合為 O₂ 分子（2O²⁻ → O₂ + 4e⁻）。淨效應為氧從高壓側「泵送」至低壓側，電池電動勢由能斯特方程式 ℰ = (RT/4F) ln(p<sub>ref</sub>/p<sub>sample</sub>) 給出。觀察要點：YSZ 需在高溫（>600°C）運行以確保足夠的離子導電率；多孔鉑電極的微結構對傳感器響應速度有重要影響。</figcaption>
+  </figure>
+
+  <p>
+    電池反應為：O<sub>2</sub>(p<sub>ref</sub>) → O<sub>2</sub>(p<sub>sample</sub>)，即氧氣從高壓側「遷移」到低壓側。此反應的 ΔG 完全來自混合自由能，n = 4（每個 O<sub>2</sub> 分子涉及 4 個電子的轉移：O<sub>2</sub> + 4e<sup>−</sup> → 2O<sup>2−</sup>），因此能斯特方程式為：
+  </p>
+  <div class="eq"><strong>ℰ = (RT/4F) ln (p<sub>ref</sub> / p<sub>sample</sub>)</strong></div>
+  <p>
+    在 1000 K 下，RT/4F = (8.314×1000)/(4×96485) = 0.02155 V。若參考側為空氣（p<sub>ref</sub> = 0.21 bar），則可由 ℰ 直接計算待測氣體中的氧分壓。這一原理廣泛應用於：
+  </p>
+  <ul style="margin:10px 0 10px 24px;font-size:14px;color:var(--t2);line-height:2.0;">
+    <li><strong>汽車氧傳感器（lambda sensor）：</strong>監測引擎廢氣中的氧含量，用於精確控制空燃比，以實現最佳燃燒效率和最低污染物排放。</li>
+    <li><strong>鋼鐵冶煉：</strong>在轉爐或電弧爐中實時監測鋼液中溶解氧含量，控制脫氧過程。</li>
+    <li><strong>熱處理氣氛控制：</strong>在滲碳、氮化等表面處理過程中精確控制爐內氧分壓。</li>
+    <li><strong>核反應堆：</strong>監測冷卻劑（液態金屬）中的氧含量以防止腐蝕。</li>
+  </ul>
+
+  <div class="callout">
+    <strong>🔬 氧化鋯傳感器的技術要點：</strong>YSZ 電解質需在足夠高的溫度下運行以確保 O<sup>2−</sup> 離子導電率足夠（通常 &gt; 600°C）。多孔鉑電極既作為電子導體，又催化氧分子的解離與電離反應。在極低氧分壓下（如 &lt; 10<sup>−15</sup> bar），YSZ 可能出現部分電子導電，導致量測電壓低於理論值，此時需要進行修正或選用其他電解質材料（如氧化釷 ThO<sub>2</sub>）。
+  </div>
+
+  <p>
+    另一類濃差電池是<strong>電解質濃差電池</strong>，其中兩個半電池含有不同濃度的同一電解質，通過鹽橋連接。這種電池的電動勢還涉及液接電位（liquid junction potential），其理論處理較為複雜，Gaskell 對此有扼要討論。
+  </p>
+
+  <!-- FIGURE 14.7: Concentration cell with transference -->
+  <figure class="figure">
+    <img src="../../../images/thermodynamics/ch14_pages/ch14_page_599_c.png" alt="有遷移濃差電池" loading="lazy">
+    <figcaption><strong>圖 14.7：有遷移濃差電池（concentration cell with transference）。</strong>與無遷移濃差電池不同，此類電池沒有鹽橋，兩種不同濃度的電解質直接接觸。離子在濃度梯度驅動下直接遷移穿過液-液界面，產生液接電位（liquid junction potential）。觀察重點：(1) 液接電位的大小取決於陽離子和陰離子的遷移率差異——若陽離子遷移更快，液接電位為正；反之為負；(2) 總電動勢 = 電極電位差 + 液接電位；(3) 使用鹽橋（含 KCl 或 NH₄NO₃，其中陽離子和陰離子遷移率相近）可大幅降低液接電位。理解此概念對精確電位量測至關重要。</figcaption>
+  </figure>
+</section>
+
+<!-- ====== 14.6 TEMPERATURE COEFFICIENT OF EMF ====== -->
+<section id="s14_6">
+  <h2>14.6 電動勢的溫度係數</h2>
+
+  <!-- FIGURE 14.9: Temperature coefficient measurement setup -->
+  <figure class="figure">
+    <img src="../../../images/thermodynamics/ch14_pages/ch14_page_604_c.png" alt="溫度係數量測裝置" loading="lazy">
+    <figcaption><strong>圖 14.9：電動勢溫度係數量測裝置示意圖。</strong>此圖展示了精確測定 (∂ℰ/∂T)<sub>P</sub> 的實驗裝置。電池置於精密控溫的恆溫槽中，通過高阻抗電壓表量測 ℰ。關鍵技術要點：(1) 使用恆溫水浴或油浴精確控制溫度（±0.01 K）；(2) 高阻抗量測（大於 10¹² Ω）確保幾乎無電流通過，維持可逆條件；(3) 在每個設定溫度下等待熱平衡後記錄 ℰ 值；(4) 對 ℰ-T 數據進行線性回歸獲得斜率。實驗難點：溫度變化會影響電解質的離子導電率和電極反應速率，需確保量測數據反映真實的平衡電位。</figcaption>
+  </figure>
+
+  <!-- FIGURE 14.10: E vs T plot -->
+  <figure class="figure">
+    <img src="../../../images/thermodynamics/ch14_pages/ch14_page_604_c.png" alt="電動勢對溫度關係圖" loading="lazy">
+    <figcaption><strong>圖 14.10：電池電動勢 ℰ 對溫度 T 的關係圖。</strong>此圖展示了 ℰ 隨溫度的變化趨勢。觀察要點：(1) 直線斜率即為 (∂ℰ/∂T)<sub>P</sub>，可正可負；(2) 正斜率（∂ℰ/∂T 大於 0）對應 ΔS 大於 0，反應增加系統熵（如生成更多氣體或離子）；(3) 負斜率（∂ℰ/∂T 小於 0）對應 ΔS 小於 0，反應減少系統熵；(4) 近乎水平的直線表示 ΔS ≈ 0，此時 ΔH ≈ ΔG ≈ −nFℰ。此圖還可用於外推至不同溫度下的 ℰ 值，對高溫電化學系統設計具有實用價值。注意：某些系統在較大溫度範圍內可能出現非線性，這反映了 ΔC<sub>P</sub> ≠ 0 的效應。</figcaption>
+  </figure>
+
+  <p>
+    從基本熱力學關係 (∂G/∂T)<sub>P</sub> = −S，以及 ΔG = −nFℰ，我們可得：
+  </p>
+  <div class="eq">∂(ΔG)/∂T = −ΔS = ∂(−nFℰ)/∂T = −nF (∂ℰ/∂T)<sub>P</sub></div>
+  <p>因此：</p>
+  <div class="eq"><strong>ΔS = nF (∂ℰ/∂T)<sub>P</sub></strong></div>
+  <p>
+    這是電化學熱力學中一個極其重要的關係式：<strong>通過量測電池電動勢隨溫度的變化率，可以直接獲得反應的熵變</strong>。這一方法的精確度遠高於量熱法測熵變（後者需量測熱容從 0 K 到 T 的積分）。
+  </p>
+
+  <!-- DERIVATION: ΔS from fundamental thermodynamics -->
+  <div class="derivation">
+    <h4>📐 推導：由基本熱力學推導 ΔS = nF(∂ℰ/∂T)<sub>P</sub></h4>
+    <p>從熱力學基本關係出發進行嚴謹推導：</p>
+    <div class="step">
+      <strong>步驟 1：</strong>吉布斯自由能的微分形式（第5章基本方程式）——
+      <br>dG = −S dT + V dP + Σμ<sub>i</sub> dn<sub>i</sub>
+      <br>在恆壓條件下（dP = 0）且組成固定時，偏導數為：
+      <br>(∂G/∂T)<sub>P,n</sub> = −S
+    </div>
+    <div class="step">
+      <strong>步驟 2：</strong>對化學反應應用此關係——
+      <br>ΔG = Σν<sub>i</sub> μ<sub>i</sub>（產物 − 反應物）
+      <br>(∂ΔG/∂T)<sub>P</sub> = −ΔS
+      <br>這是 Maxwell 關係式 (∂G/∂T)<sub>P</sub> = −S 對反應系統的推廣（參見第5章）。
+    </div>
+    <div class="step">
+      <strong>步驟 3：</strong>引入電化學橋樑關係——
+      <br>ΔG = −nFℰ（恆溫恆壓下的可逆電化學過程）
+      <br>對此式在恆壓下對溫度求導：
+      <br>(∂ΔG/∂T)<sub>P</sub> = −nF (∂ℰ/∂T)<sub>P</sub>
+    </div>
+    <div class="step">
+      <strong>步驟 4：</strong>結合步驟 2 和步驟 3——
+      <br>−ΔS = −nF (∂ℰ/∂T)<sub>P</sub>
+    </div>
+    <div class="result">
+      <strong>ΔS = nF (∂ℰ/∂T)<sub>P</sub></strong>
+    </div>
+    <p><strong>關鍵洞察：</strong>此推導展示了熱力學的優雅之處——通過簡單的量測（ℰ 對 T 的斜率），即可獲得通常難以直接量測的熵變。這是電化學方法優於量熱法的核心原因。需要注意的是，此關係假設 n 不隨溫度變化（即反應計量不變），且 ℰ 是在可逆條件下量測的平衡電位。</p>
+  </div>
+
+  <h3 id="s14_6b">由電化學量測獲取反應焓變</h3>
+  <p>
+    結合 ΔG = ΔH − TΔS 以及 ΔG = −nFℰ、ΔS = nF(∂ℰ/∂T)，我們可得到著名的<strong>吉布斯-亥姆霍茲方程式（Gibbs-Helmholtz equation）</strong>應用於電化學系統的形式：
+  </p>
+  <div class="eq"><strong>ΔH = −nF [ ℰ − T (∂ℰ/∂T)<sub>P</sub> ]</strong></div>
+
+  <!-- DERIVATION: ΔH from Gibbs-Helmholtz -->
+  <div class="derivation">
+    <h4>📐 推導：由電化學量測求反應焓變（Gibbs-Helmholtz 形式）</h4>
+    <p>從熱力學基本關係出發，導出電化學可量測量表示的 ΔH：</p>
+    <div class="step">
+      <strong>步驟 1：</strong>吉布斯-亥姆霍茲方程式（第5章）——
+      <br>ΔG = ΔH − TΔS
+      <br>重新排列：ΔH = ΔG + TΔS
+    </div>
+    <div class="step">
+      <strong>步驟 2：</strong>代入電化學關係——
+      <br>ΔG = −nFℰ
+      <br>ΔS = nF (∂ℰ/∂T)<sub>P</sub>（由上節推導得出）
+    </div>
+    <div class="step">
+      <strong>步驟 3：</strong>將步驟 2 代入步驟 1——
+      <br>ΔH = −nFℰ + T · nF (∂ℰ/∂T)<sub>P</sub>
+      <br>ΔH = −nFℰ + nFT (∂ℰ/∂T)<sub>P</sub>
+    </div>
+    <div class="step">
+      <strong>步驟 4：</strong>提取公因式 −nF——
+    </div>
+    <div class="result">
+      <strong>ΔH = −nF [ ℰ − T (∂ℰ/∂T)<sub>P</sub> ]</strong>
+    </div>
+    <p><strong>物理意義：</strong>此方程式揭示了電化學量測的強大之處——僅需量測 ℰ 和 (∂ℰ/∂T)，無需任何量熱實驗，即可同時獲得 ΔG、ΔS 和 ΔH。三者的關係為：</p>
+    <div class="step">
+      • ΔG = −nFℰ（來自 ℰ 本身）<br>
+      • ΔS = nF(∂ℰ/∂T)（來自 ℰ-T 曲線的斜率）<br>
+      • ΔH = ΔG + TΔS（由前兩者計算得出）<br>
+      • q<sub>rev</sub> = TΔS（可逆熱效應）
+    </div>
+    <p><strong>注意：</strong>當 (∂ℰ/∂T) 很小時（如許多固-固反應），ΔH ≈ ΔG ≈ −nFℰ，此時電化學量測直接給出焓變。而當 (∂ℰ/∂T) 較大時，ΔH 和 ΔG 可能差異顯著——這在燃料電池的熱管理設計中至關重要。</p>
+  </div>
+
+  <p>
+    此式的意義在於：僅通過電化學量測（ℰ 和 ∂ℰ/∂T），即可同時獲得反應的 ΔG、ΔS 和 ΔH。這種「一式三得」的特性使電化學方法成為熱力學數據測定的黃金標準。
+  </p>
+
+  <div class="callout">
+    <strong>📊 溫度係數的三種情況及其物理意義：</strong>
+    <br>• <strong>(∂ℰ/∂T) &gt; 0：</strong>ΔS &gt; 0，反應導致系統熵增加（通常因為反應生成更多氣體分子或溶液中的離子）。電池在運行中從環境<strong>吸熱</strong>（若在絕熱條件下運行，電池會冷卻）。
+    <br>• <strong>(∂ℰ/∂T) &lt; 0：</strong>ΔS &lt; 0，反應導致系統熵減少。電池在運行中向環境<strong>放熱</strong>。
+    <br>• <strong>(∂ℰ/∂T) ≈ 0：</strong>ΔS ≈ 0，此時 ΔH ≈ ΔG ≈ −nFℰ。許多涉及純固體和純液體的反應具有很小的熵變，因此 ℰ 幾乎不隨溫度變化。
+  </div>
+
+  <p>
+    以 Daniell 電池為例：Zn + Cu<sup>2+</sup> → Zn<sup>2+</sup> + Cu。在 298 K 附近，(∂ℰ/∂T) ≈ −0.0001 V/K。代入得 ΔS = 2 × 96,485 × (−0.0001) = −19.3 J/(mol·K)，負值合理，因為反應中離子從 Cu<sup>2+</sup> 變為 Zn<sup>2+</sup>（水合熵不同）。ΔH = −2×96,485×[1.10 − 298×(−0.0001)] = −218.0 kJ/mol，與量熱法測得的 −218.7 kJ/mol 高度吻合。這一例子說明了電化學方法的可靠性。
+  </p>
+</section>
+
+<!-- ====== 14.7 THERMAL ENERGY EFFECTS ====== -->
+<section id="s14_7">
+  <h2>14.7 熱效應 (Thermal Energy Effects)</h2>
+
+  <p>
+    對於一個可逆運行的電化學電池（電流趨近於零），從熱力學第二定律可知可逆熱效應為：
+  </p>
+  <div class="eq"><strong>q<sub>rev</sub> = TΔS = nFT (∂ℰ/∂T)<sub>P</sub></strong></div>
+  <p>
+    此式說明：<strong>可逆電池在運行中與環境交換的熱量直接取決於其電動勢的溫度係數。</strong>當 (∂ℰ/∂T) &gt; 0 時，電池從環境吸收熱量（q<sub>rev</sub> &gt; 0）；當 (∂ℰ/∂T) &lt; 0 時，電池向環境釋放熱量（q<sub>rev</sub> &lt; 0）。
+  </p>
+  <p>
+    需要注意的是，實際電池在放電（有電流）時，除了可逆熱效應外，還會因內部電阻而產生不可逆的焦耳熱（I<sup>2</sup>R 熱）。在電池設計和熱管理中，這兩種熱效應都必須納入考量。對於高功率鋰離子電池組，熱管理是確保安全和壽命的關鍵技術。
+  </p>
+  <p>
+    Gaskell 還討論了電池的<strong>能量效率</strong>概念。在恆溫恆壓下，電池所做的最大電功為 −ΔG，而反應的總能量變化為 −ΔH。因此電池的熱力學效率（理想效率）定義為：
+  </p>
+  <div class="eq">η<sub>ideal</sub> = ΔG/ΔH = nFℰ / [nF(ℰ − T ∂ℰ/∂T)] = ℰ / (ℰ − T ∂ℰ/∂T)</div>
+  <p>
+    大多數電池反應的 |ΔG| 小於 |ΔH|（因為 TΔS 項通常為負或較小），所以理想熱力學效率通常小於 1。但值得注意的是：<strong>若 (∂ℰ/∂T) &gt; 0（即 ΔS &gt; 0），則 ΔG = ΔH − TΔS，可能出現 |ΔG| &gt; |ΔH| 的情況，此時電池的理想效率大於 1</strong>——這並非違反能量守恆，而是因為電池從環境吸收了額外的熱量轉化為電功。燃料電池在低溫運行時常具有此特性。
+  </p>
+
+  <div class="callout-warn">
+    <strong>🔥 實際應用提醒：</strong>電池在運行中的熱行為是複雜的。可逆熱效應（q<sub>rev</sub>）與不可逆焦耳熱（I<sup>2</sup>R）疊加，決定了電池的實際溫度變化。在大電流放電時，焦耳熱通常主導，使電池升溫。在某些情況下（如鋰離子電池在低倍率充放電時），可逆熱效應可能導致吸熱現象，這一特徵已被用於開發更精確的電池狀態估計（State of Charge, SOC）算法。
+  </div>
+</section>
+
+<!-- ====== 14.8 THERMODYNAMICS OF AQUEOUS SOLUTIONS ====== -->
+<section id="s14_8">
+  <h2>14.8 水溶液熱力學</h2>
+
+  <h3>離子活度與平均離子活度係數</h3>
+  <p>
+    在電解質溶液中，溶質以離子形式存在。對於強電解質 M<sub>ν+</sub>X<sub>ν−</sub>，其在水中完全解離為 ν<sub>+</sub> 個陽離子 M<sup>z+</sup> 和 ν<sub>−</sub> 個陰離子 X<sup>z−</sup>。由於無法單獨量測單一離子的活度（溶液始終保持電中性），我們定義<strong>平均離子活度 a<sub>±</sub></strong> 和<strong>平均離子活度係數 γ<sub>±</sub></strong>：
+  </p>
+  <div class="eq">a<sub>±</sub> = (a<sub>+</sub><sup>ν+</sup> · a<sub>−</sub><sup>ν−</sup>)<sup>1/ν</sup></div>
+  <div class="eq">γ<sub>±</sub> = (γ<sub>+</sub><sup>ν+</sup> · γ<sub>−</sub><sup>ν−</sup>)<sup>1/ν</sup></div>
+  <p>
+    其中 ν = ν<sub>+</sub> + ν<sub>−</sub> 為每分子電解質解離產生的總離子數。例如，對於 CaCl<sub>2</sub>（ν<sub>+</sub>=1, ν<sub>−</sub>=2, ν=3），平均離子活度 a<sub>±</sub> = (a<sub>Ca2+</sub> · a<sub>Cl−</sub><sup>2</sup>)<sup>1/3</sup>。
+  </p>
+  <p>
+    電解質溶液的化學勢則表示為所有離子貢獻之和：
+  </p>
+  <div class="eq">μ<sub>electrolyte</sub> = ν<sub>+</sub> μ<sub>+</sub> + ν<sub>−</sub> μ<sub>−</sub> = νμ<sub>±</sub></div>
+  <p>
+    其中 μ<sub>±</sub> = μ<sub>±</sub>° + RT ln a<sub>±</sub> 為平均離子化學勢。這一框架使得我們可以將電解質視為單一物種進行熱力學處理，是理解電化學電池中濃度效應的基礎。（有關活度與化學勢的詳細討論，請參閱<a href="#crossref">第9章</a>。）
+  </p>
+
+  <h3 id="s14_8b">德拜-休克爾極限定律 (Debye-Hückel Limiting Law)</h3>
+  <p>
+    在稀溶液中，離子間的靜電交互作用是導致活度係數偏離 1 的主要原因。德拜和休克爾於 1923 年提出了電解質溶液的離子氛圍理論，得到<strong>德拜-休克爾極限定律</strong>：
+  </p>
+  <div class="eq"><strong>log<sub>10</sub> γ<sub>±</sub> = −A |z<sub>+</sub>z<sub>−</sub>| √I</strong></div>
+  <p>
+    其中 <strong>I</strong> 為溶液的<strong>離子強度（ionic strength）</strong>：
+  </p>
+  <div class="eq">I = ½ Σ<sub>i</sub> m<sub>i</sub> z<sub>i</sub><sup>2</sup></div>
+  <p>
+    m<sub>i</sub> 為離子 i 的質量莫耳濃度（mol/kg），z<sub>i</sub> 為其電荷數。A 為與溶劑和溫度相關的常數：對於 298 K 下的水溶液，<strong>A ≈ 0.509 (kg/mol)<sup>1/2</sup></strong>。
+  </p>
+
+  <table>
+    <thead>
+      <tr><th>電解質類型</th><th>範例</th><th>|z<sub>+</sub>z<sub>−</sub>|</th><th>適用範圍 (I / mol/kg)</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>1:1</td><td>NaCl, KCl, HCl</td><td>1</td><td>I ≲ 0.01</td></tr>
+      <tr><td>1:2 / 2:1</td><td>CaCl<sub>2</sub>, Na<sub>2</sub>SO<sub>4</sub></td><td>2</td><td>I ≲ 0.005</td></tr>
+      <tr><td>2:2</td><td>CuSO<sub>4</sub>, MgSO<sub>4</sub></td><td>4</td><td>I ≲ 0.001</td></tr>
+      <tr><td>1:3 / 3:1</td><td>AlCl<sub>3</sub>, Na<sub>3</sub>PO<sub>4</sub></td><td>3</td><td>I ≲ 0.002</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout">
+    <strong>💧 德拜-休克爾定律的物理圖像：</strong>在溶液中，每個離子都被一層帶相反電荷的「離子氛圍」（ionic atmosphere）所包圍。這種靜電交互作用降低了離子的化學勢，使 γ<sub>±</sub> &lt; 1。離子強度 I 越大（即溶液中離子越多、電荷越高），離子氛圍越強，γ<sub>±</sub> 越小。極限定律僅在非常稀的溶液中精確成立（離子氛圍的半徑遠大於離子本身的半徑）。對於較高濃度，需使用擴展的德拜-休克爾方程式或 Pitzer 模型。
+  </div>
+
+  <p>
+    Gaskell 強調了活度係數在電化學計算中的重要性：能斯特方程式中的 Q 必須使用<strong>活度</strong>而非濃度。在稀溶液中，γ<sub>±</sub> ≈ 1，可用濃度近似；但在實際電化學系統中（如電池電解質、海水、生物流體），離子強度往往不低，忽略活度係數可能導致顯著誤差。
+  </p>
+</section>
+
+<!-- ====== 14.9 STANDARD REDUCTION POTENTIALS ====== -->
+<section id="s14_9">
+  <h2>14.9 標準還原電位</h2>
+
+  <h3 id="s14_9b">標準氫電極與電化學序列</h3>
+  <p>
+    由於無法單獨量測單一電極的絕對電位，電化學領域約定以<strong>標準氫電極（Standard Hydrogen Electrode, SHE）</strong>作為參考點，將其電位定義為 <strong>ℰ° = 0 V</strong>（在所有溫度下）。SHE 的構成如下：
+  </p>
+  <div class="eq">Pt(s) | H<sub>2</sub>(g, 1 bar) | H<sup>+</sup>(aq, a=1)</div>
+  <p>
+    其半反應為：<strong>2H<sup>+</sup>(aq) + 2e<sup>−</sup> → H<sub>2</sub>(g)</strong>，ℰ° ≡ 0 V。（注意：在電化學中，半反應一律寫成<strong>還原形式</strong>，即氧化態物種獲得電子。）
+  </p>
+  <p>
+    以此為基準，可以測量任何其他半反應的<strong>標準還原電位 ℰ°</strong>。以下為選錄的一些重要標準還原電位（298 K，水溶液）：
+  </p>
+
+  <table>
+    <thead>
+      <tr><th>半反應（還原）</th><th>ℰ° / V</th><th>n</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>F<sub>2</sub> + 2e<sup>−</sup> → 2F<sup>−</sup></td><td>+2.866</td><td>2</td></tr>
+      <tr><td>O<sub>2</sub> + 4H<sup>+</sup> + 4e<sup>−</sup> → 2H<sub>2</sub>O</td><td>+1.229</td><td>4</td></tr>
+      <tr><td>Cl<sub>2</sub> + 2e<sup>−</sup> → 2Cl<sup>−</sup></td><td>+1.358</td><td>2</td></tr>
+      <tr><td>Ag<sup>+</sup> + e<sup>−</sup> → Ag(s)</td><td>+0.799</td><td>1</td></tr>
+      <tr><td>Fe<sup>3+</sup> + e<sup>−</sup> → Fe<sup>2+</sup></td><td>+0.771</td><td>1</td></tr>
+      <tr><td>Cu<sup>2+</sup> + 2e<sup>−</sup> → Cu(s)</td><td>+0.337</td><td>2</td></tr>
+      <tr><td style="background:var(--b3);font-weight:600;">2H<sup>+</sup> + 2e<sup>−</sup> → H<sub>2</sub></td><td style="background:var(--b3);font-weight:600;">0.000</td><td style="background:var(--b3);">2</td></tr>
+      <tr><td>Pb<sup>2+</sup> + 2e<sup>−</sup> → Pb(s)</td><td>−0.126</td><td>2</td></tr>
+      <tr><td>Ni<sup>2+</sup> + 2e<sup>−</sup> → Ni(s)</td><td>−0.250</td><td>2</td></tr>
+      <tr><td>Fe<sup>2+</sup> + 2e<sup>−</sup> → Fe(s)</td><td>−0.440</td><td>2</td></tr>
+      <tr><td>Zn<sup>2+</sup> + 2e<sup>−</sup> → Zn(s)</td><td>−0.763</td><td>2</td></tr>
+      <tr><td>Al<sup>3+</sup> + 3e<sup>−</sup> → Al(s)</td><td>−1.662</td><td>3</td></tr>
+      <tr><td>Mg<sup>2+</sup> + 2e<sup>−</sup> → Mg(s)</td><td>−2.363</td><td>2</td></tr>
+      <tr><td>Li<sup>+</sup> + e<sup>−</sup> → Li(s)</td><td>−3.045</td><td>1</td></tr>
+    </tbody>
+  </table>
+
+  <!-- FIGURE 14.11: Standard reduction potentials - electrochemical series -->
+  <figure class="figure">
+    <img src="../../../images/thermodynamics/ch14_pages/ch14_page_612_c.png" alt="標準還原電位 — 電化學序列" loading="lazy">
+    <figcaption><strong>圖 14.11：標準還原電位——電化學序列（electrochemical series）。</strong>此圖以垂直刻度展示了各半反應的標準還原電位 ℰ°，從最正（最強氧化劑，如 F₂/F⁻：+2.87 V）到最負（最強還原劑，如 Li⁺/Li：−3.05 V）。標準氫電極（SHE）位於 ℰ° = 0 處作為參考零點。觀察要點：(1) 任何兩個半反應組合的 ℰ°<sub>cell</sub> = ℰ°<sub>高</sub> − ℰ°<sub>低</sub>；(2) ℰ°<sub>cell</sub> 大於 0 表示反應自發，可構成原電池（galvanic cell）；(3) 位置越高的金屬越「貴」（不易氧化），位置越低的金屬越「活潑」（易氧化）。此序列是預測置換反應、電偶腐蝕和電解電壓的基礎工具。</figcaption>
+  </figure>
+
+  <!-- FIGURE 14.12: Latimer diagram -->
+  <figure class="figure">
+    <img src="../../../images/thermodynamics/ch14_pages/ch14_page_613_c.png" alt="拉蒂默圖" loading="lazy">
+    <figcaption><strong>圖 14.12：拉蒂默圖（Latimer diagram）。</strong>拉蒂默圖以簡潔的線性格式展示同一元素不同氧化態之間的標準還原電位。每個箭頭上標示相鄰兩個氧化態之間的 ℰ° 值（單位 V）。觀察要點：(1) 從左到右氧化態降低（獲得電子）；(2) 非相鄰氧化態之間的 ℰ° 不能直接相加——必須先轉換為 ΔG°（ΔG° = −nFℰ°），相加後再轉回 ℰ°；(3) 若某個中間氧化態的 ℰ°<sub>右</sub> 大於 ℰ°<sub>左</sub>，則該物種傾向於發生歧化反應（disproportionation）。拉蒂默圖是快速評估元素氧化還原行為的有力工具，特別適用於水溶液化學和多電子轉移反應的分析。</figcaption>
+  </figure>
+
+  <!-- FIGURE 14.13: Frost diagram -->
+  <figure class="figure">
+    <img src="../../../images/thermodynamics/ch14_pages/ch14_page_615_c.png" alt="弗羅斯特圖" loading="lazy">
+    <figcaption><strong>圖 14.13：弗羅斯特圖（Frost diagram）。</strong>弗羅斯特圖以 nℰ°（或 ΔG°/F）對氧化態 N 作圖，提供物種相對穩定性的直觀圖像。觀察要點：(1) 斜率 = ℰ°，斜率越正表示氧化性越強；(2) 最低點對應最穩定的氧化態；(3) 若某物種位於連接其兩側物種的直線上方，則該物種傾向歧化（如 MnO₄²⁻ 在酸性條件下）；(4) 若某物種位於直線下方，則其兩側物種傾向於歸中反應（comproportionation）。弗羅斯特圖與拉蒂默圖互補：拉蒂默圖給出精確數值，弗羅斯特圖提供直觀的穩定性趨勢。兩者皆廣泛用於無機化學和水溶液電化學的教學與研究。</figcaption>
+  </figure>
+
+  <p>
+    由任何兩個半反應組成的完整電池，其標準電動勢為：
+  </p>
+  <div class="eq"><strong>ℰ°<sub>cell</sub> = ℰ°<sub>cathode</sub> − ℰ°<sub>anode</sub></strong></div>
+  <p>
+    其中<strong>陰極（cathode）發生還原反應</strong>（ℰ° 較高者），<strong>陽極（anode）發生氧化反應</strong>（ℰ° 較低者）。例如，對於 Daniell 電池：陰極為 Cu<sup>2+</sup>/Cu（ℰ° = +0.337 V），陽極為 Zn<sup>2+</sup>/Zn（ℰ° = −0.763 V），因此 ℰ°<sub>cell</sub> = 0.337 − (−0.763) = +1.100 V。
+  </p>
+
+  <div class="callout">
+    <strong>📋 標準還原電位的應用要點：</strong>
+    <br>• ℰ° 越<strong>正</strong>，物種的氧化態越容易被還原，是強氧化劑（如 F<sub>2</sub>、O<sub>2</sub>）。
+    <br>• ℰ° 越<strong>負</strong>，物種的還原態越容易被氧化，是強還原劑（如 Li、Mg、Al）。
+    <br>• 在自發電池中，ℰ° 較高者為陰極，較低者為陽極。ℰ°<sub>cell</sub> &gt; 0 保證反應自發。
+    <br>• ℰ° 是<strong>強度量</strong>——不論反應式乘以何係數，ℰ° 保持不變。但 ΔG° = −nFℰ° 隨著 n 的變化而改變。
+    <br>• 在非標準條件下（濃度 ≠ 1, 分壓 ≠ 1 bar），需使用能斯特方程式進行修正。
+  </div>
+
+  <p>
+    標準還原電位表還可用於<strong>預測氧化還原反應的方向</strong>以及<strong>判斷金屬的腐蝕傾向</strong>。例如，鐵的 ℰ°(Fe<sup>2+</sup>/Fe) = −0.440 V 比銅 ℰ°(Cu<sup>2+</sup>/Cu) = +0.337 V 更負，因此在銅離子溶液中，鐵會自發溶解（腐蝕）並沉積出銅：Fe + Cu<sup>2+</sup> → Fe<sup>2+</sup> + Cu，ℰ°<sub>cell</sub> = 0.337 − (−0.440) = +0.777 V。此原理是理解電偶腐蝕（galvanic corrosion）的基礎。
+  </p>
+</section>
+
+<!-- ====== 14.10 POURBAIX DIAGRAMS ====== -->
+<section id="s14_10">
+  <h2>14.10 普爾貝圖 (Pourbaix Diagrams)</h2>
+
+  <h3>電位-pH 圖的基本原理</h3>
+  <p>
+    <strong>普爾貝圖（Pourbaix diagram）</strong>，又稱為電位-pH 圖（potential-pH diagram）或優勢區域圖（predominance area diagram），由比利時化學家 Marcel Pourbaix 於 1930 年代提出。它是一張以電位 ℰ（縱軸）對 pH（橫軸）作圖的二維相圖，用於顯示在水溶液環境中，某一金屬元素的各種化學形態（金屬、氧化物、氫氧化物、溶解離子）在給定 ℰ 和 pH 條件下的<strong>熱力學穩定區域</strong>。普爾貝圖是腐蝕科學與防護工程中最為重要的工具之一。
+  </p>
+
+  <!-- FIGURE 14.15: Pourbaix diagram for Fe-H2O system (CRITICAL) -->
+  <figure class="figure">
+    <img src="../../../images/thermodynamics/ch14_pages/ch14_page_624_c.png" alt="鐵-水系統普爾貝圖" loading="lazy">
+    <figcaption><strong>圖 14.15：鐵-水系統（Fe-H₂O）的普爾貝圖。</strong>這是腐蝕科學中最經典、最重要的普爾貝圖。圖中以電位 ℰ（SHE）為縱軸（範圍約 −1.2 至 +1.8 V），pH 為橫軸（範圍 −2 至 16）。兩條虛線標示水的穩定區域（a 線：H₂ 析出；b 線：O₂ 析出）。鐵的各種形態佔據不同區域：(1) <strong>免疫區</strong>（左下，低 ℰ）——金屬 Fe(s) 穩定，熱力學上不腐蝕；(2) <strong>腐蝕區</strong>（酸性低 ℰ 區的 Fe²⁺，強酸性高 ℰ 區的 Fe³⁺，強鹼性區的 HFeO₂⁻）——鐵以可溶性離子存在，持續溶解；(3) <strong>鈍化區</strong>（中高 ℰ 及中高 pH）——Fe₃O₄（磁鐵礦）、Fe₂O₃（赤鐵礦）等固體氧化物/氫氧化物穩定，形成保護膜。觀察要點：在中性 pH 和中等 ℰ 條件下（如天然水體），鐵處於鈍化區，這是鋼鐵在自然環境中具有一定耐蝕性的原因；但在酸性（低 pH）或含氯離子環境中，鈍化膜可能被破壞，導致局部腐蝕（如點蝕）。</figcaption>
+  </figure>
+
+  <!-- FIGURE 14.16: Pourbaix diagram for Zn-H2O -->
+  <figure class="figure">
+    <img src="../../../images/thermodynamics/ch14_pages/ch14_page_627_c.png" alt="鋅-水系統普爾貝圖" loading="lazy">
+    <figcaption><strong>圖 14.16：鋅-水系統（Zn-H₂O）的普爾貝圖。</strong>與鐵相比，鋅的普爾貝圖具有顯著不同的特徵。觀察要點：(1) 鋅的 ℰ°(Zn²⁺/Zn) = −0.763 V，遠比鐵的 ℰ°(Fe²⁺/Fe) = −0.440 V 更負，意味著鋅在熱力學上更易氧化（更活潑）；(2) 鋅在寬廣的 pH 範圍內（pH 約 6-12）表現出兩性行為——既可溶於酸形成 Zn²⁺，也可溶於強鹼形成 ZnO₂²⁻ 或 HZnO₂⁻；(3) 在中性 pH 區域，Zn(OH)₂ 和 ZnO 為穩定固相，形成鈍化區；(4) 鋅的腐蝕區（Zn²⁺）在酸性範圍內非常廣闊，這解釋了為什麼鋅在酸性環境中極易腐蝕。然而，正因為鋅的 ℰ° 較低，它被廣泛用作犧牲陽極來保護鋼鐵（陰極保護）——鋅優先腐蝕，鋼鐵被保護在免疫區。</figcaption>
+  </figure>
+
+  <!-- FIGURE 14.17: Pourbaix diagram for Cu-H2O -->
+  <figure class="figure">
+    <img src="../../../images/thermodynamics/ch14_pages/ch14_page_631_c.png" alt="銅-水系統普爾貝圖" loading="lazy">
+    <figcaption><strong>圖 14.17：銅-水系統（Cu-H₂O）的普爾貝圖。</strong>銅的 ℰ°(Cu²⁺/Cu) = +0.337 V 為正值，比氫的 ℰ° 更高，這賦予銅獨特的電化學行為。觀察要點：(1) <strong>貴金屬特性</strong>——銅在無氧化劑的水溶液中熱力學上穩定（免疫區涵蓋了水的全部穩定區域），銅不會從純水中置換出氫氣；(2) 銅的腐蝕需要氧化劑（如溶解 O₂）的存在——在水穩定區域的上半部，Cu²⁺ 和 CuO/Cu₂O 為穩定形態；(3) 在強鹼性條件下，CuO 和 Cu₂O 形成鈍化區；(4) 銅在含氧酸性溶液（如含溶解 O₂ 的稀硫酸）中會腐蝕，這是銅在工業環境中的主要腐蝕問題。銅的高 ℰ° 使其在許多環境中具有天然耐蝕性，這也是銅廣泛用於水管、屋頂和電子產品的原因。</figcaption>
+  </figure>
+
+  <p>
+    普爾貝圖中的邊界線分為三種類型，每種對應不同類型的化學平衡：
+  </p>
+
+  <!-- EXPANDED POURBAIX: Three boundary types with detailed equations -->
+  <div class="pourbaix-expanded">
+    <h4>🔍 三種邊界線的詳細分析</h4>
+
+    <div class="boundary-type">
+      <h5>類型 1：水平邊界線（Horizontal Boundaries）——僅涉及電子轉移</h5>
+      <p>此類邊界對應<strong>純氧化還原反應</strong>，無 H⁺ 或 OH⁻ 參與。反應通式：</p>
+      <p style="text-align:center"><strong>M<sup>n+</sup> + n e<sup>−</sup> → M(s)</strong></p>
+      <p>應用能斯特方程式：ℰ = ℰ° + (RT/nF) ln a<sub>M<sup>n+</sup></sub>。在 298 K 下：</p>
+      <p style="text-align:center"><strong>ℰ = ℰ° + (0.05916/n) log a<sub>M<sup>n+</sup></sub></strong></p>
+      <p>此方程式<strong>不包含 pH 項</strong>，因此在普爾貝圖上表現為水平線（ℰ 與 pH 無關）。線的位置取決於金屬離子活度：活度越低（越稀），線越向下移動（ℰ 越負），免疫區越大。Gaskell 的範例：Fe²⁺ + 2e⁻ → Fe，ℰ = −0.440 + (0.05916/2) log a<sub>Fe²⁺</sub>。</p>
+    </div>
+
+    <div class="boundary-type">
+      <h5>類型 2：垂直邊界線（Vertical Boundaries）——僅涉及質子轉移</h5>
+      <p>此類邊界對應<strong>純酸鹼反應（水解/沉澱平衡）</strong>，無電子轉移。反應通式：</p>
+      <p style="text-align:center"><strong>M(OH)<sub>n</sub>(s) + n H<sup>+</sup> ⇌ M<sup>n+</sup> + n H<sub>2</sub>O</strong></p>
+      <p>平衡常數 K = a<sub>M<sup>n+</sup></sub> / (a<sub>H<sup>+</sup></sub>)<sup>n</sup>。取對數得：</p>
+      <p style="text-align:center"><strong>pH = −(1/n) log K − (1/n) log a<sub>M<sup>n+</sup></sub></strong></p>
+      <p>此方程式<strong>不包含 ℰ 項</strong>，因此在普爾貝圖上表現為垂直線（pH 固定，與 ℰ 無關）。給定金屬離子活度（通常取 a = 10⁻⁶ 作為「無腐蝕」的判據），可計算出沉澱發生的臨界 pH。Gaskell 的範例：Fe³⁺ + 3H₂O → Fe(OH)₃ + 3H⁺。</p>
+    </div>
+
+    <div class="boundary-type">
+      <h5>類型 3：斜邊界線（Sloping Boundaries）——同時涉及電子和質子轉移</h5>
+      <p>此類邊界對應<strong>電化學-酸鹼耦合反應</strong>，反應通式：</p>
+      <p style="text-align:center"><strong>a Ox + m H<sup>+</sup> + n e<sup>−</sup> → b Red + c H<sub>2</sub>O</strong></p>
+      <p>應用能斯特方程式：</p>
+      <p style="text-align:center"><strong>ℰ = ℰ° − (0.05916/n) log (a<sub>Red</sub><sup>b</sup> / a<sub>Ox</sub><sup>a</sup>) − (0.05916 m/n) pH</strong></p>
+      <p>斜率 = <strong>−(0.05916 × m)/n</strong>（單位：V/pH）。斜率的大小和符號取決於反應中 H⁺ 與電子的計量比 m/n。若 m/n 較大（涉及較多質子），斜率較陡。Gaskell 的範例：Fe₂O₃ + 6H⁺ + 2e⁻ → 2Fe²⁺ + 3H₂O，斜率 = −0.177 V/pH。</p>
+    </div>
+  </div>
+
+  <!-- DERIVATION: Pourbaix boundary line equations -->
+  <div class="derivation">
+    <h4>📐 推導：普爾貝圖邊界線方程式的計算方法</h4>
+    <p>以 Fe-H₂O 系統中 Fe²⁺/Fe₃O₄ 邊界為例，系統展示如何將能斯特方程式轉化為 ℰ-pH 關係式。</p>
+    <div class="step">
+      <strong>反應：</strong>Fe₃O₄(s) + 8H⁺ + 8e⁻ → 3Fe(s) + 4H₂O &nbsp; (ℰ° 查表可得)
+      <br>但更常用的形式是 Fe₃O₄(s) + 8H⁺ + 2e⁻ → 3Fe²⁺ + 4H₂O
+    </div>
+    <div class="step">
+      <strong>步驟 1：</strong>寫出能斯特方程式——
+      <br>ℰ = ℰ° − (RT/nF) ln (a<sub>Fe²⁺</sub>³ / a<sub>H⁺</sub>⁸)
+      <br>（Fe₃O₄ 和 H₂O 為純物質，活度 = 1）
+    </div>
+    <div class="step">
+      <strong>步驟 2：</strong>轉換 pH 表示法——
+      <br>a<sub>H⁺</sub> = 10<sup>−pH</sup>，因此 a<sub>H⁺</sub>⁸ = 10<sup>−8pH</sup>
+      <br>ln(a<sub>H⁺</sub>⁸) = −8 × 2.303 × pH
+    </div>
+    <div class="step">
+      <strong>步驟 3：</strong>在 298 K 下代入數值——
+      <br>ℰ = ℰ° − (0.05916/2) [3 log a<sub>Fe²⁺</sub> − 8 log a<sub>H⁺</sub>]
+      <br>ℰ = ℰ° − (0.05916/2) [3 log a<sub>Fe²⁺</sub> + 8 pH]
+      <br>ℰ = ℰ° − 0.08874 log a<sub>Fe²⁺</sub> − 0.2366 pH
+    </div>
+    <div class="result">
+      ℰ = [ℰ° − 0.08874 log a<sub>Fe²⁺</sub>] − 0.2366 pH
+      <br>斜率 = −0.2366 V/pH（由 m/n = 8/2 = 4 決定）
+    </div>
+    <p><strong>通用公式：</strong>對於反應 a Ox + m H⁺ + n e⁻ → b Red + c H₂O，普爾貝圖邊界線方程式為 ℰ = ℰ°′ − (0.05916 m/n) pH，其中 ℰ°′ 包含了活度項的貢獻（在給定離子活度下為常數）。此推導方法可應用於任何普爾貝圖中任何類型 3 邊界的構建。</p>
+  </div>
+
+  <h3 id="s14_10b">水的穩定區域與腐蝕科學應用</h3>
+  <p>
+    每一張普爾貝圖都包含兩條關鍵的虛線，標示<strong>水的熱力學穩定區域</strong>：
+  </p>
+  <ul style="margin:10px 0 10px 24px;font-size:14px;color:var(--t2);line-height:2.0;">
+    <li><strong>下邊界（a 線）：</strong>2H<sup>+</sup> + 2e<sup>−</sup> → H<sub>2</sub>。當 ℰ 低於此線時，水被還原產生氫氣。ℰ = −0.05916 pH（在 p<sub>H2</sub> = 1 bar 下）。</li>
+    <li><strong>上邊界（b 線）：</strong>O<sub>2</sub> + 4H<sup>+</sup> + 4e<sup>−</sup> → 2H<sub>2</sub>O。當 ℰ 高於此線時，水被氧化產生氧氣。ℰ = 1.229 − 0.05916 pH（在 p<sub>O2</sub> = 1 bar 下）。</li>
+  </ul>
+
+  <!-- EXPANDED: Water stability region detailed explanation -->
+  <div class="pourbaix-expanded">
+    <h4>💧 水穩定區域的深層理解</h4>
+    <p>水的穩定區域由兩條虛線界定，其間距在 298 K 下恆為 1.229 V（任意 pH 下兩線平行，因為兩個反應的 m/n 比均為 1）。關鍵含義：</p>
+    <div class="boundary-type">
+      <h5>a 線以下（ℰ 低於 H₂ 析出線）：熱力學上水不穩定</h5>
+      <p>水傾向被還原為 H₂ 氣體。任何金屬若其穩定區域位於 a 線以下，則該金屬可從水中置換出氫氣（如鹼金屬 Na、K，以及 Mg、Al 等活潑金屬）。在腐蝕科學中，這意味著金屬在該區域會伴隨析氫腐蝕。</p>
+    </div>
+    <div class="boundary-type">
+      <h5>b 線以上（ℰ 高於 O₂ 析出線）：熱力學上水不穩定</h5>
+      <p>水傾向被氧化為 O₂ 氣體。在此區域，理論上水會分解產生氧氣。實際上，由於 O₂ 析出反應的動力學過電位較大，水在略高於此線的電位下仍可能亞穩存在。此區域對應強氧化性環境。</p>
+    </div>
+    <div class="boundary-type">
+      <h5>a 線與 b 線之間：水的熱力學穩定區域</h5>
+      <p>在此區域內，H₂O 在熱力學上穩定，不會自發分解為 H₂ 或 O₂。大多數自然水體和工業水溶液的 ℰ-pH 條件落在此區域內。對於腐蝕防護，目標是使金屬在此區域內處於免疫區或鈍化區。</p>
+    </div>
+  </div>
+
+  <p>
+    在這兩條線之間的區域，水在熱力學上是穩定的。普爾貝圖上通常標示三個特徵區域：
+  </p>
+  <ul style="margin:10px 0 10px 24px;font-size:14px;color:var(--t2);line-height:2.0;">
+    <li><strong>免疫區（Immunity）：</strong>金屬處於熱力學穩定狀態，不會發生腐蝕。例如鐵在足夠低的電位下以 Fe(s) 形式穩定存在。</li>
+    <li><strong>腐蝕區（Corrosion）：</strong>金屬以可溶性離子形式穩定存在，會持續溶解。例如 Fe<sup>2+</sup> 或 Fe<sup>3+</sup> 的穩定區域。</li>
+    <li><strong>鈍化區（Passivation）：</strong>金屬表面形成一層緻密的氧化物或氫氧化物薄膜（如 Fe<sub>2</sub>O<sub>3</sub>、Fe<sub>3</sub>O<sub>4</sub>），阻止進一步腐蝕。這是許多工程合金（如不銹鋼）耐腐蝕的基礎。</li>
+  </ul>
+
+  <!-- EXPANDED: Iron corrosion regions specific analysis -->
+  <div class="pourbaix-expanded">
+    <h4>🔬 鐵-水系統腐蝕區域詳解</h4>
+    <p>以圖 14.15（Fe-H₂O 普爾貝圖）為基礎，以下是各特徵區域的詳細分析：</p>
+    <div class="boundary-type">
+      <h5>區域 1：免疫區（Fe 穩定，ℰ 低於約 −0.6 V，寬廣 pH 範圍）</h5>
+      <p>在此區域，金屬鐵是熱力學穩定的唯一凝聚相。任何鐵離子或氧化物都會自發還原為金屬鐵。實現免疫區的策略：<strong>陰極保護</strong>——通過外加電流或犧牲陽極（如 Zn、Mg）將鋼鐵結構的電位拉低至此區域。</p>
+    </div>
+    <div class="boundary-type">
+      <h5>區域 2：酸性腐蝕區（Fe²⁺ 穩定，低 pH，中等 ℰ）</h5>
+      <p>在酸性環境（pH 小於約 6）和中等電位下，Fe²⁺ 為穩定物種。鐵以亞鐵離子形式溶解：Fe → Fe²⁺ + 2e⁻。此即典型的<strong>酸腐蝕</strong>（如鋼鐵在酸洗過程中）。腐蝕產物為可溶性 Fe²⁺，無保護性固體膜形成。</p>
+    </div>
+    <div class="boundary-type">
+      <h5>區域 3：強氧化性酸性腐蝕區（Fe³⁺ 穩定，極低 pH，高 ℰ）</h5>
+      <p>在強酸性（pH 小於 0）和高電位條件下，Fe³⁺ 為穩定物種。此區域通常超出自然環境範圍，但在強氧化性酸（如濃硝酸、濃硫酸）的化學處理過程中可能遇到。</p>
+    </div>
+    <div class="boundary-type">
+      <h5>區域 4：鈍化區（Fe₃O₄ / Fe₂O₃ 穩定，中等至高 pH 及中等 ℰ）</h5>
+      <p>這是最重要的區域——在 pH 約 6-14 和 ℰ 約 −0.2 至 +1.0 V 範圍內，鐵的氧化物（Fe₃O₄ 在較低 ℰ，Fe₂O₃ 在較高 ℰ）為穩定固相。這些氧化物形成緻密的保護膜（厚度僅數奈米至數微米），有效阻止進一步腐蝕。<strong>不銹鋼的耐蝕性</strong>即源於合金中的 Cr 元素促進了更穩定的鈍化膜（Cr₂O₃）的形成。注意：氯離子（Cl⁻）可局部破壞鈍化膜，導致點蝕（pitting corrosion）——此效應在普爾貝圖中無法體現，需藉助實驗數據補充。</p>
+    </div>
+    <div class="boundary-type">
+      <h5>區域 5：強鹼性腐蝕區（HFeO₂⁻ 穩定，極高 pH）</h5>
+      <p>在強鹼性條件（pH 大於約 14）下，鐵可形成可溶性的 HFeO₂⁻ 離子（亞鐵酸根），導致鹼性腐蝕。此現象在紙漿工業（kraft process）和某些化學環境中需特別關注。</p>
+    </div>
+  </div>
+
+  <div class="callout">
+    <strong>🛡️ 普爾貝圖在腐蝕防護中的應用策略：</strong>
+    <br>• <strong>陰極保護（Cathodic Protection）：</strong>通過施加外部電壓或連接犧牲陽極（如鋅、鎂），將金屬的電位降低至免疫區。廣泛應用於地下管線、船舶、海上平台。
+    <br>• <strong>陽極保護（Anodic Protection）：</strong>將金屬的電位提升至鈍化區，使其表面形成保護性氧化膜。適用於可鈍化的金屬（如不銹鋼、鈦）在特定電解質中。
+    <br>• <strong>調節 pH：</strong>通過改變環境的酸鹼度，使金屬進入免疫區或鈍化區。例如在鍋爐水中添加鹼性藥劑以提高 pH。
+    <br>• <strong>添加緩蝕劑（Inhibitors）：</strong>在溶液中引入可吸附在金屬表面或促進鈍化膜形成的化學物質。
+  </div>
+
+  <div class="callout-warn">
+    <strong>⚠️ 普爾貝圖的局限性：</strong>普爾貝圖是純熱力學工具——它只能告訴我們<strong>哪些物種在熱力學上是穩定的</strong>，但無法預測<strong>反應速率（動力學）</strong>。一個在熱力學上處於腐蝕區的金屬，可能因為動力學因素（如表面氧化膜的形成、低反應速率）而實際上幾乎不腐蝕。相反地，即使在免疫區，若存在其他氧化劑（如溶解氧），仍可能發生腐蝕。因此，普爾貝圖需與腐蝕動力學知識結合使用。
+  </div>
+
+  <!-- CROSS-CHAPTER LINK: Ch13 phase stability comparison -->
+  <div class="callout">
+    <strong>🔗 與第13章之關聯——相穩定圖 vs. 普爾貝圖：</strong>
+    <br>普爾貝圖本質上是<strong>包含電化學變量的相穩定圖</strong>。第13章討論的固態相穩定圖（如金屬-氧-硫系統的優勢區域圖）使用 log p<sub>O₂</sub> 或 log p<sub>S₂</sub> 作為變量，而普爾貝圖使用 ℰ 和 pH。兩者之間存在深刻的類比：
+    <br>• 在第13章：log p<sub>O₂</sub> 對應氧的化學勢 μ<sub>O₂</sub> = RT ln p<sub>O₂</sub>
+    <br>• 在第14章：ℰ 對應電子的電化學勢，pH 對應 H⁺ 的化學勢（μ<sub>H⁺</sub> = −RT·ln(10)·pH）
+    <br>將普爾貝圖的坐標轉換（ℰ → −μ<sub>e⁻</sub>/F，pH → −μ<sub>H⁺</sub>/RT·ln(10)），即可得到與第13章完全一致的化學勢圖。這種統一觀點展示了熱力學在不同領域的普適性。
+  </div>
+
+  <p>
+    Gaskell 以鐵-水系統的普爾貝圖為例進行了詳細討論。在不同 pH 和電位條件下，鐵可以 Fe(s)、Fe<sup>2+</sup>、Fe<sup>3+</sup>、Fe(OH)<sub>2</sub>、Fe(OH)<sub>3</sub>、Fe<sub>3</sub>O<sub>4</sub>、Fe<sub>2</sub>O<sub>3</sub> 等形式存在。每一條邊界線對應一個特定的平衡反應的能斯特方程式。普爾貝圖在濕法冶金（hydrometallurgy）、電化學加工、地質化學以及核廢料處置等領域均有重要應用。
+  </p>
+</section>
+
+<!-- ====== NUMERICAL EXAMPLES ====== -->
+<section id="examples">
+  <h2>數值計算例題</h2>
+
+  <h3>例題 1：基本 ΔG 與 ℰ 的轉換</h3>
+  <p>
+    <strong>問題：</strong>某一電池反應轉移 3 個電子，在 298 K 下測得 ℰ = 1.50 V。求該反應的 ΔG（單位 kJ/mol）。若此 ℰ 為標準電動勢 ℰ°，求平衡常數 K。
+  </p>
+  <p>
+    <strong>解答：</strong><br>
+    ΔG = −nFℰ = −3 × 96,485 × 1.50 = −434,182 J/mol = <strong>−434.2 kJ/mol</strong>。<br>
+    平衡常數：ln K = nFℰ°/RT = (3 × 96,485 × 1.50) / (8.314 × 298) = 175.3。<br>
+    K = e<sup>175.3</sup> ≈ <strong>1.2 × 10<sup>76</sup></strong>。此巨大的平衡常數說明反應極度偏向產物，幾乎完全進行。
+  </p>
+
+  <h3>例題 2：能斯特方程式的應用</h3>
+  <p>
+    <strong>問題：</strong>考慮電池 Zn(s) | Zn<sup>2+</sup>(a=0.01) || Cu<sup>2+</sup>(a=0.10) | Cu(s)。ℰ°(Cu<sup>2+</sup>/Cu) = +0.337 V，ℰ°(Zn<sup>2+</sup>/Zn) = −0.763 V。在 298 K 下計算此電池的電動勢。
+  </p>
+  <p>
+    <strong>解答：</strong><br>
+    ℰ°<sub>cell</sub> = 0.337 − (−0.763) = 1.100 V。<br>
+    電池反應：Zn(s) + Cu<sup>2+</sup> → Zn<sup>2+</sup> + Cu(s)，n = 2。<br>
+    Q = a<sub>Zn2+</sub> / a<sub>Cu2+</sub> = 0.01/0.10 = 0.10。<br>
+    ℰ = ℰ° − (0.05916/2) log<sub>10</sub>(0.10) = 1.100 − 0.02958 × (−1) = 1.100 + 0.0296 = <strong>1.130 V</strong>。<br>
+    電動勢比標準值高，因為反應物 Cu<sup>2+</sup> 的活度高於產物 Zn<sup>2+</sup>，使反應的驅動力增大。
+  </p>
+
+  <h3>例題 3：由溫度係數求熱力學參數</h3>
+  <p>
+    <strong>問題：</strong>某一電池在 298 K 下 ℰ = 0.800 V，且 (∂ℰ/∂T)<sub>P</sub> = −2.5×10<sup>−4</sup> V/K，n = 2。計算此電池反應的 ΔG、ΔS、ΔH 和 q<sub>rev</sub>。
+  </p>
+  <p>
+    <strong>解答：</strong><br>
+    ΔG = −nFℰ = −2 × 96,485 × 0.800 = <strong>−154.4 kJ/mol</strong>。<br>
+    ΔS = nF(∂ℰ/∂T) = 2 × 96,485 × (−2.5×10<sup>−4</sup>) = <strong>−48.2 J/(mol·K)</strong>。<br>
+    ΔH = −nF[ℰ − T(∂ℰ/∂T)] = −2×96,485×[0.800 − 298×(−2.5×10<sup>−4</sup>)]
+    = −192,970 × [0.800 + 0.0745] = −192,970 × 0.8745 = <strong>−168.8 kJ/mol</strong>。<br>
+    q<sub>rev</sub> = TΔS = 298 × (−48.2) = <strong>−14.4 kJ/mol</strong>（電池向環境放熱）。<br>
+    驗算：ΔH = ΔG + TΔS = −154.4 + (−14.4) = −168.8 kJ/mol ✓。
+  </p>
+
+  <h3>例題 4：氧氣濃差電池</h3>
+  <p>
+    <strong>問題：</strong>一個氧化鋯氧氣傳感器在 1000 K 下運行，參考側為空氣（p<sub>O2</sub> = 0.21 bar），量測得 ℰ = 0.100 V。求待測側的氧分壓。
+  </p>
+  <p>
+    <strong>解答：</strong><br>
+    使用能斯特方程式：ℰ = (RT/4F) ln(p<sub>ref</sub>/p<sub>sample</sub>)。<br>
+    RT/4F = (8.314×1000)/(4×96485) = 0.02155 V。<br>
+    0.100 = 0.02155 × ln(0.21/p<sub>sample</sub>) → ln(0.21/p<sub>sample</sub>) = 4.64。<br>
+    0.21/p<sub>sample</sub> = e<sup>4.64</sup> = 103.6 → p<sub>sample</sub> = 0.21/103.6 = <strong>2.03×10<sup>−3</sup> bar</strong>。<br>
+    此氧分壓極低，表明待測氣體為高度還原性氣氛（如含大量 H<sub>2</sub> 或 CO 的燃燒產物）。
+  </p>
+
+  <div class="callout">
+    <strong>🧮 計算技巧：</strong>在電化學計算中，務必注意以下易錯點：
+    <br>• <strong>單位一致性：</strong>ΔG 以 J/mol 為單位，F = 96,485 C/mol，ℰ 以 V 為單位，RT 以 J/mol 為單位（8.314 × T）。
+    <br>• <strong>自然對數 vs. 常用對數：</strong>能斯特方程式在理論推導中使用 ln（自然對數），對應 RT/F = 0.02569 V（298 K）；在實際計算中常用 log<sub>10</sub>，對應 0.05916 V。兩者轉換關係：ln x = 2.303 log<sub>10</sub> x。
+    <br>• <strong>n 的確定：</strong>仔細平衡半反應以確定轉移的電子數。對於涉及 O<sub>2</sub> 的反應，n 取決於反應的書寫方式（n=4 若生成 2O<sup>2−</sup>；n=2 若生成 O<sub>2</sub><sup>2−</sup> 等）。
+    <br>• <strong>符號約定：</strong>ℰ &gt; 0 對應自發反應（ΔG &lt; 0），ℰ &lt; 0 對應非自發反應（ΔG &gt; 0）。
+  </div>
+</section>
+
+<!-- ====== INDUSTRIAL APPLICATIONS ====== -->
+<section id="applications">
+  <h2>工業應用</h2>
+
+  <h3>1. 電池技術</h3>
+  <p>
+    電化學電池是將化學能直接轉換為電能的裝置。現代電池技術的發展緊密依賴於本章所述的熱力學原理：
+  </p>
+  <ul style="margin:10px 0 10px 24px;font-size:14px;color:var(--t2);line-height:2.0;">
+    <li><strong>鋰離子電池：</strong>工作電壓約 3.6–3.8 V，取決於正極材料（如 LiCoO<sub>2</sub>、LiFePO<sub>4</sub>）和負極材料（石墨、矽）的電化學電位差。電解質為鋰鹽溶於有機溶劑。熱力學決定了電池的最大理論能量密度，而 ℰ° 與溫度係數影響了電池在高溫/低溫下的表現。</li>
+    <li><strong>燃料電池：</strong>氫-氧燃料電池的總反應 H<sub>2</sub> + ½O<sub>2</sub> → H<sub>2</sub>O，ℰ° = 1.229 V，理論效率可達 83%（基於 ΔG/ΔH）。實際效率因動力學極化而降低，但熱力學提供了效率上限。</li>
+    <li><strong>液流電池（Redox Flow Battery）：</strong>使用釩等氧化還原對（如 V<sup>2+</sup>/V<sup>3+</sup> 和 VO<sup>2+</sup>/VO<sub>2</sub><sup>+</sup>），ℰ°<sub>cell</sub> ≈ 1.26 V。其一大優勢是功率與容量可分離設計，適合大規模儲能。</li>
+  </ul>
+
+  <h3>2. 腐蝕與防護</h3>
+  <p>
+    腐蝕本質上是一個電化學過程，涉及金屬的陽極溶解（M → M<sup>n+</sup> + ne<sup>−</sup>）和陰極反應（通常為氧還原或氫析出）。普爾貝圖提供了腐蝕傾向的熱力學判斷，而實際腐蝕速率則由混合電位理論（mixed potential theory）決定。常見的防護方法包括：
+  </p>
+  <ul style="margin:10px 0 10px 24px;font-size:14px;color:var(--t2);line-height:2.0;">
+    <li><strong>犧牲陽極：</strong>連接 ℰ° 更負的金屬（如 Mg、Zn、Al）以保護鋼結構。例如船舶的鋅塊、地下管線的鎂陽極。</li>
+    <li><strong>外加電流陰極保護（ICCP）：</strong>使用直流電源將被保護結構的電位降至免疫區。廣泛用於長距離管線和海上平台。</li>
+    <li><strong>塗層與緩蝕劑：</strong>物理隔離或化學抑制腐蝕反應。</li>
+  </ul>
+
+  <h3>3. 電化學傳感器</h3>
+  <p>
+    基於濃差電池原理的傳感器在工業過程中不可或缺：
+  </p>
+  <ul style="margin:10px 0 10px 24px;font-size:14px;color:var(--t2);line-height:2.0;">
+    <li><strong>pH 電極：</strong>玻璃膜電極通過測量跨玻璃膜的電位差來確定 H<sup>+</sup> 活度（pH = −log a<sub>H+</sub>）。這是典型的離子選擇性電極，其響應遵循能斯特方程式：ℰ = 常數 + (0.05916) log a<sub>H+</sub> = 常數 − 0.05916 pH。</li>
+    <li><strong>氧傳感器（Lambda Sensor）：</strong>如前所述，基於 YSZ 的氧濃差電池用於汽車廢氣監測。在 λ=1（理論空燃比）附近，ℰ 從約 0.1 V 急劇躍升至約 0.8 V，提供極其靈敏的空燃比檢測。</li>
+    <li><strong>離子選擇性電極（ISE）：</strong>針對 Na<sup>+</sup>、K<sup>+</sup>、Ca<sup>2+</sup>、F<sup>−</sup>、NO<sub>3</sub><sup>−</sup> 等特定離子的電極，廣泛用於水質監測、臨床檢驗和農業分析。</li>
+  </ul>
+
+  <h3>4. 電解與電冶金</h3>
+  <p>
+    電解是施加外部電壓驅動非自發反應的過程，其最低所需電壓由熱力學決定（ℰ<sub>min</sub> = −ΔG/nF，即分解電壓）。實際操作電壓因過電位（overpotential）和歐姆損失而更高。重要應用包括：
+  </p>
+  <ul style="margin:10px 0 10px 24px;font-size:14px;color:var(--t2);line-height:2.0;">
+    <li><strong>鋁的電解冶煉（Hall-Héroult 法）：</strong>Al<sub>2</sub>O<sub>3</sub> 溶於冰晶石熔鹽中電解，ℰ° ≈ −2.2 V，實際操作電壓約 4.0–4.5 V，能耗極高。</li>
+    <li><strong>氯鹼工業：</strong>電解 NaCl 水溶液生產 Cl<sub>2</sub>、NaOH 和 H<sub>2</sub>。膜電解槽技術基於對 ℰ° 和能斯特方程式的深入理解進行優化。</li>
+    <li><strong>電鍍與電鑄：</strong>利用電解在基材上沉積金屬層，需精確控制電流密度和電解液組成以獲得所需鍍層質量。</li>
+  </ul>
+
+  <div class="callout-warn">
+    <strong>⚡ 熱力學 vs. 動力學：</strong>本章所述的全部內容均為<strong>熱力學（平衡）分析</strong>。在實際電化學系統中，動力學因素——包括活化過電位（activation overpotential）、濃度過電位（concentration overpotential）和歐姆損失（ohmic loss）——使實際電池電壓偏離平衡值。然而，熱力學提供了不可逾越的理論極限和設計基準。對於電化學工程的深入討論，需結合電極動力學（Butler-Volmer 方程式）和傳輸現象。
+  </div>
+</section>
+
+<!-- ====== CROSS-REFERENCES ====== -->
+<section id="crossref">
+  <h2>與其他章節之關聯</h2>
+
+  <p>本章的電化學熱力學與全書多個章節有深層的理論聯繫。以下詳列各章節與本章的具體關聯點，幫助建立系統性的知識網絡：</p>
+
+  <div class="crossref-enhanced">
+  <table>
+    <thead>
+      <tr><th>章節</th><th>主題</th><th>與本章之關聯</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>第5章</strong></td>
+        <td>吉布斯自由能與基本關係式</td>
+        <td>本章的核心關係式 ΔG = −nFℰ 直接來自第5章關於最大非體積功的討論。第5章的 Maxwell 關係式 (∂G/∂T)<sub>P</sub> = −S 和吉布斯-亥姆霍茲方程式 (∂(G/T)/∂T)<sub>P</sub> = −H/T² 是推導 ΔS = nF(∂ℰ/∂T) 和 ΔH = −nF[ℰ − T(∂ℰ/∂T)] 的基礎。第5章中 ΔG 作為化學反應自發性判據的概念，在電化學中被賦予了可直接量測的物理意義（ℰ 的正負直接指示 ΔG 的符號）。</td>
+      </tr>
+      <tr>
+        <td><strong>第9章</strong></td>
+        <td>溶液熱力學與活度</td>
+        <td>本章 §14.8 討論水溶液中離子活度時，直接使用了第9章建立的活度與活度係數概念。平均離子活度係數 γ<sub>±</sub> 是第9章中逸度/活度框架向電解質溶液的延伸。第9章的 Gibbs-Duhem 方程式在分析電解質溶液的熱力學一致性時亦有應用。能斯特方程式中的 Q 必須使用活度而非濃度——第9章提供了將濃度轉換為活度的理論工具（活度係數模型）。德拜-休克爾極限定律（§14.8）是第9章理想溶液理論向離子溶液的延伸。</td>
+      </tr>
+      <tr>
+        <td><strong>第11章</strong></td>
+        <td>化學反應平衡</td>
+        <td>本章的能斯特方程式直接連結了 ℰ° 與平衡常數 K：ℰ° = (RT/nF) ln K。第11章詳述的平衡常數與 ΔG° 之關係（ΔG° = −RT ln K）在此被賦予了電化學的詮釋。由電化學量測獲取 K 是第11章平衡計算方法的重要補充——特別是用於平衡常數極大（K > 10¹⁰）或極小（K < 10⁻¹⁰）的反應，傳統濃度分析法無法準確測定。此外，第11章的 van't Hoff 方程式（d ln K/dT = ΔH°/RT²）可與電化學溫度係數結合，提供從 ℰ(T) 數據獲取 ΔH° 的另一路徑。</td>
+      </tr>
+      <tr>
+        <td><strong>第10章</strong></td>
+        <td>相平衡與相律</td>
+        <td>普爾貝圖（§14.10）本質上是一種包含電化學變量的相圖。第10章關於相律（F = C − P + 2）、相邊界和物種穩定性的概念在此被擴展到包含電位 ℰ 作為額外自由度的系統中。在普爾貝圖中，自由度增加了一個（電位），因此對於兩相平衡（P=2），在三元系統（金屬-水-電子）中，F = 3 − 2 + 2 = 3 但其中兩個變量（T 和 P）固定，留下 ℰ 和 pH 作為可變量——這正是普爾貝圖的二維性來源。pH 作為 H⁺ 化學勢的一種度量，與 ℰ 共同定義了水溶液中的物種穩定性區域。</td>
+      </tr>
+      <tr>
+        <td><strong>第13章</strong></td>
+        <td>固態反應與相穩定圖</td>
+        <td>氧化鋯（ZrO<sub>2</sub>）和其他固體電解質（如 ThO<sub>2</sub>、β-Al<sub>2</sub>O<sub>3</sub>）在高溫電化學量測中的應用，與第13章討論的固態缺陷化學密切相關。YSZ 中氧空缺的濃度和遷移率決定了其離子導電性。第13章的相穩定圖（如金屬-氧-硫系統的 log p<sub>O₂</sub>-log p<sub>S₂</sub> 圖）與普爾貝圖在概念上高度類比：前者使用化學勢（log p）作為坐標，後者使用 ℰ 和 pH。兩者皆基於相同的基本原理——在給定化學勢條件下識別最穩定的凝聚相。</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="callout">
+    <strong>🔗 學習路徑建議：</strong>若你對本章的某些基礎概念感到不熟悉，建議按以下順序複習：
+    <br>• 對 <strong>活度與活度係數</strong> 有疑問 → 複習第9章（溶液熱力學）
+    <br>• 對 <strong>ΔG° 與平衡常數的關係</strong> 有疑問 → 複習第11章（反應平衡）
+    <br>• 對 <strong>吉布斯自由能與 Maxwell 關係</strong> 有疑問 → 複習第5章（熱力學勢函數）
+    <br>• 對 <strong>相圖與穩定性判據</strong> 有疑問 → 複習第10章（相平衡）
+    <br>• 對 <strong>固態電解質與缺陷化學</strong> 有疑問 → 複習第13章（固態反應）
+    <br>• 對 <strong>普爾貝圖與相穩定圖的類比</strong> 有疑問 → 同時複習第13章（相穩定圖）和 §14.10（普爾貝圖）
+  </div>
+</section>
+
+<!-- ====== CHAPTER SUMMARY ====== -->
+<section id="summary">
+  <h2>章節總結</h2>
+
+  <p>
+    第14章是 Gaskell《材料熱力學導論》中獨具特色的一章，它將抽象的熱力學函數（ΔG、ΔS、ΔH）與可直接量測的電學量（ℰ、∂ℰ/∂T）建立了定量聯繫。以下是本章的核心知識要點：
+  </p>
+
+  <ol style="margin:10px 0 10px 24px;font-size:14px;color:var(--t2);line-height:2.2;">
+    <li><strong>基本橋樑：</strong>ΔG = −nFℰ。這是化學能與電能轉換的核心關係式。自發反應（ΔG &lt; 0）對應 ℰ &gt; 0。</li>
+    <li><strong>能斯特方程式：</strong>ℰ = ℰ° − (RT/nF) ln Q。該式描述了濃度（活度）對電池電壓的影響，是電化學中應用最廣泛的方程式。</li>
+    <li><strong>標準電位與平衡常數：</strong>ℰ° = (RT/nF) ln K。電化學方法可極其精確地測定平衡常數，即使是極大或極小的 K 值。</li>
+    <li><strong>生成電池：</strong>由元素生成化合物的電池，其 ℰ° 直接給出 ΔG<sub>f</sub>°。</li>
+    <li><strong>濃差電池：</strong>電動勢來自濃度差異而非化學反應的差異（ℰ° = 0）。氧化鋯氧傳感器是其最重要的工業應用。</li>
+    <li><strong>溫度係數：</strong>(∂ℰ/∂T)<sub>P</sub> 給出 ΔS（通過 ΔS = nF ∂ℰ/∂T），進而可求得 ΔH。電化學方法是測定反應熱力學參數最精確的方法之一。</li>
+    <li><strong>水溶液熱力學：</strong>使用平均離子活度 a<sub>±</sub> 和平均離子活度係數 γ<sub>±</sub> 處理電解質溶液。德拜-休克爾極限定律提供稀溶液中 γ<sub>±</sub> 的理論預測。</li>
+    <li><strong>標準還原電位表：</strong>以 SHE 為零點，提供了所有半反應的電位排序——電化學序列。ℰ° 越正表示越強的氧化劑；ℰ° 越負表示越強的還原劑。</li>
+    <li><strong>普爾貝圖：</strong>電位-pH 圖直觀地展示了金屬在水溶液中的腐蝕、免疫和鈍化區域，是腐蝕工程的核心工具。</li>
+    <li><strong>熱效應：</strong>可逆電池的熱效應 q<sub>rev</sub> = TΔS = nFT(∂ℰ/∂T)，其符號和大小取決於溫度係數。</li>
+  </ol>
+
+  <div class="callout-warn">
+    <strong>📝 考試重點提醒：</strong>
+    <br>• 熟練掌握 ΔG = −nFℰ 與能斯特方程式的計算，特別是 n 的正確確定。
+    <br>• 理解標準還原電位表中 ℰ° 的符號含義，能正確計算 ℰ°<sub>cell</sub> = ℰ°<sub>cathode</sub> − ℰ°<sub>anode</sub>。
+    <br>• 能由 ℰ 和 ∂ℰ/∂T 計算 ΔG、ΔS、ΔH。
+    <br>• 理解普爾貝圖的結構（三種邊界線）和水的穩定區域。
+    <br>• 能解釋氧化鋯氧傳感器的工作原理並進行相關計算。
+    <br>• 注意區分自然對數和常用對數在能斯特方程式中的使用（0.02569 V vs. 0.05916 V at 298 K）。
+    <br>• 記住法拉第常數 F = 96,485 C/mol ≈ 96.5 kC/mol。
+  </div>
+
+  <p style="text-align:center;margin-top:32px;color:var(--t2);font-size:12px;">
+    — 第14章學習指南完 · Gaskell《Introduction to the Thermodynamics of Materials》· pp. 588–641 —
+  </p>
+</section>
+
+</main>
+
+<!-- ========== JAVASCRIPT: THEME TOGGLE & SCROLL SPY ========== -->
+<script>
+// Theme toggle
+(function() {
+  var saved = localStorage.getItem('hermes-theme');
+  if (saved === 'dark') {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    var btn = document.getElementById('themeToggle');
+    if (btn) btn.textContent = '☀️ 切換淺色模式';
+  }
+})();
+
+function toggleTheme() {
+  var html = document.documentElement;
+  var btn = document.getElementById('themeToggle');
+  var isDark = html.getAttribute('data-theme') === 'dark';
+  if (isDark) {
+    html.setAttribute('data-theme', 'light');
+    btn.textContent = '🌙 切換深色模式';
+    localStorage.setItem('hermes-theme', 'light');
+  } else {
+    html.setAttribute('data-theme', 'dark');
+    btn.textContent = '☀️ 切換淺色模式';
+    localStorage.setItem('hermes-theme', 'dark');
+  }
+}
+
+// Scroll spy
+(function() {
+  var sections = [];
+  var links = document.querySelectorAll('.sn a');
+  links.forEach(function(a) {
+    var href = a.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      var target = document.getElementById(href.substring(1));
+      if (target) sections.push({ link: a, target: target });
+    }
+  });
+
+  function onScroll() {
+    var scrollPos = window.scrollY + 100;
+    var current = null;
+    for (var i = sections.length - 1; i >= 0; i--) {
+      if (sections[i].target.offsetTop <= scrollPos) {
+        current = sections[i];
+        break;
+      }
+    }
+    links.forEach(function(a) { a.classList.remove('active'); });
+    if (current) current.link.classList.add('active');
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+})();
+</script>
+
+</body>
+</html>

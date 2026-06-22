@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>第 13 章 JFET / MESFET / HEMT - 半導體物理與元件</title>
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']],tags:'ams'},options:{ignoreHtmlClass:'no-math'}};</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+:root{--bg:#fff;--b2:#F5F5F7;--b3:#E8F0FE;--tx:#1D1D1F;--t2:#1D1D1F;--ac:#007AFF;--bd:#D2D2D7;--sh:0 2px 8px rgba(0,0,0,.08);--fbd:#E5E5EA;--wbg:#FFF9F0;--wbd:#FFB340;--wtx:#B8700A;--nw:260px}
+[data-theme="dark"]{--bg:#1C1C1E;--b2:#2C2C2E;--b3:#1A2332;--tx:#F5F5F7;--t2:#A1A1A6;--ac:#0A84FF;--bd:#48484A;--fbd:#3A3A3C;--wbg:#2C2416;--wbd:#8B6914;--wtx:#FFB340}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth;scroll-padding-top:16px}
+body{font-family:-apple-system,BlinkMacSystemFont,'Noto Sans TC','Microsoft JhengHei',sans-serif;background:var(--b2);color:var(--tx);line-height:1.9;display:flex;min-height:100vh}
+.sidebar{position:fixed;top:0;left:0;width:var(--nw);height:100vh;background:var(--bg);border-right:1px solid var(--bd);overflow-y:auto;z-index:100;padding:20px 16px;display:flex;flex-direction:column}
+.sh{margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--fbd)}.sh h2{font-size:14px;font-weight:600;color:var(--ac)}.sh .bk{font-size:11px;color:var(--t2)}
+.sn{flex:1}.sn ul{list-style:none}.sn a{display:block;padding:4px 10px;font-size:11px;color:var(--t2);text-decoration:none;border-radius:5px;transition:.12s}.sn a:hover{background:var(--b3);color:var(--ac)}.sn a.active{background:var(--b3);color:var(--ac);font-weight:500}.sn .ns{font-weight:600;font-size:12px;color:var(--tx);margin-top:10px;padding:2px 10px}.sn .nsub a{padding-left:20px;font-size:10px}
+.st{margin-top:auto;padding-top:12px;border-top:1px solid var(--fbd)}.st button{width:100%;padding:6px;border:1px solid var(--bd);border-radius:6px;background:var(--b2);color:var(--tx);cursor:pointer;font-size:12px}
+.main{margin-left:var(--nw);flex:1;max-width:1050px;padding:32px 40px 80px}.header{margin-bottom:32px;padding-bottom:20px;border-bottom:2px solid var(--ac)}
+.header .cl{font-size:12px;font-weight:600;color:var(--ac);letter-spacing:1px}.header h1{font-size:28px;font-weight:700;margin:6px 0}.header .meta{font-size:13px;color:var(--t2)}
+section{margin-bottom:44px}h2{font-size:20px;font-weight:700;color:var(--ac);margin-bottom:14px;padding-bottom:6px;border-bottom:1px solid var(--bd)}h3{font-size:16px;font-weight:600;color:var(--tx);margin:24px 0 10px}p{font-size:14px;color:var(--t2);margin-bottom:12px}strong{font-weight:600;color:var(--tx)}
+.eq{text-align:center;margin:16px 0;font-size:15px}.figure{margin:24px 0;text-align:center}.figure img{max-width:100%;border-radius:8px;box-shadow:var(--sh)}.figure figcaption{margin-top:8px;font-size:12px;color:var(--t2)}
+.callout{background:var(--b3);border:1px solid var(--fbd);border-radius:8px;padding:14px 18px;margin:16px 0;font-size:13px}.callout strong{color:var(--ac)}
+.callout-warn{background:var(--wbg);border:1px solid var(--wbd);border-radius:8px;padding:14px 18px;margin:16px 0;font-size:13px}.callout-warn strong{color:var(--wtx)}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}thead th{background:var(--b3);padding:8px 12px;font-size:12px;font-weight:600;border-bottom:2px solid var(--bd)}tbody td{padding:8px 12px;border-bottom:1px solid var(--fbd)}tbody tr:nth-child(even){background:var(--b2)}
+.toplink{display:inline-block;margin-top:12px;font-size:12px;color:var(--ac);text-decoration:none}
+@media(max-width:768px){.sidebar{transform:translateX(-100%);transition:.3s}.sidebar.open{transform:translateX(0)}.main{margin-left:0;padding:20px 16px 60px}}
+@media print{.sidebar{display:none}.main{margin-left:0;max-width:100%;padding:0}}
+</style>
+<script src="../../../reading-preferences.js" defer></script></head>
+<body><a class="portal-home-link" href="../../../index.html">返回學習中心</a><style id="portal-home-link-style">.portal-home-link{position:fixed;top:16px;right:16px;z-index:1000;display:inline-flex;align-items:center;min-height:36px;padding:7px 11px;border:1px solid #cbd5e1;border-radius:8px;background:#fff;color:#1d4ed8;font:600 13px/1.2 -apple-system,BlinkMacSystemFont,"Noto Sans TC","Microsoft JhengHei",sans-serif;text-decoration:none;box-shadow:0 2px 10px rgba(15,23,42,.08)}.portal-home-link:hover{background:#eff6ff}.portal-home-link:focus-visible{outline:3px solid rgba(37,99,235,.35);outline-offset:2px}@media(max-width:768px){.portal-home-link{top:10px;right:10px;min-height:34px;padding:7px 9px;font-size:12px}}</style>
+<nav class="sidebar"><div class="sh"><div class="bk">Semiconductor Physics and Devices</div><h2>第 13 章</h2></div><div class="sn"><ul>
+<li><a href="#preview">13.0 預覽</a></li>
+<li class="ns">13.1 基本操作</li><li class="nsub"><a href="#s13-1">JFET 與 MESFET 的共通骨架</a></li>
+<li class="ns">13.2 I-V 與 pinch-off</li><li class="nsub"><a href="#s13-2">pinch-off 電壓、飽和與 transconductance</a></li>
+<li class="ns">13.3–13.4 非理想與高頻</li><li class="nsub"><a href="#s13-3">通道長度調變、速度飽和、小訊號</a></li>
+<li class="ns">13.5 HEMT</li><li class="nsub"><a href="#s13-4">異質接面與高遷移率通道</a></li>
+<li><a href="#summary">本章總結</a></li>
+</ul></div><div class="st"><button onclick="toggleTheme()">切換 <span id="tl">深色</span></button></div></nav>
+<main class="main">
+<header class="header"><div class="cl">Chapter 13</div><h1>JFET / MESFET / HEMT</h1><div class="meta">對應原書 The Junction Field-Effect Transistor</div></header>
+
+<section id="preview"><div class="callout"><strong>13.0 預覽</strong>
+<p>這章真正要你理解的不是多一種 transistor 名稱，而是 <strong>場效控制還有另一條路</strong>。MOSFET 靠反轉層建立通道；JFET / MESFET 則假設通道本來就存在，再用耗盡區把它慢慢掐小。</p>
+<p>所以本章吃的是第 5 章輸運、第 7 章接面靜電學、第 9 章 Schottky barrier 的物理。你若不懂耗盡區怎麼長、通道截面怎麼影響電導，這章就只剩曲線背誦。</p>
+<a class="toplink" href="./semiconductor_book_structure_map_zh.html">回總地圖</a></div>
+<div class="figure"><img src="../../../images/solid-state-physics/ch13_pages/ch13_page_517.png" alt="chapter 13 preview"><figcaption>Chapter 13 的入口圖像。主題不是少數載子注入，而是場效控制通道導電。</figcaption></div></section>
+
+<section id="s13-1"><h2>13.1 JFET 與 MESFET 的共通骨架</h2>
+<p>JFET 用 pn 接面反偏造成的耗盡區控制通道；MESFET 用 Schottky gate 的勢壘區控制通道。兩者都屬於 <strong>depletion-mode field effect</strong>：gate 的功能是縮小原本存在的通道，而不是像 enhancement MOSFET 那樣先創造通道。</p>
+<table><thead><tr><th>元件</th><th>gate 機制</th><th>通道來源</th><th>典型優勢</th></tr></thead><tbody>
+<tr><td>JFET</td><td>pn 接面反偏</td><td>預先摻雜好的導電通道</td><td>模型乾淨、低雜訊</td></tr>
+<tr><td>MESFET</td><td>金屬-半導體勢壘</td><td>預先存在的高遷移率通道</td><td>適合 III-V 高頻元件</td></tr>
+<tr><td>MOSFET</td><td>MOS 電容與反轉層</td><td>由 gate 建立通道</td><td>超大規模整合</td></tr>
+</tbody></table>
+<div class="callout-warn"><strong>關鍵差異</strong> JFET / MESFET 的直覺是「掐窄」；MOSFET 的直覺是「建立」。這兩種圖像不要混在一起。</div></section>
+
+<section id="s13-2"><h2>13.2 pinch-off、飽和與 transconductance</h2>
+<p>隨著 $V_{GS}$ 變得更負，耗盡區向通道中央擴張，通道有效寬度下降，直到發生 <strong>pinch-off</strong>。這個事件不是通道完全沒電流，而是通道在 drain 端附近被夾窄到電流進入飽和控制。</p>
+<div class="eq">$$I_D = I_{DSS}\left(1-\frac{V_{GS}}{V_P}\right)^2$$</div>
+<div class="eq">$$g_m = \frac{\partial I_D}{\partial V_{GS}} = g_{m0}\left(1-\frac{V_{GS}}{V_P}\right), \qquad g_{m0}=\frac{2I_{DSS}}{|V_P|}$$</div>
+<p>這是 depletion-mode JFET 最該記住的式子。它的物理口語版是：<strong>你不是打開電流，而是在收窄通道</strong>。</p>
+<div class="figure"><img src="../../../images/solid-state-physics/ch13_pages/ch13_page_522.png" alt="pinch off"><figcaption>通道隨 gate 偏壓被夾窄，最後進入 pinch-off 與飽和區。</figcaption></div>
+<p>MESFET 的 I-V 架構和 JFET 類似，但 gate 是 Schottky barrier，所以常出現在 GaAs 一類高遷移率材料上，特別適合高頻。</p></section>
+
+<section id="s13-3"><h2>13.3–13.4 非理想、小訊號與高頻</h2>
+<p>理想飽和區不會永遠平坦。通道長度調變會讓 $I_D$ 隨 $V_{DS}$ 再上升；高場下還會碰到速度飽和。這表示 JFET / MESFET 也得像 MOSFET 一樣進入真實元件修正。</p>
+<div class="eq">$$I_D \approx I_{D,\text{sat}}(1+\lambda V_{DS})$$</div>
+<div class="eq">$$g_m = \frac{\partial I_D}{\partial V_{GS}}, \qquad r_d = \left(\frac{\partial I_D}{\partial V_{DS}}\right)^{-1}$$</div>
+<p>一旦你有了 $g_m$、$r_d$ 和寄生電容，這顆元件就能被畫成小訊號等效電路，進入放大器與高頻設計。</p>
+<div class="callout"><strong>高頻重點</strong> 這些元件在 RF 世界重要，不是因為它們名字酷，而是因為通道遷移率高、gate 結構適合高速操作、寄生行為可被控制。</div></section>
+
+<section id="s13-4"><h2>13.5 HEMT：為什麼異質接面可以更快</h2>
+<p>HEMT 把材料工程直接拉進元件設計。它不是單純把 MESFET 再縮小，而是用異質接面把電子困在高遷移率、低散射的二維電子氣通道裡。</p>
+<p>這代表兩件事。第一，載子可以和摻雜離子空間分離，雜質散射更低。第二，通道不只由幾何尺寸決定，還由能帶對準方式決定。</p>
+<div class="callout-warn"><strong>HEMT 的意義</strong> 它說明高頻元件速度不是只有微影問題，而是 <strong>材料與能帶工程</strong> 問題。</div></section>
+
+<section id="summary"><h2>本章總結</h2>
+<ul>
+<li>JFET / MESFET 是 depletion-mode 場效元件，gate 的工作是掐窄通道。</li>
+<li>pinch-off 是本章核心事件，對應電流進入飽和控制。</li>
+<li>小訊號模型與頻率限制把這章從 DC 曲線推進到 RF 與放大器應用。</li>
+<li>HEMT 代表材料與能帶工程直接介入高頻元件性能。</li>
+</ul></section>
+</main>
+<script>
+function toggleTheme(){const h=document.documentElement;const n=h.getAttribute('data-theme')==='light'?'dark':'light';h.setAttribute('data-theme',n);localStorage.setItem('theme',n);document.getElementById('tl').textContent=n==='dark'?'淺色':'深色';}
+const s=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',s);document.getElementById('tl').textContent=s==='dark'?'淺色':'深色';
+const secs=document.querySelectorAll('section[id]');const navs=document.querySelectorAll('.sn a');window.addEventListener('scroll',()=>{let c='';secs.forEach(s=>{if(window.scrollY>=s.offsetTop-80)c=s.getAttribute('id');});navs.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+c));});
+</script>
+</body>
+</html>

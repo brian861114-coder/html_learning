@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>第 14 章 Optical Devices - 半導體物理與元件</title>
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']],tags:'ams'},options:{ignoreHtmlClass:'no-math'}};</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+:root{--bg:#fff;--b2:#F5F5F7;--b3:#E8F0FE;--tx:#1D1D1F;--t2:#1D1D1F;--ac:#007AFF;--bd:#D2D2D7;--fbd:#E5E5EA;--wbg:#FFF9F0;--wbd:#FFB340;--wtx:#B8700A;--nw:260px}
+[data-theme="dark"]{--bg:#1C1C1E;--b2:#2C2C2E;--b3:#1A2332;--tx:#F5F5F7;--t2:#A1A1A6;--ac:#0A84FF;--bd:#48484A;--fbd:#3A3A3C;--wbg:#2C2416;--wbd:#8B6914;--wtx:#FFB340}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth;scroll-padding-top:16px}
+body{font-family:-apple-system,BlinkMacSystemFont,'Noto Sans TC','Microsoft JhengHei',sans-serif;background:var(--b2);color:var(--tx);line-height:1.9;display:flex;min-height:100vh}
+.sidebar{position:fixed;top:0;left:0;width:var(--nw);height:100vh;background:var(--bg);border-right:1px solid var(--bd);overflow-y:auto;z-index:100;padding:20px 16px;display:flex;flex-direction:column}
+.sh{margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--fbd)}.sh h2{font-size:14px;font-weight:600;color:var(--ac)}.sh .bk{font-size:11px;color:var(--t2)}
+.sn{flex:1}.sn ul{list-style:none}.sn a{display:block;padding:4px 10px;font-size:11px;color:var(--t2);text-decoration:none;border-radius:5px;transition:.12s}.sn a:hover{background:var(--b3);color:var(--ac)}.sn a.active{background:var(--b3);color:var(--ac);font-weight:500}
+.st{margin-top:auto;padding-top:12px;border-top:1px solid var(--fbd)}.st button{width:100%;padding:6px;border:1px solid var(--bd);border-radius:6px;background:var(--b2);color:var(--tx);cursor:pointer;font-size:12px}
+.main{margin-left:var(--nw);flex:1;max-width:1050px;padding:32px 40px 80px}.header{margin-bottom:32px;padding-bottom:20px;border-bottom:2px solid var(--ac)}
+.header .cl{font-size:12px;font-weight:600;color:var(--ac);letter-spacing:1px}.header h1{font-size:28px;font-weight:700;margin:6px 0}.header .meta{font-size:13px;color:var(--t2)}
+section{margin-bottom:44px}h2{font-size:20px;font-weight:700;color:var(--ac);margin-bottom:14px;padding-bottom:6px;border-bottom:1px solid var(--bd)}p{font-size:14px;color:var(--t2);margin-bottom:12px}strong{font-weight:600;color:var(--tx)}
+.eq{text-align:center;margin:16px 0;font-size:15px}.callout{background:var(--b3);border:1px solid var(--fbd);border-radius:8px;padding:14px 18px;margin:16px 0;font-size:13px}.callout strong{color:var(--ac)}
+.callout-warn{background:var(--wbg);border:1px solid var(--wbd);border-radius:8px;padding:14px 18px;margin:16px 0;font-size:13px}.callout-warn strong{color:var(--wtx)}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}thead th{background:var(--b3);padding:8px 12px;font-size:12px;font-weight:600;border-bottom:2px solid var(--bd)}tbody td{padding:8px 12px;border-bottom:1px solid var(--fbd)}tbody tr:nth-child(even){background:var(--b2)}
+.toplink{display:inline-block;margin-top:12px;font-size:12px;color:var(--ac);text-decoration:none}
+@media(max-width:768px){.sidebar{transform:translateX(-100%);transition:.3s}.sidebar.open{transform:translateX(0)}.main{margin-left:0;padding:20px 16px 60px}}
+@media print{.sidebar{display:none}.main{margin-left:0;max-width:100%;padding:0}}
+</style>
+<script src="../../../reading-preferences.js" defer></script></head>
+<body><a class="portal-home-link" href="../../../index.html">返回學習中心</a><style id="portal-home-link-style">.portal-home-link{position:fixed;top:16px;right:16px;z-index:1000;display:inline-flex;align-items:center;min-height:36px;padding:7px 11px;border:1px solid #cbd5e1;border-radius:8px;background:#fff;color:#1d4ed8;font:600 13px/1.2 -apple-system,BlinkMacSystemFont,"Noto Sans TC","Microsoft JhengHei",sans-serif;text-decoration:none;box-shadow:0 2px 10px rgba(15,23,42,.08)}.portal-home-link:hover{background:#eff6ff}.portal-home-link:focus-visible{outline:3px solid rgba(37,99,235,.35);outline-offset:2px}@media(max-width:768px){.portal-home-link{top:10px;right:10px;min-height:34px;padding:7px 9px;font-size:12px}}</style>
+<nav class="sidebar"><div class="sh"><div class="bk">Semiconductor Physics and Devices</div><h2>第 14 章</h2></div><div class="sn"><ul>
+<li><a href="#preview">14.0 預覽</a></li>
+<li><a href="#s14-1">14.1 吸收與光生載子</a></li>
+<li><a href="#s14-2">14.2 太陽能電池</a></li>
+<li><a href="#s14-3">14.3 光偵測器</a></li>
+<li><a href="#s14-4">14.4–14.6 發光、LED、Laser</a></li>
+<li><a href="#summary">本章總結</a></li>
+</ul></div><div class="st"><button onclick="toggleTheme()">切換 <span id="tl">深色</span></button></div></nav>
+<main class="main">
+<header class="header"><div class="cl">Chapter 14</div><h1>Optical Devices</h1><div class="meta">對應原書 Chapter 14</div></header>
+
+<section id="preview"><div class="callout"><strong>14.0 預覽</strong>
+<p>這章不是附錄，也不是應用雜談。它其實是在測你前面主幹有沒有真的學懂。因為 bandgap、吸收、非平衡載子、復合、pn 接面，全部會在這裡會師。</p>
+<p>如果你前面只有背二極體公式而不懂直接能隙、吸收係數與載子壽命，這章就只會剩下元件名字。</p>
+<a class="toplink" href="./semiconductor_book_structure_map_zh.html">回總地圖</a></div></section>
+
+<section id="s14-1"><h2>14.1 吸收與光生載子</h2>
+<p>光電元件第一個問題不是導線怎麼接，而是 <strong>光子能量能不能跨過能隙</strong>。若 $E_{\text{photon}}<E_g$，材料基本上無法做有效跨帶吸收。</p>
+<div class="eq">$$E_{\text{photon}}=h\nu=\frac{hc}{\lambda}$$</div>
+<div class="eq">$$G(x)=\alpha\Phi_0 e^{-\alpha x}$$</div>
+<p>這裡的 $\alpha$ 是吸收係數。它越大，光越快在材料中被吃掉。對發光與吸光而言，direct bandgap 材料通常佔優；這就是為什麼 GaAs、InP 類材料在光電比 Si 強得多。</p>
+<div class="callout-warn"><strong>別把 Si 想得太萬能</strong>。Si 在電子學很強，但在高效率光發射上先天吃虧，因為它是間接能隙材料。</div></section>
+
+<section id="s14-2"><h2>14.2 太陽能電池</h2>
+<p>太陽能電池的本質是：先吸光產生電子-電洞對，再由內建電場把它們分離、收集，最後形成外部輸出功率。這根本就是 Ch.6 和 Ch.7 的直接應用。</p>
+<div class="eq">$$\eta=\frac{P_{\text{out}}}{P_{\text{in}}}$$</div>
+<p>原書在這裡談 conversion efficiency、solar concentration、heterojunction solar cell 和 amorphous silicon solar cells，意思很明白：真實工程不是理想單一 pn 結構，而是不斷在吸收、復合、串阻、表面反射之間折衷。</p>
+<div class="callout"><strong>核心直覺</strong> 太陽能電池不是「被光照的二極體」就結束，真正難點在於你能不能在載子復合之前把它們成功收走。</div></section>
+
+<section id="s14-3"><h2>14.3 光偵測器</h2>
+<p>光偵測器的重點是把光變成夠快、夠乾淨、夠大的電訊號。這會自然分成 photoconductor、photodiode、PIN photodiode、APD 幾條路線。</p>
+<table><thead><tr><th>元件</th><th>主機制</th><th>優勢</th><th>代價</th></tr></thead><tbody>
+<tr><td>Photoconductor</td><td>光生載子提升導電度</td><td>結構簡單</td><td>速度和噪聲較差</td></tr>
+<tr><td>Photodiode</td><td>接面電場分離光生載子</td><td>快、模型直觀</td><td>內部增益有限</td></tr>
+<tr><td>PIN Photodiode</td><td>加寬耗盡區提升吸收與速度</td><td>高速通訊常用</td><td>製程更複雜</td></tr>
+<tr><td>APD</td><td>撞擊游離帶來增益</td><td>靈敏度高</td><td>偏壓高、噪聲更大</td></tr>
+</tbody></table>
+</section>
+
+<section id="s14-4"><h2>14.4–14.6 發光、LED、Laser</h2>
+<p>發光的物理本質是：電子與電洞復合時把能量以光子形式放出，而不是全都轉給聲子。</p>
+<div class="eq">$$R_{\text{rad}}\propto np$$</div>
+<div class="eq">$$\eta_{\text{ext}}=\eta_{\text{int}}\times \text{extraction efficiency}$$</div>
+<p>LED 主要追的是內部量子效率與出光效率；laser 則更嚴苛，還要滿足 stimulated emission、population inversion 與 cavity feedback。</p>
+<div class="callout-warn"><strong>Laser 不是更亮的 LED</strong>。它需要增益超過腔損，進入受激放射主導的狀態，這是另一個物理門檻。</div></section>
+
+<section id="summary"><h2>本章總結</h2>
+<ul>
+<li>光電元件的起點是 bandgap 與吸收，不是電路圖。</li>
+<li>太陽能電池與 photodiode 依賴接面電場把光生載子分離收集。</li>
+<li>LED 與 laser 的差別在於是否進入受激放射與腔體回授。</li>
+<li>材料選擇在光電元件比在一般矽邏輯更殘酷。</li>
+</ul></section>
+</main>
+<script>
+function toggleTheme(){const h=document.documentElement;const n=h.getAttribute('data-theme')==='light'?'dark':'light';h.setAttribute('data-theme',n);localStorage.setItem('theme',n);document.getElementById('tl').textContent=n==='dark'?'淺色':'深色';}
+const s=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',s);document.getElementById('tl').textContent=s==='dark'?'淺色':'深色';
+const secs=document.querySelectorAll('section[id]');const navs=document.querySelectorAll('.sn a');window.addEventListener('scroll',()=>{let c='';secs.forEach(s=>{if(window.scrollY>=s.offsetTop-80)c=s.getAttribute('id');});navs.forEach(a=>a.classList.toggle('active',a.getAttribute('href')==='#'+c));});
+</script>
+</body>
+</html>

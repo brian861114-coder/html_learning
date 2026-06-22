@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>第七章：單成分系統的相平衡 — 材料熱力學</title>
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']],tags:'ams'},options:{ignoreHtmlClass:'no-math'}};</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+:root{--bg:#fff;--b2:#F5F5F7;--b3:#E8F0FE;--tx:#1D1D1F;--t2:#1D1D1F;--ac:#007AFF;--bd:#D2D2D7;--sh:0 2px 8px rgba(0,0,0,.08);--fbd:#E5E5EA;--wbg:#FFF9F0;--wbd:#FFB340;--wtx:#B8700A;--nw:260px}
+[data-theme="dark"]{--bg:#1C1C1E;--b2:#2C2C2E;--b3:#1A2332;--tx:#F5F5F7;--t2:#A1A1A6;--ac:#0A84FF;--bd:#48484A;--fbd:#3A3A3C;--wbg:#2C2416;--wbd:#8B6914;--wtx:#FFB340}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth;scroll-padding-top:16px}
+body{font-family:-apple-system,BlinkMacSystemFont,'Noto Sans TC','Microsoft JhengHei',sans-serif;background:var(--b2);color:var(--tx);line-height:1.9;display:flex;min-height:100vh}
+.sidebar{position:fixed;top:0;left:0;width:var(--nw);height:100vh;background:var(--bg);border-right:1px solid var(--bd);overflow-y:auto;z-index:100;padding:20px 16px;display:flex;flex-direction:column}
+.sh{margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--fbd)}.sh h2{font-size:14px;font-weight:600;color:var(--ac)}.sh .bk{font-size:11px;color:var(--t2)}
+.sn{flex:1}.sn ul{list-style:none}.sn a{display:block;padding:4px 10px;font-size:11px;color:var(--t2);text-decoration:none;border-radius:5px;transition:.12s}.sn a:hover{background:var(--b3);color:var(--ac)}.sn a.active{background:var(--b3);color:var(--ac);font-weight:500}.sn .ns{font-weight:600;font-size:12px;color:var(--tx);margin-top:10px;padding:2px 10px}.sn .nsub a{padding-left:20px;font-size:10px}
+.st{margin-top:auto;padding-top:12px;border-top:1px solid var(--fbd)}.st button{width:100%;padding:6px;border:1px solid var(--bd);border-radius:6px;background:var(--b2);color:var(--tx);cursor:pointer;font-size:12px}
+.main{margin-left:var(--nw);flex:1;max-width:1050px;padding:32px 40px 80px}
+.header{margin-bottom:32px;padding-bottom:20px;border-bottom:2px solid var(--ac)}.header .cl{font-size:12px;font-weight:600;color:var(--ac);letter-spacing:1px}.header h1{font-size:28px;font-weight:700;margin:6px 0}.header .meta{font-size:13px;color:var(--t2)}
+section{margin-bottom:44px}h2{font-size:20px;font-weight:700;color:var(--ac);margin-bottom:14px;padding-bottom:6px;border-bottom:1px solid var(--bd)}h3{font-size:16px;font-weight:600;color:var(--tx);margin:24px 0 10px}h4{font-size:14px;font-weight:600;color:var(--t2);margin:18px 0 6px}
+p{font-size:14px;color:var(--t2);margin-bottom:12px}strong{font-weight:600;color:var(--tx)}
+.eq{text-align:center;margin:16px 0;font-size:15px}
+.figure{margin:24px 0;text-align:center}.figure img{max-width:100%;border-radius:8px;box-shadow:var(--sh);cursor:pointer}.figure img:hover{transform:scale(1.01)}.figure figcaption{margin-top:8px;font-size:12px;color:var(--t2)}
+.callout{background:var(--b3);border:1px solid var(--fbd);border-radius:8px;padding:14px 18px;margin:16px 0;font-size:13px}.callout strong{color:var(--ac)}
+.callout-warn{background:var(--wbg);border:1px solid var(--wbd);border-radius:8px;padding:14px 18px;margin:16px 0;font-size:13px}.callout-warn strong{color:var(--wtx)}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}thead th{background:var(--b3);padding:8px 12px;font-size:12px;font-weight:600;border-bottom:2px solid var(--bd)}tbody td{padding:8px 12px;border-bottom:1px solid var(--fbd)}tbody tr:nth-child(even){background:var(--b2)}
+@media(max-width:768px){.sidebar{transform:translateX(-100%);transition:.3s}.sidebar.open{transform:translateX(0)}.main{margin-left:0;padding:20px 16px 60px}}
+@media print{.sidebar{display:none}.main{margin-left:0;max-width:100%;padding:0}}
+</style>
+<script src="../../../reading-preferences.js" defer></script></head>
+<body><a class="portal-home-link" href="../../../index.html">返回學習中心</a><style id="portal-home-link-style">.portal-home-link{position:fixed;top:16px;right:16px;z-index:1000;display:inline-flex;align-items:center;min-height:36px;padding:7px 11px;border:1px solid #cbd5e1;border-radius:8px;background:#fff;color:#1d4ed8;font:600 13px/1.2 -apple-system,BlinkMacSystemFont,"Noto Sans TC","Microsoft JhengHei",sans-serif;text-decoration:none;box-shadow:0 2px 10px rgba(15,23,42,.08)}.portal-home-link:hover{background:#eff6ff}.portal-home-link:focus-visible{outline:3px solid rgba(37,99,235,.35);outline-offset:2px}@media(max-width:768px){.portal-home-link{top:10px;right:10px;min-height:34px;padding:7px 9px;font-size:12px}}</style>
+<nav class="sidebar"><div class="sh"><div class="bk">材料熱力學·Gaskell</div><h2>第七章</h2></div><div class="sn"><ul>
+<li><a href="#preview">📋 7.0 本章預覽</a></li>
+<li class="ns">7.1–7.4 $G$ 與 $T$、$P$ 的關係</li><li class="nsub"><a href="#s7-1">7.1 導論</a></li><li class="nsub"><a href="#s7-2">7.2 $G$ 隨溫度的變化</a></li><li class="nsub"><a href="#s7-3">7.3 $G$ 隨壓力的變化</a></li><li class="nsub"><a href="#s7-4">7.4 $G(T,P)$ 的三維圖像</a></li>
+<li class="ns">7.5–7.7 相平衡方程式</li><li class="nsub"><a href="#s7-5">7.5 Clapeyron 與 Clausius–Clapeyron</a></li><li class="nsub"><a href="#s7-6">7.6 氣–凝態平衡的圖形</a></li><li class="nsub"><a href="#s7-7">7.7 固–固平衡</a></li>
+<li class="ns">7.8</li><li class="nsub"><a href="#s7-8">7.8 外加磁場對 $P$–$T$ 圖的影響</a></li>
+<li class="ns">7.9 例題</li><li class="nsub"><a href="#s7-9">7.9 例題與圖解</a></li>
+<li><a href="#summary">📋 本章摘要</a></li>
+</ul></div><div class="st"><button onclick="toggleTheme()">🌓 <span id="tl">深色模式</span></button></div></nav>
+<main class="main">
+<header class="header"><div class="cl">第七章</div><h1>單成分系統的相平衡</h1><div class="meta">David R. Gaskell·《Introduction to the Thermodynamics of Materials》·第 220–249 頁</div></header>
+
+<section id="preview"><div class="callout"><strong>📋 7.0 本章預覽</strong>
+<p>第一章介紹了單成分系統的 $P$–$T$ 相圖——固、液、氣三個區域被三條曲線分隔。但那只是<strong>描述</strong>。現在我們有了吉布斯自由能 $G$ 這個強大的工具，可以從熱力學原理<strong>推導</strong>這些曲線的形狀和斜率。為什麼融點通常隨壓力升高？為什麼水的冰在壓力下會融化？為什麼蒸氣壓隨溫度指數上升？本章的核心——<strong>Clapeyron 方程式</strong>——給出這些問題的精確答案。</p>
+<div class="callout-warn"><strong>⚡ 第七章是從「描述熱力學」到「預測熱力學」的轉折點。</strong>第一至第六章給了我們計算 $\Delta H$、$\Delta S$ 和 $\Delta G$ 的能力。本章展示如何將這些量轉化為相圖上的實際曲線。Clapeyron 方程式告訴你：給定 $\Delta H_{\text{fus}}$ 和 $\Delta V_{\text{fus}}$，你就可以計算熔化曲線的斜率。這是從微觀熱力學數據到宏觀相行為的橋樑。</div>
+<p><strong>在本章中，我們將學習：</strong></p>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px">
+<li>$G(T)$ 和 $G(P)$ 的行為——為什麼高熵相在高溫下穩定、低體積相在高壓下穩定</li>
+<li>Clapeyron 方程式——$dP/dT = \Delta S/\Delta V = \Delta H/T\Delta V$</li>
+<li>Clausius–Clapeyron 方程式——氣–液平衡的蒸氣壓曲線</li>
+<li>固–固相變——同素異形體轉變的熱力學</li>
+<li>外加場（磁場）對相平衡的影響</li>
+</ul></div></section>
+
+<section id="s7-1"><h2>7.1 導論（Introduction）</h2>
+<p>相平衡的核心條件極其簡潔：在給定的 $T$ 和 $P$ 下，兩相共存時，它們的吉布斯自由能必須相等：</p>
+<div class="eq">$$G^\alpha(T, P) = G^\beta(T, P) \quad \text{（平衡條件）}$$</div>
+<p>這個條件源於第五章的結果——在定溫定壓下，$G$ 最小化的狀態是平衡狀態。如果 $G^\alpha < G^\beta$，則 $\alpha$ 相更穩定；如果 $G^\alpha > G^\beta$，則系統會自發轉變為 $\beta$ 相。兩相共存時 $G^\alpha = G^\beta$——這定義了 $P$–$T$ 圖上的相邊界。</p>
+<p>本章的策略是：先理解 $G(T)$ 和 $G(P)$ 各自的行為（7.2–7.4），然後沿著兩相共存的曲線應用 $dG^\alpha = dG^\beta$ 的條件，推導出相邊界的斜率——這就是 Clapeyron 方程式（7.5）。</p>
+<div class="callout"><strong>💡 $G$ 作為「相穩定性的終極裁判」：</strong>你可以將 $G(T,P)$ 想像成一個三維曲面。不同相對應於不同的曲面。在任何 $(T,P)$ 點，最低的曲面對應於最穩定的相。兩曲面相交的線就是相邊界。這就是熱力學賦予相圖的微觀意義——相圖不是經驗觀察的產物，而是 $G(T,P)$ 曲面的幾何投影。</div>
+</section>
+
+<section id="s7-2"><h2>7.2 吉布斯自由能隨溫度的變化（Variation of $G$ with Temperature）</h2>
+
+<h3>基本關係</h3>
+<p>從基本方程式 $dG = -S\,dT + V\,dP$ 出發——這正是<strong>第三章</strong>中結合第一與第二定律推導出的核心關係 $dU = TdS - PdV$ 經 Legendre 轉換得到的結果。定壓下 $dP = 0$：</p>
+<div class="eq">$$\boxed{\left(\frac{\partial G}{\partial T}\right)_P = -S} \tag{7.1}$$</div>
+
+<h3>推導詳解</h3>
+<p>式 (7.1) 的完整推導如下：</p>
+<p>由 $G = H - TS$ 的定義出發。對 $T$ 求偏導（$P$ 固定）：</p>
+<div class="eq">$$\left(\frac{\partial G}{\partial T}\right)_P = \left(\frac{\partial H}{\partial T}\right)_P - S - T\left(\frac{\partial S}{\partial T}\right)_P$$</div>
+<p>但 $(\partial H/\partial T)_P = C_P$，且 $(\partial S/\partial T)_P = C_P/T$（從 $dS = C_P dT/T$）。代入：</p>
+<div class="eq">$$\left(\frac{\partial G}{\partial T}\right)_P = C_P - S - T\left(\frac{C_P}{T}\right) = -S$$</div>
+<p>這與從 $dG = -SdT + VdP$ 直接得到的結果一致，但展示了其與熱容量的內在聯繫。</p>
+
+<h3>物理含義與圖解</h3>
+<p>因為 $S > 0$（除了在 $T = 0$ 時），$G$ 總是<strong>隨溫度升高而降低</strong>。更重要的是<strong>降低的速率</strong>就是熵的絕對值：</p>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li><strong>固相：</strong>$S$ 最小（原子只在平衡位置附近振動）→ $G(T)$ 斜率最平緩</li>
+<li><strong>液相：</strong>$S$ 中等（原子可以移動但仍有近距有序）→ $G(T)$ 斜率中等</li>
+<li><strong>氣相：</strong>$S$ 最大（原子完全無序，自由移動）→ $G(T)$ 斜率最陡</li>
+</ul>
+<p>這直接解釋了為什麼<strong>低溫時固相穩定、高溫時氣相穩定</strong>。在低溫，$G$ 的絕對值主要由 $H$ 決定——固相的低能（強鍵結）使其 $G$ 最低。隨著溫度升高，$-TS$ 項變得越來越重要，氣相的高熵使其 $G$ 下降得最快，最終超越固相成為最穩定的相。</p>
+
+<div class="figure"><img src="../../../images/thermodynamics/ch07_pages/ch07_page_221_c.png" alt="固、液、氣三相的 G-T 曲線" loading="lazy"><figcaption><strong>圖 7.1</strong> $G$–$T$ 曲線：固相（$S$ 最小，斜率最平緩）、液相（$S$ 中等，斜率中等）、氣相（$S$ 最大，斜率最陡）。兩兩曲線的交點對應於相變溫度。低溫時固相 $G$ 最低；高溫時氣相 $G$ 最低。</figcaption></div>
+
+<div class="figure"><img src="../../../images/thermodynamics/ch07_pages/ch07_page_222_c.png" alt="G-T 圖中的相穩定性" loading="lazy"><figcaption><strong>圖 7.2</strong> $G$–$T$ 圖與相穩定性：圖中展示了在不同溫度區間，哪個相的 $G$ 最低。陰影區域表示該相為穩定相。$T_m$ 為熔化溫度，$T_b$ 為沸點。</figcaption></div>
+
+<div class="figure"><img src="../../../images/thermodynamics/ch07_pages/ch07_page_224_c.png" alt="dG/dT = -S 的幾何意義" loading="lazy"><figcaption><strong>圖 7.3</strong> $(\partial G/\partial T)_P = -S$ 的幾何意義：$G(T)$ 曲線上任意一點的切線斜率等於 $-S$。較陡的斜率對應於較大的熵。圖中展示了固相（淺斜率）和氣相（陡斜率）的切線對比。</figcaption></div>
+
+<div class="figure"><img src="../../../images/thermodynamics/ch07_pages/ch07_page_225_c.png" alt="$G$–$T$ 圖" loading="lazy"><figcaption>$G$–$T$ 示意圖：固、液、氣三相的 $G(T)$ 曲線。固相曲線最平緩（$S$ 最小），氣相最陡（$S$ 最大）。兩曲線相交處為相變溫度。</figcaption></div>
+
+<div class="figure"><img src="../../../images/thermodynamics/ch07_pages/ch07_page_225_c.png" alt="不同壓力下的 G-T 曲線" loading="lazy"><figcaption><strong>圖 7.4</strong> 不同壓力下的 $G$–$T$ 曲線：同一物質在不同壓力下的 $G(T)$ 曲線。壓力增加使 $G$ 整體上移（因為 $(\partial G/\partial P)_T = V > 0$），且固相的移動幅度小於氣相。這導致熔化溫度和沸點隨壓力變化。</figcaption></div>
+
+<p>在兩相共存溫度（$T_{\text{tr}}$）：</p>
+<div class="eq">$$G^\alpha(T_{\text{tr}}) = G^\beta(T_{\text{tr}}) \quad \Rightarrow \quad \Delta G_{\text{tr}} = 0$$</div>
+<p>且：</p>
+<div class="eq">$$\Delta S_{\text{tr}} = \frac{\Delta H_{\text{tr}}}{T_{\text{tr}}} \tag{7.2}$$</div>
+<p>這是我們在第三章從熵的角度推導過的關係——現在從 $G$ 的角度重新獲得。</p>
+
+<h3>利用 $C_P$ 計算 $G(T)$——與第六章的聯繫</h3>
+<p>在<strong>第六章</strong>中，我們學習了如何利用熱容量數據計算焓和熵隨溫度的變化：</p>
+<div class="eq">$$H(T) = H(298) + \int_{298}^{T} C_P\,dT$$</div>
+<div class="eq">$$S(T) = S(298) + \int_{298}^{T} \frac{C_P}{T}\,dT$$</div>
+<p>結合 $G = H - TS$，我們就可以計算任意溫度下的 $G(T)$：</p>
+<div class="eq">$$G(T) = H(298) + \int_{298}^{T} C_P\,dT - T\left[S(298) + \int_{298}^{T} \frac{C_P}{T}\,dT\right]$$</div>
+<p>這在實際應用中至關重要——只要有了 $C_P(T)$、$H(298)$ 和 $S(298)$，我們就能預測任何溫度下的相穩定性，無需在每個溫度下做實驗。</p>
+
+<div class="callout"><strong>💡 物理直覺——「$S$ 是 $G$ 的溫度剎車」：</strong>熵越大，$G$ 隨溫度下降越快。你可以想像每個相有一條「下滑跑道」——氣相的最陡，所以雖然它在低溫時從很高的 $H$ 出發（需要打斷所有鍵結），但在足夠高的溫度時它必然「滑到」固相和液相之下。這就是為什麼所有物質在足夠高溫時都會變成氣體。</div>
+</section>
+
+<section id="s7-3"><h2>7.3 吉布斯自由能隨壓力的變化（Variation of $G$ with Pressure）</h2>
+
+<h3>基本關係</h3>
+<p>從 $dG = -S\,dT + V\,dP$，定溫下 $dT = 0$：</p>
+<div class="eq">$$\boxed{\left(\frac{\partial G}{\partial P}\right)_T = V} \tag{7.3}$$</div>
+<p>因為 $V > 0$，$G$ 總是隨壓力升高而<strong>增加</strong>。增加的速率等於體積：</p>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li><strong>固相和液相：</strong>$V$ 很小（∼10 cm³/mol）→ $G(P)$ 斜率很小→對壓力不敏感</li>
+<li><strong>氣相：</strong>$V$ 很大（∼22,400 cm³/mol 在 STP）→ $G(P)$ 斜率極大→對壓力極敏感</li>
+</ul>
+<p>這解釋了為什麼<strong>低壓時氣相穩定、高壓時固相穩定</strong>。在低壓時，氣相的 $G$ 很低（因為 $G$–$P$ 靈敏度大，低 $P$ 使 $G$ 大幅下降）；隨著壓力升高，氣相的 $G$ 迅速攀升（$V$ 大），而固相和液相的 $G$ 只是緩慢增加。在高壓極限下，固相的小體積優勢最終勝出。</p>
+
+<div class="figure"><img src="../../../images/thermodynamics/ch07_pages/ch07_page_226_c.png" alt="G-P 曲線" loading="lazy"><figcaption><strong>圖 7.5</strong> $G$–$P$ 曲線：固、液、氣三相的 $G(P)$ 關係。斜率為 $V$。固相斜率最小（$V$ 小），氣相斜率最大（$V$ 大）。低壓時氣相 $G$ 最低；高壓時固相 $G$ 最低。兩曲線相交處為相變壓力。</figcaption></div>
+
+<p>對於理想氣體（$V = RT/P$），從 $P_1$ 到 $P_2$ 的 $\Delta G$ 可以直接積分：</p>
+<div class="eq">$$\Delta G = \int_{P_1}^{P_2} V\,dP = RT\ln\frac{P_2}{P_1} \tag{7.4}$$</div>
+
+<h3>推導詳解</h3>
+<p>式 (7.4) 的完整推導：對理想氣體 $V = RT/P$，定溫下 $dG = V dP = (RT/P)dP$。從 $P_1$ 到 $P_2$ 積分：</p>
+<div class="eq">$$\Delta G = \int_{P_1}^{P_2} \frac{RT}{P}\,dP = RT \int_{P_1}^{P_2} \frac{dP}{P} = RT \ln\frac{P_2}{P_1}$$</div>
+<p>這個簡潔的對數關係是化學位隨壓力變化的基礎（$\mu = \mu^\circ + RT\ln P/P^\circ$），也是第十一章平衡常數推導的起點。</p>
+
+<p>對於凝聚相（固體或液體），$V$ 近似為常數（實際上隨 $P$ 略有變化，但變化很小）：</p>
+<div class="eq">$$\Delta G \approx V(P_2 - P_1) \quad \text{（凝聚相）} \tag{7.4b}$$</div>
+<p>這說明凝聚相的 $G$ 基本上隨壓力線性增加——這也是為什麼在 $P$–$T$ 相圖中，固–液邊界近乎垂直：因為 $\Delta V_{\text{fus}}$ 很小，$G$ 對 $P$ 的靈敏度在固相和液相之間差別不大。</p>
+
+<div class="callout"><strong>💡 固–液–氣壓力穩定性的記憶法則：</strong>低壓→大體積有利（氣體）。高壓→小體積有利（固體）。中等壓力→液體可能是折衷方案。這就是為什麼行星大氣層（低壓）是氣體、海洋（中等壓力）是液體、地核（極高壓）是固體。</div>
+</section>
+
+<section id="s7-4"><h2>7.4 吉布斯自由能做為溫度與壓力的函數（$G$ as a Function of $T$ and $P$）</h2>
+<p>將 7.2 和 7.3 的結果合併，$G(T,P)$ 的全微分為 $dG = -S\,dT + V\,dP$。在三維空間 $(T, P, G)$ 中，每一相都是一個曲面。曲面的局部斜率由 $S$ 和 $V$ 決定。</p>
+<p>這種三維表示非常直觀：</p>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li>沿 $T$ 軸方向：曲面以斜率 $-S$ 向下傾斜。氣相的曲面最陡（$S$ 大），固相最平緩。</li>
+<li>沿 $P$ 軸方向：曲面以斜率 $V$ 向上傾斜。氣相的曲面最陡（$V$ 大），固相最平緩。</li>
+<li><strong>相邊界：</strong>兩個 $G$ 曲面的交線投影到 $(T,P)$ 平面上，就是我們看到的相邊界曲線。</li>
+<li><strong>三相點：</strong>三個曲面共同的交點——這解釋了為什麼三相點在 $P$–$T$ 圖上是唯一的點。</li>
+</ul>
+
+<div class="figure"><img src="../../../images/thermodynamics/ch07_pages/ch07_page_228_c.png" alt="G-P-T 三維曲面" loading="lazy"><figcaption><strong>圖 7.6</strong> $G$–$P$–$T$ 三維曲面：固、液、氣三相的 $G(T,P)$ 曲面。在 $(T,P)$ 平面上，每一 $(T,P)$ 點對應曲面上的一個 $G$ 值。三個曲面相交於三相點。</figcaption></div>
+
+<div class="figure"><img src="../../../images/thermodynamics/ch07_pages/ch07_page_228_c.png" alt="G-P-T 投影圖" loading="lazy"><figcaption><strong>圖 7.7</strong> $G$–$P$–$T$ 曲面投影到 $(T,P)$ 平面：曲面的交線在 $(T,P)$ 平面上的投影就是傳統的 $P$–$T$ 相圖。每一條曲線對應兩個曲面相交的軌跡。三相點是三條曲線的交點。</figcaption></div>
+
+<div class="callout-warn"><strong>⚡ 這個三維圖像統一了整個第七章。</strong>Clapeyron 方程式（7.5 節）就是求解兩個 $G$ 曲面交線斜率的數學結果。如果你理解了三維 $G(T,P)$ 曲面，相圖上的每一條線、每一個點都有了清晰的物理意義。</div>
+
+<h3>從 $G(T,P)$ 曲面理解相變</h3>
+<p>當系統沿著 $P$–$T$ 平面上的某一路徑移動時，如果穿過了兩個曲面的交線，系統就會發生相變。交線的斜率 $dP/dT$ 由 Clapeyron 方程式（7.5 節）給出。這個斜率完全由兩個曲面在交線處的相對方向決定——而相對方向又由 $S$ 和 $V$ 的差值決定。這就是為什麼 $dP/dT = \Delta S/\Delta V$。</p>
+</section>
+
+<section id="s7-5"><h2>7.5 氣相與凝態相的平衡——Clapeyron 與 Clausius–Clapeyron 方程式</h2>
+
+<h3>Clapeyron 方程式的完整推導</h3>
+<p>沿兩相共存曲線，$G^\alpha = G^\beta$ 且當 $(T,P)$ 沿曲線移動時 $dG^\alpha = dG^\beta$。展開 $dG = -SdT + VdP$：</p>
+<div class="eq">$$-S^\alpha\,dT + V^\alpha\,dP = -S^\beta\,dT + V^\beta\,dP$$</div>
+<p>將含有 $dT$ 的項移到左邊，$dP$ 的項移到右邊：</p>
+<div class="eq">$$-S^\alpha\,dT + S^\beta\,dT = -V^\alpha\,dP + V^\beta\,dP$$</div>
+<div class="eq">$$(S^\beta - S^\alpha)\,dT = (V^\beta - V^\alpha)\,dP$$</div>
+<p>整理得：</p>
+<div class="eq">$$\frac{dP}{dT} = \frac{S^\beta - S^\alpha}{V^\beta - V^\alpha} = \frac{\Delta S}{\Delta V}$$</div>
+<p>利用 $\Delta G = \Delta H - T\Delta S = 0$（平衡條件），$\Delta S = \Delta H / T$：</p>
+<div class="eq">$$\boxed{\frac{dP}{dT} = \frac{\Delta H}{T\,\Delta V}} \tag{7.5}$$</div>
+<p>這就是<strong>Clapeyron 方程式</strong>——它精確給出了 $P$–$T$ 圖上任何一階相變邊界的斜率。$\Delta H$ 是相變熱（可從熱卡計測量），$\Delta V$ 是體積變化（可從密度測量）。因為 $dP/dT$ 可以從實驗測量，Clapeyron 方程式反過來也用於驗證或推算 $\Delta H$ 值。</p>
+
+<div class="figure"><img src="../../../images/thermodynamics/ch07_pages/ch07_page_230_c.png" alt="P-T 相圖" loading="lazy"><figcaption><strong>圖 7.8</strong> 單成分系統的 $P$–$T$ 相圖：標示出固、液、氣三區域，以及昇華線、熔化線、汽化線三條相邊界。$T_{\text{tp}}$ 和 $P_{\text{tp}}$ 為三相點。$T_c$ 和 $P_c$ 為臨界點。注意熔化線從三相點向上延伸，無終點；汽化線終止於臨界點。</figcaption></div>
+
+<div class="figure"><img src="../../../images/thermodynamics/ch07_pages/ch07_page_232_c.png" alt="Clapeyron 方程式的幾何意義" loading="lazy"><figcaption><strong>圖 7.9</strong> Clapeyron 方程式的幾何意義：沿兩相平衡曲線，$dP/dT = \Delta S/\Delta V = \Delta H/T\Delta V$。圖中展示了在相邊界上一點處的切線斜率即為 $dP/dT$。</figcaption></div>
+
+<h3>Clausius–Clapeyron 方程式的推導</h3>
+<p>對於涉及氣相的平衡（液–氣或固–氣），$\Delta V = V_{\text{gas}} - V_{\text{cond}} \approx V_{\text{gas}}$，因為凝聚相（液體或固體）的體積比氣相小兩到三個數量級。代入理想氣體狀態方程 $V_{\text{gas}} = RT/P$：</p>
+<div class="eq">$$\frac{dP}{dT} = \frac{\Delta H}{T(RT/P)} = \frac{P\Delta H}{RT^2}$$</div>
+<p>分離變數：</p>
+<div class="eq">$$\frac{dP}{P} = \frac{\Delta H}{R}\frac{dT}{T^2}$$</div>
+<p>左邊是 $d\ln P$，右邊是 $-d(1/T)$：</p>
+<div class="eq">$$\boxed{\frac{d\ln P}{dT} = \frac{\Delta H}{RT^2}} \tag{7.6}$$</div>
+<p>這就是<strong>Clausius–Clapeyron 方程式</strong>——描述蒸氣壓隨溫度的指數上升。</p>
+
+<div class="figure"><img src="../../../images/thermodynamics/ch07_pages/ch07_page_232_c.png" alt="Clausius-Clapeyron 關係" loading="lazy"><figcaption><strong>圖 7.10</strong> Clausius–Clapeyron 關係的圖形表示：左圖為 $P$–$T$ 坐標下的蒸氣壓曲線（非線性），右圖為 $\ln P$–$1/T$ 坐標下的直線關係。斜率为 $-\Delta H/R$。實驗數據的 $\ln P$ vs $1/T$ 圖是直線，這既是 Clausius–Clapeyron 的驗證，也是測定 $\Delta H_{\text{vap}}$ 的標準方法。</figcaption></div>
+
+<h3>Clausius–Clapeyron 的積分形式</h3>
+<p>假設 $\Delta H$ 在溫度範圍內為常數，對式 (7.6) 積分：</p>
+<div class="eq">$$\int_{P_1}^{P_2} d\ln P = \int_{T_1}^{T_2} \frac{\Delta H}{RT^2} dT = -\frac{\Delta H}{R} \int_{T_1}^{T_2} d\left(\frac{1}{T}\right)$$</div>
+<div class="eq">$$\ln\frac{P_2}{P_1} = -\frac{\Delta H}{R}\left(\frac{1}{T_2} - \frac{1}{T_1}\right) \tag{7.7}$$</div>
+<p>或者寫成更常用的形式：</p>
+<div class="eq">$$\ln P = -\frac{\Delta H}{RT} + C \tag{7.7b}$$</div>
+<p>其中 $C$ 是積分常數。這說明 $\ln P$ 與 $1/T$ 呈線性關係，斜率為 $-\Delta H/R$。</p>
+
+<h3>實際應用——蒸氣壓測定</h3>
+<p>Clausius–Clapeyron 方程式可能是材料科學中最常用的熱力學公式之一：</p>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li><strong>測定汽化熱：</strong>測量兩個溫度下的蒸氣壓 $(T_1, P_1)$ 和 $(T_2, P_2)$，代入式 (7.7) 即可計算 $\Delta H_{\text{vap}}$。</li>
+<li><strong>預測蒸氣壓：</strong>已知 $\Delta H_{\text{vap}}$ 和一個參考點的蒸氣壓，可預測任何溫度下的 $P$。</li>
+<li><strong>CVD 製程：</strong>在半導體化學氣相沉積中，前驅物的蒸氣壓–溫度關係直接決定了輸運速率和沉積均勻性。</li>
+<li><strong>蒸餾設計：</strong>化工分離過程的設計依賴於精確的蒸氣壓數據。</li>
+</ul>
+
+<div class="callout"><strong>💡 Clausius–Clapeyron 的實際應用——蒸氣壓測定：</strong>這可能是材料科學中最常用的熱力學公式之一。測量兩個溫度下的蒸氣壓，就可以估算 $\Delta H_{\text{vap}}$（汽化熱）。反之，知道 $\Delta H_{\text{vap}}$ 和一個溫度的蒸氣壓，就可以計算任何溫度的蒸氣壓。在半導體製程中，CVD 前驅物的蒸氣壓–溫度關係直接決定了沉積速率。</div>
+<div class="callout-warn"><strong>⚡ Clausius–Clapeyron 的三個假設：</strong>(1) $\Delta V \approx V_{\text{gas}}$（凝聚相體積可忽略），(2) 氣相為理想氣體，(3) $\Delta H$ 在溫度範圍內為常數。在高壓或接近臨界點時，這些假設不再成立——需要使用更精確的處理。</div>
+
+<h3>固–液平衡（熔化曲線）的詳細討論</h3>
+<p>對大多數物質，$\Delta H_{\text{fus}} > 0$（熔化吸熱）且 $\Delta V_{\text{fus}} > 0$（液體密度低於固體）→ $dP/dT > 0$——熔化溫度隨壓力升高。利用 Clapeyron 方程式可以計算具體數值：</p>
+
+<div class="eq">$$\frac{dP}{dT} = \frac{\Delta H_{\text{fus}}}{T_m \Delta V_{\text{fus}}}$$</div>
+
+<p><strong>鐵（Fe）</strong>：$T_m = 1811\ \text{K}$，$\Delta H_{\text{fus}} = 13.8\ \text{kJ/mol}$，$\Delta V_{\text{fus}} = 0.18\ \text{cm}^3/\text{mol}$</p>
+<div class="eq">$$\frac{dP}{dT} = \frac{13.8\times10^3\ \text{J/mol}}{1811\ \text{K} \times 0.18\times10^{-6}\ \text{m}^3/\text{mol}} \approx 42\ \text{atm/K}$$</div>
+<p>即壓力每增加 42 atm，鐵的熔點升高 1 K。</p>
+
+<p><strong>錫（Sn）</strong>：$T_m = 505\ \text{K}$，$\Delta H_{\text{fus}} = 7.0\ \text{kJ/mol}$，$\Delta V_{\text{fus}} = 0.37\ \text{cm}^3/\text{mol}$</p>
+<div class="eq">$$\frac{dP}{dT} = \frac{7.0\times10^3}{505 \times 0.37\times10^{-6}} \approx 37\ \text{atm/K}$$</div>
+
+<p><strong>水的著名例外：</strong>對於水（冰），$\Delta V_{\text{fus}} < 0$（冰的密度低於水，體積收縮）→ $dP/dT < 0$。壓力增加使冰的熔點<strong>降低</strong>——這就是為什麼溜冰時冰刀施加的高壓使冰局部熔化形成潤滑水膜。</p>
+<div class="eq">$$\frac{dP}{dT} = \frac{\Delta H_{\text{fus}}}{T_m \Delta V_{\text{fus}}} = \frac{6.01\ \text{kJ/mol}}{273\ \text{K} \times (-1.63\ \text{cm}^3/\text{mol})} \approx -134\ \text{atm/K}$$</div>
+<p>即壓力每增加 134 atm，水的熔點降低 1 K。</p>
+
+<table>
+<thead><tr><th>物質</th><th>$T_m$ (K)</th><th>$\Delta H_{\text{fus}}$ (kJ/mol)</th><th>$\Delta V_{\text{fus}}$ (cm³/mol)</th><th>$dP/dT$ (atm/K)</th></tr></thead>
+<tbody>
+<tr><td>水（冰）</td><td>273</td><td>6.01</td><td>−1.63</td><td>−134</td></tr>
+<tr><td>鐵 (Fe)</td><td>1811</td><td>13.8</td><td>+0.18</td><td>+42</td></tr>
+<tr><td>錫 (Sn)</td><td>505</td><td>7.0</td><td>+0.37</td><td>+37</td></tr>
+<tr><td>銅 (Cu)</td><td>1357</td><td>13.1</td><td>+0.33</td><td>+36</td></tr>
+<tr><td>鋁 (Al)</td><td>933</td><td>10.7</td><td>+0.70</td><td>+22</td></tr>
+</tbody>
+</table>
+
+<div class="callout"><strong>💡 Clapeyron 方程式的預測力量：</strong>從上表可以看出，僅憑 $\Delta H_{\text{fus}}$ 和 $\Delta V_{\text{fus}}$ 這兩個微觀熱力學量，我們就能預測熔化曲線的斜率——進而推斷高壓下的熔化溫度。這是熱力學從「微觀測量」到「宏觀預測」的典範。</div>
+</section>
+
+<section id="s7-6"><h2>7.6 氣相與凝態相平衡的圖形表示（Graphical Representation）</h2>
+<p>在 $P$–$T$ 圖上：</p>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li><strong>固–氣曲線（昇華線）：</strong>從原點出發，隨溫度上升而上升（$\Delta H_{\text{sub}} > 0$）。斜率由 Clausius–Clapeyron 決定。</li>
+<li><strong>液–氣曲線（汽化線）：</strong>從三相點出發，終止於<strong>臨界點（critical point）</strong>——在此點之上，液體和氣體不可區分。水的臨界點：$T_c = 647\ \text{K}$（374°C），$P_c = 218\ \text{atm}$。</li>
+<li><strong>固–液曲線（熔化線）：</strong>從三相點向上延伸，沒有臨界點（固體和液體的對稱性不同，無法連續過渡）。大多數物質的熔化線近垂直（$dP/dT$ 大），因為 $\Delta V_{\text{fus}}$ 很小。</li>
+<li><strong>三相點：</strong>三條曲線的唯一交點。自由度為零（$F = 1 - 3 + 2 = 0$）→溫度和壓力完全固定。</li>
+</ul>
+
+<div class="figure"><img src="../../../images/thermodynamics/ch07_pages/ch07_page_234_c.png" alt="蒸氣壓曲線" loading="lazy"><figcaption><strong>圖 7.11</strong> 蒸氣壓曲線：不同物質的液–氣平衡曲線。蒸氣壓隨溫度指數上升。在相同溫度下，揮發性較高的物質（如乙醇）的蒸氣壓高於揮發性較低的物質（如水）。</figcaption></div>
+
+<div class="figure"><img src="../../../images/thermodynamics/ch07_pages/ch07_page_235_c.png" alt="沸點與壓力的關係" loading="lazy"><figcaption><strong>圖 7.12</strong> 沸點隨壓力的變化：液體的沸點是蒸氣壓等於外界壓力時的溫度。在高海拔地區（低壓），水的沸點降低；在高壓鍋中（高壓），水的沸點升高。Clausius–Clapeyron 方程式精確描述了這種關係。</figcaption></div>
+
+<div class="callout"><strong>💡 為什麼液–氣線有臨界點而固–液線沒有？</strong>液體和氣體的差別只是密度的不同——你可以繞過臨界點連續地從液體變為氣體而不經歷相變。但固體和液體之間的對稱性不同（固體有長程有序、液體沒有），無法通過連續路徑規避。這是對稱性破缺（symmetry breaking）在熱力學中的體現。</div>
+
+<h3>臨界現象的熱力學</h3>
+<p>在臨界點 $(T_c, P_c)$，液體和氣體的性質變得完全相同：</p>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li>$\Delta H_{\text{vap}} \to 0$（汽化熱趨近於零）</li>
+<li>$\Delta V_{\text{vap}} \to 0$（液–氣體積差趨近於零）</li>
+<li>Clapeyron 方程式中的 $dP/dT$ 變為不定式 $0/0$——但仍可通過極限分析（L'Hôpital 法則）確定其值</li>
+<li>在臨界點以上，物質以<strong>超臨界流體（supercritical fluid）</strong>形式存在，兼具液體的溶解能力和氣體的擴散性</li>
+</ul>
+<p>超臨界 $CO_2$ 在工業上廣泛用作綠色溶劑——用於咖啡因萃取、精密清洗和聚合物加工。</p>
+</section>
+
+<section id="s7-7"><h2>7.7 固–固平衡（Solid–Solid Equilibria）</h2>
+<p>許多單成分系統有多種固相——這稱為<strong>同素異形體（polymorphism 或 allotropy）</strong>。經典例子：</p>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li><strong>鐵：</strong>$\alpha$-Fe（bcc，室溫）$\xrightarrow{910\,^{\circ}\text{C}}$ $\gamma$-Fe（fcc）$\xrightarrow{1400\,^{\circ}\text{C}}$ $\delta$-Fe（bcc）</li>
+<li><strong>碳：</strong>石墨（室溫穩定）⇌ 金剛石（高壓穩定）</li>
+<li><strong>錫：</strong>$\beta$-Sn（白錫，金屬）→ $\alpha$-Sn（灰錫，半導體），低於 13°C——這就是「錫疫」（tin pest）</li>
+<li><strong>鈦：</strong>$\alpha$-Ti（hcp）$\xrightarrow{882\,^{\circ}\text{C}}$ $\beta$-Ti（bcc）</li>
+</ul>
+<p>固–固相變同樣遵循 Clapeyron 方程式。由於 $\Delta V_{\text{tr}}$ 通常非常小（兩種固相的密度接近），$dP/dT$ 很大——固–固相邊界在 $P$–$T$ 圖上近乎垂直。</p>
+
+<div class="figure"><img src="../../../images/thermodynamics/ch07_pages/ch07_page_237_c.png" alt="固-固平衡相圖" loading="lazy"><figcaption><strong>圖 7.13</strong> 固–固平衡示意圖：在 $P$–$T$ 圖上，兩個固相之間的相邊界。由於 $\Delta V_{\text{tr}}$ 很小，邊界線近乎垂直。圖中展示了 $\alpha$ 和 $\beta$ 兩種同素異形體的 $(T,P)$ 穩定區。</figcaption></div>
+
+<div class="figure"><img src="../../../images/thermodynamics/ch07_pages/ch07_page_237_c.png" alt="Fe 的相圖" loading="lazy"><figcaption><strong>圖 7.14</strong> 鐵的 $P$–$T$ 相圖：顯示 $\alpha$（bcc）、$\gamma$（fcc）、$\delta$（bcc）三種固相以及液相的穩定區。$\alpha \to \gamma$ 和 $\gamma \to \delta$ 的相變溫度已標示。壓力對這些轉變溫度有顯著影響。</figcaption></div>
+
+<h3>詳細熱力學分析——鐵的同素異形體</h3>
+<p>鐵是高溫材料中最具有實際重要性的同素異形體系統之一。$\alpha$-Fe → $\gamma$-Fe 的轉變在 910°C（$T_{\text{tr}}$）發生，伴隨著 bcc → fcc 的晶體結構變化：</p>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li>$\Delta H_{\text{tr}} \approx 0.9\ \text{kJ/mol}$（轉變熱相對較小）</li>
+<li>$\Delta V_{\text{tr}} \approx -0.13\ \text{cm}^3/\text{mol}$（fcc 的堆積密度高於 bcc）</li>
+<li>$dP/dT = \Delta H_{\text{tr}} / (T_{\text{tr}} \Delta V_{\text{tr}}) \approx -55\ \text{atm/K}$——壓力升高使 $\alpha \to \gamma$ 轉變溫度降低</li>
+</ul>
+<p>這在鋼的熱處理中至關重要：高壓可以改變奧氏體化溫度，影響淬火後的顯微組織和力學性能。</p>
+
+<h3>石墨 → 金剛石——熱力學案例研究</h3>
+<p>室溫常壓下，石墨的 $G$ 低於金剛石（石墨是穩定相）。但金剛石的密度（3.51 g/cm³）遠高於石墨（2.26 g/cm³）→ 金剛石的 $V$ 較小 → 其 $G(P)$ 上升較慢。在高壓下，金剛石的 $G$ 最終變得低於石墨：</p>
+<div class="eq">$$\Delta G_{\text{graphite}\to\text{diamond}}(P) = \Delta G^\circ + \int_1^P \Delta V\,dP$$</div>
+<p>當 $P$ 足夠大時，$\Delta G$ 由正變負——金剛石化為穩定相。實際的轉變壓力在室溫下約為 15,000 atm（1.5 GPa）。這正是人造金剛石合成（HPHT 法）的熱力學基礎。</p>
+
+<h3>錫疫——一個歷史案例</h3>
+<p>$\beta$-Sn（白錫）在低於 13°C 時自發轉變為 $\alpha$-Sn（灰錫）。這個固–固相變具有重要的歷史意義：拿破崙遠征俄國時期，士兵制服上的錫鈕扣在嚴寒中碎裂成粉末——因為 $\beta \to \alpha$ 轉變伴隨著巨大的體積膨脹（$\Delta V > 0$），導致材料崩解。Clapeyron 方程式的預測：</p>
+<div class="eq">$$\frac{dP}{dT} = \frac{\Delta H_{\text{tr}}}{T_{\text{tr}} \Delta V_{\text{tr}}}$$</div>
+<p>壓力越高，轉變溫度越高。這意味著高壓可以抑制錫疫的發生——在實際中，加入少量銻（Sb）也可以穩定 $\beta$-Sn 相，防止低溫降解。</p>
+
+<div class="callout"><strong>💡 材料設計的熱力學思維：</strong>如果你知道一個高壓相的 $\Delta H^\circ$、$S^\circ$ 和 $V(P)$，你就可以計算它變為穩定相的壓力和溫度條件。這就是為什麼熱力學在新型材料合成中如此重要——它告訴你「在哪裡找」以及「需要什麼條件」。</div>
+
+<h3>與第十章（二元相圖）的聯繫</h3>
+<p><strong>第十章</strong>將把本章的 Clapeyron 概念推廣到二元（binary）系統。在二元系統中，相平衡條件從 $G^\alpha = G^\beta$ 擴展為化學位相等：$\mu_i^\alpha = \mu_i^\beta$（對每一組分 $i$）。Clapeyron 方程式推廣為：</p>
+<div class="eq">$$\frac{dP}{dT} = \frac{\Delta S}{\Delta V} \quad \xrightarrow{\text{二元}} \quad \frac{dT}{dx} = \frac{RT^2}{\Delta H_{\text{fus}}} \cdot \frac{1 - k}{x(1-x)}$$</div>
+<p>這直接導出了第十章將要討論的液–固相線形狀和凝固區間的概念。因此，第七章的 Clapeyron 方程式是理解所有更高維度相圖的基石。</p>
+</section>
+
+<section id="s7-8"><h2>7.8 外加磁場對 $P$–$T$ 圖的影響（Effect of an Applied Magnetic Field）</h2>
+<p>對於磁性材料，外加磁場提供了一個額外的熱力學自由度。磁場下的基本方程式包含磁功項：</p>
+<div class="eq">$$dU = T\,dS - P\,dV + \mu_0 H\,dM$$</div>
+<p>對應的 $dG$ 表達式（$G = U + PV - TS - \mu_0 HM$）：</p>
+<div class="eq">$$dG = -S\,dT + V\,dP - \mu_0 M\,dH$$</div>
+<p>沿兩相共存曲線，$dG^\alpha = dG^\beta$，展開後：</p>
+<div class="eq">$$-S^\alpha dT + V^\alpha dP - \mu_0 M^\alpha dH = -S^\beta dT + V^\beta dP - \mu_0 M^\beta dH$$</div>
+<p>在定壓下（$dP = 0$），得到磁場對相變溫度的影響：</p>
+<div class="eq">$$\boxed{\frac{dT}{dH} = -\frac{\mu_0 (M^\beta - M^\alpha)}{S^\beta - S^\alpha} = -\frac{\mu_0 \Delta M}{\Delta S}} \tag{7.8}$$</div>
+<p>其中 $\Delta M$ 是兩相之間磁化強度的差值。</p>
+
+<div class="figure"><img src="../../../images/thermodynamics/ch07_pages/ch07_page_238_c.png" alt="磁場對 P-T 圖的影響" loading="lazy"><figcaption><strong>圖 7.15</strong> 外加磁場對 $P$–$T$ 相圖的影響：磁場改變了鐵磁性材料的相邊界位置。強磁場可以顯著改變居里溫度或結構相變溫度。圖中展示了在不同磁場強度下，相邊界的移動。</figcaption></div>
+
+<p>這在<strong>磁制冷（magnetic refrigeration）</strong>中有直接應用——利用絕熱去磁（adiabatic demagnetization）來達到極低溫。磁制冷材料（如 Gd–Si–Ge 合金）的設計正是基於這類熱力學分析。</p>
+<div class="callout"><strong>💡 磁場效應在材料加工中日益重要。</strong>在強磁場下（>10 T），即使是順磁性材料的相平衡也可能被顯著改變。磁場已被用於控制鋼的相變溫度（奧氏體→鐵素體）、取向凝固、以及抑制對流——這些都是新興的「磁場輔助材料製程」。</div>
+</section>
+
+<section id="s7-9"><h2>7.9 例題與圖解（Example Problems）</h2>
+
+<p>本節彙整了 Gaskell 教材中第七章的典型例題圖解。這些圖像展示了本章核心概念在實際問題中的應用。</p>
+
+<h3>例題 7.1：Clapeyron 方程式的應用</h3>
+<p>已知苯的 $\Delta H_{\text{fus}} = 9.95\ \text{kJ/mol}$，$T_m = 278.7\ \text{K}$，液體密度 $0.899\ \text{g/cm}^3$，固體密度 $0.891\ \text{g/cm}^3$（分子量 78.11 g/mol）。計算熔化曲線的斜率 $dP/dT$。</p>
+<div class="figure"><img src="../../../images/thermodynamics/ch07_pages/ch07_page_241_c.png" alt="例題 7.1 圖解" loading="lazy"><figcaption><strong>圖 7.16</strong> 例題 7.1：苯的熔化曲線計算。圖中展示了如何從 $\Delta H_{\text{fus}}$ 和密度數據計算 $\Delta V_{\text{fus}}$，進而得到 $dP/dT$。</figcaption></div>
+
+<h3>例題 7.2：Clausius–Clapeyron 的應用</h3>
+<p>已知水的蒸氣壓在 25°C 時為 23.76 mmHg，在 100°C 時為 760 mmHg。估算水的平均汽化熱 $\Delta H_{\text{vap}}$。</p>
+<div class="figure"><img src="../../../images/thermodynamics/ch07_pages/ch07_page_242_c.png" alt="例題 7.2 圖解" loading="lazy"><figcaption><strong>圖 7.17</strong> 例題 7.2：利用 Clausius–Clapeyron 方程式從兩個溫度下的蒸氣壓估算 $\Delta H_{\text{vap}}$。圖中顯示了 $\ln P$ vs $1/T$ 的直線擬合。</figcaption></div>
+
+<h3>例題 7.3：蒸氣壓曲線的完整計算</h3>
+<div class="figure"><img src="../../../images/thermodynamics/ch07_pages/ch07_page_243_c.png" alt="例題 7.3 圖解" loading="lazy"><figcaption><strong>圖 7.18</strong> 例題 7.3：給定 $\Delta H_{\text{vap}}$ 和一個參考溫度下的蒸氣壓，計算完整蒸氣壓曲線。展示了如何繪製 $P$–$T$ 圖和 $\ln P$–$1/T$ 圖。</figcaption></div>
+
+<h3>例題 7.4：固–固相變的 Clapeyron 分析</h3>
+<div class="figure"><img src="../../../images/thermodynamics/ch07_pages/ch07_page_248_c.png" alt="例題 7.4 圖解" loading="lazy"><figcaption><strong>圖 7.19</strong> 例題 7.4：固–固相變（如 $\alpha \to \beta$ 轉變）的 Clapeyron 分析。展示了如何從 $\Delta H_{\text{tr}}$ 和 $\Delta V_{\text{tr}}$ 計算 $dP/dT$，並預測高壓下的轉變溫度。</figcaption></div>
+
+<h3>例題 7.5：磁場對相變的影響</h3>
+<div class="figure"><img src="../../../images/thermodynamics/ch07_pages/ch07_page_248_c.png" alt="例題 7.5 圖解" loading="lazy"><figcaption><strong>圖 7.20</strong> 例題 7.5：磁場作用下相變溫度的偏移。計算給定 $\Delta M$ 和 $\Delta S$ 時的 $dT/dH$。</figcaption></div>
+
+<h3>例題 7.6：綜合應用——水的完整 $P$–$T$ 圖</h3>
+<div class="figure"><img src="../../../images/thermodynamics/ch07_pages/ch07_page_249_c.png" alt="例題 7.6 圖解" loading="lazy"><figcaption><strong>圖 7.21</strong> 例題 7.6：水的完整 $P$–$T$ 相圖綜合分析。包含熔化線的負斜率、汽化線、昇華線、三相點（0.0098°C，4.58 mmHg）和臨界點（374°C，218 atm）。這是本章所有概念（$G$–$T$、$G$–$P$、Clapeyron、Clausius–Clapeyron）的綜合應用。</figcaption></div>
+
+<div class="callout"><strong>💡 例題學習方法：</strong>建議讀者先嘗試獨立推導每個例題的解答，然後對照圖中的解題步驟。特別注意：(1) 確認已知量和未知量，(2) 選擇正確的方程形式（Clapeyron 還是 Clausius–Clapeyron），(3) 注意單位換算（J、cm³、atm、K）。</div>
+</section>
+
+<section id="summary"><h2>本章摘要</h2>
+<ol style="font-size:14px;color:var(--t2);margin-left:18px">
+<li><strong>$G(T)$ 關係：</strong>$(\partial G/\partial T)_P = -S$。$S$ 越大→$G$ 隨溫度下降越快→高溫時高熵相（氣體）穩定。</li>
+<li><strong>$G(P)$ 關係：</strong>$(\partial G/\partial P)_T = V$。高壓時低體積相（固體）穩定。理想氣體：$\Delta G = RT\ln(P_2/P_1)$。</li>
+<li><strong>Clapeyron 方程式：</strong>$dP/dT = \Delta H/T\Delta V$。從 $dG^\alpha = dG^\beta$ 推導。決定所有一階相變邊界的斜率。</li>
+<li><strong>Clausius–Clapeyron：</strong>$d\ln P/dT = \Delta H/RT^2$。蒸氣壓的指數溫度依賴。積分形式：$\ln(P_2/P_1) = -(\Delta H/R)(1/T_2 - 1/T_1)$。</li>
+<li><strong>固–固平衡：</strong>同素異形體轉變。$\Delta V$ 小→$dP/dT$ 大→相邊界近乎垂直。高壓穩定高密度相（如金剛石）。</li>
+<li><strong>磁場效應：</strong>$dT/dH = -\mu_0 \Delta M/\Delta S$。磁制冷和磁場輔助材料製程的基礎。</li>
+<li><strong>與後續章節的聯繫：</strong>本章的 Clapeyron 方程式（純物質相變）是第十章（二元相圖）和第十一章（化學反應平衡）的熱力學基礎。第六章的 $C_P$ 數據提供了計算 $G(T)$ 的實驗輸入。</li>
+</ol>
+<div class="callout"><strong>📚 回顧與前瞻：</strong>第七章完成了從「純物質的 $G(T,P)$ 行為」到「相邊界的定量預測」的飛躍。在第八章和第九章中，我們將把這些概念應用到溶液和多元系統，化學位 $\mu_i$ 將取代 $G$ 成為新的核心量。</div>
+</section>
+</main>
+<script>
+function toggleTheme(){const h=document.documentElement;const n=h.getAttribute('data-theme')==='light'?'dark':'light';h.setAttribute('data-theme',n);localStorage.setItem('theme',n);document.getElementById('tl').textContent=n==='dark'?'淺色模式':'深色模式';}
+const s=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',s);if(s==='dark')document.getElementById('tl').textContent='淺色模式';
+const secs=document.querySelectorAll('section[id]');const navs=document.querySelectorAll('.sn a');window.addEventListener('scroll',()=>{let c='';secs.forEach(s=>{if(window.scrollY>=s.offsetTop-80)c=s.getAttribute('id');});navs.forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+c);});});
+document.querySelectorAll('.figure img').forEach(i=>i.addEventListener('click',()=>window.open(i.src,'_blank')));
+</script>
+</body>
+</html>

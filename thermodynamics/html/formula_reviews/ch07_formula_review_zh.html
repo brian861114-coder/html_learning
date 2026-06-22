@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>第七章 公式摘要 — 單成分系統相平衡（8 條完整版）</title>
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']],tags:'ams'},options:{ignoreHtmlClass:'no-math'}};</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+:root{--bg:#FFFFFF;--bg2:#F5F5F7;--bg3:#E8F0FE;--tx:#1D1D1F;--tx2:#1D1D1F;--ac:#007AFF;--bd:#D2D2D7;--sh:0 2px 8px rgba(0,0,0,0.08);--fbg:#FAFBFC;--fbd:#E5E5EA;--dbg:#E8F0FE;--dac:#007AFF;--wbg:#FFF9F0;--wbd:#FFB340;--wtx:#B8700A;--hv:#F0F4FF;--nw:240px}
+[data-theme="dark"]{--bg:#1C1C1E;--bg2:#2C2C2E;--bg3:#1A2332;--tx:#F5F5F7;--tx2:#A1A1A6;--ac:#0A84FF;--bd:#48484A;--fbg:#252528;--fbd:#3A3A3C;--dbg:#1A2332;--dac:#0A84FF;--wbg:#2C2416;--wbd:#8B6914;--wtx:#FFB340;--hv:#1E2A3A}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth;scroll-padding-top:16px}
+body{font-family:-apple-system,BlinkMacSystemFont,'Noto Sans TC','Microsoft JhengHei',sans-serif;background:var(--bg2);color:var(--tx);line-height:1.75;display:flex;min-height:100vh}
+.sidebar{position:fixed;top:0;left:0;width:var(--nw);height:100vh;background:var(--bg);border-right:1px solid var(--bd);overflow-y:auto;z-index:100;padding:20px 16px;display:flex;flex-direction:column}
+.sidebar-header{margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--fbd)}.sidebar-header h2{font-size:14px;font-weight:600;color:var(--ac)}.sidebar-header .bk{font-size:11px;color:var(--tx2)}
+.sidebar-nav{flex:1}.sidebar-nav ul{list-style:none}.sidebar-nav li{margin-bottom:1px}.sidebar-nav a{display:block;padding:4px 10px;font-size:11px;color:var(--tx2);text-decoration:none;border-radius:5px;transition:all .12s;line-height:1.3}.sidebar-nav a:hover{background:var(--bg3);color:var(--ac)}.sidebar-nav a.active{background:var(--bg3);color:var(--ac);font-weight:500}.sidebar-nav .ns{font-weight:600;font-size:12px;color:var(--tx);margin-top:10px;margin-bottom:2px;padding:2px 10px}.sidebar-nav .nsub a{padding-left:20px;font-size:10px}
+.sidebar-toggle{margin-top:auto;padding-top:12px;border-top:1px solid var(--fbd)}.sidebar-toggle button{width:100%;padding:6px;border:1px solid var(--bd);border-radius:6px;background:var(--bg2);color:var(--tx);cursor:pointer;font-size:12px}
+.main{margin-left:var(--nw);flex:1;max-width:1100px;padding:32px 40px 80px}
+.header{margin-bottom:24px;padding-bottom:20px;border-bottom:2px solid var(--ac)}.header .tag{font-size:12px;font-weight:600;color:var(--ac);letter-spacing:1px}.header h1{font-size:26px;font-weight:700;margin:6px 0}.header .sub{font-size:13px;color:var(--tx2)}
+.tbar{display:flex;gap:8px;margin-bottom:20px}.tbar button{padding:5px 16px;font-size:12px;border:1px solid var(--ac);border-radius:20px;background:var(--bg);color:var(--ac);cursor:pointer;font-weight:500;transition:all .15s}.tbar button:hover{background:var(--ac);color:#fff}
+.section{margin-bottom:44px}.section h2{font-size:19px;font-weight:700;color:var(--ac);margin-bottom:4px;padding-bottom:6px;border-bottom:1px solid var(--bd)}
+.fcard{background:var(--bg);border:1px solid var(--fbd);border-radius:10px;padding:16px 20px;margin:14px 0;box-shadow:var(--sh)}.fcard .lbl{font-size:11px;font-weight:700;color:var(--ac);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}.fcard .eq{text-align:center;padding:8px 0;font-size:15px}.fcard .note{font-size:12px;color:var(--tx2);margin-top:6px;padding-top:6px;border-top:1px solid var(--fbd);line-height:1.6}
+.warn-box{background:var(--wbg);border:1px solid var(--wbd);border-radius:10px;padding:14px 18px;margin:16px 0;font-size:14px}.warn-box .wt{font-weight:700;color:var(--wtx);font-size:12px;margin-bottom:6px}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:13px}thead th{background:var(--bg3);padding:8px 12px;text-align:left;font-size:12px;font-weight:600;border-bottom:2px solid var(--bd)}tbody td{padding:8px 12px;border-bottom:1px solid var(--fbd)}
+@media(max-width:768px){.sidebar{transform:translateX(-100%);transition:transform .3s}.sidebar.open{transform:translateX(0)}.main{margin-left:0;padding:20px 16px 60px}}
+@media print{.sidebar,.tbar{display:none}.main{margin-left:0;max-width:100%;padding:0}}
+</style>
+<script src="../../../reading-preferences.js" defer></script></head>
+<body><a class="portal-home-link" href="../../../index.html">返回學習中心</a><style id="portal-home-link-style">.portal-home-link{position:fixed;top:16px;right:16px;z-index:1000;display:inline-flex;align-items:center;min-height:36px;padding:7px 11px;border:1px solid #cbd5e1;border-radius:8px;background:#fff;color:#1d4ed8;font:600 13px/1.2 -apple-system,BlinkMacSystemFont,"Noto Sans TC","Microsoft JhengHei",sans-serif;text-decoration:none;box-shadow:0 2px 10px rgba(15,23,42,.08)}.portal-home-link:hover{background:#eff6ff}.portal-home-link:focus-visible{outline:3px solid rgba(37,99,235,.35);outline-offset:2px}@media(max-width:768px){.portal-home-link{top:10px;right:10px;min-height:34px;padding:7px 9px;font-size:12px}}</style>
+<nav class="sidebar"><div class="sidebar-header"><div class="bk">材料熱力學 · Gaskell</div><h2>第七章 公式摘要</h2></div><div class="sidebar-nav"><ul>
+<li><a href="#s1">7.2–7.4 $G$ 的溫度與壓力依賴</a></li>
+<li><a href="#s2">7.5 Clapeyron 與 Clausius–Clapeyron</a></li>
+<li><a href="#s3">7.7–7.8 固–固平衡與磁場效應</a></li>
+<li><a href="#cheatsheet">📋 公式速查表</a></li>
+</ul></div><div class="sidebar-toggle"><button onclick="toggleTheme()">🌓 <span id="tl">深色模式</span></button></div></nav>
+<main class="main">
+<div class="header"><div class="tag">8 條公式完整版 · 含 Clapeyron + Clausius–Clapeyron</div><h1>第七章：單成分系統的相平衡</h1><div class="sub">Introduction to the Thermodynamics of Materials · David R. Gaskell · pp. 220–249</div></div>
+<div class="tbar"><button onclick="document.querySelectorAll('details').forEach(d=>d.open=true)">📖 展開全部</button><button onclick="document.querySelectorAll('details').forEach(d=>d.open=false)">📕 收合全部</button></div>
+
+<div class="section" id="s1"><h2>7.2–7.4 $G$ 對 $T$ 與 $P$ 的依賴</h2>
+<div class="fcard"><div class="lbl">⭐ $G$–$T$ 關係 (7.1)</div><div class="eq">$$\boxed{\left(\frac{\partial G}{\partial T}\right)_P = -S} \tag{7.1}$$</div><div class="note">$S > 0$ → $G$ 隨 $T$ 升高而降低。$S$ 越大→降越快→高溫時高熵相穩定。</div></div>
+<div class="fcard"><div class="lbl">⭐ $G$–$P$ 關係 (7.2)</div><div class="eq">$$\boxed{\left(\frac{\partial G}{\partial P}\right)_T = V} \tag{7.2}$$</div><div class="note">$V > 0$ → $G$ 隨 $P$ 升高而增加。高壓時低體積相穩定。</div></div>
+<div class="fcard"><div class="lbl">$G$ 的全微分 (7.3)</div><div class="eq">$$dG = -S\,dT + V\,dP \tag{7.3}$$</div></div>
+</div>
+
+<div class="section" id="s2"><h2>7.5 Clapeyron 與 Clausius–Clapeyron 方程式</h2>
+<div class="fcard"><div class="lbl">⭐ Clapeyron 方程式 (7.4)</div><div class="eq">$$\boxed{\frac{dP}{dT} = \frac{\Delta S}{\Delta V} = \frac{\Delta H}{T\Delta V}} \tag{7.4}$$</div><div class="note">沿兩相共存曲線。$\Delta H$ = 相變熱，$\Delta V$ = 體積變化。適用於所有一階相變。</div></div>
+<div class="fcard"><div class="lbl">⭐ Clausius–Clapeyron 方程式 (7.5)</div><div class="eq">$$\boxed{\frac{d\ln P}{dT} = \frac{\Delta H_{\text{vap}}}{RT^2}} \tag{7.5}$$</div><div class="note">適用於氣–凝態平衡。假設 $\Delta V \approx V_{\text{gas}} = RT/P$。</div></div>
+<div class="fcard"><div class="lbl">積分形式 (7.6)</div><div class="eq">$$\ln\frac{P_2}{P_1} = -\frac{\Delta H_{\text{vap}}}{R}\left(\frac{1}{T_2} - \frac{1}{T_1}\right) \tag{7.6}$$</div><div class="note">假設 $\Delta H_{\text{vap}}$ 在 $T_1$–$T_2$ 範圍內為常數。</div></div>
+</div>
+
+<div class="section" id="s3"><h2>7.7–7.8 固–固平衡與磁場效應</h2>
+<div class="fcard"><div class="lbl">固–固 Clapeyron</div><div class="eq">$$\frac{dP}{dT} = \frac{\Delta H_{\text{tr}}}{T\Delta V_{\text{tr}}} \tag{7.7}$$</div><div class="note">同素異形體轉變。$\Delta V_{\text{tr}}$ 小→$dP/dT$ 大→相邊界近垂直。</div></div>
+<div class="fcard"><div class="lbl">磁場對相變的影響 (7.8)</div><div class="eq">$$\frac{dT}{dH} = -\frac{\Delta M}{\Delta S} \tag{7.8}$$</div><div class="note">$\Delta M$ = 磁化強度變化。用於磁制冷材料設計。</div></div>
+</div>
+
+<div class="section" id="cheatsheet"><h2>公式速查表（8 條全收錄）</h2>
+<table><thead><tr><th>Eq</th><th>公式</th><th>備註</th></tr></thead><tbody>
+<tr><td>7.1</td><td>$(\partial G/\partial T)_P = -S$</td><td>⭐ $G$ 的溫度依賴</td></tr>
+<tr><td>7.2</td><td>$(\partial G/\partial P)_T = V$</td><td>⭐ $G$ 的壓力依賴</td></tr>
+<tr><td>7.3</td><td>$dG = -S\,dT + V\,dP$</td><td>$G$ 的全微分</td></tr>
+<tr><td>7.4</td><td>$dP/dT = \Delta H/T\Delta V$</td><td>⭐ Clapeyron 方程式</td></tr>
+<tr><td>7.5</td><td>$d\ln P/dT = \Delta H_{\text{vap}}/RT^2$</td><td>⭐ Clausius–Clapeyron</td></tr>
+<tr><td>7.6</td><td>$\ln(P_2/P_1) = -(\Delta H_{\text{vap}}/R)(1/T_2-1/T_1)$</td><td>Clausius–Clapeyron 積分</td></tr>
+<tr><td>7.7</td><td>$dP/dT = \Delta H_{\text{tr}}/T\Delta V_{\text{tr}}$</td><td>固–固 Clapeyron</td></tr>
+<tr><td>7.8</td><td>$dT/dH = -\Delta M/\Delta S$</td><td>磁場效應 Clapeyron</td></tr>
+</tbody></table>
+</div>
+</main>
+<script>
+function toggleTheme(){const h=document.documentElement;const n=h.getAttribute('data-theme')==='light'?'dark':'light';h.setAttribute('data-theme',n);localStorage.setItem('theme',n);document.getElementById('tl').textContent=n==='dark'?'淺色模式':'深色模式';}
+const s=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',s);if(s==='dark')document.getElementById('tl').textContent='淺色模式';
+const secs=document.querySelectorAll('.section[id]');const navs=document.querySelectorAll('.sidebar-nav a');window.addEventListener('scroll',()=>{let c='';secs.forEach(s=>{if(window.scrollY>=s.offsetTop-80)c=s.getAttribute('id');});navs.forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+c);});});
+</script>
+</body>
+</html>

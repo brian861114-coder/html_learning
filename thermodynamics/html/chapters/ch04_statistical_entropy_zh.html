@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>第四章：熵的統計詮釋 — 材料熱力學</title>
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']],tags:'ams'},options:{ignoreHtmlClass:'no-math'}};</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+:root{--bg:#fff;--b2:#F5F5F7;--b3:#E8F0FE;--tx:#1D1D1F;--t2:#1D1D1F;--ac:#007AFF;--bd:#D2D2D7;--sh:0 2px 8px rgba(0,0,0,.08);--fbd:#E5E5EA;--wbg:#FFF9F0;--wbd:#FFB340;--wtx:#B8700A;--nw:260px}
+[data-theme="dark"]{--bg:#1C1C1E;--b2:#2C2C2E;--b3:#1A2332;--tx:#F5F5F7;--t2:#A1A1A6;--ac:#0A84FF;--bd:#48484A;--fbd:#3A3A3C;--wbg:#2C2416;--wbd:#8B6914;--wtx:#FFB340}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth;scroll-padding-top:16px}
+body{font-family:-apple-system,BlinkMacSystemFont,'Noto Sans TC','Microsoft JhengHei',sans-serif;background:var(--b2);color:var(--tx);line-height:1.9;display:flex;min-height:100vh}
+.sidebar{position:fixed;top:0;left:0;width:var(--nw);height:100vh;background:var(--bg);border-right:1px solid var(--bd);overflow-y:auto;z-index:100;padding:20px 16px;display:flex;flex-direction:column}
+.sh{margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--fbd)}.sh h2{font-size:14px;font-weight:600;color:var(--ac)}.sh .bk{font-size:11px;color:var(--t2)}
+.sn{flex:1}.sn ul{list-style:none}.sn a{display:block;padding:4px 10px;font-size:11px;color:var(--t2);text-decoration:none;border-radius:5px;transition:.12s}.sn a:hover{background:var(--b3);color:var(--ac)}.sn a.active{background:var(--b3);color:var(--ac);font-weight:500}.sn .ns{font-weight:600;font-size:12px;color:var(--tx);margin-top:10px;padding:2px 10px}.sn .nsub a{padding-left:20px;font-size:10px}
+.st{margin-top:auto;padding-top:12px;border-top:1px solid var(--fbd)}.st button{width:100%;padding:6px;border:1px solid var(--bd);border-radius:6px;background:var(--b2);color:var(--tx);cursor:pointer;font-size:12px}
+.main{margin-left:var(--nw);flex:1;max-width:1050px;padding:32px 40px 80px}
+.header{margin-bottom:32px;padding-bottom:20px;border-bottom:2px solid var(--ac)}.header .cl{font-size:12px;font-weight:600;color:var(--ac);letter-spacing:1px}.header h1{font-size:28px;font-weight:700;margin:6px 0}.header .meta{font-size:13px;color:var(--t2)}
+section{margin-bottom:44px}h2{font-size:20px;font-weight:700;color:var(--ac);margin-bottom:14px;padding-bottom:6px;border-bottom:1px solid var(--bd)}h3{font-size:16px;font-weight:600;color:var(--tx);margin:24px 0 10px}h4{font-size:14px;font-weight:600;color:var(--t2);margin:18px 0 6px}
+p{font-size:14px;color:var(--t2);margin-bottom:12px}strong{font-weight:600;color:var(--tx)}
+.eq{text-align:center;margin:16px 0;font-size:15px}
+.figure{margin:24px 0;text-align:center}.figure img{max-width:100%;border-radius:8px;box-shadow:var(--sh);cursor:pointer}.figure img:hover{transform:scale(1.01)}.figure figcaption{margin-top:8px;font-size:12px;color:var(--t2)}
+.callout{background:var(--b3);border:1px solid var(--fbd);border-radius:8px;padding:14px 18px;margin:16px 0;font-size:13px}.callout strong{color:var(--ac)}
+.callout-warn{background:var(--wbg);border:1px solid var(--wbd);border-radius:8px;padding:14px 18px;margin:16px 0;font-size:13px}.callout-warn strong{color:var(--wtx)}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}thead th{background:var(--b3);padding:8px 12px;font-size:12px;font-weight:600;border-bottom:2px solid var(--bd)}tbody td{padding:8px 12px;border-bottom:1px solid var(--fbd)}tbody tr:nth-child(even){background:var(--b2)}
+@media(max-width:768px){.sidebar{transform:translateX(-100%);transition:.3s}.sidebar.open{transform:translateX(0)}.main{margin-left:0;padding:20px 16px 60px}}
+@media print{.sidebar{display:none}.main{margin-left:0;max-width:100%;padding:0}}
+</style>
+<script src="../../../reading-preferences.js" defer></script></head>
+<body><a class="portal-home-link" href="../../../index.html">返回學習中心</a><style id="portal-home-link-style">.portal-home-link{position:fixed;top:16px;right:16px;z-index:1000;display:inline-flex;align-items:center;min-height:36px;padding:7px 11px;border:1px solid #cbd5e1;border-radius:8px;background:#fff;color:#1d4ed8;font:600 13px/1.2 -apple-system,BlinkMacSystemFont,"Noto Sans TC","Microsoft JhengHei",sans-serif;text-decoration:none;box-shadow:0 2px 10px rgba(15,23,42,.08)}.portal-home-link:hover{background:#eff6ff}.portal-home-link:focus-visible{outline:3px solid rgba(37,99,235,.35);outline-offset:2px}@media(max-width:768px){.portal-home-link{top:10px;right:10px;min-height:34px;padding:7px 9px;font-size:12px}}</style>
+<nav class="sidebar"><div class="sh"><div class="bk">材料熱力學·Gaskell</div><h2>第四章</h2></div><div class="sn"><ul>
+<li><a href="#preview">📋 4.0 本章預覽</a></li>
+<li class="ns">4.1–4.3 微觀基礎</li><li class="nsub"><a href="#s4-1">4.1 導論</a></li><li class="nsub"><a href="#s4-2">4.2 熵與原子尺度的無序</a></li><li class="nsub"><a href="#s4-3">4.3 微觀態的概念</a></li>
+<li class="ns">4.4–4.5 統計方法</li><li class="nsub"><a href="#s4-4">4.4 微正則系綜方法</a></li><li class="nsub"><a href="#s4-5">4.5 波茲曼分布</a></li>
+<li class="ns">4.6–4.8 溫度與熱流</li><li class="nsub"><a href="#s4-6">4.6 溫度的影響</a></li><li class="nsub"><a href="#s4-7">4.7 熱平衡與波茲曼方程式</a></li><li class="nsub"><a href="#s4-8">4.8 熱流與熵的產生</a></li>
+<li><a href="#summary">📋 本章摘要</a></li>
+</ul></div><div class="st"><button onclick="toggleTheme()">🌓 <span id="tl">深色模式</span></button></div></nav>
+<main class="main">
+<header class="header"><div class="cl">第四章</div><h1>熵的統計詮釋</h1><div class="meta">David R. Gaskell·《Introduction to the Thermodynamics of Materials》·第 114–141 頁</div></header>
+
+<section id="preview"><div class="callout"><strong>📋 4.0 本章預覽</strong>
+<p>前三章從<strong>宏觀</strong>角度建立了熱力學定律。本章轉向<strong>微觀</strong>視角，用原子和分子的行為來解釋熵的物理意義。核心洞察來自 Boltzmann：$S = k_B \ln \Omega$——熵是系統可及的微觀態數目的對數。這個簡潔的方程式將宏觀熱力學與微觀統計力學統一起來。</p>
+<div class="callout-warn"><strong>⚡ 為什麼本章是理解熱力學本質的關鍵？</strong>第三章告訴我們「熵會增加」，但沒有解釋<strong>為什麼</strong>。第四章給出答案：因為宏觀狀態對應的微觀態數目越多越可能出現。自發過程不是被「驅動」的——它們只是系統在無數微觀態之間隨機遊走時，自然地走向最有可能的宏觀狀態。</div>
+<p><strong>在本章中，我們將學習：</strong></p>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px">
+<li>微觀態（microstate）vs 宏觀態（macrostate）的區別</li>
+<li>Boltzmann 熵公式：$S = k_B \ln \Omega$</li>
+<li>微正則系綜（microcanonical ensemble）與最可能分布</li>
+<li>Boltzmann 分布：$n_i = n_0 e^{-\varepsilon_i/k_B T}$</li>
+<li>配分函數（partition function）的引入</li>
+<li>溫度如何影響能階的佔據</li>
+<li>熱平衡的統計力學條件</li>
+</ul></div></section>
+
+<section id="s4-1"><h2>4.1 導論（Introduction）</h2>
+<p>古典熱力學（第一至第三章）是<strong>現象學</strong>的——它描述了能量和熵的行為，但不解釋<strong>為什麼</strong>這些定律成立。統計熱力學提供了解釋——它從原子的離散能階和機率分布出發，推導出宏觀熱力學的所有關係。</p>
+<p>統計熱力學的威力在於：它可以<strong>從第一原理計算</strong>熱力學量（如熱容量、熵、自由能），而不需要做實驗測量。對於材料科學家來說，這意味著可以在實驗之前預測新材料的相穩定性和反應行為。</p>
+<div class="callout"><strong>💡 兩種互補的視角：</strong>古典熱力學給出精確的宏觀關係（如 $dU = T\,dS - P\,dV$），統計熱力學給出微觀解釋和計算方法（如 $U = \sum_i n_i \varepsilon_i$）。兩者結合，構成了現代材料熱力學的完整框架。</div>
+
+<h3>歷史脈絡與 Boltzmann 的貢獻</h3>
+<p>統計熱力學的起源可以追溯到 19 世紀後期。Ludwig Boltzmann（1844–1906）在與 Ernst Mach 和 Wilhelm Ostwald 等實證主義者的激烈論戰中，堅定捍衛了原子論的觀點。他提出的 $S = k_B\ln\Omega$ 公式——現在刻在他的墓碑上——是史上最深刻的物理學洞察之一。Boltzmann 的洞見在於認識到：熵不是物質的「性質」，而是我們對系統微觀狀態<strong>知識缺乏程度</strong>的度量。這個視角後來被 Claude Shannon 在 1948 年推廣到資訊理論中，形成了「資訊熵」的概念——$H = -\sum_i p_i\ln p_i$，與 Boltzmann 公式完全同構。</p>
+<p>值得注意的是，Boltzmann 在世時他的工作並未得到廣泛認可。直到 1905 年 Einstein 發表布朗運動理論，原子的真實性才被最終證實。Boltzmann 於 1906 年自殺，未能看到他的統計力學成為物理學的基石。今天，從固態物理到天文物理，從化學動力學到材料設計，統計力學的思想貫穿整個現代科學。</p>
+</section>
+
+<section id="s4-2"><h2>4.2 熵與原子尺度的無序（Entropy and Disorder on an Atomic Scale）</h2>
+<p>在原子層面，熵反映的是系統的<strong>無序度</strong>或<strong>隨機性</strong>。考慮一個簡單的例子：將兩種不同氣體混合。混合前，每種氣體的分子分別侷限在自己的容器中——這是有序的狀態。混合後，兩種分子隨機分布——這是無序的狀態。混合過程的熵增加對應於無序度的增加。</p>
+<p>另一個經典例子是晶體中的<strong>空位（vacancy）</strong>：完美晶體只有一種排列方式（每個原子在它的晶格點上），但一個空位可以出現在 $N$ 個不同的位置——這引入了 $N$ 倍的無序度。這就是為什麼即使在絕對零度以上，晶體中總有一些本徵的點缺陷——它們增加的熵（$-T\Delta S$ 項）可以抵消形成缺陷所需的能量（$\Delta H$），使總自由能降低。</p>
+<div class="callout-warn"><strong>⚡ 缺陷是熱力學必然的。</strong>在有限溫度下，$\Delta G = \Delta H - T\Delta S$。即使 $\Delta H > 0$（形成空位需要能量），只要 $T\Delta S$ 夠大，$\Delta G$ 就可以是負的。這就是為什麼完美晶體不存在——一定濃度的點缺陷在熱力學上是穩定的。</div>
+
+      <h3>數值範例：晶體中空位的平衡濃度</h3>
+      <p>上述關於缺陷穩定性的定性討論，可以通過具體的數值計算來定量理解。考慮一個有 $N$ 個晶格點的金屬晶體，其中有 $n$ 個空缺的晶格點（空位）。形成 $n$ 個空位後，將空位分配到 $N$ 個晶格點的方式數——即微觀態數——為：</p>
+      <div class="eq">$$\Omega = \frac{N!}{(N-n)!\,n!}$$</div>
+      <p>使用 Stirling 近似 $\ln N! \approx N\ln N - N$（對大 $N$ 成立）：</p>
+      <div class="eq">$$\begin{aligned}
+        \ln\Omega &= \ln N! - \ln(N-n)! - \ln n! \\
+        &\approx N\ln N - (N-n)\ln(N-n) - n\ln n
+        \end{aligned}$$</div>
+      <p>自由能變化為 $\Delta G = n\Delta H_v - T\Delta S$，其中 $\Delta S = k_B\ln\Omega$。在平衡時 $\partial(\Delta G)/\partial n = 0$，得到：</p>
+      <div class="eq">$$\frac{n}{N-n} = e^{-\Delta H_v/k_B T} \quad\Longrightarrow\quad \frac{n}{N} \approx e^{-\Delta H_v/k_B T}\quad(\text{當 } n \ll N)$$</div>
+      <p><strong>以銅（Cu）為例的具體計算：</strong></p>
+      <ul style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+        <li>銅的空位形成焓：$\Delta H_v \approx 1.0\ \text{eV} = 1.602 \times 10^{-19}\ \text{J}$（每個空位）</li>
+        <li>$k_B = 1.381 \times 10^{-23}\ \text{J/K}$，因此在 300 K（室溫）：$k_B T = 0.026\ \text{eV}$</li>
+        <li>$\displaystyle \frac{n}{N} = e^{-1.0/0.026} = e^{-38.5} \approx 1.9 \times 10^{-17}$——低溫下空位極少，幾乎無法檢測</li>
+        <li>在 1000 K：$k_B T = 0.086\ \text{eV}$，$\displaystyle \frac{n}{N} = e^{-1.0/0.086} = e^{-11.6} \approx 9.2 \times 10^{-6}$——約百萬分之 9</li>
+        <li>在 1300 K（接近銅的熔點 1358 K）：$k_B T = 0.112\ \text{eV}$，$\displaystyle \frac{n}{N} = e^{-1.0/0.112} = e^{-8.93} \approx 1.3 \times 10^{-4}$——約萬分之 1.3</li>
+      </ul>
+      <p>這個範例清楚展示了 Boltzmann 因子 $e^{-\Delta H_v/k_B T}$ 如何定量決定缺陷濃度。在材料科學中，這種 Arrhenius 形式的關係（$n/N \propto e^{-E/k_B T}$）無處不在——從擴散係數到化學反應速率，都遵循相同的統計規律。</p>
+
+      <div class="figure"><img src="../../../images/thermodynamics/ch04_pages/ch04_page_120_c.png" alt="圖 4.3" loading="lazy"><figcaption>圖 4.3：微觀態分布示意。同一宏觀態（固定的 $U, V, N$）對應於大量不同的微觀態，系統在其中均勻隨機遊走。不同巨觀態對應的微觀態數相差巨大，這就是自發過程熵增的根源。</figcaption></div>
+
+<section id="s4-3"><h2>4.3 微觀態的概念（The Concept of Microstate）</h2>
+<p>一個<strong>微觀態（microstate）</strong>是系統在微觀層面的完整描述——指定每個原子的位置和動量（在量子力學中，指定每個粒子的量子態）。一個<strong>宏觀態（macrostate）</strong>則只用少數宏觀變數（$U$, $V$, $N$）來描述。</p>
+<p><strong>關鍵點：</strong>一個宏觀態對應於<strong>極多</strong>個微觀態。例如，對於 1 莫耳理想氣體（$N_A \approx 6 \times 10^{23}$ 個分子），宏觀態「$U = 3.7\ \text{kJ}$，$V = 22.4\ \text{L}$」對應的微觀態數目是天文數字——大約 $10^{10^{24}}$。</p>
+<p>統計熱力學的基本假設（<strong>等機率先驗假設</strong>）：對於一個孤立系統，所有可及的微觀態出現的機率相等。這看似簡單的假設蘊含了整個統計熱力學。</p>
+<div class="callout"><strong>💡 為什麼自發過程使熵增加？</strong>因為無序的宏觀態對應的微觀態數目遠大於有序的宏觀態。系統在微觀態之間隨機遊走時，壓倒性地更可能處於微觀態數目多的宏觀態。熵增不是被「強迫」的——它是純粹的機率結果。</div>
+
+      <div class="figure"><img src="../../../images/thermodynamics/ch04_pages/ch04_page_118_c.png" alt="圖 4.2" loading="lazy"><figcaption>圖 4.2：能階佔據示意圖。粒子在離散能階 $\varepsilon_0, \varepsilon_1, \varepsilon_2, \dots$ 上的分布由 Boltzmann 因子決定。簡併度 $g_i$ 表示能量為 $\varepsilon_i$ 的量子態數目。佔據數 $n_i$ 服從 $n_i = (N/Z)\,g_i\,e^{-\varepsilon_i/k_B T}$。</figcaption></div>
+
+      <div class="callout"><strong>🔗 回顧第三章：</strong>第三章從宏觀角度定義 $dS = \delta q_{\text{rev}}/T$，但當時無法解釋「為什麼」熵會增加。現在我們看到，熵增是系統向微觀態數最多的宏觀態演化的統計結果。兩者是同一枚硬幣的兩面——宏觀定義提供了測量方法，微觀解釋提供了物理根源。在後續推導中，我們將證明 $S = k_B\ln\Omega$ 與 $dS = \delta q_{\text{rev}}/T$ 完全等價。</div>
+
+<section id="s4-4"><h2>4.4 微正則系綜方法（The Microcanonical Approach）</h2>
+<p><strong>微正則系綜（microcanonical ensemble）</strong>描述一個完全孤立的系統——$U$、$V$、$N$ 固定。系統的熵由 Boltzmann 的著名公式給出：</p>
+<div class="eq">$$\boxed{S = k_B \ln \Omega} \tag{4.1}$$</div>
+<p>其中 $\Omega$ 是系統可及的微觀態數目，$k_B = R/N_A = 1.381 \times 10^{-23}\ \text{J/K}$ 是<strong>波茲曼常數</strong>。</p>
+<p>這條方程式被刻在 Boltzmann 的墓碑上——它可能是物理學中最深刻的方程式之一。它將抽象的熱力學量 $S$ 與可以計數的微觀態數目 $\Omega$ 聯繫起來。</p>
+<p>對於兩個子系統的組合，總微觀態數是乘積：$\Omega = \Omega_1 \times \Omega_2$。因此總熵是加和：$S = k_B \ln(\Omega_1 \Omega_2) = k_B \ln \Omega_1 + k_B \ln \Omega_2 = S_1 + S_2$。這解釋了為什麼熵是廣延量。</p>
+<div class="figure"><img src="../../../images/thermodynamics/ch04_pages/ch04_page_118_c.png" alt="圖 4.1" loading="lazy"><figcaption>圖 4.1：微正則系綜示意——$N$ 個粒子分布在可及的能階上，總能量 $U$ 固定。</figcaption></div>
+<h3>最可能分布</h3>
+<p>對於一個由大量粒子組成的系統，絕大多數微觀態集中在某個特定的分布 $\{n_i\}$ 附近——這就是<strong>最可能分布（most probable distribution）</strong>。這個分布對應於 $\Omega$ 的最大值。由於 $\Omega$ 的峰值極其尖銳（對於宏觀系統），最可能分布實際上就是<strong>唯一的</strong>可觀察分布。</p>
+<p>尋找最可能分布的數學方法是使用 Lagrange 乘數法，在總粒子數 $\sum n_i = N$ 和總能量 $\sum n_i \varepsilon_i = U$ 的約束下最大化 $\ln \Omega$。這導出：</p>
+<div class="eq">$$\boxed{n_i = n_0\,e^{-\varepsilon_i/k_B T}} \tag{4.2}$$</div>
+      <p>這就是著名的<strong>波茲曼分布（Boltzmann distribution）</strong>——統計熱力學的核心結果。</p>
+
+      <h3>Lagrange 乘數法：最可能分布的完整推導</h3>
+      <p>讓我們詳細展示如何從微正則系綜出發，利用 Lagrange 乘數法推導最可能分布。系統由 $N$ 個可區分粒子組成，分布在能階 $\varepsilon_i$（$i=0,1,2,\dots$）上，各能階的簡併度為 $g_i$。能階 $i$ 上的粒子數為 $n_i$，滿足兩個約束條件：</p>
+      <div class="eq">$$\sum_i n_i = N \qquad \sum_i n_i \varepsilon_i = U$$</div>
+      <p>對於可區分粒子，將 $N$ 個粒子分配到各能階的方式數（即微觀態數）為：</p>
+      <div class="eq">$$\Omega = N! \prod_i \frac{g_i^{n_i}}{n_i!}$$</div>
+      <p>我們的目標是在兩個約束條件下最大化 $\Omega$（等價於最大化 $\ln\Omega$，因為對數是單調函數）。使用 <strong>Stirling 近似</strong> $\ln n! \approx n\ln n - n$（對 $n \gg 1$ 成立）：</p>
+      <div class="eq">$$\begin{aligned}
+        \ln\Omega &\approx N\ln N - N + \sum_i \bigl(n_i\ln g_i - n_i\ln n_i + n_i\bigr) \\
+        &= N\ln N + \sum_i \bigl(n_i\ln g_i - n_i\ln n_i\bigr)
+        \end{aligned}$$</div>
+      <p>引入 <strong>Lagrange 乘數</strong> $\alpha$ 和 $\beta$ 來處理兩個約束條件：</p>
+      <div class="eq">$$\mathcal{L} = \ln\Omega + \alpha\Bigl(N - \sum_i n_i\Bigr) + \beta\Bigl(U - \sum_i n_i\varepsilon_i\Bigr)$$</div>
+      <p>對 $n_i$ 求偏導並令為零（駐點條件）：</p>
+      <div class="eq">$$\frac{\partial\mathcal{L}}{\partial n_i} = \ln g_i - \ln n_i - \alpha - \beta\varepsilon_i = 0$$</div>
+      <p>解得：</p>
+      <div class="eq">$$n_i = g_i\,e^{-\alpha}\,e^{-\beta\varepsilon_i}$$</div>
+      <p>由粒數守恆 $\sum_i n_i = N$ 可得 $e^{-\alpha} = N / \sum_i g_i e^{-\beta\varepsilon_i}$，記配分函數 $Z \equiv \sum_i g_i e^{-\beta\varepsilon_i}$，則 $e^{-\alpha} = N/Z$，因此：</p>
+      <div class="eq">$$n_i = \frac{N}{Z}\,g_i\,e^{-\beta\varepsilon_i}$$</div>
+      <p>參數 $\beta$ 的熱力學意義可以通過對比宏觀熱力學來確定。由 $S = k_B\ln\Omega$ 和 $dS = \delta q_{\text{rev}}/T$，可以證明 $\beta = 1/k_B T$。這就是波茲曼分布（式 4.3）。</p>
+
+      <h3>最可能分布的尖銳性</h3>
+      <p>對於宏觀系統（$N \sim 10^{23}$），最可能分布附近的漲落極其微小。可以證明，分布 $\{n_i\}$ 的相對標準差滿足：</p>
+      <div class="eq">$$\frac{\delta n_i}{n_i} \sim \frac{1}{\sqrt{N}}$$</div>
+      <p>對於 $N = 10^{23}$，$\delta n_i / n_i \sim 10^{-11.5}$——這意味著實際觀測到的分布與最可能分布的偏離完全可以忽略。這就是為什麼統計力學的預測本質上是<strong>確定性的</strong>，儘管其基礎是機率論。宏觀系統的行為之所以可預測，不是因為我們精確知道每個粒子的運動，而是因為天文數字級別的粒子數使得漲落被徹底平均掉。</p>
+
+      <div class="figure"><img src="../../../images/thermodynamics/ch04_pages/ch04_page_123_c.png" alt="圖 4.4" loading="lazy"><figcaption>圖 4.4：最可能分布示意。給定總能量 $U$ 和總粒子數 $N$，存在一個使 $\Omega$ 最大的分布 $\{n_i^*\}$，即最可能分布。系統實際觀測到的分布幾乎一定就是這個分布。</figcaption></div>
+
+      <div class="figure"><img src="../../../images/thermodynamics/ch04_pages/ch04_page_123_c.png" alt="圖 4.5" loading="lazy"><figcaption>圖 4.5：分布尖銳度隨 $N$ 的變化。$N$ 越大，最可能分布附近的相對漲落越小（$\propto 1/\sqrt{N}$）。對於宏觀系統（$N \sim 10^{23}$），分布實際上就是 $\delta$ 函數——最可能分布即為唯一可觀測分布。</figcaption></div>
+
+      <div class="callout"><strong>🔗 從微觀到宏觀的橋樑：</strong>本章從微觀態計數出發，推導出 $S = k_B\ln\Omega$。第三章則從宏觀可測量定義 $dS = \delta q_{\text{rev}}/T$。兩者的等價性可以通過以下對比驗證：在微正則系綜中，$1/T = (\partial S/\partial U)_{V,N}$，而第三章的 Carnot 循環分析給出相同的關係。統計力學不僅<strong>再現</strong>了宏觀熱力學的全部結果，還為其提供了深刻的微觀基礎——溫度、熵、自由能這些宏觀量都有了明確的統計力學意義。</div>
+
+<section id="s4-5"><h2>4.5 波茲曼分布（The Boltzmann Distribution）</h2>
+<p>波茲曼分布描述了在熱平衡下，粒子在各能階上的分布：</p>
+<div class="eq">$$n_i = \frac{N}{Z}\,g_i\,e^{-\varepsilon_i/k_B T} \tag{4.3}$$</div>
+<p>其中：</p>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li>$n_i$ = 能階 $i$ 上的粒子數</li>
+<li>$g_i$ = 能階 $i$ 的簡併度（degeneracy）</li>
+<li>$\varepsilon_i$ = 能階 $i$ 的能量</li>
+<li>$Z = \sum_i g_i e^{-\varepsilon_i/k_B T}$ = <strong>配分函數（partition function）</strong></li>
+</ul>
+<p><strong>配分函數 $Z$</strong> 是統計熱力學中最重要的量——所有熱力學性質都可以從 $Z$ 推導出來：</p>
+<div class="eq">$$U = N k_B T^2 \left(\frac{\partial \ln Z}{\partial T}\right)_V \tag{4.4}$$</div>
+<div class="eq">$$S = N k_B \ln Z + N k_B T \left(\frac{\partial \ln Z}{\partial T}\right)_V \tag{4.5}$$</div>
+<div class="eq">$$A = -N k_B T \ln Z \tag{4.6}$$</div>
+<div class="callout"><strong>💡 配分函數的名字</strong>來自德文 <em>Zustandssumme</em>（「狀態總和」）。它確實是對所有可能狀態的 Boltzmann 因子求和——$Z = \sum_i g_i e^{-\varepsilon_i/k_B T}$。知道 $Z$，就等於知道系統的一切。</div>
+
+      <h3>從配分函數推導熱力學量</h3>
+      <p>配分函數 $Z$ 之所以是統計熱力學的核心，是因為所有熱力學量都可以從 $Z$ 及其偏導數唯一確定。以下是完整的推導過程：</p>
+
+      <p><strong>內能 $U$：</strong></p>
+      <div class="eq">$$\begin{aligned}
+        U &= \sum_i n_i\varepsilon_i
+        = \frac{N}{Z}\sum_i g_i\varepsilon_i e^{-\varepsilon_i/k_B T} \\
+        &= N k_B T^2\left(\frac{\partial\ln Z}{\partial T}\right)_V \tag{4.4}
+        \end{aligned}$$</div>
+
+      <p><strong>熵 $S$：</strong></p>
+      <div class="eq">$$\begin{aligned}
+        S &= k_B\ln\Omega = k_B\left(N\ln N + \sum_i (n_i\ln g_i - n_i\ln n_i)\right) \\
+        &= N k_B\ln Z + \frac{U}{T} \\
+        &= N k_B\ln Z + N k_B T\left(\frac{\partial\ln Z}{\partial T}\right)_V \tag{4.5}
+        \end{aligned}$$</div>
+
+      <p><strong>Helmholtz 自由能 $A$：</strong></p>
+      <div class="eq">$$A = U - TS = -N k_B T\ln Z \tag{4.6}$$</div>
+
+      <p><strong>壓力 $P$：</strong></p>
+      <div class="eq">$$P = -\left(\frac{\partial A}{\partial V}\right)_T = N k_B T\left(\frac{\partial\ln Z}{\partial V}\right)_T$$</div>
+
+      <p>這組關係式揭示了深刻的統一性：只要我們能計算出系統的配分函數 $Z$，就能得到<strong>所有</strong>的熱力學性質——無需任何額外假設。不同的材料對應不同的 $Z$，而 $Z$ 的具體形式由系統的 Hamiltonian（Hamiltonian）和量子力學能階結構決定。因此，統計熱力學將熱力學量的計算還原為求解 Schrödinger 方程這一（原則上）純粹的量子力學問題。</p>
+
+      <div class="figure"><img src="../../../images/thermodynamics/ch04_pages/ch04_page_129_c.png" alt="圖 4.7" loading="lazy"><figcaption>圖 4.7：Maxwell-Boltzmann 分布——理想氣體分子在熱平衡下的速率分布 $f(v) = \left(\frac{m}{2\pi k_B T}\right)^{3/2} 4\pi v^2 e^{-mv^2/2k_B T}$。這是 Boltzmann 分布 $n_i \propto e^{-\varepsilon_i/k_B T}$ 在連續速度空間的具體表現。不同曲線對應不同溫度：低溫時分布尖銳集中在低速區域，高溫時分布展寬到高速區域。</figcaption></div>
+
+      <div class="callout"><strong>🔗 展望第六章（Debye 模型）：</strong>配分函數的威力將在第六章充分展現。Debye 模型通過計算晶體中聲子（晶格振動的量子）的配分函數，成功預測了 $C_V$ 在低溫下的 $T^3$ 行為——這是古典熱力學完全無法解釋的。具體而言，Debye 模型的振動配分函數 $Z_{\text{vib}} = \prod_{\mathbf{q},s} \frac{e^{-\hbar\omega_{\mathbf{q},s}/2k_B T}}{1-e^{-\hbar\omega_{\mathbf{q},s}/k_B T}}$ 給出了低溫熱容量 $C_V \propto (T/\Theta_D)^3$，與實驗完美吻合。這個經典案例完美展示了「從配分函數到熱力學量」的完整路徑。</div>
+
+<section id="s4-6"><h2>4.6 溫度的影響（The Influence of Temperature）</h2>
+<p>波茲曼因子 $e^{-\varepsilon_i/k_B T}$ 揭示了溫度如何影響能階的佔據：</p>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li><strong>低溫：</strong>$k_B T \ll \varepsilon_i$（對激發態而言），$e^{-\varepsilon_i/k_B T} \approx 0$——只有最低能階被佔據。系統「凍結」在基態。</li>
+<li><strong>高溫：</strong>$k_B T \gg \varepsilon_i$，$e^{-\varepsilon_i/k_B T} \approx 1$——各能階幾乎均勻佔據。系統趨向最大無序。</li>
+</ul>
+<p>這解釋了熱容量的溫度依賴性（第六章）：低溫下，振動自由度被凍結，$C_V$ 低於經典值；隨著溫度升高，更多自由度被激活，$C_V$ 上升。</p>
+<div class="figure"><img src="../../../images/thermodynamics/ch04_pages/ch04_page_129_c.png" alt="圖 4.6" loading="lazy"><figcaption>圖 4.6：不同溫度下能階的相對佔據。低溫時只有基態被佔據，高溫時高能態也被大量佔據。</figcaption></div>
+<div class="callout"><strong>💡 $k_B T$ 是自然的能量尺度。</strong>在室溫（300 K），$k_B T \approx 0.026\ \text{eV}$。能量遠大於此值的激發態幾乎不被佔據。這就是為什麼大多數化學反應需要高溫——只有當 $k_B T$ 接近活化能時，足夠多的分子才能跨越能障。</div>
+
+      <h3>數值範例：二能階系統的 Boltzmann 因子</h3>
+      <p>考慮一個簡單的二能階系統：基態能量 $\varepsilon_0 = 0$，激發態能量 $\varepsilon_1 = \varepsilon$。為了具體，取 $\varepsilon = 0.1\ \text{eV}$（典型的分子振動能階尺度）。粒子數比值由 Boltzmann 因子給出：</p>
+      <div class="eq">$$\frac{n_1}{n_0} = e^{-\varepsilon/k_B T}$$</div>
+      <p>在不同溫度下的具體數值：</p>
+      <table>
+        <thead><tr><th>$T$ (K)</th><th>$k_B T$ (eV)</th><th>$\varepsilon/k_B T$</th><th>$n_1/n_0$</th><th>$n_1/(n_0+n_1)$</th></tr></thead>
+        <tbody>
+          <tr><td>100</td><td>0.0086</td><td>11.6</td><td>$9.2 \times 10^{-6}$</td><td>$9.2 \times 10^{-4}\%$</td></tr>
+          <tr><td>300</td><td>0.0259</td><td>3.86</td><td>$2.1 \times 10^{-2}$</td><td>$2.1\%$</td></tr>
+          <tr><td>600</td><td>0.0517</td><td>1.93</td><td>$0.145$</td><td>$12.7\%$</td></tr>
+          <tr><td>1200</td><td>0.103</td><td>0.97</td><td>$0.379$</td><td>$27.5\%$</td></tr>
+          <tr><td>3000</td><td>0.259</td><td>0.39</td><td>$0.68$</td><td>$40.5\%$</td></tr>
+          <tr><td>$\infty$</td><td>$\infty$</td><td>0</td><td>1</td><td>$50\%$</td></tr>
+        </tbody>
+      </table>
+      <p>這個表格清晰展示了三個重要極限：</p>
+      <ul style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+        <li><strong>低溫極限</strong>（$k_B T \ll \varepsilon$）：激發態幾乎沒有粒子，$n_1/n_0 \to 0$——系統「凍結」在基態</li>
+        <li><strong>高溫極限</strong>（$k_B T \gg \varepsilon$）：兩能階均勻佔據，$n_1/n_0 \to 1$——系統趨向最大無序</li>
+        <li><strong>室溫附近</strong>（$k_B T \approx \varepsilon/4$）：約 $2\%$ 的粒子在激發態——雖然比例不大，但對於化學反應速率和熱容量已經有顯著影響</li>
+      </ul>
+      <p>對於更複雜的多能階系統，同樣的原理成立——低溫時系統「凍結」在基態附近，僅最低能階被佔據；高溫時粒子分布到更多能階上，系統的有效自由度增加。這就是 Debye 熱容量理論的核心物理圖像：溫度升高「激活」了更多振動模態，從而增加了系統吸收熱量的能力。</p>
+
+      <p><strong>延伸範例：Boltzmann 因子在化學反應中的應用</strong></p>
+      <p>Arrhenius 公式 $k = A e^{-E_a/k_B T}$ 直接源自 Boltzmann 分布。反應速率常數 $k$ 正比於能量超過活化能 $E_a$ 的分子比例。例如，對於典型的化學反應 $E_a = 0.5\ \text{eV}$：</p>
+      <ul style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+        <li>在 300 K（室溫）：$e^{-0.5/0.026} = e^{-19.2} \approx 4.4 \times 10^{-9}$——反應極慢</li>
+        <li>在 500 K：$e^{-0.5/0.043} = e^{-11.6} \approx 9.2 \times 10^{-6}$——速度提升約 2000 倍</li>
+        <li>在 1000 K：$e^{-0.5/0.086} = e^{-5.81} \approx 3.0 \times 10^{-3}$——速度提升約百萬倍</li>
+      </ul>
+      <p>這就是溫度對化學反應速率產生指數級影響的微觀根源——而這個根源就是 Boltzmann 因子 $e^{-\varepsilon/k_B T}$。</p>
+
+<section id="s4-7"><h2>4.7 熱平衡與波茲曼方程式（Thermal Equilibrium and the Boltzmann Equation）</h2>
+<p>當兩個系統可以交換能量（熱接觸）時，它們最終達到<strong>熱平衡</strong>——此時兩者的溫度相等。從統計力學的角度，熱平衡的條件是：</p>
+<div class="eq">$$\left(\frac{\partial \ln \Omega_1}{\partial U_1}\right) = \left(\frac{\partial \ln \Omega_2}{\partial U_2}\right) \tag{4.7}$$</div>
+<p>這直接導致溫度的統計定義：</p>
+<div class="eq">$$\boxed{\frac{1}{k_B T} = \left(\frac{\partial \ln \Omega}{\partial U}\right)_{V,N}} \tag{4.8}$$</div>
+<p>或等價地，使用第三章的定義：</p>
+<div class="eq">$$\frac{1}{T} = \left(\frac{\partial S}{\partial U}\right)_{V,N} \tag{4.9}$$</div>
+<div class="callout-warn"><strong>⚡ 溫度的統計意義：</strong>溫度衡量的是熵對能量的敏感度。當 $\partial S/\partial U$ 很大時（低密度能態→低溫），加一點能量就能大幅增加熵。當 $\partial S/\partial U$ 很小時（高密度能態→高溫），需要大量能量才能顯著增加熵。負溫度（$T < 0$）在特定系統中可能出現——對應於能階佔據反轉（population inversion），如雷射介質。</div>
+
+      <h3>溫度的統計定義之完整推導</h3>
+      <p>讓我們從微正則系綜出發，嚴格推導溫度的統計定義。考慮兩個系統 $A$ 和 $B$ 熱接觸（可以交換能量，但 $V$ 和 $N$ 各自固定），構成一個孤立複合系統。總能量守恆：$U_A + U_B = U_{\text{total}}$（常數）。</p>
+      <p>複合系統的總微觀態數為：</p>
+      <div class="eq">$$\Omega_{\text{total}}(U_A) = \Omega_A(U_A)\,\Omega_B(U_{\text{total}} - U_A)$$</div>
+      <p>在平衡時，系統處於最可能（即 $\Omega_{\text{total}}$ 最大）的宏觀態。求極值：</p>
+      <div class="eq">$$\frac{d\Omega_{\text{total}}}{dU_A} = \Omega_B\frac{d\Omega_A}{dU_A} + \Omega_A\frac{d\Omega_B}{dU_B}\frac{dU_B}{dU_A} = 0$$</div>
+      <p>由於 $dU_B/dU_A = -1$，平衡條件化為：</p>
+      <div class="eq">$$\frac{1}{\Omega_A}\frac{d\Omega_A}{dU_A} = \frac{1}{\Omega_B}\frac{d\Omega_B}{dU_B}$$</div>
+      <p>即：</p>
+      <div class="eq">$$\frac{d\ln\Omega_A}{dU_A} = \frac{d\ln\Omega_B}{dU_B} \tag{4.11}$$</div>
+      <p>這就是熱平衡的統計條件。從宏觀熱力學我們知道，熱平衡時兩系統的溫度相等。因此，$d\ln\Omega/dU$ 必然單調地與 $1/T$ 相關。代入 Boltzmann 公式 $S = k_B\ln\Omega$：</p>
+      <div class="eq">$$\frac{\partial S}{\partial U} = k_B\frac{\partial\ln\Omega}{\partial U} = \frac{1}{T}$$</div>
+      <p>從而得到溫度的統計定義：</p>
+      <div class="eq">$$\boxed{\frac{1}{k_B T} = \left(\frac{\partial\ln\Omega}{\partial U}\right)_{V,N}} \tag{4.8}$$</div>
+
+      <p><strong>溫度統計定義的物理詮釋：</strong></p>
+      <ul style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+        <li><strong>低溫：</strong>$d\ln\Omega/dU$ 大 → 系統的能態密度低，增加少量能量就能顯著增加可及的微觀態數</li>
+        <li><strong>高溫：</strong>$d\ln\Omega/dU$ 小 → 系統的能態密度高，需要大量能量才能顯著增加微觀態數</li>
+        <li><strong>負溫度（$T < 0$）：</strong>$d\ln\Omega/dU < 0$ → 存在能階上界且高能態佔據多於低能態（粒子數反轉）。注意這不是「比絕對零度更冷」——負溫度系統實際上比任何正溫度系統更「熱」（能量會從負溫度系統流向正溫度系統）</li>
+      </ul>
+
+      <div class="callout"><strong>🔗 與第三章的聯繫：</strong>第三章中溫度由 $1/T = (\partial S/\partial U)_{V,N}$ 定義（式 3.??）。現在我們從統計力學重新推導出這個關係，並賦予它微觀意義——溫度衡量的是微觀態數目對能量的敏感度。這完成了宏觀與微觀描述的完美統一。</div>
+
+<section id="s4-8"><h2>4.8 熱流與熵的產生（Heat Flow and the Production of Entropy）</h2>
+<p>當兩個不同溫度的物體熱接觸時，能量從高溫流向低溫。從統計力學看，這是因為總微觀態數 $\Omega_{\text{total}} = \Omega_1 \times \Omega_2$ 在能量重新分配後增加。具體而言：</p>
+<p>從高溫物體取出 $\delta q$ 的熱量，其熵減少 $\delta q/T_h$。將這份熱量放入低溫物體，其熵增加 $\delta q/T_c$。淨熵變：</p>
+<div class="eq">$$\Delta S_{\text{univ}} = \frac{\delta q}{T_c} - \frac{\delta q}{T_h} = \delta q\left(\frac{1}{T_c} - \frac{1}{T_h}\right) > 0 \tag{4.10}$$</div>
+<p>這與第三章的結論完全一致——但現在有了微觀的解釋：能量重新分配使得總微觀態數增加，而熵的增加就是這個增加的對數度量。</p>
+<div class="callout"><strong>💡 統計熱力學的終極洞見：</strong>熱力學第二定律不是一個外加的規則——它是機率論的直接結果。一個系統從有序走向無序，不是因為有任何「驅動力」，而是因為無序狀態的微觀態數目遠遠超過有序狀態。熵增是統計必然，不是物理強制。</div>
+
+      <h3>不可逆過程的統計詮釋</h3>
+      <p>任何不可逆過程都可以從微觀態的角度統一理解。考慮兩個初始溫度不同的物體 $T_h > T_c$。當它們熱接觸時，微量的熱量 $\delta q$ 從高溫物體流向低溫物體。總微觀態數的變化為：</p>
+      <div class="eq">$$\begin{aligned}
+        \Delta\ln\Omega_{\text{total}} &= \ln\Omega_1(U_1-\delta q) + \ln\Omega_2(U_2+\delta q) - \ln\Omega_1(U_1) - \ln\Omega_2(U_2) \\
+        &\approx -\frac{\partial\ln\Omega_1}{\partial U_1}\delta q + \frac{\partial\ln\Omega_2}{\partial U_2}\delta q \\
+        &= \delta q\left(\frac{1}{k_B T_c} - \frac{1}{k_B T_h}\right) > 0
+        \end{aligned}$$</div>
+      <p>因此 $\Delta S = k_B\,\Delta\ln\Omega_{\text{total}} > 0$。這個推導清晰地展示了：熱流的方向（從高溫到低溫）不是被任何「力」驅動的，而是因為這個方向使總微觀態數（即總熵）增加的結果。</p>
+
+      <p><strong>一般不可逆過程的統一原理：</strong></p>
+      <p>同樣的邏輯適用於任何不可逆過程：</p>
+      <ul style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+        <li><strong>擴散：</strong>粒子從高濃度流向低濃度，因為均勻分布對應的微觀態數遠多於聚集分布</li>
+        <li><strong>化學反應：</strong>反應趨向平衡組成，因為平衡組成的微觀態數（考慮所有分子排列和能量分布）最大</li>
+        <li><strong>熱傳導：</strong>熱量從高溫流向低溫，如上所述，使總微觀態數增加</li>
+        <li><strong>黏滯耗散：</strong>有序的宏觀動能被轉化為微觀的熱運動（無序），增加微觀態數</li>
+      </ul>
+      <p>所有這些過程都可以統一理解為：系統自發地向微觀態數最多的宏觀態演化。這個視角不僅統一了各種不可逆現象，還揭示了第二定律的統計本質——它不是絕對的物理定律，而是機率論的推論。對於宏觀系統，偏離最可幾分布的機率小到在宇宙年齡內都不會觀測到一次。但對於微小系統（如生物分子馬達），漲落不可忽略——這就是為什麼微觀尺度上第二定律的「違反」是可能的（雖然在統計意義上仍遵循漲落定理）。</p>
+
+      <div class="callout-warn"><strong>⚡ 漲落定理與第二定律：</strong>在微小系統中，熵可以短暫減少——這不違反統計力學。漲落定理（Fluctuation Theorem）指出，熵減的機率 $P(-\Delta S)/P(+\Delta S) = e^{-\Delta S/k_B}$。對於 $\Delta S \gg k_B$，熵減的機率趨近於零；但對於 $\Delta S \sim k_B$（奈米尺度），熵減可以短暫發生。這是奈米熱力學的核心內容。</div>
+
+<section id="summary"><h2>本章摘要</h2>
+<ol style="font-size:14px;color:var(--t2);margin-left:18px">
+<li><strong>Boltzmann 熵公式：</strong>$S = k_B \ln \Omega$——熵是微觀態數目的對數。</li>
+<li><strong>微觀態 vs 宏觀態：</strong>一個宏觀態對應極多微觀態。系統壓倒性地處於微觀態數最多的宏觀態。</li>
+<li><strong>波茲曼分布：</strong>$n_i = n_0 e^{-\varepsilon_i/k_B T}$——熱平衡下的粒子分布。</li>
+<li><strong>配分函數：</strong>$Z = \sum_i g_i e^{-\varepsilon_i/k_B T}$。所有熱力學量都可從 $Z$ 推導。</li>
+<li><strong>溫度的統計定義：</strong>$1/T = (\partial S/\partial U)_{V,N}$。溫度反映熵對能量的敏感度。</li>
+<li><strong>熱流的熵增：</strong>$\Delta S = \delta q(1/T_c - 1/T_h) > 0$。微觀上源自總微觀態數的增加。</li>
+      <li><strong>微正則系綜與 Lagrange 乘數法：</strong>在 $\sum n_i = N$ 和 $\sum n_i\varepsilon_i = U$ 的約束下最大化 $\ln\Omega$，導出波茲曼分布 $n_i \propto g_i e^{-\varepsilon_i/k_B T}$。</li>
+      <li><strong>配分函數的威力：</strong>$Z = \sum_i g_i e^{-\varepsilon_i/k_B T}$ 包含系統的所有熱力學信息：$U = N k_B T^2(\partial\ln Z/\partial T)_V$，$S = N k_B\ln Z + N k_B T(\partial\ln Z/\partial T)_V$，$A = -N k_B T\ln Z$。</li>
+      <li><strong>溫度的統計定義：</strong>$1/k_B T = (\partial\ln\Omega/\partial U)_{V,N}$。溫度衡量微觀態數目對能量的敏感度，而非「冷熱程度」。</li>
+      <li><strong>數值估算：</strong>$k_B T$ 是自然的能量尺度（300 K 時 $\approx 0.026\ \text{eV}$）。Boltzmann 因子 $e^{-\Delta\varepsilon/k_B T}$ 決定能階佔據比、缺陷濃度、化學反應速率等一切熱激活過程。</li>
+      <li><strong>交叉連結：</strong>統計熱力學為第三章的宏觀熵 $dS = \delta q_{\text{rev}}/T$ 提供了微觀基礎，並為第六章的 Debye 模型熱容量計算提供了理論工具。三者共同構成材料熱力學的完整體系。</li>
+      <li><strong>核心哲學：</strong>第二定律不是外加的物理規則——它是機率論的必然結果。宏觀系統的行為之所以確定，是因為 $N \sim 10^{23}$ 使得漲落 ($\propto 1/\sqrt{N}$) 完全可以忽略。</li>
+      </ol></section>
+</main>
+<script>
+function toggleTheme(){const h=document.documentElement;const n=h.getAttribute('data-theme')==='light'?'dark':'light';h.setAttribute('data-theme',n);localStorage.setItem('theme',n);document.getElementById('tl').textContent=n==='dark'?'淺色模式':'深色模式';}
+const s=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',s);if(s==='dark')document.getElementById('tl').textContent='淺色模式';
+const secs=document.querySelectorAll('section[id]');const navs=document.querySelectorAll('.sn a');window.addEventListener('scroll',()=>{let c='';secs.forEach(s=>{if(window.scrollY>=s.offsetTop-80)c=s.getAttribute('id');});navs.forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+c);});});
+document.querySelectorAll('.figure img').forEach(i=>i.addEventListener('click',()=>window.open(i.src,'_blank')));
+</script>
+</body>
+</html>

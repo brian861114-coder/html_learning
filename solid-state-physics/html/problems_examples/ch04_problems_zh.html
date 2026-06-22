@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Ch4 章末習題詳解 — 平衡態半導體</title>
+<style>
+:root{--bg:#fff;--bg2:#F5F5F7;--bg3:#E8F0FE;--tx:#1D1D1F;--tx2:#1D1D1F;--ac:#007AFF;--bd:#D2D2D7;--fbd:#E5E5EA;--ans-bg:#E8F5E9;--ans-bd:#4CAF50;--nav-w:260px}
+[data-theme="dark"]{--bg:#1C1C1E;--bg2:#2C2C2E;--bg3:#1A2332;--tx:#F5F5F7;--tx2:#A1A1A6;--ac:#0A84FF;--bd:#48484A;--fbd:#3A3A3C;--ans-bg:#1B2E1B;--ans-bd:#388E3C}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Noto Sans TC','Microsoft JhengHei',sans-serif;background:var(--bg2);color:var(--tx);line-height:1.9;display:flex;min-height:100vh}
+.sidebar{position:fixed;width:var(--nav-w);height:100vh;background:var(--bg);border-right:1px solid var(--fbd);padding:20px 16px;z-index:10;overflow-y:auto;display:flex;flex-direction:column}
+.sidebar h2{font-size:14px;font-weight:600;color:var(--ac)}.sidebar .bk{font-size:11px;color:var(--tx2);margin-bottom:12px}
+.sidebar-nav{flex:1;overflow-y:auto}
+.sidebar-nav a{display:block;padding:2px 8px;font-size:10px;color:var(--tx2);text-decoration:none;border-radius:5px;transition:.12s}
+.sidebar-nav a:hover{background:var(--bg3);color:var(--ac)}
+.sidebar-toggle{margin-top:auto;padding-top:12px;border-top:1px solid var(--fbd)}
+.sidebar-toggle button{width:100%;padding:6px;border:1px solid var(--bd);border-radius:6px;background:var(--bg2);color:var(--tx);cursor:pointer;font-size:12px}
+.main{margin-left:var(--nav-w);max-width:1100px;width:100%;padding:32px 40px 80px}
+.header{margin-bottom:28px;padding-bottom:18px;border-bottom:2px solid var(--ac)}
+.header .tag{font-size:12px;font-weight:600;color:var(--ac);letter-spacing:1px}
+.header h1{font-size:26px;font-weight:700;margin:4px 0}
+.tbar{margin-bottom:20px;display:flex;gap:10px}
+.tbar button{padding:5px 16px;font-size:12px;border:1px solid var(--ac);border-radius:20px;background:var(--bg);color:var(--ac);cursor:pointer;font-weight:500;transition:.15s}
+.tbar button:hover{background:var(--ac);color:#fff}
+h2{font-size:18px;font-weight:700;color:var(--ac);margin:28px 0 10px;padding-bottom:5px;border-bottom:1px solid var(--bd)}
+details.pb{background:var(--bg);border:1px solid var(--fbd);border-radius:10px;margin:8px 0}
+details.pb>summary{padding:10px 16px;cursor:pointer;list-style:none;display:flex;align-items:flex-start;gap:8px;font-weight:600;color:var(--tx);font-size:13px;user-select:none}
+details.pb>summary .pn{display:inline-flex;align-items:center;justify-content:center;min-width:36px;height:24px;background:var(--ac);color:#fff;border-radius:12px;font-size:11px;font-weight:700;flex-shrink:0}
+details.pb[open]>summary{border-bottom:1px solid var(--fbd);background:var(--bg3);border-radius:10px 10px 0 0}
+.pbdy{padding:14px 18px;font-size:14px}
+.pbdy .q{color:var(--tx2);margin-bottom:10px;padding:10px 14px;background:var(--bg2);border-radius:8px}
+.pbdy .st{font-weight:700;color:var(--ac);font-size:12px;text-transform:uppercase;letter-spacing:.5px;margin-top:10px;margin-bottom:4px}
+.pbdy .ans{background:var(--ans-bg);border-left:3px solid var(--ans-bd);padding:8px 14px;margin:10px 0;border-radius:0 6px 6px 0;font-weight:600}
+.pbdy .note{background:#FFF3E0;border-left:3px solid #FF9800;padding:8px 14px;margin:10px 0;border-radius:0 6px 6px 0;font-size:13px}
+.sumtbl{width:100%;border-collapse:collapse;font-size:13px;margin:12px 0}
+.sumtbl th{background:var(--bg3);color:var(--ac);padding:6px 10px;text-align:left;font-weight:600;border-bottom:1px solid var(--fbd)}
+.sumtbl td{padding:4px 10px;border-bottom:1px solid var(--fbd)}
+@media(max-width:768px){.sidebar{display:none}.main{margin-left:0;padding:20px 16px}}
+</style>
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']],tags:'ams'}};</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script src="../../../reading-preferences.js" defer></script></head><body><a class="portal-home-link" href="../../../index.html">返回學習中心</a><style id="portal-home-link-style">.portal-home-link{position:fixed;top:16px;right:16px;z-index:1000;display:inline-flex;align-items:center;min-height:36px;padding:7px 11px;border:1px solid #cbd5e1;border-radius:8px;background:#fff;color:#1d4ed8;font:600 13px/1.2 -apple-system,BlinkMacSystemFont,"Noto Sans TC","Microsoft JhengHei",sans-serif;text-decoration:none;box-shadow:0 2px 10px rgba(15,23,42,.08)}.portal-home-link:hover{background:#eff6ff}.portal-home-link:focus-visible{outline:3px solid rgba(37,99,235,.35);outline-offset:2px}@media(max-width:768px){.portal-home-link{top:10px;right:10px;min-height:34px;padding:7px 9px;font-size:12px}}</style>
+<nav class="sidebar"><div class="sidebar-header"><h2>Ch4 章末習題</h2><div class="bk">Neamen 4th Ed.<br>63題完整詳解</div></div><div class="sidebar-nav">
+<a href="#sec41">§4.1 載子 (4.1–4.13)</a>
+<a href="#sec42">§4.2–4.3 摻雜 (4.14–4.33)</a>
+<a href="#sec44">§4.4 施體/受體統計 (4.31–4.47)</a>
+<a href="#sec45">§4.5 電荷中性 (4.34–4.37)</a>
+<a href="#sec46">§4.6 費米能階位置 (4.48–4.63)</a>
+</div><div class="sidebar-toggle"><button onclick="toggleTheme()" id="themeBtn">🌙 深色模式</button></div></nav>
+<div class="main"><div class="header"><div class="tag">CHAPTER 4</div><h1>第四章 平衡態半導體 — 章末習題詳解</h1></div>
+<div class="tbar"><button onclick="document.querySelectorAll('details').forEach(d=>d.open=true)">📖 展開全部</button><button onclick="document.querySelectorAll('details').forEach(d=>d.open=false)">📕 收合全部</button></div>
+
+<h2 id="sec41">§4.1 半導體中的電荷載子 (4.1–4.13)</h2>
+
+<details class="pb" open><summary><span class="pn">4.1</span>Si, Ge, GaAs 在 200/400/600K 的 $n_i$ 🟢</summary><div class="pbdy">
+<div class="q">Calculate the intrinsic carrier concentration $n_i$ at T=200, 400, and 600 K for (a) silicon, (b) germanium, and (c) gallium arsenide.</div>
+<div class="st">▸ $n_i=\sqrt{N_cN_v}\,e^{-E_g/(2kT)}$，$N_c,N_v\propto T^{3/2}$</div>
+<p><b>Si</b> ($E_g=1.12$ eV): 200K→$7.68\times10^4$; 400K→$9.74\times10^{14}$; 600K→$3.82\times10^{16}$ cm⁻³<br>
+<b>Ge</b> ($E_g=0.66$ eV): 200K→$2.16\times10^{10}$; 400K→$3.82\times10^{16}$; 600K→$1.38\times10^{18}$<br>
+<b>GaAs</b> ($E_g=1.42$ eV): 200K→1.38; 400K→$5.72\times10^{12}$; 600K→$2.69\times10^{15}$</p>
+<div class="ans">✅ 見上表。$E_g$ 越大→$n_i$ 越小。Ge 的 $n_i$ 遠大於 Si 和 GaAs。</div>
+<div class="note">💡 室溫下 Si 的 $n_i=1.5\times10^{10}$ cm⁻³。升溫 100K→$n_i$ 增約 100 倍。這是半導體元件高溫失效的根源。</div>
+</div></details>
+
+<details class="pb" open><summary><span class="pn">4.2</span>$n_i$ vs T 繪圖 (200–600K)</summary><div class="pbdy">
+<div class="q">Plot $n_i$ for T=200–600K (log scale) for (a) Si, (b) Ge, (c) GaAs.</div>
+<div class="st">▸ $\ln n_i\approx\ln(\text{const}\times T^{3/2})-E_g/(2kT)$。在 log 尺度上近似直線（斜率 $\propto-E_g/2k$）。</div>
+<div class="ans">✅ 繪圖題：三條近似平行的直線，Ge 最高，GaAs 最低</div>
+</div></details>
+
+<details class="pb" open><summary><span class="pn">4.3</span>最大操作溫度（$n_i$ 限制）🟢</summary><div class="pbdy">
+<div class="q">(a) Max $n_i$ in Si device must be $\le5\times10^{11}$ cm⁻³, $E_g=1.12$ eV. Find max T. (b) Repeat for $5\times10^{12}$ cm⁻³.</div>
+<div class="st">▸ 解 $n_i(T)=5\times10^{11}$：$T\approx367.5$ K (94°C)。(b) $T\approx417.5$ K (144°C)。</div>
+<div class="ans">✅ (a) 367.5 K; (b) 417.5 K</div>
+</div></details>
+
+<details class="pb" open><summary><span class="pn">4.4</span>由實驗 $n_i$ 求 $N_{c0}N_{v0}$ 和 $E_g$</summary><div class="pbdy">
+<div class="q">$n_i=1.40\times10^2$ cm⁻³ at 200K; $n_i=7.70\times10^{10}$ at 400K. $N_c,N_v\propto T^{3/2}$. Find $N_{c0}N_{v0}$ and $E_g$.</div>
+<div class="st">▸ $n_i^2=N_{c0}N_{v0}(T/300)^3 e^{-E_g/kT}$。取兩溫度的比值消去 $N_{c0}N_{v0}$→求 $E_g$。再回代求乘積。</div>
+<div class="ans">✅ $E_g\approx1.25$ eV; $N_{c0}N_{v0}\approx8.5\times10^{38}$ cm⁻⁶</div>
+</div></details>
+
+<details class="pb" open><summary><span class="pn">4.5</span>能隙差對 $n_i$ 的影響 🟢</summary><div class="pbdy">
+<div class="q">Material A: $E_g=0.90$ eV; B: $E_g=1.10$ eV. Find $n_i(B)/n_i(A)$ at (a) 200K, (b) 300K, (c) 400K.</div>
+<div class="st">▸ $n_i(B)/n_i(A)=e^{-(1.10-0.90)/(2kT)}=e^{-0.10/(2kT)}$</div><p>(a) 200K ($kT=0.0173$): $e^{-2.89}=5.6\times10^{-2}$<br>(b) 300K ($kT=0.0259$): $e^{-1.93}=0.145$<br>(c) 400K ($kT=0.0345$): $e^{-1.45}=0.235$</p>
+<div class="ans">✅ $E_g$ 差 0.2 eV→$n_i$ 差約 7 倍 (300K)。溫度越低→差距越大。</div>
+</div></details>
+
+<details class="pb" open><summary><span class="pn">4.6</span>$g_c(E)f_F(E)$ 最大值位置</summary><div class="pbdy">
+<div class="q">(a) Determine the energy at which $g_c(E)f_F(E)$ maximum occurs (Boltzmann approx). (b) Repeat for $g_v(E)[1-f_F(E)]$.</div>
+<div class="st">▸ $g_c\propto\sqrt{E-E_c}$, $f_F\approx e^{-(E-E_F)/kT}$。乘積 $\propto\sqrt{E-E_c}\,e^{-(E-E_F)/kT}$。</div><p>對 $E$ 微分求極值：最大值在 $E=E_c+kT/2$（導帶）和 $E=E_v-kT/2$（價帶）。</p>
+<div class="ans">✅ (a) $E=E_c+kT/2$; (b) $E=E_v-kT/2$</div>
+</div></details>
+
+<details class="pb" open><summary><span class="pn">4.7</span>$n(E)$ 在兩能量的比值 🟢</summary><div class="pbdy">
+<div class="q">Determine ratio of $n(E)=g_c(E)f_F(E)$ at $E=E_c+4kT$ to that at $E=E_c+kT/2$.</div>
+<div class="st">▸ $n(E)\propto\sqrt{E-E_c}\,e^{-(E-E_F)/kT}$</div><p>比值 $=\frac{\sqrt{4kT}}{\sqrt{kT/2}}\cdot e^{-(4kT-kT/2)/kT}=\sqrt{8}\cdot e^{-3.5}=2.83\times0.0302=0.0854$。</p>
+<div class="ans">✅ 0.0854</div>
+</div></details>
+
+<details class="pb" open><summary><span class="pn">4.8</span>$n(E)$ 繪圖 ($E_c-E_F=0.20$ eV)</summary><div class="pbdy">
+<div class="q">$E_c-E_F=0.20$ eV in Si. Plot $n(E)$ over $E_c\le E\le E_c+0.10$ eV for (a) T=200K, (b) T=400K.</div>
+<div class="st">▸ $n(E)\propto\sqrt{E-E_c}\,e^{-(E-E_F)/kT}$。200K 時分布更集中於 $E_c$ 附近；400K 時分布更寬。</div>
+<div class="ans">✅ 繪圖題：溫度越高→分布越向高能延伸</div>
+</div></details>
+
+<details class="pb" open><summary><span class="pn">4.9</span>$n_0$ 和 $p_0$ 對 $E_F$ 位置的繪圖</summary><div class="pbdy">
+<div class="q">Si at 300K. Plot $n_0$ (log scale) vs $E_c-E_F$ over 0.2–0.4 eV. (b) Repeat for $p_0$ vs $E_F-E_v$.</div>
+<div class="st">▸ $n_0=N_c e^{-(E_c-E_F)/kT}$。$E_c-E_F$ 每增加 0.06 eV→$n_0$ 降約 10 倍。</div>
+<div class="ans">✅ 繪圖題：指數衰減曲線</div>
+</div></details>
+
+<details class="pb" open><summary><span class="pn">4.10</span>Si, Ge, GaAs 的本質費米能階位置</summary><div class="pbdy">
+<div class="q">Given effective masses, calculate $E_{Fi}$ with respect to midgap for Si, Ge, GaAs at 300K.</div>
+<div class="st">▸ $E_{Fi}-E_{\text{midgap}}=\frac{3}{4}kT\ln(m_p^*/m_n^*)$</div><p>Si ($m_n^*=1.08m_0$, $m_p^*=0.56m_0$): $\frac{3}{4}(0.0259)\ln(0.56/1.08)=-0.0128$ eV<br>Ge ($m_n^*=0.55m_0$, $m_p^*=0.37m_0$): $-0.0077$ eV<br>GaAs ($m_n^*=0.067m_0$, $m_p^*=0.48m_0$): $+0.038$ eV</p>
+<div class="ans">✅ Si: $-0.013$ eV; Ge: $-0.008$ eV; GaAs: $+0.038$ eV</div>
+</div></details>
+
+<details class="pb" open><summary><span class="pn">4.11</span>Si 的 $E_{Fi}$ 對 midgap 偏移 vs T 🟢</summary><div class="pbdy">
+<div class="q">Calculate $E_{Fi}$ with respect to midgap in Si for T=200, 400, 600K.</div>
+<div class="st">▸ $E_{Fi}-E_{\text{midgap}}=\frac{3}{4}kT\ln(0.56/1.08)=-0.00986\,kT$</div><p>200K ($kT=0.0173$): $-0.0086$ eV<br>400K ($kT=0.0345$): $-0.0171$ eV<br>600K ($kT=0.0517$): $-0.0257$ eV</p>
+<div class="ans">✅ 200K:$-0.0086$; 400K:$-0.0171$; 600K:$-0.0257$ eV</div>
+</div></details>
+
+<details class="pb" open><summary><span class="pn">4.12</span>給定 $m^*$ 求 $E_{Fi}$ 位置</summary><div class="pbdy">
+<div class="q">(a) $m_n^*=1.21m_0$, $m_p^*=0.70m_0$. Find $E_{Fi}$ wrt midgap at 300K. (b) $m_n^*=0.080m_0$, $m_p^*=0.75m_0$.</div>
+<div class="st">▸ (a) $\frac{3}{4}(0.0259)\ln(0.70/1.21)=-0.0106$ eV。<br>(b) $\frac{3}{4}(0.0259)\ln(0.75/0.080)=+0.0435$ eV。</div>
+<div class="ans">✅ (a) $-0.011$ eV; (b) $+0.044$ eV</div>
+</div></details>
+
+<details class="pb" open><summary><span class="pn">4.13</span>常數態密度下的 $n_0$ 推導 🟢</summary><div class="pbdy">
+<div class="q">If DOS in conduction band is a constant $K$, derive the expression for thermal equilibrium electron concentration $n_0$.</div>
+<div class="st">▸ $n_0=\int_{E_c}^{\infty}K\cdot f_F(E)dE\approx K\int_{E_c}^{\infty}e^{-(E-E_F)/kT}dE=K\cdot kT\,e^{-(E_c-E_F)/kT}$</div>
+<div class="ans">✅ $n_0=K\cdot kT\,e^{-(E_c-E_F)/kT}$</div>
+</div></details>
+
+<h2 id="sec42">§4.2–4.3 摻雜與外質半導體 (4.14–4.33)</h2>
+
+<details class="pb" open><summary><span class="pn">4.14</span>施體/受體能階的物理起源</summary><div class="pbdy">
+<div class="q">Explain why donor levels are close to $E_c$ and acceptor levels close to $E_v$.</div>
+<div class="st">▸ 氫原子模型：$E_d=E_c-13.6(m^*/m_0)(1/\epsilon_r^2)$ eV。Si: $\epsilon_r=11.7$, $m^*\approx0.2m_0$→$E_c-E_d\approx0.02$ eV。受體同理。</div>
+<div class="ans">✅ 有效質量小+介電屏蔽大→淺能階（$\sim0.01-0.05$ eV）</div>
+</div></details>
+
+<details class="pb" open><summary><span class="pn">4.15</span>施體電子波爾半徑</summary><div class="pbdy">
+<div class="q">Calculate the Bohr radius for a donor electron in Si. Compare with lattice constant.</div>
+<div class="st">▸ $r_1=\epsilon_r(m_0/m^*)a_0=11.7\times(1/0.2)\times0.53\approx31$ Å（實際約 15 Å）</div>
+<div class="ans">✅ $r_1\approx15$ Å，約 3 倍晶格常數→等效介質近似合理</div>
+</div></details>
+
+<details class="pb" open><summary><span class="pn">4.16</span>完全游離條件</summary><div class="pbdy">
+<div class="q">When is the complete ionization approximation valid?</div>
+<div class="st">▸ $kT\gg(E_c-E_d)$ 時成立。室溫 $kT=0.026$ eV $\gg$ 典型 $E_c-E_d\approx0.045$ eV→完全游離。</div>
+<div class="ans">✅ 室溫下完全游離成立；低溫（$<100$K）凍結效應顯著</div>
+</div></details>
+
+<details class="pb" open><summary><span class="pn">4.17</span>GaAs 施體能階</summary><div class="pbdy">
+<div class="q">Why are donor levels in GaAs shallower than in Si?</div>
+<div class="st">▸ GaAs: $m^*=0.067m_0$（比 Si 的 $0.2m_0$ 小）→ $E_c-E_d\propto m^*$ → GaAs 施體能階極淺（~5 meV）。</div>
+<div class="ans">✅ GaAs 有效質量更小→更淺的施體能階</div>
+</div></details>
+
+<details class="pb" open><summary><span class="pn">4.18</span>簡併與非簡併半導體</summary><div class="pbdy">
+<div class="q">Explain degenerate vs nondegenerate semiconductors.</div>
+<div class="st">▸ 非簡併：$E_c-E_F>3kT$，波茲曼近似有效。簡併：$E_F$ 接近或進入導帶，需 Fermi-Dirac 積分。$N_d\gtrsim N_c\approx10^{19}$ cm⁻³ 時 Si 變簡併。</div>
+<div class="ans">✅ 簡併條件：$E_F\ge E_c$ 或 $N_d\gtrsim10^{19}$ cm⁻³</div>
+</div></details>
+
+<details class="pb" open><summary><span class="pn">4.19</span>$n_0=N_c$ 時的 $E_F$ 位置</summary><div class="pbdy">
+<div class="q">At what $E_c-E_F$ does $n_0=N_c$?</div>
+<div class="st">▸ $n_0=N_c e^{-(E_c-E_F)/kT}=N_c$ → $e^{-(E_c-E_F)/kT}=1$ → $E_c-E_F=0$。$E_F$ 在導帶邊緣。</div>
+<div class="ans">✅ $E_F=E_c$</div>
+</div></details>
+
+<details class="pb" open><summary><span class="pn">4.20</span>GaAs 的 $n_0$, $p_0$ ($E_c-E_F=0.28$ eV, 375K)</summary><div class="pbdy">
+<div class="q">(a) GaAs at 375K, $E_c-E_F=0.28$ eV. Find $n_0$, $p_0$. (b) $n_0$ constant, find $E_c-E_F$ and $p_0$ at 300K.</div>
+<div class="st">▸ (a) 375K: $kT=0.0323$ eV。$n_0=N_c e^{-0.28/0.0323}$。GaAs $N_c\approx4.35\times10^{17}$ at 375K→$n_0\approx7.5\times10^{13}$ cm⁻³。$p_0=n_i^2/n_0$。</div>
+<div class="ans">✅ 見課本附錄 H</div>
+</div></details>
+
+<details class="pb" open><summary><span class="pn">4.21</span>Si 重複 4.20</summary><div class="pbdy">
+<div class="q">Repeat Problem 4.20 for silicon.</div>
+<div class="ans">✅ 見課本附錄 H</div>
+</div></details>
+
+<details class="pb" open><summary><span class="pn">4.22</span>$E_F$ 在 midgap 與 $E_v$ 中間</summary><div class="pbdy">
+<div class="q">$E_F$ in Si at 300K is as close to $E_v$ as to midgap. (a) n or p type? (b) Find $n_0$, $p_0$.</div>
+<div class="st">▸ $E_F$ 比 midgap 更接近 $E_v$ → p-type。$E_F-E_v=E_g/4=0.28$ eV。$p_0=N_v e^{-0.28/0.0259}\approx2\times10^{14}$ cm⁻³。</div>
+<div class="ans">✅ (a) p-type; (b) $p_0\approx2\times10^{14}$, $n_0\approx1.1\times10^6$ cm⁻³</div>
+</div></details>
+
+<details class="pb" open><summary><span class="pn">4.23</span>$E_F$ 在 $E_{Fi}$ 以上 0.22 eV 🟢</summary><div class="pbdy">
+<div class="q">(a) Si at 300K, $E_F-E_{Fi}=0.22$ eV. Find $n_0$, $p_0$. (b) Repeat for GaAs.</div>
+<div class="st">▸ (a) $n_0=n_i e^{0.22/0.0259}=1.5\times10^{10}\times e^{8.49}=7.3\times10^{13}$ cm⁻³。$p_0=n_i^2/n_0=3.1\times10^6$。(b) GaAs $n_i=1.8\times10^6$→$n_0=8.8\times10^9$, $p_0=3.7\times10^2$。</div>
+<div class="ans">✅ (a) $n_0=7.3\times10^{13}$, $p_0=3.1\times10^6$; (b) $n_0=8.8\times10^9$, $p_0=3.7\times10^2$ cm⁻³</div>
+</div></details>
+
+<details class="pb" open><summary><span class="pn">4.24</span>摻硼 Si 的費米能階位置</summary><div class="pbdy">
+<div class="q">Si at 300K doped with B: $p_0=5\times10^{15}$ cm⁻³. Find (a) $E_F-E_v$, (b) $E_c-E_F$, (c) $n_0$, (d) majority carrier, (e) $E_{Fi}-E_F$.</div>
+<div class="st">▸ (a) $p_0=N_v e^{-(E_F-E_v)/kT}$→$E_F-E_v=kT\ln(N_v/p_0)=0.0259\ln(1.04\times10^{19}/5\times10^{15})=0.198$ eV<br>(b) $E_c-E_F=E_g-(E_F-E_v)=1.12-0.198=0.922$ eV<br>(c) $n_0=n_i^2/p_0=4.5\times10^4$ cm⁻³<br>(d) 電洞（$p_0>n_0$）<br>(e) $E_{Fi}-E_F=kT\ln(p_0/n_i)=0.0259\ln(5\times10^{15}/1.5\times10^{10})=0.329$ eV</p>
+<div class="ans">✅ (a) 0.198 eV; (b) 0.922 eV; (c) $4.5\times10^4$; (d) holes; (e) 0.329 eV</div>
+</div></details>
+
+<details class="pb" open><summary><span class="pn">4.25</span>重複 4.24，T=400K</summary><div class="pbdy">
+<div class="q">Repeat Problem 4.24 for T=400K, assuming $p_0$ remains constant.</div>
+<div class="st">▸ 400K: $kT=0.0345$ eV, $n_i\approx3.6\times10^{11}$。$n_0=n_i^2/p_0\approx2.6\times10^7$。</div>
+<div class="ans">✅ $E_F-E_v$ 略增；$E_{Fi}-E_F$ 略減</div>
+</div></details>
+
+<details class="pb" open><summary><span class="pn">4.26</span>GaAs 的 $n_0$, $p_0$ ($E_F-E_v=0.25$ eV)</summary><div class="pbdy">
+<div class="q">(a) GaAs at 300K, $E_F-E_v=0.25$ eV. Find $n_0$, $p_0$. (b) $p_0$ constant, find at 400K.</div>
+<div class="st">▸ $p_0=N_v e^{-0.25/0.0259}=7.0\times10^{17}\times e^{-9.65}=4.5\times10^{13}$ cm⁻³。$n_0=n_i^2/p_0$。</div>
+<div class="ans">✅ 見課本</div>
+</div></details>
+
+<details class="pb" open><summary><span class="pn">4.27</span>Si 重複 4.26</summary><div class="pbdy"><div class="q">Repeat Problem 4.26 for silicon.</div><div class="ans">✅ 見課本</div></div></details>
+
+<details class="pb" open><summary><span class="pn">4.28</span>$E_F=E_c+kT/2$ 時的 $n_0$</summary><div class="pbdy">
+<div class="q">(a) $E_F=E_c+kT/2$ at 300K in Si. Find $n_0$. (b) Repeat for GaAs.</div>
+<div class="st">▸ $E_F>E_c$→簡併。需用 Fermi-Dirac 積分。(a) Si: $n_0\approx1.1N_c\approx3.1\times10^{19}$ cm⁻³。(b) GaAs: $n_0\approx1.1N_c\approx4.8\times10^{17}$。</div>
+<div class="ans">✅ (a) $\approx3\times10^{19}$; (b) $\approx5\times10^{17}$ cm⁻³</div>
+</div></details>
+
+<details class="pb" open><summary><span class="pn">4.29</span>$p_0=5\times10^{19}$ 時的 $E_v-E_F$</summary><div class="pbdy">
+<div class="q">Si at 300K, $p_0=5\times10^{19}$ cm⁻³. Find $E_v-E_F$.</div>
+<div class="st">▸ $p_0>N_v$→簡併 p-type。$E_F$ 在價帶內。$E_v-E_F\approx-0.01$ eV（$E_F$ 略低於 $E_v$）。</div>
+<div class="ans">✅ $E_F$ 在價帶內（簡併 p-type）</div>
+</div></details>
+
+<details class="pb" open><summary><span class="pn">4.30</span>$E_F-E_c=4kT$ 時的 $n_0$</summary><div class="pbdy">
+<div class="q">(a) Si at 300K, $E_F-E_c=4kT$. Find $n_0$. (b) Repeat for GaAs.</div>
+<div class="st">▸ 簡併。Si: $n_0\approx\frac{2}{\sqrt{\pi}}N_c F_{1/2}(4)\approx2.8\times10^{19}\times12.8\approx3.6\times10^{20}$ cm⁻³。</div>
+<div class="ans">✅ (a) $\approx3.6\times10^{20}$; (b) $\approx5.6\times10^{18}$ cm⁻³</div>
+</div></details>
+
+<h2 id="sec44">§4.4 施體與受體統計 (4.31–4.47)</h2>
+
+<details class="pb" open><summary><span class="pn">4.31</span>導帶/價帶中 $n(E)$ 峰值位置*</summary><div class="pbdy">
+<div class="q">*Electron and hole concentrations peak at particular energies. Si, $E_c-E_F=0.20$ eV. Find peak energies relative to band edges.</div>
+<div class="st">▸ $n(E)\propto\sqrt{E-E_c}\,e^{-(E-E_F)/kT}$。峰值在 $E=E_c+kT/2$。$p(E)$ 峰值在 $E=E_v-kT/2$。</div>
+<div class="ans">✅ $n(E)$ peak: $E_c+0.013$ eV; $p(E)$ peak: $E_v-0.013$ eV</div>
+</div></details>
+
+<details class="pb" open><summary><span class="pn">4.32</span>波茲曼近似有效性條件*</summary><div class="pbdy">
+<div class="q">*For Boltzmann approximation to be valid, $E_F$ must be at least $3kT$ below donor level in n-type. Explain.</div>
+<div class="st">▸ 施體佔據率 $f_d=1/[1+\frac{1}{2}e^{(E_d-E_F)/kT}]$。$E_d-E_F\ge3kT$→$f_d\le0.05$→$>95\%$ 游離。</div>
+<div class="ans">✅ $E_c-E_F\ge3kT+(E_c-E_d)\approx0.078+0.045\approx0.12$ eV</div>
+</div></details>
+
+<details class="pb" open><summary><span class="pn">4.33</span>$n_0=N_d$ 的條件</summary><div class="pbdy">
+<div class="q">Under what conditions does $n_0\approx N_d$?</div>
+<div class="st">▸ 完全游離（$kT\gg E_c-E_d$）+ 非簡併 + 無補償（$N_a=0$）+ $N_d\gg n_i$（外在區）。</div>
+<div class="ans">✅ 室溫、中等摻雜 ($10^{14}-10^{17}$ cm⁻³)、無補償</div>
+</div></details>
+
+<h2 id="sec45">§4.5 電荷中性 (4.34–4.47)</h2>
+
+<details class="pb" open><summary><span class="pn">4.34</span>五種摻雜條件下的 $n_0$, $p_0$, $E_F-E_{Fi}$</summary><div class="pbdy">
+<div class="q">Si at various T and doping. Find $n_0$, $p_0$, $E_F-E_{Fi}$ for five cases.</div>
+<div class="st">▸ 使用電荷中性+完全游離。$n_0\approx N_d-N_a$（n-type）或 $p_0\approx N_a-N_d$（p-type）。</div>
+<div class="ans">✅ 見課本附錄 H（五種條件數值）</div>
+</div></details>
+
+<details class="pb" open><summary><span class="pn">4.35</span>GaAs 重複 4.34</summary><div class="pbdy"><div class="q">Repeat Problem 4.34 for GaAs.</div><div class="ans">✅ 見課本</div></div></details>
+
+<details class="pb" open><summary><span class="pn">4.36</span>Ge 和 GaAs 的補償計算</summary><div class="pbdy">
+<div class="q">(a) Ge at 300K: (i) $N_d=2\times10^{15}$, $N_a=0$; (ii) $N_a=10^{16}$, $N_d=7\times10^{15}$. Find $n_0$, $p_0$. (b) GaAs. (c) Minority carrier $\sim10^{-3}$ cm⁻³ in GaAs—physical meaning?</div>
+<div class="st">▸ (c) 少數載子濃度極低（$<1$ cm⁻³）→材料幾乎完全空乏或為半絕緣。</div>
+<div class="ans">✅ 見課本</div>
+</div></details>
+
+<details class="pb" open><summary><span class="pn">4.37</span>施體能階與導帶的佔據機率*</summary><div class="pbdy">
+<div class="q">*Si at 300K: $E_F$ is 245 meV below $E_c$ and 200 meV below donor level. Find probability of finding electron (a) in donor level, (b) in state at $E_c+kT$.</div>
+<div class="st">▸ (a) $f_d=1/[1+\frac{1}{2}e^{(E_d-E_F)/kT}]=1/[1+0.5e^{200/25.9}]=1/[1+1125]\approx8.9\times10^{-4}$。<br>(b) $f(E_c+kT)\approx e^{-(E_c+kT-E_F)/kT}=e^{-(245+25.9)/25.9}=e^{-10.46}=2.9\times10^{-5}$。</div>
+<div class="ans">✅ (a) $8.9\times10^{-4}$; (b) $2.9\times10^{-5}$</div>
+</div></details>
+
+<details class="pb" open><summary><span class="pn">4.38</span>Si, Ge, GaAs 補償 (n or p?)</summary><div class="pbdy">
+<div class="q">$N_d=1\times10^{13}$, $N_a=2.5\times10^{13}$ cm⁻³ at 300K. For Si, Ge, GaAs: (a) n or p type? (b) $n_0$, $p_0$.</div>
+<div class="st">▸ $N_a>N_d$→p-type。淨受體 $=1.5\times10^{13}$ cm⁻³。Si: $p_0\approx1.5\times10^{13}$, $n_0=n_i^2/p_0$。Ge 和 GaAs 因 $n_i$ 不同而有差異。</div>
+<div class="ans">✅ All p-type; $p_0\approx1.5\times10^{13}$ cm⁻³ (Si/Ge); GaAs $p_0$ 受 $n_i$ 影響</div>
+</div></details>
+
+<details class="pb" open><summary><span class="pn">4.39</span>Si 補償—額外掺硼</summary><div class="pbdy">
+<div class="q">Si: As $2\times10^{15}$, B $1.2\times10^{15}$ cm⁻³. (a) n or p? (b) $n_0$, $p_0$. (c) Add B to get $p_0=4\times10^{15}$.</div>
+<div class="st">▸ (a) $N_d>N_a$→n-type。淨施體 $=8\times10^{14}$→$n_0\approx8\times10^{14}$。<br>(c) 需 $N_a-N_d=4\times10^{15}$→總 $N_a=6\times10^{15}$，需額外掺 $4.8\times10^{15}$ B。</div>
+<div class="ans">✅ (a) n-type; (b) $n_0=8\times10^{14}$, $p_0=2.8\times10^5$; (c) add $4.8\times10^{15}$ B</div>
+</div></details>
+
+<details class="pb" open><summary><span class="pn">4.40</span>$p_0=2\times10^5$→$n_0$? n or p?</summary><div class="pbdy">
+<div class="q">Si at 300K, $p_0=2\times10^5$ cm⁻³. Find $n_0$. n or p type?</div>
+<div class="st">▸ $n_0=n_i^2/p_0=2.25\times10^{20}/2\times10^5=1.125\times10^{15}$ cm⁻³。$n_0>p_0$→n-type。</div>
+<div class="ans">✅ $n_0=1.13\times10^{15}$ cm⁻³; n-type</div>
+</div></details>
+
+<details class="pb" open><summary><span class="pn">4.41</span>Ge: $p_0=4n_0$, $N_d=0$</summary><div class="pbdy">
+<div class="q">Ge at 250K, $p_0=4n_0$, $N_d=0$. Find $p_0$, $n_0$, $N_a$.</div>
+<div class="st">▸ $n_0p_0=n_i^2$→$4n_0^2=n_i^2$→$n_0=n_i/2$, $p_0=2n_i$。$N_a\approx p_0$（完全游離）。Ge at 250K: $n_i\approx1.5\times10^{13}$→$p_0\approx3\times10^{13}$。</div>
+<div class="ans">✅ $p_0\approx3\times10^{13}$, $n_0\approx7.5\times10^{12}$, $N_a\approx3\times10^{13}$ cm⁻³</div>
+</div></details>
+
+<details class="pb" open><summary><span class="pn">4.42</span>多數載子濃度 vs T 繪圖 ($N_a=10^{14}$)</summary><div class="pbdy">
+<div class="q">Si: $N_d=0$, $N_a=10^{14}$ cm⁻³. Plot majority carrier concentration vs T (200–600K).</div>
+<div class="st">▸ 低溫凍結區→外在區（$p_0\approx N_a$）→本質區（$p_0\approx n_i$）。過渡溫度約 450K。</div>
+<div class="ans">✅ 繪圖題：三段式曲線</div>
+</div></details>
+
+<h2 id="sec46">§4.6 費米能階位置 (4.48–4.63)</h2>
+
+<details class="pb" open><summary><span class="pn">4.48</span>Ge 的 $E_F$ vs T ($N_a=10^{15}$)</summary><div class="pbdy">
+<div class="q">Ge: $N_a=10^{15}$, $N_d=0$. Find $E_F-E_{Fi}$ at T=200, 400, 600K.</div>
+<div class="st">▸ 200K（凍結區尾）: $p_0\approx N_a$→$E_{Fi}-E_F=kT\ln(N_a/n_i)$。400K（外在區）。600K（趨近本質）→$E_F\to E_{Fi}$。</div>
+<div class="ans">✅ 200K: large; 400K: moderate; 600K: $\approx0$</div>
+</div></details>
+
+<details class="pb" open><summary><span class="pn">4.49</span>Si 的 $E_F$ vs $N_d$</summary><div class="pbdy">
+<div class="q">Si at 300K, $N_d=10^{14},10^{15},10^{16},10^{17}$ cm⁻³. (a) $E_c-E_F$? (b) $E_F-E_{Fi}$?</div>
+<div class="st">▸ $E_c-E_F=kT\ln(N_c/N_d)$。$10^{14}$: 0.30 eV; $10^{15}$: 0.24 eV; $10^{16}$: 0.18 eV; $10^{17}$: 0.12 eV。</div>
+<div class="ans">✅ 每十倍摻雜→$E_c-E_F$ 降約 0.06 eV</div>
+</div></details>
+
+<details class="pb" open><summary><span class="pn">4.50</span>本質載子貢獻 <5% 的最大溫度 🟢</summary><div class="pbdy">
+<div class="q">Si: $N_d=10^{15}$. Intrinsic carriers must contribute <5% to total $n$. (a) Max T? (b) Change in $E_c-E_F$ from 300K.</div>
+<div class="st">▸ $n_i\le0.05\times10^{15}=5\times10^{13}$→$T\approx530$ K。$E_c-E_F$ 從 300K 的 0.24 eV 降至約 0.05 eV。</div>
+<div class="ans">✅ (a) $T_{\max}\approx530$ K; (b) $E_F$ 向本質位置移動</div>
+</div></details>
+
+<details class="pb" open><summary><span class="pn">4.51</span>Si p-type $E_F$ vs T 🟢</summary><div class="pbdy">
+<div class="q">Si: $N_a=3\times10^{15}$, $N_d=0$. Plot $E_{Fi}-E_F$ vs T (200–600K).</div>
+<div class="ans">✅ 200K: 0.421 eV; 400K: 0.247 eV; 600K: 0.063 eV</div>
+</div></details>
+
+<details class="pb" open><summary><span class="pn">4.52</span>GaAs $E_F$ vs $N_a$ 繪圖</summary><div class="pbdy">
+<div class="q">GaAs at 300K, $N_d=0$. Plot (a) $E_{Fi}-E_F$ vs $N_a$ ($10^{14}$–$10^{17}$), (b) $E_F-E_v$ vs $N_a$.</div>
+<div class="st">▸ $p_0\approx N_a$（完全游離）。$E_F-E_v=kT\ln(N_v/N_a)$。</div>
+<div class="ans">✅ 繪圖題：對數線性關係</div>
+</div></details>
+
+<details class="pb" open><summary><span class="pn">4.53</span>特殊半導體的 $E_{Fi}$ 位置 🟢</summary><div class="pbdy">
+<div class="q">$E_g=1.50$ eV, $m_p^*=10m_n^*$, $n_i=1\times10^5$ cm⁻³ at 300K. (a) Find $E_{Fi}-E_{\text{midgap}}$. (b) If $E_F-E_v=1.0$ eV: doping type and concentration?</div>
+<div class="st">▸ (a) $\frac{3}{4}kT\ln(10)=0.0447$ eV（$E_{Fi}$ 在 midgap 以上）。(b) $E_F$ 距 $E_v$ 1.0 eV→離 $E_c$ 0.5 eV→$E_F$ 在 $E_{Fi}$ 以上→n-type? 需要求 $N_d$。</div>
+<div class="ans">✅ (a) $+0.0447$ eV; (b) Acceptors, $N_a=1.97\times10^{13}$ cm⁻³</div>
+</div></details>
+
+<details class="pb" open><summary><span class="pn">4.54</span>費米能階與摻雜的設計關係</summary><div class="pbdy">
+<div class="q">Design doping to achieve specific $E_F$ position.</div>
+<div class="ans">✅ 見課本</div>
+</div></details>
+
+<details class="pb" open><summary><span class="pn">4.55</span>由 $E_c-E_F$ 求 $N_d^+$ 🟢</summary><div class="pbdy">
+<div class="q">Si at 300K. Given $E_c-E_F$, find $N_d$ and $N_d^+$.</div>
+<div class="ans">✅ (a) $E_c-E_F=0.2188$ eV→$1.03\times10^{16}$; (b) $0.1594$ eV→$1.72\times10^{15}$ cm⁻³</div>
+</div></details>
+
+<details class="pb" open><summary><span class="pn">4.56</span>$E_F$ 調整</summary><div class="pbdy"><div class="q">How to adjust $E_F$ by changing doping?</div><div class="ans">✅ 增加施體→$E_F$ 向 $E_c$ 移動；增加受體→$E_F$ 向 $E_v$ 移動</div></div></details>
+
+<details class="pb" open><summary><span class="pn">4.57</span>改變費米能階的摻雜 🟢</summary><div class="pbdy">
+<div class="q">p-type $p_0=5\times10^{15}$, want $E_{Fi}-E_F=0.35$ eV. Add what?</div>
+<div class="ans">✅ Add acceptors, $N_a=4\times10^{15}$ cm⁻³</div>
+</div></details>
+
+<details class="pb" open><summary><span class="pn">4.58</span>五種條件下的 $E_F-E_{Fi}$ (Problem 4.34)</summary><div class="pbdy">
+<div class="q">Find $E_F-E_{Fi}$ for each condition in Problem 4.34.</div>
+<div class="ans">✅ 見課本附錄</div>
+</div></details>
+
+<details class="pb" open><summary><span class="pn">4.59</span>五種條件下的 $E_F-E_v$ (Problem 4.35) 🟢</summary><div class="pbdy">
+<div class="q">Find $E_F$ with respect to $E_v$ for conditions in Problem 4.35.</div>
+<div class="ans">✅ (a) 0.2009; (b) 1.360; (c) 0.7508; (d) 0.2526; (e) 1.068 eV</div>
+</div></details>
+
+<details class="pb" open><summary><span class="pn">4.60</span>Problem 4.47 的 $E_F-E_{Fi}$</summary><div class="pbdy"><div class="q">Find $E_F-E_{Fi}$ for conditions in Problem 4.47.</div><div class="ans">✅ 見課本</div></div></details>
+
+<details class="pb" open><summary><span class="pn">4.61</span>設計新材料—最小 $E_g$</summary><div class="pbdy">
+<div class="q">New p-type material: $N_a=5\times10^{15}$, $N_c=1.2\times10^{19}$, $N_v=1.8\times10^{19}$ at 300K, vary as $T^2$. Require $p_0\le5.08\times10^{15}$ at 350K. Find minimum $E_g$.</div>
+<div class="st">▸ $p_0=N_v e^{-(E_F-E_v)/kT}\approx N_a$。350K 時本質載子 $n_i=\sqrt{N_cN_v}e^{-E_g/(2kT)}$ 需足夠小。$p_0=N_a+n_i\le5.08\times10^{15}$→$n_i\le8\times10^{13}$→$E_g\ge1.25$ eV。</div>
+<div class="ans">✅ $E_g\ge1.25$ eV</div>
+</div></details>
+
+<details class="pb" open><summary><span class="pn">4.62</span>Si 掺入 GaAs 的兩性摻雜</summary><div class="pbdy">
+<div class="q">Si atoms at $7\times10^{15}$ cm⁻³ added to GaAs. 5% replace Ga (donors), 95% replace As (acceptors). (a) $N_d$, $N_a$? (b) n or p? (c) $n_0$, $p_0$. (d) $E_F-E_{Fi}$.</div>
+<div class="st">▸ $N_d=0.05\times7\times10^{15}=3.5\times10^{14}$, $N_a=0.95\times7\times10^{15}=6.65\times10^{15}$。$N_a>N_d$→p-type。淨受體 $=6.3\times10^{15}$。</div>
+<div class="ans">✅ (a) $N_d=3.5\times10^{14}$, $N_a=6.65\times10^{15}$; (b) p-type; (c) $p_0\approx6.3\times10^{15}$; (d) $E_F$ 在 $E_{Fi}$ 以下</div>
+</div></details>
+
+<details class="pb" open><summary><span class="pn">4.63</span>缺陷能階與電荷態</summary><div class="pbdy">
+<div class="q">Defect in Si introduces donor level 0.25 eV above $E_v$ and acceptor level 0.65 eV above $E_v$. (a) Sketch charge density vs $E_F$. Which level dominates in (i) heavily n-type, (ii) heavily p-type?</div>
+<div class="st">▸ (i) n-type ($E_F$ near $E_c$): acceptor level occupied→負電荷主導。(ii) p-type ($E_F$ near $E_v$): donor level empty→正電荷主導。</div>
+<div class="ans">✅ (i) acceptor level dominates (負電); (ii) donor level dominates (正電)</div>
+</div></details>
+
+<h2>📋 答案速查</h2>
+<table class="sumtbl">
+<tr><th>題號</th><th>答案</th></tr>
+<tr><td>4.1</td><td>Si/Ge/GaAs at 200/400/600K（見內文表）🟢</td></tr>
+<tr><td>4.3</td><td>(a) 367.5K; (b) 417.5K 🟢</td></tr>
+<tr><td>4.5</td><td>$n_i(B)/n_i(A)$: 200K→5.6%, 300K→14.5%, 400K→23.5% 🟢</td></tr>
+<tr><td>4.7</td><td>0.0854 🟢</td></tr>
+<tr><td>4.11</td><td>200K:$-0.0086$; 400K:$-0.0171$; 600K:$-0.0257$ eV 🟢</td></tr>
+<tr><td>4.13</td><td>$n_0=K\cdot kT\,e^{-(E_c-E_F)/kT}$ 🟢</td></tr>
+<tr><td>4.51</td><td>200K:0.421; 400K:0.247; 600K:0.063 eV 🟢</td></tr>
+<tr><td>4.53</td><td>(a)$+0.0447$ eV; (b) Acceptors $1.97\times10^{13}$ 🟢</td></tr>
+<tr><td>4.55</td><td>見內文 🟢</td></tr>
+<tr><td>4.57</td><td>Add acceptors, $4\times10^{15}$ cm⁻³ 🟢</td></tr>
+<tr><td>4.59</td><td>(a)0.2009;(b)1.360;(c)0.7508;(d)0.2526;(e)1.068 eV 🟢</td></tr>
+</table>
+</div>
+<script>function toggleTheme(){const h=document.documentElement,b=document.getElementById('themeBtn');if(h.getAttribute('data-theme')==='dark'){h.setAttribute('data-theme','light');b.textContent='🌙 深色模式';localStorage.setItem('theme','light')}else{h.setAttribute('data-theme','dark');b.textContent='☀️ 淺色模式';localStorage.setItem('theme','dark')}}const s=localStorage.getItem('theme');if(s==='dark'){document.documentElement.setAttribute('data-theme','dark');document.getElementById('themeBtn').textContent='☀️ 淺色模式'}</script></body></html>

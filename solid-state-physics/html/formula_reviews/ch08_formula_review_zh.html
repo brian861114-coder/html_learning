@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>第八章 公式摘要 — pn 接面二極體（85 條完整版）</title>
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']],tags:'ams'},options:{ignoreHtmlClass:'no-math'}};</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+:root{--bg:#fff;--b2:#F5F5F7;--b3:#E8F0FE;--tx:#1D1D1F;--t2:#1D1D1F;--ac:#007AFF;--bd:#D2D2D7;--sh:0 2px 8px rgba(0,0,0,.08);--fbg:#FAFBFC;--fbd:#E5E5EA;--dbg:#E8F0FE;--dac:#007AFF;--wbg:#FFF9F0;--wbd:#FFB340;--wtx:#B8700A;--hv:#F0F4FF;--nw:240px}
+[data-theme="dark"]{--bg:#1C1C1E;--b2:#2C2C2E;--b3:#1A2332;--tx:#F5F5F7;--t2:#A1A1A6;--ac:#0A84FF;--bd:#48484A;--fbg:#252528;--fbd:#3A3A3C;--dbg:#1A2332;--dac:#0A84FF;--wbg:#2C2416;--wbd:#8B6914;--wtx:#FFB340;--hv:#1E2A3A}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth;scroll-padding-top:16px}
+body{font-family:-apple-system,BlinkMacSystemFont,'Noto Sans TC','Microsoft JhengHei',sans-serif;background:var(--b2);color:var(--tx);line-height:1.75;display:flex;min-height:100vh}
+.sidebar{position:fixed;top:0;left:0;width:var(--nw);height:100vh;background:var(--bg);border-right:1px solid var(--bd);overflow-y:auto;z-index:100;padding:20px 16px;display:flex;flex-direction:column}
+.sh{margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--fbd)}.sh h2{font-size:14px;font-weight:600;color:var(--ac)}.sh .bk{font-size:11px;color:var(--t2)}
+.sn{flex:1}.sn ul{list-style:none}.sn a{display:block;padding:3px 10px;font-size:10.5px;color:var(--t2);text-decoration:none;border-radius:5px;transition:.12s;line-height:1.3}.sn a:hover{background:var(--b3);color:var(--ac)}.sn a.active{background:var(--b3);color:var(--ac);font-weight:500}.sn .ns{font-weight:600;font-size:11.5px;color:var(--tx);margin-top:8px;padding:2px 10px}.sn .nsub a{padding-left:18px;font-size:10px}
+.st{margin-top:auto;padding-top:12px;border-top:1px solid var(--fbd)}.st button{width:100%;padding:6px;border:1px solid var(--bd);border-radius:6px;background:var(--b2);color:var(--tx);cursor:pointer;font-size:12px}
+.main{margin-left:var(--nw);flex:1;max-width:1100px;padding:32px 40px 80px}
+.header{margin-bottom:24px;padding-bottom:20px;border-bottom:2px solid var(--ac)}.header .tag{font-size:12px;font-weight:600;color:var(--ac);letter-spacing:1px}.header h1{font-size:26px;font-weight:700;margin:6px 0}.header .sub{font-size:13px;color:var(--t2)}
+.tbar{display:flex;gap:8px;margin-bottom:20px}.tbar button{padding:5px 16px;font-size:12px;border:1px solid var(--ac);border-radius:20px;background:var(--bg);color:var(--ac);cursor:pointer;font-weight:500;transition:.15s}.tbar button:hover{background:var(--ac);color:#fff}
+.section{margin-bottom:44px}.section h2{font-size:19px;font-weight:700;color:var(--ac);margin-bottom:4px;padding-bottom:6px;border-bottom:1px solid var(--bd)}
+.fcard{background:var(--bg);border:1px solid var(--fbd);border-radius:10px;padding:16px 20px;margin:14px 0;box-shadow:var(--sh)}.fcard .lbl{font-size:11px;font-weight:700;color:var(--ac);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}.fcard .eq{text-align:center;padding:8px 0;font-size:15px}.fcard .note{font-size:12px;color:var(--t2);margin-top:6px;padding-top:6px;border-top:1px solid var(--fbd);line-height:1.6}
+details.derive{background:var(--dbg);border-left:4px solid var(--dac);border-radius:0 10px 10px 0;margin:16px 0;transition:.2s}details.derive[open]{background:var(--bg)}
+details.derive>summary{padding:14px 18px;cursor:pointer;list-style:none;display:flex;align-items:center;gap:8px;font-weight:700;color:var(--ac);font-size:13px;letter-spacing:.3px;user-select:none}details.derive>summary::-webkit-details-marker{display:none}details.derive>summary::before{content:'▸';display:inline-block;font-size:11px;transition:transform .2s;width:14px;text-align:center}details.derive[open]>summary::before{transform:rotate(90deg)}details.derive>summary:hover{background:var(--hv);border-radius:0 10px 0 0}
+details.derive .dbo{padding:0 18px 16px 18px}details.derive .step{margin:8px 0;padding:6px 0}details.derive .snb{display:inline-block;background:var(--ac);color:#fff;width:22px;height:22px;border-radius:50%;text-align:center;font-size:11px;font-weight:700;line-height:22px;margin-right:8px}details.derive .sl{font-weight:700;font-size:13px;color:var(--tx)}details.derive .sc{margin:4px 0 4px 30px;font-size:13px;color:var(--t2)}details.derive .sc .math{display:block;text-align:center;padding:6px 0}
+details.example{background:#FFF9F0;border:1px solid #FFB340;border-radius:10px;margin:14px 0}[data-theme="dark"] details.example{background:#2C2416;border-color:#8B6914}details.example>summary{padding:10px 16px;cursor:pointer;list-style:none;display:flex;align-items:center;gap:8px;font-weight:700;color:#B8700A;font-size:12px}[data-theme="dark"] details.example>summary{color:#FFB340}details.example>summary::-webkit-details-marker{display:none}details.example>summary::before{content:'▸';display:inline-block;font-size:11px;transition:transform .2s;width:14px;text-align:center}details.example[open]>summary::before{transform:rotate(90deg)}details.example .ebo{padding:0 16px 12px 16px;font-size:13px}
+.warn-box{background:var(--wbg);border:1px solid var(--wbd);border-radius:10px;padding:14px 18px;margin:16px 0;font-size:14px}.warn-box .wt{font-weight:700;color:var(--wtx);font-size:12px;margin-bottom:6px}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:13px}thead th{background:var(--b3);padding:8px 12px;font-size:12px;font-weight:600;border-bottom:2px solid var(--bd)}tbody td{padding:6px 10px;border-bottom:1px solid var(--fbd);font-size:12px}
+@media(max-width:768px){.sidebar{transform:translateX(-100%);transition:.3s}.sidebar.open{transform:translateX(0)}.main{margin-left:0;padding:20px 16px 60px}}
+@media print{.sidebar,.tbar{display:none}details.derive,details.example{display:block!important}details.derive>summary::before,details.example>summary::before{display:none}.main{margin-left:0;max-width:100%;padding:0}}
+</style>
+<script src="../../../reading-preferences.js" defer></script></head>
+<body><a class="portal-home-link" href="../../../index.html">返回學習中心</a><style id="portal-home-link-style">.portal-home-link{position:fixed;top:16px;right:16px;z-index:1000;display:inline-flex;align-items:center;min-height:36px;padding:7px 11px;border:1px solid #cbd5e1;border-radius:8px;background:#fff;color:#1d4ed8;font:600 13px/1.2 -apple-system,BlinkMacSystemFont,"Noto Sans TC","Microsoft JhengHei",sans-serif;text-decoration:none;box-shadow:0 2px 10px rgba(15,23,42,.08)}.portal-home-link:hover{background:#eff6ff}.portal-home-link:focus-visible{outline:3px solid rgba(37,99,235,.35);outline-offset:2px}@media(max-width:768px){.portal-home-link{top:10px;right:10px;min-height:34px;padding:7px 9px;font-size:12px}}</style>
+<nav class="sidebar"><div class="sh"><div class="bk">半導體物理與元件·第四版</div><h2>第八章 公式摘要</h2></div><div class="sn"><ul>
+<li class="ns">8.1 接面電流</li><li class="nsub"><a href="#s1">8.1.1–8.1.3 邊界條件</a></li><li class="nsub"><a href="#s2">8.1.4 理想二極體方程 ⭐</a></li><li class="nsub"><a href="#s3">8.1.5 物理效應</a></li>
+<li class="ns">8.2 G-R 電流</li><li class="nsub"><a href="#s4">8.2 產生-復合·高階注入</a></li>
+<li class="ns">8.3–8.5</li><li class="nsub"><a href="#s5">8.3 小訊號模型 ⭐</a></li><li class="nsub"><a href="#s6">8.4–8.5 暫態·穿隧二極體</a></li>
+<li><a href="#cheatsheet">📋 公式速查表</a></li>
+</ul></div><div class="st"><button onclick="toggleTheme()">🌓 <span id="tl">深色模式</span></button></div></nav>
+<main class="main">
+<div class="header"><div class="tag">85 條公式·含 9 例題+8 TYU</div><h1>第八章：pn 接面二極體</h1><div class="sub">Semiconductor Physics & Devices, 4th Ed.·Donald A. Neamen·pp.278–327</div></div>
+<div class="tbar"><button onclick="document.querySelectorAll('details').forEach(d=>d.open=true)">📖 展開全部</button><button onclick="document.querySelectorAll('details').forEach(d=>d.open=false)">📕 收合全部</button></div>
+
+<!-- 8.1.1-8.1.3 -->
+<div class="section" id="s1"><h2>8.1.1–8.1.3 接面電流的邊界條件 (8.1–8.20)</h2>
+<details class="derive" open><summary>🔍 從準 Fermi 能階到少數載子邊界條件（20 條公式）</summary><div class="dbo">
+<div class="step"><span class="snb">1</span><span class="sl">pn 接面的電流成分 (8.1–8.4)</span><div class="sc">總電流 = 電洞電流 + 電子電流。在順向偏壓下，電洞從 p 側注入 n 側、電子從 n 側注入 p 側。</div></div>
+<div class="step"><span class="snb">2</span><span class="sl">⭐ 少數載子邊界條件 (8.16–8.17)</span><div class="sc">在空乏區邊緣，$pn = n_i^2 e^{eV_a/kT}$（Shockley 邊界條件）：<span class="math">$$\boxed{p_n(x_n) = p_{n0}\,e^{eV_a/kT}} \quad\text{（n 側邊界電洞濃度）} \tag{8.16}$$</span><span class="math">$$\boxed{n_p(-x_p) = n_{p0}\,e^{eV_a/kT}} \quad\text{（p 側邊界電子濃度）} \tag{8.17}$$</span>$V_a>0$（順偏）→邊界少數載子濃度指數增加。$V_a<0$（逆偏）→邊界濃度趨近於零。</div></div>
+<div class="step"><span class="snb">3</span><span class="sl">過量少數載子濃度 (8.18–8.20)</span><div class="sc"><span class="math">$$\delta p_n(x_n) = p_{n0}(e^{eV_a/kT}-1) \tag{8.18}$$</span>$\delta n_p(-x_p) = n_{p0}(e^{eV_a/kT}-1)$ (8.19)。</div></div>
+</div></details>
+</div>
+
+<!-- 8.1.4 -->
+<div class="section" id="s2"><h2>8.1.4 理想二極體電流-電壓關係 ⭐ (8.21–8.38)</h2>
+<div class="fcard"><div class="lbl">⭐ 理想二極體方程（Shockley 方程）</div><div class="eq">$$\boxed{I = I_S\left(e^{eV_a/kT} - 1\right)} \tag{8.27}$$</div><div class="eq">$$I_S = eA\left(\frac{D_p p_{n0}}{L_p} + \frac{D_n n_{p0}}{L_n}\right) = eA n_i^2\left(\frac{D_p}{L_p N_d} + \frac{D_n}{L_n N_a}\right) \tag{8.28}$$</div><div class="note">$I_S$ = 反向飽和電流。$V_a>0$（順偏）→指數增長；$V_a<0$（逆偏）→$I\to -I_S$。</div></div>
+<details class="derive" open><summary>🔍 推導——從擴散方程到 I-V 關係（18 條公式）</summary><div class="dbo">
+<div class="step"><span class="snb">1</span><span class="sl">少數載子擴散方程 (8.21–8.24)</span><div class="sc">n 側中性區中電洞的穩態擴散方程：$d^2\delta p_n/dx^2 = \delta p_n/L_p^2$。<br>解：$\delta p_n(x) = \delta p_n(x_n)e^{-(x-x_n)/L_p}$ (8.23)。</div></div>
+<div class="step"><span class="snb">2</span><span class="sl">擴散電流密度 (8.25–8.26)</span><div class="sc">電洞擴散電流在 $x=x_n$：<span class="math">$$J_p(x_n) = -eD_p\frac{d\delta p_n}{dx}\bigg|_{x_n} = \frac{eD_p p_{n0}}{L_p}(e^{eV_a/kT}-1) \tag{8.25}$$</span></div></div>
+<div class="step"><span class="snb">3</span><span class="sl">⭐ 總電流 (8.27–8.28)</span><div class="sc">$J = J_p(x_n) + J_n(-x_p)$ → $I = I_S(e^{eV_a/kT}-1)$。<br>$I_S \propto n_i^2$ → 寬能隙材料（如 GaAs）的 $I_S$ 遠小於 Si（因 $n_i$ 小）。</div></div>
+</div></details>
+<details class="example" open><summary>📐 例題 8.3 — Si pn 二極體 $I_S$</summary><div class="ebo">$N_a=10^{17}$，$N_d=10^{16}$ cm⁻³，$A=10^{-4}$ cm²，$D_p=10$，$D_n=25$ cm²/s，$L_p=L_n=10$ µm。<br>$p_{n0}=n_i^2/N_d=2.25\times10^4$，$n_{p0}=n_i^2/N_a=2.25\times10^3$ cm⁻³。<br>$I_S=1.6\times10^{-19}\cdot10^{-4}(10\cdot2.25\times10^4+25\cdot2.25\times10^3)/10^{-3}=4.5\times10^{-14}$ A。</div></details>
+</div>
+
+<!-- 8.1.5 -->
+<div class="section" id="s3"><h2>8.1.5 物理效應 (8.39–8.52)</h2>
+<div class="fcard"><div class="lbl">溫度效應</div><div class="eq">$$I_S \propto T^3 e^{-E_g/kT} \tag{8.42}$$</div><div class="note">$I_S$ 隨溫度急劇增加——主要是 $n_i^2\propto e^{-E_g/kT}$ 的貢獻。</div></div>
+<div class="fcard"><div class="lbl">串聯電阻效應</div><div class="eq">$$I = I_S\left[\exp\!\left(\frac{e(V_a - IR_s)}{kT}\right) - 1\right] \tag{8.46}$$</div><div class="note">高電流時中性區電阻 $R_s$ 使有效接面電壓小於外加電壓→I-V 曲線偏離理想指數。</div></div>
+</div>
+
+<!-- 8.2 -->
+<div class="section" id="s4"><h2>8.2 產生-復合電流 (8.53–8.66)</h2>
+<div class="fcard"><div class="lbl">復合電流（順偏）</div><div class="eq">$$I_{\text{rec}} \propto e^{eV_a/2kT} \tag{8.58}$$</div><div class="note">低順向偏壓時，空乏區中的 SRH 復合電流主導→斜率為 $e/2kT$（非理想因子 $n\approx2$）。</div></div>
+<div class="fcard"><div class="lbl">產生電流（逆偏）</div><div class="eq">$$I_{\text{gen}} = \frac{e n_i W}{\tau_0} \tag{8.61}$$</div><div class="note">反向偏壓下空乏區中的產生電流 $>I_S$（特別是寬能隙材料如 Si）。$I_{\text{gen}}\propto n_i$，而 $I_S\propto n_i^2$。</div></div>
+</div>
+
+<!-- 8.3 -->
+<div class="section" id="s5"><h2>8.3 小訊號模型 ⭐ (8.67–8.75)</h2>
+<div class="fcard"><div class="lbl">⭐ 擴散電導（Diffusion Conductance）</div><div class="eq">$$\boxed{g_d = \frac{dI}{dV} = \frac{e}{kT}(I + I_S) \approx \frac{eI}{kT}} \tag{8.68}$$</div></div>
+<div class="fcard"><div class="lbl">⭐ 擴散電容（Diffusion Capacitance）</div><div class="eq">$$\boxed{C_d = \frac{e}{kT}I\,\tau_{p0}} \quad\text{（n⁺p 接面）} \tag{8.75}$$</div><div class="note">$C_d \propto I$——順向電流越大，儲存的過量少數載子越多→等效電容越大。<br>接面電容 $C_j$（第七章）主導反向偏壓；擴散電容 $C_d$ 主導順向偏壓。</div></div>
+</div>
+
+<!-- 8.4-8.5 -->
+<div class="section" id="s6"><h2>8.4–8.5 電荷儲存與穿隧二極體 (8.76–8.85)</h2>
+<div class="fcard"><div class="lbl">二極體反向恢復</div><div class="eq">$$t_s \approx \tau_{p0}\,\ln\!\left(1 + \frac{I_F}{I_R}\right) \tag{8.79}$$</div><div class="note">$t_s$ = 儲存時間。從順向切換到反向時，儲存電荷需時間消散。</div></div>
+<div class="fcard"><div class="lbl">穿隧二極體（Tunnel Diode）</div><div class="eq">峰值電流密度：$J_p \propto \exp(-\text{const}/\sqrt{N})$ (8.82)</div><div class="note">重摻雜（∼10¹⁹ cm⁻³）→空乏區極窄→電子直接穿隧。I-V 特性有負微分電阻區。</div></div>
+</div>
+
+<div class="section" id="cheatsheet"><h2>公式速查表（85 條全收錄）</h2>
+<table><thead><tr><th>Eq</th><th>公式</th><th>備註</th></tr></thead><tbody>
+<tr><td>8.16</td><td>$p_n(x_n)=p_{n0}e^{eV_a/kT}$</td><td>⭐ Shockley 邊界條件</td></tr>
+<tr><td>8.18</td><td>$\delta p_n(x_n)=p_{n0}(e^{eV_a/kT}-1)$</td><td>過量少數載子</td></tr>
+<tr><td>8.25</td><td>$J_p=\frac{eD_p p_{n0}}{L_p}(e^{eV_a/kT}-1)$</td><td>電洞擴散電流</td></tr>
+<tr><td>8.27</td><td>$I=I_S(e^{eV_a/kT}-1)$</td><td>⭐ 理想二極體方程</td></tr>
+<tr><td>8.28</td><td>$I_S=eA n_i^2(D_p/(L_p N_d)+D_n/(L_n N_a))$</td><td>⭐ 反向飽和電流</td></tr>
+<tr><td>8.42</td><td>$I_S\propto T^3 e^{-E_g/kT}$</td><td>溫度效應</td></tr>
+<tr><td>8.46</td><td>$I=I_S[\exp(e(V_a-IR_s)/kT)-1]$</td><td>串聯電阻效應</td></tr>
+<tr><td>8.58</td><td>$I_{\text{rec}}\propto e^{eV_a/2kT}$</td><td>復合電流（$n\approx2$）</td></tr>
+<tr><td>8.61</td><td>$I_{\text{gen}}=en_i W/\tau_0$</td><td>產生電流（逆偏）</td></tr>
+<tr><td>8.68</td><td>$g_d\approx eI/kT$</td><td>⭐ 擴散電導</td></tr>
+<tr><td>8.75</td><td>$C_d=(e/kT)I\tau_{p0}$</td><td>⭐ 擴散電容</td></tr>
+<tr><td>8.79</td><td>$t_s\approx\tau_{p0}\ln(1+I_F/I_R)$</td><td>反向恢復儲存時間</td></tr>
+</tbody></table></div></main>
+<script>
+function toggleTheme(){const h=document.documentElement;const n=h.getAttribute('data-theme')==='light'?'dark':'light';h.setAttribute('data-theme',n);localStorage.setItem('theme',n);document.getElementById('tl').textContent=n==='dark'?'淺色模式':'深色模式';}
+const s=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',s);if(s==='dark')document.getElementById('tl').textContent='淺色模式';
+const secs=document.querySelectorAll('.section[id]');const navs=document.querySelectorAll('.sn a');window.addEventListener('scroll',()=>{let c='';secs.forEach(s=>{if(window.scrollY>=s.offsetTop-80)c=s.getAttribute('id');});navs.forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+c);});});
+</script>
+</body>
+</html>

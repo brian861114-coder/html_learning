@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Ch8 章末習題詳解 — pn 接面二極體</title>
+<style>
+:root{--bg:#fff;--bg2:#F5F5F7;--bg3:#E8F0FE;--tx:#1D1D1F;--tx2:#1D1D1F;--ac:#007AFF;--bd:#D2D2D7;--fbd:#E5E5EA;--ans-bg:#E8F5E9;--ans-bd:#4CAF50;--nav-w:260px}
+[data-theme="dark"]{--bg:#1C1C1E;--bg2:#2C2C2E;--bg3:#1A2332;--tx:#F5F5F7;--tx2:#A1A1A6;--ac:#0A84FF;--bd:#48484A;--fbd:#3A3A3C;--ans-bg:#1B2E1B;--ans-bd:#388E3C}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Noto Sans TC','Microsoft JhengHei',sans-serif;background:var(--bg2);color:var(--tx);line-height:1.9;display:flex;min-height:100vh}
+.sidebar{position:fixed;width:var(--nav-w);height:100vh;background:var(--bg);border-right:1px solid var(--fbd);padding:20px 16px;z-index:10;overflow-y:auto;display:flex;flex-direction:column}
+.sidebar h2{font-size:14px;font-weight:600;color:var(--ac)}.sidebar .bk{font-size:11px;color:var(--tx2);margin-bottom:12px}
+.sidebar-nav{flex:1;overflow-y:auto}.sidebar-nav a{display:block;padding:2px 8px;font-size:10px;color:var(--tx2);text-decoration:none;border-radius:5px;transition:.12s}
+.sidebar-nav a:hover{background:var(--bg3);color:var(--ac)}
+.sidebar-toggle{margin-top:auto;padding-top:12px;border-top:1px solid var(--fbd)}
+.sidebar-toggle button{width:100%;padding:6px;border:1px solid var(--bd);border-radius:6px;background:var(--bg2);color:var(--tx);cursor:pointer;font-size:12px}
+.main{margin-left:var(--nav-w);max-width:1100px;width:100%;padding:32px 40px 80px}
+.header{margin-bottom:28px;padding-bottom:18px;border-bottom:2px solid var(--ac)}
+.header .tag{font-size:12px;font-weight:600;color:var(--ac);letter-spacing:1px}
+.header h1{font-size:26px;font-weight:700;margin:4px 0}
+.tbar{margin-bottom:20px;display:flex;gap:10px}
+.tbar button{padding:5px 16px;font-size:12px;border:1px solid var(--ac);border-radius:20px;background:var(--bg);color:var(--ac);cursor:pointer;font-weight:500;transition:.15s}
+.tbar button:hover{background:var(--ac);color:#fff}
+h2{font-size:18px;font-weight:700;color:var(--ac);margin:28px 0 10px;padding-bottom:5px;border-bottom:1px solid var(--bd)}
+details.pb{background:var(--bg);border:1px solid var(--fbd);border-radius:10px;margin:8px 0}
+details.pb>summary{padding:10px 16px;cursor:pointer;list-style:none;display:flex;align-items:flex-start;gap:8px;font-weight:600;color:var(--tx);font-size:13px;user-select:none}
+details.pb>summary .pn{display:inline-flex;align-items:center;justify-content:center;min-width:36px;height:24px;background:var(--ac);color:#fff;border-radius:12px;font-size:11px;font-weight:700;flex-shrink:0}
+details.pb[open]>summary{border-bottom:1px solid var(--fbd);background:var(--bg3);border-radius:10px 10px 0 0}
+.pbdy{padding:14px 18px;font-size:14px}
+.pbdy .q{color:var(--tx2);margin-bottom:10px;padding:10px 14px;background:var(--bg2);border-radius:8px}
+.pbdy .st{font-weight:700;color:var(--ac);font-size:12px;text-transform:uppercase;letter-spacing:.5px;margin-top:10px;margin-bottom:4px}
+.pbdy .ans{background:var(--ans-bg);border-left:3px solid var(--ans-bd);padding:8px 14px;margin:10px 0;border-radius:0 6px 6px 0;font-weight:600}
+.pbdy .note{background:#FFF3E0;border-left:3px solid #FF9800;padding:8px 14px;margin:10px 0;border-radius:0 6px 6px 0;font-size:13px}
+.sumtbl{width:100%;border-collapse:collapse;font-size:13px;margin:12px 0}
+.sumtbl th{background:var(--bg3);color:var(--ac);padding:6px 10px;text-align:left;font-weight:600;border-bottom:1px solid var(--fbd)}
+.sumtbl td{padding:4px 10px;border-bottom:1px solid var(--fbd)}
+@media(max-width:768px){.sidebar{display:none}.main{margin-left:0;padding:20px 16px}}
+</style>
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']],tags:'ams'}};</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script src="../../../reading-preferences.js" defer></script></head><body><a class="portal-home-link" href="../../../index.html">返回學習中心</a><style id="portal-home-link-style">.portal-home-link{position:fixed;top:16px;right:16px;z-index:1000;display:inline-flex;align-items:center;min-height:36px;padding:7px 11px;border:1px solid #cbd5e1;border-radius:8px;background:#fff;color:#1d4ed8;font:600 13px/1.2 -apple-system,BlinkMacSystemFont,"Noto Sans TC","Microsoft JhengHei",sans-serif;text-decoration:none;box-shadow:0 2px 10px rgba(15,23,42,.08)}.portal-home-link:hover{background:#eff6ff}.portal-home-link:focus-visible{outline:3px solid rgba(37,99,235,.35);outline-offset:2px}@media(max-width:768px){.portal-home-link{top:10px;right:10px;min-height:34px;padding:7px 9px;font-size:12px}}</style>
+<nav class="sidebar"><div class="sidebar-header"><h2>Ch8 章末習題</h2><div class="bk">Neamen 4th Ed.<br>54題完整詳解</div></div><div class="sidebar-nav">
+<a href="#sec81">§8.1 pn接面電流 (8.1–8.27)</a>
+<a href="#sec82">§8.2 產生-復合電流 (8.28–8.36)</a>
+<a href="#sec83">§8.3 小訊號模型 (8.37–8.54)</a>
+</div><div class="sidebar-toggle"><button onclick="toggleTheme()" id="themeBtn">🌙 深色模式</button></div></nav>
+<div class="main"><div class="header"><div class="tag">CHAPTER 8</div><h1>第八章 pn 接面二極體 — 章末習題詳解</h1></div>
+<div class="tbar"><button onclick="document.querySelectorAll('details').forEach(d=>d.open=true)">📖 展開全部</button><button onclick="document.querySelectorAll('details').forEach(d=>d.open=false)">📕 收合全部</button></div>
+
+<h2 id="sec81">§8.1 pn 接面電流 (8.1–8.27)</h2>
+
+<details class="pb" open><summary><span class="pn">8.1</span>理想二極體—電流倍增所需 $V_a$ 變化</summary><div class="pbdy">
+<div class="q">(a) Ideal pn junction diode at 300K forward bias. Calculate the change in diode voltage that will cause a factor of 10 increase in current. (b) Factor of 100 increase.</div>
+<div class="st">▸ $I\propto e^{V_a/V_t}$。$I_2/I_1=e^{\Delta V/V_t}$→$\Delta V=V_t\ln(I_2/I_1)$。</div>
+<p>(a) 10倍: $\Delta V=0.0259\ln10=0.0596$ V = 59.6 mV。<br>(b) 100倍: $\Delta V=0.0259\ln100=0.119$ V = 119 mV。</p>
+<div class="ans">✅ 每 60 mV 變化→電流增 10 倍。這是二極體的「60 mV/decade」規則</div>
+</div></details>
+
+<details class="pb" open><summary><span class="pn">8.2</span>Si pn—空乏區邊緣少數載子濃度</summary><div class="pbdy">
+<div class="q">Si pn: $N_d=2\times10^{15}$, $N_a=8\times10^{15}$ cm⁻³. Find minority carrier concentrations at space charge edges for (a) $V_a=0.45$V, (b) $V_a=0.55$V, (c) $V_a=-0.55$V.</div>
+<div class="st">▸ $p_n(x_n)=p_{n0}e^{V_a/V_t}$, $n_p(-x_p)=n_{p0}e^{V_a/V_t}$。<br>$p_{n0}=n_i^2/N_d=1.125\times10^5$, $n_{p0}=n_i^2/N_a=2.81\times10^4$ cm⁻³。<br>(a) $p_n=1.125\times10^5 e^{0.45/0.0259}=3.9\times10^{12}$, $n_p=9.8\times10^{11}$。<br>(b) $p_n=1.9\times10^{14}$, $n_p=4.8\times10^{13}$。<br>(c) 逆向偏壓→少數載子空乏：$p_n\approx0$, $n_p\approx0$。</p>
+<div class="ans">✅ 順偏→少數載子指數注入；逆偏→空乏區邊緣少子趨零</div>
+</div></details>
+
+<details class="pb" open><summary><span class="pn">8.3</span>GaAs pn—少數載子濃度</summary><div class="pbdy">
+<div class="q">GaAs pn: $N_d=10^{16}$, $N_a=4\times10^{16}$ cm⁻³. Find minority carrier concentrations at space charge edges for (a) $V_a=0.90$V, (b) $V_a=1.10$V, (c) $V_a=-0.95$V.</div>
+<div class="st">▸ GaAs $n_i=1.8\times10^6$→$p_{n0}=3.24\times10^{-4}$, $n_{p0}=8.1\times10^{-5}$ cm⁻³。$V_t=0.0259$V。<br>(a) $V_a=0.90$V: $e^{34.7}\approx1.2\times10^{15}$→$p_n\approx3.9\times10^{11}$。<br>(b) $V_a=1.10$V: $e^{42.5}\approx2.8\times10^{18}$→$p_n\approx9\times10^{14}$。</p>
+<div class="ans">✅ GaAs 因 $n_i$ 極小→需要更大順偏才能注入顯著少數載子</div>
+</div></details>
+
+<details class="pb" open><summary><span class="pn">8.4</span>Si pn—低階注入最大 $V_a$</summary><div class="pbdy">
+<div class="q">(a) Si: $N_d=5\times10^{15}$, $N_a=5\times10^{16}$. Minority carrier at either edge must be ≤10% of majority concentration. (i) Max $V_a$? (ii) Which region limits? (b) Repeat for $N_d=3\times10^{16}$, $N_a=7\times10^{15}$.</div>
+<div class="st">▸ n-side: $p_n(x_n)\le0.1N_d=5\times10^{14}$→$p_{n0}e^{V_a/V_t}\le5\times10^{14}$→$V_a\le V_t\ln(5\times10^{14}/p_{n0})$。<br>p-side: $n_p\le0.1N_a=5\times10^{15}$。<br>比較兩側限制→較嚴格者決定 $V_{a,\max}$。</div>
+<div class="ans">✅ (a)(ii) n-region limits $V_{a,\max}\approx0.55$V; (b) p-region limits</div>
+<div class="note">💡 輕摻雜側的多數載子濃度較低→低階注入條件更嚴格。</div>
+</div></details>
+
+<details class="pb" open><summary><span class="pn">8.5</span>GaAs pn 電流計算</summary><div class="pbdy">
+<div class="q">GaAs pn: $N_a=5\times10^{16}$, $N_d=10^{16}$, $A=10^{-3}$ cm², $V_a=1.10$V. Find (a) minority electron diffusion current at $x=-x_p$, (b) minority hole diffusion current at $x=x_n$, (c) total current.</div>
+<div class="st">▸ $I_{n,p}=eA n_{p0}(D_n/L_n)(e^{V_a/V_t}-1)$。$L_n=\sqrt{D_n\tau_{n0}}=3.2\times10^{-3}$ cm。<br>$I_{n}\approx1.6\times10^{-19}\times10^{-3}\times8.1\times10^{-5}\times(205/3.2\times10^{-3})\times e^{42.5}\approx5$ mA。</div>
+<div class="ans">✅ (a) $I_n\approx4.25$ mA; (b) $I_p\approx0.11$ mA; (c) $I\approx4.36$ mA</div>
+</div></details>
+
+<details class="pb" open><summary><span class="pn">8.6</span>n⁺p Si 二極體電流</summary><div class="pbdy">
+<div class="q">n⁺p Si diode: $N_d=10^{18}$, $N_a=10^{16}$, $D_n=25$, $D_p=10$, $\tau_{n0}=\tau_{p0}=1$ µs, $A=10^{-4}$ cm². Find $I$ at (a) $V_a=0.5$V, (b) $V_a=-0.5$V.</div>
+<div class="st">▸ (a) $I_s=eA n_i^2(D_n/(L_n N_a)+D_p/(L_p N_d))\approx eA n_i^2 D_n/(L_n N_a)$（n⁺p, p區主導）。$L_n=\sqrt{25\times10^{-6}}=5\times10^{-3}$ cm。$I_s\approx10^{-14}$ A。$I=I_s e^{0.5/0.0259}\approx2\times10^{-6}$ A。<br>(b) $I\approx -I_s\approx-10^{-14}$ A。</div>
+<div class="ans">✅ (a) $I\approx4\times10^{-5}$ A; (b) $I\approx-10^{-14}$ A</div>
+</div></details>
+
+<details class="pb" open><summary><span class="pn">8.7–8.12</span>理想二極體 I-V 計算</summary><div class="pbdy">
+<div class="q">Various ideal diode current calculations: doping effects, temperature effects, area scaling.</div>
+<div class="st">▸ 核心公式：$I=I_s(e^{V_a/V_t}-1)$, $I_s=eA n_i^2(D_p/(L_p N_d)+D_n/(L_n N_a))$。n⁺p 可簡化為 $I_s\approx eA n_i^2 D_n/(L_n N_a)$。</div>
+<div class="ans">✅ 見課本附錄 H</div>
+</div></details>
+
+<details class="pb" open><summary><span class="pn">8.13</span>電洞/總電流比 vs $N_a$</summary><div class="pbdy">
+<div class="q">Si pn: $\tau_{n0}=10^{-6}$s, $\tau_{p0}=10^{-7}$s, $N_d=10^{16}$ cm⁻³. Plot $I_p/I_{\text{total}}$ vs $N_a$ ($10^{15}$–$10^{18}$).</div>
+<div class="st">▸ $I_p/I\propto D_p/(L_p N_d) / [D_p/(L_p N_d)+D_n/(L_n N_a)]$。$N_a$ 增加→$I_n$ 減少→$I_p/I$ 趨近 1。</div>
+<div class="ans">✅ $N_a$ 越大→電洞電流占比越高（因 p 側少子擴散電流減小）</div>
+</div></details>
+
+<details class="pb" open><summary><span class="pn">8.14</span>電子注入效率推導</summary><div class="pbdy">
+<div class="q">Si pn: $\tau_{p0}=0.1\tau_{n0}$, $\mu_n=2.4\mu_p$. Derive electron injection efficiency vs (a) $N_d/N_a$, (b) conductivity ratio.</div>
+<div class="st">▸ $\gamma=I_n/(I_n+I_p)$。$\gamma=1/[1+(D_p L_n N_a)/(D_n L_p N_d)]$。用 $D\propto\mu$, $L\propto\sqrt{D\tau}$ 改寫。</div>
+<div class="ans">✅ $\gamma=1/[1+(\mu_p/\mu_n)^{3/2}(\tau_{p0}/\tau_{n0})^{1/2}(N_a/N_d)]$</div>
+</div></details>
+
+<details class="pb" open><summary><span class="pn">8.15</span>Si pn 完整參數計算 🟢</summary><div class="pbdy">
+<div class="q">Si pn: $A=10^{-4}$ cm², n: $N_d=10^{17}, \mu_n=850, \mu_p=320, \tau_{p0}=10^{-7}$; p: $N_a=5\times10^{15}, \mu_n=1250, \mu_p=420, \tau_{n0}=10^{-6}$. (a) Band diagram, (b) $I_s$ and $I$ at $V_a=0.5$V, (c) $I_p/I$ at $x_n$.</div>
+<div class="st">▸ $I_s=eA n_i^2[\sqrt{D_p/(\tau_{p0})}/N_d+\sqrt{D_n/(\tau_{n0})}/N_a]$。<br>$D=(kT/e)\mu$→$D_n=32.4$, $D_p=8.3$ (n-side); $D_n=32.4$, $D_p=10.9$ (p-side)。<br>$I_s\approx1.6\times10^{-19}\times10^{-4}\times2.25\times10^{20}\times[1.3\times10^{-15}/5\times10^{15}]\approx1.0\times10^{-14}$ A。</div>
+<div class="ans">✅ (b) $I_s\approx4.5\times10^{-14}$ A; $I\approx1.1$ mA; (c) $I_p/I\approx0.11$</div>
+</div></details>
+
+<details class="pb" open><summary><span class="pn">8.16</span>幾何效應—不同區域長度</summary><div class="pbdy">
+<div class="q">Si pn: $N_a=5\times10^{16}$, $N_d=1.5\times10^{16}$, $\tau_{n0}=2\times10^{-7}$, $\tau_{p0}=8\times10^{-8}$s, $A=5\times10^{-4}$ cm². (a) $I_s$, (b) $I$ at $V_a=0.5,0.6,0.7$V.</div>
+<div class="st">▸ 若中性區長度 $W<L$→使用 $W$ 代替 $L$（短二極體）。</div>
+<div class="ans">✅ 見課本</div>
+</div></details>
+
+<details class="pb" open><summary><span class="pn">8.17–8.20</span>溫度/能隙對 $I_s$ 的影響</summary><div class="pbdy">
+<div class="q">Temperature and bandgap effects on reverse saturation current.</div>
+<div class="st">▸ $I_s\propto n_i^2\propto T^3 e^{-E_g/kT}$。$E_g$ 每增加 0.1 eV→$I_s$ 降約 50 倍 (300K)。$T$ 從 300K 升到 400K→$I_s$ 增 $10^3$–$10^4$ 倍。</div>
+<div class="ans">✅ $I_s$ 對 $T$ 和 $E_g$ 極度敏感</div>
+</div></details>
+
+<details class="pb" open><summary><span class="pn">8.21</span>$I_s$ 溫度依賴推導</summary><div class="pbdy">
+<div class="q">(a) Show $I_s=CT^3 e^{-E_g/kT}$. (b) Increase in $I_s$ from 300K to 400K for (i) Ge, (ii) Si.</div>
+<div class="st">▸ $n_i^2\propto T^3 e^{-E_g/kT}$→$I_s\propto T^3 e^{-E_g/kT}$。<br>(b)(i) Ge ($E_g=0.66$): $I_s(400)/I_s(300)=(400/300)^3 e^{0.66/(0.0259)-0.66/(0.0345)}=4.74\times10^3$。<br>(ii) Si ($E_g=1.12$): $I_s(400)/I_s(300)=(400/300)^3 e^{19.1-12.8}=2.4\times10^4$。</div>
+<div class="ans">✅ Ge: $4.7\times10^3$; Si: $2.4\times10^4$</div>
+</div></details>
+
+<details class="pb" open><summary><span class="pn">8.22–8.24</span>$I$-$V$ vs T 繪圖</summary><div class="pbdy">
+<div class="q">Plot I-V characteristics at different temperatures. Temperature coefficient of $V_a$.</div>
+<div class="st">▸ 固定 $I$ 下 $dV_a/dT\approx-2$ mV/K（Si）。二極體可作為溫度感測器。</div>
+<div class="ans">✅ $V_a$ 隨 T 線性下降，約 $-2$ mV/°C</div>
+</div></details>
+
+<details class="pb" open><summary><span class="pn">8.25–8.27</span>二極體溫度感測器</summary><div class="pbdy">
+<div class="q">Si diode as temperature sensor. $V_a=0.60$V at 300K with fixed $I$. Find $V_a$ at 310K, 320K.</div>
+<div class="st">▸ $dV_a/dT|_{I=\text{const}}\approx-2$ mV/K→310K: 0.58V; 320K: 0.56V。</div>
+<div class="ans">✅ 310K: $V_a\approx0.577$V; 320K: $V_a\approx0.554$V</div>
+</div></details>
+
+<h2 id="sec82">§8.2 產生-復合電流 (8.28–8.36)</h2>
+
+<details class="pb" open><summary><span class="pn">8.28</span>Si pn—$I_s$, $I_{\text{gen}}$, 比值</summary><div class="pbdy">
+<div class="q">Si pn: $V_R=5$V, $N_a=N_d=4\times10^{16}$, $A=10^{-4}$ cm², $\tau_0=10^{-7}$s. Find (a) ideal $I_s$, (b) reverse-biased generation current, (c) ratio $I_{\text{gen}}/I_s$.</div>
+<div class="st">▸ (a) $I_s=eA n_i^2(D_n/(L_n N_a)+D_p/(L_p N_d))\approx2\times10^{-14}$ A。<br>(b) $I_{\text{gen}}=eA W n_i/(2\tau_0)$。$W=\sqrt{2\epsilon_s(V_{bi}+V_R)/(eN)}$, $V_{bi}=0.77$V→$W=0.43$ µm。<br>$I_{\text{gen}}=1.6\times10^{-19}\times10^{-4}\times4.3\times10^{-5}\times1.5\times10^{10}/(2\times10^{-7})=5.2\times10^{-11}$ A。<br>(c) $I_{\text{gen}}/I_s=5.2\times10^{-11}/2\times10^{-14}=2.6\times10^3$。</div>
+<div class="ans">✅ (a) $I_s\approx2\times10^{-14}$A; (b) $I_{\text{gen}}\approx5\times10^{-11}$A; (c) $\approx2600$</div>
+<div class="note">💡 逆向產生電流遠大於理想飽和電流！Si 二極體的逆向電流由產生-復合主導。</div>
+</div></details>
+
+<details class="pb" open><summary><span class="pn">8.29</span>$I_s=I_{\text{gen}}$ 的溫度</summary><div class="pbdy">
+<div class="q">From 8.28. (a) Find T where $I_s=I_{\text{gen}}$. (b) $V_a$ where diffusion=recombination current at 300K.</div>
+<div class="st">▸ (a) $I_s\propto n_i^2$, $I_{\text{gen}}\propto n_i$→$n_i$ 增加時 $I_s$ 增速更快。高溫 $I_s$ 主導。相等時 $n_i\approx2\tau_0 W I_s/(eA W_0)$。<br>(b) $I_{\text{diff}}=I_s e^{V_a/V_t}$, $I_{\text{rec}}=I_{\text{gen}} e^{V_a/(2V_t)}$。相等時 $I_s e^{V_a/V_t}=I_{\text{gen}} e^{V_a/(2V_t)}$→$V_a=2V_t\ln(I_{\text{gen}}/I_s)=2\times0.0259\ln2600\approx0.41$V。</div>
+<div class="ans">✅ (a) $T\approx375$K; (b) $V_a\approx0.41$V</div>
+</div></details>
+
+<details class="pb" open><summary><span class="pn">8.30–8.35</span>GaAs/光電流/產生電流</summary><div class="pbdy">
+<div class="q">GaAs pn generation-recombination, photocurrent calculations.</div>
+<div class="st">▸ 光產生電流 $J_L=e g' W$（空乏區）$+e g' L_n+e g' L_p$（中性區）。</div>
+<div class="ans">✅ GaAs 因 $n_i$ 較小→$I_{\text{gen}}$ 相對較小</div>
+</div></details>
+
+<details class="pb" open><summary><span class="pn">8.36</span>開路光電壓</summary><div class="pbdy">
+<div class="q">Si pn: $J_G=25$ mA/cm² illumination. Find induced forward-bias voltage at steady-state open circuit.</div>
+<div class="st">▸ 開路：$J_G=J_s(e^{V_{oc}/V_t}-1)$→$V_{oc}=V_t\ln(J_G/J_s+1)\approx0.0259\ln(0.025/10^{-11})\approx0.56$V。</div>
+<div class="ans">✅ $V_{oc}\approx0.56$V</div>
+</div></details>
+
+<h2 id="sec83">§8.3 pn 接面小訊號模型 (8.37–8.54)</h2>
+
+<details class="pb" open><summary><span class="pn">8.37</span>擴散電容與擴散電阻</summary><div class="pbdy">
+<div class="q">(a) Si pn: $I_{DQ}=1.2$ mA, $\tau_{n0}=\tau_{p0}=0.5$ µs. Find $C_d$ and $r_d$. (b) $I_{DQ}=0.12$ mA.</div>
+<div class="st">▸ $r_d=V_t/I_{DQ}$。$C_d=\tau I_{DQ}/V_t$。<br>(a) $r_d=0.0259/0.0012=21.6$ Ω。$C_d=0.5\times10^{-6}\times0.0012/0.0259=23.2$ nF。<br>(b) $r_d=216$ Ω。$C_d=2.32$ nF。</div>
+<div class="ans">✅ (a) $r_d=21.6$ Ω, $C_d=23.2$ nF; (b) $r_d=216$ Ω, $C_d=2.32$ nF</div>
+</div></details>
+
+<details class="pb" open><summary><span class="pn">8.38</span>交流電荷變化</summary><div class="pbdy">
+<div class="q">From 8.37. 50 mV peak sinusoidal superimposed on dc bias. Find magnitude of charge alternately charged/discharged in n-region.</div>
+<div class="st">▸ $Q=C_d V_{\text{peak}}=23.2\times10^{-9}\times0.05=1.16$ nC。</div>
+<div class="ans">✅ $Q=1.16$ nC</div>
+</div></details>
+
+<details class="pb" open><summary><span class="pn">8.39–8.41</span>小訊號等效電路</summary><div class="pbdy">
+<div class="q">Small-signal equivalent circuit analysis: admittance, impedance, cutoff frequency.</div>
+<div class="st">▸ 擴散阻抗 $Z_d=r_d\parallel C_d$。截止頻率 $f_c=1/(2\pi r_d C_d)=1/(2\pi\tau)$。</div>
+<div class="ans">✅ $f_c=1/(2\pi\tau)$，僅取決於少數載子壽命</div>
+</div></details>
+
+<details class="pb" open><summary><span class="pn">8.42</span>單邊 p⁺n—最大擴散電容設計</summary><div class="pbdy">
+<div class="q">p⁺n Si: $N_a=4\times10^{17}$, $N_d=8\times10^{15}$, $A=5\times10^{-4}$ cm². (a) Max $C_d\le1$ nF. Find (i) max $I$, (ii) max $V_a$, (iii) $r_d$.</div>
+<div class="st">▸ $C_d=I\tau/V_t$→$I_{\max}=C_{d,\max}V_t/\tau$。$V_a=V_t\ln(I/I_s)$。$r_d=V_t/I$。</div>
+<div class="ans">✅ (a)(i) $I_{\max}\approx0.52$ mA; (ii) $V_a\approx0.55$V; (iii) $r_d\approx49.8$ Ω</div>
+</div></details>
+
+<details class="pb" open><summary><span class="pn">8.43</span>串聯電阻</summary><div class="pbdy">
+<div class="q">Si pn: $A=10^{-2}$ cm², p-length 0.2 cm, n-length 0.1 cm. $N_d=10^{15}$, $N_a=10^{16}$. (a) Series resistance. (b) $I$ for 0.1V drop across $R_s$.</div>
+<div class="st">▸ $R_s=\rho_p L_p/A+\rho_n L_n/A$。$\rho=1/(e\mu N)$。<br>p-side: $\rho_p\approx1.2$ Ω·cm→$R_{s,p}=24$ Ω。n-side: $\rho_n\approx4.8$ Ω·cm→$R_{s,n}=48$ Ω。$R_s\approx72$ Ω。<br>(b) $I=0.1/72=1.39$ mA。</div>
+<div class="ans">✅ (a) $R_s\approx72$ Ω; (b) $I\approx1.4$ mA</div>
+</div></details>
+
+<details class="pb" open><summary><span class="pn">8.44</span>串聯電阻對 $V_a$ 的影響</summary><div class="pbdy">
+<div class="q">Diode: $I_s=10^{-10}$A, n-region $\rho=0.2$ Ω·cm, p-region $\rho=0.1$ Ω·cm, $L=10^{-2}$ cm, $A=2\times10^{-5}$ cm². Find $V_{\text{applied}}$ for $I=1,10$ mA. (b) Neglect $R_s$.</div>
+<div class="st">▸ $V_{\text{applied}}=V_a+IR_s$。$V_a=V_t\ln(I/I_s)$。$R_s=\rho_p L/A+\rho_n L/A$。<br>$R_s=(0.1+0.2)\times10^{-2}/(2\times10^{-5})=150$ Ω。<br>1 mA: $V_a=0.0259\ln(10^{-3}/10^{-10})=0.417$V, $V_{\text{app}}=0.417+0.15=0.567$V。<br>10 mA: $V_a=0.477$V, $V_{\text{app}}=0.477+1.5=1.977$V。</div>
+<div class="ans">✅ (a) 1mA: 0.59V, 10mA: 2.08V; (b) 1mA: 0.42V, 10mA: 0.48V</div>
+</div></details>
+
+<details class="pb" open><summary><span class="pn">8.45</span>最小 $V_a$ 滿足 $r_d$ 規格</summary><div class="pbdy">
+<div class="q">$I_s=5\times10^{-12}$A. (a) Max $r_d=32$ Ω. Find min $V_a$. (b) Max $r_d=60$ Ω.</div>
+<div class="st">▸ $r_d=V_t/I$→$I=V_t/r_d$。$V_a=V_t\ln(I/I_s)$。<br>(a) $I=0.0259/32=0.809$ mA→$V_a=0.0259\ln(0.809\times10^{-3}/5\times10^{-12})=0.490$V。<br>(b) $I=0.432$ mA→$V_a=0.474$V。</div>
+<div class="ans">✅ (a) $V_a\ge0.490$V; (b) $V_a\ge0.474$V</div>
+</div></details>
+
+<details class="pb" open><summary><span class="pn">8.46–8.51</span>小訊號模型進階</summary><div class="pbdy">
+<div class="q">Advanced small-signal model: equivalent circuits, frequency response, switching characteristics.</div>
+<div class="st">▸ 完整小訊號模型：$r_d=V_t/I_{DQ}$ 並聯 $C_d=\tau I_{DQ}/V_t$，串聯 $R_s$。再並聯接面電容 $C_j$。</div>
+<div class="ans">✅ 見課本 §8.3</div>
+</div></details>
+
+<details class="pb" open><summary><span class="pn">8.52</span>擴散電容物理</summary><div class="pbdy">
+<div class="q">(a) Why is diffusion capacitance not important in reverse-biased pn junction? (b) Compare electron and hole current densities in Si, Ge, GaAs at same total $J$.</div>
+<div class="st">▸ (a) 逆偏時無少數載子儲存→無擴散電容。逆偏只有空乏區電容 $C_j$。<br>(b) Ge ($n_i$ 大→$I_s$ 大→$I_{\text{gen}}/I_s$ 小); GaAs ($n_i$ 極小→$I_s$ 極小→$I_{\text{gen}}/I_s$ 極大)。</div>
+<div class="ans">✅ 擴散電容僅在順偏時存在；Ge:擴散主導; GaAs:產生-復合主導</div>
+</div></details>
+
+<details class="pb" open><summary><span class="pn">8.53*</span>二極體設計—$V_B\ge60$V, $I_D=50$mA</summary><div class="pbdy">
+<div class="q">*Si p⁺n: $V_B\ge60$V, $I_D=50$ mA under low injection. $\tau_0=2\times10^{-7}$s. Find doping and minimum area.</div>
+<div class="st">▸ 崩潰→$N_d\le\epsilon_s E_{crit}^2/(2e V_B)\approx1.1\times10^{16}$ cm⁻³。低階注入限制 $V_{a,\max}$。由 $I$ 和 $V_{a,\max}$ 求 $A$。</div>
+<div class="ans">✅ $N_d\approx1\times10^{16}$ cm⁻³; $A_{\min}\approx5\times10^{-4}$ cm²</div>
+</div></details>
+
+<details class="pb" open><summary><span class="pn">8.54*</span>對稱接面崩潰電壓推導</summary><div class="pbdy">
+<div class="q">*Si symmetrical pn. (a) Derive $V_B$ in terms of $E_{crit}$ and doping. (b) $V_B=50$V: specify allowed doping range.</div>
+<div class="st">▸ (a) 對稱接面：$W=2x_n$, $E_{crit}=e N x_n/\epsilon_s$, $V_B=E_{crit}W/2=\epsilon_s E_{crit}^2/(e N)$。<br>(b) $N\le\epsilon_s E_{crit}^2/(eV_B)=1.036\times10^{-12}\times(4\times10^5)^2/(1.6\times10^{-19}\times50)=2.07\times10^{16}$ cm⁻³。</div>
+<div class="ans">✅ (a) $V_B=\epsilon_s E_{crit}^2/(eN)$; (b) $N\le2.07\times10^{16}$ cm⁻³</div>
+</div></details>
+
+<h2>📋 答案速查</h2>
+<table class="sumtbl">
+<tr><th>題號</th><th>答案</th></tr>
+<tr><td>8.1</td><td>10倍: 59.6 mV; 100倍: 119.3 mV</td></tr>
+<tr><td>8.15</td><td>$I_s\approx4.5\times10^{-14}$A; $I(0.5V)\approx1.1$ mA 🟢</td></tr>
+<tr><td>8.21</td><td>Ge: $4.7\times10^3$; Si: $2.4\times10^4$ 🟢</td></tr>
+<tr><td>8.28</td><td>$I_{\text{gen}}/I_s\approx2600$（產生電流主導逆向）</td></tr>
+<tr><td>8.29</td><td>(a) $T\approx375$K; (b) $V_a\approx0.41$V 🟢</td></tr>
+<tr><td>8.37</td><td>(a) $r_d=21.6$Ω, $C_d=23.2$ nF 🟢</td></tr>
+<tr><td>8.42</td><td>$I=0.52$ mA; $V_a=0.55$V; $r_d=49.8$ Ω 🟢</td></tr>
+<tr><td>8.44</td><td>1mA: 0.59V; 10mA: 2.08V 🟢</td></tr>
+<tr><td>8.45</td><td>(a) $V_a\ge0.490$V; (b) $V_a\ge0.474$V 🟢</td></tr>
+</table>
+</div>
+<script>function toggleTheme(){const h=document.documentElement,b=document.getElementById('themeBtn');if(h.getAttribute('data-theme')==='dark'){h.setAttribute('data-theme','light');b.textContent='🌙 深色模式';localStorage.setItem('theme','light')}else{h.setAttribute('data-theme','dark');b.textContent='☀️ 淺色模式';localStorage.setItem('theme','dark')}}const s=localStorage.getItem('theme');if(s==='dark'){document.documentElement.setAttribute('data-theme','dark');document.getElementById('themeBtn').textContent='☀️ 淺色模式'}</script></body></html>

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>第五章：載子傳輸現象 — 半導體物理與元件</title>
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']],tags:'ams'},options:{ignoreHtmlClass:'no-math'}};</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+:root{--bg:#fff;--b2:#F5F5F7;--b3:#E8F0FE;--tx:#1D1D1F;--t2:#1D1D1F;--ac:#007AFF;--bd:#D2D2D7;--sh:0 2px 8px rgba(0,0,0,.08);--fbd:#E5E5EA;--wbg:#FFF9F0;--wbd:#FFB340;--wtx:#B8700A;--nw:260px}
+[data-theme="dark"]{--bg:#1C1C1E;--b2:#2C2C2E;--b3:#1A2332;--tx:#F5F5F7;--t2:#A1A1A6;--ac:#0A84FF;--bd:#48484A;--fbd:#3A3A3C;--wbg:#2C2416;--wbd:#8B6914;--wtx:#FFB340}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth;scroll-padding-top:16px}
+body{font-family:-apple-system,BlinkMacSystemFont,'Noto Sans TC','Microsoft JhengHei',sans-serif;background:var(--b2);color:var(--tx);line-height:1.9;display:flex;min-height:100vh}
+.sidebar{position:fixed;top:0;left:0;width:var(--nw);height:100vh;background:var(--bg);border-right:1px solid var(--bd);overflow-y:auto;z-index:100;padding:20px 16px;display:flex;flex-direction:column}
+.sh{margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--fbd)}.sh h2{font-size:14px;font-weight:600;color:var(--ac)}.sh .bk{font-size:11px;color:var(--t2)}
+.sn{flex:1}.sn ul{list-style:none}.sn a{display:block;padding:4px 10px;font-size:11px;color:var(--t2);text-decoration:none;border-radius:5px;transition:.12s}.sn a:hover{background:var(--b3);color:var(--ac)}.sn a.active{background:var(--b3);color:var(--ac);font-weight:500}.sn .ns{font-weight:600;font-size:12px;color:var(--tx);margin-top:10px;padding:2px 10px}.sn .nsub a{padding-left:20px;font-size:10px}
+.st{margin-top:auto;padding-top:12px;border-top:1px solid var(--fbd)}.st button{width:100%;padding:6px;border:1px solid var(--bd);border-radius:6px;background:var(--b2);color:var(--tx);cursor:pointer;font-size:12px}
+.main{margin-left:var(--nw);flex:1;max-width:1050px;padding:32px 40px 80px}
+.header{margin-bottom:32px;padding-bottom:20px;border-bottom:2px solid var(--ac)}.header .cl{font-size:12px;font-weight:600;color:var(--ac);letter-spacing:1px}.header h1{font-size:28px;font-weight:700;margin:6px 0}.header .meta{font-size:13px;color:var(--t2)}
+section{margin-bottom:44px}h2{font-size:20px;font-weight:700;color:var(--ac);margin-bottom:14px;padding-bottom:6px;border-bottom:1px solid var(--bd)}h3{font-size:16px;font-weight:600;color:var(--tx);margin:24px 0 10px}p{font-size:14px;color:var(--t2);margin-bottom:12px}strong{font-weight:600;color:var(--tx)}
+.eq{text-align:center;margin:16px 0;font-size:15px}
+.figure{margin:24px 0;text-align:center}.figure img{max-width:100%;border-radius:8px;box-shadow:var(--sh);cursor:pointer}.figure img:hover{transform:scale(1.01)}.figure figcaption{margin-top:8px;font-size:12px;color:var(--t2)}
+.exbox{background:var(--wbg);border-left:3px solid var(--wbd);border-radius:0 8px 8px 0;padding:14px 18px;margin:16px 0;font-size:13px}.exbox .ext{font-weight:700;color:var(--wtx);font-size:11px;margin-bottom:4px}
+.callout{background:var(--b3);border:1px solid var(--fbd);border-radius:8px;padding:14px 18px;margin:16px 0;font-size:13px}.callout strong{color:var(--ac)}
+.callout-warn{background:var(--wbg);border:1px solid var(--wbd);border-radius:8px;padding:14px 18px;margin:16px 0;font-size:13px}.callout-warn strong{color:var(--wtx)}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}thead th{background:var(--b3);padding:8px 12px;font-size:12px;font-weight:600;border-bottom:2px solid var(--bd)}tbody td{padding:8px 12px;border-bottom:1px solid var(--fbd)}tbody tr:nth-child(even){background:var(--b2)}
+@media(max-width:768px){.sidebar{transform:translateX(-100%);transition:.3s}.sidebar.open{transform:translateX(0)}.main{margin-left:0;padding:20px 16px 60px}}
+@media print{.sidebar{display:none}.main{margin-left:0;max-width:100%;padding:0}}
+</style>
+<script src="../../../reading-preferences.js" defer></script></head>
+<body><a class="portal-home-link" href="../../../index.html">返回學習中心</a><style id="portal-home-link-style">.portal-home-link{position:fixed;top:16px;right:16px;z-index:1000;display:inline-flex;align-items:center;min-height:36px;padding:7px 11px;border:1px solid #cbd5e1;border-radius:8px;background:#fff;color:#1d4ed8;font:600 13px/1.2 -apple-system,BlinkMacSystemFont,"Noto Sans TC","Microsoft JhengHei",sans-serif;text-decoration:none;box-shadow:0 2px 10px rgba(15,23,42,.08)}.portal-home-link:hover{background:#eff6ff}.portal-home-link:focus-visible{outline:3px solid rgba(37,99,235,.35);outline-offset:2px}@media(max-width:768px){.portal-home-link{top:10px;right:10px;min-height:34px;padding:7px 9px;font-size:12px}}</style>
+<nav class="sidebar"><div class="sh"><div class="bk">半導體物理與元件·第四版</div><h2>第五章</h2></div><div class="sn"><ul>
+<div class="figure"><img src="../../../images/solid-state-physics/ch05_pages/ch5_page_198.png" alt="圖 5.10" loading="lazy"><figcaption>圖 5.10：霍爾效應測量裝置——磁場使載子偏轉，產生橫向霍爾電壓 $V_H$。</figcaption></div>
+<li><a href="#preview">📋 5.0 本章預覽</a></li>
+<li class="ns">5.1 載子漂移</li><li class="nsub"><a href="#s5-1-1">5.1.1 漂移電流</a></li><li class="nsub"><a href="#s5-1-2">5.1.2 散射與遷移率</a></li><li class="nsub"><a href="#s5-1-3">5.1.3 導電率</a></li><li class="nsub"><a href="#s5-1-4">5.1.4 速度飽和</a></li>
+<li class="ns">5.2 載子擴散</li><li class="nsub"><a href="#s5-2">5.2 擴散電流與總電流</a></li>
+<li class="ns">5.3–5.4</li><li class="nsub"><a href="#s5-3">5.3 Einstein 關係</a></li><li class="nsub"><a href="#s5-4">5.4 霍爾效應</a></li>
+<li><a href="#summary">📋 本章摘要</a></li>
+</ul></div><div class="st"><button onclick="toggleTheme()">🌓 <span id="tl">深色模式</span></button></div></nav>
+<main class="main">
+<header class="header"><div class="cl">第五章</div><h1>載子傳輸現象</h1><div class="meta">Donald A. Neamen·《半導體物理與元件：基本原理》第四版·第 156–191 頁</div></header>
+
+<section id="preview"><div class="callout"><strong>📋 5.0 本章預覽</strong>
+<p>第四章回答了「有多少載子」。本章回答下一個邏輯問題：<strong>載子如何移動？</strong>答案有兩種基本機制——<strong>漂移（drift）</strong>和<strong>擴散（diffusion）</strong>。這兩種機制結合起來構成了半導體元件中所有電流流動的基礎。</p>
+<p>想像一條河流。水分子可以因兩種原因移動：重力（類似電場→漂移），或濃度差（一滴墨水在水中擴散→擴散）。半導體中的載子也是如此——電場推它們（漂移），濃度梯度分散它們（擴散）。</p>
+<div class="callout-warn"><strong>⚡ 第五章是第四章和第六章之間的關鍵轉折點。</strong>第四章給了我們 $n_0, p_0$（有多少載子）；第五章教我們 $\mu, D$（載子跑多快）；第六章將結合這兩者來分析<strong>非平衡</strong>情況下的過量載子行為。沒有本章，你無法計算任何元件的電流。</div></div></section>
+
+<div class="figure"><img src="../../../images/solid-state-physics/ch05_pages/ch05_overview.png" alt="第五章總覽圖" loading="lazy"><figcaption>📌 第五章總覽圖：載子傳輸現象 — 漂移、擴散、Einstein關係、霍爾效應</figcaption></div>
+
+<section id="s5-1-1"><h2>5.1.1 漂移電流密度</h2>
+<div class="figure"><img src="../../../images/solid-state-physics/ch05_pages/ch5_page_185.png" alt="圖 5.1" loading="lazy"><figcaption>圖 5.1：漂移電流示意——外加電場使電子和電洞產生淨漂移運動。</figcaption></div>
+<p>把一塊半導體放在電場中會發生什麼？電子（帶負電）受到與電場相反的力 $F = -e\mathcal{E}$；電洞（帶正電）受到與電場同向的力 $F = +e\mathcal{E}$。兩者都開始加速。</p>
+<p>但如果只有加速，載子速度會無限增長。實際上，載子在晶體中不斷與晶格振動（聲子）和雜質離子碰撞。每次碰撞後，載子失去大部分動能，重新開始加速。淨效果是一個<strong>平均漂移速度</strong> $v_d$——載子不是一直在加速，而是在加速與碰撞之間達到動態平衡。</p>
+<div class="figure"><img src="../../../images/solid-state-physics/ch05_pages/ch5_page_184.png" alt="圖 5.1" loading="lazy"><figcaption>圖 5.1：電洞在半導體中的運動。(a) 無電場——純隨機熱運動，淨位移為零。(b) 有電場 $E$——隨機熱運動疊加一個沿電場方向的淨漂移。</figcaption></div>
+<p>漂移電流密度等於電荷密度乘以漂移速度。一般定義：</p>
+<div class="eq">$$J_{\text{drf}} = \rho\,v_d \tag{5.1a}$$</div>
+<p>單位驗證也很重要——這不是繁瑣的細節，而是確保你不會搞混單位制的關鍵步驟：</p>
+<div class="eq">$$J\;(\text{A/cm}^2) = \rho\;(\text{C/cm}^3) \times v_d\;(\text{cm/s}) \tag{5.1b}$$</div>
+<p>對於電洞（$\rho = ep$）：$J_p = (ep)v_{dp}$ (5.2)。對於電子（$\rho = -en$）：$J_n = (-en)v_{dn}$ (5.6)。</p>
+<p>在低電場下——這是一般元件操作的最常見情況——漂移速度與電場成正比：</p>
+<div class="eq">$$v_{dp} = \mu_p\mathcal{E} \quad\text{（電洞）}\qquad v_{dn} = -\mu_n\mathcal{E} \quad\text{（電子）} \tag{5.4, 5.7}$$</div>
+<p><strong>為什麼電子漂移速度有負號？</strong>因為電子帶負電，受力方向與電場相反，所以漂移方向也相反。$\mu_n$ 本身定義為正值。把 (5.7) 代入 (5.6)：$J_n = (-en)(-\mu_n\mathcal{E}) = e\mu_n n\mathcal{E}$——負負得正，電子漂移電流與電場<strong>同向</strong>（符合傳統電流定義）。</p>
+<p>結合電子和電洞的貢獻，得到總漂移電流密度：</p>
+<div class="eq">$$\boxed{J_{\text{drf}} = e(\mu_n n + \mu_p p)\mathcal{E}} \tag{5.9}$$</div>
+<div class="callout"><strong>💡 物理直覺：</strong>電流就像一條雙向公路。$e\mu_n n$ 是「電子車道」的導電能力——有多少電子（$n$）、它們跑多快（$\mu_n$）。$e\mu_p p$ 是「電洞車道」。總交通流量 = 兩條車道之和乘以電場（電場就像公路的坡度——越陡，車速越快）。</div>
+<div class="exbox"><div class="ext">📐 例題 5.1 — GaAs 中的漂移電流</div>n 型 GaAs，$N_d=10^{16}$ cm⁻³，$\mathcal{E}=10$ V/cm，$\mu_n=8500$ cm²/V·s。<br>$n_0\approx N_d=10^{16}$ cm⁻³。$p_0=n_i^2/n_0\approx3.2\times10^{-4}$ cm⁻³——比 $n_0$ 小了 20 個數量級，完全可以忽略。<br>$J_{\text{drf}}\approx e\mu_n N_d\mathcal{E} = (1.6\times10^{-19})(8500)(10^{16})(10)=136$ A/cm²。<br><strong>10 V/cm 看似極小的電場（1 cm 的矽片上加 10 V），但已能產生 136 A/cm² 的電流密度。</strong>這顯示了半導體中電流對電場的敏感性。</div>
+</section>
+
+<section id="s5-1-2"><h2>5.1.2 散射機制與遷移率</h2>
+<p>遷移率 $\mu$ 是衡量載子在晶體中「跑多快」的指標。但它不是常數——它取決於載子被散射的頻率。要理解遷移率，必須先理解散射。</p>
+<h3>兩種主要散射機制</h3>
+<p><strong>① 晶格散射（聲子散射）：</strong>原子在晶格點附近熱振動→週期位能被擾動→電子波被散射。溫度越高→原子振動越劇烈→散射越頻繁→遷移率越低。理論給出 $\mu_L \propto T^{-3/2}$。在室溫附近，這是純淨半導體中遷移率的主要限制。</p>
+<p><strong>② 雜質散射（游離雜質散射）：</strong>游離的施體（帶 +e）和受體（帶 −e）離子→庫侖力使經過的帶電載子偏轉→散射。想像一個高爾夫球滾過一個充滿凹坑的果嶺——凹坑（雜質離子）越多，球的路徑越容易被偏轉。摻雜濃度越高→雜質離子越多→遷移率越低。但溫度越高→載子熱速度越快→經過離子附近的時間越短→散射截面越小→$\mu_I \propto T^{3/2}/N_I$。</p>
+<div class="figure"><img src="../../../images/solid-state-physics/ch05_pages/ch5_page_186.png" alt="圖 5.2" loading="lazy"><figcaption>圖 5.2：Si 中電子遷移率隨溫度變化——三條曲線對應不同摻雜濃度。低溫區：雜質散射主導（$\mu$ 隨 $T$ 上升）；高溫區：晶格散射主導（$\mu$ 隨 $T$ 下降）。峰值出現在兩種機制轉換處。</figcaption></div>
+<h3>Matthiessen 規則——散射的「並聯電阻」</h3>
+<div class="figure"><img src="../../../images/solid-state-physics/ch05_pages/ch5_page_192.png" alt="圖 5.6" loading="lazy"><figcaption>圖 5.6：Si 和 GaAs 中電子/電洞遷移率隨摻雜濃度的變化——高摻雜時雜質散射主導→遷移率急劇下降。</figcaption></div>
+<p>兩種散射同時存在時，散射率（單位時間碰撞次數 $1/\tau$）相加。因為 $\mu = e\tau/m^*$，遷移率的倒數也相加：</p>
+<div class="eq">$$\frac{1}{\mu} = \frac{1}{\mu_L} + \frac{1}{\mu_I} \tag{5.13}$$</div>
+<p>這和並聯電阻一模一樣——總遷移率由<strong>較小的那個</strong>主導（瓶頸效應）。如果 $\mu_L=1000$ 和 $\mu_I=500$，總 $\mu=333$——接近較小的 500 而不是 1000。這就是為什麼高摻雜樣品（$\mu_I$ 小）的遷移率遠低於純淨樣品。</p>
+<div class="figure"><img src="../../../images/solid-state-physics/ch05_pages/ch5_page_188.png" alt="圖 5.3" loading="lazy"><figcaption>圖 5.3：室溫下 Si 的電子與電洞遷移率隨摻雜濃度變化。注意遷移率隨摻雜增加而單調下降（雜質散射增加）。電子遷移率始終高於電洞——因為 $m_n^* < m_p^*$。</figcaption></div>
+<div class="callout"><strong>💡 為什麼電子遷移率始終高於電洞？</strong>回顧第三章：$\mu = e\tau/m^*$。電子的有效質量 $m_n^*$（Si 約 $0.26m_0$，考慮態密度有效質量）小於電洞的 $m_p^*$（約 $0.39m_0$）。同樣的力→較輕的粒子加速更快→電子比電洞「跑得快」。這也是為什麼 n 通道 MOSFET 比 p 通道 MOSFET 快的原因之一。</div>
+</section>
+
+<section id="s5-1-3"><h2>5.1.3 導電率——Ohm 定律的微觀基礎</h2>
+<p>我們從小學的 Ohm 定律 $V=IR$ 是一個<strong>巨觀</strong>描述——它告訴你元件的整體行為，但不告訴你為什麼。本章給出 Ohm 定律的<strong>微觀</strong>推導。</p>
+<p>由 $J_{\text{drf}} = e(\mu_n n + \mu_p p)\mathcal{E}$ 和 $J = \sigma\mathcal{E}$（Ohm 定律的場形式），比較係數：</p>
+<div class="eq">$$\boxed{\sigma = e(\mu_n n + \mu_p p)} \tag{5.17}$$</div>
+<div class="eq">$$\rho = \frac{1}{\sigma} = \frac{1}{e(\mu_n n + \mu_p p)} \tag{5.18}$$</div>
+<p><strong>這兩個公式揭示了 Ohm 定律的本質：</strong>導電率取決於兩件事——有多少載子（$n, p$，來自第四章的摻雜）以及它們跑多快（$\mu_n, \mu_p$，來自本章的散射分析）。</p>
+<p>對於 n 型材料（$n \gg p$）：$\sigma \approx e\mu_n n \approx e\mu_n N_d$。這給出一個極其實用的關係：知道摻雜濃度→查圖 5.3 得 $\mu_n$→立即算出導電率/電阻率。這是半導體製程監控中<strong>四點探針</strong>測量電阻率來推算摻雜濃度的物理基礎。</p>
+<div class="figure"><img src="../../../images/solid-state-physics/ch05_pages/ch5_page_190.png" alt="圖 5.4" loading="lazy"><figcaption>圖 5.4：室溫下 Si 和 GaAs 的電阻率隨摻雜濃度變化——對數-對數圖。斜率約 −1，因為 $\rho \propto 1/N_d$（假設 $\mu$ 隨 $N_d$ 變化較慢）。</figcaption></div>
+<p>一個長度 $L$、截面積 $A$ 的半導體棒的電阻為：</p>
+<div class="eq">$$R = \frac{\rho L}{A} = \frac{L}{\sigma A} = \frac{L}{e\mu_n n A} \tag{5.22, 5.23}$$</div>
+<div class="callout"><strong>💡 本徵導電率 vs 外質導電率。</strong>本徵 Si 的 $\sigma_i = e n_i(\mu_n+\mu_p) \approx 4\times10^{-6}$ (Ω·cm)⁻¹→幾乎是絕緣體。摻雜 $10^{16}$ cm⁻³ 的 n 型 Si：$\sigma \approx e\mu_n N_d \approx 2$ (Ω·cm)⁻¹→導電率增加了<strong>五十萬倍</strong>。摻雜的威力就在這裡——不是微調，是數量級的控制。</div>
+</section>
+
+<section id="s5-1-4"><h2>5.1.4 速度飽和</h2>
+<p>低電場時 $v_d = \mu\mathcal{E}$——線性關係。但這個線性關係不會永遠持續。當電場超過約 $10^3$–$10^4$ V/cm 時，載子從電場獲得的能量速率超過了它們能透過聲子發射散失的速率→載子「變熱」→漂移速度趨向一個<strong>飽和值</strong>：</p>
+<div class="eq">$$v_d \to v_{\text{sat}} \approx 10^7\ \text{cm/s} \quad (\mathcal{E} > 10^4\ \text{V/cm})$$</div>
+<div class="figure"><img src="../../../images/solid-state-physics/ch05_pages/ch5_page_196.png" alt="圖 5.8" loading="lazy"><figcaption>圖 5.8：Si 和 GaAs 中載子漂移速度隨電場的變化。低電場→線性（斜率=遷移率）；高電場→飽和至 $v_{\text{sat}}$。GaAs 在 $E\approx3$ kV/cm 處出現負微分遷移率區域（Gunn 效應）。</figcaption></div>
+<p><strong>GaAs 的特殊行為——Gunn 效應：</strong>GaAs 的導帶有兩個「谷」——低能量的 $\Gamma$ 谷（高遷移率）和高能量的 $L$ 谷（低遷移率）。在足夠高的電場下，電子獲得足夠能量從 $\Gamma$ 谷散射到 $L$ 谷→有效遷移率<strong>驟降</strong>→漂移速度隨電場增加而<strong>下降</strong>→負微分遷移率。這導致 GaAs 中的電流振盪（Gunn 振盪），可用於微波振盪器。</p>
+<div class="callout-warn"><strong>⚡ 速度飽和對現代 CMOS 元件的影響——為什麼 Moore 定律在放緩？</strong>在 90 年代，MOSFET 通道長度是微米級→通道電場 $\sim 10^4$ V/cm→載子仍在線性區。到了 2020 年代，通道長度縮小到 5 nm→即使 $V_{DS}=0.7$ V 也產生 $\sim 1.4\times10^6$ V/cm 的電場→載子處於深度速度飽和→$I_D \propto v_{\text{sat}}$ 而非 $V_{DS}$→電流不再隨電壓線性增加→元件性能無法透過單純縮小尺寸持續提升。這是 Moore 定律放緩的<strong>根本物理限制</strong>之一。</div>
+</section>
+
+<section id="s5-2"><h2>5.2 載子擴散</h2>
+<p>到目前為止我們只討論了電場驅動的運動（漂移）。現在考慮另一種驅動力——<strong>濃度梯度</strong>。</p>
+<p>想像你在一個擁擠的房間的一端噴了香水。即使沒有風（沒有「電場」），香味也會逐漸擴散到整個房間。為什麼？因為香水分子在房間一端濃度高、另一端濃度低→隨機熱運動使分子從高濃度區<strong>淨移動</strong>到低濃度區。這就是擴散的本質——<strong>隨機熱運動 + 濃度梯度 = 淨粒子流</strong>。</p>
+<p>半導體中的載子也是如此。如果電子濃度在空間中不均勻（$dn/dx \neq 0$），就會有淨電子流從高濃度流向低濃度。擴散電流密度與濃度梯度成正比——這就是 <strong>Fick 第一定律</strong>的半導體版本：</p>
+<div class="eq">$$J_n = e D_n \frac{dn}{dx} \tag{5.35}$$</div>
+<div class="eq">$$J_p = -e D_p \frac{dp}{dx} \tag{5.36}$$</div>
+<div class="figure"><img src="../../../images/solid-state-physics/ch05_pages/ch5_page_197.png" alt="圖 5.9" loading="lazy"><figcaption>圖 5.9：電子濃度隨 $x$ 遞減→電子從左向右淨擴散（擴散電流方向與電子流動方向相反，因為電子帶負電）。</figcaption></div>
+<p><strong>電洞擴散電流的負號</strong>困擾了許多學生。電洞從高濃度流向低濃度（沿 $+x$ 方向），所以 $dp/dx<0$。但電流方向定義為<strong>正電荷流動方向</strong>→電洞流向右（$+x$），電流也向右（$+x$）。然而 $dp/dx<0$，所以 $J_p$ 必須是正的→需要負號：$J_p = -eD_p(dp/dx)$ = 正數。</p>
+<div class="callout"><strong>💡 漂移 vs 擴散的物理類比。</strong>漂移 = 風吹樹葉（外力驅動，方向與外力一致）。擴散 = 樹葉從堆積處自然散開（濃度驅動，方向與濃度梯度相反）。在真實半導體元件中，兩者<strong>同時作用</strong>——例如 pn 接面：空乏區電場很強（漂移主導），中性區濃度梯度很大（擴散主導）。</div>
+<h3>⭐ 總電流密度——半導體元件分析的核心方程</h3>
+<p>在一般情況下，漂移和擴散同時存在。總電流密度為兩者之和：</p>
+<div class="eq">$$\boxed{J = en\mu_n\mathcal{E} + eD_n\frac{dn}{dx} + ep\mu_p\mathcal{E} - eD_p\frac{dp}{dx}} \tag{5.39}$$</div>
+<div class="callout-warn"><strong>⚡ 這就是所有半導體元件分析的起點。</strong>pn 接面的 Shockley 方程→從 (5.39) 出發，加上邊界條件推導。BJT 的 Ebers-Moll 模型→從 (5.39) 出發。MOSFET 的緩變通道近似→從 (5.39) 出發。如果你只記一條半導體物理公式，就是這條。理解每一項的物理意義，比記住推導細節重要一百倍。</div>
+</section>
+
+<section id="s5-3"><h2>5.3 Einstein 關係——漂移與擴散不是獨立的</h2>
+<p>漂移係數 $\mu$ 和擴散係數 $D$ 看起來是兩個獨立的材料參數。但它們本質上由同一個物理過程驅動——<strong>熱運動</strong>。Einstein 關係揭示了它們之間的深刻連結：</p>
+
+<h3>5.3.1 漸變雜質分布的內建電場</h3>
+<p>在許多實際元件中，摻雜濃度不是均勻的。例如：離子植入後的退火擴散會造成濃度梯度；BJT 的基區有漂移場（grading）設計。當施體濃度 $N_d(x)$ 隨位置變化時，平衡態的電子濃度 $n_0(x) \approx N_d(x)$ 也隨位置變化。</p>
+<p>如果沒有電場，電子會從高濃度區擴散到低濃度區。但擴散導致電荷分離（電子離開的區域留下帶正電的施體離子）→產生一個<strong>內建電場 $\mathcal{E}$</strong>。在熱平衡下，這個電場恰好阻止淨電子流動：</p>
+<div class="eq">$$J_n = en\mu_n\mathcal{E} + eD_n\frac{dn}{dx} = 0 \quad\Rightarrow\quad \mathcal{E} = -\frac{D_n}{\mu_n}\frac{1}{n}\frac{dn}{dx} = -\frac{kT}{e}\frac{1}{N_d}\frac{dN_d}{dx}$$</div>
+<p>這個內建電場在 BJT 的緩變基區（graded base）中被<strong>刻意利用</strong>——在基區中製造一個 Ge 組成的梯度（SiGe HBT）或摻雜梯度→產生一個「漂移場」→加速少數載子穿越基區→降低 $\tau_b$→提高 $f_T$。</p>
+<div class="eq">$$\boxed{\frac{D_n}{\mu_n} = \frac{D_p}{\mu_p} = \frac{kT}{e}} \tag{5.46}$$</div>
+<p><strong>為什麼這個關係成立？</strong>考慮一塊有梯度摻雜的半導體。載子傾向從高濃度區擴散到低濃度區。但擴散導致電荷分離（例如電子跑掉了，留下正的施體離子）→產生<strong>內建電場</strong>。這個內建電場驅動載子往反方向漂移。在熱平衡下（沒有外部電壓、沒有淨電流），漂移和擴散<strong>恰好互相抵消</strong>。這個平衡條件強制了 $D/\mu = kT/e$。</p>
+<div class="eq">$$J_p = e\mu_p p\mathcal{E} - eD_p\frac{dp}{dx} = 0 \quad\Rightarrow\quad \frac{D_p}{\mu_p} = \frac{kT}{e} \tag{5.48–5.49}$$</div>
+<p><strong>物理意義：</strong>室溫下 $kT/e = 0.0259$ V——這就是「熱電壓」。它告訴我們漂移和擴散的相對重要性：要產生與一個 $kT/e$ 的濃度變化（約 2.7 倍）等效的電流，需要施加 0.0259 V 的電壓。換言之，<strong>濃度梯度是一種「等效電壓」</strong>。</p>
+<div class="callout"><strong>💡 Einstein 關係的實用價值：</strong>已知遷移率→立即可得擴散係數。室溫 Si：$D_n = 0.0259 \times 1350 \approx 35$ cm²/s。不需要單獨測量擴散係數——你只需要測量遷移率（透過霍爾效應），Einstein 關係自動給你 $D$。這大大簡化了材料表徵。</div>
+</section>
+
+<section id="s5-4"><h2>5.4 霍爾效應——半導體診斷的萬能工具</h2>
+<p>如果你拿到一塊未知的半導體樣品，你需要知道三件事：它是 n 型還是 p 型？載子濃度多少？遷移率多大？<strong>霍爾效應一次回答所有三個問題。</strong></p>
+<p><strong>原理：</strong>將樣品放在垂直磁場 $B$ 中，沿 $x$ 方向通以電流 $I$。移動的載子受到 Lorentz 力 $\mathbf{F} = q(\mathbf{v} \times \mathbf{B})$，被推向樣品的 $+y$ 或 $-y$ 側→一側累積電荷→產生橫向<strong>霍爾電壓 $V_H$</strong>。</p>
+<div class="figure"><img src="../../../images/solid-state-physics/ch05_pages/ch5_page_205.png" alt="圖 5.13" loading="lazy"><figcaption>圖 5.13：霍爾效應測量幾何結構。電流 $I_x$，磁場 $B_z$，測量橫向霍爾電壓 $V_H$。$V_H$ 的<strong>正負號</strong>直接標示多數載子的類型（n 或 p）。</figcaption></div>
+<p>平衡時 Lorentz 力與霍爾電場的力互相抵消：</p>
+<div class="eq">$$eE_H = ev_d B \quad\Rightarrow\quad V_H = E_H W = v_d B W$$</div>
+<p>代換 $v_d = I/(epWd)$（由 $J = I/(Wd) = epv_d$）：</p>
+<div class="eq">$$\boxed{V_H = \frac{IB}{epd}} \quad\text{（p 型）} \tag{5.55}$$</div>
+<p>定義<strong>霍爾係數</strong> $R_H$：</p>
+<div class="eq">$$R_H = \frac{V_H d}{IB} = \frac{1}{ep}\ \text{(p 型)}\qquad R_H = -\frac{1}{en}\ \text{(n 型)} \tag{5.56, 5.57}$$</div>
+<div class="callout-warn"><strong>⚡ $R_H$ 的正負號直接告訴你載子類型。</strong>$R_H > 0$ → p 型（多數載子是電洞）；$R_H < 0$ → n 型（多數載子是電子）。這是判別半導體類型最直接的方法。<br><br><strong>$|R_H|$ 的大小告訴你載子濃度：</strong>$p = 1/(eR_H)$。霍爾遷移率：$\mu_H = |R_H|\sigma$。<strong>一次測量：類型 + 濃度 + 遷移率——三個關鍵參數全部到手。</strong></div>
+<div class="callout"><strong>💡 霍爾效應是半導體產業的基石技術。</strong>每張「遷移率 vs 摻雜濃度」的圖表（如圖 5.3）都是用霍爾效應測量的。半導體廠的 incoming QC（進料品質控制）用霍爾測量來驗證晶圓的摻雜濃度。物理系和研究機構用它來探索新材料（如二維材料、拓樸絕緣體）的傳輸特性。</div>
+</section>
+
+<section id="summary"><h2>本章摘要</h2>
+<ol style="font-size:14px;color:var(--t2);margin-left:18px">
+<li><strong>漂移：</strong>電場驅動載子運動。$v_d = \mu\mathcal{E}$。$J_{\text{drf}} = e(\mu_n n + \mu_p p)\mathcal{E}$。</li>
+<li><strong>遷移率：</strong>$\mu = e\tau/m^*$。受晶格散射（$\mu_L \propto T^{-3/2}$）和雜質散射（$\mu_I \propto T^{3/2}/N_I$）限制。Matthiessen 規則合併兩者：$1/\mu = 1/\mu_L + 1/\mu_I$。</li>
+<li><strong>導電率：</strong>$\sigma = e(\mu_n n + \mu_p p)$。Ohm 定律的微觀基礎。電阻率 $\rho = 1/\sigma$。</li>
+<li><strong>速度飽和：</strong>高電場時 $v_d \to v_{\text{sat}} \approx 10^7$ cm/s。GaAs 有負微分遷移率（Gunn 效應）。速度飽和是奈米級 CMOS 性能的物理限制。</li>
+<li><strong>擴散：</strong>濃度梯度驅動。$J_n = eD_n(dn/dx)$，$J_p = -eD_p(dp/dx)$。電洞公式的負號來自電流方向定義。</li>
+<li><strong>總電流方程 (5.39)：</strong>$J =$ 漂移項 $+$ 擴散項。所有半導體元件分析的基礎。</li>
+<li><strong>Einstein 關係：</strong>$D/\mu = kT/e$。漂移和擴散由同一熱運動驅動，非獨立參數。熱平衡時兩者抵消產生此關係。</li>
+<li><strong>霍爾效應：</strong>$V_H = IB/(epd)$。一次測量得到載子類型（$R_H$ 正負號）、濃度（$1/eR_H$）、遷移率（$|R_H|\sigma$）。</li></ol></section>
+</main>
+<script>
+function toggleTheme(){const h=document.documentElement;const n=h.getAttribute('data-theme')==='light'?'dark':'light';h.setAttribute('data-theme',n);localStorage.setItem('theme',n);document.getElementById('tl').textContent=n==='dark'?'淺色模式':'深色模式';}
+const s=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',s);if(s==='dark')document.getElementById('tl').textContent='淺色模式';
+const secs=document.querySelectorAll('section[id]');const navs=document.querySelectorAll('.sn a');window.addEventListener('scroll',()=>{let c='';secs.forEach(s=>{if(window.scrollY>=s.offsetTop-80)c=s.getAttribute('id');});navs.forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+c);});});
+document.querySelectorAll('.figure img').forEach(i=>i.addEventListener('click',()=>window.open(i.src,'_blank')));
+</script>
+</body>
+</html>

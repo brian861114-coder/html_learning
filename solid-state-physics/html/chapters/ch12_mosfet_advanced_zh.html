@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>第十二章：MOSFET 進階概念 — 半導體物理與元件</title>
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']],tags:'ams'},options:{ignoreHtmlClass:'no-math'}};</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+:root{--bg:#fff;--b2:#F5F5F7;--b3:#E8F0FE;--tx:#1D1D1F;--t2:#1D1D1F;--ac:#007AFF;--bd:#D2D2D7;--sh:0 2px 8px rgba(0,0,0,.08);--fbd:#E5E5EA;--wbg:#FFF9F0;--wbd:#FFB340;--wtx:#B8700A;--nw:260px}
+[data-theme="dark"]{--bg:#1C1C1E;--b2:#2C2C2E;--b3:#1A2332;--tx:#F5F5F7;--t2:#A1A1A6;--ac:#0A84FF;--bd:#48484A;--fbd:#3A3A3C;--wbg:#2C2416;--wbd:#8B6914;--wtx:#FFB340}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth;scroll-padding-top:16px}
+body{font-family:-apple-system,BlinkMacSystemFont,'Noto Sans TC','Microsoft JhengHei',sans-serif;background:var(--b2);color:var(--tx);line-height:1.9;display:flex;min-height:100vh}
+.sidebar{position:fixed;top:0;left:0;width:var(--nw);height:100vh;background:var(--bg);border-right:1px solid var(--bd);overflow-y:auto;z-index:100;padding:20px 16px;display:flex;flex-direction:column}
+.sh{margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--fbd)}.sh h2{font-size:14px;font-weight:600;color:var(--ac)}.sh .bk{font-size:11px;color:var(--t2)}
+.sn{flex:1}.sn ul{list-style:none}.sn a{display:block;padding:4px 10px;font-size:11px;color:var(--t2);text-decoration:none;border-radius:5px;transition:.12s}.sn a:hover{background:var(--b3);color:var(--ac)}.sn a.active{background:var(--b3);color:var(--ac);font-weight:500}.sn .ns{font-weight:600;font-size:12px;color:var(--tx);margin-top:10px;padding:2px 10px}.sn .nsub a{padding-left:20px;font-size:10px}
+.st{margin-top:auto;padding-top:12px;border-top:1px solid var(--fbd)}.st button{width:100%;padding:6px;border:1px solid var(--bd);border-radius:6px;background:var(--b2);color:var(--tx);cursor:pointer;font-size:12px}
+.main{margin-left:var(--nw);flex:1;max-width:1050px;padding:32px 40px 80px}
+.header{margin-bottom:32px;padding-bottom:20px;border-bottom:2px solid var(--ac)}.header .cl{font-size:12px;font-weight:600;color:var(--ac);letter-spacing:1px}.header h1{font-size:28px;font-weight:700;margin:6px 0}.header .meta{font-size:13px;color:var(--t2)}
+section{margin-bottom:44px}h2{font-size:20px;font-weight:700;color:var(--ac);margin-bottom:14px;padding-bottom:6px;border-bottom:1px solid var(--bd)}h3{font-size:16px;font-weight:600;color:var(--tx);margin:24px 0 10px}p{font-size:14px;color:var(--t2);margin-bottom:12px}strong{font-weight:600;color:var(--tx)}
+.eq{text-align:center;margin:16px 0;font-size:15px}
+.figure{margin:24px 0;text-align:center}.figure img{max-width:100%;border-radius:8px;box-shadow:var(--sh);cursor:pointer}.figure img:hover{transform:scale(1.01)}.figure figcaption{margin-top:8px;font-size:12px;color:var(--t2)}
+.callout{background:var(--b3);border:1px solid var(--fbd);border-radius:8px;padding:14px 18px;margin:16px 0;font-size:13px}.callout strong{color:var(--ac)}
+.callout-warn{background:var(--wbg);border:1px solid var(--wbd);border-radius:8px;padding:14px 18px;margin:16px 0;font-size:13px}.callout-warn strong{color:var(--wtx)}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}thead th{background:var(--b3);padding:8px 12px;font-size:12px;font-weight:600;border-bottom:2px solid var(--bd)}tbody td{padding:8px 12px;border-bottom:1px solid var(--fbd)}tbody tr:nth-child(even){background:var(--b2)}
+@media(max-width:768px){.sidebar{transform:translateX(-100%);transition:.3s}.sidebar.open{transform:translateX(0)}.main{margin-left:0;padding:20px 16px 60px}}
+@media print{.sidebar{display:none}.main{margin-left:0;max-width:100%;padding:0}}
+</style>
+<script src="../../../reading-preferences.js" defer></script></head>
+<body><a class="portal-home-link" href="../../../index.html">返回學習中心</a><style id="portal-home-link-style">.portal-home-link{position:fixed;top:16px;right:16px;z-index:1000;display:inline-flex;align-items:center;min-height:36px;padding:7px 11px;border:1px solid #cbd5e1;border-radius:8px;background:#fff;color:#1d4ed8;font:600 13px/1.2 -apple-system,BlinkMacSystemFont,"Noto Sans TC","Microsoft JhengHei",sans-serif;text-decoration:none;box-shadow:0 2px 10px rgba(15,23,42,.08)}.portal-home-link:hover{background:#eff6ff}.portal-home-link:focus-visible{outline:3px solid rgba(37,99,235,.35);outline-offset:2px}@media(max-width:768px){.portal-home-link{top:10px;right:10px;min-height:34px;padding:7px 9px;font-size:12px}}</style>
+<nav class="sidebar"><div class="sh"><div class="bk">半導體物理與元件·第四版</div><h2>第十二章</h2></div><div class="sn"><ul>
+<li><a href="#preview">📋 12.0 本章預覽</a></li><li class="ns">12.1 縮小</li><li class="nsub"><a href="#s12-1">12.1 定電場縮小法則 ⭐</a></li><li class="ns">12.2 非理想</li><li class="nsub"><a href="#s12-2a">遷移率退化·界面散射</a></li><li class="nsub"><a href="#s12-2b">速度飽和·短通道 $I_D$</a></li><li class="ns">12.3–12.6</li><li class="nsub"><a href="#s12-3">熱載子·氧化層崩潰·LDD</a></li><li class="nsub"><a href="#s12-4">SOI·FinFET·GAA</a></li><li class="nsub"><a href="#s12-5">終極尺寸限制·量子·統計</a></li>
+<li><a href="#summary">📋 本章摘要</a></li>
+</ul></div><div class="st"><button onclick="toggleTheme()">🌓 <span id="tl">深色模式</span></button></div></nav>
+<main class="main">
+<header class="header"><div class="cl">第十二章</div><h1>MOSFET 進階概念</h1><div class="meta">Donald A. Neamen·《半導體物理與元件：基本原理》第四版·第 446–504 頁</div></header>
+
+<section id="preview"><div class="callout"><strong>📋 12.0 本章預覽</strong>
+<p>第十一章建立了 MOSFET 的理想模型——長通道、均勻摻雜、無短通道效應。這個理想模型對於理解 MOSFET 的基本原理至關重要。但任何嘗試過用長通道公式來預測現代奈米級 MOSFET 行為的人都會立刻發現：理想模型完全不準。</p>
+<p>本章討論<strong>讓理想模型失效的所有效應</strong>——以及克服它們的工程解決方案。這些非理想效應不是學術好奇心；它們是每天困擾著晶片設計者和製程工程師的實際問題。每一個效應背後都有一個對應的製程解決方案（LDD、SOI、high-κ、FinFET）——了解這些方案需要先了解它們要解決的問題。</p>
+<div class="callout-warn"><strong>⚡ 本章的兩個核心主題：</strong>① <strong>縮小（Scaling）</strong>——把電晶體越做越小帶來的物理挑戰。定電場縮小法則告訴我們如何理想地縮小；速度飽和、DIBL、熱載子效應告訴我們現實中會出什麼問題。② <strong>工程解決方案</strong>——LDD 對抗熱載子、SOI 降低寄生電容、high-κ 對抗閘極漏電、FinFET 對抗短通道效應。本章連接了「元件物理」和「實際 CMOS 製程」。</div></div></section>
+
+<div class="figure"><img src="../../../images/solid-state-physics/ch12_pages/ch12_overview.png" alt="第十二章總覽圖" loading="lazy"><figcaption>📌 第十二章總覽圖：MOSFET進階 — 縮小法則、物理挑戰、工程解法、終極限制</figcaption></div>
+
+<section id="s12-1"><h2>12.1 定電場縮小法則——Moore 定律的物理基礎 ⭐</h2>
+<div class="figure"><img src="../../../images/solid-state-physics/ch12_pages/ch12_page_480.png" alt="圖 11.12" loading="lazy"><figcaption>圖 11.12：Dennard 定電場縮小法則——尺寸和電壓同時縮小 $\kappa$ 倍，內部電場不變，功耗密度降低 $\kappa^2$ 倍。</figcaption></div>
+<p>1965 年，Gordon Moore 觀察到積體電路上的電晶體數量大約每兩年翻一倍。但這條著名的「定律」如果沒有物理上的可行性論證，就只是一條經驗曲線。1974 年，Robert Dennard 發表了<strong>定電場縮小法則</strong>——論證了MOSFET 可以持續縮小而不會遭遇根本性的物理障礙。</p>
+<p><strong>核心思想：</strong>如果你把電晶體的所有尺寸（$L$, $W$, $t_{ox}$）和所有電壓（$V_{DD}$, $V_T$）同時除以同一個因子 $\kappa$，並把基板摻雜增加 $\kappa$ 倍，那麼：</p>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li>內部電場保持不變（因為電壓和距離以相同比例縮小）→可靠性不受影響</li>
+<li>每單位面積的電晶體數量增加 $\kappa^2$ 倍→密度平方增長</li>
+<li>每個電晶體的延遲時間縮短 $\kappa$ 倍→速度提升</li>
+<li>每個電晶體的功耗降低 $\kappa^2$ 倍→功耗急劇下降（因為 $P\propto CV^2f$，$C\propto1/\kappa$, $V\propto1/\kappa$, $f\propto\kappa$→$P\propto1/\kappa^2$）</li>
+</ul>
+
+<div class="figure"><img src="../../../images/solid-state-physics/ch12_pages/ch12_page_483.png" alt="圖 12.13" loading="lazy"><figcaption>圖 12.13：定電場縮小法則的圖解。左：原始元件。右：縮小 $\kappa$ 倍後的元件——所有尺寸和電壓同步縮小，內部電場保持不變。</figcaption></div>
+
+<table><thead><tr><th>參數</th><th>縮小因子</th><th>實際效益</th></tr></thead><tbody>
+<tr><td>$L, W, t_{ox}$</td><td>$1/\kappa$</td><td>尺寸縮小</td></tr>
+<tr><td>$V_{DD}, V_T, V_{DS}$</td><td>$1/\kappa$</td><td>電壓降低→功耗降低</td></tr>
+<tr><td>$N_a$（基板摻雜）</td><td>$\kappa$</td><td>保持空乏層寬度同步縮小</td></tr>
+<tr><td>延遲時間 $\tau$</td><td>$1/\kappa$</td><td>速度提升 $\kappa$ 倍</td></tr>
+<tr><td>功耗 $P$</td><td>$1/\kappa^2$</td><td>⭐ 功耗急劇降低</td></tr>
+<tr><td>功率-延遲積</td><td>$1/\kappa^3$</td><td>整體性能指標大幅改善</td></tr>
+<tr><td>密度</td><td>$\kappa^2$</td><td>每晶片電晶體數量平方增加</td></tr></tbody></table>
+
+<p><strong>為什麼 $N_a$ 必須增加？</strong>空乏層寬度 $x_d\propto1/\sqrt{N_a}$。當 $L$ 縮小 $\kappa$ 倍時，空乏層寬度也必須同步縮小——否則空乏區會延伸到通道中不該延伸的地方（例如源極和汲極的空乏區在通道下方相遇→產生穿通效應）。增加 $N_a$ 使 $x_d$ 縮小至所需的尺寸。</p>
+
+<div class="callout-warn"><strong>⚡ Dennard 縮小在 2005 年前後失效——「功耗牆」的物理根源。</strong>Dennard 縮小要求 $V_{DD}$ 和 $V_T$ 隨 $L$ 同步降低。但 $V_T$ 不能低於某個下限——因為次臨界漏電流 $I_{OFF}\propto e^{-V_T/(S/\ln10)}$。如果 $V_T$ 從 0.5 V 降到 0.2 V→$I_{OFF}$ 增加 $e^{0.3/(0.1)}\approx20$ 倍（假設 $S=100$ mV/dec）→待機功耗爆炸。<br><br>Dennard 縮小失效後，$V_{DD}$ 不再能隨 $L$ 同步縮小（從 ∼1 V 降到 ∼0.7 V 後就卡住了）。但 $L$ 繼續縮小→內部電場增大→速度飽和、熱載子效應加劇→每代新製程的性能提升幅度從之前的 ∼40% 降到 ∼10–15%。這就是為什麼 Moore 定律在放緩——不是因為電晶體不能再縮小，而是因為縮小不再帶來同等的性能回報。</div>
+</section>
+
+<section id="s12-2a"><h2>12.2.1 遷移率退化——當閘極壓得太緊</h2>
+<p>第十一章假設反轉層中的載子遷移率 $\mu_n$ 為常數（等於塊材中的低電場遷移率）。現實中，當 $V_{GS}$ 增大時，<strong>垂直於通道方向的電場</strong>（從閘極指向基板）將反轉層中的電子<strong>壓向</strong> Si/SiO₂ 界面。這個界面不是原子級平坦的——存在約 0.2–0.5 nm RMS 的粗糙度。載子被壓在粗糙界面上→界面粗糙度散射增加→有效遷移率下降。</p>
+
+<div class="eq">$$\mu_{\text{eff}} = \frac{\mu_0}{1 + \theta(V_{GS}-V_T)}$$</div>
+
+<p>$\theta$（遷移率退化因子）取決於氧化層厚度（$t_{ox}$ 越小→垂直電場越大→$\theta$ 越大）和界面品質。典型值 ∼0.1–0.5 V⁻¹。當 $V_{GS}-V_T=2$ V 且 $\theta=0.3$ 時，$\mu_{\text{eff}}=\mu_0/1.6=0.625\mu_0$——遷移率下降了近 40%。</p>
+
+<p><strong>物理機制——不只是界面粗糙度：</strong>除了界面粗糙度散射，垂直電場還會改變載子在反轉層中的<strong>量子侷限</strong>狀態。反轉層極薄（∼1–5 nm），電子在垂直方向的運動被量子化為離散的次能帶（subbands）。垂直電場越大→電子被壓得越緊→量子侷限越強→最低次能帶的能量升高→更多的電子佔據較高有效質量的次能帶→遷移率進一步下降。這是「表面粗糙度散射+量子侷限效應」的協同作用。</p>
+
+<div class="callout"><strong>💡 遷移率退化對類比電路設計的影響：</strong>類比設計師通常希望 $g_m$ 越大越好→傾向用大的 $V_{GS}-V_T$。但遷移率退化限制了 $g_m$ 在高過驅動電壓下的增長→存在一個最優的 $V_{GS}-V_T$（通常在 0.15–0.3 V），超過之後 $g_m/I_D$（跨導效率）開始下降。這就是為什麼低功耗類比電路傾向於操作在弱反轉區（$V_{GS}<V_T$）——該區域雖然 $g_m$ 小，但 $g_m/I_D$ 達到最大值（類似 BJT 的 $g_m/I_C=1/V_T$）。</div>
+</section>
+
+<section id="s12-2b"><h2>12.2.2 速度飽和——短通道元件最根本的限制</h2>
+<p>第十一章的長通道模型中，$I_D$ 的平方律來自一個關鍵假設：載子漂移速度與電場成正比（$v_d=\mu_n E$）。這個假設在電場低於 ∼$10^4$ V/cm 時成立。但在短通道元件中——以 $L=20$ nm、$V_{DS}=1$ V 為例——通道中的平均電場高達 $5\times10^5$ V/cm。在這個電場強度下，載子已經遠遠進入<strong>速度飽和區</strong>（$v_d\approx v_{\text{sat}}\approx10^7$ cm/s，見第五章圖 5.8）。</p>
+
+<p>速度飽和對 $I_D$ 的影響是質變而非量變。當載子以 $v_{\text{sat}}$ 穿越整個通道時：</p>
+<div class="eq">$$\boxed{I_D(\text{sat}) = W C_{ox}(V_{GS}-V_T)v_{\text{sat}}}$$</div>
+
+<div class="figure"><img src="../../../images/solid-state-physics/ch12_pages/ch12_page_474.png" alt="圖 12.7" loading="lazy"><figcaption>圖 12.7：速度飽和對 $I_D$–$V_{GS}$ 特性的轉變。長通道（左）：$I_D\propto(V_{GS}-V_T)^2$（平方律）。短通道（右）：$I_D\propto(V_{GS}-V_T)$（線性律）。這是一個根本性的轉變——所有以平方律為基礎的設計直覺都需要修正。</figcaption></div>
+
+<p><strong>速度飽和的三個連鎖後果：</strong></p>
+
+<p><strong>① $I_D$ 變為線性而非平方律。</strong>$I_D$ 不再隨 $(V_{GS}-V_T)^2$ 增長，而只隨 $(V_{GS}-V_T)$ 線性增長→給定 $V_{GS}$ 下的驅動電流顯著降低。這直接影響了數位電路的開關速度。</p>
+
+<p><strong>② $g_m$ 趨向常數。</strong>在長通道飽和區：$g_m=\mu_n C_{ox}(W/L)(V_{GS}-V_T)$→隨 $V_{GS}$ 線性增長。在速度飽和極限：$g_m = WC_{ox}v_{\text{sat}}$→<strong>常數</strong>——加大 $V_{GS}$ 不再能提高跨導。這對類比放大器設計是災難性的——增益 $A_v=-g_m R_L$ 被固定上限。</p>
+
+<p><strong>③ 飽和提前發生。</strong>在長通道中，飽和發生在 $V_{DS}=V_{GS}-V_T$（夾止條件）。在速度飽和極限下，載子在通道中途（$V\ll V_{GS}-V_T$ 處）就已達到 $v_{\text{sat}}$→飽和發生在 $V_{DS}$ 遠小於 $V_{GS}-V_T$ 時→可用的電壓餘裕（voltage headroom）被壓縮。</p>
+
+<div class="callout-warn"><strong>⚡ 速度飽和是為什麼 FinFET 的 $I_D$–$V_{GS}$ 是線性的。</strong>如果你量測一顆現代 FinFET（$L_g\sim14$ nm）的 $I_D$–$V_{GS}$ 曲線，你會發現它幾乎完全是直線——平方律完全消失。這就是速度飽和的指紋。速度飽和不是一個「可以用更好的製程消除」的問題——它是載子基本物理的限制（$v_{\text{sat}}\approx10^7$ cm/s 是 Si 中的材料常數，由聲子發射速率決定）。除非換用更高 $v_{\text{sat}}$ 的材料（如 GaAs、InGaAs），否則速度飽和是 Si MOSFET 無法逾越的物理限制。</div>
+</section>
+
+<section id="s12-3"><h2>12.3 熱載子效應——高速電子的破壞力</h2>
+<p>在短通道元件中，即使 $V_{DS}$ 只有 1 V，汲極端的峰值電場也可達 $>10^5$ V/cm。電子在汲極端空乏區中被這個高電場加速→獲得遠高於熱平衡（$kT=0.026$ eV）的動能——成為「熱」載子。某些電子的能量可達數 eV。</p>
+
+<p><strong>熱載子能造成三種破壞：</strong></p>
+
+<p><strong>① 注入氧化層。</strong>電子要從 Si 的導帶進入 SiO₂ 的導帶，需要克服 ∼3.1 eV 的能障。熱載子的能量夠高→可以直接越過這個能障進入氧化層。注入的電子在氧化層中移動，可能被氧化層中的缺陷（氧空缺等）捕獲→形成固定電荷→$V_T$ 漂移。這是長期操作中 $V_T$ 不穩定的主要原因。</p>
+
+<p><strong>② 產生界面態。</strong>高能電子撞擊 Si/SiO₂ 界面→打斷 Si-H 鍵（鈍化鍵）→產生懸鍵（dangling bond）→這些懸鍵形成能隙中的界面態。界面態會捕捉和釋放通道中的載子→$g_m$ 退化、次臨界斜率劣化、低頻雜訊增加。</p>
+
+<p><strong>③ 氧化層崩潰。</strong>長期累積的注入和陷阱充電最終導致氧化層局部電場超過 SiO₂ 的介電強度（∼$10^7$ V/cm）→氧化層永久性擊穿→閘極短路。</p>
+
+<h3>輕摻雜汲極（LDD）——對抗熱載子的工程解決方案</h3>
+<div class="figure"><img src="../../../images/solid-state-physics/ch12_pages/ch12_page_486.png" alt="圖 12.16, 12.17" loading="lazy"><figcaption>圖 12.16–12.17：傳統汲極結構 vs 輕摻雜汲極（LDD）結構。LDD 在汲極端加入一段輕摻雜 n⁻ 區域，使空乏區延伸→電場分布更平滑→峰值電場降低 30–50%。</figcaption></div>
+<p>LDD 的核心思想：在通道和重摻雜 n⁺ 汲極之間插入一段<strong>輕摻雜的 n⁻ 區域</strong>。n⁻ 區域的空間電荷密度低→Poisson 方程積分出的電場曲線更平緩→峰值電場降低。LDD 結構中的峰值電場可以從 ∼$5\times10^5$ V/cm 降到 ∼$3\times10^5$ V/cm。因為熱載子注入率對電場有極強的超線性依賴（$\propto e^{-E_0/E}$），電場降低 40% 可以使元件壽命延長數個數量級。</p>
+</section>
+
+<section id="s12-4"><h2>12.4 SOI、FinFET 與先進 CMOS 結構</h2>
+<h3>SOI——把電晶體放在絕緣體上</h3>
+<p>在傳統塊材（bulk）MOSFET 中，通道和汲極與基板之間存在 pn 接面→寄生接面電容 $C_{j,DB}$、接面漏電流、以及基板效應（body effect：$V_{SB}$ 增加會使 $V_T$ 增加）。SOI 技術在通道下方放置一層<strong>埋入氧化層（Buried Oxide, BOX, 通常 ∼100–200 nm 厚的 SiO₂）</strong>→通道完全被絕緣體包圍→消除所有寄生接面。</p>
+<p>SOI 的優勢：寄生電容降低 30–50%→開關速度更快、動態功耗更低；接面漏電流消失→待機功耗降低；基板效應消失→$V_T$ 不受 $V_{SB}$ 調變；抗軟錯誤（soft error）能力增強（埋入氧化層阻擋 α 粒子從封裝材料進入通道）。</p>
+
+<h3>FinFET——從平面到三維的革命</h3>
+<div class="figure"><img src="../../../images/solid-state-physics/ch12_pages/ch12_page_503.png" alt="圖 12.32" loading="lazy"><figcaption>圖 12.32：FinFET 的三維結構——矽「鰭」從基板豎起，閘極從三面包圍鰭。靜電控制遠優於平面 MOSFET，使 $L_g$ 能從 ∼20 nm 繼續縮小到 ∼3 nm。</figcaption></div>
+<p>在平面 MOSFET 中，閘極只從<strong>上方</strong>控制通道。當 $L_g$ 縮小到 ∼20 nm 以下時，源極和汲極的電場從通道<strong>下方</strong>（基板側）繞過——閘極失去了對通道底部區域的控制。這些不受控的區域成為次臨界漏電流的路徑。FinFET 把通道豎起來變成一個矽「鰭」→閘極從<strong>三面包圍</strong>鰭（上方+左右兩側）→閘極的靜電控制力大幅增強→短通道效應被有效抑制。這是為什麼 $L_g$ 能從 20 nm（平面 MOSFET 的極限）繼續縮小到 5 nm 以下的關鍵技術。</p>
+<p><strong>GAAFET（閘極全環繞）：</strong>FinFET 的下一步進化——通道變成水平奈米線或奈米片，閘極<strong>完全環繞</strong>通道四面。這實現了終極的靜電完整性。Samsung 2022 年發布了 3 nm GAAFET 製程，TSMC 預計在 2 nm 節點（2025）引入。</p>
+</section>
+
+<section id="s12-5"><h2>12.5–12.6 終極尺寸的物理限制——我們能縮到多小？</h2>
+<div class="figure"><img src="../../../images/solid-state-physics/ch12_pages/ch12_page_469.png" alt="圖 11.1" loading="lazy"><figcaption>圖 11.1：短通道 MOSFET 的二維電勢分布——源極和汲極的電場穿入通道中央，分攤閘極控制力。</figcaption></div>
+<p>Moore 定律不可能永遠持續。本節討論限制 MOSFET 繼續縮小的<strong>根本物理障壁</strong>——這些不是工程問題（可透過更聰明的設計克服），而是物理定律設定硬性限制。</p>
+
+<h3>氧化層的量子穿隧限制</h3>
+<p>SiO₂ 氧化層的厚度不能小於 ∼0.5 nm（約兩個分子層）。當 $t_{ox}<1$ nm 時，直接量子穿隧（direct tunneling）導致閘極漏電流密度呈指數增長：$J_G \propto e^{-t_{ox}\sqrt{2m^*\phi_B}/\hbar}$。對 $t_{ox}=1.5$ nm→$J_G\sim1$ A/cm²；$t_{ox}=0.8$ nm→$J_G\sim10^3$ A/cm²→閘極漏電功耗超過通道導通功耗→電晶體失去意義。high-κ 材料（HfO₂, $\kappa\sim25$）可以物理厚度 5 nm 達到等效 0.8 nm 的電容→穿隧漏電降低 ∼$10^4$ 倍。但當等效厚度也縮到 ∼0.5 nm 時，穿隧限制再次出現。</p>
+
+<h3>摻雜波動（Random Dopant Fluctuation, RDF）</h3>
+<p>在 $L_g=10$ nm 的 MOSFET 中，通道體積約為 $10\times10\times10$ nm³ $=10^{-18}$ cm³。若 $N_a=10^{18}$ cm⁻³→通道中僅有 ∼<strong>10 個摻雜原子</strong>。這 10 個原子的確切數量和位置因每個電晶體而異（Poisson 統計→標準差 $\sqrt{10}\approx3$）→每個電晶體的 $V_T$ 都不同。在一個有 100 億個電晶體的晶片上，$V_T$ 的統計分布寬度可達 ∼50–100 mV——大到足以破壞 SRAM 單元的讀寫穩定性和邏輯時序。</p>
+
+<h3>功耗密度——黑暗矽（Dark Silicon）</h3>
+<p>即使每個電晶體的功耗隨縮小而降低，但密度以 $\kappa^2$ 增長→每單位面積的總功耗可能增加。現代高效能晶片的功耗密度已接近 ∼100 W/cm²——接近核反應爐的熱通量。散熱能力（空冷∼50 W/cm²，液冷∼200 W/cm²）限制了能同時全速運行的電晶體比例。這就是「黑暗矽」現象——晶片上有大比例的電晶體必須關閉或降頻以避免過熱。</p>
+
+<h3>11.3.2 窄通道效應（Narrow-Channel Effects）</h3>
+<p>短通道效應是通道<strong>長度</strong>縮小的問題。通道<strong>寬度</strong>縮小同樣帶來效應——<strong>窄通道效應</strong>。當 $W$ 縮小到與空乏區寬度可比時，閘極邊緣的電場線「繞射」到通道側面的空乏區中→需要額外的閘極電壓來覆蓋側面空乏電荷→$V_T$ <strong>升高</strong>。</p>
+<p>與短通道效應（$V_T$ 下降）相反，窄通道效應使 $V_T$ 上升。在現代 FinFET 中，通道是三維的鰭片（fin），$W$ 的定義不再是簡單的平面寬度，而是鰭片高度×2+鰭片寬度——窄通道效應的物理圖像需要重新理解。</p>
+</section>
+
+<section id="s12-ballistic"><h2>11.1.5 彈道傳輸——當通道比平均自由程還短</h2>
+<p>在傳統的漂移-擴散模型中，載子在通道中經過多次散射（碰撞）才從源極到達汲極。平均自由程 $\ell = v_{th}\tau \approx 10$–$50$ nm（室溫 Si）。當通道長度 $L$ 縮小到與 $\ell$ 可比（$L < 50$ nm）時，載子可能在<strong>不經過任何散射</strong>的情況下從源極飛到汲極——這就是<strong>彈道傳輸</strong>。</p>
+<p><strong>平均自由程的數值計算：</strong>$\ell = v_{th}\tau$。Si 中 $\mu_n = 300$ cm²/V·s（短通道中的有效遷移率）→$\tau = m^*\mu/e = 0.26\times9.11\times10^{-31}\times300\times10^{-4}/(1.6\times10^{-19}) \approx 4.4\times10^{-14}$ s。$v_{th} = \sqrt{8kT/(\pi m^*)} \approx 2.3\times10^7$ cm/s。$\ell = 2.3\times10^7\times4.4\times10^{-14} \approx 10$ nm。所以 $L < 10$ nm 的通道確實進入彈道區域。</p>
+<p>在完全彈道極限下，$I_D$ 不再受通道中的散射限制，而是受源極端的<strong>熱離子注入率</strong>限制——就像蕭特基二極體的 thermionic emission。飽和電流：</p>
+<div class="eq">$$I_{\text{ballistic}} = WC_{ox}(V_{GS}-V_T)v_{\text{inj}}$$</div>
+<p>其中 $v_{\text{inj}} \approx v_{th}/2$（注入速度≈熱速度的一半）。對 Si，$v_{th}\sim10^7$ cm/s→$v_{\text{inj}}\sim5\times10^6$ cm/s。這比速度飽和的 $v_{sat}\sim10^7$ cm/s 還低——所以彈道傳輸在 Si 中<strong>不一定</strong>比速度飽和更優。但在高遷移率材料（如 InGaAs，$v_{th}$ 更高）中，彈道傳輸可能是突破速度瓶頸的途徑。</p>
+<div class="callout"><strong>💡 彈道傳輸的工程現實。</strong>目前最先進的電晶體（3 nm FinFET/GAA）的通道長度約 12 nm——接近但不完全進入彈道區域。實際傳輸是「準彈道」的：載子在通道中只經歷 1-2 次散射。業界正在研究 InGaAs 和 Ge 通道來利用更高的注入速度，但這些材料的界面品質仍是挑戰。</div>
+</section>
+
+<section id="s12-implant"><h2>11.4.3 離子植入閾值調整</h2>
+<p>$V_T$ 的精確控制對數位電路至關重要——同一晶片上的所有 nMOS 必須有相同的 $V_T$。$V_T$ 取決於 $N_a$（基板摻雜）和 $C_{ox}$（氧化層厚度），但這些參數的製程控制精度有限。</p>
+<p><strong>離子植入（Ion Implantation）</strong>是精確調整 $V_T$ 的標準方法：在通道表面下方植入一層極薄的摻雜層（通常用 B 對 nMOS，P 或 As 對 pMOS）。植入劑量 $Q_I$（atoms/cm²）直接改變 $V_T$：</p>
+<div class="eq">$$\Delta V_T = \frac{eQ_I}{C_{ox}}$$</div>
+<p>植入深度（由離子能量決定）必須在反轉層形成的位置附近——太深則對 $V_T$ 無效，太淺則影響載子遷移率。典型的調整範圍：$\pm 100$–$300$ mV，植入劑量 $10^{12}$–$10^{13}$ cm$^{-2}$。</p>
+<p><strong>植入能量與深度的關係：</strong>離子進入 Si 後會與晶格原子碰撞而減速。投影射程 $R_p$（平均停止深度）取決於離子能量和質量：</p>
+<table><thead><tr><th>離子</th><th>能量 (keV)</th><th>$R_p$ (nm)</th><th>用途</th></tr></thead><tbody>
+<tr><td>B（硼）</td><td>10</td><td>∼30</td><td>淺接面 $V_T$ 調整</td></tr>
+<tr><td>B（硼）</td><td>50</td><td>∼150</td><td>標準 $V_T$ 調整</td></tr>
+<tr><td>P（磷）</td><td>50</td><td>∼60</td><td>nMOS $V_T$ 調整</td></tr>
+<tr><td>As（砷）</td><td>50</td><td>∼30</td><td>極淺 S/D 擴展</td></tr></tbody></table>
+<p><strong>退火（Annealing）：</strong>植入過程會嚴重破壞晶格（每個離子撞出數千個 Si 原子）→必須在 900–1100°C 退火來修復晶格損傷並活化摻雜原子。現代製程使用快速熱退火（RTA，∼1 秒）或雷射退火（毫秒級）以防止摻雜原子過度擴散。</p>
+<div class="callout"><strong>💡 多閾值電壓（Multi-$V_T$）技術。</strong>現代 SoC 中不同電路區塊對速度和功耗的要求不同。高效能核心用低 $V_T$（快但漏電大），低功耗 I/O 用高 $V_T$（慢但漏電小）。透過多次離子植入（不同區域不同劑量），可以在同一晶片上實現多種 $V_T$ 的 MOSFET。這是現代手機 SoC（如 Apple A 系列、Qualcomm Snapdragon）能在效能和續航之間取得平衡的關鍵技術。</div>
+</section>
+
+<section id="s12-rad"><h2>11.5 輻射與熱載子效應</h2>
+<p>除了前節討論的熱載子效應（通道中的高能電子注入氧化層），輻射環境也會在氧化層中產生電荷。</p>
+<p><strong>輻射效應的兩種類型：</strong></p>
+<p>① <strong>總劑量效應（TID, Total Ionizing Dose）：</strong>累積的輻射劑量在氧化層中產生永久性電荷。$\gamma$ 射線或質子撞擊 SiO₂→產生電子-電洞對。電子很快被掃出（$\sim10^{-5}$ cm²/V·s），但電洞被陷阱捕獲（$\sim10^{-11}$ cm²/V·s）→形成正的固定氧化層電荷→$V_{FB}$ 負移→$V_T$ 下降。典型漂移量：</p>
+<table><thead><tr><th>輻射劑量 (rad(Si))</th><th>$\Delta V_T$（未加固）</th><th>$\Delta V_T$（加固後）</th></tr></thead><tbody>
+<tr><td>100</td><td>∼50 mV</td><td>< 10 mV</td></tr>
+<tr><td>10k</td><td>∼1 V</td><td>∼100 mV</td></tr>
+<tr><td>100k</td><td>元件失效</td><td>∼500 mV</td></tr></tbody></table>
+<p>② <strong>單一事件效應（SEE, Single Event Effects）：</strong>高能粒子（宇宙射線中的重離子或質子）穿過電晶體→沿路產生大量電子-電洞對→瞬間電流脈衝。可能導致：SEU（單一事件翻轉，SRAM 位元翻轉→軟錯誤）、SEL（單一事件鎖定，觸發寄生 SCR→大電流→永久損壞）、SEB（單一事件崩潰，功率元件中）。</p>
+<p><strong>抗輻射設計方法：</strong></p>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li>薄氧化層（$<10$ nm）：減少電洞陷阱數量→TID 敏感度降低。</li>
+<li>SOI 結構：埋入氧化層消除體矽中的寄生路徑→抗 SEL。</li>
+<li>特殊的退火處理（含氫退火→減少界面態）。</li>
+<li>三模冗餘（TMR）：三個 SRAM 單元投票→容忍 SEU。</li>
+<li>矽化物閘極取代多晶矽閘極：消除空乏區中的電荷陷阱。</li>
+</ul>
+<div class="callout"><strong>💡 輻射加固是航太和軍事電子的專屬需求。</strong>國際太空站上的電子設備需要耐受 ∼100 krad/年的輻射劑量。衛星在 Van Allen 輻射帶中面臨更嚴苛的環境。軍規元件（如 BAE Systems 的 RAD750 處理器）使用特殊的抗輻射製程，代價是速度降低 5-10×、成本增加 100×。消費電子通常不需要考慮輻射效應，但在高海拔飛行（如民航飛機）中，宇宙射線仍可能導致 SRAM 軟錯誤——ECC（錯誤校正碼）是標準的防護措施。</div>
+</section>
+
+<section id="summary"><h2>本章摘要</h2>
+<ol style="font-size:14px;color:var(--t2);margin-left:18px">
+<li><strong>定電場縮小（Dennard Scaling）：</strong>尺寸和電壓同時除以 $\kappa$→內部電場不變→功耗 $\propto1/\kappa^2$。在 ∼90 nm 後因 $V_T$ 無法繼續降低而失效。</li>
+<li><strong>遷移率退化：</strong>$\mu_{\text{eff}}=\mu_0/[1+\theta(V_{GS}-V_T)]$。垂直電場壓迫載子至粗糙 Si/SiO₂ 界面→界面散射+量子侷限→$\mu$ 下降。</li>
+<li><strong>速度飽和：</strong>短通道 $I_D=WC_{ox}(V_{GS}-V_T)v_{\text{sat}}$（線性取代平方律）。$g_m$→$WC_{ox}v_{\text{sat}}$（常數上限）。Si 中 $v_{\text{sat}}$ 是材料常數→無法繞過。</li>
+<li><strong>熱載子效應：</strong>高能電子（數 eV）注入氧化層→$V_T$ 漂移、界面態、氧化層崩潰。LDD 結構降低峰值電場 30–50%。</li>
+<li><strong>SOI：</strong>埋入氧化層消除寄生接面電容和基板效應→更快、更低功耗。FinFET：三面閘極→靜電控制增強→$L_g$ 可縮小至 3 nm。</li>
+<li><strong>終極限制：</strong>量子穿隧→$t_{ox}>0.5$ nm。RDF→$V_T$ 統計變異（通道中 ∼10 原子）。功耗密度→散熱限制→黑暗矽。</li></ol></section>
+</main>
+<script>
+function toggleTheme(){const h=document.documentElement;const n=h.getAttribute('data-theme')==='light'?'dark':'light';h.setAttribute('data-theme',n);localStorage.setItem('theme',n);document.getElementById('tl').textContent=n==='dark'?'淺色模式':'深色模式';}
+const s=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',s);if(s==='dark')document.getElementById('tl').textContent='淺色模式';
+const secs=document.querySelectorAll('section[id]');const navs=document.querySelectorAll('.sn a');window.addEventListener('scroll',()=>{let c='';secs.forEach(s=>{if(window.scrollY>=s.offsetTop-80)c=s.getAttribute('id');});navs.forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+c);});});
+document.querySelectorAll('.figure img').forEach(i=>i.addEventListener('click',()=>window.open(i.src,'_blank')));
+</script>
+</body>
+</html>

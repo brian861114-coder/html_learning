@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>第十章：雙極性接面電晶體 — 半導體物理與元件</title>
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']],tags:'ams'},options:{ignoreHtmlClass:'no-math'}};</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+:root{--bg:#fff;--b2:#F5F5F7;--b3:#E8F0FE;--tx:#1D1D1F;--t2:#1D1D1F;--ac:#007AFF;--bd:#D2D2D7;--sh:0 2px 8px rgba(0,0,0,.08);--fbd:#E5E5EA;--wbg:#FFF9F0;--wbd:#FFB340;--wtx:#B8700A;--nw:260px}
+[data-theme="dark"]{--bg:#1C1C1E;--b2:#2C2C2E;--b3:#1A2332;--tx:#F5F5F7;--t2:#A1A1A6;--ac:#0A84FF;--bd:#48484A;--fbd:#3A3A3C;--wbg:#2C2416;--wbd:#8B6914;--wtx:#FFB340}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth;scroll-padding-top:16px}
+body{font-family:-apple-system,BlinkMacSystemFont,'Noto Sans TC','Microsoft JhengHei',sans-serif;background:var(--b2);color:var(--tx);line-height:1.9;display:flex;min-height:100vh}
+.sidebar{position:fixed;top:0;left:0;width:var(--nw);height:100vh;background:var(--bg);border-right:1px solid var(--bd);overflow-y:auto;z-index:100;padding:20px 16px;display:flex;flex-direction:column}
+.sh{margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--fbd)}.sh h2{font-size:14px;font-weight:600;color:var(--ac)}.sh .bk{font-size:11px;color:var(--t2)}
+.sn{flex:1}.sn ul{list-style:none}.sn a{display:block;padding:4px 10px;font-size:11px;color:var(--t2);text-decoration:none;border-radius:5px;transition:.12s}.sn a:hover{background:var(--b3);color:var(--ac)}.sn a.active{background:var(--b3);color:var(--ac);font-weight:500}.sn .ns{font-weight:600;font-size:12px;color:var(--tx);margin-top:10px;padding:2px 10px}.sn .nsub a{padding-left:20px;font-size:10px}
+.st{margin-top:auto;padding-top:12px;border-top:1px solid var(--fbd)}.st button{width:100%;padding:6px;border:1px solid var(--bd);border-radius:6px;background:var(--b2);color:var(--tx);cursor:pointer;font-size:12px}
+.main{margin-left:var(--nw);flex:1;max-width:1050px;padding:32px 40px 80px}
+.header{margin-bottom:32px;padding-bottom:20px;border-bottom:2px solid var(--ac)}.header .cl{font-size:12px;font-weight:600;color:var(--ac);letter-spacing:1px}.header h1{font-size:28px;font-weight:700;margin:6px 0}.header .meta{font-size:13px;color:var(--t2)}
+section{margin-bottom:44px}h2{font-size:20px;font-weight:700;color:var(--ac);margin-bottom:14px;padding-bottom:6px;border-bottom:1px solid var(--bd)}h3{font-size:16px;font-weight:600;color:var(--tx);margin:24px 0 10px}p{font-size:14px;color:var(--t2);margin-bottom:12px}strong{font-weight:600;color:var(--tx)}
+.eq{text-align:center;margin:16px 0;font-size:15px}
+.figure{margin:24px 0;text-align:center}.figure img{max-width:100%;border-radius:8px;box-shadow:var(--sh);cursor:pointer}.figure img:hover{transform:scale(1.01)}.figure figcaption{margin-top:8px;font-size:12px;color:var(--t2)}
+.callout{background:var(--b3);border:1px solid var(--fbd);border-radius:8px;padding:14px 18px;margin:16px 0;font-size:13px}.callout strong{color:var(--ac)}
+.callout-warn{background:var(--wbg);border:1px solid var(--wbd);border-radius:8px;padding:14px 18px;margin:16px 0;font-size:13px}.callout-warn strong{color:var(--wtx)}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}thead th{background:var(--b3);padding:8px 12px;font-size:12px;font-weight:600;border-bottom:2px solid var(--bd)}tbody td{padding:8px 12px;border-bottom:1px solid var(--fbd)}tbody tr:nth-child(even){background:var(--b2)}
+@media(max-width:768px){.sidebar{transform:translateX(-100%);transition:.3s}.sidebar.open{transform:translateX(0)}.main{margin-left:0;padding:20px 16px 60px}}
+@media print{.sidebar{display:none}.main{margin-left:0;max-width:100%;padding:0}}
+</style>
+<script src="../../../reading-preferences.js" defer></script></head>
+<body><a class="portal-home-link" href="../../../index.html">返回學習中心</a><style id="portal-home-link-style">.portal-home-link{position:fixed;top:16px;right:16px;z-index:1000;display:inline-flex;align-items:center;min-height:36px;padding:7px 11px;border:1px solid #cbd5e1;border-radius:8px;background:#fff;color:#1d4ed8;font:600 13px/1.2 -apple-system,BlinkMacSystemFont,"Noto Sans TC","Microsoft JhengHei",sans-serif;text-decoration:none;box-shadow:0 2px 10px rgba(15,23,42,.08)}.portal-home-link:hover{background:#eff6ff}.portal-home-link:focus-visible{outline:3px solid rgba(37,99,235,.35);outline-offset:2px}@media(max-width:768px){.portal-home-link{top:10px;right:10px;min-height:34px;padding:7px 9px;font-size:12px}}</style>
+<nav class="sidebar"><div class="sh"><div class="bk">半導體物理與元件·第四版</div><h2>第十章</h2></div><div class="sn"><ul>
+<div class="figure"><img src="../../../images/solid-state-physics/ch10_pages/ch10_page_458.png" alt="圖 10.16" loading="lazy"><figcaption>圖 10.16：Ebers-Moll 等效電路——兩個背靠背二極體加上兩個耦合電流源 $lpha_F I_F$ 和 $lpha_R I_R$。</figcaption></div>
+<li><a href="#preview">📋 10.0 本章預覽</a></li>
+<li class="ns">10.1 BJT 基礎</li><li class="nsub"><a href="#s10-1a">10.1.1–10.1.3 結構·電流·模式</a></li><li class="nsub"><a href="#s10-1b">10.1.4 少數載子分布</a></li>
+<li class="ns">10.2 增益</li><li class="nsub"><a href="#s10-2a">10.2.1–10.2.2 $\gamma,\alpha_T,\beta$ ⭐</a></li><li class="nsub"><a href="#s10-2b">10.2.3 Ebers-Moll 模型</a></li>
+<li class="ns">10.3–10.4</li><li class="nsub"><a href="#s10-3">10.3 非理想效應</a></li><li class="nsub"><a href="#s10-4">10.4 小訊號等效電路</a></li>
+<li><a href="#summary">📋 本章摘要</a></li>
+</ul></div><div class="st"><button onclick="toggleTheme()">🌓 <span id="tl">深色模式</span></button></div></nav>
+<main class="main">
+<header class="header"><div class="cl">第十章</div><h1>雙極性接面電晶體（BJT）</h1><div class="meta">Donald A. Neamen·《半導體物理與元件：基本原理》第四版·第 370–403 頁</div></header>
+
+<section id="preview"><div class="callout"><strong>📋 10.0 本章預覽</strong>
+<p>pn 接面二極體（第七、八章）是兩端元件——你只能控制它導通或不導通，無法實現<strong>放大</strong>。放大的本質是<strong>用小信號控制大信號</strong>。這需要第三個端點。</p>
+<p>BJT 是第一個被發明的三端固態放大元件（1947 年，Bardeen、Brattain、Shockley）。它的基本結構是兩個 pn 接面背靠背放置，讓它們<strong>互相作用</strong>——一個接面注入少數載子，另一個接面收集它們。透過這種「注入→傳輸→收集」的機制，一個從基極流入的<strong>小電流</strong> $I_B$（微安級）可以控制一個從集極流入的<strong>大電流</strong> $I_C$（毫安級），實現電流放大。</p>
+<p>雖然 MOSFET 後來取代 BJT 成為數位電路的主流，但 BJT 在類比領域（音頻放大器、射頻前端、電源管理）仍然佔有重要地位——它的跨導更高、匹配更好、雜訊更低。</p>
+<div class="callout-warn"><strong>⚡ 本章的邏輯鏈：</strong>BJT 結構（10.1.1）→ 四種操作模式（10.1.3）→ 基極中少數載子分布（10.1.4）→ 射極注入效率 $\gamma$（10.2.1）→ 基極傳輸因子 $\alpha_T$（10.2.1）→ 電流增益 $\alpha,\beta$（10.2.2）→ Ebers-Moll 完整模型（10.2.3）→ 非理想效應：Early 效應等（10.3）→ 小訊號混合-π 模型（10.4）。每一步都精確建立在前一步的物理基礎上。</div></div></section>
+
+<div class="figure"><img src="../../../images/solid-state-physics/ch10_pages/ch10_overview.png" alt="第十章總覽圖" loading="lazy"><figcaption>📌 第十章總覽圖：BJT — 結構與模式、電流路徑、電流增益、Ebers-Moll模型、非理想效應</figcaption></div>
+
+<section id="s10-1a"><h2>10.1.1–10.1.3 BJT 的結構、電流關係、操作模式</h2>
+<h3>從兩個二極體到一個電晶體</h3>
+<div class="figure"><img src="../../../images/solid-state-physics/ch10_pages/ch10_page_399.png" alt="圖 10.3" loading="lazy"><figcaption>圖 10.3：npn BJT 的截面結構和電流路徑——電子從射極注入基極，擴散穿越基極後被集極收集。</figcaption></div>
+<p>如果你只是把兩個 pn 二極體背靠背放在一起（p-n-p 或 n-p-n），而不讓它們的基極區域<strong>共用</strong>，你得到的只是兩個獨立的二極體——沒有放大功能。BJT 的奧妙在於：兩個接面<strong>共用同一個狹窄的基極區域</strong>。射極注入的少數載子跨過這個狹窄基極，被集極收集。基極寬度 $W_B$ 必須遠小於少數載子的擴散長度 $L_B$——這是 BJT 能夠放大的根本原因。</p>
+
+<div class="figure"><img src="../../../images/solid-state-physics/ch10_pages/ch10_page_397.png" alt="圖 10.1, 10.2" loading="lazy"><figcaption>圖 10.1–10.2：npn BJT 的截面結構與電路符號。n⁺ 射極（重摻雜 ∼$10^{19}$ cm⁻³）、p 基極（輕摻雜 ∼$10^{17}$ cm⁻³，寬度 $W_B\sim0.1$–1 µm）、n 集極（輕摻雜 ∼$10^{16}$ cm⁻³）。</figcaption></div>
+
+<p><strong>為什麼射極要重摻雜？</strong>射極的任務是注入大量電子到基極。重摻雜 n⁺ 射極確保射極電流中以電子為主（$\gamma\approx1$）——相較之下從基極注入射極的電洞很少。如果射極和基極摻雜相同，兩種載子的注入量相當→沒有淨放大。</p>
+
+<p><strong>為什麼基極要極窄？</strong>注入的電子在基極中是少數載子，會與多數載子（電洞）復合。如果基極太寬，大部分電子在到達集極前就復合了→沒有集極電流→沒有放大。$W_B \ll L_B$ 確保絕大多數電子存活並被收集。</p>
+
+<p><strong>為什麼集極要輕摻雜？</strong>集極的主要任務是收集電子，但 BC 接面的空乏區主要在輕摻雜側→輕摻雜的集極側承擔了大部分電壓降→提高了崩潰電壓（$V_{CE}$ 耐壓）。</p>
+
+<h3>四種操作模式</h3>
+<table><thead><tr><th>模式</th><th>BE 接面</th><th>BC 接面</th><th>物理行為</th><th>用途</th></tr></thead><tbody>
+<tr><td><strong>順向主動</strong> (Forward-active)</td><td>順偏</td><td>逆偏</td><td>射極注入→基極傳輸→集極收集</td><td>線性放大器</td></tr>
+<tr><td><strong>截止</strong> (Cutoff)</td><td>逆偏</td><td>逆偏</td><td>兩個接面都不注入→$I_C\approx0$</td><td>數位 OFF</td></tr>
+<tr><td><strong>飽和</strong> (Saturation)</td><td>順偏</td><td>順偏</td><td>兩個接面都注入→基極充滿過量載子</td><td>數位 ON</td></tr>
+<tr><td><strong>反向主動</strong> (Inverse)</td><td>逆偏</td><td>順偏</td><td>集極當射極用→$\beta_R\ll\beta_F$</td><td>少用</td></tr></tbody></table>
+
+<p>在順向主動模式下，$V_{BE}\approx0.7$ V（順偏），$V_{BC}<0$（逆偏）。三個端點電流滿足 Kirchhoff 電流律：$I_E = I_B + I_C$。</p>
+
+<div class="figure"><img src="../../../images/solid-state-physics/ch10_pages/ch10_page_400.png" alt="圖 10.5, 10.6" loading="lazy"><figcaption>圖 10.5–10.6：順向主動模式下的電流成分。粗箭頭 $I_{nE}$→$I_{nC}$（電子從射極到集極）是主要電流路徑。細箭頭為浪費的電流（基極復合 $I_{rB}$、電洞注入射極 $I_{pE}$），這些合起來構成了 $I_B$。</figcaption></div>
+
+<div class="callout"><strong>💡 BJT 的電流放大本質上是一個「效率遊戲」。</strong>射極發射了 100 個電子。其中 99 個成功跨越基極被集極收集（$\alpha=0.99$），只有 1 個在半路復合。基極必須從外部補充 1 個電洞來維持電中性——這就是 $I_B$。所以 $I_C/I_B=99/1=99=\beta$。$\beta$ 衡量的就是這個收集過程的效率。</div>
+
+<h3>12.1.4 BJT 放大原理——為什麼三端元件能放大？</h3>
+<p>BJT 能放大訊號的根本原因：用<strong>小的基極電流 $I_B$</strong> 控制<strong>大的集極電流 $I_C = \beta I_B$</strong>。在共射極組態中，輸入加在 BE 端，輸出從 CE 端取出。</p>
+<p><strong>電壓放大：</strong>輸入端的 BE 接面是順偏二極體→小訊號電阻 $r_\pi = \beta/g_m$（通常幾 kΩ）。輸出端的 CE 之間有大電阻 $r_o = V_A/I_C$（通常幾百 kΩ）。電壓增益 $A_v = -g_m R_L$——輸入電阻低、輸出電阻高→用一個小的輸入電壓變化就能控制一個大的輸出電壓變化。</p>
+<div class="callout"><strong>💡 放大的能量從哪裡來？</strong>不是無中生有！BJT 用小的輸入訊號控制從電源（$V_{CC}$）流向負載的大電流。就像水龍頭——你用很小的力轉動閥門（$I_B$），就能控制大量的水流（$I_C$）。能量來自電源 $V_{CC}$，不是來自輸入訊號。放大器的本質是<strong>能量轉換器</strong>，不是能量產生器。</div>
+</section>
+
+<section id="s10-1b"><h2>10.1.4 基極中少數載子的分布</h2>
+<p>這節是 BJT 物理的核心。基極中沒有電場（中性區）→注入的電子只能靠<strong>擴散</strong>移動。電子的穩態擴散方程為 $D_B\,d^2\delta n_B/dx^2 = \delta n_B/\tau_B$。</p>
+
+<p>因為基極極窄（$W_B\ll L_B = \sqrt{D_B\tau_B}$），電子在基極中的<strong>傳輸時間遠短於復合時間</strong>→復合項可忽略→$d^2\delta n_B/dx^2\approx0$。這意味著電子濃度在基極中呈<strong>線性分布</strong>——這是 BJT 分析中最關鍵的簡化結果。</p>
+<p><strong>為什麼線性分布如此重要？</strong>① 擴散電流 $J_n = eD_B(dn/dx)$ 與梯度成正比。線性分布→梯度為常數→電流在整個基極中<strong>不隨位置變化</strong>→沒有載子在半路「消失」。② 梯度 $= \delta n_B(0)/W_B$→$I_C \propto 1/W_B$→基極越薄，電流越大。③ 這是「短二極體」近似（8.1.8）的直接應用——BJT 的基極本質上就是一個短二極體。</p>
+
+<div class="figure"><img src="../../../images/solid-state-physics/ch10_pages/ch10_page_401.png" alt="圖 10.7" loading="lazy"><figcaption>圖 10.7：基極中少數載子（電子）濃度的線性分布。$x=0$ 處（BE 邊界）濃度 $=n_{B0}e^{V_{BE}/V_T}$，$x=W_B$ 處（BC 邊界）濃度 $\approx0$（因 BC 逆偏收集）。斜率 $=\delta n_B(0)/W_B$。</figcaption></div>
+
+<p>在 BE 接面邊界（$x=0$），Shockley 邊界條件給出：$\delta n_B(0)=n_{B0}(e^{V_{BE}/V_T}-1)$。在 BC 接面邊界（$x=W_B$），逆偏將所有到達的電子掃入集極→$\delta n_B(W_B)\approx0$。直線連接兩點→斜率為常數→擴散電流 $J_n=eD_B\,\delta n_B(0)/W_B$ 在整個基極中為<strong>常數</strong>。</p>
+
+<div class="callout"><strong>💡 $W_B$ 越小→$I_C$ 越大——為什麼？</strong>$I_C\propto1/W_B$：基極越窄，濃度梯度越陡→擴散越強。這就是為什麼 BJT 的電流增益和速度都隨基極寬度縮小而提升。現代 SiGe HBT 的基極寬度僅有 ∼10 nm——透過精確的 SiGe 磊晶來實現。</div>
+</section>
+
+<section id="s10-2a"><h2>10.2.1–10.2.2 電流增益的物理根源 ⭐</h2>
+<div class="figure"><img src="../../../images/solid-state-physics/ch10_pages/ch10_page_405.png" alt="圖 10.10" loading="lazy"><figcaption>圖 10.10：射極注入效率 $\gamma$ 和基極傳輸因子 $lpha_T$ 的圖示——決定 BJT 電流增益的兩個關鍵因素。</figcaption></div>
+<p>BJT 的電流放大本質上由兩個因子乘積決定：</p>
+<div class="eq">$$\boxed{\alpha = \frac{I_C}{I_E} = \gamma \cdot \alpha_T}$$</div>
+
+<h3>射極注入效率 $\gamma$：「有用的 vs 浪費的」</h3>
+<p>射極電流 $I_E$ 有兩個成分：從射極注入基極的電子電流 $I_{nE}$（有用），和從基極注入射極的電洞電流 $I_{pE}$（浪費——這些電洞只在射極中與多數載子復合，對集極電流無貢獻）。</p>
+<div class="eq">$$\gamma = \frac{I_{nE}}{I_{nE}+I_{pE}} = \frac{1}{1+\dfrac{D_E N_B W_B}{D_B N_E L_E}}$$</div>
+<p>要使 $\gamma\to1$，分母中的修正項必須 $\ll1$。這要求：$N_E\gg N_B$（射極遠重於基極）、$W_B$ 小、$L_E$ 大（射極中電洞擴散長度大→電洞在射極深處復合而非在界面附近堆積）。這就是為什麼射極是 n⁺、基極是 p、且基極極窄的根本原因。</p>
+
+<h3>基極傳輸因子 $\alpha_T$：「活著到達 vs 半路復合」</h3>
+<p>射極注入的電子不會全部到達集極。有些在基極中與電洞復合。復合損失的比例取決於基極寬度與擴散長度的比值：</p>
+<div class="eq">$$\alpha_T \approx 1 - \frac{1}{2}\left(\frac{W_B}{L_B}\right)^2$$</div>
+<p>$W_B/L_B$ 越小→$\alpha_T$ 越接近 1。典型 BJT：$W_B\sim0.2$ µm，$L_B\sim10$ µm→$W_B/L_B\sim0.02$→$\alpha_T\approx0.9998$。</p>
+
+<h3>⭐ 共射極電流增益 $\beta$</h3>
+<div class="eq">$$\boxed{\beta = \frac{I_C}{I_B} = \frac{\alpha}{1-\alpha}}$$</div>
+<p>$I_B$ 主要由兩部分組成：補充基極復合損失的電洞（$I_{rB}$），和從基極注入射極的浪費電洞電流（$I_{pE}$）。</p>
+
+<div class="callout-warn"><strong>⚡ $\beta$ 對 $\alpha$ 的極端敏感性——BJT 電路設計的關鍵教訓。</strong><br>$\alpha=0.99$→$\beta=99$；$\alpha=0.98$→$\beta=49$；$\alpha=0.995$→$\beta=199$；$\alpha=0.9$→$\beta=9$。<br><br>$\alpha$ 從 0.99 降到 0.98 僅有 <strong>1% 的變化</strong>，但 $\beta$ 從 99 降到 49——<strong>下降了 50%</strong>！這就是為什麼 BJT 電路<strong>不能</strong>假設 $\beta$ 是精確值——你必須透過負回授（射極電阻、集極回授）來穩定偏壓點。這也是為什麼 BJT 放大器通常設計為對 $\beta>\beta_{\min}$ 都能正常工作。<br><br>也是因為這個敏感性，MOSFET 在數位電路中取代了 BJT：MOSFET 的「增益」由 $g_m$ 決定，$g_m$ 對製程變異的敏感度遠低於 BJT 的 $\beta$。</div>
+</section>
+
+<section id="s10-2b"><h2>10.2.3 Ebers-Moll 模型——BJT 的通用等效電路</h2>
+<p>Ebers-Moll 模型是 BJT 最通用的描述——兩個背靠背的二極體（代表 BE 和 BC 接面），加上兩個互相控制的電流源。它能夠預測 BJT 在所有四個操作模式下的行為，是 SPICE 中 BJT 模型的基礎。</p>
+<p><strong>等效電路的四個元件：</strong></p>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li><strong>BE 二極體：</strong>$I_F = I_{ES}(e^{V_{BE}/V_T}-1)$——BE 接面的順向電流。</li>
+<li><strong>BC 二極體：</strong>$I_R = I_{CS}(e^{V_{BC}/V_T}-1)$——BC 接面的電流（順向或反向取決於偏壓）。</li>
+<li><strong>$\alpha_F I_F$（受控電流源）：</strong>BE 電流中成功穿越基極到達集極的比例。$\alpha_F \approx 0.99$。</li>
+<li><strong>$\alpha_R I_R$（受控電流源）：</strong>BC 電流中穿越基極到達射極的比例。$\alpha_R \ll \alpha_F$（因為集極設計不是為了高效注入）。</li>
+</ul>
+<div class="eq">$$I_E = I_{ES}(e^{V_{BE}/V_T}-1) - \alpha_R I_{CS}(e^{V_{BC}/V_T}-1)$$</div>
+<div class="eq">$$I_C = \alpha_F I_{ES}(e^{V_{BE}/V_T}-1) - I_{CS}(e^{V_{BC}/V_T}-1)$$</div>
+
+<div class="figure"><img src="../../../images/solid-state-physics/ch10_pages/ch10_page_410.png" alt="圖 10.16" loading="lazy"><figcaption>圖 10.16：Ebers-Moll 等效電路——$I_F$（順向二極體電流）和 $I_R$（反向二極體電流）加上耦合係數 $\alpha_F,\alpha_R$。</figcaption></div>
+
+<p><strong>在順向主動模式（$V_{BE}>0$, $V_{BC}<0$）：</strong>$e^{V_{BC}/V_T}\approx0$→$I_C\approx\alpha_F I_{ES}e^{V_{BE}/V_T} = \alpha_F I_E\approx I_S e^{V_{BE}/V_T}$。這就是我們熟悉的指數關係。</p>
+<p><strong>在飽和模式（$V_{BE}>0$, $V_{BC}>0$）：</strong>兩個二極體都導通→$I_C = \alpha_F I_F - I_R$。$I_R$ 開始抵消 $\alpha_F I_F$→$V_{CE}$ 降得很低（$V_{CE,sat} \approx 0.1$–$0.2$ V）。飽和區中兩個接面都順偏→基極中儲存大量過量載子→開關延遲（第十三章）。</p>
+<p><strong>互易關係（reciprocity）：</strong>$\alpha_F I_{ES} = \alpha_R I_{CS}$——這不是巧合，而是半導體物理的自洽要求（來自二極體飽和電流的微觀定義）。這個關係減少了獨立參數的數量——Ebers-Moll 模型只需要 3 個獨立參數（$I_{ES}$, $\alpha_F$, $\alpha_R$）而非 4 個。</p>
+<div class="callout"><strong>💡 Ebers-Moll vs 混合-π 模型。</strong>Ebers-Moll 是大訊號 DC 模型——描述 BJT 在任意偏壓點的電流。混合-π 模型（10.4）是小訊號 AC 模型——描述 BJT 在特定偏壓點附近的小訊號響應。在 SPICE 模擬中，大訊號 Ebers-Moll（或更先進的 Gummel-Poon）用於 DC 和暫態分析；小訊號混合-π 用於 AC 分析。兩者是同一物理的不同數學近似。</div>
+</section>
+
+<section id="s10-3"><h2>10.3 非理想效應</h2>
+<h3>基極寬度調變與 Early 效應</h3>
+<div class="figure"><img src="../../../images/solid-state-physics/ch10_pages/ch10_page_460.png" alt="圖 10.21" loading="lazy"><figcaption>圖 10.21：BJT 輸出特性——$I_C$ 隨 $V_{CE}$ 輕微上傾（Early 效應），外插交於 $-V_A$。</figcaption></div>
+<p>在理想 BJT 中，$I_C$ 只取決於 $V_{BE}$，與 $V_{CE}$ 無關。但現實中 $V_{CE}$ 增加→BC 接面逆偏增加→BC 空乏區向基極側擴展→<strong>有效基極寬度 $W_B$ 變窄</strong>。</p>
+<p>$W_B$ 變窄有兩個效應：① 電子濃度梯度 $\delta n_B(0)/W_B$ 變大→$I_C$ 增加。② 基極傳輸時間變短→$\alpha_T$ 輕微增大。兩者都使 $I_C$ 隨 $V_{CE}$ 增加而增加——這就是 <strong>Early 效應</strong>。</p>
+
+<div class="figure"><img src="../../../images/solid-state-physics/ch10_pages/ch10_page_416.png" alt="圖 10.21" loading="lazy"><figcaption>圖 10.21：BJT 的 $I_C$–$V_{CE}$ 輸出特性。注意曲線的輕微上傾（Early 效應）。所有曲線外插交於 $V_{CE}=-V_A$，$V_A$ = Early 電壓。</figcaption></div>
+
+<div class="eq">$$I_C = I_S\,e^{V_{BE}/V_T}\!\left(1 + \frac{V_{CE}}{V_A}\right)$$</div>
+
+<p><strong>$V_A$（Early 電壓）的物理意義：</strong>$V_A$ 越大→$I_C$–$V_{CE}$ 曲線越平→輸出電阻 $r_o=V_A/I_C$ 越大→放大器增益越高。$V_A$ 取決於基極寬度——$W_B$ 越大，BC 空乏區的變化對 $W_B$ 的<strong>比例影響</strong>越小→$V_A$ 越高。但 $W_B$ 大也會降低 $\beta$（因 $\alpha_T$ 下降）。這是 BJT 設計中的經典取捨：$\beta$ vs $V_A$。</p>
+
+<h3>其他非理想效應</h3>
+<p><strong>Webster 效應（高階注入）：</strong>當 $I_C$ 很大時，注入基極的電子濃度與基極多數載子電洞濃度可比（$\delta n_B\approx p_{B0}$）→為維持電中性，電洞濃度也必須增加→注入射極的電洞電流增大→$\gamma$ 下降→$\beta$ 隨 $I_C$ 增加而下降。</p>
+<p><strong>Kirk 效應（基極推擠）：</strong>在極高 $I_C$ 下，集極電流的空間電荷在 BC 空乏區中產生顯著的附加電場→空乏區向集極側移動→有效基極向集極延伸→$W_B$ 增加→截止頻率 $f_T$ 下降。</p>
+<p><strong>崩潰（Breakdown）：</strong>$V_{CE}$ 太高→BC 接面雪崩倍增→$I_C$ 急劇增大（與 pn 接面崩潰機制相同）。BJT 中崩潰電壓記為 $BV_{CEO}$（基極開路）或 $BV_{CBO}$（射極開路）。</p>
+
+<h3>12.4.6 崩潰電壓——BJT 的電壓天花板</h3>
+<p>BJT 有兩個關鍵的崩潰電壓指標：</p>
+<p><strong>$BV_{CBO}$（射極開路）：</strong>純粹是 BC 接面的雪崩崩潰電壓——與一個獨立的 pn 接面相同。取決於集極側的摻雜濃度 $N_C$：$N_C$ 越低→空乏區越寬→崩潰電壓越高。典型值：50–300 V。</p>
+<p><strong>$BV_{CEO}$（基極開路）：</strong>比 $BV_{CBO}$ <strong>低得多</strong>。為什麼？因為在共射極組態中，雪崩倍增產生的額外電子被掃到集極→增加了 $I_C$→增加了 $I_B$（通過 $\beta$ 反饋）→進一步增加 $I_C$→正反饋迴路→在更低的電壓下就發生崩潰。</p>
+<div class="eq">$$BV_{CEO} \approx \frac{BV_{CBO}}{\beta^{1/n}}$$</div>
+<p>其中 $n$ 是雪崩倍增指數（通常 3–4 對 Si）。對 $\beta=100$，$n=4$：$BV_{CEO} \approx BV_{CBO}/100^{0.25} \approx BV_{CBO}/3.2$。所以一個 $BV_{CBO}=100$ V 的 BJT，$BV_{CEO}$ 只有約 30 V。</p>
+<div class="callout-warn"><strong>⚡ 崩潰電壓 vs $\beta$ 的兩難。</strong>$\beta$ 越大→$BV_{CEO}$ 越低。高壓 BJT 必須犧牲 $\beta$（用較寬的基極）。功率 BJT 通常用厚集極區（低 $N_C$）來提高 $BV_{CBO}$，同時用較寬的基極來控制 $\beta$——但這會犧牲速度。這就是為什麼功率 BJT 的 $f_T$ 通常只有幾 MHz，而小訊號 BJT 可達 GHz。</div>
+</section>
+
+<section id="s10-4"><h2>10.4 小訊號等效電路——混合-π 模型</h2>
+<p>在 DC 偏壓點 $(I_{CQ}, V_{CEQ})$ 附近，如果疊加一個小 AC 信號，BJT 的非線性指數關係可以<strong>線性化</strong>。這就是<strong>混合-π 模型（hybrid-π model）</strong>的由來。整個模型只有三個主參數，卻精確描述了 BJT 在低到中頻範圍內的所有小訊號行為。</p>
+
+<div class="eq">$$\boxed{g_m = \frac{I_{CQ}}{V_T} \qquad r_\pi = \frac{\beta}{g_m} \qquad r_o = \frac{V_A}{I_{CQ}}}$$</div>
+
+<p><strong>$g_m$（跨導）——最核心的參數：</strong>$g_m = \partial I_C/\partial V_{BE} = I_{CQ}/V_T$。它告訴你 $V_{BE}$ 的微小變化能產生多大的 $I_C$ 變化：$i_c = g_m v_{be}$。室溫（$V_T=0.026$ V）：$I_C=1$ mA→$g_m=38.5$ mS。$I_C=10$ µA→$g_m=0.385$ mS。注意 $g_m\propto I_{CQ}$——偏壓電流直接控制增益。</p>
+
+<p><strong>$r_\pi$（輸入電阻）：</strong>$r_\pi = v_{be}/i_b = \beta/g_m = \beta V_T/I_{CQ}$。$I_C=1$ mA、$\beta=100$→$r_\pi=2.6$ kΩ。$r_\pi$ 是從基極看向射極的等效電阻。</p>
+
+<p><strong>$r_o$（輸出電阻）：</strong>$r_o = \partial V_{CE}/\partial I_C = V_A/I_{CQ}$。來自 Early 效應的有限輸出阻抗。$I_C=1$ mA、$V_A=100$ V→$r_o=100$ kΩ。</p>
+
+<div class="callout"><strong>💡 BJT 的 $g_m$ 比 MOSFET 大——這是 BJT 在類比電路中仍占優勢的根本原因。</strong><br><br>BJT：$g_m=I_C/V_T=38.5$ mS/mA（每毫安偏壓電流產生 38.5 mS 的跨導）。<br>MOSFET（飽和區）：$g_m=2I_D/(V_{GS}-V_{TH})$。同樣 1 mA：若 $V_{GS}-V_{TH}=0.2$ V→$g_m=10$ mS；若 $V_{GS}-V_{TH}=0.5$ V→$g_m=4$ mS。<br><br>BJT 的 $g_m$ 大了 4–10 倍。更大的 $g_m$→更大的電壓增益（$A_v=-g_m R_C$）、更低的輸入參考雜訊。這就是為什麼低雜訊放大器（LNA）、高速運算放大器輸入級、和射頻功率放大器仍然偏好使用 BJT（或 BiCMOS 製程中的 BJT 部分）。<br><br>但 BJT 有 $r_\pi$ 的負載效應（輸入阻抗有限）和基極電流的散粒雜訊——這在極高阻抗信號源應用中不利。</div>
+</section>
+
+<section id="summary"><h2>本章摘要</h2>
+<ol style="font-size:14px;color:var(--t2);margin-left:18px">
+<li><strong>BJT 結構：</strong>n⁺-p-n（或 p⁺-n-p）。射極重摻雜→$\gamma\approx1$；基極極窄（$W_B\ll L_B$）→$\alpha_T\approx1$；集極輕摻雜→高崩潰電壓。</li>
+<li><strong>順向主動模式：</strong>BE 順偏（注入）、BC 逆偏（收集）。$I_E=I_B+I_C$。</li>
+<li><strong>基極傳輸：</strong>$W_B\ll L_B$→無復合→少數載子線性分布→擴散電流 $J_n\propto1/W_B$。$W_B$ 越窄→$I_C$ 越大。</li>
+<li><strong>電流增益：</strong>$\alpha=\gamma\cdot\alpha_T$。$\beta=\alpha/(1-\alpha)$。$\alpha$ 的微小變化（1%）使 $\beta$ 劇烈波動（50%）。</li>
+<li><strong>Ebers-Moll 模型：</strong>兩個背靠背二極體+耦合電流源。BJT 所有四種操作模式的統一描述。SPICE BJT 模型的基礎。</li>
+<li><strong>Early 效應：</strong>$V_{CE}$ 調變 $W_B$→$I_C=I_Se^{V_{BE}/V_T}(1+V_{CE}/V_A)$。$r_o=V_A/I_C$。$W_B$ 大→$V_A$ 大但 $\beta$ 小→設計取捨。</li>
+<li><strong>小訊號混合-π 模型：</strong>$g_m=I_{CQ}/V_T$（BJT 的 $g_m$ 比 MOSFET 大 4–10×），$r_\pi=\beta/g_m$，$r_o=V_A/I_{CQ}$。</li></ol></section>
+</main>
+<script>
+function toggleTheme(){const h=document.documentElement;const n=h.getAttribute('data-theme')==='light'?'dark':'light';h.setAttribute('data-theme',n);localStorage.setItem('theme',n);document.getElementById('tl').textContent=n==='dark'?'淺色模式':'深色模式';}
+const s=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',s);if(s==='dark')document.getElementById('tl').textContent='淺色模式';
+const secs=document.querySelectorAll('section[id]');const navs=document.querySelectorAll('.sn a');window.addEventListener('scroll',()=>{let c='';secs.forEach(s=>{if(window.scrollY>=s.offsetTop-80)c=s.getAttribute('id');});navs.forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+c);});});
+document.querySelectorAll('.figure img').forEach(i=>i.addEventListener('click',()=>window.open(i.src,'_blank')));
+</script>
+</body>
+</html>

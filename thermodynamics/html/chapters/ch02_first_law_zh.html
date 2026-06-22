@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>第二章：熱力學第一定律 — 材料熱力學</title>
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']],tags:'ams'},options:{ignoreHtmlClass:'no-math'}};</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+:root{--bg:#fff;--b2:#F5F5F7;--b3:#E8F0FE;--tx:#1D1D1F;--t2:#1D1D1F;--ac:#007AFF;--bd:#D2D2D7;--sh:0 2px 8px rgba(0,0,0,.08);--fbd:#E5E5EA;--wbg:#FFF9F0;--wbd:#FFB340;--wtx:#B8700A;--nw:260px}
+[data-theme="dark"]{--bg:#1C1C1E;--b2:#2C2C2E;--b3:#1A2332;--tx:#F5F5F7;--t2:#A1A1A6;--ac:#0A84FF;--bd:#48484A;--fbd:#3A3A3C;--wbg:#2C2416;--wbd:#8B6914;--wtx:#FFB340}
+*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth;scroll-padding-top:16px}
+body{font-family:-apple-system,BlinkMacSystemFont,'Noto Sans TC','Microsoft JhengHei',sans-serif;background:var(--b2);color:var(--tx);line-height:1.9;display:flex;min-height:100vh}
+.sidebar{position:fixed;top:0;left:0;width:var(--nw);height:100vh;background:var(--bg);border-right:1px solid var(--bd);overflow-y:auto;z-index:100;padding:20px 16px;display:flex;flex-direction:column}
+.sh{margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--fbd)}.sh h2{font-size:14px;font-weight:600;color:var(--ac)}.sh .bk{font-size:11px;color:var(--t2)}
+.sn{flex:1}.sn ul{list-style:none}.sn a{display:block;padding:4px 10px;font-size:11px;color:var(--t2);text-decoration:none;border-radius:5px;transition:.12s}.sn a:hover{background:var(--b3);color:var(--ac)}.sn a.active{background:var(--b3);color:var(--ac);font-weight:500}.sn .ns{font-weight:600;font-size:12px;color:var(--tx);margin-top:10px;padding:2px 10px}.sn .nsub a{padding-left:20px;font-size:10px}
+.st{margin-top:auto;padding-top:12px;border-top:1px solid var(--fbd)}.st button{width:100%;padding:6px;border:1px solid var(--bd);border-radius:6px;background:var(--b2);color:var(--tx);cursor:pointer;font-size:12px}
+.main{margin-left:var(--nw);flex:1;max-width:1050px;padding:32px 40px 80px}
+.header{margin-bottom:32px;padding-bottom:20px;border-bottom:2px solid var(--ac)}.header .cl{font-size:12px;font-weight:600;color:var(--ac);letter-spacing:1px}.header h1{font-size:28px;font-weight:700;margin:6px 0}.header .meta{font-size:13px;color:var(--t2)}
+section{margin-bottom:44px}h2{font-size:20px;font-weight:700;color:var(--ac);margin-bottom:14px;padding-bottom:6px;border-bottom:1px solid var(--bd)}h3{font-size:16px;font-weight:600;color:var(--tx);margin:24px 0 10px}h4{font-size:14px;font-weight:600;color:var(--t2);margin:18px 0 6px}
+p{font-size:14px;color:var(--t2);margin-bottom:12px}strong{font-weight:600;color:var(--tx)}
+.eq{text-align:center;margin:16px 0;font-size:15px}
+.figure{margin:24px 0;text-align:center}.figure img{max-width:100%;border-radius:8px;box-shadow:var(--sh);cursor:pointer}.figure img:hover{transform:scale(1.01)}.figure figcaption{margin-top:8px;font-size:12px;color:var(--t2)}
+.callout{background:var(--b3);border:1px solid var(--fbd);border-radius:8px;padding:14px 18px;margin:16px 0;font-size:13px}.callout strong{color:var(--ac)}
+.callout-warn{background:var(--wbg);border:1px solid var(--wbd);border-radius:8px;padding:14px 18px;margin:16px 0;font-size:13px}.callout-warn strong{color:var(--wtx)}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}thead th{background:var(--b3);padding:8px 12px;font-size:12px;font-weight:600;border-bottom:2px solid var(--bd)}tbody td{padding:8px 12px;border-bottom:1px solid var(--fbd)}tbody tr:nth-child(even){background:var(--b2)}
+.derivation{background:var(--b3);border:1px solid var(--fbd);border-left:4px solid var(--ac);border-radius:8px;padding:16px 20px;margin:18px 0;font-size:13px}.derivation h4{color:var(--ac);font-size:14px;font-weight:600;margin:0 0 10px}.derivation p{margin-bottom:8px}.derivation .eq{margin:8px 0}
+.xlink{display:inline-block;background:var(--b3);border:1px solid var(--fbd);border-radius:4px;padding:1px 8px;font-size:11px;color:var(--ac);text-decoration:none;font-weight:500;margin:0 2px}.xlink:hover{background:var(--ac);color:var(--bg)}
+@media(max-width:768px){.sidebar{transform:translateX(-100%);transition:.3s}.sidebar.open{transform:translateX(0)}.main{margin-left:0;padding:20px 16px 60px}}
+@media print{.sidebar{display:none}.main{margin-left:0;max-width:100%;padding:0}}
+</style>
+<script src="../../../reading-preferences.js" defer></script></head>
+<body><a class="portal-home-link" href="../../../index.html">返回學習中心</a><style id="portal-home-link-style">.portal-home-link{position:fixed;top:16px;right:16px;z-index:1000;display:inline-flex;align-items:center;min-height:36px;padding:7px 11px;border:1px solid #cbd5e1;border-radius:8px;background:#fff;color:#1d4ed8;font:600 13px/1.2 -apple-system,BlinkMacSystemFont,"Noto Sans TC","Microsoft JhengHei",sans-serif;text-decoration:none;box-shadow:0 2px 10px rgba(15,23,42,.08)}.portal-home-link:hover{background:#eff6ff}.portal-home-link:focus-visible{outline:3px solid rgba(37,99,235,.35);outline-offset:2px}@media(max-width:768px){.portal-home-link{top:10px;right:10px;min-height:34px;padding:7px 9px;font-size:12px}}</style>
+<nav class="sidebar"><div class="sh"><div class="bk">材料熱力學·Gaskell</div><h2>第二章</h2></div><div class="sn"><ul>
+<li><a href="#preview">📋 2.0 本章預覽</a></li>
+<li class="ns">2.1–2.3 第一定律基礎</li><li class="nsub"><a href="#s2-1">2.1 導論</a></li><li class="nsub"><a href="#s2-2">2.2 熱與功的關係</a></li><li class="nsub"><a href="#s2-3">2.3 內能與第一定律</a></li>
+<li class="ns">2.4–2.6 熱容與焓</li><li class="nsub"><a href="#s2-4">2.4 定容過程</a></li><li class="nsub"><a href="#s2-5">2.5 定壓過程與焓</a></li><li class="nsub"><a href="#s2-6">2.6 熱容量</a></li>
+<li class="ns">2.7–2.9 特殊過程</li><li class="nsub"><a href="#s2-7">2.7 可逆絕熱過程</a></li><li class="nsub"><a href="#s2-8">2.8 可逆等溫過程</a></li><li class="nsub"><a href="#s2-9">2.9 其他形式的功</a></li>
+<li><a href="#summary">📋 本章摘要</a></li>
+<li><a href="#key-formulas">📊 關鍵公式總結</a></li>
+<li><a href="#further-reading">📚 延伸閱讀</a></li>
+<li><a href="#examples">📝 例題與應用</a></li>
+</ul></div><div class="st"><button onclick="toggleTheme()">🌓 <span id="tl">深色模式</span></button></div></nav>
+<main class="main">
+<header class="header"><div class="cl">第二章</div><h1>熱力學第一定律</h1><div class="meta">David R. Gaskell·《Introduction to the Thermodynamics of Materials》·第 44–77 頁</div></header>
+
+<section id="preview"><div class="callout"><strong>📋 2.0 本章預覽</strong>
+<p>熱力學第一定律是<strong>能量守恆定律</strong>在熱力學系統中的表述：能量不能被創造或毀滅，只能從一種形式轉換為另一種形式。本章將第一定律精確表述為 $\Delta U = q + w$，並由此推導出<strong>焓（enthalpy）</strong>和<strong>熱容量（heat capacity）</strong>兩個關鍵概念。</p>
+<div class="callout-warn"><strong>⚡ 為什麼第一定律是整個材料熱力學的基石？</strong>所有後續章節的能量計算——反應熱（第十一章）、相變熱（第十五章）、Ellingham 圖（第十二章）、電化學電池的能斯特方程（第十四章）——都建立在第一定律之上。不理解 $U$ 和 $H$ 的區別，就無法理解為什麼有些反應在定容下放熱較多、有些在定壓下放熱較多。</div>
+<p><strong>在本章中，我們將學習：</strong></p>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px">
+<li>熱 ($q$) 與功 ($w$) 的定義與符號慣例</li>
+<li>內能 $U$ 作為狀態函數，$\Delta U = q + w$</li>
+<li>定容過程：$\Delta U = q_V$</li>
+<li>焓的定義 $H = U + PV$，定壓過程：$\Delta H = q_P$</li>
+<li>熱容量 $C_V$ 與 $C_P$，理想氣體的 $C_P - C_V = R$</li>
+<li>可逆絕熱過程：$PV^\gamma = \text{constant}$</li>
+<li>可逆等溫過程的功：$w = -nRT\ln(V_2/V_1)$</li>
+</ul>
+<h3>章節結構與學習路徑</h3>
+<table><thead><tr><th>章節</th><th>主題</th><th>核心概念</th><th>Gaskell 頁碼</th></tr></thead><tbody>
+<tr><td>2.1</td><td>導論</td><td>狀態函數 vs 路徑函數；正合/非正合微分</td><td>p44–46</td></tr>
+<tr><td>2.2</td><td>熱與功的關係</td><td>焦耳實驗；熱功當量 $1\ \text{cal} = 4.184\ \text{J}$</td><td>p46–48</td></tr>
+<tr><td>2.3</td><td>內能與第一定律</td><td>$\Delta U = q + w$；符號慣例；$dU = \delta q - P\,dV$</td><td>p48–50</td></tr>
+<tr><td>2.4</td><td>定容過程</td><td>$\Delta U = q_V$；彈卡計原理</td><td>p50–51</td></tr>
+<tr><td>2.5</td><td>定壓過程與焓</td><td>$H = U + PV$；$\Delta H = q_P$；$\Delta H$ vs $\Delta U$</td><td>p51–55</td></tr>
+<tr><td>2.6</td><td>熱容量</td><td>$C_V$, $C_P$；$C_P - C_V = R$；能量均分定理</td><td>p55–59</td></tr>
+<tr><td>2.7</td><td>可逆絕熱過程</td><td>$PV^\gamma = \text{constant}$；$\gamma = C_P/C_V$</td><td>p59–63</td></tr>
+<tr><td>2.8</td><td>可逆等溫過程</td><td>$w = -nRT\ln(V_2/V_1)$；最大功原理</td><td>p63–67</td></tr>
+<tr><td>2.9</td><td>其他形式的功</td><td>表面功、磁功、電功、彈性功；$dU = \delta q - P\,dV + \sum Y_i\,dX_i$</td><td>p68–73</td></tr>
+</tbody></table>
+<p class="xlink" style="display:inline-block;padding:1px 8px;margin:4px 2px">🔗 交叉參考：本章內容直接服務於第三章（卡諾循環與第二定律）、第五章（基本方程式與 Maxwell 關係）、第八章（真實氣體）、第十一章（反應熱計算）、第十二章（Ellingham 圖）、第十四章（電化學）及第十五章（相變熱力學）。</p>
+</div></section>
+
+<section id="s2-1"><h2>2.1 導論（Introduction）</h2>
+<p>熱力學第一定律的核心是<strong>能量守恆</strong>。在熱力學中，一個系統可以通過兩種方式與外界交換能量：<strong>熱（heat, $q$）</strong>和<strong>功（work, $w$）</strong>。系統內能的變化等於這兩者的總和。</p>
+<p>要理解第一定律，我們必須先區分兩種物理量：</p>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li><strong>狀態函數（state function）：</strong>如內能 $U$、壓力 $P$、溫度 $T$——只取決於系統的當前狀態，與過程路徑無關。</li>
+<li><strong>路徑函數（path function）：</strong>如熱 $q$ 和功 $w$——取決於過程的具體方式。你不能說「系統含有多少熱」，只能說「系統在過程中吸收了多少熱」。</li>
+</ul>
+<div class="callout"><strong>💡 關鍵區別：</strong>數學上，狀態函數的微分是<strong>正合微分（exact differential）</strong>，記為 $dU$；而熱和功的微分是<strong>非正合微分（inexact differential）</strong>，記為 $\delta q$ 和 $\delta w$。這個區別在第五章的 Maxwell 關係中至關重要。</div>
+</section>
+
+<section id="s2-2"><h2>2.2 熱與功的關係（The Relationship Between Heat and Work）</h2>
+<p>在熱力學發展的早期，熱和功被視為兩種完全不同的東西。焦耳（Joule）在 1840 年代的經典實驗證明了<strong>熱和功是等價的</strong>——一定量的功可以產生一定量的熱，反之亦然。這就是<strong>熱功當量（mechanical equivalent of heat）</strong>。</p>
+<p>焦耳的實驗設計是經典力學能量轉換為熱能的完美展示：他將總質量 $m \\approx 26.3\\ \\text{kg}$ 的重物懸掛在滑輪兩側，通過細繩和轉軸帶動浸在水中的槳輪（paddle-wheel）旋轉。重物在重力作用下以恆速下降，釋放的位能 $mgh$ 完全用於驅動槳輪攪拌水體。水的黏滯阻力使機械功轉化為水的內能，引起水溫上升。關鍵參數如下：</p>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li>重物總質量 $m \\approx 26.3\\ \\text{kg}$（每邊各 $\\sim 13\\ \\text{kg}$）</li>
+<li>下降高度 $h \\approx 1.6\\ \\text{m}$</li>
+<li>水體質量 $M \\approx 6.36\\ \\text{kg}$</li>
+<li>重複下降 20 次，總機械功 $\approx 20 \\times mgh \\approx 8.26\\ \\text{kJ}$</li>
+<li>測得水溫升高 $\\Delta T \\approx 0.31\\ \\text{°F} \\approx 0.172\\ \\text{°C}$</li>
+</ul>
+<p>由此計算，產生 $1\\ \\text{cal}$ 熱量所需的功為約 $4.16\\ \\text{J}$，非常接近現代公認值：</p>
+<div class="eq">$$1\\ \\text{cal} = 4.184\\ \\text{J}$$</div>
+<p>這個等價關係是能量守恆的實驗基礎。它意味著熱和功只是能量的兩種<strong>傳遞形式</strong>，而不是能量本身。焦耳實驗中 $mgh$（機械功）$\approx MC_w\\Delta T$（熱量），這是第一定律最直接的定量驗證。</p>
+<p class="xlink" style="display:inline-block;padding:1px 8px;margin:4px 2px">🔗 交叉參考：焦耳實驗的能量守恆觀點將在第 3 章（熱力學第二定律）關於熱機效率的分析中再次出現——可逆與不可逆過程的功量差異正是第二定律的核心。</p>
+<div class="callout"><strong>💡 歷史上，熱曾被誤認為一種流體——「熱質（caloric）」。</strong>焦耳和邁爾（Mayer）的工作推翻了熱質說，建立了能量守恆定律。這也是為什麼熱量的傳統單位「卡路里」至今仍在使用——它是熱質時代的遺產。</div>
+</section>
+
+<section id="s2-3"><h2>2.3 內能與熱力學第一定律（Internal Energy and the First Law）</h2>
+<p>一個系統的<strong>內能 $U$</strong> 是系統內部所有能量的總和——包括分子的動能、分子間位能、化學鍵能、以及原子核內的能量。在熱力學中，我們通常不需要知道 $U$ 的絕對值，只需要知道<strong>內能的變化 $\Delta U$</strong>。</p>
+<p>熱力學第一定律的數學表述：</p>
+<div class="eq">$$\Delta U = q + w \tag{2.1}$$</div>
+<p>或以微分形式：</p>
+<div class="eq">$$dU = \delta q + \delta w \tag{2.2}$$</div>
+<p><strong>符號慣例（本書採用）：</strong></p>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li>$q > 0$：系統從外界<strong>吸熱</strong></li>
+<li>$q < 0$：系統向外界<strong>放熱</strong></li>
+<li>$w > 0$：外界<strong>對系統</strong>做功</li>
+<li>$w < 0$：系統<strong>對外界</strong>做功</li>
+</ul>
+<p>如果系統只做壓力–體積功（最常見的情況），且過程是可逆的：</p>
+<div class="eq">$$\delta w = -P\,dV$$</div>
+<p>因此第一定律可寫為：</p>
+<div class="eq">$$dU = \delta q - P\,dV \tag{2.3}$$</div>
+<div class="figure"><img src="../../../images/thermodynamics/ch02_pages/ch02_page_48_c.png" alt="圖 2.1" loading="lazy"><figcaption>圖 2.1：系統與外界之間的熱 ($q$) 和功 ($w$) 交換示意圖。系統內能的變化等於輸入的熱和功的總和。</figcaption></div>
+<div class="callout-warn"><strong>⚡ 最常見的混淆：$w$ 的符號。</strong>有些教科書定義 $w$ 為系統對外做功（因此 $w > 0$ 表示系統對外做功），導致第一定律寫成 $\Delta U = q - w$。本書使用 $\Delta U = q + w$，其中 $w$ 是外界對系統做的功。考試和計算時務必確認使用的是哪種符號慣例。</div>
+<div class="callout"><strong>💡 內能是狀態函數。</strong>無論你通過什麼路徑從狀態 1 到狀態 2——直接加熱、攪拌做功、或先壓縮再加熱——$\Delta U$ 都相同。這就是狀態函數的威力：你可以選擇最方便計算的路徑來求解 $\Delta U$。</div>
+</section>
+
+<section id="s2-4"><h2>2.4 定容過程（Constant-Volume Processes）</h2>
+<p>當系統體積保持不變（$dV = 0$），系統不對外做功，外界也不對系統做功（$\delta w = -P\,dV = 0$）。第一定律簡化為：</p>
+<div class="eq">$$dU = \delta q_V \quad \Rightarrow \quad \Delta U = q_V \tag{2.4}$$</div>
+<p>這就是<strong>彈卡計（bomb calorimeter）</strong>的原理：在一個固定體積的剛性容器中進行反應，測量釋放的熱量，就等於內能的變化。</p>
+<p><strong>重要結論：在定容條件下，系統吸收或釋放的熱等於內能的變化。</strong>這是測量 $\\Delta U$ 最直接的方法。</p>
+<div class="derivation"><h4>📐 推導 2.1：$\\Delta U = q_V$——定容下熱量等於內能變化</h4>
+<p>從第一定律的微分形式出發，系統只做 $P$–$V$ 功：</p>
+<div class="eq">$$dU = \\delta q + \\delta w = \\delta q - P\\,dV$$</div>
+<p>定容條件體積不變，$dV = 0$，因此 $-P\\,dV = 0$：</p>
+<div class="eq">$$dU = \\delta q_V$$</div>
+<p>對兩邊從初態到末態積分：</p>
+<div class="eq">$$\\int_{U_1}^{U_2} dU = \\int \\delta q_V \\quad \\Longrightarrow \\quad \\Delta U = q_V$$</div>
+<p><strong>結論：</strong>定容過程中系統吸收的熱 $q_V$ 完全等於內能的增量 $\\Delta U$。這是彈卡計（bomb calorimeter）的理論基礎——在剛性密閉容器中測得的反應熱直接給出 $\\Delta U$。</p>
+</div>
+<div class="callout"><strong>💡 定容 vs 定壓——為什麼需要焓？</strong>
+</section>
+
+<section id="s2-5"><h2>2.5 定壓過程與焓（Constant-Pressure Processes and the Enthalpy, $H$）</h2>
+<p><strong>焓（enthalpy）</strong>是熱力學中最重要的狀態函數之一，定義為：</p>
+<div class="eq">$$\boxed{H = U + PV} \tag{2.5}$$</div>
+<p>為什麼要定義焓？考慮一個定壓過程。第一定律告訴我們：$dU = \delta q - P\,dV$（只做 $P$–$V$ 功）。在定壓下，$\delta q_P = dU + P\,dV = d(U + PV) = dH$。因此：</p>
+<div class="eq">$$dH = \delta q_P \quad \Rightarrow \quad \Delta H = q_P \tag{2.6}$$</div>
+<p><strong>在定壓條件下，系統吸收或釋放的熱等於焓的變化。</strong></p>
+<div class="derivation"><h4>📐 推導 2.2：$H = U + PV$ 的定義與 $\\Delta H = q_P$</h4>
+<p>從第一定律微分形式 $dU = \\delta q - P\\,dV$ 出發。在定壓條件下，外壓 $P$ 為常數：</p>
+<div class="eq">$$\\delta q_P = dU + P\\,dV$$</div>
+<p>右側可以改寫為全微分的形式。注意到：</p>
+<div class="eq">$$d(PV) = P\\,dV + V\\,dP$$</div>
+<p>在定壓下 $dP = 0$，因此 $d(PV) = P\\,dV$。代入上式：</p>
+<div class="eq">$$\\delta q_P = dU + d(PV) = d(U + PV)$$</div>
+<p>這啟發我們定義一個新的狀態函數——<strong>焓（enthalpy）</strong>：</p>
+<div class="eq">$$H \\equiv U + PV \\tag{2.5}$$</div>
+<p>於是：</p>
+<div class="eq">$$\\delta q_P = dH \\quad \\Longrightarrow \\quad q_P = \\Delta H \\tag{2.6}$$</div>
+<p><strong>結論：</strong>定壓過程中系統吸收的熱 $q_P$ 等於焓的增量 $\\Delta H$。由於大多數化學反應在大氣壓（定壓）下進行，$\\Delta H$ 比 $\\Delta U$ 更具實用價值。</p>
+</div>
+<p>焓的物理意義：$U$ 是系統的內能，$PV$ 是系統為「騰出空間」對抗外壓所需的功。$H = U + PV$ 是定壓下系統的「總能量內容」——包含內能加上體積功的貢獻。</p>
+<div class="figure"><img src="../../../images/thermodynamics/ch02_pages/ch02_page_49_c.png" alt="圖 2.2 — 定壓過程示意（Gaskell 原書圖)" loading="lazy"><figcaption>圖 2.2：定壓過程示意（Gaskell 原書 p49）。系統在定壓下膨脹時對抗外壓做功 $P\\Delta V$。</figcaption></div>
+<div class="figure"><img src="../../../images/thermodynamics/ch02_pages/ch02_page_49_c.png" alt="圖 2.2 補充 — 體積功與焓的關係" loading="lazy"><figcaption>圖 2.2（補充）：定壓過程中 $P\\Delta V$ 功與焓變的幾何示意。系統膨脹時對抗外壓做功，這部分能量必須由熱提供——因此 $\\Delta H = \\Delta U + P\\Delta V$ 才是定壓下的實際熱效應。</figcaption></div>
+<p class="xlink" style="display:inline-block;padding:1px 8px;margin:4px 2px">🔗 交叉參考：焓 $H$ 作為狀態函數的數學基礎——$dH$ 是正合微分（exact differential）——將在第 5 章（Maxwell 關係與基本方程式）中深入討論。定壓熱容量 $C_P = (\\partial H/\\partial T)_P$ 也將在第五章中與 $C_V$ 通過 $\\kappa_T$ 和 $\\alpha$ 建立一般關係。</p>
+<div class="callout-warn"><strong>⚡ $\Delta H$ 和 $\Delta U$ 的差別在涉及氣體的反應中最明顯。</strong>反應中氣體莫耳數的變化 $\Delta n_g$ 導致 $P\Delta V = \Delta n_g RT$，因此 $\Delta H = \Delta U + \Delta n_g RT$。對於只有固體和液體的反應，$\Delta V \approx 0$，$\Delta H \approx \Delta U$。第十一章和第十二章大量使用這個關係來計算反應熱。</div>
+</section>
+
+<section id="s2-6"><h2>2.6 熱容量（Heat Capacity）</h2>
+<p><strong>熱容量（heat capacity）</strong>定義為使系統溫度升高 1 度所需的熱量。因為熱是路徑函數，熱容量的值取決於加熱過程的條件：</p>
+<h3>定容熱容量 $C_V$</h3>
+<div class="eq">$$C_V = \left(\frac{\delta q}{dT}\right)_V = \left(\frac{\partial U}{\partial T}\right)_V \tag{2.7}$$</div>
+<h3>定壓熱容量 $C_P$</h3>
+<div class="eq">$$C_P = \left(\frac{\delta q}{dT}\right)_P = \left(\frac{\partial H}{\partial T}\right)_P \tag{2.8}$$</div>
+<p>對於<strong>理想氣體</strong>，$C_P$ 和 $C_V$ 之間有一個極其重要的關係：</p>
+<div class="eq">$$\boxed{C_P - C_V = R} \tag{2.9}$$</div>
+<div class="derivation"><h4>📐 推導 2.3：理想氣體的 $C_P - C_V = R$</h4>
+<p>從焓的定義出發：</p>
+<div class="eq">$$H = U + PV$$</div>
+<p>對於理想氣體，$PV = RT$（每莫耳）：</p>
+<div class="eq">$$H = U + RT$$</div>
+<p>對溫度求偏導（固定壓力）：</p>
+<div class="eq">$$\left(\frac{\partial H}{\partial T}\right)_P = \left(\frac{\partial U}{\partial T}\right)_V + R$$</div>
+<p>根據定義，左側為 $C_P$，右側第一項為 $C_V$：</p>
+<div class="eq">$$C_P = C_V + R \quad \Longrightarrow \quad \boxed{C_P - C_V = R}$$</div>
+<p><strong>物理意義：</strong>$C_P$ 大於 $C_V$ 的原因是定壓下系統膨脹時對抗外壓做功 $(P\,dV)$，需要額外的熱量來補償這部分功。對於液體和固體，由於體積變化小，$C_P \approx C_V$。</p>
+</div>
+<p>對於理想氣體，$C_V$ 的值取決於分子的自由度，由<strong>能量均分定理（equipartition theorem）</strong>決定。下表列出了各類氣體的經典預測值：</p>
+<table><thead><tr><th>氣體類型</th><th>自由度</th><th>每個自由度貢獻</th><th>$C_V$</th><th>$C_P$</th><th>$\gamma = C_P/C_V$</th></tr></thead><tbody>
+<tr><td>單原子（如 Ar）</td><td>3（平移）</td><td>$3 \times \frac{1}{2}R$</td><td>$\frac{3}{2}R$</td><td>$\frac{5}{2}R$</td><td>$\frac{5}{3} \approx 1.67$</td></tr>
+<tr><td>雙原子（如 N₂）</td><td>3 平移 + 2 旋轉</td><td>$5 \times \frac{1}{2}R$</td><td>$\frac{5}{2}R$</td><td>$\frac{7}{2}R$</td><td>$\frac{7}{5} = 1.40$</td></tr>
+<tr><td>多原子非線性</td><td>3 平移 + 3 旋轉</td><td>$6 \times \frac{1}{2}R$</td><td>$3R$</td><td>$4R$</td><td>$\frac{4}{3} \approx 1.33$</td></tr></tbody></table>
+<h3>能量均分定理的詳細推導（每莫耳）</h3>
+<p>經典統計力學的能量均分定理指出：每個二次項自由度在熱平衡下平均貢獻 $\frac{1}{2}k_BT$ 的能量（每分子），折合每莫耳 $\frac{1}{2}RT$。</p>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li><strong>平動（translational）：</strong>$E_{\text{trans}} = \frac{1}{2}mv_x^2 + \frac{1}{2}mv_y^2 + \frac{1}{2}mv_z^2$ → 3 個自由度 → $C_{V,\text{trans}} = \frac{3}{2}R$</li>
+<li><strong>轉動（rotational）：</strong>雙原子分子 2 個轉動軸 → $E_{\text{rot}} = \frac{1}{2}I_1\omega_1^2 + \frac{1}{2}I_2\omega_2^2$ → 2 個自由度 → $C_{V,\text{rot}} = R$；非線性分子 3 個 → $C_{V,\text{rot}} = \frac{3}{2}R$</li>
+<li><strong>振動（vibrational）：</strong>高溫下每個振動模式貢獻 $R$（動能 + 位能），但室溫下通常被凍結</li>
+</ul>
+<div class="figure"><img src="../../../images/thermodynamics/ch02_pages/ch02_page_58_c.png" alt="圖 2.3" loading="lazy"><figcaption>圖 2.3：不同氣體的 $C_V$ 隨溫度變化。低溫下旋轉和振動自由度被「凍結」，$C_V$ 趨近於 $\frac{3}{2}R$。</figcaption></div>
+<div class="callout"><strong>💡 熱容量是連接微觀和宏觀的橋樑。</strong>經典能量均分定理給出每個自由度貢獻 $\frac{1}{2}R$（每莫耳），但實驗顯示低溫下 $C_V$ 會下降——這直接導致了量子理論的發展和愛因斯坦/德拜熱容模型（第六章）。<br><span class="xlink" style="display:inline-block;padding:1px 8px;margin:4px 2px;font-size:11px">🔗 交叉參考：第六章將推導愛因斯坦固體模型（$C_V = 3R(\Theta_E/T)^2 e^{\Theta_E/T}/(e^{\Theta_E/T}-1)^2$）和德拜 $T^3$ 定律，詳細解釋 $C_V$ 在低溫下的 $T^3$ 行為。</span></div>
+</section>
+
+<section id="s2-7"><h2>2.7 可逆絕熱過程（Reversible Adiabatic Processes）</h2>
+<p><strong>絕熱過程</strong>是指系統與外界沒有熱交換（$q = 0$）的過程。對於可逆絕熱過程，第一定律給出：</p>
+<div class="eq">$$dU = -P\,dV = -w$$</div>
+<p>對於理想氣體（$dU = C_V\,dT$），代入 $P = RT/V$，經由以下完整推導可以得到可逆絕熱過程的基本方程：</p>
+<div class="derivation"><h4>📐 推導 2.4：可逆絕熱過程 $PV^\gamma = \text{constant}$</h4>
+<p>從第一定律出發，絕熱條件 $\delta q = 0$：</p>
+<div class="eq">$$dU = \delta w = -P\,dV$$</div>
+<p>對於理想氣體，$dU = C_V\,dT$，且 $P = RT/V$（每莫耳）：</p>
+<div class="eq">$$C_V\,dT = -\frac{RT}{V}\,dV$$</div>
+<p>分離變數：</p>
+<div class="eq">$$C_V\,\frac{dT}{T} = -R\,\frac{dV}{V}$$</div>
+<p>令 $\gamma = C_P/C_V$，並利用 $R = C_P - C_V = C_V(\gamma - 1)$：</p>
+<div class="eq">$$\frac{dT}{T} = -(\gamma - 1)\,\frac{dV}{V}$$</div>
+<p>從初態 $(T_1, V_1)$ 到末態 $(T_2, V_2)$ 積分：</p>
+<div class="eq">$$\int_{T_1}^{T_2} \frac{dT}{T} = -(\gamma - 1) \int_{V_1}^{V_2} \frac{dV}{V}$$</div>
+<div class="eq">$$\ln\frac{T_2}{T_1} = -(\gamma - 1)\ln\frac{V_2}{V_1} = \ln\left(\frac{V_1}{V_2}\right)^{\gamma-1}$$</div>
+<p>因此：</p>
+<div class="eq">$$T_2 V_2^{\gamma-1} = T_1 V_1^{\gamma-1} \quad \Longrightarrow \quad TV^{\gamma-1} = \text{constant}$$</div>
+<p>利用理想氣體狀態方程 $PV = RT$ 消去 $T$：</p>
+<div class="eq">$$\frac{PV}{R} \cdot V^{\gamma-1} = \text{constant} \quad \Longrightarrow \quad \boxed{PV^\gamma = \text{constant}} \tag{2.10}$$</div>
+<p>同理，消去 $V$ 可得 $TP^{(1-\gamma)/\gamma} = \text{constant}$。</p>
+</div>
+<p>其中 $\gamma = C_P/C_V$，稱為<strong>比熱比（heat capacity ratio）</strong>。</p>
+<p class="xlink" style="display:inline-block;padding:1px 8px;margin:4px 2px">🔗 交叉參考：可逆絕熱過程是卡諾循環（Carnot cycle）的兩個關鍵步驟之一。卡諾循環由兩個等溫步驟和兩個絕熱步驟組成——其效率 $\eta = 1 - T_C/T_H$ 是熱力學第二定律的核心，將在第 3 章深入討論。</p>
+<p>等效的關係式：</p>
+<div class="eq">$$TV^{\gamma-1} = \text{constant} \tag{2.11}$$</div>
+<div class="eq">$$TP^{(1-\gamma)/\gamma} = \text{constant} \tag{2.12}$$</div>
+<p>在 $P$–$V$ 圖上，可逆絕熱線比等溫線（$PV = \text{constant}$）更陡峭——因為膨脹時不僅壓力因體積增加而下降，溫度也因絕熱冷卻而下降，進一步降低壓力。</p>
+<div class="figure"><img src="../../../images/thermodynamics/ch02_pages/ch02_page_60_c.png" alt="圖 2.4" loading="lazy"><figcaption>圖 2.4：$P$–$V$ 圖上的等溫線（$PV = C$）與絕熱線（$PV^\gamma = C$）比較。絕熱線更陡，因為膨脹伴隨溫度下降。</figcaption></div>
+<div class="callout-warn"><strong>⚡ 可逆絕熱 ≠ 不可逆絕熱。</strong>兩者都是 $q = 0$，但可逆絕熱過程中系統始終處於平衡（$P_{\text{ext}} = P_{\text{sys}}$），而不可逆絕熱（如自由膨脹）中 $P_{\text{ext}} \neq P_{\text{sys}}$。$PV^\gamma = \text{constant}$ 只適用於<strong>可逆</strong>絕熱過程。</div>
+</section>
+
+<section id="s2-8"><h2>2.8 理想氣體的可逆等溫壓力或體積變化（Reversible Isothermal Changes of an Ideal Gas）</h2>
+<p>對於理想氣體的<strong>等溫過程</strong>（$dT = 0$），內能不變：$dU = C_V\,dT = 0$。根據第一定律：</p>
+<div class="eq">$$q + w = 0 \quad \Rightarrow \quad q = -w$$</div>
+<p>系統吸收的熱全部轉化為對外做的功（反之亦然）。可逆等溫過程的功可以從以下完整推導得到：</p>
+<div class="derivation"><h4>📐 推導 2.5：可逆等溫過程的功 $w = -nRT\ln(V_2/V_1)$</h4>
+<p>對於可逆過程，外壓等於系統壓力：$P_{\text{ext}} = P_{\text{sys}} = P$。因此：</p>
+<div class="eq">$$w = -\int_{V_1}^{V_2} P\,dV$$</div>
+<p>對於理想氣體，$P = nRT/V$。等溫條件下 $T = \text{constant}$：</p>
+<div class="eq">$$w = -\int_{V_1}^{V_2} \frac{nRT}{V}\,dV = -nRT \int_{V_1}^{V_2} \frac{dV}{V}$$</div>
+<p>積分得到：</p>
+<div class="eq">$$w = -nRT\,\bigl[\ln V\bigr]_{V_1}^{V_2} = -nRT\,(\ln V_2 - \ln V_1)$$</div>
+<div class="eq">$$\boxed{w = -nRT\ln\frac{V_2}{V_1}} \tag{2.13}$$</div>
+<p>利用理想氣體狀態方程 $P_1V_1 = P_2V_2$（等溫），可得等價形式：</p>
+<div class="eq">$$\boxed{w = -nRT\ln\frac{P_1}{P_2}} \tag{2.14}$$</div>
+<p><strong>關鍵觀察：</strong>等溫可逆膨脹時 $V_2 > V_1$，$\ln(V_2/V_1) > 0$，$w < 0$（系統對外做功）；壓縮時相反。</p>
+</div>
+<div class="callout"><strong>💡 等溫過程的功可以很大。</strong>例：1 莫耳理想氣體在 300 K 下從 10 L 等溫可逆壓縮到 1 L，$w = -1 \times 8.314 \times 300 \times \ln(0.1) = +5.74\ \text{kJ}$——外界需要對氣體做近 6 kJ 的功。這部分功去哪了？它轉化為熱釋放到環境中（$q = -5.74\ \text{kJ}$）。</div>
+<div class="callout-warn"><strong>⚡ 等溫不可逆過程的功較小。</strong>如果同樣的壓縮是瞬間施加外壓完成的（不可逆），所需的功會更小——等溫可逆過程產生的功是<strong>最大值</strong>（對膨脹而言）或<strong>最小值</strong>（對壓縮而言）。這是第三章第二定律在功上的體現。</div>
+<div class="figure"><img src="../../../images/thermodynamics/ch02_pages/ch02_page_67_c.png" alt="圖 2.5 — 定性例題 1（Gaskell 原書 p67）" loading="lazy"><figcaption>圖 2.5：定性例題 1——等溫可逆膨脹的 $P$–$V$ 圖示意，陰影面積代表系統對外界做的功。</figcaption></div>
+<div class="figure"><img src="../../../images/thermodynamics/ch02_pages/ch02_page_67_c.png" alt="圖 2.6 — 定性例題 2（Gaskell 原書 p67）" loading="lazy"><figcaption>圖 2.6：定性例題 2——等溫可逆壓縮的 $P$–$V$ 圖示意，比較不同路徑的功量差異。</figcaption></div>
+
+<section id="s2-8a"><h3>📝 計算範例：等溫 vs 絕熱壓縮的功量比較</h3>
+<p>這個例子展示如何運用本章的核心公式計算實際過程的功量，並比較等溫和絕熱兩種不同路徑下的結果。</p>
+<p><strong>問題：</strong>2 莫耳理想氣體 ($C_V = \frac{5}{2}R$) 在 300 K 下從 $P_1 = 1\ \text{atm}$, $V_1 = 49.2\ \text{L}$ 被壓縮到 $V_2 = 24.6\ \text{L}$。比較以下兩種可逆過程的功：</p>
+<ol style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:8px">
+<li><strong>等溫壓縮：</strong>溫度保持 300 K</li>
+<li><strong>絕熱壓縮：</strong>系統與外界無熱交換</li>
+</ol>
+<p><strong>解：</strong></p>
+<p><strong>(a) 等溫可逆壓縮</strong></p>
+<p>$\Delta U = 0$，由推導 2.5：</p>
+<div class="eq">$$w_{\text{iso}} = -nRT\ln\frac{V_2}{V_1} = -2 \times 8.314 \times 300 \times \ln\frac{24.6}{49.2}$$</div>
+<div class="eq">$$= -4988 \times \ln(0.5) = -4988 \times (-0.6931) = +3.46\ \text{kJ}$$</div>
+<p>正號表示外界對系統做功。由於 $\Delta U = 0$，$q = -w = -3.46\ \text{kJ}$（系統放熱）。</p>
+<p><strong>(b) 絕熱可逆壓縮</strong></p>
+<p>$q = 0$，$\Delta U = w$。由 $PV^\gamma = \text{constant}$ 先求末溫。$\gamma = C_P/C_V = \frac{7}{5} = 1.4$。利用 $TV^{\gamma-1} = \text{constant}$：</p>
+<div class="eq">$$T_2 = T_1\left(\frac{V_1}{V_2}\right)^{\gamma-1} = 300 \times (2)^{0.4} = 300 \times 1.319 = 395.8\ \text{K}$$</div>
+<p>內能變化：</p>
+<div class="eq">$$\Delta U = nC_V\Delta T = 2 \times \frac{5}{2} \times 8.314 \times (395.8 - 300) = 5 \times 8.314 \times 95.8 = +3.98\ \text{kJ}$$</div>
+<p>因此 $w_{\text{adia}} = \Delta U = +3.98\ \text{kJ}$（因為 $q = 0$）。</p>
+<p><strong>比較與討論：</strong></p>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li>等溫壓縮需要外界做功 $3.46\ \text{kJ}$，絕熱壓縮需要 $3.98\ \text{kJ}$——絕熱壓縮需要更多的功，因為氣體溫度升高導致壓力更大。</li>
+<li>等溫壓縮中，系統將 $3.46\ \text{kJ}$ 的功以熱的形式釋放到環境；絕熱壓縮中，全部功轉化為內能增加，氣體溫度升高 $95.8\ \text{K}$。</li>
+<li>這個比較展示了路徑依賴性：從相同的初態到相同的體積變化，不同過程的功量不同——因為 $w$ 是路徑函數。</li>
+<li>如果改為不可逆壓縮（瞬間施加外壓），兩種情況的功都會更小——可逆過程給出功的極值。</li>
+</ul></section>
+
+<section id="s2-9"><h2>2.9 其他形式的功（Other Forms of Work）</h2>
+<p>壓力–體積功是最常見的功，但不是唯一的。在材料系統中，其他形式的功包括：</p>
+<table><thead><tr><th>功的類型</th><th>表達式</th><th>應用</th></tr></thead><tbody>
+<tr><td><strong>表面功</strong></td><td>$\delta w = \gamma\,dA$（$\gamma$ = 表面張力，$A$ = 面積）</td><td>粉末冶金、泡沫材料</td></tr>
+<tr><td><strong>磁功</strong></td><td>$\delta w = \mu_0 H\,dM$</td><td>磁性材料、磁制冷</td></tr>
+<tr><td><strong>電功</strong></td><td>$\delta w = \mathcal{E}\,dq$（$\mathcal{E}$ = 電動勢）</td><td>電化學電池（第十四章）</td></tr>
+<tr><td><strong>彈性功</strong></td><td>$\delta w = \sigma\,d\varepsilon$</td><td>應力–應變、相變（第十五章）</td></tr>
+</tbody></table>
+<p>一般化的第一定律可以寫成：</p>
+<div class="eq">$$dU = \delta q - P\,dV + \sum_i Y_i\,dX_i$$</div>
+<p>其中 $Y_i$ 是廣義力（如表面張力、電場），$X_i$ 是對應的廣義位移（如面積、電荷）。</p>
+<h3>各類非 $P$–$V$ 功的實際例子</h3>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li><strong>表面功：</strong>奈米粒子的熔點降低是表面能效應的經典例子——當粒徑從微米減小到奈米尺度，表面積與體積比急劇增大，表面能的貢獻不可忽略。例如，金的塊體熔點為 1337 K，而 2 nm 金粒子的熔點降至約 600 K。這個現象在第五章的基本方程式中通過 $dU = T\,dS - P\,dV + \gamma\,dA$ 來定量描述。</li>
+<li><strong>磁功：</strong>磁制冷（magnetic refrigeration）利用磁熱效應——施加磁場時磁性材料的磁矩有序化，熵降低，釋放熱量；去除磁場後磁矩無序化，熵增加，吸收熱量。通過 $dU = T\,dS + \mu_0 H\,dM$ 可以分析這個循環的效率。</li>
+<li><strong>電功：</strong>電化學電池（如鋰離子電池、燃料電池）的電動勢 $\mathcal{E}$ 與 Gibbs 自由能變化直接相關：$\Delta G = -nF\mathcal{E}$（第十四章）。在充放電過程中，$dU = T\,dS + \mathcal{E}\,dq$ 描述了內能、熱和電功之間的轉換。</li>
+<li><strong>彈性功：</strong>形狀記憶合金（如 NiTi）的馬氏體相變伴隨著應變能的儲存和釋放。應力誘導的相變可以用 $dU = T\,dS + \sigma\,d\varepsilon$ 來分析。這在第 15 章的相變熱力學中會進一步討論。</li>
+</ul>
+<div class="callout"><strong>💡 為什麼要學其他形式的功？</strong>在材料科學中，許多重要的現象涉及非 $P$–$V$ 功。例如：奈米粒子的熔點降低（表面能的貢獻）、形狀記憶合金的相變（彈性能的貢獻）、以及腐蝕和電池（電功）。第五章的基本方程式會將這些納入統一的熱力學框架。</div>
+<p class="xlink" style="display:inline-block;padding:1px 8px;margin:4px 2px">🔗 交叉參考：第五章（Maxwell 關係與基本方程式）將把 $dU = T\,dS - P\,dV + \sum Y_i\,dX_i$ 作為熱力學的基本微分式，並推導出各類響應函數之間的關係。第八章（真實氣體）將討論偏離理想氣體行為時 $P$–$V$–$T$ 關係的變化，這直接影響非理想條件下第一定律的計算。</p>
+</section>
+
+<section id="examples"><h2>例題與應用（Examples and Applications）</h2>
+<p>本節彙整 Gaskell 原著第 74–75 頁的例題圖示及第一章的參考圖，幫助讀者將本章的理論與實際問題聯繫起來。</p>
+<div class="figure"><img src="../../../images/thermodynamics/ch02_pages/ch02_page_74_c.png" alt="圖 2.7 — 習題圖 1（Gaskell 原書 p74）" loading="lazy"><figcaption>圖 2.7：習題圖 1（p74）——多步驟循環過程的 $P$–$V$ 圖。此類循環出現在第 3 章卡諾循環和第 11 章反應熱的溫度依賴性分析中。</figcaption></div>
+<div class="figure"><img src="../../../images/thermodynamics/ch02_pages/ch02_page_74_c.png" alt="圖 2.8 — 習題圖 2（Gaskell 原書 p75）" loading="lazy"><figcaption>圖 2.8：習題圖 2（p75）——氣體在不同邊界條件下的膨脹–壓縮示意圖。通過比較不同路徑的功量，可以深化對狀態函數與路徑函數的理解。</figcaption></div>
+<div class="figure"><img src="../../../images/thermodynamics/ch02_pages/ch02_page_74_c.png" alt="圖 1.1 — 第一章參考圖（p58）" loading="lazy"><figcaption>圖 1.1：第一章參考圖（p58）——$P$–$V$–$T$ 曲面與狀態方程示意。第一章建立的 $PV = nRT$ 關係是本章所有推導的起點。</figcaption></div>
+<div class="callout"><strong>💡 綜合提示：</strong>以上例題涵蓋了本章的核心計算類型——從 $PV^γ$ 關係求絕熱過程的終態參數（2.7 節），從 $w = -nRT\ln(V_2/V_1)$ 計算等溫功（2.8 節），以及通過 $\Delta H = \Delta U + \Delta n_g RT$ 在定容和定壓反應熱之間轉換（2.5 節）。建議讀者先手算每道例題，再對照書末解答。</div>
+</section>
+
+<section id="further-reading"><h2>延伸閱讀與進階參考（Further Reading）</h2>
+<p>本章的內容是後續所有章節的基礎。以下列出與本章直接相關的進階主題及對應章節：</p>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li><strong>可逆過程與最大功原理：</strong>可逆過程的功量極值特性是第二定律的核心——第三章將從熵的角度重新解釋為什麼可逆過程的功是最大值（膨脹）或最小值（壓縮）。</li>
+<li><strong>$C_P - C_V$ 的一般關係：</strong>對於一般物質（非理想氣體），$C_P - C_V = \alpha^2 V T / \kappa_T$，其中 $\alpha$ 是體膨脹係數，$\kappa_T$ 是等溫壓縮係數。這個關係將在第五章通過 Maxwell 關係推導。</li>
+<li><strong>熱容量與量子統計：</strong>第六章將推導愛因斯坦和德拜的量子熱容模型，解釋為什麼 $C_V$ 在低溫下遵循 $T^3$ 定律而非經典能量均分定理的預測。</li>
+<li><strong>真實氣體的 $P$–$V$–$T$ 行為：</strong>第八章將討論 van der Waals 方程等真實氣體狀態方程，以及偏離理想行為時 $\Delta U$ 和 $\Delta H$ 的計算方法。</li>
+<li><strong>反應熱與標準焓：</strong>第十一章將本章的 $\Delta H = q_P$ 應用於化學反應，引入標準生成焓和赫斯定律（Hess's law），計算反應熱及其溫度依賴性。</li>
+</ul>
+</section>
+
+<section id="key-formulas"><h2>關鍵公式總結（Key Formulas Summary）</h2>
+<table><thead><tr><th>公式</th><th>名稱/條件</th><th>備註</th></tr></thead><tbody>
+<tr><td>$\Delta U = q + w$</td><td>熱力學第一定律</td><td>$U$ 為狀態函數，$q$, $w$ 為路徑函數</td></tr>
+<tr><td>$dU = \delta q - P\,dV$</td><td>只做 $P$–$V$ 功的可逆過程</td><td>$\delta w = -P\,dV$</td></tr>
+<tr><td>$\Delta U = q_V$</td><td>定容過程</td><td>$dV = 0$，彈卡計原理</td></tr>
+<tr><td>$H = U + PV$</td><td>焓的定義</td><td>狀態函數，任意過程適用</td></tr>
+<tr><td>$\Delta H = q_P$</td><td>定壓過程</td><td>常壓化學反應熱 = $\Delta H$</td></tr>
+<tr><td>$C_V = (\partial U/\partial T)_V$</td><td>定容熱容量</td><td>每莫耳或總量</td></tr>
+<tr><td>$C_P = (\partial H/\partial T)_P$</td><td>定壓熱容量</td><td>每莫耳或總量</td></tr>
+<tr><td>$C_P - C_V = R$</td><td>理想氣體關係</td><td>$C_P > C_V$，因體積功</td></tr>
+<tr><td>$PV^\gamma = \text{constant}$</td><td>可逆絕熱過程</td><td>$\gamma = C_P/C_V$，$q = 0$</td></tr>
+<tr><td>$TV^{\gamma-1} = \text{constant}$</td><td>可逆絕熱（等價）</td><td>與 $PV^\gamma$ 等效</td></tr>
+<tr><td>$w = -nRT\ln(V_2/V_1)$</td><td>可逆等溫膨脹/壓縮</td><td>$dT = 0$, $\Delta U = 0$</td></tr>
+<tr><td>$w = -nRT\ln(P_1/P_2)$</td><td>可逆等溫（等價）</td><td>$P_1V_1 = P_2V_2$</td></tr>
+<tr><td>$dU = \delta q - P\,dV + \sum Y_i\,dX_i$</td><td>一般化第一定律</td><td>$Y_i$: 廣義力，$X_i$: 廣義位移</td></tr>
+</tbody></table>
+</section>
+
+<section id="summary"><h2>本章摘要</h2>
+<ol style="font-size:14px;color:var(--t2);margin-left:18px">
+<li><strong>第一定律（能量守恆）：</strong>$\Delta U = q + w$。內能 $U$ 是狀態函數——其變化 $\Delta U$ 只取決於初末態，與路徑無關。熱 $q$ 和功 $w$ 是路徑函數——它們的數值取決於過程的具體方式。數學上，$dU$ 是正合微分（exact differential），$\delta q$ 和 $\delta w$ 是非正合微分（inexact differential）。這個區別是第五章 Maxwell 關係的數學基礎。</li>
+<li><strong>定容過程（$dV = 0$）：</strong>$\Delta U = q_V$。系統不做 $P$–$V$ 功，所有吸收或釋放的熱量完全反映在內能的變化上。彈卡計（bomb calorimeter）利用此原理測量反應的 $\Delta U$。推導 2.1 給出了從第一定律到 $\Delta U = q_V$ 的完整步驟。</li>
+<li><strong>焓的定義（$H = U + PV$）：</strong>定壓過程（$dP = 0$）中 $\Delta H = q_P$。焓是狀態函數，其變化 $\Delta H$ 等於定壓下系統吸收或釋放的熱量。對於理想氣體反應，$\Delta H = \Delta U + \Delta n_g RT$，其中 $\Delta n_g$ 是氣體莫耳數的變化。推導 2.2 展示了 $H$ 如何自然地從 $dU = \delta q - P\,dV$ 定義出來。</li>
+<li><strong>熱容量：</strong>$C_V = (\partial U/\partial T)_V$，$C_P = (\partial H/\partial T)_P$。對於理想氣體：$C_P - C_V = R$（推導 2.3）。$C_P > C_V$ 的原因是定壓加熱時系統膨脹對抗外壓做功。能量均分定理給出單原子氣體 $C_V = \frac{3}{2}R$，雙原子 $C_V = \frac{5}{2}R$，多原子非線性 $C_V = 3R$。低溫下 $C_V$ 的偏離是量子效應（第六章）。</li>
+<li><strong>可逆絕熱過程（$q = 0$）：</strong>$PV^\gamma = \text{constant}$，$\gamma = C_P/C_V$。等價形式 $TV^{\gamma-1} = \text{constant}$ 和 $TP^{(1-\gamma)/\gamma} = \text{constant}$。推導 2.4 從 $dU = -P\,dV$ 出發，通過分離變數和積分得到該關係。$P$–$V$ 圖上絕熱線比等溫線更陡。絕熱過程是卡諾循環的關鍵步驟（第三章）。</li>
+<li><strong>可逆等溫過程（$dT = 0$）：</strong>$w = -nRT\ln(V_2/V_1)$（推導 2.5）。等溫可逆過程的功是最大值（膨脹）或最小值（壓縮）——這是可逆過程的標誌。$\Delta U = 0$，$q = -w$，系統吸收的熱全部轉化為功。等溫不可逆過程的功較小。</li>
+<li><strong>其他形式的功：</strong>表面功（$\gamma\,dA$）、磁功（$\mu_0 H\,dM$）、電功（$\mathcal{E}\,dq$）、彈性功（$\sigma\,d\varepsilon$）。一般化第一定律：$dU = \delta q - P\,dV + \sum Y_i\,dX_i$，其中 $Y_i$ 為廣義力，$X_i$ 為廣義位移。</li>
+</ol>
+<h3>學習要點與常見迷思</h3>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li><strong>⚠️ $w$ 的符號慣例：</strong>本書採用 $\Delta U = q + w$（$w > 0$ 表示外界對系統做功）。部分教科書採用 $\Delta U = q - w$（$w > 0$ 表示系統對外做功）。計算時務必確認採用哪種慣例。</li>
+<li><strong>⚠️ $\Delta U$ 和 $\Delta H$ 的區別：</strong>定容下 $\Delta U = q_V$，定壓下 $\Delta H = q_P$。對於固體和液體反應，兩者近似相等；對於含氣體反應，$\Delta H = \Delta U + \Delta n_g RT$。</li>
+<li><strong>⚠️ 可逆 vs 不可逆：</strong>$PV^\gamma = \text{constant}$ 只適用於可逆絕熱過程。不可逆絕熱（如自由膨脹）中 $\Delta U = 0$，$T$ 和 $P$ 的變化不同。</li>
+<li><strong>🔗 跨章節聯繫：</strong>本章推導的 $dU = T\,dS - P\,dV$（加入熵後）是第五章基本方程式的起點。$C_P - C_V$ 的一般關係（透過 $\kappa_T$ 和 $\alpha$ 表達）將在第五章推導。卡諾循環（第三章）由兩個等溫和兩個絕熱步驟構成。</li>
+</ul></section>
+</main>
+<script>
+function toggleTheme(){const h=document.documentElement;const n=h.getAttribute('data-theme')==='light'?'dark':'light';h.setAttribute('data-theme',n);localStorage.setItem('theme',n);document.getElementById('tl').textContent=n==='dark'?'淺色模式':'深色模式';}
+const s=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',s);if(s==='dark')document.getElementById('tl').textContent='淺色模式';
+const secs=document.querySelectorAll('section[id]');const navs=document.querySelectorAll('.sn a');window.addEventListener('scroll',()=>{let c='';secs.forEach(s=>{if(window.scrollY>=s.offsetTop-80)c=s.getAttribute('id');});navs.forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+c);});});
+document.querySelectorAll('.figure img').forEach(i=>i.addEventListener('click',()=>window.open(i.src,'_blank')));
+</script>
+</body>
+</html>
