@@ -25,29 +25,52 @@ table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}thead th{
 @media(max-width:768px){.sidebar{transform:translateX(-100%);transition:.3s}.sidebar.open{transform:translateX(0)}.main{margin-left:0;padding:20px 16px 60px}}
 @media print{.sidebar{display:none}.main{margin-left:0;max-width:100%;padding:0}}
 </style>
-<script src="../../../reading-preferences.js" defer></script></head>
-<body><a class="portal-home-link" href="../../../index.html">返回學習中心</a><style id="portal-home-link-style">.portal-home-link{position:fixed;top:16px;right:16px;z-index:1000;display:inline-flex;align-items:center;min-height:36px;padding:7px 11px;border:1px solid #cbd5e1;border-radius:8px;background:#fff;color:#1d4ed8;font:600 13px/1.2 -apple-system,BlinkMacSystemFont,"Noto Sans TC","Microsoft JhengHei",sans-serif;text-decoration:none;box-shadow:0 2px 10px rgba(15,23,42,.08)}.portal-home-link:hover{background:#eff6ff}.portal-home-link:focus-visible{outline:3px solid rgba(37,99,235,.35);outline-offset:2px}@media(max-width:768px){.portal-home-link{top:10px;right:10px;min-height:34px;padding:7px 9px;font-size:12px}}</style>
+<style id="derivation-lab-style">.derivation-lab{border-top:3px solid var(--ac);padding-top:20px}.derivation-lab ul,.derivation-lab ol{font-size:14px;color:var(--t2);margin:8px 0 14px 22px}.derivation-lab details{border:1px solid var(--bd);border-radius:8px;margin:8px 0;background:var(--bg)}.derivation-lab summary{cursor:pointer;padding:10px 13px;font-weight:600}.derivation-lab details p{padding:0 13px 10px}.dimcheck{background:var(--b3);border-left:3px solid var(--ac);padding:12px 15px;border-radius:0 8px 8px 0}</style>
+<script src="../../../reading-preferences.js" defer></script>
+</head>
+<body>
+<a class="portal-home-link" href="../../../index.html">返回學習中心</a>
+<style id="portal-home-link-style">.portal-home-link{position:fixed;top:16px;right:16px;z-index:1000;display:inline-flex;align-items:center;min-height:36px;padding:7px 11px;border:1px solid #cbd5e1;border-radius:8px;background:#fff;color:#1d4ed8;font:600 13px/1.2 -apple-system,BlinkMacSystemFont,"Noto Sans TC","Microsoft JhengHei",sans-serif;text-decoration:none;box-shadow:0 2px 10px rgba(15,23,42,.08)}.portal-home-link:hover{background:#eff6ff}.portal-home-link:focus-visible{outline:3px solid rgba(37,99,235,.35);outline-offset:2px}@media(max-width:768px){.portal-home-link{top:10px;right:10px;min-height:34px;padding:7px 9px;font-size:12px}}</style>
 <nav class="sidebar"><div class="sh"><div class="bk">半導體物理與元件·第四版</div><h2>第七章</h2></div><div class="sn"><ul>
-<div class="figure"><img src="../../../images/solid-state-physics/ch07_pages/ch7_page_273.png" alt="圖 7.3" loading="lazy"><figcaption>圖 7.3：pn 接面空乏區的電荷分布、電場分布、電位分布——三角形電場、S 形電位。</figcaption></div>
+<div class="figure"><img src="../../pages/ch07_pages/ch7_page_268_c.png" alt="圖 7.3" loading="lazy"><figcaption>圖 7.3：pn 接面空乏區的電荷分布、電場分布、電位分布——三角形電場、S 形電位。</figcaption></div>
 <li><a href="#preview">📋 7.0 本章預覽</a></li>
 <li class="ns">7.1–7.2 零偏壓</li><li class="nsub"><a href="#s7-1">7.1 基本結構</a></li><li class="nsub"><a href="#s7-2a">7.2.1 內建電位差 ⭐</a></li><li class="nsub"><a href="#s7-2b">7.2.2–7.2.3 電場·空乏區 ⭐</a></li>
 <li class="ns">7.3 反向偏壓</li><li class="nsub"><a href="#s7-3">7.3 反向偏壓·接面電容</a></li>
 <li class="ns">7.4–7.5</li><li class="nsub"><a href="#s7-4">7.4 接面崩潰</a></li><li class="nsub"><a href="#s7-5">7.5 非均勻摻雜接面</a></li>
-<li><a href="#summary">📋 本章摘要</a></li>
+<li><a href="#summary">📋 本章摘要</a></li><li><a href="#derivation-lab">🧪 推導、假設與章末診斷</a></li>
 </ul></div><div class="st"><button onclick="toggleTheme()">🌓 <span id="tl">深色模式</span></button></div></nav>
 <main class="main">
-<header class="header"><div class="cl">第七章</div><h1>pn 接面</h1><div class="meta">Donald A. Neamen·《半導體物理與元件：基本原理》第四版·第 232–277 頁</div></header>
+<header class="header"><div class="cl">第七章</div><h1>pn 接面</h1><div class="meta">Donald A. Neamen·《半導體物理與元件：基本原理》第四版·第 241–275 頁</div></header>
 
 <section id="preview"><div class="callout"><strong>📋 7.0 本章預覽</strong>
 <p>前面六章建立了半導體材料物理的完整基礎。現在我們把 p 型和 n 型半導體放在一起，觀察它們的界面處發生什麼——這就形成了<strong>pn 接面</strong>，半導體元件物理中最基本也最重要的結構。</p>
 <p>本章討論 pn 接面的<strong>靜態特性</strong>——在零偏壓和反向偏壓下的能帶圖、空間電荷分布、電場、電位、以及接面電容。這是理解所有半導體元件（二極體、BJT、MOSFET、太陽能電池）的第一步。第八章將討論順向偏壓下的電流-電壓特性。</p>
 <div class="callout-warn"><strong>⚡ pn 接面在全書中的核心位置：</strong>第一至三章→固態物理基礎（能帶、態密度、統計）。第四章→平衡態載子濃度。第五章→載子傳輸（漂移+擴散）。第六章→非平衡過量載子。這些<strong>全部</strong>被用來分析 pn 接面——能帶彎曲來自第四章的 Fermi 能階概念；空乏區電場來自 Poisson 方程；接面電流（第八章）來自第五章的漂移-擴散方程和第六章的連續性方程。本章是前面所有知識的集大成應用。</div></div></section>
+<div style="margin-top:14px;background:var(--bg);border:1px solid var(--fbd);border-radius:8px;padding:12px 16px">
+<div style="font-size:11px;font-weight:600;color:var(--ac);margin-bottom:6px">🔑 本章核心概念</div>
+<div style="font-size:12px;color:var(--tx);line-height:2">
+1. pn 接面：p 型和 n 型半導體接觸→載子濃度梯度→擴散→留下游離雜質→空乏區+內建電場<br>
+2. 內建電位 $V_{bi}=\frac{kT}{e}\ln\frac{N_a N_d}{n_i^2}$——平衡時空乏區的總電位降（Si 典型 0.7–0.9 V）<br>
+3. 空乏區寬度 $W=\sqrt{\frac{2\varepsilon_s(V_{bi}+V_R)}{e}\left(\frac{N_a+N_d}{N_a N_d}
+ight)}$——Poisson 方程+突變空乏近似推得<br>
+4. 最大電場在冶金接面處：$E_{max}=-e N_d x_n/\varepsilon_s$——逆偏時電場增大<br>
+5. 接面電容 $C_j=\varepsilon_s/W$——電壓可控電容，$C_j\propto 1/\sqrt{V_{bi}+V_R}$（突變接面）<br>
+6. 單側接面（$N_a\gg N_d$ 或反過來）：$W$ 主要由輕摻雜側決定→$W\approx\sqrt{2\varepsilon_s(V_{bi}+V_R)/(e N_B)}$<br>
+7. 逆偏崩潰：雪崩（載子撞擊游離倍增）和齊納（穿隧）——$V_{BR}$ 隨摻雜增加而降低<br>
+8. 線性漸變接面：$N_d-N_a=ax$→$W\propto V^{1/3}$，$C_j\propto V^{-1/3}$——與突變接面的 $V^{-1/2}$ 不同<br>
+9. 超突變接面 $m=-3/2$：$C_j\propto V^{-2}$→變容二極體實現線性頻率調諧<br>
+10. 本章所有公式都是第八章 Shockley 二極體方程的基礎——先懂空乏區靜電學，再談電流<br>
+</div>
+</div>
 
-<div class="figure"><img src="../../../images/solid-state-physics/ch07_pages/ch07_overview.png" alt="第七章總覽圖" loading="lazy"><figcaption>📌 第七章總覽圖：pn 接面 — 接面形成、空乏區分析、反向偏壓、崩潰機制、Zener vs Avalanche</figcaption></div>
+<div class="figure"><img src="../../pages/ch07_pages/ch07_overview.png" alt="第七章總覽圖" loading="lazy"><figcaption>📌 第七章總覽圖：pn 接面 — 接面形成、空乏區分析、反向偏壓、崩潰機制、Zener vs Avalanche</figcaption></div>
 
 <section id="s7-1"><h2>7.1 pn 接面的基本結構</h2>
+<div style="margin-bottom:14px;font-size:12px;color:var(--t2);line-height:1.8">
+<strong style="color:var(--tx)">🔑 本節重點</strong> ① 突變接面模型——摻雜濃度在冶金界面階梯式變化，為最簡分析模型 ② 接面形成四步驟：濃度梯度→載子擴散→留下游離雜質離子（空間電荷區）→內建電場→動態平衡 ③ 空乏區名稱由來——區內自由載子已被掃出，僅留不可移動的雜質離子 ④ 擴散電流與漂移電流在熱平衡下精確抵銷，淨電流為零
+</div>
 <p>最簡單的 pn 接面是<strong>突變接面（abrupt junction）</strong>——摻雜濃度在冶金界面處從 $N_a$（p 側）突然變為 $N_d$（n 側）。雖然真實元件中的接面是透過擴散或離子植入形成的（摻雜分布較漸進），突變接面是最容易分析的理想化模型，也是理解所有真實接面的出發點。</p>
-<div class="figure"><img src="../../../images/solid-state-physics/ch07_pages/ch7_page_267.png" alt="圖 7.1, 7.2" loading="lazy"><figcaption>圖 7.1：pn 接面的二維示意圖——p 區和 n 區在冶金接面處接觸。圖 7.2：摻雜濃度分布——突變接面假設 $N_a$ 和 $N_d$ 在界面處階梯式變化。</figcaption></div>
+<div class="figure"><img src="../../pages/ch07_pages/ch7_page_267_c.png" alt="圖 7.1, 7.2" loading="lazy"><figcaption>圖 7.1：pn 接面的二維示意圖——p 區和 n 區在冶金接面處接觸。圖 7.2：摻雜濃度分布——突變接面假設 $N_a$ 和 $N_d$ 在界面處階梯式變化。</figcaption></div>
 
 <p><strong>接面形成的物理過程——四個步驟：</strong></p>
 <p><strong>第一步：巨大的濃度梯度。</strong>在接面形成的瞬間，p 側有高濃度電洞（∼$10^{17}$ cm⁻³），n 側有高濃度電子（∼$10^{16}$ cm⁻³）。濃度梯度驅動載子擴散——電洞從 p 側擴散到 n 側，電子從 n 側擴散到 p 側。</p>
@@ -59,8 +82,11 @@ table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}thead th{
 </section>
 
 <section id="s7-2a"><h2>7.2.1 內建電位差 ⭐</h2>
+<div style="margin-bottom:14px;font-size:12px;color:var(--t2);line-height:1.8">
+<strong style="color:var(--tx)">🔑 本節重點</strong> ① 熱平衡下 Fermi 能階必須均勻→能帶彎曲→彎曲量 $=eV_{bi}$ ② 內建電位 $V_{bi}=\frac{kT}{e}\ln\frac{N_a N_d}{n_i^2}$，Si 典型 0.6–0.8 V ③ 推導來自兩側 $n_{n0}$ 與 $n_{p0}$ 之差，代入射極 Fermi 能階公式 ④ 無法用電壓表直接量測——金屬探針接觸電位互相抵銷，需用 C-V 或光電子能譜間接測定 ⑤ $V_{bi}$ 隨 $N_a N_d$ 增大而增加、隨 $n_i^2$ 增大而減少
+</div>
 <p>在熱平衡下，一個系統只能有一個 Fermi 能階——如果 $E_F$ 在各處不同，電子就會流動直到均勻。n 側的 $E_F$ 原本靠近 $E_c$（因摻雜施體），p 側的 $E_F$ 原本靠近 $E_v$（因摻雜受體）。為了讓同一個 $E_F$ 貫穿整個結構，能帶<strong>必須彎曲</strong>。</p>
-<div class="figure"><img src="../../../images/solid-state-physics/ch07_pages/ch7_page_269.png" alt="圖 7.3" loading="lazy"><figcaption>圖 7.3：pn 接面在熱平衡下的能帶圖。$E_F$ 在整個結構中為常數。能帶在空乏區中彎曲，彎曲量 $=eV_{bi}$——內建電位差。</figcaption></div>
+<div class="figure">
 
 <p>能帶彎曲量對應一個<strong>內建電位差 $V_{bi}$</strong>（也稱為 diffusion potential 或 built-in potential）。它是 p 側和 n 側原始 Fermi 能階位置之差的直接度量：</p>
 <div class="eq">$$\boxed{V_{bi} = \frac{kT}{e}\ln\!\left(\frac{N_a N_d}{n_i^2}\right)}$$</div>
@@ -73,10 +99,13 @@ table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}thead th{
 </section>
 
 <section id="s7-2b"><h2>7.2.2–7.2.3 電場分布與空乏區寬度 ⭐</h2>
+<div style="margin-bottom:14px;font-size:12px;color:var(--t2);line-height:1.8">
+<strong style="color:var(--tx)">🔑 本節重點</strong> ① Poisson 方程＋空乏近似→$\rho=-eN_a$（p 側）、$+eN_d$（n 側）→積分得三角電場分布 ② 電荷守恆 $N_a x_p=N_d x_n$——重摻雜側空乏區更窄 ③ $W=x_n+x_p=\sqrt{2\epsilon_s V_{bi}(N_a+N_d)/(e N_a N_d)}$ ④ $E_{max}=-eN_d x_n/\epsilon_s$ 在冶金界面，再積分得 S 形電位曲線 ⑤ $W\propto\sqrt{V_{bi}}$——空乏區如同平行板電容器，電位差越大需要越多空間電荷
+</div>
 <p>空間電荷區中的電場由 <strong>Poisson 方程</strong>決定：$d^2\phi/dx^2 = -\rho(x)/\epsilon_s$。在<strong>空乏近似（depletion approximation）</strong>下，我們假設空乏區內完全沒有自由載子，空間電荷僅來自離子化的雜質：</p>
 <div class="eq">$$\rho(x) = \begin{cases} -eN_a & (-x_p < x < 0) \\ +eN_d & (0 < x < x_n) \end{cases}$$</div>
 <p>在空乏區外，假設材料為電中性（$\rho=0$）。空乏近似雖然是一個理想化，但它給出了極其準確的結果（因為自由載子濃度在空乏區中確實遠小於雜質離子濃度）。</p>
-<div class="figure"><img src="../../../images/solid-state-physics/ch07_pages/ch7_page_271.png" alt="圖 7.4" loading="lazy"><figcaption>圖 7.4：(a) pn 接面的空間電荷密度——p 側均勻 $-eN_a$，n 側均勻 $+eN_d$。(b) 電場——從 n 側的零線性變化到冶金界面的最大值，再回到 p 側的零。(c) 電位——平滑 S 形曲線，總電位差 $=V_{bi}$。</figcaption></div>
+<div class="figure"><img src="../../pages/ch07_pages/ch7_page_271_c.png" alt="圖 7.4" loading="lazy"><figcaption>圖 7.4：(a) pn 接面的空間電荷密度——p 側均勻 $-eN_a$，n 側均勻 $+eN_d$。(b) 電場——從 n 側的零線性變化到冶金界面的最大值，再回到 p 側的零。(c) 電位——平滑 S 形曲線，總電位差 $=V_{bi}$。</figcaption></div>
 
 <p>Poisson 方程積分一次得電場。在 n 側（$0<x<x_n$）：$dE/dx = +eN_d/\epsilon_s$，積分得 $E(x) = (eN_d/\epsilon_s)(x-x_n)$。冶金界面 $x=0$ 處電場最大：</p>
 <div class="eq">$$\boxed{E_{\text{max}} = -\frac{eN_a x_p}{\epsilon_s} = -\frac{eN_d x_n}{\epsilon_s}}$$</div>
@@ -91,24 +120,30 @@ table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}thead th{
 </section>
 
 <section id="s7-3"><h2>7.3 反向偏壓與接面電容</h2>
+<div style="margin-bottom:14px;font-size:12px;color:var(--t2);line-height:1.8">
+<strong style="color:var(--tx)">🔑 本節重點</strong> ① 反向偏壓 $V_R$→總障壁 $V_{bi}+V_R$→$W$ 變寬，$W=\sqrt{2\epsilon_s(V_{bi}+V_R)(N_a+N_d)/(e N_a N_d)}$ ② 接面電容 $C_j=\epsilon_s/W\propto 1/\sqrt{V_{bi}+V_R}$——電壓可控電容 ③ $1/C_j^2$ 對 $V_R$ 作圖為直線：截距 $=-V_{bi}$、斜率給出輕摻雜側濃度 ④ 單側突變接面（$N_a\gg N_d$）→$W$ 幾乎全在輕摻雜側→$C_j$ 僅由 $N_d$ 決定 ⑤ 變容二極體原理——利用反向偏壓調控空乏區寬度來改變電容值
+</div>
 <p>當外加<strong>反向偏壓 $V_R$</strong>（p 側接負、n 側接正）時，外加電場的方向與內建電場<strong>相同</strong>→總電位障壁增大為 $V_{bi}+V_R$→空乏區變寬：</p>
 <div class="eq">$$\boxed{W = \sqrt{\frac{2\epsilon_s(V_{bi}+V_R)}{e}\left(\frac{N_a+N_d}{N_a N_d}\right)}}$$</div>
-<div class="figure"><img src="../../../images/solid-state-physics/ch07_pages/ch7_page_276.png" alt="圖 7.7" loading="lazy"><figcaption>圖 7.7：反向偏壓下的能帶圖——能帶彎曲增大（$=e(V_{bi}+V_R)$），空乏區變寬。注意 $E_{Fn}$ 和 $E_{Fp}$ 的分離（準 Fermi 能階，第六章），兩者之差 $=eV_R$。</figcaption></div>
+<div class="figure"><img src="../../pages/ch07_pages/ch7_page_276_c.png" alt="圖 7.7" loading="lazy"><figcaption>圖 7.7：反向偏壓下的能帶圖——能帶彎曲增大（$=e(V_{bi}+V_R)$），空乏區變寬。注意 $E_{Fn}$ 和 $E_{Fp}$ 的分離（準 Fermi 能階，第六章），兩者之差 $=eV_R$。</figcaption></div>
 
 <p><strong>接面電容（junction capacitance）或空乏層電容：</strong>空乏區兩側的空間電荷 $Q = eN_d x_n = eN_a x_p$ 形成一個平行板電容器。當反向偏壓變化時，$W$ 變化→$Q$ 變化→表現為電容：</p>
 <div class="eq">$$\boxed{C_j = \frac{\epsilon_s}{W} = \sqrt{\frac{e\epsilon_s N_a N_d}{2(V_{bi}+V_R)(N_a+N_d)}}}$$</div>
 
 <p><strong>$C_j \propto 1/\sqrt{V_{bi}+V_R}$：</strong>反向偏壓越大→$W$ 越大→$C_j$ 越小。這就是<strong>變容二極體（varactor diode）</strong>的工作原理——用電壓來控制電容值，用於射頻電路的頻率調諧。</p>
 
-<div class="figure"><img src="../../../images/solid-state-physics/ch07_pages/ch7_page_282.png" alt="圖 7.11" loading="lazy"><figcaption>圖 7.11：$1/C_j^2$ 對 $V_R$ 的關係圖——直線！截距 $=-V_{bi}$（給出內建電位），斜率 $\propto 1/N_d$（給出輕摻雜側的摻雜濃度）。這是實驗量測 pn 接面參數的標準方法。</figcaption></div>
+<div class="figure"><img src="../../pages/ch07_pages/ch7_page_282_c.png" alt="圖 7.11" loading="lazy"><figcaption>圖 7.11：$1/C_j^2$ 對 $V_R$ 的關係圖——直線！截距 $=-V_{bi}$（給出內建電位），斜率 $\propto 1/N_d$（給出輕摻雜側的摻雜濃度）。這是實驗量測 pn 接面參數的標準方法。</figcaption></div>
 
 <p><strong>單側突變接面（one-sided abrupt junction，如 p⁺n）：</strong>當一側的摻雜遠重於另一側（$N_a\gg N_d$），空乏區幾乎完全在輕摻雜側。$W\approx x_n = \sqrt{2\epsilon_s(V_{bi}+V_R)/(eN_d)}$，$C_j = \sqrt{e\epsilon_s N_d/[2(V_{bi}+V_R)]}$。$C_j$ 完全由輕摻雜側的濃度決定——這對變容二極體的設計很重要。</p>
 </section>
 
 <section id="s7-4"><h2>7.4 接面崩潰</h2>
+<div style="margin-bottom:14px;font-size:12px;color:var(--t2);line-height:1.8">
+<strong style="color:var(--tx)">🔑 本節重點</strong> ① 雪崩倍增——高電場加速載子撞擊游離→新生電子-電洞對→正回授連鎖反應 ② $V_B\approx\epsilon_s E_{crit}^2/(2e N_B)$→輕摻雜（低 $N_B$）→高崩潰電壓 ③ 雪崩 vs 齊納：輕摻雜/碰撞游離/正溫度係數 vs 重摻雜/量子穿隧/負溫度係數 ④ Si 崩潰 ∼6 V 時兩種機制共存、溫度係數抵銷→最佳電壓參考點 ⑤ 齊納二極體刻意在崩潰區操作——利用精確崩潰電壓作為參考源
+</div>
 <p>反向偏壓不能無限增大。當空乏區中的電場達到某一<strong>臨界值 $E_{\text{crit}}$</strong>時，載子透過碰撞游離倍增→反向電流急劇增大→pn 接面<strong>崩潰（breakdown）</strong>。</p>
 <p><strong>雪崩倍增（avalanche multiplication）的物理機制：</strong>空乏區中的少數載子（反向漏電流中的電子或電洞）被高電場加速到極高動能。當它們撞擊晶格原子時，如果動能超過 $E_g$（Si: 1.12 eV），就可以把價帶電子撞入導帶→產生一個新的電子-電洞對。這些新生載子也被加速→撞出更多載子→正回授連鎖反應→電流倍增。</p>
-<div class="figure"><img src="../../../images/solid-state-physics/ch07_pages/ch7_page_284.png" alt="圖 7.13" loading="lazy"><figcaption>圖 7.13：雪崩倍增過程——一個高能電子撞擊產生多個電子-電洞對，每個新生載子又被加速撞出更多載子。</figcaption></div>
+<div class="figure"><img src="../../pages/ch07_pages/ch7_page_284_c.png" alt="圖 7.13" loading="lazy"><figcaption>圖 7.13：雪崩倍增過程——一個高能電子撞擊產生多個電子-電洞對，每個新生載子又被加速撞出更多載子。</figcaption></div>
 <p>崩潰電壓取決於輕摻雜側的濃度：</p>
 <div class="eq">$$\boxed{V_B \approx \frac{\epsilon_s E_{\text{crit}}^2}{2e N_B}}$$</div>
 <p>其中 $N_B$ 是輕摻雜側的濃度，$E_{\text{crit}}\approx3\times10^5$ V/cm（Si）。$V_B\propto1/N_B$——輕摻雜（低 $N_B$）→高崩潰電壓。功率二極體（需要耐壓數百至數千伏）使用極輕摻雜的集極/基極區域。</p>
@@ -127,15 +162,88 @@ table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}thead th{
 </section>
 
 <section id="s7-5"><h2>7.5 非均勻摻雜接面</h2>
-<p>真實的擴散或離子植入接面不是突變的——摻雜濃度在接面附近是<strong>漸進變化</strong>的。最簡單的非均勻模型是<strong>線性梯度接面（linearly graded junction）</strong>：$N_d-N_a = ax$（$a$ = 摻雜梯度，單位 cm⁻⁴）。</p>
-<p>線性梯度接面的特性與突變接面有質的不同：空間電荷不再是均勻分布（$\rho(x)=eax$），Poisson 方程積分後得到 $W\propto(V_{bi}+V_R)^{1/3}$（而非突變接面的 $V^{1/2}$），$C_j\propto V^{-1/3}$（而非 $V^{-1/2}$）。</p>
+<div style="margin-bottom:14px;font-size:12px;color:var(--t2);line-height:1.8">
+<strong style="color:var(--tx)">🔑 本節重點</strong> ① 線性梯度接面 $N_d-N_a=ax$→$\rho=e a x$→$E(x)$ 為二次函數（vs 突變的三角形） ② $W\propto V^{1/3}$、$C\propto V^{-1/3}$（vs 突變的 $V^{-1/2}$）→C-V 斜率可判斷製程摻雜分布 ③ 超突變接面 $N=Bx^m$→$C\propto V^{-1/(m+2)}$，$m$ 越負→電容對電壓越敏感 ④ $m=-3/2$ 實現 $C\propto V^{-2}$→VCO 線性頻率調諧（$f_r\propto V_R$） ⑤ C-V profiling 實驗法：量測 $C(V)$→從 $1/C^2$ 或 $1/C^3$ 作圖斜率反推摻雜分布
+</div>
+<p>到目前為止，我們討論的都是<strong>突變接面（abrupt junction）</strong>——假設兩側半導體各自均勻摻雜，在冶金界面處摻雜濃度階梯式變化。然而真實的 pn 接面元件——透過擴散（diffusion）或離子植入（ion implantation）製程形成——幾乎不會是均勻摻雜的。擴散製程使雜質從表面向內部逐漸擴散，形成如圖所示的漸進摻雜分布。在冶金接面附近的淨摻雜濃度可以用<strong>線性函數</strong>來近似，這就是<strong>線性梯度接面（linearly graded junction）</strong>的由來。此外，在某些電子應用中，刻意設計特定的非均勻摻雜分布可以獲得特殊的接面電容特性——例如<strong>超突變接面（hyperabrupt junction）</strong>用於壓控振盪器中的變容二極體。</p>
+<p>本節將從 Poisson 方程出發，完整推導線性梯度接面的電場分布、內建電位、空乏區寬度和接面電容，然後介紹超突變接面的設計原理與應用。</p>
 
-<h3>超突變接面（Hyperabrupt Junction）與變容二極體</h3>
-<p>超突變接面透過特殊設計的摻雜分布（在接面附近刻意增加摻雜濃度梯度），使 $C_j$ 對電壓的依賴更強：</p>
-<div class="eq">$$C_j = C_{j0}\left(1 + \frac{V_R}{V_{bi}}\right)^{-m}, \quad m > \frac{1}{2}$$</div>
-<p>其中 $m$ 可達 2 或更高（對比突變接面 $m=1/2$，線性梯度 $m=1/3$）。$m$ 越大→$C_j$ 隨 $V_R$ 的變化越劇烈。</p>
-<p><strong>變容二極體（Varactor Diode）的應用：</strong>利用電壓控制的電容 $C_j(V)$ 來實現壓控振盪器（VCO）。振盪頻率 $f = 1/(2\pi\sqrt{LC_j})$→$f \propto V^{m/2}$。$m=2$ 時，$f \propto V$——頻率與電壓成<strong>線性</strong>關係，這對 FM 調變和鎖相迴路（PLL）至關重要。超突變接面 varactor 是手機射頻電路中頻率合成器的核心元件。</p>
-<div class="callout"><strong>💡 三種接面類型的 $C_j$-$V$ 關係比較：</strong>突變接面（離子植入）：$C_j \propto V^{-1/2}$。線性梯度（擴散）：$C_j \propto V^{-1/3}$。超突變（特殊摻雜）：$C_j \propto V^{-m}$，$m=1$–$2$。在電路設計中，$m$ 的選擇取決於應用：VCO 需要大 $m$（線性頻率調諧），一般濾波器用突變接面就夠了。</div>
+<h3>7.5.1 線性梯度接面（Linearly Graded Junction）</h3>
+<p><strong>物理圖像：</strong>考慮一個擴散形成的 pn 接面。如果從均勻摻雜的 n 型半導體表面擴散受體原子（如硼），受體濃度從表面向內部逐漸降低，經過冶金接面後，n 側的施體濃度保持均勻或近似線性變化。在冶金接面（$x=0$）附近，淨雜質濃度可以近似為位置的線性函數：</p>
+<div class="eq">$$N_d(x) - N_a(x) = a x$$</div>
+<p>其中 $a$ 是<strong>摻雜梯度（impurity gradient）</strong>，單位為 cm⁻⁴。$x>0$ 為 n 側（$N_d>N_a$），$x<0$ 為 p 側（$N_a>N_d$）。這個近似在冶金接面附近的空乏區範圍內是相當準確的。</p>
+
+<p><strong>Poisson 方程與空間電荷：</strong>在空乏近似下，自由載子濃度忽略不計，空間電荷密度完全來自離子化的雜質：</p>
+<div class="eq">$$\rho(x) = e[N_d(x) - N_a(x)] = e a x$$</div>
+<p>注意：這與突變接面不同——突變接面的 $\rho$ 在每側均為常數（p 側 $-eN_a$、n 側 $+eN_d$），而線性梯度接面的空間電荷密度自身就是位置的函數。Poisson 方程寫為：</p>
+<div class="eq">$$\frac{d^2V}{dx^2} = -\frac{\rho(x)}{\epsilon_s} = -\frac{e a x}{\epsilon_s}$$</div>
+<p>設空乏區從 $-x_0$ 延伸到 $+x_0$（因對稱性，兩側寬度相等），邊界條件為 $E(-x_0)=E(+x_0)=0$。</p>
+
+<p><strong>電場分布——二次函數而非線性：</strong>對 Poisson 方程積分一次（$dE/dx = \rho/\epsilon_s$）：</p>
+<div class="eq">$$E(x) = \int_{-x_0}^{x} \frac{e a x'}{\epsilon_s} dx' = \frac{e a}{2\epsilon_s}\left[x^2 - x_0^2\right]$$</div>
+<p>更一般的寫法（以冶金界面 $x=0$ 的電場最大值為參考）：</p>
+<div class="eq">$$\boxed{E(x) = -\frac{e a}{2\epsilon_s}\left[\left(\frac{W}{2}\right)^2 - x^2\right]}$$</div>
+<p>其中 $W = 2x_0$ 是總空乏區寬度。這是一個<strong>二次函數</strong>——與突變接面的線性電場分布（三角分布）截然不同。最大電場仍然發生在冶金界面 $x=0$：</p>
+<div class="eq">$$E_{\text{max}} = |E(0)| = \frac{e a}{2\epsilon_s} x_0^2 = \frac{e a W^2}{8\epsilon_s}$$</div>
+
+<p><strong>內建電位——與空乏區寬度的三次方關係：</strong>對電場再積分一次得電位。設 $V(-x_0)=0$（p 側空乏區邊界為參考零點），則在冶金界面的電位為：</p>
+<div class="eq">$$V(0) = \frac{e a}{3\epsilon_s} x_0^3$$</div>
+<p>完整的電位分布為三次函數（S 形曲線）：</p>
+<div class="eq">$$V(x) = -\frac{e a}{2\epsilon_s}\left(\frac{x^3}{3} - x_0^2 x\right) + \frac{e a}{3\epsilon_s} x_0^3$$</div>
+<p>總內建電位差（從 $-x_0$ 到 $+x_0$）：</p>
+<div class="eq">$$\boxed{V_{bi} = V(x_0) - V(-x_0) = \frac{e a}{12\epsilon_s} W^3}$$</div>
+<p>這是一個關鍵結果——$V_{bi} \propto W^3$，而突變接面是 $V_{bi} \propto W^2$。這意味著增加同樣的電位差，線性梯度接面的空乏區擴展比突變接面更慢。</p>
+<p>另一種估計 $V_{bi}$ 的方法是使用突變接面 $V_{bi}$ 公式的推廣——以空乏區邊界的摻雜濃度代入：$N_d(x_0)=a x_0$、$N_a(-x_0)=a x_0$：</p>
+<div class="eq">$$V_{bi} = V_t \ln\left(\frac{a x_0}{n_i}\right)^2 = 2V_t \ln\left(\frac{a W}{2 n_i}\right)$$</div>
+
+<p><strong>空乏區寬度——$W \propto V^{1/3}$：</strong>加入反向偏壓 $V_R$ 後，總電位障壁變為 $V_{bi}+V_R$。從 $V_{bi}+V_R = (e a / 12\epsilon_s) W^3$ 解出 $W$：</p>
+<div class="eq">$$\boxed{W = \left[\frac{12\epsilon_s (V_{bi} + V_R)}{e a}\right]^{1/3}}$$</div>
+<p>對比—突變接面：$W \propto \sqrt{V_{bi}+V_R}$（冪次 $1/2$）；線性梯度：$W \propto (V_{bi}+V_R)^{1/3}$（冪次 $1/3$）。這意味著線性梯度接面的空乏區寬度對偏壓變化較不敏感。</p>
+
+<p><strong>接面電容——$C' \propto V^{-1/3}$：</strong>利用與突變接面相同的方法——微分量 $dQ' = \rho(x_0) \cdot dx_0 = e a x_0 \cdot dx_0$（在空乏區邊界因 $dV_R$ 而露出的額外空間電荷），得到單位面積的接面電容：</p>
+<div class="eq">$$\boxed{C' = \left[\frac{e a \epsilon_s^2}{12(V_{bi} + V_R)}\right]^{1/3}}$$</div>
+<p>簡潔記憶形式：$C' = \epsilon_s / W$（與突變接面的形式一致，但 $W$ 的定義不同！）。對比三個關鍵冪次：</p>
+<ul style="font-size:14px;color:var(--t2);margin:10px 0 10px 22px;">
+<li>突變接面：$C' \propto (V_{bi}+V_R)^{-1/2}$</li>
+<li>線性梯度：$C' \propto (V_{bi}+V_R)^{-1/3}$</li>
+<li>超突變：$C' \propto (V_{bi}+V_R)^{-1/(m+2)}$（$m$ 可負可正）</li>
+</ul>
+
+<div class="callout"><strong>💡 為什麼漸變接面的 C-V 斜率不同——這可以用來判斷製程中的摻雜分布：</strong>$1/C'^3$ 對 $V_R$ 作圖，若為直線則表示線性梯度接面，斜率給出 $a$（摻雜梯度）；若 $1/C'^2$ 對 $V_R$ 作圖為直線，則表示突變接面，斜率給出 $N_B$（輕摻雜側濃度）。這是半導體製程線上監控（in-line process monitoring）中最常用的摻雜分布檢測方法——稱為 <strong>C-V profiling</strong>。實驗上先量測 $C(V)$，再從斜率反推摻雜分布。</div>
+
+<h3>7.5.2 超突變接面（Hyperabrupt Junction）</h3>
+<p><strong>動機——為什麼需要特殊的摻雜分布：</strong>線性梯度接面和突變接面都是「自然」形成的接面類型（分別對應擴散和離子植入製程）。但在某些射頻應用中，我們需要接面電容對電壓有<strong>更強</strong>的依賴性——$C(V)$ 變化愈劇烈，頻率調諧範圍就愈大。超突變接面透過<strong>刻意設計</strong>的摻雜分布來達成這個目標：讓 n 型摻雜在靠近冶金界面處較高，向 n 側內部逐漸降低。</p>
+
+<p><strong>廣義摻雜分布模型：</strong>對於一個單側 p⁺n 接面（p 側重摻雜），n 側的廣義摻雜濃度分布可以寫為：</p>
+<div class="eq">$$N(x) = B x^m \quad (x > 0)$$</div>
+<p>其中 $B$ 是常數，$m$ 是描述分布形狀的指數：</p>
+<ul style="font-size:14px;color:var(--t2);margin:10px 0 10px 22px;">
+<li>$m = 0$（$N=B$，均勻摻雜）→ <strong>突變接面</strong></li>
+<li>$m = +1$（$N=Bx$，線性增加）→ <strong>線性梯度接面</strong></li>
+<li>$m = -1, -2, -3, \dots$ → <strong>超突變接面</strong></li>
+</ul>
+<p>當 $m$ 為負值時，n 側摻雜在冶金界面附近最高，向內遞減——這通常是透過在重摻雜 n⁺ 基板上成長輕摻雜的 n 型磊晶層，然後在表面進行 p⁺ 擴散來實現的。</p>
+
+<p><strong>超突變接面的 C-V 關係：</strong>使用與前述相同的分析方法，可以推導出廣義接面電容公式：</p>
+<div class="eq">$$\boxed{C' = \left[\frac{e B \epsilon_s^{m+1}}{(m+2)(V_{bi}+V_R)}\right]^{1/(m+2)}}$$</div>
+<p>這可以改寫成更直觀的冪次形式：</p>
+<div class="eq">$$\boxed{C' \propto (V_{bi}+V_R)^{-1/(m+2)}}$$</div>
+<p>關鍵觀察：$m$ 越負（負得越多），指數 $1/(m+2)$ 的絕對值越大，電容對電壓的變化就越劇烈。</p>
+
+<p><strong>變容二極體的設計目標——線性頻率調諧：</strong>變容二極體（varactor diode）與電感並聯組成 LC 諧振電路時，諧振頻率為：</p>
+<div class="eq">$$f_r = \frac{1}{2\pi\sqrt{L C}}$$</div>
+<p>在實際電路應用中——特別是 FM 調變器（frequency modulator）和鎖相迴路（PLL）的壓控振盪器（VCO）——我們希望諧振頻率是控制電壓 $V_R$ 的<strong>線性函數</strong>：$f_r \propto V_R$。代入 $f_r \propto 1/\sqrt{C}$，得到要求 $C \propto V_R^{-2}$。從 $C \propto V_R^{-1/(m+2)}$ 可知：</p>
+<div class="eq">$$\frac{1}{m+2} = 2 \quad\Rightarrow\quad m = -\frac{3}{2}$$</div>
+<p>因此，<strong>$m=-3/2$ 的超突變摻雜分布是最理想的 VCO 變容二極體設計</strong>——它使頻率與控制電壓之間達到線性關係，大幅簡化 VCO 的線性化電路設計。</p>
+
+<table><thead><tr><th>接面類型</th><th>指數 $m$</th><th>$C \propto V_R^{-n}$</th><th>指數 $n = 1/(m+2)$</th><th>$f_r \propto V_R^{n/2}$</th><th>應用場景</th></tr></thead><tbody>
+<tr><td>突變接面（Abrupt）</td><td>$m=0$</td><td>$C \propto V_R^{-1/2}$</td><td>$n = 0.5$</td><td>$f \propto V_R^{0.25}$</td><td>一般濾波器、開關二極體</td></tr>
+<tr><td>線性梯度（Linear）</td><td>$m=+1$</td><td>$C \propto V_R^{-1/3}$</td><td>$n \approx 0.33$</td><td>$f \propto V_R^{0.17}$</td><td>擴散製程的預設接面</td></tr>
+<tr><td>超突變（Hyperabrupt）</td><td>$m=-3/2$</td><td>$C \propto V_R^{-2}$</td><td>$n = 2.0$</td><td>$f \propto V_R^{1.0}$ ⭐</td><td><strong>VCO、PLL、FM 調變</strong></td></tr>
+<tr><td>超突變（其他）</td><td>$m=-1$</td><td>$C \propto V_R^{-1}$</td><td>$n = 1.0$</td><td>$f \propto V_R^{0.5}$</td><td>寬頻調諧（次線性）</td></tr>
+</tbody></table>
+
+<div class="callout-warn"><strong>⚠️ 變容二極體的設計關鍵——選擇正確的 $m$ 值來達到所需的調諧特性：</strong>$m=0$（突變）適合需要穩定電容的場合；$m=+1$（線性梯度）是自然擴散接面的預設行為；$m=-3/2$（超突變）是 VCO 設計的「魔法數字」——它使得諧振頻率與控制電壓之間達到精確的線性關係，對 FM 調變和鎖相迴路至關重要。然而超突變接面的 $Q$ 值（品質因數）通常低於突變接面，因為靠近冶金界面的重摻雜區域引入了額外的串聯電阻。在實際設計中，需要在調諧線性度和 $Q$ 值之間權衡取捨。</div>
 </section>
 
 <section id="summary"><h2>本章摘要</h2>
@@ -147,6 +255,10 @@ table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}thead th{
 <li><strong>反向偏壓：</strong>$V_R$→$V_{bi}+V_R$→$W$ 變寬。$C_j=\epsilon_s/W\propto1/\sqrt{V_{bi}+V_R}$→變容二極體原理。</li>
 <li><strong>崩潰：</strong>$V_B\approx\epsilon_s E_{\text{crit}}^2/(2eN_B)$。輕摻雜→高耐壓。雪崩倍增機制。</li>
 <li><strong>非均勻接面：</strong>線性梯度 $W\propto V^{1/3}$。超突變接面 $C_j\propto V^{-m}$（$m>1/2$）→VCO 應用。</li></ol></section>
+<section id="derivation-lab" class="derivation-lab"><h2>推導、假設與章末診斷</h2><h3>方程式使用契約與邊界條件</h3><ul><li>突變接面、均勻摻雜、一維、完全游離、非退化且熱平衡或準靜態反偏。</li><li>空乏近似：空乏區內自由載子忽略，$
+ho=-qN_A$（p 側）或 $+qN_D$（n 側）；中性區 $
+ho\approx0$。</li><li>邊界 $E(-x_p)=E(x_n)=0$，電位連續；電荷中性要求 $N_Ax_p=N_Dx_n$。</li><li>高正偏、強產生復合、緩變接面或接近崩潰時需改用更完整模型。</li></ul><h3>中間推導：空乏寬度</h3><ol><li>由 Poisson 方程 $dE/dx=
+ho/\epsilon_s$ 分別積分兩側電場。</li><li>利用外緣 $E=0$ 與界面電場連續，得到 $N_Ax_p=N_Dx_n$。</li><li>再積分 $E=-dV/dx$，電位降等於兩個三角形電場面積。</li><li>$W=x_p+x_n=\sqrt{\frac{2\epsilon_s}{q}(V_{bi}+V_R)(1/N_A+1/N_D)}$。</li></ol><div class="dimcheck"><strong>單位／量級：</strong>$\epsilon V/(qN)$ 為 cm²。Si、$N_A=N_D=10^{16}$ cm$^{-3}$、總位降 0.7 V 時，$W\approx0.43$ µm。</div><h3>章末練習與概念診斷</h3><details><summary>反向偏壓增加時，哪一側空乏區增加較多？</summary><p>較輕摻雜側；由 $N_Ax_p=N_Dx_n$ 可知寬度與摻雜濃度成反比。</p></details><details><summary>為何接面電容隨反偏增加而下降？</summary><p>反偏使 $W$ 增大，而 $C_j=\epsilon_sA/W$，等效電荷板距離增加。</p></details><h3>延伸計算練習</h3><p>完成上方診斷後，請在不查公式的情況下重建代表推導，並改變一個參數檢查極限行為。更多含數值與解答的題目：<a href="../problems_examples/ch07_problems_zh.html">本章完整習題頁</a>。</p></section>
 </main>
 <script>
 function toggleTheme(){const h=document.documentElement;const n=h.getAttribute('data-theme')==='light'?'dark':'light';h.setAttribute('data-theme',n);localStorage.setItem('theme',n);document.getElementById('tl').textContent=n==='dark'?'淺色模式':'深色模式';}

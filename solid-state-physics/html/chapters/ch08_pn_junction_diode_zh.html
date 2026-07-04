@@ -25,29 +25,51 @@ table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}thead th{
 @media(max-width:768px){.sidebar{transform:translateX(-100%);transition:.3s}.sidebar.open{transform:translateX(0)}.main{margin-left:0;padding:20px 16px 60px}}
 @media print{.sidebar{display:none}.main{margin-left:0;max-width:100%;padding:0}}
 </style>
-<script src="../../../reading-preferences.js" defer></script></head>
-<body><a class="portal-home-link" href="../../../index.html">返回學習中心</a><style id="portal-home-link-style">.portal-home-link{position:fixed;top:16px;right:16px;z-index:1000;display:inline-flex;align-items:center;min-height:36px;padding:7px 11px;border:1px solid #cbd5e1;border-radius:8px;background:#fff;color:#1d4ed8;font:600 13px/1.2 -apple-system,BlinkMacSystemFont,"Noto Sans TC","Microsoft JhengHei",sans-serif;text-decoration:none;box-shadow:0 2px 10px rgba(15,23,42,.08)}.portal-home-link:hover{background:#eff6ff}.portal-home-link:focus-visible{outline:3px solid rgba(37,99,235,.35);outline-offset:2px}@media(max-width:768px){.portal-home-link{top:10px;right:10px;min-height:34px;padding:7px 9px;font-size:12px}}</style>
+<style id="derivation-lab-style">.derivation-lab{border-top:3px solid var(--ac);padding-top:20px}.derivation-lab ul,.derivation-lab ol{font-size:14px;color:var(--t2);margin:8px 0 14px 22px}.derivation-lab details{border:1px solid var(--bd);border-radius:8px;margin:8px 0;background:var(--bg)}.derivation-lab summary{cursor:pointer;padding:10px 13px;font-weight:600}.derivation-lab details p{padding:0 13px 10px}.dimcheck{background:var(--b3);border-left:3px solid var(--ac);padding:12px 15px;border-radius:0 8px 8px 0}</style>
+<script src="../../../reading-preferences.js" defer></script>
+</head>
+<body>
+<a class="portal-home-link" href="../../../index.html">返回學習中心</a>
+<style id="portal-home-link-style">.portal-home-link{position:fixed;top:16px;right:16px;z-index:1000;display:inline-flex;align-items:center;min-height:36px;padding:7px 11px;border:1px solid #cbd5e1;border-radius:8px;background:#fff;color:#1d4ed8;font:600 13px/1.2 -apple-system,BlinkMacSystemFont,"Noto Sans TC","Microsoft JhengHei",sans-serif;text-decoration:none;box-shadow:0 2px 10px rgba(15,23,42,.08)}.portal-home-link:hover{background:#eff6ff}.portal-home-link:focus-visible{outline:3px solid rgba(37,99,235,.35);outline-offset:2px}@media(max-width:768px){.portal-home-link{top:10px;right:10px;min-height:34px;padding:7px 9px;font-size:12px}}</style>
 <nav class="sidebar"><div class="sh"><div class="bk">半導體物理與元件·第四版</div><h2>第八章</h2></div><div class="sn"><ul>
 <li><a href="#preview">📋 8.0 本章預覽</a></li>
 <li class="ns">8.1 接面電流</li><li class="nsub"><a href="#s8-1a">8.1.1–8.1.3 邊界條件 ⭐</a></li><li class="nsub"><a href="#s8-1b">8.1.4 理想二極體方程 ⭐</a></li><li class="nsub"><a href="#s8-1c">8.1.5 溫度·串聯電阻</a></li>
 <li class="ns">8.2–8.5</li><li class="nsub"><a href="#s8-2">8.2 產生-復合電流</a></li><li class="nsub"><a href="#s8-3">8.3 小訊號模型 ⭐</a></li><li class="nsub"><a href="#s8-4">8.4–8.5 暫態·穿隧二極體</a></li>
-<li><a href="#summary">📋 本章摘要</a></li>
+<li><a href="#summary">📋 本章摘要</a></li><li><a href="#derivation-lab">🧪 推導、假設與章末診斷</a></li>
 </ul></div><div class="st"><button onclick="toggleTheme()">🌓 <span id="tl">深色模式</span></button></div></nav>
 <main class="main">
-<header class="header"><div class="cl">第八章</div><h1>pn 接面二極體</h1><div class="meta">Donald A. Neamen·《半導體物理與元件：基本原理》第四版·第 278–327 頁</div></header>
+<header class="header"><div class="cl">第八章</div><h1>pn 接面二極體</h1><div class="meta">Donald A. Neamen·《半導體物理與元件：基本原理》第四版·第 276–330 頁</div></header>
 
 <section id="preview"><div class="callout"><strong>📋 8.0 本章預覽</strong>
 <p>第七章告訴我們 pn 接面「長什麼樣子」——能帶彎曲、空乏區、內建電位。本章回答工程師最關心的問題：<strong>當外加電壓時，pn 接面中有多少電流流動？</strong>答案就是半導體物理中最著名的公式——<strong>Shockley 理想二極體方程</strong>：$I = I_S(e^{eV_a/kT}-1)$。</p>
 <p>本章的推導邏輯極其清晰，每一步都建立在前幾章的堅實基礎上：外加電壓→準 Fermi 能階分離（第六章）→少數載子邊界濃度改變（Shockley 邊界條件）→少數載子擴散進入中性區（第五章擴散方程）→擴散電流（第五章）→總電流。將所有前面學到的工具串聯起來，得到一個極其簡潔的結果。</p>
 <p>在此基礎上，我們加入非理想效應（空乏區產生-復合電流、串聯電阻、高階注入）、頻率響應（擴散電容和小訊號模型）、和開關行為（反向恢復暫態）。這些是連接「理想 pn 接面物理」和「真實二極體元件行為」的橋樑。</p></div></section>
+<div style="margin-top:14px;background:var(--bg);border:1px solid var(--fbd);border-radius:8px;padding:12px 16px">
+<div style="font-size:11px;font-weight:600;color:var(--ac);margin-bottom:6px">🔑 本章核心概念</div>
+<div style="font-size:12px;color:var(--tx);line-height:2">
+1. <strong>Shockley 理想方程</strong>：$I=I_S(e^{eV_a/kT}-1)$——半導體物理中最重要的公式<br>
+2. Shockley 邊界條件：$p_n(x_n)=p_{n0}e^{eV_a/kT}$——外加電壓透過調變少數載子濃度來控制電流<br>
+3. 物理鏈：偏壓→降低障壁→少數載子注入→濃度梯度→擴散→電流<br>
+4. $I_S\propto n_i^2\propto e^{-E_g/kT}$——反向飽和電流對溫度極度敏感（∼每 6°C 翻一倍）<br>
+5. 順向壓降溫度係數 $\approx-2$ mV/°C——二極體可當廉價溫度感測器<br>
+6. 空乏區產生-復合電流→低電流區 $n=2$ 斜率（偏離 $n=1$ 理想行為）<br>
+7. 串聯電阻 $R_s$→高電流區 $I$–$V$ 偏離指數<br>
+8. 小訊號模型：擴散電導 $g_d=eI/kT$，擴散電容 $C_d=\tau I/kT$——兩者都正比於偏壓電流<br>
+9. 短二極體（$W\ll L$）：$I_S\propto 1/W$，載子呈線性分布→電流大於長二極體<br>
+10. 關閉暫態：儲存時間 $t_s\approx\tau\ln(1+I_F/I_R)$——少數載子儲存是速度限制的根源<br>
+</div>
+</div>
 
-<div class="figure"><img src="../../../images/solid-state-physics/ch08_pages/ch08_overview.png" alt="第八章總覽圖" loading="lazy"><figcaption>📌 第八章總覽圖：pn 接面二極體 — 理想I-V、非理想效應、小訊號模型、暫態行為、穿隧二極體</figcaption></div>
+<div class="figure"><img src="../../pages/ch08_pages/ch08_overview.png" alt="第八章總覽圖" loading="lazy"><figcaption>📌 第八章總覽圖：pn 接面二極體 — 理想I-V、非理想效應、小訊號模型、暫態行為、穿隧二極體</figcaption></div>
 
 <section id="s8-1a"><h2>8.1.1–8.1.3 Shockley 邊界條件——電壓如何「注射」少數載子 ⭐</h2>
-<div class="figure"><img src="../../../images/solid-state-physics/ch08_pages/ch8_page_303.png" alt="圖 8.1" loading="lazy"><figcaption>圖 8.1：pn 二極體中的電流路徑——電子從 n 側注入 p 側，電洞從 p 側注入 n 側。</figcaption></div>
+<div style="margin-bottom:14px;font-size:12px;color:var(--t2);line-height:1.8">
+<strong style="color:var(--tx)">🔑 本節重點</strong> ① Shockley 邊界條件 $p_n(x_n)=p_{n0}e^{eV_a/kT}$——外加電壓透過調變少數載子濃度控制電流 ② 順偏→障壁從 $V_{bi}$ 降至 $V_{bi}-V_a$→少數載子注入→巨大濃度梯度 ③ $V_a=0.6$ V 時 $e^{23}\approx10^{10}$ 倍——邊界濃度暴增一百億倍，驅動強烈擴散 ④ 準 Fermi 能階分離 $eV_a$→$pn=n_i^2 e^{eV_a/kT}$，低階注入下多數載子濃度幾乎不變 ⑤ 指數函數的門檻行為——0.6–0.7 V 附近從「幾乎不導通」急劇切換到「高度導通」
+</div>
+<div class="figure"><img src="../../pages/ch08_pages/ch8_page_302_c.png" alt="圖 8.1" loading="lazy"><figcaption>圖 8.1：pn 二極體中的電流路徑——電子從 n 側注入 p 側，電洞從 p 側注入 n 側。</figcaption></div>
 <p>在熱平衡時（$V_a=0$），空乏區邊緣的少數載子濃度等於熱平衡值：p 側邊界的電子濃度 $=n_{p0}=n_i^2/N_a$；n 側邊界的電洞濃度 $=p_{n0}=n_i^2/N_d$。</p>
 <p>當施加順向偏壓 $V_a>0$（p 側接正、n 側接負）時，空乏區的電位障壁從 $V_{bi}$ 降低到 $V_{bi}-V_a$。降低的障壁使得 n 側的大量電子更容易越過障壁進入 p 側，p 側的大量電洞更容易越過障壁進入 n 側→<strong>少數載子注入</strong>。</p>
-<div class="figure"><img src="../../../images/solid-state-physics/ch08_pages/ch8_page_307.png" alt="圖 8.4" loading="lazy"><figcaption>圖 8.4：順向偏壓下的少數載子注入——電洞從 p 側注入 n 側，成為 n 側的過量少數載子（上）；電子從 n 側注入 p 側（下）。注入的少數載子在空乏區邊緣濃度最高，然後以指數衰減擴散進入中性區。</figcaption></div>
+<div class="figure"><img src="../../pages/ch08_pages/ch8_page_307_c.png" alt="圖 8.4" loading="lazy"><figcaption>圖 8.4：順向偏壓下的少數載子注入——電洞從 p 側注入 n 側，成為 n 側的過量少數載子（上）；電子從 n 側注入 p 側（下）。注入的少數載子在空乏區邊緣濃度最高，然後以指數衰減擴散進入中性區。</figcaption></div>
 
 <p><strong>Shockley 邊界條件</strong>是本章最關鍵的公式——它將外加電壓與少數載子濃度連結起來：</p>
 <div class="eq">$$\boxed{p_n(x_n) = p_{n0}\,e^{eV_a/kT} \qquad n_p(-x_p) = n_{p0}\,e^{eV_a/kT}}$$</div>
@@ -58,11 +80,14 @@ table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}thead th{
 </section>
 
 <section id="s8-1b"><h2>8.1.4 理想二極體電流-電壓關係 ⭐</h2>
-<div class="figure"><img src="../../../images/solid-state-physics/ch08_pages/ch8_page_309.png" alt="圖 8.3" loading="lazy"><figcaption>圖 8.3：pn 二極體中少數載子的穩態分布——線性衰減（短二極體）或指數衰減（長二極體）。</figcaption></div>
+<div style="margin-bottom:14px;font-size:12px;color:var(--t2);line-height:1.8">
+<strong style="color:var(--tx)">🔑 本節重點</strong> ① 中性區純擴散方程 $D_p d^2\delta p_n/dx^2=\delta p_n/\tau_{p0}$→指數衰減 $e^{-x/L_p}$ ② Shockley 理想方程 $I=I_S(e^{eV_a/kT}-1)$——半導體物理最重要的公式 ③ $I_S=eA n_i^2(D_p/(L_p N_d)+D_n/(L_n N_a))$→$I_S\propto n_i^2\propto e^{-E_g/kT}$ ④ $L_p=\sqrt{D_p\tau_{p0}}$ 為擴散長度，決定載子能走多遠 ⑤ 反向飽和——$V_a$ 大負值時 $I\to -I_S$，寬能隙半導體 $I_S$ 遠小於 Si
+</div>
+<div class="figure"><img src="../../pages/ch08_pages/ch8_page_305_c.png" alt="圖 8.3" loading="lazy"><figcaption>圖 8.3：pn 二極體中少數載子的穩態分布——線性衰減（短二極體）或指數衰減（長二極體）。</figcaption></div>
 <p>注入的過量少數載子從空乏區邊緣擴散進入中性區，同時與多數載子復合。在中性區中沒有電場→只有擴散。穩態擴散方程：$D_p\,d^2\delta p_n/dx^2 = \delta p_n/\tau_{p0}$。</p>
 <p>解為指數衰減：$\delta p_n(x) = \delta p_n(x_n)\,e^{-(x-x_n)/L_p}$。$L_p=\sqrt{D_p\tau_{p0}}$ 是電洞擴散長度。</p>
 
-<div class="figure"><img src="../../../images/solid-state-physics/ch08_pages/ch8_page_318.png" alt="圖 8.11" loading="lazy"><figcaption>圖 8.11：pn 接面二極體的 I-V 特性。(a) 線性坐標——順向指數增長，反向飽和。(b) 對數坐標——順向區為直線（斜率 $=e/kT$），可清楚看到不同電流區的斜率變化（$n=1$ vs $n=2$）。</figcaption></div>
+<div class="figure"><img src="../../pages/ch08_pages/ch8_page_319_c.png" alt="圖 8.11" loading="lazy"><figcaption>圖 8.11：pn 接面二極體的 I-V 特性。(a) 線性坐標——順向指數增長，反向飽和。(b) 對數坐標——順向區為直線（斜率 $=e/kT$），可清楚看到不同電流區的斜率變化（$n=1$ vs $n=2$）。</figcaption></div>
 
 <p>擴散電流在 $x=x_n$ 處：$J_p(x_n) = -eD_p(d\delta p_n/dx)|_{x_n} = (eD_p/L_p)\,\delta p_n(x_n) = (eD_p p_{n0}/L_p)(e^{eV_a/kT}-1)$。</p>
 <p>同理可得 $J_n(-x_p)$。總電流為兩者之和：</p>
@@ -75,22 +100,37 @@ table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}thead th{
 </section>
 
 <section id="s8-1c"><h2>8.1.5 溫度效應與串聯電阻——真實二極體的 I-V 特性</h2>
+<div style="margin-bottom:14px;font-size:12px;color:var(--t2);line-height:1.8">
+<strong style="color:var(--tx)">🔑 本節重點</strong> ① $I_S\propto T^3 e^{-E_g/kT}$→每升高 ∼5–6°C 加倍，$E_g/kT^2$ 項主導 ② 固定電流下 $dV_D/dT\approx-2$ mV/°C（Si）→二極體可作廉價溫度感測器 ③ 串聯電阻 $R_s$→高電流 $IR_s$ 壓降使有效接面電壓降低→I-V 偏離指數 ④ 真實 I-V 四區域（對數坐標）：復合（$n\approx2$）→理想擴散（$n\approx1$）→$R_s$ 主導→高階注入 ⑤ 熱逃逸風險——溫度↑→$V_D$↓→更多電流→正回饋，大功率需正溫度係數設計
+</div>
 <p>真實二極體的 I-V 特性偏離理想方程。兩個最重要的修正來自<strong>溫度</strong>和<strong>串聯電阻</strong>。</p>
-<h3>溫度效應</h3>
-<p>$I_S$ 對溫度極其敏感：$I_S \propto T^3 e^{-E_g/kT}$（$T^3$ 來自 $N_c N_v\propto T^3$ 以及 $D,L$ 的溫度關係）。取對數微分：</p>
-<div class="eq">$$\frac{1}{I_S}\frac{dI_S}{dT} = \frac{3}{T} + \frac{E_g}{kT^2} \approx \frac{E_g}{kT^2}$$</div>
-<p>室溫下 Si：$E_g/kT^2 = 1.12/(0.026\times300) \approx 0.144$ K$^{-1}$。即溫度每升高 1°C，$I_S$ 增大約 14.4%。近似規則：<strong>溫度每升 10°C，$I_S$ 約增加一倍</strong>（$2^{10\times0.0072} \approx 1.05$，更精確是 ∼7%/°C 對 $I_S$ 的影響）。</p>
-<p>順向電壓降的溫度係數：在固定電流下，$V_D$ 隨溫度變化：</p>
-<div class="eq">$$\frac{dV_D}{dT} \approx -\frac{E_g/e - V_D}{T} \approx -2\ \text{mV/°C}$$</div>
-<p>這正是矽二極體可作為廉價溫度感測器的原因——測量固定電流下的 $V_D$ 變化即可推算溫度。</p>
+<h3>§8.1.7 溫度效應——$I_S$ 的劇烈溫度依賴性</h3>
+<p>理想反向飽和電流密度 $J_S$（或 $I_S$）對溫度極其敏感，這是因為 $J_S$ 中包含熱平衡少數載子濃度 $p_{n0}$ 和 $n_{p0}$，它們都正比於 $n_i^2$。而 $n_i^2$ 本身是溫度的強函數——從第四章可知 $n_i^2 = N_c N_v e^{-E_g/kT}$，其中狀態密度 $N_c, N_v \propto T^{3/2}$。將這些溫度依賴關係代入 $I_S$ 的表達式：</p>
+<div class="eq">$$I_S = eA\left(\frac{D_p p_{n0}}{L_p} + \frac{D_n n_{p0}}{L_n}\right) \propto n_i^2 \propto T^3 e^{-E_g/kT}$$</div>
+<p>其中 $T^3$ 的因子來自三處貢獻的疊加：① $N_c N_v \propto T^3$——狀態密度本身隨溫度上升而增大，因為更高的溫度使載子可佔據更多的 $k$ 空間態；② 擴散係數 $D$ 對溫度的依賴（$D \propto \mu \propto T^{-3/2}$，來自晶格散射的遷移率溫度關係）；③ 擴散長度 $L = \sqrt{D\tau}$ 中 $D$ 和壽命 $\tau$ 的綜合溫度效應。在室溫附近，$I_S$ 的溫度變化主要（>90%）由指數項 $e^{-E_g/kT}$ 主導——能隙 $E_g$ 出現在指數中意味著微小的溫度變化就能引起 $I_S$ 的巨大改變。這與 $n_i$ 隨溫度急劇變化的物理圖像完全一致：溫度升高→更多的價帶電子被熱激發到導帶→$n_i$ 增大→少數載子濃度增大→$I_S$ 增大。</p>
+
+<p><strong>$I_S$ 的溫度係數——定量推導：</strong>對 $I_S \propto T^3 e^{-E_g/kT}$ 取自然對數後對溫度微分：</p>
+<div class="eq">$$\boxed{\frac{1}{I_S}\frac{dI_S}{dT} = \frac{3}{T} + \frac{E_g}{kT^2}}$$</div>
+<p>室溫（$T = 300$ K）下對矽（$E_g = 1.12$ eV）：第一項 $3/T = 0.01$ K⁻¹，第二項 $E_g/kT^2 = 1.12/(0.0259 \times 300) \approx 0.144$ K⁻¹。指數項 $E_g/kT^2$ 的貢獻是 $3/T$ 項的 <strong>14 倍以上</strong>——因此在實用溫度範圍內，$3/T$ 項常被忽略，直接用 $(1/I_S)(dI_S/dT) \approx E_g/kT^2 \approx 0.144$ K⁻¹ 進行估算。換算成百分比：<strong>$I_S$ 每升高 1°C 約增大 14.4%</strong>。換算成更直觀的加倍規則：<strong>溫度每升高約 5–6°C，$I_S$ 就增加一倍</strong>（因為 $e^{0.144 \times 5} \approx 2.05$）。這與常見的工程經驗法則「Si pn 接面的反向飽和電流每升高 10°C 約增大四倍」一致（$e^{0.144 \times 10} \approx 4.2$）。作為對比，GaAs（$E_g = 1.42$ eV）的 $E_g/kT^2 \approx 0.183$ K⁻¹——溫度靈敏度甚至更高。</p>
+
+<p><strong>順向電壓的溫度係數——二極體作為溫度感測器：</strong>在固定順向電流下操作時，所需的外加電壓隨溫度升高而<strong>降低</strong>。從理想二極體方程 $I = I_S(T)\,e^{eV_a/kT}$ 出發，令 $I$ 保持常數，兩端取對數後對 $T$ 微分：</p>
+<div class="eq">$$\left.\frac{dV_D}{dT}\right|_{I=\text{const}} = -\frac{E_g/e - V_D}{T} \approx -2\ \text{mV/°C} \quad (\text{Si})$$</div>
+<p>對室溫下的矽二極體，$V_D \approx 0.6$–0.7 V，$E_g/e = 1.12$ V，代入得 $dV_D/dT \approx -(1.12-0.65)/300 \approx -1.6$ mV/°C。文獻中常引用的 −2 mV/°C 是考慮了非理想效應（如串聯電阻的溫度效應和 $n_i$ 的附加依賴）後的典型值。<strong>這個近似線性的溫度係數使得 pn 二極體成為極其便利的固態溫度感測器</strong>——只需在固定小電流（∼10–100 µA，以避免自熱效應）下測量順向壓降 $V_D$，每 −2 mV 的變化對應溫度上升 1°C。這種「二極體溫度計」廣泛用於 IC 內部的片上溫度監測電路（如 CPU/GPU 的熱管理），因為它可以直接用晶片上的寄生 pn 接面實現，無需額外的感測元件。</p>
+
+<p>從元件物理的角度來看，$dV_D/dT < 0$ 的根本原因是：溫度升高使本質載子濃度 $n_i$ 急劇增大→少數載子濃度提高→在相同外加電壓下產生更大的擴散電流→要維持相同的總電流，所需的外加電壓反而降低了。換句話說，<strong>溫度升高使二極體「更容易導通」</strong>——給定電壓下的電流增大，給定電流下的電壓降低。從能帶理論的角度詮釋：溫度升高→能隙略微縮小→$e^{-E_g/kT}$ 增大→$I_S$ 指數式增大→I-V 曲線向左移動。</p>
+
+<div class="callout"><strong>💡 為什麼 GaAs 的 $dV_D/dT$ 比 Si 大？從溫度感測器到寬能隙半導體。</strong>從公式 $dV_D/dT = -(E_g/e - V_D)/T$ 可以看出，$E_g$ 越大，溫度係數的絕對值越大：GaAs（$E_g=1.42$ eV）的 $dV_D/dT \approx -3$ mV/°C；GaN（$E_g=3.4$ eV）和 SiC（$E_g=3.26$ eV）的溫度係數可達 −6 至 −10 mV/°C。更高的靈敏度對於精密溫度感測是優勢，但對功率元件卻是挑戰——寬能隙功率二極體的順向壓降隨溫度變化更大，需要更仔細的熱管理。此外，$dV_D/dT$ 為負也意味著<strong>熱逃逸（thermal runaway）的風險</strong>：若局部區域溫度升高→$V_D$ 降低→該區域吸引更多電流→更多焦耳熱→溫度進一步升高→正回饋循環。這就是為什麼大功率二極體通常使用正溫度係數的設計（如 PIN 結構）來抑制熱逃逸。</div>
 <h3>串聯電阻 $R_s$</h3>
 <p>中性 n 區和 p 區、以及金屬接觸都有歐姆電阻。高電流時 $IR_s$ 壓降不可忽略→有效接面電壓 $=V_a-IR_s<V_a$→I-V 曲線在高電流區偏離指數：</p>
 <div class="eq">$$I = I_S\left[\exp\!\left(\frac{e(V_a-IR_s)}{kT}\right) - 1\right]$$</div>
 <p>$R_s$ 的典型值：小訊號二極體 ∼1–5 Ω，功率二極體 ∼0.01–0.1 Ω。$R_s$ 可從 I-V 曲線的高電流偏離程度中提取：$\Delta V = IR_s$。</p>
-<div class="figure"><img src="../../../images/solid-state-physics/ch08_pages/ch8_page_313.png" alt="圖 8.8" loading="lazy"><figcaption>圖 8.8：真實二極體的 I-V 特性（對數坐標）。低電流（A 區）：復合電流主導，斜率 $=e/2kT$（$n\approx2$）。中電流（B 區）：理想擴散，斜率 $=e/kT$（$n\approx1$）。高電流（C 區）：串聯電阻主導，偏離指數。極高電流（D 區）：高階注入效應。</figcaption></div>
+<div class="figure"><img src="../../pages/ch08_pages/ch8_page_313_c.png" alt="圖 8.8" loading="lazy"><figcaption>圖 8.8：真實二極體的 I-V 特性（對數坐標）。低電流（A 區）：復合電流主導，斜率 $=e/2kT$（$n\approx2$）。中電流（B 區）：理想擴散，斜率 $=e/kT$（$n\approx1$）。高電流（C 區）：串聯電阻主導，偏離指數。極高電流（D 區）：高階注入效應。</figcaption></div>
 </section>
 
 <section id="s8-1d"><h2>8.1.6 物理總結——電流機制的完整圖像</h2>
+<div style="margin-bottom:14px;font-size:12px;color:var(--t2);line-height:1.8">
+<strong style="color:var(--tx)">🔑 本節重點</strong> ① 完整電流鏈：外加電壓→Shockley 邊界條件→少數載子注入→擴散→復合→多數載子傳導至外部電路 ② 限制步驟是擴散——$W\ll L$（短二極體）vs $W\gg L$（長二極體）決定電流大小 ③ 短二極體 $I\propto D/W$（線性分布），長二極體 $I\propto D/L$（指數衰減） ④ 少數載子分布形狀決定濃度梯度→擴散電流大小——這是整章的統一物理框架
+</div>
 <p>在進入非理想效應之前，讓我們先整合 8.1 的所有結果。pn 二極體的電流由以下步驟串聯而成：</p>
 <p>① <strong>外加電壓改變接面處的少數載子濃度</strong>（Shockley 邊界條件）→$np = n_i^2 e^{eV_a/kT}$。</p>
 <p>② <strong>注入的少數載子以擴散方式遠離接面</strong>（濃度梯度驅動）→擴散長度 $L = \sqrt{D\tau}$ 決定了載子能走多遠。</p>
@@ -99,21 +139,35 @@ table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}thead th{
 <div class="callout"><strong>💡 整條鏈條的限制步驟是「擴散」。</strong>如果中性區寬度 $W \ll L$（短二極體），所有注入的載子都到達金屬接觸→梯度 = $\delta p/W$（線性分布）。如果 $W \gg L$（長二極體），載子在到達接觸前就已復合→梯度 = $\delta p/L$。這就是為什麼長二極體的電流正比於 $D/L$，短二極體正比於 $D/W$。</div>
 </section>
 
-<section id="s8-1e"><h2>8.1.8 短二極體（$W_n \ll L_p$）</h2>
-<p>前面推導的理想二極體方程假設中性區寬度 $W_n$ 和 $W_p$ <strong>遠大於</strong>擴散長度 $L_p$ 和 $L_n$。但在許多實際元件中，中性區很短——例如薄基區的 BJT。</p>
-<p><strong>關鍵差異：</strong>在長二極體中，少數載子在中性區內指數衰減（$e^{-x/L}$）。在短二極體中，少數載子到達金屬接觸前幾乎不復合→濃度分布近似<strong>線性</strong>。</p>
-<p>邊界條件：$\delta p(0) = p_{n0}(e^{eV_a/kT}-1)$，$\delta p(W_n) = 0$（金屬接觸處快速復合）。線性梯度：</p>
-<div class="eq">$$\frac{d(\delta p)}{dx}\bigg|_{x=0} = -\frac{\delta p(0)}{W_n} = -\frac{p_{n0}(e^{eV_a/kT}-1)}{W_n}$$</div>
-<p>因此短二極體的電流：</p>
-<div class="eq">$$I = \frac{eAD_p p_{n0}}{W_n}\left(e^{eV_a/kT}-1\right)$$</div>
-<p>對比長二極體：$I = (eAD_p p_{n0}/L_p)(e^{eV_a/kT}-1)$。差別只在分母是 $W_n$ 還是 $L_p$——物理上完全合理：短二極體的梯度更大（$W_n < L_p$）→電流更大。</p>
-<div class="callout-warn"><strong>⚡ 短二極體公式在 BJT 中的核心地位。</strong>BJT 的基區就是一個短二極體——$W_B \ll L_B$。BJT 的集極電流 $I_C$ 直接正比於 $D_B/W_B$（而不是 $D_B/L_B$）。這就是為什麼 BJT 的電流增益 $\beta$ 隨 $W_B$ 減小而增大——基區越薄，少數載子的梯度越大，注入效率越高。</div>
+<section id="s8-1e"><h2>§8.1.8 短二極體——當中性區比擴散長度更短時</h2>
+<div style="margin-bottom:14px;font-size:12px;color:var(--t2);line-height:1.8">
+<strong style="color:var(--tx)">🔑 本節重點</strong> ① $W_n\ll L_p$→載子在抵達接觸前幾乎不復合→濃度分布從指數退化為線性 ② $I_{S,short}=eA(D_p p_{n0}/W_n+D_n n_{p0}/W_p)$——分母 $W$ 取代 $L$ ③ 短二極體電流遠大於長二極體（$I_{S,short}\gg I_S$，因 $W\ll L$） ④ BJT 關鍵應用：基區寬度 $W_B\ll L_B$→注入載子直達集極→$\beta\propto 1/W_B$ ⑤ 歐姆接觸為「理想黑牆」——表面復合速度趨近無窮大，多餘載子瞬間歸零
+</div>
+<p><strong>定義與物理圖像：</strong>前面 §8.1.4 推導的理想二極體方程基於「長二極體」近似——即中性 n 區的長度 $W_n$ 和中性 p 區的長度 $W_p$ 均遠大於各自的少數載子擴散長度 $L_p$ 和 $L_n$。但在許多實際元件結構中，中性區的幾何長度可能遠小於擴散長度：$W_n \ll L_p$ 或 $W_p \ll L_n$。這種元件稱為<strong>短二極體（short diode）</strong>。短二極體的關鍵物理差異在於：注入中性區的少數載子在抵達金屬歐姆接觸之前<strong>幾乎不發生復合</strong>——因為穿越中性區所需的時間 $\sim W_n^2/D_p$ 遠小於少數載子壽命 $\tau_{p0}$。而金屬-半導體歐姆接觸處具有極高的表面復合速度（接近無窮大），如同一道「理想的黑牆」，將抵達接觸面的多餘少數載子瞬間拉回熱平衡濃度 $p_{n0}$。</p>
+
+<p><strong>少數載子濃度分布——從指數衰減到線性分布：</strong>短二極體的穩態擴散方程與長二極體完全相同：$D_p\,d^2(\delta p_n)/dx^2 = \delta p_n/\tau_{p0}$。但邊界條件有所改變：在空乏區邊緣 $x=x_n$ 處仍適用 Shockley 邊界條件 $\delta p_n(x_n) = p_{n0}(e^{eV_a/kT}-1)$；而在金屬接觸處 $x = x_n + W_n$，多餘濃度被強制歸零：$\delta p_n(x_n+W_n) = 0$。對於通解 $\delta p_n(x) = A e^{(x-x_n)/L_p} + B e^{-(x-x_n)/L_p}$，當 $W_n \ll L_p$ 時，雙曲正弦函數 $\sinh(W_n/L_p)$ 可近似為其自變量 $W_n/L_p$。在這一極限下，指數函數退化為<strong>線性分布</strong>（如圖 8.11 中的虛線所示）：</p>
+<div class="eq">$$\boxed{\delta p_n(x) = \delta p_n(x_n)\left(1 - \frac{x - x_n}{W_n}\right) = p_{n0}\left(e^{eV_a/kT}-1\right)\left(1 - \frac{x - x_n}{W_n}\right)}$$</div>
+<p>這個線性分布的核心物理意義是：因為 $L_p \gg W_n$，復合項 $\delta p_n/\tau_{p0}$ 在整個中性區內幾乎可以忽略——載子就像在一條沒有「洩漏」的管道中進行純擴散傳輸。與長二極體的指數衰減 $e^{-x/L_p}$ 形成鮮明對比：長二極體中，注入的少數載子在中途就因復合而大幅衰減，只有少部分能到達遠端的接觸；而短二極體中，<strong>所有注入的載子都能「存活」到達接觸</strong>——只是在那裡被表面復合瞬間消滅。</p>
+
+<p><strong>短二極體的電流-電壓關係——一般形式：</strong>擴散電流密度正比於邊界處的濃度梯度。對於線性分布，梯度在整個中性區內為<strong>常數</strong>：$d(\delta p_n)/dx = -\delta p_n(x_n)/W_n$。將此梯度代入擴散電流公式 $J_p = -eD_p\,d(\delta p_n)/dx$，並加上 p 側的對稱貢獻，得到短二極體的完整 I-V 關係：</p>
+<div class="eq">$$\boxed{I = I_{S,\text{short}}\left(e^{eV_a/kT} - 1\right)}$$</div>
+<div class="eq">$$I_{S,\text{short}} = eA\left(\frac{D_p p_{n0}}{W_n} + \frac{D_n n_{p0}}{W_p}\right) = eA n_i^2\left(\frac{D_p}{W_n N_d} + \frac{D_n}{W_p N_a}\right)$$</div>
+<p>其中 $W_n$ 是中性 n 區的幾何長度（從空乏區邊緣到金屬接觸），$W_p$ 是中性 p 區的幾何長度。注意 $I_{S,\text{short}}$ 的表達式與長二極體的 $I_S$（公式 8.26）在結構上完全對應——唯一且關鍵的差別是<strong>分母中的擴散長度 $L$ 被幾何長度 $W$ 取代</strong>。</p>
+
+<p><strong>短二極體與長二極體的定量比較：</strong>長二極體的飽和電流 $I_S \propto 1/L$（$L_p$ 或 $L_n$ 為擴散長度），而短二極體的 $I_{S,\text{short}} \propto 1/W$（$W_n$ 或 $W_p$ 為中性區幾何長度）。因為 $W \ll L$，所以 $I_{S,\text{short}} \gg I_S$——<strong>在相同偏壓下，短二極體的電流遠大於長二極體</strong>。以典型矽 pn 接面為例：若 $L_p = 50$ µm 而 $W_n = 2$ µm，則短二極體的電流約為長二極體的 $50/2 = 25$ 倍。此外，在短二極體中擴散電流密度 $J_p(x)$ 在整個中性區內為<strong>常數</strong>（因為梯度恆定且無復合衰減），而在長二極體中 $J_p(x)$ 隨 $x$ 指數衰減——部分載子在到達接觸前就已復合，其能量以熱的形式散失在中性區中。</p>
+
+<p><strong>短二極體的雙向推廣：</strong>若中性 n 區為短（$W_n \ll L_p$）而中性 p 區為長（$W_p \gg L_n$），則飽和電流為 $I_S = eA(D_p p_{n0}/W_n + D_n n_{p0}/L_n)$——一個混合形式。反之亦然。在一般的 pn 接面中，由於一側的摻雜通常遠高於另一側（$N_a \gg N_d$ 或反之），電流往往由低摻雜側的少數載子主導——因此只需確認該側是「長」還是「短」即可決定用 $L$ 還是 $W$。</p>
+
+<div class="callout"><strong>💡 短二極體的物理——當載子在到達金屬接觸前還來不及復合。</strong>短二極體的本質是「幾何尺寸限制了擴散梯度」的極限。在這個極限下，少數載子的行為從「擴散-復合」轉變為純粹的擴散傳輸——就像一條暢通無阻的管道，所有注入的載子都直達終點。這在<strong>雙極性接面電晶體（BJT）</strong>中有極其重要的應用：BJT 的基區寬度 $W_B$ 被刻意設計得遠小於基區少數載子擴散長度 $L_B$，使得從發射極注入的少數載子幾乎全部順利到達集極空乏區邊緣（而非在基區內復合）。BJT 的集極電流 $I_C \propto D_B/W_B$（擴散主導），基極電流 $I_B \propto 1/\tau_B$（復合主導），因此電流增益 $\beta = I_C/I_B \propto \tau_B D_B/W_B$——<strong>基區越薄，增益越高</strong>。這就是為什麼現代 BJT 的基區寬度已透過離子植入和磊晶技術縮小到數十奈米——每一代製程的微縮都直接轉化為更高的 $\beta$ 和更快的開關速度。</div>
 </section>
 
 <section id="s8-2"><h2>8.2 產生-復合電流——空乏區中的電流</h2>
+<div style="margin-bottom:14px;font-size:12px;color:var(--t2);line-height:1.8">
+<strong style="color:var(--tx)">🔑 本節重點</strong> ① 空乏區 SRH：順偏復合 $I_{rec}\propto e^{eV_a/2kT}$（$n\approx2$）→低電流區偏離理想 ② 逆偏產生 $I_{gen}=en_i W/\tau_0\propto n_i$——對 Si 常大於 $I_S\propto n_i^2$ ③ 低順偏（$V_a<0.4$ V）復合電流可能主導→非理想因子 $n\approx2$ ④ 高注入：$\delta p\approx n_0$→I-V 從 $e^{eV_a/kT}$ 過渡到 $e^{eV_a/2kT}$→斜率減半 ⑤ 高注入＋串聯電阻→功率元件電流上限，BJT 中 $\beta$ 急降（Kirk effect）
+</div>
 <p>理想二極體方程只考慮了<strong>中性區</strong>中的擴散電流。但空乏區內部也有電流——來自深層陷阱能階的 SRH 產生和復合（第六章）。</p>
 <h3>順向偏壓——復合電流</h3>
-<div class="figure"><img src="../../../images/solid-state-physics/ch08_pages/ch8_page_321.png" alt="圖 8.12" loading="lazy"><figcaption>圖 8.12：空乏區中的復合電流和產生電流——順偏時復合（斜率 $e/2kT$），反偏時產生。</figcaption></div>
+<div class="figure"><img src="../../pages/ch08_pages/ch8_page_321_c.png" alt="圖 8.12" loading="lazy"><figcaption>圖 8.12：空乏區中的復合電流和產生電流——順偏時復合（斜率 $e/2kT$），反偏時產生。</figcaption></div>
 <p>在順向偏壓下，空乏區中的 $np>n_i^2$→淨復合。復合率最高的地方在 $n\approx p$ 的區域（空乏區中的某處）。復合電流 $I_{\text{rec}}\propto e^{eV_a/2kT}$——斜率只有理想擴散電流的一半。在低順向偏壓時（$V_a<0.4$ V），$I_{\text{rec}}$ 可能大於擴散電流→非理想因子 $n\approx2$。</p>
 <h3>反向偏壓——產生電流</h3>
 <p>在反向偏壓下，空乏區中的 $np<n_i^2$→淨產生。產生電流 $I_{\text{gen}} = en_i W/\tau_0$。注意 $I_{\text{gen}}\propto n_i$ 而 $I_S\propto n_i^2$——對 Si（$n_i=1.5\times10^{10}$），$n_i\gg n_i^2$→反向電流主要由空乏區產生電流主導，而非理想飽和電流。這就是為什麼實際 Si 二極體的反向電流通常遠大於 $I_S$ 的理論值。</p>
@@ -126,7 +180,10 @@ table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}thead th{
 </section>
 
 <section id="s8-3"><h2>8.3 小訊號模型——pn 二極體的 AC 行為 ⭐</h2>
-<div class="figure"><img src="../../../images/solid-state-physics/ch08_pages/ch8_page_329.png" alt="圖 8.17" loading="lazy"><figcaption>圖 8.17：pn 二極體的小訊號等效電路——$r_d$ 並聯 $C_d$，再串聯 $r_s$ 和 $C_j$。</figcaption></div>
+<div style="margin-bottom:14px;font-size:12px;color:var(--t2);line-height:1.8">
+<strong style="color:var(--tx)">🔑 本節重點</strong> ① 擴散電導 $g_d=eI_{DQ}/kT$→$r_d=V_T/I_{DQ}$（$I_{DQ}=1$ mA→$r_d=26$ Ω） ② 擴散電容 $C_d=(e/kT)I_{DQ}\tau_{p0}$——正比於偏壓電流，順向時 $C_d\gg C_j$ ③ $C_j$ vs $C_d$：$C_j$ 來自空乏區空間電荷，$C_d$ 來自中性區儲存少數載子 ④ 截止頻率 $f_c=1/(2\pi\tau_{p0})$→壽命越短越快，普通 pn 不適合高頻整流 ⑤ 小訊號等效電路：$r_d\parallel C_d$，串聯 $r_s$ 和 $C_j$——蕭特基二極體無 $C_d$
+</div>
+<div class="figure"><img src="../../pages/ch08_pages/ch8_page_329_c.png" alt="圖 8.17" loading="lazy"><figcaption>圖 8.17：pn 二極體的小訊號等效電路——$r_d$ 並聯 $C_d$，再串聯 $r_s$ 和 $C_j$。</figcaption></div>
 <p>當二極體操作在 DC 偏壓點 $(V_{DQ}, I_{DQ})$ 附近疊加一個小 AC 信號時，非線性的指數關係可以<strong>線性化</strong>。</p>
 <p><strong>小訊號等效電路：</strong>順向偏壓的 pn 二極體在 AC 小訊號下等效為以下元件的並聯/串聯組合：</p>
 <ul style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
@@ -148,13 +205,36 @@ table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}thead th{
 <div class="callout-warn"><strong>⚡ $C_j$ vs $C_d$——兩種電容的物理區別：</strong><br>• <strong>接面電容 $C_j$（第七章）：</strong>空乏區邊界空間電荷隨電壓變化。主導反向偏壓和低順向偏壓。$C_j\propto1/\sqrt{V_{bi}+V_R}$。<br>• <strong>擴散電容 $C_d$（本章）：</strong>中性區中儲存的過量少數載子隨電流變化。主導順向偏壓。$C_d\propto I_{DQ}$。<br>• 順向偏壓下 $C_d\gg C_j$。這就是為什麼 pn 二極體在順向操作時速度受限——擴散電容使二極體無法快速響應高頻信號。蕭特基二極體（第九章）沒有少數載子儲存→$C_d\approx0$→開關速度遠快。</div>
 </section>
 
-<section id="s8-4"><h2>8.4–8.5 電荷儲存暫態與穿隧二極體</h2>
-<h3>反向恢復暫態——為什麼二極體不能瞬間關斷</h3>
-<div class="figure"><img src="../../../images/solid-state-physics/ch08_pages/ch8_page_340.png" alt="圖 8.24" loading="lazy"><figcaption>圖 8.24：反向恢復暫態波形——儲存時間 $t_s$ 和下降時間 $t_f$ 的定義。</figcaption></div>
-<p>當二極體從順向突然切換到反向時，順向期間在中性區儲存的大量過量少數載子必須先被<strong>移除</strong>，二極體才能開始阻斷反向電壓。移除過程包括兩個階段：</p>
-<p><strong>儲存時間 $t_s$（storage time）：</strong>過量少數載子被反向電流抽取，或透過復合消失，直到空乏區邊緣的濃度降至熱平衡值。$t_s \approx \tau_{p0}\ln(1+I_F/I_R)$（$I_F$=順向電流，$I_R$=反向抽取電流）。</p>
-<p><strong>下降時間 $t_f$（fall time）：</strong>空乏區電容充放電的時間。總反向恢復時間 $t_{rr}=t_s+t_f$。快速開關二極體需要短 $\tau_{p0}$——可透過掺金（Au）或電子輻照引入復合中心來降低壽命。</p>
-<h3>穿隧二極體（Tunnel Diode / Esaki Diode）</h3>
+<section id="s8-4"><h2>§8.4 電荷儲存與二極體暫態——pn 接面的開關行為</h2>
+<div style="margin-bottom:14px;font-size:12px;color:var(--t2);line-height:1.8">
+<strong style="color:var(--tx)">🔑 本節重點</strong> ① 關斷暫態——儲存少數載子須先被清除→儲存時間 $t_s\approx\tau_{p0}\ln(1+I_F/I_R)$ ② $t_s$ 期間接面仍處順向——外部電壓已反轉但內部「記憶」未消 ③ 導通暫態——空乏區窄化（ps–ns 級）＋電導調變（ns–µs 級）→順向電壓過衝 ④ 穿隧二極體——重摻雜→極窄空乏區→量子穿隧→負微分電阻（NDR）→GHz 振盪 ⑤ NDR 原理：偏壓增大→可穿隧態減少→電流反降，峰谷比 $I_P/I_V$ 決定品質
+</div>
+<p>pn 接面二極體在電路中最常見的應用之一就是作為<strong>電子開關</strong>：順向偏壓時導通（on state，大電流）、反向偏壓時阻斷（off state，極小電流）。在電路設計中——特別是高頻整流、開關式電源供應器（SMPS）、和數位邏輯電路——二極體從導通切換到阻斷（或反之）的<strong>切換速度</strong>往往是決定系統性能的關鍵參數。本節深入分析二極體切換過程中的暫態物理機制：<strong>少數載子的電荷儲存效應（charge storage）</strong>是決定開關速度的根本原因——這一概念在後續章節中討論 BJT 和 MOSFET 的開關行為時將反覆出現。</p>
+
+<h3>§8.4.1 關斷暫態（Turn-off Transient）——為什麼二極體不能瞬間關斷</h3>
+<div class="figure"><img src="../../pages/ch08_pages/ch8_page_340_c.png" alt="圖 8.24" loading="lazy"><figcaption>圖 8.24：反向恢復暫態波形——儲存時間 $t_s$ 和下降時間 $t_f$ 的定義。在 $t=0$ 時電路從順向切換為反向，但二極體仍持續導通反向電流 $I_R$ 達 $t_s$ 之久，之後才逐漸恢復到反向阻斷狀態。</figcaption></div>
+<p>考慮一個最典型的開關場景：二極體已在順向偏壓下穩定操作了很長時間（$t < 0$），流通的順向電流為 $I_F = (V_F - V_a)/R_F$。在 $t=0$ 時，外部電路突然將偏壓切換為反向——理論上二極體應立即阻斷電流。但實際量測到的波形（圖 8.24）顯示：二極體在切換後的一段時間內<strong>仍持續導通一個顯著的反向電流</strong> $I_R$，然後才逐漸恢復到反向阻斷狀態。這個現象的物理根源在於：順向操作期間，大量過量少數載子被注入並<strong>儲存</strong>在中性 n 區和 p 區中（參見 §8.3 的擴散電容討論）。這些儲存的總電荷量 $Q_S$ 不會因外部電壓反轉就憑空消失——它們必須透過兩種機制被<strong>移除</strong>：① 被反向電場所驅動的<strong>反向擴散電流</strong>抽取出去；② 透過 SRH 復合自然衰減。</p>
+
+<p><strong>儲存時間 $t_s$（storage time）——少數載子電荷的抽取階段：</strong>當外部電壓在 $t=0$ 突然反轉為反向時，空乏區邊緣的高濃度少數載子（在順向期間由 Shockley 邊界條件維持）無法再被順向接面電壓所支持——它們形成巨大的<strong>反向濃度梯度</strong>，驅動一個強烈的反向擴散電流。在 $0 < t < t_s$ 期間，<strong>接面電壓仍然保持順向</strong>（$V_a > 0$），因為空乏區邊緣的少數載子濃度尚未降至熱平衡值——只要邊緣濃度 $p_n(x_n) > p_{n0}$，接面就「感覺」自己仍在順向偏壓下。外部電路中的反向電流 $I_R$ 被串聯電阻限制為 $I_R \approx V_R/R_R$（假設接面壓降 $V_a$ 遠小於 $V_R$）。整個過程可以這樣類比：順向時二極體就像一個被水（少數載子）浸透的海綿——即使你開始用力擠壓（外加反向電壓），海綿中儲存的水仍需要一定的時間才能被排空。</p>
+
+<p>儲存時間 $t_s$ 可以透過求解時變連續性方程得到。對於一側陡峭接面（one-sided $p^+n$ junction），精確解涉及誤差函數，其近似式為：</p>
+<div class="eq">$$\boxed{t_s \approx \tau_{p0}\,\ln\!\left(1 + \frac{I_F}{I_R}\right)}$$</div>
+<p>這個簡潔的公式揭示了決定關斷速度的三個關鍵因素：① <strong>$t_s$ 正比於少數載子壽命 $\tau_{p0}$</strong>——壽命越短，儲存電荷透過復合消失得越快（直觀上這是因為復合率 $= \delta p_n/\tau_{p0}$）；② <strong>$I_F/I_R$ 比值越大，$t_s$ 越長</strong>——順向時注入的總電荷量 ∝ $I_F$（電荷 = 電流 × 壽命），而抽取這些電荷的可用反向電流為 $I_R$，電荷清除所需的時間自然正比於 $I_F/I_R$ 的對數；③ <strong>要加快關斷，電路設計者必須為反向暫態電流提供一條低阻抗路徑</strong>（即增大 $I_R$，縮小 $R_R$）。以典型數值為例：若 $\tau_{p0}=1$ µs、$I_F=1$ mA、$I_R=1$ mA，則 $t_s = 1\ \mu\text{s} \times \ln(2) \approx 0.69$ µs。但若反向迴路的 $R_R$ 較大，使得 $I_R$ 僅有 0.1 mA，則 $t_s$ 延長到 $\ln(11) \approx 2.4$ µs——整整慢了 3.5 倍。</p>
+
+<p><strong>恢復階段（$t > t_s$）——下降時間 $t_f$：</strong>當空乏區邊緣的少數載子濃度終於回到熱平衡值時（$t = t_s$），接面電壓開始從順向轉為反向。此時殘餘的過量少數載子繼續被清除，同時空乏區寬度從順向偏壓下的窄值逐漸展寬到反向偏壓下的寬值——這相當於對<strong>接面電容 $C_j$ 充電</strong>到反向偏壓。這段時間稱為<strong>下降時間 $t_f$（fall time）</strong>，通常定義為反向電流從 $I_R$ 衰減到 $0.1 I_R$ 所需的時間。在 $t_f$ 期間，少數載子分布的「尾巴」繼續被抽取，空乏區邊界的離子化掺雜原子逐漸裸露出更多的空間電荷。總反向恢復時間為兩者之和：</p>
+<div class="eq">$$t_{rr} = t_s + t_f$$</div>
+<p>其中 $t_f$ 也同時受 $\tau_{p0}$ 和 $I_F/I_R$ 的影響，其精確解同樣涉及誤差函數。值得注意的是，在整個 $t_s$ 期間——雖然二極體兩端的外部端電壓已經是反向——但<strong>接面本身仍然處於順向狀態</strong>。這是少數載子儲存效應最違反直覺的後果：外部電路的電壓反轉了，但內部的「記憶」（儲存的電荷）使接面暫時「記住」了之前的順向狀態。只有當儲存電荷被充分清除後，空乏區才開始真正擴張以承受反向電壓。</p>
+
+<h3>§8.4.2 導通暫態（Turn-on Transient）</h3>
+<p>當二極體從反向阻斷切換到順向导通時，同樣會經歷一個暫態過程，但通常比關斷暫態快得多——原因是導通時需要的是<strong>建立</strong>少數載子分布，而非清除。導通過程可分解為兩個在時間尺度上截然不同的階段：</p>
+
+<p><strong>第一階段——空乏區窄化（極快，ps–ns 級）：</strong>外加順向電壓後，多數載子從兩側中性區注入空乏區邊界，中和那裡的離子化掺雜原子（施體和受體）。空乏區寬度從反向偏壓下的寬值快速收縮到順向偏壓下的窄值（甚至接近零）。這本質上是接面電容 $C_j$ 的<strong>放電過程</strong>——所需的時間非常短（ps 至 ns 量級），因為接面電容本身很小（∼pF 級）且放電路徑阻抗低。這一階段結束時，接面電壓已從反向值變為 ∼0 V（熱平衡），但尚未建立順向電流。</p>
+
+<p><strong>第二階段——少數載子分布的建立與電導調變（較慢，ns–µs 級）：</strong>當接面電壓跨過 0 V 進入順向後，少數載子開始從空乏區邊緣向中性區深處擴散，逐步建立穩態的指數（或線性）分布。在此期間，接面電壓逐漸增大到穩態值 $V_a$——但在達到穩態之前，會出現一個有趣的現象：<strong>順向電壓過衝（forward voltage overshoot）</strong>。這是因為中性區的<strong>電導調變（conductivity modulation）</strong>需要時間來建立：注入的高濃度少數載子為維持電中性而吸引等量的多數載子→中性區的有效多數載子濃度增加→該區域的電導率 $\sigma = e(\mu_n n + \mu_p p)$ 上升→串聯電阻下降。在導通的初始瞬間，中性區尚未被注入載子「淹沒」，串聯電阻較高→$IR_s$ 壓降較大→所需的 $V_a$ 較高。隨著注入的載子逐漸填充中性區，串聯電阻下降→$V_a$ 最終穩定在較低的穩態值。這個過程猶如給一條乾涸的河道放水——水（載子）需要時間才能流滿整條河道，在此之前水流受到的阻力較大。</p>
+
+<div class="callout-warn"><strong>⚡ 為什麼整流二極體不能直接用在高速開關——儲存時間的物理限制。</strong>普通整流二極體（如 1N4007）的設計目標是最小化順向壓降 $V_F$，因此刻意採用長少數載子壽命（$\tau \sim 10$–100 µs）——長壽命意味著更多儲存電荷→更強的電導調變→更低的 $V_F$。但代價是 $t_{rr}$ 長達數微秒。在 100 kHz 以上的開關頻率下，這樣的 $t_{rr}$ 可能比整個開關週期還長——二極體在一個週期內都無法完全恢復到阻斷狀態，導致嚴重的<strong>貫通電流（shoot-through）</strong>和巨大的開關損耗。解決方案有兩個層次：(1) <strong>快速恢復二極體（fast recovery diode）</strong>——透過刻意引入深層復合中心（如掺金 Au、鉑 Pt，或電子輻照造成的晶格缺陷）將 $\tau$ 大幅降至 10–100 ns。這些復合中心就像中性區中的「排水孔」，加速了儲存電荷的清除；(2) 終極方案——<strong>蕭特基二極體（Schottky diode，第九章）</strong>，它是一款多數載子元件（majority carrier device），根本不存在少數載子注入和儲存→$t_{rr}$ 幾乎為零（僅受限於接面電容的充放電，∼ps 級）。這就是為什麼蕭特基二極體是 GHz 級高頻整流和高速數位邏輯的首選——但它們的缺點是反向漏電流較大且崩潰電壓較低。</div>
+
+<h3>§8.5 穿隧二極體（Tunnel Diode / Esaki Diode）</h3>
 <p>當 pn 接面兩側都極重摻雜（$>10^{19}$ cm⁻³）→空乏區極窄（<10 nm）→量子穿隧成為主導的電流機制。</p>
 <p><strong>NDR（負微分電阻）的完整物理圖像：</strong></p>
 <p>① <strong>零偏壓：</strong>n 側導帶中的電子與 p 側價帶中能量對應的空態對齊→穿隧可以雙向進行→淨電流為零。</p>
@@ -163,8 +243,8 @@ table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}thead th{
 <p>④ <strong>較大偏壓（谷值電流 $I_V$）：</strong>穿隧幾乎停止（沒有重疊的態），但熱離子發射電流開始增大。電流達到<strong>谷值</strong> $I_V$。</p>
 <p>⑤ <strong>大偏壓：</strong>普通擴散電流（類似普通二極體）主導→電流隨電壓指數增長。</p>
 <p>峰谷比 $I_P/I_V$ 是穿隧二極體的關鍵品質指標。典型值：Ge 穿隧二極體 ∼8:1，GaAs ∼15:1。$I_P/I_V$ 越大→NDR 越明顯→振盪器的功率效率越高。</p>
-<div class="figure"><img src="../../../images/solid-state-physics/ch08_pages/ch8_page_343.png" alt="圖 8.27" loading="lazy"><figcaption>圖 8.27：穿隧二極體的 I-V 特性曲線——注意峰值電流 $I_P$、谷值電流 $I_V$、以及兩者之間的負微分電阻（NDR）區域。</figcaption></div>
-<div class="figure"><img src="../../../images/solid-state-physics/ch08_pages/ch8_page_346.png" alt="圖 8.30" loading="lazy"><figcaption>圖 8.30：穿隧二極體在五個偏壓點的能帶圖——從零偏壓到大偏壓，解釋 NDR 的物理起源：可穿隧態的重疊區域隨偏壓增大而減少。</figcaption></div>
+<div class="figure"><img src="../../pages/ch08_pages/ch8_page_343_c.png" alt="圖 8.27" loading="lazy"><figcaption>圖 8.27：穿隧二極體的 I-V 特性曲線——注意峰值電流 $I_P$、谷值電流 $I_V$、以及兩者之間的負微分電阻（NDR）區域。</figcaption></div>
+<div class="figure"><img src="../../pages/ch08_pages/ch8_page_346_c.png" alt="圖 8.30" loading="lazy"><figcaption>圖 8.30：穿隧二極體在五個偏壓點的能帶圖——從零偏壓到大偏壓，解釋 NDR 的物理起源：可穿隧態的重疊區域隨偏壓增大而減少。</figcaption></div>
 <div class="callout-warn"><strong>⚡ NDR 區域使穿隧二極體成為天然的振盪元件。</strong>在 NDR 區域操作時，微小的電壓擾動會被正回饋放大→產生自持振盪。穿隧二極體振盪器可達 100 GHz 以上——遠超普通電晶體的頻率極限。它也被用作超快速開關（切換時間 ∼ps 級，因為穿隧是瞬時過程）。缺點：NDR 區域的電壓範圍很窄（∼0.3 V），電路設計難度高，且輸出功率有限。</div>
 </section>
 
@@ -178,6 +258,7 @@ table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}thead th{
 <li><strong>小訊號模型：</strong>$g_d=I_{DQ}/V_T$，$r_d=V_T/I_{DQ}$，$C_d=(e/kT)I_{DQ}\tau_{p0}$。$C_d$ 限制二極體頻率響應。</li>
 <li><strong>反向恢復：</strong>$t_s\approx\tau_{p0}\ln(1+I_F/I_R)$。少數載子儲存導致開關延遲。</li>
 <li><strong>穿隧二極體：</strong>重摻雜→極窄空乏區→量子穿隧→負微分電阻→高頻振盪。</li></ol></section>
+<section id="derivation-lab" class="derivation-lab"><h2>推導、假設與章末診斷</h2><h3>理想二極體方程的完整假設</h3><ul><li>突變接面、穩態、一維、低階注入、非退化、準中性區電場可忽略。</li><li>空乏區內不發生產生復合，載子穿越空乏區的時間可忽略。</li><li>中性區長於擴散長度（長二極體）、接觸為理想歐姆接觸、串聯電阻忽略。</li><li>邊界：$\Delta p_n(0)=p_{n0}(e^{qV/kT}-1)$、$\Delta p_n(\infty)=0$；電子側類同。</li></ul><h3>中間推導：Shockley 方程</h3><ol><li>解 $D_p d^2\Delta p_n/dx^2-\Delta p_n/\tau_p=0$，得 $\Delta p_n=\Delta p_n(0)e^{-x/L_p}$。</li><li>在空乏邊緣 $J_p=-qD_p(d\Delta p_n/dx)=qD_pp_{n0}(e^{qV/kT}-1)/L_p$。</li><li>p 側電子電流同理，兩者相加。</li><li>$I=I_S(e^{qV/kT}-1)$，$I_S=qA n_i^2[D_p/(L_pN_D)+D_n/(L_nN_A)]$。</li></ol><div class="dimcheck"><strong>單位／量級：</strong>$qA(D/L)n$ = C·cm²·(cm/s)·cm$^{-3}$ = A。300 K 每增加约 60 mV，理想 $n=1$ 電流約增十倍。</div><h3>章末練習與概念診斷</h3><details><summary>量到理想因子接近 2，最可能是哪個假設失效？</summary><p>空乏區復合可能主導；其電壓依賴常近似 $e^{qV/2kT}$。</p></details><details><summary>短二極體為何不能直接使用 $D/L$ 的長二極體結果？</summary><p>遠端接觸在載子復合前就截斷濃度分布，梯度由實際中性區長度控制，須使用有限長度邊界條件。</p></details><h3>延伸計算練習</h3><p>完成上方診斷後，請在不查公式的情況下重建代表推導，並改變一個參數檢查極限行為。更多含數值與解答的題目：<a href="../problems_examples/ch08_problems_zh.html">本章完整習題頁</a>。</p></section>
 </main>
 <script>
 function toggleTheme(){const h=document.documentElement;const n=h.getAttribute('data-theme')==='light'?'dark':'light';h.setAttribute('data-theme',n);localStorage.setItem('theme',n);document.getElementById('tl').textContent=n==='dark'?'淺色模式':'深色模式';}

@@ -27,15 +27,19 @@ table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}thead th{
 @media(max-width:768px){.sidebar{transform:translateX(-100%);transition:.3s}.sidebar.open{transform:translateX(0)}.main{margin-left:0;padding:20px 16px 60px}}
 @media print{.sidebar{display:none}.main{margin-left:0;max-width:100%;padding:0}}
 </style>
-<script src="../../../reading-preferences.js" defer></script></head>
-<body><a class="portal-home-link" href="../../../index.html">返回學習中心</a><style id="portal-home-link-style">.portal-home-link{position:fixed;top:16px;right:16px;z-index:1000;display:inline-flex;align-items:center;min-height:36px;padding:7px 11px;border:1px solid #cbd5e1;border-radius:8px;background:#fff;color:#1d4ed8;font:600 13px/1.2 -apple-system,BlinkMacSystemFont,"Noto Sans TC","Microsoft JhengHei",sans-serif;text-decoration:none;box-shadow:0 2px 10px rgba(15,23,42,.08)}.portal-home-link:hover{background:#eff6ff}.portal-home-link:focus-visible{outline:3px solid rgba(37,99,235,.35);outline-offset:2px}@media(max-width:768px){.portal-home-link{top:10px;right:10px;min-height:34px;padding:7px 9px;font-size:12px}}</style>
+<style id="derivation-lab-style">.derivation-lab{border-top:3px solid var(--ac);padding-top:20px}.derivation-lab ul,.derivation-lab ol{font-size:14px;color:var(--t2);margin:8px 0 14px 22px}.derivation-lab details{border:1px solid var(--bd);border-radius:8px;margin:8px 0;background:var(--bg)}.derivation-lab summary{cursor:pointer;padding:10px 13px;font-weight:600}.derivation-lab details p{padding:0 13px 10px}.dimcheck{background:var(--b3);border-left:3px solid var(--ac);padding:12px 15px;border-radius:0 8px 8px 0}</style>
+<script src="../../../reading-preferences.js" defer></script>
+</head>
+<body>
+<a class="portal-home-link" href="../../../index.html">返回學習中心</a>
+<style id="portal-home-link-style">.portal-home-link{position:fixed;top:16px;right:16px;z-index:1000;display:inline-flex;align-items:center;min-height:36px;padding:7px 11px;border:1px solid #cbd5e1;border-radius:8px;background:#fff;color:#1d4ed8;font:600 13px/1.2 -apple-system,BlinkMacSystemFont,"Noto Sans TC","Microsoft JhengHei",sans-serif;text-decoration:none;box-shadow:0 2px 10px rgba(15,23,42,.08)}.portal-home-link:hover{background:#eff6ff}.portal-home-link:focus-visible{outline:3px solid rgba(37,99,235,.35);outline-offset:2px}@media(max-width:768px){.portal-home-link{top:10px;right:10px;min-height:34px;padding:7px 9px;font-size:12px}}</style>
 <nav class="sidebar"><div class="sh"><div class="bk">半導體物理與元件·第四版</div><h2>第四章</h2></div><div class="sn"><ul>
 <li><a href="#preview">📋 4.0 本章預覽</a></li>
 <li class="ns">4.1 半導體中的載子</li><li class="nsub"><a href="#s4-1-1">4.1.1 平衡態分布</a></li><li class="nsub"><a href="#s4-1-2">4.1.2 n₀ 與 p₀ 公式</a></li><li class="nsub"><a href="#s4-1-3">4.1.3 本徵載子濃度 n_i</a></li><li class="nsub"><a href="#s4-1-4">4.1.4 本徵 Fermi 能階</a></li>
 <li class="ns">4.2 摻雜</li><li class="nsub"><a href="#s4-2">施體與受體能階</a></li>
-<li class="ns">4.3–4.5 外質半導體</li><li class="nsub"><a href="#s4-3">4.3 外質半導體</a></li><li class="nsub"><a href="#s4-4">4.4 施體/受體統計</a></li><li class="nsub"><a href="#s4-5">4.5 電荷中性</a></li>
+<li class="ns">4.3–4.5 外質半導體</li><li class="nsub"><a href="#s4-3">4.3 外質半導體</a></li><li class="nsub"><a href="#s4-3-3">4.3.3 Fermi-Dirac 積分</a></li><li class="nsub"><a href="#s4-4">4.4 施體/受體統計</a></li><li class="nsub"><a href="#s4-5">4.5 電荷中性</a></li>
 <li class="ns">4.6 Fermi 能階</li><li class="nsub"><a href="#s4-6">4.6 Fermi 能階位置</a></li>
-<li><a href="#summary">📋 本章摘要</a></li>
+<li><a href="#summary">📋 本章摘要</a></li><li><a href="#derivation-lab">🧪 推導、假設與章末診斷</a></li>
 </ul></div><div class="st"><button onclick="toggleTheme()">🌓 <span id="tl">深色模式</span></button></div></nav>
 <main class="main">
 <header class="header"><div class="cl">第四章</div><h1>平衡態半導體</h1><div class="meta">Donald A. Neamen·《半導體物理與元件：基本原理》第四版·第 106–155 頁</div></header>
@@ -44,12 +48,30 @@ table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}thead th{
 <p>前面三章建立了量子力學和固態理論的基礎：我們學會了薛丁格方程、能帶理論、態密度、以及 Fermi-Dirac 統計。現在我們終於要把這些工具<strong>全部組裝起來</strong>，回答半導體元件物理中最核心的問題：</p>
 <p><strong>在熱平衡下，半導體中有多少電子？有多少電洞？Fermi 能階在哪裡？</strong></p>
 <p>這三個問題的答案是所有半導體元件分析的起點。無論你要設計一個 pn 接面、一個 MOSFET、還是一個太陽能電池，第一步永遠是計算熱平衡載子濃度。</p>
-<p>本章的邏輯鏈非常清晰：態密度 × Fermi 機率 → 積分 → $n_0$ 和 $p_0$ → $n_i$ → 質量作用定律 → 加入摻雜 → 電荷中性 → 解出 Fermi 能階位置。每一步都建立在前一步的基礎上。</p></div></section>
+<p>本章的邏輯鏈非常清晰：態密度 × Fermi 機率 → 積分 → $n_0$ 和 $p_0$ → $n_i$ → 質量作用定律 → 加入摻雜 → 電荷中性 → 解出 Fermi 能階位置。每一步都建立在前一步的基礎上。</p>
+<div style="margin-top:14px;background:var(--bg);border:1px solid var(--fbd);border-radius:8px;padding:12px 16px">
+<div style="font-size:11px;font-weight:600;color:var(--ac);margin-bottom:6px">🔑 本章核心概念</div>
+<div style="font-size:12px;color:var(--tx);line-height:2">
+1. 載子濃度 = 態密度 $\times$ 佔據機率 積分：$n_0=\int g_c(E)f_F(E)dE$<br>
+2. Boltzmann 近似下 $n_0=N_c e^{-(E_c-E_F)/kT}$，$p_0=N_v e^{-(E_F-E_v)/kT}$<br>
+3. 質量作用定律：$n_0 p_0=n_i^2$——熱平衡下的 $np$ 乘積是常數，與摻雜無關<br>
+4. 本徵載子濃度 $n_i=\sqrt{N_c N_v}e^{-E_g/2kT}$——$n_i$ 對 $T$ 極敏感（Si 室溫下 $\sim10^{10}$ cm⁻³）<br>
+5. 摻雜：施體（P, As→$E_d\approx E_c-0.045$ eV→n 型），受體（B→$E_a\approx E_v+0.045$ eV→p 型）<br>
+6. $E_F$ 位置隨摻雜移動：n 型→$E_F$ 靠近 $E_c$，p 型→$E_F$ 靠近 $E_v$<br>
+7. 電荷中性條件 $n_0+N_a^-=p_0+N_d^+$——解二次方程得 $n_0$ 和 $p_0$<br>
+8. 完全游離近似：室溫下 $N_d^+\approx N_d$，$N_a^-\approx N_a$（雜質全部游離）<br>
+9. 凍結區（低溫）→非本徵區→本徵區（高溫）——$n_0$ 對 $1/T$ 的三段行為<br>
+10. 補償半導體：$N_d$ 和 $N_a$ 同時存在→$n_0\approx N_d-N_a$（$N_d>N_a$），但兩者「不能簡單相減」<br>
+</div>
+</div></div></section>
 
-<div class="figure"><img src="../../../images/solid-state-physics/ch04_pages/ch04_overview.png" alt="第四章總覽圖" loading="lazy"><figcaption>📌 第四章總覽圖：平衡態半導體 — 本徵半導體、摻雜原子、載子濃度vs溫度、電荷中性、Fermi能階、關鍵公式</figcaption></div>
+<div class="figure"><img src="../../pages/ch04_pages/ch04_overview.png" alt="第四章總覽圖" loading="lazy"><figcaption>📌 第四章總覽圖：平衡態半導體 — 本徵半導體、摻雜原子、載子濃度vs溫度、電荷中性、Fermi能階、關鍵公式</figcaption></div>
 
 <!-- 4.1.1 -->
 <section id="s4-1-1"><h2>4.1.1 平衡態電子與電洞的分布</h2>
+<div style="margin-bottom:14px;font-size:12px;color:var(--t2);line-height:1.8">
+<strong style="color:var(--tx)">🔑 本節重點</strong> ① $n(E)=g_c(E)f_F(E)$——相乘得電子能量分布：先升後降的鐘形曲線 ② $g_c(E)\propto\sqrt{E-E_c}$ 隨能量增加，$f_F(E)$ 隨能量指數衰減→兩者競爭 ③ 電子主要分布在導帶底部往上約 $kT$（~0.026 eV）的範圍內 ④ 總電子濃度 $n_0=\int_{E_c}^\infty g_c(E)f_F(E)dE$
+</div>
 
 <p>在第三章中我們得到了兩個關鍵函數：<strong>態密度 $g_c(E)$</strong>（導帶中每單位能量、每單位體積有多少個「空位」可以給電子坐），以及 <strong>Fermi-Dirac 機率 $f_F(E)$</strong>（能量為 $E$ 的量子態被電子佔據的機率）。</p>
 
@@ -58,13 +80,16 @@ table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}thead th{
 
 <p><strong>物理圖像（圖 4.1）：</strong>態密度 $g_c(E)$ 從 $E_c$ 開始以 $\sqrt{E-E_c}$ 的形式增長——能量越高，可用的量子態越多。但 Fermi-Dirac 機率 $f_F(E)$ 隨能量指數衰減——能量越高的態越難被佔據（因為電子傾向待在低能態）。兩者相乘的結果是一個<strong>先升後降的鐘形曲線</strong>：在 $E_c$ 附近，$g_c$ 還很小；在遠高於 $E_c$ 處，$f_F$ 已衰減到幾乎為零。電子主要分布在導帶底部往上約 $kT$（室溫約 0.026 eV）的範圍內。</p>
 
-<div class="figure"><img src="../../../images/solid-state-physics/ch04_pages/ch4_page_134.png" alt="圖 4.1" loading="lazy"><figcaption>圖 4.1：(a) 態密度 $g_c(E)$、(b) Fermi-Dirac 機率 $f_F(E)$、(c) 電子濃度分布 $n(E)=g_c(E)f_F(E)$。注意 $f_F$ 在 $E_F$ 以上的指數衰減決定了 $n(E)$ 的形狀。</figcaption></div>
+<div class="figure"><img src="../../pages/ch04_pages/ch4_page_133_c.png" alt="圖 4.1" loading="lazy"><figcaption>圖 4.1：(a) 態密度 $g_c(E)$、(b) Fermi-Dirac 機率 $f_F(E)$、(c) 電子濃度分布 $n(E)=g_c(E)f_F(E)$。注意 $f_F$ 在 $E_F$ 以上的指數衰減決定了 $n(E)$ 的形狀。</figcaption></div>
 
 <p>將 $n(E)$ 從 $E_c$ 積分到 $\infty$，就得到導帶中的總電子濃度 $n_0$。對於電洞，同理：價帶態密度 $g_v(E)$ 乘以「沒有電子的機率」$[1-f_F(E)]$，積分得到 $p_0$。</p>
 </section>
 
 <!-- 4.1.2 -->
 <section id="s4-1-2"><h2>4.1.2 $n_0$ 與 $p_0$ 的公式推導</h2>
+<div style="margin-bottom:14px;font-size:12px;color:var(--t2);line-height:1.8">
+<strong style="color:var(--tx)">🔑 本節重點</strong> ① Boltzmann 近似（$E_c-E_F\gg kT$）：$f_F\approx e^{-(E-E_F)/kT}$→積分可解析求解 ② $n_0=N_c e^{-(E_c-E_F)/kT}$——等效態密度 × Boltzmann 機率因子 ③ $N_c=2(2\pi m_n^*kT/h^2)^{3/2}$——Si 室溫 $N_c=2.8\times10^{19}$ cm⁻³ ④ $N_c\propto T^{3/2}$：溫度越高→熱能越大→等效態密度越大
+</div>
 
 <p>對於<strong>非簡併半導體</strong>（即 $E_F$ 位於能隙中，且距 $E_c$ 和 $E_v$ 都超過 $3kT$），$E_c - E_F \gg kT$，因此 $f_F(E) \approx \exp[-(E-E_F)/kT]$——這就是 <strong>Boltzmann 近似</strong>。這個近似使積分可以解析求解，得到本章最重要的兩個公式：</p>
 
@@ -85,6 +110,9 @@ table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}thead th{
 
 <!-- 4.1.3 -->
 <section id="s4-1-3"><h2>4.1.3 本徵載子濃度 $n_i$</h2>
+<div style="margin-bottom:14px;font-size:12px;color:var(--t2);line-height:1.8">
+<strong style="color:var(--tx)">🔑 本節重點</strong> ① 質量作用定律：$n_0 p_0=n_i^2$——熱平衡下 $np$ 乘積為常數（與 $E_F$ 無關） ② $n_i=\sqrt{N_c N_v}e^{-E_g/2kT}$——本徵載子濃度僅取決於材料和溫度 ③ Si 室溫 $n_i=1.5\times10^{10}$ cm⁻³；溫度從 300K→400K，$n_i$ 增加約 300 倍 ④ 提高 $n_0$（n 型摻雜）→$p_0$ 必以 $n_i^2/n_0$ 下降——化學平衡類比
+</div>
 
 <p><strong>本徵半導體（intrinsic semiconductor）</strong>是指完全沒有雜質的完美晶體。在本徵半導體中，每一個被激發到導帶的電子，都在價帶中留下一個電洞，因此 $n_0 = p_0 \equiv n_i$。</p>
 
@@ -95,7 +123,7 @@ table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}thead th{
 
 <div class="eq">$$n_i = \sqrt{N_c N_v}\,\exp\!\left(-\frac{E_g}{2kT}\right) \tag{4.20}$$</div>
 
-<div class="figure"><img src="../../../images/solid-state-physics/ch04_pages/ch4_page_141.png" alt="圖 4.2" loading="lazy"><figcaption>圖 4.2：Si、GaAs、Ge 的本徵載子濃度 $n_i$ 隨溫度變化。注意對數坐標——$n_i$ 隨溫度指數增長。</figcaption></div>
+<div class="figure"><img src="../../pages/ch04_pages/ch4_page_141_c.png" alt="圖 4.2" loading="lazy"><figcaption>圖 4.2：Si、GaAs、Ge 的本徵載子濃度 $n_i$ 隨溫度變化。注意對數坐標——$n_i$ 隨溫度指數增長。</figcaption></div>
 
 <div class="callout"><strong>💡 $n_i$ 公式的物理直覺：</strong>$\sqrt{N_c N_v}$ ≈ 可用能態的幾何平均值。$\exp(-E_g/2kT)$ = 電子從價帶跨越能隙 $E_g$ 到達導帶的 Boltzmann 機率。$E_g$ 越大或 $T$ 越低，$n_i$ 越小——直觀上，跨越更大的能隙更困難，溫度越低熱能越不足以激發電子。</div>
 
@@ -110,6 +138,9 @@ table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}thead th{
 
 <!-- 4.1.4 -->
 <section id="s4-1-4"><h2>4.1.4 本徵 Fermi 能階 $E_{Fi}$</h2>
+<div style="margin-bottom:14px;font-size:12px;color:var(--t2);line-height:1.8">
+<strong style="color:var(--tx)">🔑 本節重點</strong> ① $E_{Fi}\approx(E_c+E_v)/2+\frac{3}{4}kT\ln(m_p^*/m_n^*)$——幾乎在能隙正中央 ② $E_{Fi}$ 是判斷 n/p 型的基準：$E_F>E_{Fi}$→n 型，$E_F<E_{Fi}$→p 型 ③ $n_0=n_i e^{(E_F-E_{Fi})/kT}$，$p_0=n_i e^{-(E_F-E_{Fi})/kT}$——最實用的載子公式 ④ $E_F$ 每遠離 $E_{Fi}$ 一個 $kT$（0.026 eV）→多數載子濃度增 $e$ 倍（~2.72 倍）
+</div>
 
 <p>在本徵半導體中，令 $n_0 = p_0 = n_i$ 代入 (4.11) 和 (4.19)，可解得本徵 Fermi 能階的位置：</p>
 <div class="eq">$$\boxed{E_{Fi} = \frac{E_c + E_v}{2} + \frac{3}{4}kT\ln\!\left(\frac{m_p^*}{m_n^*}\right)} \tag{4.25}$$</div>
@@ -125,12 +156,15 @@ table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}thead th{
 
 <!-- 4.2 -->
 <section id="s4-2"><h2>4.2 摻雜原子與能階</h2>
+<div style="margin-bottom:14px;font-size:12px;color:var(--t2);line-height:1.8">
+<strong style="color:var(--tx)">🔑 本節重點</strong> ① 施體（V 族：P, As, Sb）：5 個價電子→多 1 個被微弱束縛→游離能 ~0.045 eV→n 型 ② 受體（III 族：B, Al, Ga）：3 個價電子→缺 1 個→從價帶「接受」電子→留下電洞→p 型 ③ 摻雜濃度 $10^{14}$–$10^{18}$ cm⁻³→比 $n_i$ 高 4–8 個數量級 ④ 完全游離：室溫 $kT=0.026$ eV 與束縛能 $0.045$ eV 同量級→絕大多數雜質已游離
+</div>
 
 <p>純淨的本徵半導體導電性很差——Si 的 $n_i$ 只有 $10^{10}$ cm⁻³，而 Si 的原子密度是 $5\times10^{22}$ cm⁻³，也就是說每 $5\times10^{12}$ 個原子中才有一個自由電子。要靠本徵載子做元件是完全不現實的。</p>
 
 <p><strong>摻雜（doping）</strong>是半導體技術的基石：刻意加入極少量的特定雜質原子，精確控制導電性。典型的摻雜濃度是 $10^{14}$–$10^{18}$ cm⁻³——相比 Si 原子密度仍然極低（約百萬分之一到百分之一），但已經比 $n_i$ 高出 4 到 8 個數量級。</p>
 
-<div class="figure"><img src="../../../images/solid-state-physics/ch04_pages/ch4_page_143.png" alt="圖 4.3" loading="lazy"><figcaption>圖 4.3：(a) 施體（P）和受體（B）在矽晶格中的二維示意圖——注意 P 多出一個價電子，B 缺少一個。(b) 對應的能帶圖——施體能階 $E_d$ 靠近 $E_c$，受體能階 $E_a$ 靠近 $E_v$。</figcaption></div>
+<div class="figure"><img src="../../pages/ch04_pages/ch4_page_143_c.png" alt="圖 4.3" loading="lazy"><figcaption>圖 4.3：(a) 施體（P）和受體（B）在矽晶格中的二維示意圖——注意 P 多出一個價電子，B 缺少一個。(b) 對應的能帶圖——施體能階 $E_d$ 靠近 $E_c$，受體能階 $E_a$ 靠近 $E_v$。</figcaption></div>
 
 <h3>施體（Donor）— n 型摻雜</h3>
 <p>用<strong>第 V 族元素</strong>（P、As、Sb）取代 Si 原子。V 族元素有 5 個價電子。其中 4 個與相鄰 Si 形成共價鍵；第 5 個電子多餘出來，只被施體離子微弱束縛。這個多餘電子的束縛能（游離能）極小——對 Si 中的 P 僅約 0.045 eV。室溫下 $kT\approx0.026$ eV，熱能足以使絕大部分施體電子脫離束縛進入導帶，成為自由電子。施體離子本身固定在晶格中，帶正電。</p>
@@ -150,6 +184,9 @@ table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}thead th{
 
 <!-- 4.3 -->
 <section id="s4-3"><h2>4.3 外質半導體</h2>
+<div style="margin-bottom:14px;font-size:12px;color:var(--t2);line-height:1.8">
+<strong style="color:var(--tx)">🔑 本節重點</strong> ① 外質半導體 = 已摻雜的半導體；質量作用定律 $n_0 p_0=n_i^2$ 仍嚴格成立 ② 三個溫度區域：凍結區（$T<50$ K, $n_0\ll N_d$）→外質區（平台, $n_0\approx N_d$）→本徵區（高溫, $n_0\approx n_i$） ③ 非簡併（$E_F$ 在能隙中，Boltzmann 近似有效）vs 簡併（$E_F$ 進入能帶，$N_d>10^{19}$ cm⁻³） ④ 功率元件高溫可能進入本徵區→漏電流急增→熱失控→必須用更高摻雜濃度
+</div>
 
 <p>加入摻雜後的半導體稱為<strong>外質半導體（extrinsic semiconductor）</strong>。摻雜濃度記為 $N_d$（施體濃度）和 $N_a$（受體濃度）。</p>
 
@@ -168,11 +205,70 @@ table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}thead th{
 <li><strong>簡併：</strong>摻雜濃度極高（$>10^{19}$ cm⁻³），$E_F$ 進入導帶或價帶。必須使用完整的 Fermi-Dirac 積分。簡併半導體的行為更接近金屬。</li>
 </ul>
 
-<div class="figure"><img src="../../../images/solid-state-physics/ch04_pages/ch4_page_144.png" alt="圖 4.5" loading="lazy"><figcaption>圖 4.5：(a) n 型半導體的能帶圖——$E_F$ 靠近 $E_c$，電子為多數載子。(b) p 型半導體——$E_F$ 靠近 $E_v$，電洞為多數載子。箭頭表示載子濃度的大小關係。</figcaption></div>
+<div class="figure"><img src="../../pages/ch04_pages/ch4_page_144_c.png" alt="圖 4.5" loading="lazy"><figcaption>圖 4.5：(a) n 型半導體的能帶圖——$E_F$ 靠近 $E_c$，電子為多數載子。(b) p 型半導體——$E_F$ 靠近 $E_v$，電洞為多數載子。箭頭表示載子濃度的大小關係。</figcaption></div>
+</section>
+
+<!-- 4.3.3 Fermi-Dirac Integral -->
+<section id="s4-3-3"><h2>4.3.3 Fermi-Dirac 積分</h2>
+<div style="margin-bottom:14px;font-size:12px;color:var(--t2);line-height:1.8">
+<strong style="color:var(--tx)">🔑 本節重點</strong> ① 重摻雜時 $E_F$ 進入能帶→Boltzmann 近似失效→需用完整 Fermi-Dirac 積分 $F_{1/2}(\eta)$ ② $n_0=\frac{2}{\sqrt{\pi}}N_c F_{1/2}(\eta_c)$，$\eta_c=(E_F-E_c)/kT$ ③ 非簡併極限（$\eta_c<-3$）：$F_{1/2}\approx e^{\eta_c}$→還原 Boltzmann 近似 ④ 現代 MOSFET 源極/汲極 $N_d\sim10^{20}$ cm⁻³→強簡併→必須使用 Fermi-Dirac 積分
+</div>
+
+<p>在前面的推導中，我們使用了 <strong>Boltzmann 近似</strong>來簡化 Fermi-Dirac 分布函數 $f_F(E) \approx \exp[-(E-E_F)/kT]$。這個近似在 <strong>非簡併半導體</strong>（$E_F$ 位於能隙中且距能帶邊緣超過 $3kT$）中非常精確。然而，當摻雜濃度極高（$\gtrsim 10^{19}$ cm⁻³），Fermi 能階會被「推入」導帶或價帶，Boltzmann 近似就會失效。此時必須使用完整的 Fermi-Dirac 統計——這正是 <strong>Fermi-Dirac 積分</strong>登場的時刻。</p>
+
+<p>回顧電子濃度的精確積分表達式（不引入 Boltzmann 近似）：</p>
+<div class="eq">$$n_0 = \frac{4\pi(2m_n^*)^{3/2}}{h^3} \int_{E_c}^{\infty} \frac{(E-E_c)^{1/2}}{1 + \exp\!\left(\dfrac{E-E_F}{kT}\right)}\,dE \tag{4.44}$$</div>
+
+<p>引入無量綱變數 $\eta \equiv (E-E_c)/kT$ 以及 <strong>簡併參數</strong> $\eta_c \equiv (E_F-E_c)/kT$，上式可以改寫為：</p>
+<div class="eq">$$n_0 = \frac{2}{\sqrt{\pi}}\,N_c\,F_{1/2}(\eta_c) \tag{4.46}$$</div>
+
+<p>其中 $N_c = 2(2\pi m_n^* kT/h^2)^{3/2}$ 是我們熟悉的導帶有效態密度，而 $F_{1/2}(\eta)$ 就是著名的 <strong>Fermi-Dirac 積分（階數 1/2）</strong>：</p>
+<div class="eq">$$\boxed{F_{1/2}(\eta) = \frac{2}{\sqrt{\pi}} \int_0^{\infty} \frac{x^{1/2}}{1 + e^{x-\eta}}\,dx} \tag{4.47}$$</div>
+
+<p>$F_{1/2}(\eta)$ 是一個只能數值計算的函數（沒有解析的初等函數表達式），其值已被製成廣泛使用的表格和近似公式。它的物理角色是：<strong>把 Boltzmann 近似的指數因子 $e^{\eta}$ 修正為完整的 Fermi-Dirac 統計結果</strong>。當 $\eta \ll 0$ 時 $F_{1/2}(\eta) \approx e^{\eta}$，當 $\eta \gg 0$ 時它增長得更慢——這就是 Pauli 不相容原理在統計上的體現。</p>
+
+<div class="callout"><strong>🔬 為什麼 Boltzmann 近似在重摻雜時失效——Pauli 原理開始限制態的佔據：</strong>在非簡併情況下，Fermi-Dirac 分布的尾部（$E \gg E_F$）與 Boltzmann 分布幾乎重合——因為 $f_F(E) \approx e^{-(E-E_F)/kT}$ 時，$f_F \ll 1$，Pauli 不相容原理的限制（每個量子態最多一個電子）幾乎感覺不到。但當 $E_F$ 接近甚至進入導帶時，$E_F$ 附近的態有相當高的佔據機率（$f_F \sim 0.5$），Pauli 原理開始顯著限制新電子的填入——Boltzmann 近似（它允許任意數量的電子堆積在同一能態）會嚴重高估載子濃度。例如課本例題 4.6：$\eta_c = 2$ 時，Boltzmann 近似給出 $n_0 = 2.08 \times 10^{20}$ cm⁻³，而正確的 Fermi-Dirac 積分值僅為 $8.53 \times 10^{19}$ cm⁻³——高估了超過 2.4 倍！</div>
+
+<h3>Fermi-Dirac 積分的三個重要極限</h3>
+
+<p><strong>① 非簡併極限（$\eta_c < -3$）：</strong>當 Fermi 能階深埋在能隙中時，$e^{x-\eta_c} = e^x e^{-\eta_c} \gg 1$ 在整個積分範圍內成立（因為 $\eta_c$ 很負）。分母中的 $+1$ 可忽略：</p>
+<div class="eq">$$F_{1/2}(\eta) \approx e^{\eta} \quad (\eta < -3)$$</div>
+<p>代入 (4.46)：$n_0 \approx \frac{2}{\sqrt{\pi}} N_c e^{\eta_c}$。注意 $N_c$ 的定義中已包含係數 $2/\sqrt{\pi}$（來自態密度積分），兩者抵消後得到 $n_0 = N_c e^{(E_F-E_c)/kT}$——<strong>完美還原了 Boltzmann 近似的結果（公式 4.11）。</strong>這驗證了非簡併半導體中使用 Boltzmann 近似的合理性。對 Si 在 300 K，$\eta_c = -3$ 對應 $E_c - E_F \approx 0.078$ eV（約 $3kT$）。</p>
+
+<p><strong>② 強簡併極限（$\eta_c > 5$）：</strong>當 Fermi 能階深入導帶時，在 $x < \eta_c$ 的區域 $e^{x-\eta_c} \ll 1$，分母近似為 1；在 $x > \eta_c$ 處積分貢獻急劇衰減。此時積分可以近似為：</p>
+<div class="eq">$$F_{1/2}(\eta) \approx \frac{4}{3\sqrt{\pi}}\,\eta^{3/2} \quad (\eta > 5)$$</div>
+<p>代入 (4.46) 後得到 $n_0 \propto (E_F-E_c)^{3/2}$——這是金屬中自由電子氣體的標準結果（Sommerfeld 模型的 $T=0$ 極限）。簡併半導體的導電行為因此更接近金屬而非典型半導體——導帶底部以下有大量被佔據的能態，電子表現得像簡併電子氣體。</p>
+
+<p><strong>③ 中間區域（$-3 < \eta_c < 5$）：</strong>這是 Boltzmann 近似和強簡併近似都不精確的過渡區——必須使用查表或數值計算。這恰好對應於許多現代元件的操作條件：重摻雜的源極/汲極區域（$\sim 10^{20}$ cm⁻³）、隧道接面、以及某些光電元件的主動層。在這些應用中，使用 Boltzmann 近似會導致載子濃度估算誤差達到 2–5 倍，進而嚴重影響元件模擬的準確性。</p>
+
+<h3>Si 在室溫下的 Fermi-Dirac 積分數值表</h3>
+
+<p>下表列出 Si 在 $T=300$ K 時（$N_c = 2.8\times10^{19}$ cm⁻³），不同 $\eta_c$ 值對應的 $F_{1/2}(\eta_c)$ 和電子濃度 $n_0 = \frac{2}{\sqrt{\pi}}N_c F_{1/2}(\eta_c)$，以及對應的典型施體摻雜濃度（假設完全游離且無補償）：</p>
+
+<table><thead><tr><th>$\eta_c = \frac{E_F-E_c}{kT}$</th><th>$E_F-E_c$ (eV)</th><th>$F_{1/2}(\eta_c)$</th><th>$n_0$ (cm⁻³)</th><th>典型 $N_d$ (cm⁻³)</th><th>半導體類型</th></tr></thead><tbody>
+<tr><td>−10</td><td>−0.259</td><td>$4.54\times10^{-5}$</td><td>$1.43\times10^{15}$</td><td>$\sim 10^{15}$</td><td>非簡併 n 型</td></tr>
+<tr><td>−5</td><td>−0.130</td><td>$6.74\times10^{-3}$</td><td>$2.13\times10^{17}$</td><td>$\sim 10^{17}$</td><td>非簡併 n 型</td></tr>
+<tr><td>−3</td><td>−0.078</td><td>$4.98\times10^{-2}$</td><td>$1.57\times10^{18}$</td><td>$\sim 10^{18}$</td><td>Boltzmann 近似邊界</td></tr>
+<tr><td>0</td><td>0</td><td>0.678</td><td>$2.14\times10^{19}$</td><td>$\sim 2\times10^{19}$</td><td>簡併（$E_F=E_c$）</td></tr>
+<tr><td>2</td><td>0.052</td><td>2.7</td><td>$8.53\times10^{19}$</td><td>$\sim 10^{20}$</td><td>簡併 n 型</td></tr>
+<tr><td>5</td><td>0.130</td><td>11.4</td><td>$3.60\times10^{20}$</td><td>$\sim 5\times10^{20}$</td><td>強簡併 n 型</td></tr>
+</tbody></table>
+
+<p>從表中可以觀察到一個關鍵事實：<strong>當 $E_F$ 剛好到達 $E_c$ 時（$\eta_c = 0$），$n_0 \approx 2.14\times10^{19}$ cm⁻³，已經接近 $N_c$ 的值。</strong>此時若仍然使用 Boltzmann 近似（即 $n_0 = N_c e^0 = 2.8\times10^{19}$ cm⁻³），會高估約 30%。當 $E_F$ 進一步深入導帶（$\eta_c = 2$，約 0.052 eV），Boltzmann 近似給出 $n_0 = 2.8\times10^{19} \cdot e^2 = 2.07\times10^{20}$ cm⁻³，比正確值高出約 2.4 倍——誤差已不可接受。</p>
+
+<p><strong>電洞的對應公式：</strong>同理，價帶中的電洞濃度也可以寫成 Fermi-Dirac 積分的形式。定義 $\eta_v \equiv (E_v-E_F)/kT$，則：</p>
+<div class="eq">$$p_0 = \frac{2}{\sqrt{\pi}}\,N_v\,F_{1/2}(\eta_v) \tag{4.48}$$</div>
+<p>當 $\eta_v < -3$（非簡併 p 型），$F_{1/2}(\eta_v) \approx e^{\eta_v}$，還原 $p_0 = N_v e^{-(E_F-E_v)/kT}$。對 p⁺ 重摻雜（$N_a > 10^{19}$ cm⁻³），同樣必須使用完整的 Fermi-Dirac 積分——簡併 p 型半導體的 $E_F$ 進入價帶，此時 $\eta_v > 0$。</p>
+
+<div class="callout-warn"><strong>⚡ 工程要點——何時必須改用 Fermi-Dirac 積分：</strong>對 n 型 Si，當 $N_d \gtrsim 2\times10^{19}$ cm⁻³ 時，$E_F$ 開始接近甚至超過 $E_c$，必須拋棄 $n_0 \approx N_d$ 的簡單關係，改用 $n_0 = \frac{2}{\sqrt{\pi}}N_c F_{1/2}(\eta_c)$ 並與電荷中性條件聯立自洽求解。現代 MOSFET 的源極/汲極摻雜常達到 $10^{20}$ cm⁻³——這已經是強簡併區域，Boltzmann 近似完全失效。許多 TCAD（Technology Computer-Aided Design）模擬工具的精度就取決於是否正確處理了 Fermi-Dirac 統計。</div>
+
 </section>
 
 <!-- 4.4 -->
 <section id="s4-4"><h2>4.4 施體與受體的統計</h2>
+<div style="margin-bottom:14px;font-size:12px;color:var(--t2);line-height:1.8">
+<strong style="color:var(--tx)">🔑 本節重點</strong> ① 游離施體濃度 $N_d^+=N_d/[1+g_d e^{(E_F-E_d)/kT}]$，$g_d=2$（自旋簡併） ② 游離受體濃度 $N_a^-=N_a/[1+g_a e^{(E_a-E_F)/kT}]$，$g_a=4$（價帶雙重簡併+自旋） ③ 凍結溫度：當 $kT\ll E_d$ 時雜質未游離→$n_0$ 隨 $T$ 急劇下降 ④ 太空低溫應用（< 30 K）需特殊設計（更高摻雜或不同材料）避免載子凍結
+</div>
 
 <p>嚴格來說，並非所有雜質原子都一定游離——這取決於溫度和 Fermi 能階的位置。游離施體濃度的精確表達式為：</p>
 <div class="eq">$$N_d^+ = \frac{N_d}{1 + g_d\,\exp\!\left(\dfrac{E_F - E_d}{kT}\right)} \tag{4.53}$$</div>
@@ -191,46 +287,121 @@ table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}thead th{
 </section>
 
 <!-- 4.5 -->
-<section id="s4-5"><h2>4.5 電荷中性</h2>
+<section id="s4-5"><h2>4.5 電荷中性——完整推導</h2>
+<div style="margin-bottom:14px;font-size:12px;color:var(--t2);line-height:1.8">
+<strong style="color:var(--tx)">🔑 本節重點</strong> ① 電荷中性：$n_0+N_a^-=p_0+N_d^+$→結合 $n_0 p_0=n_i^2$ 解二次方程 ② $n_0=\frac{N_d-N_a}{2}+\sqrt{[(N_d-N_a)/2]^2+n_i^2}$——補償半導體的精確解 ③ 補償：$N_d$ 和 $N_a$ 同時存在→施體電子優先填入受體能階→有效摻雜 = $|N_d-N_a|$ ④ 高度補償（$|N_d-N_a|\ll n_i$）→$n_0\approx n_i$——表現如本徵半導體
+</div>
 
-<p>熱平衡下的半導體整體必須是<strong>電中性</strong>的——總負電荷等於總正電荷。這給出本章第三個核心方程：</p>
-<div class="eq">$$\boxed{n_0 + N_a^- = p_0 + N_d^+} \tag{4.60}$$</div>
+<p>熱平衡下，半導體晶體整體必須保持<strong>電中性</strong>——淨電荷密度為零。這個看似簡單的條件，是聯繫摻雜濃度和載子濃度的關鍵橋樑。本節將從電荷中性條件出發，完整推導出補償半導體的載子濃度解析解，並分析其溫度依賴性。</p>
 
-<p><strong>物理意義：</strong>負電荷來源有二：導帶中的電子 $n_0$，以及游離的受體離子 $N_a^-$（受體接受了電子，帶負電）。正電荷來源也有二：價帶中的電洞 $p_0$，以及游離的施體離子 $N_d^+$（施體給出了電子，帶正電）。</p>
+<h3>4.5.1 補償半導體的概念</h3>
 
-<p>結合 (4.60) 和質量作用定律 $n_0 p_0 = n_i^2$，以及完全游離假設（室溫下合理），可以對任何摻雜情況求解 $n_0$ 和 $p_0$：</p>
+<p><strong>補償半導體（compensated semiconductor）</strong>是指同一區域中同時含有施體和受體雜質原子的半導體。這在半導體製程中極為常見——例如在 n 型基板上擴散受體雜質以形成 pn 接面時，擴散區就是一個補償區域。補償半導體可以是 n 型（$N_d > N_a$）、p 型（$N_a > N_d$），或完全補償（$N_d = N_a$，表現得像本徵半導體）。</p>
 
-<h3>n 型半導體（$N_d \gg n_i$，$N_a \approx 0$）</h3>
-<div class="eq">$$n_0 = \frac{N_d}{2} + \sqrt{\left(\frac{N_d}{2}\right)^2 + n_i^2} \approx N_d \tag{4.62}$$</div>
-<div class="eq">$$p_0 = \frac{n_i^2}{n_0} \approx \frac{n_i^2}{N_d} \tag{4.64}$$</div>
+<p><strong>補償的物理圖像：</strong>施體原子「捐出」電子，受體原子「接受」電子。當兩者同時存在時，施體電子會優先落入能量更低的受體能階（$E_a$ 在 $E_v$ 附近，而 $E_d$ 在 $E_c$ 附近——電子從高能的 $E_d$ 落入低能的 $E_a$ 在能量上是有利的）。每有一個電子從施體轉移到受體，就相當於一對施體-受體互相「抵消」——淨效應是有效摻雜濃度變為 $|N_d - N_a|$。</p>
 
-<h3>p 型半導體（$N_a \gg n_i$，$N_d \approx 0$）</h3>
-<div class="eq">$$p_0 = \frac{N_a}{2} + \sqrt{\left(\frac{N_a}{2}\right)^2 + n_i^2} \approx N_a \tag{4.66}$$</div>
-<div class="eq">$$n_0 = \frac{n_i^2}{p_0} \approx \frac{n_i^2}{N_a} \tag{4.68}$$</div>
+<h3>4.5.2 電荷中性條件的嚴格表達</h3>
 
-<h3>補償半導體（$N_d \neq 0$ 且 $N_a \neq 0$）</h3>
-<p>當 n 型和 p 型雜質同時存在時，它們會互相「抵消」——電子從施體落入受體能階，等效淨摻雜為 $|N_d - N_a|$。</p>
-<div class="eq">$$n_0 = \frac{N_d - N_a}{2} + \sqrt{\left(\frac{N_d - N_a}{2}\right)^2 + n_i^2} \quad (N_d > N_a) \tag{4.69}$$</div>
+<p>半導體中的電荷來自四個來源，如圖 4.14 所示：</p>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li><strong>負電荷：</strong>導帶中的電子 $n_0$（每個帶 $-q$）+ 游離受體離子 $N_a^-$（接受了電子，帶負電）</li>
+<li><strong>正電荷：</strong>價帶中的電洞 $p_0$（每個帶 $+q$）+ 游離施體離子 $N_d^+$（捐出了電子，帶正電）</li>
+</ul>
 
-<div class="exbox"><div class="ext">📐 例題 4.7 — n 型 Si 的載子濃度</div>Si，$N_d=10^{16}$ cm⁻³，$T=300$ K。<br>$n_0 \approx N_d = 10^{16}$ cm⁻³<br>$p_0 = n_i^2/n_0 = (1.5\times10^{10})^2 / 10^{16} = 2.25\times10^4$ cm⁻³<br>多數載子（電子）比少數載子（電洞）多了 12 個數量級！在 n 型 Si 中，電洞幾乎不存在——這就是為什麼我們說「多數載子主導導電性」。</div>
+<p>電中性要求總負電荷等於總正電荷：</p>
+<div class="eq">$$\boxed{n_0 + N_a^- = p_0 + N_d^+} \tag{4.56}$$</div>
+
+<p>更精確地，引入未游離雜質的濃度 $n_d$（仍在施體能階上的電子濃度）和 $p_a$（仍在受體能階上的電洞濃度），則 $N_d^+ = N_d - n_d$、$N_a^- = N_a - p_a$：</p>
+<div class="eq">$$n_0 + (N_a - p_a) = p_0 + (N_d - n_d) \tag{4.57}$$</div>
+
+<h3>4.5.3 完全游離近似下的解析解</h3>
+
+<p>在室溫附近，雜質的束縛能（~0.045 eV）與 $kT$（0.026 eV）同數量級，絕大多數雜質都已游離——這就是<strong>完全游離近似</strong>（$n_d \approx 0$、$p_a \approx 0$、$N_d^+ \approx N_d$、$N_a^- \approx N_a$）。在此近似下，電荷中性簡化為：</p>
+<div class="eq">$$n_0 + N_a = p_0 + N_d \tag{4.58}$$</div>
+
+<div class="callout-warn"><strong>⚠️ 補償半導體的物理——為什麼 $N_d$ 和 $N_a$ 不能簡單相減：</strong>初學者常犯的錯誤是認為「n 型和 p 型雜質互相抵消後，淨載子濃度就是 $N_d - N_a$（或 $N_a - N_d$）」。這個直覺<strong>在 $|N_d - N_a| \gg n_i$ 時近似正確</strong>，但在低摻雜或高溫時可能嚴重失準。真正發生的是：施體電子和受體電洞重新分布以達到熱平衡——多數載子濃度由 (4.60) 的二次方程決定，而非簡單的線性相減。當 $N_d \approx N_a$ 時（高度補償），$n_0 \approx n_i$——材料表現得像本徵半導體，儘管含有大量雜質！這是因為幾乎所有施體電子都被受體捕獲，兩者互相「消滅」了對方的電活性。</div>
+
+<h3>4.5.4 二次方程的完整推導</h3>
+
+<p>現在將質量作用定律 $n_0 p_0 = n_i^2$ 與電荷中性 (4.58) 結合。從 (4.58) 解出 $p_0$：</p>
+<div class="eq">$$p_0 = n_0 + N_a - N_d$$</div>
+
+<p>代入 $n_0 p_0 = n_i^2$：</p>
+<div class="eq">$$n_0 (n_0 + N_a - N_d) = n_i^2$$</div>
+
+<p>展開得到 $n_0$ 的二次方程：</p>
+<div class="eq">$$\boxed{n_0^2 - (N_d - N_a)n_0 - n_i^2 = 0} \tag{4.59b}$$</div>
+
+<p>使用二次公式求解（取正根，因為 $n_0$ 必須為正），得到本章最重要的通用公式：</p>
+<div class="eq">$$\boxed{n_0 = \frac{N_d - N_a}{2} + \sqrt{\left(\frac{N_d - N_a}{2}\right)^2 + n_i^2}} \tag{4.60}$$</div>
+
+<p>這個公式是補償半導體載子濃度的<strong>精確解</strong>（在完全游離近似下）。它統一了三種情況：</p>
+
+<p><strong>① n 型主導（$N_d \gg N_a$ 且 $N_d - N_a \gg n_i$）：</strong>根號內 $((N_d-N_a)/2)^2 \gg n_i^2$，因此 $n_0 \approx (N_d-N_a)/2 + (N_d-N_a)/2 = N_d - N_a \approx N_d$。多數載子濃度等於淨施體濃度。</p>
+
+<p><strong>② p 型主導（$N_a \gg N_d$ 且 $N_a - N_d \gg n_i$）：</strong>對稱地，$p_0$ 滿足：</p>
+<div class="eq">$$p_0 = \frac{N_a - N_d}{2} + \sqrt{\left(\frac{N_a - N_d}{2}\right)^2 + n_i^2} \tag{4.62}$$</div>
+<p>且 $p_0 \approx N_a - N_d \approx N_a$。</p>
+
+<p><strong>③ 高度補償（$N_d \approx N_a$ 即 $|N_d - N_a| \ll n_i$）：</strong>$N_d - N_a \approx 0$，因此 $n_0 \approx \sqrt{n_i^2} = n_i$。此時儘管有大量雜質原子，半導體表現得像本徵材料——所有施體電子都被受體捕獲，淨自由載子僅來自本徵激發。</p>
+
+<p>對 p 型半導體（$N_a > N_d$），少數載子電子濃度由質量作用定律決定：</p>
+<div class="eq">$$n_0 = \frac{n_i^2}{p_0} \approx \frac{n_i^2}{N_a - N_d}$$</div>
+
+<h3>4.5.5 載子濃度的溫度依賴性——三個區域</h3>
+
+<p>公式 (4.60) 中的 $n_i$ 是溫度的強函數（$n_i \propto T^{3/2} e^{-E_g/2kT}$），而 $N_d$、$N_a$ 在完全游離區基本不隨溫度變化。這導致載子濃度隨溫度呈現特徵性的三個區域（如圖 4.16），以 Si 中摻磷 $N_d = 5\times10^{14}$ cm⁻³ 為例：</p>
+
+<p><strong>① 凍結區（Freeze-out，$T < 50$ K）：</strong>$kT$ 遠小於雜質束縛能（P 在 Si 中為 0.045 eV）。大部分施體電子仍被束縛在 $E_d$ 能階上——完全游離近似在此失效。$n_0$ 隨溫度以 $e^{-E_d/2kT}$ 急劇上升。此時 $n_0 \ll N_d$，半導體實際上幾乎不導電。在太空低溫環境中（如深空探測器的陰影面可達 < 30 K），載子凍結是嚴重的工程問題。</p>
+
+<p><strong>② 外質區 / 飽和區（Extrinsic / Saturation，$50 < T < 500$ K）：</strong>$kT$ 足以完全游離雜質（$N_d^+ \approx N_d$），同時 $n_i$ 仍然遠小於 $N_d$。因此 $n_0 \approx N_d$——載子濃度基本不隨溫度變化，呈現一個「平台」。這是所有正常操作的半導體元件所在區域。室溫（300 K）恰好位於此區域中央。</p>
+
+<ul style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li>Si:P, $N_d=10^{15}$ cm⁻³：外質區從 ~30 K 延伸到 ~550 K</li>
+<li>Si:P, $N_d=10^{17}$ cm⁻³：外質區從 ~50 K 延伸到 ~600 K（更高摻雜→更寬的外質平台）</li>
+</ul>
+
+<p><strong>③ 本徵區（Intrinsic，$T > 500$ K）：</strong>$n_i$ 以指數形式增長，最終超過 $N_d$。此時 $((N_d-N_a)/2)^2 \ll n_i^2$，因此 $n_0 \approx n_i$——半導體失去其外質特性，回歸本徵行為。摻雜濃度越低，過渡到本徵區的溫度越低。例如：</p>
+
+<ul style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li>$N_d=10^{14}$ cm⁻³ → 約 450 K 進入本徵區</li>
+<li>$N_d=10^{15}$ cm⁻³ → 約 550 K 進入本徵區（Si 的 $n_i$ 在 ~550 K 達到 $10^{15}$ cm⁻³）</li>
+<li>$N_d=10^{17}$ cm⁻³ → 約 650 K 才進入本徵區</li>
+</ul>
+
+<p><strong>工程意義：</strong>功率元件（如 IGBT、功率 MOSFET）在大電流操作時，接面溫度可達 400–500 K。如果設計不當（摻雜濃度過低），元件可能在高溫時進入本徵區→漏電流急劇增大→熱失控→元件燒毀。這就是為什麼功率元件通常使用較高的摻雜濃度。</p>
+
+<table><thead><tr><th>溫度區域</th><th>$T$ 範圍（Si:P）</th><th>主導機制</th><th>$n_0$ 行為</th><th>完全游離？</th></tr></thead><tbody>
+<tr><td>凍結區</td><td>$< 50$ K</td><td>雜質游離</td><td>$n_0 \propto e^{-E_d/2kT}$</td><td>否</td></tr>
+<tr><td>外質區</td><td>$50-500$ K</td><td>雜質完全游離</td><td>$n_0 \approx N_d$（常數）</td><td>是 ✓</td></tr>
+<tr><td>本徵區</td><td>$> 500$ K</td><td>本徵激發</td><td>$n_0 \approx n_i \propto e^{-E_g/2kT}$</td><td>是</td></tr>
+</tbody></table>
+
+<div class="exbox"><div class="ext">📐 例題 4.9 — 補償半導體的載子濃度計算</div>Si，$T=300$ K，$N_d=5\times10^{15}$ cm⁻³，$N_a=2\times10^{15}$ cm⁻³。<br><br>代入 (4.60)：$n_0 = \frac{3\times10^{15}}{2} + \sqrt{\left(\frac{3\times10^{15}}{2}\right)^2 + (1.5\times10^{10})^2}$<br>$= 1.5\times10^{15} + \sqrt{2.25\times10^{30} + 2.25\times10^{20}}$<br>$= 1.5\times10^{15} + 1.5\times10^{15} = 3.0\times10^{15}$ cm⁻³<br><br>$p_0 = n_i^2 / n_0 = 2.25\times10^{20} / 3.0\times10^{15} = 7.5\times10^4$ cm⁻³<br><br>注意：$N_d - N_a = 3\times10^{15} \gg n_i = 1.5\times10^{10}$，因此 $n_0 \approx N_d - N_a$——淨施體濃度決定了多數載子濃度。受體「吃掉」了 $2\times10^{15}$ cm⁻³ 的施體電子。</div>
+
+<div class="exbox"><div class="ext">📐 例題 4.10 — 低摻雜 Ge 的補償效應</div>Ge，$T=300$ K，$N_d=2\times10^{14}$ cm⁻³，$N_a=0$。$n_i$(Ge) $=2.4\times10^{13}$ cm⁻³。<br><br>$n_0 = \frac{2\times10^{14}}{2} + \sqrt{\left(\frac{2\times10^{14}}{2}\right)^2 + (2.4\times10^{13})^2}$<br>$= 1\times10^{14} + \sqrt{1\times10^{28} + 5.76\times10^{26}}$<br>$= 1\times10^{14} + 1.028\times10^{14} = 2.028\times10^{14}$ cm⁻³<br><br>如果簡單地取 $n_0 \approx N_d = 2\times10^{14}$，誤差僅 1.4%——但這是因為 $N_d \gg n_i$。若 $N_d$ 更接近 $n_i$（例如 Ge 中 $N_d=5\times10^{13}$），簡單近似就會產生顯著誤差。</div>
+
 </section>
 
 <!-- 4.6 -->
 <section id="s4-6"><h2>4.6 Fermi 能階的位置</h2>
-<div class="figure"><img src="../../../images/solid-state-physics/ch04_pages/ch4_page_169.png" alt="圖 4.17" loading="lazy"><figcaption>圖 4.17：Fermi 能階隨摻雜濃度和溫度的完整變化圖。</figcaption></div>
+<div style="margin-bottom:14px;font-size:12px;color:var(--t2);line-height:1.8">
+<strong style="color:var(--tx)">🔑 本節重點</strong> ① $E_F-E_{Fi}=kT\ln(n_0/n_i)$——由載子濃度反推 Fermi 能階 ② 摻雜濃度每增 10 倍→$E_F$ 移動 $kT\ln10\approx0.06$ eV ③ 高溫時所有曲線趨近 $E_{Fi}$：$n_i$ 超過 $N_d$→本徵載子主導→Fermi 能階回歸能隙中央 ④ $E_F$ 位置圖（圖 4.7）是本章的「總地圖」——彙整所有摻雜和溫度資訊
+</div>
+<div class="figure"><img src="../../pages/ch04_pages/ch4_page_169_c.png" alt="圖 4.17" loading="lazy"><figcaption>圖 4.17：Fermi 能階隨摻雜濃度和溫度的完整變化圖。</figcaption></div>
 
 <p>有了 $n_0$（從摻雜濃度得知）和 $n_i$（從材料參數得知），就可以反推 Fermi 能階的位置。這是本章的收尾——把前面所有的推導串在一起：</p>
 <div class="eq">$$\boxed{E_F - E_{Fi} = kT\ln\!\left(\frac{n_0}{n_i}\right)} \tag{4.73}$$</div>
 
 <p><strong>物理圖像：</strong>Fermi 能階是系統的「電化學勢」。當你加入施體雜質（給予電子），系統的化學勢上升→ $E_F$ 向 $E_c$ 移動。加入受體（拿走電子），化學勢下降→ $E_F$ 向 $E_v$ 移動。摻雜濃度每增加 10 倍，$E_F$ 移動約 $kT\ln10 \approx 0.06$ eV（室溫）。</p>
 
-<div class="figure"><img src="../../../images/solid-state-physics/ch04_pages/ch4_page_145.png" alt="圖 4.7" loading="lazy"><figcaption>圖 4.7：Si 中 Fermi 能階位置隨摻雜濃度和溫度的變化。n 型（上半部）：$E_F$ 從 $E_{Fi}$ 向 $E_c$ 移動。p 型（下半部）：$E_F$ 向 $E_v$ 移動。注意高溫時 $E_F$ 趨近 $E_{Fi}$——因為 $n_i$ 變大，本徵行為主導。</figcaption></div>
+<div class="figure"><img src="../../pages/ch04_pages/ch4_page_145_c.png" alt="圖 4.7" loading="lazy"><figcaption>圖 4.7：Si 中 Fermi 能階位置隨摻雜濃度和溫度的變化。n 型（上半部）：$E_F$ 從 $E_{Fi}$ 向 $E_c$ 移動。p 型（下半部）：$E_F$ 向 $E_v$ 移動。注意高溫時 $E_F$ 趨近 $E_{Fi}$——因為 $n_i$ 變大，本徵行為主導。</figcaption></div>
 
 <div class="exbox"><div class="ext">📐 例題 4.12 — n 型 Si 的 $E_F$ 位置</div>Si，$N_d=10^{16}$ cm⁻³，$T=300$ K。<br>$E_F - E_{Fi} = 0.0259 \cdot \ln(10^{16}/1.5\times10^{10}) = 0.0259 \cdot 13.4 = 0.347$ eV<br>$E_{Fi}$ 約在能隙中央下方 0.013 eV → $E_c - E_F \approx 1.12/2 + 0.013 - 0.347 \approx 0.21$ eV。<br>Fermi 能階距導帶底部僅 0.21 eV——摻雜有效地把 $E_F$ 從能隙中央「拉」向了導帶。</div>
 
 <h3>溫度對 Fermi 能階的影響</h3>
 <p>圖 4.7 的一個重要特徵是：<strong>高溫時所有曲線都趨近 $E_{Fi}$</strong>。這是因為當溫度升高，$n_i$ 急劇增加（$\propto e^{-E_g/2kT}$）。當 $n_i$ 超過 $N_d$（或 $N_a$）時，本徵載子主導，半導體回歸本徵行為——$E_F \to E_{Fi}$。對 $N_d=10^{14}$ cm⁻³ 的 Si，這大約發生在 500 K 左右。</p>
-<div class="figure"><img src="../../../images/solid-state-physics/ch04_pages/ch4_page_150.png" alt="圖 4.9" loading="lazy"><figcaption>圖 4.9：Fermi 能階位置隨溫度的變化——不同摻雜濃度下，$E_F$ 從低溫的接近能帶邊緣逐漸回歸高溫的能隙中央。</figcaption></div>
+<div class="figure"><img src="../../pages/ch04_pages/ch4_page_150_c.png" alt="圖 4.9" loading="lazy"><figcaption>圖 4.9：Fermi 能階位置隨溫度的變化——不同摻雜濃度下，$E_F$ 從低溫的接近能帶邊緣逐漸回歸高溫的能隙中央。</figcaption></div>
 </section>
 
 <section id="summary"><h2>本章摘要</h2>
@@ -243,6 +414,8 @@ table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}thead th{
 <li><strong>摻雜：</strong>V 族（P, As）→ n 型；III 族（B）→ p 型。室溫下完全游離（束縛能 ∼0.045 eV vs $kT$ ∼0.026 eV）。</li>
 <li><strong>電荷中性：</strong>$n_0 + N_a^- = p_0 + N_d^+$。結合 $n_0 p_0 = n_i^2$ 可解出任何摻雜情況下的 $n_0$ 和 $p_0$。</li>
 <li><strong>Fermi 能階位置：</strong>$E_F - E_{Fi} = kT\ln(n_0/n_i)$。摻雜使 $E_F$ 移動——n 型向 $E_c$，p 型向 $E_v$。高溫時 $E_F$ 回歸 $E_{Fi}$。</li></ol></section>
+<section id="derivation-lab" class="derivation-lab"><h2>推導、假設與章末診斷</h2><h3>方程式使用契約</h3><ul><li>熱平衡要求溫度均勻、無外部注入且 Fermi 能階在空間中為常數。</li><li>$n=N_c e^{-(E_c-E_F)/kT}$ 與 $p=N_v e^{-(E_F-E_v)/kT}$ 使用 Maxwell–Boltzmann 近似，通常要求能階距帶邊至少約 $3kT$；退化摻雜須用 Fermi–Dirac 積分。</li><li>$n\approx N_D$ 或 $p\approx N_A$ 還要求完全游離、單一摻雜型占優且非本徵。</li><li>電荷中性邊界為整體 $
+ho=0$；局部空乏區則不能套用多數載子等於摻雜的近似。</li></ul><h3>中間推導：質量作用律</h3><ol><li>$n=N_c e^{-(E_c-E_F)/kT}$，$p=N_v e^{-(E_F-E_v)/kT}$。</li><li>相乘後 $E_F$ 消去：$np=N_cN_v e^{-(E_c-E_v)/kT}$。</li><li>定義 $n_i^2=N_cN_v e^{-E_g/kT}$，故平衡態 $n_0p_0=n_i^2$。</li><li>再與 $p+N_D^+=n+N_A^-$ 聯立，才可求補償或未完全游離情況。</li></ol><div class="dimcheck"><strong>單位／量級：</strong>$N_c,N_v,n,p$ 都是 cm$^{-3}$，所以 $np$ 是 cm$^{-6}$。300 K Si 的 $n_i$ 約 $10^{10}$ cm$^{-3}$，比常見 $10^{16}$ cm$^{-3}$ 摻雜低六個數量級。</div><h3>章末練習與概念診斷</h3><details><summary>$N_D=10^{16}$ cm$^{-3}$ 是否永遠代表 $n=10^{16}$ cm$^{-3}$？</summary><p>否。低溫可能凍結、很高溫可能進入本徵區、補償受體會降低淨電子濃度，重摻雜還可能退化。</p></details><details><summary>非平衡光照下仍可用單一 $E_F$ 嗎？</summary><p>通常不行；需分別使用電子與電洞準 Fermi 能階，且 $np$ 不再固定等於 $n_i^2$。</p></details><h3>延伸計算練習</h3><p>完成上方診斷後，請在不查公式的情況下重建代表推導，並改變一個參數檢查極限行為。更多含數值與解答的題目：<a href="../problems_examples/ch04_problems_zh.html">本章完整習題頁</a>。</p></section>
 </main>
 <script>
 function toggleTheme(){const h=document.documentElement;const n=h.getAttribute('data-theme')==='light'?'dark':'light';h.setAttribute('data-theme',n);localStorage.setItem('theme',n);document.getElementById('tl').textContent=n==='dark'?'淺色模式':'深色模式';}

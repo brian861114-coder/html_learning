@@ -26,16 +26,20 @@ table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}thead th{
 @media(max-width:768px){.sidebar{transform:translateX(-100%);transition:.3s}.sidebar.open{transform:translateX(0)}.main{margin-left:0;padding:20px 16px 60px}}
 @media print{.sidebar{display:none}.main{margin-left:0;max-width:100%;padding:0}}
 </style>
-<script src="../../../reading-preferences.js" defer></script></head>
-<body><a class="portal-home-link" href="../../../index.html">返回學習中心</a><style id="portal-home-link-style">.portal-home-link{position:fixed;top:16px;right:16px;z-index:1000;display:inline-flex;align-items:center;min-height:36px;padding:7px 11px;border:1px solid #cbd5e1;border-radius:8px;background:#fff;color:#1d4ed8;font:600 13px/1.2 -apple-system,BlinkMacSystemFont,"Noto Sans TC","Microsoft JhengHei",sans-serif;text-decoration:none;box-shadow:0 2px 10px rgba(15,23,42,.08)}.portal-home-link:hover{background:#eff6ff}.portal-home-link:focus-visible{outline:3px solid rgba(37,99,235,.35);outline-offset:2px}@media(max-width:768px){.portal-home-link{top:10px;right:10px;min-height:34px;padding:7px 9px;font-size:12px}}</style>
+<style id="derivation-lab-style">.derivation-lab{border-top:3px solid var(--ac);padding-top:20px}.derivation-lab ul,.derivation-lab ol{font-size:14px;color:var(--t2);margin:8px 0 14px 22px}.derivation-lab details{border:1px solid var(--bd);border-radius:8px;margin:8px 0;background:var(--bg)}.derivation-lab summary{cursor:pointer;padding:10px 13px;font-weight:600}.derivation-lab details p{padding:0 13px 10px}.dimcheck{background:var(--b3);border-left:3px solid var(--ac);padding:12px 15px;border-radius:0 8px 8px 0}</style>
+<script src="../../../reading-preferences.js" defer></script>
+</head>
+<body>
+<a class="portal-home-link" href="../../../index.html">返回學習中心</a>
+<style id="portal-home-link-style">.portal-home-link{position:fixed;top:16px;right:16px;z-index:1000;display:inline-flex;align-items:center;min-height:36px;padding:7px 11px;border:1px solid #cbd5e1;border-radius:8px;background:#fff;color:#1d4ed8;font:600 13px/1.2 -apple-system,BlinkMacSystemFont,"Noto Sans TC","Microsoft JhengHei",sans-serif;text-decoration:none;box-shadow:0 2px 10px rgba(15,23,42,.08)}.portal-home-link:hover{background:#eff6ff}.portal-home-link:focus-visible{outline:3px solid rgba(37,99,235,.35);outline-offset:2px}@media(max-width:768px){.portal-home-link{top:10px;right:10px;min-height:34px;padding:7px 9px;font-size:12px}}</style>
 <nav class="sidebar"><div class="sh"><div class="bk">半導體物理與元件·第四版</div><h2>第二章</h2></div><div class="sn"><ul>
-<div class="figure"><img src="../../../images/solid-state-physics/ch02_pages/ch2_page_59.png" alt="圖 2.5" loading="lazy"><figcaption>圖 2.5：波函數 $|\psi|^2$ 的機率密度詮釋——曲線下面積代表在該區域找到粒子的機率。</figcaption></div>
+<div class="figure"><img src="../../pages/ch02_pages/ch2_page_59_c.png" alt="圖 2.5" loading="lazy"><figcaption>圖 2.5：波函數 $|\psi|^2$ 的機率密度詮釋——曲線下面積代表在該區域找到粒子的機率。</figcaption></div>
 <li><a href="#preview">📋 2.0 本章預覽</a></li>
 <li class="ns">2.1 量子力學基本原理</li><li class="nsub"><a href="#s2-1-1">2.1.1 能量量子化</a></li><li class="nsub"><a href="#s2-1-2">2.1.2 波粒二象性</a></li><li class="nsub"><a href="#s2-1-3">2.1.3 不確定性原理</a></li>
 <li class="ns">2.2 薛丁格方程</li><li class="nsub"><a href="#s2-2">2.2.1 波動方程式</a></li><li class="nsub"><a href="#s2-2-2">2.2.2 波函數的物理意義</a></li><li class="nsub"><a href="#s2-2-3">2.2.3 邊界條件</a></li>
 <li class="ns">2.3 應用</li><li class="nsub"><a href="#s2-3-1">2.3.1 自由電子</a></li><li class="nsub"><a href="#s2-3-2">2.3.2 無限位能井 ⭐</a></li><li class="nsub"><a href="#s2-3-3">2.3.3 階梯位能</a></li><li class="nsub"><a href="#s2-3-4">2.3.4 穿隧效應 ⭐</a></li>
 <li class="ns">2.4 原子理論</li><li class="nsub"><a href="#s2-4">2.4 單電子原子與週期表</a></li>
-<li><a href="#summary">📋 本章摘要</a></li>
+<li><a href="#summary">📋 本章摘要</a></li><li><a href="#derivation-lab">🧪 推導、假設與章末診斷</a></li>
 </ul></div><div class="st"><button onclick="toggleTheme()">🌓 <span id="tl">深色模式</span></button></div></nav>
 <main class="main">
 <header class="header"><div class="cl">第二章</div><h1>量子力學導論</h1><div class="meta">Donald A. Neamen·《半導體物理與元件：基本原理》第四版·第 25–57 頁</div></header>
@@ -43,39 +47,66 @@ table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}thead th{
 <section id="preview"><div class="callout"><strong>📋 2.0 本章預覽</strong>
 <p>古典物理學（牛頓力學、馬克士威電磁學）在描述日常尺度的物體時極其成功。但在原子尺度——電子的行為完全不符合古典預測。電子不是微小的撞球；它們是<strong>機率波</strong>，同時具有粒子和波的性質，能量是量子化的。</p>
 <div class="callout-warn"><strong>⚡ 為什麼半導體工程師需要量子力學？</strong>你不會在日常工作中手動解薛丁格方程。但你<strong>必須</strong>理解它的結果：束縛電子→能量量子化→離散能階。這個概念是整個半導體物理的基石——沒有量子化，就沒有能帶理論（第三章）、沒有 $E_g$、就沒有半導體。不理解無限位能井，你就無法理解為什麼縮小電晶體的通道寬度會改變它的電性（量子侷限效應）。本章建立的每個概念都直接服務於第三章和第五章。</div>
-<p><strong>本章邏輯鏈：</strong>古典物理的失敗（光電效應）→普朗克/愛因斯坦（能量量子）→德布羅意（物質波）→海森堡（不確定性）→薛丁格（波動方程）→求解各種位能下的電子行為→延伸到原子（量子數、週期表）。</p></div></section>
+<p><strong>本章邏輯鏈：</strong>古典物理的失敗（光電效應）→普朗克/愛因斯坦（能量量子）→德布羅意（物質波）→海森堡（不確定性）→薛丁格（波動方程）→求解各種位能下的電子行為→延伸到原子（量子數、週期表）。</p>
+<div style="margin-top:14px;background:var(--bg);border:1px solid var(--fbd);border-radius:8px;padding:12px 16px">
+<div style="font-size:11px;font-weight:600;color:var(--ac);margin-bottom:6px">🔑 本章核心概念</div>
+<div style="font-size:12px;color:var(--tx);line-height:2">
+1. 光子能量 $E=h\nu=hc/\lambda$，$\lambda(\mu m)$ 時 $E(eV)=1.24/\lambda$<br>
+2. de Broglie 波長 $\lambda=h/p$——粒子也有波的性質（Davisson-Germer 實驗證實）<br>
+3. 不確定性原理：$\Delta x\Delta p\ge\hbar/2$，$\Delta E\Delta t\ge\hbar/2$——無法同時精確測量<br>
+4. 薛丁格方程：$-\frac{\hbar^2}{2m}\frac{d^2\psi}{dx^2}+V\psi=E\psi$——波函數 $\psi$ 的物理意義是 $|\psi|^2=$ 機率密度<br>
+5. 無限位能井：$E_n=n^2\pi^2\hbar^2/(2ma^2)$——能量量子化，$n$ 越大間距越大<br>
+6. 階梯位能：$E<V_0$ 時波函數在障壁中指數衰減但不為零→穿透深度 $1/k_2$<br>
+7. 位能障壁穿隧：穿透機率 $T\propto e^{-2\kappa a}$——對障壁寬度 $a$ 極敏感<br>
+8. 氫原子模型：$E_n=-13.6/n^2$ eV，波耳半徑 $a_0=0.529$ Å——量子數 $(n,l,m,s)$ 決定電子態<br>
+9. Pauli 不相容原理：每個量子態只能容納一個電子→多電子原子中電子按能量排列<br>
+10. 本章是第三章能帶理論的基礎——沒有量子化，就沒有 $E_g$，就沒有半導體<br>
+</div>
+</div></div></section>
 
-<div class="figure"><img src="../../../images/solid-state-physics/ch02_pages/ch02_overview.png" alt="第二章總覽圖" loading="lazy"><figcaption>📌 第二章總覽圖：量子力學導論 — 能量量子化、波粒二象性、不確定性原理、薛丁格方程、穿隧效應</figcaption></div>
+<div class="figure"><img src="../../pages/ch02_pages/ch02_overview.png" alt="第二章總覽圖" loading="lazy"><figcaption>📌 第二章總覽圖：量子力學導論 — 能量量子化、波粒二象性、不確定性原理、薛丁格方程、穿隧效應</figcaption></div>
 
 <section id="s2-1-1"><h2>2.1.1 能量量子化——光電效應</h2>
+<div style="margin-bottom:14px;font-size:12px;color:var(--t2);line-height:1.8">
+<strong style="color:var(--tx)">🔑 本節重點</strong> ① 普朗克假設：能量以量子 $E=h\nu$ 形式發射（$h=6.625\times10^{-34}$ J·s） ② 愛因斯坦：光本身由光子組成→光電效應：$T_{\max}=h\nu-\phi$ ③ 截止頻率 $\nu_0$：低於此頻率→無論光多強都打不出電子 ④ 光強度只改變光子數量，不改變每個光子的能量→決定發射率而非最大動能
+</div>
 <p>古典物理預測：只要光夠強，任何頻率都能打出電子。實驗事實：<strong>低於某個截止頻率 $\nu_0$，再強的光也打不出電子。</strong>高於 $\nu_0$，即使極微弱的光也能打出電子。古典物理完全無法解釋。</p>
 <p>普朗克（1900）提出了一個革命性的假設：熱輻射的能量不是連續的，而是以<strong>離散的能量包（量子）</strong>形式發射。每個量子的能量為 $E = h\nu$，其中 $h = 6.625\times10^{-34}$ J·s——這就是<strong>普朗克常數</strong>，量子力學的標誌性常數。</p>
 <p>愛因斯坦（1905）更進一步：光本身也是由離散的能量包組成的——<strong>光子（photon）</strong>。光電效應的完整解釋：</p>
 <div class="eq">$$\boxed{T_{\text{max}} = \frac{1}{2}mv^2 = h\nu - \phi = h(\nu - \nu_0)} \tag{2.1}$$</div>
 <p><strong>物理圖像：</strong>一個光子擊中金屬表面。如果光子能量 $h\nu$ 大於金屬的功函數 $\phi$（把電子從表面拉出來所需的最小能量），多餘的能量變成光電子的動能。光子能量不夠（$\nu < \nu_0$）→電子出不來。光強度只改變光子的<strong>數量</strong>（每秒多少個光子），不改變每個光子的<strong>能量</strong>→光強度影響光電子發射率，不影響最大動能。</p>
-<div class="figure"><img src="../../../images/solid-state-physics/ch02_pages/ch2_page_52.png" alt="圖 2.1" loading="lazy"><figcaption>圖 2.1：(a) 光電效應——光子擊出電子；(b) 光電子最大動能 vs 頻率——線性關係，截距 $\nu_0$。</figcaption></div>
+<div class="figure"><img src="../../pages/ch02_pages/ch2_page_51_c.png" alt="圖 2.1" loading="lazy"><figcaption>圖 2.1：(a) 光電效應——光子擊出電子；(b) 光電子最大動能 vs 頻率——線性關係，截距 $\nu_0$。</figcaption></div>
 <div class="callout"><strong>💡 實用換算：</strong>$E(\text{eV}) = 12400 / \lambda(\text{Å})$。可見光（$\lambda\sim5000$ Å）→ $E\sim2.5$ eV。X 射線（$\lambda\sim1$ Å）→ $E\sim12400$ eV。半導體的光學微影從可見光發展到紫外（193 nm）再到極紫外（13.5 nm），就是為了用更短波長（更高能量）的光來刻出更小的圖案。</div>
 </section>
 
 <section id="s2-1-2"><h2>2.1.2 波粒二象性</h2>
+<div style="margin-bottom:14px;font-size:12px;color:var(--t2);line-height:1.8">
+<strong style="color:var(--tx)">🔑 本節重點</strong> ① de Broglie 波長 $\lambda=h/p=h/(mv)$——任何運動粒子都有對應波長 ② Davisson-Germer 實驗：電子束在鎳單晶上產生繞射圖案→證實電子是波 ③ 150 eV 電子→$\lambda\approx1$ Å（原子間距量級）→電子顯微鏡解析度遠超光學顯微鏡 ④ 巨觀物體 $\lambda$ 極小（1 kg 棒球→$10^{-35}$ m）→無法觀測波動性
+</div>
 <p>光（傳統認為是波）表現出粒子性→那粒子是否也表現出波動性？德布羅意（1924）大膽假設：<strong>是。</strong>任何運動的粒子都有一個對應的波長：</p>
 <div class="eq">$$\boxed{\lambda = \frac{h}{p} = \frac{h}{mv}} \tag{2.3}$$</div>
 <p>這不只是理論臆測。Davisson 和 Germer（1927）用電子束照射鎳單晶，觀測到電子散射的<strong>繞射圖案</strong>——就像光通過光柵產生的干涉條紋。電子真的表現得像波。</p>
 <p><strong>數值直覺：</strong>一個被 150 V 電壓加速的電子，動能 $E = eV = 150$ eV→$v = 7.3\times10^6$ m/s→$\lambda = h/(mv) = 6.63\times10^{-34}/(9.11\times10^{-31}\times7.3\times10^6) = 1.0$ Å。這正好是原子間距的量級→電子束可以在晶體上產生 Bragg 繞射。相比之下，一個 1 kg 的棒球以 30 m/s 運動：$\lambda = 6.63\times10^{-34}/(1\times30) = 2.2\times10^{-35}$ m——比普朗克長度還小，完全無法觀測到波動性。</p>
-<div class="figure"><img src="../../../images/solid-state-physics/ch02_pages/ch2_page_54.png" alt="圖 2.2, 2.3" loading="lazy"><figcaption>圖 2.2：Davisson–Germer 實驗裝置。圖 2.3：散射電子通量 vs 角度——峰值來自 Bragg 繞射，證實 $\lambda=h/p$。</figcaption></div>
+<div class="figure"><img src="../../pages/ch02_pages/ch2_page_53_c.png" alt="圖 2.2, 2.3" loading="lazy"><figcaption>圖 2.2：Davisson–Germer 實驗裝置。圖 2.3：散射電子通量 vs 角度——峰值來自 Bragg 繞射，證實 $\lambda=h/p$。</figcaption></div>
 <div class="callout"><strong>💡 電子顯微鏡的解析度遠超光學顯微鏡</strong>——因為電子波長（$\sim0.05$ Å）比可見光波長（$\sim5000$ Å）短了十萬倍。繞射極限決定了你能看到的最小特徵——波長越短，解析度越高。TEM（穿透式電子顯微鏡）的解析度可達 0.5 Å——足以「看到」單個原子。SEM（掃描式電子顯微鏡）解析度 ∼1 nm——用於觀察奈米結構和元件截面。</div>
 </section>
 
 <section id="s2-1-3"><h2>2.1.3 海森堡不確定性原理</h2>
+<div style="margin-bottom:14px;font-size:12px;color:var(--t2);line-height:1.8">
+<strong style="color:var(--tx)">🔑 本節重點</strong> ① $\Delta x\Delta p\ge\hbar/2$——不可能同時精確知道位置和動量（本質限制，非儀器限制） ② $\Delta E\Delta t\ge\hbar/2$——能量-時間不確定性 ③ 直接後果：無法說「電子在 $x$ 處」，只能說機率 $|\psi(x)|^2$ ④ MOSFET 通道 < 5 nm→位置不確定性→動量展寬→古典漂移-擴散模型逐漸失效
+</div>
 <p>在古典物理中，你可以同時精確知道粒子的位置和動量。量子力學說：<strong>不行。</strong></p>
-<div class="eq">$$\Delta p \cdot \Delta x \geq \hbar \qquad \Delta E \cdot \Delta t \geq \hbar \tag{2.4, 2.5}$$</div>
+<div class="eq">$$\Delta x\,\Delta p \geq \frac{\hbar}{2} \qquad \Delta E\,\Delta t \gtrsim \frac{\hbar}{2} \tag{2.4, 2.5}$$</div>
 <p>其中 $\hbar = h/2\pi = 1.054\times10^{-34}$ J·s。這不是測量儀器的限制——這是自然的<strong>本質限制</strong>。電子<strong>本質上</strong>不具有同時確定的位置和動量。</p>
-<p><strong>數值估算——為什麼電子不能靜止：</strong>假設把一個電子侷限在 $a = 1$ nm 的範圍內（$\Delta x \approx 10^{-9}$ m）。不確定性原理要求 $\Delta p \geq \hbar/\Delta x = 1.054\times10^{-34}/10^{-9} = 1.054\times10^{-25}$ kg·m/s。對應的動能 $E \approx (\Delta p)^2/(2m) = (1.054\times10^{-25})^2/(2\times9.11\times10^{-31}) \approx 6\times10^{-21}$ J $\approx 0.04$ eV。這就是<strong>零點能</strong>——即使在 $T=0$ K，侷限在 1 nm 範圍內的電子仍有 0.04 eV 的動能。侷限範圍越小，零點能越大（$E \propto 1/a^2$）。</p>
+<p><strong>數值估算——侷限必然帶來動量展寬：</strong>若電子的位置不確定度為 $\Delta x\approx1$ nm，則 $\Delta p\geq\hbar/(2\Delta x)\approx5.27\times10^{-26}$ kg·m/s，對應的最低動能量級約 $0.01$ eV。這只是由不確定關係得到的量級下限；若是寬度恰為 1 nm 的無限深位能井，自由電子的精確基態能量為 $E_1=\pi^2\hbar^2/(2ma^2)\approx0.376$ eV。兩者都顯示侷限尺度越小，動能尺度越高（$E\propto1/a^2$）。</p>
 <div class="callout-warn"><strong>⚡ 不確定性原理的直接後果：</strong>我們不能說「電子在 $x=3$ Å 處」。我們只能說「在 $x=3$ Å 附近找到電子的機率是 $P$」。這就是為什麼我們需要<strong>機率密度函數</strong> $|\psi(x)|^2$——它告訴我們在每個位置找到電子的機率，而不是電子的確切位置。這也直接導致了第三章的 Fermi-Dirac 統計——每個量子態不是「有一個電子」而是「有一定機率被電子佔據」。</div>
 <div class="callout"><strong>💡 不確定性原理在半導體中的實際影響。</strong>當 MOSFET 的通道長度縮小到 5 nm 以下，電子在通道方向的位置不確定性 $\Delta x \approx 5$ nm→動量不確定性 $\Delta p \approx \hbar/5\times10^{-9} \approx 2\times10^{-26}$ kg·m/s→速度不確定性 $\Delta v \approx 2\times10^4$ m/s。這意味著電子的行為越來越「模糊」，古典的漂移-擴散模型逐漸失效→需要量子力學的 transport 理論（彈道傳輸、量子穿隧）。</div>
 </section>
 
 <section id="s2-2"><h2>2.2 薛丁格波動方程式</h2>
+<div style="margin-bottom:14px;font-size:12px;color:var(--t2);line-height:1.8">
+<strong style="color:var(--tx)">🔑 本節重點</strong> ① 時間無關薛丁格方程：$\frac{d^2\psi}{dx^2}+\frac{2m}{\hbar^2}[E-V(x)]\psi=0$——本章核心 ② 左邊動能項（$\partial^2/\partial x^2$）+ 位能項 $V\Psi$ = 總能量 $E\Psi$ ③ 分離變數法 $\Psi(x,t)=\psi(x)\phi(t)$ 將時間與空間分開 ④ 虛數 $j$ 出現→$\Psi$ 是複數函數→本身不可測量
+</div>
 <p>如果粒子是波，那支配它們的「運動方程」是什麼？薛丁格（1926）給出了答案：</p>
 <div class="eq">$$-\frac{\hbar^2}{2m}\frac{\partial^2\Psi}{\partial x^2} + V\Psi = j\hbar\frac{\partial\Psi}{\partial t} \tag{2.6}$$</div>
 <p>這看起來像擴散方程和波動方程的混合體。左邊第一項是動能項（$\partial^2/\partial x^2$ 來自動量平方，除以 $2m$ 就是動能）；第二項是位能。右邊是時間變化。虛數 $j$ 的出現意味著 $\Psi$ 是複數函數——它本身不是可測量的物理量。</p>
@@ -85,6 +116,9 @@ table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}thead th{
 </section>
 
 <section id="s2-2-2"><h2>2.2.2 波函數的物理意義</h2>
+<div style="margin-bottom:14px;font-size:12px;color:var(--t2);line-height:1.8">
+<strong style="color:var(--tx)">🔑 本節重點</strong> ① Born 詮釋：$|\psi(x)|^2dx$ = 在 $x$ 至 $x+dx$ 間找到粒子的機率 ② 歸一化條件 $\int_{-\infty}^{\infty}|\psi|^2dx=1$——粒子必定在某處 ③ $\psi$ 為複數→$|\psi|^2=\psi^*\psi$ 是實數、非負的機率密度 ④ 機率密度 ≠ 電荷密度（電荷密度 = $(-e)|\psi|^2$）
+</div>
 <p>$\psi(x)$ 本身是<strong>複數函數</strong>，沒有直接的物理意義。你不能用任何儀器「測量」$\psi$。那它有什麼用？</p>
 <p><strong>Born 的機率詮釋（1926）：</strong>$|\psi(x)|^2 dx$ = 在 $x$ 和 $x+dx$ 之間找到粒子的<strong>機率</strong>。$|\psi|^2 = \psi^*\psi$ 是<strong>機率密度</strong>——一個實數、非負的函數。</p>
 <div class="eq">$$\int_{-\infty}^{\infty}|\psi|^2 dx = 1 \tag{2.18}$$</div>
@@ -94,10 +128,13 @@ table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}thead th{
 </section>
 
 <section id="s2-2-3"><h2>2.2.3 邊界條件</h2>
+<div style="margin-bottom:14px;font-size:12px;color:var(--t2);line-height:1.8">
+<strong style="color:var(--tx)">🔑 本節重點</strong> ① $\psi$ 必須連續、$\partial\psi/\partial x$ 必須連續（$V=\infty$ 除外） ② $\psi$ 必須有界且束縛態可歸一化 ③ 邊界條件→量子化：$\psi(0)=\psi(a)=0$ 強制 $k_n=n\pi/a$→$E_n$ 離散 ④ 與第三章連結：週期性邊界條件（Kronig-Penney）→能帶結構（允帶/禁帶）
+</div>
 <p>薛丁格方程是二階微分方程，需要<strong>邊界條件</strong>來確定唯一解。物理上，邊界條件來自對波函數合理性的要求：</p>
 <p><strong>條件一：$\psi$ 必須連續。</strong>如果 $\psi$ 在某點不連續，$\partial\psi/\partial x$ 在該點會變成狄拉克 delta 函數→$\partial^2\psi/\partial x^2$ 發散→薛丁格方程無解。物理上：機率密度不能瞬間跳變。</p>
 <p><strong>條件二：$\partial\psi/\partial x$ 必須連續</strong>（除非 $V(x)$ 在該點發散到無窮大）。理由同上——如果一階導數不連續，二階導數就發散。唯一例外是 $V=\infty$ 的邊界（如無限位能井的壁），此時 $\psi$ 本身在邊界處為零。</p>
-<p><strong>條件三：$\psi$ 必須有界。</strong>$|\psi(x)|^2$ 代表機率密度→在無窮遠處必須趨近於零（粒子不可能出現在無窮遠處）。</p>
+<p><strong>條件三：$\psi$ 必須有界，且束縛態必須可歸一化。</strong>束縛態在無窮遠處趨近於零；散射態的平面波不會趨零，通常採盒歸一化或 delta 歸一化處理，不能把束縛態條件直接套到所有量子態。</p>
 <p><strong>條件四：$\psi$ 必須是單值函數。</strong>在任何位置 $x$，$|\psi(x)|^2$ 只能有一個值——否則機率密度就不唯一。</p>
 <div class="callout"><strong>💡 邊界條件 → 量子化。</strong>這些邊界條件是能量量子化的根本原因。以無限位能井為例：$\psi(0)=\psi(a)=0$ 強制波函數只能是駐波 $\sin(n\pi x/a)$，而駐波的波數 $k$ 只能取離散值 $k_n=n\pi/a$→$E_n$ 量子化。如果邊界條件不同（如週期性邊界條件，$\psi(0)=\psi(L)$），得到的量子化規則也不同——但物理本質相同：<strong>有限空間中的波只能以特定模式存在</strong>。</div>
 <div class="callout-warn"><strong>⚡ 與第三章的連結：</strong>Kronig-Penney 模型（3.1.2）使用的是<strong>週期性邊界條件</strong>——因為晶體中的位能是週期性的。正是這種週期性邊界條件產生了能帶結構（允帶和禁帶交替出現）。所以邊界條件不只是數學技巧——它直接決定了材料是導體、半導體還是絕緣體。</div>
@@ -112,41 +149,53 @@ table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}thead th{
 </section>
 
 <section id="s2-3-2"><h2>2.3.2 無限位能井 ⭐</h2>
+<div style="margin-bottom:14px;font-size:12px;color:var(--t2);line-height:1.8">
+<strong style="color:var(--tx)">🔑 本節重點</strong> ① 束縛電子→駐波（非行進波）：$\psi_n=\sqrt{2/a}\sin(n\pi x/a)$ ② $E_n=\hbar^2\pi^2 n^2/(2ma^2)$——能量量子化，$n=1,2,3,\ldots$ ③ 零點能 $E_1\neq0$：即使 $T=0$ K 電子也不能靜止 ④ $E_n\propto n^2/a^2$——$n$ 越大間距越大；$a$ 越小（井越窄）→能階越高（量子侷限效應）
+</div>
 <p>把電子關在一個寬度為 $a$ 的「盒子」裡——$V=0$（$0<x<a$），$V=\infty$（外面）。電子完全無法逃脫。</p>
-<div class="figure"><img src="../../../images/solid-state-physics/ch02_pages/ch2_page_63.png" alt="圖 2.6" loading="lazy"><figcaption>圖 2.6：無限位能井——電子被限制在 $0<x<a$ 的區域。</figcaption></div>
+<div class="figure"><img src="../../pages/ch02_pages/ch2_page_62_c.png" alt="圖 2.6" loading="lazy"><figcaption>圖 2.6：無限位能井——電子被限制在 $0<x<a$ 的區域。</figcaption></div>
 <p><strong>物理圖像：</strong>想像一條兩端固定的琴弦。弦只能以特定頻率（諧波）振動——你不能讓弦以任意頻率振動。電子的波函數也是如此：兩端必須為零（$\psi(0)=\psi(a)=0$），就像琴弦的兩端固定。這導致波函數只能是<strong>駐波</strong>——不是行進波。</p>
 <p>數學推導：$\psi(0)=0$→$A_1=0$（只剩正弦項）。$\psi(a)=0$→$\sin(ka)=0$→<strong>$ka=n\pi$</strong>。這是量子化的來源——$k$ 只能取離散值 $k_n = n\pi/a$。代入 $k=\sqrt{2mE}/\hbar$：</p>
 <div class="eq">$$\boxed{E_n = \frac{\hbar^2\pi^2 n^2}{2ma^2},\quad n=1,2,3,\ldots} \tag{2.38}$$</div>
 <div class="eq">$$\boxed{\psi_n(x) = \sqrt{\frac{2}{a}}\sin\!\left(\frac{n\pi x}{a}\right)} \tag{2.36}$$</div>
-<div class="figure"><img src="../../../images/solid-state-physics/ch02_pages/ch2_page_64.png" alt="圖 2.7" loading="lazy"><figcaption>圖 2.7：(a) 四個最低能階；(b) 對應駐波波函數；(c) 機率密度。注意 $n=2$ 在 $x=a/2$ 處有一個節點。</figcaption></div>
-<div class="callout-warn"><strong>⚡ 無限位能井的三個核心結論（考試必考）：</strong><br>① <strong>駐波而非行進波：</strong>束縛粒子的標誌。自由電子→行進波；束縛電子→駐波。<br>② <strong>零點能 $E_1 \neq 0$：</strong>即使 $T=0$ K，電子也不能靜止。如果靜止（$p=0$），$\Delta x=0$，違反不確定性原理。量子力學強制電子永遠在運動。<br>③ <strong>$E_n \propto n^2/a^2$：</strong>能階間距隨 $n$ 增大而增大（非等距！）。$a$ 越小（井越窄），能階越高。這是量子侷限效應——把電子關在更小的空間裡需要更多能量。</div>
+<div class="figure"><img src="../../pages/ch02_pages/ch2_page_65_c.png" alt="圖 2.7" loading="lazy"><figcaption>圖 2.7：(a) 四個最低能階；(b) 對應駐波波函數；(c) 機率密度。注意 $n=2$ 在 $x=a/2$ 處有一個節點。</figcaption></div>
+<div class="callout-warn"><strong>⚡ 無限位能井的三個核心結論（考試必考）：</strong><br>① <strong>駐波而非行進波：</strong>束縛粒子的標誌。自由電子→行進波；束縛電子→駐波。<br>② <strong>零點能 $E_1 \neq 0$：</strong>即使 $T=0$ K，電子也不能靜止。若動量被精確固定為零（$\Delta p=0$），位置不確定度便不能有限；它無法同時滿足位能井的空間侷限與邊界條件。基態因此具有非零能量。<br>③ <strong>$E_n \propto n^2/a^2$：</strong>能階間距隨 $n$ 增大而增大（非等距！）。$a$ 越小（井越窄），能階越高。這是量子侷限效應——把電子關在更小的空間裡需要更多能量。</div>
 <div class="callout"><strong>💡 從無限位能井到半導體量子井。</strong>現代量子井雷射利用的正是同樣的物理：用奈米厚度的 GaAs 層夾在 AlGaAs 之間（AlGaAs 的 $E_g$ 更寬→形成位能井），電子被侷限在 GaAs 層中。改變 GaAs 層的厚度 $a$ 就能調控量子化能階的位置→從而調控雷射的波長。你剛學到的 $E_n \propto 1/a^2$ 直接應用在數十億美元的產業中。</div>
 </section>
 
 <section id="s2-3-3"><h2>2.3.3 階梯位能——滲入古典禁區</h2>
+<div style="margin-bottom:14px;font-size:12px;color:var(--t2);line-height:1.8">
+<strong style="color:var(--tx)">🔑 本節重點</strong> ① $E<V_0$ 時波函數不為零→指數衰減 $\psi_2=A_2e^{-k_2x}$，$k_2=\sqrt{2m(V_0-E)}/\hbar$ ② 穿透深度 $1/k_2$（波函數衰減至 $1/e$ 的特徵長度）→Si 中 ~0.5 nm ③ 這是純量子效應：古典粒子不能進入 $E<V_0$ 區域（動能變負） ④ 「有滲入」≠「有淨透射」——半無限階梯 $R=1$，只有有限寬障壁才有穿隧
+</div>
 <p>現在考慮一個更有趣的場景：位能在 $x=0$ 處從 0 跳到 $V_0$。電子從左邊來，能量 $E < V_0$（古典物理中電子不可能越過障壁）。</p>
-<div class="figure"><img src="../../../images/solid-state-physics/ch02_pages/ch2_page_67.png" alt="圖 2.8" loading="lazy"><figcaption>圖 2.8：階梯位能的能帶圖與波函數——區域 I 的振盪波函數在進入區域 II 後指數衰減。</figcaption></div>
-<div class="figure"><img src="../../../images/solid-state-physics/ch02_pages/ch2_page_65.png" alt="圖 2.8 附圖" loading="lazy"><figcaption>圖 2.8 附：波函數 $|\psi|^2$ 在 $x>0$ 處不為零但快速衰減，穿透深度 $1/k_2$ 取決於 $(V_0-E)$。</figcaption></div>
+<div class="figure"><img src="../../pages/ch02_pages/ch2_page_65_c.png" alt="圖 2.8" loading="lazy"><figcaption>圖 2.8：階梯位能的能帶圖與波函數——區域 I 的振盪波函數在進入區域 II 後指數衰減。</figcaption></div>
+<div class="figure"><img src="../../pages/ch02_pages/ch2_page_65_c.png" alt="圖 2.8 附圖" loading="lazy"><figcaption>圖 2.8 附：波函數 $|\psi|^2$ 在 $x>0$ 處不為零但快速衰減，穿透深度 $1/k_2$ 取決於 $(V_0-E)$。</figcaption></div>
 <p>區域 I 的解仍是行進波（入射+反射）。區域 II 呢？
 <div class="eq">$$\psi_2(x) = A_2 e^{-k_2 x},\quad k_2 = \frac{\sqrt{2m(V_0-E)}}{\hbar} \tag{2.46}$$</div>
 <p><strong>穿透深度的數值估算：</strong>$1/k_2$ 是波函數衰減到 $1/e$ 的特徵長度。對 Si 中的電子（$m^* = 0.26\,m_0$）越過一個 1 eV 的障壁，且 $E = 0.5$ eV（$V_0-E = 0.5$ eV）：</p>
 <div class="eq">$$\frac{1}{k_2} = \frac{\hbar}{\sqrt{2\times0.26\times9.11\times10^{-31}\times0.5\times1.6\times10^{-19}}} \approx 0.5\ \text{nm}$$</div>
 <p>穿透深度只有 ∼0.5 nm（約 2 個原子層）！這就是為什麼穿隧效應只在極薄的障壁（< 3 nm）中才顯著。</p>
-<p><strong>反射係數：</strong>即使電子被「反射」回去，反射機率 $R$ 不是 1——有一部分波函數滲入障壁。$R$ 取決於 $(V_0-E)/E$ 的比值。$E$ 越接近 $V_0$，反射越少。</p>
+<p><strong>反射係數與滲入：</strong>對延伸到 $x\to+\infty$ 的半無限階梯且 $E&lt;V_0$，障壁內只有消逝波，沒有向右傳遞的機率流，因此總反射率是 $R=1$。但 $\psi_2(x)$ 在界面附近仍不為零，表示量子機率密度會滲入古典禁區；「有滲入」不等於「有淨透射流」。有限寬障壁才會在另一側形成非零透射流。</p>
 <div class="callout-warn"><strong>⚡ 這是純量子效應：</strong>古典物理中，粒子不可能出現在 $E<V_0$ 的區域（動能會變負）。但量子力學中，波函數<strong>不為零</strong>——電子有一定的機率<strong>滲入</strong>障壁。雖然機率隨深度指數衰減（典型的穿透深度只有幾個 Å），但這不是零。這個「滲入」是穿隧效應的前奏。</div>
 </section>
 
 <section id="s2-3-4"><h2>2.3.4 位能障壁與穿隧效應 ⭐</h2>
+<div style="margin-bottom:14px;font-size:12px;color:var(--t2);line-height:1.8">
+<strong style="color:var(--tx)">🔑 本節重點</strong> ① 有限寬障壁→穿隧機率 $T\approx16\frac{E}{V_0}(1-\frac{E}{V_0})e^{-2k_2a}$ ② $T\propto e^{-2k_2a}$——對障壁寬度 $a$ 指數衰減（非常敏感！） ③ 應用：快閃記憶體（Fowler-Nordheim 穿隧）、穿隧二極體、STM ④ 只有奈米級障壁（< 3 nm）才有顯著穿隧→現代 MOSFET 閘極漏電流的根源
+</div>
 <p>如果障壁的寬度是<strong>有限的</strong>（寬度 $a$），電子可以從左邊「穿隧」到右邊：</p>
-<div class="figure"><img src="../../../images/solid-state-physics/ch02_pages/ch2_page_70.png" alt="圖 2.9" loading="lazy"><figcaption>圖 2.9：位能障壁的能帶圖——波函數在區域 I（入射+反射）、區域 II（指數衰減）、區域 III（透射波）中的行為。</figcaption></div>
-<div class="figure"><img src="../../../images/solid-state-physics/ch02_pages/ch2_page_81.png" alt="圖 2.9 附圖" loading="lazy"><figcaption>圖 2.9 附：穿隧機率 $T$ 隨障壁寬度 $a$ 和粒子能量 $E$ 的變化——$T$ 對 $a$ 呈指數衰減。</figcaption></div>
+<div class="figure"><img src="../../pages/ch02_pages/ch2_page_69_c.png" alt="圖 2.9" loading="lazy"><figcaption>圖 2.9：位能障壁的能帶圖——波函數在區域 I（入射+反射）、區域 II（指數衰減）、區域 III（透射波）中的行為。</figcaption></div>
+<div class="figure"><img src="../../pages/ch02_pages/ch2_page_69_c.png" alt="圖 2.9 附圖" loading="lazy"><figcaption>圖 2.9 附：穿隧機率 $T$ 隨障壁寬度 $a$ 和粒子能量 $E$ 的變化——$T$ 對 $a$ 呈指數衰減。</figcaption></div>
 <div class="eq">$$\boxed{T \approx 16\frac{E}{V_0}\left(1-\frac{E}{V_0}\right)e^{-2k_2 a}} \tag{2.63}$$</div>
 <p><strong>物理直覺：</strong>穿隧機率隨障壁寬度 $a$ <strong>指數衰減</strong>（不是線性！）。$a$ 每增加一個 $1/k_2$（約 1–2 Å），穿隧機率就減少 $e^2 \approx 7.4$ 倍。這就是為什麼穿隧效應只對極薄的障壁（奈米尺度）重要。</p>
-<p><strong>數值例題：</strong>SiO₂ 中的電子穿隧（$m^* \approx 0.5\,m_0$，$V_0 = 3.1$ eV，$E = 0$）：$k_2 = \sqrt{2\times0.5\times9.11\times10^{-31}\times3.1\times1.6\times10^{-19}}/(1.054\times10^{-34}) \approx 6.4\times10^9$ m$^{-1}$。對 $a = 3$ nm：$T \propto e^{-2\times6.4\times10^9\times3\times10^{-9}} = e^{-38.4} \approx 2\times10^{-17}$——幾乎不可能。對 $a = 1$ nm：$T \propto e^{-12.8} \approx 3\times10^{-6}$——微小但非零。對 $a = 0.5$ nm：$T \propto e^{-6.4} \approx 1.6\times10^{-3}$——可觀測！這就是為什麼 Flash 記憶體的隧穿氧化層厚度必須 < 8 nm。</p>
-<div class="callout-warn"><strong>⚡ 穿隧效應在半導體中的實際應用：</strong><br>• <strong>快閃記憶體（Flash）：</strong>電子透過穿隧穿過 10 nm 的氧化層進入浮動閘極→寫入資料。氧化層越薄→穿隧機率越大→寫入越快，但漏電也越多→資料保持時間越短。這是 Flash 記憶體設計的核心取捨。<br>• <strong>穿隧二極體（Tunnel Diode）：</strong>重摻雜的 pn 接面，空乏層極薄→電子可直接穿隧。<br>• <strong>STM（掃描穿隧顯微鏡）：</strong>探針尖端與樣品表面之間有真空障壁→穿隧電流對距離極其敏感（指數關係）→可解析單個原子。</div>
+<p><strong>數值例題：</strong>取 SiO₂ 障壁 $V_0=3.1$ eV、電子能量 $E=1.0$ eV、$m^*\approx0.5m_0$，則 $k_2=\sqrt{2m^*(V_0-E)}/\hbar\approx5.25\times10^9$ m$^{-1}$。只看主導的指數因子：$a=3$ nm 時 $e^{-2k_2a}\approx2.1\times10^{-14}$；$a=1$ nm 時約 $2.8\times10^{-5}$；$a=0.5$ nm 時約 $5.3\times10^{-3}$。這裡刻意選 $0&lt;E&lt;V_0$，因為前式的前因子在 $E=0$ 時為零，不能一面代入 $E=0$、一面只保留指數項宣稱是完整穿隧率。</p>
+<div class="callout-warn"><strong>⚡ 穿隧效應在半導體中的實際應用：</strong><br>• <strong>快閃記憶體（Flash）：</strong>程式寫入／抹除可利用高電場下的 Fowler–Nordheim 穿隧，較薄介電層也可能出現直接穿隧。實際厚度取決於材料、電場、可靠度與製程世代，沒有通用的「必須小於 8 nm」門檻。<br>• <strong>穿隧二極體（Tunnel Diode）：</strong>重摻雜的 pn 接面，空乏層極薄→電子可直接穿隧。<br>• <strong>STM（掃描穿隧顯微鏡）：</strong>探針尖端與樣品表面之間有真空障壁→穿隧電流對距離極其敏感（指數關係）→可解析單個原子。</div>
 </section>
 
 <section id="s2-4"><h2>2.4 波理論在原子中的延伸</h2>
+<div style="margin-bottom:14px;font-size:12px;color:var(--t2);line-height:1.8">
+<strong style="color:var(--tx)">🔑 本節重點</strong> ① 氫原子：$E_n=-13.6/n^2$ eV，波耳半徑 $a_0=0.529$ Å ② 四個量子數：$n$（主量子數）、$l$（角動量）、$m$（磁量子數）、$s$（自旋 $\pm1/2$） ③ Pauli 不相容原理：每個量子態 $(n,l,m,s)$ 只能被一個電子佔據→決定週期表 ④ 電子填入規則：Aufbau 原理（最低能階優先）、Hund 規則（自旋平行優先） ⑤ Si 電子組態 $1s^2 2s^2 2p^6 3s^2 3p^2$→4 個價電子→sp³ 混成→鑽石結構
+</div>
 <p>將薛丁格方程應用於氫原子——一個電子和一個質子之間的庫侖吸引力：$V(r) = -e^2/(4\pi\epsilon_0 r)$。因為位能是球對稱的，在球座標中求解。</p>
 <p>求解過程產生三個<strong>量子數</strong>（加上自旋就是四個）：</p>
 <table><thead><tr><th>量子數</th><th>符號</th><th>取值</th><th>物理意義</th></tr></thead><tbody>
@@ -154,7 +203,7 @@ table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}thead th{
 <tr><td>角動量量子數</td><td>$l$</td><td>$0,\ldots,n-1$</td><td>決定軌域形狀（s,p,d,f）</td></tr>
 <tr><td>磁量子數</td><td>$m$</td><td>$-l,\ldots,+l$</td><td>決定軌域空間取向</td></tr>
 <tr><td>自旋量子數</td><td>$s$</td><td>$\pm 1/2$</td><td>電子內稟角動量</td></tr></tbody></table>
-<div class="figure"><img src="../../../images/solid-state-physics/ch02_pages/ch2_page_73.png" alt="圖 2.10" loading="lazy"><figcaption>圖 2.10：氫原子徑向機率密度。基態電子最可能出現在 $r=a_0=0.529$ Å（波耳半徑）。</figcaption></div>
+<div class="figure"><img src="../../pages/ch02_pages/ch2_page_70_c.png" alt="圖 2.10" loading="lazy"><figcaption>圖 2.10：氫原子徑向機率密度。基態電子最可能出現在 $r=a_0=0.529$ Å（波耳半徑）。</figcaption></div>
 <p><strong>包立不相容原理</strong>——每個量子態 $(n,l,m,s)$ 只能被一個電子佔據——決定了原子中電子的排列方式，進而決定了整個週期表的結構。每個殼層 $n$ 最多容納 $2n^2$ 個電子（K:2, L:8, M:18, N:32）。</p>
 <p><strong>電子組態的填入規則：</strong></p>
 <ol style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
@@ -163,7 +212,7 @@ table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}thead th{
 <li><strong>Hund 規則：</strong>同一亞層（如 2p 的三個軌域）中，電子先單獨佔據不同軌域且自旋平行，再配對。這降低了電子間的庫侖排斥。</li>
 </ol>
 <p><strong>矽的電子組態：</strong>$1s^2 2s^2 2p^6 3s^2 3p^2$——最外層有 4 個價電子（$3s^2 3p^2$）。這 4 個電子參與 sp³ 混成→形成 4 個共價鍵→鑽石結構。內層 10 個電子被原子核緊密束縛→不參與化學鍵結→在半導體物理中通常忽略。</p>
-<div class="figure"><img src="../../../images/solid-state-physics/ch02_pages/ch2_page_76.png" alt="圖 2.12" loading="lazy"><figcaption>圖 2.12：基於量子力學的週期表建構——電子按能量從低到高填滿量子態。</figcaption></div>
+<div class="figure"><img src="../../pages/ch02_pages/ch2_page_74_c.png" alt="圖 2.12" loading="lazy"><figcaption>圖 2.11：氫原子徑向機率密度——(a) 基態與 (b) 第一激發態的電子出現機率分布，峰值對應波耳半徑 $a_0$。</figcaption></div>
 <div class="callout"><strong>💡 從氫原子到半導體摻雜。</strong>施體原子（如 P）在 Si 晶格中的行為類似一個「固態氫原子」——多餘的電子被施體離子束縛，束縛能約 0.045 eV（遠小於氫原子的 13.6 eV，因為 Si 的高介電常數屏蔽了庫侖力）。這個類比是理解摻雜能階的關鍵——第四章將以此為基礎。</div>
 </section>
 
@@ -171,13 +220,14 @@ table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}thead th{
 <ol style="font-size:14px;color:var(--t2);margin-left:18px">
 <li><strong>能量量子化：</strong>$E=h\nu$。光電效應——光的粒子性。功函數 $\phi$ = 電子脫離所需最小能量。</li>
 <li><strong>波粒二象性：</strong>$\lambda=h/p$。電子繞射實驗證實。波數 $k=2\pi/\lambda$。</li>
-<li><strong>不確定性原理：</strong>$\Delta p\Delta x\geq\hbar$。無法同時精確測量→只能以機率描述。</li>
+<li><strong>不確定性原理：</strong>$\Delta x\Delta p\geq\hbar/2$。無法同時精確測量→只能以機率描述。</li>
 <li><strong>薛丁格方程：</strong>量子力學的「$F=ma$」。時間無關形式 (2.13) 是本章核心。</li>
 <li><strong>Born 詮釋：</strong>$|\psi|^2$ = 機率密度。$\int|\psi|^2dx=1$（歸一化）。</li>
 <li><strong>自由電子→行進波：</strong>$k=\sqrt{2mE}/\hbar=p/\hbar$。$|\psi|^2$ 為常數。</li>
 <li><strong>束縛電子→駐波：</strong>無限位能井→$E_n=\hbar^2\pi^2n^2/(2ma^2)$。能量量子化！</li>
 <li><strong>穿隧效應：</strong>$T\propto e^{-2k_2a}$。障壁越薄/越矮→穿透機率越大。</li>
 <li><strong>氫原子→量子數 $(n,l,m,s)$：</strong>$E_n=-13.6/n^2$ eV。包立原理→$2n^2$。</li></ol></section>
+<section id="derivation-lab" class="derivation-lab"><h2>推導、假設與章末診斷</h2><h3>方程式使用契約與邊界條件</h3><ul><li>本章薛丁格方程採非相對論、單粒子、無自旋且位能 $V(x)$ 已知；多體作用被忽略或吸收到有效位能。</li><li>定態解要求 $V$ 不顯含時間。束縛態須可歸一化；散射態採盒歸一化或 delta 歸一化。</li><li>有限位能且質量相同時，$\psi$ 與 $d\psi/dx$ 連續；異質接面有效質量跳變時，應連續的是 $\psi$ 與 $(1/m^*)d\psi/dx$。</li><li>無限井壁使用 Dirichlet 邊界 $\psi(0)=\psi(a)=0$；半無限階梯 $E<V_0$ 的消逝波在無窮遠必須有限。</li></ul><h3>中間推導：無限位能井</h3><ol><li>井內 $V=0$：$\psi=A\sin kx+B\cos kx$，$k=\sqrt{2mE}/\hbar$。</li><li>$\psi(0)=0\Rightarrow B=0$；$\psi(a)=0\Rightarrow \sin ka=0$。</li><li>$k_na=n\pi$，故 $E_n=\hbar^2\pi^2n^2/(2ma^2)$。</li><li>由 $\int_0^a|\psi|^2dx=1$ 得 $A=\sqrt{2/a}$。</li></ol><div class="dimcheck"><strong>單位／量級：</strong>$\hbar^2/(ma^2)$ 的單位是 J；自由電子在 1 nm 無限井的 $E_1\approx0.376$ eV，縮成 0.5 nm 會增為四倍。</div><h3>章末練習與概念診斷</h3><details><summary>半無限階梯中波函數滲入障壁，為何仍有 $R=1$？</summary><p>消逝波有機率密度但沒有向右淨機率流；只有有限寬障壁另一側出現行進波時才有非零透射。</p></details><details><summary>若把井寬加倍，基態能與波函數節點如何改變？</summary><p>$E_1\propto1/a^2$，所以降為四分之一；基態仍無內部節點，只是空間尺度拉長。</p></details><h3>延伸計算練習</h3><p>完成上方診斷後，請在不查公式的情況下重建代表推導，並改變一個參數檢查極限行為。更多含數值與解答的題目：<a href="../problems_examples/ch02_problems_zh.html">本章完整習題頁</a>。</p></section>
 </main>
 <script>
 function toggleTheme(){const h=document.documentElement;const n=h.getAttribute('data-theme')==='light'?'dark':'light';h.setAttribute('data-theme',n);localStorage.setItem('theme',n);document.getElementById('tl').textContent=n==='dark'?'淺色模式':'深色模式';}

@@ -2,80 +2,446 @@
 <html lang="zh-TW" data-theme="light">
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>第 15 章 Microwave and Power Devices - 半導體物理與元件</title>
+<title>第 15 章 半導體微波與功率元件</title>
 <script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']],tags:'ams'},options:{ignoreHtmlClass:'no-math'}};</script>
 <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 <style>
-:root{--bg:#fff;--b2:#F5F5F7;--b3:#E8F0FE;--tx:#1D1D1F;--t2:#1D1D1F;--ac:#007AFF;--bd:#D2D2D7;--fbd:#E5E5EA;--wbg:#FFF9F0;--wbd:#FFB340;--wtx:#B8700A;--nw:260px}
-[data-theme="dark"]{--bg:#1C1C1E;--b2:#2C2C2E;--b3:#1A2332;--tx:#F5F5F7;--t2:#A1A1A6;--ac:#0A84FF;--bd:#48484A;--fbd:#3A3A3C;--wbg:#2C2416;--wbd:#8B6914;--wtx:#FFB340}
+:root{--bg:#fff;--b2:#F5F5F7;--b3:#E8F0FE;--tx:#1D1D1F;--t2:#1D1D1F;--ac:#007AFF;--bd:#D2D2D7;--fbd:#E5E5EA;--wbg:#FFF9F0;--wbd:#FFB340;--wtx:#B8700A;--nw:260px;--sh:0 2px 8px rgba(0,0,0,.08)}
+[data-theme="dark"]{--bg:#1C1C1E;--b2:#2C2C2E;--b3:#1A2332;--tx:#F5F5F7;--t2:#A1A1A6;--ac:#0A84FF;--bd:#48484A;--fbd:#3A3A3C;--wbg:#2C2416;--wbd:#8B6914;--wtx:#FFB340;--sh:0 2px 8px rgba(0,0,0,.3)}
 *{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth;scroll-padding-top:16px}
 body{font-family:-apple-system,BlinkMacSystemFont,'Noto Sans TC','Microsoft JhengHei',sans-serif;background:var(--b2);color:var(--tx);line-height:1.9;display:flex;min-height:100vh}
 .sidebar{position:fixed;top:0;left:0;width:var(--nw);height:100vh;background:var(--bg);border-right:1px solid var(--bd);overflow-y:auto;z-index:100;padding:20px 16px;display:flex;flex-direction:column}
 .sh{margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--fbd)}.sh h2{font-size:14px;font-weight:600;color:var(--ac)}.sh .bk{font-size:11px;color:var(--t2)}
-.sn{flex:1}.sn ul{list-style:none}.sn a{display:block;padding:4px 10px;font-size:11px;color:var(--t2);text-decoration:none;border-radius:5px;transition:.12s}.sn a:hover{background:var(--b3);color:var(--ac)}.sn a.active{background:var(--b3);color:var(--ac);font-weight:500}
+.sn{flex:1}.sn ul{list-style:none}.sn a{display:block;padding:4px 10px;font-size:11px;color:var(--t2);text-decoration:none;border-radius:5px;transition:.12s}.sn a:hover{background:var(--b3);color:var(--ac)}.sn a.active{background:var(--b3);color:var(--ac);font-weight:500}.sn .ns{font-weight:600;font-size:12px;color:var(--tx);margin-top:10px;padding:2px 10px}.sn .nsub a{padding-left:20px;font-size:10px}
 .st{margin-top:auto;padding-top:12px;border-top:1px solid var(--fbd)}.st button{width:100%;padding:6px;border:1px solid var(--bd);border-radius:6px;background:var(--b2);color:var(--tx);cursor:pointer;font-size:12px}
 .main{margin-left:var(--nw);flex:1;max-width:1050px;padding:32px 40px 80px}.header{margin-bottom:32px;padding-bottom:20px;border-bottom:2px solid var(--ac)}
 .header .cl{font-size:12px;font-weight:600;color:var(--ac);letter-spacing:1px}.header h1{font-size:28px;font-weight:700;margin:6px 0}.header .meta{font-size:13px;color:var(--t2)}
-section{margin-bottom:44px}h2{font-size:20px;font-weight:700;color:var(--ac);margin-bottom:14px;padding-bottom:6px;border-bottom:1px solid var(--bd)}p{font-size:14px;color:var(--t2);margin-bottom:12px}strong{font-weight:600;color:var(--tx)}
+section{margin-bottom:44px}h2{font-size:20px;font-weight:700;color:var(--ac);margin-bottom:14px;padding-bottom:6px;border-bottom:1px solid var(--bd)}h3{font-size:16px;font-weight:600;color:var(--tx);margin:24px 0 10px}p{font-size:14px;color:var(--t2);margin-bottom:12px}strong{font-weight:600;color:var(--tx)}
 .eq{text-align:center;margin:16px 0;font-size:15px}.callout{background:var(--b3);border:1px solid var(--fbd);border-radius:8px;padding:14px 18px;margin:16px 0;font-size:13px}.callout strong{color:var(--ac)}
 .callout-warn{background:var(--wbg);border:1px solid var(--wbd);border-radius:8px;padding:14px 18px;margin:16px 0;font-size:13px}.callout-warn strong{color:var(--wtx)}
+.figure{margin:24px 0;text-align:center}.figure img{max-width:100%;border-radius:8px;box-shadow:var(--sh);cursor:pointer}.figure img:hover{transform:scale(1.01)}.figure figcaption{margin-top:8px;font-size:12px;color:var(--t2)}
 table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}thead th{background:var(--b3);padding:8px 12px;font-size:12px;font-weight:600;border-bottom:2px solid var(--bd)}tbody td{padding:8px 12px;border-bottom:1px solid var(--fbd)}tbody tr:nth-child(even){background:var(--b2)}
 .toplink{display:inline-block;margin-top:12px;font-size:12px;color:var(--ac);text-decoration:none}
 @media(max-width:768px){.sidebar{transform:translateX(-100%);transition:.3s}.sidebar.open{transform:translateX(0)}.main{margin-left:0;padding:20px 16px 60px}}
 @media print{.sidebar{display:none}.main{margin-left:0;max-width:100%;padding:0}}
 </style>
-<script src="../../../reading-preferences.js" defer></script></head>
-<body><a class="portal-home-link" href="../../../index.html">返回學習中心</a><style id="portal-home-link-style">.portal-home-link{position:fixed;top:16px;right:16px;z-index:1000;display:inline-flex;align-items:center;min-height:36px;padding:7px 11px;border:1px solid #cbd5e1;border-radius:8px;background:#fff;color:#1d4ed8;font:600 13px/1.2 -apple-system,BlinkMacSystemFont,"Noto Sans TC","Microsoft JhengHei",sans-serif;text-decoration:none;box-shadow:0 2px 10px rgba(15,23,42,.08)}.portal-home-link:hover{background:#eff6ff}.portal-home-link:focus-visible{outline:3px solid rgba(37,99,235,.35);outline-offset:2px}@media(max-width:768px){.portal-home-link{top:10px;right:10px;min-height:34px;padding:7px 9px;font-size:12px}}</style>
+<style id="derivation-lab-style">.derivation-lab{border-top:3px solid var(--ac);padding-top:20px}.derivation-lab ul,.derivation-lab ol{font-size:14px;color:var(--t2);margin:8px 0 14px 22px}.derivation-lab details{border:1px solid var(--bd);border-radius:8px;margin:8px 0;background:var(--bg)}.derivation-lab summary{cursor:pointer;padding:10px 13px;font-weight:600}.derivation-lab details p{padding:0 13px 10px}.dimcheck{background:var(--b3);border-left:3px solid var(--ac);padding:12px 15px;border-radius:0 8px 8px 0}</style>
+<script src="../../../reading-preferences.js" defer></script>
+</head>
+<body>
+<a class="portal-home-link" href="../../../index.html">返回學習中心</a>
+<style id="portal-home-link-style">.portal-home-link{position:fixed;top:16px;right:16px;z-index:1000;display:inline-flex;align-items:center;min-height:36px;padding:7px 11px;border:1px solid #cbd5e1;border-radius:8px;background:#fff;color:#1d4ed8;font:600 13px/1.2 -apple-system,BlinkMacSystemFont,"Noto Sans TC","Microsoft JhengHei",sans-serif;text-decoration:none;box-shadow:0 2px 10px rgba(15,23,42,.08)}.portal-home-link:hover{background:#eff6ff}.portal-home-link:focus-visible{outline:3px solid rgba(37,99,235,.35);outline-offset:2px}@media(max-width:768px){.portal-home-link{top:10px;right:10px;min-height:34px;padding:7px 9px;font-size:12px}}</style>
 <nav class="sidebar"><div class="sh"><div class="bk">Semiconductor Physics and Devices</div><h2>第 15 章</h2></div><div class="sn"><ul>
-<li><a href="#preview">15.0 預覽</a></li>
-<li><a href="#s15-1">15.1–15.3 Tunnel / Gunn / IMPATT</a></li>
-<li><a href="#s15-2">15.4 Power BJT</a></li>
-<li><a href="#s15-3">15.5 Power MOSFET</a></li>
-<li><a href="#s15-4">15.6 Thyristor / SCR</a></li>
-<li><a href="#summary">本章總結</a></li>
+<li><a href="#preview">📋 15.0 本章預覽</a></li>
+<li class="ns">15.1 穿隧二極體</li><li class="nsub"><a href="#s15-1">量子穿隧與 NDR 特性</a></li>
+<li class="ns">15.2 甘恩二極體</li><li class="nsub"><a href="#s15-2">雙谷能帶與 Domain 振盪</a></li>
+<li class="ns">15.3 IMPATT 二極體</li><li class="nsub"><a href="#s15-3">雪崩延遲與動態負電阻</a></li>
+<li class="ns">15.4 功率雙極性電晶體</li><li class="nsub"><a href="#s15-4">垂直結構與 SOA</a></li>
+<li class="ns">15.5 功率 MOSFET</li><li class="nsub"><a href="#s15-5">DMOS 結構與導通電阻</a></li>
+<li class="ns">15.6 閘流體</li><li class="nsub"><a href="#s15-6">pnpn 鎖定與觸發機制</a></li>
+<li><a href="#summary">📋 本章總結</a></li><li><a href="#derivation-lab">🧪 推導、假設與章末診斷</a></li>
 </ul></div><div class="st"><button onclick="toggleTheme()">切換 <span id="tl">深色</span></button></div></nav>
 <main class="main">
-<header class="header"><div class="cl">Chapter 15</div><h1>Microwave and Power Devices</h1><div class="meta">對應原書 Chapter 15</div></header>
+<header class="header"><div class="cl">Chapter 15</div><h1>半導體微波與功率元件</h1><div class="meta">對應原書 Chapter 15 · 第 670–706 頁</div></header>
 
-<section id="preview"><div class="callout"><strong>15.0 預覽</strong>
-<p>這章不是基本元件的重複介紹，而是問你：當場很強、頻率很高、電流很大、寄生效應很重時，前面那些物理會變成什麼樣。</p>
-<p>所以閱讀方式要改。你不能把它看成名詞清單，而要看成前面接面、輸運、穿隧、速度飽和、寄生 BJT 全部被推向極端之後的結果。</p>
-<a class="toplink" href="./semiconductor_book_structure_map_zh.html">回總地圖</a></div></section>
+<!-- 15.0 PREVIEW -->
+<section id="preview">
+<h2>15.0 本章預覽</h2>
+<div class="callout"><strong>📋 極端條件下的半導體物理</strong>
+<p>前面十四章建立了半導體物理的完整基礎——從晶體結構、載子統計、輸運現象，到 pn 接面、BJT、MOSFET。但這些分析都在「正常條件」下：中等電壓、中等電流、中等頻率。本章問一個更難的問題：<strong>當電場極強、頻率極高（微波波段）、電流極大、寄生效應極重時，半導體物理會變成什麼樣？</strong></p>
+<p>答案是將前面學過的穿隧（Ch8 §8.5）、速度飽和（Ch5 §5.1.4）、撞擊游離（Ch12 §12.4.6）、寄生 BJT（本章 §15.5.3）、再生正回授等機制推至極限。本章就是這些物理在工程前沿的會合點。</p>
+<p>本章分為兩大區塊：前半（§15.1–§15.3）討論三種產生微波振盪的半導體元件——Tunnel Diode、Gunn Diode、IMPATT Diode——它們的共同特徵是需要<strong>負微分電阻（NDR）</strong>才能振盪，但 NDR 的物理來源截然不同。後半（§15.4–§15.6）討論功率半導體元件——Power BJT、Power MOSFET、Thyristor——它們的核心挑戰是<strong>耐壓、大電流、散熱、以及安全操作區（SOA）</strong>的邊界。</p></div>
+</section>
+<div style="margin-top:14px;background:var(--bg);border:1px solid var(--fbd);border-radius:8px;padding:12px 16px">
+<div style="font-size:11px;font-weight:600;color:var(--ac);margin-bottom:6px">🔑 本章核心概念</div>
+<div style="font-size:12px;color:var(--tx);line-height:2">
+1. NDR（負微分電阻）是三種微波元件（Tunnel, Gunn, IMPATT）的共同需求，但物理來源不同<br>
+2. Tunnel diode：重摻雜 $p^+n^+$→空乏區 ∼50 Å→量子穿隧→$I$–$V$ 呈 N 形，$f_r\propto1/(R_{min}C_j)$<br>
+3. Gunn diode：GaAs 能谷轉移→電子從高遷移率 Γ 谷轉到低遷移率 L 谷→負微分遷移率→domain 振盪<br>
+4. Gunn domain：$\tau_d<0$→空間電荷指數增長→以 $v_d$ 渡越→$f=v_d/L$（∼10 GHz at $L=10$ μm）<br>
+5. IMPATT：撞擊游離產生載子→渡越時間延遲→動態負電阻→$f=v_s/(2L)$，效率 ∼15%<br>
+6. 功率 BJT：垂直結構→耐高壓，但 $\beta$ 低（寬基極）→Darlington pair 補償<br>
+7. SOA（安全操作區）：$I_C$、$V_{CE}$、$P_T$ 的三重限制→二次崩潰是最終邊界<br>
+8. 功率 MOSFET：DMOS/VMOS→垂直電流→$R_{on}=R_{ch}+R_{drift}+...$，寄生 BJT 可能鎖存<br>
+9. SCR（閘流體）：pnpn 四層→再生正回授 $I_A=I_{C0}/[1-(\alpha_1+\alpha_2)]$→$\alpha_1+\alpha_2=1$ 時觸發導通<br>
+10. 微波+功率元件的共同主題：寄生、熱、SOA——高場、高頻、大電流下，所有前面章節的理想假設都要重新檢視<br>
+</div>
+</div>
 
-<section id="s15-1"><h2>15.1–15.3 Tunnel / Gunn / IMPATT</h2>
-<p>Tunnel diode 靠極重摻雜接面的量子穿隧； Gunn diode 靠負微分遷移率； IMPATT diode 靠撞擊游離加 transit-time 效應。它們都屬於微波元件，但物理來源根本不是同一件事。</p>
-<table><thead><tr><th>元件</th><th>主機制</th><th>典型特徵</th></tr></thead><tbody>
-<tr><td>Tunnel diode</td><td>量子穿隧</td><td>負微分電阻、超高速</td></tr>
-<tr><td>Gunn diode</td><td>能谷轉移、負微分遷移率</td><td>微波振盪</td></tr>
-<tr><td>IMPATT</td><td>撞擊游離 + transit time</td><td>高功率微波但噪聲大</td></tr>
-</tbody></table>
-<div class="eq">$$f_r=\frac{1}{2\pi}\sqrt{\frac{1}{LC}-\frac{R^2}{L^2}}$$</div>
-<div class="callout-warn"><strong>不要混淆</strong> 這三個元件都可能出現在微波電路，但不是「不同封裝的同類東西」，而是三套不同物理。</div></section>
+<!-- 15.1 TUNNEL DIODE -->
+<section id="s15-1">
+<h2>15.1 穿隧二極體 (Tunnel Diode / Esaki Diode)</h2>
+<div style="margin-bottom:14px;font-size:12px;color:var(--t2);line-height:1.8">
+<strong style="color:var(--tx)">🔑 本節重點</strong> ① 重摻雜 $p^+n^+$→空乏區 ∼50 Å→量子穿隧主導電流 ② I-V 呈 N 形：先升（穿隧增加）→後降（態密度重疊減少）→再升（擴散電流接管）③ NDR 來自 $dI/dV<0$ 的穿隧態減少區 ④ $f_r=1/(2\\pi R_{min}C_j)\\sqrt{R_{min}/R_p-1}$——振盪頻率上限由 $RC$ 時間常數決定
+</div>
 
-<section id="s15-2"><h2>15.4 Power BJT</h2>
-<p>Power BJT 不只是把小訊號 BJT 面積放大。它通常改成 vertical structure，目的是提升耐壓與大電流能力，同時還得面對 current crowding、熱效應與 safe operating area。</p>
-<div class="callout"><strong>關鍵字</strong> SOA、熱失控、Darlington pair、vertical current flow。這些都是前面小訊號章節沒有真正逼你面對的工程現實。</div>
+<h3>量子穿隧作為主導電流機制</h3>
+<p>穿隧二極體是唯一完全依賴<strong>量子穿隧</strong>作為主導電流機制的兩端元件。Ch2 §2.3.4 建立了穿隧的基本量子力學：當位障寬度極窄（∼nm）時，電子波函數可穿透經典禁區。Ch8 §8.5 簡介了穿隧在 pn 接面中的應用，但本章從微波振盪的角度深入分析：NDR 如何產生、等效電路參數如何決定振盪頻率上限。</p>
+
+<h3>物理結構與能帶圖</h3>
+<p>穿隧二極體的核心特徵是 p 側和 n 側<strong>都極重摻雜</strong>（degenerately doped，$N_a, N_d > 10^{19}\ \text{cm}^{-3}$）。這導致兩個關鍵後果：① 空乏區極窄——$W \approx 50\ \text{Å} = 5 \times 10^{-7}\ \text{cm}$，遠小於普通 pn 接面的 ∼0.1–1 µm；② Fermi 能階分別進入價帶（p 側）和導帶（n 側），使得 n 側導帶中的電子與 p 側價帶中的空態在能量上對齊——這是穿隧的必要條件。</p>
+
+<p>當空乏區寬度降至 ∼50 Å，穿隧機率足以主導電流——此時傳統的熱離子發射擴散電流相比之下微不足道。能帶圖的關鍵特徵是：在零偏壓時，n 側導帶與 p 側價帶有大量態密度重疊，為穿隧提供了「通道」。</p>
+
+<h3>I-V 特性的完整圖像</h3>
+<p>圖 15.1（p.696）展示了穿隧二極體的順向 I-V 特性。這不是普通的指數曲線，而是一個<strong>先升後降再升</strong>的 N 形曲線，可分為五個區域：</p>
+
+<div class="figure"><img src="../../pages/ch15_pages/ch15_page_696_c.png" alt="Fig 15.1 Tunnel diode I-V characteristic — NDR curve" loading="lazy"><figcaption>圖 15.1：穿隧二極體的典型順向 I-V 特性，展示峰值電流 $I_P$、谷值電流 $I_V$ 與負微分電阻區域</figcaption></div>
+
+<p><strong>① 零偏壓：</strong>n 側導帶的電子與 p 側價帶的空態對齊，穿隧雙向進行，淨電流為零。</p>
+
+<p><strong>② 小順向偏壓（$0 < V < V_P$）：</strong>外加電壓使 n 側導帶底與 p 側價帶中的空態對齊——最大數量的電子態與空態重疊→穿隧電流隨 $V$ 增大而增大，達到<strong>峰值電流</strong> $I_P$。典型值：$I_P \approx 1\text{--}100\ \text{mA}$，$V_P \approx 0.05\text{--}0.15\ \text{V}$。</p>
+
+<p><strong>③ 負微分電阻區（$V_P < V < V_V$）：</strong>這是本章最核心的物理現象。當偏壓繼續增大，n 側導帶底開始高於 p 側價帶頂→可穿隧的態逐漸<strong>減少</strong>→電流<strong>反而下降</strong>。這就是負微分電阻（Negative Differential Resistance, NDR）——$dI/dV < 0$。電流從 $I_P$ 降到<strong>谷值電流</strong> $I_V$。</p>
+
+<p><strong>④ 谷值區（$V \approx V_V$）：</strong>穿隧幾乎停止（沒有重疊的態），但普通熱離子發射擴散電流開始增大。典型 $V_V \approx 0.3\text{--}0.6\ \text{V}$。</p>
+
+<p><strong>⑤ 大偏壓（$V > V_V$）：</strong>普通 pn 二極體的擴散電流主導——$I \propto e^{eV/kT}$。</p>
+
+<div class="callout"><strong>💡 峰谷比（Peak-to-Valley Ratio, PVR）</strong>是穿隧二極體的關鍵品質指標：$PVR = I_P/I_V$。典型值：Ge 穿隧二極體 ∼4–8，GaAs ∼12–20，InAs ∼25。PVR 越大→NDR 越明顯→振盪器的功率效率和穩定度越高。PVR 受溫度影響顯著——高溫下 $I_V$ 增大（擴散電流增加）→PVR 下降。</div>
+
+<h3>等效電路與截止頻率</h3>
+<p>當穿隧二極體偏壓在 NDR 區的最小負電阻點 $-R_{\min}$ 時，其小訊號等效電路如圖 15.2（p.697）：一個負電阻 $-R_{\min}$ 與接面電容 $C_j$ 並聯，然後串聯寄生電感 $L_p$ 和寄生電阻 $R_p$。</p>
+
+<div class="figure"><img src="../../pages/ch15_pages/ch15_page_697_c.png" alt="Fig 15.2 Tunnel diode equivalent circuit" loading="lazy"><figcaption>圖 15.2：穿隧二極體的小訊號等效電路——負電阻 $-R_{\min}$、接面電容 $C_j$、寄生電感 $L_p$、寄生電阻 $R_p$</figcaption></div>
+
+<p>小訊號輸入阻抗可寫為：</p>
+<div class="eq">$$Z = \left[R_p - \frac{R_{\min}}{1 + \omega^2 R_{\min}^2 C_j^2}\right] + j\omega\left[L_p - \frac{R_{\min}^2 C_j}{1 + \omega^2 R_{\min}^2 C_j^2}\right]$$</div>
+
+<p>阻抗的電阻部分在某一頻率歸零。令 $\text{Re}(Z) = 0$，解出最大電阻截止頻率：</p>
+<div class="eq">$$\boxed{f_r = \frac{1}{2\pi R_{\min} C_j}\sqrt{\frac{R_{\min}}{R_p} - 1}}$$</div>
+
+<p>當 $f > f_r$，電阻部分變為正值→二極體失去 NDR 特性→無法振盪。因此振盪頻率必須 $f_o < f_r$。</p>
+
+<div class="callout-warn"><strong>⚡ 數值範例：</strong>若 $R_{\min} = 10\ \Omega$，$R_p = 1\ \Omega$，$C_j = 2\ \text{pF}$，則 $f_r = \frac{1}{2\pi \times 10 \times 2\times10^{-12}}\sqrt{\frac{10}{1}-1} = \frac{10^{12}}{125.7}\times 3 \approx 23.9\ \text{GHz}$。這就是為什麼穿隧二極體可以工作在微波甚至毫米波頻段。</div>
+
+<h3>穿隧過程的優缺點</h3>
+<p>穿隧是<strong>多數載子效應</strong>——不涉及少數載子的擴散、儲存、或復合→沒有擴散電容 $C_d$ 的時間延遲。這使穿隧二極體可工作在 >100 GHz 的頻率，切換時間 ∼ps 量級。然而，NDR 區域的電壓範圍很窄（∼0.3 V），輸出功率有限（∼mW），且需要精確的偏壓控制和阻抗匹配。在實際應用中，穿隧二極體已被其他微波元件（如 HEMT、HBT）部分取代，但其量子穿隧原理仍是超高速元件的設計基石。</p>
 </section>
 
-<section id="s15-3"><h2>15.5 Power MOSFET</h2>
-<p>Power MOSFET 把 MOS 通道控制能力和大電流結構結合起來，所以原書會談 DMOS、VMOS、HEXFET。它們的核心矛盾是：你想要低導通電阻，就經常得付出耐壓或面積代價。</p>
-<div class="eq">$$R_{\text{on}}=R_{\text{channel}}+R_{\text{drift}}+R_{\text{contact}}+\cdots$$</div>
-<p>這個式子說得很直白：功率 MOSFET 的導通電阻不是單一來源，而是多段串起來的總和。當耐壓升高時，drift region 往往成為大頭。</p>
-<div class="callout-warn"><strong>寄生 BJT 很重要</strong> 垂直功率 MOSFET 幾乎都內建寄生雙極結構。這不是教科書邊角料，而是可靠度與擊穿問題的真來源。</div></section>
+<!-- 15.2 GUNN DIODE -->
+<section id="s15-2">
+<h2>15.2 甘恩二極體 (Gunn Diode / Transferred-Electron Device)</h2>
 
-<section id="s15-4"><h2>15.6 Thyristor / SCR</h2>
-<p>SCR 的本質不是單純「四層 pnpn 結構」，而是 <strong>再生正回授</strong>。你可以把它理解成兩顆互相提供基極電流的電晶體，一旦總電流增益夠高，就會鎖進導通狀態。</p>
-<div class="eq">$$I_A=\frac{I_{C0,1}+I_{C0,2}}{1-(\alpha_1+\alpha_2)}$$</div>
-<p>只要 $\alpha_1+\alpha_2$ 接近 1，分母就會很小，導通進入再生狀態。這就是為什麼 SCR 一旦被觸發，不是你想關就關。</p>
-<div class="callout"><strong>這章的物理高潮</strong> SCR 讓你看到「內部正回授」如何把普通載流機制變成鎖定導通元件。</div></section>
+<div style="margin-bottom:14px;font-size:12px;color:var(--t2);line-height:1.8">
+<strong style="color:var(--tx)">🔑 本節重點</strong> ① GaAs 雙谷：Γ 谷($m^*=0.067m_0$,高 $\mu$) vs L 谷($m^*=0.55m_0$,低 $\mu$)，能量差 ∼0.3 eV ② $E>E_{th}\approx3.2$ kV/cm→電子轉移到 L 谷→平均漂移速度下降→負微分遷移率（材料特性，非元件結構）③ Domain 形成：$\sigma<0$→$\tau_d<0$→空間電荷指數增長→以 $v_d$ 渡越→$f=v_d/L$ ④ 不需 pn 接面——n 型 GaAs 兩端元件，$n_0L$ 乘積需 ∼$10^{12}$ cm⁻² 以獲得最佳效率
+</div>
 
-<section id="summary"><h2>本章總結</h2>
-<ul>
-<li>微波元件與功率元件不是新宇宙，而是前面物理在極端條件下的變形。</li>
-<li>Tunnel、Gunn、IMPATT 的共同點只有都能碰到微波，不代表物理相同。</li>
-<li>Power BJT / MOSFET 的關鍵在結構、熱、SOA、寄生效應，不是只看理想 I-V。</li>
-<li>SCR 的靈魂是再生正回授，而不是 pnpn 四個字本身。</li>
-</ul></section>
+<h3>負微分遷移率——源自能帶結構的 NDR</h3>
+<p>Gunn Diode 的 NDR 機制<strong>完全不同於</strong> Tunnel Diode。它不是來自量子穿隧，而是來自半導體<strong>能帶結構</strong>中多個導帶谷之間電子轉移導致的<strong>負微分遷移率（negative differential mobility）</strong>。這個現象被稱為 Ridley-Watkins-Hilsum（RWH）機制。Gunn Diode 最關鍵的特徵是——<strong>它不需要 pn 接面</strong>，只是一個 n 型 GaAs 兩端元件。NDR 本質上是材料特性（負微分遷移率），而非元件結構特性（如 Tunnel Diode 的 $dI/dV < 0$）。</p>
+
+<h3>GaAs 的雙谷能帶結構——負微分遷移率的根源</h3>
+<p>Ch5 §5.2 展示了 GaAs 中電子漂移速度對電場的特性曲線：速度先隨電場線性增加（低場遷移率 $\mu_n \approx 8000\ \text{cm}^2/\text{V-s}$），在臨界電場 $E_{th} \approx 3.2\ \text{kV/cm}$ 達到峰值速度 ∼$2 \times 10^7\ \text{cm/s}$，然後<strong>下降</strong>到約 $10^7\ \text{cm/s}$ 的飽和值——這就是負微分遷移率區域。</p>
+
+<div class="figure"><img src="../../pages/ch15_pages/ch15_page_698_c.png" alt="Fig 15.4 GaAs two-valley conduction band structure" loading="lazy"><figcaption>圖 15.4：GaAs 的雙谷導帶結構——$\Gamma$ 谷（下谷，$m_n^*=0.067m_0$）與 L 谷（上谷，$m_n^*\approx 0.55m_0$），能量差 ∼0.3 eV</figcaption></div>
+
+<p>這個行為的物理根源在 GaAs 的導帶結構（圖 15.4）：</p>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li><strong>下谷（lower valley, $\Gamma$ valley）：</strong>位於 $k = 0$，電子有效質量小（$m_n^* = 0.067m_0$）→遷移率高。能隙 $E_g = 1.42\ \text{eV}$。</li>
+<li><strong>上谷（upper valley, L valley）：</strong>能量比下谷高約 $0.3\ \text{eV}$，有效質量大（$m_n^* \approx 0.55m_0$）→遷移率低。</li>
+</ul>
+
+<p>當電場 $E < E_{th}$：幾乎所有電子在下谷→高遷移率→高漂移速度。當 $E > E_{th}$：電子從電場獲得足夠動能（>$0.3\ \text{eV}$），被散射到上谷→在上谷中有效質量大→遷移率低→<strong>平均漂移速度反而下降</strong>。最大負微分遷移率在 GaAs 中約為 $-2400\ \text{cm}^2/\text{V-s}$。</p>
+
+<div class="callout"><strong>💡 負微分遷移率 vs. 負微分電阻：</strong>Gunn Diode 的 NDR 本質上是材料特性（負微分遷移率），而 Tunnel Diode 的 NDR 是元件特性（$dI/dV < 0$）。這是一個重要的觀念差異——Gunn Diode 不需要 pn 接面，它只是一個 n 型 GaAs 的兩端元件。</div>
+
+<h3>Domain 的形成——介電弛豫時間的關鍵角色</h3>
+<p>考慮一個兩端 n 型 GaAs 元件，偏壓在負遷移率區（$E_{\text{bias}} > E_{th}$）。陰極附近若有微小電荷擾動（通常由接觸或摻雜不均勻引起），該處的電場略高於周圍。Ch6 告訴我們，半導體中淨電荷密度的時間行為為：</p>
+<div class="eq">$$\Delta Q(t) = \Delta Q(0)\, e^{-t/\tau_d}$$</div>
+<p>其中 $\tau_d = \epsilon/\sigma$ 是介電弛豫時間常數（dielectric relaxation time），通常 ∼ps 量級。正常情況下（$\sigma > 0$），空間電荷會快速被中和。</p>
+
+<p>但在負遷移率區，$\sigma = e n \mu$ 中 $\mu < 0$→$\sigma < 0$→$\tau_d < 0$→指數的符號反轉：</p>
+<div class="eq">$$\Delta Q(t) = \Delta Q(0)\, e^{+t/|\tau_d|}$$</div>
+
+<p><strong>空間電荷不但不衰減，反而隨時間增長！</strong>這個增長的空間電荷區域稱為<strong>domain</strong>（畴）。Domain 內的電場持續增大，而 domain 外的電場隨之降低——可能降到 $E_{th}$ 以下。這保證了材料中<strong>同一時間只存在一個 domain</strong>（因為只有 domain 內的 $E$ 仍在 $>E_{th}$）。</p>
+
+<div class="figure"><img src="../../pages/ch15_pages/ch15_page_699_c.png" alt="Fig 15.5-15.6 Domain formation and field profile in Gunn diode" loading="lazy"><figcaption>圖 15.5–15.6：Gunn 二極體中 domain 的形成過程與電場分布——domain 內高電場、domain 外電場降至 $E_{th}$ 以下</figcaption></div>
+
+<h3>Transit-Time 振盪模式</h3>
+<p>Domain 在陰極附近形成後，以載子的平均漂移速度 $v_d$ 向陽極移動。當 domain 到達陽極時，在外電路中感應出一個電流脈衝。Domain 到達陽極消失後，陰極附近又可以形成新的 domain，如此週而復始。</p>
+
+<p>振盪頻率由 domain 的渡越時間決定：</p>
+<div class="eq">$$\boxed{f = \frac{1}{\tau} = \frac{v_d}{L}}$$</div>
+<p>其中 $v_d$ 是平均漂移速度（∼$10^7\ \text{cm/s}$），$L$ 是漂移區長度。</p>
+
+<div class="callout-warn"><strong>⚡ 數值範例：</strong>若 $L = 10\ \mu\text{m} = 10^{-3}\ \text{cm}$，$v_d = 10^7\ \text{cm/s}$，則 $f = 10^7 / 10^{-3} = 10\ \text{GHz}$。要達到 100 GHz，需要 $L = 1\ \mu\text{m}$。這就是 Gunn Diode 的頻率由元件長度直接決定的原因。</div>
+
+<h3>效能與應用</h3>
+<p>Gunn Diode 的 DC-to-RF 轉換效率最高約 10%，振盪頻率範圍 1–100 GHz 以上。脈衝操作模式下可輸出數百瓦的峰值功率。典型應用包括微波雷達系統、汽車防撞雷達（77 GHz）、微波信號源。$n_0 L$ 乘積（摻雜濃度 × 漂移區長度）需控制在 ∼$10^{12}\ \text{cm}^{-2}$ 量級以獲得最佳效率——摻雜過低則 domain 無法形成，過高則 domain 過多。</p>
+</section>
+
+<!-- 15.3 IMPATT DIODE -->
+<section id="s15-3">
+<h2>15.3 IMPATT 二極體 (IMPact ionization Avalanche Transit-Time)</h2>
+
+<div style="margin-bottom:14px;font-size:12px;color:var(--t2);line-height:1.8">
+<strong style="color:var(--tx)">🔑 本節重點</strong> ① 動態負電阻：DC 的 $dI/dV$ 永遠為正——負電阻來自 AC 電流與電壓的 180° 相位差 ② 雙重 $\pi/2$ 延遲：雪崩累積延遲(∼90°)＋漂移渡越延遲(∼90°)＝總相位 $\pi$→電流與電壓反相 ③ $f=v_s/(2L)$——Si 中 $v_s\approx10^7$ cm/s，$L=10$ μm→$f=5$ GHz ④ 最高連續輸出功率(∼10 W CW)的半導體微波元件，但雪崩雜訊最高
+</div>
+
+<h3>動態負電阻——時間延遲產生的負電阻</h3>
+<p>IMPATT 二極體的 NDR 機制又是<strong>第三種不同的物理</strong>。它既不靠穿隧（Tunnel Diode），也不靠能谷轉移（Gunn Diode），而是靠<strong>撞擊游離的累積時間延遲 + 載子渡越漂移區的延遲</strong>，使電流的交流分量與電壓的交流分量之間產生 180° 的相位差——產生<strong>動態負電阻</strong>（dynamic negative resistance）。IMPATT 提供所有半導體微波元件中最高的連續輸出功率（∼10 W CW），雖然代價是較高的雪崩雜訊。</p>
+
+<h3>元件結構與電場分布</h3>
+<p>一個典型的 IMPATT 結構是 $\text{p}^+\text{-n-i-n}^+$（圖 15.7–15.8，p.700）。逆向偏壓使 n 區和 i（intrinsic）區完全空乏。電場分布為：在 $\text{p}^+\text{-n}$ 接面處電場最高（撞擊游離的雪崩區），在 i 區中電場接近常數（漂移區）。外加逆向偏壓 $V_B$ 接近崩潰電壓。</p>
+
+<div class="figure"><img src="../../pages/ch15_pages/ch15_page_700_c.png" alt="Fig 15.7-15.8 IMPATT diode structure and electric field profile" loading="lazy"><figcaption>圖 15.7–15.8：IMPATT 二極體的 $\text{p}^+\text{-n-i-n}^+$ 結構及其逆向偏壓下的電場分布——$\text{p}^+\text{-n}$ 接面處為高場雪崩區，i 區為常數場漂移區</figcaption></div>
+
+<p>撞擊游離的物理在 Ch12 §12.4.6 已經討論過：高電場下載子獲得足夠動能，與晶格原子碰撞產生電子-電洞對。IMPATT 的操作把撞擊游離從「需要避免的破壞機制」變成「有用的振盪機制」。</p>
+
+<h3>動態負電阻的產生——雙重 $\pi/2$ 相位延遲</h3>
+<p>IMPATT 的核心概念是<strong>時間延遲導致電流與電壓反相</strong>：</p>
+
+<p><strong>步驟 1 — 正半週：</strong>AC 電壓為正→二極體進入崩潰→$\text{p}^+\text{-n}$ 接面處產生大量電子-電洞對。但雪崩是一個累積過程——載子數量不會瞬間跟上電壓，而是以指數增長。這產生第一個 ∼$\pi/2$ 的相位延遲：雪崩電流峰值<strong>落後</strong>雪崩電壓峰值約 90°。</p>
+
+<p><strong>步驟 2 — 漂移：</strong>產生的電洞以飽和速度 $v_s$ 漂移通過 i 區（長度 $L$）。渡越時間為 $\tau = L/v_s$。第二個 ∼$\pi/2$ 的相位延遲來自漂移過程。</p>
+
+<p><strong>步驟 3 — 總相位差：</strong>$\pi/2$（雪崩）$+ \pi/2$（漂移）$= \pi$→AC 電流與 AC 電壓在輸出端<strong>反相</strong>→這就是動態負電阻。</p>
+
+<div class="callout"><strong>💡 關鍵洞察：</strong>IMPATT 的 $dI/dV$ 在 DC 意義下<strong>永遠是正的</strong>——它的 I-V 曲線沒有 NDR 區域。負電阻是在 AC/動態意義下的——$v_{ac}$ 和 $i_{ac}$ 反相。這與 Tunnel Diode（DC 意義下的 NDR）有本質區別。考試常考這個觀念差異。</div>
+
+<h3>振盪頻率與設計</h3>
+<p>最佳振盪頻率對應於漂移區渡越時間：</p>
+<div class="eq">$$\boxed{f = \frac{1}{2\tau} = \frac{v_s}{2L}}$$</div>
+<p>其中 $v_s$ 是載子飽和速度（Si 中 ∼$10^7\ \text{cm/s}$），$L$ 是漂移區長度。</p>
+
+<div class="callout-warn"><strong>⚡ 數值範例：</strong>Si IMPATT，$L = 10\ \mu\text{m}$，$v_s \approx 10^7\ \text{cm/s}$：$f = \frac{10^7}{2 \times 10^{-3}} = 5\ \text{GHz}$。要達到 100 GHz：$L = \frac{10^7}{2 \times 10^{10}} = 5 \times 10^{-4}\ \text{cm} = 5\ \mu\text{m}$。</div>
+
+<h3>IMPATT vs Tunnel vs Gunn 對照表</h3>
+<table>
+<thead><tr><th>特性</th><th>Tunnel Diode</th><th>Gunn Diode</th><th>IMPATT Diode</th></tr></thead>
+<tbody>
+<tr><td>NDR 來源</td><td>量子穿隧（$dI/dV<0$）</td><td>能谷轉移（負遷移率）</td><td>時間延遲（動態負電阻）</td></tr>
+<tr><td>結構</td><td>$\text{p}^+\text{-n}^+$ 接面</td><td>n 型 GaAs 兩端元件</td><td>$\text{p}^+\text{-n-i-n}^+$</td></tr>
+<tr><td>頻率範圍</td><td>∼1–100 GHz</td><td>∼1–100 GHz</td><td>∼1–300 GHz</td></tr>
+<tr><td>輸出功率</td><td>低（∼mW）</td><td>中（∼W）</td><td>高（∼10 W CW）</td></tr>
+<tr><td>效率</td><td>低</td><td>∼10%</td><td>∼10–15%</td></tr>
+<tr><td>雜訊</td><td>低</td><td>中</td><td>高（雪崩雜訊）</td></tr>
+</tbody>
+</table>
+</section>
+
+<!-- 15.4 POWER BIPOLAR TRANSISTORS -->
+<section id="s15-4">
+<h2>15.4 功率雙極性電晶體 (Power BJT)</h2>
+
+<div style="margin-bottom:14px;font-size:12px;color:var(--t2);line-height:1.8">
+<strong style="color:var(--tx)">🔑 本節重點</strong> ① 垂直 npn 結構：Collector 在底部→大截面積＋直接散熱；低摻雜寬漂移區(50–200 μm)→耐高壓 ② 寬基區→$\beta$ 僅 5–100（vs 小訊號 100–500），Darlington pair：$\beta_{\text{eff}}\approx\beta_A\beta_B$ ③ SOA 四邊界：$I_{C,\max}$、$V_{CE,\text{sus}}$、$P_T$ 雙曲線、二次崩潰——不能同時達到極限 ④ 熱失控：$\beta\propto T\uparrow$→$I_C\uparrow$→功耗$\uparrow$→$T\uparrow$（正回授）→功率 MOSFET 憑負溫度係數在此勝出
+</div>
+
+<h3>從訊號放大到功率處理——BJT 在極限條件下的物理</h3>
+<p>Ch12 討論 BJT 時，我們假設電晶體可承受任意電流和電壓。但真實世界中，功率 BJT 有明確的物理極限：最大電流（導線熔斷）、最大電壓（崩潰）、最大功率（熱損壞）。更微妙的是，這些極限<strong>不能同時達到</strong>——操作點必須在安全操作區（SOA）內。功率 BJT 的核心設計方向是：通過垂直結構實現耐高壓，通過寬基區防止 punch-through，但這兩者都犧牲了電流增益——這引出 Darlington pair 等補償方案。</p>
+
+<h3>垂直結構——為什麼 Collector 在底部？</h3>
+<p>功率 BJT 採用<strong>垂直 npn 結構</strong>而非平面結構。Emitter 在頂部，Base 在中間，Collector 在底部。這樣的好處是：① 最大化電流流動的截面積→可處理大電流；② 熱量從接面直接傳到封裝散熱片→散熱效率高。</p>
+
+<p>關鍵的 Collector 漂移區（drift region）具有<strong>低摻雜濃度</strong>（$N_C \sim 10^{14}\ \text{cm}^{-3}$）和<strong>大寬度</strong>（50–200 µm）。低摻雜使空乏區主要向 Collector 側延伸→可承受大逆向偏壓而不崩潰。寬度需要夠大以防止 punch-through——Base-Collector 空乏區穿透 Base 區到達 Emitter（Ch12 §12.4.5）。基區也比小訊號 BJT 寬得多（∼5–20 µm），同樣是為了防止 punch-through。</p>
+
+<h3>電流增益的權衡</h3>
+<p>寬基區的直接代價是<strong>電流增益 $\beta$ 大幅降低</strong>。小訊號 BJT 的 $\beta$ 可達 100–500；功率 BJT 的 $\beta$ 通常只有 5–100，而且隨集極電流和溫度強烈變化。這是因為寬基區中少數載子復合增多→基極傳輸因子 $\alpha_T$ 降低→$\beta$ 降低。</p>
+
+<p>另一個限制是<strong>射極電流擁擠效應</strong>（emitter current crowding）：基極電阻造成的橫向壓降使得射極邊緣的電流密度遠高於中心。功率 BJT 使用<strong>交指式結構</strong>（interdigitated structure，圖 15.11，p.703）來緩解——把射極分成多個窄條，增大周長對面積比，使電流分布更均勻。</p>
+
+<div class="figure"><img src="../../pages/ch15_pages/ch15_page_703_c.png" alt="Fig 15.11 Power BJT interdigitated emitter structure" loading="lazy"><figcaption>圖 15.11：功率 BJT 的交指式射極結構——多個窄射極條並聯，增大周長對面積比以均勻化電流分布</figcaption></div>
+
+<h3>安全操作區 (SOA) —— 功率 BJT 的「護照」</h3>
+<p>SOA 是 $I_C$–$V_{CE}$ 平面上電晶體可以安全操作的區域，由四條邊界定義（圖 15.12，p.704）：</p>
+
+<div class="figure"><img src="../../pages/ch15_pages/ch15_page_704_c.png" alt="Fig 15.12 Safe Operating Area (SOA) curve for power BJT" loading="lazy"><figcaption>圖 15.12：功率 BJT 的安全操作區（SOA）——$I_{C,\max}$、$V_{CE,\text{sus}}$、$P_T$ 雙曲線、二次崩潰界限</figcaption></div>
+
+<ol style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li><strong>$I_{C,\max}$（最大電流界限）：</strong>由金屬導線的熔斷電流、$\beta$ 降至最低可接受值時的電流、或飽和區最大功耗對應的電流決定。</li>
+<li><strong>$V_{CE,\text{sus}}$（最大電壓界限）：</strong>維持崩潰的最小電壓（sustaining voltage）。在共射極組態下，崩潰電壓 $BV_{CEO}$ 受 $\beta$ 影響——$BV_{CEO} = BV_{CBO} / \beta^{1/n}$（$n \approx 3$–6）。$\beta$ 越大→$BV_{CEO}$ 越低。</li>
+<li><strong>$P_T$（最大功率界限）：</strong>$P_T = V_{CE} I_C$。在 $I_C$–$V_{CE}$ 圖上是一條雙曲線。功率限制來自接面溫度——矽元件的最大接面溫度通常為 150–200°C。</li>
+<li><strong>二次崩潰（Second Breakdown）界限：</strong>高電壓高電流下，局部電流不均勻→局部發熱→少數載子增加→電流更集中→正回授→局部熔融短路。這是功率 BJT 最致命的失效模式。</li>
+</ol>
+
+<div class="eq">$$P_T = V_{CE} I_C \quad \text{（DC 操作點）}$$</div>
+
+<div class="callout-warn"><strong>⚡ 關鍵設計公式——最大功率點：</strong>對於共射極電路（$V_{CC}$ 經 $R_L$ 供電），負載線為 $V_{CE} = V_{CC} - I_C R_L$。功率 $P = V_{CE} I_C = V_{CC} I_C - I_C^2 R_L$。令 $dP/dI_C = 0$→$I_C = V_{CC}/(2R_L)$→$V_{CE} = V_{CC}/2$→$P_{\max} = V_{CC}^2/(4R_L)$。<strong>最大功率點永遠在負載線的中點。</strong></div>
+
+<h3>Darlington Pair —— 解決低 $\beta$ 的工程方案</h3>
+<p>功率 BJT 的 $\beta$ 小，要驅動大集極電流需要可觀的基極電流。Darlington pair（圖 15.17，p.707）把兩個 BJT 串接：$Q_A$（驅動級）的射極電流驅動 $Q_B$（輸出級）的基極。</p>
+
+<div class="figure"><img src="../../pages/ch15_pages/ch15_page_707_c.png" alt="Fig 15.17 Darlington pair configuration" loading="lazy"><figcaption>圖 15.17：Darlington pair——兩個 BJT 串接，等效電流增益 $\beta_{\text{eff}} \approx \beta_A \beta_B$</figcaption></div>
+
+<div class="eq">$$i_C = \beta_A i_B + \beta_B (1+\beta_A)i_B \approx \beta_A \beta_B \, i_B$$</div>
+
+<p>等效 $\beta_{\text{eff}} \approx \beta_A \beta_B$。若 $\beta_A = \beta_B = 15$，則 $\beta_{\text{eff}} \approx 255$——用兩個低增益元件獲得高增益。</p>
+
+<h3>熱效應與熱失控</h3>
+<p>功率 BJT 的致命弱點是<strong>熱失控（thermal runaway）</strong>——$\beta$ 和 $I_{CBO}$ 都隨溫度升高而增大（$I_S \propto T^3 e^{-E_g/kT}$）→溫度升高→$I_C$ 增大→功耗增加→溫度更高→正回授直到元件燒毀。功率 BJT 設計必須包含充分的散熱片和被動冷卻來打斷這個正回授迴圈。這也是功率 MOSFET 藉由正溫度係數佔據優勢的關鍵切入點。</p>
+</section>
+
+<!-- 15.5 POWER MOSFETs -->
+<section id="s15-5">
+<h2>15.5 功率 MOSFET</h2>
+<div style="margin-bottom:14px;font-size:12px;color:var(--t2);line-height:1.8">
+<strong style="color:var(--tx)">🔑 本節重點</strong> ① DMOS/VMOS：垂直電流結構→耐高壓（數百至數千伏）② $R_{on}=R_{ch}+R_{drift}+R_{sub}+...$——導通電阻是功率 MOSFET 的核心性能指標 ③ 寄生 BJT（npn）：n⁺ 源極/p-body/n⁻ 漂移層形成寄生 BJT→可能意外觸發鎖存 ④ 功率 MOSFET 是電壓控制元件→驅動簡單、無儲存時間→開關速度優於功率 BJT
+</div>
+
+<h3>電壓控制與正溫度係數——MOSFET 的功率優勢</h3>
+<p>功率 MOSFET 繼承了普通 MOSFET（Ch10–11）的電壓控制優點——高輸入阻抗使閘極驅動電流極小。但它在功率領域真正的殺手級優勢來自<strong>溫度係數的方向</strong>：$\mu \propto T^{-3/2}$（Ch5 §5.1）→$R_{\text{on}}$ 隨溫度升高→負回授→天然並聯穩定。這與功率 BJT 的熱失控正回授形成鮮明對比，是現代功率電子以 MOSFET 為主的根本原因。</p>
+
+<h3>垂直結構：DMOS 與 VMOS</h3>
+<p>為同時實現大電流（寬通道）和高耐壓（垂直結構），功率 MOSFET 採用兩種主要結構：</p>
+
+<p><strong>DMOS（Double-Diffused MOS，圖 15.20）：</strong>p-base 和 $\text{n}^+$ source 通過同一個閘極邊緣定義的窗口進行兩次擴散。p-base 擴散比 $\text{n}^+$ source 更深，兩者橫向擴散距離之差定義了<strong>表面通道長度</strong>。電子從 source 橫向流過反轉層通道，然後垂直穿過 n-drift 區到達 drain。這是目前最主流的功率 MOSFET 結構。</p>
+
+<p><strong>VMOS（V-groove MOS，圖 15.21）：</strong>在 (100) 矽表面蝕刻出 V 形槽（利用 (111) 面蝕刻速率極慢的各向異性蝕刻），閘極氧化層和金屬閘極沉積在 V 槽中。通道沿 V 槽側壁形成。</p>
+
+<div class="figure"><img src="../../pages/ch15_pages/ch15_page_709_c.png" alt="Fig 15.20-15.21 DMOS and VMOS power MOSFET structures" loading="lazy"><figcaption>圖 15.20–15.21：DMOS（雙擴散 MOS）與 VMOS（V 槽 MOS）功率 MOSFET 的垂直結構比較</figcaption></div>
+
+<p><strong>HEXFET：</strong>DMOS 的多胞並聯版本——六角形排列的小 DMOS 單元，密度可達 $10^5\ \text{cells/cm}^2$。大量單元並聯等效於極大的 $W/L$ 比。</p>
+
+<h3>導通電阻 $R_{\text{on}}$ —— 功率 MOSFET 的核心參數</h3>
+<p>$R_{\text{on}}$ 是 drain-to-source 導通時的總電阻，由多個分量串聯而成（圖 15.23，p.711）：</p>
+
+<div class="figure"><img src="../../pages/ch15_pages/ch15_page_711_c.png" alt="Fig 15.23 Power MOSFET Ron components" loading="lazy"><figcaption>圖 15.23：功率 MOSFET 導通電阻 $R_{\text{on}}$ 的各個分量——$R_S$（source）、$R_{\text{CH}}$（通道）、$R_D$（drain 漂移區）</figcaption></div>
+
+<div class="eq">$$\boxed{R_{\text{on}} = R_S + R_{\text{CH}} + R_D}$$</div>
+<p>其中 $R_S$ 是 source 接觸和 $\text{n}^+$ 區電阻，$R_{\text{CH}}$ 是通道電阻，$R_D$ 是 drain 漂移區電阻（包括 substrate 電阻）。在線性區：</p>
+<div class="eq">$$R_{\text{CH}} = \frac{L}{W \mu_n C_{ox} (V_{GS} - V_T)}$$</div>
+
+<p>$R_D$ 往往佔 $R_{\text{on}}$ 的最大份額——因為 n-drift 區需要低摻雜（耐高壓）但這使電阻率增大。這是功率 MOSFET 設計的核心權衡：<strong>高耐壓 ↔ 低 $R_{\text{on}}$</strong>。對於給定耐壓的 Si MOSFET，$R_{\text{on}} \propto BV^{2.5}$——耐壓翻倍，$R_{\text{on}}$ 約增為 5.7 倍。</p>
+
+<h3>正溫度係數——功率 MOSFET 的殺手級優勢</h3>
+<p>遷移率隨溫度升高而降低：$\mu \propto T^{-3/2}$（晶格散射主導時）。因此：</p>
+<div class="eq">$$\text{溫度 } \uparrow \ \Rightarrow\ \mu \downarrow \ \Rightarrow\ R_{\text{on}} \uparrow \ \Rightarrow\ I_D \downarrow \ \Rightarrow\ \text{功耗 } \downarrow$$</div>
+
+<p>這是一個<strong>負回授</strong>！它提供天然的熱穩定性：如果某個並聯單元電流偏大→該單元發熱→$R_{\text{on}}$ 增高→電流自動向其他單元分流→電流均勻分布。這與功率 BJT（$\beta$ 隨溫度升高而增大→正回授→熱失控）形成鮮明對比。</p>
+
+<div class="callout"><strong>💡 為什麼可以並聯？</strong>功率 BJT 很難並聯——一個電晶體稍微熱一點，$\beta$ 就更大，電流就更多，就更熱。功率 MOSFET 的並聯是天然穩定的——熱的那個自動「讓出」電流。這就是為什麼高功率 MOSFET 模組常見數十甚至數百個單元並聯。</div>
+
+<h3>寄生 BJT 與 Snapback Breakdown</h3>
+<p>垂直功率 MOSFET 的結構中內建了一個<strong>寄生 npn BJT</strong>（圖 15.26，p.714）：$\text{n}^+$ source 是 Emitter，p-base 是 Base，n-drift drain 是 Collector。在正常穩態操作中，source 金屬化同時覆蓋 $\text{n}^+$ 和 p-base→B-E 短路→寄生 BJT 截止。</p>
+
+<div class="figure"><img src="../../pages/ch15_pages/ch15_page_713_c.png" alt="Fig 15.26 Parasitic BJT in power MOSFET" loading="lazy"><figcaption>圖 15.26：功率 MOSFET 中的寄生 npn BJT——$\text{n}^+$ source（Emitter）、p-base（Base）、n-drift drain（Collector）</figcaption></div>
+
+<p>但在高速開關時，$C_{gd}$ 的位移電流流過 p-base 的寄生電阻→產生壓降→可能使 B-E 順偏→寄生 BJT 導通→大電流→燒毀。這稱為<strong>snapback breakdown</strong>。元件設計需最小化 p-base 的寄生電阻（例如使用 $\text{p}^+$ 深擴散）。</p>
+
+<h3>MOSFET 的 SOA</h3>
+<p>功率 MOSFET 的 SOA 也由三條邊界定義：</p>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li>$I_{D,\max}$：最大額定 drain 電流</li>
+<li>$BV_{DSS}$：drain-to-source 崩潰電壓</li>
+<li>$P_T = V_{DS} I_D$：最大功率雙曲線</li>
+</ul>
+<p>與 BJT 不同，MOSFET <strong>沒有二次崩潰</strong>（因為沒有少數載子參與的熱正回授機制）→SOA 只用三條線就能完整定義。</p>
+
+<div class="callout-warn"><strong>⚡ 數值比較——BJT vs MOSFET 在功率應用：</strong><br>• BJT：電流控制，$\beta$ 小（∼10–50），需要大基極驅動電流；$\beta$ 隨溫度升高→熱失控風險；有二次崩潰；但飽和壓降 $V_{CE,\text{sat}}$ 低（∼0.2–0.5 V）。<br>• MOSFET：電壓控制，輸入阻抗極高；$R_{\text{on}}$ 隨溫度升高→天然穩定；無二次崩潰；開關速度遠快於 BJT；但 $R_{\text{on}}$ 使導通壓降可能大於 BJT（特別是高耐壓元件）。<br>• 現代趨勢：600 V 以下以 MOSFET 為主；1200 V 以上 Si IGBT（結合 MOSFET 輸入 + BJT 輸出的混合元件）主導。</div>
+</section>
+
+<!-- 15.6 THYRISTOR / SCR -->
+<section id="s15-6">
+<h2>15.6 閘流體 (Thyristor / SCR)</h2>
+
+<div style="margin-bottom:14px;font-size:12px;color:var(--t2);line-height:1.8">
+<strong style="color:var(--tx)">🔑 本節重點</strong> ① $I_A=(I_{C01}+I_{C02})/[1-(\alpha_1+\alpha_2)]$——分母趨零即為阻斷→導通的相變點 ② 雙電晶體交叉耦合：pnp 的 collector 驅動 npn 的 base，反之亦然→再生正回授鎖定 ③ 觸發方式：崩潰、閘極電流($I_g$ 只需 mA 控制數百 A)、$dV/dt$、光照 ④ 關斷：陽極電流必須降到 $I_H$(維持電流)以下——一旦導通，閘極失去控制權；Triac = 雙向 SCR
+</div>
+
+<h3>雙穩態鎖定——再生正回授的物理極致</h3>
+<p>Thyristor 展示了半導體物理中最精巧的正回授設計：將兩個 BJT 交叉耦合，創造出具有<strong>雙穩態</strong>（bistable）的四層 pnpn 開關元件。一旦觸發導通，它會<strong>鎖住</strong>在導通狀態——不需要維持控制信號。這是與 BJT（需要持續基極驅動）和 MOSFET（需要持續閘極電壓）最根本的區別。Thyristor 的物理本質可以濃縮在一個關鍵公式中：$I_A = (I_{C01}+I_{C02})/[1-(\alpha_1+\alpha_2)]$——分母趨於零就是相變點。</p>
+
+<h3>基本 pnpn 結構與阻斷特性</h3>
+<p>四層 pnpn 結構（圖 15.29，p.716）有三個接面：$J_1$（p1-n1）、$J_2$（n1-p2）、$J_3$（p2-n2）。陽極接 p1，陰極接 n2。當陽極施加正電壓（順向偏壓）：$J_1$ 和 $J_3$ 順偏，但 $J_2$ 逆偏→只有很小的漏電流→元件處於<strong>順向阻斷</strong>狀態。當陽極施加負電壓（逆向偏壓）：$J_1$ 和 $J_3$ 逆偏→<strong>逆向阻斷</strong>狀態。</p>
+
+<h3>雙電晶體等效模型——再生正回授的數學</h3>
+<p>把 pnpn 結構從中間分開（圖 15.30），可以等效為耦合的 pnp 和 npn BJT。pnp 的 collector 是 npn 的 base，npn 的 collector 是 pnp 的 base——這創造了完美的<strong>交叉耦合正回授</strong>。</p>
+
+<div class="figure"><img src="../../pages/ch15_pages/ch15_page_717_c.png" alt="Fig 15.29-15.30 Thyristor pnpn structure and two-transistor model" loading="lazy"><figcaption>圖 15.29–15.30：閘流體的四層 pnpn 結構及其雙電晶體等效模型——pnp 與 npn 交叉耦合產生再生正回授</figcaption></div>
+
+<p>令 $\alpha_1$ 和 $\alpha_2$ 分別為 pnp 和 npn 的共基極電流增益，$I_{C01}$ 和 $I_{C02}$ 為其反向飽和電流。基本電流關係為：</p>
+<div class="eq">$$I_{C1} = \alpha_1 I_A + I_{C01} = I_{B2}$$</div>
+<div class="eq">$$I_{C2} = \alpha_2 I_K + I_{C02} = I_{B1}$$</div>
+
+<p>注意到 $I_A = I_K$，且 $I_{C1} + I_{C2} = I_A$。相加兩式：</p>
+<div class="eq">$$I_A = (\alpha_1 + \alpha_2) I_A + I_{C01} + I_{C02}$$</div>
+
+<p>整理得到<strong>閘流體的核心方程式</strong>：</p>
+<div class="eq">$$\boxed{I_A = \frac{I_{C01} + I_{C02}}{1 - (\alpha_1 + \alpha_2)}}$$</div>
+
+<p>這就是 SCR 的靈魂。當 $\alpha_1 + \alpha_2 \ll 1$：$I_A \approx I_{C01} + I_{C02}$——很小的漏電流→<strong>阻斷狀態</strong>。當 $\alpha_1 + \alpha_2 \to 1$：分母趨近於零→$I_A$ 急劇增大→<strong>導通狀態</strong>。$\alpha_1 + \alpha_2 = 1$ 就是切換條件。</p>
+
+<div class="callout"><strong>💡 物理直覺：</strong>$\alpha$ 隨集極電流增大而增大。在小電流時 $\alpha_1 + \alpha_2 \ll 1$。一旦某個外部觸發使電流增大→$\alpha_1$ 和 $\alpha_2$ 增大→$\alpha_1 + \alpha_2$ 更接近 1→$I_A$ 更大→正回授循環→<strong>再生鎖定</strong>。一旦鎖定，即使移除觸發信號，$\alpha_1 + \alpha_2 \ge 1$ 得以維持→SCR 保持導通。</div>
+
+<h3>Thyristor I-V 特性</h3>
+<p>圖 15.31（p.718）展示了完整的閘流體 I-V 特性：順向阻斷區（低電流、高電壓）→在 $V_{BO}$（breakover voltage）處急劇切換到導通狀態（低電壓、大電流）→逆向阻斷區（負電壓）。關鍵參數包括：$V_{BO}$（正向轉折電壓）、$I_H$（維持電流，holding current）——陽極電流低於此值即回復阻斷狀態。</p>
+
+<div class="figure"><img src="../../pages/ch15_pages/ch15_page_718_c.png" alt="Fig 15.31 Thyristor I-V characteristic — forward blocking, breakover, conduction" loading="lazy"><figcaption>圖 15.31：閘流體的完整 I-V 特性——順向阻斷、$V_{BO}$ 轉折、導通狀態、逆向阻斷</figcaption></div>
+
+<h3>觸發機制</h3>
+<p>SCR 可通過多種方式從阻斷狀態切換到導通狀態：</p>
+
+<p><strong>① 崩潰觸發（Breakdown Triggering）：</strong>陽極電壓超過 $J_2$ 的崩潰電壓 $V_P$→撞擊游離產生大量電子-電洞對→等效於注入 base 電流→啟動正回授。這是二端 thyristor 的觸發方式。</p>
+
+<p><strong>② 閘極觸發（Gate Triggering）：</strong>在三端 SCR 中（圖 15.33，p.720），對 p2 區注入閘極電流 $I_g$（電洞）。包含 $I_g$ 的推導得到：</p>
+<div class="eq">$$\boxed{I_A = \frac{\alpha_2 I_g + I_{C01} + I_{C02}}{1 - (\alpha_1 + \alpha_2)}}$$</div>
+
+<div class="figure"><img src="../../pages/ch15_pages/ch15_page_719_c.png" alt="Fig 15.33 Gate-triggered SCR structure" loading="lazy"><figcaption>圖 15.33：三端閘極觸發 SCR——閘極電流 $I_g$ 注入 p2 區，只需數 mA 即可觸發數百 A 的陽極電流</figcaption></div>
+
+<p>$I_g$ 增大→$\alpha_2 I_g$ 使分子增大→$I_A$ 增大→$\alpha_1, \alpha_2$ 增大→正回授啟動。閘極電流只需數 mA 就能控制數百 A 的陽極電流——這是 SCR 最實用的觸發方式。</p>
+
+<p><strong>③ $dV/dt$ 觸發：</strong>快速變化的陽極電壓→$J_2$ 空乏區寬度變化→位移電流→等效閘極電流→可能意外觸發。這是寄生 thyristor 在 CMOS 電路中造成 latch-up 的常見機制。</p>
+
+<p><strong>④ 光觸發：</strong>光照產生電子-電洞對（特別在 $J_2$ 附近）→光電流等效於閘極電流。光觸發 SCR（LASCR）用於高壓隔離應用。</p>
+
+<h3>截止（Turn-Off）</h3>
+<p>SCR 一旦導通，閘極<strong>失去控制權</strong>。要關斷 SCR，必須將陽極電流降到<strong>維持電流（holding current）</strong>以下——使得 $\alpha_1 + \alpha_2 < 1$ 不再成立→正回授崩潰→回復阻斷狀態。在 AC 應用中，SCR 在電流自然過零時自動關斷。</p>
+
+<h3>Triac —— 雙向閘流體</h3>
+<p>Triac（圖 15.38，p.722）相當於兩個反並聯的 SCR 集成在單一晶片上，可雙向導通——適用於 AC 功率控制（如調光器、馬達控制）。Triac 可被任一極性的閘極信號觸發，且可在 AC 的正負半週導通。</p>
+
+<div class="figure"><img src="../../pages/ch15_pages/ch15_page_724_c.png" alt="Fig 15.38 Triac structure — bidirectional thyristor" loading="lazy"><figcaption>圖 15.38：Triac 結構——兩個反並聯 SCR 集成，可雙向導通，適用於 AC 功率控制</figcaption></div>
+
+<h3>MOS-Gated Thyristor</h3>
+<p>MOS 閘控閘流體用 MOS 結構來控制 npn BJT 的基區寬度：正閘極電壓使 p-base 表面空乏→有效基區寬度 $W^*$ 變窄→$\beta$ 增大→觸發導通。這結合了 MOS 的高輸入阻抗和 thyristor 的鎖存能力。MOS Turn-Off Thyristor 更進一步——以負閘極電壓導通 p-channel MOSFET 來短路 npn 的 B-E 接面→實現<strong>閘極可控關斷</strong>。</p>
+
+<div class="callout-warn"><strong>⚡ Latch-up 的警示：</strong>CMOS 積體電路中寄生 pnpn 結構本質上就是一個 thyristor。輻射、$dV/dt$、或電壓過衝可能觸發 latch-up→VDD 到 VSS 短路→晶片燒毀。這就是為什麼 CMOS 設計必須包含 guard ring 和 well tie 來降低寄生 $\alpha$ 乘積。</div>
+
+<table>
+<thead><tr><th>Thyristor 類型</th><th>特徵</th><th>應用</th></tr></thead>
+<tbody>
+<tr><td>SCR（二端/三端）</td><td>單向導通，閘極觸發</td><td>相位控制、過壓保護</td></tr>
+<tr><td>Triac</td><td>雙向導通，雙極性閘極</td><td>調光器、AC 馬達控制</td></tr>
+<tr><td>MOS-Gated Thyristor</td><td>MOS 輸入 + thyristor 鎖存</td><td>高功率開關</td></tr>
+<tr><td>MOS Turn-Off Thyristor</td><td>閘極可控關斷</td><td>智慧功率模組</td></tr>
+</tbody>
+</table>
+</section>
+
+<!-- 15.7 SUMMARY -->
+<section id="summary">
+<h2>15.7 本章總結</h2>
+
+<h3>三種微波元件 — 三種不同的 NDR 物理</h3>
+<ol style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li><strong>Tunnel Diode（穿隧二極體）：</strong>極重摻雜→空乏區極窄（∼50 Å）→量子穿隧主導電流→$dI/dV < 0$（DC 意義的 NDR）。截止頻率 $f_r = \frac{1}{2\pi R_{\min}C_j}\sqrt{R_{\min}/R_p - 1}$。多數載子效應→無擴散延遲→可達 >100 GHz。</li>
+<li><strong>Gunn Diode（甘恩二極體）：</strong>GaAs 雙谷導帶→高場下電子從高遷移率下谷轉移到低遷移率上谷→負微分遷移率→domain 形成與渡越→振盪頻率 $f = v_d/L$。不需要 pn 接面。</li>
+<li><strong>IMPATT Diode：</strong>撞擊游離雪崩區 + 漂移區→$\pi/2$（雪崩累積延遲）$+ \pi/2$（漂移渡越延遲）$= \pi$ 相位差→動態負電阻。振盪頻率 $f = v_s/(2L)$。$dI/dV$ 永遠為正（DC 意義）。是所有微波半導體元件中輸出功率最高的。</li>
+</ol>
+
+<h3>三種功率元件 — 共同的物理極限</h3>
+<ol style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li><strong>Power BJT：</strong>垂直 npn 結構，寬基區→低 $\beta$（∼5–100），Darlington pair 補償。SOA 由 $I_C,\max$、$V_{CE,\text{sus}}$、$P_T$、二次崩潰界定。熱失控是致命問題（$\beta$ 隨溫度升高→正回授）。</li>
+<li><strong>Power MOSFET：</strong>DMOS/VMOS 垂直結構，$R_{\text{on}} = R_S + R_{\text{CH}} + R_D$。$R_{\text{on}}$ 隨溫度升高→負回授→天然並聯穩定。寄生 BJT 在高速開關時可能觸發 snapback。SOA 無二次崩潰。開關速度遠快於 BJT。</li>
+<li><strong>Thyristor (SCR)：</strong>pnpn 四層結構，雙電晶體正回授模型→$I_A = (I_{C01}+I_{C02})/[1-(\alpha_1+\alpha_2)]$。$\alpha_1+\alpha_2\to 1$ 時鎖定導通。閘極觸發、$dV/dt$ 觸發、光觸發。維持電流以下才能關斷。Triac = 雙向 SCR。</li>
+</ol>
+
+<h3>核心物理洞察</h3>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li>微波元件與功率元件不是「新物理」，而是前面所有章節的物理在極端條件下的變形——穿隧、速度飽和、撞擊游離、寄生 BJT、再生正回授。</li>
+<li>Tunnel / Gunn / IMPATT 的共同點只有「都能振盪」，物理機制完全不同。考試常考三者 NDR 來源的區別。</li>
+<li>功率元件的關鍵不是理想 I-V，而是結構（垂直→耐壓+大電流）、熱（SOA 雙曲線）、寄生（snapback、latch-up）。</li>
+<li>Thyristor 的靈魂是 $1-(\alpha_1+\alpha_2)$ 在分母——這不只是公式，而是從阻斷到導通的相變條件。</li>
+</ul>
+
+<div class="callout"><strong>📋 考試重點回顧：</strong><br>• Tunnel Diode：最大電阻截止頻率 $f_r$ 的公式推導<br>• Gunn Diode：GaAs 雙谷能帶 → 負微分遷移率 → domain → $f = v_d/L$<br>• IMPATT：為什麼是「動態」負電阻而非 DC 負電阻？雙重 $\pi/2$ 相位延遲<br>• Power BJT：SOA 四邊界，Darlington pair $\beta_{\text{eff}}$<br>• Power MOSFET：$R_{\text{on}}$ 的正溫度係數 → 並聯穩定性<br>• SCR：$I_A$ 推導，$\alpha_1+\alpha_2 = 1$ 觸發條件，閘極失去控制權</div>
+
+<a class="toplink" href="../combined/semiconductor_book_structure_map_zh.html">回總地圖</a>
+</section>
+
+<section id="learning-resources"><h2>本章學習資源</h2><p><a href="../problems_examples/ch15_problems_zh.html">微波與功率元件可驗算補充習題</a> · <a href="../problems_examples/examples_in_chapter_zh.html#ch15">章內例題</a></p></section>
+<section id="derivation-lab" class="derivation-lab"><h2>推導、假設與章末診斷</h2><h3>各模型不可混用的假設</h3><ul><li>Tunnel diode 的負微分電阻是偏壓點附近的小訊號量；振盪條件還需負電導大於諧振器與負載損耗。</li><li>Gunn transit 模型 $f\sim v_d/L$ 假設形成穩定高場 domain 並以近似固定速度通過有效區。</li><li>IMPATT 模型要求雪崩建立與漂移渡越提供接近 $\pi$ 的總相位延遲；它是動態而非必然的 DC 負電阻。</li><li>功率元件 $P=I^2R$ 與熱阻模型多採穩態平均值；切換瞬間須加入 $E_{on},E_{off}$、寄生電感與暫態熱阻。</li><li>SCR 二電晶體模型假設可用 $\alpha_1,\alpha_2$ 描述耦合；實際觸發還受分布電阻、載子壽命與溫度影響。</li></ul><h3>中間推導：三個工程尺度</h3><ol><li>Gunn：domain 渡越時間 $\tau=L/v_d$，基本頻率 $f\sim1/\tau=v_d/L$。</li><li>功率 MOSFET：$R_{DS(on)}=\sum_iR_i$，導通平均損耗 $P_{cond}=I_{rms}^2R_{DS(on)}$。</li><li>SCR：$I_A=\alpha_1I_A+\alpha_2I_A+I_{CBO1}+I_{CBO2}+I_G$。</li><li>整理得 $I_A=[I_{CBO1}+I_{CBO2}+I_G]/[1-(\alpha_1+\alpha_2)]$；分母趨近零代表再生鎖定。</li></ol><div class="dimcheck"><strong>單位／量級：</strong>10 µm GaAs 區、$v_d=10^7$ cm/s，$f\sim10$ GHz；40 A 流過 55 mΩ 的導通損耗為 88 W，熱設計不可省略。</div><h3>章末練習與概念診斷</h3><details><summary>Tunnel、Gunn、IMPATT 都有負電阻，是否能用同一物理模型？</summary><p>不能：分別源於量子穿隧、能谷轉移造成的負微分遷移率，以及雪崩加渡越相位延遲。</p></details><details><summary>SOA 為何不是由最大電壓乘最大電流形成矩形？</summary><p>電流、電壓、功耗、熱與二次崩潰限制互相耦合；最大額定值通常不能同時達到。</p></details><h3>延伸計算練習</h3><p>完成上方診斷後，請在不查公式的情況下重建代表推導，並改變一個參數檢查極限行為。更多含數值與解答的題目：<a href="../problems_examples/ch15_problems_zh.html">本章完整習題頁</a>。</p></section>
 </main>
 <script>
 function toggleTheme(){const h=document.documentElement;const n=h.getAttribute('data-theme')==='light'?'dark':'light';h.setAttribute('data-theme',n);localStorage.setItem('theme',n);document.getElementById('tl').textContent=n==='dark'?'淺色':'深色';}

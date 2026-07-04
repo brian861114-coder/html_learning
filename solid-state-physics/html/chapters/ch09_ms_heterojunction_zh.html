@@ -25,29 +25,51 @@ table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}thead th{
 @media(max-width:768px){.sidebar{transform:translateX(-100%);transition:.3s}.sidebar.open{transform:translateX(0)}.main{margin-left:0;padding:20px 16px 60px}}
 @media print{.sidebar{display:none}.main{margin-left:0;max-width:100%;padding:0}}
 </style>
-<script src="../../../reading-preferences.js" defer></script></head>
-<body><a class="portal-home-link" href="../../../index.html">返回學習中心</a><style id="portal-home-link-style">.portal-home-link{position:fixed;top:16px;right:16px;z-index:1000;display:inline-flex;align-items:center;min-height:36px;padding:7px 11px;border:1px solid #cbd5e1;border-radius:8px;background:#fff;color:#1d4ed8;font:600 13px/1.2 -apple-system,BlinkMacSystemFont,"Noto Sans TC","Microsoft JhengHei",sans-serif;text-decoration:none;box-shadow:0 2px 10px rgba(15,23,42,.08)}.portal-home-link:hover{background:#eff6ff}.portal-home-link:focus-visible{outline:3px solid rgba(37,99,235,.35);outline-offset:2px}@media(max-width:768px){.portal-home-link{top:10px;right:10px;min-height:34px;padding:7px 9px;font-size:12px}}</style>
+<style id="derivation-lab-style">.derivation-lab{border-top:3px solid var(--ac);padding-top:20px}.derivation-lab ul,.derivation-lab ol{font-size:14px;color:var(--t2);margin:8px 0 14px 22px}.derivation-lab details{border:1px solid var(--bd);border-radius:8px;margin:8px 0;background:var(--bg)}.derivation-lab summary{cursor:pointer;padding:10px 13px;font-weight:600}.derivation-lab details p{padding:0 13px 10px}.dimcheck{background:var(--b3);border-left:3px solid var(--ac);padding:12px 15px;border-radius:0 8px 8px 0}</style>
+<script src="../../../reading-preferences.js" defer></script>
+</head>
+<body>
+<a class="portal-home-link" href="../../../index.html">返回學習中心</a>
+<style id="portal-home-link-style">.portal-home-link{position:fixed;top:16px;right:16px;z-index:1000;display:inline-flex;align-items:center;min-height:36px;padding:7px 11px;border:1px solid #cbd5e1;border-radius:8px;background:#fff;color:#1d4ed8;font:600 13px/1.2 -apple-system,BlinkMacSystemFont,"Noto Sans TC","Microsoft JhengHei",sans-serif;text-decoration:none;box-shadow:0 2px 10px rgba(15,23,42,.08)}.portal-home-link:hover{background:#eff6ff}.portal-home-link:focus-visible{outline:3px solid rgba(37,99,235,.35);outline-offset:2px}@media(max-width:768px){.portal-home-link{top:10px;right:10px;min-height:34px;padding:7px 9px;font-size:12px}}</style>
 <nav class="sidebar"><div class="sh"><div class="bk">半導體物理與元件·第四版</div><h2>第九章</h2></div><div class="sn"><ul>
 <li><a href="#preview">📋 9.0 本章預覽</a></li>
 <li class="ns">9.1 金半接面</li><li class="nsub"><a href="#s9-1-1">9.1.1 蕭特基能障</a></li><li class="nsub"><a href="#s9-1-2">9.1.2 空乏區·電場·電容</a></li><li class="nsub"><a href="#s9-1-3">9.1.3 費米能階釘札</a></li><li class="nsub"><a href="#s9-1-4">9.1.4 I-V 特性</a></li><li class="nsub"><a href="#s9-1-5">9.1.5 歐姆接觸</a></li>
 <li class="ns">9.2 異質接面</li><li class="nsub"><a href="#s9-2">9.2 異質接面</a></li>
-<li><a href="#summary">📋 本章摘要</a></li>
+<li><a href="#summary">📋 本章摘要</a></li><li><a href="#derivation-lab">🧪 推導、假設與章末診斷</a></li>
 </ul></div><div class="st"><button onclick="toggleTheme()">🌓 <span id="tl">深色模式</span></button></div></nav>
 <main class="main">
-<header class="header"><div class="cl">第九章</div><h1>金屬-半導體接面與異質接面</h1><div class="meta">Donald A. Neamen·《半導體物理與元件：基本原理》第四版·第 328–347 頁</div></header>
+<header class="header"><div class="cl">第九章</div><h1>金屬-半導體接面與異質接面</h1><div class="meta">Donald A. Neamen·《半導體物理與元件：基本原理》第四版·第 331–370 頁</div></header>
 
 <section id="preview"><div class="callout"><strong>📋 9.0 本章預覽</strong>
 <p>到目前為止，我們討論的「接面」都是同一種材料中 p 型和 n 型的接觸——所謂的<strong>同質接面（homojunction）</strong>。但真實的半導體元件不只包含 pn 接面。每一個電晶體、每一個二極體都需要<strong>金屬電極</strong>把信號和電力從外部世界引入半導體內部。金屬與半導體的接觸就是本章的第一個主題——<strong>金屬-半導體接面</strong>。</p>
 <p>更進一步，把兩種<strong>不同能隙</strong>的半導體放在一起會發生什麼？這種<strong>異質接面（heterojunction）</strong>能實現同質接面無法達到的功能——例如把電子和電洞侷限在奈米尺度的薄層中，從而製造出雷射和超高速電晶體。這是本章的第二個主題。</p>
 <p>這兩類接面看似冷門，但它們在每一個半導體元件中都是不可或缺的。沒有好的歐姆接觸，你的 MOSFET 源極電阻會吞噬掉大部分的驅動電流。沒有異質接面，就沒有光纖通訊用的雷射二極體、沒有手機中的 HBT 功率放大器、沒有衛星通訊中的 HEMT 低雜訊放大器。</p>
-<div class="callout-warn"><strong>⚡ 本章在全書中的位置：</strong>第七章（pn 接面靜態）→第八章（pn 二極體 I-V）→<strong>第九章（金半接面 + 異質接面）</strong>→第十章（BJT）。本章補足了「非 pn 接面」的接面物理，是理解蕭特基二極體、歐姆接觸、和異質接面元件的必要基礎。</div></div></section>
+<div class="callout-warn"><strong>⚡ 本章在全書中的位置：</strong>第七章（pn 接面靜態）→第八章（pn 二極體 I-V）→<strong>第九章（金半接面 + 異質接面）</strong>→第十章（MOSFET）。本章補足了「非 pn 接面」的接面物理，是理解蕭特基二極體、歐姆接觸、和異質接面元件的必要基礎。</div></div></section>
+<div style="margin-top:14px;background:var(--bg);border:1px solid var(--fbd);border-radius:8px;padding:12px 16px">
+<div style="font-size:11px;font-weight:600;color:var(--ac);margin-bottom:6px">🔑 本章核心概念</div>
+<div style="font-size:12px;color:var(--tx);line-height:2">
+1. 蕭特基能障高度 $\phi_{Bn}=\phi_m-\chi$（理想）——金屬功函數與半導體電子親和力的差<br>
+2. 蕭特基二極體是多數載子元件→無少數載子儲存→$t_s\approx0$→高速開關<br>
+3. 蕭特基 $J_S$ 比 pn 接面大 5–7 個數量級→相同電流下 $V_F$ 更低<br>
+4. 蕭特基能障降低（image-force lowering）：$\Delta\phi\propto\sqrt{E_{max}}$——高電場下能障變矮<br>
+5. 界面態 Fermi-level pinning→實際 $\phi_{Bn}$ 偏離理想——GaAs 尤其明顯<br>
+6. 歐姆接觸：重摻雜→空乏區極窄→穿隧主導→線性 $I$–$V$，比接觸電阻 $\rho_c\propto e^{\phi_B/\sqrt{N}}$<br>
+7. 異質接面能帶對準：straddling（Type I）、staggered（Type II）、broken-gap（Type III）<br>
+8. 調變摻雜（modulation doping）：摻雜只在寬能隙側→載子落入窄能隙側的量子井→2DEG<br>
+9. 2DEG 遷移率極高（$>10^6$ cm²/V-s 低溫）→HEMT 的速度基礎<br>
+10. 蕭特基+pn 比較表：蕭特基快但 $V_{BR}$ 低、$J_S$ 大；pn 耐壓高但慢<br>
+</div>
+</div>
 
-<div class="figure"><img src="../../../images/solid-state-physics/ch09_pages/ch09_overview.png" alt="第九章總覽圖" loading="lazy"><figcaption>📌 第九章總覽圖：金半接面與異質接面 — 蕭特基接面、歐姆接觸、異質接面、2DEG、DH雷射/HBT/HEMT</figcaption></div>
+<div class="figure"><img src="../../pages/ch09_pages/ch09_overview.png" alt="第九章總覽圖" loading="lazy"><figcaption>📌 第九章總覽圖：金半接面與異質接面 — 蕭特基接面、歐姆接觸、異質接面、2DEG、DH雷射/HBT/HEMT</figcaption></div>
 
 <section id="s9-1-1"><h2>9.1.1 蕭特基能障——金屬碰到半導體會怎樣？</h2>
+<div style="margin-bottom:14px;font-size:12px;color:var(--t2);line-height:1.8">
+<strong style="color:var(--tx)">🔑 本節重點</strong> ① 蕭特基-Mott 理想模型：$\phi_{Bn}=\phi_m-\chi$——金屬功函數與半導體電子親和力之差 ② 接觸後 $E_{Fs}>E_{Fm}$→電子流向金屬→留下 $N_d^+$ 空乏區→內建電場→動態平衡 ③ $V_{bi}=\phi_{Bn}-\phi_n$ 是半導體側能帶彎曲量；$\phi_{Bn}$ 不隨摻雜而變（理想） ④ p 型：$\phi_{Bp}=\chi+E_g-\phi_m$→$\phi_{Bn}+\phi_{Bp}=E_g$ ⑤ 理想預測與實驗值差異巨大——Al/Si 理想 0.05 eV vs 實際 0.5–0.7 eV
+</div>
 <p>想像你把一塊金屬（例如鋁）和一塊 n 型矽緊緊貼在一起。在接觸的瞬間，兩側的電子處於不同的「化學勢」——金屬的 Fermi 能階 $E_{Fm}$ 和半導體的 Fermi 能階 $E_{Fs}$ 通常不同。如果 $E_{Fs} > E_{Fm}$（半導體的電子「更想逃離」），電子就會從半導體流向金屬，直到兩側的 Fermi 能階對齊。</p>
 <p>電子的淨流動在界面附近留下<strong>不可移動的帶電雜質離子</strong>——n 型半導體側留下正的 $N_d^+$ 離子，形成<strong>空乏區</strong>。這個空間電荷產生<strong>內建電場</strong>——指向金屬，阻止更多電子從半導體流向金屬。最終達到動態平衡。</p>
-<div class="figure"><img src="../../../images/solid-state-physics/ch09_pages/ch9_page_359.png" alt="圖 9.2" loading="lazy"><figcaption>圖 9.2：金屬與 n 型半導體接觸前（左）和接觸後（右）的能帶圖。$\phi_m$ = 金屬功函數（把電子從金屬 Fermi 能階拉到真空所需的能量），$\chi$ = 半導體電子親和力（把電子從導帶底拉到真空所需的能量）。$\phi_{Bn}=\phi_m-\chi$ 是金屬端的電子能障。</figcaption></div>
+<div class="figure"><img src="../../pages/ch09_pages/ch9_page_359_c.png" alt="圖 9.2" loading="lazy"><figcaption>圖 9.2：金屬與 n 型半導體接觸前（左）和接觸後（右）的能帶圖。$\phi_m$ = 金屬功函數（把電子從金屬 Fermi 能階拉到真空所需的能量），$\chi$ = 半導體電子親和力（把電子從導帶底拉到真空所需的能量）。$\phi_{Bn}=\phi_m-\chi$ 是金屬端的電子能障。</figcaption></div>
 
 <p>在理想情況下（蕭特基-Mott 模型），金屬端的能障高度就是金屬功函數與半導體電子親和力的差值：</p>
 <div class="eq">$$\boxed{\phi_{Bn} = \phi_m - \chi} \quad\text{（n 型半導體）}$$</div>
@@ -70,24 +92,30 @@ table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}thead th{
 </section>
 
 <section id="s9-1-2"><h2>9.1.2 空乏區、電場、電容</h2>
-<div class="figure"><img src="../../../images/solid-state-physics/ch09_pages/ch9_page_392.png" alt="圖 9.5" loading="lazy"><figcaption>圖 9.5：Mott-Schottky $1/C^2$ vs $V_R$ 圖——直線斜率給出 $N_d$，x 截距給出 $V_{bi}$。</figcaption></div>
-<div class="figure"><img src="../../../images/solid-state-physics/ch09_pages/ch9_page_362.png" alt="圖 9.3" loading="lazy"><figcaption>圖 9.3：蕭特基接面的電荷分布和電場分布——與 p⁺n 單側突變接面相同。</figcaption></div>
+<div style="margin-bottom:14px;font-size:12px;color:var(--t2);line-height:1.8">
+<strong style="color:var(--tx)">🔑 本節重點</strong> ① 金半空乏區＝單側 $p^+n$ 接面——金屬側空乏區可忽略（電子濃度 ∼$10^{22}$ cm⁻³） ② $W=\sqrt{2\epsilon_s(V_{bi}+V_R)/(e N_d)}$，$E_{max}=eN_d W/\epsilon_s$，$C_j=\epsilon_s/W$ ③ Mott-Schottky 分析：$1/C_j^2$ vs $V_R$ 直線→斜率得 $N_d$，截距得 $V_{bi}$→再推出 $\phi_{Bn}$ ④ 蕭特基 $W$ 比 pn 窄→$C_j$ 較大→高頻響應較好 ⑤ 蕭特基 $V_{bi}$ 通常小於 pn（$\phi_{Bn}<E_g/e$）→相同偏壓下 $W$ 更窄
+</div>
+<div class="figure"><img src="../../pages/ch09_pages/ch9_page_365_c.png" alt="圖 9.5" loading="lazy"><figcaption>圖 9.5：Mott-Schottky $1/C^2$ vs $V_R$ 圖——直線斜率給出 $N_d$，x 截距給出 $V_{bi}$。</figcaption></div>
+<div class="figure"><img src="../../pages/ch09_pages/ch9_page_362_c.png" alt="圖 9.3" loading="lazy"><figcaption>圖 9.3：蕭特基接面的電荷分布和電場分布——與 p⁺n 單側突變接面相同。</figcaption></div>
 <p>一旦理解了 $\phi_{Bn}$ 和 $V_{bi}$，空乏區的分析與 pn 接面幾乎完全相同。金屬側電子濃度極高（∼$10^{22}$ cm⁻³）→空乏區厚度可忽略。半導體側的空乏區與<strong>單側突變 p⁺n 接面</strong>完全一致（金屬類似 p⁺ 側，無限重摻雜）。</p>
 <p>Poisson 方程推導給出空乏區寬度：</p>
 <div class="eq">$$W = \sqrt{\frac{2\epsilon_s(V_{bi}+V_R)}{e N_d}}$$</div>
 <p>這裡 $V_R$ 是外加反向偏壓（如果金屬接負、n 型半導體接正）。$V_R>0$→$W$ 變寬。最大電場在冶金界面處：$E_{\text{max}} = eN_d W/\epsilon_s$。單位面積接面電容：$C_j = \epsilon_s/W$。</p>
 
-<div class="figure"><img src="../../../images/solid-state-physics/ch09_pages/ch9_page_365.png" alt="圖 9.5, 9.6" loading="lazy"><figcaption>圖 9.5–9.6：金半接面的電荷密度和電場分布——與 p⁺n 單側突變接面相同。金屬側無空乏區（無限重摻雜近似）。</figcaption></div>
+<div class="figure"><img src="../../pages/ch09_pages/ch9_page_365_c.png" alt="圖 9.5, 9.6" loading="lazy"><figcaption>圖 9.5–9.6：金半接面的電荷密度和電場分布——與 p⁺n 單側突變接面相同。金屬側無空乏區（無限重摻雜近似）。</figcaption></div>
 
 <div class="callout"><strong>💡 Mott-Schottky 分析——從電容量出 $V_{bi}$ 和 $N_d$。</strong>將 $1/C_j^2$ 對 $V_R$ 作圖：$1/C_j^2 = 2(V_{bi}+V_R)/(e\epsilon_s N_d)$。這是一條直線——斜率 = $2/(e\epsilon_s N_d)$→得摻雜濃度；x 截距 = $-V_{bi}$→得內建電位；y 截距可外插得 $\phi_{Bn}$。這是實驗量測蕭特基接面參數的標準方法，不需要知道金屬的功函數。</div>
 <div class="callout"><strong>💡 蕭特基 vs pn 接面的空乏區比較。</strong>蕭特基接面的空乏區只在半導體側（金屬側沒有空乏區）→$W$ 較窄→$C_j$ 較大→高頻響應較好。pn 接面的空乏區在兩側都有→$W$ 較寬。此外，蕭特基接面的 $V_{bi}$ 通常比 pn 接面小（$\phi_{Bn} < E_g/e$）→相同反向偏壓下，蕭特基的 $W$ 更窄。這在 RF 混頻器和檢波器中是優勢（較低的串聯電阻）。</div>
 </section>
 
 <section id="s9-1-3"><h2>9.1.3 費米能階釘札——為什麼理想預測總是錯的？</h2>
+<div style="margin-bottom:14px;font-size:12px;color:var(--t2);line-height:1.8">
+<strong style="color:var(--tx)">🔑 本節重點</strong> ① 表面態（懸鍵）密度 $D_{it}\sim10^{12}$–$10^{14}$ cm⁻²eV⁻¹→界面電偶極層釘住 Fermi 能階 ② 高 $D_{it}$ 使 $\phi_{Bn}$ 鎖定在特定能隙位置→與金屬種類幾乎無關 ③ Si 的 $\phi_{Bn}$ 被釘在 0.5–0.9 eV；GaAs 更嚴重（$\phi_{Bn}\approx0.8$ eV，完全無關金屬） ④ 無法透過更換金屬自由調控能障→接觸工程的核心挑戰 ⑤ 奈米級 CMOS 接觸電阻瓶頸的物理根源——3nm 節點以下尤為突出
+</div>
 <p>如果你對照上一節的表格，會發現蕭特基-Mott 模型預測的 $\phi_{Bn}$ 與實驗值有巨大偏差。例如 Al/Si 的理想 $\phi_{Bn}=0.05$ eV（幾乎是歐姆接觸！），但實際量到 0.5–0.7 eV（明顯的整流接觸）。為什麼？</p>
 <p>答案在半導體的<strong>表面</strong>。晶體在表面突然終止→大量共價鍵懸空（<strong>表面態，surface states</strong>或稱 dangling bonds）。這些表面態的能階分布在能隙中，密度高達 $10^{12}$–$10^{14}$ cm⁻²eV⁻¹。表面態可以接受或給出電子→在表面建立一個電偶極層→這個偶極層<strong>強制</strong>半導體表面的 Fermi 能階鎖定在特定的能隙位置——與接觸的金屬種類幾乎無關。</p>
 
-<div class="figure"><img src="../../../images/solid-state-physics/ch09_pages/ch9_page_367.png" alt="圖 9.7" loading="lazy"><figcaption>圖 9.7：表面態對能障的影響。左：低表面態密度，$\phi_{Bn}$ 與 $\phi_m$ 線性相關。右：高表面態密度，$\phi_{Bn}$ 幾乎與 $\phi_m$ 無關→Fermi level pinning。</figcaption></div>
+<div class="figure"><img src="../../pages/ch09_pages/ch9_page_367_c.png" alt="圖 9.7" loading="lazy"><figcaption>圖 9.7：表面態對能障的影響。左：低表面態密度，$\phi_{Bn}$ 與 $\phi_m$ 線性相關。右：高表面態密度，$\phi_{Bn}$ 幾乎與 $\phi_m$ 無關→Fermi level pinning。</figcaption></div>
 
 <p><strong>量化 Fermi level pinning：</strong>定義表面態的中性能階 $\phi_0$（charge neutrality level）。如果表面態密度 $D_{it} \to \infty$，$\phi_{Bn}$ 被完全釘在 $E_g - \phi_0$。Si 的 $\phi_0$ 約在價帶上方 0.3–0.4 eV→$\phi_{Bn}$ 被釘在 0.7–0.8 eV 附近。GaAs 的 $D_{it}$ 更高→$\phi_{Bn}$ 固定在 ∼0.8 eV，幾乎完全與金屬種類無關。</p>
 
@@ -95,7 +123,10 @@ table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}thead th{
 </section>
 
 <section id="s9-1-4"><h2>9.1.4 蕭特基二極體的電流-電壓特性</h2>
-<div class="figure"><img src="../../../images/solid-state-physics/ch09_pages/ch9_page_369.png" alt="圖 9.8" loading="lazy"><figcaption>圖 9.8：蕭特基二極體的 I-V 特性——注意順向壓降（0.3–0.5 V）比 pn 二極體（0.7 V）低。</figcaption></div>
+<div style="margin-bottom:14px;font-size:12px;color:var(--t2);line-height:1.8">
+<strong style="color:var(--tx)">🔑 本節重點</strong> ① 熱離子發射——電子直接靠熱能跨越 $\phi_{Bn}$ 能障，不需先成為少數載子 ② $J=A^*T^2 e^{-e\phi_{Bn}/kT}(e^{eV_a/kT}-1)$，$A^*$ 為有效 Richardson 常數 ③ $J_S\propto e^{-\phi_{Bn}/kT}$（vs pn 的 $J_S\propto e^{-E_g/kT}$）→大 5–7 個數量級 ④ 蕭特基優勢：多數載子元件→無少數載子儲存→無擴散電容→GHz 級開關 ⑤ pn 優勢：$J_S$ 極低→高耐壓整流；典型取捨：效率 vs 耐壓
+</div>
+<div class="figure"><img src="../../pages/ch09_pages/ch9_page_369_c.png" alt="圖 9.8" loading="lazy"><figcaption>圖 9.8：蕭特基二極體的 I-V 特性——注意順向壓降（0.3–0.5 V）比 pn 二極體（0.7 V）低。</figcaption></div>
 <p>蕭特基二極體的電流傳輸機制與 pn 接面<strong>不同</strong>。pn 接面中，少數載子先被注入、然後擴散、最後復合——這是一個擴散主導的過程。蕭特基接面中，電子<strong>不需要</strong>先成為少數載子——它們直接靠熱能跨越（或穿隧通過）能障頂部。這個過程稱為<strong>熱離子發射（thermionic emission）</strong>。</p>
 
 <p><strong>物理圖像：</strong>金屬中有海量的電子分布在 Fermi 能階附近。這些電子以隨機熱速度運動。其中只有那些能量夠高、且速度方向朝向界面（向 +x 方向）的電子，才有機會跨越 $\phi_{Bn}$ 能障進入半導體。跨越能障的機率自然是 Boltzmann 因子 $e^{-e\phi_{Bn}/kT}$。</p>
@@ -110,6 +141,9 @@ table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}thead th{
 </section>
 
 <section id="s9-1-5"><h2>9.1.5 歐姆接觸——每個元件的必要結構</h2>
+<div style="margin-bottom:14px;font-size:12px;color:var(--t2);line-height:1.8">
+<strong style="color:var(--tx)">🔑 本節重點</strong> ① 歐姆接觸須為純電阻性、無整流效應→特定接觸電阻率 $\rho_c$（Ω·cm²）衡量品質 ② 路徑一：低能障（$\phi_m<\chi$）→費米能階釘札使此路徑在 Si 上幾乎不可行 ③ 路徑二：重摻雜穿隧→$W$ 極窄→量子穿隧→$\rho_c\propto e^{\phi_{Bn}/\sqrt{N_d}}$ ④ 金屬矽化物（TiSi₂、NiSi）＋超高劑量植入（$>10^{20}$ cm⁻³）→現代 CMOS 標準做法 ⑤ 奈米級 CMOS 接觸電阻是頭號瓶頸——即使 $\rho_c=10^{-8}$ Ω·cm²，小截面積下電阻仍高達 kΩ
+</div>
 <p>一個二極體需要一個整流接觸（蕭特基或 pn）來實現非線性 I-V。但每個元件<strong>還需要</strong>歐姆接觸來連接外部電路——這些接觸必須是純電阻性的，不能有整流效應。如果你把一個交流信號加到一個有整流效應的接觸上，信號會被削波、失真。</p>
 
 <p><strong>特定接觸電阻率 $\rho_c$（specific contact resistivity）</strong>是衡量歐姆接觸品質的指標——單位 Ω·cm²。現代 CMOS 技術要求 $\rho_c < 10^{-8}$ Ω·cm²（接觸電阻小於通道電阻）。</p>
@@ -128,9 +162,12 @@ table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}thead th{
 </section>
 
 <section id="s9-2"><h2>9.2 異質接面</h2>
+<div style="margin-bottom:14px;font-size:12px;color:var(--t2);line-height:1.8">
+<strong style="color:var(--tx)">🔑 本節重點</strong> ① Anderson 定則：$\Delta E_c=\chi_1-\chi_2$，$\Delta E_v=\Delta E_g-\Delta E_c$——電子親和力決定能帶對齊 ② Type I（跨立）電子電洞同層；Type II（錯開）分層；Type III（斷開）半金屬行為 ③ 調變摻雜——僅寬能隙側摻雜→2DEG 與施體空間分離→遷移率暴增 10–100 倍 ④ DH 雷射：寬能隙層雙向侷限載子→低閾值電流；HBT：寬能隙射極→$\beta$ 可達數千 ⑤ HEMT：AlGaAs/GaAs 界面 2DEG→遷移率 $>10^6$ cm²/V·s→GHz 級低雜訊放大
+</div>
 <p>到目前為止我們的所有接面都是同一種材料的不同摻雜類型（同質接面）。<strong>異質接面</strong>把兩種能隙不同的半導體接在一起。最經典的例子是 GaAs（$E_g=1.42$ eV）和 Al$_x$Ga$_{1-x}$As——後者的能隙可隨 Al 成分 $x$ 從 1.42 eV（$x=0$）調整到超過 2.1 eV（$x>0.45$）。</p>
 
-<div class="figure"><img src="../../../images/solid-state-physics/ch09_pages/ch9_page_374.png" alt="圖 9.11" loading="lazy"><figcaption>圖 9.11：Type I（跨立型）異質接面的能帶圖——GaAs/AlGaAs 是典型例子。$\Delta E_c$ 和 $\Delta E_v$ 將電子和電洞都侷限在窄能隙的 GaAs 層中。</figcaption></div>
+<div class="figure"><img src="../../pages/ch09_pages/ch9_page_374_c.png" alt="圖 9.11" loading="lazy"><figcaption>圖 9.11：Type I（跨立型）異質接面的能帶圖——GaAs/AlGaAs 是典型例子。$\Delta E_c$ 和 $\Delta E_v$ 將電子和電洞都侷限在窄能隙的 GaAs 層中。</figcaption></div>
 
 <p>兩種材料接觸時，Anderson 定則描述了能帶如何對齊：</p>
 <div class="eq">$$\boxed{\Delta E_c = \chi_1 - \chi_2 \qquad \Delta E_v = \Delta E_g - \Delta E_c}$$</div>
@@ -150,7 +187,7 @@ table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}thead th{
 <div class="callout"><strong>💡 異質接面 I-V 的實用意義。</strong>在 HBT 中，射極-基極異質接面的 $\Delta E_c$ 很大→電子注入效率極高但反向漏電很小→$\beta$ 大且穩定。在 HEMT 中，2DEG 的密度由 $\Delta E_c$ 和 AlGaAs 層的摻雜和厚度精確控制→閾值電壓可設計。理解異質接面的 I-V 特性是設計這些高頻元件的基礎。</div>
 
 <h3>異質接面的三種類型</h3>
-<div class="figure"><img src="../../../images/solid-state-physics/ch09_pages/ch9_page_376.png" alt="圖 9.11" loading="lazy"><figcaption>圖 9.11：Type I 異質接面能帶圖——$\Delta E_c$ 和 $\Delta E_v$ 將載子侷限在窄能隙層中。</figcaption></div>
+<div class="figure"><img src="../../pages/ch09_pages/ch9_page_374_c.png" alt="圖 9.11" loading="lazy"><figcaption>圖 9.11：Type I 異質接面能帶圖——$\Delta E_c$ 和 $\Delta E_v$ 將載子侷限在窄能隙層中。</figcaption></div>
 <table><thead><tr><th>類型</th><th>能帶排列</th><th>載子侷限</th><th>例子</th></tr></thead><tbody>
 <tr><td><strong>Type I（跨立）</strong></td><td>$\Delta E_c$ 和 $\Delta E_v$ 同側</td><td>電子和電洞在同一層</td><td>GaAs/AlGaAs</td></tr>
 <tr><td><strong>Type II（錯開）</strong></td><td>$\Delta E_c$ 和 $\Delta E_v$ 反向</td><td>電子在一層、電洞在另一層</td><td>InP/InGaAs</td></tr>
@@ -167,6 +204,7 @@ table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}thead th{
 <li><strong>蕭特基二極體：</strong>$J=A^*T^2e^{-e\phi_{Bn}/kT}(e^{eV_a/kT}-1)$。熱離子發射機制的多數載子元件→無擴散電容→極快開關速度。</li>
 <li><strong>歐姆接觸：</strong>低能障（$\phi_m<\chi$）或重摻雜穿隧實現低 $\rho_c$。奈米級 CMOS 中接觸電阻是關鍵瓶頸。</li>
 <li><strong>異質接面：</strong>Anderson 定則 $\Delta E_c=\chi_1-\chi_2$。Type I/II/III 三類。應用：DH 雷射、HBT、HEMT。</li></ol></section>
+<section id="derivation-lab" class="derivation-lab"><h2>推導、假設與章末診斷</h2><h3>方程式使用契約</h3><ul><li>理想 Schottky–Mott 能障 $\phi_{Bn}=\phi_m-\chi$ 假設界面無氧化層、無界面態、無偶極與無費米能階釘扎。</li><li>熱離子發射模型要求載子越障為速率限制、平均自由程與界面條件適合；薄能障／重摻雜時須加入穿隧。</li><li>金半空乏寬度沿用一維 depletion approximation。</li><li>Anderson 異質接面定則假設電子親和力可直接對齊且無界面電荷；真實 band offset 應以實驗或更完整界面模型校正。</li></ul><h3>中間推導：熱離子發射電流</h3><ol><li>只統計法向動能足以越過 $\phi_{Bn}$ 的電子通量。</li><li>對 Maxwell–Boltzmann 分布積分，得到 $J_{s}=A^{**}T^2e^{-q\phi_{Bn}/kT}$。</li><li>偏壓使半導體到金屬的越障率乘 $e^{qV/kT}$，反向通量近似不變。</li><li>$J=J_s(e^{qV/kT}-1)$；非理想界面以理想因子 $n$ 修正指數分母。</li></ol><div class="dimcheck"><strong>單位／量級：</strong>$A^{**}$ 為 A·cm$^{-2}$K$^{-2}$，乘 $T^2$ 得 A/cm²。300 K 能障降低 0.10 eV，$J_s$ 約增 $e^{0.10/0.0259}\approx48$ 倍。</div><h3>章末練習與概念診斷</h3><details><summary>為何重摻雜可把高能障接觸變成近似歐姆接觸？</summary><p>重摻雜使空乏層變薄，載子可穿隧而非必須熱越障；接觸電阻因此大幅下降。</p></details><details><summary>Schottky 二極體快的核心原因是較低順向壓降嗎？</summary><p>不是主要原因；它是多數載子元件，沒有大量少數載子儲存，因此反向恢復快。</p></details><h3>延伸計算練習</h3><p>完成上方診斷後，請在不查公式的情況下重建代表推導，並改變一個參數檢查極限行為。更多含數值與解答的題目：<a href="../problems_examples/ch09_problems_zh.html">本章完整習題頁</a>。</p></section>
 </main>
 <script>
 function toggleTheme(){const h=document.documentElement;const n=h.getAttribute('data-theme')==='light'?'dark':'light';h.setAttribute('data-theme',n);localStorage.setItem('theme',n);document.getElementById('tl').textContent=n==='dark'?'淺色模式':'深色模式';}
