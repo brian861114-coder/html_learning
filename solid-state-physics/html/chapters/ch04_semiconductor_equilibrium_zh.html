@@ -24,10 +24,15 @@ p{font-size:14px;color:var(--t2);margin-bottom:12px}strong{font-weight:600;color
 .callout{background:var(--b3);border:1px solid var(--fbd);border-radius:8px;padding:14px 18px;margin:16px 0;font-size:13px}.callout strong{color:var(--ac)}
 .callout-warn{background:var(--wbg);border:1px solid var(--wbd);border-radius:8px;padding:14px 18px;margin:16px 0;font-size:13px}.callout-warn strong{color:var(--wtx)}
 table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}thead th{background:var(--b3);padding:8px 12px;font-size:12px;font-weight:600;border-bottom:2px solid var(--bd)}tbody td{padding:8px 12px;border-bottom:1px solid var(--fbd)}tbody tr:nth-child(even){background:var(--b2)}
-@media(max-width:768px){.sidebar{transform:translateX(-100%);transition:.3s}.sidebar.open{transform:translateX(0)}.main{margin-left:0;padding:20px 16px 60px}}
+.sidebar-toggle-btn{display:none;position:fixed;top:12px;left:12px;z-index:200;width:40px;height:40px;border:1px solid var(--bd);border-radius:8px;background:var(--bg);color:var(--tx);font-size:22px;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.1)}@media(max-width:768px){.sidebar-toggle-btn{display:flex;align-items:center;justify-content:center}.sidebar{transform:translateX(-100%);transition:transform .3s}.sidebar.open{transform:translateX(0)}.main{margin-left:0;padding:20px 16px 60px}}
 @media print{.sidebar{display:none}.main{margin-left:0;max-width:100%;padding:0}}
 </style>
-<style id="derivation-lab-style">.derivation-lab{border-top:3px solid var(--ac);padding-top:20px}.derivation-lab ul,.derivation-lab ol{font-size:14px;color:var(--t2);margin:8px 0 14px 22px}.derivation-lab details{border:1px solid var(--bd);border-radius:8px;margin:8px 0;background:var(--bg)}.derivation-lab summary{cursor:pointer;padding:10px 13px;font-weight:600}.derivation-lab details p{padding:0 13px 10px}.dimcheck{background:var(--b3);border-left:3px solid var(--ac);padding:12px 15px;border-radius:0 8px 8px 0}</style>
+<style id="derivation-lab-style">.derivation-lab{border-top:3px solid var(--ac);padding-top:20px}.derivation-lab ul,.derivation-lab ol{font-size:14px;color:var(--t2);margin:8px 0 14px 22px}.derivation-lab details{border:1px solid var(--bd);border-radius:8px;margin:8px 0;background:var(--bg)}.derivation-lab summary{cursor:pointer;padding:10px 13px;font-weight:600}.derivation-lab details p{padding:0 13px 10px}.dimcheck{background:var(--b3);border-left:3px solid var(--ac);padding:12px 15px;border-radius:0 8px 8px 0}</style><link rel="stylesheet" href="../assets/course-ui.css">
+<script defer src="../assets/course-ui.js"></script>
+<link rel="stylesheet" href="../assets/fermi-carrier-model.css">
+<link rel="stylesheet" href="../assets/pn-junction-model.css">
+<script defer src="../assets/fermi-carrier-model.js"></script>
+
 <script src="../../../reading-preferences.js" defer></script>
 </head>
 <body>
@@ -39,6 +44,7 @@ table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}thead th{
 <li class="ns">4.2 摻雜</li><li class="nsub"><a href="#s4-2">施體與受體能階</a></li>
 <li class="ns">4.3–4.5 外質半導體</li><li class="nsub"><a href="#s4-3">4.3 外質半導體</a></li><li class="nsub"><a href="#s4-3-3">4.3.3 Fermi-Dirac 積分</a></li><li class="nsub"><a href="#s4-4">4.4 施體/受體統計</a></li><li class="nsub"><a href="#s4-5">4.5 電荷中性</a></li>
 <li class="ns">4.6 Fermi 能階</li><li class="nsub"><a href="#s4-6">4.6 Fermi 能階位置</a></li>
+<li><a href="#fermi-model">🧪 互動模型：費米能階與載子濃度</a></li>
 <li><a href="#summary">📋 本章摘要</a></li><li><a href="#derivation-lab">🧪 推導、假設與章末診斷</a></li>
 </ul></div><div class="st"><button onclick="toggleTheme()">🌓 <span id="tl">深色模式</span></button></div></nav>
 <main class="main">
@@ -404,6 +410,16 @@ table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}thead th{
 <div class="figure"><img src="../../pages/ch04_pages/ch4_page_150_c.png" alt="圖 4.9" loading="lazy"><figcaption>圖 4.9：Fermi 能階位置隨溫度的變化——不同摻雜濃度下，$E_F$ 從低溫的接近能帶邊緣逐漸回歸高溫的能隙中央。</figcaption></div>
 </section>
 
+<!-- FERMI-CARRIER INTERACTIVE MODEL -->
+<section id="fermi-model"><h2>🧪 互動模型：費米能階與平衡載子濃度</h2>
+<details class="pnm-disclosure" data-fermi-disclosure>
+<summary><span class="pnm-closed-label">展開互動模型</span><span class="pnm-open-label">收合互動模型</span><small>調整溫度、摻雜濃度與材料，即時觀察 E<sub>F</sub> 與載子濃度的變化</small></summary>
+<div class="pnm-disclosure-body">
+<div data-fermi-model></div>
+</div>
+</details>
+</section>
+
 <section id="summary"><h2>本章摘要</h2>
 <ol style="font-size:14px;color:var(--t2);margin-left:18px">
 <li><strong>載子濃度公式：</strong>$n_0 = N_c e^{-(E_c-E_F)/kT}$，$p_0 = N_v e^{-(E_F-E_v)/kT}$。核心在於 Boltzmann 近似——適用於非簡併半導體。</li>
@@ -418,6 +434,7 @@ table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}thead th{
 ho=0$；局部空乏區則不能套用多數載子等於摻雜的近似。</li></ul><h3>中間推導：質量作用律</h3><ol><li>$n=N_c e^{-(E_c-E_F)/kT}$，$p=N_v e^{-(E_F-E_v)/kT}$。</li><li>相乘後 $E_F$ 消去：$np=N_cN_v e^{-(E_c-E_v)/kT}$。</li><li>定義 $n_i^2=N_cN_v e^{-E_g/kT}$，故平衡態 $n_0p_0=n_i^2$。</li><li>再與 $p+N_D^+=n+N_A^-$ 聯立，才可求補償或未完全游離情況。</li></ol><div class="dimcheck"><strong>單位／量級：</strong>$N_c,N_v,n,p$ 都是 cm$^{-3}$，所以 $np$ 是 cm$^{-6}$。300 K Si 的 $n_i$ 約 $10^{10}$ cm$^{-3}$，比常見 $10^{16}$ cm$^{-3}$ 摻雜低六個數量級。</div><h3>章末練習與概念診斷</h3><details><summary>$N_D=10^{16}$ cm$^{-3}$ 是否永遠代表 $n=10^{16}$ cm$^{-3}$？</summary><p>否。低溫可能凍結、很高溫可能進入本徵區、補償受體會降低淨電子濃度，重摻雜還可能退化。</p></details><details><summary>非平衡光照下仍可用單一 $E_F$ 嗎？</summary><p>通常不行；需分別使用電子與電洞準 Fermi 能階，且 $np$ 不再固定等於 $n_i^2$。</p></details><h3>延伸計算練習</h3><p>完成上方診斷後，請在不查公式的情況下重建代表推導，並改變一個參數檢查極限行為。更多含數值與解答的題目：<a href="../problems_examples/ch04_problems_zh.html">本章完整習題頁</a>。</p></section>
 </main>
 <script>
+function toggleSidebar(){document.querySelector(".sidebar").classList.toggle("open");}
 function toggleTheme(){const h=document.documentElement;const n=h.getAttribute('data-theme')==='light'?'dark':'light';h.setAttribute('data-theme',n);localStorage.setItem('theme',n);document.getElementById('tl').textContent=n==='dark'?'淺色模式':'深色模式';}
 const s=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',s);if(s==='dark')document.getElementById('tl').textContent='淺色模式';
 const secs=document.querySelectorAll('section[id]');const navs=document.querySelectorAll('.sn a');window.addEventListener('scroll',()=>{let c='';secs.forEach(s=>{if(window.scrollY>=s.offsetTop-80)c=s.getAttribute('id');});navs.forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+c);});});

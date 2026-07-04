@@ -23,10 +23,15 @@ section{margin-bottom:44px}h2{font-size:20px;font-weight:700;color:var(--ac);mar
 table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}thead th{background:var(--b3);padding:8px 12px;font-size:12px;font-weight:600;border-bottom:2px solid var(--bd)}tbody td{padding:8px 12px;border-bottom:1px solid var(--fbd)}tbody tr:nth-child(even){background:var(--b2)}
 .figure{margin:24px 0;text-align:center}.figure img{max-width:100%;border-radius:8px;box-shadow:var(--sh);cursor:pointer}.figure img:hover{transform:scale(1.01)}.figure figcaption{margin-top:8px;font-size:12px;color:var(--t2)}
 .toplink{display:inline-block;margin-top:12px;font-size:12px;color:var(--ac);text-decoration:none}
-@media(max-width:768px){.sidebar{transform:translateX(-100%);transition:.3s}.sidebar.open{transform:translateX(0)}.main{margin-left:0;padding:20px 16px 60px}}
+.sidebar-toggle-btn{display:none;position:fixed;top:12px;left:12px;z-index:200;width:40px;height:40px;border:1px solid var(--bd);border-radius:8px;background:var(--bg);color:var(--tx);font-size:22px;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.1)}@media(max-width:768px){.sidebar-toggle-btn{display:flex;align-items:center;justify-content:center}.sidebar{transform:translateX(-100%);transition:transform .3s}.sidebar.open{transform:translateX(0)}.main{margin-left:0;padding:20px 16px 60px}}
 @media print{.sidebar{display:none}.main{margin-left:0;max-width:100%;padding:0}}
 </style>
-<style id="derivation-lab-style">.derivation-lab{border-top:3px solid var(--ac);padding-top:20px}.derivation-lab ul,.derivation-lab ol{font-size:14px;color:var(--t2);margin:8px 0 14px 22px}.derivation-lab details{border:1px solid var(--bd);border-radius:8px;margin:8px 0;background:var(--bg)}.derivation-lab summary{cursor:pointer;padding:10px 13px;font-weight:600}.derivation-lab details p{padding:0 13px 10px}.dimcheck{background:var(--b3);border-left:3px solid var(--ac);padding:12px 15px;border-radius:0 8px 8px 0}</style>
+<style id="derivation-lab-style">.derivation-lab{border-top:3px solid var(--ac);padding-top:20px}.derivation-lab ul,.derivation-lab ol{font-size:14px;color:var(--t2);margin:8px 0 14px 22px}.derivation-lab details{border:1px solid var(--bd);border-radius:8px;margin:8px 0;background:var(--bg)}.derivation-lab summary{cursor:pointer;padding:10px 13px;font-weight:600}.derivation-lab details p{padding:0 13px 10px}.dimcheck{background:var(--b3);border-left:3px solid var(--ac);padding:12px 15px;border-radius:0 8px 8px 0}</style><link rel="stylesheet" href="../assets/course-ui.css">
+<script defer src="../assets/course-ui.js"></script>
+<link rel="stylesheet" href="../assets/photon-bandgap-model.css">
+<link rel="stylesheet" href="../assets/pn-junction-model.css">
+<script defer src="../assets/photon-bandgap-model.js"></script>
+
 <script src="../../../reading-preferences.js" defer></script>
 </head>
 <body>
@@ -40,6 +45,7 @@ table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}thead th{
 <li class="ns">14.4 光致發光與電致發光</li><li class="nsub"><a href="#s14-4">躍遷過程與發光效率</a></li>
 <li class="ns">14.5 發光二極體</li><li class="nsub"><a href="#s14-5">LED 原理與量子效率</a></li>
 <li class="ns">14.6 雷射二極體</li><li class="nsub"><a href="#s14-6">受激輻射與共振腔</a></li>
+<li><a href="#photon-model">🧪 互動模型：光子能量與吸收門檻</a></li>
 <li class="ns">14.7 總結</li><li class="nsub"><a href="#summary">核心概念回顧</a></li><li><a href="#derivation-lab">🧪 推導、假設與章末診斷</a></li>
 </ul></div><div class="st"><button onclick="toggleTheme()">切換 <span id="tl">深色</span></button></div></nav>
 <main class="main">
@@ -460,6 +466,15 @@ table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}thead th{
 <div class="callout"><strong>💡 為什麼異質結構在半導體雷射中不可或缺？</strong>同質接面雷射就像在一個沒有牆壁的房間裡點火——熱量和光都散失了。DH 結構同時提供了「載子牆」（能帶不連續）和「光子牆」（折射率差），把能量集中在活性層。沒有異質接面，就沒有實用的半導體雷射。第十二章的異質接面理論在這裡找到了它最重要的應用。</div>
 </section>
 
+<section id="photon-model"><h2>🧪 互動模型：光子能量、波長與能隙門檻</h2>
+<details class="pnm-disclosure" data-photon-disclosure>
+<summary><span class="pnm-closed-label">展開互動模型</span><span class="pnm-open-label">收合互動模型</span><small>調整波長，即時判斷光子是否足以跨越各材料的能隙</small></summary>
+<div class="pnm-disclosure-body">
+<div data-photon-model></div>
+</div>
+</details>
+</section>
+
 <section id="summary"><h2>14.7 本章總結</h2>
 <p>第十四章將前面十三章的所有核心物理概念——能隙、能帶、非平衡載子、復合、擴散、pn 接面、異質接面——整合為一個統一的框架，說明了半導體如何與光交互作用，以及這些交互作用如何轉化為實用的光電元件。</p>
 
@@ -490,6 +505,7 @@ table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}thead th{
 <section id="derivation-lab" class="derivation-lab"><h2>推導、假設與章末診斷</h2><h3>光電方程的完整假設與邊界</h3><ul><li>Beer–Lambert 定律假設單色平面光、均勻材料、$\alpha$ 不隨位置變化，並忽略干涉、多重反射與散射。</li><li>$G(x)=\alpha\Phi_0e^{-\alpha x}$ 假設每個被吸收光子產生一對可用電子–電洞；量子效率不足時乘 $\eta$。</li><li>理想太陽電池採疊加原理、單一接面、均勻溫度、無串聯／並聯漏電損失。</li><li>雷射閾值邊界是一個 round trip 的模態增益恰好抵銷內部與鏡面損失。</li></ul><h3>中間推導：吸收、光電流與響應度</h3><ol><li>$d\Phi/dx=-\alpha\Phi$，邊界 $\Phi(0)=\Phi_0$，故 $\Phi(x)=\Phi_0e^{-\alpha x}$。</li><li>每單位體積生成率 $G=-d\Phi/dx=\alpha\Phi$。</li><li>厚度 $d$ 內被收集的光子率為 $\Phi_0(1-e^{-\alpha d})$，乘 $qA\eta_c$ 得光電流。</li><li>若以入射功率表示，$\mathcal R=\eta q/(h\nu)=\eta q\lambda/(hc)$。</li></ol><div class="dimcheck"><strong>單位／量級：</strong>$\alpha$ [cm$^{-1}$]·$\Phi$ [cm$^{-2}$s$^{-1}$] = $G$ [cm$^{-3}$s$^{-1}$]。850 nm、$\eta=1$ 的最大響應度約 0.685 A/W。</div><h3>章末練習與概念診斷</h3><details><summary>為何 Si 適合吸光卻不擅長發光？</summary><p>Si 是間接能隙，輻射復合還需聲子協助；非輻射途徑競爭強，因此發光效率低。</p></details><details><summary>Laser 為何不是「電流更大的 LED」？</summary><p>它還需 population inversion、受激放射與腔體回授，且模態增益必須超過總損失的閾值。</p></details><h3>延伸計算練習</h3><p>完成上方診斷後，請在不查公式的情況下重建代表推導，並改變一個參數檢查極限行為。更多含數值與解答的題目：<a href="../problems_examples/ch14_problems_zh.html">本章完整習題頁</a>。</p></section>
 </main>
 <script>
+function toggleSidebar(){document.querySelector(".sidebar").classList.toggle("open");}
 function toggleTheme(){const h=document.documentElement;const n=h.getAttribute('data-theme')==='light'?'dark':'light';h.setAttribute('data-theme',n);localStorage.setItem('theme',n);document.getElementById('tl').textContent=n==='dark'?'淺色':'深色';}
 const s=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',s);document.getElementById('tl').textContent=s==='dark'?'淺色':'深色';
 const secs=document.querySelectorAll('section[id]');const navs=document.querySelectorAll('.sn a, .nsub a');window.addEventListener('scroll',()=>{let c='';secs.forEach(s=>{if(window.scrollY>=s.offsetTop-80)c=s.getAttribute('id');});navs.forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+c);});});

@@ -22,10 +22,14 @@ section{margin-bottom:44px}h2{font-size:20px;font-weight:700;color:var(--ac);mar
 .callout{background:var(--b3);border:1px solid var(--fbd);border-radius:8px;padding:14px 18px;margin:16px 0;font-size:13px}.callout strong{color:var(--ac)}
 .callout-warn{background:var(--wbg);border:1px solid var(--wbd);border-radius:8px;padding:14px 18px;margin:16px 0;font-size:13px}.callout-warn strong{color:var(--wtx)}
 table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}thead th{background:var(--b3);padding:8px 12px;font-size:12px;font-weight:600;border-bottom:2px solid var(--bd)}tbody td{padding:8px 12px;border-bottom:1px solid var(--fbd)}tbody tr:nth-child(even){background:var(--b2)}
-@media(max-width:768px){.sidebar{transform:translateX(-100%);transition:.3s}.sidebar.open{transform:translateX(0)}.main{margin-left:0;padding:20px 16px 60px}}
+.sidebar-toggle-btn{display:none;position:fixed;top:12px;left:12px;z-index:200;width:40px;height:40px;border:1px solid var(--bd);border-radius:8px;background:var(--bg);color:var(--tx);font-size:22px;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.1)}@media(max-width:768px){.sidebar-toggle-btn{display:flex;align-items:center;justify-content:center}.sidebar{transform:translateX(-100%);transition:transform .3s}.sidebar.open{transform:translateX(0)}.main{margin-left:0;padding:20px 16px 60px}}
 @media print{.sidebar{display:none}.main{margin-left:0;max-width:100%;padding:0}}
 </style>
-<style id="derivation-lab-style">.derivation-lab{border-top:3px solid var(--ac);padding-top:20px}.derivation-lab ul,.derivation-lab ol{font-size:14px;color:var(--t2);margin:8px 0 14px 22px}.derivation-lab details{border:1px solid var(--bd);border-radius:8px;margin:8px 0;background:var(--bg)}.derivation-lab summary{cursor:pointer;padding:10px 13px;font-weight:600}.derivation-lab details p{padding:0 13px 10px}.dimcheck{background:var(--b3);border-left:3px solid var(--ac);padding:12px 15px;border-radius:0 8px 8px 0}</style>
+<style id="derivation-lab-style">.derivation-lab{border-top:3px solid var(--ac);padding-top:20px}.derivation-lab ul,.derivation-lab ol{font-size:14px;color:var(--t2);margin:8px 0 14px 22px}.derivation-lab details{border:1px solid var(--bd);border-radius:8px;margin:8px 0;background:var(--bg)}.derivation-lab summary{cursor:pointer;padding:10px 13px;font-weight:600}.derivation-lab details p{padding:0 13px 10px}.dimcheck{background:var(--b3);border-left:3px solid var(--ac);padding:12px 15px;border-radius:0 8px 8px 0}</style><link rel="stylesheet" href="../assets/course-ui.css">
+<script defer src="../assets/course-ui.js"></script>
+<link rel="stylesheet" href="../assets/pn-junction-model.css">
+<script defer src="../assets/pn-junction-model.js"></script>
+
 <script src="../../../reading-preferences.js" defer></script>
 </head>
 <body>
@@ -33,7 +37,7 @@ table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}thead th{
 <style id="portal-home-link-style">.portal-home-link{position:fixed;top:16px;right:16px;z-index:1000;display:inline-flex;align-items:center;min-height:36px;padding:7px 11px;border:1px solid #cbd5e1;border-radius:8px;background:#fff;color:#1d4ed8;font:600 13px/1.2 -apple-system,BlinkMacSystemFont,"Noto Sans TC","Microsoft JhengHei",sans-serif;text-decoration:none;box-shadow:0 2px 10px rgba(15,23,42,.08)}.portal-home-link:hover{background:#eff6ff}.portal-home-link:focus-visible{outline:3px solid rgba(37,99,235,.35);outline-offset:2px}@media(max-width:768px){.portal-home-link{top:10px;right:10px;min-height:34px;padding:7px 9px;font-size:12px}}</style>
 <nav class="sidebar"><div class="sh"><div class="bk">半導體物理與元件·第四版</div><h2>第七章</h2></div><div class="sn"><ul>
 <div class="figure"><img src="../../pages/ch07_pages/ch7_page_268_c.png" alt="圖 7.3" loading="lazy"><figcaption>圖 7.3：pn 接面空乏區的電荷分布、電場分布、電位分布——三角形電場、S 形電位。</figcaption></div>
-<li><a href="#preview">📋 7.0 本章預覽</a></li>
+<li><a href="#preview">📋 7.0 本章預覽</a></li><li><a href="#interactive-pn">🎛️ PN 接面互動模型</a></li>
 <li class="ns">7.1–7.2 零偏壓</li><li class="nsub"><a href="#s7-1">7.1 基本結構</a></li><li class="nsub"><a href="#s7-2a">7.2.1 內建電位差 ⭐</a></li><li class="nsub"><a href="#s7-2b">7.2.2–7.2.3 電場·空乏區 ⭐</a></li>
 <li class="ns">7.3 反向偏壓</li><li class="nsub"><a href="#s7-3">7.3 反向偏壓·接面電容</a></li>
 <li class="ns">7.4–7.5</li><li class="nsub"><a href="#s7-4">7.4 接面崩潰</a></li><li class="nsub"><a href="#s7-5">7.5 非均勻摻雜接面</a></li>
@@ -51,8 +55,7 @@ table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}thead th{
 <div style="font-size:12px;color:var(--tx);line-height:2">
 1. pn 接面：p 型和 n 型半導體接觸→載子濃度梯度→擴散→留下游離雜質→空乏區+內建電場<br>
 2. 內建電位 $V_{bi}=\frac{kT}{e}\ln\frac{N_a N_d}{n_i^2}$——平衡時空乏區的總電位降（Si 典型 0.7–0.9 V）<br>
-3. 空乏區寬度 $W=\sqrt{\frac{2\varepsilon_s(V_{bi}+V_R)}{e}\left(\frac{N_a+N_d}{N_a N_d}
-ight)}$——Poisson 方程+突變空乏近似推得<br>
+3. 空乏區寬度 $W=\sqrt{\frac{2\varepsilon_s(V_{bi}+V_R)}{e}\left(\frac{N_a+N_d}{N_a N_d}\right)}$——Poisson 方程+突變空乏近似推得<br>
 4. 最大電場在冶金接面處：$E_{max}=-e N_d x_n/\varepsilon_s$——逆偏時電場增大<br>
 5. 接面電容 $C_j=\varepsilon_s/W$——電壓可控電容，$C_j\propto 1/\sqrt{V_{bi}+V_R}$（突變接面）<br>
 6. 單側接面（$N_a\gg N_d$ 或反過來）：$W$ 主要由輕摻雜側決定→$W\approx\sqrt{2\varepsilon_s(V_{bi}+V_R)/(e N_B)}$<br>
@@ -119,6 +122,17 @@ ight)}$——Poisson 方程+突變空乏近似推得<br>
 <div class="callout"><strong>💡 $W\propto\sqrt{V_{bi}}$ 的直覺：</strong>空乏區就像一個平行板電容器。要建立更大的電位差，你需要更多的空間電荷→空乏區必須更寬（以容納更多離子）。但摻雜濃度越高→空間電荷密度越大→只需較短距離就能累積所需的電荷→$W$ 越小。這就是為什麼重摻雜接面的空乏區更窄。</div>
 </section>
 
+<section id="interactive-pn">
+<h2>互動模型｜PN 接面空乏區多圖聯動</h2>
+<p>調整兩側摻雜、外加偏壓與溫度，觀察同一組物理條件如何同步改變空乏區、固定空間電荷、電場、電位與接面電容。建議先預測變化方向，再移動滑桿驗證；所有控制項皆可使用方向鍵微調。</p>
+<details class="pnm-disclosure" data-pn-disclosure>
+<summary>
+<span><span class="pnm-closed-label">🎛️ 開啟 PN 接面互動模型</span><span class="pnm-open-label">收合 PN 接面互動模型</span></span>
+<small>摻雜、偏壓與溫度 → 空乏區、電場、電位、電容</small>
+</summary>
+<div class="pnm-disclosure-body"><div data-pn-junction-model></div></div>
+</details>
+</section>
 <section id="s7-3"><h2>7.3 反向偏壓與接面電容</h2>
 <div style="margin-bottom:14px;font-size:12px;color:var(--t2);line-height:1.8">
 <strong style="color:var(--tx)">🔑 本節重點</strong> ① 反向偏壓 $V_R$→總障壁 $V_{bi}+V_R$→$W$ 變寬，$W=\sqrt{2\epsilon_s(V_{bi}+V_R)(N_a+N_d)/(e N_a N_d)}$ ② 接面電容 $C_j=\epsilon_s/W\propto 1/\sqrt{V_{bi}+V_R}$——電壓可控電容 ③ $1/C_j^2$ 對 $V_R$ 作圖為直線：截距 $=-V_{bi}$、斜率給出輕摻雜側濃度 ④ 單側突變接面（$N_a\gg N_d$）→$W$ 幾乎全在輕摻雜側→$C_j$ 僅由 $N_d$ 決定 ⑤ 變容二極體原理——利用反向偏壓調控空乏區寬度來改變電容值
@@ -255,12 +269,10 @@ ight)}$——Poisson 方程+突變空乏近似推得<br>
 <li><strong>反向偏壓：</strong>$V_R$→$V_{bi}+V_R$→$W$ 變寬。$C_j=\epsilon_s/W\propto1/\sqrt{V_{bi}+V_R}$→變容二極體原理。</li>
 <li><strong>崩潰：</strong>$V_B\approx\epsilon_s E_{\text{crit}}^2/(2eN_B)$。輕摻雜→高耐壓。雪崩倍增機制。</li>
 <li><strong>非均勻接面：</strong>線性梯度 $W\propto V^{1/3}$。超突變接面 $C_j\propto V^{-m}$（$m>1/2$）→VCO 應用。</li></ol></section>
-<section id="derivation-lab" class="derivation-lab"><h2>推導、假設與章末診斷</h2><h3>方程式使用契約與邊界條件</h3><ul><li>突變接面、均勻摻雜、一維、完全游離、非退化且熱平衡或準靜態反偏。</li><li>空乏近似：空乏區內自由載子忽略，$
-ho=-qN_A$（p 側）或 $+qN_D$（n 側）；中性區 $
-ho\approx0$。</li><li>邊界 $E(-x_p)=E(x_n)=0$，電位連續；電荷中性要求 $N_Ax_p=N_Dx_n$。</li><li>高正偏、強產生復合、緩變接面或接近崩潰時需改用更完整模型。</li></ul><h3>中間推導：空乏寬度</h3><ol><li>由 Poisson 方程 $dE/dx=
-ho/\epsilon_s$ 分別積分兩側電場。</li><li>利用外緣 $E=0$ 與界面電場連續，得到 $N_Ax_p=N_Dx_n$。</li><li>再積分 $E=-dV/dx$，電位降等於兩個三角形電場面積。</li><li>$W=x_p+x_n=\sqrt{\frac{2\epsilon_s}{q}(V_{bi}+V_R)(1/N_A+1/N_D)}$。</li></ol><div class="dimcheck"><strong>單位／量級：</strong>$\epsilon V/(qN)$ 為 cm²。Si、$N_A=N_D=10^{16}$ cm$^{-3}$、總位降 0.7 V 時，$W\approx0.43$ µm。</div><h3>章末練習與概念診斷</h3><details><summary>反向偏壓增加時，哪一側空乏區增加較多？</summary><p>較輕摻雜側；由 $N_Ax_p=N_Dx_n$ 可知寬度與摻雜濃度成反比。</p></details><details><summary>為何接面電容隨反偏增加而下降？</summary><p>反偏使 $W$ 增大，而 $C_j=\epsilon_sA/W$，等效電荷板距離增加。</p></details><h3>延伸計算練習</h3><p>完成上方診斷後，請在不查公式的情況下重建代表推導，並改變一個參數檢查極限行為。更多含數值與解答的題目：<a href="../problems_examples/ch07_problems_zh.html">本章完整習題頁</a>。</p></section>
+<section id="derivation-lab" class="derivation-lab"><h2>推導、假設與章末診斷</h2><h3>方程式使用契約與邊界條件</h3><ul><li>突變接面、均勻摻雜、一維、完全游離、非退化且熱平衡或準靜態反偏。</li><li>空乏近似：空乏區內自由載子忽略，$\rho=-qN_A$（p 側）或 $+qN_D$（n 側）；中性區 $\rho\approx0$。</li><li>邊界 $E(-x_p)=E(x_n)=0$，電位連續；電荷中性要求 $N_Ax_p=N_Dx_n$。</li><li>高正偏、強產生復合、緩變接面或接近崩潰時需改用更完整模型。</li></ul><h3>中間推導：空乏寬度</h3><ol><li>由 Poisson 方程 $dE/dx=\rho/\epsilon_s$ 分別積分兩側電場。</li><li>利用外緣 $E=0$ 與界面電場連續，得到 $N_Ax_p=N_Dx_n$。</li><li>再積分 $E=-dV/dx$，電位降等於兩個三角形電場面積。</li><li>$W=x_p+x_n=\sqrt{\frac{2\epsilon_s}{q}(V_{bi}+V_R)(1/N_A+1/N_D)}$。</li></ol><div class="dimcheck"><strong>單位／量級：</strong>$\epsilon V/(qN)$ 為 cm²。Si、$N_A=N_D=10^{16}$ cm$^{-3}$、總位降 0.7 V 時，$W\approx0.43$ µm。</div><h3>章末練習與概念診斷</h3><details><summary>反向偏壓增加時，哪一側空乏區增加較多？</summary><p>較輕摻雜側；由 $N_Ax_p=N_Dx_n$ 可知寬度與摻雜濃度成反比。</p></details><details><summary>為何接面電容隨反偏增加而下降？</summary><p>反偏使 $W$ 增大，而 $C_j=\epsilon_sA/W$，等效電荷板距離增加。</p></details><h3>延伸計算練習</h3><p>完成上方診斷後，請在不查公式的情況下重建代表推導，並改變一個參數檢查極限行為。更多含數值與解答的題目：<a href="../problems_examples/ch07_problems_zh.html">本章完整習題頁</a>。</p></section>
 </main>
 <script>
+function toggleSidebar(){document.querySelector(".sidebar").classList.toggle("open");}
 function toggleTheme(){const h=document.documentElement;const n=h.getAttribute('data-theme')==='light'?'dark':'light';h.setAttribute('data-theme',n);localStorage.setItem('theme',n);document.getElementById('tl').textContent=n==='dark'?'淺色模式':'深色模式';}
 const s=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',s);if(s==='dark')document.getElementById('tl').textContent='淺色模式';
 const secs=document.querySelectorAll('section[id]');const navs=document.querySelectorAll('.sn a');window.addEventListener('scroll',()=>{let c='';secs.forEach(s=>{if(window.scrollY>=s.offsetTop-80)c=s.getAttribute('id');});navs.forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+c);});});

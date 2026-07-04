@@ -22,10 +22,15 @@ section{margin-bottom:44px}h2{font-size:20px;font-weight:700;color:var(--ac);mar
 .callout{background:var(--b3);border:1px solid var(--fbd);border-radius:8px;padding:14px 18px;margin:16px 0;font-size:13px}.callout strong{color:var(--ac)}
 .callout-warn{background:var(--wbg);border:1px solid var(--wbd);border-radius:8px;padding:14px 18px;margin:16px 0;font-size:13px}.callout-warn strong{color:var(--wtx)}
 table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}thead th{background:var(--b3);padding:8px 12px;font-size:12px;font-weight:600;border-bottom:2px solid var(--bd)}tbody td{padding:8px 12px;border-bottom:1px solid var(--fbd)}tbody tr:nth-child(even){background:var(--b2)}
-@media(max-width:768px){.sidebar{transform:translateX(-100%);transition:.3s}.sidebar.open{transform:translateX(0)}.main{margin-left:0;padding:20px 16px 60px}}
+.sidebar-toggle-btn{display:none;position:fixed;top:12px;left:12px;z-index:200;width:40px;height:40px;border:1px solid var(--bd);border-radius:8px;background:var(--bg);color:var(--tx);font-size:22px;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.1)}@media(max-width:768px){.sidebar-toggle-btn{display:flex;align-items:center;justify-content:center}.sidebar{transform:translateX(-100%);transition:transform .3s}.sidebar.open{transform:translateX(0)}.main{margin-left:0;padding:20px 16px 60px}}
 @media print{.sidebar{display:none}.main{margin-left:0;max-width:100%;padding:0}}
 </style>
-<style id="derivation-lab-style">.derivation-lab{border-top:3px solid var(--ac);padding-top:20px}.derivation-lab ul,.derivation-lab ol{font-size:14px;color:var(--t2);margin:8px 0 14px 22px}.derivation-lab details{border:1px solid var(--bd);border-radius:8px;margin:8px 0;background:var(--bg)}.derivation-lab summary{cursor:pointer;padding:10px 13px;font-weight:600}.derivation-lab details p{padding:0 13px 10px}.dimcheck{background:var(--b3);border-left:3px solid var(--ac);padding:12px 15px;border-radius:0 8px 8px 0}</style>
+<style id="derivation-lab-style">.derivation-lab{border-top:3px solid var(--ac);padding-top:20px}.derivation-lab ul,.derivation-lab ol{font-size:14px;color:var(--t2);margin:8px 0 14px 22px}.derivation-lab details{border:1px solid var(--bd);border-radius:8px;margin:8px 0;background:var(--bg)}.derivation-lab summary{cursor:pointer;padding:10px 13px;font-weight:600}.derivation-lab details p{padding:0 13px 10px}.dimcheck{background:var(--b3);border-left:3px solid var(--ac);padding:12px 15px;border-radius:0 8px 8px 0}</style><link rel="stylesheet" href="../assets/course-ui.css">
+<script defer src="../assets/course-ui.js"></script>
+<link rel="stylesheet" href="../assets/device-models.css">
+<script defer src="../assets/mos-cv-model.js"></script>
+<script defer src="../assets/mos-channel-model.js"></script>
+
 <script src="../../../reading-preferences.js" defer></script>
 </head>
 <body>
@@ -33,7 +38,7 @@ table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}thead th{
 <style id="portal-home-link-style">.portal-home-link{position:fixed;top:16px;right:16px;z-index:1000;display:inline-flex;align-items:center;min-height:36px;padding:7px 11px;border:1px solid #cbd5e1;border-radius:8px;background:#fff;color:#1d4ed8;font:600 13px/1.2 -apple-system,BlinkMacSystemFont,"Noto Sans TC","Microsoft JhengHei",sans-serif;text-decoration:none;box-shadow:0 2px 10px rgba(15,23,42,.08)}.portal-home-link:hover{background:#eff6ff}.portal-home-link:focus-visible{outline:3px solid rgba(37,99,235,.35);outline-offset:2px}@media(max-width:768px){.portal-home-link{top:10px;right:10px;min-height:34px;padding:7px 9px;font-size:12px}}</style>
 <nav class="sidebar"><div class="sh"><div class="bk">半導體物理與元件·第四版</div><h2>第十章</h2></div><div class="sn"><ul>
 <div class="figure"><img src="../../pages/ch11_pages/ch11_page_429_c.png" alt="圖 10.34" loading="lazy"><figcaption>圖 10.34：n 通道 MOSFET 的截面結構——閘極、源極、汲極、基板的幾何關係。</figcaption></div>
-<li><a href="#preview">📋 10.0 本章預覽</a></li><li class="ns">10.1 MOS 結構</li><li class="nsub"><a href="#s10-1a">10.1.1–10.1.2 結構·電容</a></li><li class="nsub"><a href="#s10-1b">10.1.3–10.1.5 能帶·空乏·反轉</a></li><li class="ns">10.1.6 $V_T$</li><li class="nsub"><a href="#s10-2">10.1.6 臨界電壓 $V_T$ ⭐</a></li><li class="ns">10.2 C-V 特性</li><li class="nsub"><a href="#s10-cv">10.2 C-V 特性</a></li><li class="ns">10.3 I-V</li><li class="nsub"><a href="#s10-3a">10.3.1–10.3.3 線性區推導</a></li><li class="nsub"><a href="#s10-3b">10.3.3–10.3.4 飽和區·夾止</a></li><li class="ns">10.4 與第 11 章延伸</li><li class="nsub"><a href="#s10-4">10.4 小訊號·$f_T$</a></li><li class="nsub"><a href="#s10-freq">10.4 頻率限制</a></li><li class="nsub"><a href="#s10-5">11.3.1 短通道·次臨界</a></li><li><a href="#summary">📋 本章摘要</a></li><li><a href="#derivation-lab">🧪 推導、假設與章末診斷</a></li></ul></div><div class="st"><button onclick="toggleTheme()">🌓 <span id="tl">深色模式</span></button></div></nav>
+<li><a href="#preview">📋 10.0 本章預覽</a></li><li class="ns">10.1 MOS 結構</li><li class="nsub"><a href="#s10-1a">10.1.1–10.1.2 結構·電容</a></li><li class="nsub"><a href="#s10-1b">10.1.3–10.1.5 能帶·空乏·反轉</a></li><li class="ns">10.1.6 $V_T$</li><li class="nsub"><a href="#s10-2">10.1.6 臨界電壓 $V_T$ ⭐</a></li><li class="ns">10.2 C-V 特性</li><li class="nsub"><a href="#s10-cv">10.2 C-V 特性</a></li><li class="nsub"><a href="#interactive-mos-cv">🎛️ MOS C-V 互動模型</a></li><li class="ns">10.3 I-V</li><li class="nsub"><a href="#s10-3a">10.3.1–10.3.3 線性區推導</a></li><li class="nsub"><a href="#s10-3b">10.3.3–10.3.4 飽和區·夾止</a></li><li class="nsub"><a href="#interactive-mos-channel">🎛️ 通道與夾止模型</a></li><li class="ns">10.4 與第 11 章延伸</li><li class="nsub"><a href="#s10-4">10.4 小訊號·$f_T$</a></li><li class="nsub"><a href="#s10-freq">10.4 頻率限制</a></li><li class="nsub"><a href="#s10-5">11.3.1 短通道·次臨界</a></li><li><a href="#summary">📋 本章摘要</a></li><li><a href="#derivation-lab">🧪 推導、假設與章末診斷</a></li></ul></div><div class="st"><button onclick="toggleTheme()">🌓 <span id="tl">深色模式</span></button></div></nav>
 <main class="main">
 <header class="header"><div class="cl">第十章</div><h1>場效電晶體（MOSFET）</h1><div class="meta">Donald A. Neamen·《半導體物理與元件：基本原理》第四版·第 371–442 頁</div></header>
 
@@ -174,6 +179,14 @@ table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}thead th{
 
 </section>
 
+<section id="interactive-mos-cv">
+<h2>互動模型｜MOS 電容與高低頻 C–V</h2>
+<p>調整閘極電壓、基板摻雜、氧化層厚度與量測頻率，比較累積、空乏及反轉時的能帶彎曲與小訊號電容。模型採理想一維 MOS 電容與空乏近似。</p>
+<details class="dm-disclosure" data-dm-disclosure="mos-cv">
+<summary><span><span class="dm-closed-label">🎛️ 開啟 MOS C–V 互動模型</span><span class="dm-open-label">收合 MOS C–V 互動模型</span></span><small>V_G、N_A、t_ox、頻率 → 能帶與 C–V</small></summary>
+<div class="dm-disclosure-body"><div data-mos-cv-model></div></div>
+</details>
+</section>
 <section id="s10-3a"><h2>10.3.1–10.3.3 線性區 I-V 關係的完整推導 ⭐</h2>
 <div style="margin-bottom:14px;font-size:12px;color:var(--t2);line-height:1.8">
 <strong style="color:var(--tx)">🔑 本節重點</strong> ① 漸變通道近似：$|E_x|\\ll|E_y|$，通道電位 $V(x)$ 沿長度緩慢變化 ② 反轉層電荷 $Q_i(x)=-C_{ox}[V_{GS}-V_T-V(x)]$——閘極過驅動電壓扣除通道壓降 ③ 積分得 $I_D=\\mu_n C_{ox}(W/L)[(V_{GS}-V_T)V_{DS}-V_{DS}^2/2]$——拋物線形狀，$V_{DS}$ 小時近似線性
@@ -214,6 +227,14 @@ table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}thead th{
 <div class="callout-warn"><strong>⚡ 平方律的深刻意義——MOSFET 是平方律元件。</strong>$I_D\propto(V_{GS}-V_T)^2$。對比 BJT：$I_C\propto e^{V_{BE}/V_T}$（指數律）。BJT 的I-V 曲線比 MOSFET 陡峭得多（指數 > 平方）。這意味著 BJT 的 $g_m$ 更大（$g_m\propto I_C$ vs $g_m\propto\sqrt{I_D}$），但 BJT 的偏壓控制更難（$V_{BE}$ 的微小變化導致 $I_C$ 的巨大變化）。MOSFET 的平方律給出了較溫和的增益特性→更容易設計穩定偏壓點。</div>
 </section>
 
+<section id="interactive-mos-channel">
+<h2>互動模型｜MOSFET 通道、輸出特性與 pinch-off</h2>
+<p>同步觀察反轉電荷沿通道變薄、線性區到飽和區的轉換，以及夾止後電流為何不會消失。模型使用理想長通道平方律並提供一階通道長度調變。</p>
+<details class="dm-disclosure" data-dm-disclosure="mos-channel">
+<summary><span><span class="dm-closed-label">🎛️ 開啟通道與 pinch-off 模型</span><span class="dm-open-label">收合通道與 pinch-off 模型</span></span><small>V_GS、V_DS、V_T → Q_i(x)、I_D 與工作區域</small></summary>
+<div class="dm-disclosure-body"><div data-mos-channel-model></div></div>
+</details>
+</section>
 <section id="s10-3c"><h2>10.3.5 基板偏壓效應（Body Effect）⭐</h2>
 <div style="margin-bottom:14px;font-size:12px;color:var(--t2);line-height:1.8">
 <strong style="color:var(--tx)">🔑 本節重點</strong> ① $V_{BS}<0$（基板負偏壓）→基板-通道空乏區變寬→$Q_{d,\max}$ 增大→$V_T$ 升高 ② $V_T = V_{FB}+2\phi_f+\sqrt{2\epsilon_s e N_a(2\phi_f-V_{BS})}/C_{ox}$——最後一項受 $V_{BS}$ 調變 ③ $\gamma=\sqrt{2\epsilon_s e N_a}/C_{ox}$——典型 ∼0.4 V¹/²；$V_{BS}=-3$ V 時 $\Delta V_T\approx0.45$ V ④ NAND 閘堆疊 nMOS：上方元件源極不為零→$V_T$ 升高→切換速度變慢
@@ -384,6 +405,7 @@ table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13px}thead th{
 <section id="derivation-lab" class="derivation-lab"><h2>推導、假設與章末診斷</h2><h3>長通道 MOSFET 方程的完整假設</h3><ul><li>氧化層理想絕緣、界面電荷已吸收到 $V_{FB}$，閘極直流電流忽略。</li><li>強反轉、漸變通道近似 $|E_x|\ll|E_y|$、一維電荷片、均勻摻雜與準靜態操作。</li><li>遷移率常數、低橫向場、無速度飽和、無通道長度調變、源汲串聯電阻忽略。</li><li>邊界 $V(0)=0$、$V(L)=V_{DS}$；反轉電荷 $Q_i(x)=-C_{ox}[V_{GS}-V_T-V(x)]$。</li></ul><h3>中間推導：線性區到飽和區</h3><ol><li>通道電流 $I_D=-W\mu_nQ_i(x)dV/dx$，穩態下沿 $x$ 不變。</li><li>分離變數並從 $x=0\to L$、$V=0\to V_{DS}$ 積分。</li><li>$I_D=\mu_nC_{ox}(W/L)[(V_{GS}-V_T)V_{DS}-V_{DS}^2/2]$。</li><li>令 $dI_D/dV_{DS}=0$ 得 $V_{DS,sat}=V_{GS}-V_T$，代回得 $I_{D,sat}=\frac12\mu_nC_{ox}(W/L)(V_{GS}-V_T)^2$。</li></ol><div class="dimcheck"><strong>單位／量級：</strong>$\mu C_{ox}V^2$ = cm²/(V·s)·F/cm²·V² = A。若 $\mu C_{ox}=200$ µA/V²、$W/L=10$、$V_{OV}=1$ V，$I_{sat}=1$ mA。</div><h3>章末練習與概念診斷</h3><details><summary>pinch-off 是否表示汲極電流變成零？</summary><p>否。夾止點後的高場區把載子掃入汲極；理想長通道模型中電流進入飽和而非中斷。</p></details><details><summary>5 nm MOSFET 為何不能直接套平方律？</summary><p>漸變通道、常數遷移率與低場假設同時失效，速度飽和、彈道輸運、DIBL 與量子侷限都不可忽略。</p></details><h3>延伸計算練習</h3><p>完成上方診斷後，請在不查公式的情況下重建代表推導，並改變一個參數檢查極限行為。更多含數值與解答的題目：<a href="../problems_examples/ch10_problems_zh.html">本章完整習題頁</a>。</p></section>
 </main>
 <script>
+function toggleSidebar(){document.querySelector(".sidebar").classList.toggle("open");}
 function toggleTheme(){const h=document.documentElement;const n=h.getAttribute('data-theme')==='light'?'dark':'light';h.setAttribute('data-theme',n);localStorage.setItem('theme',n);document.getElementById('tl').textContent=n==='dark'?'淺色模式':'深色模式';}
 const s=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',s);if(s==='dark')document.getElementById('tl').textContent='淺色模式';
 const secs=document.querySelectorAll('section[id]');const navs=document.querySelectorAll('.sn a');window.addEventListener('scroll',()=>{let c='';secs.forEach(s=>{if(window.scrollY>=s.offsetTop-80)c=s.getAttribute('id');});navs.forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+c);});});
