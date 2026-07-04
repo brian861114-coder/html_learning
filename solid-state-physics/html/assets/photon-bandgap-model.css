@@ -1,0 +1,14 @@
+.pbg-spectrum {
+  display: flex;
+  height: 18px;
+  border-radius: 9px;
+  overflow: hidden;
+  margin: 8px 0;
+  border: 1px solid var(--bd);
+}
+.pbg-spectrum div {
+  flex: 1;
+}
+.pbg-comparison {
+  min-height: 10rem;
+}

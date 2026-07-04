@@ -1,0 +1,77 @@
+/* Fermi-carrier model — reuses .pnm base with fcm-specific extensions */
+.fcm-band-wrap {
+  padding: 14px 16px 2px;
+}
+.fcm-band {
+  min-height: 11rem;
+}
+.fcm-bar-wrap {
+  padding: 10px 14px 14px;
+}
+.fcm-bar {
+  min-height: 9rem;
+}
+.fcm-svg-band-fill {
+  fill: color-mix(in srgb, var(--pnm-n) 13%, transparent);
+}
+.fcm-svg-band-empty {
+  fill: color-mix(in srgb, var(--tx) 7%, transparent);
+}
+.fcm-svg-ef-line {
+  stroke: var(--pnm-p);
+  stroke-width: 2.5;
+  stroke-dasharray: 8 4;
+  stroke-linecap: round;
+}
+.fcm-svg-ei-line {
+  stroke: var(--t2);
+  stroke-width: 1.2;
+  stroke-dasharray: 4 4;
+  stroke-linecap: round;
+}
+.fcm-svg-ef-label {
+  fill: var(--pnm-p);
+  font: 700 12px -apple-system,BlinkMacSystemFont,"Noto Sans TC",sans-serif;
+}
+.fcm-svg-band-label {
+  fill: var(--tx);
+  font: 700 11px -apple-system,BlinkMacSystemFont,"Noto Sans TC",sans-serif;
+}
+.fcm-svg-bar-fill {
+  fill: var(--ac);
+}
+.fcm-svg-bar-ni {
+  fill: var(--t2);
+}
+.fcm-svg-curve-ef {
+  fill: none;
+  stroke: var(--pnm-p);
+  stroke-width: 2.8;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+.fcm-material-select {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+}
+.fcm-material-select button {
+  min-height: 36px;
+  padding: 6px 4px;
+  border: 1px solid var(--bd);
+  border-radius: 8px;
+  background: var(--b2);
+  color: var(--tx);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+.fcm-material-select button[aria-pressed="true"] {
+  border-color: var(--ac);
+  background: var(--b3);
+  color: var(--ac);
+}
+.fcm-material-select button:hover {
+  border-color: var(--ac);
+}

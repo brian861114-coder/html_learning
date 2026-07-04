@@ -1,0 +1,34 @@
+/* Diode I-V model — extends .pnm base */
+.div-iv-curve {
+  min-height: 13rem;
+}
+.div-iv-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 20px;
+  padding: 8px 14px 2px;
+  font-size: 0.78rem;
+  color: var(--t2);
+}
+.div-iv-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.div-iv-legend span::before {
+  content: "";
+  display: inline-block;
+  width: 16px;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--ac);
+}
+.div-iv-legend span.legend-rs::before {
+  background: var(--pnm-p);
+  stroke-dasharray: 4 3;
+}
+.div-iv-dot {
+  fill: var(--pnm-p);
+  stroke: var(--bg);
+  stroke-width: 2;
+}

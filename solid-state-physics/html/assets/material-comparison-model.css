@@ -1,0 +1,116 @@
+/* Material comparison model */
+.mcm-table-wrap {
+  margin: 14px 0;
+  overflow-x: auto;
+  border: 1px solid var(--bd);
+  border-radius: 10px;
+}
+.mcm-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+  font-variant-numeric: tabular-nums;
+}
+.mcm-table th {
+  position: sticky;
+  top: 0;
+  background: var(--b3);
+  padding: 10px 8px;
+  font-size: 0.76rem;
+  font-weight: 700;
+  border-bottom: 2px solid var(--bd);
+  text-align: center;
+  white-space: nowrap;
+}
+.mcm-table td {
+  padding: 8px 10px;
+  border-bottom: 1px solid var(--fbd);
+  text-align: center;
+}
+.mcm-table tr:last-child td { border-bottom: none; }
+.mcm-table .si-col { color: var(--ac); font-weight: 600; }
+.mcm-bar-wrap {
+  padding: 12px 14px 10px;
+}
+.mcm-bar {
+  min-height: 10rem;
+}
+.mcm-check-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 4px;
+  margin-bottom: 12px;
+}
+.mcm-check-grid button {
+  min-height: 36px;
+  padding: 6px 4px;
+  border: 1px solid var(--bd);
+  border-radius: 8px;
+  background: var(--b2);
+  color: var(--tx);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+.mcm-check-grid button[aria-pressed="true"] {
+  border-color: var(--ac);
+  background: var(--b3);
+  color: var(--ac);
+}
+.mcm-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 10px;
+  margin: 12px 0;
+}
+.mcm-card {
+  padding: 12px;
+  border: 1px solid var(--bd);
+  border-radius: 10px;
+  background: var(--bg);
+}
+.mcm-card h4 {
+  margin: 0 0 4px;
+  font-size: 0.85rem;
+}
+.mcm-card ul {
+  margin: 4px 0 0 16px;
+  font-size: 0.78rem;
+  color: var(--t2);
+}
+.mcm-app-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 8px;
+  margin: 10px 0;
+}
+.mcm-app-btn {
+  min-height: 56px;
+  padding: 8px;
+  border: 1px solid var(--bd);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--tx);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-align: left;
+}
+.mcm-app-btn:hover, .mcm-app-btn[aria-pressed="true"] {
+  border-color: var(--ac);
+  background: var(--b3);
+}
+.mcm-app-btn small {
+  display: block;
+  margin-top: 2px;
+  color: var(--t2);
+  font-weight: 400;
+  font-size: 0.72rem;
+}
+@media (max-width: 600px) {
+  .mcm-check-grid { grid-template-columns: repeat(2, 1fr); }
+  .mcm-card-grid { grid-template-columns: 1fr; }
+  .mcm-table { font-size: 0.7rem; }
+}
