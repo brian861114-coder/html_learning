@@ -75,8 +75,10 @@ tbody td{padding:8px 12px;border-bottom:1px solid var(--fbd)}
 @media print{.sidebar,.tbar{display:none}details.derive,details.example{display:block!important}details.derive>summary::before,details.example>summary::before{display:none}.main{margin-left:0;max-width:100%;padding:0}}
 
 </style>
-<script src="../../../reading-preferences.js" defer></script></head>
-<body><a class="portal-home-link" href="../../../index.html">返回學習中心</a><style id="portal-home-link-style">.portal-home-link{position:fixed;top:16px;right:16px;z-index:1000;display:inline-flex;align-items:center;min-height:36px;padding:7px 11px;border:1px solid #cbd5e1;border-radius:8px;background:#fff;color:#1d4ed8;font:600 13px/1.2 -apple-system,BlinkMacSystemFont,"Noto Sans TC","Microsoft JhengHei",sans-serif;text-decoration:none;box-shadow:0 2px 10px rgba(15,23,42,.08)}.portal-home-link:hover{background:#eff6ff}.portal-home-link:focus-visible{outline:3px solid rgba(37,99,235,.35);outline-offset:2px}@media(max-width:768px){.portal-home-link{top:10px;right:10px;min-height:34px;padding:7px 9px;font-size:12px}}</style>
+<link rel="stylesheet" href="../assets/course-ui.css">
+<script defer src="../assets/course-ui.js"></script>
+</head>
+<body>
 <nav class="sidebar">
   <div class="sidebar-header"><div class="bk">半導體物理與元件 · 第四版</div><h2>公式摘要整合版</h2></div>
   <div class="sidebar-nav"><ul>
@@ -158,38 +160,10 @@ tbody td{padding:8px 12px;border-bottom:1px solid var(--fbd)}
     <li class="nsub"><a href="#fr09_s4">9.1.4–9.1.5 I-V·歐姆接觸</a></li>
     <li class="nsub"><a href="#fr09_s5">9.2 異質接面·Anderson 定則</a></li>
     <li><a href="#fr09_cheatsheet">📋 速查表</a></li>
-    <li class="ns">第十章 公式摘要 — BJT</li>
-    <li class="nsub"><a href="#fr10_s1">10.1.1–10.1.3 結構·電流·模式</a></li>
-    <li class="nsub"><a href="#fr10_s2">10.1.4 少數載子分布</a></li>
-    <li class="nsub"><a href="#fr10_s3">10.2.1–10.2.2 $\alpha,\beta,\gamma$ ⭐</a></li>
-    <li class="nsub"><a href="#fr10_s4">10.2.3 Ebers-Moll 模型</a></li>
-    <li class="nsub"><a href="#fr10_s5">10.3 非理想效應·Early</a></li>
-    <li class="nsub"><a href="#fr10_s6">10.4 小訊號等效電路</a></li>
-    <li><a href="#fr10_cheatsheet">📋 速查表</a></li>
-    <li class="ns">第十一章 公式摘要 — MOSFET</li>
-    <li class="nsub"><a href="#fr11_s1">11.1.1–11.1.2 結構·電容</a></li>
-    <li class="nsub"><a href="#fr11_s2">11.1.3–11.1.5 能帶·空乏·反轉</a></li>
-    <li class="nsub"><a href="#fr11_s3">11.2.1–11.2.4 臨界電壓推導 ⭐</a></li>
-    <li class="nsub"><a href="#fr11_s4">11.3.1–11.3.3 線性區推導 ⭐</a></li>
-    <li class="nsub"><a href="#fr11_s5">11.3.4–11.3.5 飽和區·夾止 ⭐</a></li>
-    <li class="nsub"><a href="#fr11_s6">11.4 小訊號·跨導·$f_T$</a></li>
-    <li class="nsub"><a href="#fr11_s7">11.5 短通道·次臨界</a></li>
-    <li><a href="#fr11_cheatsheet">📋 速查表</a></li>
-    <li class="ns">第十二章 公式摘要 — MOSFET 進階概念</li>
-    <li class="nsub"><a href="#fr12_s1">12.1 定電場縮小 (12.1–12.2)</a></li>
-    <li class="nsub"><a href="#fr12_s2">12.2.1 遷移率退化</a></li>
-    <li class="nsub"><a href="#fr12_s3">12.2.2 速度飽和 (12.14–12.15)</a></li>
-    <li class="nsub"><a href="#fr12_s4">12.3 熱載子·DIBL·次臨界</a></li>
-    <li class="nsub"><a href="#fr12_s5">12.4–12.5 短通道 $V_T$·穿通</a></li>
-    <li><a href="#fr12_cheatsheet">📋 速查表</a></li>
-    <li class="ns">第十三章 公式摘要 — BJT 進階概念</li>
-    <li class="nsub"><a href="#fr13_s1">13.1 BJT 物理回顧·多邊結構</a></li>
-    <li class="nsub"><a href="#fr13_s2">13.2 $f_T$·$f_{\max}$·四時間常數 ⭐</a></li>
-    <li class="nsub"><a href="#fr13_s3">13.3 大訊號開關·儲存時間</a></li>
-    <li class="nsub"><a href="#fr13_s4">13.4 小訊號模型·$C_\pi$·$C_\mu$</a></li>
-    <li class="nsub"><a href="#fr13_s5">13.5 HBT·SiGe·$\beta$ 突破</a></li>
-    <li><a href="#fr13_cheatsheet">📋 速查表</a></li>
-  </ul></div>
+    <li class="ns">第十章 公式摘要 — MOSFET</li><li class="nsub"><a href="#fr10_s1">MOS 結構與臨界電壓</a></li><li class="nsub"><a href="#fr10_cheatsheet">第 10 章速查表</a></li>
+<li class="ns">第十一章 公式摘要 — MOSFET 進階</li><li class="nsub"><a href="#fr11_s1">非理想效應與縮小</a></li><li class="nsub"><a href="#fr11_cheatsheet">第 11 章速查表</a></li>
+<li class="ns">第十二章 公式摘要 — BJT 基礎</li><li class="nsub"><a href="#fr12b_s1">BJT 結構、電流與模式</a></li><li class="nsub"><a href="#fr12b_cheatsheet">BJT 基礎速查表</a></li>
+<li class="ns">第十二章 公式摘要 — BJT 進階</li><li class="nsub"><a href="#fr12a_s1">BJT 頻率與進階模型</a></li><li class="nsub"><a href="#fr12a_cheatsheet">BJT 進階速查表</a></li></ul></div>
   <div class="sidebar-toggle"><button onclick="toggleTheme()">🌓 <span id="tl">深色模式</span></button></div>
 </nav>
 
@@ -1106,92 +1080,19 @@ TYU 2.4: $T=5\times10^{-6}$, $V_0=0.8$ eV, $E=0.08$ eV → $a_{\text{max}} = 14.
 <tr><td>9.27</td><td>$\Delta E_v=\Delta E_g-\Delta E_c$</td><td>價帶偏移</td></tr>
 </tbody></table></div>
 
-<!-- ===== 第十章 公式摘要 — BJT ===== -->
+<!-- ===== 第十章 公式摘要 — MOSFET ===== -->
 
-<div class="header"><div class="tag">55 條公式·全部收錄</div><h1>第十章：雙極性接面電晶體（BJT）</h1><div class="sub">Semiconductor Physics & Devices, 4th Ed.·Donald A. Neamen·pp.370–403</div></div>
-<div class="tbar"><button onclick="document.querySelectorAll('details').forEach(d=>d.open=true)">📖 展開全部</button><button onclick="document.querySelectorAll('details').forEach(d=>d.open=false)">📕 收合全部</button></div>
-
-<!-- 10.1.1-10.1.3 -->
-<div class="section" id="fr10_s1"><h2>10.1.1–10.1.3 BJT 結構、電流關係、操作模式 (10.1–10.9)</h2>
-<div class="fcard"><div class="lbl">BJT 的兩種結構</div><div class="eq">npn：n⁺射極 / p 基極 / n 集極<br>pnp：p⁺射極 / n 基極 / p 集極</div><div class="note">射極重摻雜（∼10¹⁸–10²⁰ cm⁻³），基極輕摻雜且極窄（$W_B\sim0.1$–1 µm），集極輕摻雜（∼10¹⁵–10¹⁶ cm⁻³）。</div></div>
-<details class="derive" open><summary>🔍 電流組成與操作模式（9 條公式）</summary><div class="dbo">
-<div class="step"><span class="snb">1</span><span class="sl">端點電流關係 (10.1–10.3)</span><div class="sc"><span class="math">$$I_E = I_B + I_C \tag{10.1}$$</span>射極電流 = 基極電流 + 集極電流（Kirchhoff 電流律）。npn：$I_E$ 流出，$I_B$ 和 $I_C$ 流入。pnp 方向相反。</div></div>
-<div class="step"><span class="snb">2</span><span class="sl">四種操作模式 (10.4–10.7)</span><div class="sc"><table><thead><tr><th>模式</th><th>BE</th><th>BC</th><th>用途</th></tr></thead><tbody>
-<tr><td>順向主動 (Forward-active)</td><td>順偏</td><td>逆偏</td><td>線性放大器</td></tr>
-<tr><td>截止 (Cutoff)</td><td>逆偏</td><td>逆偏</td><td>OFF 開關</td></tr>
-<tr><td>飽和 (Saturation)</td><td>順偏</td><td>順偏</td><td>ON 開關</td></tr>
-<tr><td>反向主動 (Inverse-active)</td><td>逆偏</td><td>順偏</td><td>少用</td></tr></tbody></table></div></div>
-<div class="step"><span class="snb">3</span><span class="sl">順向主動模式的電流組成 (10.8–10.9)</span><div class="sc">射極電流 $I_E$ = 電子注入基極的電流 + 電洞從基極注入射極的電流。<br>集極電流 $I_C$ = 收集到的電子電流 + BC 接面反向飽和電流。</div></div>
-</div></details>
-</div>
-
-<!-- 10.1.4 -->
-<div class="section" id="fr10_s2"><h2>10.1.4 少數載子分布 (10.10–10.18)</h2>
-<details class="derive" open><summary>🔍 基極中少數載子分布的推導（9 條公式）</summary><div class="dbo">
-<div class="step"><span class="snb">1</span><span class="sl">基極中的擴散方程 (10.10–10.13)</span><div class="sc">基極中無電場→純擴散。穩態擴散方程：$d^2\delta n_B/dx^2 = \delta n_B/L_B^2$。<br>因為 $W_B \ll L_B$（基極極窄），復合項可忽略→$d^2\delta n_B/dx^2 \approx 0$ (10.12)。</div></div>
-<div class="step"><span class="snb">2</span><span class="sl">線性濃度分布 (10.14–10.15)</span><div class="sc">無復合→擴散方程解為直線：$\delta n_B(x) = \delta n_B(0)(1-x/W_B)$。<br>邊界條件：$x=0$（BE 接面邊界）$\delta n_B(0)=n_{B0}(e^{eV_{BE}/kT}-1)$ (10.14)。$x=W_B$（BC 接面邊界）$\delta n_B(W_B)\approx0$（逆偏收集）(10.15)。</div></div>
-<div class="step"><span class="snb">3</span><span class="sl">擴散電流 (10.16–10.18)</span><div class="sc"><span class="math">$$J_n = e D_B\frac{d\delta n_B}{dx} = -e D_B\frac{\delta n_B(0)}{W_B} \tag{10.17}$$</span>濃度梯度 = $\delta n_B(0)/W_B$（常數！→擴散電流均勻）。$W_B$ 越窄→梯度越大→電流越大。</div></div>
-</div></details>
-</div>
-
-<!-- 10.2.1-10.2.2 -->
-<div class="section" id="fr10_s3"><h2>10.2.1–10.2.2 電流增益參數 ⭐ (10.19–10.36)</h2>
-<details class="derive" open><summary>🔍 完整推導——射極效率·基極傳輸因子·電流增益（18 條公式）</summary><div class="dbo">
-<div class="step"><span class="snb">1</span><span class="sl">射極注入效率 $\gamma$ (10.19–10.25)</span><div class="sc"><span class="math">$$\gamma = \frac{I_{nE}}{I_{nE}+I_{pE}} = \frac{1}{1 + \dfrac{D_E N_B W_B}{D_B N_E L_E}} \tag{10.24}$$</span>$I_{nE}$ = 從射極注入基極的電子電流（有用）；$I_{pE}$ = 從基極注入射極的電洞電流（浪費）。<br>要使 $\gamma\approx1$：$N_E \gg N_B$（射極遠重於基極），$W_B$ 小，$L_E$ 大。</div></div>
-<div class="step"><span class="snb">2</span><span class="sl">基極傳輸因子 $\alpha_T$ (10.26–10.29)</span><div class="sc"><span class="math">$$\alpha_T = \frac{I_{nC}}{I_{nE}} \approx 1 - \frac{1}{2}\left(\frac{W_B}{L_B}\right)^2 \tag{10.29}$$</span>$W_B \ll L_B$ → $\alpha_T \approx 1$。在基極中復合的電子比例 $\propto (W_B/L_B)^2$。</div></div>
-<div class="step"><span class="snb">3</span><span class="sl">⭐ 共基極電流增益 $\alpha$ (10.30–10.31)</span><div class="sc"><span class="math">$$\boxed{\alpha = \frac{I_C}{I_E} = \gamma \cdot \alpha_T} \tag{10.31}$$</span>$\alpha$ 略小於 1（典型 0.98–0.998）。</div></div>
-<div class="step"><span class="snb">4</span><span class="sl">⭐ 共射極電流增益 $\beta$ (10.32–10.36)</span><div class="sc">$I_C = \alpha I_E + I_{CBO}$，$I_B = (1-\alpha)I_E - I_{CBO}$ (10.32–10.34)。<span class="math">$$\boxed{\beta = \frac{I_C}{I_B} = \frac{\alpha}{1-\alpha}} \tag{10.36}$$</span>$\alpha=0.99\rightarrow\beta=99$；$\alpha=0.995\rightarrow\beta=199$；$\alpha=0.998\rightarrow\beta=499$。</div></div>
-</div></details>
-</div>
-
-<!-- 10.2.3 -->
-<div class="section" id="fr10_s4"><h2>10.2.3 Ebers-Moll 模型 (10.37)</h2>
-<div class="fcard"><div class="lbl">⭐ Ebers-Moll 方程（完整耦合二極體模型）</div><div class="eq">$$\boxed{I_E = I_{ES}(e^{eV_{BE}/kT}-1) - \alpha_R I_{CS}(e^{eV_{BC}/kT}-1)} \tag{10.37a}$$</div><div class="eq">$$\boxed{I_C = \alpha_F I_{ES}(e^{eV_{BE}/kT}-1) - I_{CS}(e^{eV_{BC}/kT}-1)} \tag{10.37b}$$</div><div class="note">$\alpha_F$ = 順向共基極增益，$\alpha_R$ = 反向共基極增益。$I_{ES}, I_{CS}$ = 射極和集極飽和電流。互易關係：$\alpha_F I_{ES} = \alpha_R I_{CS}$。</div></div>
-</div>
-
-<!-- 10.3 -->
-<div class="section" id="fr10_s5"><h2>10.3 非理想效應 (10.38–10.48)</h2>
-<details class="derive" open><summary>🔍 基極寬度調變·Early 效應·高階注入（11 條公式）</summary><div class="dbo">
-<div class="step"><span class="snb">1</span><span class="sl">基極寬度調變 (10.38–10.43)</span><div class="sc">$V_{CE}$ 增加→BC 接面逆偏增加→BC 空乏區變寬→有效基極寬度 $W_B$ 變窄 (10.38–10.40)。<br>$W_B$ 變窄→濃度梯度 $n_{B0}/W_B$ 變大→$I_C$ 增加 (10.41–10.43)。</div></div>
-<div class="step"><span class="snb">2</span><span class="sl">⭐ Early 效應 (10.44–10.48)</span><div class="sc">輸出特性上傾：<span class="math">$$\boxed{I_C = I_S\,e^{eV_{BE}/kT}\!\left(1 + \frac{V_{CE}}{V_A}\right)} \tag{10.48}$$</span>$V_A$ = Early 電壓（通常 50–300 V）。$V_A$ 越大→輸出特性越平→$r_o$ 越大。</div></div>
-</div></details>
-</div>
-
-<!-- 10.4 -->
-<div class="section" id="fr10_s6"><h2>10.4 小訊號等效電路 (10.49–10.55)</h2>
-<div class="fcard"><div class="lbl">⭐ 混合-π 模型參數</div><div class="eq">$$g_m = \frac{I_{CQ}}{kT/e} = \frac{I_{CQ}}{V_T} \tag{10.52a}$$</div><div class="eq">$$r_\pi = \frac{\beta}{g_m} = \frac{\beta V_T}{I_{CQ}} \tag{10.52b}$$</div><div class="eq">$$r_o = \frac{V_A}{I_{CQ}} \tag{10.52c}$$</div><div class="note">$g_m$ = 跨導（控制量），$r_\pi$ = 輸入電阻（基極-射極），$r_o$ = 輸出電阻（集極-射極，來自 Early 效應）。$V_T = kT/e = 0.0259$ V (300 K)。</div></div>
-</div>
-
-<div class="section" id="fr10_cheatsheet"><h2>公式速查表（55 條全收錄）</h2>
-<table><thead><tr><th>Eq</th><th>公式</th><th>備註</th></tr></thead><tbody>
-<tr><td>10.1</td><td>$I_E=I_B+I_C$</td><td>Kirchhoff 電流律</td></tr>
-<tr><td>10.4–10.7</td><td>四種操作模式（BE,BC 偏壓組合）</td><td>順向主動/截止/飽和/反向</td></tr>
-<tr><td>10.12</td><td>$d^2\delta n_B/dx^2\approx0$（$W_B\ll L_B$）</td><td>基極無復合近似</td></tr>
-<tr><td>10.14</td><td>$\delta n_B(0)=n_{B0}(e^{eV_{BE}/kT}-1)$</td><td>BE 邊界條件</td></tr>
-<tr><td>10.17</td><td>$J_n=-eD_B\delta n_B(0)/W_B$</td><td>基極電子擴散電流</td></tr>
-<tr><td>10.24</td><td>$\gamma=1/[1+(D_E N_B W_B)/(D_B N_E L_E)]$</td><td>⭐ 射極注入效率</td></tr>
-<tr><td>10.29</td><td>$\alpha_T\approx1-\frac{1}{2}(W_B/L_B)^2$</td><td>⭐ 基極傳輸因子</td></tr>
-<tr><td>10.31</td><td>$\alpha=\gamma\cdot\alpha_T$</td><td>⭐ 共基極電流增益</td></tr>
-<tr><td>10.36</td><td>$\beta=\alpha/(1-\alpha)$</td><td>⭐ 共射極電流增益</td></tr>
-<tr><td>10.37</td><td>Ebers-Moll 完整模型</td><td>⭐ BJT 等效電路基礎</td></tr>
-<tr><td>10.48</td><td>$I_C=I_S e^{V_{BE}/V_T}(1+V_{CE}/V_A)$</td><td>⭐ Early 效應</td></tr>
-<tr><td>10.52</td><td>$g_m=I_{CQ}/V_T,\;r_\pi=\beta/g_m,\;r_o=V_A/I_{CQ}$</td><td>⭐ 混合-π 小訊號參數</td></tr>
-<tr><td>10.53</td><td>$\mu_f=g_m r_o=V_A/V_T$</td><td>最大電壓增益因子</td></tr>
-</tbody></table></div>
-
-<!-- ===== 第十一章 公式摘要 — MOSFET ===== -->
-
-<div class="header"><div class="tag">完整公式推導</div><h1>第十一章：場效電晶體（MOSFET）</h1><div class="sub">Semiconductor Physics & Devices, 4th Ed.·Donald A. Neamen·pp.396–445</div></div>
+<div class="header"><div class="tag">完整公式推導</div><h1>第十章：場效電晶體（MOSFET）</h1><div class="sub">Semiconductor Physics & Devices, 4th Ed.·Donald A. Neamen·pp.371–442</div></div>
 <div class="tbar"><button onclick="document.querySelectorAll('details').forEach(d=>d.open=true)">📖 展開全部</button><button onclick="document.querySelectorAll('details').forEach(d=>d.open=false)">📕 收合全部</button></div>
 
 <!-- 11.1.1-11.1.2 -->
-<div class="section" id="fr11_s1"><h2>11.1.1–11.1.2 MOS 結構與氧化層電容</h2>
+<div class="section" id="fr10_s1"><h2>10.1.1–11.1.2 MOS 結構與氧化層電容</h2>
 <div class="fcard"><div class="lbl">⭐ 單位面積氧化層電容</div><div class="eq">$$\boxed{C_{ox} = \frac{\epsilon_{ox}}{t_{ox}}}$$</div><div class="note">$\epsilon_{ox}=3.9\epsilon_0=3.45\times10^{-13}$ F/cm（SiO₂）。$t_{ox}$：1970s ∼100 nm → 2020s ∼1 nm（等效）。high-κ 材料（HfO₂, $\epsilon_r\sim25$）用更厚的物理厚度達到相同的等效電容→降低穿隧漏電流。</div></div>
 <div class="fcard"><div class="lbl">平帶電壓 $V_{FB}$</div><div class="eq">$$V_{FB} = \phi_{ms} - \frac{Q_f}{C_{ox}}$$</div><div class="note">$\phi_{ms}$ = 金屬-半導體功函數差。$Q_f$ = 氧化層固定正電荷（通常 ∼$10^{10}$ cm⁻²）。$V_{FB}$ 是使能帶恢復平坦（無彎曲）所需的閘極電壓。</div></div>
 </div>
 
 <!-- 11.1.3-11.1.5 -->
-<div class="section" id="fr11_s2"><h2>11.1.3–11.1.5 能帶彎曲·空乏·反轉</h2>
+<div class="section" id="fr10_s2"><h2>10.1.3–11.1.5 能帶彎曲·空乏·反轉</h2>
 <details class="derive" open><summary>🔍 MOS 結構的三個操作區域——完整的能帶與電荷分析</summary><div class="dbo">
 <div class="step"><span class="snb">1</span><span class="sl">基板 Fermi 電位 $\phi_f$</span><div class="sc">p 型基板：$\phi_f = (kT/e)\ln(N_a/n_i)$。$N_a=10^{17}$ cm⁻³→$\phi_f=0.0259\ln(10^{17}/1.5\times10^{10})=0.407$ V。</div></div>
 <div class="step"><span class="snb">2</span><span class="sl">空乏層電荷 $Q_d$ 與寬度 $x_d$</span><div class="sc">Poisson 方程：$d^2\phi/dx^2 = eN_a/\epsilon_s$。空乏層寬度 $x_d = \sqrt{2\epsilon_s\phi_s/(eN_a)}$。<br>空乏層電荷密度 $Q_d = -eN_a x_d = -\sqrt{2\epsilon_s e N_a\phi_s}$。$\phi_s$ = 表面電位。</div></div>
@@ -1201,7 +1102,7 @@ TYU 2.4: $T=5\times10^{-6}$, $V_0=0.8$ eV, $E=0.08$ eV → $a_{\text{max}} = 14.
 </div>
 
 <!-- 11.2 -->
-<div class="section" id="fr11_s3"><h2>11.2 臨界電壓 $V_T$ ⭐</h2>
+<div class="section" id="fr10_s3"><h2>10.2 臨界電壓 $V_T$ ⭐</h2>
 <details class="derive" open><summary>🔍 完整推導——從閘極電壓方程式到 $V_T$</summary><div class="dbo">
 <div class="step"><span class="snb">1</span><span class="sl">閘極電壓方程式</span><div class="sc">$V_G = \phi_{ms} + \phi_s + V_{ox} = \phi_{ms} + \phi_s - \dfrac{Q_d+Q_n}{C_{ox}}$。</div></div>
 <div class="step"><span class="snb">2</span><span class="sl">強反轉時的條件</span><div class="sc">$\phi_s = 2\phi_f$，$Q_d = Q_{d,\max} = -\sqrt{4\epsilon_s e N_a\phi_f}$。剛好強反轉時 $Q_n\approx0$。<br>平帶時 $V_{FB} = \phi_{ms} - Q_f/C_{ox}$（$Q_f$ = 固定氧化層電荷）。</div></div>
@@ -1211,7 +1112,7 @@ TYU 2.4: $T=5\times10^{-6}$, $V_0=0.8$ eV, $E=0.08$ eV → $a_{\text{max}} = 14.
 </div>
 
 <!-- 11.3.1-11.3.3 -->
-<div class="section" id="fr11_s4"><h2>11.3.1–11.3.3 線性區 I-V 推導 ⭐</h2>
+<div class="section" id="fr10_s4"><h2>10.3.1–11.3.3 線性區 I-V 推導 ⭐</h2>
 <details class="derive" open><summary>🔍 完整推導——從通道電荷到線性區 $I_D$</summary><div class="dbo">
 <div class="step"><span class="snb">1</span><span class="sl">通道中的電荷密度</span><div class="sc">在通道中任意點 $y$，有效閘極控制電壓 $=V_{GS}-V_T-V(y)$（$V(y)$ = 該點的通道電位）。<br>單位面積反轉層電荷：$Q_n(y) = -C_{ox}[V_{GS}-V_T-V(y)]$（只計入超過 $V_T$ 的部分）。</div></div>
 <div class="step"><span class="snb">2</span><span class="sl">漂移電流</span><div class="sc">通道中電場 $E_y = -dV/dy$。電流 $I_D = W\mu_n Q_n(y)E_y$（$W$ = 通道寬度）。<br>$I_D = W\mu_n C_{ox}[V_{GS}-V_T-V(y)]\,dV/dy$。</div></div>
@@ -1221,7 +1122,7 @@ TYU 2.4: $T=5\times10^{-6}$, $V_0=0.8$ eV, $E=0.08$ eV → $a_{\text{max}} = 14.
 </div>
 
 <!-- 11.3.4-11.3.5 -->
-<div class="section" id="fr11_s5"><h2>11.3.4–11.3.5 飽和區 I-V ⭐</h2>
+<div class="section" id="fr10_s5"><h2>10.3.4–11.3.5 飽和區 I-V ⭐</h2>
 <div class="fcard"><div class="lbl">⭐ 飽和區汲極電流</div><div class="eq">$$\boxed{I_D = \frac{\mu_n C_{ox}}{2}\frac{W}{L}(V_{GS}-V_T)^2}$$</div><div class="note">夾止條件：$V_{DS}=V_{GS}-V_T$（汲極端通道厚度→0）。夾止後 $V_{DS}$ 繼續增加→夾止點向源極移動，但 $I_D$ 基本不變（飽和）。</div></div>
 <details class="derive" open><summary>🔍 夾止機制與通道長度調變</summary><div class="dbo">
 <div class="step"><span class="snb">1</span><span class="sl">夾止發生的條件</span><div class="sc">$V_{DS}=V_{GS}-V_T$，此時 $V(L)=V_{DS}$，$Q_n(L)=0$→通道在汲極端厚度為零。</div></div>
@@ -1231,19 +1132,19 @@ TYU 2.4: $T=5\times10^{-6}$, $V_0=0.8$ eV, $E=0.08$ eV → $a_{\text{max}} = 14.
 </div>
 
 <!-- 11.4 -->
-<div class="section" id="fr11_s6"><h2>11.4 小訊號參數與頻率響應</h2>
+<div class="section" id="fr10_s6"><h2>10.4 小訊號參數與頻率響應</h2>
 <div class="fcard"><div class="lbl">⭐ 跨導 $g_m$（飽和區）</div><div class="eq">$$\boxed{g_m = \frac{\partial I_D}{\partial V_{GS}} = \mu_n C_{ox}\frac{W}{L}(V_{GS}-V_T) = \frac{2I_D}{V_{GS}-V_T} = \sqrt{2\mu_n C_{ox}\frac{W}{L}I_D}}$$</div><div class="note">BJT: $g_m=I_C/V_T=38.5$ mS/mA（線性）。MOSFET: $g_m=2I_D/(V_{GS}-V_T)$。若 $V_{GS}-V_T=0.3$ V→$g_m=6.7$ mS/mA。MOSFET 的 $g_m$ 效率約為 BJT 的 1/6。</div></div>
 <div class="fcard"><div class="lbl">輸出電阻 $r_o$</div><div class="eq">$$r_o = \frac{\partial V_{DS}}{\partial I_D} = \frac{V_A}{I_D}$$</div></div>
 <div class="fcard"><div class="lbl">截止頻率 $f_T$</div><div class="eq">$$f_T = \frac{g_m}{2\pi(C_{gs}+C_{gd})} \approx \frac{\mu_n(V_{GS}-V_T)}{2\pi L^2}$$</div><div class="note">$f_T\propto1/L^2$→通道長度縮小一半→$f_T$ 增為四倍。現代 FinFET ($L_g\sim14$ nm): $f_T\sim300$–$400$ GHz。</div></div>
 </div>
 
 <!-- 11.5 -->
-<div class="section" id="fr11_s7"><h2>11.5 短通道效應與次臨界導通</h2>
+<div class="section" id="fr10_s7"><h2>10.5 短通道效應與次臨界導通</h2>
 <div class="fcard"><div class="lbl">⭐ 次臨界斜率（Subthreshold Swing）</div><div class="eq">$$\boxed{S = \frac{dV_{GS}}{d(\log I_D)} \approx \frac{kT}{e}\ln10\left(1 + \frac{C_d}{C_{ox}}\right) \approx 60\left(1 + \frac{C_d}{C_{ox}}\right)\ \text{mV/dec}}$$</div><div class="note">$C_d$ = 空乏層電容。室溫物理下限 $=60$ mV/dec。$C_d/C_{ox}$ 越小→$S$ 越接近 60→開關越陡峭→OFF 電流越小。</div></div>
 <div class="fcard"><div class="lbl">DIBL（汲極引發能障降低）</div><div class="eq">$$V_T = V_{T0} - \delta\,V_{DS}$$</div><div class="note">短通道時汲極電場穿透到源極側→降低源極端能障→$V_T$ 隨 $V_{DS}$ 增加而下降。DIBL 是限制 $L$ 縮小的關鍵因素。</div></div>
 </div>
 
-<div class="section" id="fr11_cheatsheet"><h2>公式速查表（完整）</h2>
+<div class="section" id="fr10_cheatsheet"><h2>公式速查表（完整）</h2>
 <table><thead><tr><th>參數</th><th>公式</th><th>備註</th></tr></thead><tbody>
 <tr><td>$C_{ox}$</td><td>$C_{ox}=\epsilon_{ox}/t_{ox}$</td><td>單位面積氧化層電容</td></tr>
 <tr><td>$V_{FB}$</td><td>$V_{FB}=\phi_{ms}-Q_f/C_{ox}$</td><td>平帶電壓</td></tr>
@@ -1259,12 +1160,12 @@ TYU 2.4: $T=5\times10^{-6}$, $V_0=0.8$ eV, $E=0.08$ eV → $a_{\text{max}} = 14.
 <tr><td>$S$</td><td>$S\approx60(1+C_d/C_{ox})$ mV/dec</td><td>⭐ 次臨界斜率</td></tr>
 </tbody></table></div>
 
-<!-- ===== 第十二章 公式摘要 — MOSFET 進階概念 ===== -->
+<!-- ===== 第十一章 公式摘要 — MOSFET 進階概念 ===== -->
 
-<div class="header"><div class="tag">23 條公式·全部收錄</div><h1>第十二章：MOSFET 進階概念</h1><div class="sub">Semiconductor Physics & Devices, 4th Ed.·Donald A. Neamen·pp.446–504</div></div>
+<div class="header"><div class="tag">23 條公式·全部收錄</div><h1>第十一章：MOSFET 進階概念</h1><div class="sub">Semiconductor Physics & Devices, 4th Ed.·Donald A. Neamen·pp.443–490</div></div>
 <div class="tbar"><button onclick="document.querySelectorAll('details').forEach(d=>d.open=true)">📖 展開全部</button><button onclick="document.querySelectorAll('details').forEach(d=>d.open=false)">📕 收合全部</button></div>
 
-<div class="section" id="fr12_s1"><h2>12.1 定電場縮小法則 (12.1–12.2)</h2>
+<div class="section" id="fr11_s1"><h2>11.1 定電場縮小法則 (12.1–12.2)</h2>
 <details class="derive" open><summary>🔍 完整推導——Dennard 縮小法則的全部參數關係</summary><div class="dbo">
 <div class="step"><span class="snb">1</span><span class="sl">基本縮小因子 $\kappa$ (12.1)</span><div class="sc">所有尺寸乘以 $1/\kappa$：$L'=L/\kappa$, $W'=W/\kappa$, $t_{ox}'=t_{ox}/\kappa$, $x_j'=x_j/\kappa$。<br>所有電壓乘以 $1/\kappa$：$V_{DD}'=V_{DD}/\kappa$, $V_T'=V_T/\kappa$。<br>基板摻雜乘以 $\kappa$：$N_a'=\kappa N_a$（保持空乏層寬度同步縮小）。</div></div>
 <div class="step"><span class="snb">2</span><span class="sl">電場保持不變 (12.2)</span><div class="sc">$E'=V'/L'=(V/\kappa)/(L/\kappa)=V/L=E$。內部電場完全不受縮小影響→可靠性保持。</div></div>
@@ -1282,12 +1183,12 @@ TYU 2.4: $T=5\times10^{-6}$, $V_0=0.8$ eV, $E=0.08$ eV → $a_{\text{max}} = 14.
 <tr><td>密度</td><td>$\kappa^2$</td><td>平方增長</td></tr></tbody></table></div>
 </div>
 
-<div class="section" id="fr12_s2"><h2>12.2.1 遷移率退化 (12.14–12.15)</h2>
-<div class="fcard"><div class="lbl">⭐ 遷移率退化公式 (12.14a, 12.14b)</div><div class="eq">$$\boxed{\mu_{\text{eff}} = \frac{\mu_0}{1 + \theta(V_{GS}-V_T)}} \tag{12.14a}$$</div><div class="eq">$$\theta = \frac{1}{t_{ox}}\sqrt{\frac{\epsilon_{ox}}{\epsilon_s}}\cdot\frac{\hbar^2}{2m^* kT} \tag{12.14b}$$</div><div class="note">$\theta$ 的物理來源：垂直電場 $\propto (V_{GS}-V_T)/t_{ox}$→載子被壓向 Si/SiO₂ 界面→表面粗糙度散射 + 量子侷限→$\mu$ 下降。</div></div>
-<div class="fcard"><div class="lbl">速度飽和修正後的 $I_D$ (12.15a, 12.15b)</div><div class="eq">$$I_D(\text{sat}) = \frac{W C_{ox}(V_{GS}-V_T)^2}{2\left[1 + \dfrac{\mu_n(V_{GS}-V_T)}{2v_{\text{sat}}L}\right]} \tag{12.15a}$$</div><div class="note">長通道極限 ($L\to\infty$)：回復平方律 $I_D=\frac{1}{2}\mu_n C_{ox}(W/L)(V_{GS}-V_T)^2$。<br>短通道極限 ($L\to0$)：$I_D=W C_{ox}(V_{GS}-V_T)v_{\text{sat}}$——線性律。(12.15b)</div></div>
+<div class="section" id="fr11_s2"><h2>11.2.1 遷移率退化 (12.14–12.15)</h2>
+<div class="fcard"><div class="lbl">⭐ 遷移率退化公式 (12.14a, 12.14b)</div><div class="eq">$$\boxed{\mu_{\text{eff}} = \frac{\mu_0}{1 + \theta(V_{GS}-V_T)}} \tag{11.14a}$$</div><div class="eq">$$\theta = \frac{1}{t_{ox}}\sqrt{\frac{\epsilon_{ox}}{\epsilon_s}}\cdot\frac{\hbar^2}{2m^* kT} \tag{11.14b}$$</div><div class="note">$\theta$ 的物理來源：垂直電場 $\propto (V_{GS}-V_T)/t_{ox}$→載子被壓向 Si/SiO₂ 界面→表面粗糙度散射 + 量子侷限→$\mu$ 下降。</div></div>
+<div class="fcard"><div class="lbl">速度飽和修正後的 $I_D$ (12.15a, 12.15b)</div><div class="eq">$$I_D(\text{sat}) = \frac{W C_{ox}(V_{GS}-V_T)^2}{2\left[1 + \dfrac{\mu_n(V_{GS}-V_T)}{2v_{\text{sat}}L}\right]} \tag{11.15a}$$</div><div class="note">長通道極限 ($L\to\infty$)：回復平方律 $I_D=\frac{1}{2}\mu_n C_{ox}(W/L)(V_{GS}-V_T)^2$。<br>短通道極限 ($L\to0$)：$I_D=W C_{ox}(V_{GS}-V_T)v_{\text{sat}}$——線性律。(12.15b)</div></div>
 </div>
 
-<div class="section" id="fr12_s3"><h2>12.2.2 速度飽和效應的完整分析</h2>
+<div class="section" id="fr11_s3"><h2>11.2.2 速度飽和效應的完整分析</h2>
 <details class="derive" open><summary>🔍 速度飽和對 $I_D$, $g_m$, 飽和電壓的全面影響</summary><div class="dbo">
 <div class="step"><span class="snb">1</span><span class="sl">速度飽和下的跨導</span><div class="sc">從 (12.15a) 微分：$g_m = \partial I_D/\partial V_{GS}$。短通道極限：$g_m = W C_{ox} v_{\text{sat}}$（常數！）。</div></div>
 <div class="step"><span class="snb">2</span><span class="sl">速度飽和下的飽和電壓</span><div class="sc">長通道：$V_{DS,\text{sat}} = V_{GS}-V_T$（夾止條件）。速度飽和：$V_{DS,\text{sat}} < V_{GS}-V_T$（載子在通道中途已達 $v_{\text{sat}}$→提前夾止）。</div></div>
@@ -1295,48 +1196,121 @@ TYU 2.4: $T=5\times10^{-6}$, $V_0=0.8$ eV, $E=0.08$ eV → $a_{\text{max}} = 14.
 </div></details>
 </div>
 
-<div class="section" id="fr12_s4"><h2>12.3 熱載子效應·DIBL·次臨界特性</h2>
-<div class="fcard"><div class="lbl">熱載子注入機率</div><div class="eq">$$P_{\text{inj}} \propto \exp\!\left(-\frac{\phi_B}{e\lambda E_m}\right) \tag{12.35a}$$</div><div class="note">$\phi_B$ = Si/SiO₂ 能障（∼3.1 eV）。$\lambda$ = 熱載子平均自由路徑。$E_m$ = 汲極端峰值電場。注入機率對 $E_m$ 有極強的超線性依賴。</div></div>
-<div class="fcard"><div class="lbl">DIBL（汲極引發能障降低）</div><div class="eq">$$V_T = V_{T0} - \delta\,V_{DS} \tag{12.36a}$$</div><div class="note">$\delta$ = DIBL 係數。短通道時汲極電場穿透到源極側→降低源極端能障→$V_T$ 下降。</div></div>
-<div class="fcard"><div class="lbl">次臨界斜率 (12.37)</div><div class="eq">$$\boxed{S = \frac{kT}{e}\ln10\left(1 + \frac{C_d}{C_{ox}}\right) \approx 60\left(1 + \frac{C_d}{C_{ox}}\right)\ \text{mV/dec}} \tag{12.37}$$</div></div>
+<div class="section" id="fr11_s4"><h2>11.3 熱載子效應·DIBL·次臨界特性</h2>
+<div class="fcard"><div class="lbl">熱載子注入機率</div><div class="eq">$$P_{\text{inj}} \propto \exp\!\left(-\frac{\phi_B}{e\lambda E_m}\right) \tag{11.35a}$$</div><div class="note">$\phi_B$ = Si/SiO₂ 能障（∼3.1 eV）。$\lambda$ = 熱載子平均自由路徑。$E_m$ = 汲極端峰值電場。注入機率對 $E_m$ 有極強的超線性依賴。</div></div>
+<div class="fcard"><div class="lbl">DIBL（汲極引發能障降低）</div><div class="eq">$$V_T = V_{T0} - \delta\,V_{DS} \tag{11.36a}$$</div><div class="note">$\delta$ = DIBL 係數。短通道時汲極電場穿透到源極側→降低源極端能障→$V_T$ 下降。</div></div>
+<div class="fcard"><div class="lbl">次臨界斜率 (12.37)</div><div class="eq">$$\boxed{S = \frac{kT}{e}\ln10\left(1 + \frac{C_d}{C_{ox}}\right) \approx 60\left(1 + \frac{C_d}{C_{ox}}\right)\ \text{mV/dec}} \tag{11.37}$$</div></div>
 </div>
 
-<div class="section" id="fr12_s5"><h2>12.4–12.5 短通道臨界電壓·穿通效應</h2>
-<div class="fcard"><div class="lbl">短通道 $V_T$ 模型 (12.77)</div><div class="eq">$$\Delta V_T \propto -\exp\!\left(-\frac{L}{2l}\right) \tag{12.77}$$</div><div class="note">$l$ = 特徵長度（取決於 $t_{ox}$, $x_j$, $x_d$）。$L$ 越小→$\Delta V_T$ 負得越多→$V_T$ roll-off。這是 $L$ 不能無限縮小的根本原因。</div></div>
+<div class="section" id="fr11_s5"><h2>11.4–12.5 短通道臨界電壓·穿通效應</h2>
+<div class="fcard"><div class="lbl">短通道 $V_T$ 模型 (12.77)</div><div class="eq">$$\Delta V_T \propto -\exp\!\left(-\frac{L}{2l}\right) \tag{11.77}$$</div><div class="note">$l$ = 特徵長度（取決於 $t_{ox}$, $x_j$, $x_d$）。$L$ 越小→$\Delta V_T$ 負得越多→$V_T$ roll-off。這是 $L$ 不能無限縮小的根本原因。</div></div>
 <div class="fcard"><div class="lbl">穿通效應 (Punch-through)</div><div class="eq">源極和汲極空乏區在通道下方相遇→形成直接穿通電流路徑→$I_D$ 不再由閘極控制。</div></div>
-<div class="fcard"><div class="lbl">閘極漏電流——Fowler-Nordheim 穿隧 (12.87–12.88)</div><div class="eq">$$J_G = A\,E_{ox}^2\,\exp\!\left(-\frac{B}{E_{ox}}\right) \tag{12.87}$$</div><div class="note">$E_{ox}=V_{ox}/t_{ox}$。$t_{ox}$ 越小→$E_{ox}$ 越大→$J_G$ 指數增長。high-κ 材料降低 $E_{ox}$（較厚物理厚度）。</div></div>
-<div class="fcard"><div class="lbl">等效氧化層厚度 (12.97)</div><div class="eq">$$t_{ox,\text{eq}} = \frac{\kappa_{\text{SiO}_2}}{\kappa_{\text{high-}\kappa}}\,t_{\text{high-}\kappa} \tag{12.97}$$</div></div>
-<div class="fcard"><div class="lbl">量子力學 $V_T$ 偏移 (12.99)</div><div class="eq">$$\Delta V_T^{QM} = \frac{\Delta E_0}{e} \tag{12.99}$$</div><div class="note">$\Delta E_0$ = 反轉層中最低次能帶的能量（來自垂直方向的量子侷限）。使 $V_T$ 增加 ∼0.1–0.2 V。</div></div>
+<div class="fcard"><div class="lbl">閘極漏電流——Fowler-Nordheim 穿隧 (12.87–12.88)</div><div class="eq">$$J_G = A\,E_{ox}^2\,\exp\!\left(-\frac{B}{E_{ox}}\right) \tag{11.87}$$</div><div class="note">$E_{ox}=V_{ox}/t_{ox}$。$t_{ox}$ 越小→$E_{ox}$ 越大→$J_G$ 指數增長。high-κ 材料降低 $E_{ox}$（較厚物理厚度）。</div></div>
+<div class="fcard"><div class="lbl">等效氧化層厚度 (12.97)</div><div class="eq">$$t_{ox,\text{eq}} = \frac{\kappa_{\text{SiO}_2}}{\kappa_{\text{high-}\kappa}}\,t_{\text{high-}\kappa} \tag{11.97}$$</div></div>
+<div class="fcard"><div class="lbl">量子力學 $V_T$ 偏移 (12.99)</div><div class="eq">$$\Delta V_T^{QM} = \frac{\Delta E_0}{e} \tag{11.99}$$</div><div class="note">$\Delta E_0$ = 反轉層中最低次能帶的能量（來自垂直方向的量子侷限）。使 $V_T$ 增加 ∼0.1–0.2 V。</div></div>
 </div>
 
-<div class="section" id="fr12_cheatsheet"><h2>公式速查表（23 條全收錄）</h2>
+<div class="section" id="fr11_cheatsheet"><h2>公式速查表（23 條全收錄）</h2>
 <table><thead><tr><th>Eq</th><th>公式</th><th>備註</th></tr></thead><tbody>
-<tr><td>12.1</td><td>$L'=L/\kappa$, $V'=V/\kappa$, $N_a'=\kappa N_a$</td><td>⭐ 定電場縮小</td></tr>
-<tr><td>12.2</td><td>$E'=V'/L'=E$（不變）</td><td>電場守恆</td></tr>
-<tr><td>12.14a</td><td>$\mu_{\text{eff}}=\mu_0/[1+\theta(V_{GS}-V_T)]$</td><td>⭐ 遷移率退化</td></tr>
-<tr><td>12.14b</td><td>$\theta$ 表達式</td><td>垂直電場起源</td></tr>
-<tr><td>12.15a</td><td>$I_D=WC_{ox}(V_{GS}-V_T)^2/\{2[1+\mu_n(V_{GS}-V_T)/(2v_{\text{sat}}L)]\}$</td><td>⭐ 含速度飽和的 $I_D$</td></tr>
-<tr><td>12.15b</td><td>$I_D=W C_{ox}(V_{GS}-V_T)v_{\text{sat}}$</td><td>短通道極限</td></tr>
-<tr><td>12.35a</td><td>$P_{\text{inj}}\propto\exp(-\phi_B/(e\lambda E_m))$</td><td>熱載子注入機率</td></tr>
-<tr><td>12.36a</td><td>$V_T=V_{T0}-\delta V_{DS}$</td><td>DIBL</td></tr>
-<tr><td>12.37</td><td>$S=60(1+C_d/C_{ox})$ mV/dec</td><td>⭐ 次臨界斜率</td></tr>
-<tr><td>12.77</td><td>$\Delta V_T\propto-\exp(-L/(2l))$</td><td>短通道 $V_T$ roll-off</td></tr>
-<tr><td>12.87</td><td>$J_G=A E_{ox}^2\exp(-B/E_{ox})$</td><td>Fowler-Nordheim 穿隧</td></tr>
-<tr><td>12.88</td><td>直接穿隧 $J_G$</td><td>$t_{ox}<3$ nm 主導</td></tr>
-<tr><td>12.97</td><td>$t_{ox,\text{eq}}=(\kappa_{\text{SiO}_2}/\kappa)t_{\text{high-}\kappa}$</td><td>⭐ 等效氧化層厚度</td></tr>
-<tr><td>12.99</td><td>$\Delta V_T^{QM}=\Delta E_0/e$</td><td>量子侷限 $V_T$ 偏移</td></tr>
+<tr><td>11.1</td><td>$L'=L/\kappa$, $V'=V/\kappa$, $N_a'=\kappa N_a$</td><td>⭐ 定電場縮小</td></tr>
+<tr><td>11.2</td><td>$E'=V'/L'=E$（不變）</td><td>電場守恆</td></tr>
+<tr><td>11.14a</td><td>$\mu_{\text{eff}}=\mu_0/[1+\theta(V_{GS}-V_T)]$</td><td>⭐ 遷移率退化</td></tr>
+<tr><td>11.14b</td><td>$\theta$ 表達式</td><td>垂直電場起源</td></tr>
+<tr><td>11.15a</td><td>$I_D=WC_{ox}(V_{GS}-V_T)^2/\{2[1+\mu_n(V_{GS}-V_T)/(2v_{\text{sat}}L)]\}$</td><td>⭐ 含速度飽和的 $I_D$</td></tr>
+<tr><td>11.15b</td><td>$I_D=W C_{ox}(V_{GS}-V_T)v_{\text{sat}}$</td><td>短通道極限</td></tr>
+<tr><td>11.35a</td><td>$P_{\text{inj}}\propto\exp(-\phi_B/(e\lambda E_m))$</td><td>熱載子注入機率</td></tr>
+<tr><td>11.36a</td><td>$V_T=V_{T0}-\delta V_{DS}$</td><td>DIBL</td></tr>
+<tr><td>11.37</td><td>$S=60(1+C_d/C_{ox})$ mV/dec</td><td>⭐ 次臨界斜率</td></tr>
+<tr><td>11.77</td><td>$\Delta V_T\propto-\exp(-L/(2l))$</td><td>短通道 $V_T$ roll-off</td></tr>
+<tr><td>11.87</td><td>$J_G=A E_{ox}^2\exp(-B/E_{ox})$</td><td>Fowler-Nordheim 穿隧</td></tr>
+<tr><td>11.88</td><td>直接穿隧 $J_G$</td><td>$t_{ox}<3$ nm 主導</td></tr>
+<tr><td>11.97</td><td>$t_{ox,\text{eq}}=(\kappa_{\text{SiO}_2}/\kappa)t_{\text{high-}\kappa}$</td><td>⭐ 等效氧化層厚度</td></tr>
+<tr><td>11.99</td><td>$\Delta V_T^{QM}=\Delta E_0/e$</td><td>量子侷限 $V_T$ 偏移</td></tr>
 </tbody></table></div>
 
-<!-- ===== 第十三章 公式摘要 — BJT 進階概念 ===== -->
+<!-- ===== 第十二章 公式摘要 — BJT 基礎 ===== -->
 
-<div class="header"><div class="tag">全部公式·含完整推導</div><h1>第十三章：BJT 進階概念</h1><div class="sub">Semiconductor Physics & Devices, 4th Ed.·Donald A. Neamen·pp.491–550</div></div>
+<div class="header"><div class="tag">55 條公式·全部收錄</div><h1>第十二章：雙極性接面電晶體（BJT）</h1><div class="sub">Semiconductor Physics & Devices, 4th Ed.·Donald A. Neamen·pp.491–558</div></div>
 <div class="tbar"><button onclick="document.querySelectorAll('details').forEach(d=>d.open=true)">📖 展開全部</button><button onclick="document.querySelectorAll('details').forEach(d=>d.open=false)">📕 收合全部</button></div>
 
-<div class="section" id="fr13_s1"><h2>13.1 BJT 作用回顧與多邊結構</h2>
+<!-- 10.1.1-10.1.3 -->
+<div class="section" id="fr12b_s1"><h2>12.1.1–10.1.3 BJT 結構、電流關係、操作模式 (10.1–10.9)</h2>
+<div class="fcard"><div class="lbl">BJT 的兩種結構</div><div class="eq">npn：n⁺射極 / p 基極 / n 集極<br>pnp：p⁺射極 / n 基極 / p 集極</div><div class="note">射極重摻雜（∼10¹⁸–10²⁰ cm⁻³），基極輕摻雜且極窄（$W_B\sim0.1$–1 µm），集極輕摻雜（∼10¹⁵–10¹⁶ cm⁻³）。</div></div>
+<details class="derive" open><summary>🔍 電流組成與操作模式（9 條公式）</summary><div class="dbo">
+<div class="step"><span class="snb">1</span><span class="sl">端點電流關係 (10.1–10.3)</span><div class="sc"><span class="math">$$I_E = I_B + I_C \tag{12.1}$$</span>射極電流 = 基極電流 + 集極電流（Kirchhoff 電流律）。npn：$I_E$ 流出，$I_B$ 和 $I_C$ 流入。pnp 方向相反。</div></div>
+<div class="step"><span class="snb">2</span><span class="sl">四種操作模式 (10.4–10.7)</span><div class="sc"><table><thead><tr><th>模式</th><th>BE</th><th>BC</th><th>用途</th></tr></thead><tbody>
+<tr><td>順向主動 (Forward-active)</td><td>順偏</td><td>逆偏</td><td>線性放大器</td></tr>
+<tr><td>截止 (Cutoff)</td><td>逆偏</td><td>逆偏</td><td>OFF 開關</td></tr>
+<tr><td>飽和 (Saturation)</td><td>順偏</td><td>順偏</td><td>ON 開關</td></tr>
+<tr><td>反向主動 (Inverse-active)</td><td>逆偏</td><td>順偏</td><td>少用</td></tr></tbody></table></div></div>
+<div class="step"><span class="snb">3</span><span class="sl">順向主動模式的電流組成 (10.8–10.9)</span><div class="sc">射極電流 $I_E$ = 電子注入基極的電流 + 電洞從基極注入射極的電流。<br>集極電流 $I_C$ = 收集到的電子電流 + BC 接面反向飽和電流。</div></div>
+</div></details>
+</div>
+
+<!-- 10.1.4 -->
+<div class="section" id="fr12b_s2"><h2>12.1.4 少數載子分布 (10.10–10.18)</h2>
+<details class="derive" open><summary>🔍 基極中少數載子分布的推導（9 條公式）</summary><div class="dbo">
+<div class="step"><span class="snb">1</span><span class="sl">基極中的擴散方程 (10.10–10.13)</span><div class="sc">基極中無電場→純擴散。穩態擴散方程：$d^2\delta n_B/dx^2 = \delta n_B/L_B^2$。<br>因為 $W_B \ll L_B$（基極極窄），復合項可忽略→$d^2\delta n_B/dx^2 \approx 0$ (10.12)。</div></div>
+<div class="step"><span class="snb">2</span><span class="sl">線性濃度分布 (10.14–10.15)</span><div class="sc">無復合→擴散方程解為直線：$\delta n_B(x) = \delta n_B(0)(1-x/W_B)$。<br>邊界條件：$x=0$（BE 接面邊界）$\delta n_B(0)=n_{B0}(e^{eV_{BE}/kT}-1)$ (10.14)。$x=W_B$（BC 接面邊界）$\delta n_B(W_B)\approx0$（逆偏收集）(10.15)。</div></div>
+<div class="step"><span class="snb">3</span><span class="sl">擴散電流 (10.16–10.18)</span><div class="sc"><span class="math">$$J_n = e D_B\frac{d\delta n_B}{dx} = -e D_B\frac{\delta n_B(0)}{W_B} \tag{12.17}$$</span>濃度梯度 = $\delta n_B(0)/W_B$（常數！→擴散電流均勻）。$W_B$ 越窄→梯度越大→電流越大。</div></div>
+</div></details>
+</div>
+
+<!-- 10.2.1-10.2.2 -->
+<div class="section" id="fr12b_s3"><h2>12.2.1–10.2.2 電流增益參數 ⭐ (10.19–10.36)</h2>
+<details class="derive" open><summary>🔍 完整推導——射極效率·基極傳輸因子·電流增益（18 條公式）</summary><div class="dbo">
+<div class="step"><span class="snb">1</span><span class="sl">射極注入效率 $\gamma$ (10.19–10.25)</span><div class="sc"><span class="math">$$\gamma = \frac{I_{nE}}{I_{nE}+I_{pE}} = \frac{1}{1 + \dfrac{D_E N_B W_B}{D_B N_E L_E}} \tag{12.24}$$</span>$I_{nE}$ = 從射極注入基極的電子電流（有用）；$I_{pE}$ = 從基極注入射極的電洞電流（浪費）。<br>要使 $\gamma\approx1$：$N_E \gg N_B$（射極遠重於基極），$W_B$ 小，$L_E$ 大。</div></div>
+<div class="step"><span class="snb">2</span><span class="sl">基極傳輸因子 $\alpha_T$ (10.26–10.29)</span><div class="sc"><span class="math">$$\alpha_T = \frac{I_{nC}}{I_{nE}} \approx 1 - \frac{1}{2}\left(\frac{W_B}{L_B}\right)^2 \tag{12.29}$$</span>$W_B \ll L_B$ → $\alpha_T \approx 1$。在基極中復合的電子比例 $\propto (W_B/L_B)^2$。</div></div>
+<div class="step"><span class="snb">3</span><span class="sl">⭐ 共基極電流增益 $\alpha$ (10.30–10.31)</span><div class="sc"><span class="math">$$\boxed{\alpha = \frac{I_C}{I_E} = \gamma \cdot \alpha_T} \tag{12.31}$$</span>$\alpha$ 略小於 1（典型 0.98–0.998）。</div></div>
+<div class="step"><span class="snb">4</span><span class="sl">⭐ 共射極電流增益 $\beta$ (10.32–10.36)</span><div class="sc">$I_C = \alpha I_E + I_{CBO}$，$I_B = (1-\alpha)I_E - I_{CBO}$ (10.32–10.34)。<span class="math">$$\boxed{\beta = \frac{I_C}{I_B} = \frac{\alpha}{1-\alpha}} \tag{12.36}$$</span>$\alpha=0.99\rightarrow\beta=99$；$\alpha=0.995\rightarrow\beta=199$；$\alpha=0.998\rightarrow\beta=499$。</div></div>
+</div></details>
+</div>
+
+<!-- 10.2.3 -->
+<div class="section" id="fr12b_s4"><h2>12.2.3 Ebers-Moll 模型 (10.37)</h2>
+<div class="fcard"><div class="lbl">⭐ Ebers-Moll 方程（完整耦合二極體模型）</div><div class="eq">$$\boxed{I_E = I_{ES}(e^{eV_{BE}/kT}-1) - \alpha_R I_{CS}(e^{eV_{BC}/kT}-1)} \tag{12.37a}$$</div><div class="eq">$$\boxed{I_C = \alpha_F I_{ES}(e^{eV_{BE}/kT}-1) - I_{CS}(e^{eV_{BC}/kT}-1)} \tag{12.37b}$$</div><div class="note">$\alpha_F$ = 順向共基極增益，$\alpha_R$ = 反向共基極增益。$I_{ES}, I_{CS}$ = 射極和集極飽和電流。互易關係：$\alpha_F I_{ES} = \alpha_R I_{CS}$。</div></div>
+</div>
+
+<!-- 10.3 -->
+<div class="section" id="fr12b_s5"><h2>12.3 非理想效應 (10.38–10.48)</h2>
+<details class="derive" open><summary>🔍 基極寬度調變·Early 效應·高階注入（11 條公式）</summary><div class="dbo">
+<div class="step"><span class="snb">1</span><span class="sl">基極寬度調變 (10.38–10.43)</span><div class="sc">$V_{CE}$ 增加→BC 接面逆偏增加→BC 空乏區變寬→有效基極寬度 $W_B$ 變窄 (10.38–10.40)。<br>$W_B$ 變窄→濃度梯度 $n_{B0}/W_B$ 變大→$I_C$ 增加 (10.41–10.43)。</div></div>
+<div class="step"><span class="snb">2</span><span class="sl">⭐ Early 效應 (10.44–10.48)</span><div class="sc">輸出特性上傾：<span class="math">$$\boxed{I_C = I_S\,e^{eV_{BE}/kT}\!\left(1 + \frac{V_{CE}}{V_A}\right)} \tag{12.48}$$</span>$V_A$ = Early 電壓（通常 50–300 V）。$V_A$ 越大→輸出特性越平→$r_o$ 越大。</div></div>
+</div></details>
+</div>
+
+<!-- 10.4 -->
+<div class="section" id="fr12b_s6"><h2>12.4 小訊號等效電路 (10.49–10.55)</h2>
+<div class="fcard"><div class="lbl">⭐ 混合-π 模型參數</div><div class="eq">$$g_m = \frac{I_{CQ}}{kT/e} = \frac{I_{CQ}}{V_T} \tag{12.52a}$$</div><div class="eq">$$r_\pi = \frac{\beta}{g_m} = \frac{\beta V_T}{I_{CQ}} \tag{12.52b}$$</div><div class="eq">$$r_o = \frac{V_A}{I_{CQ}} \tag{12.52c}$$</div><div class="note">$g_m$ = 跨導（控制量），$r_\pi$ = 輸入電阻（基極-射極），$r_o$ = 輸出電阻（集極-射極，來自 Early 效應）。$V_T = kT/e = 0.0259$ V (300 K)。</div></div>
+</div>
+
+<div class="section" id="fr12b_cheatsheet"><h2>公式速查表（55 條全收錄）</h2>
+<table><thead><tr><th>Eq</th><th>公式</th><th>備註</th></tr></thead><tbody>
+<tr><td>12.1</td><td>$I_E=I_B+I_C$</td><td>Kirchhoff 電流律</td></tr>
+<tr><td>12.4–10.7</td><td>四種操作模式（BE,BC 偏壓組合）</td><td>順向主動/截止/飽和/反向</td></tr>
+<tr><td>12.12</td><td>$d^2\delta n_B/dx^2\approx0$（$W_B\ll L_B$）</td><td>基極無復合近似</td></tr>
+<tr><td>12.14</td><td>$\delta n_B(0)=n_{B0}(e^{eV_{BE}/kT}-1)$</td><td>BE 邊界條件</td></tr>
+<tr><td>12.17</td><td>$J_n=-eD_B\delta n_B(0)/W_B$</td><td>基極電子擴散電流</td></tr>
+<tr><td>12.24</td><td>$\gamma=1/[1+(D_E N_B W_B)/(D_B N_E L_E)]$</td><td>⭐ 射極注入效率</td></tr>
+<tr><td>12.29</td><td>$\alpha_T\approx1-\frac{1}{2}(W_B/L_B)^2$</td><td>⭐ 基極傳輸因子</td></tr>
+<tr><td>12.31</td><td>$\alpha=\gamma\cdot\alpha_T$</td><td>⭐ 共基極電流增益</td></tr>
+<tr><td>12.36</td><td>$\beta=\alpha/(1-\alpha)$</td><td>⭐ 共射極電流增益</td></tr>
+<tr><td>12.37</td><td>Ebers-Moll 完整模型</td><td>⭐ BJT 等效電路基礎</td></tr>
+<tr><td>12.48</td><td>$I_C=I_S e^{V_{BE}/V_T}(1+V_{CE}/V_A)$</td><td>⭐ Early 效應</td></tr>
+<tr><td>12.52</td><td>$g_m=I_{CQ}/V_T,\;r_\pi=\beta/g_m,\;r_o=V_A/I_{CQ}$</td><td>⭐ 混合-π 小訊號參數</td></tr>
+<tr><td>12.53</td><td>$\mu_f=g_m r_o=V_A/V_T$</td><td>最大電壓增益因子</td></tr>
+</tbody></table></div>
+
+<!-- ===== 第十二章 公式摘要 — BJT 進階 ===== -->
+
+<div class="header"><div class="tag">全部公式·含完整推導</div><h1>第十二章（進階篇）：BJT 進階概念</h1><div class="sub">Semiconductor Physics & Devices, 4th Ed.·Donald A. Neamen·pp.491–558</div></div>
+<div class="tbar"><button onclick="document.querySelectorAll('details').forEach(d=>d.open=true)">📖 展開全部</button><button onclick="document.querySelectorAll('details').forEach(d=>d.open=false)">📕 收合全部</button></div>
+
+<div class="section" id="fr12a_s1"><h2>12.1 BJT 作用回顧與多邊結構</h2>
 <div class="fcard"><div class="lbl">BJT 核心參數回顧</div><div class="eq">$$\alpha = \gamma \cdot \alpha_T,\quad \beta = \frac{\alpha}{1-\alpha}$$</div><div class="eq">$$I_C = I_S e^{V_{BE}/V_T},\quad I_E = I_B + I_C$$</div></div>
 </div>
 
-<div class="section" id="fr13_s2"><h2>13.2 BJT 頻率限制——四個時間常數 ⭐</h2>
+<div class="section" id="fr12a_s2"><h2>12.2 BJT 頻率限制——四個時間常數 ⭐</h2>
 <details class="derive" open><summary>🔍 $f_T$ 的完整推導——四個延遲成分的物理來源</summary><div class="dbo">
 <div class="step"><span class="snb">1</span><span class="sl">⭐ 截止頻率定義 (12.97)</span><div class="sc"><span class="math">$$\boxed{f_T = \frac{1}{2\pi\tau_{ec}}},\quad \tau_{ec} = \tau_e + \tau_b + \tau_d + \tau_c \tag{12.97}$$</span></div></div>
 <div class="step"><span class="snb">2</span><span class="sl">① 射極充電時間 $\tau_e = r_e C_{je}$</span><div class="sc">$r_e = V_T/I_E \approx 25.9/I_E(\text{mA})$ Ω。$C_{je}$ = BE 接面電容。充放電 BE 接面的 RC 延遲。</div></div>
@@ -1349,19 +1323,19 @@ TYU 2.4: $T=5\times10^{-6}$, $V_0=0.8$ eV, $E=0.08$ eV → $a_{\text{max}} = 14.
 <div class="fcard"><div class="lbl">射極-集極延遲完整表達式 (12.107–12.108)</div><div class="eq">$$\tau_{ec} = \frac{V_T}{I_E}C_{je} + \frac{W_B^2}{2D_B} + \frac{x_d}{2v_{\text{sat}}} + r_c C_{jc} \tag{12.107}$$</div><div class="note">(12.108) 給出各成分的相對重要性——基極傳輸時間通常主導。</div></div>
 </div>
 
-<div class="section" id="fr13_s3"><h2>13.3 大訊號開關</h2>
+<div class="section" id="fr12a_s3"><h2>12.3 大訊號開關</h2>
 <div class="fcard"><div class="lbl">開關延遲時間</div><div class="eq">$$t_s \approx \tau_s\ln\!\left(1 + \frac{I_F}{I_R}\right)$$</div><div class="note">$\tau_s$ = 飽和區等效壽命。$I_F$ = 順向基極電流，$I_R$ = 反向抽取電流。<br>蕭特基箝位防止飽和→$t_s$ 大幅降低（$\tau_s$ 變為主動區壽命，短得多）。</div></div>
 </div>
 
-<div class="section" id="fr13_s4"><h2>13.4 小訊號模型</h2>
+<div class="section" id="fr12a_s4"><h2>12.4 小訊號模型</h2>
 <div class="fcard"><div class="lbl">⭐ 完整混合-π 模型（含電容）</div><div class="eq">$$g_m = \frac{I_C}{V_T},\quad r_\pi = \frac{\beta}{g_m},\quad r_o = \frac{V_A}{I_C}$$</div><div class="eq">$$C_\pi = C_{je} + \tau_F g_m,\quad C_\mu = C_{jc}$$</div><div class="note">$C_\pi$（輸入電容）= 接面電容 $C_{je}$ + 擴散電容 $\tau_F g_m$（$\propto I_C$）。<br>$C_\mu$ = BC 接面電容（Miller 效應→輸入端放大 $(1+g_m R_L)$ 倍）。</div></div>
 </div>
 
-<div class="section" id="fr13_s5"><h2>13.5 HBT 與 SiGe 技術</h2>
+<div class="section" id="fr12a_s5"><h2>12.5 HBT 與 SiGe 技術</h2>
 <div class="fcard"><div class="lbl">HBT 射極注入效率的突破</div><div class="eq">$$\gamma_{\text{HBT}} \approx 1,\quad \beta_{\text{HBT}} \gg \beta_{\text{BJT}}$$</div><div class="note">寬能隙射極→價帶能障阻止電洞從基極注入射極→$I_{pE}\approx0$→$\gamma\approx1$ 即使 $N_E$ 不重於 $N_B$。<br>可重摻雜基極→$r_b$ 降低→$f_{\max}$ 提升。</div></div>
 </div>
 
-<div class="section" id="fr13_cheatsheet"><h2>公式速查表（完整）</h2>
+<div class="section" id="fr12a_cheatsheet"><h2>公式速查表（完整）</h2>
 <table><thead><tr><th>Eq</th><th>公式</th><th>備註</th></tr></thead><tbody>
 <tr><td>12.97</td><td>$f_T=1/(2\pi\tau_{ec})$, $\tau_{ec}=\tau_e+\tau_b+\tau_d+\tau_c$</td><td>⭐ 截止頻率定義</td></tr>
 <tr><td>—</td><td>$\tau_e=r_e C_{je}=V_T C_{je}/I_E$</td><td>射極充電時間</td></tr>

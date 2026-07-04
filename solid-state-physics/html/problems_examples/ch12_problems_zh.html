@@ -1,93 +1,10 @@
-<!DOCTYPE html><html lang="zh-TW" data-theme="light"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Ch12 章末習題詳解</title><style>
-:root{--bg:#fff;--bg2:#F5F5F7;--bg3:#E8F0FE;--tx:#1D1D1F;--tx2:#1D1D1F;--ac:#007AFF;--bd:#D2D2D7;--fbd:#E5E5EA;--ans-bg:#E8F5E9;--ans-bd:#4CAF50;--nav-w:260px}
-[data-theme="dark"]{--bg:#1C1C1E;--bg2:#2C2C2E;--bg3:#1A2332;--tx:#F5F5F7;--tx2:#A1A1A6;--ac:#0A84FF;--bd:#48484A;--fbd:#3A3A3C;--ans-bg:#1B2E1B;--ans-bd:#388E3C}
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:-apple-system,BlinkMacSystemFont,'Noto Sans TC','Microsoft JhengHei',sans-serif;background:var(--bg2);color:var(--tx);line-height:1.9;display:flex;min-height:100vh}
-.sidebar{position:fixed;width:var(--nav-w);height:100vh;background:var(--bg);border-right:1px solid var(--fbd);padding:20px 16px;z-index:10;overflow-y:auto;display:flex;flex-direction:column}
-.sidebar h2{font-size:14px;font-weight:600;color:var(--ac)}.sidebar .bk{font-size:11px;color:var(--tx2);margin-bottom:12px}
-.sidebar-nav{flex:1;overflow-y:auto}
-.sidebar-nav a{display:block;padding:2px 8px;font-size:10.5px;color:var(--tx2);text-decoration:none;border-radius:5px;transition:.12s}
-.sidebar-nav a:hover{background:var(--bg3);color:var(--ac)}
-.sidebar-toggle{margin-top:auto;padding-top:12px;border-top:1px solid var(--fbd)}
-.sidebar-toggle button{width:100%;padding:6px;border:1px solid var(--bd);border-radius:6px;background:var(--bg2);color:var(--tx);cursor:pointer;font-size:12px}
-.main{margin-left:var(--nav-w);max-width:1100px;width:100%;padding:32px 40px 80px}
-.header{margin-bottom:28px;padding-bottom:18px;border-bottom:2px solid var(--ac)}
-.header .tag{font-size:12px;font-weight:600;color:var(--ac);letter-spacing:1px}
-.header h1{font-size:26px;font-weight:700;margin:4px 0}
-.tbar{margin-bottom:20px;display:flex;gap:10px}
-.tbar button{padding:5px 16px;font-size:12px;border:1px solid var(--ac);border-radius:20px;background:var(--bg);color:var(--ac);cursor:pointer;font-weight:500;transition:.15s}
-.tbar button:hover{background:var(--ac);color:#fff}
-h2{font-size:18px;font-weight:700;color:var(--ac);margin:28px 0 10px;padding-bottom:5px;border-bottom:1px solid var(--bd)}
-details.pb{background:var(--bg);border:1px solid var(--fbd);border-radius:10px;margin:8px 0}
-details.pb>summary{padding:10px 16px;cursor:pointer;list-style:none;display:flex;align-items:flex-start;gap:8px;font-weight:600;color:var(--tx);font-size:13px;user-select:none}
-details.pb>summary .pn{display:inline-flex;align-items:center;justify-content:center;min-width:36px;height:24px;background:var(--ac);color:#fff;border-radius:12px;font-size:11px;font-weight:700;flex-shrink:0}
-details.pb[open]>summary{border-bottom:1px solid var(--fbd);background:var(--bg3);border-radius:10px 10px 0 0}
-.pbdy{padding:14px 18px;font-size:14px}
-.pbdy .q{color:var(--tx2);margin-bottom:10px;padding:10px 14px;background:var(--bg2);border-radius:8px}
-.pbdy .st{font-weight:700;color:var(--ac);font-size:12px;text-transform:uppercase;letter-spacing:.5px;margin-top:10px;margin-bottom:4px}
-.pbdy .ans{background:var(--ans-bg);border-left:3px solid var(--ans-bd);padding:8px 14px;margin:10px 0;border-radius:0 6px 6px 0;font-weight:600}
-.pbdy .note{background:#FFF3E0;border-left:3px solid #FF9800;padding:8px 14px;margin:10px 0;border-radius:0 6px 6px 0;font-size:13px}
-.sumtbl{width:100%;border-collapse:collapse;font-size:13px;margin:12px 0}
-.sumtbl th{background:var(--bg3);color:var(--ac);padding:6px 10px;text-align:left;font-weight:600;border-bottom:1px solid var(--fbd)}
-.sumtbl td{padding:4px 10px;border-bottom:1px solid var(--fbd)}
-@media(max-width:768px){.sidebar{display:none}.main{margin-left:0;padding:20px 16px}}
-</style><script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']],tags:'ams'}};</script><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script src="../../../reading-preferences.js" defer></script></head><body><a class="portal-home-link" href="../../../index.html">返回學習中心</a><style id="portal-home-link-style">.portal-home-link{position:fixed;top:16px;right:16px;z-index:1000;display:inline-flex;align-items:center;min-height:36px;padding:7px 11px;border:1px solid #cbd5e1;border-radius:8px;background:#fff;color:#1d4ed8;font:600 13px/1.2 -apple-system,BlinkMacSystemFont,"Noto Sans TC","Microsoft JhengHei",sans-serif;text-decoration:none;box-shadow:0 2px 10px rgba(15,23,42,.08)}.portal-home-link:hover{background:#eff6ff}.portal-home-link:focus-visible{outline:3px solid rgba(37,99,235,.35);outline-offset:2px}@media(max-width:768px){.portal-home-link{top:10px;right:10px;min-height:34px;padding:7px 9px;font-size:12px}}</style>
-<nav class="sidebar"><div class="sidebar-header"><h2>Ch12 章末習題</h2><div class="bk">Neamen 4th Ed.</div></div><div class="sidebar-nav"><a href="#p12-1">12.1~12.37</a></div><div class="sidebar-toggle"><button onclick="toggleTheme()" id="themeBtn">🌙 深色模式</button></div></nav>
-<div class="main"><div class="header"><div class="tag">CHAPTER 12</div><h1>第十二章 BJT</h1></div>
-<div class="tbar"><button onclick="document.querySelectorAll('details').forEach(d=>d.open=true)">📖 展開全部</button><button onclick="document.querySelectorAll('details').forEach(d=>d.open=false)">📕 收合全部</button></div>
-<h2>§12.1–12.9 BJT</h2>
-<details class="pb" id="p12-3"><summary><span class="pn">12.3</span>BJT 飽和電流與 $I_C$ 🟢</summary><div class="pbdy">
-<div class="q">An npn BJT has $I_S=7.2\times10^{-15}$ A. Find $I_C$ at $V_{BE}=0.5,0.6,0.7$ V.</div>
-<div class="st">▸ $I_C = I_S e^{V_{BE}/V_t}$, $V_t=0.0259$ V</div>
-<p>$V_{BE}=0.5$: $I_C=7.2\times10^{-15}e^{19.3}=7.2\times10^{-15}\times2.41\times10^8=1.74\times10^{-6}$ A = 1.74 µA（課本：38.27 µA, 可能 $I_S$ 值不同）<br>
-$V_{BE}=0.6$: $I_C=7.2\times10^{-15}e^{23.2}=0.571$ mA<br>
-$V_{BE}=0.7$: $I_C=7.2\times10^{-15}e^{27.0}=8.52$ mA</p>
-<div class="ans">✅ (i) 38.3 µA; (ii) 0.571 mA; (iii) 8.52 mA</div>
-</div></details>
-<details class="pb" id="p12-5"><summary><span class="pn">12.5</span>電流增益 $\beta$ 與基極電流 🟢</summary><div class="pbdy">
-<div class="q">npn BJT with $\beta=65.7$. For the three $I_C$ values from 12.3, find $I_B$ and $I_E$.</div>
-<div class="st">▸ $I_B = I_C/\beta$, $I_E = I_C + I_B$</div>
-<p>(i) $I_C=38.27$ µA: $I_B=0.583$ µA, $I_E=38.85$ µA<br>(ii) $I_C=0.571$ mA: $I_B=8.70$ µA, $I_E=0.580$ mA<br>(iii) $I_C=8.52$ mA: $I_B=0.130$ mA, $I_E=8.65$ mA</p>
-<div class="ans">✅ (i) $I_B=0.58$ µA, $I_E=38.9$ µA; (ii) $I_B=8.70$ µA, $I_E=0.58$ mA; (iii) $I_B=0.13$ mA, $I_E=8.65$ mA</div>
-</div></details>
-<details class="pb" id="p12-15"><summary><span class="pn">12.15</span>Early 效應 — 基極寬度調變 🟢</summary><div class="pbdy">
-<div class="q">Due to base width modulation, the neutral base width changes by (a) 0.126% and (b) 11.32%. Find the corresponding change in $I_C$.</div>
-<div class="st">▸ $I_C\propto1/x_B$（基極寬度調變）。$\Delta I_C/I_C\approx -\Delta x_B/x_B$（小變化）。</div>
-<p>(a) $\Delta x_B/x_B=0.126\%$→$\Delta I_C/I_C\approx0.126\%$。<br>(b) $11.32\%$→$\Delta I_C/I_C\approx11.32\%$。</p>
-<div class="ans">✅ (a) 0.126% increase; (b) 11.32% increase in $I_C$</div>
-</div></details>
-<details class="pb" id="p12-21"><summary><span class="pn">12.21</span>增益因子計算 🟢</summary><div class="pbdy">
-<div class="q">Calculate $\gamma$, $\alpha_T$, $\alpha$, $\beta$, and current components for an npn BJT.</div>
-<div class="st">▸ $\gamma=0.99305$, $\alpha_T=0.990$, $\delta=0.990167$→$\alpha=0.97345$, $\beta=\alpha/(1-\alpha)=36.7$。</div>
-<div class="ans">✅ $\gamma=0.993$, $\alpha_T=0.990$, $\beta=36.7$</div>
-</div></details>
-<details class="pb" id="p12-27"><summary><span class="pn">12.27</span>$x_B/L_B$ 對 $\alpha_T$ 和 $\beta$ 的影響 🟢</summary><div class="pbdy">
-<div class="q">Calculate $\alpha_T$ and $\beta$ for $x_B/L_B=0.01,0.1,1.0,10$.</div>
-<div class="st">▸ $\alpha_T=1/\cosh(x_B/L_B)\approx1-(x_B/L_B)^2/2$（小 $x_B/L_B$）。</div>
-<p>$x_B/L_B=0.01$: $\alpha_T=0.99995$, $\beta=19999$<br>0.1: $\alpha_T=0.995$, $\beta=199$<br>1.0: $\alpha_T=0.648$, $\beta=1.84$<br>10.0: $\alpha_T\approx0$, $\beta\approx0$</p>
-<div class="ans">✅ 基極越窄→$\alpha_T$ 和 $\beta$ 越高。$x_B\ll L_B$ 為高增益必要條件</div>
-</div></details>
-<details class="pb" id="p12-35"><summary><span class="pn">12.35</span>輸出電阻 $r_o$ 🟢</summary><div class="pbdy">
-<div class="q">Find output resistance $r_o$ for two BJT bias conditions: (a) $I_C=0.5$ mA, $V_A=50$ V; (b) $I_C=0.1$ mA, $V_A=65$ V.</div>
-<div class="st">▸ $r_o = V_A/I_C$（忽略 $V_{CE}$ 效應）</div>
-<p>(a) $r_o=50/0.5\times10^{-3}=100$ kΩ。<br>(b) $r_o=65/0.1\times10^{-3}=650$ kΩ。</p>
-<div class="ans">✅ (a) $r_o\approx102$ kΩ; (b) $r_o\approx648$ kΩ</div>
-</div></details>
-
-<details class="pb" id="p12-1"><summary><span class="pn">12.1</span>BJT基本工作原理 — 雙極性作用</summary><div class="pbdy">
-<div class="q">Explain the basic principle of operation of a bipolar junction transistor (BJT). Why is it called "bipolar"?</div>
-<div class="st">▸ Step 1：結構</div>
-<p>npn BJT：射極（n⁺,重摻雜）/ 基極（p,薄,輕摻雜）/ 集極（n,中等摻雜）。兩個背對背pn接面：E-B接面（順偏），B-C接面（逆向）。</p>
-<div class="st">▸ Step 2：雙極性作用</div>
-<p>E-B順偏→電子從射極注入基極（少數載子）。基極極薄（$x_B\ll L_B$）→電子幾乎全部擴散通過基極到達B-C空乏區→被電場掃入集極→形成 $I_C$。基極電流 $I_B$ 補充因復合損失的電洞。</p>
-<div class="st">▸ Step 3：為何叫「雙極性」</div>
-<p>電子和電洞都參與元件運作。電子是傳導載子（從E到C），電洞是控制載子（基極電流）。與MOSFET（單極性,僅一種載子）對比。</p>
-<div class="ans">✅ BJT = 雙極性：電子和電洞都參與。E-B順偏注入→基極傳輸→C收集。$I_C=\beta I_B$</div>
-</div></details>
-<details class="pb" id="p12-2"><summary><span class="pn">12.2</span>BJT-注入效率/基極傳輸/復合/Early/崩潰/Ebers-Moll/Gummel-Poon/Hybrid-π/頻率響應/開關</summary><div class="pbdy">
-<div class="q">See Neamen textbook Problem 12.2 for the complete problem statement. This problem covers pn junction/diode concepts related to BJT-注入效率/基極傳輸/復合/Early/崩潰/Ebers-Moll/Gummel-Poon/Hybrid-π/頻率響應/開關.</div>
-<div class="st">本題涵蓋第12章 BJT-注入效率/基極傳輸/復合/Early/崩潰/Ebers-Moll/Gummel-Poon/Hybrid-π/頻率響應/開關 相關概念</div><p>核心公式包括：Vbi=Vt×ln(NaNd/ni²)；W=sqrt(2ε(Vbi+VR)/eN)；Emax=2(Vbi+VR)/W；Cj=A×sqrt(eεN/2(Vbi+VR))；I=Is(e^(Va/Vt)-1)；Is=eni²A(Dp/LpNd+Dn/LnNa)。解題需代入課本給定參數進行計算。</p>
-<div class="ans">✅ 解題需使用第12章相關公式</div>
-
-</div></details>
+<!DOCTYPE html><html lang="zh-TW" data-theme="light"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>第 12 章 BJT 補充習題詳解</title><script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['','']]}};</script><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><style>:root{--bg:#fff;--panel:#f5f7fa;--text:#1d1d1f;--muted:#515154;--accent:#0769d7;--border:#d7dbe0;--good:#eaf7ee}[data-theme=dark]{--bg:#1c1c1e;--panel:#2c2c2e;--text:#f5f5f7;--muted:#c7c7cc;--accent:#64a8ff;--border:#48484a;--good:#173c24}*{box-sizing:border-box}body{margin:0;background:var(--panel);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Noto Sans TC','Microsoft JhengHei',sans-serif;line-height:1.75}.wrap{max-width:980px;margin:auto;padding:28px 20px 70px}.header{background:var(--bg);padding:22px;border-radius:14px;border:1px solid var(--border);margin-bottom:18px}.header h1{margin:0 0 6px;font-size:26px}.header p{margin:0;color:var(--muted)}.tools{display:flex;gap:8px;margin:12px 0}.tools button{border:1px solid var(--border);background:var(--bg);color:var(--text);padding:7px 11px;border-radius:8px;cursor:pointer}details{background:var(--bg);border:1px solid var(--border);border-radius:12px;margin:12px 0;overflow:hidden}summary{cursor:pointer;padding:13px 16px;font-weight:700;color:var(--accent)}.content{padding:0 18px 16px}.q{background:var(--panel);padding:10px 13px;border-radius:8px}.answer{background:var(--good);border-left:4px solid #34a853;padding:10px 13px;margin-top:12px}.check{color:var(--muted);font-size:13px}</style><link rel="stylesheet" href="../assets/course-ui.css">
+<script defer src="../assets/course-ui.js"></script>
+</head><body><main class="wrap"><header class="header"><h1>第十二章　雙極性接面電晶體</h1><p>第 12 章 BJT 補充習題詳解</p><p class="check">本頁為自編補充練習，依原書章節概念設計，不冒充原書題號；每題均提供完整資料與可驗算答案。</p></header><div class="tools"><button onclick="document.querySelectorAll('details').forEach(x=>x.open=true)">展開全部</button><button onclick="document.querySelectorAll('details').forEach(x=>x.open=false)">收合全部</button><button onclick="document.documentElement.dataset.theme=document.documentElement.dataset.theme==='dark'?'light':'dark'">切換主題</button></div><details open><summary>12-A｜$\alpha$ 與 $\beta$ 的轉換</summary><div class="content"><p class="q">共基極電流增益 $\alpha=0.990$，求共射極電流增益 $\beta$。</p><p>$\beta=\alpha/(1-\alpha)$。</p><div class="answer">答案：$\beta=99$。</div></div></details>
+<details><summary>12-B｜混合-π 參數</summary><div class="content"><p class="q">300 K，$I_C=1.0$ mA、$\beta=100$。求 $g_m$ 與 $r_\pi$。</p><p>$g_m=I_C/V_T=1\text{ mA}/25.9\text{ mV}=38.6$ mS；$r_\pi=\beta/g_m$。</p><div class="answer">答案：$g_m=38.6$ mS，$r_\pi\approx2.59$ kΩ。</div></div></details>
+<details><summary>12-C｜Early 效應輸出電阻</summary><div class="content"><p class="q">$V_A=100$ V、偏壓 $I_C=1.0$ mA，求小訊號 $r_o$。</p><p>$r_o\approx V_A/I_C$。</p><div class="answer">答案：$r_o\approx100$ kΩ。</div></div></details>
+<details><summary>12-D｜基極傳輸時間</summary><div class="content"><p class="q">中性基極寬 $W_B=0.20$ µm，電子擴散係數 $D_n=25$ cm²/s。以 $\tau_B\approx W_B^2/(2D_n)$ 估算。</p><p>$W_B=2.0\times10^{-5}$ cm。</p><div class="answer">答案：$\tau_B=8.0$ ps。</div></div></details>
+<details><summary>12-E｜由總延遲估算 $f_T$</summary><div class="content"><p class="q">射極充電、基極傳輸、集極渡越與集極充電延遲總和為 5.0 ps。估算截止頻率。</p><p>$f_T\approx1/(2\pi\tau_{total})$。</p><div class="answer">答案：$f_T\approx31.8$ GHz。</div></div></details>
+<details><summary>12-F｜飽和儲存時間</summary><div class="content"><p class="q">飽和時多餘儲存電荷 $Q_s=20$ pC，關斷時反向基極電流 2.0 mA。忽略電流變化，估算移除時間。</p><p>$t_s\approx Q_s/|I_{B,rev}|$。</p><div class="answer">答案：$t_s\approx10$ ns。</div></div></details>
+<details><summary>12-G｜注入效率與基極傳輸因子</summary><div class="content"><p class="q">射極注入效率 $\gamma=0.995$、基極傳輸因子 $\alpha_T=0.990$。求 $\alpha$ 與 $\beta$。</p><p>$\alpha=\gamma\alpha_T=0.98505$；$\beta=\alpha/(1-\alpha)$。</p><div class="answer">答案：$\alpha\approx0.9851$，$\beta\approx65.9$。</div></div></details>
+<details><summary>12-H｜HBT 能隙工程的理想增益尺度</summary><div class="content"><p class="q">寬能隙射極相對基極的能隙差 $\Delta E_g=0.20$ eV。300 K 下，估算理想化的少數載子反向注入抑制因子 $\exp(\Delta E_g/kT)$。</p><p>$\exp(0.20/0.0259)\approx2.25\times10^3$。</p><div class="answer">答案：約 $2.3\times10^3$。這是理想尺度估算，真實增益仍受界面、復合與傳輸限制。</div></div></details></main></body></html>

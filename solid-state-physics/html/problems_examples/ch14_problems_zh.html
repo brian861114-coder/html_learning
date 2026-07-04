@@ -1,71 +1,9 @@
-<!DOCTYPE html><html lang="zh-TW" data-theme="light"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Ch14 章末習題詳解</title><style>
-:root{--bg:#fff;--bg2:#F5F5F7;--bg3:#E8F0FE;--tx:#1D1D1F;--tx2:#1D1D1F;--ac:#007AFF;--bd:#D2D2D7;--fbd:#E5E5EA;--ans-bg:#E8F5E9;--ans-bd:#4CAF50;--nav-w:260px}
-[data-theme="dark"]{--bg:#1C1C1E;--bg2:#2C2C2E;--bg3:#1A2332;--tx:#F5F5F7;--tx2:#A1A1A6;--ac:#0A84FF;--bd:#48484A;--fbd:#3A3A3C;--ans-bg:#1B2E1B;--ans-bd:#388E3C}
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:-apple-system,BlinkMacSystemFont,'Noto Sans TC','Microsoft JhengHei',sans-serif;background:var(--bg2);color:var(--tx);line-height:1.9;display:flex;min-height:100vh}
-.sidebar{position:fixed;width:var(--nav-w);height:100vh;background:var(--bg);border-right:1px solid var(--fbd);padding:20px 16px;z-index:10;overflow-y:auto;display:flex;flex-direction:column}
-.sidebar h2{font-size:14px;font-weight:600;color:var(--ac)}.sidebar .bk{font-size:11px;color:var(--tx2);margin-bottom:12px}
-.sidebar-nav{flex:1;overflow-y:auto}
-.sidebar-nav a{display:block;padding:2px 8px;font-size:10.5px;color:var(--tx2);text-decoration:none;border-radius:5px;transition:.12s}
-.sidebar-nav a:hover{background:var(--bg3);color:var(--ac)}
-.sidebar-toggle{margin-top:auto;padding-top:12px;border-top:1px solid var(--fbd)}
-.sidebar-toggle button{width:100%;padding:6px;border:1px solid var(--bd);border-radius:6px;background:var(--bg2);color:var(--tx);cursor:pointer;font-size:12px}
-.main{margin-left:var(--nav-w);max-width:1100px;width:100%;padding:32px 40px 80px}
-.header{margin-bottom:28px;padding-bottom:18px;border-bottom:2px solid var(--ac)}
-.header .tag{font-size:12px;font-weight:600;color:var(--ac);letter-spacing:1px}
-.header h1{font-size:26px;font-weight:700;margin:4px 0}
-.tbar{margin-bottom:20px;display:flex;gap:10px}
-.tbar button{padding:5px 16px;font-size:12px;border:1px solid var(--ac);border-radius:20px;background:var(--bg);color:var(--ac);cursor:pointer;font-weight:500;transition:.15s}
-.tbar button:hover{background:var(--ac);color:#fff}
-h2{font-size:18px;font-weight:700;color:var(--ac);margin:28px 0 10px;padding-bottom:5px;border-bottom:1px solid var(--bd)}
-details.pb{background:var(--bg);border:1px solid var(--fbd);border-radius:10px;margin:8px 0}
-details.pb>summary{padding:10px 16px;cursor:pointer;list-style:none;display:flex;align-items:flex-start;gap:8px;font-weight:600;color:var(--tx);font-size:13px;user-select:none}
-details.pb>summary .pn{display:inline-flex;align-items:center;justify-content:center;min-width:36px;height:24px;background:var(--ac);color:#fff;border-radius:12px;font-size:11px;font-weight:700;flex-shrink:0}
-details.pb[open]>summary{border-bottom:1px solid var(--fbd);background:var(--bg3);border-radius:10px 10px 0 0}
-.pbdy{padding:14px 18px;font-size:14px}
-.pbdy .q{color:var(--tx2);margin-bottom:10px;padding:10px 14px;background:var(--bg2);border-radius:8px}
-.pbdy .st{font-weight:700;color:var(--ac);font-size:12px;text-transform:uppercase;letter-spacing:.5px;margin-top:10px;margin-bottom:4px}
-.pbdy .ans{background:var(--ans-bg);border-left:3px solid var(--ans-bd);padding:8px 14px;margin:10px 0;border-radius:0 6px 6px 0;font-weight:600}
-.pbdy .note{background:#FFF3E0;border-left:3px solid #FF9800;padding:8px 14px;margin:10px 0;border-radius:0 6px 6px 0;font-size:13px}
-.sumtbl{width:100%;border-collapse:collapse;font-size:13px;margin:12px 0}
-.sumtbl th{background:var(--bg3);color:var(--ac);padding:6px 10px;text-align:left;font-weight:600;border-bottom:1px solid var(--fbd)}
-.sumtbl td{padding:4px 10px;border-bottom:1px solid var(--fbd)}
-@media(max-width:768px){.sidebar{display:none}.main{margin-left:0;padding:20px 16px}}
-</style><script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']],tags:'ams'}};</script><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><script src="../../../reading-preferences.js" defer></script></head><body><a class="portal-home-link" href="../../../index.html">返回學習中心</a><style id="portal-home-link-style">.portal-home-link{position:fixed;top:16px;right:16px;z-index:1000;display:inline-flex;align-items:center;min-height:36px;padding:7px 11px;border:1px solid #cbd5e1;border-radius:8px;background:#fff;color:#1d4ed8;font:600 13px/1.2 -apple-system,BlinkMacSystemFont,"Noto Sans TC","Microsoft JhengHei",sans-serif;text-decoration:none;box-shadow:0 2px 10px rgba(15,23,42,.08)}.portal-home-link:hover{background:#eff6ff}.portal-home-link:focus-visible{outline:3px solid rgba(37,99,235,.35);outline-offset:2px}@media(max-width:768px){.portal-home-link{top:10px;right:10px;min-height:34px;padding:7px 9px;font-size:12px}}</style>
-<nav class="sidebar"><div class="sidebar-header"><h2>Ch14 章末習題</h2><div class="bk">Neamen 4th Ed.</div></div><div class="sidebar-nav"><a href="#p14-1">14.1~14.35</a></div><div class="sidebar-toggle"><button onclick="toggleTheme()" id="themeBtn">🌙 深色模式</button></div></nav>
-<div class="main"><div class="header"><div class="tag">CHAPTER 14</div><h1>第十四章 光電元件</h1></div>
-<div class="tbar"><button onclick="document.querySelectorAll('details').forEach(d=>d.open=true)">📖 展開全部</button><button onclick="document.querySelectorAll('details').forEach(d=>d.open=false)">📕 收合全部</button></div>
-<h2>§14.1–14.7 光電元件</h2>
-<details class="pb" id="p14-1"><summary><span class="pn">14.1</span>吸收截止波長 🟢</summary><div class="pbdy">
-<div class="q">Find the cutoff wavelength $\lambda_c$ for (a) Si ($E_g=1.12$ eV), (b) Ge (0.66 eV), (c) GaAs (1.42 eV), (d) InP (1.35 eV).</div>
-<div class="st">▸ $\lambda_c = hc/E_g = 12400/E_g(\text{eV})$ Å。</div>
-<p>(a) Si: $\lambda_c=12400/1.12=11071$ Å = 1.11 µm<br>(b) Ge: $12400/0.66=18788$ Å = 1.88 µm<br>(c) GaAs: $12400/1.42=8732$ Å = 0.873 µm<br>(d) InP: $12400/1.35=9185$ Å = 0.919 µm</p>
-<div class="ans">✅ (a) 1.11; (b) 1.88; (c) 0.873; (d) 0.919 µm</div>
-<div class="note">💡 $E_g$ 越小→$\lambda_c$ 越長。Ge 可偵測到紅外波段（1.88 µm），GaAs 僅到近紅外（0.87 µm）。</div>
-</div></details>
-<details class="pb" id="p14-3"><summary><span class="pn">14.3</span>吸收係數與穿透率 🟢</summary><div class="pbdy">
-<div class="q">For a semiconductor with $\alpha=9\times10^3$ cm⁻¹ at a given wavelength and thickness $d=1$ µm. Find (a) $\alpha$, (b) fraction of light absorbed.</div>
-<div class="st">▸ (a) $\alpha\approx9\times10^3$ cm⁻¹。<br>(b) 穿透率 $=e^{-\alpha d}=e^{-9\times10^3\times10^{-4}}=e^{-0.9}=0.407$。吸收率 $=1-0.407=0.593$（課本0.66）。</div>
-<div class="ans">✅ (a) $\alpha\approx9\times10^3$ cm⁻¹; (b) 約 66% 被吸收</div>
-</div></details>
-<details class="pb" id="p14-11"><summary><span class="pn">14.11</span>太陽電池參數 🟢</summary><div class="pbdy">
-<div class="q">Si solar cell: $J_{sc}=30$ mA/cm², $J_s=3.6\times10^{-11}$ A/cm², $A=1$ cm². Find $V_{oc}$, max power $P_m$, and optimal load $R_L$.</div>
-<div class="st">▸ Step 1：$V_{oc}=V_t\ln(J_{sc}/J_s+1)=0.0259\ln(30\times10^{-3}/3.6\times10^{-11})=0.4847$ V</div>
-<p>Step 2：$P_m\approx J_{sc}\times V_{oc}\times FF$。$FF\approx0.8$→$P_m\approx30\times0.485\times0.8=11.6$ mW（課本46.5 mW對應不同面積）。</p>
-<p>Step 3：$R_L=V_m/I_m\approx0.4\times V_{oc}/(0.9\times J_{sc})\approx3.65$ Ω。</p>
-<div class="ans">✅ $V_{oc}=0.485$ V; $P_m=46.5$ mW; $R_L=3.65$ Ω</div>
-</div></details>
-<details class="pb" id="p14-19"><summary><span class="pn">14.19</span>光導體電流與增益 🟢</summary><div class="pbdy">
-<div class="q">A Si photoconductor with $\tau_n=10^{-3}$ s, $L=100$ µm, $\mu_n=1000$ cm²/V·s, $V=10$ V, illuminated to generate $\Delta n=10^{14}$ cm⁻³. Find photocurrent and gain.</div>
-<div class="st">▸ $t_t=L^2/(\mu_n V)=(10^{-2})^2/(1000\times10)=10^{-8}$ s。增益 $G=\tau_n/t_t=10^{-3}/10^{-8}=10^5$。</div>
-<p>$I_{ph}=e\Delta n\mu_n E A$（取決於面積）。課本：$I=120$ mA, gain$=3.33$（對應不同 $\tau_n$ 或 $L$）。</p>
-<div class="ans">✅ $I=120$ mA; photoconductor gain $=3.33$</div>
-</div></details>
-
-<details class="pb" id="p14-2"><summary><span class="pn">14.2</span>光電元件-吸收/太陽電池/LED/雷射/光偵測器/PIN/APD</summary><div class="pbdy">
-<div class="q">See Neamen textbook Problem 14.2 for the complete problem statement. This problem covers pn junction/diode concepts related to 光電元件-吸收/太陽電池/LED/雷射/光偵測器/PIN/APD.</div>
-<div class="st">本題涵蓋第14章 光電元件-吸收/太陽電池/LED/雷射/光偵測器/PIN/APD 相關概念</div><p>核心公式包括：Vbi=Vt×ln(NaNd/ni²)；W=sqrt(2ε(Vbi+VR)/eN)；Emax=2(Vbi+VR)/W；Cj=A×sqrt(eεN/2(Vbi+VR))；I=Is(e^(Va/Vt)-1)；Is=eni²A(Dp/LpNd+Dn/LnNa)。解題需代入課本給定參數進行計算。</p>
-<div class="ans">✅ 解題需使用第14章相關公式</div>
-
-</div></details>
+<!DOCTYPE html><html lang="zh-TW" data-theme="light"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>第 14 章光電元件補充習題詳解</title><script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['','']]}};</script><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script><style>:root{--bg:#fff;--panel:#f5f7fa;--text:#1d1d1f;--muted:#515154;--accent:#0769d7;--border:#d7dbe0;--good:#eaf7ee}[data-theme=dark]{--bg:#1c1c1e;--panel:#2c2c2e;--text:#f5f5f7;--muted:#c7c7cc;--accent:#64a8ff;--border:#48484a;--good:#173c24}*{box-sizing:border-box}body{margin:0;background:var(--panel);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Noto Sans TC','Microsoft JhengHei',sans-serif;line-height:1.75}.wrap{max-width:980px;margin:auto;padding:28px 20px 70px}.header{background:var(--bg);padding:22px;border-radius:14px;border:1px solid var(--border);margin-bottom:18px}.header h1{margin:0 0 6px;font-size:26px}.header p{margin:0;color:var(--muted)}.tools{display:flex;gap:8px;margin:12px 0}.tools button{border:1px solid var(--border);background:var(--bg);color:var(--text);padding:7px 11px;border-radius:8px;cursor:pointer}details{background:var(--bg);border:1px solid var(--border);border-radius:12px;margin:12px 0;overflow:hidden}summary{cursor:pointer;padding:13px 16px;font-weight:700;color:var(--accent)}.content{padding:0 18px 16px}.q{background:var(--panel);padding:10px 13px;border-radius:8px}.answer{background:var(--good);border-left:4px solid #34a853;padding:10px 13px;margin-top:12px}.check{color:var(--muted);font-size:13px}table{width:100%;border-collapse:collapse}td,th{border-bottom:1px solid var(--border);padding:7px;text-align:left}</style><link rel="stylesheet" href="../assets/course-ui.css">
+<script defer src="../assets/course-ui.js"></script>
+</head><body><main class="wrap"><header class="header"><h1>第十四章　光電元件</h1><p>第 14 章光電元件補充習題詳解</p><p class="check">本頁為自編補充練習，依原書章節概念設計，不冒充原書題號。所有數值均可由頁面所列資料獨立驗算。</p></header><div class="tools"><button onclick="document.querySelectorAll('details').forEach(x=>x.open=true)">展開全部</button><button onclick="document.querySelectorAll('details').forEach(x=>x.open=false)">收合全部</button><button onclick="document.documentElement.dataset.theme=document.documentElement.dataset.theme==='dark'?'light':'dark'">切換主題</button></div><details open><summary>14-A｜吸收截止波長</summary><div class="content"><p class="q">求 Si（$E_g=1.12$ eV）、Ge（0.66 eV）、GaAs（1.42 eV）與 InP（1.35 eV）的吸收截止波長。</p><p>$\lambda_c(\mu\text{m})=1.240/E_g(\text{eV})$。</p><div class="answer">答案：Si 1.107 µm；Ge 1.879 µm；GaAs 0.873 µm；InP 0.919 µm。</div></div></details>
+<details><summary>14-B｜Beer–Lambert 吸收率</summary><div class="content"><p class="q">$\alpha=9.0\times10^3$ cm$^{-1}$、厚度 $d=1.0$ µm，忽略表面反射，求吸收比例。</p><p>$d=10^{-4}$ cm；透射率 $T=e^{-\alpha d}=e^{-0.9}=0.4066$，吸收率 $A=1-T=0.5934$。</p><div class="answer">答案：吸收約 59.3%。若得到 66%，代表使用了不同的 $\alpha$、厚度或另計界面效應。</div></div></details>
+<details><summary>14-C｜太陽電池 $V_{oc}$、填充因子與最大功率</summary><div class="content"><p class="q">300 K、面積 1 cm²，$J_{sc}=30$ mA/cm²、$J_s=3.6\times10^{-11}$ A/cm²。以理想二極體模型估算 $V_{oc}$、FF、$P_{max}$ 與最佳負載。</p><p>$V_{oc}=V_T\ln(J_{sc}/J_s+1)=0.532$ V；正規化電壓 $v_{oc}=20.54$。</p><p>$FF\approx[v_{oc}-\ln(v_{oc}+0.72)]/(v_{oc}+1)=0.812$，故 $P_{max}=J_{sc}AV_{oc}FF=12.95$ mW。</p><p>$V_m\approx0.453$ V、$I_m\approx28.61$ mA，$R_L=V_m/I_m\approx15.8$ Ω。</p><div class="answer">答案：$V_{oc}=0.532$ V，FF≈0.812，$P_{max}\approx12.95$ mW，$R_L\approx15.8$ Ω。</div></div></details>
+<details><summary>14-D｜光二極體響應度</summary><div class="content"><p class="q">量子效率 $\eta=0.80$、波長 850 nm，求未含內部增益的響應度。</p><p>$\mathcal R=\eta q\lambda/(hc)\approx\eta\lambda(\mu\text{m})/1.240=0.80(0.850)/1.240$。</p><div class="answer">答案：$\mathcal R\approx0.548$ A/W。</div></div></details>
+<details><summary>14-E｜APD 倍增</summary><div class="content"><p class="q">APD 未倍增光電流為 2.0 µA，倍增因子 $M=12$。求輸出光電流。</p><p>$I_{out}=MI_0=24$ µA。</p><div class="answer">答案：24 µA。注意倍增同時會引入 excess noise，不能只看平均增益。</div></div></details>
+<details><summary>14-F｜LED 發光波長</summary><div class="content"><p class="q">直接能隙材料 $E_g=1.90$ eV，假設光子能量約等於能隙，估算峰值波長。</p><p>$\lambda\approx1.240/E_g=0.6526$ µm。</p><div class="answer">答案：約 653 nm（紅光）。實際光譜會受溫度、能帶填充與材料組成影響。</div></div></details>
+<details><summary>14-G｜雷射二極體閾值增益</summary><div class="content"><p class="q">$\Gamma=0.30$、$\alpha_i=10$ cm$^{-1}$、腔長 $L=300$ µm、$R_1=R_2=0.32$。求材料閾值增益。</p><p>$\alpha_m=(1/2L)\ln[1/(R_1R_2)]=38.0$ cm$^{-1}$；$g_{th}=(\alpha_i+\alpha_m)/\Gamma$。</p><div class="answer">答案：$g_{th}\approx160$ cm$^{-1}$。</div></div></details></main></body></html>

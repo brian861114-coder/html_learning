@@ -1,0 +1,357 @@
+.dm-disclosure {
+  margin: 1rem 0;
+  border: 1px solid var(--bd);
+  border-radius: 12px;
+  background: var(--bg);
+  overflow: clip;
+}
+
+.dm-disclosure > summary {
+  display: flex;
+  min-height: 58px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 16px;
+  cursor: pointer;
+  color: var(--tx);
+  font-weight: 700;
+}
+
+.dm-disclosure > summary:hover {
+  background: var(--b3);
+}
+
+.dm-disclosure > summary:focus-visible {
+  outline: 3px solid var(--course-focus, #ff9500);
+  outline-offset: -3px;
+}
+
+.dm-disclosure > summary small {
+  color: var(--t2);
+  font-size: 0.78rem;
+  font-weight: 500;
+  text-align: right;
+}
+
+.dm-disclosure .dm-open-label,
+.dm-disclosure[open] .dm-closed-label {
+  display: none;
+}
+
+.dm-disclosure[open] .dm-open-label {
+  display: inline;
+}
+
+.dm-disclosure[open] > summary {
+  border-bottom: 1px solid var(--bd);
+  color: var(--ac);
+}
+
+.dm-disclosure-body {
+  padding: 0 14px 16px;
+}
+
+.dm {
+  --dm-grid: color-mix(in srgb, var(--bd) 72%, transparent);
+  margin-top: 1rem;
+  color: var(--tx);
+}
+
+.dm * {
+  box-sizing: border-box;
+}
+
+.dm-shell {
+  display: grid;
+  grid-template-columns: minmax(15rem, 18rem) minmax(0, 1fr);
+  gap: 18px;
+  align-items: start;
+}
+
+.dm-panel,
+.dm-visual,
+.dm-card,
+.dm-note,
+.dm-equations {
+  border: 1px solid var(--bd);
+  border-radius: 12px;
+  background: var(--bg);
+}
+
+.dm-panel {
+  position: sticky;
+  top: 16px;
+  padding: 16px;
+}
+
+.dm-panel h3 {
+  margin: 0 0 12px;
+}
+
+.dm-control {
+  margin-bottom: 17px;
+}
+
+.dm-control label {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 6px;
+  font-size: 0.86rem;
+  font-weight: 700;
+}
+
+.dm-control output,
+.dm-card strong,
+.dm-status strong {
+  font-variant-numeric: tabular-nums;
+}
+
+.dm-control input[type="range"],
+.dm-control select {
+  width: 100%;
+  min-height: 36px;
+  accent-color: var(--ac);
+}
+
+.dm-control select {
+  padding: 6px 8px;
+  border: 1px solid var(--bd);
+  border-radius: 8px;
+  background: var(--bg);
+  color: var(--tx);
+  font: inherit;
+}
+
+.dm-control small {
+  display: block;
+  color: var(--t2);
+  font-size: 0.74rem;
+}
+
+.dm-presets {
+  display: grid;
+  gap: 8px;
+}
+
+.dm button {
+  min-height: 40px;
+  padding: 8px 10px;
+  border: 1px solid var(--bd);
+  border-radius: 8px;
+  background: var(--b2);
+  color: var(--tx);
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.dm button:hover {
+  border-color: var(--ac);
+  color: var(--ac);
+}
+
+.dm button:focus-visible,
+.dm input:focus-visible,
+.dm select:focus-visible,
+.dm summary:focus-visible {
+  outline: 3px solid var(--course-focus, #ff9500);
+  outline-offset: 3px;
+}
+
+.dm-visual {
+  min-width: 0;
+  overflow: hidden;
+}
+
+.dm-status {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px 16px;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--bd);
+  background: var(--b3);
+  font-size: 0.84rem;
+}
+
+.dm-status strong {
+  color: var(--ac);
+}
+
+.dm-figure {
+  margin: 0;
+  padding: 12px 14px 14px;
+  border-top: 1px solid var(--fbd);
+}
+
+.dm-status + .dm-figure {
+  border-top: 0;
+}
+
+.dm-figure figcaption {
+  margin-bottom: 5px;
+  color: var(--tx);
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.dm svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  min-height: 12rem;
+  color: var(--tx);
+}
+
+.dm-svg-grid {
+  stroke: var(--dm-grid);
+  stroke-width: 1;
+}
+
+.dm-svg-axis {
+  stroke: var(--t2);
+  stroke-width: 1.2;
+}
+
+.dm-svg-curve {
+  fill: none;
+  stroke: var(--ac);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.dm-svg-curve-secondary {
+  fill: none;
+  stroke: var(--t2);
+  stroke-width: 2.2;
+  stroke-dasharray: 7 5;
+}
+
+.dm-svg-point {
+  fill: var(--bg);
+  stroke: var(--ac);
+  stroke-width: 3;
+}
+
+.dm-svg-fill {
+  fill: color-mix(in srgb, var(--ac) 15%, transparent);
+}
+
+.dm-svg-label {
+  fill: var(--t2);
+  font: 12px -apple-system, BlinkMacSystemFont, "Noto Sans TC", sans-serif;
+}
+
+.dm-svg-title {
+  fill: var(--tx);
+  font: 700 13px -apple-system, BlinkMacSystemFont, "Noto Sans TC", sans-serif;
+}
+
+.dm-cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin: 14px 0;
+}
+
+.dm-card {
+  padding: 11px 13px;
+}
+
+.dm-card span {
+  display: block;
+  margin-bottom: 2px;
+  color: var(--t2);
+  font-size: 0.74rem;
+}
+
+.dm-card strong {
+  display: block;
+  font-size: 1rem;
+}
+
+.dm-note,
+.dm-equations {
+  margin-top: 10px;
+  padding: 12px 14px;
+}
+
+.dm-note strong {
+  color: var(--ac);
+}
+
+.dm-note[data-level="warn"] {
+  border-color: var(--wbd);
+  background: var(--wbg);
+}
+
+.dm-note[data-level="warn"] strong {
+  color: var(--wtx);
+}
+
+.dm-equations summary {
+  min-height: 44px;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+.dm-equations ul {
+  margin: 8px 0 0 20px;
+}
+
+@media (max-width: 900px) {
+  .dm-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .dm-panel {
+    position: static;
+  }
+
+  .dm-presets {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .dm-disclosure > summary {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .dm-disclosure > summary small {
+    text-align: left;
+  }
+
+  .dm-presets,
+  .dm-cards {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .dm-figure {
+    overflow-x: auto;
+  }
+
+  .dm svg {
+    width: 42rem;
+    max-width: none;
+  }
+}
+
+@media print {
+  .dm-disclosure {
+    break-inside: avoid;
+  }
+
+  .dm-shell {
+    display: block;
+  }
+
+  .dm-panel {
+    position: static;
+  }
+}
