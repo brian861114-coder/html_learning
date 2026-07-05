@@ -1,0 +1,801 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第 15 章 — Calculus 學習教材</title>
+<script>
+MathJax = {
+  tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']], tags: 'ams' },
+  options: { ignoreHtmlClass: 'no-math' }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script src="../assets/reading-preferences.js" defer></script>
+<style>
+:root {
+  --bg: #FFFFFF; --bg2: #F5F5F7; --bg3: #E8F0FE;
+  --tx: #1D1D1F; --tx2: #1D1D1F;
+  --ac: #007AFF; --ac2: #0056CC;
+  --bd: #D2D2D7; --fbd: #E5E5EA;
+  --sh: 0 2px 8px rgba(0,0,0,.08);
+  --derive-bg: #F0F6FF; --derive-ac: #2563EB;
+  --warn-bg: #FFFBEB; --warn-bd: #F59E0B; --warn-tx: #92400E;
+  --ex-bg: #F0FDF4; --ex-bd: #22C55E;
+  --nav-width: 260px;
+}
+[data-theme="dark"] {
+  --bg: #1D1D1F; --bg2: #2D2D2F; --bg3: #1E3A5F;
+  --tx: #F5F5F7; --tx2: #A1A1A6;
+  --ac: #4DA3FF; --ac2: #7DBFFF;
+  --bd: #3A3A3C; --fbd: #48484A;
+  --sh: 0 2px 8px rgba(0,0,0,.35);
+  --derive-bg: #1E293B; --derive-ac: #60A5FA;
+  --warn-bg: #422006; --warn-bd: #92400E; --warn-tx: #FCD34D;
+  --ex-bg: #052E16; --ex-bd: #16A34A;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Noto Sans TC','Microsoft JhengHei',sans-serif;background:var(--bg);color:var(--tx);line-height:1.72;font-size:15px;display:flex}
+a{color:var(--ac);text-decoration:none}
+h1{font-size:28px;font-weight:700;margin:0 0 4px}
+h2{font-size:20px;font-weight:700;margin:32px 0 12px;padding-bottom:6px;border-bottom:2px solid var(--fbd)}
+h3{font-size:16px;font-weight:600;margin:20px 0 8px}
+p{margin:10px 0}
+strong{font-weight:600}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:13px}
+th,td{padding:8px 12px;text-align:left;border:1px solid var(--bd)}
+th{background:var(--bg2);font-weight:600}
+.sidebar{position:fixed;left:0;top:0;width:var(--nav-width);height:100vh;background:var(--bg2);border-right:1px solid var(--bd);overflow-y:auto;z-index:100;display:flex;flex-direction:column}
+.sidebar-header{padding:18px 14px 10px;border-bottom:1px solid var(--fbd);font-size:12px;color:var(--tx2);line-height:1.5}
+.sidebar-header strong{font-size:14px;color:var(--tx);display:block}
+.sn{flex:1;overflow-y:auto;padding:6px 0}
+.ns{font-size:11px;font-weight:600;color:var(--tx);padding:6px 12px 2px;margin-top:6px;display:block}
+.nsub a{display:block;padding:3px 12px 3px 20px;font-size:11px;color:var(--tx2);text-decoration:none;border-radius:5px;transition:.12s}
+.nsub a:hover,.nsub a.active{background:var(--bg3);color:var(--ac)}
+.sidebar-footer{padding:10px 12px 16px;border-top:1px solid var(--fbd)}
+.theme-btn{display:block;width:100%;padding:7px;border:1px solid var(--bd);border-radius:6px;background:var(--bg);color:var(--tx);font-size:12px;cursor:pointer;text-align:center}
+.theme-btn:hover{background:var(--bg3)}
+.main{margin-left:var(--nav-width);max-width:1100px;padding:32px 40px 80px;width:100%}
+.header{margin-bottom:28px}
+.header .chap-tag{display:inline-block;padding:4px 12px;background:var(--ac);color:#fff;border-radius:12px;font-size:12px;font-weight:600;margin-bottom:8px}
+.header .meta{font-size:12px;color:var(--tx2);margin-top:2px}
+.preview{background:var(--bg2);border:1px solid var(--bd);border-radius:10px;padding:20px 24px;margin:20px 0}
+.preview h3{margin-top:0}
+.preview ul{padding-left:20px;font-size:14px}
+.callout{background:var(--bg3);border:1px solid var(--fbd);border-radius:8px;padding:14px 18px;margin:16px 0;font-size:13px}
+.callout strong{color:var(--ac)}
+.callout-warn{background:var(--warn-bg);border:1px solid var(--warn-bd);border-radius:8px;padding:14px 18px;margin:16px 0;font-size:13px}
+.callout-warn strong{color:var(--warn-tx)}
+.exbox{background:var(--ex-bg);border:1px solid var(--ex-bd);border-radius:8px;padding:14px 18px;margin:16px 0;font-size:13px}
+.exbox strong{color:#166534}
+.figure{margin:24px 0;text-align:center}
+.figure img{max-width:100%;border-radius:8px;box-shadow:var(--sh);cursor:pointer}
+.figure img:hover{transform:scale(1.01)}
+.figure figcaption{margin-top:8px;font-size:12px;color:var(--tx2)}
+.formula-card{background:var(--bg2);border:1px solid var(--bd);border-radius:10px;padding:16px 20px;margin:20px 0}
+.formula-card .label{font-size:12px;font-weight:700;color:var(--ac);margin-bottom:6px}
+.formula-card .note{font-size:12px;color:var(--tx2);margin-top:6px}
+details.derive{border-left:4px solid var(--derive-ac);background:var(--derive-bg);border-radius:0 8px 8px 0;padding:0;margin:16px 0}
+details.derive>summary{padding:12px 16px;cursor:pointer;font-weight:600;font-size:14px}
+details.derive .step{display:flex;gap:12px;align-items:flex-start;padding:8px 16px}
+details.example{border:1px solid var(--ex-bd);background:var(--ex-bg);border-radius:8px;padding:0;margin:16px 0}
+details.example>summary{padding:12px 16px;cursor:pointer;font-weight:600;font-size:14px}
+.eq{margin:14px 0;overflow-x:auto}
+.portal-home-link{position:fixed;top:16px;right:16px;z-index:1000;display:inline-flex;align-items:center;min-height:36px;padding:7px 11px;border:1px solid var(--bd);border-radius:8px;background:var(--bg);color:var(--ac);font:600 13px/1.2 -apple-system,BlinkMacSystemFont,'Noto Sans TC','Microsoft JhengHei',sans-serif;text-decoration:none;box-shadow:0 2px 10px rgba(15,23,42,.08)}
+.portal-home-link:hover{background:var(--bg3)}
+ol,ul{padding-left:24px}
+li{margin:6px 0}
+@media(max-width:768px){
+  .sidebar{transform:translateX(-100%);transition:transform .25s}
+  .sidebar.open{transform:translateX(0)}
+  .main{margin-left:0;padding:16px}
+  .sidebar-toggle-btn{display:block;position:fixed;top:12px;left:12px;z-index:200;width:36px;height:36px;border-radius:8px;background:var(--bg);border:1px solid var(--bd);font-size:18px;cursor:pointer}
+}
+.sidebar-toggle-btn{display:none}
+@media(max-width:768px){.sidebar-toggle-btn{display:block}}
+@media print{.sidebar,.sidebar-toggle-btn,.portal-home-link{display:none}.main{margin-left:0}}
+</style>
+<link rel="stylesheet" href="../assets/course-ui.css">
+</head>
+<body>
+
+<a class="portal-home-link" href="../../index.html">← 返回學習中心</a>
+<button class="sidebar-toggle-btn" onclick="toggleSidebar()" aria-label="Toggle sidebar">☰</button>
+
+<nav class="sidebar">
+  <div class="sidebar-header">
+     · 第 15 章
+    第 5 章：多重積分
+  </div>
+  <ul class="sn">
+    <li class="ns">本章預覽</li>
+    <li class="nsub"><a href="#preview">學習目標與概念地圖</a></li>
+    <li class="ns">5.1 矩形區域上的二重積分</li>
+    <li class="nsub"><a href="#s5-1">體積、Riemann 和、Fubini 定理</a></li>
+    <li class="ns">5.2 一般區域上的二重積分</li>
+    <li class="nsub"><a href="#s5-2">Type I/II 區域、積分順序交換</a></li>
+    <li class="ns">5.3 極座標下的二重積分</li>
+    <li class="nsub"><a href="#s5-3">極矩形、一般極區域、面積與體積</a></li>
+    <li class="ns">5.4 三重積分</li>
+    <li class="nsub"><a href="#s5-4">長方體、一般區域、Fubini 定理推廣</a></li>
+    <li class="ns">5.5 柱座標與球座標下的三重積分</li>
+    <li class="nsub"><a href="#s5-5">柱座標轉換、球座標轉換、體積元素</a></li>
+    <li class="ns">5.6 質心與轉動慣量</li>
+    <li class="nsub"><a href="#s5-6">薄板質心、三維質心、慣性矩</a></li>
+    <li class="ns">5.7 多重積分的變數變換</li>
+    <li class="nsub"><a href="#s5-7">Jacobian、平面變換、一般變數變換</a></li>
+    <li class="ns">本章摘要</li>
+    <li class="nsub"><a href="#summary">關鍵概念總整理</a></li>
+    <li class="nsub"><a href="#common-mistakes">初學者常見錯誤</a></li>
+    <li class="nsub"><a href="#self-check">✅ 自我檢測</a></li>
+  </ul>
+  <div class="sidebar-footer">
+    <button class="theme-btn" onclick="toggleTheme()" id="themeBtn">🌙 深色模式</button>
+  </div>
+</nav>
+
+<main class="main">
+
+<header class="header">
+  <div class="chap-tag">第 15 章 · OpenStax Calculus Vol 3, Ch 5</div>
+  <h1>多重積分</h1>
+  <div class="meta">OpenStax · Calculus Volume 3 · Multiple Integration · pp.427–582</div>
+</header>
+
+<section id="preview">
+<div class="preview">
+<h3>📌 本章要解決的核心問題</h3>
+<p>單變數的定積分讓我們能計算曲線下的面積。但當我們面對<strong>三維空間中的體積、質量、質心</strong>等問題時，需要將積分推廣到多個變數。本章將定積分從一維拓展到二維（二重積分）和三維（三重積分），涵蓋直角座標、極座標、柱座標與球座標四種座標系，並以 Fubini 定理為核心工具，把多重積分化為逐次積分來計算。</p>
+
+<h3>🔑 關鍵概念（10 條）</h3>
+<ol>
+  <li><strong>二重積分定義</strong>：$\iint_R f(x,y)\,dA = \lim_{m,n\to\infty}\sum_{i=1}^m\sum_{j=1}^n f(x_{ij}^*,y_{ij}^*)\Delta A$——雙 Riemann 和的極限</li>
+  <li><strong>Fubini 定理</strong>：將二重積分化為逐次積分（iterated integral）——先積 $y$ 再積 $x$，或反過來</li>
+  <li><strong>Type I 與 Type II 區域</strong>：一般區域的兩種描述方式，決定積分上下限的寫法</li>
+  <li><strong>極座標二重積分</strong>：$dA = r\,dr\,d\theta$——面積元素多了一個 $r$ 因子</li>
+  <li><strong>三重積分</strong>：$\iiint_E f(x,y,z)\,dV$——六種可能的積分順序</li>
+  <li><strong>柱座標</strong>：$(r,\theta,z)$，$dV = r\,dr\,d\theta\,dz$——適合軸對稱問題</li>
+  <li><strong>球座標</strong>：$(\rho,\theta,\phi)$，$dV = \rho^2\sin\phi\,d\rho\,d\theta\,d\phi$——適合球對稱問題</li>
+  <li><strong>質心與轉動慣量</strong>：用二重/三重積分計算質量的分佈中心與旋轉阻力</li>
+  <li><strong>Jacobian 行列式</strong>：$\frac{\partial(x,y)}{\partial(u,v)}$——變數變換時的「面積放大因子」</li>
+  <li><strong>座標系的選擇策略</strong>：對稱性決定最優座標系——這是多重積分計算的核心技巧</li>
+</ol>
+
+<h3>🧭 邏輯鏈</h3>
+<p>二重積分定義（矩形區域）→ Fubini 定理 → 一般區域（Type I/II）→ 極座標 → 三重積分 → 柱座標與球座標 → 應用（質心、轉動慣量）→ 一般變數變換（Jacobian）</p>
+
+<div class="callout-warn"><strong>⚡ 先備知識提醒</strong>：本章假設你已熟練掌握單變數定積分（Vol 2 Ch 1）、偏導數與多重變數函數（Vol 3 Ch 4）、極座標的基本概念，以及基本的積分技巧（代換法、分部積分、三角積分）。如果你對 $\int x\sin x\,dx$ 感到陌生，強烈建議先複習 Vol 2 的積分技巧章節。</div>
+</div>
+</section>
+
+<!-- ====== Section 5.1 ====== -->
+<section id="s5-1">
+<h2>5.1 矩形區域上的二重積分（Double Integrals over Rectangular Regions）</h2>
+
+<div style="margin-bottom:14px;font-size:12px;color:var(--tx2);line-height:1.8">
+<strong style="color:var(--tx)">🔑 本節重點</strong> ①二重積分是雙 Riemann 和的極限，幾何意義為曲面下方的體積（$f \ge 0$ 時）。②Fubini 定理將二重積分化為逐次積分：$\iint_R f\,dA = \int_a^b \int_c^d f(x,y)\,dy\,dx$，兩種積分順序結果相同。③$\iint_R 1\,dA$ 等於區域面積；平均值 $f_{\text{avg}} = \frac{1}{\text{Area}(R)}\iint_R f\,dA$。④可分離函數 $f(x,y)=g(x)h(y)$ 在矩形上可拆分為兩個單積分乘積。
+</div>
+
+<p>我們從最簡單的情形開始：給定一個定義在矩形區域 $R = [a,b] \times [c,d]$ 上的連續函數 $f(x,y)$，求曲面 $z = f(x,y)$ 下方、$xy$ 平面上方、以 $R$ 為底的立體的<strong>體積</strong>。這是單變數積分「曲線下面積」的自然推廣——只是現在「底」是二維的矩形，而「頂」是三維的曲面。</p>
+
+<div class="figure">
+  <img src="../../pages/v3c5_pages/v3c5_page_428_c.png" alt="曲面在矩形區域上方的示意圖" loading="lazy">
+  <figcaption>圖 5.2：連續函數 $z=f(x,y)$ 在矩形區域 $R$ 上方定義了一個曲面——其下方的體積正是我們要計算的二重積分</figcaption>
+</div>
+
+<p>仿照單變數的做法，我們將矩形 $R$ 分割成 $m \times n$ 個小矩形 $R_{ij}$，每個面積為 $\Delta A = \Delta x \cdot \Delta y$。在每個小矩形中選取樣本點 $(x_{ij}^*, y_{ij}^*)$，則該點的函數值 $f(x_{ij}^*, y_{ij}^*)$ 近似為小柱體的高度。所有小柱體的體積和就是<strong>雙 Riemann 和（double Riemann sum）</strong>：</p>
+
+<div class="formula-card">
+  <div class="label">雙 Riemann 和</div>
+  <div class="eq">$$V \approx \sum_{i=1}^{m}\sum_{j=1}^{n} f(x_{ij}^*, y_{ij}^*)\,\Delta A$$</div>
+  <div class="note">當 $m, n \to \infty$（$\Delta A \to 0$）時，這個和的極限就是精確的體積</div>
+</div>
+
+<div class="figure">
+  <img src="../../pages/v3c5_pages/v3c5_page_429_c.png" alt="矩形區域分割與薄柱體示意圖" loading="lazy">
+  <figcaption>圖 5.3–5.4：將矩形 $R$ 分割成小矩形 $R_{ij}$，每個小矩形上方對應一個高度為 $f(x_{ij}^*,y_{ij}^*)$ 的薄柱體</figcaption>
+</div>
+
+<p>當 $m, n \to \infty$ 時，如果這個極限存在，我們就稱 $f$ 在 $R$ 上<strong>可積（integrable）</strong>，並將極限定義為<strong>二重積分（double integral）</strong>：</p>
+
+<div class="formula-card">
+  <div class="label">二重積分的正式定義</div>
+  <div class="eq">$$\iint_R f(x,y)\,dA = \lim_{m,n\to\infty}\sum_{i=1}^{m}\sum_{j=1}^{n} f(x_{ij}^*, y_{ij}^*)\,\Delta A$$</div>
+  <div class="note">若 $f(x,y) \geq 0$，則二重積分等於曲面下方的體積；若 $f$ 可能為負，則積分代表「帶符號體積」</div>
+</div>
+
+<div class="callout"><strong>💡 核心洞察：從一維到二維的跳躍</strong><br>單變數定積分 $\int_a^b f(x)\,dx$ 將一個區間分割成小段；二重積分則將一個<strong>平面區域</strong>分割成小塊。這種「升維」的思考方式在整個多重積分中反覆出現。認識到 $\iint_R 1\,dA$ 等於 $R$ 的<strong>面積</strong>——這和 $\int_a^b 1\,dx = b-a$ 完全同構。</div>
+
+<h3>Fubini 定理——計算的關鍵</h3>
+
+<p>直接用極限定義計算二重積分幾乎不可能。幸好，<strong>Fubini 定理（Fubini's Theorem）</strong>告訴我們：對於矩形區域上的連續函數，二重積分可以轉化為<strong>逐次積分（iterated integral）</strong>——先對一個變數積分（把另一個當常數），再對另一個變數積分。</p>
+
+<div class="formula-card">
+  <div class="label">Fubini 定理（矩形區域）</div>
+  <div class="eq">$$\iint_R f(x,y)\,dA = \int_a^b \int_c^d f(x,y)\,dy\,dx = \int_c^d \int_a^b f(x,y)\,dx\,dy$$</div>
+  <div class="note">兩種積分順序給出相同的結果！注意 $dy\,dx$ 是先積 $y$（內層）再積 $x$（外層）；$dx\,dy$ 則相反</div>
+</div>
+
+<div class="figure">
+  <img src="../../pages/v3c5_pages/v3c5_page_434_c.png" alt="Fubini 定理的兩種積分順序示意圖" loading="lazy">
+  <figcaption>圖 5.7：(a) 先對 $y$ 積分再對 $x$ 積分——先計算「切片面積」$A(x)$，再沿 $x$ 方向累積；(b) 先對 $x$ 積分再對 $y$ 積分</figcaption>
+</div>
+
+<p>Fubini 定理的幾何意義非常直觀：先固定 $x$，對 $y$ 積分得到一個垂直於 $x$ 軸的「切片面積」$A(x) = \int_c^d f(x,y)\,dy$；然後將所有切片面積沿 $x$ 軸積分起來，就得到總體積 $V = \int_a^b A(x)\,dx$。這就是微積分中「先切片再累積」策略的典範。</p>
+
+<div class="callout-warn"><strong>⚡ 常見錯誤：積分順序與積分限的對應</strong><br>$\int_a^b \int_c^d f(x,y)\,dy\,dx$ 中，內層積分 $\int_c^d \cdots dy$ 的積分限 $c,d$ 對應 $y$，外層的 $a,b$ 對應 $x$。千萬不要把 $dx$ 和 $dy$ 的位置搞反——寫成 $\int_a^b \int_c^d f(x,y)\,dx\,dy$ 的含義完全不同（先積 $x$ 再積 $y$）。</div>
+
+<h3>二重積分的性質</h3>
+
+<p>二重積分繼承了單變數積分的大部分性質：</p>
+
+<div class="formula-card">
+  <div class="label">二重積分的六大性質</div>
+  <p><strong>(i) 線性（和）：</strong>$\iint_R [f(x,y)+g(x,y)]\,dA = \iint_R f\,dA + \iint_R g\,dA$</p>
+  <p><strong>(ii) 線性（常數倍）：</strong>$\iint_R cf(x,y)\,dA = c\iint_R f(x,y)\,dA$</p>
+  <p><strong>(iii) 可加性：</strong>若 $R = R_1 \cup R_2$（邊界重疊除外），則 $\iint_R f\,dA = \iint_{R_1} f\,dA + \iint_{R_2} f\,dA$</p>
+  <p><strong>(iv) 單調性：</strong>若 $f(x,y) \geq g(x,y)$ 在 $R$ 上，則 $\iint_R f\,dA \geq \iint_R g\,dA$</p>
+  <p><strong>(v) 有界性：</strong>若 $m \leq f(x,y) \leq M$，則 $m \cdot \text{Area}(R) \leq \iint_R f\,dA \leq M \cdot \text{Area}(R)$</p>
+  <p><strong>(vi) 可分離性：</strong>若 $f(x,y)=g(x)h(y)$ 且 $R=[a,b]\times[c,d]$，則 $\iint_R f\,dA = \left(\int_a^b g(x)dx\right)\left(\int_c^d h(y)dy\right)$</p>
+</div>
+
+<details class="example" open><summary>📝 範例 5.1：用 Riemann 和近似二重積分</summary>考慮 $f(x,y) = x - y^2$ 在 $R = [0,2] \times [0,2]$ 上。將 $R$ 分成四個 $1 \times 1$ 的正方形，分別用右上角和中心點作為樣本點來近似 $\iint_R f(x,y)\,dA$。<br><br><strong>解（右上角）：</strong>樣本點為 $(1,1), (2,1), (1,2), (2,2)$，$\Delta A = 1$。<br>$f(1,1)=0,\; f(2,1)=1,\; f(1,2)=-3,\; f(2,2)=-2$。和 = $-4$。近似體積 = $-4$。<br><strong>解（中心點）：</strong>樣本點為 $(0.5,0.5), (1.5,0.5), (0.5,1.5), (1.5,1.5)$。<br>$f(0.5,0.5)=0.25,\; f(1.5,0.5)=1.25,\; f(0.5,1.5)=-1.75,\; f(1.5,1.5)=-0.75$。和 = $-1$。近似體積 = $-1$。<br>這個函數在 $R$ 上既有正值也有負值，因此二重積分代表「帶符號體積」。</details>
+
+<h3>應用：面積、體積與平均值</h3>
+
+<p>二重積分的應用豐富多樣。首先是<strong>面積</strong>——這是最簡單的情況：</p>
+<div class="eq">$$\text{Area}(R) = \iint_R 1\,dA$$</div>
+
+<p>其次是<strong>體積</strong>：若 $f(x,y) \geq 0$，則曲面下方的體積為 $V = \iint_R f(x,y)\,dA$。最後是<strong>平均值</strong>：</p>
+
+<div class="formula-card">
+  <div class="label">函數在區域上的平均值</div>
+  <div class="eq">$$f_{\text{avg}} = \frac{1}{\text{Area}(R)}\iint_R f(x,y)\,dA$$</div>
+  <div class="note">這和單變數的 $f_{\text{avg}} = \frac{1}{b-a}\int_a^b f(x)dx$ 完全同構——只是把「區間長度」換成「區域面積」</div>
+</div>
+
+<details class="example" open><summary>📝 範例 5.9：計算橢圓拋物面下的體積</summary>求立體 $S$ 的體積，其中 $S$ 由橢圓拋物面 $z = 16 - x^2 - 2y^2$、平面 $x=2$、$y=2$ 及三個座標平面所圍成。<br><br><strong>解：</strong>區域 $R = [0,2] \times [0,2]$（第一象限的正方形）。被積函數 $f(x,y) = 16 - x^2 - 2y^2 \geq 0$ 在 $R$ 上。<br>$$V = \iint_R (16-x^2-2y^2)\,dA = \int_0^2 \int_0^2 (16-x^2-2y^2)\,dy\,dx$$<br>先積 $y$：$\int_0^2 (16-x^2-2y^2)\,dy = [16y - x^2y - \frac{2}{3}y^3]_0^2 = 32 - 2x^2 - \frac{16}{3}$<br>$= \frac{80}{3} - 2x^2$。<br>再積 $x$：$\int_0^2 \left(\frac{80}{3} - 2x^2\right)dx = \left[\frac{80}{3}x - \frac{2}{3}x^3\right]_0^2 = \frac{160}{3} - \frac{16}{3} = 48$。<br>體積為 $48$ 立方單位。</details>
+
+<div class="callout"><strong>💡 策略提示：何時交換積分順序？</strong><br>選擇先積哪個變數有時會極大地影響計算難度。例如 $\iint_R x e^{xy}\,dA$，先積 $y$ 很簡單（$\int e^{xy}\,dy = \frac{1}{x}e^{xy}$），但先積 $x$ 就需要分部積分。一個好習慣是：在開始計算之前，快速檢查兩種順序的內層積分難度，選擇較簡單的路徑。</div>
+
+</section>
+
+<!-- ====== Section 5.2 ====== -->
+<section id="s5-2">
+<h2>5.2 一般區域上的二重積分（Double Integrals over General Regions）</h2>
+
+<div style="margin-bottom:14px;font-size:12px;color:var(--tx2);line-height:1.8">
+<strong style="color:var(--tx)">🔑 本節重點</strong> ①一般區域分為 Type I（垂直界定，內層積分限為 $y=g_1(x)$ 到 $g_2(x)$）和 Type II（水平界定，內層積分限為 $x=h_1(y)$ 到 $h_2(y)$）。②內層積分限是<strong>外層變數的函數</strong>（非固定常數！），這是與矩形區域最關鍵的區別。③交換積分順序可將「不可能」的積分化為可行——<strong>永遠先畫圖</strong>。
+</div>
+
+<p>真實世界的問題很少剛好落在完美的矩形上。本節將二重積分推廣到由曲線圍成的一般有界區域 $D$。關鍵策略是：將一般區域分類為<strong>Type I</strong>（垂直線之間、上下由 $x$ 的函數界定）或<strong>Type II</strong>（水平線之間、左右由 $y$ 的函數界定），然後用 Fubini 定理的強形式來計算。</p>
+
+<div class="figure">
+  <img src="../../pages/v3c5_pages/v3c5_page_449_c.png" alt="一般區域與包圍矩形示意圖" loading="lazy">
+  <figcaption>圖 5.12–5.13：一般區域 $D$ 被一個矩形 $R$ 包圍——我們將 $f$ 在 $D$ 外的值定義為 $0$，從而把問題轉化為矩形上的積分</figcaption>
+</div>
+
+<p>理論上，對於任何有界區域 $D$，我們可以找一個包含 $D$ 的矩形 $R$，然後定義 $F(x,y) = f(x,y)$ 在 $D$ 內、$F(x,y)=0$ 在 $D$ 外。這樣 $\iint_D f\,dA = \iint_R F\,dA$ 就回到矩形情形。但在實務上，我們更常用以下的分類方法。</p>
+
+<h3>Type I 與 Type II 區域</h3>
+
+<p><strong>Type I 區域</strong>夾在兩條垂直線 $x=a$ 和 $x=b$ 之間，上方邊界為 $y=g_2(x)$、下方邊界為 $y=g_1(x)$：</p>
+
+<div class="formula-card">
+  <div class="label">Type I 區域的 Fubini 定理</div>
+  <div class="eq">$$\iint_D f(x,y)\,dA = \int_a^b \int_{g_1(x)}^{g_2(x)} f(x,y)\,dy\,dx$$</div>
+  <div class="note">內層積分的上下限是 $x$ 的函數（不是常數！），外層積分限則是常數</div>
+</div>
+
+<p><strong>Type II 區域</strong>夾在兩條水平線 $y=c$ 和 $y=d$ 之間，左邊界為 $x=h_1(y)$、右邊界為 $x=h_2(y)$：</p>
+
+<div class="formula-card">
+  <div class="label">Type II 區域的 Fubini 定理</div>
+  <div class="eq">$$\iint_D f(x,y)\,dA = \int_c^d \int_{h_1(y)}^{h_2(y)} f(x,y)\,dx\,dy$$</div>
+</div>
+
+<div class="callout-warn"><strong>⚡ 關鍵區別：積分限何時是常數？何時是函數？</strong><br>這是本章最常見的錯誤來源。在 $\int_a^b \int_{g_1(x)}^{g_2(x)} f(x,y)\,dy\,dx$ 中：外層積分限 $a, b$ 永遠是常數，但內層積分限 $g_1(x), g_2(x)$ 是 $x$ 的函數。同樣，在 Type II 中，內層積分限 $h_1(y), h_2(y)$ 是 $y$ 的函數。如果你把內層積分限寫成常數，那你就回到矩形區域了。</div>
+
+<div class="figure">
+  <img src="../../pages/v3c5_pages/v3c5_page_450_c.png" alt="Type I 和 Type II 區域示意圖" loading="lazy">
+  <figcaption>圖 5.14–5.15：Type II 區域由兩條水平線界定；同一區域往往可以同時用 Type I 和 Type II 描述——選擇積分較簡單的那種</figcaption>
+</div>
+
+<p>許多區域可以同時用 Type I 和 Type II 來描述。例如由 $y = x$ 和 $y = \sqrt{x}$ 在第一象限圍成的區域，既可以寫成 Type I：$0 \leq x \leq 1$，$y$ 從 $x$ 到 $\sqrt{x}$；也可以寫成 Type II：$0 \leq y \leq 1$，$x$ 從 $y^2$ 到 $y$。選擇哪種取決於被積函數——哪種讓內層積分更容易。</p>
+
+<h3>交換積分順序</h3>
+
+<p>有時給定的積分順序極難計算（甚至無法用初等函數表示），但交換積分順序後就迎刃而解。經典例子如 $\iint e^{y^2}\,dA$——先積 $y$ 是不可能的（$e^{y^2}$ 沒有初等反導數），但先積 $x$ 就非常簡單。</p>
+
+<details class="example" open><summary>📝 範例 5.11–5.12：識別區域類型並計算積分</summary>計算 $\iint_D (x+y)\,dA$，其中 $D$ 是由 $y = x$ 和 $y = x^2$ 圍成的區域。<br><br><strong>解（Type I）：</strong>兩曲線的交點：$x = x^2 \Rightarrow x(x-1)=0$，交點為 $(0,0)$ 和 $(1,1)$。在 $[0,1]$ 上，$x \geq x^2$（因為 $x - x^2 = x(1-x) \geq 0$）。<br>$$\iint_D (x+y)\,dA = \int_0^1 \int_{x^2}^x (x+y)\,dy\,dx$$<br>內層：$\int_{x^2}^x (x+y)\,dy = [xy + \frac{y^2}{2}]_{x^2}^x = \left(x^2+\frac{x^2}{2}\right) - \left(x^3+\frac{x^4}{2}\right) = \frac{3}{2}x^2 - x^3 - \frac{x^4}{2}$<br>外層：$\int_0^1 \left(\frac{3}{2}x^2 - x^3 - \frac{x^4}{2}\right)dx = \left[\frac{1}{2}x^3 - \frac{1}{4}x^4 - \frac{1}{10}x^5\right]_0^1 = \frac{1}{2} - \frac{1}{4} - \frac{1}{10} = \frac{3}{20}$</details>
+
+<div class="callout"><strong>💡 什麼時候該交換積分順序？</strong><br>
+三個線索：(1) 內層積分沒有初等反導數（如 $\int e^{y^2}dy$、$\int \frac{\sin x}{x}dx$）；(2) 內層積分極其繁瑣而交換後大幅簡化；(3) 給定的積分限很難理解區域形狀時——先畫出區域、再決定用哪種類型。記住：<strong>永遠先畫圖！</strong></div>
+
+<h3>體積與面積的應用</h3>
+
+<p>一般區域上的二重積分可以直接計算兩曲面之間的體積：若 $f(x,y) \geq g(x,y)$ 在 $D$ 上，則兩曲面之間的體積為 $V = \iint_D [f(x,y) - g(x,y)]\,dA$。而區域 $D$ 的面積則用 $\iint_D 1\,dA$ 求得。</p>
+
+<details class="example" open><summary>📝 範例 5.23：四面體的體積</summary>求由三個座標平面和平面 $x + y + z = 1$ 圍成的四面體的體積。<br><br><strong>解：</strong>這個四面體的「底」在 $xy$ 平面上是一個三角形（$x \geq 0, y \geq 0, x+y \leq 1$）。上方曲面為 $z = 1 - x - y$。<br>$$V = \iint_D (1-x-y)\,dA = \int_0^1 \int_0^{1-x} (1-x-y)\,dy\,dx$$<br>內層：$\int_0^{1-x} (1-x-y)\,dy = [(1-x)y - \frac{y^2}{2}]_0^{1-x} = (1-x)^2 - \frac{(1-x)^2}{2} = \frac{(1-x)^2}{2}$<br>外層：$\int_0^1 \frac{(1-x)^2}{2}\,dx = \left[-\frac{(1-x)^3}{6}\right]_0^1 = \frac{1}{6}$<br>體積為 $\frac{1}{6}$，與幾何公式 $\frac{1}{3} \times \text{底面積} \times \text{高} = \frac{1}{3} \cdot \frac{1}{2} \cdot 1 = \frac{1}{6}$ 一致。</details>
+
+
+<details class="derive" open style="margin:20px 0">
+<summary>🎮 互動模型：積分區域與掃描線</summary>
+<div style="padding:8px 0"><p style="font-size:13px;color:var(--tx2);margin-bottom:12px">切換 Type I/II 區域，點擊掃描觀察積分順序如何影響切片方向。</p>
+<div data-double-integral-model></div></div>
+</details>
+</section>
+
+<!-- ====== Section 5.3 ====== -->
+<section id="s5-3">
+<h2>5.3 極座標下的二重積分（Double Integrals in Polar Coordinates）</h2>
+
+<div style="margin-bottom:14px;font-size:12px;color:var(--tx2);line-height:1.8">
+<strong style="color:var(--tx)">🔑 本節重點</strong> ①極座標轉換：$x=r\cos\theta$, $y=r\sin\theta$，面積元素 $dA = r\,dr\,d\theta$（<strong>注意必須多一個 $r$</strong>！）。②當區域具圓形對稱或被積函數含 $x^2+y^2$ 時優先使用極座標。③經典應用：Gaussian 積分 $\int_{-\infty}^{\infty} e^{-x^2}dx = \sqrt{\pi}$ 在極座標下迎刃而解。
+</div>
+
+<p>當積分區域具有圓形、扇形或環形對稱性時
+
+<div class="figure">
+  <img src="../../pages/v3c5_pages/v3c5_page_473_c.png" alt="極矩形與其分割示意圖" loading="lazy">
+  <figcaption>圖 5.28–5.29：(a) 極矩形 $R = \{(r,\theta) \mid a \leq r \leq b,\; \alpha \leq \theta \leq \beta\}$；(b) 分割成小塊；(c) 小塊的面積約為 $r\,\Delta r\,\Delta\theta$</figcaption>
+</div>
+
+<p>極座標下的核心公式是<strong>面積元素</strong>的變化。在直角座標中 $dA = dx\,dy$，但在極座標中：</p>
+
+<div class="formula-card">
+  <div class="label">極座標下的二重積分——面積元素</div>
+  <div class="eq">$$\iint_R f(x,y)\,dA = \iint_R f(r\cos\theta, r\sin\theta)\,r\,dr\,d\theta$$</div>
+  <div class="note">關鍵！$dA = r\,dr\,d\theta$，<strong>不是</strong> $dr\,d\theta$。那個多出來的 $r$ 來自於「扇形小塊的面積 $\approx r\,\Delta r\,\Delta\theta$」這個幾何事實</div>
+</div>
+
+<div class="callout-warn"><strong>⚡ 最常見的致命錯誤：忘記 $r$ 因子！</strong><br>在極座標積分中，把 $dA$ 寫成 $dr\,d\theta$ 而不是 $r\,dr\,d\theta$ 是本章排名第一的錯誤。沒有那個 $r$，答案完全錯誤。記住：$r$ 來自 $\Delta A \approx r\,\Delta r\,\Delta\theta$——小塊離原點越遠面積越大。你可以把 $r$ 理解為「極座標的 Jacobian」。</div>
+
+<p>對於極矩形 $R = \{(r,\theta) \mid a \leq r \leq b,\; \alpha \leq \theta \leq \beta\}$，積分直接寫為：</p>
+<div class="eq">$$\iint_R f(r\cos\theta, r\sin\theta)\,r\,dr\,d\theta = \int_{\theta=\alpha}^{\beta} \int_{r=a}^{b} f(r\cos\theta, r\sin\theta)\,r\,dr\,d\theta$$</div>
+
+<p>對於更一般的極區域——例如 $r$ 的範圍取決於 $\theta$：$\alpha \leq \theta \leq \beta$，$h_1(\theta) \leq r \leq h_2(\theta)$——積分寫為：</p>
+<div class="eq">$$\iint_D f(x,y)\,dA = \int_{\theta=\alpha}^{\beta} \int_{r=h_1(\theta)}^{h_2(\theta)} f(r\cos\theta, r\sin\theta)\,r\,dr\,d\theta$$</div>
+
+<div class="figure">
+  <img src="../../pages/v3c5_pages/v3c5_page_474_c.png" alt="一般極區域示意圖" loading="lazy">
+  <figcaption>圖 5.30：一般極區域 $D$——$r$ 的範圍從內曲線 $r=h_1(\theta)$ 到外曲線 $r=h_2(\theta)$</figcaption>
+</div>
+
+<h3>經典應用：Gaussian 積分</h3>
+
+<p>極座標最著名的應用之一是計算 $\int_{-\infty}^{\infty} e^{-x^2}\,dx = \sqrt{\pi}$——這個在直角座標下無法用初等方法計算的積分，在極座標下卻優雅地迎刃而解。考慮 $\iint_{\mathbb{R}^2} e^{-(x^2+y^2)}\,dA$，轉換為極座標後，$x^2+y^2=r^2$，$dA=r\,dr\,d\theta$，積分變為 $\int_0^{2\pi}\int_0^{\infty} e^{-r^2}r\,dr\,d\theta = 2\pi \cdot \frac{1}{2} = \pi$。這顯示了座標系選擇的強大威力。</p>
+
+<details class="example" open><summary>📝 範例 5.37：計算圓盤上的體積</summary>求在圓盤 $x^2 + y^2 \leq 4$ 上方、圓錐 $z = \sqrt{x^2 + y^2}$ 下方的立體體積。<br><br><strong>解：</strong>在極座標下，圓盤為 $0 \leq r \leq 2$，$0 \leq \theta \leq 2\pi$。$z = \sqrt{x^2+y^2} = r$。<br>$$V = \iint_D r\,dA = \int_0^{2\pi} \int_0^2 r \cdot r\,dr\,d\theta = \int_0^{2\pi} \int_0^2 r^2\,dr\,d\theta$$<br>內層：$\int_0^2 r^2\,dr = \frac{8}{3}$。外層：$\int_0^{2\pi} \frac{8}{3}\,d\theta = \frac{16\pi}{3}$。<br>體積為 $\frac{16\pi}{3}$ 立方單位。請注意 $dA = r\,dr\,d\theta$ 中的兩個 $r$：一個來自被積函數 $\sqrt{x^2+y^2}=r$，另一個來自面積元素。</details>
+
+<div class="callout"><strong>💡 何時使用極座標？判別法則</strong><br>當遇到以下情況時，優先考慮極座標：(1) 積分區域是圓、環、扇形、心形線等；(2) 被積函數含有 $x^2+y^2$ 或 $\sqrt{x^2+y^2}$；(3) 直角座標下積分限極其複雜（如 $\int_{-\sqrt{1-y^2}}^{\sqrt{1-y^2}}$）。極座標有時甚至能將「不可能」的積分化為「簡單」。</div>
+
+</section>
+
+<!-- ====== Section 5.4 ====== -->
+<section id="s5-4">
+<h2>5.4 三重積分（Triple Integrals）</h2>
+
+<div style="margin-bottom:14px;font-size:12px;color:var(--tx2);line-height:1.8">
+<strong style="color:var(--tx)">🔑 本節重點</strong> ①三重積分 $\iiint_E f(x,y,z)\,dV$ 用於計算三維區域上的體積、質量等累積量。②Fubini 定理可化為三重逐次積分，共有 $3!=6$ 種積分順序可選。③設定積分限的關鍵流程：先畫投影、選順序、從外到內逐步確定積分限（外層常數、內層函數）。④$\iiint_E 1\,dV$ 等於立體的體積。
+</div>
+
+<p>將積分再升一維，我們得到<strong>三重積分</strong>
+
+<div class="figure">
+  <img src="../../pages/v3c5_pages/v3c5_page_493_c.png" alt="三重積分的長方體分割示意圖" loading="lazy">
+  <figcaption>圖 5.40：將三維長方體 $B$ 分割成小長方體 $B_{ijk}$——每個的體積 $\Delta V = \Delta x\,\Delta y\,\Delta z$，三重 Riemann 和的極限就是三重積分</figcaption>
+</div>
+
+<p>三重積分的定義完全平行於二重積分：對於長方體 $B = [a,b] \times [c,d] \times [e,f]$，</p>
+
+<div class="formula-card">
+  <div class="label">三重積分的定義</div>
+  <div class="eq">$$\iiint_B f(x,y,z)\,dV = \lim_{l,m,n\to\infty}\sum_{i=1}^l\sum_{j=1}^m\sum_{k=1}^n f(x_{ijk}^*,y_{ijk}^*,z_{ijk}^*)\,\Delta V$$</div>
+  <div class="note">$\Delta V = \Delta x\,\Delta y\,\Delta z$。若 $f$ 連續，則極限存在且 $f$ 在 $B$ 上可積</div>
+</div>
+
+<p>和 Fubini 定理一樣，三重積分可化為<strong>三重逐次積分</strong>——共有 $3! = 6$ 種可能的積分順序：</p>
+
+<div class="formula-card">
+  <div class="label">長方體上的 Fubini 定理</div>
+  <div class="eq">$$\iiint_B f(x,y,z)\,dV = \int_a^b \int_c^d \int_e^f f(x,y,z)\,dz\,dy\,dx$$</div>
+  <div class="note">也可以寫成任何其他順序，例如 $dx\,dz\,dy$、$dy\,dx\,dz$ 等——所有 6 種順序給出相同結果</div>
+</div>
+
+<div class="callout"><strong>💡 六種積分順序的選擇策略</strong><br>和三重積分類似，選擇積分順序會極大影響計算難度。優先考慮：(1) 被積函數對哪個變數最容易積分；(2) 區域的邊界用哪個變數表示最簡單。例如若 $f(x,y,z) = g(z)$ 且邊界與 $x,y$ 無關，則先積 $x,y$ 再積 $z$ 通常最簡潔。</div>
+
+<h3>一般三維區域</h3>
+
+<p>對於一般的三維區域 $E$，我們通常將它描述為「上方曲面 $z=u_2(x,y)$、下方曲面 $z=u_1(x,y)$、在 $xy$ 平面上的投影為 $D$」：</p>
+
+<div class="formula-card">
+  <div class="label">一般區域上的三重積分（$z$-simple）</div>
+  <div class="eq">$$\iiint_E f(x,y,z)\,dV = \iint_D \left[\int_{u_1(x,y)}^{u_2(x,y)} f(x,y,z)\,dz\right]\,dA$$</div>
+  <div class="note">先積 $z$，剩下一個 $x,y$ 的二重積分——再用 5.2 節的方法處理</div>
+</div>
+
+<div class="figure">
+  <img src="../../pages/v3c5_pages/v3c5_page_496_c.png" alt="一般三維區域的投影示意圖" loading="lazy">
+  <figcaption>圖 5.42：一般區域 $E$ 描述為「下方曲面 $z=u_1(x,y)$ 和上方曲面 $z=u_2(x,y)$ 之間的空間」——$D$ 是 $E$ 在 $xy$ 平面上的投影</figcaption>
+</div>
+
+<details class="example" open><summary>📝 範例 5.37：計算金字塔體積</summary>求由平面 $x=0, y=0, z=0$ 和 $x+y+z=1$ 圍成的四面體的體積（用三重積分）。<br><br><strong>解：</strong>區域 $E$：$0 \leq x \leq 1$；對於固定的 $x$，$0 \leq y \leq 1-x$；對於固定的 $(x,y)$，$0 \leq z \leq 1-x-y$。<br>$$V = \iiint_E 1\,dV = \int_0^1 \int_0^{1-x} \int_0^{1-x-y} 1\,dz\,dy\,dx$$<br>先積 $z$：$\int_0^{1-x-y} 1\,dz = 1-x-y$<br>再積 $y$：$\int_0^{1-x} (1-x-y)\,dy = \frac{(1-x)^2}{2}$<br>最後積 $x$：$\int_0^1 \frac{(1-x)^2}{2}\,dx = \frac{1}{6}$<br>結果與 5.2 節用二重積分算出的 $\frac{1}{6}$ 一致，兩種方法互相印證。</details>
+
+<div class="callout-warn"><strong>⚡ 三重積分的積分限陷阱</strong><br>設定三重積分的積分限是本章最具挑戰性的技能。一個實用的流程：(1) 畫出三維區域的草圖（或至少理解投影）；(2) 選擇積分順序（優先選邊界最簡單的方向作為最外層）；(3) 對於最外層變數，找出其最小和最大值（常數）；(4) 對於中間層，用外層變數的函數表示；(5) 對於最內層，用外面兩個變數的函數表示。每完成一步都要在圖上驗證。</div>
+
+</section>
+
+<!-- ====== Section 5.5 ====== -->
+<section id="s5-5">
+<h2>5.5 柱座標與球座標下的三重積分（Triple Integrals in Cylindrical and Spherical Coordinates）</h2>
+
+<div style="margin-bottom:14px;font-size:12px;color:var(--tx2);line-height:1.8">
+<strong style="color:var(--tx)">🔑 本節重點</strong> ①柱座標 $(r,\theta,z)$：$dV = r\,dr\,d\theta\,dz$，適用於繞 $z$ 軸旋轉對稱的物體。②球座標 $(
+ho,\theta,\phi)$：$dV = 
+ho^2\sin\phi\,d
+ho\,d\theta\,d\phi$，適用於球對稱物體。③$\phi$ 的範圍是 $0$ 到 $\pi$（正 $z$ 軸 → 負 $z$ 軸），不是 $0$ 到 $2\pi$！④座標系選擇決策樹：矩形對稱→直角、軸對稱→柱座標、球對稱→球座標。
+</div>
+
+<p>正如極座標簡化了具有圓形對稱的二重積分
+
+<h3>柱座標 $(r, \theta, z)$</h3>
+
+<p>柱座標是極座標在三維空間的自然延伸——保留 $z$ 軸不變，將 $xy$ 平面轉換為極座標。轉換公式：$x = r\cos\theta$，$y = r\sin\theta$，$z = z$。</p>
+
+<div class="figure">
+  <img src="../../pages/v3c5_pages/v3c5_page_512_c.png" alt="柱座標系統示意圖" loading="lazy">
+  <figcaption>圖 5.50：柱座標——$(r,\theta)$ 定義了點在 $xy$ 平面上的投影，$z$ 給出高度——非常適合描述圓柱、圓錐、旋轉拋物面</figcaption>
+</div>
+
+<div class="formula-card">
+  <div class="label">柱座標下的三重積分</div>
+  <div class="eq">$$\iiint_E f(x,y,z)\,dV = \iiint_E f(r\cos\theta, r\sin\theta, z)\,r\,dr\,d\theta\,dz$$</div>
+  <div class="note">體積元素：$dV = r\,dr\,d\theta\,dz$。同樣，$r$ 來自極座標的面積元素</div>
+</div>
+
+<p>常見曲面在柱座標下的簡化：圓柱 $x^2+y^2=a^2$ → $r=a$；圓錐 $z=\sqrt{x^2+y^2}$ → $z=r$；旋轉拋物面 $z=x^2+y^2$ → $z=r^2$；球 $x^2+y^2+z^2=a^2$ → $r^2+z^2=a^2$。</p>
+
+<details class="example" open><summary>📝 範例 5.44–5.46：柱座標下的體積計算</summary>求區域 $E$ 的體積，其中 $E$ 在圓柱 $x^2+y^2=1$ 內部、$xy$ 平面上方、球 $x^2+y^2+z^2=4$ 下方。<br><br><strong>解：</strong>柱座標下，圓柱為 $r=1$，球為 $r^2+z^2=4$ → $z=\sqrt{4-r^2}$（上半球）。$\theta$ 從 $0$ 到 $2\pi$。<br>$$V = \int_0^{2\pi} \int_0^1 \int_0^{\sqrt{4-r^2}} r\,dz\,dr\,d\theta$$<br>先積 $z$：$\int_0^{\sqrt{4-r^2}} r\,dz = r\sqrt{4-r^2}$<br>再積 $r$：$\int_0^1 r\sqrt{4-r^2}\,dr$。令 $u=4-r^2$，$du=-2r\,dr$ → $r\,dr = -\frac{du}{2}$<br>$= \int_4^3 \sqrt{u}\left(-\frac{1}{2}\right)du = \frac{1}{2}\left[\frac{2}{3}u^{3/2}\right]_3^4 = \frac{1}{3}(8 - 3\sqrt{3})$<br>最後積 $\theta$：$V = \frac{2\pi}{3}(8 - 3\sqrt{3})$。</details>
+
+<div class="callout"><strong>💡 何時使用柱座標？</strong><br>當區域具有繞 $z$ 軸的旋轉對稱性時使用——圓柱、圓錐、旋轉拋物面、以及任何可以用 $r$ 和 $z$ 簡單描述的形狀。特別注意：如果區域的 $xy$ 投影是圓形，但邊界曲面與 $z$ 有關且不具球對稱性，柱座標通常是最佳選擇。</div>
+
+<h3>球座標 $(\rho, \theta, \phi)$</h3>
+
+<p>球座標用三個量定位空間中的點：$\rho$（到原點的距離）、$\theta$（$xy$ 平面上的方位角，與極座標相同）、$\phi$（從正 $z$ 軸向下量的極角）。轉換公式：</p>
+<div class="eq">$$x = \rho\sin\phi\cos\theta,\quad y = \rho\sin\phi\sin\theta,\quad z = \rho\cos\phi$$</div>
+<p>其中 $\rho \geq 0$，$0 \leq \theta \leq 2\pi$，$0 \leq \phi \leq \pi$。</p>
+
+<div class="figure">
+  <img src="../../pages/v3c5_pages/v3c5_page_518_c.png" alt="球座標系統示意圖" loading="lazy">
+  <figcaption>圖 5.55：球座標——$\rho$ 是到原點的距離，$\theta$ 是方位角，$\phi$ 是從正 $z$ 軸向下的極角</figcaption>
+</div>
+
+<div class="formula-card">
+  <div class="label">球座標下的三重積分——體積元素</div>
+  <div class="eq">$$\iiint_E f(x,y,z)\,dV = \iiint_E f(\rho\sin\phi\cos\theta, \rho\sin\phi\sin\theta, \rho\cos\phi)\,\rho^2\sin\phi\,d\rho\,d\theta\,d\phi$$</div>
+  <div class="note">$dV = \rho^2\sin\phi\,d\rho\,d\theta\,d\phi$。注意 $\rho^2\sin\phi$ 是球座標的 Jacobian</div>
+</div>
+
+<div class="callout-warn"><strong>⚡ 球座標的兩大陷阱</strong><br>
+(1) 忘記 $\rho^2\sin\phi$ 因子——這和極座標忘記 $r$ 一樣致命。<br>
+(2) $\phi$ 的範圍是 $0$ 到 $\pi$（從北極到南極），不是 $0$ 到 $2\pi$。$\phi=0$ 是正 $z$ 軸（北極），$\phi=\pi$ 是負 $z$ 軸（南極），$\phi=\pi/2$ 是 $xy$ 平面。混淆 $\phi$ 和 $\theta$ 的範圍是極常見的錯誤。</div>
+
+<details class="example" open><summary>📝 範例 5.58：球體積分</summary>計算 $\iiint_E z\,dV$，其中 $E$ 是上半單位球 $x^2+y^2+z^2 \leq 1$，$z \geq 0$。<br><br><strong>解：</strong>球座標下：$0 \leq \rho \leq 1$，$0 \leq \theta \leq 2\pi$，$0 \leq \phi \leq \pi/2$（上半球）。$z = \rho\cos\phi$。<br>$$\iiint_E z\,dV = \int_0^{2\pi} \int_0^{\pi/2} \int_0^1 (\rho\cos\phi) \cdot \rho^2\sin\phi\,d\rho\,d\phi\,d\theta$$<br>先積 $\rho$：$\int_0^1 \rho^3\cos\phi\sin\phi\,d\rho = \frac{1}{4}\cos\phi\sin\phi$<br>再積 $\phi$：$\int_0^{\pi/2} \frac{1}{4}\cos\phi\sin\phi\,d\phi = \frac{1}{4}\left[\frac{1}{2}\sin^2\phi\right]_0^{\pi/2} = \frac{1}{8}$<br>最後積 $\theta$：$\int_0^{2\pi} \frac{1}{8}\,d\theta = \frac{\pi}{4}$</details>
+
+<div class="callout"><strong>💡 座標系選擇的決策樹</strong><br>
+(1) 矩形對稱 → 直角座標<br>
+(2) 繞 $z$ 軸的旋轉對稱、圓柱/圓錐 → 柱座標<br>
+(3) 球對稱、球/球冠/球錐 → 球座標<br>
+有時同一個問題可以用多種座標系解決——練習時不妨兩種都試試，培養對座標系選擇的直覺。</div>
+
+</section>
+
+<!-- ====== Section 5.6 ====== -->
+<section id="s5-6">
+<h2>5.6 質心與轉動慣量（Calculating Centers of Mass and Moments of Inertia）</h2>
+
+<div style="margin-bottom:14px;font-size:12px;color:var(--tx2);line-height:1.8">
+<strong style="color:var(--tx)">🔑 本節重點</strong> ①薄板質心：$\bar{x}=M_y/m$, $\bar{y}=M_x/m$，其中 $M_x=\iint y
+ho\,dA$, $M_y=\iint x
+ho\,dA$。②轉動慣量 $I_x=\iint y^2
+ho\,dA$（二維）與 $I_x=\iiint (y^2+z^2)
+ho\,dV$（三維）——<strong>注意三維使用到軸的距離平方</strong>。③對稱性可大幅簡化計算：若物體對 $yz$ 平面對稱則 $\bar{x}=0$。
+</div>
+
+<p>多重積分最美麗的應用之一是計算物體的<strong>質心</strong>
+
+<div class="figure">
+  <img src="../../pages/v3c5_pages/v3c5_page_536_c.png" alt="質心平衡示意圖" loading="lazy">
+  <figcaption>圖 5.64：薄板（lamina）在質心處完美平衡——質心是密度分佈的「加權平均位置」</figcaption>
+</div>
+
+<h3>平面薄板的質心</h3>
+
+<p>對於佔據平面區域 $D$、面密度為 $\rho(x,y)$ 的薄板（lamina）：</p>
+
+<div class="formula-card">
+  <div class="label">薄板的質量、力矩與質心</div>
+  <p><strong>總質量：</strong>$m = \iint_D \rho(x,y)\,dA$</p>
+  <p><strong>對 $x$ 軸的力矩：</strong>$M_x = \iint_D y\rho(x,y)\,dA$</p>
+  <p><strong>對 $y$ 軸的力矩：</strong>$M_y = \iint_D x\rho(x,y)\,dA$</p>
+  <p><strong>質心座標：</strong>$\bar{x} = \dfrac{M_y}{m},\quad \bar{y} = \dfrac{M_x}{m}$</p>
+  <div class="note">質心 $(\bar{x},\bar{y})$ 是「如果所有質量集中在這一點，力矩保持不變」的那個點</div>
+</div>
+
+<p>當密度均勻（$\rho$ 為常數）時，質心退化為<strong>形心（centroid）</strong>——純幾何的區域中心。形心的公式大幅簡化：$\bar{x} = \frac{1}{A}\iint_D x\,dA$，$\bar{y} = \frac{1}{A}\iint_D y\,dA$，其中 $A$ 是區域面積。</p>
+
+<h3>轉動慣量（Moment of Inertia）</h3>
+
+<p>轉動慣量衡量物體對旋轉的「阻力」——類似於質量衡量對平移的阻力。對於薄板：</p>
+
+<div class="formula-card">
+  <div class="label">薄板的轉動慣量（二維）</div>
+  <p><strong>對 $x$ 軸：</strong>$I_x = \iint_D y^2\rho(x,y)\,dA$</p>
+  <p><strong>對 $y$ 軸：</strong>$I_y = \iint_D x^2\rho(x,y)\,dA$</p>
+  <p><strong>對原點（極慣性矩）：</strong>$I_0 = \iint_D (x^2+y^2)\rho(x,y)\,dA = I_x + I_y$</p>
+  <div class="note">$I_0 = I_x + I_y$ 是「垂直軸定理」——僅適用於平面薄板</div>
+</div>
+
+<h3>三維立體的質心與轉動慣量</h3>
+
+<p>這些概念自然延伸到三維：</p>
+
+<div class="formula-card">
+  <div class="label">三維立體的質量、質心與轉動慣量</div>
+  <p><strong>質量：</strong>$m = \iiint_E \rho(x,y,z)\,dV$</p>
+  <p><strong>質心：</strong>$\bar{x} = \frac{1}{m}\iiint_E x\rho\,dV$，$\bar{y} = \frac{1}{m}\iiint_E y\rho\,dV$，$\bar{z} = \frac{1}{m}\iiint_E z\rho\,dV$</p>
+  <p><strong>轉動慣量（對座標軸）：</strong>$I_x = \iiint_E (y^2+z^2)\rho\,dV$，$I_y = \iiint_E (x^2+z^2)\rho\,dV$，$I_z = \iiint_E (x^2+y^2)\rho\,dV$</p>
+  <div class="note">注意三維的 $I_x$ 使用 $y^2+z^2$（到 $x$ 軸的距離平方），不是 $y^2$ 而已</div>
+</div>
+
+<details class="example" open><summary>📝 範例 5.67：均勻半圓盤的質心</summary>求半徑為 $a$ 的均勻上半圓盤（$y \geq 0$，$x^2+y^2 \leq a^2$）的形心。<br><br><strong>解：</strong>由對稱性，$\bar{x} = 0$。用極座標計算 $\bar{y}$。面積 $A = \frac{1}{2}\pi a^2$。<br>$$M_x = \iint_D y\,dA = \int_0^\pi \int_0^a (r\sin\theta) \cdot r\,dr\,d\theta = \int_0^\pi \sin\theta\,d\theta \cdot \int_0^a r^2\,dr$$<br>$= \left[-\cos\theta\right]_0^\pi \cdot \left[\frac{r^3}{3}\right]_0^a = 2 \cdot \frac{a^3}{3} = \frac{2a^3}{3}$<br>$$\bar{y} = \frac{M_x}{A} = \frac{2a^3/3}{\pi a^2/2} = \frac{4a}{3\pi} \approx 0.424a$$<br>注意形心在幾何中心（$a/2$）之上——因為上半圓盤的質量更多集中在遠離 $x$ 軸的位置。</details>
+
+<div class="callout-warn"><strong>⚡ 二維 vs 三維轉動慣量的公式區別</strong><br>在二維薄板中，$I_x = \iint y^2\rho\,dA$（到 $x$ 軸的距離就是 $|y|$）。但在三維中，$I_x = \iiint (y^2+z^2)\rho\,dV$（到 $x$ 軸的距離是 $\sqrt{y^2+z^2}$）。這個差異是初學者頻繁出錯的地方——升維時務必調整距離的定義。</div>
+
+<div class="callout"><strong>💡 對稱性的威力</strong><br>當物體具有對稱性時，質心的某些分量可以直接判斷為零而不需計算。例如：若物體對 $yz$ 平面對稱，則 $\bar{x}=0$；若對 $z$ 軸旋轉對稱且密度僅取決於 $r$，則 $\bar{x}=\bar{y}=0$。善用對稱性能大幅減少計算量。</div>
+
+</section>
+
+<!-- ====== Section 5.7 ====== -->
+<section id="s5-7">
+<h2>5.7 多重積分的變數變換（Change of Variables in Multiple Integrals）</h2>
+
+<div style="margin-bottom:14px;font-size:12px;color:var(--tx2);line-height:1.8">
+<strong style="color:var(--tx)">🔑 本節重點</strong> ①變數變換公式：$\iint_R f(x,y)\,dx\,dy = \iint_G f(g(u,v),h(u,v)) \left|\frac{\partial(x,y)}{\partial(u,v)}\right|\,du\,dv$。②Jacobian $\frac{\partial(x,y)}{\partial(u,v)}$ 衡量變換的面積放大倍率，必須取<strong>絕對值</strong>。③極座標的 Jacobian 為 $r$、球座標為 $\rho^2\sin\phi$——驗證了先前的面積/體積元素。④關鍵是找到使邊界變為常數的變換。
+</div>
+
+<p>極座標、柱座標和球座標的轉換都是更一般的<strong>變數變換（change of variables）</strong>的特例。本節系統性地發展這個一般理論——核心工具是<strong>Jacobian 行列式（Jacobian determinant）</strong>，它告訴我們在變換過程中「微小面積/體積如何被放大或縮小」。</p>
+
+<div class="figure">
+  <img src="../../pages/v3c5_pages/v3c5_page_554_c.png" alt="變數變換示意圖" loading="lazy">
+  <figcaption>圖 5.71：變換 $T$ 將 $uv$ 平面上的區域 $G$ 映射到 $xy$ 平面上的區域 $R$——我們在 $G$ 上積分，但需要 Jacobian 來補償面積的變形</figcaption>
+</div>
+
+<h3>Jacobian 行列式</h3>
+
+<p>給定變換 $T: (u,v) \to (x,y)$，定義為 $x = g(u,v)$、$y = h(u,v)$。其<strong>Jacobian 行列式</strong>為：</p>
+
+<div class="formula-card">
+  <div class="label">二維 Jacobian 行列式</div>
+  <div class="eq">$$\frac{\partial(x,y)}{\partial(u,v)} = \begin{vmatrix} \frac{\partial x}{\partial u} & \frac{\partial x}{\partial v} \\[4pt] \frac{\partial y}{\partial u} & \frac{\partial y}{\partial v} \end{vmatrix} = \frac{\partial x}{\partial u}\frac{\partial y}{\partial v} - \frac{\partial x}{\partial v}\frac{\partial y}{\partial u}$$</div>
+  <div class="note">Jacobian 衡量變換 $T$ 在每一點附近的面積放大（或縮小）倍率</div>
+</div>
+
+<p>二重積分的變數變換公式為：</p>
+<div class="formula-card">
+  <div class="label">二重積分的變數變換公式</div>
+  <div class="eq">$$\iint_R f(x,y)\,dx\,dy = \iint_G f(g(u,v), h(u,v)) \left|\frac{\partial(x,y)}{\partial(u,v)}\right|\,du\,dv$$</div>
+  <div class="note">注意 Jacobian 取<strong>絕對值</strong>——面積放大倍率永遠是非負的</div>
+</div>
+
+<p>驗證：極座標變換 $x = r\cos\theta$、$y = r\sin\theta$ 的 Jacobian 為 $\frac{\partial(x,y)}{\partial(r,\theta)} = \cos\theta \cdot r\cos\theta - (-\sin\theta) \cdot r\sin\theta = r(\cos^2\theta + \sin^2\theta) = r$。這正是我們熟悉的 $dA = r\,dr\,d\theta$。</p>
+
+<div class="callout"><strong>💡 Jacobian 的幾何直覺</strong><br>在 $uv$ 平面上取一個小矩形 $[u, u+\Delta u] \times [v, v+\Delta v]$，經過變換 $T$ 後，它變成 $xy$ 平面上的一個小平行四邊形。這個平行四邊形的面積約等於 $|\frac{\partial(x,y)}{\partial(u,v)}| \cdot \Delta u\,\Delta v$。Jacobian 正是這個「面積放大因子」。如果 Jacobian 為零，表示變換在該點附近將二維區域壓縮成較低維度——這通常不是我們想要的（變換不再是一對一的）。</div>
+
+<h3>三維 Jacobian</h3>
+
+<p>對於三維變換 $x = g(u,v,w)$、$y = h(u,v,w)$、$z = k(u,v,w)$，Jacobian 為 $3 \times 3$ 行列式：</p>
+
+<div class="formula-card">
+  <div class="label">三維變數變換公式</div>
+  <div class="eq">$$\iiint_R f(x,y,z)\,dV = \iiint_G f(g(u,v,w), h(u,v,w), k(u,v,w)) \left|\frac{\partial(x,y,z)}{\partial(u,v,w)}\right|\,du\,dv\,dw$$</div>
+  <div class="note">球座標的 Jacobian：$\frac{\partial(x,y,z)}{\partial(\rho,\theta,\phi)} = \rho^2\sin\phi$——印證了 $dV = \rho^2\sin\phi\,d\rho\,d\theta\,d\phi$</div>
+</div>
+
+<details class="example" open><summary>📝 範例 5.65–5.66：變換的影像</summary>設變換 $T(u,v) = (u^2-v^2, 2uv)$。求 $uv$ 平面上的矩形 $G = [0,1] \times [0,1]$ 在 $T$ 下的影像 $R$，並計算 $R$ 的面積。<br><br><strong>解：</strong>$x = u^2-v^2$，$y = 2uv$。注意到 $x^2+y^2 = (u^2-v^2)^2 + (2uv)^2 = u^4 - 2u^2v^2 + v^4 + 4u^2v^2 = (u^2+v^2)^2$。<br>計算 Jacobian：$\frac{\partial x}{\partial u}=2u$，$\frac{\partial x}{\partial v}=-2v$，$\frac{\partial y}{\partial u}=2v$，$\frac{\partial y}{\partial v}=2u$。<br>$\frac{\partial(x,y)}{\partial(u,v)} = (2u)(2u) - (-2v)(2v) = 4(u^2+v^2)$。<br>面積：$\iint_G 4(u^2+v^2)\,du\,dv = \int_0^1\int_0^1 4(u^2+v^2)\,du\,dv = 4\left(\frac{1}{3}+\frac{1}{3}\right) = \frac{8}{3}$。</details>
+
+<div class="callout-warn"><strong>⚡ 變數變換的兩大難點</strong><br>
+(1) <strong>找合適的變換</strong>——這往往是整個過程中最需要創造力的一步。常見策略：讓邊界曲線變成常數（如 $u = x+y$、$v = x-y$ 把傾斜的平行四邊形變成矩形）。<br>
+(2) <strong>Jacobian 的絕對值</strong>——如果你忘記取絕對值而 Jacobian 為負，結果會出錯。記住：面積/體積放大倍率永遠是非負的。</div>
+
+</section>
+
+<!-- ====== Key Concepts ====== -->
+<section id="key-concepts">
+<h2>📋 關鍵概念回顧（Key Concepts）</h2>
+<ol>
+  <li><strong>Fubini 定理</strong>：在矩形區域上，二重積分的計算次序可以交換——$\iint_R f(x,y)\,dA = \int_a^b\!\int_c^d f(x,y)\,dy\,dx = \int_c^d\!\int_a^b f(x,y)\,dx\,dy$</li>
+  <li><strong>Type I / Type II 區域</strong>：Type I：$x$ 在固定區間、$y$ 在兩條曲線之間；Type II：$y$ 固定、$x$ 在兩條曲線之間——選擇合適的型別可以大幅簡化積分</li>
+  <li><strong>極座標下的二重積分</strong>：$dA = r\,dr\,d\theta$——面積元素包含了 $r$ 因子；特別適用於圓形或扇形區域</li>
+  <li><strong>三重積分</strong>：$\iiint_E f(x,y,z)\,dV$ 有六種可能的積分次序——選擇次序的關鍵是讓積分邊界盡可能簡單</li>
+  <li><strong>柱座標</strong>：$(r,\theta,z)$，其中 $x=r\cos\theta, y=r\sin\theta, z=z$——$dV = r\,dr\,d\theta\,dz$，適合圓柱對稱區域</li>
+  <li><strong>球座標</strong>：$(\rho,\theta,\phi)$，其中 $\rho$ 為原點距離、$\theta$ 為方位角、$\phi$ 為極角——$dV = \rho^2\sin\phi\,d\rho\,d\theta\,d\phi$，適合球對稱區域</li>
+  <li><strong>變數變換（Jacobian）</strong>：$\iint_R f(x,y)\,dx\,dy = \iint_S f(x(u,v),y(u,v))\,|J|\,du\,dv$，其中 $J = \frac{\partial(x,y)}{\partial(u,v)} = x_u y_v - x_v y_u$——這是最一般的變數變換公式</li>
+  <li><strong>質心與轉動慣量</strong>：薄板的質心 $(\bar{x},\bar{y})$ 由 $\bar{x} = \frac{1}{M}\iint x\rho\,dA$ 給出；轉動慣量 $I_x = \iint y^2\rho\,dA$</li>
+</ol>
+</section>
+
+<section id="key-equations">
+<h2>📐 關鍵公式（Key Equations）</h2>
+<table>
+  <thead><tr><th>公式</th><th>說明</th></tr></thead>
+  <tbody>
+    <tr><td>$$\iint_R f(x,y)\,dA = \int_a^b\!\int_c^d f(x,y)\,dy\,dx$$</td><td>矩形區域上的二重積分（Fubini）</td></tr>
+    <tr><td>$$\iint_R f(x,y)\,dA = \int_\alpha^\beta\!\int_{r_1(\theta)}^{r_2(\theta)} f(r\cos\theta,r\sin\theta)\,r\,dr\,d\theta$$</td><td>極座標下的二重積分</td></tr>
+    <tr><td>$$\iiint_E f(x,y,z)\,dV = \iiint_E f(r\cos\theta,r\sin\theta,z)\,r\,dz\,dr\,d\theta$$</td><td>柱座標下的三重積分</td></tr>
+    <tr><td>$$\iiint_E f\,dV = \iiint_E f\,\rho^2\sin\phi\,d\rho\,d\theta\,d\phi$$</td><td>球座標下的三重積分</td></tr>
+    <tr><td>$$J = \frac{\partial(x,y)}{\partial(u,v)} = \begin{vmatrix}x_u & x_v \\ y_u & y_v\end{vmatrix}$$</td><td>Jacobian 行列式</td></tr>
+    <tr><td>$$\bar{x} = \frac{1}{M}\iint_R x\rho(x,y)\,dA,\quad M = \iint_R \rho(x,y)\,dA$$</td><td>質心公式</td></tr>
+  </tbody>
+</table>
+</section>
+
+<!-- ====== Summary ====== -->
+<section id="summary">
+<h2>本章摘要</h2>
+
+<div class="callout"><strong>🔑 核心收穫</strong><br>
+本章將積分從單變數推廣到多變數，建立了一套完整的多重積分體系。以下是七大支柱：
+<ol>
+  <li><strong>二重積分 = 雙 Riemann 和的極限</strong>——幾何意義：曲面下方的體積（$f \geq 0$ 時）</li>
+  <li><strong>Fubini 定理是計算的基石</strong>——將多重積分化為逐次積分，積分順序可以交換</li>
+  <li><strong>區域分類（Type I / Type II）決定積分限</strong>——內層積分限是外層變數的函數</li>
+  <li><strong>座標系選擇是策略核心</strong>——極座標（$dA=r\,dr\,d\theta$）、柱座標（$dV=r\,dr\,d\theta\,dz$）、球座標（$dV=\rho^2\sin\phi\,d\rho\,d\theta\,d\phi$）</li>
+  <li><strong>三重積分用於三維量</strong>——體積、質量、電荷、機率</li>
+  <li><strong>質心與轉動慣量是多變數微積分的物理應用</strong>——力矩是「加權位置」的積分</li>
+  <li><strong>Jacobian 統攝所有座標變換</strong>——$dA = |\frac{\partial(x,y)}{\partial(u,v)}|\,du\,dv$ 是一般公式，極座標/柱座標/球座標皆為特例</li>
+</ol>
+</div>
+
+<table>
+  <thead><tr><th>座標系</th><th>變數</th><th>面積/體積元素</th><th>適合場景</th></tr></thead>
+  <tbody>
+    <tr><td>直角（2D）</td><td>$(x,y)$</td><td>$dA = dx\,dy$</td><td>矩形區域</td></tr>
+    <tr><td>極（2D）</td><td>$(r,\theta)$</td><td>$dA = r\,dr\,d\theta$</td><td>圓形、扇形</td></tr>
+    <tr><td>直角（3D）</td><td>$(x,y,z)$</td><td>$dV = dx\,dy\,dz$</td><td>長方體</td></tr>
+    <tr><td>柱（3D）</td><td>$(r,\theta,z)$</td><td>$dV = r\,dr\,d\theta\,dz$</td><td>軸對稱（圓柱、圓錐）</td></tr>
+    <tr><td>球（3D）</td><td>$(\rho,\theta,\phi)$</td><td>$dV = \rho^2\sin\phi\,d\rho\,d\theta\,d\phi$</td><td>球對稱（球、球冠）</td></tr>
+    <tr><td>一般變換（2D）</td><td>$(u,v) \to (x,y)$</td><td>$dA = |\frac{\partial(x,y)}{\partial(u,v)}|\,du\,dv$</td><td>任意（自訂變換）</td></tr>
+  </tbody>
+</table>
+</section>
+
+<!-- ====== Common Mistakes ====== -->
+<section id="common-mistakes">
+<h2>⚠️ 初學者常見錯誤</h2>
+
+<div class="callout-warn"><strong>❌ 錯誤 1：極座標/柱座標/球座標忘記 Jacobian 因子</strong><br>
+極座標中 $dA \neq dr\,d\theta$，而是 $dA = r\,dr\,d\theta$。柱座標中 $dV \neq dr\,d\theta\,dz$，而是 $dV = r\,dr\,d\theta\,dz$。球座標中 $dV \neq d\rho\,d\theta\,d\phi$，而是 $dV = \rho^2\sin\phi\,d\rho\,d\theta\,d\phi$。忘記這些「多出來」的因子是本章最常見、最致命的錯誤。每次轉換座標系時，養成<strong>先寫下面積/體積元素再開始積分</strong>的習慣。</div>
+
+<div class="callout-warn"><strong>❌ 錯誤 2：積分限與變數的對應關係搞混</strong><br>
+$\int_a^b \int_c^d f(x,y)\,dy\,dx$ 的內層積分限 $c,d$ 對應 $y$，外層的 $a,b$ 對應 $x$。對於一般區域，內層積分限<strong>不是常數</strong>——它們是外層變數的函數。例如 $\int_0^1 \int_{x^2}^x f(x,y)\,dy\,dx$ 中，內層的上下限 $x^2$ 和 $x$ 是 $x$ 的函數。如果把這些當成常數，你就假設了矩形區域。</div>
+
+<div class="callout-warn"><strong>❌ 錯誤 3：球座標中 $\phi$ 的範圍搞錯</strong><br>
+$\phi$ 的範圍是 $0$ 到 $\pi$（從北極到南極），<strong>不是</strong> $0$ 到 $2\pi$。$\theta$ 才是 $0$ 到 $2\pi$。混淆兩者是球座標積分中最常見的錯誤。快速記憶法：$\phi$ 是從 $z$ 軸往下量的角度，像地球的緯度（$0$=北極，$\pi$=南極）；$\theta$ 是繞 $z$ 軸旋轉的角度，像地球的經度。</div>
+
+<div class="callout-warn"><strong>❌ 錯誤 4：先積分的變數出現在外層積分限中</strong><br>
+在逐次積分中，已經被積掉的變數<strong>不能</strong>出現在外層的積分限裡。例如 $\int_{0}^{y} \int_{0}^{1} f(x,y)\,dx\,dy$ 是錯誤的——$y$ 在內層已被積掉，但外層積分限卻還引用 $y$（這其實是一個不同的 $y$，作為積分變數）。正確的寫法應該確保外層積分限只依賴尚未被積分的變數。</div>
+
+<div class="callout-warn"><strong>❌ 錯誤 5：交換積分順序時沒修正積分限</strong><br>
+交換積分順序不只是把 $dx$ 和 $dy$ 互換——你必須<strong>重新推導積分限</strong>。$\int_0^1 \int_0^x f(x,y)\,dy\,dx$ 交換後變成 $\int_0^1 \int_y^1 f(x,y)\,dx\,dy$（而不是 $\int_0^1 \int_0^y \cdots$）。交換前務必畫出區域，確認新的積分限正確描述了同一個區域。</div>
+
+</section>
+
+<!-- ====== Self-Check ====== -->
+<section id="self-check">
+<h2>✅ 自我檢測（Self-Check）</h2>
+<p>完成以下題目檢驗你對本章核心概念的掌握程度。點擊展開查看答案。</p>
+
+<details class="derive"><summary>題 1：矩形區域上的二重積分</summary>
+<p>計算 $\displaystyle \int_0^1 \int_0^2 (x + y)\,dy\,dx$。</p>
+<p><strong>答案：</strong></p>
+<p>先積 $y$：$\int_0^2 (x + y)\,dy = \left[ xy + \frac{y^2}{2} 
+ight]_{y=0}^{y=2} = 2x + 2$。</p>
+<p>再積 $x$：$\int_0^1 (2x + 2)\,dx = \left[ x^2 + 2x 
+ight]_0^1 = 1 + 2 = 3$。</p>
+</details>
+
+<details class="derive"><summary>題 2：交換積分順序</summary>
+<p>交換以下積分的順序：$\displaystyle \int_0^1 \int_{y}^{\sqrt{y}} f(x,y)\,dx\,dy$（需修正積分限）。</p>
+<p><strong>答案：</strong></p>
+<p>原區域：$0 \le y \le 1$，$y \le x \le \sqrt{y}$。即 $x$ 在 $y$ 和 $\sqrt{y}$ 之間。</p>
+<p>由 $x = y$ 得 $y = x$；由 $x = \sqrt{y}$ 得 $y = x^2$。注意 $y \le \sqrt{y}$ 只在 $0 \le y \le 1$ 成立。</p>
+<p>反轉：$x$ 從 $0$ 到 $1$，對每個 $x$，$y$ 從 $x^2$ 到 $x$。</p>
+<p>因此 $\displaystyle \int_0^1 \int_{x^2}^{x} f(x,y)\,dy\,dx$。</p>
+</details>
+
+<details class="derive"><summary>題 3：極座標下的二重積分</summary>
+<p>用極座標計算 $\displaystyle \iint_D e^{-(x^2+y^2)}\,dA$，其中 $D$ 是單位圓盤 $x^2+y^2 \le 1$。</p>
+<p><strong>答案：</strong></p>
+<p>極座標：$x^2+y^2 = r^2$，$dA = r\,dr\,d\theta$。區域：$0 \le r \le 1$，$0 \le \theta \le 2\pi$。</p>
+<p>$\displaystyle \iint_D e^{-r^2} \cdot r\,dr\,d\theta = \int_0^{2\pi} d\theta \int_0^1 r e^{-r^2}\,dr$。</p>
+<p>令 $u = r^2$，$du = 2r\,dr$：$\int_0^1 r e^{-r^2}\,dr = \frac{1}{2}\int_0^1 e^{-u}\,du = \frac{1}{2}[ -e^{-u} ]_0^1 = \frac{1}{2}(1 - e^{-1})$。</p>
+<p>乘上 $2\pi$：$= \pi(1 - e^{-1})$。</p>
+</details>
+
+<details class="derive"><summary>題 4：柱座標下的三重積分</summary>
+<p>用柱座標寫出立體 $E$：$x^2+y^2 \le 4$，$0 \le z \le 3$ 上 $f(x,y,z)$ 的三重積分。</p>
+<p><strong>答案：</strong></p>
+<p>柱座標：$x = r\cos\theta$，$y = r\sin\theta$，$z = z$，$dV = r\,dz\,dr\,d\theta$。</p>
+<p>$x^2+y^2 \le 4$ 變成 $r \le 2$。積分：</p>
+<p>$\displaystyle \iiint_E f\,dV = \int_0^{2\pi} \int_0^{2} \int_0^{3} f(r\cos\theta,\, r\sin\theta,\, z)\; r\,dz\,dr\,d\theta$。</p>
+</details>
+
+<details class="derive"><summary>題 5：Jacobian 與變數變換</summary>
+<p>考慮變換 $x = u + v$，$y = u - v$。求 Jacobian $\frac{\partial(x,y)}{\partial(u,v)}$。</p>
+<p><strong>答案：</strong></p>
+<p>$\displaystyle \frac{\partial(x,y)}{\partial(u,v)} = \begin{vmatrix} x_u & x_v \\ y_u & y_v \end{vmatrix} = \begin{vmatrix} 1 & 1 \\ 1 & -1 \end{vmatrix} = (1)(-1) - (1)(1) = -2$。</p>
+<p>面積元素變換：$dx\,dy = |{-2}|\,du\,dv = 2\,du\,dv$。</p>
+</details>
+
+</section>
+
+<section id="extras">
+<h2>📚 延伸資源</h2>
+
+<ul>
+  <li><strong>OpenStax Calculus Vol 3 — Chapter 5</strong>：原書全文，含大量練習題（每節 30–60 題）</li>
+  <li><strong>Paul's Online Notes — Calculus III / Multiple Integrals</strong>：Lamar 大學的詳盡筆記，例題豐富</li>
+  <li><strong>3Blue1Brown — Essence of Calculus</strong>：YouTube 系列，提供積分的視覺直覺——特別推薦「Integration and the Fundamental Theorem」和「Higher Order Derivatives」兩章</li>
+  <li><strong>Desmos 3D Graphing Calculator</strong>：可視化三維曲面和積分區域，幫助理解區域形狀</li>
+  <li><strong>GeoGebra 3D</strong>：互動式三維幾何工具，適合探索柱座標和球座標的轉換</li>
+  <li>下一章預告：<strong>第 6 章 — 向量微積分</strong>將引入向量場、線積分、面積分，以及 Green 定理、Stokes 定理和散度定理這三大「微積分基本定理的推廣」</li>
+</ul>
+</section>
+
+</main>
+
+<script>
+// Sidebar scroll spy
+(function(){
+  const navs = document.querySelectorAll('.sn a, .nsub a');
+  const sections = [];
+  navs.forEach(a => {
+    const id = a.getAttribute('href');
+    if (id && id.startsWith('#')) {
+      const el = document.getElementById(id.substring(1));
+      if (el) sections.push({a, el});
+    }
+  });
+  function onScroll(){
+    let current = sections[0];
+    for (const s of sections) {
+      if (s.el.offsetTop <= window.scrollY + 120) current = s;
+    }
+    navs.forEach(a => a.classList.remove('active'));
+    if (current) current.a.classList.add('active');
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+})();
+
+// Theme toggle
+function toggleTheme(){ if(window.toggleTheme) window.toggleTheme(); } catch(e){}
+}
+(function(){
+  try {
+    const saved = localStorage.getItem('learning-portal-reading-preferences');
+    if (saved === 'dark') {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      document.getElementById('themeBtn').textContent = '☀️ 淺色模式';
+    }
+  } catch(e){}
+})();
+
+// Mobile sidebar
+</script>
+<script defer src="../assets/course-ui.js"></script>
+<script defer src="../assets/advanced-models.js"></script>
+</body>
+</html>

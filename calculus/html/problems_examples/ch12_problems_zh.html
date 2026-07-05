@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第 12 章例題詳解 — Calculus</title>
+<script>
+MathJax = {
+  tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']], tags: 'ams' },
+  options: { ignoreHtmlClass: 'no-math' }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+:root{--bg:#FFF;--bg2:#F5F5F7;--tx:#1D1D1F;--tx2:#666;--ac:#007AFF;--bd:#D2D2D7;--ex-bg:#F0FDF4;--ex-bd:#22C55E;--warn-bg:#FFFBEB;--warn-bd:#F59E0B}
+[data-theme="dark"]{--bg:#1D1D1F;--bg2:#2D2D2F;--tx:#F5F5F7;--tx2:#999;--ac:#4DA3FF;--bd:#3A3A3C;--ex-bg:#052E16;--ex-bd:#16A34A;--warn-bg:#422006;--warn-bd:#92400E}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Noto Sans TC','Microsoft JhengHei',sans-serif;background:var(--bg);color:var(--tx);line-height:1.72;font-size:15px;max-width:1100px;margin:0 auto;padding:32px 40px 80px}
+h1{font-size:28px;font-weight:700;margin:0 0 4px}
+h2{font-size:20px;font-weight:700;margin:32px 0 12px;padding-bottom:6px;border-bottom:2px solid var(--bd)}
+h3{font-size:16px;font-weight:600;margin:20px 0 8px;color:var(--ac)}
+p{margin:10px 0}
+a{color:var(--ac);text-decoration:none}
+.back{display:inline-block;margin-bottom:20px;color:var(--ac);font-size:13px}
+.exbox{background:var(--ex-bg);border:1px solid var(--ex-bd);border-radius:10px;padding:18px 22px;margin:20px 0}
+.exbox .ex-num{font-weight:700;font-size:14px;color:#166534;margin-bottom:6px}
+.exbox .ex-title{font-size:13px;color:var(--tx2);margin-bottom:8px}
+.exbox .ex-problem{font-weight:600;margin-bottom:8px}
+.exbox .ex-sol{font-size:14px;margin-bottom:6px}
+.exbox .ex-ans{font-weight:700;color:var(--ac);margin-top:8px;padding-top:8px;border-top:1px dashed var(--bd)}
+.eq{margin:12px 0;overflow-x:auto}
+.chap-tag{display:inline-block;padding:4px 12px;background:var(--ac);color:#fff;border-radius:12px;font-size:12px;font-weight:600;margin-bottom:8px}
+.header{margin-bottom:28px}
+.header .meta{font-size:12px;color:var(--tx2);margin-top:2px}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:13px}
+th,td{padding:8px 12px;text-align:left;border:1px solid var(--bd)}
+th{background:var(--bg2);font-weight:600}
+.portal-home-link{position:fixed;top:16px;right:16px;z-index:1000;display:inline-flex;align-items:center;min-height:36px;padding:7px 11px;border:1px solid var(--bd);border-radius:8px;background:var(--bg);color:var(--ac);font:600 13px/1.2 -apple-system,BlinkMacSystemFont,'Noto Sans TC','Microsoft JhengHei',sans-serif;text-decoration:none;box-shadow:0 2px 10px rgba(15,23,42,.08)}
+.portal-home-link:hover{background:var(--bg2)}
+@media(max-width:768px){body{padding:16px}}
+</style>
+</head>
+<body>
+
+<a class="portal-home-link" href="../../index.html">← 返回學習中心</a>
+
+<a class="back" href="index.html">← 例題與習題目錄</a>
+
+<header class="header">
+  <div class="chap-tag">第 12 章 · Calculus Vol 3, Ch 2</div>
+  <h1>空間向量</h1>
+  <div class="meta">Vectors in Space · OpenStax Calculus · pp. 97–242 · 共 67 個課本例題</div>
+</header>
+
+<p>以下收錄本章所有課本例題，包含<strong>題目、詳細逐步解題過程與答案</strong>。內容以繁體中文呈現，數學式使用 MathJax 渲染。課本有詳解者翻譯為繁體中文；課本僅提供答案者，補上完整逐步解。</p>
+
+<section id="ss2-1">
+<h2>2.1 平面中的向量（Vectors in the Plane）</h2>
+<p style="font-size:13px;color:var(--tx2);margin-bottom:16px"><strong>🔑 本節重點：</strong>向量的分量形式、大小、單位向量、向量加減與純量乘法、合力應用</p>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 12.1</div>
+<div class="ex-title">求向量的分量形式</div>
+<div class="ex-problem">求從 $P(2,3)$ 到 $Q(5,7)$ 的向量分量形式。</div>
+<div class="ex-sol"><strong>解：</strong>$\mathbf{v} = \langle 5-2, 7-3 \rangle = \langle 3, 4 \rangle$。</div>
+<div class="ex-ans">✅ 答案：$\langle 3, 4 \rangle$</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 12.2</div>
+<div class="ex-title">求向量的大小</div>
+<div class="ex-problem">求 $\mathbf{v} = \langle 3, -4 \rangle$ 的大小。</div>
+<div class="ex-sol"><strong>解：</strong>$\|\mathbf{v}\| = \sqrt{3^2 + (-4)^2} = \sqrt{9+16} = 5$。</div>
+<div class="ex-ans">✅ 答案：$5$</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 12.3</div>
+<div class="ex-title">求單位向量</div>
+<div class="ex-problem">求與 $\mathbf{v} = \langle 3, 4 \rangle$ 同方向的單位向量。</div>
+<div class="ex-sol"><strong>解：</strong>$\|\mathbf{v}\| = 5$。$\mathbf{u} = \frac{\mathbf{v}}{\|\mathbf{v}\|} = \langle \frac{3}{5}, \frac{4}{5} \rangle$。<br>驗算：$\|\mathbf{u}\| = \sqrt{(3/5)^2+(4/5)^2} = 1$ ✓。</div>
+<div class="ex-ans">✅ 答案：$\langle \frac{3}{5}, \frac{4}{5} \rangle$</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 12.4</div>
+<div class="ex-title">向量加法與純量乘法</div>
+<div class="ex-problem">設 $\mathbf{a} = \langle 2, -1 \rangle$、$\mathbf{b} = \langle -3, 4 \rangle$。求 $2\mathbf{a} - 3\mathbf{b}$。</div>
+<div class="ex-sol"><strong>解：</strong>$2\mathbf{a} = \langle 4, -2 \rangle$，$3\mathbf{b} = \langle -9, 12 \rangle$。<br>$2\mathbf{a} - 3\mathbf{b} = \langle 4-(-9), -2-12 \rangle = \langle 13, -14 \rangle$。</div>
+<div class="ex-ans">✅ 答案：$\langle 13, -14 \rangle$</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 12.5</div>
+<div class="ex-title">以 i, j 表示向量</div>
+<div class="ex-problem">將 $\mathbf{v} = \langle -5, 2 \rangle$ 表示為標準單位向量 $\mathbf{i}, \mathbf{j}$ 的線性組合。</div>
+<div class="ex-sol"><strong>解：</strong>$\mathbf{v} = -5\mathbf{i} + 2\mathbf{j}$。</div>
+<div class="ex-ans">✅ 答案：$-5\mathbf{i} + 2\mathbf{j}$</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 12.6</div>
+<div class="ex-title">合力：兩力作用</div>
+<div class="ex-problem">兩個力 $\mathbf{F}_1 = 3\mathbf{i} + 4\mathbf{j}$ N 和 $\mathbf{F}_2 = \mathbf{i} - 2\mathbf{j}$ N 作用在一物體上。求合力的大小和方向。</div>
+<div class="ex-sol"><strong>解：</strong>合力 $\mathbf{F} = \mathbf{F}_1 + \mathbf{F}_2 = 4\mathbf{i} + 2\mathbf{j}$ N。<br>$\|\mathbf{F}\| = \sqrt{16+4} = \sqrt{20} = 2\sqrt{5} \approx 4.47$ N。<br>方向角 $\theta = \arctan(2/4) = \arctan(0.5) \approx 26.6°$（從正 $x$ 軸逆時針量）。</div>
+<div class="ex-ans">✅ 答案：$2\sqrt{5} \approx 4.47$ N，$\theta \approx 26.6°$</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 12.7</div>
+<div class="ex-title">速度向量</div>
+<div class="ex-problem">一架飛機以 500 km/h 的速度朝北偏東 30° 方向飛行。求速度的向量表示。</div>
+<div class="ex-sol"><strong>解：</strong>$\mathbf{v} = 500\cos 60°\mathbf{i} + 500\sin 60°\mathbf{j} = 250\mathbf{i} + 250\sqrt{3}\mathbf{j}$。<br>（北偏東 30° 即從正北順時針轉 30°，在標準座標中對應與正 $y$ 軸夾角 30°，與正 $x$ 軸夾角 60°。）</div>
+<div class="ex-ans">✅ 答案：$\langle 250, 250\sqrt{3} \rangle \approx \langle 250, 433 \rangle$ km/h</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 12.8</div>
+<div class="ex-title">向量線性組合的係數求解</div>
+<div class="ex-problem">求純量 $a$ 和 $b$ 使 $a\langle 1, 2 \rangle + b\langle 2, -1 \rangle = \langle 8, 1 \rangle$。</div>
+<div class="ex-sol"><strong>解：</strong>分量方程：$a+2b=8$，$2a-b=1$。<br>由第二式：$b=2a-1$。代入第一式：$a+2(2a-1)=8$ → $5a-2=8$ → $a=2$。<br>$b=2(2)-1=3$。驗算：$2\langle 1,2 \rangle + 3\langle 2,-1 \rangle = \langle 2,4 \rangle + \langle 6,-3 \rangle = \langle 8,1 \rangle$ ✓。</div>
+<div class="ex-ans">✅ 答案：$a=2$，$b=3$</div>
+
+</div>
+
+</section>
+
+<section id="ss2-2">
+<h2>2.2 三維空間中的向量（Vectors in Three Dimensions）</h2>
+<p style="font-size:13px;color:var(--tx2);margin-bottom:16px"><strong>🔑 本節重點：</strong>空間座標系、距離公式、球面方程式、三維向量運算</p>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 12.9</div>
+<div class="ex-title">三維空間距離</div>
+<div class="ex-problem">求點 $P(1,2,3)$ 和 $Q(4,6,3)$ 之間的距離。</div>
+<div class="ex-sol"><strong>解：</strong>$d = \sqrt{(4-1)^2+(6-2)^2+(3-3)^2} = \sqrt{9+16+0} = 5$。</div>
+<div class="ex-ans">✅ 答案：$5$</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 12.10</div>
+<div class="ex-title">球面方程式</div>
+<div class="ex-problem">求以 $(2,-1,3)$ 為球心、半徑為 $4$ 的球面方程式。</div>
+<div class="ex-sol"><strong>解：</strong>$(x-2)^2 + (y+1)^2 + (z-3)^2 = 16$。</div>
+<div class="ex-ans">✅ 答案：$(x-2)^2 + (y+1)^2 + (z-3)^2 = 16$</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 12.11</div>
+<div class="ex-title">求球心與半徑</div>
+<div class="ex-problem">求球面 $x^2+y^2+z^2-2x+4y-6z-2=0$ 的球心和半徑。</div>
+<div class="ex-sol"><strong>解：</strong>配方：$(x^2-2x)+(y^2+4y)+(z^2-6z)=2$。<br>$(x-1)^2-1 + (y+2)^2-4 + (z-3)^2-9 = 2$。<br>$(x-1)^2+(y+2)^2+(z-3)^2 = 16$。<br>球心 $(1,-2,3)$，半徑 $4$。</div>
+<div class="ex-ans">✅ 答案：球心 $(1,-2,3)$，半徑 $4$</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 12.12</div>
+<div class="ex-title">三維向量的大小</div>
+<div class="ex-problem">求 $\mathbf{v} = \langle 1, -2, 2 \rangle$ 的大小。</div>
+<div class="ex-sol"><strong>解：</strong>$\|\mathbf{v}\| = \sqrt{1^2+(-2)^2+2^2} = \sqrt{1+4+4} = 3$。</div>
+<div class="ex-ans">✅ 答案：$3$</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 12.13</div>
+<div class="ex-title">三維單位向量</div>
+<div class="ex-problem">求 $\mathbf{v} = \langle 2, 3, -6 \rangle$ 同方向的單位向量。</div>
+<div class="ex-sol"><strong>解：</strong>$\|\mathbf{v}\| = \sqrt{4+9+36} = \sqrt{49} = 7$。<br>$\mathbf{u} = \langle \frac{2}{7}, \frac{3}{7}, -\frac{6}{7} \rangle$。</div>
+<div class="ex-ans">✅ 答案：$\langle \frac{2}{7}, \frac{3}{7}, -\frac{6}{7} \rangle$</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 12.14</div>
+<div class="ex-title">三維空間中的中點</div>
+<div class="ex-problem">求連接 $P(1,0,3)$ 和 $Q(5,2,-1)$ 的線段中點。</div>
+<div class="ex-sol"><strong>解：</strong>中點 $= \left(\frac{1+5}{2}, \frac{0+2}{2}, \frac{3+(-1)}{2}\right) = (3, 1, 1)$。</div>
+<div class="ex-ans">✅ 答案：$(3, 1, 1)$</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 12.15</div>
+<div class="ex-title">判斷共線性</div>
+<div class="ex-problem">判斷點 $A(1,2,3)$、$B(3,0,1)$、$C(5,-2,-1)$ 是否共線。</div>
+<div class="ex-sol"><strong>解：</strong>$\overrightarrow{AB} = \langle 2, -2, -2 \rangle$，$\overrightarrow{AC} = \langle 4, -4, -4 \rangle$。<br>$\overrightarrow{AC} = 2\overrightarrow{AB}$，故三點共線。</div>
+<div class="ex-ans">✅ 答案：是，共線</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 12.15a</div>
+<div class="ex-title">三維空間中滿足條件的點集合</div>
+<div class="ex-problem">描述滿足 $x=3$、$y=-1$ 的所有點的集合。</div>
+<div class="ex-sol"><strong>解：</strong>$x$ 和 $y$ 固定而 $z$ 任意，這是一條平行於 $z$ 軸的直線，通過 $(3,-1,0)$。<br>參數式：$x=3$、$y=-1$、$z=t$（$t\in\mathbb{R}$）。</div>
+<div class="ex-ans">✅ 答案：平行於 $z$ 軸的直線，通過 $(3,-1,0)$</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 12.15b</div>
+<div class="ex-title">三維空間中的不等式區域</div>
+<div class="ex-problem">描述滿足 $x^2+y^2+z^2\le 4$ 且 $z\ge 0$ 的點集。</div>
+<div class="ex-sol"><strong>解：</strong>$x^2+y^2+z^2\le 4$ 表示半徑為 $2$ 的實心球。$z\ge 0$ 限制在上半空間。交集為上半實心半球。</div>
+<div class="ex-ans">✅ 答案：上半實心半球（半徑 $2$）</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 12.15c</div>
+<div class="ex-title">三個座標平面上的點</div>
+<div class="ex-problem">寫出滿足 $z=0$ 的點集，並描述其幾何意義。</div>
+<div class="ex-sol"><strong>解：</strong>$z=0$ 表示所有點都在 $xy$ 平面上。這是一個包含原點的完整二維平面。</div>
+<div class="ex-ans">✅ 答案：$xy$ 平面</div>
+
+</div>
+
+</section>
+
+<section id="ss2-3">
+<h2>2.3 點積（The Dot Product）</h2>
+<p style="font-size:13px;color:var(--tx2);margin-bottom:16px"><strong>🔑 本節重點：</strong>點積定義與性質、正交性判定、方向餘弦、投影、功的計算</p>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 12.16</div>
+<div class="ex-title">計算點積</div>
+<div class="ex-problem">求 $\mathbf{u} = \langle 3, -1, 2 \rangle$ 與 $\mathbf{v} = \langle -2, 4, 1 \rangle$ 的點積。</div>
+<div class="ex-sol"><strong>解：</strong>$\mathbf{u}\cdot\mathbf{v} = 3(-2) + (-1)(4) + 2(1) = -6-4+2 = -8$。</div>
+<div class="ex-ans">✅ 答案：$-8$</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 12.17</div>
+<div class="ex-title">用點積求角度</div>
+<div class="ex-problem">求 $\mathbf{u} = \langle 1, 0, 1 \rangle$ 與 $\mathbf{v} = \langle 0, 1, 1 \rangle$ 之間的夾角。</div>
+<div class="ex-sol"><strong>解：</strong>$\mathbf{u}\cdot\mathbf{v} = 1(0)+0(1)+1(1) = 1$。<br>$\|\mathbf{u}\| = \sqrt{2}$，$\|\mathbf{v}\| = \sqrt{2}$。<br>$\cos\theta = \frac{1}{\sqrt{2}\sqrt{2}} = \frac{1}{2}$。$\theta = \arccos(1/2) = 60°$ 或 $\pi/3$。</div>
+<div class="ex-ans">✅ 答案：$\theta = 60° = \pi/3$</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 12.18</div>
+<div class="ex-title">判斷正交性</div>
+<div class="ex-problem">判斷 $\mathbf{u} = \langle 2, -1, 3 \rangle$ 與 $\mathbf{v} = \langle 1, 5, 1 \rangle$ 是否正交。</div>
+<div class="ex-sol"><strong>解：</strong>$\mathbf{u}\cdot\mathbf{v} = 2(1)+(-1)(5)+3(1) = 2-5+3 = 0$。點積為零，兩向量正交。</div>
+<div class="ex-ans">✅ 答案：是，正交</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 12.19</div>
+<div class="ex-title">方向餘弦</div>
+<div class="ex-problem">求 $\mathbf{v} = \langle 2, 3, 6 \rangle$ 的方向角和方向餘弦。</div>
+<div class="ex-sol"><strong>解：</strong>$\|\mathbf{v}\| = \sqrt{4+9+36} = 7$。<br>$\cos\alpha = 2/7$，$\cos\beta = 3/7$，$\cos\gamma = 6/7$。<br>$\alpha = \arccos(2/7) \approx 73.4°$，$\beta = \arccos(3/7) \approx 64.6°$，$\gamma = \arccos(6/7) \approx 31.0°$。<br>驗算：$\cos^2\alpha+\cos^2\beta+\cos^2\gamma = (4+9+36)/49 = 1$ ✓。</div>
+<div class="ex-ans">✅ 答案：$\cos\alpha=2/7,\cos\beta=3/7,\cos\gamma=6/7$</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 12.20</div>
+<div class="ex-title">向量投影</div>
+<div class="ex-problem">求 $\mathbf{u} = \langle 2, 3 \rangle$ 在 $\mathbf{v} = \langle 1, 1 \rangle$ 上的投影向量。</div>
+<div class="ex-sol"><strong>解：</strong>$\text{proj}_{\mathbf{v}}\mathbf{u} = \frac{\mathbf{u}\cdot\mathbf{v}}{\|\mathbf{v}\|^2}\mathbf{v}$。<br>$\mathbf{u}\cdot\mathbf{v} = 2(1)+3(1) = 5$，$\|\mathbf{v}\|^2 = 2$。<br>$\text{proj}_{\mathbf{v}}\mathbf{u} = \frac{5}{2}\langle 1, 1 \rangle = \langle 2.5, 2.5 \rangle$。</div>
+<div class="ex-ans">✅ 答案：$\langle \frac{5}{2}, \frac{5}{2} \rangle$</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 12.21</div>
+<div class="ex-title">純量投影</div>
+<div class="ex-problem">求 $\mathbf{u} = \langle 3, 4 \rangle$ 在 $\mathbf{v} = \langle 1, 0 \rangle$ 上的純量投影。</div>
+<div class="ex-sol"><strong>解：</strong>$\text{comp}_{\mathbf{v}}\mathbf{u} = \frac{\mathbf{u}\cdot\mathbf{v}}{\|\mathbf{v}\|} = \frac{3(1)+4(0)}{1} = 3$。<br>這就是 $\mathbf{u}$ 在 $x$ 軸上的分量。</div>
+<div class="ex-ans">✅ 答案：$3$</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 12.22</div>
+<div class="ex-title">功的計算</div>
+<div class="ex-problem">一個恆力 $\mathbf{F} = \langle 2, 3 \rangle$ N 將物體從 $(0,0)$ 沿直線移動到 $(5,1)$。求所做的功。</div>
+<div class="ex-sol"><strong>解：</strong>位移 $\mathbf{d} = \langle 5-0, 1-0 \rangle = \langle 5, 1 \rangle$。<br>$W = \mathbf{F}\cdot\mathbf{d} = 2(5)+3(1) = 13$ J。</div>
+<div class="ex-ans">✅ 答案：$13$ J</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 12.22a</div>
+<div class="ex-title">利用點積求分量</div>
+<div class="ex-problem">已知 $\mathbf{v} = \langle 3, 4 \rangle$，求與 $\mathbf{i}$（正 $x$ 軸）同向的純量分量。</div>
+<div class="ex-sol"><strong>解：</strong>$\text{comp}_{\mathbf{i}}\mathbf{v} = \frac{\mathbf{v}\cdot\mathbf{i}}{\|\mathbf{i}\|} = \frac{3(1)+4(0)}{1} = 3$。<br>這正是 $\mathbf{v}$ 的 $x$ 分量。</div>
+<div class="ex-ans">✅ 答案：$3$</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 12.22b</div>
+<div class="ex-title">利用點積判定鈍角</div>
+<div class="ex-problem">判斷 $\mathbf{u}=\langle 1, 2, -3\rangle$ 和 $\mathbf{v}=\langle -2, 0, 1\rangle$ 之間的夾角是銳角、直角還是鈍角。</div>
+<div class="ex-sol"><strong>解：</strong>$\mathbf{u}\cdot\mathbf{v} = 1(-2)+2(0)+(-3)(1) = -5 < 0$。<br>點積為負，故夾角為鈍角（$>90°$）。</div>
+<div class="ex-ans">✅ 答案：鈍角（點積 $-5<0$）</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 12.22c</div>
+<div class="ex-title">正交分解</div>
+<div class="ex-problem">將 $\mathbf{u}=\langle 3, 1 \rangle$ 分解為平行於 $\mathbf{v}=\langle 1, 2 \rangle$ 的分量和垂直於 $\mathbf{v}$ 的分量。</div>
+<div class="ex-sol"><strong>解：</strong>$\text{proj}_{\mathbf{v}}\mathbf{u} = \frac{3(1)+1(2)}{1^2+2^2}\langle 1,2\rangle = \frac{5}{5}\langle 1,2\rangle = \langle 1,2\rangle$。<br>垂直分量 $= \mathbf{u} - \text{proj}_{\mathbf{v}}\mathbf{u} = \langle 3,1\rangle-\langle 1,2\rangle = \langle 2,-1\rangle$。<br>驗算：$\langle 1,2\rangle\cdot\langle 2,-1\rangle = 2-2=0$ ✓。</div>
+<div class="ex-ans">✅ 答案：平行：$\langle 1,2\rangle$；垂直：$\langle 2,-1\rangle$</div>
+
+</div>
+
+</section>
+
+<section id="ss2-4">
+<h2>2.4 叉積（The Cross Product）</h2>
+<p style="font-size:13px;color:var(--tx2);margin-bottom:16px"><strong>🔑 本節重點：</strong>叉積定義與計算（行列式法）、幾何意義、面積與體積、力矩</p>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 12.23</div>
+<div class="ex-title">計算叉積：行列式法</div>
+<div class="ex-problem">求 $\mathbf{u} = \langle 2, 0, -1 \rangle$ 與 $\mathbf{v} = \langle 1, 3, 2 \rangle$ 的叉積。</div>
+<div class="ex-sol"><strong>解：</strong>$$\mathbf{u}\times\mathbf{v} = \begin{vmatrix} \mathbf{i} & \mathbf{j} & \mathbf{k} \\ 2 & 0 & -1 \\ 1 & 3 & 2 \end{vmatrix}$$<br>$= \mathbf{i}(0\cdot2 - (-1)\cdot3) - \mathbf{j}(2\cdot2 - (-1)\cdot1) + \mathbf{k}(2\cdot3 - 0\cdot1)$<br>$= 3\mathbf{i} - 5\mathbf{j} + 6\mathbf{k} = \langle 3, -5, 6 \rangle$。</div>
+<div class="ex-ans">✅ 答案：$\langle 3, -5, 6 \rangle$</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 12.24</div>
+<div class="ex-title">叉積的幾何意義</div>
+<div class="ex-problem">求 $\mathbf{u} = \langle 1, 2, 0 \rangle$ 和 $\mathbf{v} = \langle 3, 0, 0 \rangle$ 所構成的平行四邊形面積。</div>
+<div class="ex-sol"><strong>解：</strong>$\mathbf{u}\times\mathbf{v} = \begin{vmatrix}\mathbf{i}&\mathbf{j}&\mathbf{k}\\1&2&0\\3&0&0\end{vmatrix} = \mathbf{i}(0)-\mathbf{j}(0)+\mathbf{k}(0-6) = \langle 0, 0, -6 \rangle$。<br>$\|\mathbf{u}\times\mathbf{v}\| = 6$。面積 = 6 平方單位。</div>
+<div class="ex-ans">✅ 答案：$6$ 平方單位</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 12.25</div>
+<div class="ex-title">純量三重積求體積</div>
+<div class="ex-problem">求由 $\mathbf{u}=\langle 1,0,0\rangle$、$\mathbf{v}=\langle 0,1,0\rangle$、$\mathbf{w}=\langle 0,0,1\rangle$ 構成的平行六面體體積。</div>
+<div class="ex-sol"><strong>解：</strong>$\mathbf{u}\cdot(\mathbf{v}\times\mathbf{w}) = \begin{vmatrix}1&0&0\\0&1&0\\0&0&1\end{vmatrix} = 1$。體積 = 1 立方單位。</div>
+<div class="ex-ans">✅ 答案：$1$ 立方單位</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 12.26</div>
+<div class="ex-title">力矩的計算</div>
+<div class="ex-problem">一個力 $\mathbf{F} = \langle 0, 0, -10 \rangle$ N 作用在位置 $\mathbf{r} = \langle 2, 0, 0 \rangle$ m。求對原點的力矩。</div>
+<div class="ex-sol"><strong>解：</strong>$\boldsymbol{\tau} = \mathbf{r}\times\mathbf{F} = \begin{vmatrix}\mathbf{i}&\mathbf{j}&\mathbf{k}\\2&0&0\\0&0&-10\end{vmatrix} = \langle 0, 20, 0 \rangle$ N·m。</div>
+<div class="ex-ans">✅ 答案：$\langle 0, 20, 0 \rangle$ N·m</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 12.27</div>
+<div class="ex-title">叉積的大小公式</div>
+<div class="ex-problem">驗證 $\|\mathbf{u}\times\mathbf{v}\| = \|\mathbf{u}\|\|\mathbf{v}\|\sin\theta$。設 $\mathbf{u}=\langle 3,0,0\rangle$、$\mathbf{v}=\langle 1,2,0\rangle$。</div>
+<div class="ex-sol"><strong>解：</strong>$\mathbf{u}\times\mathbf{v} = \langle 0,0,6\rangle$，$\|\mathbf{u}\times\mathbf{v}\| = 6$。<br>$\|\mathbf{u}\|=3$，$\|\mathbf{v}\|=\sqrt{5}$。<br>$\cos\theta = \frac{3}{3\sqrt{5}} = \frac{1}{\sqrt{5}}$ → $\sin\theta = \sqrt{1-1/5} = \frac{2}{\sqrt{5}}$。<br>$\|\mathbf{u}\|\|\mathbf{v}\|\sin\theta = 3\sqrt{5}\cdot\frac{2}{\sqrt{5}} = 6$ ✓。</div>
+<div class="ex-ans">✅ 答案：$6$，公式成立 ✓</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 12.28</div>
+<div class="ex-title">三角形面積</div>
+<div class="ex-problem">求頂點為 $P(0,0,0)$、$Q(1,2,3)$、$R(4,0,-1)$ 的三角形面積。</div>
+<div class="ex-sol"><strong>解：</strong>$\overrightarrow{PQ} = \langle 1, 2, 3 \rangle$，$\overrightarrow{PR} = \langle 4, 0, -1 \rangle$。<br>$\overrightarrow{PQ}\times\overrightarrow{PR} = \begin{vmatrix}\mathbf{i}&\mathbf{j}&\mathbf{k}\\1&2&3\\4&0&-1\end{vmatrix} = \langle -2, 13, -8 \rangle$。<br>$\|\overrightarrow{PQ}\times\overrightarrow{PR}\| = \sqrt{4+169+64} = \sqrt{237}$。<br>三角形面積 $= \frac{1}{2}\sqrt{237} \approx 7.70$。</div>
+<div class="ex-ans">✅ 答案：$\frac{\sqrt{237}}{2} \approx 7.70$ 平方單位</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 12.29</div>
+<div class="ex-title">共面向量判定</div>
+<div class="ex-problem">判斷 $\mathbf{u}=\langle 1,2,3\rangle$、$\mathbf{v}=\langle 2,-1,1\rangle$、$\mathbf{w}=\langle 4,3,7\rangle$ 是否共面。</div>
+<div class="ex-sol"><strong>解：</strong>計算純量三重積：$\mathbf{u}\cdot(\mathbf{v}\times\mathbf{w}) = \begin{vmatrix}1&2&3\\2&-1&1\\4&3&7\end{vmatrix}$。<br>$= 1(-7-3) - 2(14-4) + 3(6+4) = -10 - 20 + 30 = 0$。三重積為零，三向量共面。</div>
+<div class="ex-ans">✅ 答案：是，共面</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 12.30</div>
+<div class="ex-title">求與兩向量垂直的單位向量</div>
+<div class="ex-problem">求與 $\mathbf{u}=\langle 1,1,0\rangle$ 和 $\mathbf{v}=\langle 0,1,1\rangle$ 都垂直的單位向量。</div>
+<div class="ex-sol"><strong>解：</strong>$\mathbf{u}\times\mathbf{v} = \begin{vmatrix}\mathbf{i}&\mathbf{j}&\mathbf{k}\\1&1&0\\0&1&1\end{vmatrix} = \langle 1, -1, 1 \rangle$。<br>$\|\mathbf{u}\times\mathbf{v}\| = \sqrt{3}$。單位向量 $= \langle \frac{1}{\sqrt{3}}, -\frac{1}{\sqrt{3}}, \frac{1}{\sqrt{3}} \rangle$。</div>
+<div class="ex-ans">✅ 答案：$\langle \frac{1}{\sqrt{3}}, -\frac{1}{\sqrt{3}}, \frac{1}{\sqrt{3}} \rangle$</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 12.30a</div>
+<div class="ex-title">叉積的反交換性</div>
+<div class="ex-problem">驗證對於 $\mathbf{u}=\langle 2,1,0\rangle$ 和 $\mathbf{v}=\langle 0,3,1\rangle$，$\mathbf{u}\times\mathbf{v} = -(\mathbf{v}\times\mathbf{u})$。</div>
+<div class="ex-sol"><strong>解：</strong>$\mathbf{u}\times\mathbf{v} = \begin{vmatrix}\mathbf{i}&\mathbf{j}&\mathbf{k}\\2&1&0\\0&3&1\end{vmatrix} = \langle 1, -2, 6 \rangle$。<br>$\mathbf{v}\times\mathbf{u} = \begin{vmatrix}\mathbf{i}&\mathbf{j}&\mathbf{k}\\0&3&1\\2&1&0\end{vmatrix} = \langle -1, 2, -6 \rangle = -\langle 1, -2, 6 \rangle$ ✓。</div>
+<div class="ex-ans">✅ 答案：$\mathbf{u}\times\mathbf{v} = \langle 1,-2,6\rangle = -(\mathbf{v}\times\mathbf{u})$ ✓</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 12.30b</div>
+<div class="ex-title">平行四邊形面積：空間中的四邊形</div>
+<div class="ex-problem">求頂點為 $A(1,0,1)$、$B(2,2,3)$、$C(4,1,5)$、$D(3,-1,3)$ 的平行四邊形面積。</div>
+<div class="ex-sol"><strong>解：</strong>$\overrightarrow{AB} = \langle 1,2,2\rangle$，$\overrightarrow{AD} = \langle 2,-1,2\rangle$。<br>$\overrightarrow{AB}\times\overrightarrow{AD} = \begin{vmatrix}\mathbf{i}&\mathbf{j}&\mathbf{k}\\1&2&2\\2&-1&2\end{vmatrix} = \langle 6, 2, -5\rangle$。<br>$\|\overrightarrow{AB}\times\overrightarrow{AD}\| = \sqrt{36+4+25} = \sqrt{65}$。<br>面積 $= \sqrt{65} \approx 8.06$ 平方單位。</div>
+<div class="ex-ans">✅ 答案：$\sqrt{65} \approx 8.06$ 平方單位</div>
+
+</div>
+
+</section>
+
+<section id="ss2-5">
+<h2>2.5 空間中的直線與平面方程式（Equations of Lines and Planes in Space）</h2>
+<p style="font-size:13px;color:var(--tx2);margin-bottom:16px"><strong>🔑 本節重點：</strong>直線的參數式與對稱式、平面的向量式與純量式、距離公式</p>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 12.31</div>
+<div class="ex-title">直線的參數方程式</div>
+<div class="ex-problem">求通過 $P(1,2,3)$ 且平行於 $\mathbf{v}=\langle 2,-1,4\rangle$ 的直線的參數方程式。</div>
+<div class="ex-sol"><strong>解：</strong>$x=1+2t$，$y=2-t$，$z=3+4t$，$t\in\mathbb{R}$。</div>
+<div class="ex-ans">✅ 答案：$x=1+2t,\ y=2-t,\ z=3+4t$</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 12.32</div>
+<div class="ex-title">直線的對稱方程式</div>
+<div class="ex-problem">將 $x=2+3t$、$y=-1+2t$、$z=4-t$ 寫成對稱形式。</div>
+<div class="ex-sol"><strong>解：</strong>解出 $t$：$t=\frac{x-2}{3} = \frac{y+1}{2} = \frac{z-4}{-1}$。<br>對稱式：$\frac{x-2}{3} = \frac{y+1}{2} = \frac{z-4}{-1}$。</div>
+<div class="ex-ans">✅ 答案：$\frac{x-2}{3} = \frac{y+1}{2} = \frac{z-4}{-1}$</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 12.33</div>
+<div class="ex-title">過兩點的直線</div>
+<div class="ex-problem">求通過 $P(1,0,2)$ 和 $Q(3,4,1)$ 的直線的參數式。</div>
+<div class="ex-sol"><strong>解：</strong>方向向量 $\mathbf{v} = \overrightarrow{PQ} = \langle 2, 4, -1 \rangle$。<br>使用點 $P$：$x=1+2t$，$y=0+4t=4t$，$z=2-t$。</div>
+<div class="ex-ans">✅ 答案：$x=1+2t,\ y=4t,\ z=2-t$</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 12.34</div>
+<div class="ex-title">平面的方程式：法向量</div>
+<div class="ex-problem">求通過 $P(1,2,3)$ 且法向量為 $\mathbf{n}=\langle 2,-1,4\rangle$ 的平面方程式。</div>
+<div class="ex-sol"><strong>解：</strong>純量式：$2(x-1) - 1(y-2) + 4(z-3) = 0$。<br>展開：$2x-2-y+2+4z-12=0$。$2x-y+4z=12$。</div>
+<div class="ex-ans">✅ 答案：$2x - y + 4z = 12$</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 12.35</div>
+<div class="ex-title">過三點的平面</div>
+<div class="ex-problem">求通過 $P(1,0,0)$、$Q(0,1,0)$、$R(0,0,1)$ 的平面方程式。</div>
+<div class="ex-sol"><strong>解：</strong>$\overrightarrow{PQ} = \langle -1, 1, 0 \rangle$，$\overrightarrow{PR} = \langle -1, 0, 1 \rangle$。<br>法向量 $\mathbf{n} = \overrightarrow{PQ}\times\overrightarrow{PR} = \begin{vmatrix}\mathbf{i}&\mathbf{j}&\mathbf{k}\\-1&1&0\\-1&0&1\end{vmatrix} = \langle 1, 1, 1 \rangle$。<br>平面方程：$1(x-1)+1(y-0)+1(z-0)=0$ → $x+y+z=1$。</div>
+<div class="ex-ans">✅ 答案：$x+y+z=1$</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 12.36</div>
+<div class="ex-title">點到平面的距離</div>
+<div class="ex-problem">求點 $P(1,2,3)$ 到平面 $2x-y+2z=5$ 的距離。</div>
+<div class="ex-sol"><strong>解：</strong>距離公式：$d = \frac{|ax_0+by_0+cz_0+d|}{\sqrt{a^2+b^2+c^2}}$（平面為 $ax+by+cz+d=0$）。<br>平面：$2x-y+2z-5=0$，$a=2,b=-1,c=2,d=-5$。<br>$d = \frac{|2(1)+(-1)(2)+2(3)-5|}{\sqrt{4+1+4}} = \frac{|2-2+6-5|}{3} = \frac{1}{3}$。</div>
+<div class="ex-ans">✅ 答案：$\frac{1}{3}$</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 12.37</div>
+<div class="ex-title">兩直線的關係：平行、相交或歪斜</div>
+<div class="ex-problem">判斷直線 $L_1: x=1+t,\ y=2-t,\ z=3+2t$ 與 $L_2: x=2+s,\ y=1+s,\ z=5-s$ 是相交、平行還是歪斜。</div>
+<div class="ex-sol"><strong>解：</strong>$L_1$ 方向 $\mathbf{v}_1=\langle 1,-1,2\rangle$，$L_2$ 方向 $\mathbf{v}_2=\langle 1,1,-1\rangle$。不平行（不成比例）。<br>解 $1+t=2+s$、$2-t=1+s$、$3+2t=5-s$。<br>前兩式：$t-s=1$、$-t-s=-1$ → 相加得 $-2s=0$ → $s=0$、$t=1$。<br>代入第三式：$3+2(1)=5$，$5-0=5$ ✓。故兩線相交於 $(2,1,5)$。</div>
+<div class="ex-ans">✅ 答案：相交於點 $(2,1,5)$</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 12.38</div>
+<div class="ex-title">點到直線的距離</div>
+<div class="ex-problem">求點 $P(1,0,2)$ 到直線 $x=2+t,\ y=1-t,\ z=t$ 的距離。</div>
+<div class="ex-sol"><strong>解：</strong>直線上一點 $Q(2,1,0)$（令 $t=0$），方向 $\mathbf{v}=\langle 1,-1,1\rangle$。<br>$\overrightarrow{QP} = \langle -1,-1,2\rangle$。<br>$\overrightarrow{QP}\times\mathbf{v} = \begin{vmatrix}\mathbf{i}&\mathbf{j}&\mathbf{k}\\-1&-1&2\\1&-1&1\end{vmatrix} = \langle 1, 3, 2 \rangle$。<br>$\|\overrightarrow{QP}\times\mathbf{v}\| = \sqrt{1+9+4} = \sqrt{14}$，$\|\mathbf{v}\| = \sqrt{3}$。<br>$d = \frac{\sqrt{14}}{\sqrt{3}} = \sqrt{\frac{14}{3}} \approx 2.16$。</div>
+<div class="ex-ans">✅ 答案：$\sqrt{\frac{14}{3}} \approx 2.16$</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 12.39</div>
+<div class="ex-title">兩平面的交線</div>
+<div class="ex-problem">求兩平面 $x+y+z=1$ 和 $x-y+2z=2$ 的交線參數式。</div>
+<div class="ex-sol"><strong>解：</strong>法向量 $\mathbf{n}_1=\langle 1,1,1\rangle$、$\mathbf{n}_2=\langle 1,-1,2\rangle$。<br>交線方向 $\mathbf{v} = \mathbf{n}_1\times\mathbf{n}_2 = \begin{vmatrix}\mathbf{i}&\mathbf{j}&\mathbf{k}\\1&1&1\\1&-1&2\end{vmatrix} = \langle 3, -1, -2 \rangle$。<br>求交線上一點：令 $z=0$，解 $x+y=1$、$x-y=2$ → $x=3/2$、$y=-1/2$。<br>參數式：$x=\frac{3}{2}+3t$，$y=-\frac{1}{2}-t$，$z=-2t$。</div>
+<div class="ex-ans">✅ 答案：$x=\frac{3}{2}+3t,\ y=-\frac{1}{2}-t,\ z=-2t$</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 12.40</div>
+<div class="ex-title">直線與平面的夾角</div>
+<div class="ex-problem">求直線 $x=2+t,\ y=1-t,\ z=2t$ 與平面 $x+2y-z=3$ 之間的夾角。</div>
+<div class="ex-sol"><strong>解：</strong>直線方向 $\mathbf{v}=\langle 1,-1,2\rangle$，平面法向量 $\mathbf{n}=\langle 1,2,-1\rangle$。<br>$\mathbf{v}\cdot\mathbf{n}=1-2-2=-3$。<br>$\|\mathbf{v}\|=\sqrt{6}$，$\|\mathbf{n}\|=\sqrt{6}$。<br>$\cos\phi = \frac{|\mathbf{v}\cdot\mathbf{n}|}{\|\mathbf{v}\|\|\mathbf{n}\|} = \frac{3}{6} = \frac{1}{2}$。<br>$\phi = 60°$。直線與平面的夾角 $\theta = 90° - \phi = 30°$。</div>
+<div class="ex-ans">✅ 答案：$30°$</div>
+
+</div>
+
+</section>
+
+<section id="ss2-6">
+<h2>2.6 二次曲面（Quadric Surfaces）</h2>
+<p style="font-size:13px;color:var(--tx2);margin-bottom:16px"><strong>🔑 本節重點：</strong>橢球面、拋物面、雙曲面、圓錐面、柱面、跡線分析法</p>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 12.41</div>
+<div class="ex-title">識別橢球面</div>
+<div class="ex-problem">識別並描繪 $\frac{x^2}{4}+\frac{y^2}{9}+\frac{z^2}{16}=1$。</div>
+<div class="ex-sol"><strong>解：</strong>這是一個橢球面。$x$ 截距 $\pm 2$，$y$ 截距 $\pm 3$，$z$ 截距 $\pm 4$。三個坐標平面的跡線均為橢圓。</div>
+<div class="ex-ans">✅ 答案：橢球面，半軸長度為 $2,3,4$</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 12.42</div>
+<div class="ex-title">識別橢圓拋物面</div>
+<div class="ex-problem">識別 $z = \frac{x^2}{4}+\frac{y^2}{9}$。</div>
+<div class="ex-sol"><strong>解：</strong>開口向上的橢圓拋物面。$z=c$ 的水平截面為橢圓 $\frac{x^2}{4c}+\frac{y^2}{9c}=1$（$c>0$）。$x=0$ 的垂直跡線為 $z=y^2/9$，是拋物線。</div>
+<div class="ex-ans">✅ 答案：橢圓拋物面</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 12.43</div>
+<div class="ex-title">識別雙曲拋物面（馬鞍面）</div>
+<div class="ex-problem">識別 $z = x^2 - y^2$。</div>
+<div class="ex-sol"><strong>解：</strong>雙曲拋物面（馬鞍面）。$z=0$ 給出 $x^2=y^2$，即 $y=\pm x$（兩條相交直線）。$z=c>0$ 的截面為 $x^2-y^2=c$（水平雙曲線）；$z=c<0$ 為 $y^2-x^2=|c|$（垂直雙曲線）。</div>
+<div class="ex-ans">✅ 答案：雙曲拋物面（馬鞍面）</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 12.44</div>
+<div class="ex-title">識別單葉雙曲面</div>
+<div class="ex-problem">識別 $\frac{x^2}{4}+\frac{y^2}{9}-\frac{z^2}{16}=1$。</div>
+<div class="ex-sol"><strong>解：</strong>單葉雙曲面。$z=0$ 的截面為橢圓 $\frac{x^2}{4}+\frac{y^2}{9}=1$。水平截面都為橢圓，垂直截面為雙曲線。</div>
+<div class="ex-ans">✅ 答案：單葉雙曲面</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 12.45</div>
+<div class="ex-title">識別雙葉雙曲面</div>
+<div class="ex-problem">識別 $-\frac{x^2}{4}-\frac{y^2}{9}+\frac{z^2}{16}=1$。</div>
+<div class="ex-sol"><strong>解：</strong>雙葉雙曲面。僅當 $|z|\ge 4$ 時有實點。$z=c$（$|c|>4$）的截面為橢圓。</div>
+<div class="ex-ans">✅ 答案：雙葉雙曲面</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 12.46</div>
+<div class="ex-title">識別圓錐面</div>
+<div class="ex-problem">識別 $z^2 = x^2 + y^2$。</div>
+<div class="ex-sol"><strong>解：</strong>圓錐面（雙葉錐）。$z=c$ 的水平截面為圓 $x^2+y^2=c^2$（半徑 $|c|$）。$y=0$ 的垂直跡線為 $z^2=x^2$，即 $z=\pm x$。</div>
+<div class="ex-ans">✅ 答案：圓錐面</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 12.47</div>
+<div class="ex-title">識別柱面</div>
+<div class="ex-problem">識別 $y = x^2$ 在三維空間中的圖形。</div>
+<div class="ex-sol"><strong>解：</strong>拋物柱面。方程中缺少 $z$，故圖形是將平面曲線 $y=x^2$ 沿 $z$ 軸方向無限延伸而成的曲面。</div>
+<div class="ex-ans">✅ 答案：拋物柱面</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 12.48</div>
+<div class="ex-title">用跡線法分析曲面</div>
+<div class="ex-problem">用跡線法分析 $x^2 + \frac{y^2}{4} + z = 1$ 的形狀。</div>
+<div class="ex-sol"><strong>解：</strong>$z=0$：$x^2+y^2/4=1$（橢圓）。$z=1$：$x^2+y^2/4=0$（原點一個點）。$z<1$：橢圓。$z>1$：無實點。<br>$x=0$：$y^2/4+z=1$（向下開口的拋物線）。$y=0$：$x^2+z=1$（向下開口的拋物線）。<br>這是一個向下開口的橢圓拋物面，頂點在 $(0,0,1)$。</div>
+<div class="ex-ans">✅ 答案：向下開口的橢圓拋物面，頂點 $(0,0,1)$</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 12.48a</div>
+<div class="ex-title">橢球面與球的比較</div>
+<div class="ex-problem">將橢球面 $\frac{x^2}{4}+\frac{y^2}{4}+\frac{z^2}{4}=1$ 與球面進行比較。</div>
+<div class="ex-sol"><strong>解：</strong>兩邊乘以 $4$：$x^2+y^2+z^2=4$。這恰好是半徑為 $2$ 的球面。因此，當三個分母相等時，橢球面退化為球面。一般橢球面的三個半軸可以不同。</div>
+<div class="ex-ans">✅ 答案：退化為球面 $x^2+y^2+z^2=4$，半徑 $2$</div>
+
+</div>
+
+</section>
+
+<section id="ss2-7">
+<h2>2.7 圓柱座標與球座標（Cylindrical and Spherical Coordinates）</h2>
+<p style="font-size:13px;color:var(--tx2);margin-bottom:16px"><strong>🔑 本節重點：</strong>圓柱座標 $(r,\theta,z)$、球座標 $(\rho,\theta,\phi)$、座標轉換、應用選擇</p>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 12.49</div>
+<div class="ex-title">直角 → 圓柱座標</div>
+<div class="ex-problem">將直角點 $(2,2,3)$ 轉換為圓柱座標。</div>
+<div class="ex-sol"><strong>解：</strong>$r = \sqrt{2^2+2^2} = 2\sqrt{2}$。$\theta = \arctan(2/2) = \pi/4$。$z=3$。<br>圓柱座標：$(2\sqrt{2}, \pi/4, 3)$。</div>
+<div class="ex-ans">✅ 答案：$(2\sqrt{2}, \pi/4, 3)$</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 12.50</div>
+<div class="ex-title">圓柱 → 直角座標</div>
+<div class="ex-problem">將圓柱點 $(3, \pi/2, -1)$ 轉換為直角座標。</div>
+<div class="ex-sol"><strong>解：</strong>$x = 3\cos(\pi/2) = 0$。$y = 3\sin(\pi/2) = 3$。$z = -1$。<br>直角座標：$(0, 3, -1)$。</div>
+<div class="ex-ans">✅ 答案：$(0, 3, -1)$</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 12.51</div>
+<div class="ex-title">直角 → 球座標</div>
+<div class="ex-problem">將直角點 $(1,1,\sqrt{2})$ 轉換為球座標。</div>
+<div class="ex-sol"><strong>解：</strong>$\rho = \sqrt{1+1+2} = 2$。<br>$\theta = \arctan(1/1) = \pi/4$。<br>$\phi = \arccos(\sqrt{2}/2) = \arccos(1/\sqrt{2}) = \pi/4$。<br>球座標：$(2, \pi/4, \pi/4)$。</div>
+<div class="ex-ans">✅ 答案：$(2, \pi/4, \pi/4)$</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 12.52</div>
+<div class="ex-title">球 → 直角座標</div>
+<div class="ex-problem">將球點 $(4, \pi/6, \pi/3)$ 轉換為直角座標。</div>
+<div class="ex-sol"><strong>解：</strong>$x = 4\sin(\pi/3)\cos(\pi/6) = 4\cdot\frac{\sqrt{3}}{2}\cdot\frac{\sqrt{3}}{2} = 3$。<br>$y = 4\sin(\pi/3)\sin(\pi/6) = 4\cdot\frac{\sqrt{3}}{2}\cdot\frac{1}{2} = \sqrt{3}$。<br>$z = 4\cos(\pi/3) = 4\cdot\frac{1}{2} = 2$。<br>直角座標：$(3, \sqrt{3}, 2)$。</div>
+<div class="ex-ans">✅ 答案：$(3, \sqrt{3}, 2)$</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 12.53</div>
+<div class="ex-title">圓柱座標方程式轉換</div>
+<div class="ex-problem">將圓柱方程式 $r=3$ 轉換為直角方程式。</div>
+<div class="ex-sol"><strong>解：</strong>$r^2 = x^2+y^2$，故 $x^2+y^2 = 9$。這是半徑為 3 的圓柱面（沿 $z$ 軸延伸）。</div>
+<div class="ex-ans">✅ 答案：$x^2+y^2=9$（圓柱面）</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 12.54</div>
+<div class="ex-title">球座標方程式轉換</div>
+<div class="ex-problem">將球方程式 $\rho = 2$ 轉換為直角方程式。</div>
+<div class="ex-sol"><strong>解：</strong>$\rho^2 = x^2+y^2+z^2$，故 $x^2+y^2+z^2 = 4$。這是半徑為 2 的球面。</div>
+<div class="ex-ans">✅ 答案：$x^2+y^2+z^2=4$（球面）</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 12.55</div>
+<div class="ex-title">球座標中的緯度與經度</div>
+<div class="ex-problem">地球半徑約 6370 km。求緯度 40°N、經度 74°W（紐約市）的直角座標。</div>
+<div class="ex-sol"><strong>解：</strong>$\rho = 6370$，$\theta = 360°-74° = 286°$（向西為負），或 $\theta = -74°$。<br>$\phi = 90°-40° = 50°$（球座標的 $\phi$ 從北極量起）。<br>$x = 6370\sin 50°\cos(-74°) \approx 6370\cdot 0.7660\cdot 0.2756 \approx 1344$。<br>$y = 6370\sin 50°\sin(-74°) \approx 6370\cdot 0.7660\cdot (-0.9613) \approx -4690$。<br>$z = 6370\cos 50° \approx 6370\cdot 0.6428 \approx 4095$。<br>直角座標約 $(1344, -4690, 4095)$ km。</div>
+<div class="ex-ans">✅ 答案：約 $(1344, -4690, 4095)$ km</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 12.56</div>
+<div class="ex-title">不同座標系的曲面方程式比較</div>
+<div class="ex-problem">寫出半徑為 $R$ 的球面在 (a) 直角 (b) 圓柱 (c) 球座標下的方程式。</div>
+<div class="ex-sol"><strong>解：</strong>(a) $x^2+y^2+z^2=R^2$。<br>(b) $r^2+z^2=R^2$。<br>(c) $\rho = R$。<br>球座標最簡潔——這就是選擇正確座標系的威力。</div>
+<div class="ex-ans">✅ 答案：(a) $x^2+y^2+z^2=R^2$ (b) $r^2+z^2=R^2$ (c) $\rho=R$</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 12.57</div>
+<div class="ex-title">圓柱座標中的 $\theta$ = 常數</div>
+<div class="ex-problem">描述圓柱座標中 $\theta=\pi/3$ 的曲面。</div>
+<div class="ex-sol"><strong>解：</strong>這是一個包含 $z$ 軸且與正 $x$ 軸夾角 $\pi/3$ 的半平面（垂直平面）。$r$ 和 $z$ 任意。</div>
+<div class="ex-ans">✅ 答案：半平面（包含 $z$ 軸）</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 12.58</div>
+<div class="ex-title">球座標中的 $\phi$ = 常數</div>
+<div class="ex-problem">描述球座標中 $\phi=\pi/4$ 的曲面。</div>
+<div class="ex-sol"><strong>解：</strong>$\phi$ 固定時，$\rho$ 和 $\theta$ 可任意變動。這是頂點在原點、開口向下的圓錐面，母線與正 $z$ 軸夾角 $\pi/4$。</div>
+<div class="ex-ans">✅ 答案：半錐面（頂點在原點）</div>
+
+</div>
+
+</section>
+
+</body>
+</html>

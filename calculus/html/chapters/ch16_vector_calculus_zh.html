@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第 16 章 — Calculus 學習教材</title>
+<script>
+MathJax = {
+  tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']], tags: 'ams' },
+  options: { ignoreHtmlClass: 'no-math' }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script src="../assets/reading-preferences.js" defer></script>
+<style>
+:root {
+  --bg: #FFFFFF; --bg2: #F5F5F7; --bg3: #E8F0FE;
+  --tx: #1D1D1F; --tx2: #1D1D1F;
+  --ac: #007AFF; --ac2: #0056CC;
+  --bd: #D2D2D7; --fbd: #E5E5EA;
+  --sh: 0 2px 8px rgba(0,0,0,.08);
+  --derive-bg: #F0F6FF; --derive-ac: #2563EB;
+  --warn-bg: #FFFBEB; --warn-bd: #F59E0B; --warn-tx: #92400E;
+  --ex-bg: #F0FDF4; --ex-bd: #22C55E;
+  --nav-width: 260px;
+}
+[data-theme="dark"] {
+  --bg: #1D1D1F; --bg2: #2D2D2F; --bg3: #1E3A5F;
+  --tx: #F5F5F7; --tx2: #A1A1A6;
+  --ac: #4DA3FF; --ac2: #7DBFFF;
+  --bd: #3A3A3C; --fbd: #48484A;
+  --sh: 0 2px 8px rgba(0,0,0,.35);
+  --derive-bg: #1E293B; --derive-ac: #60A5FA;
+  --warn-bg: #422006; --warn-bd: #92400E; --warn-tx: #FCD34D;
+  --ex-bg: #052E16; --ex-bd: #16A34A;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Noto Sans TC','Microsoft JhengHei',sans-serif;background:var(--bg);color:var(--tx);line-height:1.72;font-size:15px;display:flex}
+a{color:var(--ac);text-decoration:none}
+h1{font-size:28px;font-weight:700;margin:0 0 4px}
+h2{font-size:20px;font-weight:700;margin:32px 0 12px;padding-bottom:6px;border-bottom:2px solid var(--fbd)}
+h3{font-size:16px;font-weight:600;margin:20px 0 8px}
+p{margin:10px 0}
+strong{font-weight:600}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:13px}
+th,td{padding:8px 12px;text-align:left;border:1px solid var(--bd)}
+th{background:var(--bg2);font-weight:600}
+.sidebar{position:fixed;left:0;top:0;width:var(--nav-width);height:100vh;background:var(--bg2);border-right:1px solid var(--bd);overflow-y:auto;z-index:100;display:flex;flex-direction:column}
+.sidebar-header{padding:18px 14px 10px;border-bottom:1px solid var(--fbd);font-size:12px;color:var(--tx2);line-height:1.5}
+.sidebar-header strong{font-size:14px;color:var(--tx);display:block}
+.sn{flex:1;overflow-y:auto;padding:6px 0}
+.ns{font-size:11px;font-weight:600;color:var(--tx);padding:6px 12px 2px;margin-top:6px;display:block}
+.nsub a{display:block;padding:3px 12px 3px 20px;font-size:11px;color:var(--tx2);text-decoration:none;border-radius:5px;transition:.12s}
+.nsub a:hover,.nsub a.active{background:var(--bg3);color:var(--ac)}
+.sidebar-footer{padding:10px 12px 16px;border-top:1px solid var(--fbd)}
+.theme-btn{display:block;width:100%;padding:7px;border:1px solid var(--bd);border-radius:6px;background:var(--bg);color:var(--tx);font-size:12px;cursor:pointer;text-align:center}
+.theme-btn:hover{background:var(--bg3)}
+.main{margin-left:var(--nav-width);max-width:1100px;padding:32px 40px 80px;width:100%}
+.header{margin-bottom:28px}
+.header .chap-tag{display:inline-block;padding:4px 12px;background:var(--ac);color:#fff;border-radius:12px;font-size:12px;font-weight:600;margin-bottom:8px}
+.header .meta{font-size:12px;color:var(--tx2);margin-top:2px}
+.preview{background:var(--bg2);border:1px solid var(--bd);border-radius:10px;padding:20px 24px;margin:20px 0}
+.preview h3{margin-top:0}
+.preview ul{padding-left:20px;font-size:14px}
+.callout{background:var(--bg3);border:1px solid var(--fbd);border-radius:8px;padding:14px 18px;margin:16px 0;font-size:13px}
+.callout strong{color:var(--ac)}
+.callout-warn{background:var(--warn-bg);border:1px solid var(--warn-bd);border-radius:8px;padding:14px 18px;margin:16px 0;font-size:13px}
+.callout-warn strong{color:var(--warn-tx)}
+.exbox{background:var(--ex-bg);border:1px solid var(--ex-bd);border-radius:8px;padding:14px 18px;margin:16px 0;font-size:13px}
+.exbox strong{color:#166534}
+.figure{margin:24px 0;text-align:center}
+.figure img{max-width:100%;border-radius:8px;box-shadow:var(--sh);cursor:pointer}
+.figure img:hover{transform:scale(1.01)}
+.figure figcaption{margin-top:8px;font-size:12px;color:var(--tx2)}
+.formula-card{background:var(--bg2);border:1px solid var(--bd);border-radius:10px;padding:16px 20px;margin:20px 0}
+.formula-card .label{font-size:12px;font-weight:700;color:var(--ac);margin-bottom:6px}
+.formula-card .note{font-size:12px;color:var(--tx2);margin-top:6px}
+details.derive{border-left:4px solid var(--derive-ac);background:var(--derive-bg);border-radius:0 8px 8px 0;padding:0;margin:16px 0}
+details.derive>summary{padding:12px 16px;cursor:pointer;font-weight:600;font-size:14px}
+details.derive .step{display:flex;gap:12px;align-items:flex-start;padding:8px 16px}
+details.example{border:1px solid var(--ex-bd);background:var(--ex-bg);border-radius:8px;padding:0;margin:16px 0}
+details.example>summary{padding:12px 16px;cursor:pointer;font-weight:600;font-size:14px}
+.eq{margin:14px 0;overflow-x:auto}
+.portal-home-link{position:fixed;top:16px;right:16px;z-index:1000;display:inline-flex;align-items:center;min-height:36px;padding:7px 11px;border:1px solid var(--bd);border-radius:8px;background:var(--bg);color:var(--ac);font:600 13px/1.2 -apple-system,BlinkMacSystemFont,'Noto Sans TC','Microsoft JhengHei',sans-serif;text-decoration:none;box-shadow:0 2px 10px rgba(15,23,42,.08)}
+.portal-home-link:hover{background:var(--bg3)}
+ol,ul{padding-left:24px}
+li{margin:6px 0}
+@media(max-width:768px){
+  .sidebar{transform:translateX(-100%);transition:transform .25s}
+  .sidebar.open{transform:translateX(0)}
+  .main{margin-left:0;padding:16px}
+  .sidebar-toggle-btn{display:block;position:fixed;top:12px;left:12px;z-index:200;width:36px;height:36px;border-radius:8px;background:var(--bg);border:1px solid var(--bd);font-size:18px;cursor:pointer}
+}
+.sidebar-toggle-btn{display:none}
+@media print{.sidebar,.sidebar-toggle-btn,.portal-home-link{display:none}.main{margin-left:0}}
+</style>
+<link rel="stylesheet" href="../assets/course-ui.css">
+</head>
+<body>
+
+<a class="portal-home-link" href="../../index.html">← 返回學習中心</a>
+
+<button class="sidebar-toggle-btn" onclick="toggleSidebar()" aria-label="Toggle sidebar">☰</button>
+
+<nav class="sidebar">
+  <div class="sidebar-header">
+     · 第 16 章
+    第 6 章：向量微積分
+  </div>
+  <ul class="sn">
+    <li class="ns">本章預覽</li>
+    <li class="nsub"><a href="#preview">學習目標與概念地圖</a></li>
+    <li class="ns">6.1 向量場</li>
+    <li class="nsub"><a href="#s6-1">向量場定義、徑向場與旋轉場、保守場</a></li>
+    <li class="ns">6.2 線積分</li>
+    <li class="nsub"><a href="#s6-2">純量線積分、向量線積分、通量與環流</a></li>
+    <li class="ns">6.3 保守向量場</li>
+    <li class="nsub"><a href="#s6-3">線積分基本定理、位勢函數、路徑無關性</a></li>
+    <li class="ns">6.4 格林定理</li>
+    <li class="nsub"><a href="#s6-4">環流形式、通量形式、非單連通區域</a></li>
+    <li class="ns">6.5 散度與旋度</li>
+    <li class="nsub"><a href="#s6-5">散度定義、旋度定義、物理詮釋</a></li>
+    <li class="ns">6.6 曲面積分</li>
+    <li class="nsub"><a href="#s6-6">參數曲面、純量曲面積分、向量曲面積分</a></li>
+    <li class="ns">6.7 斯托克斯定理</li>
+    <li class="nsub"><a href="#s6-7">Stokes' Theorem、與 Green 定理的關係</a></li>
+    <li class="ns">6.8 散度定理</li>
+    <li class="nsub"><a href="#s6-8">Divergence Theorem、高斯定理、物理應用</a></li>
+    <li class="ns">本章摘要</li>
+    <li class="nsub"><a href="#summary">關鍵概念總整理</a></li>
+    <li class="nsub"><a href="#common-mistakes">初學者常見錯誤</a></li>
+    <li class="nsub"><a href="#self-check">✅ 自我檢測</a></li>
+  </ul>
+  <div class="sidebar-footer">
+    <button class="theme-btn" onclick="toggleTheme()" id="themeBtn">🌙 深色模式</button>
+  </div>
+</nav>
+
+<main class="main">
+
+<header class="header">
+  <div class="chap-tag">第 16 章 · OpenStax Calculus Vol 3, Ch 6</div>
+  <h1>向量微積分</h1>
+  <div class="meta">OpenStax · Calculus Volume 3 · Vector Calculus · pp.583–750</div>
+</header>
+
+<!-- ====== Preview ====== -->
+<section id="preview">
+<div class="preview">
+<h3>📌 本章要解決的核心問題</h3>
+<p>向量微積分（vector calculus）是微積分從一維推廣到高維的終極形式。在前幾章我們學會了對多變數函數微分和積分，但現實世界中的力場（重力場、電磁場）、流體速度場、熱流場——這些都是<strong>向量場（vector field）</strong>。本章回答一個核心問題：<strong>如何在向量場中進行積分？</strong></p>
+
+<h3>🔑 關鍵概念（10 條）</h3>
+<ol>
+  <li><strong>向量場</strong>：每個點對應一個向量的映射——$\mathbf{F}(x,y) = \langle P(x,y), Q(x,y) \rangle$</li>
+  <li><strong>線積分</strong>：沿著曲線對向量場或純量函數積分——$\int_C \mathbf{F} \cdot d\mathbf{r}$</li>
+  <li><strong>保守場與位勢函數</strong>：若 $\mathbf{F} = \nabla f$，則 $\mathbf{F}$ 是保守場，$f$ 是位勢函數</li>
+  <li><strong>線積分基本定理</strong>：$\int_C \nabla f \cdot d\mathbf{r} = f(\mathbf{r}(b)) - f(\mathbf{r}(a))$</li>
+  <li><strong>格林定理</strong>：將平面上的線積分轉換為二重積分——$\oint_C P\,dx + Q\,dy = \iint_D (Q_x - P_y)\,dA$</li>
+  <li><strong>散度</strong>：向量場在一個點的「流出量」——$\text{div}\,\mathbf{F} = \nabla \cdot \mathbf{F}$</li>
+  <li><strong>旋度</strong>：向量場在一個點的「旋轉趨勢」——$\text{curl}\,\mathbf{F} = \nabla \times \mathbf{F}$</li>
+  <li><strong>曲面積分</strong>：在二維曲面上對向量場或純量函數積分——$\iint_S \mathbf{F} \cdot d\mathbf{S}$</li>
+  <li><strong>斯托克斯定理</strong>：$\oint_C \mathbf{F} \cdot d\mathbf{r} = \iint_S (\nabla \times \mathbf{F}) \cdot d\mathbf{S}$</li>
+  <li><strong>散度定理</strong>：$\iint_S \mathbf{F} \cdot d\mathbf{S} = \iiint_E (\nabla \cdot \mathbf{F})\,dV$</li>
+</ol>
+
+<h3>🧭 邏輯鏈</h3>
+<p>向量場定義 → 線積分（純量 + 向量）→ 保守場與位勢函數 → 線積分基本定理 → 格林定理（平面）→ 散度與旋度 → 曲面積分 → 斯托克斯定理（曲面邊界）→ 散度定理（體積邊界）——形成一整套<strong>高維微積分基本定理</strong>的體系</p>
+
+<div class="callout-warn"><strong>⚡ 先備知識提醒</strong>：本章假設你已熟練掌握多重積分（第 5 章）、偏導數與梯度（第 4 章）、向量內積與外積。如果你對 $\nabla f = \langle f_x, f_y, f_z \rangle$ 或 $\iint_D f(x,y)\,dA$ 感到陌生，建議先回顧第 4–5 章後再回來。</div>
+</div>
+</section>
+
+<!-- ====== Section 6.1 ====== -->
+<section id="s6-1">
+<h2>6.1 向量場（Vector Fields）</h2>
+
+<div style="margin-bottom:14px;font-size:12px;color:var(--tx2);line-height:1.8"><strong style="color:var(--tx)">🔑 本節重點</strong> ①向量場為定義域中每個點指定一個向量的映射 ②範例：重力場、電場、流體速度場 ③梯度場 ∇f 為最重要的保守向量場 ④學會繪製與解讀向量場圖</div>
+
+<p>向量場（vector field）是向量微積分最核心的概念。一個<strong>向量場</strong> $\mathbf{F}$ 在 $\mathbb{R}^2$ 中是一個映射，將定義域 $D$ 中的每個點 $(x,y)$ 對應到一個二維向量 $\mathbf{F}(x,y) = \langle P(x,y), Q(x,y) 
+angle$。直覺上，向量場就是一張「向量的地圖」——在每個位置告訴你方向和大小。</p>
+
+<div class="formula-card">
+  <div class="label">向量場的正式定義</div>
+  <p>$\mathbf{F}(x,y) = P(x,y)\,\mathbf{i} + Q(x,y)\,\mathbf{j}$ （在 $\mathbb{R}^2$ 中）</p>
+  <p>$\mathbf{F}(x,y,z) = P(x,y,z)\,\mathbf{i} + Q(x,y,z)\,\mathbf{j} + R(x,y,z)\,\mathbf{k}$ （在 $\mathbb{R}^3$ 中）</p>
+  <div class="note">定義域 $D$ 是 $\mathbf{F}$ 有定義的所有點的集合。$\mathbf{F}$ 是連續的若且唯若其分量函數 $P, Q, R$ 都是連續的。</div>
+</div>
+
+<div class="figure">
+  <img src="../../pages/v3c6_pages/v3c6_page_583_c.png" alt="颶風的旋轉向量場" loading="lazy">
+  <figcaption>圖 6.1：颶風由海洋上溫暖溫度驅動的旋轉風形成——氣象學家透過研究風速的旋轉向量場來預測颶風路徑（此為 2004 年南大西洋的 Catarina 氣旋，由國際太空站拍攝）</figcaption>
+</div>
+
+<p>向量場在物理學中無所不在：<strong>重力場</strong>描述每個點受到的引力方向和大小；<strong>電場</strong>描述電荷在空間中產生的力；<strong>速度場</strong>描述流體（水、空氣）在每個點的速度。圖 6.2 展示了兩個典型例子：(a) 兩個天體產生的重力場，(b) 河流表面的速度場。</p>
+
+<div class="figure">
+  <img src="../../pages/v3c6_pages/v3c6_page_585_c.png" alt="重力場與河流速度場" loading="lazy">
+  <figcaption>圖 6.2：(a) 兩個天體在小物體上施加的重力場；(b) 河流表面的向量速度場——紅色表示較大速度，藍色表示較小速度</figcaption>
+</div>
+
+<h3>徑向場與旋轉場</h3>
+
+<p>本章重點關注兩類平面向量場：<strong>徑向場（radial field）</strong>和<strong>旋轉場（rotational field）</strong>。在徑向場中，所有向量要麼直接指向原點，要麼直接遠離原點，且向量大小只取決於到原點的距離。典型的徑向場如 $\mathbf{F}(x,y) = \langle x, y \rangle$，每個向量都垂直於經過該點的圓。</p>
+
+<p>旋轉場則相反：向量與圓相切（而不是垂直），所有向量沿著順時針或逆時針方向。例如 $\mathbf{F}(x,y) = \langle -y, x \rangle$ 是一個逆時針旋轉場——你可以驗證 $\mathbf{F} \cdot \langle x, y \rangle = -yx + xy = 0$，所以每個向量都垂直於徑向向量，即與圓相切。</p>
+
+<div class="figure">
+  <img src="../../pages/v3c6_pages/v3c6_page_587_c.png" alt="徑向向量場" loading="lazy">
+  <figcaption>圖 6.3：(a) 徑向向量場 $\mathbf{F}(x,y) = \langle x, y \rangle$；(b) 疊加圓圈後，每個向量垂直於所在圓圈</figcaption>
+</div>
+
+<div class="callout"><strong>💡 核心洞察：向量場無法直接「畫出」</strong><br>向量場的「圖形」需要四維空間（2D 定義域 + 2D 值域），因此我們改為在平面上選取樣本點，在每個點畫出對應的向量。關鍵技巧：選取足夠多的點以呈現整體形狀，但不要多到讓畫面變成混亂的一團。</div>
+
+<h3>三維向量場與梯度場</h3>
+
+<p>向量場在 $\mathbb{R}^3$ 中的定義類似，只是多了第三個分量函數。三維向量場可以模擬空間中的重力場、電磁場，或整條河流（而非僅表面）的流動。三維向量場更難視覺化，但原理相同：在每個八分區（octant）中選取樣本點繪製向量。</p>
+
+<div class="figure">
+  <img src="../../pages/v3c6_pages/v3c6_page_593_c.png" alt="三維向量場" loading="lazy">
+  <figcaption>圖 6.7：三維向量場 $\mathbf{F}(x,y,z) = \langle 1, 1, z \rangle$——在 $xy$ 平面上方，$z$ 分量為正，向量向上傾斜</figcaption>
+</div>
+
+<p>一個特別重要的向量場類型是<strong>梯度場（gradient field）</strong>，也稱為<strong>保守向量場（conservative vector field）</strong>。如果存在一個純量函數 $f$（稱為<strong>位勢函數 potential function</strong>）使得 $\mathbf{F} = \nabla f$，則 $\mathbf{F}$ 是保守場。重力場和靜電場都是保守場——這意味著在這些場中能量守恆。</p>
+
+<div class="formula-card">
+  <div class="label">梯度場（保守場）</div>
+  <p>若 $\mathbf{F} = \nabla f = \langle f_x, f_y \rangle$（$\mathbb{R}^2$）或 $\mathbf{F} = \nabla f = \langle f_x, f_y, f_z \rangle$（$\mathbb{R}^3$），則 $\mathbf{F}$ 是<strong>保守向量場</strong>，$f$ 是其<strong>位勢函數</strong>。</p>
+  <div class="note">保守場最重要的性質：線積分只依賴於端點，與路徑無關。這直接類比於一維微積分基本定理。</div>
+</div>
+
+<div class="callout-warn"><strong>⚡ 常見錯誤：梯度場的符號約定</strong><br>在某些物理文獻中，位勢函數定義為 $\mathbf{F} = -\nabla f$（帶負號），而不是 $\mathbf{F} = \nabla f$。這只是約定不同——數學上通常使用後者，物理（特別是電磁學）常用前者。兩者本質相同，只是位勢函數差一個負號。</div>
+
+<h3>交叉偏導數性質</h3>
+
+<p>保守向量場有一個重要的必要條件：<strong>交叉偏導數性質（Cross-Partial Property）</strong>。若 $\mathbf{F} = \langle P, Q \rangle$ 在 $\mathbb{R}^2$ 中是保守的，則必定有 $\frac{\partial P}{\partial y} = \frac{\partial Q}{\partial x}$。在三維中，類似地有 $P_y = Q_x$、$P_z = R_x$、$Q_z = R_y$。這個性質來自 Clairaut 定理：因為 $P = f_x$ 且 $Q = f_y$，所以 $P_y = f_{xy} = f_{yx} = Q_x$。</p>
+
+<div class="callout"><strong>💡 注意：</strong>交叉偏導數性質是保守場的<strong>必要條件</strong>而非充分條件。換言之，滿足交叉偏導數性質的向量場不一定是保守場（反例：$\mathbf{F}(x,y) = \langle \frac{-y}{x^2+y^2}, \frac{x}{x^2+y^2} \rangle$ 在原點以外的區域滿足交叉偏導數性質，但沿單位圓的線積分不為零）。但若交叉偏導數不相等，則該場<strong>一定不保守</strong>——這是快速篩選非保守場的有效方法。</div>
+
+<details class="example" open><summary>📝 範例 6.1：計算指定點的向量</summary>給定 $\mathbf{F}(x,y) = \langle x^2y, x+y \rangle$，求對應於點 $(1,2)$ 的向量。<br><br><strong>解：</strong>代入 $x=1, y=2$：$\mathbf{F}(1,2) = \langle 1^2 \cdot 2,\; 1+2 \rangle = \langle 2, 3 \rangle$。所以在點 $(1,2)$ 處的向量是從該點出發指向 $(3,5)$ 的箭頭。</details>
+
+<details class="example" open><summary>📝 範例 6.12：證明向量場非保守</summary>證明旋轉向量場 $\mathbf{F}(x,y) = \langle -y, x \rangle$ 不是保守場。<br><br><strong>解：</strong>計算 $P_y = \frac{\partial}{\partial y}(-y) = -1$，$Q_x = \frac{\partial}{\partial x}(x) = 1$。由於 $P_y \neq Q_x$，由交叉偏導數性質，$\mathbf{F}$ 不可能是保守場。</details>
+
+<div class="figure">
+  <img src="../../pages/v3c6_pages/v3c6_page_594_c.png" alt="重力向量場" loading="lazy">
+  <figcaption>圖 6.8：原點處大質量物體產生的重力向量場——向量指向原點（吸引力），越靠近原點向量越大</figcaption>
+</div>
+
+<p>三維空間中的重力場由牛頓萬有引力定律給出：$\mathbf{F}(x,y,z) = -\frac{Gm_1m_2}{r^2}\mathbf{\hat{r}}$，其中 $r = \sqrt{x^2+y^2+z^2}$ 是距離，$\mathbf{\hat{r}}$ 是指向外的單位徑向向量。負號表示力是吸引力（指向原點）。這是一個徑向場在三維的推廣。</p>
+
+
+<details class="derive" open style="margin:20px 0">
+<summary>🎮 互動模型：向量場可視化</summary>
+<div style="padding:8px 0"><p style="font-size:13px;color:var(--tx2);margin-bottom:12px">切換不同向量場，觀察旋轉場與發散場的箭頭分佈差異。</p>
+<div data-vector-field-model></div></div>
+</details>
+</section>
+
+<!-- ====== Section 6.2 ====== -->
+<section id="s6-2">
+<h2>6.2 線積分（Line Integrals）</h2>
+
+<div style="margin-bottom:14px;font-size:12px;color:var(--tx2);line-height:1.8"><strong style="color:var(--tx)">🔑 本節重點</strong> ①純量線積分沿曲線積分純量函數 ②向量線積分計算力沿路徑所作之功 ③需要曲線的參數化 r(t) ④弧長元素 ds=|r'(t)|dt</div>
+
+<p>傳統的定積分 $\int_a^b f(x)\,dx$ 的積分區域是 $x$ 軸上的一段區間。但假如我們想沿著平面上或空間中的<strong>任意曲線</strong>進行積分呢？這就是<strong>線積分（line integral）</strong>的用武之地。線積分有兩種：<strong>純量線積分</strong>（scalar line integral）對純量函數沿曲線積分，以及<strong>向量線積分</strong>（vector line integral）對向量場沿曲線積分。</p>
+
+<h3>純量線積分</h3>
+
+<p>純量線積分 $\int_C f(x,y)\,ds$ 將曲線 $C$ 分割成小段，每段長度為 $\Delta s_i$，取樣本點並計算 $f \cdot \Delta s_i$ 的和，然後取極限。幾何意義：若 $f(x,y) \geq 0$，則 $\int_C f\,ds$ 是以曲線 $C$ 為底、高度為 $f$ 的「幕簾」的面積。</p>
+
+<div class="formula-card">
+  <div class="label">純量線積分計算公式（定理 6.4）</div>
+  <div class="eq">$$\int_C f(x,y,z)\,ds = \int_a^b f(\mathbf{r}(t))\,|\mathbf{r}'(t)|\,dt$$</div>
+  <div class="note">其中 $\mathbf{r}(t)$（$a \leq t \leq b$）是曲線 $C$ 的參數化，$|\mathbf{r}'(t)| = \sqrt{(x'(t))^2 + (y'(t))^2 + (z'(t))^2}$</div>
+</div>
+
+<div class="figure">
+  <img src="../../pages/v3c6_pages/v3c6_page_603_c.png" alt="線積分的幾何意義" loading="lazy">
+  <figcaption>圖 6.13：純量線積分的幾何意義——藍色「幕簾」的面積等於 $\int_C f(x,y)\,ds$。此圖中 $f(x,y) = 2$，$C$ 是上半單位圓</figcaption>
+</div>
+
+<p>純量線積分的一個重要性質是<strong>與參數化無關</strong>（parameterization-independent）：只要曲線被恰好遍歷一次，無論你如何參數化它，積分值都不變。這與一維積分的變數變換類似。</p>
+
+<div class="callout"><strong>💡 弧長元素</strong><br>$ds = |\mathbf{r}'(t)|\,dt$ 是線積分中最關鍵的概念。它告訴我們：沿曲線移動一個微小距離 $ds$ 對應於參數 $t$ 改變 $dt$，兩者的比例是 $|\mathbf{r}'(t)|$（瞬時速率）。這將曲線上的積分轉換為 $t$ 變數的普通定積分。</div>
+
+<h3>向量線積分</h3>
+
+<p>向量線積分 $\int_C \mathbf{F} \cdot d\mathbf{r}$ 計算的是力場 $\mathbf{F}$ 沿曲線 $C$ 對粒子所做的<strong>功（work）</strong>。與純量線積分不同，向量線積分<strong>依賴於曲線的定向（orientation）</strong>：反向行走會改變積分值的正負號——這符合物理直覺（上山時重力做負功，下山時重力做正功）。</p>
+
+<p>計算公式：若 $C$ 由 $\mathbf{r}(t)$（$a \leq t \leq b$）參數化，則</p>
+
+<div class="formula-card">
+  <div class="label">向量線積分計算公式（式 6.9）</div>
+  <div class="eq">$$\int_C \mathbf{F} \cdot d\mathbf{r} = \int_a^b \mathbf{F}(\mathbf{r}(t)) \cdot \mathbf{r}'(t)\,dt$$</div>
+  <div class="note">另一常用寫法：$\int_C P\,dx + Q\,dy + R\,dz = \int_a^b [P x'(t) + Q y'(t) + R z'(t)]\,dt$</div>
+</div>
+
+<div class="figure">
+  <img src="../../pages/v3c6_pages/v3c6_page_610_c.png" alt="向量線積分" loading="lazy">
+  <figcaption>圖 6.18：曲線 $C$（上半圓）在向量場 $\mathbf{F}(x,y) = \langle y, -x \rangle$ 中的向量線積分示意</figcaption>
+</div>
+
+<div class="callout-warn"><strong>⚡ 常見混淆：$ds$ vs $d\mathbf{r}$</strong><br>$\int_C f\,ds$ 是純量線積分，結果是一個<strong>數</strong>。$\int_C \mathbf{F} \cdot d\mathbf{r}$ 是向量線積分，結果也是一個<strong>數</strong>（內積後是純量）。兩者的關鍵區別：純量線積分與定向無關，向量線積分與定向有關。注意符號 $d\mathbf{r} = \langle dx, dy, dz \rangle$ 是一個向量微分，而不是純量 $ds$。</div>
+
+<h3>通量與環流</h3>
+
+<p>兩個與線積分密切相關的重要概念是<strong>通量（flux）</strong>和<strong>環流（circulation）</strong>。通量 $\int_C \mathbf{F} \cdot \mathbf{N}\,ds$ 計算流體穿越曲線 $C$ 的速率——將切向量 $\mathbf{T}$ 換成法向量 $\mathbf{N}$。環流 $\oint_C \mathbf{F} \cdot d\mathbf{r}$ 則是沿<strong>封閉</strong>曲線的向量線積分，衡量流體繞曲線的「旋轉傾向」。</p>
+
+<div class="formula-card">
+  <div class="label">通量計算公式（定理 6.6）</div>
+  <div class="eq">$$\int_C \mathbf{F} \cdot \mathbf{N}\,ds = \int_a^b [P(x(t),y(t))\,y'(t) - Q(x(t),y(t))\,x'(t)]\,dt$$</div>
+  <div class="note">若 $\mathbf{F} = \langle P, Q \rangle$ 是流體速度場，通量就是單位時間內流過曲線的流體「量」</div>
+</div>
+
+<div class="figure">
+  <img src="../../pages/v3c6_pages/v3c6_page_617_c.png" alt="通量示意圖" loading="lazy">
+  <figcaption>圖 6.23：通量——向量場 $\mathbf{F}$ 穿越曲線 $C$ 的通量由類似向量線積分的積分計算，但使用單位法向量 $\mathbf{N}$ 而非切向量 $\mathbf{T}$</figcaption>
+</div>
+
+<p>通量和環流將在本章後續定理中反覆出現。格林定理就是將封閉曲線上的環流（或通量）轉換為區域上的二重積分。</p>
+
+<details class="example" open><summary>📝 範例 6.15：計算純量線積分</summary>計算 $\int_C (x^2 + y^2 + z^2)\,ds$，其中 $C$ 是螺旋線 $\mathbf{r}(t) = \langle \cos t, \sin t, t \rangle$，$0 \leq t \leq 2\pi$。<br><br><strong>解：</strong>$f(\mathbf{r}(t)) = \cos^2 t + \sin^2 t + t^2 = 1 + t^2$。$\mathbf{r}'(t) = \langle -\sin t, \cos t, 1 \rangle$，$|\mathbf{r}'(t)| = \sqrt{\sin^2 t + \cos^2 t + 1} = \sqrt{2}$。因此 $\int_C (x^2+y^2+z^2)\,ds = \int_0^{2\pi} (1+t^2)\sqrt{2}\,dt = \sqrt{2}[t + \frac{t^3}{3}]_0^{2\pi} = \sqrt{2}(2\pi + \frac{8\pi^3}{3})$。</details>
+
+<details class="example" open><summary>📝 範例 6.18：計算向量線積分</summary>計算 $\int_C \mathbf{F} \cdot d\mathbf{r}$，其中 $\mathbf{F}(x,y) = \langle y, -x \rangle$，$C$ 是上半圓 $\mathbf{r}(t) = \langle \cos t, \sin t \rangle$，$0 \leq t \leq \pi$。<br><br><strong>解：</strong>$\mathbf{F}(\mathbf{r}(t)) = \langle \sin t, -\cos t \rangle$，$\mathbf{r}'(t) = \langle -\sin t, \cos t \rangle$。$\mathbf{F} \cdot \mathbf{r}' = \sin t(-\sin t) + (-\cos t)(\cos t) = -\sin^2 t - \cos^2 t = -1$。因此 $\int_0^\pi (-1)\,dt = -\pi$。負號表示向量場與曲線方向「對抗」。</details>
+
+</section>
+
+<!-- ====== Section 6.3 ====== -->
+<section id="s6-3">
+<h2>6.3 保守向量場（Conservative Vector Fields）</h2>
+
+<div style="margin-bottom:14px;font-size:12px;color:var(--tx2);line-height:1.8"><strong style="color:var(--tx)">🔑 本節重點</strong> ①F=∇f 則 F 為保守場，f 為位勢函數 ②線積分與路徑無關只依賴端點位勢值 ③curl F=0 且定義域單連通則 F 為保守場 ④基本定理：∫_C ∇f·dr=f(終點)-f(起點)</div>
+
+<p>保守向量場是向量微積分中最優雅的一類場。如果 $\mathbf{F} = \nabla f$，則 $\mathbf{F}$ 是<strong>保守的（conservative）</strong>，而 $f$ 是<strong>位勢函數（potential function）</strong>。保守場的核心特徵是：線積分<strong>與路徑無關（path-independent）</strong>——只依賴於起點和終點的位勢函數值。</p>
+
+<h3>曲線與區域的幾何分類</h3>
+
+<p>在深入研究保守場之前，我們需要定義一些幾何概念。一條<strong>封閉曲線（closed curve）</strong>的起點與終點相同。一條<strong>簡單曲線（simple curve）</strong>不會與自身相交。同時滿足兩者的稱為<strong>簡單封閉曲線（simple closed curve）</strong>。一個<strong>連通區域（connected region）</strong>是指區域內任意兩點都可用一條完全在區域內的路徑連接。一個<strong>單連通區域（simply connected region）</strong>是連通且「沒有洞」的區域——任何在區域內的簡單封閉曲線都可連續縮成一個點而不離開區域。</p>
+
+<div class="figure">
+  <img src="../../pages/v3c6_pages/v3c6_page_625_c.png" alt="曲線分類" loading="lazy">
+  <figcaption>圖 6.25：曲線的分類——簡單 vs 非簡單，封閉 vs 非封閉</figcaption>
+</div>
+
+<div class="figure">
+  <img src="../../pages/v3c6_pages/v3c6_page_626_c.png" alt="區域的連通性" loading="lazy">
+  <figcaption>圖 6.27：(a) 單連通區域無洞；(b) 連通但非單連通（有洞但任意兩點可連接）；(c) 非連通區域（有些點無法用區域內路徑連接）</figcaption>
+</div>
+
+<h3>線積分基本定理</h3>
+
+<p>這是本章最重要的定理之一。它將一維微積分基本定理推廣到高維：</p>
+
+<div class="formula-card">
+  <div class="label">線積分基本定理（定理 6.7）</div>
+  <div class="eq">$$\int_C \nabla f \cdot d\mathbf{r} = f(\mathbf{r}(b)) - f(\mathbf{r}(a))$$</div>
+  <div class="note">$C$ 是光滑曲線，起點 $\mathbf{r}(a)$，終點 $\mathbf{r}(b)$。這個定理意味著：梯度場的線積分只取決於位勢函數在端點的值——與路徑形狀完全無關。</div>
+</div>
+
+<p>這個定理的意義怎麼強調都不為過。在一維中，$\int_a^b f'(x)\,dx = f(b) - f(a)$；在高維中，梯度是「導數」的類比，而線積分基本定理告訴我們：梯度場的積分等於位勢函數在邊界上的差分。</p>
+
+<div class="callout"><strong>💡 核心洞察：保守 ≡ 路徑無關</strong><br>以下三個命題在單連通區域上是等價的：(1) $\mathbf{F}$ 是保守場（存在 $f$ 使 $\mathbf{F} = \nabla f$）；(2) $\oint_C \mathbf{F} \cdot d\mathbf{r} = 0$ 對<strong>所有</strong>封閉曲線成立；(3) 線積分 $\int_C \mathbf{F} \cdot d\mathbf{r}$ 只依賴於端點，與路徑選擇無關。這三個性質構成了保守場的等價刻畫。</div>
+
+<div class="callout-warn"><strong>⚡ 注意：定義域很重要</strong><br>一個向量場是否保守<strong>取決於定義域</strong>。例如 $\mathbf{F}(x,y) = \langle \frac{-y}{x^2+y^2}, \frac{x}{x^2+y^2} \rangle$ 在 $\mathbb{R}^2 \setminus \{(0,0)\}$（非單連通！）上滿足交叉偏導數性質，但沿單位圓的環流為 $2\pi \neq 0$，因此<strong>不是</strong>保守場。這說明交叉偏導數性質在非單連通區域上不足以保證保守性。</div>
+
+<h3>尋找位勢函數</h3>
+
+<p>若已知 $\mathbf{F} = \langle P, Q \rangle$ 是保守場，如何找到位勢函數 $f$？步驟如下：(1) 從 $f_x = P$ 出發，對 $x$ 積分得到 $f(x,y) = \int P\,dx + g(y)$；(2) 對 $y$ 微分，利用 $f_y = Q$ 解出 $g'(y)$；(3) 積分得到 $g(y)$。在三維中流程類似，只是更多步驟。</p>
+
+<details class="example" open><summary>📝 範例 6.28：應用線積分基本定理</summary>計算 $\int_C \mathbf{F} \cdot d\mathbf{r}$，其中 $\mathbf{F}(x,y) = \langle 2x, 2y \rangle$，$C$ 是從 $(0,0)$ 到 $(2,2)$ 的任意路徑。<br><br><strong>解：</strong>注意到 $\mathbf{F} = \nabla f$，其中 $f(x,y) = x^2 + y^2$。因此 $\int_C \mathbf{F} \cdot d\mathbf{r} = f(2,2) - f(0,0) = (4+4) - (0+0) = 8$。無需知道具體路徑。</details>
+
+<details class="example" open><summary>📝 範例 6.33：保守場測試</summary>判斷 $\mathbf{F}(x,y) = \langle 2xy, x^2 + 2y \rangle$ 是否為保守場。若是，求位勢函數。<br><br><strong>解：</strong>檢查交叉偏導數：$P_y = 2x$，$Q_x = 2x$，相等。由於定義域 $\mathbb{R}^2$ 是單連通的，$\mathbf{F}$ 是保守的。從 $f_x = 2xy$ 積分得 $f = x^2y + g(y)$；$f_y = x^2 + g'(y) = x^2 + 2y$ → $g'(y) = 2y$ → $g(y) = y^2 + C$。因此 $f(x,y) = x^2y + y^2 + C$。</details>
+
+</section>
+
+<!-- ====== Section 6.4 ====== -->
+<section id="s6-4">
+<h2>6.4 格林定理（Green's Theorem）</h2>
+
+<div style="margin-bottom:14px;font-size:12px;color:var(--tx2);line-height:1.8"><strong style="color:var(--tx)">🔑 本節重點</strong> ①將封閉曲線線積分轉為區域二重積分 ②∮_C Pdx+Qdy=∬_D(∂Q/∂x-∂P/∂y)dA ③正向為逆時針方向 ④可用於計算面積與驗證保守場</div>
+
+<p>格林定理（Green's theorem）是微積分基本定理在二維的延伸。它將一個沿簡單封閉曲線的線積分，轉換為該曲線所圍區域上的二重積分——本質上將「邊界上的積分」轉換為「內部區域上的積分」。</p>
+
+<h3>環流形式（Circulation Form）</h3>
+
+<div class="formula-card">
+  <div class="label">格林定理——環流形式（定理 6.12）</div>
+  <div class="eq">$$\oint_C (P\,dx + Q\,dy) = \iint_D \left(\frac{\partial Q}{\partial x} - \frac{\partial P}{\partial y}\right)\,dA$$</div>
+  <div class="note">$C$ 是分段光滑的簡單封閉曲線，逆時針定向；$D$ 是 $C$ 所圍的區域。此形式也稱為「切線形式」（tangential form）。</div>
+</div>
+
+<div class="figure">
+  <img src="../../pages/v3c6_pages/v3c6_page_644_c.png" alt="格林定理環流形式" loading="lazy">
+  <figcaption>圖 6.33：格林定理的環流形式——將封閉曲線 $C$ 上的線積分轉換為區域 $D$ 上的二重積分</figcaption>
+</div>
+
+<p>格林定理的威力在於：當你面對一個複雜的線積分時，可以轉換為相對簡單的二重積分；反之亦然。注意到被積函數 $\frac{\partial Q}{\partial x} - \frac{\partial P}{\partial y}$ 正是二維旋度（curl）的 $z$ 分量——這是格林定理與斯托克斯定理的連結點。</p>
+
+<div class="callout"><strong>💡 核心洞察：為什麼叫「環流形式」？</strong><br>左邊 $\oint_C \mathbf{F} \cdot d\mathbf{r}$ 正是向量場沿 $C$ 的<strong>環流（circulation）</strong>。而右邊的 $\frac{\partial Q}{\partial x} - \frac{\partial P}{\partial y}$ 可理解為向量場在每個點的「微小環流密度」。格林定理告訴我們：總環流等於區域上所有微小環流的總和。</div>
+
+<h3>通量形式（Flux Form）</h3>
+
+<p>格林定理還有另一個等價形式——通量形式（flux form）：</p>
+
+<div class="formula-card">
+  <div class="label">格林定理——通量形式</div>
+  <div class="eq">$$\oint_C \mathbf{F} \cdot \mathbf{N}\,ds = \iint_D \left(\frac{\partial P}{\partial x} + \frac{\partial Q}{\partial y}\right)\,dA$$</div>
+  <div class="note">其中 $\frac{\partial P}{\partial x} + \frac{\partial Q}{\partial y} = \text{div}\,\mathbf{F}$ 是散度。此形式將通量（邊界上的流出量）與區域內的散度積分連結。</div>
+</div>
+
+<p>通量形式是散度定理（第 6.8 節）在二維的特例，而環流形式是斯托克斯定理（第 6.7 節）在二維的特例。</p>
+
+<div class="callout-warn"><strong>⚡ 使用格林定理的注意事項</strong><br>(1) 曲線 $C$ 必須是<strong>封閉的</strong>——如果題目給定的是開放曲線，格林定理「直接」不適用。(2) $C$ 的定向必須是<strong>逆時針</strong>（正定向）——如果是順時針，結果要加負號。(3) 區域 $D$ 必須在 $C$ 的<strong>左側</strong>（對於正定向）。(4) 向量場分量必須在 $D$ 上有連續偏導數。</div>
+
+<details class="example" open><summary>📝 範例 6.38：應用格林定理（矩形區域）</summary>計算 $\oint_C (x^2y\,dx + xy^2\,dy)$，其中 $C$ 是頂點為 $(0,0),(1,0),(1,1),(0,1)$ 的矩形，逆時針定向。<br><br><strong>解：</strong>$P = x^2y$, $Q = xy^2$。$Q_x = y^2$, $P_y = x^2$。$\iint_D (y^2 - x^2)\,dA = \int_0^1\int_0^1 (y^2 - x^2)\,dx\,dy = \int_0^1 [y^2x - \frac{x^3}{3}]_0^1\,dy = \int_0^1 (y^2 - \frac{1}{3})\,dy = [\frac{y^3}{3} - \frac{y}{3}]_0^1 = 0$。</details>
+
+<details class="example" open><summary>📝 範例 6.39：用格林定理計算功</summary>計算力場 $\mathbf{F}(x,y) = \langle x^2y, -xy^2 \rangle$ 對沿圓 $x^2+y^2=4$ 逆時針移動的粒子做的功。<br><br><strong>解：</strong>$P = x^2y$, $Q = -xy^2$, $Q_x = -y^2$, $P_y = x^2$。$\iint_D (-y^2 - x^2)\,dA = -\iint_D (x^2+y^2)\,dA$。轉換為極坐標：$-\int_0^{2\pi}\int_0^2 r^2 \cdot r\,dr\,d\theta = -\int_0^{2\pi} [\frac{r^4}{4}]_0^2\,d\theta = -\int_0^{2\pi} 4\,d\theta = -8\pi$。</details>
+
+<h3>推廣至非單連通區域</h3>
+
+<p>格林定理可直接推廣到有洞的區域：只需沿所有邊界（外邊界逆時針、內邊界順時針）計算線積分，並在區域上進行二重積分。這個技巧在處理在原點有奇異點的向量場時特別有用。</p>
+
+<div class="figure">
+  <img src="../../pages/v3c6_pages/v3c6_page_656_c.png" alt="非單連通區域上的格林定理" loading="lazy">
+  <figcaption>圖 6.45：將環形區域分解為兩個單連通區域——內邊界線積分互相抵消，只剩外邊界和內邊界的貢獻</figcaption>
+</div>
+
+</section>
+
+<!-- ====== Section 6.5 ====== -->
+<section id="s6-5">
+<h2>6.5 散度與旋度（Divergence and Curl）</h2>
+
+<div style="margin-bottom:14px;font-size:12px;color:var(--tx2);line-height:1.8"><strong style="color:var(--tx)">🔑 本節重點</strong> ①散度 div F=∇·F 衡量點的流出趨勢 ②旋度 curl F=∇×F 衡量點的旋轉趨勢 ③div(curl F)=0、curl(∇f)=0 ④在流體力學與電磁學中的物理意義</div>
+
+<p>散度（divergence）和旋度（curl）是作用於向量場的兩個基本運算。它們分別衡量向量場在一個點的「流出趨勢」和「旋轉趨勢」，在流體力學、電磁學和彈性理論中有核心應用。</p>
+
+<h3>散度（Divergence）</h3>
+
+<p><strong>散度</strong>是一個純量函數，衡量向量場在一個點的「淨流出率」。在物理直覺中，若 $\mathbf{F}$ 是流體速度場，則 $\text{div}\,\mathbf{F}(P)$ 告訴我們在點 $P$ 處，流體是正在「膨脹」（正散度）、「收縮」（負散度）還是「不可壓縮」（零散度）。</p>
+
+<div class="formula-card">
+  <div class="label">散度的定義</div>
+  <div class="eq">$$\text{div}\,\mathbf{F} = \nabla \cdot \mathbf{F} = \frac{\partial P}{\partial x} + \frac{\partial Q}{\partial y} + \frac{\partial R}{\partial z}$$</div>
+  <div class="note">在 $\mathbb{R}^2$ 中：$\text{div}\,\mathbf{F} = P_x + Q_y$。散度是純量場，不是向量場。</div>
+</div>
+
+<div class="figure">
+  <img src="../../pages/v3c6_pages/v3c6_page_669_c.png" alt="零散度向量場" loading="lazy">
+  <figcaption>圖 6.50：(a) $\mathbf{F}(x,y) = \langle y, 0 \rangle$ 散度為零——每個點流入量等於流出量；(b) $\mathbf{F}(x,y) = \langle x, -y \rangle$ 同樣散度為零</figcaption>
+</div>
+
+<p>散度的幾何直覺：想像你在向量場中放置一個彈性圓圈。如果圓圈在流動中保持面積不變，散度為零。如果圓圈被「壓扁」失去面積，散度為負。如果圓圈被「撐開」增加面積，散度為正。</p>
+
+<div class="callout"><strong>💡 物理應用：高斯磁定律</strong><br>在物理學中，磁場 $\mathbf{B}$ 的散度恆為零：$\nabla \cdot \mathbf{B} = 0$。這反映了自然界中不存在「磁單極子」（孤立磁荷）的事實——磁力線總是形成封閉迴路，沒有起點也沒有終點。</div>
+
+<h3>旋度（Curl）</h3>
+
+<p><strong>旋度</strong>是一個向量場，衡量向量場在一個點的「旋轉趨勢」。直覺上，若在向量場中放置一個微型槳輪（paddlewheel），旋度告訴你槳輪會如何旋轉以及旋轉軸的方向。</p>
+
+<div class="formula-card">
+  <div class="label">旋度的定義</div>
+  <div class="eq">$$\text{curl}\,\mathbf{F} = \nabla \times \mathbf{F} = \begin{vmatrix} \mathbf{i} & \mathbf{j} & \mathbf{k} \\ \frac{\partial}{\partial x} & \frac{\partial}{\partial y} & \frac{\partial}{\partial z} \\ P & Q & R \end{vmatrix}$$</div>
+  <div class="note">展開：$\text{curl}\,\mathbf{F} = \langle R_y - Q_z,\; P_z - R_x,\; Q_x - P_y \rangle$。在 $\mathbb{R}^2$ 中，旋度視為純量 $Q_x - P_y$（即 $z$ 分量）。</div>
+</div>
+
+<div class="figure">
+  <img src="../../pages/v3c6_pages/v3c6_page_673_c.png" alt="旋度的物理直覺" loading="lazy">
+  <figcaption>圖 6.54：旋度的物理直覺——在向量場中放置微型槳輪。若槳輪旋轉，該點旋度不為零；旋轉軸的方向即旋度向量的方向</figcaption>
+</div>
+
+<h3>散度與旋度的關係</h3>
+
+<p>兩個極其重要的恆等式構成了向量微積分的骨架：</p>
+
+<div class="formula-card">
+  <div class="label">兩個基本恆等式</div>
+  <p><strong>1. 梯度場的旋度恆為零：</strong>$\text{curl}(\nabla f) = \nabla \times (\nabla f) = \mathbf{0}$</p>
+  <p><strong>2. 旋度場的散度恆為零：</strong>$\text{div}(\text{curl}\,\mathbf{F}) = \nabla \cdot (\nabla \times \mathbf{F}) = 0$</p>
+  <div class="note">第一個恆等式意味著：若 $\mathbf{F} = \nabla f$（保守場），則 $\text{curl}\,\mathbf{F} = \mathbf{0}$。在單連通區域上，反過來也成立。</div>
+</div>
+
+<div class="callout-warn"><strong>⚡ 常見混淆：$\nabla$ 運算符的「雙重身份」</strong><br>$\nabla$ 既可用來表示梯度（$\nabla f$，結果是向量場）、散度（$\nabla \cdot \mathbf{F}$，結果是純量場）、也可表示旋度（$\nabla \times \mathbf{F}$，結果是向量場）。初學者容易混淆這三種用法。記住：梯度作用在純量上產生向量，散度作用在向量上產生純量，旋度作用在向量上產生向量。</div>
+
+<details class="example" open><summary>📝 範例 6.48：計算散度</summary>若 $\mathbf{F}(x,y,z) = \langle x^2z, -2xz, yz \rangle$，求 $\text{div}\,\mathbf{F}$ 在點 $(2,-1,3)$ 的值。<br><br><strong>解：</strong>$P_x = 2xz$, $Q_y = 0$, $R_z = y$。$\text{div}\,\mathbf{F} = 2xz + 0 + y = 2(2)(3) + (-1) = 11$。在 $(2,-1,3)$ 處散度為正 11，若 $\mathbf{F}$ 代表流體速度，則該點處流體正在「流出」。</details>
+
+<details class="example" open><summary>📝 範例 6.51：計算旋度</summary>求 $\mathbf{F}(x,y,z) = \langle x^2y, xz, xyz \rangle$ 的旋度。<br><br><strong>解：</strong>$\text{curl}\,\mathbf{F} = \langle R_y - Q_z, P_z - R_x, Q_x - P_y \rangle = \langle xz - 0, 0 - yz, z - x^2 \rangle = \langle xz, -yz, z-x^2 \rangle$。</details>
+
+</section>
+
+<!-- ====== Section 6.6 ====== -->
+<section id="s6-6">
+<h2>6.6 曲面積分（Surface Integrals）</h2>
+
+<div style="margin-bottom:14px;font-size:12px;color:var(--tx2);line-height:1.8"><strong style="color:var(--tx)">🔑 本節重點</strong> ①純量曲面積分計算曲面上的面積分 ②向量曲面積分計算通過曲面的通量 ③需要曲面參數化 r(u,v) ④面積元素 dS=|r_u×r_v| dudv</div>
+
+<p>線積分將積分從一維區間推廣到一維曲線；<strong>曲面積分（surface integral）</strong>則更進一步，將積分推廣到<strong>二維曲面</strong>上。正如線積分需要曲線的參數化，曲面積分需要曲面的參數化。</p>
+
+<h3>參數曲面</h3>
+
+<p>一個<strong>參數曲面（parametric surface）</strong>由兩個參數 $u, v$ 描述：$\mathbf{r}(u,v) = \langle x(u,v), y(u,v), z(u,v) \rangle$，其中 $(u,v)$ 在參數域（parameter domain）中變化。兩個參數是因為曲面是二維的。</p>
+
+<div class="formula-card">
+  <div class="label">常見曲面的參數化</div>
+  <p><strong>圓柱 $x^2+y^2=a^2$：</strong>$\mathbf{r}(u,v) = \langle a\cos u, a\sin u, v \rangle$，$0 \leq u \leq 2\pi$，$v \in \mathbb{R}$</p>
+  <p><strong>球面 $x^2+y^2+z^2=a^2$：</strong>$\mathbf{r}(\phi,\theta) = \langle a\sin\phi\cos\theta, a\sin\phi\sin\theta, a\cos\phi \rangle$</p>
+  <p><strong>錐面 $z^2 = x^2+y^2$：</strong>$\mathbf{r}(u,v) = \langle u\cos v, u\sin v, u \rangle$</p>
+  <div class="note">函數圖形 $z = f(x,y)$ 的自然參數化：$\mathbf{r}(x,y) = \langle x, y, f(x,y) \rangle$</div>
+</div>
+
+<div class="figure">
+  <img src="../../pages/v3c6_pages/v3c6_page_683_c.png" alt="圓柱的參數化" loading="lazy">
+  <figcaption>圖 6.57：圓柱的參數化——(a) 固定 $u$ 得到垂直線；(b) 固定 $v$ 得到水平圓；(c) 兩族曲線交織形成圓柱面</figcaption>
+</div>
+
+<h3>純量曲面積分</h3>
+
+<p>純量曲面積分 $\iint_S f(x,y,z)\,dS$ 將曲面 $S$ 分割成小塊，每塊面積為 $\Delta S_{ij}$，取樣本點並求和後取極限。計算的關鍵在於面積元素 $dS = |\mathbf{r}_u \times \mathbf{r}_v|\,du\,dv$：</p>
+
+<div class="formula-card">
+  <div class="label">純量曲面積分計算公式</div>
+  <div class="eq">$$\iint_S f(x,y,z)\,dS = \iint_D f(\mathbf{r}(u,v))\,|\mathbf{r}_u \times \mathbf{r}_v|\,du\,dv$$</div>
+  <div class="note">其中 $\mathbf{r}_u = \frac{\partial\mathbf{r}}{\partial u}$, $\mathbf{r}_v = \frac{\partial\mathbf{r}}{\partial v}$，而 $|\mathbf{r}_u \times \mathbf{r}_v|$ 是兩切向量所張平行四邊形的面積</div>
+</div>
+
+<div class="figure">
+  <img src="../../pages/v3c6_pages/v3c6_page_689_c.png" alt="曲面面積元素" loading="lazy">
+  <figcaption>圖 6.66：$\mathbf{r}_u$ 和 $\mathbf{r}_v$ 是曲面的兩個切向量。若它們的外積不為零，曲面在該點有切平面</figcaption>
+</div>
+
+<div class="callout"><strong>💡 特殊情況：$f=1$ 時</strong><br>當 $f=1$ 時，$\iint_S 1\,dS$ 就是曲面 $S$ 的<strong>表面積（surface area）</strong>。這是一維弧長公式 $\int_C 1\,ds = \text{弧長}$ 的二維類比。</div>
+
+<h3>向量曲面積分（通量積分）</h3>
+
+<p>向量曲面積分，也稱為<strong>通量積分（flux integral）</strong>，計算向量場穿越曲面的「流量」：$\iint_S \mathbf{F} \cdot d\mathbf{S} = \iint_S \mathbf{F} \cdot \mathbf{N}\,dS$，其中 $\mathbf{N}$ 是曲面的單位法向量。計算公式：</p>
+
+<div class="formula-card">
+  <div class="label">向量曲面積分計算公式</div>
+  <div class="eq">$$\iint_S \mathbf{F} \cdot d\mathbf{S} = \iint_D \mathbf{F}(\mathbf{r}(u,v)) \cdot (\mathbf{r}_u \times \mathbf{r}_v)\,du\,dv$$</div>
+  <div class="note">$\mathbf{r}_u \times \mathbf{r}_v$ 的方向是曲面的法向量方向。曲面的定向（orientation）決定了法向量指向哪一側。</div>
+</div>
+
+<div class="callout-warn"><strong>⚡ 定向的重要性</strong><br>曲面積分要求曲面是<strong>可定向的（orientable）</strong>——即可以一致地定義「外側」和「內側」。大多數常見曲面（球面、圓柱面、平面）都是可定向的。但<strong>莫比烏斯帶（Möbius strip）</strong>是不可定向的經典反例：沿著帶面走一圈後，法向量會翻轉方向。</div>
+
+<details class="example" open><summary>📝 範例 6.63：計算曲面面積</summary>求曲面 $z = f(x,y) = x^2 + y^2$ 在圓盤 $x^2+y^2 \leq 1$ 上方的面積。<br><br><strong>解：</strong>使用參數化 $\mathbf{r}(x,y) = \langle x, y, x^2+y^2 \rangle$。$\mathbf{r}_x = \langle 1, 0, 2x \rangle$, $\mathbf{r}_y = \langle 0, 1, 2y \rangle$。$\mathbf{r}_x \times \mathbf{r}_y = \langle -2x, -2y, 1 \rangle$。$|\mathbf{r}_x \times \mathbf{r}_y| = \sqrt{4x^2+4y^2+1}$。轉換為極坐標：面積 $= \int_0^{2\pi}\int_0^1 \sqrt{4r^2+1}\,r\,dr\,d\theta = 2\pi[\frac{1}{12}(4r^2+1)^{3/2}]_0^1 = \frac{\pi}{6}(5\sqrt{5}-1)$。</details>
+
+</section>
+
+<!-- ====== Section 6.7 ====== -->
+<section id="s6-7">
+<h2>6.7 斯托克斯定理（Stokes' Theorem）</h2>
+
+<div style="margin-bottom:14px;font-size:12px;color:var(--tx2);line-height:1.8"><strong style="color:var(--tx)">🔑 本節重點</strong> ①將曲面邊界線積分轉為曲面上旋度的面積分 ②∮_C F·dr=∬_S(curl F)·dS ③格林定理為斯托克斯定理在平面的特例 ④統一各維度的微積分基本定理</div>
+
+<p>斯托克斯定理（Stokes' theorem）是格林定理從平面到空間曲面的推廣。它將一個沿曲面邊界的線積分，轉換為該曲面上旋度的曲面積分。</p>
+
+<div class="formula-card">
+  <div class="label">斯托克斯定理（定理 6.19）</div>
+  <div class="eq">$$\oint_C \mathbf{F} \cdot d\mathbf{r} = \iint_S (\nabla \times \mathbf{F}) \cdot d\mathbf{S}$$</div>
+  <div class="note">$S$ 是分段光滑的可定向曲面，$C$ 是其邊界（簡單封閉曲線，正定向）。「正定向」意味著當你沿 $C$ 行走、頭朝向法向量 $\mathbf{N}$ 時，曲面 $S$ 在你的左側。</div>
+</div>
+
+<div class="figure">
+  <img src="../../pages/v3c6_pages/v3c6_page_714_c.png" alt="斯托克斯定理示意" loading="lazy">
+  <figcaption>圖 6.79：斯托克斯定理——曲面 $S$ 上的旋度通量積分等於邊界 $C$ 上的線積分。注意曲線的正定向：頭朝法向量方向時曲面在左側</figcaption>
+</div>
+
+<p>斯托克斯定理的核心訊息是：旋度在曲面上的「總累積」等於向量場沿邊界的環流。這與格林定理的精神完全一致——格林定理是斯托克斯定理在平面上的特例（當 $S$ 是 $xy$ 平面上的區域時，$\mathbf{N} = \mathbf{k}$，旋度的 $z$ 分量就是 $Q_x - P_y$）。</p>
+
+<div class="callout"><strong>💡 核心洞察：微積分基本定理的統一形式</strong><br>斯托克斯定理揭示了向量微積分中所有「基本定理」的統一模式：<strong>導數的積分 = 原函數在邊界上的值</strong>。一維：$\int_a^b f'(x)\,dx = f(b)-f(a)$；梯度：$\int_C \nabla f \cdot d\mathbf{r} = f(\text{終點}) - f(\text{起點})$；格林定理（環流）：$\iint_D (Q_x-P_y)\,dA = \oint_C \mathbf{F} \cdot d\mathbf{r}$；斯托克斯定理：$\iint_S (\nabla\times\mathbf{F})\cdot d\mathbf{S} = \oint_C \mathbf{F} \cdot d\mathbf{r}$。</div>
+
+<div class="callout-warn"><strong>⚡ 常見錯誤：定向往哪邊？</strong><br>應用斯托克斯定理時，最常出錯的是曲面邊界 $C$ 的定向。記住右手法則：如果你用右手拇指指向法向量 $\mathbf{N}$ 的方向，彎曲的四指所指的方向就是 $C$ 的正定向。如果方向搞反，結果就會差一個負號。</div>
+
+<details class="example" open><summary>📝 範例 6.65：用斯托克斯定理計算線積分</summary>用斯托克斯定理計算 $\oint_C \mathbf{F} \cdot d\mathbf{r}$，其中 $\mathbf{F}(x,y,z) = \langle -y^2, x, z^2 \rangle$，$C$ 是平面 $y+z=2$ 與圓柱 $x^2+y^2=1$ 的交線，逆時針定向（從上方看）。<br><br><strong>解：</strong>計算旋度：$\nabla \times \mathbf{F} = \langle 0, 0, 1+2y \rangle$。取曲面 $S$ 為平面 $y+z=2$ 在圓柱內的部分，向上定向：$\mathbf{N} = \frac{\langle 0,1,1 \rangle}{\sqrt{2}}$。通量積分 $= \iint_S (0,0,1+2y) \cdot \frac{\langle 0,1,1 \rangle}{\sqrt{2}}\,dS = \frac{1}{\sqrt{2}}\iint_S (1+2y)\,dS$。投影至 $xy$ 平面：$dS = \sqrt{2}\,dx\,dy$（因為 $z = 2-y$，$|\nabla(z+y-2)| = \sqrt{2}$）。因此積分 $= \iint_{x^2+y^2 \leq 1} (1+2y)\,dx\,dy$。由對稱性 $\iint 2y\,dx\,dy = 0$，所以 $= \iint 1\,dx\,dy = \pi$。</details>
+
+<details class="example" open><summary>📝 範例 6.67：用斯托克斯定理計算曲面積分</summary>用斯托克斯定理計算 $\iint_S (\nabla \times \mathbf{F}) \cdot d\mathbf{S}$，其中 $\mathbf{F} = \langle xz, yz, xy \rangle$，$S$ 是上半球面 $x^2+y^2+z^2=1, z \geq 0$，向上定向。<br><br><strong>解：</strong>由斯托克斯定理，該積分等於 $\oint_C \mathbf{F} \cdot d\mathbf{r}$，其中 $C$ 是單位圓 $x^2+y^2=1$ 在 $xy$ 平面上的邊界（$z=0$）。在 $C$ 上，$z=0$，所以 $\mathbf{F} = \langle 0, 0, xy \rangle$。$\mathbf{r}(t) = \langle \cos t, \sin t, 0 \rangle$，$\mathbf{r}'(t) = \langle -\sin t, \cos t, 0 \rangle$，$\mathbf{F} \cdot \mathbf{r}' = 0$。因此線積分 $= \int_0^{2\pi} 0\,dt = 0$。</details>
+
+</section>
+
+<!-- ====== Section 6.8 ====== -->
+<section id="s6-8">
+<h2>6.8 散度定理（The Divergence Theorem）</h2>
+
+<div style="margin-bottom:14px;font-size:12px;color:var(--tx2);line-height:1.8"><strong style="color:var(--tx)">🔑 本節重點</strong> ①將封閉曲面通量轉為體積內散度三重積分 ②∬_S F·dS=∭_E div F dV ③通量等於內部所有源的總和 ④與格林、斯托克斯定理形成統一定理體系</div>
+
+<p>散度定理（divergence theorem），也稱為<strong>高斯定理（Gauss's theorem）</strong>，是向量微積分中最後一個、也是維度最高的「基本定理」。它將一個封閉曲面上的通量積分，轉換為該曲面所圍體積上的散度三重積分。</p>
+
+<div class="formula-card">
+  <div class="label">散度定理（定理 6.20）</div>
+  <div class="eq">$$\iint_S \mathbf{F} \cdot d\mathbf{S} = \iiint_E (\nabla \cdot \mathbf{F})\,dV$$</div>
+  <div class="note">$S$ 是封閉曲面（包圍立體 $E$），向外定向。$S$ 是 $E$ 的邊界：$S = \partial E$。</div>
+</div>
+
+<div class="figure">
+  <img src="../../pages/v3c6_pages/v3c6_page_730_c.png" alt="散度定理示意" loading="lazy">
+  <figcaption>圖 6.87：散度定理——封閉曲面 $S$ 上的通量積分等於立體 $E$ 上的散度三重積分。這是格林定理通量形式在三維的推廣</figcaption>
+</div>
+
+<p>散度定理的物理意義極其深刻：一個區域內所有「源」（source，正散度）和「匯」（sink，負散度）的總和，等於穿越該區域邊界的淨流量。如果區域內沒有源或匯（散度處處為零），進入的流量就等於出去的流量。</p>
+
+<h3>微積分基本定理的完整體系</h3>
+
+<p>散度定理完成了向量微積分基本定理的最後一塊拼圖：</p>
+
+<table>
+  <thead><tr><th>定理</th><th>邊界積分</th><th>區域積分</th><th>「導數」</th></tr></thead>
+  <tbody>
+    <tr><td>微積分基本定理</td><td>$f(b)-f(a)$</td><td>$\int_a^b f'(x)\,dx$</td><td>$f'$</td></tr>
+    <tr><td>線積分基本定理</td><td>$f(B)-f(A)$</td><td>$\int_C \nabla f \cdot d\mathbf{r}$</td><td>$\nabla f$</td></tr>
+    <tr><td>格林定理（環流）</td><td>$\oint_C \mathbf{F} \cdot d\mathbf{r}$</td><td>$\iint_D (Q_x-P_y)\,dA$</td><td>$\text{curl}\,\mathbf{F}$</td></tr>
+    <tr><td>格林定理（通量）</td><td>$\oint_C \mathbf{F} \cdot \mathbf{N}\,ds$</td><td>$\iint_D \text{div}\,\mathbf{F}\,dA$</td><td>$\text{div}\,\mathbf{F}$</td></tr>
+    <tr><td>斯托克斯定理</td><td>$\oint_C \mathbf{F} \cdot d\mathbf{r}$</td><td>$\iint_S (\nabla\times\mathbf{F})\cdot d\mathbf{S}$</td><td>$\text{curl}\,\mathbf{F}$</td></tr>
+    <tr><td>散度定理</td><td>$\iint_S \mathbf{F} \cdot d\mathbf{S}$</td><td>$\iiint_E \text{div}\,\mathbf{F}\,dV$</td><td>$\text{div}\,\mathbf{F}$</td></tr>
+  </tbody>
+</table>
+
+<div class="callout"><strong>💡 統一公式</strong><br>所有這些定理都可以用一個符號公式概括：$\int_{\partial \Omega} \omega = \int_{\Omega} d\omega$，其中 $\Omega$ 是區域，$\partial\Omega$ 是其邊界，$d\omega$ 是「外微分」（exterior derivative）。這是微分形式（differential forms）理論的核心，也是現代微分幾何的基礎。</div>
+
+<div class="callout-warn"><strong>⚡ 使用散度定理的條件</strong><br>(1) 曲面 $S$ 必須是<strong>封閉的</strong>（完全包圍一個立體）——如果題目給的是開放曲面，散度定理不適用（應改用斯托克斯定理）。(2) 定向必須是<strong>向外</strong>。(3) 向量場必須在立體 $E$ 上有連續偏導數。注意散度定理<strong>不要求</strong>$E$ 是單連通的——球殼（空心球）的邊界有兩個曲面（外球面和內球面），兩者都要積分。</div>
+
+<details class="example" open><summary>📝 範例 6.72：用散度定理計算通量</summary>用散度定理計算 $\iint_S \mathbf{F} \cdot d\mathbf{S}$，其中 $\mathbf{F}(x,y,z) = \langle x, y, z \rangle$，$S$ 是單位球面 $x^2+y^2+z^2=1$，向外定向。<br><br><strong>解：</strong>$\text{div}\,\mathbf{F} = 1+1+1 = 3$。由散度定理，$\iint_S \mathbf{F} \cdot d\mathbf{S} = \iiint_E 3\,dV = 3 \times \text{球體積} = 3 \times \frac{4\pi}{3} = 4\pi$。</details>
+
+<details class="example" open><summary>📝 範例 6.73：電場的高斯定律</summary>點電荷 $q$ 在原點產生的電場為 $\mathbf{E} = \frac{q}{4\pi\epsilon_0}\frac{\mathbf{r}}{|\mathbf{r}|^3}$。證明穿越任何包圍原點的封閉曲面的電通量為 $\frac{q}{\epsilon_0}$。<br><br><strong>解：</strong>$\text{div}\,\mathbf{E} = \frac{q}{\epsilon_0}\delta(\mathbf{r})$（在原點以外散度為零）。因此對於任何包圍原點的封閉曲面，通量 $= \iiint_E \text{div}\,\mathbf{E}\,dV = \frac{q}{\epsilon_0}$。這就是<strong>高斯定律（Gauss's Law）</strong>。</details>
+
+</section>
+
+<!-- ====== Key Concepts ====== -->
+<section id="key-concepts">
+<h2>📋 關鍵概念回顧（Key Concepts）</h2>
+<ol>
+  <li><strong>向量場</strong>：$\mathbf{F}(x,y) = \langle P(x,y), Q(x,y) \rangle$ 為平面上每個點賦予一個向量——可想像為流體速度場或力場</li>
+  <li><strong>線積分（純量）</strong>：$\int_C f\,ds$ 沿曲線對純量函數積分——弧長元素 $ds = \sqrt{(dx/dt)^2+(dy/dt)^2}\,dt$</li>
+  <li><strong>線積分（向量）</strong>：$\int_C \mathbf{F} \cdot d\mathbf{r} = \int_C P\,dx + Q\,dy$——物理上表示力沿路徑所作的功</li>
+  <li><strong>保守場與位勢函數</strong>：若 $\mathbf{F} = \nabla f$，則 $\mathbf{F}$ 是保守場——線積分與路徑無關，僅由起點終點決定；$\oint_C \mathbf{F}\cdot d\mathbf{r}=0$ 對任何閉曲線成立</li>
+  <li><strong>Green 定理</strong>：$\oint_C P\,dx+Q\,dy = \iint_D (Q_x - P_y)\,dA$——將沿閉曲線的線積分轉換為平面區域上的二重積分</li>
+  <li><strong>旋度</strong>：$\text{curl}\,\mathbf{F} = \nabla \times \mathbf{F}$——衡量向量場在點附近的旋轉趨勢；在平面場中 $\text{curl}\,\mathbf{F} = Q_x - P_y$</li>
+  <li><strong>散度</strong>：$\text{div}\,\mathbf{F} = \nabla \cdot \mathbf{F} = P_x + Q_y + R_z$——衡量向量場在點附近的「源」或「匯」強度</li>
+  <li><strong>Stokes 定理</strong>：$\oint_C \mathbf{F}\cdot d\mathbf{r} = \iint_S (\nabla \times \mathbf{F})\cdot d\mathbf{S}$——將空間閉曲線的線積分轉換為曲面上的面積分（Green 定理的三維推廣）</li>
+  <li><strong>散度定理</strong>：$\iint_S \mathbf{F}\cdot d\mathbf{S} = \iiint_E \text{div}\,\mathbf{F}\,dV$——將通過封閉曲面的通量轉換為體內的三重積分（也稱 Gauss 定理）</li>
+</ol>
+</section>
+
+<section id="key-equations">
+<h2>📐 關鍵公式（Key Equations）</h2>
+<table>
+  <thead><tr><th>公式</th><th>說明</th></tr></thead>
+  <tbody>
+    <tr><td>$$\int_C \mathbf{F}\cdot d\mathbf{r} = \int_a^b \mathbf{F}(\mathbf{r}(t))\cdot \mathbf{r}'(t)\,dt$$</td><td>向量線積分（參數形式）</td></tr>
+    <tr><td>$$\oint_C P\,dx+Q\,dy = \iint_D (Q_x-P_y)\,dA$$</td><td>Green 定理</td></tr>
+    <tr><td>$$\text{curl}\,\mathbf{F} = \nabla \times \mathbf{F}$$</td><td>旋度</td></tr>
+    <tr><td>$$\text{div}\,\mathbf{F} = \nabla \cdot \mathbf{F} = P_x+Q_y+R_z$$</td><td>散度</td></tr>
+    <tr><td>$$\oint_C \mathbf{F}\cdot d\mathbf{r} = \iint_S (\nabla \times \mathbf{F})\cdot d\mathbf{S}$$</td><td>Stokes 定理</td></tr>
+    <tr><td>$$\iint_S \mathbf{F}\cdot d\mathbf{S} = \iiint_E \text{div}\,\mathbf{F}\,dV$$</td><td>散度定理（Gauss）</td></tr>
+  </tbody>
+</table>
+</section>
+
+<!-- ====== Summary ====== -->
+<section id="summary">
+<h2>本章摘要</h2>
+
+<div class="callout"><strong>🔑 核心收穫</strong><br>
+本章建立了向量微積分的完整體系，從向量場的定義一路到最強大的兩個定理——斯托克斯定理和散度定理。以下是八個最重要的觀念：
+<ol>
+  <li><strong>向量場</strong>是每個點對應一個向量的映射——徑向場和旋轉場是兩大基本類型</li>
+  <li><strong>線積分</strong>沿曲線對向量場積分——純量線積分與參數化無關，向量線積分依賴定向</li>
+  <li><strong>保守場</strong>是梯度場——其線積分只依賴端點（基本定理），環流為零</li>
+  <li><strong>格林定理</strong>將平面封閉曲線上的線積分轉換為二重積分——環流形式用旋度，通量形式用散度</li>
+  <li><strong>散度</strong>衡量「流出性」，<strong>旋度</strong>衡量「旋轉性」——兩者透過 $\nabla$ 運算子優雅表達</li>
+  <li><strong>曲面積分</strong>將積分推廣到二維曲面——需要參數化和面積元素 $|\mathbf{r}_u \times \mathbf{r}_v|$</li>
+  <li><strong>斯托克斯定理</strong>：$\oint_C \mathbf{F} \cdot d\mathbf{r} = \iint_S (\nabla\times\mathbf{F})\cdot d\mathbf{S}$——格林定理的三維推廣</li>
+  <li><strong>散度定理</strong>：$\iint_S \mathbf{F} \cdot d\mathbf{S} = \iiint_E (\nabla\cdot\mathbf{F})\,dV$——封閉曲面通量 = 內部散度總和</li>
+</ol>
+</div>
+
+<table>
+  <thead><tr><th>概念</th><th>公式 / 定義</th><th>物理意義</th></tr></thead>
+  <tbody>
+    <tr><td>線積分（純量）</td><td>$\int_C f\,ds = \int_a^b f(\mathbf{r}(t))|\mathbf{r}'(t)|dt$</td><td>「幕簾」面積</td></tr>
+    <tr><td>線積分（向量）</td><td>$\int_C \mathbf{F}\cdot d\mathbf{r} = \int_a^b \mathbf{F}\cdot\mathbf{r}'\,dt$</td><td>功（work）</td></tr>
+    <tr><td>位勢函數</td><td>$\mathbf{F} = \nabla f$</td><td>能量守恆系統</td></tr>
+    <tr><td>散度</td><td>$\nabla\cdot\mathbf{F} = P_x + Q_y + R_z$</td><td>流出率</td></tr>
+    <tr><td>旋度</td><td>$\nabla\times\mathbf{F} = \langle R_y-Q_z, P_z-R_x, Q_x-P_y \rangle$</td><td>旋轉趨勢</td></tr>
+    <tr><td>曲面積分（通量）</td><td>$\iint_S \mathbf{F}\cdot d\mathbf{S} = \iint_D \mathbf{F}\cdot(\mathbf{r}_u\times\mathbf{r}_v)\,dudv$</td><td>流體穿越量</td></tr>
+  </tbody>
+</table>
+</section>
+
+<!-- ====== Common Mistakes ====== -->
+<section id="common-mistakes">
+<h2>⚠️ 初學者常見錯誤</h2>
+
+<div class="callout-warn"><strong>❌ 錯誤 1：混淆線積分的兩種形式</strong><br>
+$\int_C f(x,y)\,ds$（純量線積分）和 $\int_C \mathbf{F} \cdot d\mathbf{r}$（向量線積分）是兩個不同的概念。前者與曲線的定向無關，後者與定向有關（反向走會變號）。計算時：純量線積分需要 $|\mathbf{r}'(t)|$（弧長元素），向量線積分需要 $\mathbf{r}'(t)$（切向量本身）。很多學生在兩者之間搞混，導致使用了錯誤的公式。</div>
+
+<div class="callout-warn"><strong>❌ 錯誤 2：在非單連通區域上誤用保守場判別</strong><br>
+交叉偏導數相等（$P_y = Q_x$）是保守場的<strong>必要條件</strong>，但僅在<strong>單連通區域</strong>上才是充分條件。經典反例：$\mathbf{F}(x,y) = \langle \frac{-y}{x^2+y^2}, \frac{x}{x^2+y^2} \rangle$ 在 $\mathbb{R}^2\setminus\{(0,0)\}$（非單連通！）上滿足 $P_y = Q_x$，但沿單位圓的環流為 $2\pi \neq 0$。<strong>判別保守場的正確步驟</strong>：(1) 檢查 $P_y = Q_x$；(2) 確認定義域是單連通的——兩者缺一不可。</div>
+
+<div class="callout-warn"><strong>❌ 錯誤 3：格林定理的使用條件</strong><br>
+格林定理要求 (1) 曲線必須封閉，(2) 定向必須逆時針（若順時針則結果取負），(3) 向量場在區域上有連續偏導數。常見錯誤包括：對非封閉曲線使用格林定理、忽略定向導致符號錯誤、在有奇異點的區域上不當使用（如原點有 $\frac{1}{x^2+y^2}$ 形式的奇異點）。</div>
+
+<div class="callout-warn"><strong>❌ 錯誤 4：混淆散度定理與斯托克斯定理的使用場景</strong><br>
+散度定理適用於<strong>封閉曲面</strong>包圍的<strong>立體</strong>（三維），將通量轉換為三重積分。斯托克斯定理適用於以<strong>封閉曲線</strong>為邊界的<strong>曲面</strong>（二維），將線積分轉換為曲面積分。一個簡單的判別法：問題給的是封閉曲面 → 散度定理；問題給的是封閉曲線（空間中）→ 斯托克斯定理；平面上的封閉曲線 → 格林定理。</div>
+
+<div class="callout-warn"><strong>❌ 錯誤 5：曲面參數化時的定向問題</strong><br>
+在計算向量曲面積分時，$\mathbf{r}_u \times \mathbf{r}_v$ 給出的法向量方向取決於參數的順序。如果要改變定向，只需將 $u$ 和 $v$ 互換（使外積變號），或在結果前加負號。特別注意：對於封閉曲面（如球面），「向外」定向要求法向量指向遠離物體的方向——檢查方法是代入一個簡單點驗證法向量是否指向外。</div>
+
+</section>
+
+<!-- ====== Self-Check ====== -->
+<section id="self-check">
+<h2>✅ 自我檢測（Self-Check）</h2>
+<p>完成以下題目檢驗你對本章核心概念的掌握程度。點擊展開查看答案。</p>
+
+<details class="derive"><summary>題 1：向量線積分</summary>
+<p>計算線積分 $\displaystyle \int_C \mathbf{F} \cdot d\mathbf{r}$，其中 $\mathbf{F} = \langle y,\; -x 
+angle$，$C$ 為單位圓 $x^2+y^2=1$，逆時針方向走一圈。</p>
+<p><strong>答案：</strong></p>
+<p>參數化：$\mathbf{r}(t) = \langle \cos t,\; \sin t 
+angle$，$0 \le t \le 2\pi$。</p>
+<p>$\mathbf{F}(\mathbf{r}(t)) = \langle \sin t,\; -\cos t 
+angle$，$\mathbf{r}'(t) = \langle -\sin t,\; \cos t 
+angle$。</p>
+<p>$\mathbf{F} \cdot d\mathbf{r} = (\sin t)(-\sin t) + (-\cos t)(\cos t) = -\sin^2 t - \cos^2 t = -1$。</p>
+<p>$\int_0^{2\pi} (-1)\,dt = -2\pi$。</p>
+</details>
+
+<details class="derive"><summary>題 2：保守場判別與勢函數</summary>
+<p>判斷 $\mathbf{F} = \langle 2xy,\; x^2 
+angle$ 是否為保守場。若是，求勢函數 $f$ 使得 $\nabla f = \mathbf{F}$。</p>
+<p><strong>答案：</strong></p>
+<p>檢查 $P_y = Q_x$：$P_y = \frac{\partial}{\partial y}(2xy) = 2x$，$Q_x = \frac{\partial}{\partial x}(x^2) = 2x$。相等，且定義域 $\mathbb{R}^2$ 單連通，故為保守場。</p>
+<p>求 $f$：$f_x = 2xy \Rightarrow f = x^2y + g(y)$。$f_y = x^2 + g'(y) = x^2 \Rightarrow g'(y) = 0$，$g(y) = C$。</p>
+<p>因此 $f(x,y) = x^2y + C$。</p>
+</details>
+
+<details class="derive"><summary>題 3：Green 定理的應用</summary>
+<p>用 Green 定理計算 $\displaystyle \oint_C (x^2y\,dx - xy^2\,dy)$，其中 $C$ 為單位圓 $x^2+y^2=1$，逆時針方向。</p>
+<p><strong>答案：</strong></p>
+<p>$P = x^2y$，$Q = -xy^2$。$Q_x - P_y = (-y^2) - (x^2) = -(x^2+y^2)$。</p>
+<p>Green 定理：$\oint_C P\,dx + Q\,dy = \iint_D (Q_x - P_y)\,dA = \iint_D -(x^2+y^2)\,dA$。</p>
+<p>極座標：$-\int_0^{2\pi}\int_0^1 r^2 \cdot r\,dr\,d\theta = -2\pi \cdot \frac{1}{4} = -\frac{\pi}{2}$。</p>
+</details>
+
+<details class="derive"><summary>題 4：散度與旋度的計算</summary>
+<p>對於向量場 $\mathbf{F} = \langle x^2,\; yz,\; xz 
+angle$，計算 (a) 散度 $\nabla \cdot \mathbf{F}$；(b) 旋度 $\nabla \times \mathbf{F}$。</p>
+<p><strong>答案：</strong></p>
+<p>(a) $\nabla \cdot \mathbf{F} = \frac{\partial}{\partial x}(x^2) + \frac{\partial}{\partial y}(yz) + \frac{\partial}{\partial z}(xz) = 2x + z + x = 3x + z$。</p>
+<p>(b) $\nabla \times \mathbf{F} = \begin{vmatrix} \mathbf{i} & \mathbf{j} & \mathbf{k} \\ \partial_x & \partial_y & \partial_z \\ x^2 & yz & xz \end{vmatrix}$</p>
+<p>$= \langle 0 - y,\; 0 - z,\; 0 - 0 
+angle = \langle -y,\; -z,\; 0 
+angle$。</p>
+</details>
+
+<details class="derive"><summary>題 5：定理選擇判斷</summary>
+<p>下列三種情況分別應使用哪個定理（Green / Stokes / 散度定理）？</p>
+<p>(a) 計算封閉曲面上的通量積分 $\iint_S \mathbf{F} \cdot d\mathbf{S}$。<br>
+(b) 計算平面上封閉曲線的環流量 $\oint_C \mathbf{F} \cdot d\mathbf{r}$。<br>
+(c) 計算空間中以封閉曲線為邊界的曲面上的旋度積分。</p>
+<p><strong>答案：</strong></p>
+<p>(a) <strong>散度定理</strong>（Divergence Theorem）：$\iint_S \mathbf{F}\cdot d\mathbf{S} = \iiint_E \nabla\cdot\mathbf{F}\,dV$。<br>
+(b) <strong>Green 定理</strong>：$\oint_C \mathbf{F}\cdot d\mathbf{r} = \iint_D (\nabla\times\mathbf{F})\cdot\mathbf{k}\,dA$。<br>
+(c) <strong>Stokes 定理</strong>：$\oint_C \mathbf{F}\cdot d\mathbf{r} = \iint_S (\nabla\times\mathbf{F})\cdot d\mathbf{S}$。<br>
+三者統一框架：「邊界上的積分 = 內部導數的積分」。</p>
+</details>
+
+</section>
+
+<!-- ====== Extras ====== -->
+<section id="extras">
+<h2>📚 延伸資源與學習建議</h2>
+
+<ul>
+  <li><strong>3Blue1Brown — Divergence and Curl</strong>：YouTube 系列視覺化解釋散度與旋度的物理直覺，強烈推薦</li>
+  <li><strong>Khan Academy — Multivariable Calculus</strong>：互動練習涵蓋線積分、格林定理、斯托克斯定理</li>
+  <li><strong>MIT 18.02 — Multivariable Calculus</strong>：經典的 OCW 課程，對向量微積分有深入講解</li>
+  <li><strong>Paul's Online Notes — Calculus III</strong>：含大量例題和詳細解題步驟</li>
+  <li><strong>GeoGebra 3D</strong>：可互動視覺化向量場、參數曲面和線積分</li>
+  <li><strong>練習建議</strong>：本章的定理雖然眾多，但有一個統一的模式——「導數的積分 = 邊界上的值」。試著對每個定理辨認：(1) 什麼是「導數」？(2) 什麼是「區域」？(3) 什麼是「邊界」？這個框架會幫助你建立整體理解。</li>
+  <li>下一章預告：<strong>第 7 章 — 二階微分方程</strong>將把微積分應用於彈簧振動、電路分析等動力系統</li>
+</ul>
+</section>
+
+</main>
+
+<script>
+// Sidebar scroll spy
+(function(){
+  const navs = document.querySelectorAll('.sn a, .nsub a');
+  const sections = [];
+  navs.forEach(a => {
+    const id = a.getAttribute('href');
+    if (id && id.startsWith('#')) {
+      const el = document.getElementById(id.substring(1));
+      if (el) sections.push({a, el});
+    }
+  });
+  function onScroll(){
+    let current = sections[0];
+    for (const s of sections) {
+      if (s.el.offsetTop <= window.scrollY + 120) current = s;
+    }
+    navs.forEach(a => a.classList.remove('active'));
+    if (current) current.a.classList.add('active');
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+})();
+
+// Theme toggle
+function toggleTheme(){ if(window.toggleTheme) window.toggleTheme(); } catch(e){}
+}
+(function(){
+  try {
+    const saved = localStorage.getItem('learning-portal-reading-preferences');
+    if (saved === 'dark') {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      document.getElementById('themeBtn').textContent = '☀️ 淺色模式';
+    }
+  } catch(e){}
+})();
+
+// Mobile sidebar
+</script>
+<script defer src="../assets/course-ui.js"></script>
+<script defer src="../assets/advanced-models.js"></script>
+</body>
+</html>

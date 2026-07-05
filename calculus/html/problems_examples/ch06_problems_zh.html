@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第 6 章例題詳解 — Calculus</title>
+<script>
+MathJax = {
+  tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']], tags: 'ams' },
+  options: { ignoreHtmlClass: 'no-math' }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+:root{--bg:#FFF;--bg2:#F5F5F7;--tx:#1D1D1F;--tx2:#666;--ac:#007AFF;--bd:#D2D2D7;--ex-bg:#F0FDF4;--ex-bd:#22C55E;--warn-bg:#FFFBEB;--warn-bd:#F59E0B}
+[data-theme="dark"]{--bg:#1D1D1F;--bg2:#2D2D2F;--tx:#F5F5F7;--tx2:#999;--ac:#4DA3FF;--bd:#3A3A3C;--ex-bg:#052E16;--ex-bd:#16A34A;--warn-bg:#422006;--warn-bd:#92400E}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Noto Sans TC','Microsoft JhengHei',sans-serif;background:var(--bg);color:var(--tx);line-height:1.72;font-size:15px;max-width:1100px;margin:0 auto;padding:32px 40px 80px}
+h1{font-size:28px;font-weight:700;margin:0 0 4px}
+h2{font-size:20px;font-weight:700;margin:32px 0 12px;padding-bottom:6px;border-bottom:2px solid var(--bd)}
+h3{font-size:16px;font-weight:600;margin:20px 0 8px;color:var(--ac)}
+p{margin:10px 0}
+a{color:var(--ac);text-decoration:none}
+.back{display:inline-block;margin-bottom:20px;color:var(--ac);font-size:13px}
+.exbox{background:var(--ex-bg);border:1px solid var(--ex-bd);border-radius:10px;padding:18px 22px;margin:20px 0}
+.exbox .ex-num{font-weight:700;font-size:14px;color:#166534;margin-bottom:6px}
+.exbox .ex-title{font-size:13px;color:var(--tx2);margin-bottom:8px}
+.exbox .ex-problem{font-weight:600;margin-bottom:8px}
+.exbox .ex-sol{font-size:14px;margin-bottom:6px}
+.exbox .ex-ans{font-weight:700;color:var(--ac);margin-top:8px;padding-top:8px;border-top:1px dashed var(--bd)}
+.eq{margin:12px 0;overflow-x:auto}
+.chap-tag{display:inline-block;padding:4px 12px;background:var(--ac);color:#fff;border-radius:12px;font-size:12px;font-weight:600;margin-bottom:8px}
+.header{margin-bottom:28px}
+.header .meta{font-size:12px;color:var(--tx2);margin-top:2px}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:13px}
+th,td{padding:8px 12px;text-align:left;border:1px solid var(--bd)}
+th{background:var(--bg2);font-weight:600}
+.portal-home-link{position:fixed;top:16px;right:16px;z-index:1000;display:inline-flex;align-items:center;min-height:36px;padding:7px 11px;border:1px solid var(--bd);border-radius:8px;background:var(--bg);color:var(--ac);font:600 13px/1.2 -apple-system,BlinkMacSystemFont,'Noto Sans TC','Microsoft JhengHei',sans-serif;text-decoration:none;box-shadow:0 2px 10px rgba(15,23,42,.08)}
+.portal-home-link:hover{background:var(--bg2)}
+@media(max-width:768px){body{padding:16px}}
+</style>
+</head>
+<body>
+
+<a class="portal-home-link" href="../../index.html">← 返回學習中心</a>
+
+<a class="back" href="index.html">← 例題與習題目錄</a>
+
+<header class="header">
+  <div class="chap-tag">第 6 章 · Calculus Vol 1, Ch 6</div>
+  <h1>積分的應用</h1>
+  <div class="meta">Applications of Integration · OpenStax Calculus · pp. 547–664 · 共 51 個課本例題</div>
+</header>
+
+<p>以下收錄本章所有課本例題，包含<strong>題目、詳細逐步解題過程與答案</strong>。內容以繁體中文呈現，數學式使用 MathJax 渲染。課本有詳解者翻譯為繁體中文；課本僅提供答案者，補上完整逐步解。</p>
+
+<section id="ss6-1">
+<h2>6.1 曲線間的面積（Areas between Curves）</h2>
+<p style="font-size:13px;color:var(--tx2);margin-bottom:16px"><strong>🔑 本節重點：</strong>兩曲線間面積公式、複合區域分段積分、對 y 積分、選擇水平或垂直切片</p>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 6.1</div>
+<div class="ex-title">基本曲線間面積</div>
+<div class="ex-problem">求由 $f(x)=x+2$ 與 $g(x)=x^2$ 在 $[-1,2]$ 上所圍區域的面積。</div>
+<div class="ex-sol"><strong>解：</strong>先求交點：$x+2=x^2 \Rightarrow x^2-x-2=0 \Rightarrow (x-2)(x+1)=0$，交於 $x=-1$ 和 $x=2$，恰為給定區間端點。在 $[-1,2]$ 上，$x+2 \ge x^2$。<br>$$A = \int_{-1}^2 [(x+2)-x^2]\,dx = \int_{-1}^2 (-x^2+x+2)\,dx$$<br>$$= \left[-\frac{x^3}{3}+\frac{x^2}{2}+2x\right]_{-1}^2$$<br>$$= \left(-\frac{8}{3}+2+4\right)-\left(\frac{1}{3}+\frac{1}{2}-2\right) = \left(\frac{10}{3}\right)-\left(-\frac{7}{6}\right) = \frac{27}{6} = \frac{9}{2}$$</div>
+<div class="ex-ans">✅ 答案：$\frac{9}{2}$ 平方單位</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 6.2</div>
+<div class="ex-title">對 y 積分求面積</div>
+<div class="ex-problem">求由 $x=y^2$ 與 $x=y+2$ 所圍區域的面積。</div>
+<div class="ex-sol"><strong>解：</strong>交點：$y^2=y+2 \Rightarrow y^2-y-2=0 \Rightarrow (y-2)(y+1)=0$，$y=-1,2$。<br>在 $[-1,2]$ 上，$y+2 \ge y^2$（右曲線減左曲線）。<br>$$A = \int_{-1}^2 [(y+2)-y^2]\,dy = \left[\frac{y^2}{2}+2y-\frac{y^3}{3}\right]_{-1}^2$$<br>$$= \left(2+4-\frac{8}{3}\right)-\left(\frac{1}{2}-2+\frac{1}{3}\right) = \frac{10}{3} - \left(-\frac{7}{6}\right) = \frac{9}{2}$$</div>
+<div class="ex-ans">✅ 答案：$\frac{9}{2}$ 平方單位</div>
+<div style="font-size:12px;color:var(--tx2);margin-top:6px">💡 注意：對 x 積分需要分段（$x<0$ 和 $x>0$ 上邊界不同），對 y 積分只需一個積分。</div>
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 6.3</div>
+<div class="ex-title">交叉曲線需分段積分</div>
+<div class="ex-problem">求 $y=\sin x$ 與 $y=\cos x$ 在 $[0,\pi/2]$ 上所圍區域的面積。</div>
+<div class="ex-sol"><strong>解：</strong>交點：$\sin x = \cos x$ 在 $[0,\pi/2]$ 內得 $x=\pi/4$。<br>在 $[0,\pi/4]$ 上：$\cos x \ge \sin x$；在 $[\pi/4,\pi/2]$ 上：$\sin x \ge \cos x$。<br>$$A = \int_0^{\pi/4} (\cos x - \sin x)\,dx + \int_{\pi/4}^{\pi/2} (\sin x - \cos x)\,dx$$<br>$$= [\sin x+\cos x]_0^{\pi/4} + [-\cos x-\sin x]_{\pi/4}^{\pi/2}$$<br>$$= (\sqrt{2}-1) + (\sqrt{2}-1) = 2\sqrt{2}-2$$</div>
+<div class="ex-ans">✅ 答案：$2\sqrt{2}-2 \approx 0.828$ 平方單位</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 6.4</div>
+<div class="ex-title">使用絕對值避免分段</div>
+<div class="ex-problem">求由 $y=x^2-4$ 與 $y=0$ 在 $[0,3]$ 上所圍區域的總面積。</div>
+<div class="ex-sol"><strong>解：</strong>注意 $x^2-4$ 在 $x=2$ 處由負轉正，需使用絕對值或分段。<br>$$A = \int_0^3 |x^2-4|\,dx = \int_0^2 (4-x^2)\,dx + \int_2^3 (x^2-4)\,dx$$<br>$$= \left[4x-\frac{x^3}{3}\right]_0^2 + \left[\frac{x^3}{3}-4x\right]_2^3$$<br>$$= \left(8-\frac{8}{3}\right) + \left[\left(9-12\right)-\left(\frac{8}{3}-8\right)\right] = \frac{16}{3} + \frac{7}{3} = \frac{23}{3}$$</div>
+<div class="ex-ans">✅ 答案：$\frac{23}{3} \approx 7.67$ 平方單位</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 6.5</div>
+<div class="ex-title">水平切片 vs 垂直切片</div>
+<div class="ex-problem">求由 $y=\sqrt{x}$、$y=0$ 和 $x=4$ 在第一象限所圍區域的面積，並比較對 x 積分與對 y 積分。</div>
+<div class="ex-sol"><strong>解：</strong><strong>對 x 積分：</strong>$A = \int_0^4 \sqrt{x}\,dx = \left[\frac{2}{3}x^{3/2}\right]_0^4 = \frac{16}{3}$。<br><strong>對 y 積分：</strong>$x=y^2$，$y$ 範圍 $[0,2]$。<br>$A = \int_0^2 (4-y^2)\,dy = \left[4y-\frac{y^3}{3}\right]_0^2 = 8-\frac{8}{3} = \frac{16}{3}$。兩者結果一致。</div>
+<div class="ex-ans">✅ 答案：$\frac{16}{3}$ 平方單位</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 6.6</div>
+<div class="ex-title">複合區域：兩次積分</div>
+<div class="ex-problem">求由 $y=x^3$、$y=8$ 和 $y$ 軸所圍第一象限區域的面積。</div>
+<div class="ex-sol"><strong>解：</strong><strong>對 x 積分：</strong>$y=x^3$ 與 $y=8$ 交於 $x=2$。$A = \int_0^2 (8-x^3)\,dx = \left[8x-\frac{x^4}{4}\right]_0^2 = 16-4=12$。<br><strong>對 y 積分：</strong>$x=y^{1/3}$，$y$ 從 0 到 8。<br>$A = \int_0^8 y^{1/3}\,dy = \left[\frac{3}{4}y^{4/3}\right]_0^8 = \frac{3}{4}\cdot 16 = 12$。</div>
+<div class="ex-ans">✅ 答案：$12$ 平方單位</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 6.7</div>
+<div class="ex-title">需要求出交點的區域面積</div>
+<div class="ex-problem">求由 $y=2x^2+10$ 與 $y=4x+16$ 所圍區域的面積。</div>
+<div class="ex-sol"><strong>解：</strong>交點：$2x^2+10=4x+16 \Rightarrow 2x^2-4x-6=0 \Rightarrow x^2-2x-3=0$，$(x-3)(x+1)=0$，$x=-1,3$。<br>判斷大小：$x=0$ 時 $f(0)=10$，$g(0)=16$，故 $g(x)>f(x)$ 在 $(-1,3)$ 間。<br>$$A = \int_{-1}^3 [(4x+16)-(2x^2+10)]\,dx = \int_{-1}^3 (-2x^2+4x+6)\,dx$$<br>$$= \left[-\frac{2x^3}{3}+2x^2+6x\right]_{-1}^3 = \left(-18+18+18\right)-\left(\frac{2}{3}+2-6\right) = 18 - \left(-\frac{10}{3}\right) = \frac{64}{3}$$</div>
+<div class="ex-ans">✅ 答案：$\frac{64}{3}$ 平方單位</div>
+
+</div>
+
+</section>
+
+<section id="ss6-2">
+<h2>6.2 切片法求體積（Determining Volumes by Slicing）</h2>
+<p style="font-size:13px;color:var(--tx2);margin-bottom:16px"><strong>🔑 本節重點：</strong>切片法通式、圓盤法、墊圈法、非坐標軸旋轉</p>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 6.8</div>
+<div class="ex-title">圓盤法基本練習</div>
+<div class="ex-problem">求由 $f(x)=\sqrt{x}$ 在 $[0,4]$ 上繞 $x$ 軸旋轉所產生旋轉體的體積。</div>
+<div class="ex-sol"><strong>解：</strong>$$V = \int_0^4 \pi (\sqrt{x})^2\,dx = \int_0^4 \pi x\,dx = \pi\left[\frac{x^2}{2}\right]_0^4 = 8\pi$$</div>
+<div class="ex-ans">✅ 答案：$8\pi$ 立方單位</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 6.9</div>
+<div class="ex-title">圓盤法繞 y 軸</div>
+<div class="ex-problem">求由 $x=y^2$ 與 $y=2$ 在第一象限所圍區域繞 $y$ 軸旋轉的體積。</div>
+<div class="ex-sol"><strong>解：</strong>$V = \int_0^2 \pi (y^2)^2\,dy = \pi\int_0^2 y^4\,dy = \pi\left[\frac{y^5}{5}\right]_0^2 = \frac{32\pi}{5}$</div>
+<div class="ex-ans">✅ 答案：$\frac{32\pi}{5}$ 立方單位</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 6.10</div>
+<div class="ex-title">墊圈法基本練習</div>
+<div class="ex-problem">求由 $f(x)=x$ 和 $g(x)=x^2$ 在 $[0,1]$ 之間所圍區域繞 $x$ 軸旋轉的體積。</div>
+<div class="ex-sol"><strong>解：</strong>在 $[0,1]$ 內 $x \ge x^2$，$R(x)=x$（外半徑），$r(x)=x^2$（內半徑）。<br>$$V = \int_0^1 \pi(x^2 - x^4)\,dx = \pi\left[\frac{x^3}{3} - \frac{x^5}{5}\right]_0^1 = \pi\left(\frac{1}{3} - \frac{1}{5}\right) = \frac{2\pi}{15}$$</div>
+<div class="ex-ans">✅ 答案：$\frac{2\pi}{15}$ 立方單位</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 6.11</div>
+<div class="ex-title">繞非坐標軸旋轉：墊圈法</div>
+<div class="ex-problem">求由 $y=x^2$ 與 $y=2x$ 所圍區域繞直線 $y=-1$ 旋轉的體積。</div>
+<div class="ex-sol"><strong>解：</strong>交點：$x^2=2x \Rightarrow x=0,2$。外半徑 $R(x)=2x-(-1)=2x+1$，內半徑 $r(x)=x^2-(-1)=x^2+1$。<br>$$V = \pi\int_0^2 [(2x+1)^2 - (x^2+1)^2]\,dx$$<br>$$= \pi\int_0^2 (4x^2+4x+1 - x^4 - 2x^2 - 1)\,dx = \pi\int_0^2 (-x^4+2x^2+4x)\,dx$$<br>$$= \pi\left[-\frac{x^5}{5}+\frac{2x^3}{3}+2x^2\right]_0^2 = \pi\left(-\frac{32}{5}+\frac{16}{3}+8\right) = \pi\cdot\frac{104}{15} = \frac{104\pi}{15}$$</div>
+<div class="ex-ans">✅ 答案：$\frac{104\pi}{15}$ 立方單位</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 6.12</div>
+<div class="ex-title">切片法：非旋轉體（截面為正方形）</div>
+<div class="ex-problem">一個立體的底部是由 $y=x^2$ 與 $y=4$ 所圍的區域，且垂直於 $x$ 軸的截面都是正方形。求此立體的體積。</div>
+<div class="ex-sol"><strong>解：</strong>底部邊界：$y=x^2$（下）與 $y=4$（上），交於 $x=-2,2$。截面正方形的邊長 $=4-x^2$。<br>$$V = \int_{-2}^2 (4-x^2)^2\,dx = 2\int_0^2 (16-8x^2+x^4)\,dx$$<br>$$= 2\left[16x-\frac{8x^3}{3}+\frac{x^5}{5}\right]_0^2 = 2\left(32-\frac{64}{3}+\frac{32}{5}\right) = 2\cdot\frac{256}{15} = \frac{512}{15}$$</div>
+<div class="ex-ans">✅ 答案：$\frac{512}{15} \approx 34.13$ 立方單位</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 6.13</div>
+<div class="ex-title">切片法：截面為半圓</div>
+<div class="ex-problem">一個立體的底部是半徑為 $r$ 的圓，垂直於直徑的截面都是正三角形。求此立體的體積。</div>
+<div class="ex-sol"><strong>解：</strong>設圓為 $x^2+y^2=r^2$，截面在 $x$ 處為正三角形，邊長 $2y=2\sqrt{r^2-x^2}$。正三角形面積 $A(x)=\frac{\sqrt{3}}{4}(2\sqrt{r^2-x^2})^2 = \sqrt{3}(r^2-x^2)$。<br>$$V = \int_{-r}^r \sqrt{3}(r^2-x^2)\,dx = 2\sqrt{3}\int_0^r (r^2-x^2)\,dx$$<br>$$= 2\sqrt{3}\left[r^2x-\frac{x^3}{3}\right]_0^r = 2\sqrt{3}\left(r^3-\frac{r^3}{3}\right) = \frac{4\sqrt{3}}{3}r^3$$</div>
+<div class="ex-ans">✅ 答案：$\frac{4\sqrt{3}}{3}r^3$ 立方單位</div>
+
+</div>
+
+</section>
+
+<section id="ss6-3">
+<h2>6.3 圓柱殼法（Cylindrical Shells）</h2>
+<p style="font-size:13px;color:var(--tx2);margin-bottom:16px"><strong>🔑 本節重點：</strong>殼法公式、殼法與圓盤法的對比與選擇、繞非坐標軸的殼法</p>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 6.14</div>
+<div class="ex-title">殼法基本練習</div>
+<div class="ex-problem">求由 $f(x)=2x-x^2$ 在 $[0,2]$ 上所圍區域繞 $y$ 軸旋轉的體積。</div>
+<div class="ex-sol"><strong>解：</strong>$$V = \int_0^2 2\pi x(2x-x^2)\,dx = 2\pi\int_0^2 (2x^2-x^3)\,dx$$<br>$$= 2\pi\left[\frac{2x^3}{3}-\frac{x^4}{4}\right]_0^2 = 2\pi\left(\frac{16}{3}-4\right) = 2\pi\cdot\frac{4}{3} = \frac{8\pi}{3}$$</div>
+<div class="ex-ans">✅ 答案：$\frac{8\pi}{3}$ 立方單位</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 6.15</div>
+<div class="ex-title">繞非坐標軸的殼法</div>
+<div class="ex-problem">求由 $f(x)=x^2$ 在 $[0,2]$ 上所圍區域繞直線 $x=3$ 旋轉的體積。</div>
+<div class="ex-sol"><strong>解：</strong>殼的半徑 $= 3-x$（殼在 $x$ 處，旋轉軸在 $x=3$）。<br>$$V = \int_0^2 2\pi(3-x)(x^2)\,dx = 2\pi\int_0^2 (3x^2-x^3)\,dx$$<br>$$= 2\pi\left[x^3-\frac{x^4}{4}\right]_0^2 = 2\pi(8-4) = 8\pi$$</div>
+<div class="ex-ans">✅ 答案：$8\pi$ 立方單位</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 6.16</div>
+<div class="ex-title">殼法 vs 圓盤法：選擇</div>
+<div class="ex-problem">求由 $y=x^2$、$y=0$ 和 $x=1$ 所圍區域繞 $y$ 軸旋轉的體積。分別用殼法和墊圈法計算。</div>
+<div class="ex-sol"><strong>解：</strong><strong>殼法（對 x 積分）：</strong>$V = \int_0^1 2\pi x \cdot x^2\,dx = 2\pi\int_0^1 x^3\,dx = 2\pi\cdot\frac{1}{4} = \frac{\pi}{2}$。<br><strong>墊圈法（對 y 積分）：</strong>$x=\sqrt{y}$（外半徑），內半徑=0。$V = \pi\int_0^1 (\sqrt{y})^2\,dy = \pi\int_0^1 y\,dy = \frac{\pi}{2}$。結果一致。</div>
+<div class="ex-ans">✅ 答案：$\frac{\pi}{2}$ 立方單位</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 6.17</div>
+<div class="ex-title">殼法繞 x 軸</div>
+<div class="ex-problem">求由 $x=y^2$ 與 $x=4$ 在第一象限所圍區域繞 $x$ 軸旋轉的體積。</div>
+<div class="ex-sol"><strong>解：</strong>殼法（對 y 積分，繞 x 軸）：半徑 $=y$，高度 $=4-y^2$。<br>$$V = \int_0^2 2\pi y(4-y^2)\,dy = 2\pi\int_0^2 (4y-y^3)\,dy$$<br>$$= 2\pi\left[2y^2-\frac{y^4}{4}\right]_0^2 = 2\pi(8-4) = 8\pi$$</div>
+<div class="ex-ans">✅ 答案：$8\pi$ 立方单位</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 6.18</div>
+<div class="ex-title">殼法：繞水平線</div>
+<div class="ex-problem">求由 $y=\sqrt{x}$、$y=0$ 和 $x=4$ 所圍區域繞直線 $y=2$ 旋轉的體積。</div>
+<div class="ex-sol"><strong>解：</strong>殼的半徑 $= 2-y$（從旋轉軸到殼的距離），殼的高度 $=4-x=4-y^2$。<br>$$V = \int_0^2 2\pi(2-y)(4-y^2)\,dy = 2\pi\int_0^2 (8-2y^2-4y+y^3)\,dy$$<br>$$= 2\pi\left[8y-\frac{2y^3}{3}-2y^2+\frac{y^4}{4}\right]_0^2 = 2\pi\left(16-\frac{16}{3}-8+4\right) = 2\pi\cdot\frac{20}{3} = \frac{40\pi}{3}$$</div>
+<div class="ex-ans">✅ 答案：$\frac{40\pi}{3}$ 立方單位</div>
+
+</div>
+
+</section>
+
+<section id="ss6-4">
+<h2>6.4 弧長與表面積（Arc Length and Surface Area）</h2>
+<p style="font-size:13px;color:var(--tx2);margin-bottom:16px"><strong>🔑 本節重點：</strong>弧長公式 $L=\int\sqrt{1+[f'(x)]^2}dx$、表面積 $SA=\int 2\pi f(x)\sqrt{1+[f'(x)]^2}dx$、弧長微元 $ds$</p>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 6.19</div>
+<div class="ex-title">計算弧長</div>
+<div class="ex-problem">求 $f(x)=\frac{2}{3}x^{3/2}$ 在 $[0,1]$ 上的弧長。</div>
+<div class="ex-sol"><strong>解：</strong>$f'(x)=x^{1/2}$，$1+[f'(x)]^2=1+x$。<br>$$L = \int_0^1 \sqrt{1+x}\,dx = \left[\frac{2}{3}(1+x)^{3/2}\right]_0^1 = \frac{2}{3}(2\sqrt{2}-1) \approx 1.219$$</div>
+<div class="ex-ans">✅ 答案：$\frac{2}{3}(2\sqrt{2}-1) \approx 1.219$</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 6.20</div>
+<div class="ex-title">弧長：需要 u 替換</div>
+<div class="ex-problem">求 $f(x)=\ln(\cos x)$ 在 $[0,\pi/4]$ 上的弧長。</div>
+<div class="ex-sol"><strong>解：</strong>$f'(x)=\frac{-\sin x}{\cos x}=-\tan x$。$1+[f'(x)]^2=1+\tan^2 x=\sec^2 x$。<br>$$L = \int_0^{\pi/4} \sqrt{\sec^2 x}\,dx = \int_0^{\pi/4} \sec x\,dx$$<br>$$= \big[\ln|\sec x+\tan x|\big]_0^{\pi/4} = \ln(\sqrt{2}+1) - \ln(1) = \ln(\sqrt{2}+1) \approx 0.881$$</div>
+<div class="ex-ans">✅ 答案：$\ln(\sqrt{2}+1) \approx 0.881$</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 6.21</div>
+<div class="ex-title">計算旋轉體表面積</div>
+<div class="ex-problem">求 $f(x)=\sqrt{x}$ 在 $[0,4]$ 上繞 $x$ 軸旋轉的表面積。</div>
+<div class="ex-sol"><strong>解：</strong>$f'(x)=\frac{1}{2\sqrt{x}}$，$1+[f'(x)]^2=1+\frac{1}{4x}$。<br>$$SA = \int_0^4 2\pi\sqrt{x}\sqrt{1+\frac{1}{4x}}\,dx = 2\pi\int_0^4 \sqrt{x+\frac{1}{4}}\,dx$$<br>$$= 2\pi\left[\frac{2}{3}(x+\frac{1}{4})^{3/2}\right]_0^4 = \frac{4\pi}{3}\left((4.25)^{3/2}-(0.25)^{3/2}\right) \approx 36.18$$</div>
+<div class="ex-ans">✅ 答案：$\frac{4\pi}{3}((\frac{17}{4})^{3/2}-(\frac{1}{4})^{3/2}) \approx 36.18$ 平方單位</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 6.22</div>
+<div class="ex-title">表面積：三角函數</div>
+<div class="ex-problem">求 $f(x)=\sin x$ 在 $[0,\pi]$ 上繞 $x$ 軸旋轉的表面積。</div>
+<div class="ex-sol"><strong>解：</strong>$f'(x)=\cos x$，$1+[f'(x)]^2=1+\cos^2 x$。<br>$$SA = \int_0^\pi 2\pi\sin x\sqrt{1+\cos^2 x}\,dx$$<br>令 $u=\cos x$、$du=-\sin x\,dx$：<br>$SA = 2\pi\int_{-1}^1 \sqrt{1+u^2}\,du = 4\pi\int_0^1 \sqrt{1+u^2}\,du$<br>利用積分公式 $\int\sqrt{1+u^2}du=\frac{u}{2}\sqrt{1+u^2}+\frac{1}{2}\ln|u+\sqrt{1+u^2}|$：<br>$SA = 4\pi\left[\frac{u}{2}\sqrt{1+u^2}+\frac{1}{2}\ln(u+\sqrt{1+u^2})\right]_0^1$<br>$= 2\pi(\sqrt{2}+\ln(1+\sqrt{2})) \approx 14.42$</div>
+<div class="ex-ans">✅ 答案：$2\pi(\sqrt{2}+\ln(1+\sqrt{2})) \approx 14.42$ 平方單位</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 6.23</div>
+<div class="ex-title">弧長：參數曲線形式</div>
+<div class="ex-problem">求 $y=\frac{x^3}{6}+\frac{1}{2x}$ 在 $[1,2]$ 上的弧長。</div>
+<div class="ex-sol"><strong>解：</strong>$y' = \frac{x^2}{2}-\frac{1}{2x^2}$。$1+(y')^2 = 1+\frac{x^4}{4}-\frac{1}{2}+\frac{1}{4x^4} = \frac{x^4}{4}+\frac{1}{2}+\frac{1}{4x^4} = \left(\frac{x^2}{2}+\frac{1}{2x^2}\right)^2$。<br>$$L = \int_1^2 \left(\frac{x^2}{2}+\frac{1}{2x^2}\right)\,dx = \left[\frac{x^3}{6}-\frac{1}{2x}\right]_1^2$$<br>$$= \left(\frac{8}{6}-\frac{1}{4}\right)-\left(\frac{1}{6}-\frac{1}{2}\right) = \frac{4}{3}-\frac{1}{4}-\frac{1}{6}+\frac{1}{2} = \frac{17}{12}$$</div>
+<div class="ex-ans">✅ 答案：$\frac{17}{12} \approx 1.417$</div>
+
+</div>
+
+</section>
+
+<section id="ss6-5">
+<h2>6.5 物理應用（Physical Applications）</h2>
+<p style="font-size:13px;color:var(--tx2);margin-bottom:16px"><strong>🔑 本節重點：</strong>質量與密度、變力做功、虎克定律、抽水問題、液壓</p>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 6.24</div>
+<div class="ex-title">從線性密度求質量</div>
+<div class="ex-problem">一根長 10 m 的細桿，密度函數為 $\rho(x)=2+0.1x$ kg/m（$x$ 從左端量起）。求總質量。</div>
+<div class="ex-sol"><strong>解：</strong>$m = \int_0^{10} (2+0.1x)\,dx = \left[2x+0.05x^2\right]_0^{10} = 20+5 = 25$ kg。</div>
+<div class="ex-ans">✅ 答案：$25$ kg</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 6.25</div>
+<div class="ex-title">彈簧做功</div>
+<div class="ex-problem">一根彈簧自然長度為 20 cm。需要 30 N 的力將其拉伸至 25 cm。求將其從 25 cm 拉伸至 30 cm 所需的功。</div>
+<div class="ex-sol"><strong>解：</strong>先求 $k$：形變量 $x=0.05$ m 時 $F=30$ N → $k=30/0.05=600$ N/m。<br>$$W = \int_{0.05}^{0.10} 600x\,dx = 600\left[\frac{x^2}{2}\right]_{0.05}^{0.10} = 300(0.01-0.0025) = 2.25\ \text{J}$$</div>
+<div class="ex-ans">✅ 答案：$2.25$ J</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 6.26</div>
+<div class="ex-title">倒圓錐水箱抽水</div>
+<div class="ex-problem">一個倒圓錐水箱高 12 ft、頂部半徑 6 ft，裝滿水。將所有水從頂部邊緣抽出需要多少功？（水密度 $62.5$ lb/ft³）</div>
+<div class="ex-sol"><strong>解：</strong>設 $x$ 軸向下，原點在頂部。深度 $x$ 處半徑 $r=x/2$（相似三角形）。<br>水層體積 $dV = \pi(x/2)^2\,dx = \frac{\pi}{4}x^2\,dx$。<br>重量 $dF = 62.5\cdot\frac{\pi}{4}x^2\,dx$。<br>提升距離 $=x$。<br>$$W = \int_0^{12} 62.5\cdot\frac{\pi}{4}x^2\cdot x\,dx = \frac{62.5\pi}{4}\int_0^{12}x^3\,dx = \frac{62.5\pi}{4}\cdot\frac{12^4}{4} \approx 254{,}469\ \text{ft-lb}$$</div>
+<div class="ex-ans">✅ 答案：$\approx 254{,}469$ ft-lb</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 6.27</div>
+<div class="ex-title">圓柱水箱抽水</div>
+<div class="ex-problem">一個圓柱水箱半徑 2 m、高 5 m，裝滿水。將所有水抽到水箱頂部上方 1 m 處需要多少功？（水密度 $9800$ N/m³）</div>
+<div class="ex-sol"><strong>解：</strong>設 $y$ 軸向下，原點在頂部。水層體積 $dV = \pi(2)^2\,dy = 4\pi\,dy$。<br>重量 $dF = 9800\cdot 4\pi\,dy$。<br>提升距離 $= y+1$（提升到頂部上方 1 m）。<br>$$W = \int_0^5 9800\cdot 4\pi (y+1)\,dy = 39200\pi\int_0^5 (y+1)\,dy$$<br>$$= 39200\pi\left[\frac{y^2}{2}+y\right]_0^5 = 39200\pi(12.5+5) = 686{,}000\pi \approx 2.155\times 10^6\ \text{J}$$</div>
+<div class="ex-ans">✅ 答案：$686{,}000\pi \approx 2.155\times 10^6$ J</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 6.28</div>
+<div class="ex-title">液壓：垂直矩形板</div>
+<div class="ex-problem">一個垂直矩形水壩閘門寬 3 m、高 2 m，上緣在水面下方 5 m。求水對閘門的總力。（水密度 $9800$ N/m³）</div>
+<div class="ex-sol"><strong>解：</strong>設 $y$ 向下，原點在水面。閘門從 $y=5$ 到 $y=7$。<br>深度 $=y$，寬度恆為 3 m。<br>$$F = \int_5^7 9800\cdot y\cdot 3\,dy = 29400\int_5^7 y\,dy = 29400\left[\frac{y^2}{2}\right]_5^7$$<br>$$= 29400\cdot\frac{49-25}{2} = 29400\cdot 12 = 352{,}800\ \text{N}$$</div>
+<div class="ex-ans">✅ 答案：$352{,}800$ N</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 6.29</div>
+<div class="ex-title">液壓：三角形板</div>
+<div class="ex-problem">一個等腰三角形板，底邊在水面、頂點向下，底寬 4 m、高 3 m。求水對板的總力。</div>
+<div class="ex-sol"><strong>解：</strong>設 $y$ 向下，原點在水面。板從 $y=0$ 到 $y=3$。<br>在深度 $y$ 處，寬度 $w(y)=4-\frac{4}{3}y$（相似三角形）。<br>$$F = \int_0^3 9800\cdot y\cdot (4-\frac{4}{3}y)\,dy = 9800\int_0^3 (4y-\frac{4}{3}y^2)\,dy$$<br>$$= 9800\left[2y^2-\frac{4}{9}y^3\right]_0^3 = 9800(18-12) = 58{,}800\ \text{N}$$</div>
+<div class="ex-ans">✅ 答案：$58{,}800$ N</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 6.30</div>
+<div class="ex-title">變力做功：纜線提升</div>
+<div class="ex-problem">一根長 50 ft、重 2 lb/ft 的均勻纜線懸掛在建築物頂端。將纜線全部拉到頂端需要多少功？</div>
+<div class="ex-sol"><strong>解：</strong>設 $x$ 為纜線已拉上的長度。餘下長度 $50-x$、重量 $2(50-x)$ lb。<br>$$W = \int_0^{50} 2(50-x)\,dx = 2\left[50x-\frac{x^2}{2}\right]_0^{50} = 2(2500-1250) = 2500\ \text{ft-lb}$$</div>
+<div class="ex-ans">✅ 答案：$2500$ ft-lb</div>
+
+</div>
+
+</section>
+
+<section id="ss6-6">
+<h2>6.6 力矩與質心（Moments and Centers of Mass）</h2>
+<p style="font-size:13px;color:var(--tx2);margin-bottom:16px"><strong>🔑 本節重點：</strong>質心公式、薄板形心、對稱性原理、帕普斯定理</p>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 6.31</div>
+<div class="ex-title">求形心</div>
+<div class="ex-problem">求由 $f(x)=4-x^2$ 和 $x$ 軸在 $[-2,2]$ 上所圍區域的形心。</div>
+<div class="ex-sol"><strong>解：</strong>由對稱性，$\bar{x}=0$。<br>面積：$A = \int_{-2}^2 (4-x^2)\,dx = 2\int_0^2 (4-x^2)\,dx = 2\left[4x-\frac{x^3}{3}\right]_0^2 = 2(8-\frac{8}{3}) = \frac{32}{3}$。<br>$M_x = \int_{-2}^2 \frac{1}{2}(4-x^2)^2\,dx = \int_0^2 (16-8x^2+x^4)\,dx = \left[16x-\frac{8x^3}{3}+\frac{x^5}{5}\right]_0^2 = 32-\frac{64}{3}+\frac{32}{5} = \frac{256}{15}$。<br>$\bar{y} = \frac{M_x}{A} = \frac{256/15}{32/3} = \frac{256}{15}\cdot\frac{3}{32} = \frac{8}{5}=1.6$。</div>
+<div class="ex-ans">✅ 答案：$(0,\frac{8}{5})$ 或 $(0, 1.6)$</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 6.32</div>
+<div class="ex-title">兩曲線間區域的形心</div>
+<div class="ex-problem">求由 $y=x$ 與 $y=x^2$ 在第一象限所圍區域的形心。</div>
+<div class="ex-sol"><strong>解：</strong>交點：$x=0,1$。面積：$A = \int_0^1 (x-x^2)\,dx = \left[\frac{x^2}{2}-\frac{x^3}{3}\right]_0^1 = \frac{1}{6}$。<br>$M_y = \int_0^1 x(x-x^2)\,dx = \int_0^1 (x^2-x^3)\,dx = \left[\frac{x^3}{3}-\frac{x^4}{4}\right]_0^1 = \frac{1}{12}$。<br>$M_x = \int_0^1 \frac{1}{2}(x^2-(x^2)^2)\,dx = \frac{1}{2}\int_0^1 (x^2-x^4)\,dx = \frac{1}{2}\left[\frac{x^3}{3}-\frac{x^5}{5}\right]_0^1 = \frac{1}{2}\cdot\frac{2}{15} = \frac{1}{15}$。<br>$\bar{x} = \frac{1/12}{1/6} = \frac{1}{2}$，$\bar{y} = \frac{1/15}{1/6} = \frac{2}{5}$。</div>
+<div class="ex-ans">✅ 答案：$(\frac{1}{2}, \frac{2}{5})$</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 6.33</div>
+<div class="ex-title">一維質心</div>
+<div class="ex-problem">三個質量分別為 $m_1=2$（在 $x=-2$）、$m_2=5$（在 $x=1$）、$m_3=3$（在 $x=4$）。求系統的質心。</div>
+<div class="ex-sol"><strong>解：</strong>總質量 $m = 2+5+3 = 10$。<br>力矩 $M = 2(-2) + 5(1) + 3(4) = -4+5+12 = 13$。<br>$\bar{x} = \frac{M}{m} = \frac{13}{10} = 1.3$。</div>
+<div class="ex-ans">✅ 答案：$\bar{x}=1.3$</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 6.34</div>
+<div class="ex-title">用帕普斯定理求環面體積</div>
+<div class="ex-problem">求一個半徑為 2 的圓（圓心在 $(4,0)$）繞 $y$ 軸旋轉所產生環面（torus）的體積。</div>
+<div class="ex-sol"><strong>解：</strong>圓面積 $A = \pi(2)^2 = 4\pi$。形心在 $(4,0)$，$\bar{x}=4$。<br>$V = A\cdot 2\pi\bar{x} = 4\pi\cdot 8\pi = 32\pi^2$。無需任何積分。</div>
+<div class="ex-ans">✅ 答案：$32\pi^2$ 立方單位</div>
+<div style="font-size:12px;color:var(--tx2);margin-top:6px">💡 帕普斯定理：$V=A\cdot 2\pi\bar{x}$，是本章最優雅的結果之一。</div>
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 6.35</div>
+<div class="ex-title">帕普斯定理：旋轉三角形</div>
+<div class="ex-problem">求由 $(0,0)$、$(2,0)$、$(0,3)$ 構成的直角三角形繞 $y$ 軸旋轉的體積。</div>
+<div class="ex-sol"><strong>解：</strong>面積 $A = \frac{1}{2}\cdot 2\cdot 3 = 3$。形心在 $(\frac{2}{3}, 1)$（三角形形心是頂點坐標平均值）。<br>$\bar{x} = \frac{2}{3}$。$V = A\cdot 2\pi\bar{x} = 3\cdot 2\pi\cdot\frac{2}{3} = 4\pi$。<br>驗算：此為圓錐（體積 $\frac{1}{3}\pi r^2 h = \frac{1}{3}\pi(2)^2(3) \neq 4\pi$）。<br>等等——三角形繞 $y$ 軸旋轉，形心路徑長 $2\pi\bar{x}=2\pi\cdot\frac{2}{3}=\frac{4\pi}{3}$，$V=3\cdot\frac{4\pi}{3}=4\pi$。正確。</div>
+<div class="ex-ans">✅ 答案：$4\pi$ 立方單位</div>
+
+</div>
+
+</section>
+
+<section id="ss6-7">
+<h2>6.7 積分、指數函數與對數（Integrals, Exponential Functions, and Logarithms）</h2>
+<p style="font-size:13px;color:var(--tx2);margin-bottom:16px"><strong>🔑 本節重點：</strong>自然對數的積分定義 $\ln x=\int_1^x(1/t)dt$、$e$ 的定義、指數函數的反函數定義</p>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 6.36</div>
+<div class="ex-title">使用 $\ln$ 的積分定義求導數</div>
+<div class="ex-problem">使用 $\ln x = \int_1^x \frac{1}{t}\,dt$ 求 $\frac{d}{dx}\ln(x^3+2x)$。</div>
+<div class="ex-sol"><strong>解：</strong>由 FTC：$\frac{d}{dx}\ln u = \frac{1}{u}\frac{du}{dx}$。<br>$$\frac{d}{dx}\ln(x^3+2x) = \frac{1}{x^3+2x}\cdot(3x^2+2) = \frac{3x^2+2}{x^3+2x}$$</div>
+<div class="ex-ans">✅ 答案：$\frac{3x^2+2}{x^3+2x}$</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 6.37</div>
+<div class="ex-title">使用 $u$ 替換求對數積分</div>
+<div class="ex-problem">求 $\int \frac{2x}{x^2+1}\,dx$。</div>
+<div class="ex-sol"><strong>解：</strong>令 $u=x^2+1$，$du=2x\,dx$。<br>$\int \frac{2x}{x^2+1}\,dx = \int \frac{1}{u}\,du = \ln|u|+C = \ln(x^2+1)+C$（因 $x^2+1>0$）。</div>
+<div class="ex-ans">✅ 答案：$\ln(x^2+1)+C$</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 6.38</div>
+<div class="ex-title">證明對數性質</div>
+<div class="ex-problem">利用 $\ln x = \int_1^x \frac{1}{t}\,dt$ 證明 $\ln(xy) = \ln x + \ln y$（$x,y>0$）。</div>
+<div class="ex-sol"><strong>解：</strong>$\ln(xy) = \int_1^{xy}\frac{1}{t}\,dt = \int_1^x\frac{1}{t}\,dt + \int_x^{xy}\frac{1}{t}\,dt$。<br>對第二個積分，令 $t=xu$、$dt=x\,du$：$\int_x^{xy}\frac{1}{t}\,dt = \int_1^y\frac{1}{xu}\cdot x\,du = \int_1^y\frac{1}{u}\,du = \ln y$。<br>因此 $\ln(xy) = \ln x + \ln y$。</div>
+<div class="ex-ans">✅ 答案：$\ln(xy)=\ln x+\ln y$ ✓</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 6.39</div>
+<div class="ex-title">求 $e$ 的近似值</div>
+<div class="ex-problem">已知 $\ln x = \int_1^x \frac{1}{t}\,dt$，證明 $2 < e < 3$。</div>
+<div class="ex-sol"><strong>解：</strong>$\ln 2 = \int_1^2 \frac{1}{t}\,dt$。在 $[1,2]$ 上，$\frac{1}{2} \le \frac{1}{t} \le 1$，故 $\frac{1}{2} \le \ln 2 \le 1$，即 $\ln 2 < 1$。<br>$\ln 3 = \int_1^3 \frac{1}{t}\,dt = \ln 2 + \int_2^3 \frac{1}{t}\,dt$。$\int_2^3 \frac{1}{t}\,dt \ge \frac{1}{3}$（因 $\frac{1}{t} \ge \frac{1}{3}$），且 $\ln 2 > \frac{1}{2}$。<br>因此 $\ln 3 > 1$。由 $\ln 2 < 1 < \ln 3$ 及 $\ln$ 嚴格遞增，得 $2 < e < 3$。</div>
+<div class="ex-ans">✅ 答案：$2 < e < 3$ ✓</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 6.40</div>
+<div class="ex-title">$\int \frac{1}{x}dx$ 的擴展</div>
+<div class="ex-problem">求 $\int_{-3}^{-1} \frac{1}{x}\,dx$。</div>
+<div class="ex-sol"><strong>解：</strong>$\int \frac{1}{x}\,dx = \ln|x|+C$（帶絕對值）。<br>$\int_{-3}^{-1} \frac{1}{x}\,dx = \big[\ln|x|\big]_{-3}^{-1} = \ln 1 - \ln 3 = -\ln 3$。</div>
+<div class="ex-ans">✅ 答案：$-\ln 3$</div>
+
+</div>
+
+</section>
+
+<section id="ss6-8">
+<h2>6.8 指數增長與衰減（Exponential Growth and Decay）</h2>
+<p style="font-size:13px;color:var(--tx2);margin-bottom:16px"><strong>🔑 本節重點：</strong>指數增長模型 $y=y_0e^{kt}$、倍增時間 $t_d=\ln 2/k$、半衰期、牛頓冷卻定律</p>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 6.41</div>
+<div class="ex-title">細菌指數增長</div>
+<div class="ex-problem">一個細菌培養皿初始有 100 個細菌，增長常數 $k=0.02$/分鐘。3 小時後有多少細菌？</div>
+<div class="ex-sol"><strong>解：</strong>$y = 100e^{0.02t}$。3 小時 = 180 分鐘。<br>$y(180) = 100e^{3.6} \approx 100\cdot 36.598 = 3{,}660$ 個。</div>
+<div class="ex-ans">✅ 答案：約 $3{,}660$ 個</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 6.42</div>
+<div class="ex-title">倍增時間</div>
+<div class="ex-problem">求上題細菌族群的倍增時間。</div>
+<div class="ex-sol"><strong>解：</strong>$t_d = \frac{\ln 2}{k} = \frac{0.6931}{0.02} \approx 34.66$ 分鐘。<br>驗算：$100e^{0.02\cdot 34.66} \approx 100e^{0.693} \approx 200$。</div>
+<div class="ex-ans">✅ 答案：約 $34.7$ 分鐘</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 6.43</div>
+<div class="ex-title">放射性衰變與半衰期</div>
+<div class="ex-problem">放射性物質的半衰期為 5 年，初始質量 100 g。求 10 年後的剩餘質量及衰減常數 $k$。</div>
+<div class="ex-sol"><strong>解：</strong>$m(t)=m_0e^{-kt}$。$t_{1/2}=5$ → $50=100e^{-5k}$ → $e^{-5k}=0.5$ → $k=\frac{\ln 2}{5}\approx 0.1386$。<br>$m(10)=100e^{-10k}=100e^{-2\ln 2}=100\cdot\frac{1}{4}=25$ g。</div>
+<div class="ex-ans">✅ 答案：$25$ g，$k=\frac{\ln 2}{5}\approx 0.1386$</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 6.44</div>
+<div class="ex-title">連續複利</div>
+<div class="ex-problem">一位 25 歲學生投資年利率 5% 連續複利的退休帳戶，希望 65 歲時有 $1,000,000。她現在需投入多少？</div>
+<div class="ex-sol"><strong>解：</strong>$A(t)=A_0e^{rt}$。$1{,}000{,}000 = A_0e^{0.05\cdot 40} = A_0e^2$。<br>$A_0 = 1{,}000{,}000\cdot e^{-2} \approx 1{,}000{,}000\cdot 0.135335 \approx \$135{,}335$。</div>
+<div class="ex-ans">✅ 答案：約 $\$135{,}335$</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 6.45</div>
+<div class="ex-title">牛頓冷卻定律：咖啡冷卻</div>
+<div class="ex-problem">一杯咖啡在 200°F 時倒入杯中。2 分鐘後降到 180°F，室溫 70°F。咖啡何時降到 150°F？</div>
+<div class="ex-sol"><strong>解：</strong>$T(t)=70+(200-70)e^{-kt}=70+130e^{-kt}$。<br>由 $T(2)=180$：$180=70+130e^{-2k}$ → $e^{-2k}=110/130=11/13$。<br>$k=-\frac{1}{2}\ln(11/13)\approx 0.0835$。<br>何時 $T=150$？$150=70+130e^{-kt}$ → $e^{-kt}=80/130=8/13$。<br>$t=-\frac{1}{k}\ln(8/13)\approx 5.78$ 分鐘。</div>
+<div class="ex-ans">✅ 答案：約 $5.78$ 分鐘</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 6.46</div>
+<div class="ex-title">碳-14 定年法</div>
+<div class="ex-problem">碳-14 的半衰期為 5730 年。一塊化石的碳-14 含量為活體組織的 30%。求化石的年齡。</div>
+<div class="ex-sol"><strong>解：</strong>$0.30 = e^{-kt}$，其中 $k=\frac{\ln 2}{5730}\approx 0.000121$。<br>$t = -\frac{\ln 0.30}{k} = \frac{\ln(1/0.30)}{0.000121} \approx \frac{1.204}{0.000121} \approx 9{,}950$ 年。</div>
+<div class="ex-ans">✅ 答案：約 $9{,}950$ 年</div>
+
+</div>
+
+</section>
+
+<section id="ss6-9">
+<h2>6.9 雙曲函數的微積分（Calculus of the Hyperbolic Functions）</h2>
+<p style="font-size:13px;color:var(--tx2);margin-bottom:16px"><strong>🔑 本節重點：</strong>定義 $\sinh x=(e^x-e^{-x})/2$ 與 $\cosh x=(e^x+e^{-x})/2$、導數規律、反雙曲函數的對數表達、懸鏈線</p>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 6.47</div>
+<div class="ex-title">雙曲函數求值</div>
+<div class="ex-problem">求 (a) $\sinh 0$；(b) $\cosh(\ln 2)$；(c) $\tanh 0$。</div>
+<div class="ex-sol"><strong>解：</strong>(a) $\sinh 0 = \frac{e^0-e^0}{2} = 0$。<br>(b) $\cosh(\ln 2) = \frac{e^{\ln 2}+e^{-\ln 2}}{2} = \frac{2+\frac{1}{2}}{2} = \frac{5}{4}$。<br>(c) $\tanh 0 = \frac{\sinh 0}{\cosh 0} = \frac{0}{1} = 0$。</div>
+<div class="ex-ans">✅ 答案：(a) $0$ (b) $\frac{5}{4}$ (c) $0$</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 6.48</div>
+<div class="ex-title">雙曲函數導數</div>
+<div class="ex-problem">求 (a) $\frac{d}{dx}\cosh(2x^2)$；(b) $\frac{d}{dx}\ln(\sinh x)$。</div>
+<div class="ex-sol"><strong>解：</strong>(a) $\frac{d}{dx}\cosh(2x^2) = \sinh(2x^2)\cdot 4x = 4x\sinh(2x^2)$。<br>(b) $\frac{d}{dx}\ln(\sinh x) = \frac{\cosh x}{\sinh x} = \coth x$。</div>
+<div class="ex-ans">✅ 答案：(a) $4x\sinh(2x^2)$ (b) $\coth x$</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 6.49</div>
+<div class="ex-title">雙曲函數積分</div>
+<div class="ex-problem">求 (a) $\int \sinh(3x)\,dx$；(b) $\int \tanh x\,dx$。</div>
+<div class="ex-sol"><strong>解：</strong>(a) $\int \sinh(3x)\,dx = \frac{1}{3}\cosh(3x)+C$。<br>(b) $\int \tanh x\,dx = \int \frac{\sinh x}{\cosh x}\,dx$。令 $u=\cosh x$、$du=\sinh x\,dx$：$= \int \frac{du}{u} = \ln|\cosh x|+C = \ln(\cosh x)+C$（$\cosh x\ge 1$）。</div>
+<div class="ex-ans">✅ 答案：(a) $\frac{1}{3}\cosh(3x)+C$ (b) $\ln(\cosh x)+C$</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 6.50</div>
+<div class="ex-title">證明雙曲恆等式</div>
+<div class="ex-problem">證明 $\cosh^2 x - \sinh^2 x = 1$。</div>
+<div class="ex-sol"><strong>解：</strong>$$\cosh^2 x - \sinh^2 x = \left(\frac{e^x+e^{-x}}{2}\right)^2 - \left(\frac{e^x-e^{-x}}{2}\right)^2$$<br>$$= \frac{e^{2x}+2+e^{-2x}}{4} - \frac{e^{2x}-2+e^{-2x}}{4} = \frac{4}{4} = 1$$</div>
+<div class="ex-ans">✅ 答案：$\cosh^2 x - \sinh^2 x = 1$ ✓</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 6.51</div>
+<div class="ex-title">反雙曲函數的對數表達</div>
+<div class="ex-problem">推導 $\sinh^{-1}x = \ln(x+\sqrt{x^2+1})$。</div>
+<div class="ex-sol"><strong>解：</strong>令 $y = \sinh^{-1}x$，則 $x = \sinh y = \frac{e^y-e^{-y}}{2}$。<br>$2x = e^y - e^{-y}$。乘以 $e^y$：$2xe^y = e^{2y} - 1$。<br>$e^{2y} - 2xe^y - 1 = 0$。視為 $e^y$ 的二次方程：$e^y = \frac{2x\pm\sqrt{4x^2+4}}{2} = x\pm\sqrt{x^2+1}$。<br>由於 $e^y>0$，取正號：$e^y = x+\sqrt{x^2+1}$。<br>故 $y = \ln(x+\sqrt{x^2+1})$。</div>
+<div class="ex-ans">✅ 答案：$\sinh^{-1}x = \ln(x+\sqrt{x^2+1})$ ✓</div>
+
+</div>
+
+</section>
+
+</body>
+</html>

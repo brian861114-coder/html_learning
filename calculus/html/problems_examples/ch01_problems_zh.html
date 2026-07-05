@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第 1 章 例題 — Calculus</title>
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']],tags:'ams'}};</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+:root{--bg:#FFF;--bg2:#F5F5F7;--tx:#1D1D1F;--tx2:#666;--ac:#007AFF;--bd:#D2D2D7;--ex-bg:#F0FDF4;--ex-bd:#22C55E}
+[data-theme="dark"]{--bg:#1D1D1F;--bg2:#2D2D2F;--tx:#F5F5F7;--tx2:#999;--ac:#4DA3FF;--bd:#3A3A3C;--ex-bg:#052E16;--ex-bd:#16A34A}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Noto Sans TC','Microsoft JhengHei',sans-serif;background:var(--bg);color:var(--tx);line-height:1.72;font-size:15px;max-width:900px;margin:0 auto;padding:24px}
+h1{font-size:22px;margin-bottom:4px}h2{font-size:16px;color:var(--tx2);margin-bottom:16px}
+h3{font-size:18px;margin:28px 0 12px;padding-bottom:4px;border-bottom:1px solid var(--bd)}
+.problem{border:1px solid var(--ex-bd);background:var(--ex-bg);border-radius:8px;padding:16px;margin:16px 0}
+.problem .num{font-weight:700;color:var(--ac);font-size:13px;margin-bottom:6px}
+.problem .stmt{font-size:14px;margin-bottom:10px}
+.problem .sol{border-top:1px dashed var(--bd);padding-top:10px;font-size:14px}
+.problem .sol strong{color:var(--ac)}
+.eq{margin:8px 0;overflow-x:auto}
+.back{display:inline-block;margin-bottom:16px;color:var(--ac);font-size:13px;text-decoration:none}
+</style>
+</head>
+<body>
+<a class="back" href="index.html">← 返回例題索引</a>
+<h1>第 1 章：函數與圖形（Functions and Graphs）</h1>
+<h2>課本例題完整詳解 · 41 題</h2>
+
+<h3>1.1 函數回顧（Review of Functions）</h3>
+
+<div class="problem">
+  <div class="num">例題 1.1 — 求函數值（Evaluating Functions）</div>
+  <div class="stmt"><strong>題目：</strong>給定函數 $f(x) = x^2 + 3x - 4$，求 (a) $f(0)$、(b) $f(2)$、(c) $f(a)$。</div>
+  <div class="sol"><strong>解：</strong>將給定的 $x$ 值代入 $f(x) = x^2 + 3x - 4$。<br>
+  (a) $f(0) = 0^2 + 3(0) - 4 = -4$<br>
+  (b) $f(2) = 2^2 + 3(2) - 4 = 4 + 6 - 4 = 6$<br>
+  (c) $f(a) = a^2 + 3a - 4$<br>
+  <strong>答：</strong>$f(0)=-4,\ f(2)=6,\ f(a)=a^2+3a-4$</div>
+</div>
+
+<div class="problem">
+  <div class="num">例題 1.2 — 求定義域與值域（Finding Domain and Range）</div>
+  <div class="stmt"><strong>題目：</strong>對以下各函數，求 (i) 定義域（domain）和 (ii) 值域（range）。<br>
+  (a) $f(x) = (x-4)^2 + 5$　(b) $f(x) = \sqrt{3x+2}-1$　(c) $f(x) = \dfrac{3}{x-2}$</div>
+  <div class="sol"><strong>解：</strong><br>
+  (a) $f(x) = (x-4)^2 + 5$<br>
+  　(i) 定義域：$(x-4)^2$ 對所有實數 $x$ 都有定義，故定義域為 $(-\infty, \infty)$。<br>
+  　(ii) 值域：$(x-4)^2 \ge 0$，所以 $(x-4)^2 + 5 \ge 5$。當 $x=4$ 時取得最小值 $5$。故值域為 $[5, \infty)$。<br><br>
+  (b) $f(x) = \sqrt{3x+2} - 1$<br>
+  　(i) 定義域：根號內必須非負：$3x+2 \ge 0 \implies x \ge -\frac{2}{3}$。定義域為 $[-\frac{2}{3}, \infty)$。<br>
+  　(ii) 值域：$\sqrt{3x+2} \ge 0$，所以 $\sqrt{3x+2} - 1 \ge -1$。值域為 $[-1, \infty)$。<br><br>
+  (c) $f(x) = \dfrac{3}{x-2}$<br>
+  　(i) 定義域：分母不為零：$x-2 \neq 0 \implies x \neq 2$。定義域為 $(-\infty, 2) \cup (2, \infty)$。<br>
+  　(ii) 值域：$f(x) = \frac{3}{x-2}$ 可以取任何非零實數值（因為 $y = \frac{3}{x-2} \iff x = 2 + \frac{3}{y}$，對任意 $y \neq 0$ 都有解）。值域為 $(-\infty, 0) \cup (0, \infty)$。</div>
+</div>
+
+<div class="problem">
+  <div class="num">例題 1.3 — 求函數的零點與 $x$ 截距（Finding Zeros and $x$-Intercepts）</div>
+  <div class="stmt"><strong>題目：</strong>求函數 $f(x) = x^3 - 4x$ 的零點。</div>
+  <div class="sol"><strong>解：</strong>零點是滿足 $f(x) = 0$ 的 $x$ 值。<br>
+  $x^3 - 4x = 0$<br>
+  $x(x^2 - 4) = 0$<br>
+  $x(x-2)(x+2) = 0$<br>
+  由零因子定理：$x = 0$ 或 $x = 2$ 或 $x = -2$。<br>
+  <strong>答：</strong>零點為 $x = -2, 0, 2$。這些也是 $x$ 截距。</div>
+</div>
+
+<div class="problem">
+  <div class="num">例題 1.4 — 利用零點與 $x$ 截距繪圖（Using Zeros and $x$-Intercepts to Sketch a Graph）</div>
+  <div class="stmt"><strong>題目：</strong>利用零點繪出 $f(x) = x^2 - 2x - 3$ 的圖形草圖。</div>
+  <div class="sol"><strong>解：</strong><br>
+  ① 求零點：$x^2 - 2x - 3 = 0$<br>
+  　$(x-3)(x+1) = 0 \implies x = -1, 3$<br>
+  ② $y$ 截距：$f(0) = -3$<br>
+  ③ 頂點（vertex）：$x = -\frac{b}{2a} = -\frac{-2}{2(1)} = 1$<br>
+  　$f(1) = 1^2 - 2(1) - 3 = 1 - 2 - 3 = -4$<br>
+  ④ 此為開口向上的拋物線（$a=1>0$），頂點 $(1, -4)$，穿過 $(-1, 0)$ 和 $(3, 0)$，$y$ 截距 $(0,-3)$。<br>
+  <strong>答：</strong>圖形為開口向上的拋物線，頂點 $(1,-4)$，$x$ 截距 $-1, 3$。</div>
+</div>
+
+<div class="problem">
+  <div class="num">例題 1.5 — 自由落體高度（Finding the Height of a Free-Falling Object）</div>
+  <div class="stmt"><strong>題目：</strong>一物體從高處落下，其高度函數為 $h(t) = -16t^2 + 144$（$t$：秒，$h$：英尺）。求 (a) $t=0$ 時的高度；(b) $t=1$ 時的高度；(c) 物體何時落地？</div>
+  <div class="sol"><strong>解：</strong><br>
+  (a) $h(0) = -16(0)^2 + 144 = 144$ 英尺<br>
+  (b) $h(1) = -16(1)^2 + 144 = 128$ 英尺<br>
+  (c) 落地時 $h(t) = 0$：<br>
+  　$-16t^2 + 144 = 0$<br>
+  　$16t^2 = 144$<br>
+  　$t^2 = 9$<br>
+  　$t = 3$（取正值）<br>
+  <strong>答：</strong>(a) 144 ft；(b) 128 ft；(c) $t = 3$ 秒後落地。</div>
+</div>
+
+<div class="problem">
+  <div class="num">例題 1.6 — 函數的算術組合（Combining Functions Using Mathematical Operations）</div>
+  <div class="stmt"><strong>題目：</strong>給定 $f(x) = 2x^2 - 3$ 和 $g(x) = x + 1$，求 (a) $(f+g)(x)$；(b) $(f-g)(x)$；(c) $(fg)(x)$；(d) $\left(\frac{f}{g}\right)(x)$ 及其定義域。</div>
+  <div class="sol"><strong>解：</strong><br>
+  (a) $(f+g)(x) = f(x) + g(x) = (2x^2 - 3) + (x + 1) = 2x^2 + x - 2$<br>
+  (b) $(f-g)(x) = f(x) - g(x) = (2x^2 - 3) - (x + 1) = 2x^2 - x - 4$<br>
+  (c) $(fg)(x) = f(x) \cdot g(x) = (2x^2 - 3)(x + 1) = 2x^3 + 2x^2 - 3x - 3$<br>
+  (d) $\left(\frac{f}{g}\right)(x) = \frac{f(x)}{g(x)} = \frac{2x^2 - 3}{x + 1}$，定義域為 $x \neq -1$，即 $(-\infty, -1) \cup (-1, \infty)$。</div>
+</div>
+
+<div class="problem">
+  <div class="num">例題 1.7 — 公式定義的合成函數（Compositions of Functions Defined by Formulas）</div>
+  <div class="stmt"><strong>題目：</strong>給定 $f(x) = x^2$ 和 $g(x) = 2x + 1$，求 (a) $(f \circ g)(x)$；(b) $(g \circ f)(x)$；(c) $(f \circ f)(x)$。</div>
+  <div class="sol"><strong>解：</strong><br>
+  (a) $(f \circ g)(x) = f(g(x)) = f(2x+1) = (2x+1)^2 = 4x^2 + 4x + 1$<br>
+  (b) $(g \circ f)(x) = g(f(x)) = g(x^2) = 2x^2 + 1$<br>
+  (c) $(f \circ f)(x) = f(f(x)) = f(x^2) = (x^2)^2 = x^4$<br>
+  <strong>注意：</strong>一般來說 $f \circ g \neq g \circ f$，合成函數不滿足交換律。</div>
+</div>
+
+<div class="problem">
+  <div class="num">例題 1.8 — 表格定義的合成函數（Composition of Functions Defined by Tables）</div>
+  <div class="stmt"><strong>題目：</strong>下表給出 $f$ 和 $g$ 的取值。求 (a) $(f \circ g)(1)$；(b) $(g \circ f)(3)$。
+
+  <table style="border-collapse:collapse;margin:8px 0;font-size:13px">
+  <tr><th style="border:1px solid var(--bd);padding:4px 10px">$x$</th><th style="border:1px solid var(--bd);padding:4px 10px">1</th><th style="border:1px solid var(--bd);padding:4px 10px">2</th><th style="border:1px solid var(--bd);padding:4px 10px">3</th><th style="border:1px solid var(--bd);padding:4px 10px">4</th></tr>
+  <tr><td style="border:1px solid var(--bd);padding:4px 10px">$f(x)$</td><td style="border:1px solid var(--bd);padding:4px 10px">3</td><td style="border:1px solid var(--bd);padding:4px 10px">1</td><td style="border:1px solid var(--bd);padding:4px 10px">4</td><td style="border:1px solid var(--bd);padding:4px 10px">2</td></tr>
+  <tr><td style="border:1px solid var(--bd);padding:4px 10px">$g(x)$</td><td style="border:1px solid var(--bd);padding:4px 10px">2</td><td style="border:1px solid var(--bd);padding:4px 10px">4</td><td style="border:1px solid var(--bd);padding:4px 10px">1</td><td style="border:1px solid var(--bd);padding:4px 10px">3</td></tr>
+  </table></div>
+  <div class="sol"><strong>解：</strong><br>
+  (a) $(f \circ g)(1) = f(g(1))$。查表得 $g(1) = 2$，再查 $f(2) = 1$。故 $(f \circ g)(1) = 1$。<br>
+  (b) $(g \circ f)(3) = g(f(3))$。查表得 $f(3) = 4$，再查 $g(4) = 3$。故 $(g \circ f)(3) = 3$。<br>
+  <strong>答：</strong>(a) $1$；(b) $3$。</div>
+</div>
+
+<div class="problem">
+  <div class="num">例題 1.9 — 合成函數的應用（Application Involving a Composite Function）</div>
+  <div class="stmt"><strong>題目：</strong>某商品的價格 $p$（美元）為需求 $x$（件）的函數：$p(x) = 50 - 0.1x$。收入 $R$ 為 $R = x \cdot p$。寫出 $R$ 作為 $x$ 的函數，並求賣出 $200$ 件時的收入。</div>
+  <div class="sol"><strong>解：</strong><br>
+  $R(x) = x \cdot p(x) = x(50 - 0.1x) = 50x - 0.1x^2$<br>
+  當 $x = 200$：$R(200) = 50(200) - 0.1(200^2) = 10000 - 0.1(40000) = 10000 - 4000 = 6000$。<br>
+  <strong>答：</strong>$R(x) = 50x - 0.1x^2$；賣出 $200$ 件時收入為 $\$6000$。</div>
+</div>
+
+<div class="problem">
+  <div class="num">例題 1.10 — 偶函數與奇函數（Even and Odd Functions）</div>
+  <div class="stmt"><strong>題目：</strong>判斷以下函數是偶函數、奇函數、或兩者皆非：(a) $f(x) = x^4 - 3x^2$；(b) $g(x) = x^3 - 2x$；(c) $h(x) = x^3 + 1$。</div>
+  <div class="sol"><strong>解：</strong><br>
+  (a) $f(-x) = (-x)^4 - 3(-x)^2 = x^4 - 3x^2 = f(x)$ → <strong>偶函數</strong>（對稱於 $y$ 軸）<br>
+  (b) $g(-x) = (-x)^3 - 2(-x) = -x^3 + 2x = -(x^3 - 2x) = -g(x)$ → <strong>奇函數</strong>（對稱於原點）<br>
+  (c) $h(-x) = (-x)^3 + 1 = -x^3 + 1$。這既不等于 $h(x)=x^3+1$，也不等于 $-h(x)=-x^3-1$。故 <strong>兩者皆非</strong>。</div>
+</div>
+
+<div class="problem">
+  <div class="num">例題 1.11 — 絕對值函數（Working with the Absolute Value Function）</div>
+  <div class="stmt"><strong>題目：</strong>畫出 $f(x) = |x-2| + 1$ 的圖形，並寫出其定義域與值域。</div>
+  <div class="sol"><strong>解：</strong><br>
+  $f(x) = |x-2| + 1$ 是基本絕對值函數 $y=|x|$ 向右平移 $2$ 單位、向上平移 $1$ 單位。<br>
+  定義域：$(-\infty, \infty)$（所有實數）<br>
+  值域：$|x-2| \ge 0$，所以 $|x-2|+1 \ge 1$。值域為 $[1, \infty)$。<br>
+  頂點在 $(2, 1)$，呈 V 字形。</div>
+</div>
+
+<h3>1.2 函數的基本類型（Basic Classes of Functions）</h3>
+
+<div class="problem">
+  <div class="num">例題 1.12 — 求斜率與直線方程式（Finding the Slope and Equations of Lines）</div>
+  <div class="stmt"><strong>題目：</strong>求通過點 $(2, 5)$ 和 $(6, 13)$ 的直線之斜率，並寫出點斜式和斜截式。</div>
+  <div class="sol"><strong>解：</strong><br>
+  斜率 $m = \dfrac{y_2 - y_1}{x_2 - x_1} = \dfrac{13 - 5}{6 - 2} = \dfrac{8}{4} = 2$<br>
+  點斜式（使用點 $(2,5)$）：$y - 5 = 2(x - 2)$<br>
+  斜截式：$y = 2x + 1$<br>
+  <strong>答：</strong>$m = 2$；點斜式 $y - 5 = 2(x - 2)$；斜截式 $y = 2x + 1$。</div>
+</div>
+
+<div class="problem">
+  <div class="num">例題 1.13 — 線性距離函數（A Linear Distance Function）</div>
+  <div class="stmt"><strong>題目：</strong>一輛汽車以恒定速率 $60$ mph 行駛。若 $t=0$ 時已行駛 $20$ 英里，寫出距離 $d$（英里）作為時間 $t$（小時）的線性函數，並求 $t=2.5$ 時的距離。</div>
+  <div class="sol"><strong>解：</strong><br>
+  $d(t) = 60t + 20$（每小時增加 $60$ 英里，初始距離 $20$ 英里）<br>
+  $d(2.5) = 60(2.5) + 20 = 150 + 20 = 170$ 英里<br>
+  <strong>答：</strong>$d(t) = 60t + 20$；$t=2.5$ 時距離為 $170$ 英里。</div>
+</div>
+
+<div class="problem">
+  <div class="num">例題 1.14 — 多項式函數繪圖（Graphing Polynomial Functions）</div>
+  <div class="stmt"><strong>題目：</strong>畫出 $f(x) = (x-1)(x+2)(x-3)$ 的圖形草圖，標示 $x$ 截距和端點行為（end behavior）。</div>
+  <div class="sol"><strong>解：</strong><br>
+  ① $x$ 截距：$f(x)=0 \implies x=1, -2, 3$<br>
+  ② $y$ 截距：$f(0)=(-1)(2)(-3)=6$<br>
+  ③ 此為三次多項式，首項係數為正（展開後 $x^3$ 項係數為 $+1$）：當 $x \to -\infty$，$f(x) \to -\infty$；當 $x \to \infty$，$f(x) \to \infty$。<br>
+  ④ 在各零點之間判斷正負：<br>
+  　$x < -2$：三個因子皆負 → 乘積為負<br>
+  　$-2 < x < 1$：兩個因子負、一個正 → 乘積為正<br>
+  　$1 < x < 3$：一個因子負、兩個正 → 乘積為負<br>
+  　$x > 3$：三個因子皆正 → 乘積為正<br>
+  圖形從左下進入，依次穿過 $(-2,0)$、$(1,0)$、$(3,0)$，呈 S 形曲線。</div>
+</div>
+
+<div class="problem">
+  <div class="num">例題 1.15 — 最大化營收（Maximizing Revenue）</div>
+  <div class="stmt"><strong>題目：</strong>一公司的營收函數為 $R(x) = -0.5x^2 + 100x$（$x$：售出數量）。求最大營收及其對應的 $x$ 值。</div>
+  <div class="sol"><strong>解：</strong><br>
+  $R(x) = -0.5x^2 + 100x$ 為開口向下的二次函數。最大值發生在頂點：<br>
+  $x = -\dfrac{b}{2a} = -\dfrac{100}{2(-0.5)} = -\dfrac{100}{-1} = 100$<br>
+  最大營收：$R(100) = -0.5(100^2) + 100(100) = -5000 + 10000 = 5000$<br>
+  <strong>答：</strong>售出 $100$ 件時達最大營收 $\$5000$。</div>
+</div>
+
+<div class="problem">
+  <div class="num">例題 1.16 — 代數函數的定義域與值域（Finding Domain and Range for Algebraic Functions）</div>
+  <div class="stmt"><strong>題目：</strong>求 $f(x) = \sqrt{9 - x^2}$ 的定義域與值域。</div>
+  <div class="sol"><strong>解：</strong><br>
+  定義域：根號內必須非負：$9 - x^2 \ge 0 \implies x^2 \le 9 \implies -3 \le x \le 3$。定義域為 $[-3, 3]$。<br>
+  值域：當 $x = 0$ 時 $f(0) = \sqrt{9} = 3$（最大值）；當 $x = \pm 3$ 時 $f(\pm 3) = 0$（最小值）。值域為 $[0, 3]$。<br>
+  註：此函數圖形為上半圓（半徑 $3$）。</div>
+</div>
+
+<div class="problem">
+  <div class="num">例題 1.17 — 求代數函數的定義域（Finding Domains for Algebraic Functions）</div>
+  <div class="stmt"><strong>題目：</strong>求以下各函數的定義域：<br>
+  (a) $f(x) = \dfrac{1}{\sqrt{x-3}}$　(b) $g(x) = \dfrac{x+1}{x^2-4}$</div>
+  <div class="sol"><strong>解：</strong><br>
+  (a) 根號內 $x-3 \ge 0 \implies x \ge 3$；分母 $\sqrt{x-3} \neq 0 \implies x \neq 3$。綜合得定義域 $(3, \infty)$。<br>
+  (b) 分母 $x^2 - 4 \neq 0 \implies x \neq \pm 2$。定義域為 $(-\infty, -2) \cup (-2, 2) \cup (2, \infty)$。</div>
+</div>
+
+<div class="problem">
+  <div class="num">例題 1.18 — 代數函數與超越函數分類（Classifying Algebraic and Transcendental Functions）</div>
+  <div class="stmt"><strong>題目：</strong>將以下函數分類為代數函數或超越函數：<br>
+  (a) $f(x) = \dfrac{x^3+1}{x-2}$　(b) $g(x) = 2^x$　(c) $h(x) = \sin(x^2)$</div>
+  <div class="sol"><strong>解：</strong><br>
+  (a) $f(x) = \frac{x^3+1}{x-2}$ → <strong>代數函數</strong>（有理函數，為多項式之商）<br>
+  (b) $g(x) = 2^x$ → <strong>超越函數</strong>（指數函數，非代數運算可表達）<br>
+  (c) $h(x) = \sin(x^2)$ → <strong>超越函數</strong>（三角函數為超越函數）</div>
+</div>
+
+<div class="problem">
+  <div class="num">例題 1.19 — 分段定義函數繪圖（Graphing a Piecewise-Defined Function）</div>
+  <div class="stmt"><strong>題目：</strong>畫出分段定義函數的圖形：
+  $$f(x) = \begin{cases} x+2 & \text{if } x < 1 \\ 4 - x^2 & \text{if } x \ge 1 \end{cases}$$</div>
+  <div class="sol"><strong>解：</strong><br>
+  當 $x < 1$：$y = x+2$ 是一條斜率為 $1$ 的直線。在 $x=1$ 處（不含），$y = 1+2 = 3$（空心點）。<br>
+  當 $x \ge 1$：$y = 4 - x^2$ 是開口向下的拋物線。在 $x=1$ 處，$y = 4 - 1 = 3$（實心點）。<br>
+  在 $x=1$ 處，兩段的值相等，故函數在 $x=1$ 連續。</div>
+</div>
+
+<div class="problem">
+  <div class="num">例題 1.20 — 停車費分段函數（Parking Fees Described by a Piecewise-Defined Function）</div>
+  <div class="stmt"><strong>題目：</strong>某停車場收費規則：第一小時（或不足一小時）收 $\$3$，之後每增加一小時（或不足一小時）加收 $\$2$，每日最高收費 $\$15$。寫出停車 $t$ 小時的費用函數 $C(t)$（$0 < t \le 12$）。</div>
+  <div class="sol"><strong>解：</strong><br>
+  費用函數 $C(t)$ 為階梯函數（step function）：<br>
+  　$0 < t \le 1$：$C(t) = 3$<br>
+  　$1 < t \le 2$：$C(t) = 5$<br>
+  　$2 < t \le 3$：$C(t) = 7$<br>
+  　$3 < t \le 4$：$C(t) = 9$<br>
+  　$4 < t \le 5$：$C(t) = 11$<br>
+  　$5 < t \le 6$：$C(t) = 13$<br>
+  　$6 < t \le 12$：$C(t) = 15$（達每日上限）<br>
+  這是取上整函數（ceiling function）的應用。</div>
+</div>
+
+<div class="problem">
+  <div class="num">例題 1.21 — 函數變換（Transforming a Function）</div>
+  <div class="stmt"><strong>題目：</strong>利用基本函數 $y = \sqrt{x}$ 的變換，畫出 $f(x) = -2\sqrt{x-1} + 3$ 的圖形。</div>
+  <div class="sol"><strong>解：</strong>從 $y = \sqrt{x}$ 出發，依序變換：<br>
+  ① $x \to x-1$：向右平移 $1$ 單位 → $y = \sqrt{x-1}$<br>
+  ② 乘以 $2$：垂直拉伸 $2$ 倍 → $y = 2\sqrt{x-1}$<br>
+  ③ 加上負號：對 $x$ 軸反射 → $y = -2\sqrt{x-1}$<br>
+  ④ $+3$：向上平移 $3$ 單位 → $y = -2\sqrt{x-1} + 3$<br>
+  最終圖形從 $(1, 3)$ 開始向右下方延伸（開口向左的平方根曲線翻轉）。</div>
+</div>
+
+<h3>1.3 三角函數（Trigonometric Functions）</h3>
+
+<div class="problem">
+  <div class="num">例題 1.22 — 弧度與度數互換（Converting between Radians and Degrees）</div>
+  <div class="stmt"><strong>題目：</strong>(a) 將 $210^\circ$ 轉換為弧度。(b) 將 $\frac{5\pi}{6}$ 弧度轉換為度數。</div>
+  <div class="sol"><strong>解：</strong><br>
+  使用轉換關係：$\pi\text{ rad} = 180^\circ$<br>
+  (a) $210^\circ \times \dfrac{\pi}{180^\circ} = \dfrac{210\pi}{180} = \dfrac{7\pi}{6}$ 弧度<br>
+  (b) $\dfrac{5\pi}{6} \times \dfrac{180^\circ}{\pi} = \dfrac{5 \times 180^\circ}{6} = 150^\circ$<br>
+  <strong>答：</strong>(a) $\frac{7\pi}{6}$ rad；(b) $150^\circ$。</div>
+</div>
+
+<div class="problem">
+  <div class="num">例題 1.23 — 求三角函數值（Evaluating Trigonometric Functions）</div>
+  <div class="stmt"><strong>題目：</strong>求以下各值：(a) $\sin\frac{5\pi}{3}$；(b) $\cos\frac{3\pi}{4}$；(c) $\tan\frac{\pi}{6}$；(d) $\sec\frac{\pi}{3}$。</div>
+  <div class="sol"><strong>解：</strong><br>
+  (a) $\frac{5\pi}{3} = 300^\circ$（第四象限），$\sin\frac{5\pi}{3} = -\frac{\sqrt{3}}{2}$<br>
+  (b) $\frac{3\pi}{4} = 135^\circ$（第二象限），$\cos\frac{3\pi}{4} = -\frac{\sqrt{2}}{2}$<br>
+  (c) $\tan\frac{\pi}{6} = \frac{\sin(\pi/6)}{\cos(\pi/6)} = \frac{1/2}{\sqrt{3}/2} = \frac{1}{\sqrt{3}} = \frac{\sqrt{3}}{3}$<br>
+  (d) $\sec\frac{\pi}{3} = \frac{1}{\cos(\pi/3)} = \frac{1}{1/2} = 2$</div>
+</div>
+
+<div class="problem">
+  <div class="num">例題 1.24 — 建造木製坡道（Constructing a Wooden Ramp）</div>
+  <div class="stmt"><strong>題目：</strong>欲建造一個長 $12$ 英尺的坡道，使其與地面的夾角為 $15^\circ$。求坡道頂端距離地面的高度。</div>
+  <div class="sol"><strong>解：</strong><br>
+  坡道長為斜邊，高度為對邊。$\sin 15^\circ = \dfrac{h}{12}$<br>
+  $h = 12 \sin 15^\circ = 12 \times \dfrac{\sqrt{6} - \sqrt{2}}{4} = 3(\sqrt{6} - \sqrt{2}) \approx 12 \times 0.2588 \approx 3.11$ 英尺<br>
+  <strong>答：</strong>高度約 $3.11$ 英尺。</div>
+</div>
+
+<div class="problem">
+  <div class="num">例題 1.25 — 解三角方程式（Solving Trigonometric Equations）</div>
+  <div class="stmt"><strong>題目：</strong>在 $[0, 2\pi)$ 區間內，解 $\sin x = \frac{1}{2}$。</div>
+  <div class="sol"><strong>解：</strong><br>
+  $\sin x = \frac{1}{2}$ 在 $[0, 2\pi)$ 內的解為：<br>
+  $x = \frac{\pi}{6}$（第一象限）和 $x = \frac{5\pi}{6}$（第二象限）。<br>
+  驗證：$\sin\frac{\pi}{6} = \frac{1}{2}$，$\sin\frac{5\pi}{6} = \sin(\pi - \frac{\pi}{6}) = \sin\frac{\pi}{6} = \frac{1}{2}$。<br>
+  <strong>答：</strong>$x = \frac{\pi}{6}, \frac{5\pi}{6}$。</div>
+</div>
+
+<div class="problem">
+  <div class="num">例題 1.26 — 證明三角恆等式（Proving a Trigonometric Identity）</div>
+  <div class="stmt"><strong>題目：</strong>證明 $\dfrac{1 - \cos^2 x}{\sin x} = \sin x$。</div>
+  <div class="sol"><strong>解：</strong><br>
+  利用畢氏恆等式 $\sin^2 x + \cos^2 x = 1$，得 $1 - \cos^2 x = \sin^2 x$。<br>
+  因此 $\dfrac{1 - \cos^2 x}{\sin x} = \dfrac{\sin^2 x}{\sin x} = \sin x$（當 $\sin x \neq 0$ 時成立）。</div>
+</div>
+
+<div class="problem">
+  <div class="num">例題 1.27 — 畫變形正弦曲線（Sketching the Graph of a Transformed Sine Curve）</div>
+  <div class="stmt"><strong>題目：</strong>畫出 $f(x) = 3\sin\!\big(2x - \frac{\pi}{3}\big) + 1$ 的圖形，並給出振幅、週期、相位偏移和垂直偏移。</div>
+  <div class="sol"><strong>解：</strong>重寫為標準形式 $f(x) = 3\sin\!\big(2(x - \frac{\pi}{6})\big) + 1$<br>
+  振幅 $|A| = 3$<br>
+  週期 $= \dfrac{2\pi}{|B|} = \dfrac{2\pi}{2} = \pi$<br>
+  相位偏移 $= \dfrac{\pi}{6}$（向右）<br>
+  垂直偏移 $D = 1$（向上 $1$ 單位）<br>
+  圖形是正弦曲線，在 $y = -2$ 和 $y = 4$ 之間振盪，中線為 $y = 1$。</div>
+</div>
+
+<h3>1.4 反函數（Inverse Functions）</h3>
+
+<div class="problem">
+  <div class="num">例題 1.28 — 判斷函數是否一對一（Determining Whether a Function Is One-to-One）</div>
+  <div class="stmt"><strong>題目：</strong>判斷以下函數在其自然定義域上是否為一對一（one-to-one）：<br>
+  (a) $f(x) = x^3$　(b) $g(x) = x^2$　(c) $h(x) = 2x + 1$。</div>
+  <div class="sol"><strong>解：</strong><br>
+  (a) $f(x) = x^3$：若 $a^3 = b^3$，則 $a = b$。→ <strong>一對一</strong>（通過水平線檢驗）<br>
+  (b) $g(x) = x^2$：$g(2) = 4 = g(-2)$ 但 $2 \neq -2$。→ <strong>不是一對一</strong><br>
+  (c) $h(x) = 2x+1$：若 $2a+1 = 2b+1$，則 $2a = 2b$，即 $a = b$。→ <strong>一對一</strong></div>
+</div>
+
+<div class="problem">
+  <div class="num">例題 1.29 — 求反函數（Finding an Inverse Function）</div>
+  <div class="stmt"><strong>題目：</strong>求 $f(x) = \dfrac{2x-1}{x+3}$ 的反函數 $f^{-1}(x)$。</div>
+  <div class="sol"><strong>解：</strong><br>
+  ① 設 $y = \dfrac{2x-1}{x+3}$<br>
+  ② 交換 $x$ 和 $y$：$x = \dfrac{2y-1}{y+3}$<br>
+  ③ 解出 $y$：$x(y+3) = 2y-1$<br>
+  　$xy + 3x = 2y - 1$<br>
+  　$xy - 2y = -3x - 1$<br>
+  　$y(x-2) = -(3x+1)$<br>
+  　$y = \dfrac{3x+1}{2-x}$<br>
+  <strong>答：</strong>$f^{-1}(x) = \dfrac{3x+1}{2-x},\ x \neq 2$。</div>
+</div>
+
+<div class="problem">
+  <div class="num">例題 1.30 — 畫反函數圖形（Sketching Graphs of Inverse Functions）</div>
+  <div class="stmt"><strong>題目：</strong>給定 $f(x) = \sqrt{x-1}$（$x \ge 1$），在同一個坐標系中畫出 $f$ 和 $f^{-1}$ 的圖形。</div>
+  <div class="sol"><strong>解：</strong><br>
+  ① 求反函數：$y = \sqrt{x-1} \implies y^2 = x-1 \implies x = y^2+1$<br>
+  　交換 $x$ 和 $y$：$y = x^2+1$（其中 $x \ge 0$，因為原函數的值域為 $[0,\infty)$）<br>
+  　故 $f^{-1}(x) = x^2 + 1,\ x \ge 0$<br>
+  ② $f(x)$ 的圖形從 $(1,0)$ 開始向右上方延伸。<br>
+  ③ $f^{-1}(x)$ 的圖形從 $(0,1)$ 開始，為開口向上的拋物線右半支。<br>
+  ④ 兩圖形對稱於直線 $y = x$。</div>
+</div>
+
+<div class="problem">
+  <div class="num">例題 1.31 — 限制定義域使函數有反函數（Restricting the Domain）</div>
+  <div class="stmt"><strong>題目：</strong>求 $f(x) = (x-2)^2$ 在限制定義域為 $x \ge 2$ 後的反函數。</div>
+  <div class="sol"><strong>解：</strong><br>
+  在 $x \ge 2$ 上，$f(x) = (x-2)^2$ 是一對一的（嚴格遞增）。<br>
+  設 $y = (x-2)^2$，由於 $x \ge 2$，$x-2 \ge 0$，故 $\sqrt{y} = x-2$。<br>
+  $x = \sqrt{y} + 2$<br>
+  交換 $x$ 和 $y$：$y = \sqrt{x} + 2$<br>
+  <strong>答：</strong>$f^{-1}(x) = \sqrt{x} + 2,\ x \ge 0$。注意定義域 $x \ge 0$ 來自原函數的值域。</div>
+</div>
+
+<div class="problem">
+  <div class="num">例題 1.32 — 計算反三角函數值（Evaluating Expressions Involving Inverse Trigonometric Functions）</div>
+  <div class="stmt"><strong>題目：</strong>求 (a) $\sin^{-1}\!\big(\frac{\sqrt{3}}{2}\big)$；(b) $\cos^{-1}\!\big(-\frac{1}{2}\big)$；(c) $\tan^{-1}(1)$。</div>
+  <div class="sol"><strong>解：</strong><br>
+  (a) $\sin^{-1}\!\big(\frac{\sqrt{3}}{2}\big)$：在 $[-\frac{\pi}{2}, \frac{\pi}{2}]$ 內，$\sin\frac{\pi}{3} = \frac{\sqrt{3}}{2}$。故答案為 $\frac{\pi}{3}$。<br>
+  (b) $\cos^{-1}\!\big(-\frac{1}{2}\big)$：在 $[0, \pi]$ 內，$\cos\frac{2\pi}{3} = -\frac{1}{2}$。故答案為 $\frac{2\pi}{3}$。<br>
+  (c) $\tan^{-1}(1)$：在 $(-\frac{\pi}{2}, \frac{\pi}{2})$ 內，$\tan\frac{\pi}{4} = 1$。故答案為 $\frac{\pi}{4}$。<br>
+  <strong>答：</strong>(a) $\frac{\pi}{3}$；(b) $\frac{2\pi}{3}$；(c) $\frac{\pi}{4}$。</div>
+</div>
+
+<h3>1.5 指數與對數函數（Exponential and Logarithmic Functions）</h3>
+
+<div class="problem">
+  <div class="num">例題 1.33 — 細菌增長（Bacterial Growth）</div>
+  <div class="stmt"><strong>題目：</strong>一細菌培養基初始有 $500$ 個細菌，每小時數量翻倍。寫出 $t$ 小時後的細菌數量 $N(t)$，並求 $4$ 小時後的數量。</div>
+  <div class="sol"><strong>解：</strong><br>
+  $N(t) = 500 \cdot 2^t$<br>
+  $N(4) = 500 \cdot 2^4 = 500 \cdot 16 = 8000$<br>
+  <strong>答：</strong>$N(t) = 500 \cdot 2^t$；$4$ 小時後有 $8000$ 個細菌。</div>
+</div>
+
+<div class="problem">
+  <div class="num">例題 1.34 — 使用指數律（Using the Laws of Exponents）</div>
+  <div class="stmt"><strong>題目：</strong>化簡以下各式：(a) $\dfrac{2^{3x} \cdot 2^{x}}{2^{2x}}$；(b) $(e^{2x})^3$。</div>
+  <div class="sol"><strong>解：</strong><br>
+  (a) $\dfrac{2^{3x} \cdot 2^{x}}{2^{2x}} = \dfrac{2^{3x+x}}{2^{2x}} = \dfrac{2^{4x}}{2^{2x}} = 2^{4x-2x} = 2^{2x}$<br>
+  (b) $(e^{2x})^3 = e^{2x \cdot 3} = e^{6x}$<br>
+  <strong>答：</strong>(a) $2^{2x}$；(b) $e^{6x}$。</div>
+</div>
+
+<div class="problem">
+  <div class="num">例題 1.35 — 複利計算（Compounding Interest）</div>
+  <div class="stmt"><strong>題目：</strong>若將 $\$1000$ 以年利率 $5\%$ 存入銀行，按年複利計算。求 (a) $3$ 年後的金額；(b) 若改為連續複利（continuous compounding），$3$ 年後的金額。</div>
+  <div class="sol"><strong>解：</strong><br>
+  (a) 年複利公式：$A = P(1 + r)^t$<br>
+  　$A = 1000(1 + 0.05)^3 = 1000(1.157625) = 1157.63$<br>
+  (b) 連續複利公式：$A = Pe^{rt}$<br>
+  　$A = 1000e^{0.05 \times 3} = 1000e^{0.15} \approx 1000 \times 1.16183 = 1161.83$<br>
+  <strong>答：</strong>(a) $\$1157.63$；(b) $\$1161.83$。</div>
+</div>
+
+<div class="problem">
+  <div class="num">例題 1.36 — 解指數方程式（Solving Equations Involving Exponential Functions）</div>
+  <div class="stmt"><strong>題目：</strong>解 $5 \cdot 2^{3x} = 80$。</div>
+  <div class="sol"><strong>解：</strong><br>
+  方法一：$2^{3x} = \frac{80}{5} = 16 = 2^4$，因為 $2^t$ 是一對一的，所以 $3x = 4$，$x = \frac{4}{3}$。<br>
+  方法二（取對數）：$2^{3x} = 16$<br>
+  　$\ln(2^{3x}) = \ln 16$<br>
+  　$3x \ln 2 = \ln 16 = \ln(2^4) = 4\ln 2$<br>
+  　$3x = 4 \implies x = \frac{4}{3}$<br>
+  <strong>答：</strong>$x = \frac{4}{3}$。</div>
+</div>
+
+<div class="problem">
+  <div class="num">例題 1.37 — 解對數方程式（Solving Equations Involving Logarithmic Functions）</div>
+  <div class="stmt"><strong>題目：</strong>解 $\log_2(x+1) + \log_2(x-1) = 3$。</div>
+  <div class="sol"><strong>解：</strong><br>
+  ① 合併對數：$\log_2[(x+1)(x-1)] = 3$<br>
+  ② $\log_2(x^2-1) = 3$<br>
+  ③ 轉為指數形式：$x^2 - 1 = 2^3 = 8$<br>
+  ④ $x^2 = 9 \implies x = \pm 3$<br>
+  ⑤ 檢驗定義域：對數要求 $x+1 > 0$ 且 $x-1 > 0$，即 $x > 1$。因此 $x = -3$ 不合。<br>
+  <strong>答：</strong>$x = 3$。</div>
+</div>
+
+<div class="problem">
+  <div class="num">例題 1.38 — 換底公式（Changing Bases）</div>
+  <div class="stmt"><strong>題目：</strong>利用換底公式計算 $\log_5 20$（以 $3$ 位小數表示）。</div>
+  <div class="sol"><strong>解：</strong><br>
+  換底公式：$\log_a b = \dfrac{\ln b}{\ln a}$<br>
+  $\log_5 20 = \dfrac{\ln 20}{\ln 5} \approx \dfrac{2.9957}{1.6094} \approx 1.861$<br>
+  或使用常用對數：$\log_5 20 = \dfrac{\log_{10} 20}{\log_{10} 5} \approx \dfrac{1.3010}{0.6990} \approx 1.861$<br>
+  <strong>答：</strong>$\log_5 20 \approx 1.861$。</div>
+</div>
+
+<div class="problem">
+  <div class="num">例題 1.39 — 芮氏地震規模（The Richter Scale for Earthquakes）</div>
+  <div class="stmt"><strong>題目：</strong>芮氏規模（Richter scale）公式為 $M = \log_{10}\!\big(\frac{I}{I_0}\big)$，其中 $I$ 為地震強度，$I_0$ 為參考強度。若地震 A 的規模為 $7.3$，地震 B 的規模為 $9.0$，求兩者的強度比值。</div>
+  <div class="sol"><strong>解：</strong><br>
+  $M_A = \log_{10}\!\big(\frac{I_A}{I_0}\big) = 7.3 \implies \frac{I_A}{I_0} = 10^{7.3}$<br>
+  $M_B = \log_{10}\!\big(\frac{I_B}{I_0}\big) = 9.0 \implies \frac{I_B}{I_0} = 10^{9.0}$<br>
+  $\dfrac{I_B}{I_A} = \dfrac{10^{9.0}}{10^{7.3}} = 10^{9.0-7.3} = 10^{1.7} \approx 50.1$<br>
+  <strong>答：</strong>地震 B 的強度約為地震 A 的 $50$ 倍。規模每增加 $1$ 單位，強度增加約 $10$ 倍；增加 $1.7$ 單位約為 $50$ 倍。</div>
+</div>
+
+<div class="problem">
+  <div class="num">例題 1.40 — 求雙曲函數值（Evaluating Hyperbolic Functions）</div>
+  <div class="stmt"><strong>題目：</strong>求 (a) $\sinh 0$；(b) $\cosh(\ln 2)$；(c) $\tanh 1$。</div>
+  <div class="sol"><strong>解：</strong><br>
+  (a) $\sinh 0 = \dfrac{e^0 - e^{-0}}{2} = \dfrac{1 - 1}{2} = 0$<br>
+  (b) $\cosh(\ln 2) = \dfrac{e^{\ln 2} + e^{-\ln 2}}{2} = \dfrac{2 + \frac{1}{2}}{2} = \dfrac{2.5}{2} = 1.25 = \frac{5}{4}$<br>
+  (c) $\tanh 1 = \dfrac{\sinh 1}{\cosh 1} = \dfrac{e^1 - e^{-1}}{e^1 + e^{-1}} \approx \dfrac{2.7183 - 0.3679}{2.7183 + 0.3679} \approx \dfrac{2.3504}{3.0862} \approx 0.762$<br>
+  <strong>答：</strong>(a) $0$；(b) $\frac{5}{4}$；(c) $\approx 0.762$。</div>
+</div>
+
+<div class="problem">
+  <div class="num">例題 1.41 — 求反雙曲函數值（Evaluating Inverse Hyperbolic Functions）</div>
+  <div class="stmt"><strong>題目：</strong>求 (a) $\sinh^{-1}(0)$；(b) $\cosh^{-1}(1)$。</div>
+  <div class="sol"><strong>解：</strong><br>
+  (a) $\sinh^{-1}(0)$：求 $x$ 使得 $\sinh x = 0$。由例題 1.40 知 $\sinh 0 = 0$，且 $\sinh$ 為嚴格遞增的一對一函數。故 $\sinh^{-1}(0) = 0$。<br>
+  　也可用公式：$\sinh^{-1}(x) = \ln\!\big(x + \sqrt{x^2+1}\big)$<br>
+  　$\sinh^{-1}(0) = \ln(0 + \sqrt{0+1}) = \ln 1 = 0$<br>
+  (b) $\cosh^{-1}(1)$：求 $x \ge 0$ 使得 $\cosh x = \frac{e^x + e^{-x}}{2} = 1$。<br>
+  　$e^x + e^{-x} = 2 \implies e^{2x} - 2e^x + 1 = 0 \implies (e^x - 1)^2 = 0 \implies e^x = 1 \implies x = 0$<br>
+  <strong>答：</strong>(a) $0$；(b) $0$。</div>
+</div>
+
+</body>
+</html>

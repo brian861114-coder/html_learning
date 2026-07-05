@@ -18,6 +18,10 @@
   --ssp-light: #E8F0FE;
   --thermo-accent: #FF6B35;
   --thermo-light: #FFF3E0;
+  --calc-accent: #34C759;
+  --calc-light: #E8F8ED;
+  --matsci-accent: #AF52DE;
+  --matsci-light: #F3E8FA;
   --tag-bg: #F5F5F7;
   --tag-tx: #6E6E73;
   --divider: #E5E5EA;
@@ -34,6 +38,8 @@
   --hover-shadow: 0 8px 30px rgba(0,0,0,0.5);
   --ssp-light: #1A2332;
   --thermo-light: #2C2416;
+  --calc-light: #142818;
+  --matsci-light: #281A34;
   --tag-bg: #3A3A3C;
   --tag-tx: #A1A1A6;
   --divider: #48484A;
@@ -254,6 +260,8 @@ footer {
 .course-mark { display: block; width: 42px; height: 6px; border-radius: 99px; background: var(--course-accent, var(--ac)); margin-bottom: 20px; }
 .subject-card { --course-accent: var(--ssp-accent); border-radius: 18px; }
 .subject-card[data-course="thermodynamics"] { --course-accent: var(--thermo-accent); }
+.subject-card[data-course="calculus"] { --course-accent: var(--calc-accent); }
+.subject-card[data-course="materials-science"] { --course-accent: var(--matsci-accent); }
 .card-header { border-left: 0 !important; padding: 30px 28px 22px !important; }
 .card-header h2 { font-size: 1.5rem; }
 .card-stats { flex-wrap: wrap; gap: 8px; }
@@ -511,12 +519,229 @@ footer {
     </div>
   </div>
 
+  <!-- ═══════ 微積分 ═══════ -->
+  <div class="subject-card is-condensed" data-course="calculus">
+    <div class="card-header" style="border-left: 4px solid var(--calc-accent); padding-left: 24px;">
+      <span class="course-mark" aria-hidden="true"></span>
+      <h2>微積分</h2>
+      <div class="subtitle">Calculus — James Stewart<br>Early Transcendentals</div>
+      <div class="card-stats">
+        <span class="stat-badge">17 章</span>
+        <span class="stat-badge">17 組習題</span>
+      </div>
+    </div>
+    <div class="chapter-list">
+
+      <div class="chapter-group">
+        <div class="group-label">Part I — 微分與積分基礎</div>
+        <a class="chapter-link" href="calculus/html/chapters/ch01_functions_zh.html">
+          <span class="ch-num">Ch 1</span>
+          <span class="ch-title">函數與圖形</span>
+          <span class="ch-arrow">→</span>
+        </a>
+        <a class="chapter-link" href="calculus/html/chapters/ch02_limits_zh.html">
+          <span class="ch-num">Ch 2</span>
+          <span class="ch-title">極限</span>
+          <span class="ch-arrow">→</span>
+        </a>
+        <a class="chapter-link" href="calculus/html/chapters/ch03_derivatives_zh.html">
+          <span class="ch-num">Ch 3</span>
+          <span class="ch-title">導數</span>
+          <span class="ch-arrow">→</span>
+        </a>
+        <a class="chapter-link" href="calculus/html/chapters/ch04_applications_derivatives_zh.html">
+          <span class="ch-num">Ch 4</span>
+          <span class="ch-title">導數的應用</span>
+          <span class="ch-arrow">→</span>
+        </a>
+        <a class="chapter-link" href="calculus/html/chapters/ch05_integration_zh.html">
+          <span class="ch-num">Ch 5</span>
+          <span class="ch-title">積分</span>
+          <span class="ch-arrow">→</span>
+        </a>
+        <a class="chapter-link" href="calculus/html/chapters/ch06_applications_integration_zh.html">
+          <span class="ch-num">Ch 6</span>
+          <span class="ch-title">積分的應用</span>
+          <span class="ch-arrow">→</span>
+        </a>
+      </div>
+
+      <div class="chapter-group">
+        <div class="group-label">Part II — 進階技巧與級數</div>
+        <a class="chapter-link" href="calculus/html/chapters/ch07_integration_techniques_zh.html">
+          <span class="ch-num">Ch 7</span>
+          <span class="ch-title">積分技巧</span>
+          <span class="ch-arrow">→</span>
+        </a>
+        <a class="chapter-link" href="calculus/html/chapters/ch08_differential_equations_zh.html">
+          <span class="ch-num">Ch 8</span>
+          <span class="ch-title">微分方程入門</span>
+          <span class="ch-arrow">→</span>
+        </a>
+        <a class="chapter-link" href="calculus/html/chapters/ch09_sequences_series_zh.html">
+          <span class="ch-num">Ch 9</span>
+          <span class="ch-title">序列與級數</span>
+          <span class="ch-arrow">→</span>
+        </a>
+        <a class="chapter-link" href="calculus/html/chapters/ch10_power_series_zh.html">
+          <span class="ch-num">Ch 10</span>
+          <span class="ch-title">冪級數</span>
+          <span class="ch-arrow">→</span>
+        </a>
+        <a class="chapter-link" href="calculus/html/chapters/ch11_parametric_polar_zh.html">
+          <span class="ch-num">Ch 11</span>
+          <span class="ch-title">參數方程式與極座標</span>
+          <span class="ch-arrow">→</span>
+        </a>
+      </div>
+
+      <div class="chapter-group">
+        <div class="group-label">Part III — 多變量與向量微積分</div>
+        <a class="chapter-link" href="calculus/html/chapters/ch12_vectors_space_zh.html">
+          <span class="ch-num">Ch 12</span>
+          <span class="ch-title">空間向量</span>
+          <span class="ch-arrow">→</span>
+        </a>
+        <a class="chapter-link" href="calculus/html/chapters/ch13_vector_functions_zh.html">
+          <span class="ch-num">Ch 13</span>
+          <span class="ch-title">向量值函數</span>
+          <span class="ch-arrow">→</span>
+        </a>
+        <a class="chapter-link" href="calculus/html/chapters/ch14_partial_derivatives_zh.html">
+          <span class="ch-num">Ch 14</span>
+          <span class="ch-title">多變數函數的微分</span>
+          <span class="ch-arrow">→</span>
+        </a>
+        <a class="chapter-link" href="calculus/html/chapters/ch15_multiple_integration_zh.html">
+          <span class="ch-num">Ch 15</span>
+          <span class="ch-title">多重積分</span>
+          <span class="ch-arrow">→</span>
+        </a>
+        <a class="chapter-link" href="calculus/html/chapters/ch16_vector_calculus_zh.html">
+          <span class="ch-num">Ch 16</span>
+          <span class="ch-title">向量微積分</span>
+          <span class="ch-arrow">→</span>
+        </a>
+        <a class="chapter-link" href="calculus/html/chapters/ch17_second_order_ode_zh.html">
+          <span class="ch-num">Ch 17</span>
+          <span class="ch-title">二階微分方程</span>
+          <span class="ch-arrow">→</span>
+        </a>
+      </div>
+
+      <div class="extra-section">
+        <div class="extra-label">📦 其他資源</div>
+        <a class="extra-link" href="calculus/html/problems_examples/">習題與例題</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════ 材料科學 ═══════ -->
+  <div class="subject-card is-condensed" data-course="materials-science">
+    <div class="card-header" style="border-left: 4px solid var(--matsci-accent); padding-left: 24px;">
+      <span class="course-mark" aria-hidden="true"></span>
+      <h2>材料科學與工程</h2>
+      <div class="subtitle">Materials Science and Engineering<br>William D. Callister, Jr.</div>
+      <div class="card-stats">
+        <span class="stat-badge">15 章</span>
+        <span class="stat-badge">376 張原文圖</span>
+      </div>
+    </div>
+    <div class="chapter-list">
+
+      <div class="chapter-group">
+        <div class="group-label">Part I — 基礎與力學性質</div>
+        <a class="chapter-link" href="material-science/html/chapters/ch1_introduction_zh.html">
+          <span class="ch-num">Ch 1</span>
+          <span class="ch-title">導論</span>
+          <span class="ch-arrow">→</span>
+        </a>
+        <a class="chapter-link" href="material-science/html/chapters/ch2_atomic_structure_zh.html">
+          <span class="ch-num">Ch 2</span>
+          <span class="ch-title">原子結構與鍵結</span>
+          <span class="ch-arrow">→</span>
+        </a>
+        <a class="chapter-link" href="material-science/html/chapters/ch3_crystalline_solids_zh.html">
+          <span class="ch-num">Ch 3</span>
+          <span class="ch-title">晶體固體的結構</span>
+          <span class="ch-arrow">→</span>
+        </a>
+        <a class="chapter-link" href="material-science/html/chapters/ch4_imperfections_zh.html">
+          <span class="ch-num">Ch 4</span>
+          <span class="ch-title">固體中的缺陷</span>
+          <span class="ch-arrow">→</span>
+        </a>
+        <a class="chapter-link" href="material-science/html/chapters/ch5_diffusion_zh.html">
+          <span class="ch-num">Ch 5</span>
+          <span class="ch-title">擴散</span>
+          <span class="ch-arrow">→</span>
+        </a>
+        <a class="chapter-link" href="material-science/html/chapters/ch6_mechanical_properties_zh.html">
+          <span class="ch-num">Ch 6</span>
+          <span class="ch-title">金屬的力學性質</span>
+          <span class="ch-arrow">→</span>
+        </a>
+        <a class="chapter-link" href="material-science/html/chapters/ch7_dislocations_zh.html">
+          <span class="ch-num">Ch 7</span>
+          <span class="ch-title">差排與強化機制</span>
+          <span class="ch-arrow">→</span>
+        </a>
+        <a class="chapter-link" href="material-science/html/chapters/ch8_failure_zh.html">
+          <span class="ch-num">Ch 8</span>
+          <span class="ch-title">破損</span>
+          <span class="ch-arrow">→</span>
+        </a>
+      </div>
+
+      <div class="chapter-group">
+        <div class="group-label">Part II — 相圖、材料家族與應用</div>
+        <a class="chapter-link" href="material-science/html/chapters/ch9_phase_diagrams_zh.html">
+          <span class="ch-num">Ch 9</span>
+          <span class="ch-title">相圖</span>
+          <span class="ch-arrow">→</span>
+        </a>
+        <a class="chapter-link" href="material-science/html/chapters/ch10_phase_transformations_zh.html">
+          <span class="ch-num">Ch 10</span>
+          <span class="ch-title">相變化</span>
+          <span class="ch-arrow">→</span>
+        </a>
+        <a class="chapter-link" href="material-science/html/chapters/ch11_metal_alloys_zh.html">
+          <span class="ch-num">Ch 11</span>
+          <span class="ch-title">金屬合金</span>
+          <span class="ch-arrow">→</span>
+        </a>
+        <a class="chapter-link" href="material-science/html/chapters/ch12_ceramic_structures_zh.html">
+          <span class="ch-num">Ch 12</span>
+          <span class="ch-title">陶瓷的結構與性質</span>
+          <span class="ch-arrow">→</span>
+        </a>
+        <a class="chapter-link" href="material-science/html/chapters/ch13_ceramic_applications_zh.html">
+          <span class="ch-num">Ch 13</span>
+          <span class="ch-title">陶瓷的應用與加工</span>
+          <span class="ch-arrow">→</span>
+        </a>
+        <a class="chapter-link" href="material-science/html/chapters/ch14_polymer_structures_zh.html">
+          <span class="ch-num">Ch 14</span>
+          <span class="ch-title">高分子結構</span>
+          <span class="ch-arrow">→</span>
+        </a>
+        <a class="chapter-link" href="material-science/html/chapters/ch15_polymer_applications_zh.html">
+          <span class="ch-num">Ch 15</span>
+          <span class="ch-title">高分子的應用與加工</span>
+          <span class="ch-arrow">→</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
 </div>
 
 <footer>
-  最後更新：2026/06/22 &nbsp;|&nbsp; 
-  <a href="solid-state-physics/" style="color:var(--ac);text-decoration:none;">半導體物理專案</a> &nbsp;·&nbsp; 
-  <a href="thermodynamics/" style="color:var(--ac);text-decoration:none;">熱力學專案</a>
+  最後更新：2026/07/05 &nbsp;|&nbsp; 
+  <a href="solid-state-physics/" style="color:var(--ac);text-decoration:none;">半導體物理</a> &nbsp;·&nbsp; 
+  <a href="thermodynamics/" style="color:var(--ac);text-decoration:none;">熱力學</a> &nbsp;·&nbsp; 
+  <a href="calculus/" style="color:var(--ac);text-decoration:none;">微積分</a> &nbsp;·&nbsp; 
+  <a href="material-science/" style="color:var(--ac);text-decoration:none;">材料科學</a>
 </footer>
 
 <script>

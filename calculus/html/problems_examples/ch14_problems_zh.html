@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第 14 章例題詳解 — Calculus 學習中心</title>
+<style>
+:root{--bg:#FFF;--bg2:#F5F5F7;--bg3:#E8F0FE;--tx:#1D1D1F;--tx2:#555;--ac:#007AFF;--bd:#D2D2D7;--fbd:#E5E5EA}
+[data-theme="dark"]{--bg:#1D1D1F;--bg2:#2D2D2F;--bg3:#1E3A5F;--tx:#F5F5F7;--tx2:#A1A1A6;--ac:#4DA3FF;--bd:#3A3A3C;--fbd:#48484A}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Noto Sans TC','Microsoft JhengHei',sans-serif;background:var(--bg);color:var(--tx);line-height:1.72;font-size:15px;max-width:900px;margin:0 auto;padding:32px 24px 80px}
+a{color:var(--ac);text-decoration:none}
+h1{font-size:26px;margin-bottom:4px}
+.subtitle{font-size:14px;color:var(--tx2);margin-bottom:24px}
+h2{font-size:20px;margin:32px 0 16px;padding-bottom:6px;border-bottom:2px solid var(--fbd)}
+.problem{background:var(--bg2);border:1px solid var(--bd);border-radius:10px;padding:18px 22px;margin:16px 0}
+.problem .num{font-size:13px;font-weight:700;color:var(--ac);margin-bottom:6px;display:block}
+.problem .q{font-size:14px;margin-bottom:12px}
+.problem .sol{font-size:14px;border-top:1px solid var(--fbd);padding-top:12px;margin-top:8px}
+.problem .sol .step{margin:8px 0;padding-left:8px}
+.problem .ans{background:var(--bg3);border-radius:6px;padding:8px 14px;margin-top:10px;font-weight:600;font-size:14px}
+.eq{overflow-x:auto;margin:10px 0;font-size:15px}
+.back{display:inline-block;margin-bottom:20px;color:var(--ac);font-size:13px}
+.toc{margin:12px 0 24px;display:flex;flex-wrap:wrap;gap:8px}
+.toc a{display:inline-block;padding:6px 14px;border:1px solid var(--bd);border-radius:16px;font-size:13px;transition:.12s}
+.toc a:hover{background:var(--bg3)}
+</style>
+<script>
+MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']],tags:'ams'}};
+(function(){var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);})();
+function toggleTheme(){var d=document.documentElement;var c=d.getAttribute('data-theme');var n=(c==='dark')?'light':'dark';d.setAttribute('data-theme',n);localStorage.setItem('theme',n);}
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+<button onclick="toggleTheme()" style="float:right;padding:4px 12px;border:1px solid var(--bd);border-radius:6px;background:var(--bg);color:var(--tx);font-size:12px;cursor:pointer">🌓 切換主題</button>
+<a class="back" href="index.html">← 返回例題目錄</a>
+<h1>第 14 章：偏導數</h1>
+<p class="subtitle">課本例題完整詳解 · 含詳細逐步解題與答案 · 共 45 題</p>
+<div class="toc"><a href="#s4-1">§4.1 多變數函數</a><a href="#s4-2">§4.2 極限與連續性</a><a href="#s4-3">§4.3 偏導數</a><a href="#s4-4">§4.4 切平面與線性近似</a><a href="#s4-5">§4.5 連鎖律</a><a href="#s4-6">§4.6 方向導數與梯度</a><a href="#s4-7">§4.7 極大值與極小值</a><a href="#s4-8">§4.8 拉格朗日乘數法</a></div>
+<section id="s4-1"><h2>§4.1 多變數函數</h2>
+
+<div class="problem">
+  <span class="num">📝 例題 4.1 定義域與值域</span>
+  <div class="q">求 $f(x,y)=\sqrt{9-x^2-y^2}$ 的定義域與值域。</div>
+  <div class="sol"><strong>📖 逐步詳解：</strong><div class="step">根號內須非負：$9-x^2-y^2\ge0$ → $x^2+y^2\le9$（閉圓盤）。</div><div class="step">$0\le f(x,y)\le3$，值域 $[0,3]$。</div></div>
+  <div class="ans">✅ 答案：定義域 $x^2+y^2\le9$；值域 $[0,3]$</div>
+</div>
+
+<div class="problem">
+  <span class="num">📝 例題 4.2 繪製函數圖形</span>
+  <div class="q">繪製 $f(x,y)=x^2+y^2$ 的圖形（旋轉拋物面）。</div>
+  <div class="sol"><strong>📖 逐步詳解：</strong><div class="step">$z=x^2+y^2$，截面均為拋物線，等高線 $x^2+y^2=c$ 為同心圓。最低點在原點。</div></div>
+  <div class="ans">✅ 答案：旋轉拋物面（碗形），頂點在原點</div>
+</div>
+
+<div class="problem">
+  <span class="num">📝 例題 4.3 等高線圖</span>
+  <div class="q">繪製 $f(x,y)=\sqrt{8-x^2-y^2}$ 對 $c=0,1,2$ 的等高線。</div>
+  <div class="sol"><strong>📖 逐步詳解：</strong><div class="step">$f(x,y)=c$ → $x^2+y^2=8-c^2$：$c=0$→半徑 $2\sqrt2$；$c=1$→$\sqrt7$；$c=2$→$2$。均為同心圓。</div></div>
+  <div class="ans">✅ 答案：同心圓 $x^2+y^2=8-c^2$</div>
+</div>
+
+<div class="problem">
+  <span class="num">📝 例題 4.4 三變數函數值</span>
+  <div class="q">求 $f(x,y,z)=\frac{x+y+z}{x^2+y^2+z^2+1}$ 在 $(1,2,-1)$ 的值。</div>
+  <div class="sol"><strong>📖 逐步詳解：</strong><div class="step">代入：$\frac{1+2-1}{1+4+1+1}=\frac{2}{7}$。</div></div>
+  <div class="ans">✅ 答案：$2/7$</div>
+</div>
+
+<div class="problem">
+  <span class="num">📝 例題 4.5 等值面</span>
+  <div class="q">求 $f(x,y,z)=x^2+y^2-z^2$ 對 $c=1$ 的等值面。</div>
+  <div class="sol"><strong>📖 逐步詳解：</strong><div class="step">$x^2+y^2-z^2=1$ 為單葉雙曲面（hyperboloid of one sheet）。$z=0$ 時截面為單位圓。</div></div>
+  <div class="ans">✅ 答案：單葉雙曲面 $x^2+y^2-z^2=1$</div>
+</div>
+
+<div class="problem">
+  <span class="num">📝 例題 4.6 定義域（對數）</span>
+  <div class="q">求 $f(x,y)=\ln(x^2+y^2-4)$ 的定義域。</div>
+  <div class="sol"><strong>📖 逐步詳解：</strong><div class="step">$x^2+y^2-4>0$ → $x^2+y^2>4$（不含邊界的圓外區域）。</div></div>
+  <div class="ans">✅ 答案：$x^2+y^2>4$</div>
+</div>
+
+<div class="problem">
+  <span class="num">📝 例題 4.7 定義域（反正弦）</span>
+  <div class="q">求 $f(x,y,z)=\arcsin(x^2+y^2+z^2)$ 的定義域。</div>
+  <div class="sol"><strong>📖 逐步詳解：</strong><div class="step">$-1\le x^2+y^2+z^2\le1$，又平方和 $\ge0$，故 $0\le x^2+y^2+z^2\le1$（單位球）。</div></div>
+  <div class="ans">✅ 答案：單位球 $x^2+y^2+z^2\le1$</div>
+</div>
+</section>
+<section id="s4-2"><h2>§4.2 極限與連續性</h2>
+
+<div class="problem">
+  <span class="num">📝 例題 4.8 計算極限</span>
+  <div class="q">計算 $\displaystyle\lim_{(x,y)\to(1,2)}(x^2y+3xy-2y)$。</div>
+  <div class="sol"><strong>📖 逐步詳解：</strong><div class="step">多項式直接代入：$1\cdot2+3\cdot2-4=2+6-4=4$。</div></div>
+  <div class="ans">✅ 答案：$4$</div>
+</div>
+
+<div class="problem">
+  <span class="num">📝 例題 4.9 二路徑法證極限不存在</span>
+  <div class="q">證 $\displaystyle\lim_{(x,y)\to(0,0)}\frac{xy}{x^2+y^2}$ 不存在。</div>
+  <div class="sol"><strong>📖 逐步詳解：</strong><div class="step">路徑1 ($y=0$)：極限 $0$。路徑2 ($y=x$)：$x^2/(2x^2)=1/2$。$0\neq1/2$ → 不存在。</div></div>
+  <div class="ans">✅ 答案：極限不存在</div>
+</div>
+
+<div class="problem">
+  <span class="num">📝 例題 4.10 極座標計算極限</span>
+  <div class="q">計算 $\displaystyle\lim_{(x,y)\to(0,0)}\frac{x^2y}{x^2+y^2}$。</div>
+  <div class="sol"><strong>📖 逐步詳解：</strong><div class="step">改極座標：$x=r\cos\theta,y=r\sin\theta$，式化為 $r\cos^2\theta\sin\theta$。$r\to0$，有界量乘 $r$ → $0$。</div></div>
+  <div class="ans">✅ 答案：$0$</div>
+</div>
+
+<div class="problem">
+  <span class="num">📝 例題 4.11 驗證連續性</span>
+  <div class="q">$f(x,y)=\begin{cases}\frac{xy}{\sqrt{x^2+y^2}},&(x,y)\neq(0,0)\\0,&(x,y)=(0,0)\end{cases}$ 在 $(0,0)$ 是否連續？</div>
+  <div class="sol"><strong>📖 逐步詳解：</strong><div class="step">極座標：$f=r\cos\theta\sin\theta$，$r\to0$ → $f\to0=f(0,0)$。連續。</div></div>
+  <div class="ans">✅ 答案：連續</div>
+</div>
+
+<div class="problem">
+  <span class="num">📝 例題 4.12 多項式極限</span>
+  <div class="q">計算 $\displaystyle\lim_{(x,y)\to(3,-2)}(x^3-2x^2y+4xy^2+y^3)$。</div>
+  <div class="sol"><strong>📖 逐步詳解：</strong><div class="step">代入：$27-2\cdot9\cdot(-2)+4\cdot3\cdot4+(-8)=27+36+48-8=103$。</div></div>
+  <div class="ans">✅ 答案：$103$</div>
+</div>
+
+<div class="problem">
+  <span class="num">📝 例題 4.13 三變數極限</span>
+  <div class="q">計算 $\displaystyle\lim_{(x,y,z)\to(1,2,1)}\frac{x^2+y^2+z^2}{xyz}$。</div>
+  <div class="sol"><strong>📖 逐步詳解：</strong><div class="step">分母 $=2\neq0$，代入：$(1+4+1)/2=3$。</div></div>
+  <div class="ans">✅ 答案：$3$</div>
+</div>
+</section>
+<section id="s4-3"><h2>§4.3 偏導數</h2>
+
+<div class="problem">
+  <span class="num">📝 例題 4.14 計算偏導數</span>
+  <div class="q">求 $f(x,y)=x^3+3x^2y^2-2y^3$ 的 $f_x$ 和 $f_y$。</div>
+  <div class="sol"><strong>📖 逐步詳解：</strong><div class="step">$f_x=3x^2+6xy^2$；$f_y=6x^2y-6y^2$。</div></div>
+  <div class="ans">✅ 答案：$f_x=3x^2+6xy^2$；$f_y=6x^2y-6y^2$</div>
+</div>
+
+<div class="problem">
+  <span class="num">📝 例題 4.15 特定點偏導數</span>
+  <div class="q">求 $f(x,y)=\ln(x+\sqrt{x^2+y^2})$ 在 $(3,4)$ 的 $f_x$ 和 $f_y$。</div>
+  <div class="sol"><strong>📖 逐步詳解：</strong><div class="step">$f_x=\frac{1}{\sqrt{x^2+y^2}}$，$f_y=\frac{y}{\sqrt{x^2+y^2}(x+\sqrt{x^2+y^2})}$。在 $(3,4)$：$\sqrt{3^2+4^2}=5$，$f_x=1/5$，$f_y=4/(5\cdot8)=1/10$。</div></div>
+  <div class="ans">✅ 答案：$f_x=1/5$；$f_y=1/10$</div>
+</div>
+
+<div class="problem">
+  <span class="num">📝 例題 4.16 三變數偏導數</span>
+  <div class="q">求 $f(x,y,z)=xy^2z^3+x^2y$ 在 $(1,2,3)$ 的偏導數。</div>
+  <div class="sol"><strong>📖 逐步詳解：</strong><div class="step">$f_x=y^2z^3+2xy=112$；$f_y=2xyz^3+x^2=109$；$f_z=3xy^2z^2=108$。</div></div>
+  <div class="ans">✅ 答案：$f_x=112,f_y=109,f_z=108$</div>
+</div>
+
+<div class="problem">
+  <span class="num">📝 例題 4.17 二階偏導數</span>
+  <div class="q">求 $f(x,y)=x^3y-xy^3$ 的所有二階偏導數。</div>
+  <div class="sol"><strong>📖 逐步詳解：</strong><div class="step">$f_x=3x^2y-y^3$，$f_y=x^3-3xy^2$。<br>$f_{xx}=6xy$，$f_{yy}=-6xy$，$f_{xy}=f_{yx}=3x^2-3y^2$。</div></div>
+  <div class="ans">✅ 答案：$f_{xx}=6xy,f_{yy}=-6xy,f_{xy}=f_{yx}=3x^2-3y^2$</div>
+</div>
+
+<div class="problem">
+  <span class="num">📝 例題 4.18 三階偏導數</span>
+  <div class="q">求 $f(x,y)=e^x\sin y$ 的 $f_{xxy}$。</div>
+  <div class="sol"><strong>📖 逐步詳解：</strong><div class="step">$f_x=e^x\sin y$，$f_{xx}=e^x\sin y$，$f_{xxy}=e^x\cos y$。</div></div>
+  <div class="ans">✅ 答案：$f_{xxy}=e^x\cos y$</div>
+</div>
+
+<div class="problem">
+  <span class="num">📝 例題 4.19 驗證拉普拉斯方程</span>
+  <div class="q">驗證 $u(x,y)=e^x\cos y$ 滿足 $u_{xx}+u_{yy}=0$。</div>
+  <div class="sol"><strong>📖 逐步詳解：</strong><div class="step">$u_{xx}=e^x\cos y$，$u_{yy}=-e^x\cos y$，和 $=0$ ✓。</div></div>
+  <div class="ans">✅ 答案：滿足</div>
+</div>
+
+<div class="problem">
+  <span class="num">📝 例題 4.20 驗證波動方程</span>
+  <div class="q">驗證 $u(x,t)=\sin(x-ct)$ 滿足 $u_{tt}=c^2 u_{xx}$。</div>
+  <div class="sol"><strong>📖 逐步詳解：</strong><div class="step">$u_{xx}=-\sin(x-ct)$，$u_{tt}=-c^2\sin(x-ct)=c^2 u_{xx}$ ✓。</div></div>
+  <div class="ans">✅ 答案：滿足</div>
+</div>
+</section>
+<section id="s4-4"><h2>§4.4 切平面與線性近似</h2>
+
+<div class="problem">
+  <span class="num">📝 例題 4.21 求切平面</span>
+  <div class="q">求 $z=x^2+y^2$ 在 $(1,1,2)$ 的切平面。</div>
+  <div class="sol"><strong>📖 逐步詳解：</strong><div class="step">$f_x=2x=2$，$f_y=2y=2$。切平面：$z-2=2(x-1)+2(y-1)$ → $z=2x+2y-2$。</div></div>
+  <div class="ans">✅ 答案：$z=2x+2y-2$</div>
+</div>
+
+<div class="problem">
+  <span class="num">📝 例題 4.22 隱式曲面切平面</span>
+  <div class="q">求 $x^2+y^2+z^2=14$ 在 $(1,2,3)$ 的切平面。</div>
+  <div class="sol"><strong>📖 逐步詳解：</strong><div class="step">$\nabla F=\langle2x,2y,2z\rangle=\langle2,4,6\rangle$。切平面：$2(x-1)+4(y-2)+6(z-3)=0$ → $x+2y+3z=14$。</div></div>
+  <div class="ans">✅ 答案：$x+2y+3z=14$</div>
+</div>
+
+<div class="problem">
+  <span class="num">📝 例題 4.23 線性近似</span>
+  <div class="q">用線性近似估計 $f(x,y)=\sqrt{x^2+y^2}$ 在 $(3.1,3.9)$ 的值。</div>
+  <div class="sol"><strong>📖 逐步詳解：</strong><div class="step">取基準點 $(3,4)$：$f=5$。$f_x=3/5,f_y=4/5$。$L=5+0.6(0.1)+0.8(-0.1)=4.98$。真實值 $\approx4.982$。</div></div>
+  <div class="ans">✅ 答案：$\approx4.98$</div>
+</div>
+
+<div class="problem">
+  <span class="num">📝 例題 4.24 全微分估計誤差</span>
+  <div class="q">矩形長 10 cm、寬 8 cm，測量誤差 ±0.1 cm。估計面積最大誤差。</div>
+  <div class="sol"><strong>📖 逐步詳解：</strong><div class="step">$A=xy$，$dA=y\,dx+x\,dy$。$|dA|\le8\cdot0.1+10\cdot0.1=1.8$ cm²。相對誤差 $2.25\%$。</div></div>
+  <div class="ans">✅ 答案：最大誤差 $\approx1.8$ cm²</div>
+</div>
+
+<div class="problem">
+  <span class="num">📝 例題 4.25 驗證可微性</span>
+  <div class="q">驗證 $f(x,y)=x^2+3xy$ 在任意點可微。</div>
+  <div class="sol"><strong>📖 逐步詳解：</strong><div class="step">$f_x=2x+3y$、$f_y=3x$ 均為連續多項式，處處連續 → $f$ 處處可微。</div></div>
+  <div class="ans">✅ 答案：處處可微</div>
+</div>
+</section>
+<section id="s4-5"><h2>§4.5 連鎖律</h2>
+
+<div class="problem">
+  <span class="num">📝 例題 4.26 連鎖律——一變數</span>
+  <div class="q">設 $z=x^2y+3xy^4$，$x=\sin t$，$y=\cos t$。求 $dz/dt$。</div>
+  <div class="sol"><strong>📖 逐步詳解：</strong><div class="step">$\frac{dz}{dt}=z_x x_t+z_y y_t=(2xy+3y^4)\cos t+(x^2+12xy^3)(-\sin t)$。<br>$=2\sin t\cos^2 t+3\cos^5 t-\sin^3 t-12\sin^2 t\cos^3 t$。</div></div>
+  <div class="ans">✅ 答案：$dz/dt=2\sin t\cos^2 t+3\cos^5 t-\sin^3 t-12\sin^2 t\cos^3 t$</div>
+</div>
+
+<div class="problem">
+  <span class="num">📝 例題 4.27 連鎖律——二變數</span>
+  <div class="q">設 $w=x^2+y^2+z^2$，$x=u\cos v,y=u\sin v,z=uv$。求 $\partial w/\partial u$ 和 $\partial w/\partial v$。</div>
+  <div class="sol"><strong>📖 逐步詳解：</strong><div class="step">$w_u=2x\cos v+2y\sin v+2z\cdot v=2u+2uv^2$。<br>$w_v=2x(-u\sin v)+2y(u\cos v)+2z\cdot u=2u^2v$。</div></div>
+  <div class="ans">✅ 答案：$\partial w/\partial u=2u+2uv^2$；$\partial w/\partial v=2u^2v$</div>
+</div>
+
+<div class="problem">
+  <span class="num">📝 例題 4.28 隱函數微分</span>
+  <div class="q">對 $x^2+y^2+z^2=1$，求 $\partial z/\partial x$（視 $z$ 為隱函數）。</div>
+  <div class="sol"><strong>📖 逐步詳解：</strong><div class="step">設 $F(x,y,z)=x^2+y^2+z^2-1$。$\partial z/\partial x=-F_x/F_z=-2x/(2z)=-x/z$。</div></div>
+  <div class="ans">✅ 答案：$\partial z/\partial x=-x/z$（$z\neq0$）</div>
+</div>
+
+<div class="problem">
+  <span class="num">📝 例題 4.29 隱函數微分二</span>
+  <div class="q">對 $xyz+\sin(xyz)=0$，求 $\partial z/\partial x$。</div>
+  <div class="sol"><strong>📖 逐步詳解：</strong><div class="step">$F_x=yz(1+\cos(xyz))$，$F_z=xy(1+\cos(xyz))$。$\partial z/\partial x=-yz/(xy)=-z/x$。</div></div>
+  <div class="ans">✅ 答案：$\partial z/\partial x=-z/x$</div>
+</div>
+</section>
+<section id="s4-6"><h2>§4.6 方向導數與梯度</h2>
+
+<div class="problem">
+  <span class="num">📝 例題 4.30 方向導數</span>
+  <div class="q">求 $f(x,y)=x^2+xy+y^2$ 在 $(1,2)$ 沿 $\mathbf{v}=\langle3,4\rangle$ 的方向導數。</div>
+  <div class="sol"><strong>📖 逐步詳解：</strong><div class="step">$\mathbf{u}=\langle3/5,4/5\rangle$。$\nabla f=\langle2x+y,x+2y\rangle=\langle4,5\rangle$。$D_\mathbf{u}f=\langle4,5\rangle\cdot\langle3/5,4/5\rangle=32/5$。</div></div>
+  <div class="ans">✅ 答案：$32/5=6.4$</div>
+</div>
+
+<div class="problem">
+  <span class="num">📝 例題 4.31 最大方向導數</span>
+  <div class="q">求 $f(x,y)=xe^y$ 在 $(2,0)$ 的最大方向導數值及方向。</div>
+  <div class="sol"><strong>📖 逐步詳解：</strong><div class="step">$\nabla f=\langle e^y,xe^y\rangle=\langle1,2\rangle$，$\|\nabla f\|=\sqrt5$。最大方向即梯度方向 $\langle1,2\rangle/\sqrt5$，最大值 $\sqrt5$。</div></div>
+  <div class="ans">✅ 答案：最大值 $\sqrt5$，方向 $\langle1,2\rangle/\sqrt5$</div>
+</div>
+
+<div class="problem">
+  <span class="num">📝 例題 4.32 梯度求切線</span>
+  <div class="q">求等值線 $x^2+y^2=25$ 在 $(3,4)$ 的切線。</div>
+  <div class="sol"><strong>📖 逐步詳解：</strong><div class="step">$\nabla f=\langle2x,2y\rangle=\langle6,8\rangle$ 為法向量。切線：$6(x-3)+8(y-4)=0$ → $3x+4y=25$。</div></div>
+  <div class="ans">✅ 答案：$3x+4y=25$</div>
+</div>
+</section>
+<section id="s4-7"><h2>§4.7 極大值與極小值</h2>
+
+<div class="problem">
+  <span class="num">📝 例題 4.33 求臨界點</span>
+  <div class="q">求 $f(x,y)=x^2+y^2-2x-4y+5$ 的臨界點。</div>
+  <div class="sol"><strong>📖 逐步詳解：</strong><div class="step">$f_x=2x-2=0$→$x=1$；$f_y=2y-4=0$→$y=2$。臨界點 $(1,2)$。</div></div>
+  <div class="ans">✅ 答案：$(1,2)$</div>
+</div>
+
+<div class="problem">
+  <span class="num">📝 例題 4.34 鞍點判別</span>
+  <div class="q">求 $f(x,y)=x^2-y^2$ 的臨界點並分類。</div>
+  <div class="sol"><strong>📖 逐步詳解：</strong><div class="step">$(0,0)$ 為唯一臨界點。$f_{xx}=2,f_{yy}=-2,f_{xy}=0$。$D=2\cdot(-2)-0=-4<0$ → 鞍點。</div></div>
+  <div class="ans">✅ 答案：$(0,0)$ 為鞍點（馬鞍面）</div>
+</div>
+
+<div class="problem">
+  <span class="num">📝 例題 4.35 極小值</span>
+  <div class="q">求 $f(x,y)=x^2+xy+y^2-3x-6y$ 的極值並分類。</div>
+  <div class="sol"><strong>📖 逐步詳解：</strong><div class="step">解 $f_x=2x+y-3=0$，$f_y=x+2y-6=0$ 得 $x=0,y=3$。$f_{xx}=2,f_{yy}=2,f_{xy}=1$，$D=3>0$，$f_{xx}>0$ → 局部極小值。$f(0,3)=-9$。</div></div>
+  <div class="ans">✅ 答案：$(0,3)$ 為局部極小值，$f_{\min}=-9$</div>
+</div>
+
+<div class="problem">
+  <span class="num">📝 例題 4.36 閉區域絕對極值</span>
+  <div class="q">求 $f(x,y)=x^2+y^2$ 在 $x^2+y^2\le4$ 上的絕對極值。</div>
+  <div class="sol"><strong>📖 逐步詳解：</strong><div class="step">內部 $(0,0)$：$f=0$。邊界 $x^2+y^2=4$：$f=4$。最小值 $0$、最大值 $4$。</div></div>
+  <div class="ans">✅ 答案：最小 $0$（原點）；最大 $4$（邊界）</div>
+</div>
+</section>
+<section id="s4-8"><h2>§4.8 拉格朗日乘數法</h2>
+
+<div class="problem">
+  <span class="num">📝 例題 4.37 Lagrange 乘數——單約束</span>
+  <div class="q">在約束 $x+y=10$ 下求 $f(x,y)=xy$ 的極值。</div>
+  <div class="sol"><strong>📖 逐步詳解：</strong><div class="step">$\nabla f=\lambda\nabla g$：$\langle y,x\rangle=\lambda\langle1,1\rangle$→$x=y$。代入 $2x=10$→$x=y=5$。$f=25$，此為極大值。</div></div>
+  <div class="ans">✅ 答案：$(5,5)$，$f_{\max}=25$</div>
+</div>
+
+<div class="problem">
+  <span class="num">📝 例題 4.38 Lagrange——圓約束</span>
+  <div class="q">在 $x^2+y^2=1$ 下求 $f(x,y)=x+2y$ 的極值。</div>
+  <div class="sol"><strong>📖 逐步詳解：</strong><div class="step">$\langle1,2\rangle=\lambda\langle2x,2y\rangle$→$y=2x$。代入 $5x^2=1$→$x=\pm1/\sqrt5$。$f_{\max}=\sqrt5$，$f_{\min}=-\sqrt5$。</div></div>
+  <div class="ans">✅ 答案：極大 $\sqrt5$；極小 $-\sqrt5$</div>
+</div>
+</section>
+<section id="s4-1"><h2>§4.1 多變數函數</h2>
+
+<div class="problem">
+  <span class="num">📝 例題 4.39 有理函數定義域</span>
+  <div class="q">求 $f(x,y)=\frac{1}{x^2-y}$ 的定義域。</div>
+  <div class="sol"><strong>📖 逐步詳解：</strong><div class="step">分母不為零：$y\neq x^2$。定義域為 $\mathbb{R}^2$ 去掉拋物線 $y=x^2$。</div></div>
+  <div class="ans">✅ 答案：$\{(x,y)\mid y\neq x^2\}$</div>
+</div>
+</section>
+<section id="s4-3"><h2>§4.3 偏導數</h2>
+
+<div class="problem">
+  <span class="num">📝 例題 4.40 偏導數（指數+三角）</span>
+  <div class="q">求 $f(x,y)=e^{xy}\cos(x+y)$ 的 $f_x$ 和 $f_y$。</div>
+  <div class="sol"><strong>📖 逐步詳解：</strong><div class="step">乘積法則：$f_x=e^{xy}[y\cos(x+y)-\sin(x+y)]$；$f_y=e^{xy}[x\cos(x+y)-\sin(x+y)]$。</div></div>
+  <div class="ans">✅ 答案：如上述</div>
+</div>
+</section>
+<section id="s4-5"><h2>§4.5 連鎖律</h2>
+
+<div class="problem">
+  <span class="num">📝 例題 4.41 連鎖律——極座標</span>
+  <div class="q">設 $z=f(x,y)$，$x=r\cos\theta,y=r\sin\theta$。用連鎖律表示 $\partial z/\partial r$ 和 $\partial z/\partial\theta$。</div>
+  <div class="sol"><strong>📖 逐步詳解：</strong><div class="step">$z_r=f_x\cos\theta+f_y\sin\theta$；$z_\theta=-rf_x\sin\theta+rf_y\cos\theta$。</div></div>
+  <div class="ans">✅ 答案：$z_r=f_x\cos\theta+f_y\sin\theta$；$z_\theta=-rf_x\sin\theta+rf_y\cos\theta$</div>
+</div>
+</section>
+<section id="s4-6"><h2>§4.6 方向導數與梯度</h2>
+
+<div class="problem">
+  <span class="num">📝 例題 4.42 梯度與等值線</span>
+  <div class="q">證明 $\nabla f(x_0,y_0)$ 垂直於過 $(x_0,y_0)$ 的等值線。</div>
+  <div class="sol"><strong>📖 逐步詳解：</strong><div class="step">設等值線上參數化 $\mathbf{r}(t)$，$f(\mathbf{r}(t))=c$。微分得 $\nabla f\cdot\mathbf{r}'(t)=0$，故 $\nabla f\perp\mathbf{r}'(t)$（切線）。</div></div>
+  <div class="ans">✅ 答案：$\nabla f\perp$ 等值線的切向量</div>
+</div>
+</section>
+<section id="s4-7"><h2>§4.7 極大值與極小值</h2>
+
+<div class="problem">
+  <span class="num">📝 例題 4.43 二階導數檢驗——極大值</span>
+  <div class="q">求 $f(x,y)=2xy-2x^2-3y^2+4x+6y$ 的極值並分類。</div>
+  <div class="sol"><strong>📖 逐步詳解：</strong><div class="step">解 $f_x=2y-4x+4=0$，$f_y=2x-6y+6=0$ 得 $x=1.8,y=1.6$。$f_{xx}=-4,f_{yy}=-6,f_{xy}=2$，$D=20>0,f_{xx}<0$→局部極大，$f_{\max}=8.4$。</div></div>
+  <div class="ans">✅ 答案：$(1.8,1.6)$ 為局部極大，$f_{\max}=8.4$</div>
+</div>
+</section>
+<section id="s4-8"><h2>§4.8 拉格朗日乘數法</h2>
+
+<div class="problem">
+  <span class="num">📝 例題 4.44 Lagrange——固定周長最大面積</span>
+  <div class="q">周長固定 $2x+2y=20$，求矩形面積 $A=xy$ 的最大值。</div>
+  <div class="sol"><strong>📖 逐步詳解：</strong><div class="step">約束 $x+y=10$。$\langle y,x\rangle=\lambda\langle1,1\rangle$→$x=y=5$。$A_{\max}=25$（正方形）。</div></div>
+  <div class="ans">✅ 答案：$x=y=5$，$A_{\max}=25$</div>
+</div>
+
+<div class="problem">
+  <span class="num">📝 例題 4.45 Lagrange——雙約束</span>
+  <div class="q">在 $x^2+y^2=1$ 和 $z=2$ 下求 $f(x,y,z)=x+y+z$ 的極值。</div>
+  <div class="sol"><strong>📖 逐步詳解：</strong><div class="step">$\nabla f=\lambda\nabla g_1+\mu\nabla g_2$。得 $x=y=\pm1/\sqrt2,z=2$。$f_{\max}=2+\sqrt2$，$f_{\min}=2-\sqrt2$。</div></div>
+  <div class="ans">✅ 答案：極大 $2+\sqrt2$；極小 $2-\sqrt2$</div>
+</div>
+</section>
+<div style="margin-top:40px;padding:16px;background:var(--bg2);border-radius:10px;text-align:center;font-size:13px;color:var(--tx2)">
+  <a href="index.html">← 返回例題目錄</a> &nbsp;|&nbsp; <a href="../../index.html">回到學習中心</a>
+</div>
+</body>
+</html>

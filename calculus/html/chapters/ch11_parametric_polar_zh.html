@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第 11 章 — Calculus 學習教材</title>
+<script>
+MathJax = {
+  tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']], tags: 'ams' },
+  options: { ignoreHtmlClass: 'no-math' }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script src="../assets/reading-preferences.js" defer></script>
+<style>
+:root {
+  --bg: #FFFFFF; --bg2: #F5F5F7; --bg3: #E8F0FE;
+  --tx: #1D1D1F; --tx2: #1D1D1F;
+  --ac: #007AFF; --ac2: #0056CC;
+  --bd: #D2D2D7; --fbd: #E5E5EA;
+  --sh: 0 2px 8px rgba(0,0,0,.08);
+  --derive-bg: #F0F6FF; --derive-ac: #2563EB;
+  --warn-bg: #FFFBEB; --warn-bd: #F59E0B; --warn-tx: #92400E;
+  --ex-bg: #F0FDF4; --ex-bd: #22C55E;
+  --nav-width: 260px;
+}
+[data-theme="dark"] {
+  --bg: #1D1D1F; --bg2: #2D2D2F; --bg3: #1E3A5F;
+  --tx: #F5F5F7; --tx2: #A1A1A6;
+  --ac: #4DA3FF; --ac2: #7DBFFF;
+  --bd: #3A3A3C; --fbd: #48484A;
+  --sh: 0 2px 8px rgba(0,0,0,.35);
+  --derive-bg: #1E293B; --derive-ac: #60A5FA;
+  --warn-bg: #422006; --warn-bd: #92400E; --warn-tx: #FCD34D;
+  --ex-bg: #052E16; --ex-bd: #16A34A;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Noto Sans TC','Microsoft JhengHei',sans-serif;background:var(--bg);color:var(--tx);line-height:1.72;font-size:15px;display:flex}
+a{color:var(--ac);text-decoration:none}
+h1{font-size:28px;font-weight:700;margin:0 0 4px}
+h2{font-size:20px;font-weight:700;margin:32px 0 12px;padding-bottom:6px;border-bottom:2px solid var(--fbd)}
+h3{font-size:16px;font-weight:600;margin:20px 0 8px}
+p{margin:10px 0}
+strong{font-weight:600}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:13px}
+th,td{padding:8px 12px;text-align:left;border:1px solid var(--bd)}
+th{background:var(--bg2);font-weight:600}
+.sidebar{position:fixed;left:0;top:0;width:var(--nav-width);height:100vh;background:var(--bg2);border-right:1px solid var(--bd);overflow-y:auto;z-index:100;display:flex;flex-direction:column}
+.sidebar-header{padding:18px 14px 10px;border-bottom:1px solid var(--fbd);font-size:12px;color:var(--tx2);line-height:1.5}
+.sidebar-header strong{font-size:14px;color:var(--tx);display:block}
+.sn{flex:1;overflow-y:auto;padding:6px 0}
+.ns{font-size:11px;font-weight:600;color:var(--tx);padding:6px 12px 2px;margin-top:6px;display:block}
+.nsub a{display:block;padding:3px 12px 3px 20px;font-size:11px;color:var(--tx2);text-decoration:none;border-radius:5px;transition:.12s}
+.nsub a:hover,.nsub a.active{background:var(--bg3);color:var(--ac)}
+.sidebar-footer{padding:10px 12px 16px;border-top:1px solid var(--fbd)}
+.theme-btn{display:block;width:100%;padding:7px;border:1px solid var(--bd);border-radius:6px;background:var(--bg);color:var(--tx);font-size:12px;cursor:pointer;text-align:center}
+.theme-btn:hover{background:var(--bg3)}
+.main{margin-left:var(--nav-width);max-width:1100px;padding:32px 40px 80px;width:100%}
+.header{margin-bottom:28px}
+.header .chap-tag{display:inline-block;padding:4px 12px;background:var(--ac);color:#fff;border-radius:12px;font-size:12px;font-weight:600;margin-bottom:8px}
+.header .meta{font-size:12px;color:var(--tx2);margin-top:2px}
+.preview{background:var(--bg2);border:1px solid var(--bd);border-radius:10px;padding:20px 24px;margin:20px 0}
+.preview h3{margin-top:0}
+.preview ul{padding-left:20px;font-size:14px}
+.callout{background:var(--bg3);border:1px solid var(--fbd);border-radius:8px;padding:14px 18px;margin:16px 0;font-size:13px}
+.callout strong{color:var(--ac)}
+.callout-warn{background:var(--warn-bg);border:1px solid var(--warn-bd);border-radius:8px;padding:14px 18px;margin:16px 0;font-size:13px}
+.callout-warn strong{color:var(--warn-tx)}
+.exbox{background:var(--ex-bg);border:1px solid var(--ex-bd);border-radius:8px;padding:14px 18px;margin:16px 0;font-size:13px}
+.exbox strong{color:#166534}
+.figure{margin:24px 0;text-align:center}
+.figure img{max-width:100%;border-radius:8px;box-shadow:var(--sh);cursor:pointer}
+.figure img:hover{transform:scale(1.01)}
+.figure figcaption{margin-top:8px;font-size:12px;color:var(--tx2)}
+.formula-card{background:var(--bg2);border:1px solid var(--bd);border-radius:10px;padding:16px 20px;margin:20px 0}
+.formula-card .label{font-size:12px;font-weight:700;color:var(--ac);margin-bottom:6px}
+.formula-card .note{font-size:12px;color:var(--tx2);margin-top:6px}
+details.derive{border-left:4px solid var(--derive-ac);background:var(--derive-bg);border-radius:0 8px 8px 0;padding:0;margin:16px 0}
+details.derive>summary{padding:12px 16px;cursor:pointer;font-weight:600;font-size:14px}
+details.derive .step{display:flex;gap:12px;align-items:flex-start;padding:8px 16px}
+details.example{border:1px solid var(--ex-bd);background:var(--ex-bg);border-radius:8px;padding:0;margin:16px 0}
+details.example>summary{padding:12px 16px;cursor:pointer;font-weight:600;font-size:14px}
+.eq{margin:14px 0;overflow-x:auto}
+.portal-home-link{position:fixed;top:16px;right:16px;z-index:1000;display:inline-flex;align-items:center;min-height:36px;padding:7px 11px;border:1px solid var(--bd);border-radius:8px;background:var(--bg);color:var(--ac);font:600 13px/1.2 -apple-system,BlinkMacSystemFont,'Noto Sans TC','Microsoft JhengHei',sans-serif;text-decoration:none;box-shadow:0 2px 10px rgba(15,23,42,.08)}
+.portal-home-link:hover{background:var(--bg3)}
+ol,ul{padding-left:24px}
+li{margin:6px 0}
+.summary-section{background:var(--bg2);border:1px solid var(--bd);border-radius:10px;padding:20px 24px;margin:28px 0}
+.summary-section h3{margin-top:0}
+.resources-section{margin:28px 0;padding:20px 24px;background:var(--bg3);border-radius:10px}
+@media(max-width:768px){
+  .sidebar{transform:translateX(-100%);transition:transform .25s}
+  .sidebar.open{transform:translateX(0)}
+  .main{margin-left:0;padding:16px}
+  .sidebar-toggle-btn{display:block;position:fixed;top:12px;left:12px;z-index:200;width:36px;height:36px;border-radius:8px;background:var(--bg);border:1px solid var(--bd);font-size:18px;cursor:pointer}
+}
+.sidebar-toggle-btn{display:none}
+@media(max-width:768px){.sidebar-toggle-btn{display:block}}
+@media print{.sidebar,.sidebar-toggle-btn,.portal-home-link{display:none}.main{margin-left:0}}
+</style>
+<link rel="stylesheet" href="../assets/course-ui.css">
+</head>
+<body>
+
+<a class="portal-home-link" href="../../index.html">返回學習中心</a>
+
+<button class="sidebar-toggle-btn" onclick="toggleSidebar()" aria-label="Toggle sidebar">☰</button>
+
+<nav class="sidebar">
+  <div class="sidebar-header">
+    <strong>微積分 Calculus</strong>
+    Volume 2 · OpenStax<br>
+    <span style="font-size:11px">繁體中文學習教材</span>
+  </div>
+  <div class="sn">
+    <span class="ns">本章預覽</span>
+    <div class="nsub">
+      <a href="#preview">學習目標與概念地圖</a>
+    </div>
+    <span class="ns">CHAPTER 7</span>
+    <div class="nsub">
+      <a href="#s7-1">7.1 參數方程式</a>
+      <a href="#s7-2">7.2 參數曲線的微積分</a>
+      <a href="#s7-3">7.3 極座標</a>
+      <a href="#s7-4">7.4 極座標中的面積與弧長</a>
+      <a href="#s7-5">7.5 圓錐曲線</a>
+      <a href="#summary">本章摘要</a>
+      <a href="#common-mistakes">初學者常見錯誤</a>
+      <a href="#self-check">自我檢測</a>
+      <a href="#extras">延伸資源</a>
+    </div>
+    <span class="ns">其他章節</span>
+    <div class="nsub">
+      <a href="ch09_sequences_series_zh.html">第 9 章 序列與級數</a>
+      <a href="ch10_power_series_zh.html">第 10 章 冪級數</a>
+    </div>
+  </div>
+  <div class="sidebar-footer">
+    <button class="theme-btn" onclick="toggleTheme()">🌙 切換深色模式</button>
+  </div>
+</nav>
+
+<main class="main">
+
+<!-- ===== HEADER ===== -->
+<div class="header">
+  <div class="chap-tag">第 11 章 · OpenStax Calculus Vol 2, Ch 7</div>
+  <h1>參數方程式與極座標</h1>
+  <p class="meta">
+    原文：Parametric Equations and Polar Coordinates<br>
+    原書頁碼：p. 535–624（共 90 頁）&nbsp;|&nbsp;5 節&nbsp;|&nbsp;Figures: 7.1–7.57
+  </p>
+</div>
+
+<!-- ===== PREVIEW ===== -->
+<section id="preview">
+<div class="preview">
+  <h3>📌 本章核心問題</h3>
+  <p>如何用參數方程式描述曲線？為什麼極座標在處理圓形、螺旋等徑向圖形時比直角座標更方便？圓錐曲線（拋物線、橢圓、雙曲線）如何用代數統一定義？</p>
+
+  <h3>🔑 關鍵概念</h3>
+  <ol>
+    <li><strong>參數方程式（parametric equations）</strong>：用獨立參數 $t$ 同時定義 $x(t)$ 和 $y(t)$，可以描述非函數曲線（如圓、擺線）。</li>
+    <li><strong>消去參數（eliminating the parameter）</strong>：將參數式轉為 $y = f(x)$ 或 $F(x,y) = 0$ 的形式。</li>
+    <li><strong>參數曲線的導數</strong>：$\frac{dy}{dx} = \frac{dy/dt}{dx/dt}$，前提是 $dx/dt \neq 0$。</li>
+    <li><strong>極座標（polar coordinates）</strong>：點以 $(r, \theta)$ 表示，$r$ 為徑向距離，$\theta$ 為極角。</li>
+    <li><strong>直角–極座標互換</strong>：$x = r\cos\theta$, $y = r\sin\theta$; $r^2 = x^2 + y^2$, $\tan\theta = y/x$。</li>
+    <li><strong>極座標面積</strong>：$A = \frac{1}{2}\int_{\alpha}^{\beta} r^2\,d\theta$，使用扇形而非矩形近似。</li>
+    <li><strong>極座標弧長</strong>：$L = \int_{\alpha}^{\beta} \sqrt{r^2 + (dr/d\theta)^2}\,d\theta$。</li>
+    <li><strong>擺線（cycloid）</strong>：圓在直線上滾動時，邊緣一點的軌跡，參數式 $x = a(t - \sin t)$, $y = a(1 - \cos t)$。</li>
+    <li><strong>圓錐曲線（conic sections）</strong>：平面與圓錐相交所得；用離心率 $e$ 統一區分：$e=1$ 拋物線，$e&lt;1$ 橢圓，$e&gt;1$ 雙曲線。</li>
+    <li><strong>圓錐曲線的極座標方程</strong>：$r = \frac{ep}{1 \pm e\cos\theta}$ 或 $r = \frac{ep}{1 \pm e\sin\theta}$。</li>
+  </ol>
+
+  <h3>🧠 邏輯鏈</h3>
+  <p>參數方程式 → 消去參數 → 參數曲線的微積分（導數、面積、弧長）→ 引入極座標（當曲線有徑向對稱時更自然）→ 極座標中的面積與弧長 → 圓錐曲線的統一理論（幾何定義 → 標準式 → 極座標式 → 判別式）</p>
+
+  <h3>📚 先備知識</h3>
+  <ul>
+    <li>微分：連鎖律、隱微分、參數式求導</li>
+    <li>積分：定積分、三角函數積分、弧長公式</li>
+    <li>三角學：正弦/餘弦、畢氏恆等式、和角公式</li>
+    <li>解析幾何：二次曲線、配方法</li>
+  </ul>
+</div>
+</section>
+
+<!-- ===== 7.1 PARAMETRIC EQUATIONS ===== -->
+<section id="s7-1">
+<h2>7.1 參數方程式</h2>
+
+<div style="margin-bottom:14px;font-size:12px;color:var(--tx2);line-height:1.8">
+<strong style="color:var(--tx)">🔑 本節重點</strong> ①參數方程式 $x=x(t), y=y(t)$ 用獨立參數 $t$ 描述曲線，可表示無法寫成 $y=f(x)$ 的曲線（如圓）②消去參數得 $x$-$y$ 關係式（用畢氏恆等式或直接代入）③參數化不唯一，同一曲線有無窮多種參數表示 ④擺線 $x=a(t-\sin t), y=a(1-\cos t)$ 是輪緣點軌跡
+</div>
+
+<p>在二維座標系中，參數方程式（parametric equations）是描述曲線的有力工具
+
+<p>常見的物理類比是：$t$ 代表時間，$(x(t), y(t))$ 描述質點在平面上的位置。例如地球繞太陽的軌道是橢圓形的——你可以把一年中的第幾天當作參數 $t$，隨著 $t$ 從 1 到 365，$(x(t), y(t))$ 畫出整個橢圓軌道。</p>
+
+<div class="formula-card">
+  <div class="label">📐 定義：參數方程式</div>
+  <p>若 $x$ 和 $y$ 是 $t$ 在區間 $I$ 上的連續函數：</p>
+  <div class="eq">$$x = x(t),\quad y = y(t),\quad t \in I$$</div>
+  <p>則稱 $(x(t), y(t))$ 為參數方程式，$t$ 為參數。所有點 $(x(t), y(t))$ 的集合稱為參數曲線，記作 $C$。</p>
+  <div class="note">⚠️ 注意區分：$x(t)$、$y(t)$ 是函數；而 $(x, y)$ 是變數（有序對）。</div>
+</div>
+
+<h3>參數曲線的繪圖</h3>
+
+<p>繪製參數曲線的基本方法是建立 $t$、$x$、$y$ 三欄的數值表，選取足夠多的 $t$ 值，計算對應的 $(x, y)$，然後在平面上描點連線。箭頭標示<strong>定向（orientation）</strong>——即隨著 $t$ 增加，點在曲線上的移動方向。</p>
+
+<p>以 $x = 2t$、$y = t^2 - 3$（$-3 \le t \le 2$）為例：當 $t = -3$ 時得到 $(-6, 6)$，$t = 2$ 時得到 $(4, 1)$，路徑是一段拋物線。另一個重要例子是 $x = 4\cos t$、$y = 4\sin t$（$0 \le t \le 2\pi$），這是以原點為中心、半徑 4 的圓，定向為逆時針。</p>
+
+<div class="figure">
+  <img src="../../pages/v2c7_pages/v2c7_page_546_c.png" alt="Figure 7.4" loading="lazy">
+  <figcaption>圖 7.4：$x = 2t$, $y = t^2 - 3$ 的參數曲線——箭頭標示定向（$t$ 從 −3 到 2）</figcaption>
+</div>
+
+<div class="callout">
+  <strong>💡 核心洞察：參數 vs. 函數</strong><br>
+  並非所有曲線都是函數圖形——圓 $x^2 + y^2 = 16$ 無法寫成 $y = f(x)$（不通過鉛直線檢驗），但可以用參數式 $x = 4\cos t$, $y = 4\sin t$ 完美描述。這是參數方程式的關鍵優勢。
+</div>
+
+<div class="callout-warn">
+  <strong>⚡ 常見錯誤：忘記標示定向</strong><br>
+  參數曲線不只是點的集合——它還有<em>方向</em>。兩個不同的參數化可能畫出相同的點集，但移動方向不同。畫圖時一定要加箭頭標示 $t$ 增加的方向。
+</div>
+
+<h3>消去參數</h3>
+
+<p>要更好地理解參數曲線，常用的技巧是<strong>消去參數（eliminating the parameter）</strong>——從兩個等式中解出 $t$，代入得到純 $x$ 和 $y$ 的關係式。例如對於 $x = 2t$、$y = t^2 - 3$，由 $x = 2t$ 得 $t = x/2$，代入 $y$：$y = (x/2)^2 - 3 = x^2/4 - 3$——這是一條開口向上的拋物線。</p>
+
+<p>但有時需要一些創意。對於 $x = 4\cos t$、$y = 3\sin t$，你不能直接解出 $t$（因為正弦和餘弦不是一對一的）。技巧是利用畢氏恆等式 $\cos^2 t + \sin^2 t = 1$：</p>
+<div class="eq">$$\frac{x}{4} = \cos t,\quad \frac{y}{3} = \sin t \quad\Rightarrow\quad \left(\frac{x}{4}\right)^2 + \left(\frac{y}{3}\right)^2 = 1$$</div>
+<p>這是一個水平橢圓，長半軸 4、短半軸 3，中心在原點。</p>
+
+<div class="figure">
+  <img src="../../pages/v2c7_pages/v2c7_page_550_c.png" alt="Figure 7.8" loading="lazy">
+  <figcaption>圖 7.8：$x = 4\cos t$, $y = 3\sin t$ 的橢圓——逆時針定向</figcaption>
+</div>
+
+<details class="example" open><summary>📝 範例</summary>
+  <strong>📝 範例 7.2：消去參數</strong><br><br>
+  消去以下參數方程式中的參數並描述所得圖形：<br>
+  (a) $x = \sqrt{t+1}$，$y = t^2$，$t \ge -1$<br>
+  <strong>解：</strong>由 $x = \sqrt{t+1}$ 得 $t = x^2 - 1$（注意 $x \ge 0$）。代入：$y = (x^2 - 1)^2$，定義域為 $x \ge 0$——這是開口向上的四次曲線的右半支。<br><br>
+  (b) $x = 4\cos t$，$y = 3\sin t$，$0 \le t \le 2\pi$<br>
+  <strong>解：</strong>利用 $\cos^2 t + \sin^2 t = 1$ 得 $\frac{x^2}{16} + \frac{y^2}{9} = 1$——水平橢圓。
+</details>
+
+<h3>曲線的參數化</h3>
+
+<p>上述過程的反向操作——從 $y = f(x)$ 出發，找出一組參數方程式——稱為<strong>曲線的參數化（parameterization of a curve）</strong>。對同一條曲線，存在無窮多種參數化方式。最簡單的是令 $x = t$，則 $y = f(t)$。也可以選 $x = t^3$、$x = \sin t$ 等——只要 $x(t)$ 的取值範圍覆蓋原函數的定義域即可。</p>
+
+<div class="callout-warn">
+  <strong>⚡ 常見錯誤：參數化的定義域限制</strong><br>
+  當你選擇 $x = t^2$（取值 $x \ge 0$）來參數化定義域包含負數的原曲線時，會丟失一半的圖形。選擇參數化時，務必確認 $x(t)$ 的值域覆蓋原曲線的整個定義域。
+</div>
+
+<h3>擺線與其他參數曲線</h3>
+
+<p><strong>擺線（cycloid）</strong>是本章最具代表性的參數曲線之一。想像一個半徑為 $a$ 的圓在直線上無滑動地滾動——圓周上一點的軌跡就是擺線。其參數方程式為：</p>
+
+<div class="formula-card">
+  <div class="label">🔄 擺線（Cycloid）</div>
+  <div class="eq">$$x = a(t - \sin t),\quad y = a(1 - \cos t)$$</div>
+  <div class="note">$t$ 代表輪子轉過的角度（弧度）。當 $t$ 從 $0$ 到 $2\pi$，畫出一個拱形（arch）。</div>
+</div>
+
+<p>擺線的推導思路如下：輪心沿 $x$ 軸以恆定高度 $a$ 移動，位置為 $(at, a)$。螞蟻（輪緣上的點）相對於輪心做順時針圓周運動：$(-a\sin t, -a\cos t)$。將兩者相加即得擺線方程式。負號來自順時針旋轉（與標準參數化的逆時針相反）。</p>
+
+<div class="figure">
+  <img src="../../pages/v2c7_pages/v2c7_page_551_c.png" alt="Figure 7.9" loading="lazy">
+  <figcaption>圖 7.9：車輪沿道路滾動，輪緣上的點描出擺線</figcaption>
+</div>
+
+<p>若小圓在大圓<em>內部</em>滾動，輪緣上的點畫出的曲線稱為<strong>內擺線（hypocycloid）</strong>。其一般參數式為：</p>
+<div class="eq">$$x = (a-b)\cos t + b\cos\left(\frac{a-b}{b}t\right),\quad y = (a-b)\sin t - b\sin\left(\frac{a-b}{b}t\right)$$</div>
+<p>其中 $a$ 是大圓半徑，$b$ 是小圓半徑。比值 $a/b$ 決定尖端（cusp）的數量：若比值為有理數，曲線最終閉合；若為無理數，曲線永遠不閉合——這是<strong>空間填充曲線（space-filling curve）</strong>的例子。</p>
+
+<div class="figure">
+  <img src="../../pages/v2c7_pages/v2c7_page_553_c.png" alt="Figure 7.11" loading="lazy">
+  <figcaption>圖 7.11：不同 $a/b$ 比值下的各種內擺線</figcaption>
+</div>
+
+<div class="callout">
+  <strong>💡 歷史註記：Agnesi 的女巫曲線</strong><br>
+  「Agnesi 的女巫」（Witch of Agnesi）是一個著名的參數曲線，由 18 世紀義大利女數學家 Maria Gaetana Agnesi 研究。名稱來自翻譯錯誤——拉丁文「versoria」（繩索）被誤譯為「versiera」（女妖），英文譯者又將其譯為「witch」。曲線的參數式為 $x = 2a\cot\theta$, $y = 2a\sin^2\theta$，在機率論中對應 Cauchy 分布的機率密度函數。
+</div>
+
+<details class="example" open><summary>📝 範例</summary>
+  <strong>📝 範例 7.1c：參數圓</strong><br><br>
+  繪製 $x = 4\cos t$, $y = 4\sin t$（$0 \le t \le 2\pi$）的曲線。<br>
+  <strong>解：</strong>建表（$t = 0, \pi/2, \pi, 3\pi/2, 2\pi$），得到點 $(4,0)$, $(0,4)$, $(-4,0)$, $(0,-4)$, $(4,0)$。這是半徑 4 的圓，逆時針定向。消去參數：$x^2 + y^2 = 16\cos^2 t + 16\sin^2 t = 16$。
+</details>
+
+
+
+<details class="derive" open style="margin:20px 0">
+<summary>🎮 互動模型：參數曲線與極座標繪圖</summary>
+<div style="padding:8px 0"><p style="font-size:13px;color:var(--tx2);margin-bottom:12px">切換參數方程或極座標模式，拖動 t 或點擊繪製觀察曲線生成。</p>
+<div data-parametric-model></div></div>
+</details>
+
+</section>
+
+<!-- ===== 7.2 CALCULUS OF PARAMETRIC CURVES ===== -->
+<section id="s7-2">
+<h2>7.2 參數曲線的微積分</h2>
+
+<div style="margin-bottom:14px;font-size:12px;color:var(--tx2);line-height:1.8">
+<strong style="color:var(--tx)">🔑 本節重點</strong> ①導數 $\frac{dy}{dx}=\frac{dy/dt}{dx/dt}$（$dx/dt\neq0$）②二階導數 $\frac{d^2y}{dx^2}=\frac{d(dy/dx)/dt}{dx/dt}$（非直接相除！）③面積 $A=\int y(t)x'(t)dt$ ④弧長 $L=\int\sqrt{(dx/dt)^2+(dy/dt)^2}dt$ ⑤表面積 $S=\int 2\pi y(t)ds$
+</div>
+
+<p>有了參數曲線的表示法，接下來自然的問題是
+
+<h3>參數曲線的導數</h3>
+
+<p>考慮參數曲線 $x = x(t)$、$y = y(t)$。若在某一點 $dx/dt \neq 0$，則切線的斜率為：</p>
+
+<div class="formula-card">
+  <div class="label">📐 定理 7.1：參數曲線的導數</div>
+  <div class="eq">$$\frac{dy}{dx} = \frac{dy/dt}{dx/dt},\quad \text{前提 } \frac{dx}{dt} \neq 0$$</div>
+  <div class="note">直觀理解：$\frac{dy}{dx}$ 是 $y$ 相對於 $x$ 的瞬時變化率，而 $dy/dt$ 和 $dx/dt$ 分別是 $y$ 和 $x$ 相對於參數 $t$ 的變化率。兩者相除即得。</div>
+</div>
+
+<p>這條公式可以用連鎖律證明：假設可以消去參數得到 $y = F(x)$，則 $y(t) = F(x(t))$，兩邊對 $t$ 微分：$\frac{dy}{dt} = F'(x(t))\frac{dx}{dt} = \frac{dy}{dx}\frac{dx}{dt}$。只要 $dx/dt \neq 0$，即可解出 $\frac{dy}{dx}$。</p>
+
+<p>例如對於 $x = t^2 - 3$、$y = 2t + 1$：$\frac{dx}{dt} = 2t$，$\frac{dy}{dt} = 2$，所以 $\frac{dy}{dx} = \frac{2}{2t} = \frac{1}{t}$。當 $t = 2$ 時，斜率為 $1/2$。</p>
+
+<p>這條公式的另一個重要用途是找<strong>臨界點（critical points）</strong>：$\frac{dy}{dx} = 0$（水平切線）發生在 $dy/dt = 0$ 且 $dx/dt \neq 0$ 時；$\frac{dy}{dx}$ 不存在（鉛直切線）發生在 $dx/dt = 0$ 時（前提是曲線在該點有定義）。</p>
+
+<div class="figure">
+  <img src="../../pages/v2c7_pages/v2c7_page_562_c.png" alt="Figure 7.19" loading="lazy">
+  <figcaption>圖 7.19：$x = 5\cos t$, $y = 5\sin t$ 的圓——左右兩端 $dx/dt = 0$（鉛直切線），上下兩端 $dy/dt = 0$（水平切線）</figcaption>
+</div>
+
+<div class="callout-warn">
+  <strong>⚡ 常見錯誤：混淆 $dy/dt=0$ 和水平切線</strong><br>
+  $dy/dt = 0$ 只是 $\frac{dy}{dx} = 0$ 的<em>必要條件</em>，前提是 $dx/dt \neq 0$。如果 $dx/dt$ 也同時為零，則需要使用其他方法判斷（例如檢查極限或使用二階導數）。典型例子：$x = t^3$, $y = t^2$ 在 $t = 0$ 處兩者皆為零，曲線在該點有一個尖端（cusp）。
+</div>
+
+<h3>二階導數</h3>
+
+<p>參數曲線的二階導數是一階導數的導數：</p>
+
+<div class="formula-card">
+  <div class="label">📐 二階導數</div>
+  <div class="eq">$$\frac{d^2y}{dx^2} = \frac{d}{dx}\!\left(\frac{dy}{dx}\right) = \frac{\frac{d}{dt}\!\left(\frac{dy}{dx}\right)}{\frac{dx}{dt}}$$</div>
+  <div class="note">注意：$\frac{d^2y}{dx^2} \neq \frac{d^2y/dt^2}{d^2x/dt^2}$！必須先求出一階導數 $\frac{dy}{dx}$（以 $t$ 表示），再對 $t$ 微分後除以 $dx/dt$。</div>
+</div>
+
+<details class="example" open><summary>📝 範例</summary>
+  <strong>📝 範例 7.6：求二階導數</strong><br><br>
+  對 $x = t^2 - 3$、$y = 2t + 1$ 求 $\frac{d^2y}{dx^2}$。<br>
+  <strong>解：</strong>已知 $\frac{dy}{dx} = 1/t$。則 $\frac{d}{dt}(1/t) = -1/t^2$，且 $dx/dt = 2t$。因此 $\frac{d^2y}{dx^2} = \frac{-1/t^2}{2t} = -\frac{1}{2t^3}$。
+</details>
+
+<h3>參數曲線下的面積</h3>
+
+<p>若曲線是非自交的（non-self-intersecting），且 $x(t)$ 在 $[\alpha, \beta]$ 上是遞增（或遞減）的可微函數，則曲線下的面積為：</p>
+
+<div class="formula-card">
+  <div class="label">📐 定理 7.2：參數曲線下的面積</div>
+  <div class="eq">$$A = \int_{\alpha}^{\beta} y(t)\,x'(t)\,dt$$</div>
+  <div class="note">這是標準定積分 $\int_{a}^{b} y\,dx$ 的參數版本——做變數變換 $x = x(t)$、$dx = x'(t)dt$ 即得。</div>
+</div>
+
+<p>以擺線的一個拱形為例：$x = a(t - \sin t)$、$y = a(1 - \cos t)$，從 $t = 0$ 到 $2\pi$。$x'(t) = a(1 - \cos t)$，因此：</p>
+<div class="eq">$$A = \int_{0}^{2\pi} a(1-\cos t) \cdot a(1-\cos t)\,dt = a^2\int_{0}^{2\pi} (1-\cos t)^2\,dt = 3\pi a^2$$</div>
+<p>結果是生成圓面積（$\pi a^2$）的三倍——這是擺線的經典性質。</p>
+
+<div class="figure">
+  <img src="../../pages/v2c7_pages/v2c7_page_564_c.png" alt="Figure 7.21" loading="lazy">
+  <figcaption>圖 7.21：擺線的一個拱形——面積 $3\pi a^2$</figcaption>
+</div>
+
+<h3>參數曲線的弧長</h3>
+
+<p>將曲線用折線近似，取極限得到弧長公式：</p>
+
+<div class="formula-card">
+  <div class="label">📐 定理 7.3：參數曲線的弧長</div>
+  <div class="eq">$$L = \int_{\alpha}^{\beta} \sqrt{\left(\frac{dx}{dt}\right)^2 + \left(\frac{dy}{dt}\right)^2}\,dt$$</div>
+  <div class="note">這是畢氏定理的直接應用：微小線段長度 $ds = \sqrt{(dx)^2 + (dy)^2} = \sqrt{(dx/dt)^2 + (dy/dt)^2}\,dt$。</div>
+</div>
+
+<p>以半圓 $x = 3\cos t$、$y = 3\sin t$（$0 \le t \le \pi$）為例：$dx/dt = -3\sin t$，$dy/dt = 3\cos t$，弧長為：</p>
+<div class="eq">$$L = \int_{0}^{\pi} \sqrt{9\sin^2 t + 9\cos^2 t}\,dt = \int_{0}^{\pi} 3\,dt = 3\pi$$</div>
+<p>結果與幾何公式 $\pi r = 3\pi$ 一致——微積分成功推導出已知的幾何公式。</p>
+
+<h3>參數曲線旋轉體的表面積</h3>
+
+<p>將參數曲線繞 $x$ 軸旋轉，其表面積為：</p>
+
+<div class="formula-card">
+  <div class="label">📐 旋轉體表面積</div>
+  <div class="eq">$$S = \int_{\alpha}^{\beta} 2\pi\,y(t)\,\sqrt{\left(\frac{dx}{dt}\right)^2 + \left(\frac{dy}{dt}\right)^2}\,dt$$</div>
+  <div class="note">前提是 $y(t) \ge 0$。這是標準表面積公式 $S = \int 2\pi y\,ds$ 的參數版本。</div>
+</div>
+
+<details class="example" open><summary>📝 範例</summary>
+  <strong>📝 範例 7.9：球的表面積</strong><br><br>
+  用參數式推導半徑 $r$ 的球表面積。<br>
+  <strong>解：</strong>上半圓 $x = r\cos t$, $y = r\sin t$（$0 \le t \le \pi$）繞 $x$ 軸旋轉：$dx/dt = -r\sin t$, $dy/dt = r\cos t$，$\sqrt{(dx/dt)^2 + (dy/dt)^2} = r$。因此 $S = \int_{0}^{\pi} 2\pi(r\sin t)(r)\,dt = 2\pi r^2\int_{0}^{\pi}\sin t\,dt = 4\pi r^2$——正是球表面積公式。
+</details>
+
+<div class="callout">
+  <strong>💡 棒球的應用</strong><br>
+  假設投手以參數式 $x = 140t$、$y = -16t^2 + 6t$（忽視空氣阻力）投球。用弧長公式可以計算球在任意時刻飛行的距離。弧長函數 $s(t) = \int_0^t \sqrt{(140)^2 + (-32v + 6)^2}\,dv$，微分即得瞬時速率。$t = 1/3$ 秒時速率約為 140 ft/s ≈ 95 mph——大聯盟快速球的速度。
+</div>
+
+</section>
+
+<!-- ===== 7.3 POLAR COORDINATES ===== -->
+<section id="s7-3">
+<h2>7.3 極座標</h2>
+
+<div style="margin-bottom:14px;font-size:12px;color:var(--tx2);line-height:1.8">
+<strong style="color:var(--tx)">🔑 本節重點</strong> ①極座標 $(r,\theta)$：$r$=到原點距離、$\theta$=從極軸逆時針角度 ②轉換公式 $x=r\cos\theta, y=r\sin\theta$ 及 $r^2=x^2+y^2, \tan\theta=y/x$ ③常見極曲線：心形線、蝸牛線、玫瑰線、螺旋線 ④對稱性檢驗可大幅簡化繪圖 ⑤$\theta$ 的象限判斷需手動修正
+</div>
+
+<p>直角座標系（笛卡兒平面）用 $(x, y)$ 定位點
+
+<div class="figure">
+  <img src="../../pages/v2c7_pages/v2c7_page_575_c.png" alt="Figure 7.27" loading="lazy">
+  <figcaption>圖 7.27：笛卡兒平面上的任意點 $P$——$r$ 為到原點的距離，$\theta$ 為與正 $x$ 軸的夾角</figcaption>
+</div>
+
+<h3>座標轉換公式</h3>
+
+<div class="formula-card">
+  <div class="label">📐 定理 7.4：直角 ↔ 極座標轉換</div>
+  <p><strong>極 → 直角：</strong></p>
+  <div class="eq">$$x = r\cos\theta,\quad y = r\sin\theta$$</div>
+  <p><strong>直角 → 極：</strong></p>
+  <div class="eq">$$r^2 = x^2 + y^2,\quad \tan\theta = \frac{y}{x}$$</div>
+  <div class="note">$\theta$ 需根據 $(x, y)$ 所在象限調整。一般取 $r \ge 0$，$0 \le \theta &lt; 2\pi$ 可得唯一表示，但極座標的表示法不唯一（$(r, \theta)$ 和 $(-r, \theta+\pi)$ 代表同一點）。</div>
+</div>
+
+<div class="callout-warn">
+  <strong>⚡ 常見錯誤：$\theta$ 的象限判斷</strong><br>
+  使用 $\tan\theta = y/x$ 求 $\theta$ 時，計算機給出的 $\arctan(y/x)$ 總在 $(-\pi/2, \pi/2)$ 之間。例如點 $(-1, 1)$：$\arctan(-1) = -\pi/4$，但正確的 $\theta$ 是 $3\pi/4$（第二象限）。務必根據 $x$ 和 $y$ 的正負號手動調整象限。
+</div>
+
+<h3>極座標中的繪圖</h3>
+
+<p>要繪製極曲線 $r = f(\theta)$，步驟與直角座標類似：建立 $\theta$ 和 $r$ 的數值表，在極座標平面上標出各點，然後連線。對於週期函數，只需計算一個週期內的點，然後利用對稱性補全圖形。</p>
+
+<div class="figure">
+  <img src="../../pages/v2c7_pages/v2c7_page_578_c.png" alt="Figure 7.29" loading="lazy">
+  <figcaption>圖 7.29：三個點在極座標平面上的標繪</figcaption>
+</div>
+
+<p><strong>重要例子：</strong>$r = 4\sin\theta$。建表（$\theta = 0, \pi/6, \pi/3, \pi/2, 2\pi/3, 5\pi/6, \pi$），描點後會發現這是一個圓。轉換為直角座標：兩邊乘 $r$ 得 $r^2 = 4r\sin\theta$，即 $x^2 + y^2 = 4y$，配方得 $x^2 + (y-2)^2 = 4$——中心在 $(0, 2)$、半徑 2 的圓。</p>
+
+<div class="figure">
+  <img src="../../pages/v2c7_pages/v2c7_page_580_c.png" alt="Figure 7.30" loading="lazy">
+  <figcaption>圖 7.30：$r = 4\sin\theta$ 的圖形是一個圓</figcaption>
+</div>
+
+<h3>常見極曲線</h3>
+
+<table>
+  <tr><th>名稱</th><th>方程式</th><th>特徵</th></tr>
+  <tr><td>圓</td><td>$r = a$</td><td>中心在原點、半徑 $a$</td></tr>
+  <tr><td>圓</td><td>$r = 2a\cos\theta$</td><td>中心在 $(a,0)$、半徑 $a$</td></tr>
+  <tr><td>圓</td><td>$r = 2a\sin\theta$</td><td>中心在 $(0,a)$、半徑 $a$</td></tr>
+  <tr><td>心形線（cardioid）</td><td>$r = a(1 \pm \cos\theta)$ 或 $r = a(1 \pm \sin\theta)$</td><td>心形，$a=b$ 的 limaçon 特例</td></tr>
+  <tr><td>蝸牛線（limaçon）</td><td>$r = a \pm b\cos\theta$ 或 $r = a \pm b\sin\theta$</td><td>$a/b$ 決定形狀（內環/凹口/凸形）</td></tr>
+  <tr><td>玫瑰線（rose）</td><td>$r = a\cos(n\theta)$ 或 $r = a\sin(n\theta)$</td><td>$n$ 為奇數→$n$ 瓣；$n$ 為偶數→$2n$ 瓣</td></tr>
+  <tr><td>阿基米德螺旋</td><td>$r = a\theta$</td><td>等距螺旋</td></tr>
+  <tr><td>對數螺旋</td><td>$r = ae^{b\theta}$</td><td>鸚鵡螺殼的形狀</td></tr>
+</table>
+
+<div class="figure">
+  <img src="../../pages/v2c7_pages/v2c7_page_584_c.png" alt="Figure 7.34" loading="lazy">
+  <figcaption>圖 7.34：玫瑰線——(a) $n$ 為有理數時曲線閉合；(b) $n$ 為無理數時永不閉合，形成空間填充曲線</figcaption>
+</div>
+
+<div class="callout">
+  <strong>💡 章首回顧：鸚鵡螺與對數螺旋</strong><br>
+  章首的鸚鵡螺外殼可以用極座標中的對數螺旋 $r = ae^{b\theta}$ 精確描述。在直角座標中，螺旋的描述非常複雜（涉及 $\sqrt{x^2+y^2} = k\arctan(y/x)$），但在極座標中只是一條簡單的指數函數——這就是選擇正確座標系的威力。
+</div>
+
+<h3>極座標中的對稱性</h3>
+
+<div class="formula-card">
+  <div class="label">📐 定理 7.5：極曲線的對稱性檢驗</div>
+  <table>
+    <tr><th>對稱類型</th><th>條件</th></tr>
+    <tr><td>關於極軸（$x$ 軸）對稱</td><td>方程式在 $\theta \to -\theta$（或 $(r,\theta) \to (r,-\theta)$）下不變</td></tr>
+    <tr><td>關於極點（原點）對稱</td><td>方程式在 $r \to -r$（或 $\theta \to \theta+\pi$）下不變</td></tr>
+    <tr><td>關於 $\theta = \pi/2$（$y$ 軸）對稱</td><td>方程式在 $\theta \to \pi-\theta$（或 $(r,\theta) \to (r,\pi-\theta)$）下不變</td></tr>
+  </table>
+</div>
+
+<p>對稱性可以大幅簡化繪圖工作——只需繪製一部分，然後利用對稱性補全。例如 $r = 3\sin(2\theta)$ 在以上三種對稱檢驗都通過，因此只需繪製 $0 \le \theta \le \pi/2$ 的部分（一個花瓣），其餘三個象限用對稱得出。</p>
+
+<details class="example" open><summary>📝 範例</summary>
+  <strong>📝 範例 7.14：用極座標描述螺旋</strong><br><br>
+  用數學描述阿基米德螺旋。<br>
+  <strong>解：</strong>假設點 $P$ 到原點的距離 $d$ 與 $\theta$ 成正比：$d = k\theta$。在直角座標中：$\sqrt{x^2+y^2} = k\arctan(y/x)$——無法直接解出 $x$ 或 $y$。但在極座標中：$r = k\theta$——簡單明瞭。這就是阿基米德螺旋。更一般的形式為 $r = a + b\theta$。
+</details>
+
+</section>
+
+<!-- ===== 7.4 AREA AND ARC LENGTH IN POLAR COORDINATES ===== -->
+<section id="s7-4">
+<h2>7.4 極座標中的面積與弧長</h2>
+
+<div style="margin-bottom:14px;font-size:12px;color:var(--tx2);line-height:1.8">
+<strong style="color:var(--tx)">🔑 本節重點</strong> ①極座標面積 $A=\frac{1}{2}\int_\alpha^\beta r^2 d\theta$（扇形近似，非矩形）②兩曲線間面積 $A=\frac{1}{2}\int(r_{\text{外}}^2-r_{\text{內}}^2)d\theta$ ③注意原點處的交點可能對應不同 $\theta$ 值 ④弧長 $L=\int\sqrt{r^2+(dr/d\theta)^2}d\theta$
+</div>
+
+<p>在直角座標中，定積分 $\int_a^b f(x)\,dx$ 計算曲線下面積
+
+<h3>極座標中的面積</h3>
+
+<p>回憶：半徑 $r$、圓心角 $\theta$（弧度）的扇形面積為 $\frac{1}{2}r^2\theta$。將區間 $[\alpha, \beta]$ 分割為 $n$ 個子區間，每個子區間對應一個以 $r(\theta_i^*)$ 為半徑的小扇形，面積約為 $\frac{1}{2}[r(\theta_i^*)]^2\Delta\theta$。取黎曼和的極限得到：</p>
+
+<div class="formula-card">
+  <div class="label">📐 定理 7.6：極曲線所圍面積</div>
+  <div class="eq">$$A = \frac{1}{2}\int_{\alpha}^{\beta} r^2\,d\theta$$</div>
+  <div class="note">前提：$r = f(\theta)$ 在 $[\alpha, \beta]$ 上連續且非負，$0 \le \beta - \alpha \le 2\pi$。</div>
+</div>
+
+<div class="figure">
+  <img src="../../pages/v2c7_pages/v2c7_page_592_c.png" alt="Figure 7.39" loading="lazy">
+  <figcaption>圖 7.39：極曲線的分割——用扇形（而非矩形）近似面積</figcaption>
+</div>
+
+<p><strong>範例：</strong>求玫瑰線 $r = 3\sin(2\theta)$ 一個花瓣的面積。花瓣對應 $r = 0$ 的兩個連續 $\theta$ 值。解 $3\sin(2\theta) = 0$ 得 $2\theta = 0, \pi$，即 $\theta = 0, \pi/2$。因此：</p>
+<div class="eq">$$A = \frac{1}{2}\int_{0}^{\pi/2} 9\sin^2(2\theta)\,d\theta = \frac{9}{2}\int_{0}^{\pi/2} \frac{1 - \cos(4\theta)}{2}\,d\theta = \frac{9}{4}\left[\theta - \frac{\sin(4\theta)}{4}\right]_{0}^{\pi/2} = \frac{9\pi}{8}$$</div>
+
+<div class="callout-warn">
+  <strong>⚡ 常見錯誤：積分界限的選取</strong><br>
+  求極曲線的「一個花瓣」或「內環」面積時，關鍵是找到 $r = 0$ 的 $\theta$ 值作為積分界限。對於 $r = a\sin(n\theta)$，解 $a\sin(n\theta) = 0$ 得 $n\theta = 0, \pi, 2\pi, \dots$。確認你所選的 $\theta$ 區間確實對應<em>一個完整的</em>花瓣，而不只是半個。
+</div>
+
+<h3>兩條極曲線之間的面積</h3>
+
+<p>與直角座標類似，兩條極曲線 $r = f(\theta)$ 和 $r = g(\theta)$ 之間的面積為外曲線面積減去內曲線面積：</p>
+<div class="eq">$$A = \frac{1}{2}\int_{\alpha}^{\beta} \left([f(\theta)]^2 - [g(\theta)]^2\right)\,d\theta$$</div>
+<p>其中 $f(\theta) \ge g(\theta) \ge 0$ 在 $[\alpha, \beta]$ 上。交點由 $f(\theta) = g(\theta)$ 解出。</p>
+
+<div class="callout-warn">
+  <strong>⚡ 重要警示：原點處的交點</strong><br>
+  兩條極曲線可能在原點相交，但對應的 $\theta$ 值不同。例如心形線 $r = 1 + \cos\theta$ 在 $\theta = \pi$ 時過原點，而圓 $r = 3\cos\theta$ 在 $\theta = \pi/2$ 時過原點。解 $1 + \cos\theta = 3\cos\theta$ 只得到 $\theta = \pm\pi/3$ 兩個交點，但圖形上還有原點這個第三交點。務必檢查原點是否在兩條曲線上。
+</div>
+
+<div class="figure">
+  <img src="../../pages/v2c7_pages/v2c7_page_594_c.png" alt="Figure 7.42" loading="lazy">
+  <figcaption>圖 7.42：心形線 $r = 1 + \cos\theta$ 與圓 $r = 3\cos\theta$ 之間的區域</figcaption>
+</div>
+
+<h3>極曲線的弧長</h3>
+
+<p>將極曲線寫成參數式：$x = r(\theta)\cos\theta$、$y = r(\theta)\sin\theta$，代入參數弧長公式並化簡：</p>
+
+<div class="formula-card">
+  <div class="label">📐 定理 7.7：極曲線的弧長</div>
+  <div class="eq">$$L = \int_{\alpha}^{\beta} \sqrt{r^2 + \left(\frac{dr}{d\theta}\right)^2}\,d\theta$$</div>
+  <div class="note">推導關鍵：$\frac{dx}{d\theta} = r'\cos\theta - r\sin\theta$，$\frac{dy}{d\theta} = r'\sin\theta + r\cos\theta$，平方相加得 $r^2 + (r')^2$。</div>
+</div>
+
+<p><strong>範例：</strong>心形線 $r = 1 + \cos\theta$ 的全長。$\frac{dr}{d\theta} = -\sin\theta$，所以：</p>
+<div class="eq">$$r^2 + (r')^2 = (1+\cos\theta)^2 + \sin^2\theta = 1 + 2\cos\theta + \cos^2\theta + \sin^2\theta = 2 + 2\cos\theta = 4\cos^2(\theta/2)$$</div>
+<div class="eq">$$L = \int_{0}^{2\pi} \sqrt{4\cos^2(\theta/2)}\,d\theta = \int_{0}^{2\pi} 2|\cos(\theta/2)|\,d\theta = 2\int_{0}^{\pi} 2\cos(\theta/2)\,d\theta = 8$$</div>
+
+<details class="example" open><summary>📝 範例</summary>
+  <strong>📝 範例 7.18：心形線弧長</strong><br><br>
+  求心形線 $r = 1 + \cos\theta$ 的總弧長。<br>
+  <strong>解：</strong>如上推導，$r^2 + (r')^2 = 4\cos^2(\theta/2)$。注意 $\cos(\theta/2)$ 在 $[\pi, 2\pi]$ 上為負，需取絕對值。利用對稱性：$\int_0^{2\pi} 2|\cos(\theta/2)|\,d\theta = 2\int_0^\pi 2\cos(\theta/2)\,d\theta = 8$。
+</details>
+
+</section>
+
+<!-- ===== 7.5 CONIC SECTIONS ===== -->
+<section id="s7-5">
+<h2>7.5 圓錐曲線</h2>
+
+<div style="margin-bottom:14px;font-size:12px;color:var(--tx2);line-height:1.8">
+<strong style="color:var(--tx)">🔑 本節重點</strong> ①四種圓錐曲線：拋物線、橢圓、雙曲線、圓（由平面與圓錐交角決定）②拋物線 $(x-h)^2=4p(y-k)$：焦點與準線等距 ③橢圓 $\frac{(x-h)^2}{a^2}+\frac{(y-k)^2}{b^2}=1$：到兩焦點距離和為常數 ④雙曲線 $\frac{(x-h)^2}{a^2}-\frac{(y-k)^2}{b^2}=1$：到兩焦點距離差為常數 ⑤離心率 $e$ 統一定義：$e<1$橢圓、$e=1$拋物線、$e>1$雙曲線
+</div>
+
+<p>圓錐曲線（conic sections）是古希臘數學家深入研究的主題
+
+<p>圓錐曲線得名於它們的生成方式：用一個平面以不同角度與圓錐相交。(1) 平面與圓錐的母線平行 → <strong>拋物線</strong>；(2) 平面垂直於旋轉軸 → <strong>圓</strong>；(3) 平面以其他角度與一個錐面相交 → <strong>橢圓</strong>；(4) 平面與兩個錐面都相交 → <strong>雙曲線</strong>。</p>
+
+<div class="figure">
+  <img src="../../pages/v2c7_pages/v2c7_page_600_c.png" alt="Figure 7.44" loading="lazy">
+  <figcaption>圖 7.44：四種圓錐曲線——由平面與圓錐相交的角度決定</figcaption>
+</div>
+
+<h3>拋物線（Parabola）</h3>
+
+<p><strong>定義：</strong>拋物線是到一個定點（<strong>焦點 focus</strong>）和一條定直線（<strong>準線 directrix</strong>）等距的所有點的集合。焦點到準線的一半處稱為<strong>頂點（vertex）</strong>。</p>
+
+<div class="formula-card">
+  <div class="label">📐 定理 7.8：拋物線的標準式</div>
+  <p>頂點 $(h, k)$、焦點 $(h, k+p)$、準線 $y = k-p$ 的開口向上拋物線：</p>
+  <div class="eq">$$(x-h)^2 = 4p(y-k) \quad\text{或}\quad y = \frac{1}{4p}(x-h)^2 + k$$</div>
+  <div class="note">$p &gt; 0$ 開口向上，$p &lt; 0$ 開口向下。水平開口的拋物線為 $(y-k)^2 = 4p(x-h)$。</div>
+</div>
+
+<div class="figure">
+  <img src="../../pages/v2c7_pages/v2c7_page_602_c.png" alt="Figure 7.46" loading="lazy">
+  <figcaption>圖 7.46：四個方向的拋物線及其標準式——取決於 $p$ 的正負和平方項在 $x$ 還是 $y$ 上</figcaption>
+</div>
+
+<p>拋物線有一個重要的<strong>反射性質</strong>：平行於對稱軸入射的光線（或無線電波）會被拋物面反射並匯聚到焦點。這就是衛星天線（接收）和汽車頭燈（發射）的工作原理。</p>
+
+<h3>橢圓（Ellipse）</h3>
+
+<p><strong>定義：</strong>橢圓是到兩個定點（<strong>焦點 foci</strong>）的距離之和為常數的所有點的集合。</p>
+
+<div class="formula-card">
+  <div class="label">📐 定理 7.9：橢圓的標準式</div>
+  <p>中心 $(h, k)$、水平長軸 $2a$、垂直短軸 $2b$ 的橢圓：</p>
+  <div class="eq">$$\frac{(x-h)^2}{a^2} + \frac{(y-k)^2}{b^2} = 1$$</div>
+  <p>其中 $c^2 = a^2 - b^2$，焦點在 $(h \pm c, k)$，離心率 $e = c/a$。</p>
+  <div class="note">若長軸為垂直方向，則分母交換，焦點在 $(h, k \pm c)$。</div>
+</div>
+
+<div class="figure">
+  <img src="../../pages/v2c7_pages/v2c7_page_604_c.png" alt="Figure 7.48" loading="lazy">
+  <figcaption>圖 7.48：典型橢圓——任一點到兩焦點距離之和為常數 $2a$</figcaption>
+</div>
+
+<p>根據克卜勒第一定律，行星繞太陽的軌道是橢圓，太陽位於其中一個焦點。橢圓也有反射性質：從一個焦點發出的光線經橢圓面反射後會通過另一個焦點——這就是美國國會大廈雕像大廳（Statuary Hall）的「耳語廊」效應的數學原理。</p>
+
+<h3>雙曲線（Hyperbola）</h3>
+
+<p><strong>定義：</strong>雙曲線是到兩個定點（<strong>焦點</strong>）的距離之<em>差</em>的絕對值為常數的所有點的集合。</p>
+
+<div class="formula-card">
+  <div class="label">📐 定理 7.10：雙曲線的標準式</div>
+  <p>中心 $(h, k)$、水平貫軸的雙曲線：</p>
+  <div class="eq">$$\frac{(x-h)^2}{a^2} - \frac{(y-k)^2}{b^2} = 1$$</div>
+  <p>其中 $c^2 = a^2 + b^2$，焦點在 $(h \pm c, k)$，漸近線為 $y - k = \pm\frac{b}{a}(x - h)$。</p>
+  <div class="note">若貫軸為垂直方向，則 $y^2$ 項在前，漸近線斜率為 $\pm a/b$。</div>
+</div>
+
+<div class="figure">
+  <img src="../../pages/v2c7_pages/v2c7_page_608_c.png" alt="Figure 7.51" loading="lazy">
+  <figcaption>圖 7.51：典型雙曲線——任一點到兩焦點距離之差的絕對值為常數</figcaption>
+</div>
+
+<div class="callout">
+  <strong>💡 雙曲線的應用</strong><br>
+  雙曲線的反射性質（指向一個焦點的光線經雙曲面反射後指向另一個焦點）用於望遠鏡設計和無線電測向。進入太陽系的彗星若速度足夠大以逃脫太陽引力，其軌跡即為雙曲線。
+</div>
+
+<h3>離心率與圓錐曲線的統一</h3>
+
+<p><strong>離心率（eccentricity）</strong> $e$ 提供了一個統一描述所有圓錐曲線的方式：</p>
+
+<div class="formula-card">
+  <div class="label">📐 離心率定義</div>
+  <div class="eq">$$e = \frac{\text{曲線上任一點到焦點的距離}}{\text{該點到最近準線的垂直距離}}$$</div>
+  <table>
+    <tr><th>$e$ 值</th><th>圓錐曲線類型</th></tr>
+    <tr><td>$e = 0$</td><td>圓</td></tr>
+    <tr><td>$0 &lt; e &lt; 1$</td><td>橢圓</td></tr>
+    <tr><td>$e = 1$</td><td>拋物線</td></tr>
+    <tr><td>$e &gt; 1$</td><td>雙曲線</td></tr>
+  </table>
+</div>
+
+<div class="figure">
+  <img src="../../pages/v2c7_pages/v2c7_page_612_c.png" alt="Figure 7.54" loading="lazy">
+  <figcaption>圖 7.54：三種圓錐曲線及其焦點和準線——離心率 $e$ 統一定義</figcaption>
+</div>
+
+<h3>圓錐曲線的極座標方程</h3>
+
+<p>當圓錐曲線的一個焦點位於極點（原點）時，其極座標方程為：</p>
+
+<div class="formula-card">
+  <div class="label">📐 定理 7.11：圓錐曲線的極座標式</div>
+  <div class="eq">$$r = \frac{ep}{1 \pm e\cos\theta}\quad\text{或}\quad r = \frac{ep}{1 \pm e\sin\theta}$$</div>
+  <p>其中 $p$ 為<strong>焦參數（focal parameter）</strong>——焦點到最近準線的距離。餘弦對應水平軸，正弦對應垂直軸。</p>
+  <div class="note">求 $e$ 的技巧：將分母的常數項化為 1（分子分母同除），則 $\sin\theta$ 或 $\cos\theta$ 的係數即為 $e$。</div>
+</div>
+
+<details class="example" open><summary>📝 範例</summary>
+  <strong>📝 範例 7.23：以極座標式識別圓錐曲線</strong><br><br>
+  識別 $r = \frac{3}{1 + 2\cos\theta}$。<br>
+  <strong>解：</strong>分母常數項已是 1，因此 $e = 2$（$&gt; 1$）——這是雙曲線。焦參數由 $ep = 3$ 得 $p = 1.5$。分母含 $\cos\theta$，故為水平雙曲線。
+</details>
+
+<h3>一般二次方程與旋轉圓錐曲線</h3>
+
+<p>一般二次方程 $Ax^2 + Bxy + Cy^2 + Dx + Ey + F = 0$ 的圖形是圓錐曲線。判別式 $B^2 - 4AC$ 決定類型：</p>
+<ul>
+  <li>$B^2 - 4AC &lt; 0$：橢圓（含圓）</li>
+  <li>$B^2 - 4AC = 0$：拋物線</li>
+  <li>$B^2 - 4AC &gt; 0$：雙曲線</li>
+</ul>
+<p>當 $B \neq 0$ 時，座標軸被旋轉。旋轉角 $\theta$ 滿足 $\cot(2\theta) = \frac{A-C}{B}$。</p>
+
+<div class="callout-warn">
+  <strong>⚡ 常見錯誤：混淆橢圓與雙曲線的 $c^2$ 關係</strong><br>
+  橢圓：$c^2 = a^2 - b^2$（$a$ 最大）；雙曲線：$c^2 = a^2 + b^2$。許多人死記硬背 $c^2 = a^2 - b^2$，但這只適用於橢圓。記憶技巧：橢圓的焦點在<em>內部</em>（$c &lt; a$），雙曲線的焦點在<em>外部</em>（$c &gt; a$）。
+</div>
+
+</section>
+
+<!-- ====== Key Concepts ====== -->
+<section id="key-concepts">
+<h2>📋 關鍵概念回顧（Key Concepts）</h2>
+<ol>
+  <li><strong>參數方程式（Parametric Equations）</strong>：用第三變數 $t$（參數）定義 $x = f(t),\; y = g(t)$。同一條曲線可以有多種參數化方式。</li>
+  <li><strong>消去參數</strong>：從 $x=f(t)$ 解出 $t$ 代入 $y=g(t)$，或利用三角恆等式（如 $\cos^2 t + \sin^2 t = 1$）消去 $t$ 得到 $y$ 與 $x$ 的直接關係。</li>
+  <li><strong>擺線（Cycloid）</strong>：圓在直線上滾動時，圓周上一點的軌跡。參數方程：$x = a(t-\sin t),\; y = a(1-\cos t)$。</li>
+  <li><strong>參數曲線的切線斜率</strong>：$\frac{dy}{dx} = \frac{dy/dt}{dx/dt}$（當 $dx/dt \neq 0$）。二階導數：$\frac{d^2y}{dx^2} = \frac{d}{dt}\!\left(\frac{dy}{dx}
+ight) \Big/ \frac{dx}{dt}$。</li>
+  <li><strong>參數曲線的弧長</strong>：$L = \int_a^b \sqrt{\left(\frac{dx}{dt}
+ight)^2 + \left(\frac{dy}{dt}
+ight)^2}\,dt$。若曲線以 $y=f(x)$ 表示，退化為標準弧長公式。</li>
+  <li><strong>極座標（Polar Coordinates）</strong>：以 $(r, \theta)$ 表示點，$r$ 為到原點的距離，$\theta$ 為與正 $x$ 軸的夾角。與直角座標的轉換：$x = r\cos\theta,\; y = r\sin\theta$。</li>
+  <li><strong>極座標曲線的面積</strong>：$A = \int_\alpha^\beta \frac{1}{2}r^2\,d\theta = \frac{1}{2}\int_\alpha^\beta [f(\theta)]^2\,d\theta$。這是極座標中最核心的積分公式。</li>
+  <li><strong>極座標曲線的弧長</strong>：$L = \int_\alpha^\beta \sqrt{r^2 + \left(\frac{dr}{d\theta}
+ight)^2}\,d\theta$。</li>
+  <li><strong>圓錐曲線（Conic Sections）</strong>：以離心率 $e$ 分類——$e=0$ 圓、$0<e<1$ 橢圓、$e=1$ 拋物線、$e>1$ 雙曲線。極座標形式：$r = \frac{ed}{1 \pm e\cos\theta}$ 或 $r = \frac{ed}{1 \pm e\sin\theta}$。</li>
+  <li><strong>旋轉體表面積（參數形式）</strong>：$S = \int_a^b 2\pi y \sqrt{\left(\frac{dx}{dt}
+ight)^2 + \left(\frac{dy}{dt}
+ight)^2}\,dt$（繞 $x$ 軸旋轉）。</li>
+</ol>
+</section>
+
+<!-- ====== Key Equations ====== -->
+<section id="key-equations">
+<h2>📐 關鍵公式（Key Equations）</h2>
+<table>
+<thead><tr><th>公式</th><th>說明</th></tr></thead>
+<tbody>
+<tr><td>$$\frac{dy}{dx} = \frac{dy/dt}{dx/dt},\quad \frac{dx}{dt} \neq 0$$</td><td>參數曲線的一階導數（切線斜率）</td></tr>
+<tr><td>$$\frac{d^2y}{dx^2} = \frac{d}{dt}\!\left(\frac{dy}{dx}
+ight) \Big/ \frac{dx}{dt}$$</td><td>參數曲線的二階導數</td></tr>
+<tr><td>$$L = \int_a^b \sqrt{\left(\frac{dx}{dt}
+ight)^2 + \left(\frac{dy}{dt}
+ight)^2}\,dt$$</td><td>參數曲線弧長</td></tr>
+<tr><td>$$S = \int_a^b 2\pi y \sqrt{\left(\frac{dx}{dt}
+ight)^2 + \left(\frac{dy}{dt}
+ight)^2}\,dt$$</td><td>參數曲線旋轉體表面積（繞 $x$ 軸）</td></tr>
+<tr><td>$$x = r\cos\theta,\quad y = r\sin\theta,\quad r^2 = x^2 + y^2,\quad \tan\theta = \frac{y}{x}$$</td><td>極座標與直角座標轉換</td></tr>
+<tr><td>$$A = \int_\alpha^\beta \frac{1}{2}r^2\,d\theta$$</td><td>極座標面積</td></tr>
+<tr><td>$$L = \int_\alpha^\beta \sqrt{r^2 + \left(\frac{dr}{d\theta}
+ight)^2}\,d\theta$$</td><td>極座標弧長</td></tr>
+<tr><td>$$x = a(t - \sin t),\quad y = a(1 - \cos t)$$</td><td>擺線參數方程</td></tr>
+<tr><td>$$r = \frac{ed}{1 \pm e\cos\theta}\;\text{或}\; r = \frac{ed}{1 \pm e\sin\theta}$$</td><td>圓錐曲線的極座標方程（焦點在原點）</td></tr>
+<tr><td>$$e = \frac{c}{a}\quad\begin{cases} e=0: \text{圓} \\ 0<e<1: \text{橢圓} \\ e=1: \text{拋物線} \\ e>1: \text{雙曲線} \end{cases}$$</td><td>離心率與圓錐曲線分類</td></tr>
+<tr><td>$$\frac{x^2}{a^2} + \frac{y^2}{b^2} = 1\;\text{（橢圓）},\quad \frac{x^2}{a^2} - \frac{y^2}{b^2} = 1\;\text{（雙曲線）}$$</td><td>圓錐曲線的標準直角座標形式</td></tr>
+</tbody>
+</table>
+</section>
+
+<!-- ===== 本章摘要 ===== -->
+<section class="summary-section" id="summary">
+<h3>📋 本章摘要</h3>
+
+<table>
+  <tr><th>節</th><th>核心內容</th><th>關鍵公式</th></tr>
+  <tr>
+    <td>7.1</td>
+    <td>參數方程式：用 $t$ 定義 $(x(t), y(t))$；消去參數；擺線、內擺線</td>
+    <td>擺線：$x = a(t - \sin t)$, $y = a(1 - \cos t)$</td>
+  </tr>
+  <tr>
+    <td>7.2</td>
+    <td>參數曲線的微積分：導數、面積、弧長、表面積</td>
+    <td>$\frac{dy}{dx} = \frac{dy/dt}{dx/dt}$；$A = \int y\,x'\,dt$；$L = \int \sqrt{(x')^2 + (y')^2}\,dt$</td>
+  </tr>
+  <tr>
+    <td>7.3</td>
+    <td>極座標系：$(r,\theta)$；轉換公式；常見極曲線（圓、心形線、玫瑰線、螺旋）</td>
+    <td>$x = r\cos\theta$, $y = r\sin\theta$；$r^2 = x^2 + y^2$</td>
+  </tr>
+  <tr>
+    <td>7.4</td>
+    <td>極座標中的面積（扇形近似）與弧長</td>
+    <td>$A = \frac12\!\int r^2\,d\theta$；$L = \int \sqrt{r^2 + (r')^2}\,d\theta$</td>
+  </tr>
+  <tr>
+    <td>7.5</td>
+    <td>圓錐曲線：拋物線、橢圓、雙曲線的標準式；離心率；極座標表示；判別式</td>
+    <td>$r = \frac{ep}{1 \pm e\cos\theta}$；$B^2 - 4AC$ 判別</td>
+  </tr>
+</table>
+</section>
+
+<!-- ===== 初學者常見錯誤 ===== -->
+<section id="common-mistakes">
+<h2>⚠️ 初學者常見錯誤</h2>
+
+<div class="callout-warn">
+  <strong>⚡ 錯誤一：混淆 $\frac{dy}{dx}$ 與 $\frac{dy/dt}{dx/dt}$ 的計算</strong><br>
+  參數曲線的一階導數是 $\frac{dy}{dx} = \frac{dy/dt}{dx/dt}$，但二階導數 <strong>不是</strong> $\frac{d^2y/dt^2}{d^2x/dt^2}$。正確做法：先求 $\frac{dy}{dx}$（以 $t$ 表示），再對 $t$ 微分後除以 $dx/dt$：$\frac{d^2y}{dx^2} = \frac{\frac{d}{dt}(dy/dx)}{dx/dt}$。這是本節最常見的計算錯誤。
+</div>
+
+<div class="callout-warn">
+  <strong>⚡ 錯誤二：極座標面積公式漏掉 $\frac{1}{2}$ 因子</strong><br>
+  極座標面積是 $A = \frac{1}{2}\int r^2\,d\theta$，不是 $\int r\,d\theta$ 或 $\int r^2\,d\theta$。這個 $\frac{1}{2}$ 來自扇形面積公式 $\frac{1}{2}r^2\theta$。一個好記的方法是：當 $r$ 為常數 $R$ 且 $\theta$ 從 $0$ 到 $2\pi$ 時，公式應得圓面積 $\pi R^2$：$\frac{1}{2}\int_0^{2\pi} R^2\,d\theta = \frac{1}{2}R^2 \cdot 2\pi = \pi R^2$ ✓。
+</div>
+
+<div class="callout-warn">
+  <strong>⚡ 錯誤三：消去參數時忽略定義域限制</strong><br>
+  從參數式 $x = \sqrt{t}$、$y = t$ 消去參數得 $y = x^2$——但原參數式只有 $x \ge 0$（因為 $t \ge 0$）。如果直接畫出 $y = x^2$ 的全部，就會多出 $x &lt; 0$ 的部分。消去參數後，務必標註 $x$（或 $y$）的定義域限制。
+</div>
+
+<div class="callout-warn">
+  <strong>⚡ 錯誤四：極座標交點漏掉原點</strong><br>
+  求兩條極曲線之間的面積時，交點由聯立方程解出。但兩條曲線可能在原點 $(0, \theta)$ 相交於<em>不同的</em> $\theta$ 值——此時聯立解無法捕捉這個交點。務必檢查 $r = 0$ 是否在兩條曲線上，並考慮原點處的交點對積分區域的影響。
+</div>
+
+<div class="callout-warn">
+  <strong>⚡ 錯誤五：$\theta$ 象限判斷錯誤</strong><br>
+  用 $\theta = \arctan(y/x)$ 轉換直角座標到極座標時，計算機返回的值總在 $(-\pi/2, \pi/2)$。必須根據 $(x, y)$ 所在的象限手動修正：$x &lt; 0$ 時加 $\pi$，並確保最終 $\theta$ 在你選擇的範圍（如 $[0, 2\pi)$ 或 $(-\pi, \pi]$）內。
+</div>
+</section>
+
+<!-- ===== 自我檢測 ===== -->
+<section id="self-check">
+<h2>✅ 自我檢測（Self-Check）</h2>
+<p>完成以下題目檢驗你對本章核心概念的掌握程度。點擊展開查看答案。</p>
+
+<details class="derive"><summary>題 1：參數曲線導數 — 對 $x = t^2 - 3$，$y = 2t + 1$，求 $t = 2$ 處的 $\frac{dy}{dx}$</summary>
+<p><strong>答案：</strong>$\frac{dx}{dt} = 2t$，$\frac{dy}{dt} = 2$。<br>
+$\frac{dy}{dx} = \frac{dy/dt}{dx/dt} = \frac{2}{2t} = \frac{1}{t}$。在 $t = 2$ 處，$\frac{dy}{dx} = \frac{1}{2}$。<br>
+對應點：$x = 4 - 3 = 1$，$y = 4 + 1 = 5$。</p>
+</details>
+
+<details class="derive"><summary>題 2：參數曲線二階導數 — 同上題，求 $\frac{d^2y}{dx^2}$（以 $t$ 表示）</summary>
+<p><strong>答案：</strong>$\frac{d^2y}{dx^2} = \frac{\frac{d}{dt}(dy/dx)}{dx/dt} = \frac{\frac{d}{dt}(1/t)}{2t} = \frac{-1/t^2}{2t} = -\frac{1}{2t^3}$。<br>
+注意：$\frac{d^2y}{dx^2} \neq \frac{d^2y/dt^2}{d^2x/dt^2}$！這是參數曲線最常見的陷阱。</p>
+</details>
+
+<details class="derive"><summary>題 3：極座標面積 — 求心形線 $r = 1 + \cos\theta$ 所圍區域的面積</summary>
+<p><strong>答案：</strong>心形線對稱於極軸，$A = 2 \cdot \frac{1}{2}\int_0^\pi (1+\cos\theta)^2\,d\theta = \int_0^\pi (1 + 2\cos\theta + \cos^2\theta)\,d\theta$。<br>
+$\cos^2\theta = \frac{1+\cos 2\theta}{2}$。積分：$A = \int_0^\pi \left(1 + 2\cos\theta + \frac{1+\cos 2\theta}{2}
+ight)d\theta = \left[\frac{3}{2}\theta + 2\sin\theta + \frac{\sin 2\theta}{4}
+ight]_0^\pi = \frac{3\pi}{2}$。<br>
+總面積 $= \frac{3\pi}{2}$。</p>
+</details>
+
+<details class="derive"><summary>題 4：消去參數 — 將 $x = 4\cos t$，$y = 3\sin t$（$0 \leq t \leq 2\pi$）轉為直角座標方程</summary>
+<p><strong>答案：</strong>$\cos t = x/4$，$\sin t = y/3$。利用 $\cos^2 t + \sin^2 t = 1$：<br>
+$\left(\frac{x}{4}
+ight)^2 + \left(\frac{y}{3}
+ight)^2 = 1$，即 $\frac{x^2}{16} + \frac{y^2}{9} = 1$。<br>
+這是中心在原點、長半軸 $4$（水平）、短半軸 $3$（垂直）的橢圓。</p>
+</details>
+
+<details class="derive"><summary>題 5：極座標弧長 — 求對數螺旋 $r = e^\theta$ 從 $\theta = 0$ 到 $\theta = 2\pi$ 的弧長</summary>
+<p><strong>答案：</strong>$r = e^\theta$，$\frac{dr}{d\theta} = e^\theta$。<br>
+$L = \int_0^{2\pi} \sqrt{r^2 + (dr/d\theta)^2}\,d\theta = \int_0^{2\pi} \sqrt{e^{2\theta} + e^{2\theta}}\,d\theta = \int_0^{2\pi} \sqrt{2}\,e^\theta\,d\theta$<br>
+$= \sqrt{2}\,[e^\theta]_0^{2\pi} = \sqrt{2}\,(e^{2\pi} - 1)$。</p>
+</details>
+</section>
+
+<!-- ===== 延伸資源 ===== -->
+<section id="extras">
+<div class="resources-section">
+  <h2>📚 延伸資源</h2>
+  <ul>
+    <li><strong>原書：</strong>OpenStax Calculus Volume 2, Chapter 7 (p. 535–624)</li>
+    <li><strong>相關章節：</strong><a href="ch09_sequences_series_zh.html">第 9 章 序列與級數</a>（弧長計算常用冪級數）、<a href="ch10_power_series_zh.html">第 10 章 冪級數</a></li>
+    <li><strong>先備：</strong>三角恆等式（$\sin^2\theta + \cos^2\theta = 1$、倍角公式、和差化積）</li>
+    <li><strong>互動視覺化：</strong>建議使用 Desmos 或 GeoGebra 動態調整參數，直觀理解擺線、內擺線、玫瑰線的生成過程</li>
+    <li><strong>歷史背景：</strong>Apollonius《圓錐曲線論》（Conics）；克卜勒行星運動定律（1609）；Maria Agnesi（1748）</li>
+  </ul>
+</div>
+</section>
+
+</main>
+
+<script>
+(function() {
+  // Scroll spy
+  const sections = document.querySelectorAll('section[id], .summary-section[id]');
+  const navLinks = document.querySelectorAll('.nsub a');
+  function updateActive() {
+    let current = '';
+    sections.forEach(s => {
+      const top = s.getBoundingClientRect().top;
+      if (top < 120) current = s.id;
+    });
+    navLinks.forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+    });
+  }
+  window.addEventListener('scroll', updateActive, {passive: true});
+
+  // Theme toggle
+  window.toggleTheme = function() {
+    const html = document.documentElement;
+    const isDark = html.getAttribute('data-theme') === 'dark';
+    html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+    const btn = document.querySelector('.theme-btn');
+    if (btn) btn.textContent = isDark ? '🌙 切換深色模式' : '☀️ 切換淺色模式';
+    try { localStorage.setItem('calculus-theme', isDark ? 'light' : 'dark'); } catch(e) {}
+  };
+
+  // Sidebar toggle
+  window.toggleSidebar = function() {
+    document.querySelector('.sidebar').classList.toggle('open');
+  };
+
+  // Restore theme
+  try {
+    const saved = localStorage.getItem('calculus-theme');
+    if (saved === 'dark') {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      const btn = document.querySelector('.theme-btn');
+      if (btn) btn.textContent = '☀️ 切換淺色模式';
+    }
+  } catch(e) {}
+
+  // Initial active
+  updateActive();
+})();
+</script>
+
+<script defer src="../assets/course-ui.js"></script>
+
+<script defer src="../assets/parametric-polar-model.js"></script>
+</body>
+</html>

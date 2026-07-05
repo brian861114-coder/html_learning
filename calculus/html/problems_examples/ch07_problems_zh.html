@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第 7 章例題詳解 — Calculus</title>
+<script>
+MathJax = {
+  tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']], tags: 'ams' },
+  options: { ignoreHtmlClass: 'no-math' }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<style>
+:root{--bg:#FFF;--bg2:#F5F5F7;--tx:#1D1D1F;--tx2:#666;--ac:#007AFF;--bd:#D2D2D7;--ex-bg:#F0FDF4;--ex-bd:#22C55E;--warn-bg:#FFFBEB;--warn-bd:#F59E0B}
+[data-theme="dark"]{--bg:#1D1D1F;--bg2:#2D2D2F;--tx:#F5F5F7;--tx2:#999;--ac:#4DA3FF;--bd:#3A3A3C;--ex-bg:#052E16;--ex-bd:#16A34A;--warn-bg:#422006;--warn-bd:#92400E}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Noto Sans TC','Microsoft JhengHei',sans-serif;background:var(--bg);color:var(--tx);line-height:1.72;font-size:15px;max-width:1100px;margin:0 auto;padding:32px 40px 80px}
+h1{font-size:28px;font-weight:700;margin:0 0 4px}
+h2{font-size:20px;font-weight:700;margin:32px 0 12px;padding-bottom:6px;border-bottom:2px solid var(--bd)}
+h3{font-size:16px;font-weight:600;margin:20px 0 8px;color:var(--ac)}
+p{margin:10px 0}
+a{color:var(--ac);text-decoration:none}
+.back{display:inline-block;margin-bottom:20px;color:var(--ac);font-size:13px}
+.exbox{background:var(--ex-bg);border:1px solid var(--ex-bd);border-radius:10px;padding:18px 22px;margin:20px 0}
+.exbox .ex-num{font-weight:700;font-size:14px;color:#166534;margin-bottom:6px}
+.exbox .ex-title{font-size:13px;color:var(--tx2);margin-bottom:8px}
+.exbox .ex-problem{font-weight:600;margin-bottom:8px}
+.exbox .ex-sol{font-size:14px;margin-bottom:6px}
+.exbox .ex-ans{font-weight:700;color:var(--ac);margin-top:8px;padding-top:8px;border-top:1px dashed var(--bd)}
+.eq{margin:12px 0;overflow-x:auto}
+.chap-tag{display:inline-block;padding:4px 12px;background:var(--ac);color:#fff;border-radius:12px;font-size:12px;font-weight:600;margin-bottom:8px}
+.header{margin-bottom:28px}
+.header .meta{font-size:12px;color:var(--tx2);margin-top:2px}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:13px}
+th,td{padding:8px 12px;text-align:left;border:1px solid var(--bd)}
+th{background:var(--bg2);font-weight:600}
+.portal-home-link{position:fixed;top:16px;right:16px;z-index:1000;display:inline-flex;align-items:center;min-height:36px;padding:7px 11px;border:1px solid var(--bd);border-radius:8px;background:var(--bg);color:var(--ac);font:600 13px/1.2 -apple-system,BlinkMacSystemFont,'Noto Sans TC','Microsoft JhengHei',sans-serif;text-decoration:none;box-shadow:0 2px 10px rgba(15,23,42,.08)}
+.portal-home-link:hover{background:var(--bg2)}
+@media(max-width:768px){body{padding:16px}}
+</style>
+</head>
+<body>
+
+<a class="portal-home-link" href="../../index.html">← 返回學習中心</a>
+
+<a class="back" href="index.html">← 例題與習題目錄</a>
+
+<header class="header">
+  <div class="chap-tag">第 7 章 · Calculus Vol 2, Ch 3</div>
+  <h1>積分技巧</h1>
+  <div class="meta">Techniques of Integration · OpenStax Calculus · pp. 239–314 · 共 56 個課本例題</div>
+</header>
+
+<p>以下收錄本章所有課本例題，包含<strong>題目、詳細逐步解題過程與答案</strong>。內容以繁體中文呈現，數學式使用 MathJax 渲染。課本有詳解者翻譯為繁體中文；課本僅提供答案者，補上完整逐步解。</p>
+
+<section id="ss3-1">
+<h2>7.1 分部積分法 (Integration by Parts)</h2>
+<p style="font-size:13px;color:var(--tx2);margin-bottom:16px"><strong>🔑 本節重點：</strong>LIATE 法則、基本分部積分、重複分部積分、循環型分部積分、定積分分部積分、降冪公式</p>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 7.1</div>
+<div class="ex-title">基本分部積分：∫ x eˣ dx</div>
+<div class="ex-problem">求 $\int x e^x\,dx$。</div>
+<div class="ex-sol"><strong>解：</strong>根據 LIATE 法則，$x$ 為代數函數 (A)，$e^x$ 為指數函數 (E)，A 優先於 E，故選 $u = x$、$dv = e^x dx$。則 $du = dx$、$v = e^x$。代入分部積分公式 $\int u\,dv = uv - \int v\,du$：<br>$$\int x e^x\,dx = x e^x - \int e^x\,dx = x e^x - e^x + C$$</div>
+<div class="ex-ans">✅ 答案：$e^x(x-1) + C$</div>
+<div style="font-size:12px;color:var(--tx2);margin-top:6px">💡 驗算：$\frac{d}{dx}[e^x(x-1)] = e^x(x-1) + e^x = xe^x$ ✓</div>
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 7.2</div>
+<div class="ex-title">對數函數的積分：∫ ln x dx</div>
+<div class="ex-problem">求 $\int \ln x\,dx$。</div>
+<div class="ex-sol"><strong>解：</strong>雖然只有一個函數，但可視為 $1 \cdot \ln x$。根據 LIATE，$\ln x$ 為對數函數 (L)，選 $u = \ln x$、$dv = dx$。則 $du = \frac{1}{x}dx$、$v = x$。<br>$$\int \ln x\,dx = x\ln x - \int x \cdot \frac{1}{x}\,dx = x\ln x - \int 1\,dx = x\ln x - x + C$$</div>
+<div class="ex-ans">✅ 答案：$x\ln x - x + C$</div>
+<div style="font-size:12px;color:var(--tx2);margin-top:6px">💡 這是重要的基本積分公式，可直接背誦。</div>
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 7.3</div>
+<div class="ex-title">重複分部積分：∫ x² eˣ dx</div>
+<div class="ex-problem">求 $\int x^2 e^x\,dx$。</div>
+<div class="ex-sol"><strong>解：</strong><strong>第一次分部積分：</strong>令 $u = x^2$、$dv = e^x dx$，則 $du = 2x\,dx$、$v = e^x$。<br>$$\int x^2 e^x\,dx = x^2 e^x - \int 2x e^x\,dx = x^2 e^x - 2\int x e^x\,dx$$<br><strong>第二次分部積分：</strong>對 $\int x e^x\,dx$ 使用分部積分（參考例題 7.1），得 $e^x(x-1)$。<br>$$\int x^2 e^x\,dx = x^2 e^x - 2e^x(x-1) + C = e^x(x^2 - 2x + 2) + C$$</div>
+<div class="ex-ans">✅ 答案：$e^x(x^2 - 2x + 2) + C$</div>
+<div style="font-size:12px;color:var(--tx2);margin-top:6px">💡 每分部積分一次，$x$ 的冪次降一次。</div>
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 7.4</div>
+<div class="ex-title">例外情況：∫ arctan x dx</div>
+<div class="ex-problem">求 $\int \arctan x\,dx$。</div>
+<div class="ex-sol"><strong>解：</strong>令 $u = \arctan x$、$dv = dx$。則 $du = \frac{1}{1+x^2}dx$、$v = x$。<br>$$\int \arctan x\,dx = x\arctan x - \int \frac{x}{1+x^2}\,dx$$<br>對第二項積分，令 $w = 1+x^2$，則 $dw = 2x\,dx$，即 $x\,dx = \frac{dw}{2}$：<br>$$\int \frac{x}{1+x^2}\,dx = \frac{1}{2}\int \frac{dw}{w} = \frac{1}{2}\ln|w| + C = \frac{1}{2}\ln(1+x^2) + C$$<br>故 $\int \arctan x\,dx = x\arctan x - \frac{1}{2}\ln(1+x^2) + C$。</div>
+<div class="ex-ans">✅ 答案：$x\arctan x - \frac{1}{2}\ln(1+x^2) + C$</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 7.5</div>
+<div class="ex-title">循環型分部積分：∫ eˣ sin x dx</div>
+<div class="ex-problem">求 $\int e^x \sin x\,dx$。</div>
+<div class="ex-sol"><strong>解：</strong>設 $I = \int e^x \sin x\,dx$。<br><strong>第一次分部積分：</strong>$u = \sin x$、$dv = e^x dx$，則 $du = \cos x\,dx$、$v = e^x$。<br>$$I = e^x\sin x - \int e^x \cos x\,dx$$<br><strong>第二次分部積分：</strong>對 $\int e^x \cos x\,dx$，令 $u = \cos x$、$dv = e^x dx$，$du = -\sin x\,dx$、$v = e^x$。<br>$$\int e^x \cos x\,dx = e^x\cos x + \int e^x \sin x\,dx = e^x\cos x + I$$<br>代入：$I = e^x\sin x - (e^x\cos x + I) = e^x\sin x - e^x\cos x - I$<br>移項得 $2I = e^x(\sin x - \cos x)$，故 $I = \frac{e^x}{2}(\sin x - \cos x) + C$。</div>
+<div class="ex-ans">✅ 答案：$\frac{e^x}{2}(\sin x - \cos x) + C$</div>
+<div style="font-size:12px;color:var(--tx2);margin-top:6px">💡 循環型：原積分重新出現於等式右側，移項求解。</div>
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 7.6</div>
+<div class="ex-title">定積分的分部積分：∫₀¹ x e⁻ˣ dx</div>
+<div class="ex-problem">求區域 $y = xe^{-x}$ 與 $x$ 軸之間，在 $[0,1]$ 上的面積。</div>
+<div class="ex-sol"><strong>解：</strong>面積 $= \int_0^1 xe^{-x}\,dx$。令 $u = x$、$dv = e^{-x}dx$，則 $du = dx$、$v = -e^{-x}$。<br>$$\int_0^1 xe^{-x}\,dx = \Big[-xe^{-x}\Big]_0^1 - \int_0^1 (-e^{-x})\,dx = \Big[-xe^{-x} - e^{-x}\Big]_0^1$$<br>$$= \left[-\frac{x+1}{e^x}\right]_0^1 = -\frac{2}{e} - (-1) = 1 - \frac{2}{e} \approx 0.264$$</div>
+<div class="ex-ans">✅ 答案：$1 - \frac{2}{e} \approx 0.264$</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 7.7</div>
+<div class="ex-title">降冪公式：∫ sinⁿ x dx 的推導</div>
+<div class="ex-problem">推導降冪公式 $\int \sin^n x\,dx = -\frac{1}{n}\sin^{n-1}x\cos x + \frac{n-1}{n}\int \sin^{n-2}x\,dx$。</div>
+<div class="ex-sol"><strong>解：</strong>將 $\sin^n x$ 寫為 $\sin^{n-1}x \cdot \sin x$。令 $u = \sin^{n-1}x$、$dv = \sin x\,dx$，則 $du = (n-1)\sin^{n-2}x\cos x\,dx$、$v = -\cos x$。<br>$$\int \sin^n x\,dx = -\sin^{n-1}x\cos x + (n-1)\int \sin^{n-2}x\cos^2 x\,dx$$<br>利用 $\cos^2 x = 1 - \sin^2 x$：<br>$$= -\sin^{n-1}x\cos x + (n-1)\int \sin^{n-2}x(1-\sin^2 x)\,dx$$<br>$$= -\sin^{n-1}x\cos x + (n-1)\int \sin^{n-2}x\,dx - (n-1)\int \sin^n x\,dx$$<br>移項：$n\int \sin^n x\,dx = -\sin^{n-1}x\cos x + (n-1)\int \sin^{n-2}x\,dx$，兩邊除以 $n$ 即得公式。</div>
+<div class="ex-ans">✅ 答案：$-\frac{1}{n}\sin^{n-1}x\cos x + \frac{n-1}{n}\int \sin^{n-2}x\,dx$</div>
+
+</div>
+
+</section>
+
+<section id="ss3-2">
+<h2>7.2 三角函數積分 (Trigonometric Integrals)</h2>
+<p style="font-size:13px;color:var(--tx2);margin-bottom:16px"><strong>🔑 本節重點：</strong>sinᵐ cosⁿ 三種策略（奇次冪／偶次冪）、tanᵐ secⁿ 兩種策略、半角公式與降冪公式、積化和差公式、∫ sec³ x 循環型</p>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 7.8</div>
+<div class="ex-title">∫ sin³ x dx</div>
+<div class="ex-problem">求 $\int \sin^3 x\,dx$。</div>
+<div class="ex-sol"><strong>解：</strong>$m=3$ 為奇數。保留一個 $\sin x$：$\sin^3 x = \sin^2 x \cdot \sin x = (1-\cos^2 x)\sin x$。令 $u = \cos x$、$du = -\sin x\,dx$：<br>$$\int \sin^3 x\,dx = \int (1-u^2)(-du) = \int (u^2-1)du = \frac{u^3}{3} - u + C = \frac{\cos^3 x}{3} - \cos x + C$$</div>
+<div class="ex-ans">✅ 答案：$\frac{\cos^3 x}{3} - \cos x + C$</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 7.9</div>
+<div class="ex-title">∫ cos⁵ x dx</div>
+<div class="ex-problem">求 $\int \cos^5 x\,dx$。</div>
+<div class="ex-sol"><strong>解：</strong>$n=5$ 為奇數。保留一個 $\cos x$：$\cos^5 x = \cos^4 x \cdot \cos x = (1-\sin^2 x)^2\cos x$。令 $u = \sin x$、$du = \cos x\,dx$：<br>$$\int \cos^5 x\,dx = \int (1-u^2)^2\,du = \int (1-2u^2+u^4)du = u - \frac{2u^3}{3} + \frac{u^5}{5} + C$$<br>$$= \sin x - \frac{2\sin^3 x}{3} + \frac{\sin^5 x}{5} + C$$</div>
+<div class="ex-ans">✅ 答案：$\sin x - \frac{2\sin^3 x}{3} + \frac{\sin^5 x}{5} + C$</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 7.10</div>
+<div class="ex-title">∫ sin² x dx</div>
+<div class="ex-problem">求 $\int \sin^2 x\,dx$。</div>
+<div class="ex-sol"><strong>解：</strong>$m=2$ 為偶數，使用半角公式 $\sin^2 x = \frac{1-\cos 2x}{2}$：<br>$$\int \sin^2 x\,dx = \int \frac{1-\cos 2x}{2}\,dx = \frac{1}{2}x - \frac{1}{4}\sin 2x + C$$</div>
+<div class="ex-ans">✅ 答案：$\frac{x}{2} - \frac{\sin 2x}{4} + C$</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 7.11</div>
+<div class="ex-title">∫ cos⁴ x dx</div>
+<div class="ex-problem">求 $\int \cos^4 x\,dx$。</div>
+<div class="ex-sol"><strong>解：</strong>使用半角公式降冪：$\cos^4 x = (\cos^2 x)^2 = \left(\frac{1+\cos 2x}{2}\right)^2 = \frac{1+2\cos 2x+\cos^2 2x}{4}$。<br>對 $\cos^2 2x$ 再次降冪：$\cos^2 2x = \frac{1+\cos 4x}{2}$。<br>$$\int \cos^4 x\,dx = \frac{1}{4}\int \left(1+2\cos 2x+\frac{1+\cos 4x}{2}\right)dx$$<br>$$= \frac{1}{4}\int \left(\frac{3}{2}+2\cos 2x+\frac{\cos 4x}{2}\right)dx = \frac{3x}{8} + \frac{\sin 2x}{4} + \frac{\sin 4x}{32} + C$$</div>
+<div class="ex-ans">✅ 答案：$\frac{3x}{8} + \frac{\sin 2x}{4} + \frac{\sin 4x}{32} + C$</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 7.12</div>
+<div class="ex-title">∫ sin² x cos² x dx</div>
+<div class="ex-problem">求 $\int \sin^2 x \cos^2 x\,dx$。</div>
+<div class="ex-sol"><strong>解：</strong>$$\sin^2 x \cos^2 x = \frac{1-\cos 2x}{2} \cdot \frac{1+\cos 2x}{2} = \frac{1-\cos^2 2x}{4} = \frac{\sin^2 2x}{4}$$ 再降冪：$\frac{\sin^2 2x}{4} = \frac{1-\cos 4x}{8}$。<br>$$\int \sin^2 x \cos^2 x\,dx = \frac{1}{8}\int (1-\cos 4x)dx = \frac{x}{8} - \frac{\sin 4x}{32} + C$$</div>
+<div class="ex-ans">✅ 答案：$\frac{x}{8} - \frac{\sin 4x}{32} + C$</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 7.13</div>
+<div class="ex-title">∫ sin(3x) cos(2x) dx</div>
+<div class="ex-problem">求 $\int \sin(3x)\cos(2x)\,dx$。</div>
+<div class="ex-sol"><strong>解：</strong>使用積化和差公式 $\sin A\cos B = \frac{1}{2}[\sin(A-B) + \sin(A+B)]$：<br>$\sin(3x)\cos(2x) = \frac{1}{2}[\sin x + \sin(5x)]$。<br>$$\int \sin(3x)\cos(2x)\,dx = \frac{1}{2}\int (\sin x + \sin 5x)dx = -\frac{1}{2}\cos x - \frac{1}{10}\cos 5x + C$$</div>
+<div class="ex-ans">✅ 答案：$-\frac{1}{2}\cos x - \frac{1}{10}\cos 5x + C$</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 7.14</div>
+<div class="ex-title">∫ tan³ x sec⁴ x dx</div>
+<div class="ex-problem">求 $\int \tan^3 x \sec^4 x\,dx$。</div>
+<div class="ex-sol"><strong>解：</strong>$n=4$ 為偶數。保留 $\sec^2 x$：$\tan^3 x \sec^4 x = \tan^3 x \sec^2 x \cdot \sec^2 x = \tan^3 x (\tan^2 x+1)\sec^2 x$。令 $u = \tan x$、$du = \sec^2 x\,dx$：<br>$$\int u^3(u^2+1)du = \int (u^5+u^3)du = \frac{u^6}{6} + \frac{u^4}{4} + C = \frac{\tan^6 x}{6} + \frac{\tan^4 x}{4} + C$$</div>
+<div class="ex-ans">✅ 答案：$\frac{\tan^6 x}{6} + \frac{\tan^4 x}{4} + C$</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 7.15</div>
+<div class="ex-title">∫ tan x sec³ x dx</div>
+<div class="ex-problem">求 $\int \tan x \sec^3 x\,dx$。</div>
+<div class="ex-sol"><strong>解：</strong>保留 $\sec x\tan x$：$\tan x\sec^3 x = \sec^2 x \cdot \sec x\tan x$。令 $u = \sec x$、$du = \sec x\tan x\,dx$：<br>$$\int \tan x \sec^3 x\,dx = \int u^2\,du = \frac{u^3}{3} + C = \frac{\sec^3 x}{3} + C$$</div>
+<div class="ex-ans">✅ 答案：$\frac{\sec^3 x}{3} + C$</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 7.16</div>
+<div class="ex-title">∫ tan⁴ x dx</div>
+<div class="ex-problem">求 $\int \tan^4 x\,dx$。</div>
+<div class="ex-sol"><strong>解：</strong>$\tan^4 x = \tan^2 x \cdot \tan^2 x = \tan^2 x(\sec^2 x-1) = \tan^2 x\sec^2 x - \tan^2 x$。<br>對第一項：令 $u = \tan x$、$du = \sec^2 x\,dx$，得 $\int \tan^2 x\sec^2 x\,dx = \frac{\tan^3 x}{3}$。<br>對第二項：$\int \tan^2 x\,dx = \int (\sec^2 x-1)dx = \tan x - x$。<br>$$\int \tan^4 x\,dx = \frac{\tan^3 x}{3} - \tan x + x + C$$</div>
+<div class="ex-ans">✅ 答案：$\frac{\tan^3 x}{3} - \tan x + x + C$</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 7.17</div>
+<div class="ex-title">∫ sec x dx 的推導</div>
+<div class="ex-problem">推導 $\int \sec x\,dx = \ln|\sec x + \tan x| + C$。</div>
+<div class="ex-sol"><strong>解：</strong>使用巧妙技巧：分子分母同乘 $(\sec x + \tan x)$：<br>$$\int \sec x\,dx = \int \sec x \cdot \frac{\sec x + \tan x}{\sec x + \tan x}\,dx = \int \frac{\sec^2 x + \sec x\tan x}{\sec x + \tan x}\,dx$$<br>令 $u = \sec x + \tan x$，則 $du = (\sec x\tan x + \sec^2 x)dx$，恰好是分子。因此：<br>$$\int \frac{du}{u} = \ln|u| + C = \ln|\sec x + \tan x| + C$$</div>
+<div class="ex-ans">✅ 答案：$\ln|\sec x + \tan x| + C$</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 7.18</div>
+<div class="ex-title">∫ sec³ x dx</div>
+<div class="ex-problem">求 $\int \sec^3 x\,dx$（循環型分部積分）。</div>
+<div class="ex-sol"><strong>解：</strong>令 $u = \sec x$、$dv = \sec^2 x\,dx$，則 $du = \sec x\tan x\,dx$、$v = \tan x$。<br>$$\int \sec^3 x\,dx = \sec x\tan x - \int \sec x\tan^2 x\,dx$$<br>利用 $\tan^2 x = \sec^2 x - 1$：$$= \sec x\tan x - \int \sec x(\sec^2 x - 1)dx$$<br>$$= \sec x\tan x - \int \sec^3 x\,dx + \int \sec x\,dx$$<br>移項：$2\int \sec^3 x\,dx = \sec x\tan x + \ln|\sec x + \tan x| + C$<br>$$\int \sec^3 x\,dx = \frac{1}{2}\sec x\tan x + \frac{1}{2}\ln|\sec x + \tan x| + C$$</div>
+<div class="ex-ans">✅ 答案：$\frac{1}{2}\sec x\tan x + \frac{1}{2}\ln|\sec x + \tan x| + C$</div>
+<div style="font-size:12px;color:var(--tx2);margin-top:6px">💡 此為經典循環型積分，結果常用於後續三角代換中。</div>
+</div>
+
+</section>
+
+<section id="ss3-3">
+<h2>7.3 三角代換 (Trigonometric Substitution)</h2>
+<p style="font-size:13px;color:var(--tx2);margin-bottom:16px"><strong>🔑 本節重點：</strong>√(a²−x²)→x=a sin θ、√(a²+x²)→x=a tan θ、√(x²−a²)→x=a sec θ、參考三角形還原變數</p>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 7.19</div>
+<div class="ex-title">∫ √(9−x²) dx</div>
+<div class="ex-problem">求 $\int \sqrt{9-x^2}\,dx$。</div>
+<div class="ex-sol"><strong>解：</strong>根號型式 $\sqrt{a^2-x^2}$，其中 $a=3$。令 $x = 3\sin\theta$，則 $dx = 3\cos\theta\,d\theta$，且 $\sqrt{9-x^2} = \sqrt{9-9\sin^2\theta} = 3\cos\theta$（$\theta \in [-\pi/2,\pi/2]$）。<br>$$\int \sqrt{9-x^2}\,dx = \int 3\cos\theta \cdot 3\cos\theta\,d\theta = 9\int \cos^2\theta\,d\theta$$<br>使用半角公式：$= 9\int \frac{1+\cos 2\theta}{2}d\theta = \frac{9}{2}\left(\theta + \frac{\sin 2\theta}{2}\right) + C$<br>由參考三角形：$\sin\theta = x/3$，$\theta = \arcsin(x/3)$，$\cos\theta = \sqrt{9-x^2}/3$，$\sin 2\theta = 2\sin\theta\cos\theta = \frac{2x\sqrt{9-x^2}}{9}$。<br>$$= \frac{9}{2}\arcsin\frac{x}{3} + \frac{x\sqrt{9-x^2}}{2} + C$$</div>
+<div class="ex-ans">✅ 答案：$\frac{9}{2}\arcsin\frac{x}{3} + \frac{x\sqrt{9-x^2}}{2} + C$</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 7.20</div>
+<div class="ex-title">∫ dx/(x²√(4−x²))</div>
+<div class="ex-problem">求 $\int \frac{dx}{x^2\sqrt{4-x^2}}$。</div>
+<div class="ex-sol"><strong>解：</strong>令 $x = 2\sin\theta$，則 $dx = 2\cos\theta\,d\theta$，$\sqrt{4-x^2} = 2\cos\theta$。<br>$$\int \frac{dx}{x^2\sqrt{4-x^2}} = \int \frac{2\cos\theta\,d\theta}{4\sin^2\theta \cdot 2\cos\theta} = \int \frac{d\theta}{4\sin^2\theta} = \frac{1}{4}\int \csc^2\theta\,d\theta$$<br>$$= -\frac{1}{4}\cot\theta + C$$<br>由參考三角形：$\cot\theta = \frac{\sqrt{4-x^2}}{x}$。<br>$$= -\frac{\sqrt{4-x^2}}{4x} + C$$</div>
+<div class="ex-ans">✅ 答案：$-\frac{\sqrt{4-x^2}}{4x} + C$</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 7.21</div>
+<div class="ex-title">∫ dx/(x²+4)</div>
+<div class="ex-problem">求 $\int \frac{dx}{x^2+4}$。</div>
+<div class="ex-sol"><strong>解：</strong>使用 $x = 2\tan\theta$（$a=2$），則 $dx = 2\sec^2\theta\,d\theta$，$x^2+4 = 4\tan^2\theta+4 = 4\sec^2\theta$。<br>$$\int \frac{dx}{x^2+4} = \int \frac{2\sec^2\theta\,d\theta}{4\sec^2\theta} = \int \frac{1}{2}d\theta = \frac{\theta}{2} + C = \frac{1}{2}\arctan\frac{x}{2} + C$$</div>
+<div class="ex-ans">✅ 答案：$\frac{1}{2}\arctan\frac{x}{2} + C$</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 7.22</div>
+<div class="ex-title">∫ √(x²+4)/x dx</div>
+<div class="ex-problem">求 $\int \frac{\sqrt{x^2+4}}{x}\,dx$。</div>
+<div class="ex-sol"><strong>解：</strong>令 $x = 2\tan\theta$，則 $dx = 2\sec^2\theta\,d\theta$，$\sqrt{x^2+4} = 2\sec\theta$。<br>$$\int \frac{2\sec\theta}{2\tan\theta} \cdot 2\sec^2\theta\,d\theta = 2\int \frac{\sec^3\theta}{\tan\theta}\,d\theta = 2\int \csc\theta\sec^2\theta\,d\theta$$<br>可寫為 $2\int \csc\theta(1+\tan^2\theta)d\theta$。經分部積分或使用三角恆等式化簡後：<br>$$= 2\ln|\csc\theta-\cot\theta| + 2\sec\theta + C$$<br>還原：$\sec\theta = \frac{\sqrt{x^2+4}}{2}$，$\csc\theta = \frac{\sqrt{x^2+4}}{x}$，$\cot\theta = \frac{2}{x}$。<br>$$= 2\ln\left|\frac{\sqrt{x^2+4}-2}{x}\right| + \sqrt{x^2+4} + C$$</div>
+<div class="ex-ans">✅ 答案：$2\ln\left|\frac{\sqrt{x^2+4}-2}{x}\right| + \sqrt{x^2+4} + C$</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 7.23</div>
+<div class="ex-title">∫ dx/(x²√(x²−1))</div>
+<div class="ex-problem">求 $\int \frac{dx}{x^2\sqrt{x^2-1}}$（$x>1$）。</div>
+<div class="ex-sol"><strong>解：</strong>使用 $x = \sec\theta$，則 $dx = \sec\theta\tan\theta\,d\theta$，$\sqrt{x^2-1} = \tan\theta$（$x>1$ 時 $\tan\theta>0$）。<br>$$\int \frac{dx}{x^2\sqrt{x^2-1}} = \int \frac{\sec\theta\tan\theta\,d\theta}{\sec^2\theta \cdot \tan\theta} = \int \cos\theta\,d\theta = \sin\theta + C$$<br>由參考三角形：$\sec\theta = x$，$\sin\theta = \frac{\sqrt{x^2-1}}{x}$。<br>$$= \frac{\sqrt{x^2-1}}{x} + C$$</div>
+<div class="ex-ans">✅ 答案：$\frac{\sqrt{x^2-1}}{x} + C$</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 7.24</div>
+<div class="ex-title">∫ √(x²−a²)/x⁴ dx</div>
+<div class="ex-problem">求 $\int \frac{\sqrt{x^2-a^2}}{x^4}\,dx$（$a>0$、$x>a$）。</div>
+<div class="ex-sol"><strong>解：</strong>令 $x = a\sec\theta$，$dx = a\sec\theta\tan\theta\,d\theta$，$\sqrt{x^2-a^2} = a\tan\theta$。<br>$$\int \frac{a\tan\theta}{a^4\sec^4\theta} \cdot a\sec\theta\tan\theta\,d\theta = \frac{1}{a^2}\int \frac{\tan^2\theta}{\sec^3\theta}\,d\theta = \frac{1}{a^2}\int \sin^2\theta\cos\theta\,d\theta$$<br>令 $w = \sin\theta$、$dw = \cos\theta\,d\theta$：$$= \frac{1}{a^2}\int w^2\,dw = \frac{w^3}{3a^2} + C = \frac{\sin^3\theta}{3a^2} + C$$<br>由參考三角形：$\sin\theta = \frac{\sqrt{x^2-a^2}}{x}$。<br>$$= \frac{(x^2-a^2)^{3/2}}{3a^2 x^3} + C$$</div>
+<div class="ex-ans">✅ 答案：$\frac{(x^2-a^2)^{3/2}}{3a^2 x^3} + C$</div>
+
+</div>
+
+</section>
+
+<section id="ss3-4">
+<h2>7.4 部分分式 (Partial Fractions)</h2>
+<p style="font-size:13px;color:var(--tx2);margin-bottom:16px"><strong>🔑 本節重點：</strong>有理函數分解、線性因式、重複線性因式、二次不可約因式、重複二次因式、多項式長除法</p>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 7.25</div>
+<div class="ex-title">∫ (x+1)/(x²−1) dx</div>
+<div class="ex-problem">求 $\int \frac{x+1}{x^2-1}\,dx$。</div>
+<div class="ex-sol"><strong>解：</strong>分解分母：$x^2-1 = (x-1)(x+1)$。設 $\frac{x+1}{(x-1)(x+1)} = \frac{A}{x-1} + \frac{B}{x+1}$。<br>化簡左側：$\frac{x+1}{(x-1)(x+1)} = \frac{1}{x-1}$（因為 $x+1$ 可約分）。<br>若不分約分而直接分解：$x+1 = A(x+1) + B(x-1)$。<br>令 $x=1$：$2 = 2A$，得 $A=1$。令 $x=-1$：$0 = -2B$，得 $B=0$。<br>因此 $\frac{x+1}{x^2-1} = \frac{1}{x-1}$。<br>$$\int \frac{dx}{x-1} = \ln|x-1| + C$$</div>
+<div class="ex-ans">✅ 答案：$\ln|x-1| + C$</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 7.26</div>
+<div class="ex-title">∫ (x²+2)/(x³−x) dx</div>
+<div class="ex-problem">求 $\int \frac{x^2+2}{x^3-x}\,dx$。</div>
+<div class="ex-sol"><strong>解：</strong>分解分母：$x^3-x = x(x-1)(x+1)$。設 $\frac{x^2+2}{x(x-1)(x+1)} = \frac{A}{x} + \frac{B}{x-1} + \frac{C}{x+1}$。<br>$x^2+2 = A(x-1)(x+1) + Bx(x+1) + Cx(x-1)$。<br>令 $x=0$：$2 = -A$，$A=-2$。令 $x=1$：$3 = 2B$，$B=3/2$。令 $x=-1$：$3 = 2C$，$C=3/2$。<br>$$\int \left(-\frac{2}{x} + \frac{3/2}{x-1} + \frac{3/2}{x+1}\right)dx = -2\ln|x| + \frac{3}{2}\ln|x-1| + \frac{3}{2}\ln|x+1| + C$$</div>
+<div class="ex-ans">✅ 答案：$-2\ln|x| + \frac{3}{2}\ln|x-1| + \frac{3}{2}\ln|x+1| + C$</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 7.27</div>
+<div class="ex-title">∫ dx/(x²−1)</div>
+<div class="ex-problem">求 $\int \frac{dx}{x^2-1}$。</div>
+<div class="ex-sol"><strong>解：</strong>$x^2-1 = (x-1)(x+1)$。設 $\frac{1}{x^2-1} = \frac{A}{x-1} + \frac{B}{x+1}$。<br>$1 = A(x+1) + B(x-1)$。令 $x=1$：$1=2A$，$A=1/2$。令 $x=-1$：$1=-2B$，$B=-1/2$。<br>$$\int \left(\frac{1/2}{x-1} - \frac{1/2}{x+1}\right)dx = \frac{1}{2}\ln|x-1| - \frac{1}{2}\ln|x+1| + C = \frac{1}{2}\ln\left|\frac{x-1}{x+1}\right| + C$$</div>
+<div class="ex-ans">✅ 答案：$\frac{1}{2}\ln\left|\frac{x-1}{x+1}\right| + C$</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 7.28</div>
+<div class="ex-title">∫ (x³)/(x²+1) dx（長除法）</div>
+<div class="ex-problem">求 $\int \frac{x^3}{x^2+1}\,dx$。</div>
+<div class="ex-sol"><strong>解：</strong>分子次數 ≥ 分母次數，先做長除法：$x^3 \div (x^2+1) = x - \frac{x}{x^2+1}$。<br>$$\int \frac{x^3}{x^2+1}\,dx = \int x\,dx - \int \frac{x}{x^2+1}\,dx$$<br>第一項：$\frac{x^2}{2}$。第二項：令 $u = x^2+1$、$du = 2x\,dx$，$\int \frac{x\,dx}{x^2+1} = \frac{1}{2}\ln|x^2+1|$。<br>$$= \frac{x^2}{2} - \frac{1}{2}\ln(x^2+1) + C$$</div>
+<div class="ex-ans">✅ 答案：$\frac{x^2}{2} - \frac{1}{2}\ln(x^2+1) + C$</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 7.29</div>
+<div class="ex-title">∫ dx/(x³+x)（二次不可約因式）</div>
+<div class="ex-problem">求 $\int \frac{dx}{x^3+x}$。</div>
+<div class="ex-sol"><strong>解：</strong>$x^3+x = x(x^2+1)$。設 $\frac{1}{x(x^2+1)} = \frac{A}{x} + \frac{Bx+C}{x^2+1}$。<br>$1 = A(x^2+1) + (Bx+C)x = (A+B)x^2 + Cx + A$。<br>比較係數：$x^2$ 項：$A+B=0$；$x$ 項：$C=0$；常數項：$A=1$。得 $A=1$、$B=-1$、$C=0$。<br>$$\int \left(\frac{1}{x} - \frac{x}{x^2+1}\right)dx = \ln|x| - \frac{1}{2}\ln(x^2+1) + C$$</div>
+<div class="ex-ans">✅ 答案：$\ln|x| - \frac{1}{2}\ln(x^2+1) + C$</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 7.30</div>
+<div class="ex-title">∫ (2x³−x²)/(x⁴+x²) dx</div>
+<div class="ex-problem">求 $\int \frac{2x^3-x^2}{x^4+x^2}\,dx$。</div>
+<div class="ex-sol"><strong>解：</strong>分母 $x^4+x^2 = x^2(x^2+1)$。約分 $x^2$：$\frac{2x^3-x^2}{x^2(x^2+1)} = \frac{x(2x-1)}{x^2+1}?$ 應直接分解。<br>設 $\frac{2x^3-x^2}{x^2(x^2+1)} = \frac{A}{x} + \frac{B}{x^2} + \frac{Cx+D}{x^2+1}$。<br>$2x^3-x^2 = Ax(x^2+1) + B(x^2+1) + (Cx+D)x^2$。<br>展開比較係數：$x^3$：$A+C=2$；$x^2$：$B+D=-1$；$x$：$A=0$；常數：$B=0$。得 $A=0$、$B=0$、$C=2$、$D=-1$。<br>$$\int \frac{2x-1}{x^2+1}\,dx = \int \frac{2x}{x^2+1}\,dx - \int \frac{dx}{x^2+1} = \ln(x^2+1) - \arctan x + C$$</div>
+<div class="ex-ans">✅ 答案：$\ln(x^2+1) - \arctan x + C$</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 7.31</div>
+<div class="ex-title">∫ (x²+2x−1)/(x³−1) dx</div>
+<div class="ex-problem">求 $\int \frac{x^2+2x-1}{x^3-1}\,dx$。</div>
+<div class="ex-sol"><strong>解：</strong>$x^3-1 = (x-1)(x^2+x+1)$（$x^2+x+1$ 為二次不可約因式，判別式 $1-4=-3<0$）。<br>設 $\frac{x^2+2x-1}{(x-1)(x^2+x+1)} = \frac{A}{x-1} + \frac{Bx+C}{x^2+x+1}$。<br>$x^2+2x-1 = A(x^2+x+1) + (Bx+C)(x-1)$。<br>令 $x=1$：$1+2-1=2 = A(3)$，$A=2/3$。<br>比較係數（或代 $x=0$、$x=-1$）：得 $B=1/3$、$C=5/3$。<br>$$\int \left(\frac{2/3}{x-1} + \frac{\frac{1}{3}x+\frac{5}{3}}{x^2+x+1}\right)dx$$<br>後者配方法：$x^2+x+1 = (x+\frac{1}{2})^2 + \frac{3}{4}$，經代換後可積出涉及 $\ln$ 與 $\arctan$ 的組合。<br>$$= \frac{2}{3}\ln|x-1| + \frac{1}{6}\ln(x^2+x+1) + \frac{2\sqrt{3}}{3}\arctan\frac{2x+1}{\sqrt{3}} + C$$</div>
+<div class="ex-ans">✅ 答案：$\frac{2}{3}\ln|x-1| + \frac{1}{6}\ln(x^2+x+1) + \frac{2\sqrt{3}}{3}\arctan\frac{2x+1}{\sqrt{3}} + C$</div>
+
+</div>
+
+</section>
+
+<section id="ss3-5">
+<h2>7.5 其他積分策略 (Other Strategies for Integration)</h2>
+<p style="font-size:13px;color:var(--tx2);margin-bottom:16px"><strong>🔑 本節重點：</strong>積分表的使用、電腦代數系統 (CAS)、綜合策略選用</p>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 7.32</div>
+<div class="ex-title">使用積分表：∫ dx/(x²√(4x²+9))</div>
+<div class="ex-problem">使用積分表求 $\int \frac{dx}{x^2\sqrt{4x^2+9}}$。</div>
+<div class="ex-sol"><strong>解：</strong>整理為標準型：$\int \frac{dx}{x^2\sqrt{4x^2+9}} = \int \frac{dx}{x^2\cdot 2\sqrt{x^2+\frac{9}{4}}} = \frac{1}{2}\int \frac{dx}{x^2\sqrt{x^2+(3/2)^2}}$。<br>查積分公式 $\int \frac{dx}{x^2\sqrt{x^2+a^2}} = -\frac{\sqrt{x^2+a^2}}{a^2x} + C$，取 $a = \frac{3}{2}$：<br>$$= \frac{1}{2}\left(-\frac{\sqrt{x^2+\frac{9}{4}}}{\frac{9}{4}\cdot x}\right) + C = -\frac{2}{9}\cdot\frac{\sqrt{x^2+\frac{9}{4}}}{x} + C = -\frac{\sqrt{4x^2+9}}{9x} + C$$</div>
+<div class="ex-ans">✅ 答案：$-\frac{\sqrt{4x^2+9}}{9x} + C$</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 7.33</div>
+<div class="ex-title">∫ sin⁵ x cos² x dx（策略選擇）</div>
+<div class="ex-problem">求 $\int \sin^5 x \cos^2 x\,dx$。</div>
+<div class="ex-sol"><strong>解：</strong>$m=5$（奇），使用策略 1：保留 $\sin x$，其餘轉為 $\cos x$。<br>$\sin^5 x \cos^2 x = \sin^4 x \cos^2 x \cdot \sin x = (1-\cos^2 x)^2 \cos^2 x \cdot \sin x$。<br>令 $u = \cos x$、$du = -\sin x\,dx$：<br>$$\int (1-u^2)^2 u^2 (-du) = -\int (u^2 - 2u^4 + u^6)du = -\frac{u^3}{3} + \frac{2u^5}{5} - \frac{u^7}{7} + C$$<br>$$= -\frac{\cos^3 x}{3} + \frac{2\cos^5 x}{5} - \frac{\cos^7 x}{7} + C$$</div>
+<div class="ex-ans">✅ 答案：$-\frac{\cos^3 x}{3} + \frac{2\cos^5 x}{5} - \frac{\cos^7 x}{7} + C$</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 7.34</div>
+<div class="ex-title">∫ x/(x²+1)² dx（代換法）</div>
+<div class="ex-problem">求 $\int \frac{x}{(x^2+1)^2}\,dx$。</div>
+<div class="ex-sol"><strong>解：</strong>令 $u = x^2+1$，則 $du = 2x\,dx$，即 $x\,dx = \frac{du}{2}$。<br>$$\int \frac{x}{(x^2+1)^2}\,dx = \int \frac{du/2}{u^2} = \frac{1}{2}\int u^{-2}du = \frac{1}{2}\cdot\frac{u^{-1}}{-1} + C = -\frac{1}{2u} + C = -\frac{1}{2(x^2+1)} + C$$</div>
+<div class="ex-ans">✅ 答案：$-\frac{1}{2(x^2+1)} + C$</div>
+<div style="font-size:12px;color:var(--tx2);margin-top:6px">💡 有時簡單代換即可解決，無需複雜技巧。</div>
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 7.35</div>
+<div class="ex-title">∫ sin² x cos³ x dx（綜合）</div>
+<div class="ex-problem">求 $\int \sin^2 x \cos^3 x\,dx$。</div>
+<div class="ex-sol"><strong>解：</strong>$n=3$（奇），保留 $\cos x$：$\sin^2 x \cos^3 x = \sin^2 x \cos^2 x \cdot \cos x = \sin^2 x(1-\sin^2 x)\cos x$。<br>令 $u = \sin x$、$du = \cos x\,dx$：<br>$$\int u^2(1-u^2)du = \int (u^2-u^4)du = \frac{u^3}{3} - \frac{u^5}{5} + C = \frac{\sin^3 x}{3} - \frac{\sin^5 x}{5} + C$$</div>
+<div class="ex-ans">✅ 答案：$\frac{\sin^3 x}{3} - \frac{\sin^5 x}{5} + C$</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 7.36</div>
+<div class="ex-title">∫ x ln(x) dx（分部積分策略）</div>
+<div class="ex-problem">求 $\int x \ln x\,dx$。</div>
+<div class="ex-sol"><strong>解：</strong>根據 LIATE，$\ln x$ (L) 優先於 $x$ (A)。令 $u = \ln x$、$dv = x\,dx$，則 $du = \frac{dx}{x}$、$v = \frac{x^2}{2}$。<br>$$\int x\ln x\,dx = \frac{x^2}{2}\ln x - \int \frac{x^2}{2}\cdot\frac{1}{x}\,dx = \frac{x^2}{2}\ln x - \frac{1}{2}\int x\,dx$$<br>$$= \frac{x^2}{2}\ln x - \frac{x^2}{4} + C$$</div>
+<div class="ex-ans">✅ 答案：$\frac{x^2}{2}\ln x - \frac{x^2}{4} + C$</div>
+
+</div>
+
+</section>
+
+<section id="ss3-6">
+<h2>7.6 數值積分 (Numerical Integration)</h2>
+<p style="font-size:13px;color:var(--tx2);margin-bottom:16px"><strong>🔑 本節重點：</strong>中點法則、梯形法則、辛普森法則、誤差估計</p>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 7.37</div>
+<div class="ex-title">中點法則：∫₀¹ √(1+x²) dx，n=4</div>
+<div class="ex-problem">使用中點法則，取 $n=4$，近似計算 $\int_0^1 \sqrt{1+x^2}\,dx$。</div>
+<div class="ex-sol"><strong>解：</strong>$\Delta x = \frac{1-0}{4} = 0.25$。子區間中點：$0.125, 0.375, 0.625, 0.875$。<br>$$M_4 = 0.25\Big[\sqrt{1+(0.125)^2} + \sqrt{1+(0.375)^2} + \sqrt{1+(0.625)^2} + \sqrt{1+(0.875)^2}\Big]$$<br>$$\approx 0.25[1.0078 + 1.0680 + 1.1792 + 1.3288] = 0.25 \times 4.5838 = 1.1459$$</div>
+<div class="ex-ans">✅ 答案：$M_4 \approx 1.1459$</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 7.38</div>
+<div class="ex-title">梯形法則：∫₀¹ √(1+x²) dx，n=4</div>
+<div class="ex-problem">使用梯形法則，取 $n=4$，近似計算 $\int_0^1 \sqrt{1+x^2}\,dx$。</div>
+<div class="ex-sol"><strong>解：</strong>$\Delta x = 0.25$。端點值：$f(0)=1$、$f(0.25)\approx 1.0308$、$f(0.5)\approx 1.1180$、$f(0.75)\approx 1.2500$、$f(1)\approx 1.4142$。<br>$$T_4 = \frac{0.25}{2}\Big[1 + 2(1.0308+1.1180+1.2500) + 1.4142\Big]$$<br>$$= 0.125[1 + 6.7976 + 1.4142] = 0.125 \times 9.2118 = 1.1515$$</div>
+<div class="ex-ans">✅ 答案：$T_4 \approx 1.1515$</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 7.39</div>
+<div class="ex-title">辛普森法則：∫₀¹ √(1+x²) dx，n=4</div>
+<div class="ex-problem">使用辛普森法則，取 $n=4$，近似計算 $\int_0^1 \sqrt{1+x^2}\,dx$。</div>
+<div class="ex-sol"><strong>解：</strong>$\Delta x = 0.25$。<br>$$S_4 = \frac{0.25}{3}\Big[1 + 4(1.0308+1.2500) + 2(1.1180) + 1.4142\Big]$$<br>$$= \frac{0.25}{3}[1 + 9.1232 + 2.2360 + 1.4142] = \frac{0.25}{3} \times 13.7734 = 1.1478$$<br>（精確值 $\approx 1.1478$，辛普森法則在此例中幾乎給出精確答案）</div>
+<div class="ex-ans">✅ 答案：$S_4 \approx 1.1478$</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 7.40</div>
+<div class="ex-title">梯形法則誤差：∫₀¹ xeˣ dx</div>
+<div class="ex-problem">求使用梯形法則近似 $\int_0^1 xe^x\,dx$ 時，$n=10$ 的誤差界限。</div>
+<div class="ex-sol"><strong>解：</strong>梯形法則誤差界限：$|E_T| \leq \frac{K(b-a)^3}{12n^2}$，其中 $K$ 為 $|f''(x)|$ 在 $[a,b]$ 上的最大值。<br>$f(x)=xe^x$，$f'(x)=e^x(x+1)$，$f''(x)=e^x(x+2)$。在 $[0,1]$ 上，$f''(x)$ 遞增，最大值在 $x=1$：$f''(1)=3e \approx 8.155$。<br>$$|E_T| \leq \frac{8.155 \cdot (1-0)^3}{12 \cdot 10^2} = \frac{8.155}{1200} \approx 0.00680$$</div>
+<div class="ex-ans">✅ 答案：$|E_T| \leq 0.00680$</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 7.41</div>
+<div class="ex-title">辛普森誤差：∫₁² dx/x</div>
+<div class="ex-problem">求使用辛普森法則近似 $\int_1^2 \frac{dx}{x}$ 時，$n=6$ 的誤差界限。</div>
+<div class="ex-sol"><strong>解：</strong>辛普森誤差界限：$|E_S| \leq \frac{K(b-a)^5}{180n^4}$。<br>$f(x)=1/x$，$f^{(4)}(x)=24/x^5$。在 $[1,2]$ 上，$|f^{(4)}(x)|$ 的最大值在 $x=1$：$|f^{(4)}(1)|=24$。<br>$$|E_S| \leq \frac{24 \cdot (2-1)^5}{180 \cdot 6^4} = \frac{24}{180 \cdot 1296} = \frac{24}{233280} \approx 0.000103$$<br>（精確值 $\ln 2 \approx 0.693147$）</div>
+<div class="ex-ans">✅ 答案：$|E_S| \leq 0.000103$</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 7.42</div>
+<div class="ex-title">決定 n 使梯形法則滿足精度</div>
+<div class="ex-problem">求 $n$ 使得梯形法則近似 $\int_0^2 e^{-x^2}\,dx$ 的誤差 ≤ 0.0001。</div>
+<div class="ex-sol"><strong>解：</strong>$|E_T| \leq \frac{K(b-a)^3}{12n^2} \leq 0.0001$。需找 $K = \max|f''(x)|$。$f(x)=e^{-x^2}$、$f''(x)=2e^{-x^2}(2x^2-1)$。$|f''(x)| \leq 2$（可由分析得）。<br>$$\frac{2 \cdot 8}{12n^2} \leq 0.0001 \Rightarrow \frac{16}{12n^2} \leq 0.0001 \Rightarrow n^2 \geq \frac{16}{0.0012} \approx 13333 \Rightarrow n \geq 116$$<br>取 $n = 116$。</div>
+<div class="ex-ans">✅ 答案：$n \geq 116$</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 7.43</div>
+<div class="ex-title">∫₀¹ eˣ² dx 的中點法則，n=6</div>
+<div class="ex-problem">使用中點法則，取 $n=6$，近似計算 $\int_0^1 e^{x^2}\,dx$。</div>
+<div class="ex-sol"><strong>解：</strong>$\Delta x = \frac{1}{6}$。中點：$\frac{1}{12}, \frac{3}{12}, \frac{5}{12}, \frac{7}{12}, \frac{9}{12}, \frac{11}{12}$。<br>$$M_6 = \frac{1}{6}\Big[e^{(1/12)^2} + e^{(3/12)^2} + e^{(5/12)^2} + e^{(7/12)^2} + e^{(9/12)^2} + e^{(11/12)^2}\Big]$$<br>$$\approx \frac{1}{6}[1.0070 + 1.0645 + 1.1890 + 1.4055 + 1.7551 + 2.3164] \approx 1.4563$$</div>
+<div class="ex-ans">✅ 答案：$M_6 \approx 1.4563$</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 7.44</div>
+<div class="ex-title">辛普森法則：∫₀² sin(x²) dx，n=4</div>
+<div class="ex-problem">使用辛普森法則，取 $n=4$，近似計算 $\int_0^2 \sin(x^2)\,dx$。</div>
+<div class="ex-sol"><strong>解：</strong>$\Delta x = 0.5$。$f(0)=0$, $f(0.5)\approx 0.2474$, $f(1)\approx 0.8415$, $f(1.5)\approx 0.7781$, $f(2)\approx -0.7568$。<br>$$S_4 = \frac{0.5}{3}\Big[0 + 4(0.2474+0.7781) + 2(0.8415) + (-0.7568)\Big]$$<br>$$= \frac{0.5}{3}[0 + 4.1020 + 1.6830 - 0.7568] = \frac{0.5}{3} \times 5.0282 \approx 0.8380$$</div>
+<div class="ex-ans">✅ 答案：$S_4 \approx 0.8380$</div>
+
+</div>
+
+</section>
+
+<section id="ss3-7">
+<h2>7.7 瑕積分 (Improper Integrals)</h2>
+<p style="font-size:13px;color:var(--tx2);margin-bottom:16px"><strong>🔑 本節重點：</strong>無窮區間瑕積分、不連續被積函數瑕積分、比較定理、收斂／發散判定</p>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 7.45</div>
+<div class="ex-title">∫₁^∞ dx/x²（收斂）</div>
+<div class="ex-problem">求 $\int_1^\infty \frac{dx}{x^2}$。</div>
+<div class="ex-sol"><strong>解：</strong>定義：$\int_1^\infty \frac{dx}{x^2} = \lim_{t\to\infty} \int_1^t x^{-2}\,dx = \lim_{t\to\infty} \left[-\frac{1}{x}\right]_1^t = \lim_{t\to\infty} \left(-\frac{1}{t} + 1\right) = 1$。</div>
+<div class="ex-ans">✅ 答案：$1$（收斂）</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 7.46</div>
+<div class="ex-title">∫₁^∞ dx/x（發散）</div>
+<div class="ex-problem">求 $\int_1^\infty \frac{dx}{x}$。</div>
+<div class="ex-sol"><strong>解：</strong>$\int_1^\infty \frac{dx}{x} = \lim_{t\to\infty} \int_1^t \frac{dx}{x} = \lim_{t\to\infty} \ln|t| = \infty$。</div>
+<div class="ex-ans">✅ 答案：發散（$\to\infty$）</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 7.47</div>
+<div class="ex-title">∫₀^∞ e⁻ˣ dx</div>
+<div class="ex-problem">求 $\int_0^\infty e^{-x}\,dx$。</div>
+<div class="ex-sol"><strong>解：</strong>$\lim_{t\to\infty} \int_0^t e^{-x}\,dx = \lim_{t\to\infty} \Big[-e^{-x}\Big]_0^t = \lim_{t\to\infty} (-e^{-t} + 1) = 1$。</div>
+<div class="ex-ans">✅ 答案：$1$（收斂）</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 7.48</div>
+<div class="ex-title">∫₋∞^∞ dx/(1+x²)</div>
+<div class="ex-problem">求 $\int_{-\infty}^\infty \frac{dx}{1+x^2}$。</div>
+<div class="ex-sol"><strong>解：</strong>利用對稱性：$\int_{-\infty}^\infty \frac{dx}{1+x^2} = 2\int_0^\infty \frac{dx}{1+x^2}$。<br>$= 2\lim_{t\to\infty} \Big[\arctan x\Big]_0^t = 2\lim_{t\to\infty} \arctan t = 2 \cdot \frac{\pi}{2} = \pi$。</div>
+<div class="ex-ans">✅ 答案：$\pi$（收斂）</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 7.49</div>
+<div class="ex-title">∫₀^∞ xe⁻ˣ dx（Gamma 函數）</div>
+<div class="ex-problem">求 $\int_0^\infty x e^{-x}\,dx$。</div>
+<div class="ex-sol"><strong>解：</strong>使用分部積分：$u=x$、$dv=e^{-x}dx$，$du=dx$、$v=-e^{-x}$。<br>$\int_0^\infty xe^{-x}\,dx = \lim_{t\to\infty} \Big[-xe^{-x}\Big]_0^t + \int_0^\infty e^{-x}\,dx$<br>$= \lim_{t\to\infty} (-te^{-t}) + 0 + 1 = 0 + 1 = 1$。（$\lim_{t\to\infty} te^{-t}=0$）</div>
+<div class="ex-ans">✅ 答案：$1$（收斂）</div>
+<div style="font-size:12px;color:var(--tx2);margin-top:6px">💡 此為 $\Gamma(2)$，Gamma 函數 $\Gamma(n) = \int_0^\infty x^{n-1}e^{-x}dx$，且 $\Gamma(n)=(n-1)!$。</div>
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 7.50</div>
+<div class="ex-title">∫₀^¹ dx/√x（不連續點）</div>
+<div class="ex-problem">求 $\int_0^1 \frac{dx}{\sqrt{x}}$。</div>
+<div class="ex-sol"><strong>解：</strong>$x=0$ 處被積函數無界。$\int_0^1 x^{-1/2}\,dx = \lim_{t\to 0^+} \int_t^1 x^{-1/2}\,dx = \lim_{t\to 0^+} \Big[2\sqrt{x}\Big]_t^1 = \lim_{t\to 0^+} (2 - 2\sqrt{t}) = 2$。</div>
+<div class="ex-ans">✅ 答案：$2$（收斂）</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 7.51</div>
+<div class="ex-title">∫₀^¹ dx/x（不連續點，發散）</div>
+<div class="ex-problem">求 $\int_0^1 \frac{dx}{x}$。</div>
+<div class="ex-sol"><strong>解：</strong>$\lim_{t\to 0^+} \int_t^1 \frac{dx}{x} = \lim_{t\to 0^+} \Big[\ln x\Big]_t^1 = \lim_{t\to 0^+} (-\ln t) = \infty$。</div>
+<div class="ex-ans">✅ 答案：發散</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 7.52</div>
+<div class="ex-title">∫₀^³ dx/(x−1)²（內部不連續點）</div>
+<div class="ex-problem">求 $\int_0^3 \frac{dx}{(x-1)^2}$。</div>
+<div class="ex-sol"><strong>解：</strong>$x=1$ 為內部不連續點。拆分為 $\int_0^1 + \int_1^3$。<br>$\int_0^1 \frac{dx}{(x-1)^2} = \lim_{t\to 1^-} \Big[\frac{-1}{x-1}\Big]_0^t = \lim_{t\to 1^-} \left(\frac{-1}{t-1} - 1\right)$，當 $t\to 1^-$ 時 $t-1\to 0^-$，故 $\frac{-1}{t-1}\to\infty$，此部分發散。整體瑕積分發散。</div>
+<div class="ex-ans">✅ 答案：發散</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 7.53</div>
+<div class="ex-title">∫₁^∞ dx/(x³+1)（比較定理）</div>
+<div class="ex-problem">判斷 $\int_1^\infty \frac{dx}{x^3+1}$ 是否收斂。</div>
+<div class="ex-sol"><strong>解：</strong>對於 $x \geq 1$，$x^3+1 > x^3$，故 $\frac{1}{x^3+1} < \frac{1}{x^3}$。<br>$\int_1^\infty \frac{dx}{x^3}$ 為 $p$-積分，$p=3>1$，收斂。<br>由於 $0 \leq \frac{1}{x^3+1} \leq \frac{1}{x^3}$ 且 $\int_1^\infty \frac{dx}{x^3}$ 收斂，由比較定理，$\int_1^\infty \frac{dx}{x^3+1}$ 收斂。</div>
+<div class="ex-ans">✅ 答案：收斂（比較定理判定）</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 7.54</div>
+<div class="ex-title">∫₂^∞ dx/(x−1)（p-積分）</div>
+<div class="ex-problem">判斷 $\int_2^\infty \frac{dx}{x-1}$ 是否收斂。</div>
+<div class="ex-sol"><strong>解：</strong>令 $u = x-1$、$du=dx$：$\int_2^\infty \frac{dx}{x-1} = \int_1^\infty \frac{du}{u}$。此為 $p$-積分，$p=1$，發散。</div>
+<div class="ex-ans">✅ 答案：發散</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 7.55</div>
+<div class="ex-title">∫₁^∞ (1+e⁻ˣ)/x dx（比較定理）</div>
+<div class="ex-problem">判斷 $\int_1^\infty \frac{1+e^{-x}}{x}\,dx$ 是否收斂。</div>
+<div class="ex-sol"><strong>解：</strong>對 $x \geq 1$，$e^{-x} \geq 0$，故 $\frac{1+e^{-x}}{x} \geq \frac{1}{x}$。$\int_1^\infty \frac{dx}{x}$ 發散（$p=1$）。<br>由比較定理（被積函數大於一個發散的瑕積分），$\int_1^\infty \frac{1+e^{-x}}{x}\,dx$ 發散。</div>
+<div class="ex-ans">✅ 答案：發散（比較定理判定）</div>
+
+</div>
+
+<div class="exbox">
+<div class="ex-num">📝 例題 7.56</div>
+<div class="ex-title">∫₀^∞ e⁻ˣ sin x dx（瑕積分+循環型）</div>
+<div class="ex-problem">求 $\int_0^\infty e^{-x}\sin x\,dx$。</div>
+<div class="ex-sol"><strong>解：</strong>先求不定積分 $\int e^{-x}\sin x\,dx$。參照例題 7.5 的方法（分部積分兩次後循環）：<br>$$\int e^{-x}\sin x\,dx = -\frac{e^{-x}}{2}(\sin x + \cos x) + C$$<br>代入瑕積分：$\int_0^\infty e^{-x}\sin x\,dx = \lim_{t\to\infty} \left[-\frac{e^{-t}}{2}(\sin t + \cos t)\right] - \left[-\frac{1}{2}(0+1)\right]$<br>$= 0 + \frac{1}{2} = \frac{1}{2}$。（極限為 0 因為 $e^{-t}\to 0$ 且 $\sin t+\cos t$ 有界。）</div>
+<div class="ex-ans">✅ 答案：$\frac{1}{2}$（收斂）</div>
+
+</div>
+
+</section>
+
+</body>
+</html>

@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第 10 章 — Calculus 學習教材</title>
+<script>
+MathJax = {
+  tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']], tags: 'ams' },
+  options: { ignoreHtmlClass: 'no-math' }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script src="../assets/reading-preferences.js" defer></script>
+<style>
+:root {
+  --bg: #FFFFFF; --bg2: #F5F5F7; --bg3: #E8F0FE;
+  --tx: #1D1D1F; --tx2: #1D1D1F;
+  --ac: #007AFF; --ac2: #0056CC;
+  --bd: #D2D2D7; --fbd: #E5E5EA;
+  --sh: 0 2px 8px rgba(0,0,0,.08);
+  --derive-bg: #F0F6FF; --derive-ac: #2563EB;
+  --warn-bg: #FFFBEB; --warn-bd: #F59E0B; --warn-tx: #92400E;
+  --ex-bg: #F0FDF4; --ex-bd: #22C55E;
+  --nav-width: 260px;
+}
+[data-theme="dark"] {
+  --bg: #1D1D1F; --bg2: #2D2D2F; --bg3: #1E3A5F;
+  --tx: #F5F5F7; --tx2: #A1A1A6;
+  --ac: #4DA3FF; --ac2: #7DBFFF;
+  --bd: #3A3A3C; --fbd: #48484A;
+  --sh: 0 2px 8px rgba(0,0,0,.35);
+  --derive-bg: #1E293B; --derive-ac: #60A5FA;
+  --warn-bg: #422006; --warn-bd: #92400E; --warn-tx: #FCD34D;
+  --ex-bg: #052E16; --ex-bd: #16A34A;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,'Noto Sans TC','Microsoft JhengHei',sans-serif;background:var(--bg);color:var(--tx);line-height:1.72;font-size:15px;display:flex}
+a{color:var(--ac);text-decoration:none}
+h1{font-size:28px;font-weight:700;margin:0 0 4px}
+h2{font-size:20px;font-weight:700;margin:32px 0 12px;padding-bottom:6px;border-bottom:2px solid var(--fbd)}
+h3{font-size:16px;font-weight:600;margin:20px 0 8px}
+p{margin:10px 0}
+strong{font-weight:600}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:13px}
+th,td{padding:8px 12px;text-align:left;border:1px solid var(--bd)}
+th{background:var(--bg2);font-weight:600}
+.sidebar{position:fixed;left:0;top:0;width:var(--nav-width);height:100vh;background:var(--bg2);border-right:1px solid var(--bd);overflow-y:auto;z-index:100;display:flex;flex-direction:column}
+.sidebar-header{padding:18px 14px 10px;border-bottom:1px solid var(--fbd);font-size:12px;color:var(--tx2);line-height:1.5}
+.sidebar-header strong{font-size:14px;color:var(--tx);display:block}
+.sn{flex:1;overflow-y:auto;padding:6px 0}
+.ns{font-size:11px;font-weight:600;color:var(--tx);padding:6px 12px 2px;margin-top:6px;display:block}
+.nsub a{display:block;padding:3px 12px 3px 20px;font-size:11px;color:var(--tx2);text-decoration:none;border-radius:5px;transition:.12s}
+.nsub a:hover,.nsub a.active{background:var(--bg3);color:var(--ac)}
+.sidebar-footer{padding:10px 12px 16px;border-top:1px solid var(--fbd)}
+.theme-btn{display:block;width:100%;padding:7px;border:1px solid var(--bd);border-radius:6px;background:var(--bg);color:var(--tx);font-size:12px;cursor:pointer;text-align:center}
+.theme-btn:hover{background:var(--bg3)}
+.main{margin-left:var(--nav-width);max-width:1100px;padding:32px 40px 80px;width:100%}
+.header{margin-bottom:28px}
+.header .chap-tag{display:inline-block;padding:4px 12px;background:var(--ac);color:#fff;border-radius:12px;font-size:12px;font-weight:600;margin-bottom:8px}
+.header .meta{font-size:12px;color:var(--tx2);margin-top:2px}
+.preview{background:var(--bg2);border:1px solid var(--bd);border-radius:10px;padding:20px 24px;margin:20px 0}
+.preview h3{margin-top:0}
+.preview ul{padding-left:20px;font-size:14px}
+.callout{background:var(--bg3);border:1px solid var(--fbd);border-radius:8px;padding:14px 18px;margin:16px 0;font-size:13px}
+.callout strong{color:var(--ac)}
+.callout-warn{background:var(--warn-bg);border:1px solid var(--warn-bd);border-radius:8px;padding:14px 18px;margin:16px 0;font-size:13px}
+.callout-warn strong{color:var(--warn-tx)}
+.exbox{background:var(--ex-bg);border:1px solid var(--ex-bd);border-radius:8px;padding:14px 18px;margin:16px 0;font-size:13px}
+.exbox strong{color:#166534}
+.figure{margin:24px 0;text-align:center}
+.figure img{max-width:100%;border-radius:8px;box-shadow:var(--sh);cursor:pointer}
+.figure img:hover{transform:scale(1.01)}
+.figure figcaption{margin-top:8px;font-size:12px;color:var(--tx2)}
+.formula-card{background:var(--bg2);border:1px solid var(--bd);border-radius:10px;padding:16px 20px;margin:20px 0}
+.formula-card .label{font-size:12px;font-weight:700;color:var(--ac);margin-bottom:6px}
+.formula-card .note{font-size:12px;color:var(--tx2);margin-top:6px}
+details.derive{border-left:4px solid var(--derive-ac);background:var(--derive-bg);border-radius:0 8px 8px 0;padding:0;margin:16px 0}
+details.derive>summary{padding:12px 16px;cursor:pointer;font-weight:600;font-size:14px}
+details.derive .step{display:flex;gap:12px;align-items:flex-start;padding:8px 16px}
+details.example{border:1px solid var(--ex-bd);background:var(--ex-bg);border-radius:8px;padding:0;margin:16px 0}
+details.example>summary{padding:12px 16px;cursor:pointer;font-weight:600;font-size:14px}
+.eq{margin:14px 0;overflow-x:auto}
+.portal-home-link{position:fixed;top:16px;right:16px;z-index:1000;display:inline-flex;align-items:center;min-height:36px;padding:7px 11px;border:1px solid var(--bd);border-radius:8px;background:var(--bg);color:var(--ac);font:600 13px/1.2 -apple-system,BlinkMacSystemFont,'Noto Sans TC','Microsoft JhengHei',sans-serif;text-decoration:none;box-shadow:0 2px 10px rgba(15,23,42,.08)}
+.portal-home-link:hover{background:var(--bg3)}
+ol,ul{padding-left:24px}
+li{margin:6px 0}
+@media(max-width:768px){
+  .sidebar{transform:translateX(-100%);transition:transform .25s}
+  .sidebar.open{transform:translateX(0)}
+  .main{margin-left:0;padding:16px}
+  .sidebar-toggle-btn{display:block;position:fixed;top:12px;left:12px;z-index:200;width:36px;height:36px;border-radius:8px;background:var(--bg);border:1px solid var(--bd);font-size:18px;cursor:pointer}
+}
+.sidebar-toggle-btn{display:none}
+@media(max-width:768px){.sidebar-toggle-btn{display:block}}
+@media print{.sidebar,.sidebar-toggle-btn,.portal-home-link{display:none}.main{margin-left:0}}
+</style>
+<link rel="stylesheet" href="../assets/course-ui.css">
+</head>
+<body>
+
+<a class="portal-home-link" href="../../index.html">← 返回學習中心</a>
+
+<button class="sidebar-toggle-btn" onclick="toggleSidebar()" aria-label="Toggle sidebar">☰</button>
+
+<nav class="sidebar">
+  <div class="sidebar-header">
+     · 第 10 章
+    第 6 章：冪級數
+  </div>
+  <ul class="sn">
+    <li class="ns">本章預覽</li>
+    <li class="nsub"><a href="#preview">學習目標與概念地圖</a></li>
+    <li class="ns">6.1 冪級數與函數</li>
+    <li class="nsub"><a href="#s6-1">冪級數定義、收斂半徑與區間</a></li>
+    <li class="ns">6.2 冪級數的性質</li>
+    <li class="nsub"><a href="#s6-2">加減、乘法、逐項微分與積分</a></li>
+    <li class="ns">6.3 泰勒與麥克勞林級數</li>
+    <li class="nsub"><a href="#s6-3">泰勒多項式、餘項定理、級數展開</a></li>
+    <li class="ns">6.4 泰勒級數的應用</li>
+    <li class="nsub"><a href="#s6-4">二項式級數、微分方程、非初等積分</a></li>
+    <li class="ns">本章摘要</li>
+    <li class="nsub"><a href="#summary">關鍵概念總整理</a></li>
+    <li class="nsub"><a href="#common-mistakes">初學者常見錯誤</a></li>
+    <li class="nsub"><a href="#self-check">自我檢測</a></li>
+  </ul>
+  <div class="sidebar-footer">
+    <button class="theme-btn" onclick="toggleTheme()" id="themeBtn">🌙 深色模式</button>
+  </div>
+</nav>
+
+<main class="main">
+
+<header class="header">
+  <div class="chap-tag">第 10 章 · OpenStax Calculus Vol 2, Ch 6</div>
+  <h1>冪級數（Power Series）</h1>
+  <div class="meta">OpenStax · Calculus Volume 2 · Power Series · pp.477–542</div>
+</header>
+
+<section id="preview">
+<div class="preview">
+<h3>📌 本章要解決的核心問題</h3>
+<p>如果一個函數不是多項式，我們能否用「無窮多項式」來表示它？答案是<strong>可以</strong>——這就是冪級數（power series）的核心思想。冪級數讓我們將超越函數（如 $e^x$、$\sin x$、$\ln x$）寫成無窮多項的加總，從而可以用簡單的多項式運算來微分、積分、和近似計算。本章從冪級數的定義和收斂性出發，逐步建立泰勒級數（Taylor series）的完整理論，最後展示冪級數在解微分方程、計算非初等積分、以及物理應用中的強大威力。</p>
+
+<h3>🔑 關鍵概念（10 條）</h3>
+<ol>
+  <li><strong>冪級數的定義</strong>：$\sum_{n=0}^{\infty} c_n (x-a)^n$——以 $a$ 為中心的「無窮多項式」</li>
+  <li><strong>收斂半徑 $R$</strong>：冪級數在 $|x-a| < R$ 內絕對收斂，在 $|x-a| > R$ 發散</li>
+  <li><strong>收斂區間</strong>：端點 $(a-R, a+R)$ 需單獨檢驗——可能收斂也可能發散</li>
+  <li><strong>幾何級數是基礎</strong>：$\frac{1}{1-x} = \sum_{n=0}^{\infty} x^n$（$|x|<1$）是許多冪級數展開的起點</li>
+  <li><strong>逐項微分與積分</strong>：冪級數可以在收斂區間內逐項微分和積分，不收斂半徑改變</li>
+  <li><strong>泰勒級數</strong>：$f(x) = \sum_{n=0}^{\infty} \frac{f^{(n)}(a)}{n!} (x-a)^n$——用函數的各階導數決定係數</li>
+  <li><strong>麥克勞林級數</strong>：$a=0$ 時的特例——$e^x = \sum_{n=0}^{\infty} \frac{x^n}{n!}$</li>
+  <li><strong>泰勒餘項定理</strong>：$R_n(x) = \frac{f^{(n+1)}(c)}{(n+1)!} (x-a)^{n+1}$——量化近似的誤差</li>
+  <li><strong>冪級數的唯一性</strong>：若 $f$ 在 $a$ 處有冪級數展開，則它<strong>必定</strong>是泰勒級數</li>
+  <li><strong>二項式級數</strong>：$(1+x)^r = \sum_{n=0}^{\infty} \binom{r}{n} x^n$——適用於任意實數 $r$</li>
+</ol>
+
+<h3>🧭 邏輯鏈</h3>
+<p>冪級數定義與收斂 → 幾何級數展開 → 冪級數的加減乘與逐項微積分 → 泰勒/麥克勞林級數展開 → 餘項定理與誤差估計 → 二項式級數 → 解微分方程 → 計算非初等積分</p>
+
+<div class="callout-warn"><strong>⚡ 先備知識提醒</strong>：本章依賴第 5 章對無窮級數的完整理解——特別是幾何級數、比值檢驗（ratio test）、交錯級數檢驗。你必須熟練掌握 $\sum_{n=0}^{\infty} ar^n = \frac{a}{1-r}$（$|r|<1$）以及 $\lim_{n\to\infty} \left|\frac{a_{n+1}}{a_n}\right|$ 的計算。此外，對導數（尤其是高階導數 $f^{(n)}(x)$）的熟練度至關重要——泰勒級數的係數正是由各階導數在展開點的值決定的。</div>
+</div>
+</section>
+
+<!-- ====== Section 6.1 ====== -->
+<section id="s6-1">
+<h2>6.1 冪級數與函數（Power Series and Functions）</h2>
+
+<div style="margin-bottom:14px;font-size:12px;color:var(--tx2);line-height:1.8">
+<strong style="color:var(--tx)">🔑 本節重點</strong> ①冪級數 $\sum c_n(x-a)^n$ 是「無窮多項式」，收斂有三種可能：只在 $x=a$、對所有 $x$、或存在收斂半徑 $R$ ②用比值檢驗求 $R$，端點必須單獨檢驗 ③幾何級數 $\frac{1}{1-x}=\sum x^n$（$|x|<1$）是「種子公式」，透過代入可衍生大量展開 ④冪級數=無窮多項式的類比：可逐項加減、代入
+</div>
+
+<p>冪級數（power series）是微積分中最優雅的概念之一
+
+<div class="formula-card">
+  <div class="label">冪級數的正式定義</div>
+  <p>以 $x=a$ 為中心的冪級數具有以下形式：</p>
+  <div class="eq">$$\sum_{n=0}^{\infty} c_n (x-a)^n = c_0 + c_1(x-a) + c_2(x-a)^2 + \cdots$$</div>
+  <p>其中 $c_0, c_1, c_2, \ldots$ 是<strong>係數（coefficients）</strong>，均為常數。約定 $(x-a)^0 = 1$ 即使 $x=a$。</p>
+  <div class="note">當 $a=0$ 時，簡化為 $\sum_{n=0}^{\infty} c_n x^n = c_0 + c_1 x + c_2 x^2 + \cdots$</div>
+</div>
+
+<p>冪級數最關鍵的性質是：對於某些 $x$ 值它收斂（得到一個有限的數），對於其他 $x$ 值它發散。舉例來說，幾何級數 $\sum_{n=0}^{\infty} x^n = 1 + x + x^2 + \cdots$ 在 $|x| < 1$ 時收斂到 $\frac{1}{1-x}$，但在 $|x| \geq 1$ 時發散。這個簡單的例子揭示了冪級數的核心特徵——存在一個<strong>收斂半徑（radius of convergence）</strong>$R$，級數在中心附近的對稱區間內收斂。</p>
+
+<div class="figure">
+  <img src="../../pages/v2c6_pages/v2c6_page_477_c.png" alt="樂透彩金的現值問題" loading="lazy">
+  <figcaption>圖 6.1：如果你中了樂透，一次性領取還是分期領取比較划算？（本章開頭問題——這正是冪級數在金融中的經典應用：計算未來現金流的現值）</figcaption>
+</div>
+
+<h3>收斂的三種可能</h3>
+
+<p>對於一個以 $x=a$ 為中心的冪級數 $\sum_{n=0}^{\infty} c_n (x-a)^n$，<strong>收斂定理（Theorem 6.1）</strong>告訴我們恰好有以下三種可能之一：</p>
+
+<p><strong>情況 i：</strong>級數<strong>只在 $x=a$ 處收斂</strong>——對於所有 $x \neq a$ 均發散。此時收斂半徑 $R=0$。例如 $\sum_{n=0}^{\infty} n!\, x^n$ 只在 $x=0$ 處收斂。</p>
+
+<p><strong>情況 ii：</strong>級數<strong>對所有實數 $x$ 收斂</strong>——收斂半徑 $R=\infty$。例如 $\sum_{n=0}^{\infty} \frac{x^n}{n!}$（這其實是 $e^x$ 的麥克勞林級數）。</p>
+
+<p><strong>情況 iii：</strong>存在一個正數 $R > 0$，使得級數在 $|x-a| < R$ 時<strong>絕對收斂</strong>，在 $|x-a| > R$ 時<strong>發散</strong>。在端點 $x = a \pm R$ 處需要單獨檢驗——可能收斂也可能發散。整個收斂區間（interval of convergence）可能是 $(a-R, a+R)$、$[a-R, a+R)$、$(a-R, a+R]$ 或 $[a-R, a+R]$。</p>
+
+<div class="callout"><strong>💡 核心洞察：冪級數 = 無窮多項式</strong><br>看待冪級數最有效的方式是把它想像成一個「次數無限大的多項式」。這個類比極其有用：多項式可以逐項加減、逐項乘開、逐項微分和積分——冪級數在收斂區間內<strong>同樣可以</strong>。事實上，整個第 6 章的技術（從 6.2 節的代數運算到 6.4 節的微分方程求解）都是建立在這個類比之上。</div>
+
+<h3>如何求收斂半徑與區間</h3>
+
+<p>在實際操作中，我們通常使用<strong>比值檢驗（ratio test）</strong>來確定收斂半徑。步驟如下：對於 $\sum c_n (x-a)^n$，計算 $\rho = \lim_{n\to\infty} \left|\frac{c_{n+1}(x-a)^{n+1}}{c_n (x-a)^n}\right| = |x-a| \cdot \lim_{n\to\infty} \left|\frac{c_{n+1}}{c_n}\right|$。令 $\rho < 1$ 來求得 $|x-a| < R$，其中 $R = 1 / \lim_{n\to\infty} |c_{n+1}/c_n|$。然後<strong>單獨檢驗端點</strong> $x = a \pm R$。</p>
+
+<details class="example" open><summary>📝 範例</summary><strong>📝 範例 6.1：求收斂區間與半徑</strong><br>
+求 $\displaystyle\sum_{n=1}^{\infty} \frac{(x-1)^n}{n}$ 的收斂區間與半徑。<br><br>
+<strong>解：</strong>這是以 $a=1$ 為中心的冪級數，其中 $c_n = \frac{1}{n}$。<br>
+使用比值檢驗：$\displaystyle \rho = \lim_{n\to\infty} \left|\frac{(x-1)^{n+1}/(n+1)}{(x-1)^n/n}\right| = |x-1| \cdot \lim_{n\to\infty} \frac{n}{n+1} = |x-1|$。<br>
+令 $\rho < 1$ → $|x-1| < 1$ → 收斂半徑 $R = 1$。<br>
+<strong>檢驗端點：</strong>當 $x=0$（即 $x-1=-1$）：級數變成 $\sum (-1)^n/n$——這是交錯調和級數，收斂。當 $x=2$（即 $x-1=1$）：級數變成 $\sum 1/n$——這是調和級數，發散。<br>
+因此收斂區間為 $[0, 2)$（即 $0 \leq x < 2$），半徑 $R=1$。</details>
+
+<h3>用幾何級數表示函數</h3>
+
+<p>回想第 5 章的關鍵結果：幾何級數 $\sum_{n=0}^{\infty} ar^n = \frac{a}{1-r}$（當 $|r|<1$）。這是冪級數應用的<strong>最基礎工具</strong>——只要把一個函數寫成 $\frac{a}{1-r}$ 的形式，就能立即得到它的冪級數展開。</p>
+
+<div class="formula-card">
+  <div class="label">幾何級數展開（最重要的出發點）</div>
+  <div class="eq">$$\frac{1}{1-x} = \sum_{n=0}^{\infty} x^n = 1 + x + x^2 + x^3 + \cdots \quad (|x| < 1)$$</div>
+  <div class="note">這是本章的「種子公式」——幾乎所有其他函數的冪級數展開都可以從它通過代數操作、微分、或積分得到。</div>
+</div>
+
+<p>例如，$\frac{1}{1+x} = \frac{1}{1-(-x)} = \sum_{n=0}^{\infty} (-1)^n x^n$（$|x|<1$）；$\frac{1}{1-x^2} = \sum_{n=0}^{\infty} (x^2)^n = \sum_{n=0}^{\infty} x^{2n}$（$|x|<1$）。這個技巧可以推廣到更複雜的分式函數。</p>
+
+<div class="figure">
+  <img src="../../pages/v2c6_pages/v2c6_page_484_c.png" alt="冪級數的部分和逼近函數" loading="lazy">
+  <figcaption>圖 6.3：函數 $f(x)=\frac{1}{1-x}$ 及其冪級數的部分和 $S_N(x) = 1+x+\cdots+x^N$——當 $N$ 增大時，多項式逼近在 $(-1,1)$ 內越來越精確</figcaption>
+</div>
+
+<div class="callout-warn"><strong>⚡ 端點必須單獨檢驗</strong><br>比值檢驗只能告訴你 $|x-a| < R$ 內絕對收斂、$|x-a| > R$ 發散。但當 $|x-a| = R$（端點），比值檢驗給出 $\rho=1$，<strong>結論為「不確定」</strong>。此時你必須將端點值代入原級數，用積分檢驗、交錯級數檢驗、或比較檢驗來判斷。忽略端點檢驗是初學者最常見的扣分原因。</div>
+
+<p>在範例 6.2 和 6.3 中，課本展示了如何將函數如 $\frac{1}{1+x^2}$、$\frac{2x}{1-x^2}$ 等用幾何級數展開，以及如何透過代數操作（如部分分式分解）將複雜的有理函數轉化為已知的幾何級數形式。這些技巧為後續章節中利用冪級數微分和積分奠定了堅實的基礎。</p>
+
+<details class="example" open><summary>📝 範例</summary><strong>📝 範例 6.3：用冪級數表示函數</strong><br>
+用冪級數表示 $f(x) = \dfrac{1}{1+x^2}$，並求收斂區間。<br><br>
+<strong>解：</strong>注意到 $\dfrac{1}{1+x^2} = \dfrac{1}{1-(-x^2)}$。將 $r = -x^2$ 代入幾何級數公式：<br>
+$\displaystyle \frac{1}{1+x^2} = \sum_{n=0}^{\infty} (-x^2)^n = \sum_{n=0}^{\infty} (-1)^n x^{2n} = 1 - x^2 + x^4 - x^6 + \cdots$<br>
+收斂條件：$|r| = |-x^2| < 1$ → $|x| < 1$。當 $|x| = 1$ 時，級數變成 $\sum (-1)^n$，發散。因此收斂區間為 $(-1, 1)$。</details>
+
+</section>
+
+<!-- ====== Section 6.2 ====== -->
+<section id="s6-2">
+<h2>6.2 冪級數的性質（Properties of Power Series）</h2>
+
+<div style="margin-bottom:14px;font-size:12px;color:var(--tx2);line-height:1.8">
+<strong style="color:var(--tx)">🔑 本節重點</strong> ①冪級數可逐項加減、代入、乘以 $x^m$ 產生新展開 ②柯西乘積：兩個冪級數像多項式一樣相乘 ③逐項微分與逐項積分（收斂半徑不變，端點可能改變）④冪級數唯一性：同一中心處最多只有一種展開（必為泰勒級數）
+</div>
+
+<p>現在我們已經知道如何為某些函數找到冪級數表示
+
+<h3>冪級數的組合（Combining Power Series）</h3>
+
+<p><strong>定理 6.2（冪級數的組合）</strong>告訴我們：若 $\sum c_n x^n = f(x)$ 和 $\sum d_n x^n = g(x)$ 在共同區間 $I$ 上收斂，則：</p>
+<ul>
+  <li>$\sum (c_n \pm d_n) x^n = f(x) \pm g(x)$ 也在 $I$ 上收斂</li>
+  <li>對於任意整數 $m \geq 0$ 和常數 $b$，$\sum c_n (b x^m)^n = f(b x^m)$ 在滿足 $b x^m \in I$ 的 $x$ 上收斂</li>
+  <li>$\sum b c_n x^{m n} = b f(x^m)$ 在滿足 $x^m \in I$ 的 $x$ 上收斂</li>
+</ul>
+
+<p>這些規則看似簡單，但威力巨大。從一個已知的展開（例如 $\frac{1}{1-x} = \sum x^n$），我們可以通過代入 $x \to -x$、$x \to x^2$、$x \to 3x$ 等操作，迅速得到大量相關函數的展開。</p>
+
+<details class="example" open><summary>📝 範例</summary><strong>📝 範例 6.5：從已知展開構造新冪級數</strong><br>
+利用 $\dfrac{1}{1-x} = \sum_{n=0}^{\infty} x^n$（$|x|<1$），求 $f(x) = \dfrac{3x}{1+x^2}$ 的冪級數展開。<br><br>
+<strong>解：</strong>$f(x) = 3x \cdot \dfrac{1}{1-(-x^2)} = 3x \sum_{n=0}^{\infty} (-x^2)^n = 3x \sum_{n=0}^{\infty} (-1)^n x^{2n} = \sum_{n=0}^{\infty} 3(-1)^n x^{2n+1}$。<br>
+展開：$f(x) = 3x - 3x^3 + 3x^5 - 3x^7 + \cdots$。<br>
+收斂條件：$|-x^2| < 1$ → $|x| < 1$。收斂區間為 $(-1, 1)$。</details>
+
+<div class="callout"><strong>💡 部分分式 + 幾何級數 = 萬能展開法</strong><br>對於形如 $\frac{P(x)}{Q(x)}$ 的有理函數（其中 $Q(x)$ 可分解），先做部分分式分解，將它寫成若干個 $\frac{A}{1-r(x)}$ 的線性組合，然後對每一項用幾何級數展開。這個組合技巧幾乎可以處理所有有理函數的冪級數展開。</div>
+
+<h3>冪級數的乘法與柯西乘積</h3>
+
+<p><strong>定理 6.3（冪級數乘法）</strong>說明兩個冪級數可以像多項式一樣相乘，結果稱為<strong>柯西乘積（Cauchy product）</strong>：若 $f(x) = \sum_{n=0}^{\infty} c_n x^n$ 和 $g(x) = \sum_{n=0}^{\infty} d_n x^n$ 在共同區間 $I$ 上收斂，則</p>
+
+<div class="eq">$$f(x) \cdot g(x) = \sum_{n=0}^{\infty} \left( \sum_{k=0}^{n} c_k d_{n-k} \right) x^n$$</div>
+
+<p>這個公式看起來有點嚇人，但它的意思很簡單：乘積中 $x^n$ 的係數就是所有滿足 $k + (n-k) = n$ 的 $c_k \cdot d_{n-k}$ 之和。這和多項式乘法的分配律完全一致——只是現在有無窮多項。</p>
+
+<h3>逐項微分與逐項積分——冪級數的超能力</h3>
+
+<p>如果說冪級數有一個「殺手級應用」，那一定是<strong>逐項微分和逐項積分（Theorem 6.4）</strong>。這個定理告訴我們：若 $f(x) = \sum_{n=0}^{\infty} c_n (x-a)^n$ 在 $(a-R, a+R)$ 內收斂，則：</p>
+
+<div class="formula-card">
+  <div class="label">逐項微分與積分定理</div>
+  <div class="eq">$$f'(x) = \sum_{n=1}^{\infty} n c_n (x-a)^{n-1} \quad \text{（收斂半徑仍為 } R \text{）}$$</div>
+  <div class="eq">$$\int f(x)\,dx = C + \sum_{n=0}^{\infty} \frac{c_n}{n+1} (x-a)^{n+1} \quad \text{（收斂半徑仍為 } R \text{）}$$</div>
+  <div class="note">⚠️ 端點行為可能改變——微分可能使端點收斂變發散，積分可能使端點發散變收斂。</div>
+</div>
+
+<p>這個定理的革命性在於：它讓我們能對那些<strong>沒有初等反導數的函數</strong>進行精確的積分計算。例如 $\int e^{-x^2}\,dx$ 不能用初等函數表示，但可以展開為冪級數後逐項積分。</p>
+
+<div class="figure">
+  <img src="../../pages/v2c6_pages/v2c6_page_493_c.png" alt="樂透彩金現值計算示意圖" loading="lazy">
+  <figcaption>圖 6.4：樂透彩金選擇問題的圖示——冪級數在此用於計算未來現金流的現值（present value）</figcaption>
+</div>
+
+<details class="example" open><summary>📝 範例</summary><strong>📝 範例 6.9–6.10：逐項微分與積分</strong><br>
+已知 $\dfrac{1}{1-x} = \sum_{n=0}^{\infty} x^n$（$|x|<1$）。<br>
+(a) 透過逐項微分求 $g(x) = \dfrac{1}{(1-x)^2}$ 的冪級數。<br>
+(b) 透過逐項積分求 $h(x) = \ln(1+x)$ 的冪級數。<br><br>
+<strong>解 (a)：</strong>注意到 $\frac{d}{dx}\left(\frac{1}{1-x}\right) = \frac{1}{(1-x)^2}$。逐項微分：<br>
+$\displaystyle \frac{1}{(1-x)^2} = \frac{d}{dx} \sum_{n=0}^{\infty} x^n = \sum_{n=1}^{\infty} n x^{n-1} = \sum_{n=0}^{\infty} (n+1) x^n = 1 + 2x + 3x^2 + 4x^3 + \cdots$（$|x|<1$）。<br><br>
+<strong>解 (b)：</strong>$\ln(1+x) = \int_0^x \frac{1}{1+t}\,dt$。而 $\frac{1}{1+t} = \sum_{n=0}^{\infty} (-1)^n t^n$（$|t|<1$）。逐項積分：<br>
+$\displaystyle \ln(1+x) = \int_0^x \sum_{n=0}^{\infty} (-1)^n t^n\,dt = \sum_{n=0}^{\infty} \frac{(-1)^n}{n+1} x^{n+1} = x - \frac{x^2}{2} + \frac{x^3}{3} - \cdots$（$-1 < x \leq 1$）。</details>
+
+<div class="callout-warn"><strong>⚡ 常見陷阱：積分常數 $C$ 不能忘</strong><br>逐項積分時，級數從 $n=0$ 開始，積分後產生一個常數項 $C$。你必須用原函數在展開點的值來確定 $C$！例如上面 $\ln(1+0)=0$，所以 $C=0$。很多學生直接寫出級數而忘記處理 $C$，導致答案差一個常數。</div>
+
+<h3>冪級數的唯一性</h3>
+
+<p><strong>定理 6.5（冪級數的唯一性）</strong>是一個看似簡單但極其深刻的結論：如果在某個包含 $a$ 的開區間內，$\sum c_n (x-a)^n = \sum d_n (x-a)^n$，則對所有 $n$，$c_n = d_n$。換句話說，一個函數在給定點 $a$ 處<strong>最多只有一種</strong>冪級數展開。這個定理保證了無論你用什麼方法（幾何級數、微分、積分、代入...）找到的展開，只要是正確的，就<strong>必須是</strong>泰勒級數。</p>
+
+<div class="callout"><strong>💡 冪級數 vs 多項式——本質區別</strong><br>多項式在<strong>全局</strong>都有定義且處處相等；但兩個冪級數即使在某區間內相等，它們在區間外的行為可能完全不同。冪級數等式的成立範圍<strong>受限於收斂區間</strong>——這是冪級數操作中最容易被忽略的條件。每次進行冪級數的代數操作時，你都需要追蹤收斂區間的變化。</div>
+
+<p>本章的開頭問題——樂透彩金的選擇——在範例 6.7 中得到了完整的解答。透過將未來每年的現金流折現為等比級數，我們可以精確計算出：以 5% 年利率計算，20 年每年 150 萬美元的現值約為 1869 萬美元，而無限期每年 100 萬美元的現值恰好是 2000 萬美元。這個應用完美展示了冪級數（特別是幾何級數）在金融數學中的核心地位。</p>
+
+</section>
+
+<!-- ====== Section 6.3 ====== -->
+<section id="s6-3">
+<h2>6.3 泰勒與麥克勞林級數（Taylor and Maclaurin Series）</h2>
+
+<div style="margin-bottom:14px;font-size:12px;color:var(--tx2);line-height:1.8">
+<strong style="color:var(--tx)">🔑 本節重點</strong> ①泰勒級數 $f(x)=\sum \frac{f^{(n)}(a)}{n!}(x-a)^n$，係數由逐次微分代入 $x=a$ 得出 ②麥克勞林級數（$a=0$）三大核心展開：$e^x$、$\sin x$、$\cos x$ ③泰勒餘項 $R_n(x)=\frac{f^{(n+1)}(c)}{(n+1)!}(x-a)^{n+1}$ 量化近似誤差 ④級數收斂到原函數的充要條件：$\lim R_n(x)=0$
+</div>
+
+<p>前面兩節我們主要通過幾何級數來獲得冪級數展開
+
+<h3>泰勒級數的推導——為什麼係數是 $\frac{f^{(n)}(a)}{n!}$？</h3>
+
+<p>這是本章最需要深刻理解的推導過程。假設函數 $f(x)$ 在 $x=a$ 處可以展開為冪級數：</p>
+
+<div class="eq">$$f(x) = c_0 + c_1(x-a) + c_2(x-a)^2 + c_3(x-a)^3 + \cdots$$</div>
+
+<p>我們希望係數 $c_n$ 和 $f$ 在 $a$ 處的性質掛鉤。首先，代入 $x=a$：所有含 $(x-a)$ 的項都消失，得到 $f(a) = c_0$。所以 <strong>$c_0 = f(a)$</strong>。</p>
+
+<p>接著，對展開式逐項微分一次：</p>
+
+<div class="eq">$$f'(x) = c_1 + 2c_2(x-a) + 3c_3(x-a)^2 + 4c_4(x-a)^3 + \cdots$$</div>
+
+<p>代入 $x=a$：$f'(a) = c_1$，所以 <strong>$c_1 = f'(a)$</strong>。</p>
+
+<p>再微分一次：</p>
+
+<div class="eq">$$f''(x) = 2c_2 + 3\cdot 2c_3(x-a) + 4\cdot 3c_4(x-a)^2 + \cdots$$</div>
+
+<p>代入 $x=a$：$f''(a) = 2c_2$，所以 <strong>$c_2 = \frac{f''(a)}{2} = \frac{f''(a)}{2!}$</strong>。</p>
+
+<p>繼續這個過程，對於一般的 $n$，微分 $n$ 次後代入 $x=a$，所有次數低於 $n$ 的項都被微光了，次數高於 $n$ 的項仍含 $(x-a)$ 因子而消失，只剩下 $n!$ 乘以 $c_n$：$f^{(n)}(a) = n! \cdot c_n$，因此：</p>
+
+<div class="formula-card">
+  <div class="label">泰勒級數（Taylor Series）——本章的靈魂公式</div>
+  <div class="eq">$$f(x) = \sum_{n=0}^{\infty} \frac{f^{(n)}(a)}{n!} (x-a)^n$$</div>
+  <div class="note">當 $a=0$ 時稱為<strong>麥克勞林級數（Maclaurin series）</strong>：$f(x) = \sum_{n=0}^{\infty} \frac{f^{(n)}(0)}{n!} x^n$</div>
+</div>
+
+<div class="callout"><strong>💡 直覺理解：泰勒級數在做什麼？</strong><br>泰勒級數的思想極其優美：它用函數在<strong>單一一點</strong> $a$ 處的所有資訊（函數值、一階導數、二階導數……直至無窮階）來重建整個函數。一階近似 $f(a) + f'(a)(x-a)$ 是切線；二階近似加上 $\frac{f''(a)}{2}(x-a)^2$ 捕捉了彎曲程度；更高階的項逐次修正，使近似越來越精確。這就是為什麼泰勒級數被稱為「用多項式逼近函數的終極方法」。</div>
+
+<h3>泰勒多項式與餘項</h3>
+
+<p>$n$ 階<strong>泰勒多項式（Taylor polynomial）</strong>$p_n(x)$ 是泰勒級數的前 $n+1$ 項（從 $0$ 到 $n$ 的部分和）：</p>
+
+<div class="eq">$$p_n(x) = f(a) + f'(a)(x-a) + \frac{f''(a)}{2!}(x-a)^2 + \cdots + \frac{f^{(n)}(a)}{n!}(x-a)^n$$</div>
+
+<p>泰勒多項式本身就是強大的近似工具。但它到底有多精確？答案由<strong>泰勒餘項定理（Taylor's Theorem with Remainder, Theorem 6.7）</strong>給出：</p>
+
+<div class="formula-card">
+  <div class="label">泰勒餘項定理（Lagrange 形式）</div>
+  <div class="eq">$$R_n(x) = f(x) - p_n(x) = \frac{f^{(n+1)}(c)}{(n+1)!} (x-a)^{n+1}$$</div>
+  <p>其中 $c$ 是介於 $a$ 和 $x$ 之間的某個數。</p>
+  <div class="note">若能找到 $M$ 使得 $|f^{(n+1)}(t)| \leq M$ 對所有 $a$ 和 $x$ 之間的 $t$ 成立，則 $|R_n(x)| \leq \frac{M}{(n+1)!} |x-a|^{n+1}$</div>
+</div>
+
+<div class="figure">
+  <img src="../../pages/v2c6_pages/v2c6_page_508_c.png" alt="ln(x) 在 x=1 處的泰勒多項式逼近" loading="lazy">
+  <figcaption>圖 6.5：$f(x)=\ln x$ 在 $a=1$ 處的泰勒多項式 $p_1, p_2, p_3$——注意 $p_1$ 是切線，$p_2$ 加入了彎曲修正，$p_3$ 更精確</figcaption>
+</div>
+
+<details class="example" open><summary>📝 範例</summary><strong>📝 範例 6.12：三個最重要的麥克勞林級數</strong><br>
+推導 $e^x$、$\sin x$、$\cos x$ 的麥克勞林級數。<br><br>
+<strong>$e^x$：</strong>$f^{(n)}(x) = e^x$，因此 $f^{(n)}(0) = 1$ 對所有 $n$。得：
+$\displaystyle e^x = \sum_{n=0}^{\infty} \frac{x^n}{n!} = 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \cdots$（收斂對所有 $x \in \mathbb{R}$）<br><br>
+<strong>$\sin x$：</strong>$f(0)=0, f'(0)=1, f''(0)=0, f'''(0)=-1$，模式每 4 階循環。得：
+$\displaystyle \sin x = \sum_{n=0}^{\infty} \frac{(-1)^n}{(2n+1)!} x^{2n+1} = x - \frac{x^3}{3!} + \frac{x^5}{5!} - \cdots$（收斂對所有 $x$）<br><br>
+<strong>$\cos x$：</strong>$f(0)=1, f'(0)=0, f''(0)=-1, f'''(0)=0$，同上循環。得：
+$\displaystyle \cos x = \sum_{n=0}^{\infty} \frac{(-1)^n}{(2n)!} x^{2n} = 1 - \frac{x^2}{2!} + \frac{x^4}{4!} - \cdots$（收斂對所有 $x$）</details>
+
+<div class="figure">
+  <img src="../../pages/v2c6_pages/v2c6_page_509_c.png" alt="e^x 的麥克勞林多項式逼近" loading="lazy">
+  <figcaption>圖 6.6：$e^x$ 及其麥克勞林多項式 $p_1, p_2, p_3$——當階數增加時，逼近在更大的區間上保持精確</figcaption>
+</div>
+
+<div class="callout-warn"><strong>⚡ 常見混淆：泰勒級數收斂 ≠ 收斂到原函數</strong><br>一個泰勒級數可能在某區間內收斂，但<strong>不一定</strong>收斂到原函數 $f(x)$！經典反例是 $f(x) = e^{-1/x^2}$（定義 $f(0)=0$）——它在 $x=0$ 處的各階導數都是 $0$，所以泰勒級數是 $0+0+0+\cdots$，恆等於 $0$，完全不等於 $f(x)$。泰勒級數收斂到 $f(x)$ 的充要條件是 $\lim_{n\to\infty} R_n(x) = 0$（Theorem 6.8）。對於 $e^x, \sin x, \cos x$ 這類「良好」的函數，這個條件確實成立——但這需要驗證，不能假設。</div>
+
+<h3>證明泰勒級數確實收斂到原函數</h3>
+
+<p>以 $e^x$ 為例：我們需要證明對任意固定的 $x$，$\lim_{n\to\infty} R_n(x) = 0$。由餘項定理，$R_n(x) = \frac{e^c}{(n+1)!} x^{n+1}$（$c$ 在 $0$ 和 $x$ 之間）。對於固定的 $x$，取 $b = \max(0, x)$，則 $e^c \leq e^{|x|}$。因此 $|R_n(x)| \leq e^{|x|} \frac{|x|^{n+1}}{(n+1)!}$。由於階乘增長遠快於指數增長，$\frac{|x|^{n+1}}{(n+1)!} \to 0$，所以 $R_n(x) \to 0$。這證明了麥克勞林級數確實收斂到 $e^x$ 對所有實數 $x$。</p>
+
+<div class="figure">
+  <img src="../../pages/v2c6_pages/v2c6_page_510_c.png" alt="cos x 的麥克勞林多項式逼近" loading="lazy">
+  <figcaption>圖 6.8：$\cos x$ 及其麥克勞林多項式——注意偶函數的展開只有偶次項</figcaption>
+</div>
+
+<h3>誤差估計的實戰技巧</h3>
+
+<p>在實際應用中，我們通常不需要知道 $c$ 的精確值，而是找一個<strong>上界</strong> $M$ 來限制 $|f^{(n+1)}(t)|$。例如：</p>
+
+<details class="example" open><summary>📝 範例</summary><strong>📝 範例 6.13–6.14：用餘項估計誤差</strong><br>
+用 5 階麥克勞林多項式近似 $\sin(0.1)$，並估計誤差。<br><br>
+<strong>解：</strong>$\sin x$ 的 5 階麥克勞林多項式為 $p_5(x) = x - \frac{x^3}{3!} + \frac{x^5}{5!}$。<br>
+$\sin(0.1) \approx 0.1 - \frac{0.001}{6} + \frac{0.00001}{120} = 0.1 - 0.0001667 + 0.0000000833 = 0.0998334\ldots$<br>
+6 階餘項：$|R_5(0.1)| = \left|\frac{f^{(6)}(c)}{6!}(0.1)^6\right|$。由於 $f^{(6)}(x) = -\sin x$，$|f^{(6)}(c)| \leq 1$，所以 $|R_5(0.1)| \leq \frac{1}{720} \cdot 10^{-6} \approx 1.39 \times 10^{-9}$。誤差極小！</details>
+
+<div class="callout"><strong>💡 泰勒級數 = 冪級數的唯一形式</strong><br>由冪級數的唯一性（Theorem 6.5）可以直接推出泰勒級數的唯一性（Theorem 6.6）：如果 $f$ 在 $a$ 處有任何一種冪級數展開，那麼它<strong>必須是</strong>泰勒級數。這個結論極其強大——它意味著無論你用幾何級數巧妙湊出、還是用微分方程解出、還是通過任何其他手段得到的冪級數，只要它是對的，它就和泰勒公式算出來的一模一樣。這也解釋了為什麼 6.2 節中用幾何級數得到的 $\ln(1+x)$ 展開，和直接套泰勒公式算出的結果完全一致。</div>
+
+</section>
+
+<!-- ====== Section 6.4 ====== -->
+<section id="s6-4">
+<h2>6.4 泰勒級數的應用（Working with Taylor Series）</h2>
+
+<div style="margin-bottom:14px;font-size:12px;color:var(--tx2);line-height:1.8">
+<strong style="color:var(--tx)">🔑 本節重點</strong> ①二項式級數 $(1+x)^r=\sum\binom{r}{n}x^n$（$|x|<1$），推廣到任意實數 $r$ ②用冪級數解微分方程：假設解為冪級數→代入→比較係數 ③非初等積分（如 $\int e^{-x^2}dx$）可展開被積函數後逐項積分 ④橢圓積分：單擺精確週期用二項式級數展開
+</div>
+
+<p>掌握了泰勒級數的理論之後，本節轉向<strong>實戰應用</strong>
+
+<h3>二項式級數（Binomial Series）</h3>
+
+<p>二項式定理告訴我們：當 $r$ 是正整數時，$(1+x)^r = \sum_{k=0}^{r} \binom{r}{k} x^k$。但如果 $r$ 不是整數——比如 $r = \frac{1}{2}$（對應 $\sqrt{1+x}$）或 $r = -1$（對應 $\frac{1}{1+x}$）——這個公式就不再是有限和了。然而，<strong>二項式級數</strong>將這個公式推廣到<strong>任意實數 $r$</strong>：</p>
+
+<div class="formula-card">
+  <div class="label">二項式級數（Binomial Series）</div>
+  <div class="eq">$$(1+x)^r = \sum_{n=0}^{\infty} \binom{r}{n} x^n \quad (|x| < 1)$$</div>
+  <p>其中廣義二項式係數定義為：$\displaystyle\binom{r}{n} = \frac{r(r-1)(r-2)\cdots(r-n+1)}{n!}$，且 $\binom{r}{0} = 1$。</p>
+  <div class="note">當 $r$ 為正整數時，對於 $n > r$，分子中會出現因子 $0$，級數自動截斷為有限多項式——此時公式退化為經典的二項式定理。</div>
+</div>
+
+<details class="example" open><summary>📝 範例</summary><strong>📝 範例 6.17：二項式級數展開</strong><br>
+求 $f(x) = \sqrt{1+x}$ 的二項式級數，並用 3 階麥克勞林多項式估計 $\sqrt{1.1}$。<br><br>
+<strong>解：</strong>$r = \frac{1}{2}$，$\binom{1/2}{n} = \frac{\frac{1}{2}(-\frac{1}{2})(-\frac{3}{2})\cdots(\frac{1}{2}-n+1)}{n!}$。<br>
+前幾項：$\binom{1/2}{0}=1$，$\binom{1/2}{1}=\frac{1}{2}$，$\binom{1/2}{2}=\frac{(1/2)(-1/2)}{2!}=-\frac{1}{8}$，$\binom{1/2}{3}=\frac{(1/2)(-1/2)(-3/2)}{3!}=\frac{1}{16}$。<br>
+因此 $\sqrt{1+x} = 1 + \frac{1}{2}x - \frac{1}{8}x^2 + \frac{1}{16}x^3 - \frac{5}{128}x^4 + \cdots$（$|x|<1$）。<br>
+$\sqrt{1.1} \approx 1 + \frac{0.1}{2} - \frac{0.01}{8} + \frac{0.001}{16} = 1 + 0.05 - 0.00125 + 0.0000625 = 1.0488125$。實際值約為 $1.0488088$，誤差極小。</details>
+
+<div class="figure">
+  <img src="../../pages/v2c6_pages/v2c6_page_523_c.png" alt="sqrt(1+x) 的麥克勞林多項式逼近" loading="lazy">
+  <figcaption>圖 6.10：$\sqrt{1+x}$ 的三階麥克勞林多項式在 $x$ 接近 0 時提供了極佳的近似</figcaption>
+</div>
+
+<div class="callout-warn"><strong>⚡ 二項式級數的收斂區間注意事項</strong><br>二項式級數在 $|x| < 1$ 內收斂，但端點 $x = \pm 1$ 的行為取決於 $r$：當 $r > 0$ 時兩端都收斂；當 $-1 < r < 0$ 時 $x=1$ 收斂但 $x=-1$ 發散；當 $r \leq -1$ 時兩端都發散。這些細節在應用中不可忽視。</div>
+
+<h3>常用函數的麥克勞林級數匯總</h3>
+
+<p>表 6.1 匯總了本章最重要的麥克勞林級數——這些是必須牢記的「標準展開」：</p>
+
+<table>
+  <thead><tr><th>函數 $f(x)$</th><th>麥克勞林級數</th><th>收斂區間</th></tr></thead>
+  <tbody>
+    <tr><td>$e^x$</td><td>$\sum_{n=0}^{\infty} \dfrac{x^n}{n!}$</td><td>$(-\infty, \infty)$</td></tr>
+    <tr><td>$\sin x$</td><td>$\sum_{n=0}^{\infty} \dfrac{(-1)^n x^{2n+1}}{(2n+1)!}$</td><td>$(-\infty, \infty)$</td></tr>
+    <tr><td>$\cos x$</td><td>$\sum_{n=0}^{\infty} \dfrac{(-1)^n x^{2n}}{(2n)!}$</td><td>$(-\infty, \infty)$</td></tr>
+    <tr><td>$\dfrac{1}{1-x}$</td><td>$\sum_{n=0}^{\infty} x^n$</td><td>$(-1, 1)$</td></tr>
+    <tr><td>$\ln(1+x)$</td><td>$\sum_{n=1}^{\infty} \dfrac{(-1)^{n+1} x^n}{n}$</td><td>$(-1, 1]$</td></tr>
+    <tr><td>$\tan^{-1} x$</td><td>$\sum_{n=0}^{\infty} \dfrac{(-1)^n x^{2n+1}}{2n+1}$</td><td>$[-1, 1]$</td></tr>
+    <tr><td>$(1+x)^r$</td><td>$\sum_{n=0}^{\infty} \binom{r}{n} x^n$</td><td>$(-1, 1)$（端點取決於 $r$）</td></tr>
+  </tbody>
+</table>
+
+<div class="callout"><strong>💡 記憶技巧：$e^x, \sin x, \cos x$ 的關係</strong><br>如果你記得 $e^x = 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \cdots$，那麼 $\sin x$ 就是只取奇數次項並加上交錯符號，$\cos x$ 就是只取偶數次項並加上交錯符號。三者之間的深層聯繫由<strong>歐拉公式</strong> $e^{ix} = \cos x + i\sin x$ 揭示——將 $ix$ 代入 $e^x$ 的級數，實部和虛部分別給出 $\cos x$ 和 $\sin x$ 的級數。這不是巧合，而是數學結構深層統一的體現。</div>
+
+<h3>用冪級數解微分方程</h3>
+
+<p>冪級數在解微分方程中的威力來自一個簡單的想法：<strong>假設解可以寫成冪級數 $\sum c_n x^n$，代入微分方程，然後通過比較兩邊同次項的係數來確定 $c_n$</strong>。這個方法稱為<strong>冪級數法（power series method）</strong>。</p>
+
+<details class="example" open><summary>📝 範例</summary><strong>📝 範例 6.21：Airy 方程</strong><br>
+用冪級數解 $y'' - xy = 0$，初始條件 $y(0)=1$, $y'(0)=0$。<br><br>
+<strong>解：</strong>設 $y = \sum_{n=0}^{\infty} c_n x^n$，則 $y'' = \sum_{n=2}^{\infty} n(n-1) c_n x^{n-2} = \sum_{n=0}^{\infty} (n+2)(n+1) c_{n+2} x^n$。<br>
+代入 $y'' - xy = 0$：$\sum_{n=0}^{\infty} (n+2)(n+1) c_{n+2} x^n - \sum_{n=0}^{\infty} c_n x^{n+1} = 0$。<br>
+整理同次項係數：$c_2 = 0$，$(n+2)(n+1)c_{n+2} = c_{n-1}$（$n \geq 1$）。<br>
+由初始條件 $c_0 = 1$, $c_1 = 0$，可得 $c_2=0$, $c_3 = c_0/6 = 1/6$, $c_4=0$, $c_5=0$, $c_6 = c_3/30 = 1/180$, ...<br>
+解為：$y = 1 + \frac{x^3}{6} + \frac{x^6}{180} + \cdots$（這就是 Airy 函數 $\text{Ai}(x)$ 的級數展開）。</details>
+
+<div class="callout-warn"><strong>⚡ 警告：冪級數解法的前提</strong><br>不是所有微分方程都有冪級數解。這個方法假設解在 $x=a$ 處是<strong>解析的（analytic）</strong>——即可以在該點展開為收斂的冪級數。如果微分方程在 $x=a$ 處有奇點（singular point），普通的冪級數法可能失效，需要改用 Frobenius 方法（超出本課範圍）。但對於像 $y' = y$、Airy 方程、Legendre 方程這類正則方程，冪級數法非常有效。</div>
+
+<h3>用泰勒級數計算非初等積分</h3>
+
+<p>許多在應用中極其重要的積分——如 $\int e^{-x^2}\,dx$（誤差函數）、$\int \frac{\sin x}{x}\,dx$（正弦積分）、$\int \cos(x^2)\,dx$（Fresnel 積分）——它們的被積函數的反導數<strong>無法用初等函數表示</strong>。但透過冪級數，我們可以先展開被積函數，再逐項積分，得到一個收斂的級數表示。</p>
+
+<details class="example" open><summary>📝 範例</summary><strong>📝 範例 6.22–6.23：常態分佈與誤差函數</strong><br>
+(a) 將 $\int e^{-x^2}\,dx$ 表示為無窮級數。<br>
+(b) 估計 $\int_0^{0.5} e^{-x^2}\,dx$，精確到 $10^{-4}$。<br><br>
+<strong>解 (a)：</strong>利用 $e^u = \sum_{n=0}^{\infty} \frac{u^n}{n!}$，令 $u = -x^2$：<br>
+$e^{-x^2} = \sum_{n=0}^{\infty} \frac{(-x^2)^n}{n!} = \sum_{n=0}^{\infty} \frac{(-1)^n x^{2n}}{n!}$。<br>
+逐項積分：$\int e^{-x^2}\,dx = C + \sum_{n=0}^{\infty} \frac{(-1)^n x^{2n+1}}{(2n+1)n!}$。<br><br>
+<strong>解 (b)：</strong>$\int_0^{0.5} e^{-x^2}\,dx = \sum_{n=0}^{\infty} \frac{(-1)^n (0.5)^{2n+1}}{(2n+1)n!} = 0.5 - \frac{0.125}{3} + \frac{0.03125}{10} - \cdots \approx 0.5 - 0.041667 + 0.003125 - 0.000186 \approx 0.4613$。由交錯級數檢驗，誤差小於下一項的絕對值 $< 10^{-4}$。</details>
+
+<div class="figure">
+  <img src="../../pages/v2c6_pages/v2c6_page_529_c.png" alt="常態分佈的鐘形曲線" loading="lazy">
+  <figcaption>圖 6.11：常態分佈曲線——$e^{-x^2}$ 的積分（誤差函數）在機率論中無所不在</figcaption>
+</div>
+
+<h3>單擺週期的橢圓積分</h3>
+
+<p>另一個經典應用是<strong>單擺的精確週期</strong>。小角度近似給出 $T \approx 2\pi\sqrt{L/g}$，但對於大振幅 $\theta_{\max}$，精確公式涉及一個<strong>橢圓積分（elliptic integral）</strong>——這又是一個非初等積分。範例 6.24 展示了如何用二項式級數展開被積函數，得到週期的級數近似：</p>
+
+<div class="eq">$$T = 4\sqrt{\frac{L}{g}} \int_0^{\pi/2} \frac{d\theta}{\sqrt{1 - k^2\sin^2\theta}}, \quad k = \sin\left(\frac{\theta_{\max}}{2}\right)$$</div>
+
+<p>使用二項式級數展開 $(1 - k^2\sin^2\theta)^{-1/2}$ 並逐項積分，得到 $T = 2\pi\sqrt{\frac{L}{g}} \left(1 + \frac{1}{4}k^2 + \frac{9}{64}k^4 + \cdots\right)$。第一項就是小角度近似，後續項給出大振幅的修正。</p>
+
+<div class="figure">
+  <img src="../../pages/v2c6_pages/v2c6_page_531_c.png" alt="單擺的幾何示意圖" loading="lazy">
+  <figcaption>圖 6.12：長度為 $L$ 的單擺，最大擺角為 $\theta_{\max}$——精確週期公式需要用冪級數來計算橢圓積分</figcaption>
+</div>
+
+<div class="callout"><strong>💡 本章的核心收穫</strong><br>泰勒級數不僅是數學上的優雅構造，更是解決實際問題的<strong>終極工具</strong>。它將微分（求係數）、積分（逐項）、代數（組合級數）統一在一個框架下。從估算 $e^{0.1}$ 到預測單擺週期、從解 Airy 方程到計算常態分佈的機率——所有這些看似不相干的問題，都在冪級數的框架下找到了統一而優美的解答。記住：<strong>當其他方法都失效時，試試泰勒級數</strong>——它幾乎總能給你一個可用的答案。</div>
+
+</section>
+
+<!-- ====== Key Concepts ====== -->
+<section id="key-concepts">
+<h2>📋 關鍵概念回顧（Key Concepts）</h2>
+<ol>
+  <li><strong>冪級數（Power Series）</strong>：形式為 $\sum c_n (x-a)^n$，以 $a$ 為中心。在中心處一定收斂，收斂範圍由收斂半徑 $R$ 決定。</li>
+  <li><strong>收斂半徑與收斂區間</strong>：使用比值檢驗（或根式檢驗）求 $R = \lim \left|\frac{c_n}{c_{n+1}}
+ight|$。收斂區間需單獨驗證端點 $x = a \pm R$。</li>
+  <li><strong>幾何級數表示</strong>：$\frac{1}{1-x} = \sum_{n=0}^\infty x^n$（$|x|<1$）。透過代入、部分分式、微分和積分可衍生出大量函數的冪級數表示。</li>
+  <li><strong>逐項微分與積分</strong>：在收斂區間內，冪級數可逐項微分和積分，收斂半徑不變（但端點行為可能改變）。這是冪級數最強大的操作。</li>
+  <li><strong>泰勒級數（Taylor Series）</strong>：$f(x) = \sum_{n=0}^\infty \frac{f^{(n)}(a)}{n!}(x-a)^n$。若 $f$ 在 $a$ 處無窮可微，則泰勒級數存在；若餘項趨近於 0，則泰勒級數收斂到 $f(x)$。</li>
+  <li><strong>麥克勞林級數（Maclaurin Series）</strong>：$a=0$ 的特例。三個最重要的麥克勞林級數：$e^x = \sum \frac{x^n}{n!}$、$\sin x = \sum \frac{(-1)^n x^{2n+1}}{(2n+1)!}$、$\cos x = \sum \frac{(-1)^n x^{2n}}{(2n)!}$，全部對所有 $x$ 收斂。</li>
+  <li><strong>泰勒不等式（Taylor's Inequality）</strong>：$|R_n(x)| \le \frac{M}{(n+1)!}|x-a|^{n+1}$，其中 $M \ge |f^{(n+1)}(x)|$。用於估計泰勒多項式的誤差。</li>
+  <li><strong>二項式級數（Binomial Series）</strong>：$(1+x)^k = \sum_{n=0}^\infty \binom{k}{n}x^n$，其中 $\binom{k}{n} = \frac{k(k-1)\cdots(k-n+1)}{n!}$。當 $k$ 為正整數時退化為有限多項式。</li>
+  <li><strong>泰勒多項式近似</strong>：$T_n(x) = \sum_{k=0}^n \frac{f^{(k)}(a)}{k!}(x-a)^k$ 是 $f(x)$ 在 $a$ 附近的最佳 $n$ 次多項式近似，與 $f$ 在 $a$ 處有相同的 $n$ 階導數值。</li>
+  <li><strong>冪級數的乘法與除法</strong>：兩個冪級數可像多項式一樣相乘（柯西乘積）或長除法，結果的收斂半徑至少為兩者收斂半徑的最小值。</li>
+  <li><strong>應用</strong>：冪級數用於求解微分方程（級數解法）、近似定積分（如 $\int e^{-x^2}dx$）、計算極限、以及定義非初等函數（如 Bessel 函數）。</li>
+</ol>
+</section>
+
+<!-- ====== Key Equations ====== -->
+<section id="key-equations">
+<h2>📐 關鍵公式（Key Equations）</h2>
+<table>
+<thead><tr><th>公式</th><th>說明</th></tr></thead>
+<tbody>
+<tr><td>$$\sum_{n=0}^\infty c_n (x-a)^n$$</td><td>冪級數一般形式（中心 $a$）</td></tr>
+<tr><td>$$R = \lim_{n\to\infty} \left|\frac{c_n}{c_{n+1}}
+ight|$$</td><td>收斂半徑（比值檢驗法）</td></tr>
+<tr><td>$$\frac{1}{1-x} = \sum_{n=0}^\infty x^n,\quad |x|<1$$</td><td>幾何級數（最基礎的冪級數）</td></tr>
+<tr><td>$$f(x) = \sum_{n=0}^\infty \frac{f^{(n)}(a)}{n!}(x-a)^n$$</td><td>泰勒級數</td></tr>
+<tr><td>$$e^x = \sum_{n=0}^\infty \frac{x^n}{n!}$$</td><td>$e^x$ 的麥克勞林級數</td></tr>
+<tr><td>$$\sin x = \sum_{n=0}^\infty \frac{(-1)^n x^{2n+1}}{(2n+1)!}$$</td><td>$\sin x$ 的麥克勞林級數</td></tr>
+<tr><td>$$\cos x = \sum_{n=0}^\infty \frac{(-1)^n x^{2n}}{(2n)!}$$</td><td>$\cos x$ 的麥克勞林級數</td></tr>
+<tr><td>$$\ln(1+x) = \sum_{n=1}^\infty \frac{(-1)^{n-1}x^n}{n},\quad -1 < x \le 1$$</td><td>$\ln(1+x)$ 的麥克勞林級數</td></tr>
+<tr><td>$$\tan^{-1} x = \sum_{n=0}^\infty \frac{(-1)^n x^{2n+1}}{2n+1},\quad |x| \le 1$$</td><td>$\tan^{-1} x$ 的麥克勞林級數</td></tr>
+<tr><td>$$|R_n(x)| \le \frac{M}{(n+1)!}|x-a|^{n+1},\; M \ge |f^{(n+1)}(x)|$$</td><td>泰勒不等式（餘項估計）</td></tr>
+<tr><td>$$(1+x)^k = \sum_{n=0}^\infty \binom{k}{n}x^n,\quad |x|<1$$</td><td>二項式級數</td></tr>
+<tr><td>$$\binom{k}{n} = \frac{k(k-1)(k-2)\cdots(k-n+1)}{n!}$$</td><td>二項式係數（$k$ 為任意實數）</td></tr>
+<tr><td>$$e^{ix} = \cos x + i\sin x$$</td><td>歐拉公式</td></tr>
+</tbody>
+</table>
+</section>
+
+<!-- ====== Summary ====== -->
+<section id="summary">
+<h2>本章摘要</h2>
+
+<div class="callout"><strong>🔑 核心收穫</strong><br>
+本章完整建立了冪級數的理論與應用體系。以下是必須掌握的八個核心觀念：
+<ol>
+  <li><strong>冪級數 $\sum c_n (x-a)^n$</strong> 在中心 $a$ 處一定收斂，收斂範圍由收斂半徑 $R$ 決定——使用比值檢驗求 $R$，端點單獨驗證</li>
+  <li><strong>幾何級數 $\sum x^n = \frac{1}{1-x}$</strong> 是最基礎的冪級數——通過代入、部分分式、微分和積分可以衍生出大量函數的展開</li>
+  <li><strong>逐項微分與積分</strong>是冪級數最強大的操作——收斂半徑不變，但端點行為可能改變</li>
+  <li><strong>泰勒級數 $f(x) = \sum \frac{f^{(n)}(a)}{n!}(x-a)^n$</strong> 是冪級數展開的通用方法——係數由各階導數在展開點的值決定</li>
+  <li><strong>麥克勞林級數</strong>（$a=0$）給出 $e^x = \sum \frac{x^n}{n!}$、$\sin x = \sum \frac{(-1)^n x^{2n+1}}{(2n+1)!}$、$\cos x = \sum \frac{(-1)^n x^{2n}}{(2n)!}$</li>
+  <li><strong>泰勒餘項 $R_n(x) = \frac{f^{(n+1)}(c)}{(n+1)!}(x-a)^{n+1}$</strong> 決定了近似的精確度——級數收斂到 $f(x)$ 的充要條件是 $R_n(x) \to 0$</li>
+  <li><strong>二項式級數 $(1+x)^r$</strong> 將二項式定理推廣到任意實指數，在 $|x|<1$ 內收斂</li>
+  <li><strong>冪級數可用於解微分方程和計算非初等積分</strong>——這兩個應用充分展現了冪級數在科學與工程中的實用價值</li>
+</ol>
+</div>
+
+<table>
+  <thead><tr><th>概念</th><th>公式 / 定理</th><th>關鍵條件</th></tr></thead>
+  <tbody>
+    <tr><td>幾何級數</td><td>$\sum_{n=0}^{\infty} x^n = \frac{1}{1-x}$</td><td>$|x| < 1$</td></tr>
+    <tr><td>收斂半徑（比值檢驗）</td><td>$R = \lim_{n\to\infty} \left|\frac{c_n}{c_{n+1}}\right|$</td><td>極限存在</td></tr>
+    <tr><td>逐項微分</td><td>$f'(x) = \sum n c_n x^{n-1}$</td><td>$|x| < R$（端點可能變）</td></tr>
+    <tr><td>逐項積分</td><td>$\int f = C + \sum \frac{c_n}{n+1} x^{n+1}$</td><td>$|x| < R$（端點可能變）</td></tr>
+    <tr><td>泰勒級數</td><td>$\sum \frac{f^{(n)}(a)}{n!}(x-a)^n$</td><td>$f$ 在 $a$ 處無窮可微</td></tr>
+    <tr><td>餘項（Lagrange）</td><td>$R_n(x) = \frac{f^{(n+1)}(c)}{(n+1)!}(x-a)^{n+1}$</td><td>$c$ 在 $a$ 和 $x$ 之間</td></tr>
+    <tr><td>柯西乘積</td><td>$\sum_{n=0}^{\infty} \left(\sum_{k=0}^n c_k d_{n-k}\right) x^n$</td><td>兩級數的共同收斂區間</td></tr>
+    <tr><td>二項式級數</td><td>$(1+x)^r = \sum \binom{r}{n} x^n$</td><td>$|x| < 1$，$r \in \mathbb{R}$</td></tr>
+  </tbody>
+</table>
+</section>
+
+<!-- ====== Common Mistakes ====== -->
+<section id="common-mistakes">
+<h2>⚠️ 初學者常見錯誤</h2>
+
+<div class="callout-warn"><strong>❌ 錯誤 1：忘記檢驗端點</strong><br>
+比值檢驗告訴你 $|x-a| < R$ 時收斂、$|x-a| > R$ 時發散，但<strong>對 $|x-a| = R$ 無法下結論</strong>。端點必須單獨代入原級數，使用其他檢驗法（交錯級數檢驗、積分檢驗、$p$-級數等）來判斷。忽略端點檢驗直接寫收斂區間為 $(-R, R)$ 是考試中最常見的扣分點。記住正確答案可能是 $(-R, R)$、$[-R, R)$、$(-R, R]$ 或 $[-R, R]$ 四種之一。</div>
+
+<div class="callout-warn"><strong>❌ 錯誤 2：泰勒級數的 $n!$ 遺漏或放錯位置</strong><br>
+泰勒級數的係數公式是 $\frac{f^{(n)}(a)}{n!}$，不是 $f^{(n)}(a)$ 也不是 $\frac{f^{(n)}(a)}{n}$。許多學生在計算 $e^x$ 展開時寫成 $\sum \frac{x^n}{n}$ 而非 $\sum \frac{x^n}{n!}$——前者是 $-\ln(1-x)$ 的展開，後者才是 $e^x$。一個檢查方法：代入 $x=0$，級數應給出 $f(0)$。對於 $e^x$ 在 $x=0$，$\sum \frac{1}{n!} = e$，而 $\sum \frac{1}{n}$ 發散。</div>
+
+<div class="callout-warn"><strong>❌ 錯誤 3：逐項微分時忘記從 $n=1$ 開始</strong><br>
+$\frac{d}{dx} \sum_{n=0}^{\infty} c_n x^n = \sum_{n=1}^{\infty} n c_n x^{n-1}$，注意和號從 $n=1$ 開始（常數項 $c_0$ 微分後消失）。寫成從 $n=0$ 開始雖然第一項是 $0 \cdot c_0 \cdot x^{-1}$，形式上可以但容易出錯。更常見的錯誤是微分後忘記調整指數——原級數中 $x^n$ 的係數是 $c_n$，微分後 $x^{n-1}$ 的係數是 $n c_n$。</div>
+
+<div class="callout-warn"><strong>❌ 錯誤 4：混淆「泰勒級數收斂」和「泰勒級數收斂到 $f$」</strong><br>
+泰勒級數收斂到某個函數，不代表那個函數就是原來的 $f$。經典反例 $f(x) = e^{-1/x^2}$（$f(0)=0$）在 $x=0$ 的泰勒級數是零級數，收斂到常數函數 $0$，但 $f(x) \neq 0$（除了 $x=0$）。必須驗證 $\lim_{n\to\infty} R_n(x) = 0$ 才能斷言泰勒級數收斂到 $f(x)$。好在對於 $e^x, \sin x, \cos x$ 以及大多數「初等函數」，這個條件是滿足的——但這個驗證不能省略。</div>
+
+<div class="callout-warn"><strong>❌ 錯誤 5：在收斂區間外使用冪級數等式</strong><br>
+$\frac{1}{1-x} = 1 + x + x^2 + \cdots$ 這個等式<strong>只</strong>在 $|x| < 1$ 時成立。如果你代入 $x=2$ 得到 $1+2+4+8+\cdots = -1$，這在傳統級數收斂的意義下是錯的——等式右邊的級數在 $x=2$ 時發散。冪級數展開是一個<strong>局部</strong>表示，只在收斂區間內有效。在應用中，永遠要先檢查 $x$ 是否落在收斂區間內。</div>
+
+</section>
+
+<!-- ====== Self-Check ====== -->
+<section id="self-check">
+<h2>✅ 自我檢測（Self-Check）</h2>
+<p>完成以下題目檢驗你對本章核心概念的掌握程度。點擊展開查看答案。</p>
+
+<details class="derive"><summary>題 1：收斂半徑 — 求 $\displaystyle\sum_{n=1}^{\infty} \frac{x^n}{n}$ 的收斂半徑與區間</summary>
+<p><strong>答案：</strong>使用比值檢驗：$
+ho = \lim_{n\to\infty} \left|\frac{x^{n+1}/(n+1)}{x^n/n}
+ight| = |x| \cdot \lim_{n\to\infty} \frac{n}{n+1} = |x|$。<br>
+令 $
+ho < 1$ → $|x| < 1$，收斂半徑 $R = 1$。<br>
+端點檢驗：$x = 1$ → $\sum \frac{1}{n}$（調和級數，發散）；$x = -1$ → $\sum \frac{(-1)^n}{n}$（交錯調和級數，收斂）。<br>
+收斂區間：$[-1, 1)$。</p>
+</details>
+
+<details class="derive"><summary>題 2：麥克勞林級數 — 寫出 $e^x$ 的麥克勞林級數前四項，並說明為何收斂區間為 $(-\infty, \infty)$</summary>
+<p><strong>答案：</strong>$e^x = 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \cdots = \sum_{n=0}^{\infty} \frac{x^n}{n!}$。<br>
+用比值檢驗：$
+ho = \lim_{n\to\infty} \left|\frac{x^{n+1}/(n+1)!}{x^n/n!}
+ight| = |x| \cdot \lim_{n\to\infty} \frac{1}{n+1} = 0 < 1$ 對所有 $x$ 成立，故 $R = \infty$。</p>
+</details>
+
+<details class="derive"><summary>題 3：逐項微分 — 利用 $\frac{1}{1-x} = \sum_{n=0}^{\infty} x^n$ 求 $\frac{1}{(1-x)^2}$ 的冪級數展開</summary>
+<p><strong>答案：</strong>$\frac{d}{dx}\left(\frac{1}{1-x}
+ight) = \frac{1}{(1-x)^2}$。逐項微分：<br>
+$\frac{1}{(1-x)^2} = \frac{d}{dx} \sum_{n=0}^{\infty} x^n = \sum_{n=1}^{\infty} n x^{n-1} = \sum_{n=0}^{\infty} (n+1)x^n = 1 + 2x + 3x^2 + 4x^3 + \cdots$。<br>
+收斂區間：$|x| < 1$。</p>
+</details>
+
+<details class="derive"><summary>題 4：二項式級數 — 用二項式級數寫出 $\sqrt{1+x}$ 展開的前四項</summary>
+<p><strong>答案：</strong>$r = 1/2$，$\binom{1/2}{n} = \frac{\frac{1}{2}(-\frac{1}{2})(-\frac{3}{2})\cdots(\frac{1}{2}-n+1)}{n!}$。<br>
+$\binom{1/2}{0} = 1$，$\binom{1/2}{1} = \frac{1}{2}$，$\binom{1/2}{2} = \frac{(1/2)(-1/2)}{2!} = -\frac{1}{8}$，$\binom{1/2}{3} = \frac{(1/2)(-1/2)(-3/2)}{3!} = \frac{1}{16}$。<br>
+$\sqrt{1+x} = 1 + \frac{1}{2}x - \frac{1}{8}x^2 + \frac{1}{16}x^3 - \cdots$，收斂於 $|x| < 1$。</p>
+</details>
+
+<details class="derive"><summary>題 5：泰勒餘項 — 用 3 階麥克勞林多項式近似 $\sin(0.2)$，並估計誤差上界</summary>
+<p><strong>答案：</strong>$\sin x \approx x - \frac{x^3}{3!}$（3 階，$p_3(x)$）。$\sin(0.2) \approx 0.2 - \frac{0.008}{6} = 0.2 - 0.001333 = 0.198667$。<br>
+餘項：$|R_3(0.2)| = \left|\frac{f^{(4)}(c)}{4!}(0.2)^4
+ight|$。$f^{(4)}(x) = \sin x$，$|\sin c| \leq 1$。<br>
+$|R_3| \leq \frac{0.0016}{24} \approx 6.67 \times 10^{-5}$。實際 $\sin(0.2) \approx 0.198669$，誤差約 $2 \times 10^{-6}$，遠小於上界。</p>
+</details>
+</section>
+
+<!-- ====== Extras ====== -->
+<section id="extras">
+<h2>📚 延伸資源</h2>
+
+<ul>
+  <li><strong>3Blue1Brown — Taylor series</strong>：YouTube 影片「Taylor series | Chapter 11, Essence of calculus」提供極佳的視覺直覺——強烈推薦觀看</li>
+  <li><strong>Khan Academy — Power Series</strong>：互動練習涵蓋收斂區間、泰勒多項式、誤差估計</li>
+  <li><strong>Desmos</strong>：繪製 $f(x)$ 和它的 $n$ 階泰勒多項式，觀察 $n$ 增大時逼近如何改善</li>
+  <li><strong>MacTutor 數學史檔案</strong>：閱讀 Brook Taylor 和 Colin Maclaurin 的傳記，了解這些概念是如何被發展出來的</li>
+  <li>下一章預告：<strong>第 7 章 — 參數方程與極座標</strong>將使用冪級數來研究曲線的新表示方式</li>
+</ul>
+
+<details class="derive" open>
+<summary>📐 深入推導：歐拉公式 $e^{ix} = \cos x + i\sin x$</summary>
+<div class="step">
+<p>將 $ix$ 代入 $e^x$ 的麥克勞林級數：</p>
+</div>
+<div class="step">
+<p>$e^{ix} = \sum_{n=0}^{\infty} \frac{(ix)^n}{n!} = 1 + ix + \frac{(ix)^2}{2!} + \frac{(ix)^3}{3!} + \frac{(ix)^4}{4!} + \frac{(ix)^5}{5!} + \cdots$</p>
+</div>
+<div class="step">
+<p>$= 1 + ix - \frac{x^2}{2!} - i\frac{x^3}{3!} + \frac{x^4}{4!} + i\frac{x^5}{5!} - \cdots$</p>
+</div>
+<div class="step">
+<p>$= \left(1 - \frac{x^2}{2!} + \frac{x^4}{4!} - \cdots\right) + i\left(x - \frac{x^3}{3!} + \frac{x^5}{5!} - \cdots\right)$</p>
+</div>
+<div class="step">
+<p>$= \cos x + i\sin x$ —— 這就是為什麼冪級數被譽為數學中最優雅的構造之一。</p>
+</div>
+</details>
+</section>
+
+</main>
+
+<script>
+// Sidebar scroll spy
+(function(){
+  const navs = document.querySelectorAll('.sn a, .nsub a');
+  const sections = [];
+  navs.forEach(a => {
+    const id = a.getAttribute('href');
+    if (id && id.startsWith('#')) {
+      const el = document.getElementById(id.substring(1));
+      if (el) sections.push({a, el});
+    }
+  });
+  function onScroll(){
+    let current = sections[0];
+    for (const s of sections) {
+      if (s.el.offsetTop <= window.scrollY + 120) current = s;
+    }
+    navs.forEach(a => a.classList.remove('active'));
+    if (current) current.a.classList.add('active');
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+})();
+
+// Theme toggle
+function toggleTheme(){ if(window.toggleTheme) window.toggleTheme(); } catch(e){}
+}
+(function(){
+  try {
+    const saved = localStorage.getItem('learning-portal-reading-preferences');
+    if (saved === 'dark') {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      document.getElementById('themeBtn').textContent = '☀️ 淺色模式';
+    }
+  } catch(e){}
+})();
+
+// Mobile sidebar
+</script>
+<script defer src="../assets/course-ui.js"></script>
+</body>
+</html>

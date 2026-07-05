@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第 2 章 — Calculus 學習教材</title>
+
+<!-- MathJax 3 -->
+<script>
+MathJax = {
+  tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']], tags: 'ams' },
+  options: { ignoreHtmlClass: 'no-math' }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+<script src="../assets/reading-preferences.js" defer></script>
+
+<style>
+/* ========== CSS 變數（含深色模式） ========== */
+:root {
+  --bg: #FFFFFF; --bg2: #F5F5F7; --bg3: #E8F0FE;
+  --tx: #1D1D1F; --tx2: #4A4A4E;
+  --ac: #007AFF; --ac2: #0056CC;
+  --bd: #D2D2D7; --fbd: #E5E5EA;
+  --sh: 0 2px 8px rgba(0,0,0,.08);
+  --derive-bg: #F0F6FF; --derive-ac: #2563EB;
+  --warn-bg: #FFFBEB; --warn-bd: #F59E0B; --warn-tx: #92400E;
+  --ex-bg: #F0FDF4; --ex-bd: #22C55E;
+  --nav-width: 260px;
+  --h2-border: #007AFF;
+  --code-bg: #F3F4F6;
+  --tag-bg: #E8F0FE;
+}
+[data-theme="dark"] {
+  --bg: #1D1D1F; --bg2: #2D2D2F; --bg3: #1E3A5F;
+  --tx: #F5F5F7; --tx2: #A1A1A6;
+  --ac: #4DA3FF; --ac2: #7DBFFF;
+  --bd: #3A3A3C; --fbd: #48484A;
+  --sh: 0 2px 8px rgba(0,0,0,.35);
+  --derive-bg: #1E293B; --derive-ac: #60A5FA;
+  --warn-bg: #422006; --warn-bd: #92400E; --warn-tx: #FCD34D;
+  --ex-bg: #052E16; --ex-bd: #16A34A;
+  --h2-border: #4DA3FF;
+  --code-bg: #2D2D2F;
+  --tag-bg: #1E3A5F;
+}
+
+/* ========== 基礎樣式 ========== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Noto Sans TC', 'Microsoft JhengHei', sans-serif;
+  background: var(--bg); color: var(--tx); line-height: 1.72; font-size: 15px;
+}
+
+/* ========== 入口連結 ========== */
+.portal-home-link {
+  display: inline-block; padding: 6px 14px; margin: 10px 16px; font-size: 12px;
+  color: var(--ac); text-decoration: none; border: 1px solid var(--bd); border-radius: 20px;
+  transition: .15s;
+}
+.portal-home-link:hover { background: var(--bg3); }
+
+/* ========== 側欄 ========== */
+.sidebar {
+  position: fixed; left: 0; top: 0; width: var(--nav-width); height: 100vh;
+  background: var(--bg2); border-right: 1px solid var(--bd); overflow-y: auto;
+  z-index: 100; display: flex; flex-direction: column;
+}
+.sidebar-header { padding: 20px 16px 12px; border-bottom: 1px solid var(--fbd); }
+.sidebar-header .book-title { font-size: 13px; font-weight: 700; color: var(--tx); }
+.sidebar-header .chapter-label { font-size: 11px; color: var(--tx2); margin-top: 2px; }
+.sn { flex: 1; overflow-y: auto; padding: 8px 0; }
+.ns { font-size: 11px; font-weight: 600; color: var(--tx); padding: 6px 12px 2px; margin-top: 6px; display: block; }
+.nsub a { display: block; padding: 3px 12px 3px 20px; font-size: 11px; color: var(--tx2); text-decoration: none; border-radius: 5px; transition: .12s; }
+.nsub a:hover, .nsub a.active { background: var(--bg3); color: var(--ac); }
+.sidebar-footer { padding: 12px 16px; border-top: 1px solid var(--fbd); }
+.theme-toggle-btn { width: 100%; padding: 8px; border: 1px solid var(--bd); border-radius: 6px; background: var(--bg); color: var(--tx); cursor: pointer; font-size: 12px; transition: .15s; }
+.theme-toggle-btn:hover { background: var(--bg3); }
+
+/* ========== 側欄切換按鈕（手機） ========== */
+.sidebar-toggle-btn {
+  display: none; position: fixed; top: 12px; left: 12px; z-index: 200;
+  width: 36px; height: 36px; border: 1px solid var(--bd); border-radius: 8px;
+  background: var(--bg); color: var(--tx); cursor: pointer; font-size: 18px; line-height: 36px; text-align: center;
+  box-shadow: var(--sh);
+}
+
+/* ========== 主內容 ========== */
+.main { margin-left: var(--nav-width); max-width: 1100px; padding: 32px 40px 80px; }
+
+/* ========== 頁首 ========== */
+.chapter-header { margin-bottom: 24px; }
+.chapter-badge { display: inline-block; background: var(--ac); color: #fff; padding: 4px 12px; border-radius: 14px; font-size: 12px; font-weight: 600; margin-bottom: 8px; }
+.chapter-header h1 { font-size: 30px; font-weight: 800; color: var(--tx); margin-bottom: 4px; }
+.chapter-header .meta { font-size: 12px; color: var(--tx2); }
+
+/* ========== Preview 區塊 ========== */
+.preview-section {
+  background: var(--bg2); border: 1px solid var(--bd); border-radius: 12px;
+  padding: 24px; margin: 24px 0;
+}
+.preview-section h3 { font-size: 16px; color: var(--ac); margin-bottom: 16px; }
+.preview-section .core-questions { margin-bottom: 16px; }
+.preview-section .core-questions li { font-size: 14px; line-height: 1.8; }
+.preview-section .key-concepts { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 24px; margin: 12px 0; }
+.preview-section .key-concepts li { font-size: 13px; }
+.preview-section .logic-chain { font-size: 13px; color: var(--tx2); margin: 12px 0; }
+.preview-section .prereqs { font-size: 13px; color: var(--tx2); }
+
+/* ========== 段落 ========== */
+section { margin: 32px 0; }
+h2 { font-size: 22px; font-weight: 700; color: var(--tx); border-bottom: 2px solid var(--h2-border); padding-bottom: 8px; margin: 36px 0 16px; }
+h3 { font-size: 17px; font-weight: 700; color: var(--tx); margin: 24px 0 12px; }
+h4 { font-size: 14px; font-weight: 700; color: var(--tx); margin: 18px 0 8px; }
+p { margin: 10px 0; font-size: 14.5px; }
+strong { color: var(--ac); font-weight: 600; }
+
+/* ========== Callout 體系 ========== */
+.callout { background: var(--bg3); border: 1px solid var(--fbd); border-radius: 8px; padding: 14px 18px; margin: 16px 0; font-size: 13px; border-left: 4px solid var(--ac); }
+.callout strong { color: var(--ac); }
+.callout .callout-icon { font-size: 16px; margin-right: 6px; }
+
+.callout-warn { background: var(--warn-bg); border: 1px solid var(--warn-bd); border-radius: 8px; padding: 14px 18px; margin: 16px 0; font-size: 13px; border-left: 4px solid var(--warn-bd); }
+.callout-warn strong { color: var(--warn-tx); }
+.callout-warn .warn-icon { font-size: 16px; margin-right: 6px; }
+
+.exbox { background: var(--ex-bg); border: 1px solid var(--ex-bd); border-radius: 8px; padding: 14px 18px; margin: 16px 0; font-size: 13px; border-left: 4px solid var(--ex-bd); }
+.exbox .ex-label { font-weight: 700; color: #16A34A; margin-bottom: 8px; font-size: 14px; }
+[data-theme="dark"] .exbox .ex-label { color: #4ADE80; }
+
+/* ========== Figure ========== */
+.figure { margin: 24px 0; text-align: center; }
+.figure img { max-width: 100%; border-radius: 8px; box-shadow: var(--sh); cursor: pointer; transition: transform .15s; }
+.figure img:hover { transform: scale(1.01); }
+.figure figcaption { margin-top: 8px; font-size: 12px; color: var(--tx2); font-style: italic; }
+
+/* ========== 公式卡 ========== */
+.formula-card { background: var(--bg2); border: 1px solid var(--bd); border-radius: 10px; padding: 16px 20px; margin: 20px 0; }
+.formula-card .label { font-size: 12px; font-weight: 700; color: var(--ac); margin-bottom: 6px; text-transform: uppercase; letter-spacing: .5px; }
+.formula-card .eq { font-size: 16px; margin: 8px 0; }
+.formula-card .note { font-size: 12px; color: var(--tx2); }
+
+/* ========== 推導區塊 ========== */
+details.derive { border-left: 4px solid var(--derive-ac); background: var(--derive-bg); border-radius: 0 8px 8px 0; padding: 0; margin: 16px 0; }
+details.derive > summary { padding: 12px 16px; cursor: pointer; font-weight: 600; font-size: 14px; color: var(--derive-ac); }
+details.derive .step { display: flex; gap: 12px; align-items: flex-start; padding: 8px 16px; }
+details.derive .step-num { font-weight: 700; color: var(--derive-ac); min-width: 24px; }
+
+/* ========== 例題區塊 ========== */
+details.example { border: 1px solid var(--ex-bd); background: var(--ex-bg); border-radius: 8px; padding: 0; margin: 16px 0; }
+details.example > summary { padding: 12px 16px; cursor: pointer; font-weight: 600; font-size: 14px; color: #16A34A; }
+[data-theme="dark"] details.example > summary { color: #4ADE80; }
+details.example .sol { padding: 12px 16px; border-top: 1px solid var(--ex-bd); }
+
+/* ========== 推導實驗室 ========== */
+.derivation-lab { background: var(--bg2); border: 1px solid var(--bd); border-radius: 12px; padding: 20px 24px; margin: 24px 0; }
+.derivation-lab h3 { margin-top: 0; color: var(--ac); }
+
+/* ========== 摘要 ========== */
+.summary-section { background: var(--bg2); border: 1px solid var(--bd); border-radius: 12px; padding: 24px; margin: 32px 0; }
+.summary-section h2 { border-bottom: none; margin-top: 0; }
+.summary-section ul { columns: 2; column-gap: 32px; font-size: 13px; }
+.summary-section li { margin-bottom: 6px; break-inside: avoid; }
+
+/* ========== 常見錯誤段落 ========== */
+.common-mistakes { margin: 32px 0; }
+
+/* ========== 延伸資源 ========== */
+.resources-section { margin: 24px 0; }
+.resources-section ul { font-size: 13px; }
+
+/* ========== 響應式 ========== */
+@media (max-width: 768px) {
+  .sidebar { transform: translateX(-100%); transition: transform .25s; }
+  .sidebar.open { transform: translateX(0); }
+  .main { margin-left: 0; padding: 16px; }
+  .sidebar-toggle-btn { display: block; }
+  .preview-section .key-concepts { grid-template-columns: 1fr; }
+  .summary-section ul { columns: 1; }
+}
+
+/* ========== 列印 ========== */
+@media print {
+  .sidebar, .sidebar-toggle-btn, .portal-home-link { display: none; }
+  .main { margin-left: 0; }
+}
+
+/* ========== 其他 ========== */
+.tag { display: inline-block; background: var(--tag-bg); color: var(--ac); padding: 2px 8px; border-radius: 10px; font-size: 11px; font-weight: 600; margin: 0 4px; }
+.code { font-family: 'SF Mono', 'Fira Code', 'Cascadia Code', monospace; background: var(--code-bg); padding: 1px 5px; border-radius: 4px; font-size: 13px; }
+table { border-collapse: collapse; margin: 12px 0; font-size: 13px; }
+th, td { border: 1px solid var(--bd); padding: 6px 12px; text-align: center; }
+th { background: var(--bg2); font-weight: 600; }
+.eq { font-size: 16px; margin: 12px 0; text-align: center; overflow-x: auto; }
+.warn-box { background: var(--warn-bg); border: 1px solid var(--warn-bd); border-radius: 8px; padding: 12px 16px; margin: 12px 0; font-size: 13px; }
+hr { border: none; border-top: 1px solid var(--fbd); margin: 24px 0; }
+</style>
+<link rel="stylesheet" href="../assets/course-ui.css">
+
+<script>
+function toggleTheme() {
+  const html = document.documentElement;
+  const current = html.getAttribute('data-theme');
+  const next = current === 'dark' ? 'light' : 'dark';
+  html.setAttribute('data-theme', next);
+  try { localStorage.setItem('learning-portal-reading-preferences', next); } catch(e) {}
+  const btn = document.getElementById('themeToggleBtn');
+  if (btn) btn.textContent = next === 'dark' ? '☀️ 淺色模式' : '🌙 深色模式';
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  try {
+    const saved = localStorage.getItem('learning-portal-reading-preferences');
+    if (saved) document.documentElement.setAttribute('data-theme', saved);
+    const btn = document.getElementById('themeToggleBtn');
+    if (btn) btn.textContent = (saved === 'dark') ? '☀️ 淺色模式' : '🌙 深色模式';
+  } catch(e) {}
+  // Scroll spy
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nsub a');
+  window.addEventListener('scroll', function() {
+    let current = '';
+    sections.forEach(function(sec) {
+      if (window.scrollY >= sec.offsetTop - 120) current = sec.getAttribute('id');
+    });
+    navLinks.forEach(function(link) {
+      link.classList.toggle('active', link.getAttribute('href') === '#' + current);
+    });
+  });
+});
+</script>
+</head>
+<body>
+
+<a class="portal-home-link" href="../../index.html">🏠 返回學習中心</a>
+
+<!-- 手機側欄切換按鈕 -->
+<button class="sidebar-toggle-btn" onclick="toggleSidebar()" aria-label="切換側欄">☰</button>
+
+<!-- ========== 側欄導覽 ========== -->
+<nav class="sidebar">
+  <div class="sidebar-header">
+    <div class="book-title">Calculus Vol. 1</div>
+    <div class="chapter-label">第 2 章 · p.113–194</div>
+  </div>
+  <div class="sn">
+    <span class="ns">第 2 章 極限（Limits）</span>
+    <div class="nsub">
+      <a href="#preview">章前預覽</a>
+      <a href="#s2-1">2.1 微積分預覽</a>
+      <a href="#s2-2">2.2 函數的極限</a>
+      <a href="#s2-3">2.3 極限法則</a>
+      <a href="#s2-4">2.4 連續性</a>
+      <a href="#s2-5">2.5 極限的精確定義</a>
+      <a href="#summary">本章摘要</a>
+      <a href="#mistakes">初學者常見錯誤</a>
+      <a href="#resources">延伸資源</a>
+    </div>
+  </div>
+  <div class="sidebar-footer">
+    <button class="theme-toggle-btn" id="themeToggleBtn" onclick="toggleTheme()">🌙 深色模式</button>
+  </div>
+</nav>
+
+<!-- ========== 主內容 ========== -->
+<main class="main">
+
+<!-- 章標題 -->
+<header class="chapter-header">
+  <div class="chap-tag">第 2 章 · OpenStax Calculus Vol 1, Ch 2</div>
+  <h1>第 2 章　極限 <span style="font-weight:400;font-size:20px;">Limits</span></h1>
+  <p class="meta">原文頁碼範圍：p.113–194　|　原文作者：Gilbert Strang, Edwin "Jed" Herman　|　教材涵蓋 §2.1–§2.5</p>
+</header>
+
+<!-- ====== Preview 章前預覽 ====== -->
+<section id="preview" class="preview-section">
+  <h3>🔍 章前預覽：本章回答了什麼？</h3>
+  <div class="core-questions">
+    <p><strong>核心問題：</strong></p>
+    <ol>
+      <li>什麼是「極限」（limit）？為什麼它是整個微積分的基礎？</li>
+      <li>如何用表格、圖形與代數方法求出函數在某一點的極限？</li>
+      <li>極限法則（limit laws）如何讓複雜的極限計算變得系統化？</li>
+      <li>什麼是連續性（continuity）？函數不連續有哪三種類型？</li>
+      <li>如何用 ε-δ 語言給出極限的精確定義，並用此定義證明極限成立？</li>
+    </ol>
+  </div>
+  <p><strong>關鍵概念 10 條：</strong></p>
+  <ol class="key-concepts">
+    <li>① 極限（limit）：當 $x$ 趨近 $a$ 時，$f(x)$ 趨近的唯一實數 $L$</li>
+    <li>② 割線（secant line）→ 切線（tangent line）：微分學的起源</li>
+    <li>③ 瞬時速度 = 平均速度當時間間隔趨近零的極限</li>
+    <li>④ 面積問題：矩形近似求和 → 定積分（definite integral）</li>
+    <li>⑤ 雙側極限存在 ⟺ 左右極限相等</li>
+    <li>⑥ 無窮極限 ≠ 極限不存在；它是對函數行為的描述</li>
+    <li>⑦ 極限法則：和、差、積、商、冪、根的法則</li>
+    <li>⑧ 連續性三條件：$f(a)$ 定義、$\lim_{x\to a}f(x)$ 存在、兩者相等</li>
+    <li>⑨ 中間值定理（IVT）：連續函數在閉區間上取遍所有中間值</li>
+    <li>⑩ ε-δ 定義：$\forall\varepsilon>0,\;\exists\delta>0$ 使得 $0<|x-a|<\delta\Rightarrow|f(x)-L|<\varepsilon$</li>
+  </ol>
+  <p class="logic-chain"><strong>📐 邏輯鏈：</strong>割線斜率 → 極限 → 導數 → 微分學　|　矩形近似面積 → 極限 → 積分 → 積分學　|　極限是兩者的共同語言</p>
+  <p class="prereqs"><strong>📚 先備知識：</strong>函數概念（§1.1）、代數運算、絕對值與不等式、三角函數基礎（§1.3）、單位圓</p>
+</section>
+
+<hr>
+
+<!-- ================================================================ -->
+<!-- SECTION 2.1 -->
+<!-- ================================================================ -->
+<section id="s2-1">
+<h2>2.1　微積分預覽 <span style="font-weight:400;font-size:16px;">A Preview of Calculus</span></h2>
+
+<div style="margin-bottom:14px;font-size:12px;color:var(--tx2);line-height:1.8">
+<strong style="color:var(--tx)">🔑 本節重點</strong> ①微積分兩大核心問題：切線斜率與曲線下面積 ②極限是統一切線問題與面積問題的關鍵概念 ③割線斜率取極限即為導數 ④矩形和取極限即為定積分 ⑤微分與積分互為逆運算（FTC）
+</div>
+
+<p>在正式進入微積分的殿堂之前，我們必須先認識：
+
+<p>切線問題問的是：給定一條曲線 $y=f(x)$ 和上面的一點 $(a,f(a))$，如何準確求出通過該點的<strong>切線斜率</strong>？在物理上，這等同於問「瞬時變化率是多少？」——例如一輛車在某個瞬間的速度。要回答這個問題，我們先從一條通過曲線上兩點的<strong>割線（secant line）</strong>開始。割線的斜率為 $\displaystyle m_{\text{sec}}=\frac{f(x)-f(a)}{x-a}$。如果我們讓第二個點越來越靠近 $(a,f(a))$，割線就會逐漸轉向切線的方向——在極限過程中，割線斜率的極限就是切線斜率。這個過程所得到的值，就是<strong>導數（derivative）</strong>。</p>
+
+<p>面積問題則問：給定函數 $y=f(x)$ 在 $[a,b]$ 區間上，如何求出曲線下方與 $x$ 軸之間的面積？古希臘數學家如阿基米德（Archimedes），已經用內接多邊形來逼近圓的面積——這正是極限思想的雛形。在現代微積分中，我們將區間切成 $n$ 個窄長方形，每個寬度為 $\Delta x$，高度為 $f(x_i^*)$，總面積近似為 $\sum f(x_i^*)\Delta x$。當 $n\to\infty$（即 $\Delta x\to 0$），這個和的極限就是<strong>定積分（definite integral）</strong>，記為 $\int_a^b f(x)\,dx$。</p>
+
+這兩個問題——切線與面積——看似毫不相關，但它們的解決方案都使用了相同的「極限」語言。事實上，微積分基本定理（Fundamental Theorem of Calculus）後來證明：微分（求切線斜率）與積分（求面積）是互逆的運算！這簡直是數學史上最優雅的發現之一。</p>
+
+<details class="derive" open style="margin:20px 0">
+<summary>🎮 互動模型：割線趨近切線</summary>
+<div style="padding:8px 0">
+<p style="font-size:13px;color:var(--tx2);margin-bottom:12px">拖動 <strong>h</strong> 滑桿讓 Q 點靠近 P 點，觀察割線如何趨近切線。點擊「h → 0」觀看動畫。</p>
+<div data-secant-tangent-model></div>
+</div>
+</details>
+
+<p>此外，微積分還引領我們進入更廣闊的領域
+
+<div class="callout">
+  <span class="callout-icon">💡</span><strong>重點洞察：</strong>整個微積分的統一根源就是「極限」。無論是導數、積分、級數還是多變數微積分，它們的定義都始於某種極限過程。理解極限，就握住了微積分的鑰匙。這也是為什麼我們把整整一章（甚至整門課的前半段）都用在建立極限的直覺與嚴格定義上。
+</div>
+
+<div class="callout-warn">
+  <span class="warn-icon">⚡</span><strong>常見錯誤：</strong>初學者常把「割線的斜率」與「切線的斜率」混為一談。割線需要兩個點，切線只需要一個點（另一個點趨近於它）。關鍵區別在於：切線斜率是<strong>極限</strong>，而非普通的差分商。記住公式：導數 $f'(a)=\lim_{x\to a}\frac{f(x)-f(a)}{x-a}$。
+</div>
+
+<details class="example" open><summary>📝 範例</summary>
+  <div class="ex-label">📝 範例 2.1：求割線斜率來估計切線斜率</div>
+  <p>設 $f(x)=x^2$，考慮點 $P(1,1)$。求通過 $P$ 和 $Q(1.5, f(1.5))$ 的割線斜率，以及通過 $P$ 和 $Q(1.1, f(1.1))$ 的割線斜率。</p>
+  <p><strong>解：</strong></p>
+  <p>對於 $x=1.5$：$m_{\text{sec}}=\dfrac{f(1.5)-f(1)}{1.5-1}=\dfrac{2.25-1}{0.5}=2.5$</p>
+  <p>對於 $x=1.1$：$m_{\text{sec}}=\dfrac{f(1.1)-f(1)}{1.1-1}=\dfrac{1.21-1}{0.1}=2.1$</p>
+  <p>當 $x$ 越接近 $1$，割線斜率越接近 $2$。事實上，$f'(1)=2$。這個過程展示了極限如何從割線過渡到切線。</p>
+</details>
+
+<figure class="figure">
+  <img src="../../pages/v1c2_pages/v1c2_page_114_c.png" alt="Figure 2.2" loading="lazy">
+  <figcaption>圖 2.2：三個線性函數的變化率皆為常數，由斜率決定——斜率越大，變化越快。</figcaption>
+</figure>
+
+<h3>瞬時速度與極限</h3>
+<p>在物理中，速度是位置對時間的變化率。如果我們知道物體的位置函數 $s(t)$，則在時間區間 $[a,t]$ 上的<strong>平均速度（average velocity）</strong>為 $v_{\text{avg}}=\dfrac{s(t)-s(a)}{t-a}$。這個公式的結構與割線斜率完全一致！要得到物體在時刻 $t=a$ 的<strong>瞬時速度（instantaneous velocity）</strong>，我們讓 $t$ 趨近 $a$：$v(a)=\lim_{t\to a}\dfrac{s(t)-s(a)}{t-a}$。</p>
+
+<p>這個看似簡單的極限，實際上統一了數學中的切線問題和物理中的速度問題。正是這種統一性，使得微積分成為自然科學與工程中最強大的數學工具。</p>
+
+<details class="example" open><summary>📝 範例</summary>
+  <div class="ex-label">📝 範例 2.2：求平均速度來估計瞬時速度</div>
+  <p>一顆石頭從 64 英尺高處落下，高度函數為 $s(t)=64-16t^2$（$t$ 以秒計）。求 $t=1$ 時的瞬時速度。</p>
+  <p><strong>解：</strong>計算平均速度：</p>
+  <p>在 $[1, 1.5]$：$v_{\text{avg}}=\dfrac{s(1.5)-s(1)}{0.5}=\dfrac{28-48}{0.5}=-40$ ft/sec</p>
+  <p>在 $[1, 1.1]$：$v_{\text{avg}}=\dfrac{s(1.1)-s(1)}{0.1}=-33.6$ ft/sec</p>
+  <p>在 $[1, 1.01]$：$v_{\text{avg}}=-32.16$ ft/sec</p>
+  <p>在 $[1, 1.001]$：$v_{\text{avg}}=-32.016$ ft/sec</p>
+  <p>這些值趨近 $-32$ ft/sec。實際上 $v(1)=s'(1)=-32$ ft/sec，正是重力加速度的效果。</p>
+</details>
+
+<h3>面積問題與積分學</h3>
+<p>面積問題是微積分的第二個起源。假設我們想求 $y=f(x)$ 在 $[a,b]$ 上與 $x$ 軸之間的面積。直接計算曲線下面積並不容易，但我們可以用矩形來逼近：把 $[a,b]$ 分成 $n$ 等分，每份寬 $\Delta x=\frac{b-a}{n}$，在每一小段上取一個樣本點 $x_i^*$，構造矩形面積 $f(x_i^*)\Delta x$，然後求和。</p>
+
+<p>當 $n$ 越來越大（矩形越來越窄），這些矩形面積之和就趨近於真正的曲線下面積。這個和的極限被定義為<strong>定積分</strong>：$\displaystyle\int_a^b f(x)\,dx = \lim_{n\to\infty}\sum_{i=1}^{n}f(x_i^*)\Delta x$。</p>
+
+<div class="callout">
+  <span class="callout-icon">💡</span><strong>核心洞察：</strong>面積問題的解法（黎曼和 → 定積分）與切線問題的解法（割線斜率 → 導數），雖然幾何意義完全不同，但它們使用了相同的數學結構——<strong>極限</strong>。這暗示了微分與積分之間存在深刻的聯繫。微積分基本定理正是這種聯繫的精確表述。
+</div>
+
+<details class="example" open><summary>📝 範例</summary>
+  <div class="ex-label">📝 範例 2.3：用矩形估計面積</div>
+  <p>用三個矩形估計 $f(x)=x^2$ 在 $[0,3]$ 上的曲線下面積。</p>
+  <p><strong>解：</strong>將 $[0,3]$ 分成 $[0,1],[1,2],[2,3]$ 三個子區間，每個寬度為 $1$。取右端點：$f(1)=1$, $f(2)=4$, $f(3)=9$。面積近似 $=1\cdot1+1\cdot4+1\cdot9=14$ 平方單位。使用更多矩形可以得到更精確的結果（實際面積為 $9$ 平方單位）。</p>
+</details>
+
+<figure class="figure">
+  <img src="../../pages/v1c2_pages/v1c2_page_118_c.png" alt="Figure 2.8" loading="lazy">
+  <figcaption>圖 2.8：面積問題——如何求出陰影區域的面積？答案是使用極限過程。</figcaption>
+</figure>
+
+<p>除了單變數微積分外，同樣的概念可以延伸到<strong>多變數微積分</strong>，處理兩個或更多變數的函數。例如，要計算一個曲面 $z=f(x,y)$ 下方在某個平面區域上的體積，我們可以將區域切成小塊，構造小柱體的體積總和，然後取極限。這個過程本質上與單變數積分類似，只是多了一個維度。</p>
+
+</section>
+
+<!-- ================================================================ -->
+<!-- SECTION 2.2 -->
+<!-- ================================================================ -->
+<section id="s2-2">
+<h2>2.2　函數的極限 <span style="font-weight:400;font-size:16px;">The Limit of a Function</span></h2>
+
+<div style="margin-bottom:14px;font-size:12px;color:var(--tx2);line-height:1.8">
+<strong style="color:var(--tx)">🔑 本節重點</strong> ①極限關心函數在 a 點「附近」的行為，不要求 f(a) 有定義 ②左右極限皆等於 L 則雙側極限存在 ③極限不存在三種情況：左右不相等、震盪、無界增長 ④無窮極限描述垂直漸近線的位置 ⑤sin x / x → 1 為最重要的三角極限
+</div>
+
+p>極限的直覺概念其實並不陌生：當 $x$ 越來越靠近某個數 $a$（但不一定等於 $a$），函數值 $f(x)$ 也越來越靠近某個數 $L$。我們說「$x$ 趨近 $a$ 時，$f(x)$ 的極限是 $L$」，記作 $\displaystyle\lim_{x\to a}f(x)=L$。注意，這個定義<strong>不要求 $f(a)$ 有定義</strong>，也不要求 $f(a)=L$（即使 $f(a)$ 有定義）。極限關心的是函數在 $a$「附近」的行為，而不是在 $a$ 這一點上的值。</p>
+
+<p>例如，考慮函數 $f(x)=\dfrac{x^2-4}{x-2}$。當 $x=2$ 時分母為 $0$，所以 $f(2)$ 沒有定義。但當 $x\neq 2$ 時，我們可以化簡：$\dfrac{x^2-4}{x-2}=\dfrac{(x-2)(x+2)}{x-2}=x+2$。因此對於所有 $x\neq 2$，$f(x)=x+2$。當 $x$ 趨近 $2$ 時，$x+2$ 趨近 $4$，所以 $\lim_{x\to 2}f(x)=4$。即使函數在 $x=2$ 處有一個「洞」，極限仍然存在。</p>
+
+<div class="callout">
+  <span class="callout-icon">💡</span><strong>直覺定義：</strong>設 $f(x)$ 在含 $a$ 的某個開區間上有定義（$a$ 本身可以例外），$L$ 是一個實數。如果當 $x$ 任意接近 $a$ 時，$f(x)$ 的值都任意接近 $L$，則 $\lim_{x\to a}f(x)=L$。更簡潔地說：$x$ 越靠近 $a$，$f(x)$ 越靠近並保持在 $L$ 附近。
+</div>
+
+<h3>用表格估計極限</h3>
+<p>估計極限最直接的方法是構造一個函數值表格。取兩組 $x$ 值——一組從左側逼近 $a$（$x<a$），另一組從右側逼近 $a$（$x>a$）——然後觀察 $f(x)$ 的趨勢。如果兩組都趨近同一個數 $L$，我們就有信心說 $\lim_{x\to a}f(x)=L$。</p>
+
+<p>這個方法雖然直觀，但有兩個限制：(1) 表格只能提供近似值，不能嚴格證明極限的存在；(2) 某些函數（如 $\sin(1/x)$ 在 $x\to 0$ 時）的振盪行為可能被表格誤導。因此，表格法應該與圖形法和代數法配合使用。</p>
+
+<details class="example" open><summary>📝 範例</summary>
+  <div class="ex-label">📝 範例 2.4：用表格估計 $\displaystyle\lim_{x\to 0}\frac{\sin x}{x}$</div>
+  <p>這是微積分中最重要的極限之一。</p>
+  <table>
+    <tr><th>$x$</th><th>$\frac{\sin x}{x}$</th><th>$x$</th><th>$\frac{\sin x}{x}$</th></tr>
+    <tr><td>−0.1</td><td>0.998334</td><td>0.1</td><td>0.998334</td></tr>
+    <tr><td>−0.01</td><td>0.999983</td><td>0.01</td><td>0.999983</td></tr>
+    <tr><td>−0.001</td><td>0.99999983</td><td>0.001</td><td>0.99999983</td></tr>
+  </table>
+  <p>兩側的值都趨近 $1$，因此 $\displaystyle\lim_{x\to 0}\frac{\sin x}{x}=1$。這個極限在後續章節中至關重要。</p>
+</details>
+
+<h3>兩個基本極限</h3>
+<p>在繼續深入之前，有兩個看似平凡但極其重要的極限值得先建立：</p>
+
+<div class="formula-card">
+  <div class="label">定理 2.1　兩個重要極限</div>
+  <div class="eq">$$\lim_{x\to a}x = a \qquad\text{（恆等函數的極限）}$$</div>
+  <div class="eq">$$\lim_{x\to a}c = c \qquad\text{（常數函數的極限）}$$</div>
+  <div class="note">第一個極限表示當 $x$ 趨近 $a$ 時，$x$ 本身自然趨近 $a$。第二個極限表示常數函數的極限就是該常數本身——無論 $x$ 如何變化，常數函數的值都不變，極限當然也是該常數。</div>
+</div>
+
+<div class="callout-warn">
+  <span class="warn-icon">⚡</span><strong>注意：</strong>$\lim_{x\to a}x=a$ 和 $\lim_{x\to a}c=c$ 看起來「太簡單以至於不像定理」，但它們是整個極限法則體系的基石。所有更複雜的極限計算最終都會化簡到這兩個基本極限。不要跳過它們！
+</div>
+
+<h3>極限不存在的三種情況</h3>
+<p>並非所有函數在每一點都有極限。以下是三種常見的「極限不存在」情況：</p>
+<p><strong>(1) 左右極限不相等：</strong>若 $\lim_{x\to a^-}f(x)\neq\lim_{x\to a^+}f(x)$，則雙側極限不存在。典型的例子是階梯函數 $f(x)=\frac{|x|}{x}$ 在 $x=0$ 處——左極限為 $-1$，右極限為 $1$。</p>
+
+<p><strong>(2) 振盪行為：</strong>函數 $f(x)=\sin(1/x)$ 在 $x\to 0$ 時在 $-1$ 和 $1$ 之間無限快速振盪，無法趨近單一數值。無論 $x$ 多靠近 $0$，函數值仍然在整個 $[-1,1]$ 區間內來回跳動。</p>
+
+<p><strong>(3) 無界增長（無窮極限）：</strong>當函數值在某一點附近無限增大（或減小），我們寫成 $\lim f(x)=\infty$（或 $-\infty$）。嚴格來說，這表示極限「不存在」於實數系中，但「$\infty$」的寫法提供了有用的行為描述，並指出<strong>垂直漸近線（vertical asymptote）</strong>的位置。</p>
+
+<figure class="figure">
+  <img src="../../pages/v1c2_pages/v1c2_page_125_c.png" alt="Figure 2.12" loading="lazy">
+  <figcaption>圖 2.12：三種不同函數在 $x=2$ 附近的行為——(a) 極限存在且等於 4；(b) 左右極限不相等；(c) 無窮極限（垂直漸近線）。</figcaption>
+</figure>
+
+<h3>單側極限（One-Sided Limits）</h3>
+<p>有時候，即使雙側極限不存在，我們仍然可以討論<strong>左極限</strong>和<strong>右極限</strong>。左極限 $\lim_{x\to a^-}f(x)=L$ 表示當 $x$ 從<strong>左側</strong>（$x<a$）趨近 $a$ 時，$f(x)$ 趨近 $L$。右極限 $\lim_{x\to a^+}f(x)=L$ 則表示從<strong>右側</strong>（$x>a$）趨近。</p>
+
+<div class="formula-card">
+  <div class="label">定理 2.2　雙側極限與單側極限的關係</div>
+  <div class="eq">$$\lim_{x\to a}f(x) = L \quad\Longleftrightarrow\quad \lim_{x\to a^-}f(x) = L \;\text{ 且 }\; \lim_{x\to a^+}f(x) = L$$</div>
+  <div class="note">雙側極限存在且等於 $L$，若且唯若左右極限都存在且都等於 $L$。這是判斷極限是否存在的最實用方法。</div>
+</div>
+
+<details class="example" open><summary>📝 範例</summary>
+  <div class="ex-label">📝 範例 2.8：評估分段函數的單側極限</div>
+  <p>設 $f(x)=\begin{cases} x+1, & x<2 \\ x^2-4, & x>2 \end{cases}$，求 $\lim_{x\to 2^-}f(x)$ 和 $\lim_{x\to 2^+}f(x)$。</p>
+  <p><strong>解：</strong>當 $x\to 2^-$（從左側），使用 $f(x)=x+1$，所以 $\lim_{x\to 2^-}f(x)=3$。</p>
+  <p>當 $x\to 2^+$（從右側），使用 $f(x)=x^2-4$，所以 $\lim_{x\to 2^+}f(x)=0$。</p>
+  <p>因為左右極限不相等（$3\neq 0$），所以 $\lim_{x\to 2}f(x)$ 不存在。</p>
+</details>
+
+<h3>無窮極限與垂直漸近線</h3>
+<p>當函數在 $x\to a$ 時無限增大，我們說 $\lim_{x\to a}f(x)=\infty$。這雖然不是一個「真正的」極限（$\infty$ 不是實數），但它是對函數行為的有用描述。這類情況對應圖形上的<strong>垂直漸近線（vertical asymptote）</strong> $x=a$。</p>
+
+<p>例如 $f(x)=\frac{1}{x}$ 在 $x=0$ 處：$\lim_{x\to 0^-}\frac{1}{x}=-\infty$，$\lim_{x\to 0^+}\frac{1}{x}=+\infty$。兩側方向不同，所以雙側極限不存在（有時寫作 DNE），但 $x=0$ 確實是一條垂直漸近線。一般來說，若 $n$ 為偶數，$\lim_{x\to a}\frac{1}{(x-a)^n}=+\infty$；若 $n$ 為奇數，則左右兩側一正一負。</p>
+
+<div class="callout">
+  <span class="callout-icon">💡</span><strong>重點：</strong>$\lim f(x)=\infty$ 是一個<strong>行為描述</strong>，不是一個實數極限。當我們寫 $\infty$ 時，我們在說「函數值無限制地增大」，而不是說「極限是一個名叫 $\infty$ 的數」。這一區分在 ε-δ 定義中會被嚴格化（用 $M$ 取代 $\varepsilon$）。
+</div>
+
+<figure class="figure">
+  <img src="../../pages/v1c2_pages/v1c2_page_135_c.png" alt="Figure 2.19" loading="lazy">
+  <figcaption>圖 2.19：$f(x)=1/x$ 的圖形——當 $x\to 0^-$ 時 $f(x)\to-\infty$，當 $x\to 0^+$ 時 $f(x)\to+\infty$。$x=0$ 是垂直漸近線。</figcaption>
+</figure>
+
+<h3>愛因斯坦的質量公式：一個極限的應用</h3>
+<p>回到本章開頭的問題：物體的速度有極限嗎？根據愛因斯坦的狹義相對論，運動物體的質量為 $m=\dfrac{m_0}{\sqrt{1-v^2/c^2}}$，其中 $m_0$ 是靜止質量，$v$ 是速度，$c$ 是光速。當 $v\to c^-$ 時，分母趨近 $0^+$，所以 $m\to\infty$。這意味著：要將有質量的物體加速到光速，需要無窮大的能量——因此光速是宇宙中任何有質量物體的速度上限。</p>
+
+</section>
+
+<!-- ================================================================ -->
+<!-- SECTION 2.3 -->
+<!-- ================================================================ -->
+<section id="s2-3">
+<h2>2.3　極限法則 <span style="font-weight:400;font-size:16px;">The Limit Laws</span></h2>
+
+<div style="margin-bottom:14px;font-size:12px;color:var(--tx2);line-height:1.8">
+<strong style="color:var(--tx)">🔑 本節重點</strong> ①極限可拆解為和、差、積、商等代數運算 ②直接代入法適用於多項式與分母非零的有理函數 ③0/0 不定型需因式分解、有理化或化簡繁分數 ④夾擠定理：被夾住的函數被迫與兩側同極限 ⑤sinθ/θ→1 與 (1−cosθ)/θ→0 為關鍵三角極限
+</div>
+
+p>在前一節中，我們用表格和圖形來「估計」極限。這些方法雖然直觀，但缺乏嚴格性與效率。幸運的是，極限遵循一組簡單的代數法則，讓我們可以系統地計算複雜函數的極限，而不必每次都回到表格或圖形。這些法則合稱<strong>極限法則（limit laws）</strong>。</p>
+
+<p>極限法則的核心思想是：如果我們知道 $\lim_{x\to a}f(x)=L$ 和 $\lim_{x\to a}g(x)=M$（兩者都是實數），那麼我們可以推導出 $f(x)$ 和 $g(x)$ 經過加、減、乘、除等運算後的極限。這些法則的嚴格證明需要 ε-δ 定義（見 §2.5），但它們的直覺非常自然：既然 $f(x)$ 趨近 $L$ 且 $g(x)$ 趨近 $M$，那麼 $f(x)+g(x)$ 應該趨近 $L+M$，依此類推。</p>
+
+<div class="formula-card">
+  <div class="label">定理 2.5　極限法則</div>
+  <div class="note">設 $\lim_{x\to a}f(x)=L$、$\lim_{x\to a}g(x)=M$，$c$ 為常數，則：</div>
+  <div class="eq">$$\begin{aligned} \text{和法則：}&\quad \lim_{x\to a}[f(x)+g(x)] = L + M \\ \text{差法則：}&\quad \lim_{x\to a}[f(x)-g(x)] = L - M \\ \text{常數倍法則：}&\quad \lim_{x\to a}[c\cdot f(x)] = c\cdot L \\ \text{乘法則：}&\quad \lim_{x\to a}[f(x)\cdot g(x)] = L\cdot M \\ \text{除法則：}&\quad \lim_{x\to a}\frac{f(x)}{g(x)} = \frac{L}{M}\quad(M\neq 0) \\ \text{冪法則：}&\quad \lim_{x\to a}[f(x)]^n = L^n \\ \text{根法則：}&\quad \lim_{x\to a}\sqrt[n]{f(x)} = \sqrt[n]{L}\end{aligned}$$</div>
+</div>
+
+<div class="callout-warn">
+  <span class="warn-icon">⚡</span><strong>關鍵限制：</strong>每一個極限法則都有一個隱含的前提——<strong>等式右邊的極限必須存在且為實數</strong>。除法則要求 $M\neq 0$；根法則要求當 $n$ 為偶數時 $L\geq 0$（在實數系中）。如果不滿足這些條件，就不能直接套用法則。例如 $\lim_{x\to 0}\frac{\sin x}{x}$ 不能直接用除法則，因為分母的極限為 $0$。
+</div>
+
+<h3>多項式與有理函數的極限</h3>
+<p>一個極其實用的推論是：對於任何<strong>多項式 $p(x)$</strong>，$\lim_{x\to a}p(x)=p(a)$。也就是說，你可以直接把 $a$ 代入多項式中求極限。對於<strong>有理函數 $r(x)=\frac{p(x)}{q(x)}$</strong>，只要 $q(a)\neq 0$，同樣可以代入：$\lim_{x\to a}r(x)=r(a)$。這就是所謂的<strong>直接代入法（direct substitution）</strong>。</p>
+
+<p>但當代入後得到 $\frac{0}{0}$ 的<strong>不定型（indeterminate form）</strong>時，就不能直接代入了。這表示分子和分母在 $x=a$ 處都為 $0$，它們可能有共同的因式可以消去。常見的處理技巧包括：<strong>因式分解與約分</strong>、<strong>有理化（乘以共軛）</strong>、以及<strong>化簡繁分數</strong>。</p>
+
+<details class="example" open><summary>📝 範例</summary>
+  <div class="ex-label">📝 範例 2.17：因式分解與約分</div>
+  <p>求 $\displaystyle\lim_{x\to 3}\frac{x^2-3x}{x^2-9}$。</p>
+  <p><strong>解：</strong>代入 $x=3$ 得 $\frac{0}{0}$，是不定型。因式分解：</p>
+  <p>$\displaystyle\lim_{x\to 3}\frac{x(x-3)}{(x-3)(x+3)}=\lim_{x\to 3}\frac{x}{x+3}=\frac{3}{6}=\frac{1}{2}$。</p>
+  <p>關鍵步驟是約去公因式 $(x-3)$，然後再代入。</p>
+</details>
+
+<details class="example" open><summary>📝 範例</summary>
+  <div class="ex-label">📝 範例 2.18：乘以共軛</div>
+  <p>求 $\displaystyle\lim_{x\to -1}\frac{\sqrt{x+2}-1}{x+1}$。</p>
+  <p><strong>解：</strong>代入得 $\frac{0}{0}$。分子分母同乘共軛 $\sqrt{x+2}+1$：</p>
+  <p>$\displaystyle\lim_{x\to -1}\frac{(\sqrt{x+2}-1)(\sqrt{x+2}+1)}{(x+1)(\sqrt{x+2}+1)}=\lim_{x\to -1}\frac{(x+2)-1}{(x+1)(\sqrt{x+2}+1)}$</p>
+  <p>$\displaystyle=\lim_{x\to -1}\frac{x+1}{(x+1)(\sqrt{x+2}+1)}=\lim_{x\to -1}\frac{1}{\sqrt{x+2}+1}=\frac{1}{2}$</p>
+</details>
+
+<h3>夾擠定理（The Squeeze Theorem）</h3>
+<p>對於某些函數（尤其是三角函數），因式分解和有理化都無能為力。這時候，<strong>夾擠定理（squeeze theorem）</strong>（又稱三明治定理或夾逼定理）是一個強大的工具。其想法非常直觀：如果一個函數 $f(x)$ 被「夾」在兩個函數 $g(x)$ 和 $h(x)$ 之間，且 $g(x)$ 和 $h(x)$ 在 $x\to a$ 時都趨近同一個極限 $L$，那麼 $f(x)$ 也必然趨近 $L$。</p>
+
+<div class="formula-card">
+  <div class="label">定理 2.7　夾擠定理</div>
+  <div class="note">若在含 $a$ 的某開區間上（$a$ 可能除外），有 $g(x)\leq f(x)\leq h(x)$，且</div>
+  <div class="eq">$$\lim_{x\to a}g(x)=\lim_{x\to a}h(x)=L,$$</div>
+  <div class="note">則 $\displaystyle\lim_{x\to a}f(x)=L$。</div>
+</div>
+
+<p>夾擠定理最重要的應用之一是推導兩個關鍵的三角極限：</p>
+<div class="formula-card">
+  <div class="label">兩個關鍵三角極限</div>
+  <div class="eq">$$\lim_{\theta\to 0}\frac{\sin\theta}{\theta}=1 \qquad\text{(2.16)}$$</div>
+  <div class="eq">$$\lim_{\theta\to 0}\frac{1-\cos\theta}{\theta}=0 \qquad\text{(2.17), (2.19)}$$</div>
+  <div class="note">這些極限是微分學中推導 $\frac{d}{dx}\sin x=\cos x$ 等公式的基礎。它們不能直接代入求得（會得到 $\frac{0}{0}$），必須用夾擠定理結合單位圓的幾何不等式來證明。</div>
+</div>
+
+<h3>夾擠定理的幾何證明（$\frac{\sin\theta}{\theta}\to 1$）</h3>
+<p>在單位圓中，對於 $0<\theta<\frac{\pi}{2}$，由幾何關係可得不等式 $\sin\theta < \theta < \tan\theta$。除以 $\sin\theta$（正數）得到 $1 < \frac{\theta}{\sin\theta} < \frac{1}{\cos\theta}$，取倒數得 $\cos\theta < \frac{\sin\theta}{\theta} < 1$。由於 $\lim_{\theta\to 0^+}\cos\theta=1$ 且 $\lim_{\theta\to 0^+}1=1$，由夾擠定理得 $\lim_{\theta\to 0^+}\frac{\sin\theta}{\theta}=1$。負角的情況可通過 $\frac{\sin(-\theta)}{-\theta}=\frac{\sin\theta}{\theta}$ 的對稱性得出相同結論。</p>
+
+<figure class="figure">
+  <img src="../../pages/v1c2_pages/v1c2_page_157_c.png" alt="Figure 2.27" loading="lazy">
+  <figcaption>圖 2.27：夾擠定理的幾何直覺——當 $f(x)$ 被 $g(x)$ 和 $h(x)$「夾住」時，$f(x)$ 的極限被迫等於兩側的共同極限。</figcaption>
+</figure>
+
+<details class="example" open><summary>📝 範例</summary>
+  <div class="ex-label">📝 範例 2.24：用夾擠定理求 $\displaystyle\lim_{x\to 0}x^2\cos(1/x)$</div>
+  <p><strong>解：</strong>由於 $-1\leq\cos(1/x)\leq 1$，乘以 $x^2\geq 0$ 得 $-x^2\leq x^2\cos(1/x)\leq x^2$。</p>
+  <p>而 $\lim_{x\to 0}(-x^2)=0$，$\lim_{x\to 0}x^2=0$。由夾擠定理，$\lim_{x\to 0}x^2\cos(1/x)=0$。</p>
+  <p>請注意，$\lim_{x\to 0}\cos(1/x)$ 本身並不存在（振盪行為），但乘以 $x^2$ 後，振幅被「壓縮」到 $0$。</p>
+</details>
+
+<div class="callout-warn">
+  <span class="warn-icon">⚡</span><strong>常見錯誤：</strong>初學者在使用夾擠定理時，經常忘記驗證不等式 $g(x)\leq f(x)\leq h(x)$ 是否在 $a$ 附近的一個開區間上<strong>處處成立</strong>。僅僅在某些點上成立是不夠的。另外，夾擠定理要求 $g$ 和 $h$ 的極限<strong>相等</strong>——如果它們的極限不同，夾擠定理不提供關於 $f$ 的極限的任何信息。
+</div>
+
+<div class="callout">
+  <span class="callout-icon">💡</span><strong>策略提示：</strong>對於 $\frac{0}{0}$ 不定型，處理順序建議為：(1) 嘗試直接代入（若可定義則成功）；(2) 因式分解與約分；(3) 有理化（乘以共軛）；(4) 化簡繁分數；(5) 使用夾擠定理（尤其是三角函數）；(6) 考慮單側極限（對於分段函數或涉及絕對值的情況）。
+</div>
+
+</section>
+
+<!-- ================================================================ -->
+<!-- SECTION 2.4 -->
+<!-- ================================================================ -->
+<section id="s2-4">
+<h2>2.4　連續性 <span style="font-weight:400;font-size:16px;">Continuity</span></h2>
+
+<div style="margin-bottom:14px;font-size:12px;color:var(--tx2);line-height:1.8">
+<strong style="color:var(--tx)">🔑 本節重點</strong> ①連續三條件：f(a)有定義、極限存在且等於函數值 ②三種不連續：可移除（洞）、跳躍、無窮（漸近線） ③多項式在 ℝ 上處處連續，有理函數在分母非零處連續 ④可微必連續，但連續未必可微（如 |x| 在 x=0） ⑤中間值定理：連續函數在閉區間必經過所有中間值
+</div>
+
+p>在日常生活中，「連續」意味著沒有中斷。在數學中，<strong>連續性（continuity）</strong>的概念與此高度一致：如果一個函數的圖形在某一點可以「一筆畫過而不提起筆」，那麼該函數在該點就是連續的。連續性是微積分中最重要的性質之一，因為大多數微積分定理（如中間值定理、極值定理、微積分基本定理）都要求函數是連續的。</p>
+
+<p>連續性的正式定義包含三個條件。函數 $f(x)$ 在 $x=a$ 處<strong>連續</strong>，若且唯若：</p>
+<p>(1) <strong>$f(a)$ 有定義</strong>——函數在該點必須存在。</p>
+<p>(2) <strong>$\lim_{x\to a}f(x)$ 存在</strong>——極限必須是實數（不能是 $\infty$ 或不存在）。</p>
+<p>(3) <strong>$\lim_{x\to a}f(x)=f(a)$</strong>——極限值必須等於函數值。</p>
+<p>三個條件缺一不可。任何一條不滿足，函數就在該點<strong>不連續（discontinuous）</strong>。</p>
+
+<div class="formula-card">
+  <div class="label">連續性的定義</div>
+  <div class="eq">$$f \text{ 在 } a \text{ 連續} \;\Longleftrightarrow\; \begin{cases} \text{(i) } f(a) \text{ 有定義} \\ \text{(ii) } \displaystyle\lim_{x\to a}f(x) \text{ 存在} \\ \text{(iii) } \displaystyle\lim_{x\to a}f(x)=f(a) \end{cases}$$</div>
+</div>
+
+<h3>三種不連續的類型</h3>
+<p>當函數不連續時，我們可以根據「為什麼不連續」來分類：</p>
+
+<p><strong>(1) 可移除不連續（removable discontinuity）：</strong>極限存在，但 $f(a)$ 無定義，或 $f(a)$ 有定義但不等於極限。圖形上表現為一個「洞」。如果我們重新定義（或補充定義）$f(a)$ 等於極限值，就可以「修復」這個不連續點。例如 $f(x)=\frac{x^2-4}{x-2}$ 在 $x=2$ 處。</p>
+
+<p><strong>(2) 跳躍不連續（jump discontinuity）：</strong>左右極限都存在（且為有限值），但不相等。圖形上表現為函數值突然「跳躍」。例如 $f(x)=\frac{|x|}{x}$ 在 $x=0$ 處，從 $-1$ 跳到 $1$。</p>
+
+<p><strong>(3) 無窮不連續（infinite discontinuity）：</strong>至少一側的極限是 $\infty$ 或 $-\infty$。圖形上有一條垂直漸近線。例如 $f(x)=\frac{1}{x-2}$ 在 $x=2$ 處。</p>
+
+<figure class="figure">
+  <img src="../../pages/v1c2_pages/v1c2_page_168_c.png" alt="Figure 2.37" loading="lazy">
+  <figcaption>圖 2.37：三種不連續——(a) 可移除（洞）；(b) 跳躍（左右極限不同）；(c) 無窮（垂直漸近線）。</figcaption>
+</figure>
+
+<h3>多項式與有理函數的連續性</h3>
+<p>一個極其實用的定理：<strong>所有多項式在整個實數線 $\mathbb{R}$ 上都是連續的。有理函數在其定義域（分母不為零的所有點）上連續。</strong>這直接來自極限法則中的直接代入性質——對於多項式 $p(x)$，$\lim_{x\to a}p(x)=p(a)$，所以三條件自動滿足。對於有理函數 $\frac{p(x)}{q(x)}$，只要 $q(a)\neq 0$，連續性同樣成立。</p>
+
+<div class="callout">
+  <span class="callout-icon">💡</span><strong>跨章連結：</strong>連續性是導數存在的<strong>必要條件</strong>（但不充分——想想 $f(x)=|x|$ 在 $x=0$ 處：連續但不可導）。換句話說，可導必定連續，但連續不一定可導。這一事實將在第 3 章中詳細討論。
+</div>
+
+<details class="example" open><summary>📝 範例</summary>
+  <div class="ex-label">📝 範例 2.29：判斷有理函數的連續區間</div>
+  <p>求 $f(x)=\dfrac{x+2}{x^2-3x+2}$ 的連續區間。</p>
+  <p><strong>解：</strong>分母 $x^2-3x+2=(x-1)(x-2)$。當 $x=1$ 或 $x=2$ 時分母為 $0$。</p>
+  <p>因此 $f$ 在 $(-\infty,1)$、$(1,2)$、$(2,\infty)$ 上連續。在 $x=1$ 和 $x=2$ 處，$f$ 具有無窮不連續。</p>
+</details>
+
+<h3>合成函數定理（Composite Function Theorem）</h3>
+<p>如果 $g(x)$ 在 $x=a$ 處連續（即 $\lim_{x\to a}g(x)=g(a)=L$），且 $f$ 在 $L$ 處連續，那麼合成函數 $f(g(x))$ 在 $x=a$ 處也是連續的。用符號表達：<strong>$\displaystyle\lim_{x\to a}f(g(x)) = f\!\left(\lim_{x\to a}g(x)\right)$</strong>。這意味著我們可以把極限「穿過」連續的外部函數。</p>
+
+<p>這個定理的重要推論是：三角函數 $\sin x$、$\cos x$ 等在它們的整個定義域上都是連續的。證明依賴於我們在 §2.3 中建立的 $\lim_{\theta\to 0}\sin\theta=0$ 和 $\lim_{\theta\to 0}\cos\theta=1$，再結合三角恆等式 $\sin(a+h)=\sin a\cos h+\cos a\sin h$。</p>
+
+<h3>中間值定理（Intermediate Value Theorem, IVT）</h3>
+<p><strong>中間值定理（IVT）</strong>是連續函數最深刻也最實用的性質之一。定理陳述：如果 $f$ 在閉區間 $[a,b]$ 上連續，且 $z$ 是介於 $f(a)$ 和 $f(b)$ 之間的任何數，則在 $(a,b)$ 內<strong>必定存在</strong>至少一個 $c$，使得 $f(c)=z$。</p>
+
+<p>換句話說，連續函數從一個值走到另一個值時，一定會經過所有中間的值——不能「跳過去」。這看似直觀，但它是許多數值方法（如二分法求根）的理論基礎。</p>
+
+<div class="formula-card">
+  <div class="label">定理 2.11　中間值定理（IVT）</div>
+  <div class="note">若 $f$ 在 $[a,b]$ 上連續，且 $z$ 在 $f(a)$ 與 $f(b)$ 之間，則存在 $c\in[a,b]$ 使得 $f(c)=z$。</div>
+  <div class="note">特別地，若 $f(a)$ 和 $f(b)$ 異號，則存在 $c\in(a,b)$ 使得 $f(c)=0$（零點定理）。</div>
+</div>
+
+<details class="example" open><summary>📝 範例</summary>
+  <div class="ex-label">📝 範例 2.36：用 IVT 證明多項式有根</div>
+  <p>證明 $f(x)=x^3-2x-5$ 在 $[2,3]$ 上至少有一個根。</p>
+  <p><strong>解：</strong>$f$ 是多項式，在 $[2,3]$ 上連續。$f(2)=8-4-5=-1$，$f(3)=27-6-5=16$。因為 $f(2)<0<f(3)$，由 IVT 可知存在 $c\in(2,3)$ 使 $f(c)=0$。</p>
+</details>
+
+<div class="callout-warn">
+  <span class="warn-icon">⚡</span><strong>常見誤解：</strong>IVT 只能保證<strong>至少一個</strong>$c$ 存在，不能告訴我們有幾個、也不能告訴我們 $c$ 究竟在哪裡。另外，IVT 的結論在函數不連續時不一定成立——例如 $f(x)=1/x$ 在 $[-1,1]$ 上，$f(-1)=-1$，$f(1)=1$，但沒有 $c$ 使 $f(c)=0$，因為 $f$ 在 $x=0$ 處不連續。
+</div>
+
+<figure class="figure">
+  <img src="../../pages/v1c2_pages/v1c2_page_172_c.png" alt="Figure 2.38" loading="lazy">
+  <figcaption>圖 2.38：中間值定理的幾何意義——連續函數在 $[a,b]$ 上一定會經過 $f(a)$ 與 $f(b)$ 之間的任何水平線。</figcaption>
+</figure>
+
+</section>
+
+<!-- ================================================================ -->
+<!-- SECTION 2.5 -->
+<!-- ================================================================ -->
+<section id="s2-5">
+<h2>2.5　極限的精確定義 <span style="font-weight:400;font-size:16px;">The Precise Definition of a Limit</span></h2>
+
+<div style="margin-bottom:14px;font-size:12px;color:var(--tx2);line-height:1.8">
+<strong style="color:var(--tx)">🔑 本節重點</strong> ①ε-δ 定義將「任意接近」轉化為量化邏輯 ∀ε∃δ ②非線性函數需先限制 δ≤1 後找代數上界 ③證明策略：從目標不等式反推 δ 的候選值 ④定義可延伸至單側極限與無窮極限 ⑤ε-δ 為極限法則與分析學的邏輯基礎
+</div>
+
+p>到目前為止，我們對極限的討論都是「直覺式」的——表格、圖形、「越來越靠近」之類的描述。這對於建立概念理解非常有用，但如果我們需要<strong>嚴格證明</strong>一個極限的存在，或是想要區分「看起來像」和「確實是」，就需要一個精確的數學定義。這就是<strong>ε-δ 定義（epsilon-delta definition）</strong>。</p>
+
+<p>ε-δ 定義回答了一個基本問題：「$f(x)$ 要多接近 $L$，以及 $x$ 要多接近 $a$，才能保證前者？」更具體地說：</p>
+
+<div class="formula-card">
+  <div class="label">極限的 ε-δ 定義</div>
+  <div class="eq">$$\lim_{x\to a}f(x)=L \;\Longleftrightarrow\; \forall\varepsilon>0,\; \exists\delta>0 \;\text{ 使得 }\; 0<|x-a|<\delta \;\Rightarrow\; |f(x)-L|<\varepsilon$$</div>
+  <div class="note">以文字表達：對於<strong>每一個</strong>正數 $\varepsilon$（無論多小），都<strong>存在</strong>一個正數 $\delta$，使得只要 $x$ 在 $a$ 的 $\delta$ 範圍內（但 $x\neq a$），$f(x)$ 就在 $L$ 的 $\varepsilon$ 範圍內。</div>
+</div>
+
+<h3>逐詞解析 ε-δ 定義</h3>
+<p>這個定義初看之下可能令人卻步，但逐詞拆解後其實非常自然：</p>
+<p><strong>「對於每一個 $\varepsilon>0$」（$\forall\varepsilon>0$）：</strong>想像有人向你挑戰——「你能讓 $f(x)$ 距離 $L$ 不超過 $0.001$ 嗎？」你回答「可以」。然後他又說「那 $0.000001$ 呢？」你又必須回答可以。$\varepsilon$ 代表「容許誤差」，而且這個誤差可以被要求得任意小。</p>
+
+<p><strong>「存在 $\delta>0$」（$\exists\delta>0$）：</strong>對於每一個挑戰（$\varepsilon$），你必須找到一個對應的 $\delta$（依賴於 $\varepsilon$），使得只要 $x$ 在 $a$ 的 $\delta$ 鄰域內，$f(x)$ 就保證在 $L$ 的 $\varepsilon$ 鄰域內。$\delta$ 是你的「防禦半徑」——只要 $x$ 在這個半徑內，你就贏了。</p>
+
+<p><strong>「$0<|x-a|<\delta$」：</strong>注意 $0<|x-a|$ 這個條件——它排除了 $x=a$ 本身。這反映了極限的定義<strong>不關心</strong>$f(a)$ 的值（甚至不要求 $f(a)$ 有定義）。我們只關心 $x$ 在 $a$「附近但不等於 $a$」時的行為。</p>
+
+<p><strong>「則 $|f(x)-L|<\varepsilon$」：</strong>這是你要保證的結論——只要 $x$ 滿足前述條件，$f(x)$ 就必須在 $L$ 的 $\varepsilon$ 範圍內。$|f(x)-L|$ 表示 $f(x)$ 到 $L$ 的距離。</p>
+
+<div class="callout">
+  <span class="callout-icon">💡</span><strong>幾何直覺：</strong>在座標平面上畫一條水平帶狀區域 $y\in(L-\varepsilon,\,L+\varepsilon)$。ε-δ 定義說：對於任何高度的水平帶（無論多窄），你都能找到一個以 $a$ 為中心的垂直帶 $x\in(a-\delta,\,a+\delta)$，使得垂直帶內（$x=a$ 除外）的所有函數點都落在水平帶內。換句話說，你可以讓函數值「任意接近」$L$。
+</div>
+
+<figure class="figure">
+  <img src="../../pages/v1c2_pages/v1c2_page_178_c.png" alt="Figure 2.39" loading="lazy">
+  <figcaption>圖 2.39：對於越來越小的 $\varepsilon$（水平帶越來越窄），我們總能找到對應的 $\delta$（垂直帶），使得函數圖形在該垂直帶內完全落在水平帶中。</figcaption>
+</figure>
+
+<h3>一個簡單的 ε-δ 證明</h3>
+<p>最適合入門的 ε-δ 證明是線性函數。讓我們證明 $\displaystyle\lim_{x\to 2}(3x-1)=5$。</p>
+
+<details class="example" open><summary>📝 範例</summary>
+  <div class="ex-label">📝 範例 2.39：證明 $\displaystyle\lim_{x\to 2}(3x-1)=5$</div>
+  <p><strong>證明：</strong>設 $\varepsilon>0$。我們需要找到 $\delta>0$ 使得 $0<|x-2|<\delta\;\Rightarrow\;|(3x-1)-5|<\varepsilon$。</p>
+  <p>注意到 $|(3x-1)-5| = |3x-6| = 3|x-2|$。</p>
+  <p>我們希望 $3|x-2|<\varepsilon$，即 $|x-2|<\varepsilon/3$。</p>
+  <p>因此選擇 $\delta=\varepsilon/3$。若 $0<|x-2|<\delta$，則：</p>
+  <p>$|(3x-1)-5| = 3|x-2| < 3\delta = 3(\varepsilon/3) = \varepsilon$。$\quad\blacksquare$</p>
+</details>
+
+<p>上述證明的關鍵在於：我們從目標不等式 $|f(x)-L|<\varepsilon$ 出發，代數運算後將其轉化為 $|x-a|<\text{（某個用 }\varepsilon\text{ 表達的式子）}$，然後將這個式子選為 $\delta$。對於線性函數，這個過程非常直接；對於非線性函數，可能需要更精細的技巧。</p>
+
+<h3>非線性函數的 ε-δ 證明</h3>
+<p>當函數不是線性時，$\delta$ 的選擇可能涉及更複雜的代數。例如證明 $\displaystyle\lim_{x\to 2}x^2=4$：我們希望 $|x^2-4|<\varepsilon$。注意到 $|x^2-4|=|x-2|\cdot|x+2|$。如果我們能限制 $|x+2|$ 的大小，就可以把問題轉化為線性的。</p>
+
+<p>一個常見的策略是：先假設 $\delta\leq 1$（這樣 $|x-2|<1$ 意味著 $x\in(1,3)$，從而 $|x+2|\in(3,5)$，所以 $|x+2|<5$）。然後 $|x^2-4|<5|x-2|$。要讓這個小於 $\varepsilon$，我們需要 $|x-2|<\varepsilon/5$。因此選 $\delta=\min(1,\;\varepsilon/5)$。</p>
+
+<div class="callout">
+  <span class="callout-icon">💡</span><strong>證明策略要點：</strong>在非線性函數的 ε-δ 證明中，常見的手法包括：(1) 先限制 $\delta$ 不大於某個方便的值（如 $1$），從而限制自變數的範圍；(2) 在這個範圍內找到 $|f(x)-L|$ 的上界，表示為 $K|x-a|$ 的形式；(3) 令 $\delta=\min(\text{先前的限制},\;\varepsilon/K)$。這個策略可以應對大多數多項式與有理函數。
+</div>
+
+<h3>ε-δ 定義的變體</h3>
+<p>同樣的精確定義框架可以延伸到其他類型的極限：</p>
+<p><strong>左極限：</strong>$\lim_{x\to a^-}f(x)=L$ 定義為 $\forall\varepsilon>0,\;\exists\delta>0$ 使得 $a-\delta<x<a \;\Rightarrow\; |f(x)-L|<\varepsilon$。</p>
+<p><strong>右極限：</strong>$\lim_{x\to a^+}f(x)=L$ 定義為 $\forall\varepsilon>0,\;\exists\delta>0$ 使得 $a<x<a+\delta \;\Rightarrow\; |f(x)-L|<\varepsilon$。</p>
+<p><strong>無窮極限：</strong>$\lim_{x\to a}f(x)=\infty$ 定義為 $\forall M>0,\;\exists\delta>0$ 使得 $0<|x-a|<\delta \;\Rightarrow\; f(x)>M$。注意這裡用 $M$（任意大的正數）取代了 $\varepsilon$，用 $f(x)>M$ 取代了 $|f(x)-L|<\varepsilon$。</p>
+
+<h3>為什麼要學 ε-δ？</h3>
+<p>許多初學者會問：「我真的需要學這個嗎？我之前用表格和法則不是已經夠了嗎？」答案是：ε-δ 定義可能不會在日常計算中頻繁使用，但它提供了極限概念的<strong>邏輯基礎</strong>。沒有它，我們無法嚴格證明極限法則（如加法法則）、無法證明連續函數的性質（如 IVT）、也無法真正理解分析學（analysis）的後續內容。</p>
+
+<p>更重要的是，ε-δ 定義訓練了一種重要的數學思維方式：將模糊的直覺（「越來越靠近」）轉化為精確的量詞邏輯（「對於每一個……存在……使得……」）。這種思維方式在高等數學中無處不在。</p>
+
+<div class="callout-warn">
+  <span class="warn-icon">⚡</span><strong>常見錯誤：</strong>在 ε-δ 證明中，初學者常犯的一個錯誤是<strong>從 $|f(x)-L|<\varepsilon$ 開始推導</strong>，然後「解出」$\delta$，但沒有意識到這個推導本身假設了結論成立。正確的做法是先做「草稿分析」（scratch work），找到 $\delta$ 的候選值，然後在正式證明中先宣告 $\delta$，再從 $|x-a|<\delta$ 出發推導出 $|f(x)-L|<\varepsilon$。
+</div>
+
+<figure class="figure">
+  <img src="../../pages/v1c2_pages/v1c2_page_179_c.png" alt="Figure 2.40" loading="lazy">
+  <figcaption>圖 2.40：ε-δ 證明的幾何方法——對於給定的 $\varepsilon$，在圖形上找到對應的 $\delta$ 範圍。</figcaption>
+</figure>
+
+</section>
+
+<hr>
+
+<!-- ====== Key Concepts ====== -->
+<section id="key-concepts">
+<h2>📋 關鍵概念回顧（Key Concepts）</h2>
+<ol>
+  <li><strong>極限的直覺定義</strong>：當 x 趨近 a 時，\(f(x)\) 的值趨近某個固定數 L，記為 \(\lim_{x\to a}f(x)=L\)。</li>
+  <li><strong>用表格估計極限</strong>：從左右兩側取 x 值逐步逼近 a，觀察 \(f(x)\) 的趨勢來猜測極限值。</li>
+  <li><strong>用圖形判斷極限</strong>：觀察函數圖形在 x=a 附近的行為；極限存在 ⟺ 左右極限相等。</li>
+  <li><strong>左右極限</strong>：\(\lim_{x\to a^-}f(x)\) 為左極限、\(\lim_{x\to a^+}f(x)\) 為右極限；兩者相等時雙邊極限才存在。</li>
+  <li><strong>無窮極限</strong>：當函數值無限制地增大或減小時記為 \(\infty\) 或 \(-\infty\)；是對行為的描述而非真正的極限。</li>
+  <li><strong>鉛直漸近線</strong>：若 \(\lim_{x\to a}f(x)=\pm\infty\)，則 \(x=a\) 是鉛直漸近線。</li>
+  <li><strong>極限法則</strong>：和、差、積、商（分母不為零）、常數倍、冪次法則，允許將複雜極限拆解為簡單極限。</li>
+  <li><strong>直接代入法</strong>：若 \(f(x)\) 是多項式或有理函數且在 a 處連續，則 \(\lim_{x\to a}f(x)=f(a)\)。</li>
+  <li><strong>\(\frac{0}{0}\) 不定型</strong>：需用因式分解、共軛有理化或化簡繁分數消除不定性後再求極限。</li>
+  <li><strong>夾擠定理</strong>：若 \(g(x) \le f(x) \le h(x)\) 且 \(\lim g = \lim h = L\)，則 \(\lim f = L\)。</li>
+  <li><strong>關鍵三角極限</strong>：\(\lim_{\theta\to 0}\frac{\sin\theta}{\theta}=1\)，是推導所有三角函數導數的基礎。</li>
+  <li><strong>連續性</strong>：\(f\) 在 a 連續 ⟺ \(\lim_{x\to a}f(x)=f(a)\)；即極限值等於函數值。</li>
+  <li><strong>連續性三條件</strong>：\(f(a)\) 有定義、極限存在、極限值等於函數值。</li>
+  <li><strong>連續函數的運算</strong>：連續函數的和、差、積、商（分母不為零）及合成仍然是連續函數。</li>
+  <li><strong>中間值定理</strong>：若 f 在 \([a,b]\) 連續，則對介於 \(f(a)\) 與 \(f(b)\) 之間的任意值 N，存在 c 使得 \(f(c)=N\)。</li>
+  <li><strong>無窮遠處的極限</strong>：\(\lim_{x\to\infty}f(x)=L\) 表示當 x 無限增大時函數趨近 L；水平漸近線 \(y=L\)。</li>
+  <li><strong>ε-δ 定義</strong>：\(\lim_{x\to a}f(x)=L\) 的精確定義：對任意 \(\varepsilon>0\)，存在 \(\delta>0\) 使得 \(0 \lt |x-a| \lt \delta \implies |f(x)-L| \lt \varepsilon\)。</li>
+</ol>
+</section>
+
+<section id="key-equations">
+<h2>📐 關鍵公式（Key Equations）</h2>
+<table>
+  <thead><tr><th>公式</th><th>說明</th></tr></thead>
+  <tbody>
+    <tr><td>$$\lim_{x\to a}f(x)=L$$</td><td>極限的基本記號：x 趨近 a 時 f(x) 趨近 L</td></tr>
+    <tr><td>$$\lim_{x\to a}[f(x)+g(x)]=\lim_{x\to a}f(x)+\lim_{x\to a}g(x)$$</td><td>極限的和法則</td></tr>
+    <tr><td>$$\lim_{x\to a}[f(x)g(x)]=\lim_{x\to a}f(x)\cdot\lim_{x\to a}g(x)$$</td><td>極限的積法則</td></tr>
+    <tr><td>$$\lim_{x\to a}\frac{f(x)}{g(x)}=\frac{\lim_{x\to a}f(x)}{\lim_{x\to a}g(x)},\quad \lim g \neq 0$$</td><td>極限的商法則</td></tr>
+    <tr><td>$$\lim_{x\to a}[f(x)]^n=\left[\lim_{x\to a}f(x)
+ight]^n$$</td><td>極限的冪次法則</td></tr>
+    <tr><td>$$\lim_{\theta\to 0}\frac{\sin\theta}{\theta}=1$$</td><td>關鍵三角極限（夾擠定理推導）</td></tr>
+    <tr><td>$$\lim_{\theta\to 0}\frac{\cos\theta-1}{\theta}=0$$</td><td>第二關鍵三角極限</td></tr>
+    <tr><td>$$\lim_{x\to a}f(x)=f(a)$$</td><td>連續性的極限定義</td></tr>
+    <tr><td>$$\lim_{x\to a}f(g(x))=f\!\left(\lim_{x\to a}g(x)
+ight)$$</td><td>若 f 連續，則極限可移入外層函數</td></tr>
+    <tr><td>$$\text{若 } g(x)\le f(x)\le h(x) \text{ 且 } \lim g=\lim h=L\text{，則 }\lim f=L$$</td><td>夾擠定理</td></tr>
+    <tr><td>$$\lim_{x\to\infty}\frac{1}{x^r}=0,\quad r>0$$</td><td>無窮遠處的基本極限</td></tr>
+    <tr><td>$$\forall\varepsilon>0,\ \exists\delta>0:\ 0 \lt |x-a| \lt \delta\implies|f(x)-L| \lt \varepsilon$$</td><td>極限的 \(\varepsilon\)-\(\delta\) 精確定義</td></tr>
+  </tbody>
+</table>
+</section>
+
+<!-- ================================================================ -->
+<!-- 本章摘要 -->
+<!-- ================================================================ -->
+<section id="summary" class="summary-section">
+<h2>本章摘要</h2>
+<ul>
+  <li><strong>2.1 微積分預覽：</strong>切線問題 → 割線斜率 → 極限 → 導數。面積問題 → 矩形和 → 極限 → 積分。兩者統一於極限概念。</li>
+  <li><strong>2.2 函數的極限：</strong>$\lim_{x\to a}f(x)=L$ 的直覺定義。用表格和圖形估計極限。極限存在 ⟺ 左右極限相等。無窮極限是行為描述，不是真正的極限。</li>
+  <li><strong>2.3 極限法則：</strong>和、差、積、商、冪、根的法則。多項式／有理函數的直接代入。$\frac{0}{0}$ 不定型的處理：因式分解、共軛有理化、化簡繁分數。夾擠定理與關鍵三角極限 $\lim_{\theta\to 0}\frac{\sin\theta}{\theta}=1$。</li>
+  <li><strong>2.4 連續性：</strong>三條件：$f(a)$ 定義、極限存在、兩者相等。三種不連續：可移除、跳躍、無窮。多項式處處連續；有理函數在分母不為零處連續。合成函數定理。中間值定理（IVT）。</li>
+  <li><strong>2.5 精確定義：</strong>ε-δ 定義：$\forall\varepsilon>0,\;\exists\delta>0$ 使得 $0<|x-a|<\delta\Rightarrow|f(x)-L|<\varepsilon$。線性與非線性函數的證明範例。單側極限與無窮極限的 ε-δ 變體。</li>
+</ul>
+</section>
+
+<hr>
+
+<!-- ================================================================ -->
+<!-- 初學者常見錯誤 -->
+<!-- ================================================================ -->
+<section id="mistakes" class="common-mistakes">
+<h2>⚠️ 初學者常見錯誤（≥3 個重點提醒）</h2>
+
+<div class="callout-warn">
+  <span class="warn-icon">⚡</span><strong>錯誤 1：混淆 $\frac{0}{0}$ 不定型與「極限不存在」</strong><br>
+  當代入得到 $\frac{0}{0}$ 時，許多初學者直接下結論說「極限不存在」。這是錯的！$\frac{0}{0}$ 只是一個<strong>不定型</strong>（indeterminate form），表示我們需要更多工作來判斷極限值。事實上，很多 $\frac{0}{0}$ 的情況在化簡後會得到明確的有限值。例如 $\lim_{x\to 1}\frac{x^2-1}{x-1}=\lim_{x\to 1}(x+1)=2$。正確做法是先嘗試因式分解、乘共軛或化簡繁分數，而不是直接放棄。<br>
+  <em>記憶口訣：$\frac{0}{0}$ 不是答案，是「請繼續努力」的信號。</em>
+</div>
+
+<div class="callout-warn">
+  <span class="warn-icon">⚡</span><strong>錯誤 2：誤以為 $\lim f(x)=\infty$ 代表極限「存在」</strong><br>
+  $\infty$ 不是一個實數。當我們寫 $\lim_{x\to a}f(x)=\infty$ 時，我們是在描述函數在 $a$ 附近的<strong>無界增長行為</strong>，而不是說極限「存在於實數系中」。嚴格來說，在實數系的框架下，這樣的極限是「不存在」的（DNE）。然而，$\infty$ 的記法提供了比單純的 DNE 更多的信息——它告訴我們函數是向哪個方向發散的。兩者的區別在於：DNE 是對極限<strong>存在性</strong>的判斷；$\infty$ 是對函數<strong>行為</strong>的描述。<br>
+  <em>一句話總結：$\infty$ 是行為，不是數值。</em>
+</div>
+
+<div class="callout-warn">
+  <span class="warn-icon">⚡</span><strong>錯誤 3：忽略極限法則的前提條件</strong><br>
+  極限法則不是無條件成立的。除法則要求分母的極限不為零（$M\neq 0$）；根法則要求當 $n$ 為偶數時 $L\geq 0$（在實數中）。最常見的犯錯情境是：面對 $\lim_{x\to a}\frac{f(x)}{g(x)}$，直接拆成 $\frac{\lim f(x)}{\lim g(x)}$，卻沒有先檢查分母極限是否為零。正確做法是：<strong>先用代入法檢測</strong>。如果分母極限不為零，可以直接用除法則；如果分母極限為零，則需要進一步分析（可能是無窮極限、或是不定型 $\frac{0}{0}$ 需要化簡）。<br>
+  <em>黃金規則：永遠先檢查分母！</em>
+</div>
+
+<div class="callout-warn">
+  <span class="warn-icon">⚡</span><strong>錯誤 4：混淆連續性與可導性</strong><br>
+  連續是導數存在的<strong>必要條件</strong>，但不是充分條件。一個函數可以在某點連續但不可導——最經典的例子是 $f(x)=|x|$ 在 $x=0$ 處：函數連續（沒有斷裂），但因為左右兩側的「斜率」不同（左側為 $-1$，右側為 $+1$），導數不存在（在該點有一個「尖角」或 corner）。<br>
+  <em>簡記：可導 ⇒ 連續，但連續 ⇏ 可導。</em>
+</div>
+
+<div class="callout-warn">
+  <span class="warn-icon">⚡</span><strong>錯誤 5：ε-δ 證明中的方向性倒置</strong><br>
+  在撰寫 ε-δ 證明時，初學者經常犯下邏輯方向錯誤：從 $|f(x)-L|<\varepsilon$ 開始推導，最後「得出」$|x-a|<\delta$。雖然這在草稿分析（scratch work）中是合理的方法，但在正式證明中必須反過來——先宣告 $\delta$，再從 $|x-a|<\delta$ 推導 $|f(x)-L|<\varepsilon$。如果方向錯了，證明在邏輯上是無效的。正式證明必須遵循「假設前提 → 推出結論」的結構。<br>
+  <em>證明結構：① 設 $\varepsilon>0$。② 選擇 $\delta=\ldots$。③ 假設 $0<|x-a|<\delta$。④ 推導出 $|f(x)-L|<\varepsilon$。⑤ ∎</em>
+</div>
+</section>
+
+<!-- ====== Self-Check ====== -->
+<section id="self-check">
+<h2>✅ 自我檢測（Self-Check）</h2>
+<p>完成以下題目檢驗你對本章核心概念的掌握程度。點擊展開查看答案。</p>
+
+<details class="derive">
+<summary>題 1：若 $\lim_{x \to a} f(x)$ 存在，是否代表 $f$ 在 $x=a$ 處連續？</summary>
+<p><strong>答案：</strong>不一定。連續需要三個條件同時成立：(1) $f(a)$ 有定義；(2) $\lim_{x \to a}f(x)$ 存在；(3) $\lim_{x \to a}f(x)=f(a)$。僅有極限存在不足以保證連續性——函數可能在 $a$ 處無定義（可移除不連續），或極限值不等於函數值。</p>
+</details>
+
+<details class="derive">
+<summary>題 2：判斷對錯：「$\lim_{x \to 0}\frac{1}{x} = \infty$，所以此極限存在。」</summary>
+<p><strong>答案：</strong>錯。$\infty$ 不是一個實數。當我們寫 $\lim f(x)=\infty$，是在描述函數無界增長的行為，而非極限存在於實數系中。嚴格來說，該極限「不存在」（DNE），$\infty$ 只是提供了比單純 DNE 更多的資訊（告知發散方向）。</p>
+</details>
+
+<details class="derive">
+<summary>題 3：計算 $\displaystyle\lim_{x \to 2}\frac{x^2-4}{x-2}$。</summary>
+<p><strong>答案：</strong>$4$。代入 $x=2$ 得 $\frac{0}{0}$ 不定型，因式分解：$\frac{(x-2)(x+2)}{x-2}=x+2$（$x \neq 2$），取極限得 $2+2=4$。此處 $x=2$ 是可移除不連續點。</p>
+</details>
+
+<details class="derive">
+<summary>題 4：使用夾擠定理計算 $\displaystyle\lim_{x \to 0} x^2 \sin\frac{1}{x}$。</summary>
+<p><strong>答案：</strong>$0$。因為 $-1 \le \sin\frac{1}{x} \le 1$，所以 $-x^2 \le x^2\sin\frac{1}{x} \le x^2$。由於 $\lim_{x \to 0}(-x^2)=0$ 且 $\lim_{x \to 0}x^2=0$，由夾擠定理得極限為 $0$。</p>
+</details>
+
+<details class="derive">
+<summary>題 5：求 $a,b$ 使 $f(x)=\begin{cases} x^2, & x < 2 \\ ax+b, & x \ge 2 \end{cases}$ 在 $x=2$ 處連續。</summary>
+<p><strong>答案：</strong>需要 $2a+b=4$，其中 $a$ 可為任意值，$b=4-2a$。連續條件：$f(2)=2a+b$ 必須等於 $\lim_{x \to 2^-}f(x)=2^2=4$，因此 $2a+b=4$。注意連續不要求可導，所以有無窮多組解。</p>
+</details>
+</section>
+
+<hr>
+
+<!-- ================================================================ -->
+<!-- 推導與假設 -->
+<!-- ================================================================ -->
+<div class="derivation-lab">
+<h3>🧪 推導實驗室：$\displaystyle\lim_{\theta\to 0}\frac{\sin\theta}{\theta}=1$ 的完整證明</h3>
+<p>這是微積分中最重要的極限之一。以下是使用夾擠定理的完整幾何證明：</p>
+
+<details class="derive" open>
+<summary>展開完整推導</summary>
+<div class="step"><span class="step-num">①</span><span>在單位圓中，取角 $\theta$（以弧度計，$0<\theta<\frac{\pi}{2}$）。由幾何關係：$\sin\theta$ = 藍色垂直線段長，$\theta$ = 弧長，$\tan\theta$ = 紅色切線段長。由圖形比較得：$\sin\theta < \theta < \tan\theta$。</span></div>
+<div class="step"><span class="step-num">②</span><span>由於 $\sin\theta>0$（在第一象限），除以 $\sin\theta$：$1 < \dfrac{\theta}{\sin\theta} < \dfrac{1}{\cos\theta}$。</span></div>
+<div class="step"><span class="step-num">③</span><span>取倒數（所有項均為正，不等式反向）：$\cos\theta < \dfrac{\sin\theta}{\theta} < 1$。</span></div>
+<div class="step"><span class="step-num">④</span><span>現在考慮極限：$\displaystyle\lim_{\theta\to 0^+}\cos\theta = \cos 0 = 1$，且 $\displaystyle\lim_{\theta\to 0^+}1 = 1$。</span></div>
+<div class="step"><span class="step-num">⑤</span><span>由夾擠定理：因 $\cos\theta \leq \frac{\sin\theta}{\theta} \leq 1$ 且兩側極限均為 $1$，故 $\displaystyle\lim_{\theta\to 0^+}\frac{\sin\theta}{\theta}=1$。</span></div>
+<div class="step"><span class="step-num">⑥</span><span>對於負角 $\theta<0$：$\frac{\sin(-\theta)}{-\theta}=\frac{-\sin\theta}{-\theta}=\frac{\sin\theta}{\theta}$。因此 $\displaystyle\lim_{\theta\to 0^-}\frac{\sin\theta}{\theta}=1$ 同樣成立。雙側極限一致，故 $\displaystyle\lim_{\theta\to 0}\frac{\sin\theta}{\theta}=1$。$\quad\blacksquare$</span></div>
+</details>
+
+<details class="derive">
+<summary>展開：從 $\frac{\sin\theta}{\theta}\to 1$ 推導 $\frac{1-\cos\theta}{\theta}\to 0$</summary>
+<div class="step"><span class="step-num">①</span><span>乘上共軛：$\displaystyle\frac{1-\cos\theta}{\theta}=\frac{1-\cos\theta}{\theta}\cdot\frac{1+\cos\theta}{1+\cos\theta}$。</span></div>
+<div class="step"><span class="step-num">②</span><span>分子化簡：$(1-\cos\theta)(1+\cos\theta)=1-\cos^2\theta=\sin^2\theta$。</span></div>
+<div class="step"><span class="step-num">③</span><span>因此 $\displaystyle\frac{1-\cos\theta}{\theta}=\frac{\sin^2\theta}{\theta(1+\cos\theta)}=\frac{\sin\theta}{\theta}\cdot\frac{\sin\theta}{1+\cos\theta}$。</span></div>
+<div class="step"><span class="step-num">④</span><span>取極限：$\displaystyle\lim_{\theta\to 0}\frac{\sin\theta}{\theta}=1$，$\displaystyle\lim_{\theta\to 0}\frac{\sin\theta}{1+\cos\theta}=\frac{0}{2}=0$。</span></div>
+<div class="step"><span class="step-num">⑤</span><span>由乘法則：$\displaystyle\lim_{\theta\to 0}\frac{1-\cos\theta}{\theta}=1\cdot 0 = 0$。$\quad\blacksquare$</span></div>
+</details>
+</div>
+
+<hr>
+
+<!-- ================================================================ -->
+<!-- 延伸資源 -->
+<!-- ================================================================ -->
+<section id="resources" class="resources-section">
+<h2>📚 延伸資源</h2>
+<ul>
+  <li>📖 原文書：OpenStax <em>Calculus Vol. 1</em>, Chapter 2 — <a href="https://openstax.org/books/calculus-volume-1/pages/2-introduction" target="_blank" rel="noopener">免費線上閱讀</a></li>
+  <li>🎥 3Blue1Brown Essence of Calculus — <a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr" target="_blank" rel="noopener">YouTube 播放清單</a>（極限的視覺化直覺）</li>
+  <li>🔬 GeoGebra 互動：<a href="https://www.geogebra.org/m/er9aqsgf" target="_blank" rel="noopener">Secant → Tangent 動態展示</a></li>
+  <li>📐 ε-δ 互動 Applet：<a href="http://www.openstax.org/l/20_epsilondelt" target="_blank" rel="noopener">OpenStax ε-δ 展示</a></li>
+  <li>🧮 習題解答：本章 §2.1–§2.5 共超過 100 道練習題（含 T = 科技題），建議完成至少 30 題涵蓋各節。</li>
+  <li>📊 下一章預告：第 3 章「導數」將基於本章的極限概念，正式定義導數並學習微分法則。</li>
+</ul>
+</section>
+
+</main>
+<script defer src="../assets/course-ui.js"></script>
+<script defer src="../assets/secant-tangent-model.js"></script>
+</body>
+</html>
