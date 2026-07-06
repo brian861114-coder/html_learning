@@ -65,8 +65,14 @@ details.example{border:1px solid var(--ex-bd);background:var(--ex-bg);border-rad
 <li><strong>Larson-Miller 參數</strong>：$P = T(C + \\log t_r)$——高溫短時測試外推低溫長時服役壽命</li>
 <li><strong>表面處理的關鍵角色</strong>：噴丸、滲碳、滲氮在表面引入壓縮殘留應力→大幅提高疲勞壽命</li>
 </ol>
-<h3>🧭 邏輯鏈</h3>
-<p>Griffith 裂紋理論（應力集中+斷裂力學）→ 破裂韌性 $K_{Ic}$ 的工程應用 → DBTT 的歷史教訓 → 疲勞機制（循環應力→漸進式破壞）→ 疲勞壽命設計（S–N 曲線）→ 潛變（高溫時間依賴變形）→ Larson-Miller 壽命外推</p>
+<div class="logic-chain"><h3>🧭 本章推理地圖</h3>
+<p><strong>共同起點：</strong>真實零件含缺口或裂紋（§8.1、§8.3），且載荷、溫度與時間歷程不同 → 必須先辨認控制失效的機制。</p>
+<ul>
+<li><strong>單次載荷：</strong>裂紋集中應力並釋放彈性能（§8.2–§8.3）→ 當 $K_I \ge K_{Ic}$（§8.4），裂紋失穩擴展而斷裂（§8.1、§8.4）。</li>
+<li><strong>循環載荷：</strong>反覆滑移萌生裂紋（§8.7、§8.9）→ 以 S–N 曲線（§8.8）或 Paris 定律（§8.10）預測疲勞壽命。</li>
+<li><strong>高溫持續載荷：</strong>擴散與差排攀移活化（§8.13）→ 產生潛變（§8.12）→ 以 Larson–Miller 參數估算壽命（§8.14）。</li>
+</ul>
+<p>因此安全設計須依機制控制裂紋尺寸（§8.4–§8.6）、應力幅（§8.8–§8.11）及溫度與時間（§8.12–§8.15）。</p></div>
 <div class="callout-warn"><strong>⚡ 先備知識</strong>：Ch6 應力–應變、降伏、韌性概念；Ch7 差排與塑性變形。破裂力學需要理解裂紋尖端的應力狀態（不同於均勻拉伸的單軸應力）。</div>
 </div></section>
 
@@ -132,7 +138,7 @@ details.example{border:1px solid var(--ex-bd);background:var(--ex-bg);border-rad
 
 <p>破裂力學的強度–韌性取捨：高強度鋼的 $K_{Ic}$ 反而較低——因為裂紋尖端塑性區 $r_p \propto (K_{Ic}/\sigma_y)^2$ 極小，幾乎無塑性鈍化，應力集中極高。低強度高韌性鋼則相反。這就是為什麼<strong>不能同時最大化強度和韌性</strong>——設計必須權衡。</p>
 
-<details class="example" open><summary>📝 範例 8.1：破裂韌性的工程設計應用</summary>
+<details class="example"><summary>📝 範例 8.1：破裂韌性的工程設計應用</summary>
 <div class="example-body">
 <p><strong>題目：</strong>鋼板 $K_{Ic}=60$ MPa·√m，檢測發現裂紋 $2a=5$ mm。$Y=1.0$：$\sigma_c = 60/(1.0\times\sqrt{\pi\times0.0025}) = 677$ MPa。若疲勞使裂紋長到 20 mm：$\sigma_c = 239$ MPa——若設計應力為 400 MPa，將發生斷裂。</p>
 <p><strong>工程詮釋：</strong>這說明了定期無損檢測的重要性——檢測週期必須確保在下一次檢測前，裂紋不會從可檢測尺寸長到臨界尺寸。</p>
@@ -261,7 +267,7 @@ details.example{border:1px solid var(--ex-bd);background:var(--ex-bg);border-rad
 
 <p>實際工程零件的潛變壽命可能是數十年——不可能進行等長的實驗測試。Larson-Miller 參數解決了這個問題：$P = T(C + \log t_r)$（$T$ 為 K，$t_r$ 為小時，$C \approx 20$）。給定應力下，$P$ 為常數 → 可從<strong>高溫短時</strong>測試外推<strong>低溫長時</strong>服役壽命。例如：1000°C（1273 K）下 100 小時斷裂 → $P = 1273(20 + \log 100) = 28006$。同材料在 800°C（1073 K）、同應力下的斷裂時間：$\log t_r = P/1073 - 20 = 6.1$ → $t_r = 1.26 \times 10^6$ 小時 ≈ 144 年！溫度僅降 200°C，壽命從 100 小時增至 >100 年。</p>
 
-<details class="example" open><summary>📝 自編概念例：Larson-Miller 的工程應用</summary>
+<details class="example"><summary>📝 自編概念例：Larson-Miller 的工程應用</summary>
 <div class="example-body">
 <p><strong>問題：</strong>渦輪葉片在 950°C、150 MPa 下的設計壽命要求為 10,000 小時。實驗室可在 1050°C 進行加速測試。需在 1050°C 測試多長時間來等效驗證 950°C/10,000 小時的壽命？</p>
 <p><strong>解：</strong>$T_1 = 950+273=1223$ K，$t_1=10000$ hr。$P=1223(20+\log 10000)=1223\times24=29352$。$T_2=1050+273=1323$ K。$\log t_2 = P/T_2-20 = 29352/1323-20=2.18$。$t_2=151$ 小時。在 1050°C 測試 151 小時等效於 950°C 測試 10,000 小時。</p>
@@ -301,7 +307,7 @@ details.example{border:1px solid var(--ex-bd);background:var(--ex-bg);border-rad
   <div class="formula-card"><div class="label">常用尺寸有效性檢查</div><div class="eq">$$B,\ a,\ (W-a)\ \geq\ 2.5\left(\frac{K_Q}{\sigma_{YS}}\right)^2$$</div><div class="note">$B$ = 厚度，$a$ = 裂紋長度，$W-a$ = 剩餘韌帶；所有長度須使用一致單位。</div></div>
   <p>若試片太薄，裂紋尖端較接近平面應力，塑性區較大，量得的韌性通常偏高且依賴厚度。此時應報告 $K_Q$ 或其他適當的彈塑性破裂參數，不可直接標成 $K_{Ic}$。</p>
 
-  <details class="example" open><summary>📝 完整例題：容許裂紋尺寸</summary><div class="example-body">
+  <details class="example"><summary>📝 完整例題：容許裂紋尺寸</summary><div class="example-body">
     <p>一寬板承受 $\sigma=200$ MPa，材料 $K_{Ic}=50$ MPa·m$^{1/2}$，幾何因子 $Y=1.12$。由 $K_I=Y\sigma\sqrt{\pi a}$：</p>
     <p>$$a_c=\frac{1}{\pi}\left(\frac{K_{Ic}}{Y\sigma}\right)^2
     =\frac{1}{\pi}\left(\frac{50}{1.12\times200}\right)^2

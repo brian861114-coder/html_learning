@@ -59,6 +59,14 @@ details.example{border:1px solid var(--ex-bd);background:var(--ex-bg);border-rad
 滲碳濃度分布</li>
 <li><strong>擴散距離 ∝ √Dt</strong>：加倍距離需四倍時間</li>
 </ol>
+<div class="logic-chain"><h3>🧭 本章推理地圖</h3>
+<ol>
+<li>熱振動提供跨越能障的機會（§5.1），空位或間隙提供位置（§5.2）→ 原子能在固體中<strong>隨機跳躍</strong>（§5.1–§5.2）。</li>
+<li>化學位或濃度不均勻（§5.1、§5.7）→ 兩方向跳躍不再抵消 → 產生淨<strong>擴散通量</strong>（§5.3）。</li>
+<li>穩態下以 Fick 第一定律連結梯度與通量（§5.3）；濃度隨時間改變時結合質量守恆 → Fick 第二定律（§5.4）。</li>
+<li>擴散係數由跳躍能障控制並遵循 Arrhenius 關係（§5.5）→ 溫度、物種與快速路徑改變擴散速率（§5.5）。</li>
+<li>由邊界條件、$D$ 與時間預測濃度分布（§5.4）→ 設計滲碳與半導體摻雜的<strong>熱預算</strong>（§5.6）。</li>
+</ol></div>
 </div></section>
 
 <section id="prereq-bridge"><h2>先備知識橋接</h2>
@@ -115,7 +123,7 @@ details.example{border:1px solid var(--ex-bd);background:var(--ex-bg);border-rad
 
 <div class="callout-warn"><strong>⚡ 為什麼碳在 BCC 鐵中比在 FCC 鐵中擴散快？</strong><br>直覺上 FCC 更密（APF 0.74 vs 0.68），碳應該更難移動。但數據顯示碳在 BCC 中的 $Q_d$ (80 kJ/mol) 遠小於 FCC 中的 (148 kJ/mol)。原因是 <strong>BCC 的間隙通道瓶頸尺寸更大</strong>——碳原子在 BCC 中的遷移路徑瓶頸半徑約 0.036 nm，在 FCC 中僅約 0.025 nm。這是晶體結構影響擴散的經典案例——<strong>不是看「平均密度」，而是看「關鍵瓶頸」</strong>。</div>
 
-<details class="example" open><summary>📝 範例 5.1：比較兩個溫度下的擴散係數</summary>
+<details class="example"><summary>📝 範例 5.1：比較兩個溫度下的擴散係數</summary>
 <div class="example-body">
 <p><strong>題目：</strong>碳在 γ-Fe 中 $D_0 = 2.3 \times 10^{-5}$ m²/s, $Q_d = 148$ kJ/mol。求 900°C 和 1100°C 時的 $D$。</p>
 <p><strong>解：</strong>900°C (1173 K)：$D = 2.3\times10^{-5}\exp(-148000/(8.314\times1173)) = 7.1\times10^{-12}$ m²/s。<br>1100°C (1373 K)：$D = 2.3\times10^{-5}\exp(-148000/(8.314\times1373)) = 5.4\times10^{-11}$ m²/s。<br>溫度僅升高 200°C，$D$ 增加 ~7.6 倍——擴散係數對溫度極其敏感。</p>
@@ -146,7 +154,7 @@ details.example{border:1px solid var(--ex-bd);background:var(--ex-bg);border-rad
 <div class="callout"><strong>💡 穩態 vs 非穩態——什麼時候用哪個？</strong><br>穩態條件成立的關鍵是<strong>邊界條件不隨時間變化</strong>。氫氣純化器中，高壓側和低壓側的氫氣壓力保持恆定 → 膜內濃度梯度恆定 → 穩態（$J$ 不隨時間變化）。但
 滲碳初期，鋼件表面剛接觸高碳氣氛 → 表面碳濃度從 $C_0$ 逐漸上升到 $C_s$ → 非穩態 → 必須用 Fick 第二定律。判斷準則：邊界條件是否隨時間變化？不變 → 第一定律；在變化中 → 第二定律。</div>
 
-<details class="example" open><summary>📝 範例：穩態擴散——計算氫氣通過鈀膜的滲透速率</summary>
+<details class="example"><summary>📝 範例：穩態擴散——計算氫氣通過鈀膜的滲透速率</summary>
 <div class="example-body">
 <p><strong>題目：</strong>5 mm 厚的鈀膜在 600°C 用於純化氫氣。高壓側 H 濃度 $C_1 = 2.0$ kg/m³，低壓側 $C_2 = 0.05$ kg/m³。$D = 1.6 \times 10^{-8}$ m²/s。求穩態擴散通量 $J$ 和每小時通過 1 m² 膜面積的氫氣質量。</p>
 <p><strong>解：</strong>$J = D\frac{C_1 - C_2}{\Delta x} = 1.6\times10^{-8} \times \frac{2.0 - 0.05}{5\times10^{-3}} = 1.6\times10^{-8} \times 390 = 6.24\times10^{-6}$ kg/m²·s。</p>
@@ -182,7 +190,7 @@ details.example{border:1px solid var(--ex-bd);background:var(--ex-bg);border-rad
 滲碳時間隨深度急劇增加的原因。對於極深
 滲碳（>3 mm），可能需要數十小時甚至數天。</div>
 
-<details class="example" open><summary>📝 範例 5.2：
+<details class="example"><summary>📝 範例 5.2：
 滲碳處理的碳濃度分布</summary>
 <p><strong>題目：</strong>鋼件初始 $C_0=0.20$ wt% C，表面保持 $C_s=1.00$ wt% C。950°C 處理 5 小時，$D = 1.5\times10^{-11}$ m²/s。求距表面 0.5 mm 處的碳濃度。</p>
 <p><strong>解：</strong>$z = x/(2\sqrt{Dt}) = 0.5\times10^{-3}/(2\sqrt{1.5\times10^{-11}\times18000}) = 5\times10^{-4}/(2\times5.2\times10^{-4}) = 0.48$。<br>erf(0.48) ≈ 0.5027。$C = 0.20 + (1.00-0.20)(1-0.5027) = 0.20 + 0.398 = 0.60$ wt% C。<br><strong>答案：</strong>5 小時後距表面 0.5 mm 處碳濃度從 0.20% 提升到 0.60%——已接近共析成分（0.76% C），可在後續淬火中形成麻田散鐵硬化層。</p></details>
@@ -270,7 +278,7 @@ details.example{border:1px solid var(--ex-bd);background:var(--ex-bg);border-rad
   </table>
   <div class="callout-warn"><strong>⚠️ 半無限體判斷：</strong>若擴散影響深度約為數個 $\sqrt{Dt}$，而試片厚度遠大於此尺度，才可忽略背面。薄膜或雙面擴散時，半無限體解可能失效。</div>
 
-  <details class="example" open><summary>📝 完整例題：估算鋼的滲碳時間</summary><div class="example-body">
+  <details class="example"><summary>📝 完整例題：估算鋼的滲碳時間</summary><div class="example-body">
     <p>鋼原始含碳量 $C_0=0.20$ wt%，表面維持 $C_s=1.00$ wt%。在處理溫度下 $D=1.2\times10^{-11}$ m²/s。希望深度 $x=0.50$ mm 處達到 $C_x=0.60$ wt%，求時間。</p>
     <p>先算無因次濃度：$(C_x-C_0)/(C_s-C_0)=0.50=\operatorname{erfc}(z)$，查表得 $z\approx0.477$。</p>
     <p>由 $z=x/(2\sqrt{Dt})$ 得 $t=[x/(2z)]^2/D\approx2.29\times10^4$ s，約 <strong>6.4 小時</strong>。</p>

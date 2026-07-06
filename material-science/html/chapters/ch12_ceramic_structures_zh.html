@@ -9,15 +9,23 @@
 <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 </head>
 <body>
+<a class="portal-home-link" href="../../../index.html">返回學習中心</a>
+<style id="portal-home-link-style">.portal-home-link{position:fixed;top:16px;right:16px;z-index:1000;display:inline-flex;align-items:center;min-height:36px;padding:7px 11px;border:1px solid #cbd5e1;border-radius:8px;background:#fff;color:#1d4ed8;font:600 13px/1.2 -apple-system,BlinkMacSystemFont,"Noto Sans TC","Microsoft JhengHei",sans-serif;text-decoration:none;box-shadow:0 2px 10px rgba(15,23,42,.08)}.portal-home-link:hover{background:#eff6ff}.portal-home-link:focus-visible{outline:3px solid rgba(37,99,235,.35);outline-offset:2px}@media(max-width:768px){.portal-home-link{top:10px;right:10px;min-height:34px;padding:7px 9px;font-size:12px}}</style>
 <button class="sidebar-toggle-btn" onclick="toggleSidebar()" aria-label="切換側欄">☰</button>
 <nav class="sidebar" id="sidebar">
-  <div class="sidebar-header"><a href="../combined/materials_map_zh.html" class="ns">📘 材料科學與工程</a></div>
+  <div class="sidebar-header"><span class="ns">材料科學與工程 · 第 12 章</span></div>
   <div class="sidebar-chapter-list">
-    <div class="nsub"><a href="ch11_metal_alloys_zh.html">Ch11 金屬合金</a></div>
-    <div class="nsub active"><a href="ch12_ceramic_structures_zh.html">Ch12 陶瓷結構</a></div>
-    <div class="nsub"><a href="ch13_ceramic_applications_zh.html">Ch13 陶瓷應用</a></div>
-    <div class="nsub"><a href="ch14_polymer_structures_zh.html">Ch14 高分子結構</a></div>
-    <div class="nsub"><a href="ch15_polymer_applications_zh.html">Ch15 高分子應用</a></div>
+    <div class="nsub"><a href="#sec12.1">12.1 陶瓷結構概論</a></div>
+    <div class="nsub"><a href="#sec12.2">12.2 晶體結構</a></div>
+    <div class="nsub"><a href="#sec12.3">12.3 矽酸鹽陶瓷</a></div>
+    <div class="nsub"><a href="#sec12.4">12.4 碳材料</a></div>
+    <div class="nsub"><a href="#sec12.5">12.5 點缺陷</a></div>
+    <div class="nsub"><a href="#sec12.6">12.6 雜質與固溶體</a></div>
+    <div class="nsub"><a href="#sec12.7">12.7 差排與塑性變形</a></div>
+    <div class="nsub"><a href="#sec12.8">12.8 擴散</a></div>
+    <div class="nsub"><a href="#sec12.9">12.9 力學性質</a></div>
+    <div class="nsub"><a href="#sec12.10">12.10 韌性與強化</a></div>
+    <div class="nsub"><a href="#sec12.11">12.11 陶瓷應用</a></div>
   </div>
 </nav>
 <main class="chapter-content">
@@ -47,7 +55,14 @@
       <li><strong>Weibull 統計的必要性</strong>：陶瓷強度的巨大變異性來自裂紋尺寸分布——$m$ 值愈大→愈可靠</li>
     </ol>
   </div>
-  <div class="logic-chain"><h3>本章邏輯鏈</h3><p>離子鍵結與配位數 → AX/AₘXₚ/AₘBₙXₚ 結構 → 矽酸鹽（四面體連結）→ 碳材料（混成軌域）→ 點缺陷（Frenkel/Schottky）→ 非化學計量→ 脆性斷裂（Griffith+$K_{Ic}$）→ 彎曲試驗→ Weibull 統計→ 理論密度計算</p></div>
+  <div class="logic-chain"><h3>🧭 本章推理地圖</h3>
+  <ol>
+    <li>離子／共價鍵具有電荷與方向限制（§12.1）→ 原子排列須滿足<strong>電中性、半徑比與配位幾何</strong>（§12.1）。</li>
+    <li>這些限制決定 AX、AₘXₚ、AₘBₙXₚ 結構（§12.2）及矽酸鹽四面體連結（§12.3）→ 形成多樣結構與密度（§12.2–§12.4）。</li>
+    <li>異價摻雜或偏離化學計量（§12.5–§12.6）→ 生成空位或改變離子價態以補償電荷（§12.5–§12.6）→ 改變擴散（§12.8）。</li>
+    <li>強方向鍵與滑移時的電荷衝突（§12.1、§12.7）→ 差排難以移動（§12.7）→ 裂紋尖端不易塑性鈍化（§12.9–§12.10）。</li>
+    <li>陶瓷硬而脆且強度受缺陷控制（§12.9）→ 用破裂韌性與統計方法評估可靠度（§12.9–§12.10）。</li>
+  </ol></div>
 </section>
 
 <section class="prereq-bridge"><h2>先備知識橋接</h2>

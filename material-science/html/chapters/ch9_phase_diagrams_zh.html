@@ -47,6 +47,14 @@ details.example{border:1px solid var(--ex-bd);background:var(--ex-bg);border-rad
 <li><strong>Fe–Fe₃C</strong>：共析 $\gamma \rightarrow \alpha + \text{Fe}_3\text{C}$（波來鐵）——鋼鐵熱處理核心</li>
 <li><strong>槓桿定律</strong>：$W_L = (C_\alpha - C_0)/(C_\alpha - C_L)$</li>
 </ol>
+<div class="logic-chain"><h3>🧭 本章推理地圖</h3>
+<ol>
+<li>系統在指定溫度、壓力與總成分下傾向降低 Gibbs 自由能（§9.2、§9.17）→ 決定平衡時可共存的<strong>相</strong>（§9.2–§9.3）。</li>
+<li>把各條件下的平衡相整理成相圖（§9.1–§9.4）→ 給定溫度與成分即可判斷「有哪些相」（§9.4、§9.7）。</li>
+<li>在兩相區畫等溫連線（§9.4）→ 交點給出各相成分（§9.4）→ 槓桿定律求各相比例（§9.5）。</li>
+<li>沿冷卻路徑跨越相界（§9.6–§9.7）→ 相的種類、成分與比例改變 → 形成<strong>微觀組織</strong>（§9.8、§9.12、§9.19）。</li>
+<li>Fe–Fe₃C 相圖預測平衡終態與轉變溫度（§9.18–§9.20），但不含轉變速度 → 須結合相變動力學（Ch10）。</li>
+</ol></div>
 </div></section>
 
 <section id="prereq-bridge"><h2>先備知識橋接</h2>
@@ -303,7 +311,7 @@ details.example{border:1px solid var(--ex-bd);background:var(--ex-bg);border-rad
 
 <p>(2) <strong>共析鋼</strong>（0.76% C，AISI 1075）——冷卻至 727°C，全部 γ 同時轉變為 <strong>100% 波來鐵</strong>——肥粒鐵和雪明碳鐵的層狀交替結構（層間距取決於冷卻速率）。爐冷 → 粗波來鐵（~15 HRC）；空冷 → 細波來鐵（~25 HRC）。(3) <strong>過共析鋼</strong>（0.76–2.14% C，如 AISI 52100）——先析出<strong>網狀雪明碳鐵</strong>沿原 γ 晶界，剩餘 γ 轉變為波來鐵。網狀雪明碳鐵極脆——必須進行<strong>球化退火</strong>（spheroidizing），將網狀轉化為球狀顆粒。</p>
 
-<details class="example" open><summary>📝 自編概念例：從 Fe–C 相圖設計熱處理溫度</summary>
+<details class="example"><summary>📝 自編概念例：從 Fe–C 相圖設計熱處理溫度</summary>
 <div class="example-body">
 <p><strong>問題：</strong>AISI 1045 鋼（0.45 wt% C）需要完全退火。從相圖決定加熱溫度、冷卻後微觀結構、和各相比例。</p>
 <p><strong>解：</strong>A₃ 在 0.45% C 約為 790°C。加熱至 820°C（A₃+30°C）完全沃斯田鐵化。緩冷：初析肥粒鐵 + 波來鐵。$W_{\alpha\text{-pro}} = (0.76-0.45)/(0.76-0.022) = 42\%$，$W_{\text{pearlite}} = 58\%$。</p>
@@ -368,7 +376,7 @@ details.example{border:1px solid var(--ex-bd);background:var(--ex-bg);border-rad
     <li><strong>讀相成分並用槓桿定律</strong>：連線兩端為各相成分，不是兩相比例。</li>
     <li><strong>描述組織</strong>：指出初生相、剩餘液相或共晶組織的形態與形成順序。</li>
   </ol>
-  <details class="example" open><summary>📝 綜合例題：兩相區的完整敘述</summary><div class="example-body">
+  <details class="example"><summary>📝 綜合例題：兩相區的完整敘述</summary><div class="example-body">
     <p>某同晶型合金總成分 $C_0=35$ wt% B，在指定溫度位於 $L+\alpha$ 區；等溫線與液相線、固相線交點分別為 $C_L=32$ wt% B、$C_\alpha=43$ wt% B。</p>
     <p><strong>相：</strong>$L+\alpha$。<strong>相成分：</strong>液相 32 wt% B，$\alpha$ 相 43 wt% B。</p>
     <p>$$W_L=\frac{C_\alpha-C_0}{C_\alpha-C_L}=\frac{43-35}{43-32}=0.727,\qquad

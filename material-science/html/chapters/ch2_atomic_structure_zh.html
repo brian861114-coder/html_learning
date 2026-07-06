@@ -16,30 +16,27 @@ window.MathJax = {
 <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 </head>
 <body>
+<a class="portal-home-link" href="../../../index.html">返回學習中心</a>
+<style id="portal-home-link-style">.portal-home-link{position:fixed;top:16px;right:16px;z-index:1000;display:inline-flex;align-items:center;min-height:36px;padding:7px 11px;border:1px solid #cbd5e1;border-radius:8px;background:#fff;color:#1d4ed8;font:600 13px/1.2 -apple-system,BlinkMacSystemFont,"Noto Sans TC","Microsoft JhengHei",sans-serif;text-decoration:none;box-shadow:0 2px 10px rgba(15,23,42,.08)}.portal-home-link:hover{background:#eff6ff}.portal-home-link:focus-visible{outline:3px solid rgba(37,99,235,.35);outline-offset:2px}@media(max-width:768px){.portal-home-link{top:10px;right:10px;min-height:34px;padding:7px 9px;font-size:12px}}</style>
 <button class="sidebar-toggle-btn" onclick="toggleSidebar()" aria-label="切換側欄">☰</button>
 
 <nav class="sidebar" id="sidebar">
   <div class="sidebar-header">
-    <a href="ch1_introduction_zh.html" class="ns" title="回首頁">📘 材料科學與工程</a>
+    <span class="ns">材料科學與工程 · 第 2 章</span>
   </div>
   <div class="sidebar-chapter-list">
-    <div class="nsub"><a href="ch1_introduction_zh.html">Ch1 導論</a></div>
-    <div class="nsub active"><a href="ch2_atomic_structure_zh.html">Ch2 原子結構與鍵結</a></div>
-    <div class="nsub"><a href="ch3_crystalline_solids_zh.html">Ch3 晶體結構</a></div>
-    <div class="nsub"><a href="ch4_imperfections_zh.html">Ch4 固體缺陷</a></div>
-    <div class="nsub"><a href="ch5_diffusion_zh.html">Ch5 擴散</a></div>
-  </div>
-  <div class="sidebar-section-title">力學性質</div>
-  <div class="sidebar-chapter-list">
-    <div class="nsub"><a href="ch6_mechanical_properties_zh.html">Ch6 金屬力學性質</a></div>
-    <div class="nsub"><a href="ch7_dislocations_zh.html">Ch7 差排與強化</a></div>
-    <div class="nsub"><a href="ch8_failure_zh.html">Ch8 破損</a></div>
-  </div>
-  <div class="sidebar-section-title">相與應用</div>
-  <div class="sidebar-chapter-list">
-    <div class="nsub"><a href="ch9_phase_diagrams_zh.html">Ch9 相圖</a></div>
-    <div class="nsub"><a href="ch10_phase_transformations_zh.html">Ch10 相變化</a></div>
-    <div class="nsub"><a href="ch11_metal_alloys_zh.html">Ch11 金屬合金</a></div>
+    <div class="nsub"><a href="#sec2.1">2.1 原子結構</a></div>
+    <div class="nsub"><a href="#sec2.2">2.2 原子量與同位素</a></div>
+    <div class="nsub"><a href="#sec2.3">2.3 原子中的電子</a></div>
+    <div class="nsub"><a href="#sec2.4">2.4 週期表</a></div>
+    <div class="nsub"><a href="#sec2.5">2.5 鍵結力與能量</a></div>
+    <div class="nsub"><a href="#sec2.6">2.6 主要原子間鍵結</a></div>
+    <div class="nsub"><a href="#sec2.7">2.7 二次鍵結</a></div>
+    <div class="nsub"><a href="#sec2.8">2.8 混合鍵性</a></div>
+    <div class="nsub"><a href="#sec2.9">2.9 分子與分子材料</a></div>
+    <div class="nsub"><a href="#sec2.10">2.10 鍵結與材料分類</a></div>
+    <div class="nsub"><a href="#ch2-bond-property-bridge">鍵結與性質補強</a></div>
+    <div class="nsub"><a href="#self-check">概念診斷題</a></div>
   </div>
 </nav>
 
@@ -80,8 +77,14 @@ window.MathJax = {
     </ol>
   </div>
   <div class="logic-chain">
-    <h3>本章邏輯鏈</h3>
-    <p>原子基本概念（質子/中子/電子）→ 原子模型（Bohr → 波動力學）→ 量子數與電子組態 → 週期表規律 → 鍵結力與能量 → 三種主要鍵結（離子/共價/金屬）→ 二次鍵（凡得瓦力/氫鍵）→ 混合鍵性 → 分子 → 鍵型–材料分類對應</p>
+    <h3>🧭 本章推理地圖</h3>
+    <ol>
+      <li><strong>原子序</strong>決定元素身分（§2.1）；電子依能量與量子規則排列（§2.3）→ 形成特定的<strong>價電子組態</strong>（§2.3）。</li>
+      <li>價電子組態隨原子序週期性重複（§2.3）→ 產生電負度、原子半徑與價態趨勢（§2.4）。</li>
+      <li>原子為降低系統能量而重新分配或共享價電子（§2.5）→ 形成主要鍵與二次鍵（§2.6–§2.7）。</li>
+      <li>鍵結的<strong>能量深度</strong>控制熔點與剛性（§2.5）；鍵結的<strong>方向性</strong>限制排列與變形方式（§2.6–§2.8）。</li>
+      <li>由「電子組態（§2.3）→ 鍵結（§2.6–§2.8）→ 材料家族（§2.10）」初步預測性質差異（補強專題）。</li>
+    </ol>
   </div>
 </section>
 
@@ -143,7 +146,7 @@ window.MathJax = {
     <p>1 amu 定義為碳-12（¹²C）原子質量的 1/12。在此尺度下，質子和中子的質量略大於 1 amu。計算上極其方便的關係：<strong>1 amu/atom = 1 g/mol</strong>——例如鐵的原子量 55.85 amu/atom = 55.85 g/mol。一莫耳含有 $6.022 \times 10^{23}$（亞佛加厥數，Avogadro's number）個原子或分子。這個數字之所以是 $6.022 \times 10^{23}$，是因為它使「以克為單位的原子量」等於「1 莫耳原子的質量」。</p>
   </div>
 
-  <details class="example" open>
+  <details class="example">
 <summary>📖 範例 2.1：計算鈰的平均原子量</summary>
 <div class="example-body">
     <p>鈰有四種自然同位素：¹³⁶Ce (0.185%, 135.907 amu)、¹³⁸Ce (0.251%, 137.906 amu)、¹⁴⁰Ce (88.450%, 139.905 amu)、¹⁴²Ce (11.114%, 141.909 amu)。</p>
@@ -155,7 +158,7 @@ window.MathJax = {
 
   <h3>平均原子量是機率加權，不是單一原子的質量</h3>
   <p>週期表原子量通常是自然界同位素依豐度加權的平均值，因此可能不是整數。若元素有同位素質量 $m_i$、原子分率 $f_i$，則 $\bar m=\sum f_i m_i$，且 $\sum f_i=1$。這個平均描述大量原子的統計組成；單一氯原子不會具有 35.45 u，它實際上是某一個特定同位素。</p>
-  <details class="example" open><summary>📝 完整例題：由同位素豐度求原子量</summary><div class="example-body">
+  <details class="example"><summary>📝 完整例題：由同位素豐度求原子量</summary><div class="example-body">
     <p>假設某元素含 75.8% 的 34.97 u 同位素與 24.2% 的 36.97 u 同位素，則平均原子量為：</p>
     <p>$$\bar m=(0.758)(34.97)+(0.242)(36.97)=35.45\ \text{u}$$</p>
     <p>計算時豐度必須先由百分比轉為分率。若已知平均原子量與兩種同位素質量，也可設未知豐度 $x$，利用 $x+(1-x)=1$ 反求天然比例。</p>
@@ -199,6 +202,73 @@ window.MathJax = {
     <tr><td>自旋量子數</td><td>$m_s$</td><td>$+\frac{1}{2}$ 或 $-\frac{1}{2}$</td><td>電子自旋方向（上或下）</td></tr>
   </table>
 
+  <details class="example">
+    <summary>🔍 深入推導：為什麼電子需要四個量子數？</summary>
+    <div class="example-body">
+      <p><strong>核心路線：</strong></p>
+      <p>$$\text{薛丁格方程}\rightarrow\text{球對稱位能}\rightarrow\text{分離變數}\rightarrow(n,l,m_l)\rightarrow\text{電子內禀自旋}\rightarrow m_s$$</p>
+      <div class="callout"><strong>先說結論：</strong>前三個量子數來自電子的<strong>空間波函數</strong>；第四個量子數來自電子的<strong>內禀自旋</strong>。</div>
+
+      <h4>1　從薛丁格方程開始</h4>
+      <p>量子力學不用「確定的位置與速度」描述電子，而以波函數 $\psi(\mathbf r)$ 描述電子狀態。對氫樣原子，電子受到近似球對稱的庫侖位能：</p>
+      <p>$$V(r)=-\frac{Ze^2}{4\pi\epsilon_0r}$$</p>
+      <p>定態滿足時間獨立薛丁格方程：</p>
+      <p>$$\hat H\psi=E\psi,\qquad \hat H=-\frac{\hbar^2}{2m_e}\nabla^2-\frac{Ze^2}{4\pi\epsilon_0r}$$</p>
+      <p>因為 $V$ 只與離核距離 $r$ 有關，不依賴方向，所以使用球座標 $(r,\theta,\phi)$，並可把空間波函數分離為：</p>
+      <p>$$\psi_{nlm_l}(r,\theta,\phi)=R_{nl}(r)Y_l^{m_l}(\theta,\phi)$$</p>
+      <p>可接受的波函數必須單值、有限、連續且可歸一化。這些條件不是附加的記號規則，而會限制方程的允許解，前三個量子數便由此出現。</p>
+
+      <h4>2　主量子數 $n$：徑向邊界條件與能階</h4>
+      <p>徑向函數 $R_{nl}(r)$ 描述電子機率如何隨離核距離變化。要求它在 $r=0$ 附近不產生不合理發散、在 $r\to\infty$ 時可歸一化，使束縛態能量只能取離散值。氫原子中：</p>
+      <p>$$E_n=-\frac{13.6\ \mathrm{eV}}{n^2},\qquad n=1,2,3,\ldots$$</p>
+      <p>因此 $n$ 主要標記能階，也與電子雲的典型尺寸相關：一般而言，$n$ 越大，能量越高、電子分布延伸得越遠。</p>
+
+      <h4>3　角量子數 $l$：軌道角動量大小</h4>
+      <p>角向方程的解是球諧函數 $Y_l^{m_l}$。它同時是軌道角動量平方算符 $\hat L^2$ 的本徵函數：</p>
+      <p>$$\hat L^2Y_l^{m_l}=l(l+1)\hbar^2Y_l^{m_l},\qquad |\mathbf L|=\sqrt{l(l+1)}\hbar$$</p>
+      <p>允許值為 $l=0,1,\ldots,n-1$。$l=0,1,2,3$ 分別稱為 s、p、d、f 次殼層；在常用的軌域圖像中，它控制角向分布，也就是軌域形狀。</p>
+
+      <h4>4　磁量子數 $m_l$：角動量在選定方向上的投影</h4>
+      <p>量子力學不能同時指定 $L_x,L_y,L_z$ 三個分量，但可同時指定 $L^2$ 與其中一個分量，慣例選擇 $L_z$：</p>
+      <p>$$\hat L_zY_l^{m_l}=m_l\hbar Y_l^{m_l},\qquad m_l=-l,-l+1,\ldots,l$$</p>
+      <p>所以每個 $l$ 有 $2l+1$ 個允許的 $m_l$。例如 $l=1$ 時，$m_l=-1,0,+1$，共有三個 p 軌域。嚴格來說，常畫的 $p_x$、$p_y$ 是 $m_l=\pm1$ 狀態的線性組合，而 $p_z$ 對應 $m_l=0$；把 $m_l$ 簡稱為「軌域朝向」是有用但簡化的說法。</p>
+
+      <h4>5　前三個量子數描述空間波函數</h4>
+      <p>到此，單一空間軌域可寫成 $\psi_{nlm_l}$，由 $(n,l,m_l)$ 標記：</p>
+      <ul>
+        <li>$n$：主要能階與徑向尺度</li>
+        <li>$l$：軌道角動量大小與角向形狀</li>
+        <li>$m_l$：軌道角動量在選定軸上的投影</li>
+      </ul>
+      <p>然而，這三個量子數還不足以區分同一空間軌域中的兩個電子。</p>
+
+      <h4>6　自旋量子數 $m_s$：電子的內禀自由度</h4>
+      <p>原子光譜與 Stern–Gerlach 類實驗顯示，電子除了軌道角動量，還具有內禀角動量 $\mathbf S$。自旋不是電子像小球一樣繞軸自轉，而是粒子本身的量子性質。電子是自旋 $s=\tfrac12$ 的粒子，因此：</p>
+      <p>$$S_z=m_s\hbar,\qquad m_s=+\frac12\ \text{或}\ -\frac12$$</p>
+      <p>完整的單電子狀態因而包含空間與自旋兩部分：</p>
+      <p>$$\Psi_{nlm_lm_s}(\mathbf r)=\psi_{nlm_l}(\mathbf r)\chi_{m_s}$$</p>
+      <p>這就是第四個量子數的來源。同一個 $(n,l,m_l)$ 空間軌域可有兩個不同的自旋狀態；再結合 Pauli 不相容原理，便得到「每個軌域最多容納兩個自旋相反的電子」。</p>
+
+      <h4>7　用可相容觀測量理解四個標記</h4>
+      <p>在非相對論、中心力場的單電子模型中，可選擇一組彼此對易的算符共同標記狀態：</p>
+      <table class="structure-table">
+        <tr><th>算符</th><th>本徵值</th><th>量子數</th></tr>
+        <tr><td>$\hat H$</td><td>能量 $E_n$</td><td>$n$</td></tr>
+        <tr><td>$\hat L^2$</td><td>$l(l+1)\hbar^2$</td><td>$l$</td></tr>
+        <tr><td>$\hat L_z$</td><td>$m_l\hbar$</td><td>$m_l$</td></tr>
+        <tr><td>$\hat S_z$</td><td>$m_s\hbar$</td><td>$m_s$</td></tr>
+      </table>
+      <p>所以狀態可簡寫為：</p>
+      <p>$$|n,l,m_l,m_s\rangle$$</p>
+
+      <h4>8　為什麼不是三個或五個？</h4>
+      <p><strong>不是三個：</strong>$(n,l,m_l)$ 只標記空間軌域，無法區分同一軌域中的 $m_s=+\tfrac12$ 與 $m_s=-\tfrac12$。</p>
+      <p><strong>不必固定為五個：</strong>四個量子數是基礎原子與化學中標記單電子狀態的一組方便選擇，不是宇宙中唯一的標記方式。考慮強自旋–軌道耦合或相對論效應時，常改用總角動量 $\mathbf J=\mathbf L+\mathbf S$，以 $(n,l,j,m_j)$ 等量子數標記狀態。</p>
+
+      <div class="callout"><strong>一句話總結：</strong>徑向邊界條件給出 $n$；軌道角動量大小量子化給出 $l$；其方向投影量子化給出 $m_l$；電子的內禀自旋給出 $m_s$。因此常用 $(n,l,m_l,m_s)$ 描述一個原子中的單電子狀態。</div>
+    </div>
+  </details>
+
   <p>每個次殼層的軌道數與電子容量：s 有 1 個軌道（2 個電子）、p 有 3 個軌道（6 個電子）、d 有 5 個軌道（10 個電子）、f 有 7 個軌道（14 個電子）。</p>
 
   <div class="callout">
@@ -234,7 +304,7 @@ window.MathJax = {
     <p>關鍵洞察：<strong>4s 在 3d 之前填入</strong>（4s 能量略低於 3d），這就是為什麼過渡金屬（Sc 到 Zn）的價電子先填入 4s 再填 3d。但注意：當 3d 開始有電子後，4s 和 3d 的相對能量會改變——這解釋了 Cr ($[Ar]3d^5 4s^1$) 和 Cu ($[Ar]3d^{10} 4s^1$) 的「異常」組態（半填滿和全填滿的 d 次殼層特別穩定）。</p>
   </div>
 
-  <details class="example" open>
+  <details class="example">
 <summary>📖 為什麼過渡金屬的電子組態對材料很重要？</summary>
 <div class="example-body">
     <p>過渡金屬（第 IIIB–IIB 族）的 <strong>部分填滿的 d 軌域</strong>產生了豐富的物理現象：</p>
@@ -306,7 +376,7 @@ window.MathJax = {
     </ul>
   </div>
 
-  <details class="example" open>
+  <details class="example">
 <summary>📖 電負度的實際應用</summary>
 <div class="example-body">
     <p>兩種元素的電負度差異愈大，鍵結的離子性愈強：</p>
@@ -362,7 +432,7 @@ window.MathJax = {
 
   <p>數學上，吸引能量可寫為 $E_A = -\frac{A}{r}$（$A$ 為常數），排斥能量為 $E_R = \frac{B}{r^n}$（$B$ 和 $n$ 為常數，$n \approx 8$），淨能量 $E_N = -\frac{A}{r} + \frac{B}{r^n}$。</p>
 
-  <details class="example" open>
+  <details class="example">
 <summary>📖 從能量曲線理解材料性質</summary>
 <div class="example-body">
     <p>圖 2.10 的能量–間距曲線包含了豐富的材料資訊：</p>
@@ -422,7 +492,7 @@ window.MathJax = {
     <li>通常<strong>硬且脆</strong>、高熔點、電絕緣</li>
   </ul>
 
-  <details class="example" open>
+  <details class="example">
 <summary>📖 範例 2.2：計算 K⁺ 和 Br⁻ 之間的吸引力</summary>
 <div class="example-body">
     <p>K⁺ 半徑 0.138 nm，Br⁻ 半徑 0.196 nm。兩離子剛好接觸時，$r_0 = 0.138 + 0.196 = 0.334$ nm。</p>
@@ -473,7 +543,7 @@ window.MathJax = {
     <li><strong>自由電子直接解釋了金屬的導電性、導熱性和金屬光澤</strong></li>
   </ul>
 
-  <details class="example" open>
+  <details class="example">
 <summary>📖 金屬鍵的三個「為什麼」</summary>
 <div class="example-body">
     <p><strong>為什麼金屬導電？</strong>電子海中的自由電子在外加電場下可自由移動。</p>
@@ -594,7 +664,7 @@ window.MathJax = {
 
   <p>混合鍵性的三種主要路徑：(1) <strong>共價–離子混合</strong>——週期表位置相距愈遠 → 愈離子性。%IC 公式最直接描述此混合。(2) <strong>共價–金屬混合</strong>——第 IV 族由上到下展示了從純共價到金屬鍵的漸變：碳（鑽石，純共價 $sp^3$）→ 矽（共價為主，半導體）→ 鍺 → 錫（β-Sn 金屬鍵為主）→ 鉛（金屬鍵為主）。(3) <strong>金屬–離子混合</strong>——不同元素間的電負度差使鍵結帶有部分離子性。注意：這裡描述的是<strong>鍵結種類的混合</strong>，不是原子軌域的 $sp^2/sp^3$ 混成。</p>
 
-  <details class="example" open>
+  <details class="example">
 <summary>📖 範例：計算鍵結的 %IC</summary>
 <div class="example-body">
     <p><strong>題目：</strong>計算 MgO（$X_{Mg}=1.2$, $X_O=3.5$）和 SiC（$X_{Si}=1.8$, $X_C=2.5$）的離子性百分比。</p>
@@ -678,7 +748,7 @@ window.MathJax = {
   <p>銅與鎢都以金屬鍵為主，但熔點、模數與密度差異很大；NaCl 與 ZrO$_2$ 都有顯著離子性，缺陷與離子傳輸能力卻不同；PE 與 Kevlar 主鏈都有共價鍵，但鏈剛性、分子間作用與取向使強度完全不同。鍵結模型給出第一層物理原因，並不取代具體結構分析。</p>
   <p>真正有用的結論應能被反駁。例如預測某材料因離域電子而導電，就應量測電阻率及其溫度依賴；預測強方向性鍵導致各向異性，就應比較不同方向的模數或導電率。把鍵結概念轉成可測試的預測，才能避免停留在「金屬所以像金屬」的循環解釋。</p>
 
-  <details class="example" open><summary>📝 綜合判斷：Mg、MgO 與聚乙烯</summary><div class="example-body">
+  <details class="example"><summary>📝 綜合判斷：Mg、MgO 與聚乙烯</summary><div class="example-body">
     <p>Mg 具有離域電子，預期導電、具金屬光澤並能透過差排變形；MgO 由 Mg$^{2+}$ 與 O$^{2-}$ 組成，晶格能高，預期高熔點、硬且固態電子導電率低；聚乙烯鏈內 C–C／C–H 共價鍵強，鏈間色散力較弱，預期低密度、低模數且性質強烈依賴鏈排列。後續晶體結構、缺陷與製程會把這些第一版預測修正成實際數值。</p>
   </div></details>
   <h3>鍵結只是多層設計的第一層</h3>

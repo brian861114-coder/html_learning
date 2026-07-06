@@ -150,8 +150,16 @@ details.derive .step{display:flex;gap:12px;align-items:flex-start;padding:8px 16
     <li><strong>Bragg 定律</strong>：$n\lambda = 2d\sin\theta$——X 光繞射決定晶體結構的基石</li>
   </ol>
 
-  <h3>🧭 邏輯鏈</h3>
-  <p>晶體的本質（長程有序，§3.1–3.2）→ 描述工具（晶胞 §3.3）→ 三種金屬結構（FCC/BCC/HCP，§3.4）→ 密度計算（§3.5）→ 多晶性（§3.6）→ 晶系分類（§3.7）→ 晶體學：點/方向/平面/密度（§3.8–3.11）→ 最密堆積（§3.12）→ 單晶/多晶/非晶（§3.13–3.14）→ 各向異性（§3.15）→ X 光繞射（§3.16–3.17）</p>
+  <div class="logic-chain">
+    <h3>🧭 本章推理地圖</h3>
+    <ol>
+      <li>原子在鍵結與幾何限制下尋找低能排列（§3.1）→ 形成具有<strong>長程週期性</strong>的晶體（§3.2）。</li>
+      <li>用晶格、基底及<strong>單位晶胞</strong>描述週期性（§3.2–§3.3）→ 計算配位數、堆積因子與理論密度（§3.4–§3.5）。</li>
+      <li>FCC、BCC、HCP 的排列不同（§3.4、§3.12）→ 用晶向、晶面及 Miller 指數指出方向（§3.8–§3.11）。</li>
+      <li>原子排列具有方向性（§3.9–§3.12）→ 單晶呈現<strong>各向異性</strong>（§3.13、§3.15）；多晶取向分布決定巨觀行為（§3.14）。</li>
+      <li>不同晶面間距產生不同 X 光繞射條件（§3.10、§3.16）→ 由 Bragg 定律反推出晶體結構（§3.16）。</li>
+    </ol>
+  </div>
 
   <div class="callout-warn"><strong>⚡ 先備知識提醒</strong>：你需要 Ch2 的原子半徑概念（硬球模型）和金屬鍵的非方向性，以及基礎幾何：立方體面對角線 $a\sqrt{2}$、體對角線 $a\sqrt{3}$。</div>
 </div>
@@ -218,7 +226,7 @@ details.derive .step{display:flex;gap:12px;align-items:flex-start;padding:8px 16
 <p>選晶胞時必須保持一致：晶格參數、晶胞體積與晶胞內原子數必須屬於同一選擇。若把原始晶胞的原子數放進慣用晶胞體積，密度會算錯。工程教材常使用慣用晶胞，因為方向、平面與幾何關係較直觀。</p>
 <h3>共享原子的計數原則</h3>
 <p>角落原子由 8 個立方晶胞共享，貢獻 $1/8$；面心由 2 個共享，貢獻 $1/2$；邊心由 4 個共享，貢獻 $1/4$；完全位於晶胞內部則貢獻 1。這些分數不是原子被切碎，而是為避免在相鄰晶胞中重複計數。最可靠的方法是想像將晶胞無限平鋪，再判斷一個位置被幾個晶胞共用。</p>
-<details class="example" open><summary>📝 晶胞計數檢查</summary><div class="example-body"><p>簡單立方：$8(1/8)=1$；BCC：$8(1/8)+1=2$；FCC：$8(1/8)+6(1/2)=4$。若計數結果不是這些值，通常是把圖中可見的球數直接相加，忽略共享關係。</p></div></details>
+<details class="example"><summary>📝 晶胞計數檢查</summary><div class="example-body"><p>簡單立方：$8(1/8)=1$；BCC：$8(1/8)+1=2$；FCC：$8(1/8)+6(1/2)=4$。若計數結果不是這些值，通常是把圖中可見的球數直接相加，忽略共享關係。</p></div></details>
 <h3>晶格參數不只是一個邊長</h3>
 <p>一般晶胞由 $a,b,c$ 三個邊長與 $\alpha,\beta,\gamma$ 三個夾角描述。立方晶系因對稱性只需一個獨立邊長 $a$；六方晶系至少需 $a,c$。晶格參數會隨溫度、成分與殘留應變改變，精密 XRD 可利用峰位變化量測熱膨脹、固溶與應力。</p>
 <p>對一般平行六面體，晶胞體積等於三個晶格向量的純量三重積 $V_c=|\mathbf a\cdot(\mathbf b\times\mathbf c)|$。這個形式同時處理斜角晶胞，也提醒我們晶胞體積取決於邊長與夾角；只有正交晶胞才可直接使用 $abc$。</p>
@@ -243,7 +251,7 @@ details.derive .step{display:flex;gap:12px;align-items:flex-start;padding:8px 16
 
 
 
-<details class="example" open>
+<details class="example">
 <summary>📝 範例 3.1：FCC 鋁的晶格常數</summary>
 <p><strong>題目：</strong>鋁（Al）為 FCC 結構，原子半徑 $R = 0.143$ nm。求其晶格常數 $a$。</p>
 <p><strong>解：</strong>FCC 的 $a$–$R$ 關係為 $a = 2R\sqrt{2}$。</p>
@@ -324,7 +332,7 @@ details.derive .step{display:flex;gap:12px;align-items:flex-start;padding:8px 16
 </div>
 <p>推導邏輯：一個晶胞中有 $n$ 個原子，每個原子的質量為 $A/N_A$（克），晶胞總質量為 $nA/N_A$。除以晶胞體積 $V_C$ 即得密度。注意單位轉換——晶格常數通常以 nm 為單位，必須轉換為 cm（1 nm = $10^{-7}$ cm）。</p>
 
-<details class="example" open>
+<details class="example">
 <summary>📝 範例 3.2：計算銅的理論密度</summary>
 <p><strong>題目：</strong>銅（Cu）為 FCC 結構，$R = 0.128$ nm，$A = 63.55$ g/mol。計算銅的理論密度並與實驗值 8.94 g/cm³ 比較。</p>
 <p><strong>解：</strong></p>
@@ -356,7 +364,7 @@ details.derive .step{display:flex;gap:12px;align-items:flex-start;padding:8px 16
 <p><strong>多晶性</strong>（polymorphism）是指一種材料可以具有多種晶體結構的現象——在不同溫度和／或壓力下，不同的晶體結構具有更低的 Gibbs 自由能，因此更穩定。當這種現象發生在元素固體時，特別稱為<strong>同素異形</strong>（allotropy）。</p>
 <p>最經典的例子是<strong>純鐵</strong>：室溫下為 BCC（α-鐵／肥粒鐵 ferrite）→ 加熱到 912°C 轉變為 FCC（γ-鐵／沃斯田鐵 austenite）→ 再加熱到 1394°C 又變回 BCC（δ-鐵）。這些轉變是可逆的。FCC 在中間溫區較穩定，不能只歸因於 APF 較高；真正條件是各結構 Gibbs 自由能的交會，其中包含電子、磁性與晶格振動的焓與熵貢獻。δ-Fe 在更高溫重新成為 BCC，正好證明「最密排永遠最穩定」並不成立。</p>
 
-<details class="example" open>
+<details class="example">
 <summary>📝 案例研究：錫的「錫疫」（Tin Pest）</summary>
 <p>白錫（β-Sn，體心正方結構，金屬性）在 13.2°C 以下會自發轉變為灰錫（α-Sn，鑽石立方結構，半導體性）。此轉變伴隨約 27% 的體積膨脹，使原本堅固的金屬錫崩解為灰色粉末——稱為「錫疫」。這個現象在歷史上有深遠影響：傳說拿破崙 1812 年遠征俄羅斯失敗的原因之一是士兵的錫製制服鈕扣在俄羅斯寒冬中粉碎。雖然此事可能有誇大成分，但錫疫確實在有機錫材料中是真實的冶金問題。現代解決方案：在錫中添加少量銻（Sb）或鉍（Bi）可有效抑制此轉變。</p>
 </details>
@@ -417,7 +425,7 @@ details.derive .step{display:flex;gap:12px;align-items:flex-start;padding:8px 16
 <p>分率座標不一定侷限於 0 到 1。由於週期性，$(1.2,-0.1,0.5)$ 與減去整數平移後的 $(0.2,0.9,0.5)$ 表示等價位置。資料庫常把原子折回單一晶胞方便比較，但分析跨晶胞鍵結時，保留鄰近週期影像反而更直觀。</p>
 <h3>原點選擇與等價位置</h3>
 <p>晶胞原點可選在不同但對稱等價的位置；所有原子座標會一起平移，原子間距與結構不變。比較兩份結構資料時，不能只看座標數字是否相同，還要允許原點平移、軸交換與週期整數差。晶體結構的本質是相對排列與對稱，而非某一組唯一座標。</p>
-<details class="example" open><summary>📝 由兩點求位移向量</summary><div class="example-body"><p>由 $P_1=(1/4,1/2,0)$ 指向 $P_2=(3/4,0,1/2)$，分率位移為 $(1/2,-1/2,1/2)$。若只需方向指數，乘 2 化為 $[1\bar{1}1]$；若要求實際長度，還需乘各晶格向量並計算幾何距離。</p></div></details>
+<details class="example"><summary>📝 由兩點求位移向量</summary><div class="example-body"><p>由 $P_1=(1/4,1/2,0)$ 指向 $P_2=(3/4,0,1/2)$，分率位移為 $(1/2,-1/2,1/2)$。若只需方向指數，乘 2 化為 $[1\bar{1}1]$；若要求實際長度，還需乘各晶格向量並計算幾何距離。</p></div></details>
 <p>原子占位率也常附在點座標上。占位率 0.8 表示大量晶胞的該位置平均有 80% 被指定原子占據，不是單一位置存在 0.8 顆原子。部分占位可代表空位、無序固溶或多元素共同占據。</p>
 </section>
 
@@ -456,7 +464,7 @@ details.derive .step{display:flex;gap:12px;align-items:flex-start;padding:8px 16
 
 <div class="callout-warn"><strong>⚡ 方向 vs 平面——最常混淆</strong><br>$[uvw]$（方括號）= 方向（向量），$(hkl)$（圓括號）= 平面。立方晶系中 $[hkl] \perp (hkl)$ 成立，但<strong>非立方晶系中這個關係通常不成立</strong>。平面族以花括號 $\{hkl\}$ 表示，如立方晶系 $\{110\}$ 包含 6 個等價面。</div>
 
-<details class="example" open>
+<details class="example">
 <summary>📝 範例 3.3：求 (112) 平面的面間距</summary>
 <p><strong>題目：</strong>銅（Cu, FCC, $a = 0.362$ nm）的 (112) 平面面間距是多少？</p>
 <p><strong>解：</strong>$d_{112} = \dfrac{a}{\sqrt{1^2 + 1^2 + 2^2}} = \dfrac{0.362}{\sqrt{6}} = 0.148$ nm。</p>
@@ -487,7 +495,7 @@ details.derive .step{display:flex;gap:12px;align-items:flex-start;padding:8px 16
 線密度和面密度直接關係到第 7 章的<strong>滑移系統</strong>（slip systems）：塑性變形傾向發生在原子密度最高的方向（最短 Burgers 向量，因而 Peierls 應力最低）和原子密度最高的平面（面間距最大，滑移面的「粗糙度」最低）。</p>
 <h3>計數時只算中心落在線或面上的原子</h3>
 <p>原子球與幾何線或平面相交，不代表原子中心位於其上。線密度的分子是選定重複線段上原子中心的等價數，端點原子通常由相鄰線段共享；面密度則需建立可平鋪該平面的二維重複單元，再依角、邊與內部位置分配原子。直接看三維球體有多少部分穿過平面，常會高估。</p>
-<details class="example" open><summary>📝 FCC $[110]$ 的線密度</summary><div class="example-body"><p>在一條面對角線長度 $a\sqrt2$ 上，兩端角原子各貢獻 $1/2$，中央面心原子貢獻 1，共 2 個原子，因此 $\mathrm{LD}_{[110]}=2/(a\sqrt2)=\sqrt2/a$。利用 $a=2\sqrt2R$ 可改寫為 $1/(2R)$。</p></div></details>
+<details class="example"><summary>📝 FCC $[110]$ 的線密度</summary><div class="example-body"><p>在一條面對角線長度 $a\sqrt2$ 上，兩端角原子各貢獻 $1/2$，中央面心原子貢獻 1，共 2 個原子，因此 $\mathrm{LD}_{[110]}=2/(a\sqrt2)=\sqrt2/a$。利用 $a=2\sqrt2R$ 可改寫為 $1/(2R)$。</p></div></details>
 <h3>高面密度與大面間距不是同一個定義</h3>
 <p>在簡單立方幾何中，低指數面常同時具有較大面間距與較高面密度，但兩者一個描述相鄰平行面的距離，一個描述單一面上的原子數／面積，不能互相當成公式。對有基底的複雜晶體，某些幾何晶面甚至可能因結構因子而無繞射峰。</p>
 <p>面密度會影響表面能、吸附、成長與滑移，但不是唯一因素。不同元素終止的陶瓷表面可能有不同電荷與化學反應性；重構也會改變最外層排列。因此由體相面密度預測表面行為時，還需考慮表面化學與鬆弛。</p>
@@ -567,7 +575,7 @@ details.derive .step{display:flex;gap:12px;align-items:flex-start;padding:8px 16
 
 <p>繞射峰的<strong>系統消光規則</strong>可用來判斷晶體結構：BCC——只有 $h+k+l$ 為偶數才有峰（奇數時體心原子散射與頂點反相抵消）；FCC——$h,k,l$ 必須全奇或全偶。因此 BCC 第一峰為 (110)，FCC 第一峰為 (111)。</p>
 
-<details class="example" open>
+<details class="example">
 <summary>📝 範例 3.4：BCC 鐵的第一個繞射峰</summary>
 <p><strong>題目：</strong>BCC 鐵（$a=0.2866$ nm），使用 Cu Kα（$\lambda = 0.1542$ nm）。求第一個繞射峰的 $2\theta$ 角。</p>
 <p><strong>解：</strong>BCC 第一個允許峰為 (110)。$d_{110} = a/\sqrt{2} = 0.2027$ nm。$\sin\theta = \lambda/(2d_{110}) = 0.1542/(0.4054) = 0.380$。$\theta = 22.3°$ → $2\theta = 44.7°$（繞射儀實際測量值）。</p>
@@ -609,7 +617,7 @@ details.derive .step{display:flex;gap:12px;align-items:flex-start;padding:8px 16
   <div class="section-keypoints"><strong>🔑 解題流程</strong> ①把 $2\theta$ 除以 2 ②計算 $\sin^2\theta$ ③除以最小值形成整數比 ④套用 BCC／FCC 允許反射序列</div>
   <p>對立方晶系，Bragg 定律與 $d_{hkl}=a/\sqrt{h^2+k^2+l^2}$ 結合後得到：</p>
   <div class="formula-card"><div class="label">立方晶系峰值關係</div><div class="eq">$$\sin^2\theta=\frac{\lambda^2}{4a^2}(h^2+k^2+l^2)$$</div><div class="note">同一試片中，$\sin^2\theta$ 的比值就是 $h^2+k^2+l^2$ 的比值。</div></div>
-  <details class="example" open><summary>📝 完整例題：未知立方金屬的結構與晶格常數</summary><div class="example-body">
+  <details class="example"><summary>📝 完整例題：未知立方金屬的結構與晶格常數</summary><div class="example-body">
     <p>使用 Cu Kα，$\lambda=0.1542$ nm，前三個峰位於 $2\theta=44.7^\circ,\ 65.0^\circ,\ 82.3^\circ$。</p>
     <p>計算得 $\sin^2\theta\approx0.144,\ 0.289,\ 0.433$；除以最小值後約為 $1:2:3$。BCC 的前三個允許反射為 $(110),(200),(211)$，其平方和為 $2,4,6$，所以此金屬為 <strong>BCC</strong>。</p>
     <p>以第一峰 $(110)$ 計算：$d=\lambda/(2\sin22.35^\circ)\approx0.2027$ nm；$a=d\sqrt{2}\approx0.2867$ nm，與 α-Fe 相符。</p>

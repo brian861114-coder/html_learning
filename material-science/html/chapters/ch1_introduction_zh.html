@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-TW">
 <head>
 <meta charset="UTF-8">
@@ -17,37 +17,23 @@ window.MathJax = {
 <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 </head>
 <body>
+<a class="portal-home-link" href="../../../index.html">返回學習中心</a>
+<style id="portal-home-link-style">.portal-home-link{position:fixed;top:16px;right:16px;z-index:1000;display:inline-flex;align-items:center;min-height:36px;padding:7px 11px;border:1px solid #cbd5e1;border-radius:8px;background:#fff;color:#1d4ed8;font:600 13px/1.2 -apple-system,BlinkMacSystemFont,"Noto Sans TC","Microsoft JhengHei",sans-serif;text-decoration:none;box-shadow:0 2px 10px rgba(15,23,42,.08)}.portal-home-link:hover{background:#eff6ff}.portal-home-link:focus-visible{outline:3px solid rgba(37,99,235,.35);outline-offset:2px}@media(max-width:768px){.portal-home-link{top:10px;right:10px;min-height:34px;padding:7px 9px;font-size:12px}}</style>
 
 
 <nav class="sidebar" id="sidebar">
   <div class="sidebar-header">
-    <a href="ch1_introduction_zh.html" class="ns" title="回首頁">📘 材料科學與工程</a>
+    <span class="ns">材料科學與工程 · 第 1 章</span>
   </div>
   <div class="sidebar-chapter-list">
-    <div class="nsub active"><a href="ch1_introduction_zh.html">Ch1 導論</a></div>
-    <div class="nsub"><a href="ch2_atomic_structure_zh.html">Ch2 原子結構與鍵結</a></div>
-    <div class="nsub"><a href="ch3_crystalline_solids_zh.html">Ch3 晶體結構</a></div>
-    <div class="nsub"><a href="ch4_imperfections_zh.html">Ch4 固體缺陷</a></div>
-    <div class="nsub"><a href="ch5_diffusion_zh.html">Ch5 擴散</a></div>
-  </div>
-  <div class="sidebar-section-title">力學性質</div>
-  <div class="sidebar-chapter-list">
-    <div class="nsub"><a href="ch6_mechanical_properties_zh.html">Ch6 金屬力學性質</a></div>
-    <div class="nsub"><a href="ch7_dislocations_zh.html">Ch7 差排與強化</a></div>
-    <div class="nsub"><a href="ch8_failure_zh.html">Ch8 破損</a></div>
-  </div>
-  <div class="sidebar-section-title">相與應用</div>
-  <div class="sidebar-chapter-list">
-    <div class="nsub"><a href="ch9_phase_diagrams_zh.html">Ch9 相圖</a></div>
-    <div class="nsub"><a href="ch10_phase_transformations_zh.html">Ch10 相變化</a></div>
-    <div class="nsub"><a href="ch11_metal_alloys_zh.html">Ch11 金屬合金</a></div>
-  </div>
-  <div class="sidebar-section-title">陶瓷與高分子</div>
-  <div class="sidebar-chapter-list">
-    <div class="nsub"><a href="ch12_ceramic_structures_zh.html">Ch12 陶瓷結構</a></div>
-    <div class="nsub"><a href="ch13_ceramic_applications_zh.html">Ch13 陶瓷應用</a></div>
-    <div class="nsub"><a href="ch14_polymer_structures_zh.html">Ch14 高分子結構</a></div>
-    <div class="nsub"><a href="ch15_polymer_applications_zh.html">Ch15 高分子應用</a></div>
+    <div class="nsub"><a href="#sec1.1">1.1 歷史視角</a></div>
+    <div class="nsub"><a href="#sec1.2">1.2 材料科學與工程</a></div>
+    <div class="nsub"><a href="#sec1.3">1.3 為什麼要學材料科學</a></div>
+    <div class="nsub"><a href="#sec1.4">1.4 材料分類</a></div>
+    <div class="nsub"><a href="#sec1.5">1.5 先進材料</a></div>
+    <div class="nsub"><a href="#sec1.6">1.6 現代材料需求</a></div>
+    <div class="nsub"><a href="#ch1-selection-workflow">工程選材五步流程</a></div>
+    <div class="nsub"><a href="#self-check">概念診斷題</a></div>
   </div>
 </nav>
 
@@ -91,8 +77,14 @@ window.MathJax = {
   </div>
 
   <div class="logic-chain">
-    <h3>本章邏輯鏈</h3>
-    <p>歷史視角 → 材料科學的定義（四要素典範）→ 為什麼要學 → 三大材料分類（性質比較）→ 先進材料 → 現代材料需求</p>
+    <h3>🧭 本章推理地圖</h3>
+    <ol>
+      <li><strong>工程需求不同</strong>（§1.3、§1.6）→ 需要的<strong>材料效能</strong>不同（§1.2）。</li>
+      <li>效能取決於材料的<strong>性質</strong>（§1.2）→ 性質來自跨尺度的<strong>結構</strong>（§1.2）。</li>
+      <li><strong>製程會改變結構</strong>（§1.2）→ 因此可用「製程 → 結構 → 性質 → 效能」（§1.2）追查材料為何成功或失效（§1.3）。</li>
+      <li>不同材料家族具有不同的鍵結和結構（§1.4）→ 形成不同的性質組合（§1.4、§1.5）。</li>
+      <li>把需求轉成可量測條件（§1.3、§1.6）→ 比較性質、成本與生命週期（§1.3、§1.6）→ 做出可追溯的<strong>工程選材</strong>（補強專題）。</li>
+    </ol>
   </div>
 </section>
 
@@ -232,7 +224,7 @@ window.MathJax = {
   </div>
   <p class="diagram-caption">圖 1.2 的無障礙文字重建：加工 → 結構 → 性質 → 效能</p>
 
-  <details class="example" open>
+  <details class="example">
 <summary>📖 範例：氧化鋁的光學性質</summary>
 <div class="example-body">
     <p>圖 1.1 展示了三片放在印刷文字上的氧化鋁（Al₂O₃）薄圓盤：</p>
@@ -303,7 +295,7 @@ window.MathJax = {
 
   <p><strong>修正措施</strong>包括：降低鋼材的延脆轉變溫度（減少硫和磷雜質）、將艙口角落改為圓弧形、安裝裂紋阻止裝置、改進焊接規範。</p>
 
-  <details class="example" open>
+  <details class="example">
 <summary>📖 這個案例教我們什麼？</summary>
 <div class="example-body">
     <p>材料科學家與工程師的關鍵角色之一是：<strong>分析機械破損、確定原因、提出預防措施</strong>。Liberty 船雖然有破損事故，但整體計畫仍被認為成功——因為倖存的船隻成功運送了物資，而且在材料破損分析領域<strong>促成了整個學科的發展</strong>。</p>
@@ -398,7 +390,7 @@ window.MathJax = {
   <h3>複合材料（Composites）</h3>
   <p>複合材料由兩種（或以上）來自前述類別的獨立材料組合而成。設計目標是<strong>達成單一材料無法提供的綜合性能</strong>，同時納入每種組成材料的最佳特性。最常見的例子是<strong>玻璃纖維</strong>（fiberglass）——細小的玻璃纖維嵌入高分子基材（通常是環氧樹脂或聚酯）中。玻璃纖維相對強且剛（但脆），而高分子則較延性。組合後的玻璃纖維複合材料既強又剛，同時有一定程度的延性和韌性。</p>
 
-  <details class="example" open>
+  <details class="example">
 <summary>📖 案例研究 1.2：碳酸飲料容器</summary>
 <div class="example-body">
     <p>碳酸飲料容器必須滿足以下條件：(1) 阻隔二氧化碳；(2) 無毒、不與飲料反應、最好可回收；(3) 足夠強度承受跌落；(4) 便宜；(5) 若需透明則保持光學清晰度；(6) 可做出不同顏色/標籤。</p>
@@ -410,7 +402,12 @@ window.MathJax = {
 
   <p>為什麼用雙對數尺度？因為不同材料的性質可以跨越好幾個數量級——以剛性為例，橡膠的彈性模數約 0.01 GPa，而鑽石高達 1000 GPa，相差五個數量級。<strong>雙對數圖能在單一圖表中容納所有工程材料的性質範圍</strong>。</p>
 
-  <details class="example" open>
+  <figure class="figure">
+    <img src="../../pages/ch1_images/fig_1_12_c.png" alt="Ashby 材料選擇圖：彈性模數對密度" loading="lazy" decoding="async">
+    <figcaption><strong>圖 1.12</strong> 彈性模數（剛性）對密度之材料選擇圖。（使用 CES EduPack 2017, Granta Design Ltd. 繪製）</figcaption>
+  </figure>
+
+  <details class="example">
 <summary>📖 如何讀懂 Ashby 圖（以剛性 vs 密度為例）</summary>
 <div class="example-body">
     <p>在圖 1.12 的剛性–密度圖中：</p>
@@ -499,7 +496,7 @@ window.MathJax = {
 
   <p>當顆粒尺寸接近原子尺度時，物質的物理和化學特性可能發生劇烈變化：不透明的變透明、固體變液體、化學穩定的變可燃、電絕緣體變導體。這些效應部分源於量子力學，部分源於表面現象——<strong>隨著顆粒尺寸減小，位於表面的原子比例急劇增加</strong>。</p>
 
-  <details class="example" open>
+  <details class="example">
 <summary>📖 為什麼奈米尺度如此特別？——表面效應</summary>
 <div class="example-body">
     <p>考慮一個邊長為 1 cm 的立方體：表面原子佔總原子數的比例極小（約 10⁻⁷）。但如果將它切成邊長 1 nm 的小方塊，<strong>表面原子的比例暴增到約 80%</strong>。表面原子的鍵結狀態與內部原子不同（缺少鄰近原子），因此化學反應性、熔點、光學性質等都可能顯著改變。</p>
@@ -615,7 +612,7 @@ window.MathJax = {
     <li><strong>檢查製程與形狀</strong>：材料即使性質合格，若無法製成薄壁、複雜曲面或大量生產，仍不是可行方案。</li>
     <li><strong>排序並驗證</strong>：以樣品試驗、失效模式與生命週期資料確認候選者，而不是只相信資料表的單一數值。</li>
   </ol>
-  <details class="example" open>
+  <details class="example">
     <summary>📝 工程決策例：可重複使用水壺的材料選擇</summary>
     <div class="example-body">
       <p><strong>功能：</strong>盛裝飲用水並承受日常跌落。<strong>限制條件：</strong>無毒、耐 90°C 熱水、質量低、可清洗。<strong>目標：</strong>在壽命與成本之間取得平衡。</p>

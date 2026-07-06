@@ -6,10 +6,12 @@
 <script>window.MathJax={tex:{inlineMath:[['$','$'],['\\(','\\)']],displayMath:[['$$','$$'],['\\[','\\]']]}}</script>
 <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script></head>
 <body>
+<a class="portal-home-link" href="../../../index.html">返回學習中心</a>
+<style id="portal-home-link-style">.portal-home-link{position:fixed;top:16px;right:16px;z-index:1000;display:inline-flex;align-items:center;min-height:36px;padding:7px 11px;border:1px solid #cbd5e1;border-radius:8px;background:#fff;color:#1d4ed8;font:600 13px/1.2 -apple-system,BlinkMacSystemFont,"Noto Sans TC","Microsoft JhengHei",sans-serif;text-decoration:none;box-shadow:0 2px 10px rgba(15,23,42,.08)}.portal-home-link:hover{background:#eff6ff}.portal-home-link:focus-visible{outline:3px solid rgba(37,99,235,.35);outline-offset:2px}@media(max-width:768px){.portal-home-link{top:10px;right:10px;min-height:34px;padding:7px 9px;font-size:12px}}</style>
 <button class="sidebar-toggle-btn" onclick="toggleSidebar()">☰</button>
 <nav class="sidebar" id="sidebar">
-  <div class="sidebar-header"><a href="../combined/materials_map_zh.html" class="ns">📘 材料科學與工程</a></div>
-  <div class="sidebar-chapter-list"><div class="nsub"><a href="ch14_polymer_structures_zh.html">Ch14</a></div><div class="nsub active"><a href="ch15_polymer_applications_zh.html">Ch15 高分子應用</a></div></div>
+  <div class="sidebar-header"><span class="ns">材料科學與工程 · 第 15 章</span></div>
+  <div class="sidebar-chapter-list"><div class="nsub"><a href="#sec15.2">15.2 黏彈性行為</a></div><div class="nsub"><a href="#sec15.10">15.10 聚乙烯與工程塑膠</a></div><div class="nsub"><a href="#moi-shrink">成形收縮補充</a></div><div class="nsub"><a href="#moi-billiard">高分子碰撞補充</a></div></div>
 </nav>
 <main class="chapter-content">
 <header class="chapter-header"><div class="breadcrumb">MSE &rsaquo; <a href="ch14_polymer_structures_zh.html">Ch14</a> &rsaquo; Ch15</div>
@@ -31,7 +33,14 @@
 <li><strong>添加劑</strong>：塑化劑（降低 $T_g$、增加柔軟度）、穩定劑（抗UV/氧化）、填料（降低成本/改善性質）、阻燃劑</li>
 <li><strong>成形方法</strong>：射出、擠出、吹瓶、壓縮、旋轉成形、3D 列印——選擇取決於塑膠是熱塑或熱固</li>
 </ol></div>
-<div class="logic-chain"><h3>本章邏輯鏈</h3><p>力學行為（應力–應變）→ 黏彈性（時間依賴）→ 鬆弛與潛變 → TTSP → 半結晶高分子變形機制 → $T_g/T_m$ 的宏觀影響 → 塑膠類型與添加劑 → 彈性體（熵彈性）→ 熱塑性加工方法 → 熱固性加工方法 → 回收與環境考量</p></div></section>
+<div class="logic-chain"><h3>🧭 本章推理地圖</h3>
+<ol>
+<li>高分子鏈需要時間才能旋轉、滑移或解纏結（§15.3–§15.4）→ 力學反應取決於<strong>溫度、載入時間與應變速率</strong>（§15.2–§15.3）。</li>
+<li>升溫或延長觀察時間增加鏈段運動（§15.3）→ 產生黏彈性、潛變與應力鬆弛（§15.3、§15.6）→ 由時間–溫度疊加原理連結（§15.3）。</li>
+<li>分子量、結晶度、取向與交聯限制鏈移動（§15.4–§15.5）→ 形成塑膠（§15.10–§15.17）、纖維與彈性體（§15.18、§15.24）的性質。</li>
+<li>添加劑（§15.19）及加工中的流動、冷卻與固化（§15.20–§15.23）→ 改變鏈排列和缺陷 → 成形方法成為性質設計的一部分。</li>
+<li>由服役條件反推材料、添加劑及加工法（§15.10–§15.24）→ 再檢查老化、回收與生命週期（§15.25–§15.26）。</li>
+</ol></div></section>
 
 <section class="prereq-bridge"><h2>先備知識橋接</h2>
 <div class="callout-warn"><strong>⚡ 進入本章前需具備的基礎</strong><br>
@@ -93,7 +102,7 @@
 
 <p>高分子的黏彈性行為中，<strong>升高溫度等效於延長時間</strong>——這不是方便的近似，而是基於分子運動的物理本質：溫度愈高 → 鏈的熱運動愈劇烈 → 鬆弛過程愈快。TTSP 的實用價值極大：（1）在不同溫度下量測短時間的鬆弛模數 $E_r(t)$；（2）選擇一個參考溫度 $T_{ref}$（通常是 $T_g$）；（3）將各溫度的 $E_r(t)$ 曲線沿對數時間軸水平平移，對齊參考溫度曲線；（4）得到跨越數十個時間數量級的<strong>主曲線</strong>（master curve）。平移量 $\\log a_T$ 與溫度的關係通常遵循 WLF 方程式（Williams-Landel-Ferry）：$\\log a_T = \\frac{-C_1(T - T_{ref})}{C_2 + (T - T_{ref})}$，其中 $C_1$ 和 $C_2$ 是經驗常數（當 $T_{ref} = T_g$ 時，$C_1 \\approx 17.4$, $C_2 \\approx 51.6$ K）。TTSP 使工程師能夠從<strong>數小時的實驗室數據預測數十年的潛變行為</strong>——這對設計 50 年壽命的塑膠水管至關重要。</p>
 
-<details class="example" open>
+<details class="example">
 <summary>📝 自編概念例：TTSP 預測塑膠管的長期變形</summary>
 <div class="example-body">
 <p><strong>情境：</strong>某 HDPE 水管在 20°C 的設計使用壽命為 50 年（~1.6×10⁹ 秒）。在 80°C 下進行應力鬆弛測試，觀察到完全鬆弛需約 10⁴ 秒（~3 小時）。TTSP 的平移因子 $a_T$ 約為 10⁵（80°C vs 20°C）。</p>
@@ -216,7 +225,7 @@
 
 <p><strong>3D 列印/積層製造</strong>（additive manufacturing）：FDM/FFF（熔融沉積）——熱塑性線材（PLA、ABS、PETG）經加熱噴頭熔化 → 逐層堆積。最便宜、最普及的桌上型 3D 列印技術。SLA/DLP（光固化）——UV 光選擇性固化液態光敏樹脂（熱固性——不可回收）。SLS（選擇性雷射燒結）——雷射掃描選擇性熔融 PA 粉末床中的顆粒 → 未熔粉末作為支撐（不需列印支撐結構）。3D 列印的獨特優勢：無需模具→極低成本的原型製作和小批量生產；可製造傳統加工無法實現的複雜幾何（內部晶格結構、共形冷卻水道）。</p>
 
-<details class="example" open>
+<details class="example">
 <summary>📝 自編概念例：為什麼
 射出成形的塑膠杯有「模線」？</summary>
 <div class="example-body">

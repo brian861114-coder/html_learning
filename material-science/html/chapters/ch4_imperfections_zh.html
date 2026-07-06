@@ -83,8 +83,14 @@ details.example>summary::-webkit-details-marker{color:var(--ac)}
 <li><strong>ASTM 晶粒大小</strong>：$N = 2^{n-1}$（100× 下每平方英寸晶粒數）</li>
 <li><strong>顯微鏡三級</strong>：OM（μm）→ SEM（nm 表面）→ TEM（原子級內部）</li>
 </ol>
-<h3>🧭 邏輯鏈</h3>
-<p>完美晶體（Ch3）→ 點缺陷（空位/間隙，§4.1–4.2）→ 雜質與固溶體（§4.3–4.4）→ 線缺陷（差排，§4.5）→ 面缺陷（晶界/相界，§4.6）→ 體缺陷（§4.7）→ 顯微鏡觀察（§4.9–4.11）→ 缺陷是擴散（Ch5）和塑性變形（Ch7）的物理基礎</p>
+<div class="logic-chain"><h3>🧭 本章推理地圖</h3>
+<ol>
+<li>有限溫度下，原子排列混亂可提高熵（§4.1）→ 真實晶體具有平衡濃度的<strong>點缺陷</strong>（§4.2）。</li>
+<li>溫度、成分與製程改變缺陷族群（§4.1–§4.4）→ 形成點、線、面與體缺陷（§4.2、§4.5–§4.7）。</li>
+<li>空位提供原子跳躍位置（§4.2）→ 使<strong>擴散</strong>成為可能（Ch5）；差排可逐步移動（§4.5）→ 降低塑性滑移所需應力（Ch7）。</li>
+<li>溶質原子（§4.3）、晶界（§4.6）與析出物會阻礙差排 → 可用缺陷<strong>強化材料</strong>（Ch7）。</li>
+<li>用顯微鏡與晶粒尺寸量測辨認缺陷（§4.9–§4.11）→ 建立「製程 → 缺陷結構 → 性質」的證據鏈。</li>
+</ol></div>
 <div class="callout-warn"><strong>⚡ 先備知識</strong>：Ch3 晶體結構（FCC/BCC/HCP、間隙位置）、Ch2 電負度概念。</div>
 </div></section>
 
@@ -122,7 +128,7 @@ details.example>summary::-webkit-details-marker{color:var(--ac)}
 <div class="formula-card"><div class="label">平衡空位濃度</div><div class="eq">$$N_v = N \exp\left(-\frac{Q_v}{kT}\right)$$</div><div class="note">$N$ = 總原子位置數 · $Q_v$ = 空位形成能（~0.5–2 eV/atom）· $k$ = Boltzmann 常數 ($8.62\times10^{-5}$ eV/K) · $T$ = 絕對溫度 (K)</div></div>
 <p>指數關係意味著空位濃度對溫度<strong>極其敏感</strong>。以銅為例（$Q_v = 0.9$ eV）：室溫（298 K）時 $N_v/N = \exp(-0.9/(8.62\times10^{-5} \times 298)) = \exp(-35.0) \approx 6 \times 10^{-16}$——幾乎沒有空位。但在 1000°C（1273 K）時：$N_v/N = \exp(-8.20) \approx 2.7 \times 10^{-4}$——每 10,000 個位置中有約 3 個空位。溫度從室溫升到 1000°C，空位濃度飆升了<strong>11 個數量級</strong>。</p>
 <p><strong>自間隙原子</strong>（self-interstitial）：一個原子擠入晶格間隙位置。因為這會造成巨大的晶格畸變（擠壓周圍原子），形成能極高（通常為空位的 3–5 倍），因此在平衡狀態下濃度極低——通常可忽略。在輻照損傷（radiation damage）條件下，高能粒子撞擊可產生大量非平衡的自間隙原子和空位對（Frenkel 對）。</p>
-<details class="example" open><summary>📝 範例 4.1：鋁在 500°C 的空位濃度</summary>
+<details class="example"><summary>📝 範例 4.1：鋁在 500°C 的空位濃度</summary>
 <p><strong>題目：</strong>鋁的 $Q_v = 0.75$ eV/atom。計算鋁在 500°C (773 K) 時的平衡空位濃度。</p>
 <p><strong>解：</strong>$N_v/N = \exp(-0.75/(8.62\times10^{-5} \times 773)) = \exp(-11.26) = 1.3 \times 10^{-5}$。</p>
 <p><strong>答案：</strong>每 100,000 個原子位置中約有 1.3 個空位。若將此鋁試片從 500°C 淬火到室溫，這些非平衡空位被「凍結」在晶體中——它們會加速後續的擴散過程（Ch5）。</p>
@@ -175,7 +181,7 @@ details.example>summary::-webkit-details-marker{color:var(--ac)}
 <p>合金成分可用<strong>重量百分比</strong>（wt%）或<strong>原子百分比</strong>（at%）表示。兩者的換算公式：</p>
 <div class="eq">$$C_1(\text{at\%}) = \frac{C_1(\text{wt\%})/A_1}{C_1(\text{wt\%})/A_1 + C_2(\text{wt\%})/A_2} \times 100$$</div>
 <p>關鍵洞察：對於輕元素（如碳），wt% 和 at% 差異巨大。Fe-0.5 wt% C 鋼中，碳的 at% = $\frac{0.5/12.01}{0.5/12.01 + 99.5/55.85} \times 100 = 2.3$ at%。雖然碳的重量只有 0.5%，但因為碳原子極輕，<strong>每 100 個原子中就有 2.3 個是碳原子</strong>。這對解讀相圖（Ch9）很重要——Fe–C 相圖的成分軸是 wt%，但微觀結構比例計算需要 at%。</p>
-<details class="example" open><summary>📝 範例 4.2：wt% 與 at% 換算</summary>
+<details class="example"><summary>📝 範例 4.2：wt% 與 at% 換算</summary>
 <p><strong>題目：</strong>黃銅含 70 wt% Cu 和 30 wt% Zn。求其 at% 組成。（$A_{\text{Cu}}=63.55$, $A_{\text{Zn}}=65.41$ g/mol）</p>
 <p><strong>解：</strong>$C_{\text{Cu}}(\text{at\%}) = \frac{70/63.55}{70/63.55 + 30/65.41} \times 100 = \frac{1.101}{1.101 + 0.459} \times 100 = 70.6$ at% Cu。$C_{\text{Zn}} = 29.4$ at% Zn。本例中 wt% 和 at% 相近，因 Cu 和 Zn 原子量接近。</p>
 </details>
@@ -184,7 +190,7 @@ details.example>summary::-webkit-details-marker{color:var(--ac)}
 <h3>百分比、ppm 與濃度基準</h3>
 <p>1 wt% = $10^4$ wt ppm，但 atomic ppm 與 wt ppm 只有在原子量相近時才接近。氣體含量有時以質量 ppm、原子 ppm、mol/m³ 或每百萬基材原子表示；未註明基準的「50 ppm」是不完整數據。比較規範與量測結果前，必須確認分母、乾濕基準與元素／化合物形式。</p>
 <p>相的成分與整體合金成分也不同。微區 EDS 可能量到某一析出物或晶粒，手冊牌號則是整體平均；若取樣區域不具代表性，兩者不能直接比較。報告成分時應附量測尺度與位置。</p>
-<details class="example" open><summary>📝 三元合金的通用換算</summary><div class="example-body"><p>對 60 wt% A、30 wt% B、10 wt% C，先算 $n_A=60/A_A$、$n_B=30/A_B$、$n_C=10/A_C$，再以 $x_i=n_i/(n_A+n_B+n_C)$ 求 at%。所有原子分率相加應為 1，所有重量分率也應為 1；這是最基本的自我檢查。</p></div></details>
+<details class="example"><summary>📝 三元合金的通用換算</summary><div class="example-body"><p>對 60 wt% A、30 wt% B、10 wt% C，先算 $n_A=60/A_A$、$n_B=30/A_B$、$n_C=10/A_C$，再以 $x_i=n_i/(n_A+n_B+n_C)$ 求 at%。所有原子分率相加應為 1，所有重量分率也應為 1；這是最基本的自我檢查。</p></div></details>
 </section>
 
 <!-- ══════ 4.5 ══════ -->
@@ -241,7 +247,7 @@ details.example>summary::-webkit-details-marker{color:var(--ac)}
 <p>其他重要的面缺陷包括<strong>相界</strong>（phase boundary）——不同相的兩個晶體間的界面（如鋼中肥粒鐵和雪明碳鐵之間），以及<strong>雙晶界</strong>（twin boundary）——晶格兩側呈鏡像對稱的特殊晶界。退火雙晶（如銅合金中常見的平行直線條紋）和變形雙晶（BCC 金屬低溫變形時產生）在顯微照片中極具特徵性。</p>
 <div class="callout-warn"><strong>⚡ 晶粒大小與 ASTM 號數——不要搞反</strong><br>ASTM 號數 $n$ 愈大 = 晶粒愈小！$N = 2^{n-1}$（$N$ 為 100× 下每平方英寸晶粒數）。$n=10$ 的晶粒是 $n=5$ 的 $2^5 = 32$ 倍數量——晶粒極細。初學者常看到「No. 10」以為是大晶粒，完全相反。</div>
 
-<details class="example" open><summary>📝 範例：ASTM 晶粒大小與 Hall-Petch 的工程應用</summary>
+<details class="example"><summary>📝 範例：ASTM 晶粒大小與 Hall-Petch 的工程應用</summary>
 <div class="example-body">
 <p><strong>題目：</strong>某鋼板在 100× 顯微照片中，每平方英寸有 64 個晶粒。求 ASTM 號數和對應的降伏強度增量。</p>
 <p><strong>解：</strong>$N = 2^{n-1}$，$64 = 2^{n-1}$ → $n-1 = 6$ → $n = 7$（ASTM No. 7）。</p>
@@ -369,7 +375,7 @@ details.example>summary::-webkit-details-marker{color:var(--ac)}
 
 <div class="callout-warn"><strong>⚡ 晶粒大小與 ASTM 號數——不要搞反</strong><br>ASTM 號數 $n$ 愈大 = 晶粒愈小！$n=10$ 的晶粒是 $n=5$ 的 $2^5 = 32$ 倍數量——晶粒極細。初學者常看到「No. 10」以為是大晶粒，完全相反。</div>
 
-<details class="example" open><summary>📝 範例：ASTM 晶粒大小與 Hall-Petch 的工程應用</summary>
+<details class="example"><summary>📝 範例：ASTM 晶粒大小與 Hall-Petch 的工程應用</summary>
 <div class="example-body">
 <p><strong>題目：</strong>某鋼板在 100× 顯微照片中，每平方英寸有 64 個晶粒。求 ASTM 號數和對應的降伏強度增量。</p>
 <p><strong>解：</strong>$N = 2^{n-1}$，$64 = 2^{n-1}$ → $n-1 = 6$ → $n = 7$（ASTM No. 7）。</p>

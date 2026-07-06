@@ -33,7 +33,7 @@
 
   const labels = { theme: { light: '淺色', dark: '深色' }, font: { small: '小字', medium: '中字', large: '大字' }, width: { narrow: '窄版', medium: '中寬', wide: '寬版' } };
   const path = decodeURIComponent(location.pathname);
-  const course = path.includes('/material-science/') ? 'materials-science' : null;
+  const course = path.includes('/solid-state-physics/') ? 'semiconductor' : path.includes('/thermodynamics/') ? 'thermodynamics' : null;
   const completeButton = panel.querySelector('.reader-complete');
   const completedPages = function() { try { return JSON.parse(localStorage.getItem('learning-portal-completed-pages') || '[]'); } catch(e) { return []; } };
   const updateCompleteButton = function() { if (!course) return; var done = completedPages().indexOf(location.pathname) >= 0; completeButton.hidden = false; completeButton.textContent = done ? '標示為未完成' : '標示此頁完成'; };
@@ -42,7 +42,7 @@
     if (!course) return;
     var formulaDetail = path.includes('/formula_reviews/') && path.indexOf('/formula_reviews/index.html') < 0;
     link.href = formulaDetail ? 'index.html' : (link.href.split('?')[0] + '?course=' + course);
-    link.textContent = formulaDetail ? '返回公式摘要' : '返回學習中心 · 材料科學';
+    link.textContent = formulaDetail ? '返回公式摘要' : '返回學習中心 · ' + (course === 'semiconductor' ? '半導體物理' : '材料熱力學');
   });
 
   var factorMap = { small: 0.88, medium: 1, large: 1.18 };
