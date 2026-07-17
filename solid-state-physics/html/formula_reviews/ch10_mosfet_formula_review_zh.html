@@ -1,129 +1,14 @@
-<!DOCTYPE html>
-<html lang="zh-TW" data-theme="light">
+<!doctype html>
+<html lang="zh-Hant">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>第十章 公式摘要 — MOSFET（完整版）</title>
-<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']],tags:'ams'},options:{ignoreHtmlClass:'no-math'}};</script>
-<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-<style>
-:root{--bg:#fff;--b2:#F5F5F7;--b3:#E8F0FE;--tx:#1D1D1F;--t2:#1D1D1F;--ac:#007AFF;--bd:#D2D2D7;--sh:0 2px 8px rgba(0,0,0,.08);--fbg:#FAFBFC;--fbd:#E5E5EA;--dbg:#E8F0FE;--dac:#007AFF;--wbg:#FFF9F0;--wbd:#FFB340;--wtx:#B8700A;--hv:#F0F4FF;--nw:240px}
-[data-theme="dark"]{--bg:#1C1C1E;--b2:#2C2C2E;--b3:#1A2332;--tx:#F5F5F7;--t2:#A1A1A6;--ac:#0A84FF;--bd:#48484A;--fbg:#252528;--fbd:#3A3A3C;--dbg:#1A2332;--dac:#0A84FF;--wbg:#2C2416;--wbd:#8B6914;--wtx:#FFB340;--hv:#1E2A3A}
-*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth;scroll-padding-top:16px}
-body{font-family:-apple-system,BlinkMacSystemFont,'Noto Sans TC','Microsoft JhengHei',sans-serif;background:var(--b2);color:var(--tx);line-height:1.75;display:flex;min-height:100vh}
-.sidebar{position:fixed;top:0;left:0;width:var(--nw);height:100vh;background:var(--bg);border-right:1px solid var(--bd);overflow-y:auto;z-index:100;padding:20px 16px;display:flex;flex-direction:column}
-.sh{margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--fbd)}.sh h2{font-size:14px;font-weight:600;color:var(--ac)}.sh .bk{font-size:11px;color:var(--t2)}
-.sn{flex:1}.sn ul{list-style:none}.sn a{display:block;padding:3px 10px;font-size:10.5px;color:var(--t2);text-decoration:none;border-radius:5px;transition:.12s;line-height:1.3}.sn a:hover{background:var(--b3);color:var(--ac)}.sn a.active{background:var(--b3);color:var(--ac);font-weight:500}.sn .ns{font-weight:600;font-size:11.5px;color:var(--tx);margin-top:8px;padding:2px 10px}.sn .nsub a{padding-left:18px;font-size:10px}
-.st{margin-top:auto;padding-top:12px;border-top:1px solid var(--fbd)}.st button{width:100%;padding:6px;border:1px solid var(--bd);border-radius:6px;background:var(--b2);color:var(--tx);cursor:pointer;font-size:12px}
-.main{margin-left:var(--nw);flex:1;max-width:1100px;padding:32px 40px 80px}
-.header{margin-bottom:24px;padding-bottom:20px;border-bottom:2px solid var(--ac)}.header .tag{font-size:12px;font-weight:600;color:var(--ac);letter-spacing:1px}.header h1{font-size:26px;font-weight:700;margin:6px 0}.header .sub{font-size:13px;color:var(--t2)}
-.tbar{display:flex;gap:8px;margin-bottom:20px}.tbar button{padding:5px 16px;font-size:12px;border:1px solid var(--ac);border-radius:20px;background:var(--bg);color:var(--ac);cursor:pointer;font-weight:500;transition:.15s}.tbar button:hover{background:var(--ac);color:#fff}
-.section{margin-bottom:44px}.section h2{font-size:19px;font-weight:700;color:var(--ac);margin-bottom:4px;padding-bottom:6px;border-bottom:1px solid var(--bd)}
-.fcard{background:var(--bg);border:1px solid var(--fbd);border-radius:10px;padding:16px 20px;margin:14px 0;box-shadow:var(--sh)}.fcard .lbl{font-size:11px;font-weight:700;color:var(--ac);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}.fcard .eq{text-align:center;padding:8px 0;font-size:15px}.fcard .note{font-size:12px;color:var(--t2);margin-top:6px;padding-top:6px;border-top:1px solid var(--fbd);line-height:1.6}
-details.derive{background:var(--dbg);border-left:4px solid var(--dac);border-radius:0 10px 10px 0;margin:16px 0;transition:.2s}details.derive[open]{background:var(--bg)}
-details.derive>summary{padding:14px 18px;cursor:pointer;list-style:none;display:flex;align-items:center;gap:8px;font-weight:700;color:var(--ac);font-size:13px;letter-spacing:.3px;user-select:none}details.derive>summary::-webkit-details-marker{display:none}details.derive>summary::before{content:'▸';display:inline-block;font-size:11px;transition:transform .2s;width:14px;text-align:center}details.derive[open]>summary::before{transform:rotate(90deg)}details.derive>summary:hover{background:var(--hv);border-radius:0 10px 0 0}
-details.derive .dbo{padding:0 18px 16px 18px}details.derive .step{margin:8px 0;padding:6px 0}details.derive .snb{display:inline-block;background:var(--ac);color:#fff;width:22px;height:22px;border-radius:50%;text-align:center;font-size:11px;font-weight:700;line-height:22px;margin-right:8px}details.derive .sl{font-weight:700;font-size:13px;color:var(--tx)}details.derive .sc{margin:4px 0 4px 30px;font-size:13px;color:var(--t2)}details.derive .sc .math{display:block;text-align:center;padding:6px 0}
-table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12px}thead th{background:var(--b3);padding:8px 12px;font-size:12px;font-weight:600;border-bottom:2px solid var(--bd)}tbody td{padding:6px 10px;border-bottom:1px solid var(--fbd);font-size:11px}
-.warn-box{background:var(--wbg);border:1px solid var(--wbd);border-radius:10px;padding:14px 18px;margin:16px 0;font-size:14px}.warn-box .wt{font-weight:700;color:var(--wtx);font-size:12px;margin-bottom:6px}
-@media(max-width:768px){.sidebar{transform:translateX(-100%);transition:.3s}.sidebar.open{transform:translateX(0)}.main{margin-left:0;padding:20px 16px 60px}}
-@media print{.sidebar,.tbar{display:none}details.derive{display:block!important}.main{margin-left:0;max-width:100%;padding:0}}
-</style>
-<link rel="stylesheet" href="../assets/course-ui.css">
-<script defer src="../assets/course-ui.js"></script>
-
-<script src="../assets/reading-preferences.js" defer></script>
-<style id="portal-home-link-style">.portal-home-link{position:fixed;top:16px;right:16px;z-index:1000;display:inline-flex;align-items:center;min-height:36px;padding:7px 11px;border:1px solid #cbd5e1;border-radius:8px;background:#fff;color:#1d4ed8;font:600 13px/1.2 -apple-system,BlinkMacSystemFont,"Noto Sans TC","Microsoft JhengHei",sans-serif;text-decoration:none;box-shadow:0 2px 10px rgba(15,23,42,.08)}.portal-home-link:hover{background:#eff6ff}.portal-home-link:focus-visible{outline:3px solid rgba(37,99,235,.35);outline-offset:2px}@media(max-width:768px){.portal-home-link{top:10px;right:10px;min-height:34px;padding:7px 9px;font-size:12px}}</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="refresh" content="0; url=../../../subjects/solid-state-physics/html/formula_reviews/ch10_mosfet_formula_review_zh.html">
+  <link rel="canonical" href="../../../subjects/solid-state-physics/html/formula_reviews/ch10_mosfet_formula_review_zh.html">
+  <title>頁面已移動</title>
+  <script src="../../../assets/legacy-redirect.js" data-legacy-target="../../../subjects/solid-state-physics/html/formula_reviews/ch10_mosfet_formula_review_zh.html" defer></script>
 </head>
 <body>
-<a class="portal-home-link" href="../index.html">返回學習中心</a>
-<nav class="sidebar"><div class="sh"><div class="bk">半導體物理與元件·第四版</div><h2>第十章 公式摘要</h2></div><div class="sn"><ul>
-<li class="ns">11.1 MOS 結構</li><li class="nsub"><a href="#s1">10.1.1–10.1.2 結構·電容</a></li><li class="nsub"><a href="#s2">10.1.3–10.1.5 能帶·空乏·反轉</a></li>
-<li class="ns">11.2 $V_T$</li><li class="nsub"><a href="#s3">11.2.1–11.2.4 臨界電壓推導 ⭐</a></li>
-<li class="ns">11.3 I-V</li><li class="nsub"><a href="#s4">10.3.1–10.3.3 線性區推導 ⭐</a></li><li class="nsub"><a href="#s5">10.3.3–10.3.4 飽和區·夾止 ⭐</a></li>
-<li class="ns">11.4–11.5</li><li class="nsub"><a href="#s6">10.4 小訊號·跨導·$f_T$</a></li><li class="nsub"><a href="#s7">延伸：第 11 章短通道·次臨界</a></li>
-<li><a href="#cheatsheet">📋 公式速查表</a></li>
-</ul></div><div class="st"><button onclick="toggleTheme()">🌓 <span id="tl">深色模式</span></button></div></nav>
-<main class="main">
-<div class="header"><div class="tag">完整公式推導</div><h1>第十章：場效電晶體（MOSFET）</h1><div class="sub">Semiconductor Physics & Devices, 4th Ed.·Donald A. Neamen·pp.371–442</div></div>
-<div class="tbar"><button onclick="document.querySelectorAll('details').forEach(d=>d.open=true)">📖 展開全部</button><button onclick="document.querySelectorAll('details').forEach(d=>d.open=false)">📕 收合全部</button></div>
-
-<!-- 11.1.1-11.1.2 -->
-<div class="section" id="s1"><h2>10.1.1–10.1.2 MOS 結構與氧化層電容</h2>
-<div class="fcard"><div class="lbl">⭐ 單位面積氧化層電容</div><div class="eq">$$\boxed{C_{ox} = \frac{\epsilon_{ox}}{t_{ox}}}$$</div><div class="note">$\epsilon_{ox}=3.9\epsilon_0=3.45\times10^{-13}$ F/cm（SiO₂）。$t_{ox}$：1970s ∼100 nm → 2020s ∼1 nm（等效）。high-κ 材料（HfO₂, $\epsilon_r\sim25$）用更厚的物理厚度達到相同的等效電容→降低穿隧漏電流。</div></div>
-<div class="fcard"><div class="lbl">平帶電壓 $V_{FB}$</div><div class="eq">$$V_{FB} = \phi_{ms} - \frac{Q_f}{C_{ox}}$$</div><div class="note">$\phi_{ms}$ = 金屬-半導體功函數差。$Q_f$ = 氧化層固定正電荷（通常 ∼$10^{10}$ cm⁻²）。$V_{FB}$ 是使能帶恢復平坦（無彎曲）所需的閘極電壓。</div></div>
-</div>
-
-<!-- 11.1.3-11.1.5 -->
-<div class="section" id="s2"><h2>10.1.3–10.1.5 能帶彎曲·空乏·反轉</h2>
-<details class="derive" open><summary>🔍 MOS 結構的三個操作區域——完整的能帶與電荷分析</summary><div class="dbo">
-<div class="step"><span class="snb">1</span><span class="sl">基板 Fermi 電位 $\phi_f$</span><div class="sc">p 型基板：$\phi_f = (kT/e)\ln(N_a/n_i)$。$N_a=10^{17}$ cm⁻³→$\phi_f=0.0259\ln(10^{17}/1.5\times10^{10})=0.407$ V。</div></div>
-<div class="step"><span class="snb">2</span><span class="sl">空乏層電荷 $Q_d$ 與寬度 $x_d$</span><div class="sc">Poisson 方程：$d^2\phi/dx^2 = eN_a/\epsilon_s$。空乏層寬度 $x_d = \sqrt{2\epsilon_s\phi_s/(eN_a)}$。<br>空乏層電荷密度 $Q_d = -eN_a x_d = -\sqrt{2\epsilon_s e N_a\phi_s}$。$\phi_s$ = 表面電位。</div></div>
-<div class="step"><span class="snb">3</span><span class="sl">強反轉條件</span><div class="sc">表面電子濃度 $n_s = n_i e^{\phi_s/kT} = N_a$→$\phi_s = 2\phi_f$。此時 $x_{d,\max} = \sqrt{4\epsilon_s\phi_f/(eN_a)}$。<br>$Q_{d,\max} = -\sqrt{4\epsilon_s e N_a\phi_f}$——空乏層達到最大寬度，之後再增加的閘極電壓全部用於建立反轉層。</div></div>
-<div class="step"><span class="snb">4</span><span class="sl">閘極電壓的三部分</span><div class="sc">$V_G = V_{ox} + \phi_s + \phi_{ms}$。$V_{ox}$ = 氧化層上的壓降（$=Q_s/C_{ox}$），$\phi_s$ = 表面電位（半導體側能帶彎曲），$\phi_{ms}$ = 功函數差。$Q_s = -(Q_d+Q_n)$，$Q_n$ = 反轉層電子電荷。</div></div>
-</div></details>
-</div>
-
-<!-- 11.2 -->
-<div class="section" id="s3"><h2>10.1.6 臨界電壓 $V_T$ ⭐</h2>
-<details class="derive" open><summary>🔍 完整推導——從閘極電壓方程式到 $V_T$</summary><div class="dbo">
-<div class="step"><span class="snb">1</span><span class="sl">閘極電壓方程式</span><div class="sc">$V_G = \phi_{ms} + \phi_s + V_{ox} = \phi_{ms} + \phi_s - \dfrac{Q_d+Q_n}{C_{ox}}$。</div></div>
-<div class="step"><span class="snb">2</span><span class="sl">強反轉時的條件</span><div class="sc">$\phi_s = 2\phi_f$，$Q_d = Q_{d,\max} = -\sqrt{4\epsilon_s e N_a\phi_f}$。剛好強反轉時 $Q_n\approx0$。<br>平帶時 $V_{FB} = \phi_{ms} - Q_f/C_{ox}$（$Q_f$ = 固定氧化層電荷）。</div></div>
-<div class="step"><span class="snb">3</span><span class="sl">⭐ 臨界電壓完整表達式</span><div class="sc"><span class="math">$$\boxed{V_T = V_{FB} + 2\phi_f + \frac{\sqrt{4\epsilon_s e N_a\phi_f}}{C_{ox}}}$$</span>數值例：$N_a=10^{17}$ cm⁻³，$t_{ox}=10$ nm→$C_{ox}=3.45\times10^{-7}$ F/cm²。<br>$2\phi_f=0.814$ V。$Q_{d,\max}=\sqrt{4\cdot1.04\times10^{-12}\cdot1.6\times10^{-19}\cdot10^{17}\cdot0.407}=1.03\times10^{-7}$ C/cm²。<br>$Q_{d,\max}/C_{ox}=1.03\times10^{-7}/3.45\times10^{-7}=0.30$ V。$V_{FB}\approx-0.9$ V。<br>$V_T=-0.9+0.814+0.30=0.21$ V。</div></div>
-</div></details>
-<div class="fcard"><div class="lbl">離子植入調整 $V_T$</div><div class="eq">$$V_T = V_{FB} + 2\phi_f + \frac{\sqrt{4\epsilon_s e N_a\phi_f} + e D_I}{C_{ox}}$$</div><div class="note">$D_I$ = 通道離子植入劑量（cm⁻²）。正 $D_I$（p 型植入）→提高 $V_T$；負 $D_I$（n 型植入，如埋入通道）→降低 $V_T$。在現代 CMOS 中，通道植入是精確調控 $V_T$ 的主要手段。</div></div>
-</div>
-
-<!-- 11.3.1-11.3.3 -->
-<div class="section" id="s4"><h2>10.3.1–10.3.3 線性區 I-V 推導 ⭐</h2>
-<details class="derive" open><summary>🔍 完整推導——從通道電荷到線性區 $I_D$</summary><div class="dbo">
-<div class="step"><span class="snb">1</span><span class="sl">通道中的電荷密度</span><div class="sc">在通道中任意點 $y$，有效閘極控制電壓 $=V_{GS}-V_T-V(y)$（$V(y)$ = 該點的通道電位）。<br>單位面積反轉層電荷：$Q_n(y) = -C_{ox}[V_{GS}-V_T-V(y)]$（只計入超過 $V_T$ 的部分）。</div></div>
-<div class="step"><span class="snb">2</span><span class="sl">漂移電流</span><div class="sc">通道中電場 $E_y = -dV/dy$。電流 $I_D = W\mu_n Q_n(y)E_y$（$W$ = 通道寬度）。<br>$I_D = W\mu_n C_{ox}[V_{GS}-V_T-V(y)]\,dV/dy$。</div></div>
-<div class="step"><span class="snb">3</span><span class="sl">積分求 $I_D$</span><div class="sc">$I_D\,dy = W\mu_n C_{ox}[V_{GS}-V_T-V]\,dV$。從 $y=0$ ($V=0$) 積到 $y=L$ ($V=V_{DS}$)：<span class="math">$$I_D\,L = W\mu_n C_{ox}\left[(V_{GS}-V_T)V_{DS} - \frac{V_{DS}^2}{2}\right]$$</span><span class="math">$$\boxed{I_D = \mu_n C_{ox}\frac{W}{L}\left[(V_{GS}-V_T)V_{DS} - \frac{V_{DS}^2}{2}\right]}$$</span></div></div>
-<div class="step"><span class="snb">4</span><span class="sl">極低 $V_{DS}$ 的簡化</span><div class="sc">$V_{DS}\ll V_{GS}-V_T$→$I_D\approx\mu_n C_{ox}(W/L)(V_{GS}-V_T)V_{DS}$。通道電阻 $R_{ch}=V_{DS}/I_D = 1/[\mu_n C_{ox}(W/L)(V_{GS}-V_T)]$。</div></div>
-</div></details>
-</div>
-
-<!-- 11.3.4-11.3.5 -->
-<div class="section" id="s5"><h2>10.3.3–10.3.4 飽和區 I-V ⭐</h2>
-<div class="fcard"><div class="lbl">⭐ 飽和區汲極電流</div><div class="eq">$$\boxed{I_D = \frac{\mu_n C_{ox}}{2}\frac{W}{L}(V_{GS}-V_T)^2}$$</div><div class="note">夾止條件：$V_{DS}=V_{GS}-V_T$（汲極端通道厚度→0）。夾止後 $V_{DS}$ 繼續增加→夾止點向源極移動，但 $I_D$ 基本不變（飽和）。</div></div>
-<details class="derive" open><summary>🔍 夾止機制與通道長度調變</summary><div class="dbo">
-<div class="step"><span class="snb">1</span><span class="sl">夾止發生的條件</span><div class="sc">$V_{DS}=V_{GS}-V_T$，此時 $V(L)=V_{DS}$，$Q_n(L)=0$→通道在汲極端厚度為零。</div></div>
-<div class="step"><span class="snb">2</span><span class="sl">飽和 $I_D$ 推導</span><div class="sc">將 $V_{DS}=V_{GS}-V_T$ 代入線性區公式：$I_D(\text{sat})=\mu_n C_{ox}(W/L)[(V_{GS}-V_T)^2-(V_{GS}-V_T)^2/2]=\frac{1}{2}\mu_n C_{ox}(W/L)(V_{GS}-V_T)^2$。</div></div>
-<div class="step"><span class="snb">3</span><span class="sl">通道長度調變</span><div class="sc">$V_{DS}>V_{GS}-V_T$→夾止點距汲極 $\Delta L$→有效通道長度 $=L-\Delta L$。<span class="math">$$I_D = \frac{\mu_n C_{ox}}{2}\frac{W}{L}(V_{GS}-V_T)^2\!\left(1 + \frac{V_{DS}}{V_A}\right)$$</span>$V_A$ 類似 BJT 的 Early 電壓。</div></div>
-</div></details>
-</div>
-
-<!-- 11.4 -->
-<div class="section" id="s6"><h2>10.4 小訊號參數與頻率響應</h2>
-<div class="fcard"><div class="lbl">⭐ 跨導 $g_m$（飽和區）</div><div class="eq">$$\boxed{g_m = \frac{\partial I_D}{\partial V_{GS}} = \mu_n C_{ox}\frac{W}{L}(V_{GS}-V_T) = \frac{2I_D}{V_{GS}-V_T} = \sqrt{2\mu_n C_{ox}\frac{W}{L}I_D}}$$</div><div class="note">BJT: $g_m=I_C/V_T=38.5$ mS/mA（線性）。MOSFET: $g_m=2I_D/(V_{GS}-V_T)$。若 $V_{GS}-V_T=0.3$ V→$g_m=6.7$ mS/mA。MOSFET 的 $g_m$ 效率約為 BJT 的 1/6。</div></div>
-<div class="fcard"><div class="lbl">輸出電阻 $r_o$</div><div class="eq">$$r_o = \frac{\partial V_{DS}}{\partial I_D} = \frac{V_A}{I_D}$$</div></div>
-<div class="fcard"><div class="lbl">截止頻率 $f_T$</div><div class="eq">$$f_T = \frac{g_m}{2\pi(C_{gs}+C_{gd})} \approx \frac{\mu_n(V_{GS}-V_T)}{2\pi L^2}$$</div><div class="note">$f_T\propto1/L^2$→通道長度縮小一半→$f_T$ 增為四倍。現代 FinFET ($L_g\sim14$ nm): $f_T\sim300$–$400$ GHz。</div></div>
-</div>
-
-<!-- 11.5 -->
-<div class="section" id="s7"><h2>延伸：第 11 章短通道效應與次臨界導通</h2>
-<div class="fcard"><div class="lbl">⭐ 次臨界斜率（Subthreshold Swing）</div><div class="eq">$$\boxed{S = \frac{dV_{GS}}{d(\log I_D)} \approx \frac{kT}{e}\ln10\left(1 + \frac{C_d}{C_{ox}}\right) \approx 60\left(1 + \frac{C_d}{C_{ox}}\right)\ \text{mV/dec}}$$</div><div class="note">$C_d$ = 空乏層電容。室溫物理下限 $=60$ mV/dec。$C_d/C_{ox}$ 越小→$S$ 越接近 60→開關越陡峭→OFF 電流越小。</div></div>
-<div class="fcard"><div class="lbl">DIBL（汲極引發能障降低）</div><div class="eq">$$V_T = V_{T0} - \delta\,V_{DS}$$</div><div class="note">短通道時汲極電場穿透到源極側→降低源極端能障→$V_T$ 隨 $V_{DS}$ 增加而下降。DIBL 是限制 $L$ 縮小的關鍵因素。</div></div>
-</div>
-
-<div class="section" id="cheatsheet"><h2>公式速查表（完整）</h2>
-<table><thead><tr><th>參數</th><th>公式</th><th>備註</th></tr></thead><tbody>
-<tr><td>$C_{ox}$</td><td>$C_{ox}=\epsilon_{ox}/t_{ox}$</td><td>單位面積氧化層電容</td></tr>
-<tr><td>$V_{FB}$</td><td>$V_{FB}=\phi_{ms}-Q_f/C_{ox}$</td><td>平帶電壓</td></tr>
-<tr><td>$\phi_f$</td><td>$\phi_f=(kT/e)\ln(N_a/n_i)$</td><td>基板 Fermi 電位</td></tr>
-<tr><td>$Q_{d,\max}$</td><td>$Q_{d,\max}=\sqrt{4\epsilon_s e N_a\phi_f}$</td><td>最大空乏層電荷密度</td></tr>
-<tr><td>$V_T$</td><td>$V_T=V_{FB}+2\phi_f+Q_{d,\max}/C_{ox}$</td><td>⭐ 臨界電壓</td></tr>
-<tr><td>$I_D$（線性）</td><td>$I_D=\mu_n C_{ox}(W/L)[(V_{GS}-V_T)V_{DS}-V_{DS}^2/2]$</td><td>⭐ 線性區</td></tr>
-<tr><td>$I_D$（飽和）</td><td>$I_D=\frac{1}{2}\mu_n C_{ox}(W/L)(V_{GS}-V_T)^2$</td><td>⭐ 飽和區（平方律）</td></tr>
-<tr><td>$I_D$（飽和+CLM）</td><td>$I_D=\frac{1}{2}\mu_n C_{ox}(W/L)(V_{GS}-V_T)^2(1+V_{DS}/V_A)$</td><td>含通道長度調變</td></tr>
-<tr><td>$g_m$</td><td>$g_m=\mu_n C_{ox}(W/L)(V_{GS}-V_T)=2I_D/(V_{GS}-V_T)$</td><td>⭐ 跨導</td></tr>
-<tr><td>$r_o$</td><td>$r_o=V_A/I_D$</td><td>輸出電阻</td></tr>
-<tr><td>$f_T$</td><td>$f_T=g_m/[2\pi(C_{gs}+C_{gd})]$</td><td>截止頻率</td></tr>
-<tr><td>$S$</td><td>$S\approx60(1+C_d/C_{ox})$ mV/dec</td><td>⭐ 次臨界斜率</td></tr>
-</tbody></table></div></main>
-<script>
-function toggleTheme(){const h=document.documentElement;const n=h.getAttribute('data-theme')==='light'?'dark':'light';h.setAttribute('data-theme',n);localStorage.setItem('theme',n);document.getElementById('tl').textContent=n==='dark'?'淺色模式':'深色模式';}
-const s=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',s);if(s==='dark')document.getElementById('tl').textContent='淺色模式';
-const secs=document.querySelectorAll('.section[id]');const navs=document.querySelectorAll('.sn a');window.addEventListener('scroll',()=>{let c='';secs.forEach(s=>{if(window.scrollY>=s.offsetTop-80)c=s.getAttribute('id');});navs.forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+c);});});
-</script>
+  <p>頁面已移動至<a href="../../../subjects/solid-state-physics/html/formula_reviews/ch10_mosfet_formula_review_zh.html">新的教材位置</a>。</p>
 </body>
 </html>

@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第 2 章 運算子、測量與時間演化 — The Physics of Quantum Mechanics</title>
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$'], ['\\[','\\]']] },
+  options: { ignoreHtmlClass: 'no-mathjax' }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<link rel="stylesheet" href="../../../../shared/core.css">
+<script src="../../../../shared/core.js" defer></script>
+<link rel="stylesheet" href="../../../../shared/navigation.css" data-shared-navigation>
+</head>
+<body>
+
+<nav class="sidebar" id="sidebar" aria-label="本章目錄"><div class="sidebar-header"><div class="sidebar-subtitle">量子力學</div><h2 class="sidebar-title">第 2 章 運算子、測量與時間演化</h2></div><div class="toc">
+    <div class="nsub"><a href="#preview">本章預覽</a></div>
+    <div class="nsub"><a href="#s2-1">2.1 運算子</a></div>
+    <div class="nsub"><a href="#s2-2">2.2 時間演化</a></div>
+    <div class="nsub"><a href="#s2-3">2.3 位置表象</a></div>
+    <div class="nsub"><a href="#summary">關鍵概念與公式</a></div>
+    <div class="nsub"><a href="#common-mistakes">常見錯誤</a></div>
+    <div class="nsub"><a href="#self-check">自我檢測</a></div>
+    <div class="nsub"><a href="#extras">延伸資源</a></div>
+  </div>
+<div class="sidebar-tools"><button type="button" data-action="toggle-theme" aria-label="切換深色或淺色模式">切換顯示主題</button></div></nav>
+
+<main class="chapter-page" data-chapter-title="第 2 章 運算子、測量與時間演化" data-prev-href="ch1_probability_zh.html" data-prev-label="第 1 章 機率與機率振幅" data-next-href="ch3_harmonic_zh.html" data-next-label="第 3 章 諧振子與磁場">
+<!-- ====== 章首 ====== -->
+<header class="chapter-header">
+  <div class="chapter-subtitle">
+    <a href="#">量子力學</a> &rsaquo; <a href="ch1_probability_zh.html">Ch1</a> &rsaquo; Ch2
+  </div>
+  <h1>第 2 章　運算子、測量與時間演化</h1>
+  <div class="chapter-meta">
+    <span>原書章節：Chapter 2, Operators, measurement and time evolution</span>
+    <span>原書頁碼：p17–34</span>
+    <span>章長：18 頁 &middot; 3 節 &middot; 多個子節</span>
+  </div>
+</header>
+
+<!-- ====== 本章預覽 ====== -->
+<section class="chapter-preview" id="preview">
+  <h2>本章預覽</h2>
+
+  <div class="core-question">
+    <h3>核心問題</h3>
+    <p>第 1 章建立了量子態的數學語言——量子態是向量空間中的 ket，測量結果的機率由機率振幅的模平方給出。但兩個根本問題仍未回答：<strong>可測量的物理量（如位置、動量、能量）在量子力學中如何表示？量子態如何隨時間演化？</strong>本章引入「運算子」的概念來回答第一個問題，並以 Schrödinger 方程回答第二個問題。最後，我們將這些工具應用於位置表象，導出動量算子、不確定性原理，並完整處理自由粒子的動力學。</p>
+  </div>
+
+  <div class="deep-dive">
+    <h3>10 個關鍵概念</h3>
+    <ol>
+      <li><strong>線性運算子</strong>：將 ket 線性映射為另一個 ket 的數學物件，$Q|\psi\rangle = |\phi\rangle$</li>
+      <li><strong>可觀測量與運算子的對應</strong>：每個可測量的物理量對應一個 Hermitian 運算子，其本徵值即為可能的測量結果</li>
+      <li><strong>Hamiltonian 運算子</strong>：$H = \sum_i E_i |E_i\rangle\langle E_i|$，是量子力學中最重要的運算子，決定了時間演化</li>
+      <li><strong>時間相依 Schrödinger 方程 (TDSE)</strong>：$i\hbar\frac{\partial|\psi\rangle}{\partial t} = H|\psi\rangle$，是量子力學的動力學方程</li>
+      <li><strong>定態的時間演化</strong>：$|E_n, t\rangle = |E_n, 0\rangle e^{-iE_nt/\hbar}$——能量本徵態僅隨時間改變相位</li>
+      <li><strong>Ehrenfest 定理</strong>：期望值的時間導數由與 Hamiltonian 的對易子決定：$i\hbar\frac{d}{dt}\langle Q\rangle = \langle[Q,H]\rangle$</li>
+      <li><strong>位置表象與波函數</strong>：$\psi(x) = \langle x|\psi\rangle$ 是粒子出現在 $x$ 處的振幅，動量算子 $\hat{p} = -i\hbar\frac{\partial}{\partial x}$</li>
+      <li><strong>正則對易關係</strong>：$[\hat{x}, \hat{p}] = i\hbar$——位置與動量不可同時確定，是不確定性原理的數學根源</li>
+      <li><strong>不確定性原理</strong>：位置與動量的不確定度乘積有下限，$\sigma_x\sigma_p \ge \hbar/2$，位置越確定則動量越不確定</li>
+      <li><strong>機率流</strong>：機率密度守恆 $\partial\rho/\partial t + \nabla\cdot\mathbf{J} = 0$，波函數的相位梯度編碼了機率流的速度</li>
+    </ol>
+  </div>
+
+  <div class="deep-dive">
+    <h3>🧭 本章推理地圖</h3>
+    <ol>
+      <li><strong>量子態需要描述可測量物理量</strong>（Ch1 遺留問題）→ 引入<strong>線性運算子</strong>（§2.1），將物理量對應到運算子。</li>
+      <li>運算子的<strong>本徵值</strong>給出可能的測量結果，<strong>本徵態</strong>給出確定該值的態（§2.1）。</li>
+      <li>物理運算子必須是<strong>Hermitian</strong>的——保證本徵值為實數、本徵態正交（§2.1，Box 2.1）。</li>
+      <li><strong>對易子</strong> $[A,B]$（§2.1）決定兩個運算子是否有共同本徵態 → 零對易子意味著可同時確定，非零對易子限制同時確定性。</li>
+      <li>量子態的<strong>時間演化</strong>由 TDSE 決定（§2.2）→ 能量本徵態簡單演化為 $e^{-iE_nt/\hbar}|E_n\rangle$ → 任意態的演化由能量展開給出。</li>
+      <li><strong>Ehrenfest 定理</strong>（§2.2.1）連結量子期望值與古典運動方程 → 與 H 對易的量是守恆量。</li>
+      <li>在<strong>位置表象</strong>（§2.3）中，波函數 $\psi(x)$、動量算子 $\hat{p} = -i\hbar\partial_x$ → 正則對易關係 $[\hat{x},\hat{p}] = i\hbar$（§2.3.1）。</li>
+      <li>從 $[\hat{x},\hat{p}] = i\hbar$ → 推導 <strong>Ehrenfest 的牛頓第二定律</strong> $d\langle p\rangle/dt = -\langle dV/dx\rangle$（§2.3.1）。</li>
+      <li>確定動量的態為平面波 $e^{ipx/\hbar}$（§2.3.2）→ <strong>不確定性原理</strong>：位置高斯波包的動量散布與位置散布成反比（§2.3.2）。</li>
+      <li>自由粒子動力學（§2.3.3）：初始高斯波包以群速度 $p_0/m$ 移動並隨時間展寬 → <strong>對應原理</strong>驗證。</li>
+      <li>雙縫干涉條紋間距 $X = hL/2ps$（§2.3.4）→ 巨觀物體因 $h$ 極小而觀察不到干涉。</li>
+      <li>推廣至三維（§2.3.5）：$\hat{\mathbf{p}} = -i\hbar\nabla$，機率流 $\mathbf{J}$ 守恆（§2.3.5），維里定理連結動能與位能（§2.3.5）。</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ====== 先備知識橋接 ====== -->
+<section class="prerequisite">
+  <h2>先備知識橋接</h2>
+  <p>本章假設讀者已掌握第 1 章的核心概念：</p>
+  <ul>
+    <li><strong>Dirac notation</strong>：$|\psi\rangle$、$\langle\phi|$、$\langle\phi|\psi\rangle$ 的意義與基本運算</li>
+    <li><strong>基底展開</strong>：$|\psi\rangle = \sum_i a_i |i\rangle$，以及 $a_i = \langle i|\psi\rangle$ 提取振幅</li>
+    <li><strong>正交歸一性</strong>：$\langle j|i\rangle = \delta_{ij}$，$\langle\psi|\psi\rangle = 1$</li>
+    <li><strong>期望值</strong>：$\langle x\rangle = \sum_i p_i x_i$，以及量子力學中以振幅計算機率的基本思想</li>
+    <li><strong>複數運算</strong>：複共軛、模平方、以及 $|z|^2 = z z^*$</li>
+  </ul>
+  <p>如果你對這些概念還不太熟悉，建議先回顧第 1 章的相關章節。<strong>本章的核心挑戰不是記憶公式，而是理解運算子如何成為古典物理量在量子世界中的對應物，以及對易子如何決定哪些量可同時測量。</strong></p>
+</section>
+
+<!-- ====== 2.1 運算子 ====== -->
+<section class="deep-dive" id="s2-1">
+<h2>2.1　運算子</h2>
+<div class="section-keypoints">
+  <strong>🔑 本節重點</strong>
+  <span>① 線性運算子將 ket 線性映射為 ket：$Q(\alpha|\psi\rangle + \beta|\chi\rangle) = \alpha Q|\psi\rangle + \beta Q|\chi\rangle$</span>
+  <span>② 單位運算子 $I = \sum_i |i\rangle\langle i|$ 是完備性關係的核心體現</span>
+  <span>③ Hamiltonian $H = \sum_i E_i|E_i\rangle\langle E_i|$，夾在態之間給出能量期望值</span>
+  <span>④ Hermitian 運算子有實數本徵值與正交本徵態——物理可觀測量的必備性質</span>
+</div>
+
+  <p>在第 1 章中，我們看到量子系統的每個態由向量空間中的一個 ket $|\psi\rangle$ 表示，而能量確定的態構成這個空間的一組基底。本章進一步發展這些思想：<strong>每一個可測量的物理量——位置、動量、能量——都對應於態空間上的一個運算子。</strong>能量運算子（Hamiltonian）扮演特殊角色，因為它決定了系統的 ket 如何隨時間在態空間中移動。</p>
+
+  <p><strong>線性運算子</strong> $Q$ 是將 ket 映射為 ket 的物件，且滿足線性條件。若 $|\psi\rangle$ 是一個 ket，則 $|\phi\rangle = Q|\psi\rangle$ 是另一個 ket；對於任意複數 $\alpha, \beta$ 和任意 ket $|\psi\rangle, |\chi\rangle$：</p>
+  <div class="eq">$$Q\big(\alpha|\psi\rangle + \beta|\chi\rangle\big) = \alpha(Q|\psi\rangle) + \beta(Q|\chi\rangle) \tag{2.1}$$</div>
+  <p>這意味著運算子保持疊加結構——先疊加再作用，與先作用再疊加，結果相同。線性性質是量子力學中幾乎所有運算子的基本屬性。</p>
+
+  <h3>單位運算子與完備性</h3>
+  <p>考慮運算子 $I = \sum_i |i\rangle\langle i|$，其中 $\{|i\rangle\}$ 是任意一組基底 ket。將 $I$ 作用於任意 ket $|\psi\rangle$：</p>
+  <div class="eq">$$I|\psi\rangle = \sum_i |i\rangle\langle i|\psi\rangle = \sum_i (\langle i|\psi\rangle)\,|i\rangle \tag{2.3}$$</div>
+  <p>將 $|\psi\rangle = \sum_j a_j|j\rangle$ 代入並利用正交性 $\langle i|j\rangle = \delta_{ij}$，可得 $I|\psi\rangle = \sum_i a_i|i\rangle = |\psi\rangle$。因此 $I$ 就是<strong>單位運算子</strong>——這是完備性關係的核心體現，在本章及後續章節中會被反覆使用。</p>
+
+  <h3>Hamiltonian——最重要的運算子</h3>
+  <p>量子力學中最重要的單一運算子是<strong>Hamiltonian</strong>：</p>
+  <div class="eq">$$H = \sum_i E_i |E_i\rangle\langle E_i| \tag{2.5}$$</div>
+  <p>其中 $E_i$ 是能量的可能取值，$|E_i\rangle$ 是對應的能量本徵態。將 $H$ 夾在態 $|\psi\rangle$ 及其伴隨 bra 之間：</p>
+  <div class="eq">$$\langle\psi|H|\psi\rangle = \sum_i E_i \langle\psi|E_i\rangle\langle E_i|\psi\rangle = \sum_i E_i |a_i|^2 = \sum_i p_i E_i = \langle E\rangle \tag{2.7}$$</div>
+  <p>這是一個極其重要的結果：<strong>將 Hamiltonian 夾在量子態與其伴隨之間，就得到該態下能量的期望值。</strong>這個結果可以推廣到任何可觀測量。</p>
+
+  <h3>可觀測量與運算子</h3>
+  <p>若 $Q$ 是某個可測量的物理量（稱為<strong>可觀測量</strong>），其可能的測量值（能譜）為 $\{q_i\}$，則我們將任意態展開為 $Q$ 有確定值的態的線性組合：$|\psi\rangle = \sum_i a_i |q_i\rangle$。與 $Q$ 對應的運算子定義為：</p>
+  <div class="eq">$$Q = \sum_i q_i |q_i\rangle\langle q_i| \tag{2.9}$$</div>
+  <p>則 $\langle\psi|Q|\psi\rangle = \sum_i q_i |a_i|^2$ 即是 $Q$ 在態 $|\psi\rangle$ 下的期望值。簡記為 $\langle Q\rangle$。</p>
+
+  <h3>本徵值與本徵向量</h3>
+  <p>當線性運算子 $R$ 出現在數學問題中時，研究其本徵值和本徵向量通常很有用。本徵向量是被 $R$ 簡單縮放的向量，縮放因子稱為本徵值：</p>
+  <div class="eq">$$R|r\rangle = r|r\rangle \tag{2.10}$$</div>
+  <p>將 $H$ 作用於 $|E_k\rangle$：$H|E_k\rangle = \sum_i E_i|E_i\rangle\langle E_i|E_k\rangle = E_k|E_k\rangle$。因此 <strong>$H$ 的本徵向量就是能量確定的態，其本徵值就是能量的可能測量值。</strong>這個結果立即推廣到任意可觀測量 $Q$：其本徵向量是 $Q$ 確定的態，本徵值是 $Q$ 的可能測量值。</p>
+
+  <div class="callout">
+    <strong>💡 運算子＝測量的數學化身</strong><br>
+    在古典物理中，我們直接處理數值——位置 $x$、動量 $p$、能量 $E$。在量子力學中，這些物理量被<strong>運算子</strong>取代。運算子的本徵值告訴我們「可能測到什麼」，本徵態告訴我們「在什麼態下該值確定」。這種將物理量從數值提升為運算子的策略，是量子力學與古典物理最根本的結構性差異。夾在 bra 和 ket 之間求期望值的操作 $\langle\psi|Q|\psi\rangle$ 則是量子力學與古典物理的橋梁——當系統很大時，這個期望值就接近古典預測。
+  </div>
+
+  <h3>Hermitian 運算子</h3>
+  <p>考慮複數 $\langle\phi|Q|\psi\rangle$。若 $Q$ 的能譜全為實數（物理上的合理要求），則對於任意兩個態 $|\phi\rangle, |\psi\rangle$：</p>
+  <div class="eq">$$\big(\langle\phi|Q|\psi\rangle\big)^* = \langle\psi|Q|\phi\rangle \tag{2.13}$$</div>
+  <p>滿足此性質的運算子稱為<strong>Hermitian 運算子</strong>。Hermitian 運算子具有優良性質：<strong>本徵值為實數，且對應不同本徵值的本徵向量相互正交</strong>（見 Box 2.1 的證明）。正是因為我們在物理上要求這些性質，可觀測量的運算子必須是 Hermitian 的。</p>
+
+  <div class="callout-warn">
+    <strong>⚡ 不是所有運算子都是 Hermitian 的</strong><br>
+    雖然可觀測量的運算子總是 Hermitian 的，但非 Hermitian 運算子在量子力學中也極為有用。例如升降運算子 $a$ 和 $a^\dagger$（第 3 章）就不是 Hermitian 的。非 Hermitian 運算子 $R$ 的 <strong>Hermitian 伴隨</strong> $R^\dagger$ 定義為 $\big(\langle\phi|R^\dagger|\psi\rangle\big)^* = \langle\psi|R|\phi\rangle$。Hermitian 運算子滿足 $Q^\dagger = Q$——它是自身的伴隨。
+  </div>
+
+  <h3>矩陣元素與伴隨規則</h3>
+  <p>將 ket $|\phi\rangle = R|\psi\rangle$ 在基底中展開，可以證明 $R$ 完全由一組數（稱為<strong>矩陣元素</strong>）決定：</p>
+  <div class="eq">$$R_{ij} \equiv \langle i|R|j\rangle \tag{2.15}$$</div>
+  <p>$R$ 的 Hermitian 伴隨 $R^\dagger$ 的矩陣元素滿足 $(R^\dagger_{ij})^* = R_{ji}$，即 $R^\dagger_{ij} = R^*_{ji}$——<strong>$R^\dagger$ 的矩陣是 $R$ 矩陣的複共軛轉置。</strong>對乘積取 Hermitian 伴隨時，需反轉順序並對每個因子取伴隨：$(QR)^\dagger = R^\dagger Q^\dagger$，推廣後 $(ABC\ldots Z)^\dagger = Z^\dagger\ldots C^\dagger B^\dagger A^\dagger$。</p>
+
+  <h3>運算子的函數</h3>
+  <p>我們經常需要對運算子求函數。例如，粒子的位能是位置算子 $\hat{x}$ 的函數 $V(\hat{x})$。運算子 $R$ 的函數 $f(R)$ 定義為：</p>
+  <div class="eq">$$f(R) \equiv \sum_i f(r_i) |r_i\rangle\langle r_i| \tag{2.20}$$</div>
+  <p>其中 $r_i$ 和 $|r_i\rangle$ 是 $R$ 的本徵值和本徵向量。這個定義使 $f(R)$ 擁有與 $R$ 相同的本徵向量，而本徵值則是對 $R$ 的本徵值計算函數 $f$ 的結果。這一定義在後續章節中會被反覆使用。</p>
+
+  <h3>對易子</h3>
+  <p>兩個運算子 $A, B$ 的<strong>對易子</strong>定義為：</p>
+  <div class="eq">$$[A, B] \equiv AB - BA \tag{2.21}$$</div>
+  <p>對易子是量子力學的核心概念之一。若 $[A, B] \neq 0$，則不可能找到 $A$ 和 $B$ 的完備共同本徵向量組——也就是說，不存在一組完備態，在其中 $A$ 和 $B$ 的值都同時確定。反之，若 $[A, B] = 0$，則存在完備的共同本徵向量組。</p>
+
+  <div class="callout-warn">
+    <strong>⚡ 對易子為零／非零的含義常被誤解</strong><br>
+    即使 $[A,B] \neq 0$，仍然可能存在某些態在該態中 $A$ 和 $B$ 都有確定值——只是這些態不能構成<strong>完備集合</strong>。同樣，即使 $[A,B] = 0$，仍可能存在 $A$ 確定但 $B$ 不確定的態。文獻中關於對易子含義的不準確陳述比比皆是。關鍵詞是「完備」：對易子決定的是是否存在完備的共同本徵態集合，而非是否存在個別的共同本徵態。
+  </div>
+
+  <p>三個極為實用的對易子恆等式：</p>
+  <div class="eq">$$[A + B, C] = [A, C] + [B, C]$$</div>
+  <div class="eq">$$AB = BA + [A, B]$$</div>
+  <div class="eq">$$[AB, C] = [A, C]B + A[B, C] \tag{2.22}$$</div>
+  <p>第三個規則與乘積的微分規則 $d(ab)/dc = (da/dc)b + a(db/dc)$ 形式相似。利用這些規則，計算中幾乎不需要再展開對易子的內容，從而消除常見的錯誤來源。</p>
+
+  <p>當 $B$ 與 $[A, B]$ 對易時，一個特別重要的公式簡化為：</p>
+  <div class="eq">$$[A, f(B)] = [A, B]\,\frac{df}{dB} \tag{2.25}$$</div>
+  <p>這個公式將在後續的推導中被多次使用，特別是在計算 $[\hat{p}, V(\hat{x})]$ 時。</p>
+
+  <details class="example">
+    <summary>📝 自編概念例：驗證對易子的基本規則</summary>
+    <div class="example-body">
+      <p><strong>題目：</strong>令 $A = \begin{pmatrix}0 & 1 \\ 1 & 0\end{pmatrix}$，$B = \begin{pmatrix}1 & 0 \\ 0 & -1\end{pmatrix}$ 為作用於二態系統的運算子（以某基底表示）。計算 $[A, B]$ 並驗證 $[A, B] \neq 0$。找出 $A$ 的本徵態並檢查這些態中 $B$ 是否有確定值。</p>
+      <p><strong>解：</strong></p>
+      <div class="eq">$$AB = \begin{pmatrix}0 & -1 \\ 1 & 0\end{pmatrix}, \quad BA = \begin{pmatrix}0 & 1 \\ -1 & 0\end{pmatrix}$$</div>
+      <div class="eq">$$[A, B] = AB - BA = \begin{pmatrix}0 & -2 \\ 2 & 0\end{pmatrix} \neq 0$$</div>
+      <p>$A$ 的本徵值：$\det(A - \lambda I) = \lambda^2 - 1 = 0$，得 $\lambda = \pm 1$。本徵向量：$|+\rangle_A = \frac{1}{\sqrt{2}}\begin{pmatrix}1 \\ 1\end{pmatrix}$，$|-\rangle_A = \frac{1}{\sqrt{2}}\begin{pmatrix}1 \\ -1\end{pmatrix}$。</p>
+      <p>在 $|+\rangle_A$ 中，$B|+\rangle_A = \frac{1}{\sqrt{2}}\begin{pmatrix}1 \\ -1\end{pmatrix} = |-\rangle_A$——<strong>不是</strong> $|+\rangle_A$ 的倍數，因此 $B$ 在 $A$ 的本徵態中沒有確定值。這印證了 $[A,B] \neq 0$ 時，$A$ 的本徵態不是 $B$ 的本徵態。</p>
+      <p><strong>物理意義：</strong>對易子非零意味著兩個物理量不可同時確定。本例中的 $A$ 和 $B$ 類似於 Pauli 矩陣 $\sigma_x$ 和 $\sigma_z$，它們分別對應於沿不同方向的自旋測量。</p>
+    </div>
+  </details>
+
+  
+  <h3>Hermitian 運算子的本徵值定理</h3>
+  <p>Hermitian 運算子最重要的一條性質是：<strong>本徵值均為實數，且不同本徵值對應的本徵態相互正交</strong>。設 $Q|q_i\rangle = q_i|q_i\rangle$，$Q|q_j\rangle = q_j|q_j\rangle$，且 $Q = Q^\dagger$。考慮：</p>
+  <div class="eq">$$\langle q_i|Q|q_j\rangle = q_j\langle q_i|q_j\rangle \tag{2.15a}$$</div>
+  <p>另一方面，取 Hermitian 伴隨並利用 $Q = Q^\dagger$：</p>
+  <div class="eq">$$\langle q_i|Q|q_j\rangle = \langle q_j|Q|q_i\rangle^* = q_i^*\langle q_j|q_i\rangle^* = q_i^*\langle q_i|q_j\rangle \tag{2.15b}$$</div>
+  <p>比較兩式得：$(q_j - q_i^*)\langle q_i|q_j\rangle = 0$。令 $i = j$ 得 $q_i = q_i^*$——<strong>本徵值必為實數</strong>。令 $i \neq j$，若 $q_i \neq q_j$，則 $\langle q_i|q_j\rangle = 0$——<strong>不同本徵值對應的本徵態相互正交</strong>。這一性質使 Hermitian 運算子的本徵態構成一個理想的正交基底，用於展開任意態。</p>
+
+  <div class="callout">
+    <strong>💡 實數本徵值是量子力學的基石</strong><br>
+    測量結果必須是實數——沒有人會測量到「3 + 2i 公尺」。因此只有 Hermitian 運算子才能代表可觀測量。如果一個運算子不是 Hermitian（例如升降運算子 $a$ 和 $a^\dagger$），它的本徵值就不一定是實數，因此不能直接對應於物理測量。升降運算子的價值在代數操作而非直接測量——它們讓我們更容易地推導出可觀測量的性質。
+  </div>
+
+  <h3>投影算子與譜分解</h3>
+  <p>與 Hermitian 運算子緊密相關的是<strong>投影算子</strong>。給定一組正經正基底 $\{|q_i\rangle\}$，投影算子 $P_i \equiv |q_i\rangle\langle q_i|$ 將任意態投影到 $q_i$ 方向：</p>
+  <div class="eq">$$P_i|\psi\rangle = |q_i\rangle\langle q_i|\psi\rangle = a_i|q_i\rangle \tag{2.16}$$</div>
+  <p>投影算子滿足 $P_i^2 = P_i$（冪等性）和 $P_i^\dagger = P_i$（Hermitian 性）。不同方向的投影算子相互正交：$P_iP_j = \delta_{ij}P_i$。這組投影算子的和構成單位運算子：</p>
+  <div class="eq">$$\sum_i |q_i\rangle\langle q_i| = I \tag{2.17}$$</div>
+  <p>方程 (2.17) 稱為<strong>完備性關係</strong>——它是量子力學中最有用的恒等式之一。利用它，我們可以將運算子 $Q$ 分解為：</p>
+  <div class="eq">$$Q = \sum_i q_i |q_i\rangle\langle q_i| \tag{2.18}$$</div>
+  <p>這稱為 $Q$ 的<strong>譜分解</strong>（spectral decomposition）。譜分解的物理意義極為深刻：它將抽象運算子與具體測量結果直接對應——每一項 $q_i|q_i\rangle\langle q_i|$ 對應一個可能的測量結果 $q_i$。任何運算子的函數也可以透過譜分解定義：$f(Q) = \sum_i f(q_i) |q_i\rangle\langle q_i|$，只要在每個本徵值上計算函數值即可。</p>
+
+  <div class="callout-warn">
+    <strong>⚡ 完備性關係的濫用</strong><br>
+    初學者常把 $I = \sum_i |q_i\rangle\langle q_i|$ 誤認為「所有向量加起來等於 $I$」。正確的理解是：這個等式對任意向量 $|\psi\rangle$ 成立，因為 $(\sum_i |q_i\rangle\langle q_i|)|\psi\rangle = \sum_i a_i|q_i\rangle = |\psi\rangle$，其中 $a_i = \langle q_i|\psi\rangle$。它是<strong>基底展開的完備性</strong>的表現，而非向量相加的結果。當基底從離散變為連續時，完備性關係寫為 $I = \int dx\,|x\rangle\langle x|$——積分取代了求和。
+  </div>
+
+  <h3>對易子代數</h3>
+  <p>兩個運算子的乘積順序通常不可交換，這個重要性質由<strong>對易子</strong>（commutator）量化：$[A, B] \equiv AB - BA$。對易子滿足以下代數規則：</p>
+  <div class="eq">$$\begin{aligned} [A, B] &= -[B, A] \quad&\text{(反對稱性)} \\ [A, BC] &= [A, B]C + B[A, C] \quad&\text{(乘積法則)} \\ [AB, C] &= A[B, C] + [A, C]B \\ [A, [B, C]] + [B, [C, A]] + [C, [A, B]] &= 0 \quad&\text{(Jacobi 恒等式)} \end{aligned} \tag{2.19}$$</div>
+  <p>乘積法則（Leibniz 規則）在計算複雜對易子時特別有用。例如，計算 $[x, p^2]$：</p>
+  <div class="eq">$$[x, p^2] = [x, p]p + p[x, p] = i\hbar\,p + p\,(i\hbar) = 2i\hbar\,p \tag{2.20}$$</div>
+  <p>這個結果在推導 Ehrenfest 定理時會用到。更一般地，對於任意函數 $f(p)$，有 $[x, f(p)] = i\hbar\,f'(p)$——與量子力學中 $p$ 對應於 $x$ 的位移生成元這一角色一致。</p>
+
+  <details class="example">
+    <summary>📝 自編概念例：對易子與可同時觀測性</summary>
+    <div class="example-body">
+      <p><strong>題目：</strong>設 $A = |a_1\rangle\langle a_1| - |a_2\rangle\langle a_2|$，$B = |a_1\rangle\langle a_2| + |a_2\rangle\langle a_1|$，其中 $\{|a_1\rangle, |a_2\rangle\}$ 為正交歸一基底。</p>
+      <p>(a) 證明 $[A, B] \neq 0$。</p>
+      <p>(b) 驗證 $|a_1\rangle$ 和 $|a_2\rangle$ 是否為 $B$ 的本徵態？這說明了什麼？</p>
+      <p><strong>解：</strong></p>
+      <p>(a) 先計算各項的作用：$A|a_1\rangle = |a_1\rangle$，$A|a_2\rangle = -|a_2\rangle$。$B|a_1\rangle = |a_2\rangle$，$B|a_2\rangle = |a_1\rangle$。因此：</p>
+      <div class="eq">$$AB|a_1\rangle = A|a_2\rangle = -|a_2\rangle, \quad BA|a_1\rangle = B|a_1\rangle = |a_2\rangle$$</div>
+      <p>$AB \neq BA$，因此 $[A, B] \neq 0$。具體地，$[A, B] = 2(|a_2\rangle\langle a_1| - |a_1\rangle\langle a_2|) \neq 0$。</p>
+      <p>(b) $B|a_1\rangle = |a_2\rangle$——不是 $|a_1\rangle$ 的倍數。$B|a_2\rangle = |a_1\rangle$——不是 $|a_2\rangle$ 的倍數。因此 $\{|a_1\rangle, |a_2\rangle\}$ 不是 $B$ 的本徵態，儘管它們是 $A$ 的本徵態。這說明了 $[A, B] \neq 0$ 的關鍵結果：不存在完備的共同本徵態集合。在物理上，這意味著 $A$ 和 $B$ 無法同時被精確測定——這正是自旋沿 $z$ 和 $x$ 方向測量不可同時確定的數學類比。</p>
+    </div>
+  </details>
+
+
+<figure class="figure" id="fig-2-1">
+    <svg class="content-diagram" viewBox="0 0 500 240" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" width="500" height="240" fill="#f8f9fa" rx="8"/>
+      <text x="250" y="30" font-size="15" fill="#333" text-anchor="middle" font-weight="bold">運算子層級結構</text>
+      <!-- Operators -->
+      <rect x="30" y="55" width="130" height="40" fill="#e8f4fd" stroke="#4a90d9" stroke-width="1.5" rx="6"/>
+      <text x="95" y="80" font-size="13" fill="#333" text-anchor="middle">線性運算子 $Q$</text>
+      <rect x="180" y="55" width="130" height="40" fill="#fef3e8" stroke="#e67e22" stroke-width="1.5" rx="6"/>
+      <text x="245" y="80" font-size="13" fill="#333" text-anchor="middle">Hermitian $Q=Q^\dagger$</text>
+      <rect x="330" y="55" width="140" height="40" fill="#e8f8e8" stroke="#27ae60" stroke-width="1.5" rx="6"/>
+      <text x="400" y="80" font-size="13" fill="#333" text-anchor="middle">可觀測量 (Observable)</text>
+      <!-- Arrows -->
+      <line x1="160" y1="75" x2="178" y2="75" stroke="#666" stroke-width="1.5" marker-end="url(#arrow)"/>
+      <line x1="310" y1="75" x2="328" y2="75" stroke="#666" stroke-width="1.5" marker-end="url(#arrow)"/>
+      <defs><marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto"><path d="M0,0 L10,5 L0,10 Z" fill="#666"/></marker></defs>
+      <!-- Examples -->
+      <text x="95" y="130" font-size="11" fill="#555" text-anchor="middle">例：$a$（升降算子）</text>
+      <text x="245" y="130" font-size="11" fill="#555" text-anchor="middle">例：$\hat{x}, \hat{p}, H, \sigma_y$</text>
+      <text x="400" y="130" font-size="11" fill="#555" text-anchor="middle">實數本徵值＋正交本徵態</text>
+      <!-- Key properties -->
+      <text x="250" y="175" font-size="12" fill="#888" text-anchor="middle">所有可觀測量是 Hermitian，但並非所有 Hermitian 算子都是可觀測量</text>
+      <text x="250" y="205" font-size="12" fill="#888" text-anchor="middle">$[A,B]=0 \Leftrightarrow$ 存在完備的共同本徵態集合</text>
+    </svg>
+    <figcaption><strong>圖 2.1</strong>　運算子的分類層級。所有可觀測量都是 Hermitian 運算子（子集），而所有 Hermitian 運算子都是線性運算子（子集）。對易子決定兩個運算子是否有完備的共同本徵態。</figcaption>
+  </figure>
+</section>
+
+<!-- ====== 2.2 時間演化 ====== -->
+<section class="deep-dive" id="s2-2">
+<h2>2.2　時間演化</h2>
+<div class="section-keypoints">
+  <strong>🔑 本節重點</strong>
+  <span>① TDSE $i\hbar\frac{\partial|\psi\rangle}{\partial t} = H|\psi\rangle$ 是量子力學的動力學方程，一階而非二階</span>
+  <span>② 能量本徵態僅變化相位：$|E_n,t\rangle = |E_n,0\rangle e^{-iE_nt/\hbar}$</span>
+  <span>③ 任意態的演化由能量展開給出：$|\psi,t\rangle = \sum_n a_n e^{-iE_nt/\hbar}|E_n,0\rangle$</span>
+  <span>④ Ehrenfest 定理：$\frac{d}{dt}\langle Q\rangle = -\frac{i}{\hbar}\langle[Q,H]\rangle + \langle\frac{\partial Q}{\partial t}\rangle$</span>
+</div>
+
+  <p>物理學的核心是預測未來，因此運動方程處於其心臟地帶。牛頓力學由 $f = ma$ 主導；在量子力學中，對應的動力學方程是<strong>時間相依 Schrödinger 方程</strong>（TDSE）：</p>
+  <div class="eq">$$i\hbar\frac{\partial|\psi\rangle}{\partial t} = H|\psi\rangle \tag{2.26}$$</div>
+  <p>其中 $\hbar = h/2\pi$ 是約化 Planck 常數，$H$ 是 Hamiltonian 運算子。利用 Hermitian 伴隨規則可得 bra 的運動方程：$-i\hbar\frac{\partial\langle\psi|}{\partial t} = \langle\psi|H$。</p>
+
+  <div class="callout-warn">
+    <strong>⚡ TDSE 不是 $H$ 的定義</strong><br>
+    初學者有時將 TDSE 解讀為 $H = i\hbar\,\partial/\partial t$。這與將 $f = ma$ 視為力的定義一樣無用。牛頓方程要有用，必須補充力的具體描述；同樣，TDSE 要有用，必須有 $H$ 的具體表達式。我們將在 §2.3.1 中給出粒子 Hamiltonian 的具體形式 $H = \hat{p}^2/2m + V(\hat{x})$。TDSE 定義的是<strong>時間演化</strong>，而非 Hamiltonian。
+  </div>
+
+  <p>TDSE 是<strong>一階</strong>微分方程（而牛頓第二定律是二階的），這意味著求解 $t > 0$ 的 $|\psi, t\rangle$ 只需要 $t = 0$ 時的初始態 $|\psi, 0\rangle$。如果方程是二階的，還需要 $\partial|\psi\rangle/\partial t$ 作為初始條件。但 $|\psi, 0\rangle$ 根據假設已經構成完整的振幅集合——它包含了我們對系統當前狀態所知的一切。如果數學要求我們知道更多，那麼要麼 $|\psi\rangle$ 不是完整的振幅集合，要麼物理學無法預測未來。</p>
+
+  <h3>能量本徵態的演化</h3>
+  <p>TDSE 告訴我們，能量確定的態以極其簡單的方式演化：</p>
+  <div class="eq">$$i\hbar\frac{\partial|E_n\rangle}{\partial t} = H|E_n\rangle = E_n|E_n\rangle \quad\Rightarrow\quad |E_n, t\rangle = |E_n, 0\rangle e^{-iE_nt/\hbar} \tag{2.29}$$</div>
+  <p><strong>時間的流逝僅僅改變 ket 的相位，變化率為 $E_n/\hbar$。</strong>由於僅有相位變化，這些態中任何時間無關運算子的期望值都恆定不變——因此稱之為<strong>定態</strong>（stationary states）。</p>
+
+  <h3>任意態的演化</h3>
+  <p>利用這個結果，我們可以計算任意態 $|\psi\rangle$ 的時間演化。在能量表象中，$|\psi, t\rangle = \sum_n a_n(t)|E_n, t\rangle$。代入 TDSE 後可證明 $\dot{a}_n = 0$，即展開係數不隨時間變化。因此：</p>
+  <div class="eq">$$|\psi, t\rangle = \sum_n a_n e^{-iE_nt/\hbar} |E_n, 0\rangle \tag{2.32}$$</div>
+  <p>這是一個我們將反覆使用的核心結果。它告訴我們：<strong>要知道態如何演化，只需知道它在能量基底中的展開係數，然後讓每個分量乘上相應的相位因子。</strong></p>
+
+  <div class="callout">
+    <strong>💡 定態的悖論：不可實現但不可或缺</strong><br>
+    能量確定的態在自然界中從不出現——因為它們完全不會變化，因此不可能將系統置於這樣的態中。但它們在量子力學中扮演極其重要的角色：它們提供了 TDSE 的幾乎平凡的解，而任意態的演化就是這些解的線性組合。正是因為定態的存在，我們才花大量時間求解定態定義方程——<strong>時間無關 Schrödinger 方程</strong>（TISE）：$H|E_n\rangle = E_n|E_n\rangle$。
+  </div>
+
+
+
+  <h3>全域相位 vs 相對相位</h3>
+  <p>$|E_n, t\rangle = |E_n, 0\rangle e^{-iE_nt/\hbar}$ 中的相位因子 $e^{-iE_nt/\hbar}$ 是一個<strong>全域相位</strong>——它作用於整個 ket，不影響任何可觀測量（因為測量結果由 $|\langle\phi|\psi\rangle|^2$ 決定，全域相位在取模平方時被消去）。然而，疊加態中不同分量的<strong>相對相位</strong>截然不同。考慮疊加態：</p>
+  <div class="eq">$$|\psi, t\rangle = a_1 e^{-iE_1t/\hbar}|E_1\rangle + a_2 e^{-iE_2t/\hbar}|E_2\rangle \tag{2.33}$$</div>
+  <p>這兩個能量分量之間的<strong>相對相位</strong> $(-iE_1t/\hbar) - (-iE_2t/\hbar) = i(E_2 - E_1)t/\hbar$ 隨時間線性變化，會直接影響測量結果——期望值中會出現以頻率 $\omega_{21} = (E_2 - E_1)/\hbar$ 振盪的項。這就是為何原子光譜表現為離散頻率：</p>
+  <div class="eq">$$\langle\psi, t|Q|\psi, t\rangle = \text{常數項} + 2\,\mathrm{Re}\!\!\left(a_1^* a_2 \langle E_1|Q|E_2\rangle e^{i(E_1-E_2)t/\hbar}\right) \tag{2.34b}$$</div>
+  <p>振盪頻率對應於兩能量之差——這是 Bohr 頻率條件 $\omega = (E_f - E_i)/\hbar$ 的量子力學推導。</p>
+
+  <div class="callout">
+    <strong>💡 全域相位無物理意義，相對相位才有</strong><br>
+    這是量子力學中一個容易被忽略但極其重要的區別：(i) 全域相位 $e^{i\theta}|\psi\rangle$——θ 與 $|\psi\rangle$ 的內部結構無關，可以任意選取而不影響任何物理預測。(ii) 相對相位 $|\psi\rangle = a|0\rangle + b e^{i\phi}|1\rangle$——φ 決定了疊加態的干涉性質，直接影響測量結果。在量子資訊中，單一 qubit 的狀態完全由兩個參數描述（$|a|^2$ 和相對相位 $\phi$），全域相位 $e^{i\theta}$ 永遠不會出現在物理描述中。
+  </div>
+
+  <h3>不顯含時間運算子的守恆</h3>
+  <p>Ehrenfest 定理的一個直接推論是：若運算子 $Q$ 不顯含時間且與 Hamiltonian 對易（$[Q, H] = 0$），則 $Q$ 的期望值和機率分布均不隨時間變化——$Q$ 是<strong>守恆量</strong>。不僅如此，當 $\langle\psi|Q|q_i\rangle = q_i\langle\psi|q_i\rangle$ 時，測量 $Q$ 得到特定值 $q_i$ 的機率 $|\langle q_i|\psi\rangle|^2$ 也不隨時間變化。這是因為：</p>
+  <div class="eq">$$\frac{d}{dt}|\langle q_i|\psi, t\rangle|^2 = 0 \quad \text{當 } [Q, H] = 0 \tag{2.35}$$</div>
+  <p>物理意義：如果 Hamiltonian 是時間平移不變的（不顯含時間），能量守恆。如果 Hamiltonian 是空間平移不變的，動量守恆。這些結論與古典力學中 Noether 定理的結論完全一致——<strong>連續對稱性導致守恆律</strong>是物理學中最深刻的原理之一。</p>
+
+  <h3>期望值的演化——Ehrenfest 定理</h3>
+  <p>利用 TDSE，我們可以計算任意可觀測量 $Q$ 的期望值隨時間的變化率：</p>
+  <div class="eq">$$i\hbar\frac{d}{dt}\langle\psi|Q|\psi\rangle = \langle\psi|[Q, H]|\psi\rangle + i\hbar\langle\psi|\frac{\partial Q}{\partial t}|\psi\rangle \tag{2.34}$$</div>
+  <p>通常運算子不顯含時間（$\partial Q/\partial t = 0$），此時期望值的變化率就是運算子 $-i[Q, H]/\hbar$ 的期望值。這一重要結果稱為<strong>Ehrenfest 定理</strong>。</p>
+
+  <p>若時間無關運算子 $Q$ 與 Hamiltonian 對易（$[Q, H] = 0$），則對於任意態，$Q$ 的期望值<strong>守恆</strong>。不僅如此，$Q^2$ 的期望值也守恆，因此不確定度 $\langle(\Delta Q)^2\rangle$ 也守恆。若初始態是 $Q$ 確定的態（$|\psi\rangle = |q_i\rangle$），則在所有時刻不確定度為零——<strong>$Q$ 的值可以始終精確知道。</strong>此時 $q_i$ 被稱為<strong>好量子數</strong>，常用於標記態。</p>
+
+  <p>特別地，對於 Hamiltonian 本身：</p>
+  <div class="eq">$$\frac{d\langle E\rangle}{dt} = \left\langle\frac{\partial H}{\partial t}\right\rangle \tag{2.36}$$</div>
+  <p>若 Hamiltonian 不顯含時間，則能量期望值守恆——這是<strong>能量守恆原理</strong>的量子表述。Hamiltonian 的時間依賴性僅來自外部力對系統作功。</p>
+
+  <details class="example">
+    <summary>📝 原書問題 2.8：能階系統的時間演化</summary>
+    <div class="example-body">
+      <p><strong>題目：</strong>某粒子束縛於勢阱中，允許能量為 $E_n = n^2\mathcal{E}$（$n = 1,2,\ldots$），對應能量本徵態為 $|1\rangle, |2\rangle, \ldots$。在 $t = 0$ 時粒子處於態：</p>
+      <div class="eq">$$|\psi(0)\rangle = 0.2|1\rangle + 0.3|2\rangle + 0.4|3\rangle + 0.843|4\rangle$$</div>
+      <p>(a) 求 $t=0$ 時測量能量得到小於 $6\mathcal{E}$ 的機率。<br>
+      (b) 求能量的平均值和標準差。<br>
+      (c) 計算 $t$ 時刻的態向量。上述結果在任意時刻是否仍有效？<br>
+      (d) 若測量得到 $16\mathcal{E}$，測量後系統的態是什麼？再次測量能量會得到什麼？</p>
+      <p><strong>解：</strong></p>
+      <p>(a) 小於 $6\mathcal{E}$ 的能階：$E_1 = \mathcal{E}$，$E_2 = 4\mathcal{E}$。機率：$P = |0.2|^2 + |0.3|^2 = 0.04 + 0.09 = 0.13$。</p>
+      <p>(b) 期望值：</p>
+      <div class="eq">$$\langle E\rangle = 0.04\mathcal{E} + 0.09(4\mathcal{E}) + 0.16(9\mathcal{E}) + 0.711(16\mathcal{E}) = 13.22\mathcal{E}$$</div>
+      <p>（注意 $0.843^2 = 0.711$）$\langle E^2\rangle = 0.04\mathcal{E}^2 + 0.09(16\mathcal{E}^2) + 0.16(81\mathcal{E}^2) + 0.711(256\mathcal{E}^2) = 196.5\mathcal{E}^2$。標準差 $\Delta E = \sqrt{196.5 - 13.22^2}\,\mathcal{E} = 4.78\mathcal{E}$。</p>
+      <p>(c) 任意時刻：$|\psi(t)\rangle = 0.2 e^{-i\mathcal{E}t/\hbar}|1\rangle + 0.3 e^{-i4\mathcal{E}t/\hbar}|2\rangle + 0.4 e^{-i9\mathcal{E}t/\hbar}|3\rangle + 0.843 e^{-i16\mathcal{E}t/\hbar}|4\rangle$。由於 $[H,H]=0$，能量是守恆量，(a)(b)的結果在任意時刻有效。</p>
+      <p>(d) 測量後坍縮至 $|4\rangle$。再次測量必定得到 $16\mathcal{E}$。</p>
+    </div>
+  </details>
+</section>
+
+<!-- ====== 2.3 位置表象 ====== -->
+<section class="deep-dive" id="s2-3">
+<h2>2.3　位置表象</h2>
+<div class="section-keypoints">
+  <strong>🔑 本節重點</strong>
+  <span>① 波函數 $\psi(x) = \langle x|\psi\rangle$ 是粒子出現在 $x$ 的振幅</span>
+  <span>② 動量算子 $\hat{p} = -i\hbar\frac{\partial}{\partial x}$，滿足 $[\hat{x},\hat{p}] = i\hbar$</span>
+  <span>③ 確定動量的態為平面波 $\langle x|p\rangle = h^{-1/2}e^{ipx/\hbar}$</span>
+  <span>④ 不確定性原理：位置與動量的不確定度乘積 $\sigma_x\sigma_p \ge \hbar/2$</span>
+</div>
+
+  <p>當系統由一個只能在單一維度運動的單粒子構成時，在 $x$ 處找到粒子的振幅 $\psi(x)$（$x \in (-\infty,\infty)$）構成一組完整的振幅。與第 1 章的離散基底類比，我們用積分取代求和：</p>
+  <div class="eq">$$|\psi\rangle = \int_{-\infty}^{\infty} dx\,\psi(x)\,|x\rangle \tag{2.37}$$</div>
+  <p>其中基底 ket $|x\rangle$ 是粒子確定在 $x$ 處的態。振幅的提取為 $\psi(x) = \langle x|\psi\rangle$。由於歷史原因，函數 $\psi(x)$ 被稱為粒子的<strong>波函數</strong>。其複共軛為 $\psi^*(x) = \langle\psi|x\rangle$。</p>
+
+  <p>基底 ket $|x\rangle$ 的正交關係由 Dirac $\delta$ 函數給出：$\langle x'|x\rangle = \delta(x - x')$。$\delta$ 函數在 $x \neq x'$ 時為零（因為粒子在 $x$ 處時不可能在 $x'$ 處），在 $x = x'$ 處的奇異行為使 $\int dx\,\delta(x - x') = 1$——雖然函數處處為零（除原點外），但其下方「面積」為 1。歸一化條件為 $\int dx\,|\psi(x)|^2 = 1$。單位運算子在位置表象中為 $I = \int dx\,|x\rangle\langle x|$。</p>
+
+  <h3>位置算子與動量算子</h3>
+  <p>與方程 (2.5) 類比，<strong>位置算子</strong>定義為 $\hat{x} = \int dx\,x\,|x\rangle\langle x|$。作用於波函數時，$\langle x'|\hat{x}|\psi\rangle = x'\psi(x')$——$\hat{x}$ 僅是將波函數乘以其引數。</p>
+
+  <p>在位置表象中，運算子將 $x$ 的函數轉換為另一個 $x$ 的函數。一種產生新函數的簡單方式是微分。因此考慮以下定義的<strong>動量算子</strong>：</p>
+  <div class="eq">$$\langle x|\hat{p}|\psi\rangle = -i\hbar\frac{\partial\psi}{\partial x} \tag{2.49}$$</div>
+  <p>因子 $i$ 確保 $\hat{p}$ 是 Hermitian 算子（見 Box 2.2），$\hbar$ 確保 $\hat{p}$ 具有動量的量綱（Planck 常數 $h = 2\pi\hbar$ 的量綱為距離 × 動量）。</p>
+
+  <h3>粒子的 Hamiltonian 與古典對應</h3>
+  <p>要計算量子力學中的任何時間導數，我們需要知道 Hamiltonian 的具體形式。牛頓力學中粒子的能量為 $E = p^2/2m + V(x)$，因此我們<strong>猜測</strong>量子 Hamiltonian 為：</p>
+  <div class="eq">$$H = \frac{\hat{p}^2}{2m} + V(\hat{x}) \tag{2.51}$$</div>
+  <p>其中 $\hat{p}^2$ 表示作用兩次，$V(\hat{x})$ 按方程 (2.20) 定義。利用該定義可以證明 $V(\hat{x})$ 作用於波函數僅是乘以 $V(x)$。</p>
+
+  <p>現在計算 $[\hat{x}, \hat{p}]$。利用定義 (2.49)：</p>
+  <div class="eq">$$\langle x|[\hat{x}, \hat{p}]|\psi\rangle = -i\hbar\Big(x\frac{\partial\psi}{\partial x} - \frac{\partial(x\psi)}{\partial x}\Big) = i\hbar\langle x|\psi\rangle$$</div>
+  <p>由於這對任意 $|\psi\rangle$ 成立，我們得到運算子等式：</p>
+  <div class="eq">$$[\hat{x}, \hat{p}] = i\hbar \tag{2.54}$$</div>
+  <p>這個關鍵結果——$\hat{x}$ 與 $\hat{p}$ 的對易子為常數 $i\hbar$——稱為<strong>正則對易關係</strong>。對易子為 $\pm i\hbar$ 的兩個可觀測量互為<strong>正則共軛</strong>。</p>
+
+  <div class="callout">
+    <strong>💡 從量子到古典的橋梁——Ehrenfest 的牛頓方程</strong><br>
+    利用正則對易關係，我們可以計算位置期望值的變化率。代入方程 (2.34)：<br>
+    $\frac{d\langle x\rangle}{dt} = -\frac{i}{\hbar}\langle[\hat{x}, H]\rangle = -\frac{i}{\hbar}\frac{i\hbar}{m}\langle\hat{p}\rangle = \frac{1}{m}\langle\hat{p}\rangle$<br>
+    這正是牛頓關係 $p = m\dot{x}$ 的量子類比！進一步計算動量期望值的變化率：<br>
+    $\frac{d\langle\hat{p}\rangle}{dt} = -\frac{i}{\hbar}\langle[\hat{p}, H]\rangle = -\frac{i}{\hbar}\langle[\hat{p}, V(\hat{x})]\rangle$<br>
+    利用方程 (2.25) 計算 $[\hat{p}, V(\hat{x})] = -i\hbar\,dV/d\hat{x}$，得：<br>
+    $\frac{d\langle\hat{p}\rangle}{dt} = -\langle\frac{dV}{d\hat{x}}\rangle$<br>
+    即<strong>期望的動量變化率等於期望的力</strong>——我們從 TDSE 恢復了牛頓第二定律！這一成就使我們確信 (2.51) 是正確的 Hamiltonian。
+  </div>
+
+  <h3>確定動量的波函數</h3>
+  <p>根據 §2.1 的討論，動量確定為 $p$ 的態 $|p\rangle$ 必須是 $\hat{p}$ 的本徵態。在位置表象中求解 $\hat{p}|p\rangle = p|p\rangle$：</p>
+  <div class="eq">$$-i\hbar\frac{\partial u_p}{\partial x} = p\,u_p(x) \quad\Rightarrow\quad u_p(x) = \langle x|p\rangle = \frac{1}{\sqrt{h}}e^{ipx/\hbar} \tag{2.61}$$</div>
+  <p>因此確定動量的粒子的波函數是<strong>平面波</strong>，波長 $\lambda = h/p$（稱為 de Broglie 波長）。歸一化因子 $1/\sqrt{h}$ 來自 $\langle p'|p\rangle = \delta(p - p')$ 的要求。</p>
+
+  <h3>不確定性原理</h3>
+  <p>從 (2.61) 可知：<strong>動量確定的粒子，其位置完全不确定</strong>——$|u_p|^2$ 與 $x$ 無關，所有位置等機率。這是<strong>不確定性原理</strong>的體現：當一個可觀測量有確定值時，其正則共軛量的所有值等機率。</p>
+
+  <p>為定量理解不確定性原理，考慮位置機率分布為高斯分布的態：</p>
+  <div class="eq">$$\psi(x) = \frac{1}{(2\pi\sigma^2)^{1/4}} e^{-x^2/4\sigma^2} \tag{2.62}$$</div>
+  <p>利用 Box 2.3 的高斯積分公式，可以計算動量空間中的波函數：</p>
+  <div class="eq">$$\langle p|\psi\rangle = \frac{1}{(2\pi\hbar^2/4\sigma^2)^{1/4}} e^{-\sigma^2 p^2/\hbar^2} \tag{2.64}$$</div>
+  <p>動量機率分布 $|\langle p|\psi\rangle|^2$ 也是高斯分布，中心為零，散布 $\sigma_p = \hbar/2\sigma$。<strong>位置分布越尖銳，動量分布越寬闊。</strong>兩者散布的乘積為 $\sigma_p\sigma = \hbar/2$。</p>
+
+  <div class="callout-warn">
+    <strong>⚡ 不確定性不是測量誤差</strong><br>
+    我們假設 $x$ 和 $p$ 可以被精確測量——這些不確定性不是來自儀器的缺陷，而是<strong>情境中固有的</strong>。測量誤差只會使不確定性更大，而不會更小。不確定性的物理根源在於：在位置表象中，將波函數展開為動量本徵態時，位置的局域化需要大量不同波長的平面波相互干涉——波長越分散（動量越不確定），才能實現越尖銳的建設性干涉區域。
+  </div>
+
+
+
+  <h3>Gaussian 積分與 Fourier 變換</h3>
+  <p>Gaussian 波函數在量子力學中佔有特殊地位，因為它是唯一使不確定性達到下限 $\sigma_x\sigma_p = \hbar/2$ 的波函數。為了推導動量空間中的波函數，我們需要計算 Gaussian 積分：</p>
+  <div class="eq">$$\int_{-\infty}^{\infty} e^{-ax^2} dx = \sqrt{\frac{\pi}{a}}, \quad a > 0 \tag{2.63}$$</div>
+  <p>將位置空間波函數 $\psi(x) = (2\pi\sigma^2)^{-1/4}e^{-x^2/4\sigma^2}$ 代入 $\langle p|\psi\rangle$：</p>
+  <div class="eq">$$\langle p|\psi\rangle = \frac{1}{\sqrt{h}}\int_{-\infty}^{\infty} e^{-ipx/\hbar} \psi(x)\,dx = \frac{1}{\sqrt{h}(2\pi\sigma^2)^{1/4}}\int_{-\infty}^{\infty} e^{-x^2/4\sigma^2 - ipx/\hbar}\,dx \tag{2.64}$$</div>
+  <p>利用配方技巧：$-\frac{x^2}{4\sigma^2} - \frac{ipx}{\hbar} = -\frac{1}{4\sigma^2}\left(x + \frac{2i\sigma^2 p}{\hbar}\right)^2 - \frac{\sigma^2 p^2}{\hbar^2}$。代入 Gaussian 積分公式，得到：</p>
+  <div class="eq">$$\langle p|\psi\rangle = \frac{1}{\sqrt{h}}\left(\frac{2\sigma^2}{\pi\hbar^2}\right)^{1/4} e^{-\sigma^2 p^2/\hbar^2} \tag{2.65}$$</div>
+  <p>關鍵觀察：位置空間的波函數寬度 $\sigma_x = \sigma$，動量空間的波函數寬度 $\sigma_p = \hbar/2\sigma$。兩者乘積 $\sigma_x\sigma_p = \hbar/2$——正好達到不確定性原理的下限。Gaussian 波包因此被稱為<strong>最小不確定性波包</strong>（minimum uncertainty wavepacket）。</p>
+
+  <div class="callout">
+    <strong>💡 Fourier 變換的量子視角</strong><br>
+    位置表象與動量表象之間的轉換本質上是 Fourier 變換：$\tilde\psi(p) = \frac{1}{\sqrt{2\pi\hbar}}\int e^{-ipx/\hbar}\psi(x)\,dx$。這意味著位置空間的局域化（窄 $\psi(x)$）等價於動量空間的擴散（寬 $\tilde\psi(p)$）——這是 Fourier 變換的伸縮性質：當函數在一個域中壓縮時，它在 Fourier 域中必然展寬。不確定性原理因此可以理解為 Fourier 變換的數學內稟性質在物理中的體現，而非量子力學的偶然特徵。
+  </div>
+
+  <div class="callout-warn">
+    <strong>⚡ 不確定性 vs 測量不精確</strong><br>
+    一個常見的誤解是將 $\sigma_x\sigma_p \ge \hbar/2$ 解讀為「位置測量得越精確，動量測量就越不精確」。這會誤導人認為不確定性原理是測量過程引起的。正確的理解是：$\sigma_x$ 和 $\sigma_p$ 是<strong>同一個態</strong>的內稟屬性，與進行多少次測量、用什麼儀器無關。位置確定性高的態（小 $\sigma_x$）其內稟動量不確定性就大（大 $\sigma_p$）——這是態本身的性質，不是測量過程的後果。Heisenberg 著名的顯微鏡思想實驗是用來幫助直覺理解的類比，而非原理的推導。
+  </div>
+
+  <h3>自由粒子的動力學</h3>
+  <p>現在考慮不受力的自由粒子。此時 Hamiltonian 簡化為 $H = \hat{p}^2/2m$——它是 $\hat{p}$ 的函數，因此其本徵態就是 $\hat{p}$ 的本徵態。利用時間演化方程 (2.32)，可以從初始態出發追蹤粒子的運動。</p>
+
+  <p>以初始動量接近 $p_0$ 的高斯波包為例。經過時間 $t$ 後，位置機率密度為：</p>
+  <div class="eq">$$|\langle x|\psi, t\rangle|^2 = \frac{\sigma}{\sqrt{2\pi\hbar^2|b|^2}} \exp\left[-\frac{(x - p_0t/m)^2\sigma^2}{2\hbar^4|b|^4}\right] \tag{2.68}$$</div>
+  <p>這是一個中心以速度 $p_0/m$ 移動的高斯分布——與初始數據中最可能動量對應的古典速度一致。分布的方差為：</p>
+  <div class="eq">$$\sigma^2(t) = \sigma^2 + \left(\frac{\hbar t}{2m\sigma}\right)^2 \tag{2.69}$$</div>
+  <p><strong>波包隨時間展寬</strong>——初始動量不確定性 $\sim\hbar/2\sigma$ 轉化為速度不確定性 $\Delta v \sim \hbar/2m\sigma$，經過時間 $t$ 後導致位置不確定性增加 $\Delta v \cdot t$，與 (2.69) 的第二項完美吻合。</p>
+
+  <div class="callout">
+    <strong>💡 對應原理的驗證</strong><br>
+    自由粒子的計算完整展示了<strong>對應原理</strong>：在適當極限下，量子力學的預測應與古典力學一致。我們驗證了：(i) 波包中心以古典速度運動；(ii) 不確定性原理是量子力學的新預測，無古典對應；(iii) 演化由無限多個動量分量的振幅干涉驅動——若按照古典機率理論直接將機率相加（而非振幅相加），將得到完全不符合物理的結果。
+  </div>
+
+  <h3>雙縫干涉再探</h3>
+  <p>在 §1.2.1 中，我們未經證明地陳述了 $\phi_1 - \phi_2 \propto x$，其中 $\phi_i(x)$ 是電子經狹縫 $S_i$ 到達螢幕上 $x$ 點的振幅相位。現在我們可以推導這個比例常數。</p>
+
+  <p>假設從電子槍射出的電子近似處於確定動量 $|p\rangle$ 的態，因此槍與狹縫屏幕之間的波函數是波長 $\lambda = h/p$ 的平面波。電子穿過狹縫後，波函數不再是平面波，但波長仍約為 $\lambda$。螢幕 $P$ 上 $x$ 點的相位為狹縫處的相位加上 $2\pi D/\lambda = pD/\hbar$，其中 $D(x)$ 是 $x$ 到狹縫的距離。</p>
+
+  <p>由畢氏定理 $D = \sqrt{L^2 + (x \pm s)^2}$，在 $x, s \ll L$ 的近似下展開：</p>
+  <div class="eq">$$\phi_1 - \phi_2 \simeq \frac{2psx}{\hbar L} \tag{2.71}$$</div>
+  <p>暗紋間距 $X$ 對應相位差 $2\pi$：</p>
+  <div class="eq">$$X = \frac{hL}{2ps} \tag{2.72}$$</div>
+  <p>代入實際數值：$L = 1$ m，$s = 1\,\mu$m，$E = 100$ eV，得 $p = 5.5 \times 10^{-24}$ Ns，$X = 0.057$ mm——完全可觀測。對於子彈：$L = 1000$ m，$s = 1$ cm，$m \sim 10$ g，$v \sim 300$ m/s，得 $X \sim 10^{-29}$ m——難怪軍火製造商認為古典力學完全足夠。</p>
+
+  <h3>三維推廣</h3>
+  <p>真實粒子在三維空間運動。三個座標算子相互對易：$[\hat{x}_i, \hat{x}_j] = 0$。動量算子推廣為 $\hat{\mathbf{p}} = -i\hbar\nabla$，滿足 $[\hat{x}_i, \hat{p}_j] = i\hbar\delta_{ij}$。確定動量 $\mathbf{p}$ 的態的波函數為：</p>
+  <div class="eq">$$\langle\mathbf{x}|\mathbf{p}\rangle = \frac{1}{h^{3/2}} e^{i\mathbf{x}\cdot\mathbf{p}/\hbar} \tag{2.78}$$</div>
+  <p>在位置表象中，三維 TDSE 為：</p>
+  <div class="eq">$$i\hbar\frac{\partial\psi}{\partial t} = -\frac{\hbar^2}{2m}\nabla^2\psi + V(\mathbf{x})\psi \tag{2.80}$$</div>
+
+  <h3>機率流</h3>
+  <p>Max Born 首先提出 $|\psi(\mathbf{x}, t)|^2$ 是粒子在 $t$ 時刻出現在 $\mathbf{x}$ 附近的機率密度 $\rho(\mathbf{x}, t)$。我們需要驗證這個物理解釋與 TDSE 一致。將 TDSE 乘以 $\psi^*$ 並減去其複共軛乘以 $\psi$，可得連續性方程：</p>
+  <div class="eq">$$\frac{\partial\rho}{\partial t} = -\nabla\cdot\mathbf{J} \tag{2.84}$$</div>
+  <p>其中<strong>機率流密度</strong>定義為：</p>
+  <div class="eq">$$\mathbf{J}(\mathbf{x}) \equiv \frac{i\hbar}{2m}\big(\psi\nabla\psi^* - \psi^*\nabla\psi\big) \tag{2.83}$$</div>
+  <p>這與流體力學中質量守恆的形式完全一致，只是這裡守恆的是<strong>機率</strong>。將 $\psi = S e^{i\phi}$（$S, \phi$ 為實數）代入，可得：</p>
+  <div class="eq">$$\mathbf{J} = \frac{\hbar}{m}S^2\nabla\phi = \rho\,\mathbf{v}, \quad \mathbf{v} = \frac{\hbar\nabla\phi}{m} \tag{2.88}$$</div>
+  <p><strong>波函數的相位梯度編碼了機率流的速度。</strong>對於確定動量的態，$\phi(\mathbf{x}) = \mathbf{x}\cdot\mathbf{p}/\hbar$，因此 $\mathbf{v} = \mathbf{p}/m$——與古典物理一致。方程 (2.88) 將這一聯繫推廣至一般波函數。</p>
+
+  <h3>從 Schrödinger 方程推導機率守恆</h3>
+  <p>機率守恆是量子力學的基本要求——如果總機率隨時間變化，Born 解釋就失去了自洽性。我們從三維 TDSE 出發推導連續性方程。將 (2.80) 乘以 $\psi^*$：</p>
+  <div class="eq">$$\psi^*\left(i\hbar\frac{\partial\psi}{\partial t}
+\right) = \psi^*\left(-\frac{\hbar^2}{2m}\nabla^2\psi + V\psi
+\right) \tag{2.81}$$</div>
+  <p>取 (2.80) 的複共軛再乘以 $-\psi$：</p>
+  <div class="eq">$$-\psi\left(i\hbar\frac{\partial\psi^*}{\partial t}
+\right) = -\psi\left(-\frac{\hbar^2}{2m}\nabla^2\psi^* + V\psi^*
+\right) \tag{2.82}$$</div>
+  <p>將兩式相加，左側得 $i\hbar\,\partial(\psi^*\psi)/\partial t$，右側位能項 $\psi^*V\psi - \psi V\psi^* = 0$ 抵消，剩下動能項。整理後得到：</p>
+  <div class="eq">$$i\hbar\frac{\partial
+\rho}{\partial t} = -\frac{\hbar^2}{2m}\big(\psi^*\nabla^2\psi - \psi\nabla^2\psi^*\big) = -\nabla\cdot\left[\frac{\hbar^2}{2m}\big(\psi^*\nabla\psi - \psi\nabla\psi^*\big)
+\right] \tag{2.83}$$</div>
+  <p>其中 $
+\rho = \psi^*\psi = |\psi|^2$ 是機率密度。兩邊除以 $i\hbar$，並定義機率流密度 $\mathbf{J}$，得到<strong>連續性方程</strong>：</p>
+  <div class="eq">$$\frac{\partial
+\rho}{\partial t} + \nabla\cdot\mathbf{J} = 0, \quad \mathbf{J} = \frac{\hbar}{2mi}\big(\psi^*\nabla\psi - \psi\nabla\psi^*\big) \tag{2.84}$$</div>
+
+  <div class="callout">
+    <strong>💡 推導中的關鍵觀察</strong><br>
+    這個推導揭示了兩個重要事實：(i) 位能 $V$ 雖然影響態的演化，但完全不出現在機率流表達式中——它不影響機率的流動，只影響相位；(ii) $\mathbf{J}$ 表達式中的 $i$ 確保了 $\mathbf{J}$ 為實數——分子中的 $i$ 與 $(\psi^*\nabla\psi - \psi\nabla\psi^*)$ 的純虛數性相結合，產生實數結果。這與 $\mathbf{J}$ 作為可觀測量的身份一致。
+  </div>
+
+  <div class="callout-warn">
+    <strong>⚡ 機率守恆 vs 粒子數守恆</strong><br>
+    連續性方程 $\partial
+\rho/\partial t + \nabla\cdot\mathbf{J} = 0$ 並不意味著粒子數在更廣義的意義上嚴格守恆——它只表明機率密度遵循局部守恆律，即機率不能憑空消失或產生，只能從一個區域流向另一區域。當我們在無限遠邊界處 $\mathbf{J} \to 0$ 時，對全空間積分可得 $d/dt\int
+\rho\,dV = 0$——總機率守恆。在相對論量子力學中（如 Klein-Gordon 方程），$
+ho$ 可以變為負值，此時它不再解釋為機率密度，而解釋為<strong>電荷密度</strong>。本節的推導僅在非相對論量子力學（Schrödinger 方程）的範圍內成立，在那裏 $
+\rho$ 始終非負，可以解釋為機率密度。
+  </div>
+
+  <h3>維里定理</h3>
+  <p>正則對易關係的一個優雅應用是推導定態中動能與位能的關係。對於定態，所有期望值不隨時間變化。將此應用於運算子 $\hat{\mathbf{x}}\cdot\hat{\mathbf{p}}$：</p>
+  <div class="eq">$$0 = i\hbar\frac{d}{dt}\langle\hat{\mathbf{x}}\cdot\hat{\mathbf{p}}\rangle = \langle[\hat{\mathbf{x}}\cdot\hat{\mathbf{p}}, H]\rangle$$</div>
+  <p>經過一系列對易子計算（利用正則對易關係），得到<strong>維里定理</strong>：</p>
+  <div class="eq">$$2\left\langle\frac{\hat{p}^2}{2m}\right\rangle = \langle\mathbf{x}\cdot\nabla V\rangle \tag{2.92}$$</div>
+  <p>對於冪次位能 $V(\mathbf{x}) = C|\mathbf{x}|^\alpha$：</p>
+  <div class="eq">$$2\langle KE\rangle = \alpha\langle V\rangle \tag{2.93}$$</div>
+  <p>兩個重要例子：(i) 諧振子 $\alpha = 2$，動能與位能相等；(ii) 庫侖位能 $\alpha = -1$（如原子核的靜電場），$2\langle KE\rangle + \langle V\rangle = 0$——動能大小等於總能量但符號相反。</p>
+
+  <details class="example">
+    <summary>📝 自編概念例：高斯波包的機率流</summary>
+    <div class="example-body">
+      <p><strong>題目：</strong>自由粒子的波函數在 $t=0$ 時為實高斯波包 $\psi(x,0) = (2\pi\sigma^2)^{-1/4}e^{-x^2/4\sigma^2}$。計算 $t=0$ 時的機率流 $J(x)$ 並解釋結果。</p>
+      <p><strong>解：</strong>由於波函數為實數，$\psi = \psi^*$，因此：</p>
+      <div class="eq">$$J(x) = \frac{i\hbar}{2m}\big(\psi\psi' - \psi\psi'\big) = 0$$</div>
+      <p>實波函數的機率流為零——這符合直覺：靜止的波包沒有淨機率流。隨著時間演化，波函數獲得複數相位因子，產生非零的機率流。</p>
+      <p>如果波包具有平均動量 $p_0$，則 $\psi(x,0) \propto e^{-x^2/4\sigma^2}e^{ip_0x/\hbar}$，此時：</p>
+      <div class="eq">$$J(x) = \frac{\hbar p_0}{m}|\psi(x)|^2 = v_0\rho(x)$$</div>
+      <p>機率流密度等於機率密度乘以古典速度——與流體力學的對流完全類似。</p>
+      <p><strong>物理意義：</strong>波函數的相位決定了機率如何「流動」。實波函數（相位均勻）對應於靜止的機率分布；具有線性相位梯度的波函數對應於均勻運動的機率分布。</p>
+    </div>
+  </details>
+
+  <figure class="figure" id="fig-2-2">
+    <svg class="content-diagram" viewBox="0 0 520 260" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" width="520" height="260" fill="#f8f9fa" rx="8"/>
+      <text x="260" y="25" font-size="14" fill="#333" text-anchor="middle" font-weight="bold">不確定性原理示意：位置－動量取捨</text>
+      <!-- Narrow in x -->
+      <rect x="20" y="50" width="230" height="190" fill="#e8f4fd" stroke="#4a90d9" stroke-width="1" rx="4"/>
+      <text x="135" y="72" font-size="12" fill="#4a90d9" text-anchor="middle" font-weight="bold">窄位置分布（小 σ）</text>
+      <path d="M40,140 Q80,90 135,140 Q190,90 230,140" fill="none" stroke="#4a90d9" stroke-width="2.5"/>
+      <text x="135" y="115" font-size="10" fill="#333" text-anchor="middle">|ψ(x)|² 窄峰</text>
+      <path d="M50,200 Q80,175 135,185 Q190,175 220,200" fill="none" stroke="#e74c3c" stroke-width="2.5"/>
+      <text x="135" y="215" font-size="10" fill="#e74c3c" text-anchor="middle">|ψ̃(p)|² 寬分布</text>
+      <text x="135" y="235" font-size="11" fill="#333" text-anchor="middle">σₚ = ℏ/2σ（大）</text>
+      <!-- Wide in x -->
+      <rect x="270" y="50" width="230" height="190" fill="#fef3e8" stroke="#e67e22" stroke-width="1" rx="4"/>
+      <text x="385" y="72" font-size="12" fill="#e67e22" text-anchor="middle" font-weight="bold">寬位置分布（大 σ）</text>
+      <path d="M280,140 Q310,125 385,135 Q460,125 490,140" fill="none" stroke="#4a90d9" stroke-width="2.5"/>
+      <text x="385" y="120" font-size="10" fill="#333" text-anchor="middle">|ψ(x)|² 寬峰</text>
+      <path d="M295,195 Q340,175 385,185 Q430,175 475,195" fill="none" stroke="#e74c3c" stroke-width="2.5"/>
+      <text x="385" y="212" font-size="10" fill="#e74c3c" text-anchor="middle">|ψ̃(p)|² 窄峰</text>
+      <text x="385" y="235" font-size="11" fill="#333" text-anchor="middle">σₚ ≈ ℏ/2σ（小）</text>
+      <text x="260" y="255" font-size="11" fill="#888" text-anchor="middle">σₓ · σₚ ≥ ℏ/2（不確定性原理）</text>
+    </svg>
+    <figcaption><strong>圖 2.2</strong>　不確定性原理的圖示。左：位置分布窄 → 動量分布寬（需要多種波長的平面波干涉才能形成窄峰）。右：位置分布寬 → 動量分布窄。兩者散布的乘積存在下限。</figcaption>
+  </figure>
+</section>
+
+<!-- ====== 本章摘要 ====== -->
+<section id="summary">
+  <h2>本章摘要</h2>
+  <p>本章建立了量子力學的第二層數學結構——運算子與時間演化。運算子是可觀測量的數學化身，Hamiltonian 驅動時間演化，而位置表象將這些抽象概念化為具體的微分方程。以下是核心概念和公式的整理：</p>
+  <div class="table-scroll" role="region" aria-label="本章關鍵概念與公式" tabindex="0">
+    <table>
+      <caption>本章關鍵概念、公式、適用條件與用途</caption>
+      <thead>
+        <tr>
+          <th scope="col">概念／公式</th>
+          <th scope="col">符號與單位</th>
+          <th scope="col">適用條件</th>
+          <th scope="col">用途</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">線性運算子 $Q|\psi\rangle = |\phi\rangle$</th>
+          <td>$Q$：線性映射</td>
+          <td>態空間上的任意線性變換</td>
+          <td>量子力學中物理量的數學表示</td>
+        </tr>
+        <tr>
+          <th scope="row">期望值 $\langle Q\rangle = \langle\psi|Q|\psi\rangle$</th>
+          <td>實數（若 $Q$ 為 Hermitian）</td>
+          <td>$Q$ 為 Hermitian 可觀測量</td>
+          <td>計算測量結果的平均值</td>
+        </tr>
+        <tr>
+          <th scope="row">本徵方程 $Q|q_i\rangle = q_i|q_i\rangle$</th>
+          <td>$q_i$：實數（Hermitian 時）</td>
+          <td>$Q$ 為 Hermitian</td>
+          <td>確定態中可觀測量的取值</td>
+        </tr>
+        <tr>
+          <th scope="row">TDSE $i\hbar\frac{\partial|\psi\rangle}{\partial t} = H|\psi\rangle$</th>
+          <td>$\hbar = 1.054 \times 10^{-34}$ J·s</td>
+          <td>所有量子系統</td>
+          <td>決定量子態的時間演化</td>
+        </tr>
+        <tr>
+          <th scope="row">定態演化 $|E_n,t\rangle = e^{-iE_nt/\hbar}|E_n,0\rangle$</th>
+          <td>相位因子</td>
+          <td>能量本徵態</td>
+          <td>任意態時間演化的基石</td>
+        </tr>
+        <tr>
+          <th scope="row">Ehrenfest 定理 $\frac{d\langle Q\rangle}{dt} = -\frac{i}{\hbar}\langle[Q,H]\rangle$</th>
+          <td>期望值的變化率</td>
+          <td>$\partial Q/\partial t = 0$</td>
+          <td>連結量子期望值與古典運動方程</td>
+        </tr>
+        <tr>
+          <th scope="row">波函數 $\psi(x) = \langle x|\psi\rangle$</th>
+          <td>複數，$[\psi] = L^{-1/2}$</td>
+          <td>單粒子，位置表象</td>
+          <td>計算在 $x$ 處找到粒子的振幅</td>
+        </tr>
+        <tr>
+          <th scope="row">動量算子 $\hat{p} = -i\hbar\frac{\partial}{\partial x}$</th>
+          <td>$[\hat{p}] = $ 動量</td>
+          <td>位置表象</td>
+          <td>波函數的微分運算</td>
+        </tr>
+        <tr>
+          <th scope="row">正則對易關係 $[\hat{x},\hat{p}] = i\hbar$</th>
+          <td>常數運算子</td>
+          <td>一維粒子</td>
+          <td>不確定性原理的數學根源</td>
+        </tr>
+        <tr>
+          <th scope="row">不確定性 $\sigma_x\sigma_p \ge \hbar/2$</th>
+          <td>$\sigma$：標準差</td>
+          <td>任意態</td>
+          <td>量化同時確定位置與動量的極限</td>
+        </tr>
+        <tr>
+          <th scope="row">機率流 $\mathbf{J} = \frac{i\hbar}{2m}(\psi\nabla\psi^* - \psi^*\nabla\psi)$</th>
+          <td>$[\mathbf{J}] = $ 機率通量密度</td>
+          <td>有波函數的系統</td>
+          <td>描述機率如何「流動」</td>
+        </tr>
+        <tr>
+          <th scope="row">維里定理 $2\langle KE\rangle = \alpha\langle V\rangle$</th>
+          <td>無因次關係</td>
+          <td>定態，$V \propto r^\alpha$</td>
+          <td>動能與位能的關係</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ====== 常見錯誤 ====== -->
+<section id="common-mistakes">
+  <h2>初學者常見錯誤</h2>
+  <div class="callout-warn">
+    <strong>⚡ 錯誤一：將 TDSE 視為 Hamiltonian 的定義</strong><br>
+    初學者常將 $i\hbar\partial/\partial t = H$ 讀作「Hamiltonian 就是時間導數」。這是錯誤的——TDSE 定義的是<strong>態如何演化</strong>，而非 $H$ 是什麼。$H$ 必須由系統的物理性質（動能＋位能）獨立給出，就像牛頓力學中力必須由物理情境決定，而不能由 $f=ma$ 定義。正確的理解是：給定 Hamiltonian，TDSE 預測態如何變化。
+  </div>
+  <div class="callout-warn">
+    <strong>⚡ 錯誤二：混淆運算子和它的本徵值</strong><br>
+    $\hat{x}$ 是<strong>運算子</strong>（一個作用於函數的指令），而 $x$ 是<strong>數值</strong>（測量結果）。$\hat{x}\psi(x) = x\psi(x)$ 的意思是「將波函數乘以 $x$」，而不是「運算子等於數值」。同樣，$\hat{p} = -i\hbar\partial/\partial x$ 是一個微分運算，不是一個數。只有在作用於本徵態時，運算子才被其本徵值取代：$\hat{p}|p\rangle = p|p\rangle$。
+  </div>
+  <div class="callout-warn">
+    <strong>⚡ 錯誤三：以為對易子非零意味著永遠不可能同時確定兩個量</strong><br>
+    $[A,B] \neq 0$ 只意味著不存在<strong>完備的</strong>共同本徵向量組。仍然可能存在<strong>個別</strong>的態在該態中兩個量都確定。例如，即使 $[\hat{x},\hat{p}] \neq 0$，高斯波包的中心可以在位置和動量上都有某種程度的確定性（只是不能同時完全確定）。關鍵詞是「完備集合」而非「任何態」。
+  </div>
+  <div class="callout-warn">
+    <strong>⚡ 錯誤四：遺漏 Hermitian 伴隨取複共軛的步驟</strong><br>
+    在計算 $\langle\psi|\hat{p}|\phi\rangle$ 時，必須記得 $\hat{p} = -i\hbar\partial_x$ 中的 $i$ 在取伴隨後變號。常見錯誤是直接寫 $\langle\psi|\hat{p}|\phi\rangle = -i\hbar\int\psi^*\partial_x\phi\,dx$ 然後在分部積分時忘記邊界項和符號變化。正確的伴隨規則要求 $\langle\psi|\hat{p}|\phi\rangle = (\langle\phi|\hat{p}|\psi\rangle)^*$，這導致積分中出現 $\partial_x\psi^*$ 而非 $\psi^*$。
+  </div>
+</section>
+
+<!-- ====== 自我檢測 ====== -->
+<section id="self-check">
+  <h2>自我檢測</h2>
+  <details class="self-check-item">
+    <summary>1. 為什麼 Hamiltonian 被稱為量子力學中「最重要的單一運算子」？它至少扮演哪三個關鍵角色？</summary>
+    <div class="self-check-answer">
+      <p>Hamiltonian 扮演三個關鍵角色：(1) <strong>定義能量</strong>——它是能量可觀測量的運算子，其本徵值為可能的能量測量值，$\langle\psi|H|\psi\rangle$ 給出能量期望值；(2) <strong>驅動時間演化</strong>——它出現在 TDSE 中，決定量子態如何隨時間變化；(3) <strong>決定守恆量</strong>——透過對易子 $[Q,H]$，決定哪些物理量守恆。這三個角色使 Hamiltonian 成為連接量子態、測量和動力學的核心樞紐。</p>
+      <p class="solution-note">正文依據：§2.1（方程 2.5–2.7）、§2.2（方程 2.26）、§2.2.1（Ehrenfest 定理）</p>
+    </div>
+  </details>
+  <details class="self-check-item">
+    <summary>2. 解釋為什麼 $[\hat{x},\hat{p}] = i\hbar$ 意味著位置和動量不能同時完全確定。這個關係如何導致不確定性原理？</summary>
+    <div class="self-check-answer">
+      <p>$[\hat{x},\hat{p}] \neq 0$ 意味著不存在完備的共同本徵態集合——即不可能找到一組完備的態，在這些態中位置和動量同時有確定值。從物理上看，$\hat{p}$ 的本徵態是平面波 $e^{ipx/\hbar}$，其模平方在整個空間均勻——位置完全不確定。反之，位置確定的態 $\delta(x-x_0)$ 需要所有動量的平面波等權重疊加，動量完全不確定。定量上，對於高斯波包，位置散布 $\sigma$ 和動量散布 $\sigma_p$ 滿足 $\sigma\sigma_p = \hbar/2$——一個越小，另一個必須越大。</p>
+      <p class="solution-note">正文依據：§2.3.1（方程 2.54）、§2.3.2（方程 2.62–2.64）</p>
+    </div>
+  </details>
+  <details class="self-check-item">
+    <summary>3. 自由粒子的波包隨時間演化時會發生什麼？為什麼波包會展寬？這與古典力學的對應原理有何關係？</summary>
+    <div class="self-check-answer">
+      <p>自由粒子的高斯波包以群速度 $p_0/m$ 移動（與古典速度一致），同時隨時間展寬：$\sigma^2(t) = \sigma^2 + (\hbar t/2m\sigma)^2$。展寬的原因在於初始動量不確定性：動量分布有寬度 $\sim\hbar/2\sigma$，對應的速度不確定性 $\Delta v \sim \hbar/2m\sigma$，經過時間 $t$ 後導致位置不確定性增加 $\Delta v \cdot t$。這是純量子效應——古典粒子不會自發展寬。然而波包中心的運動遵循古典軌跡，驗證了對應原理：量子力學在適當極限下恢復古典結果。</p>
+      <p class="solution-note">正文依據：§2.3.3（方程 2.68–2.69）</p>
+    </div>
+  </details>
+  <details class="self-check-item">
+    <summary>4. 波函數的相位 $\phi(\mathbf{x})$ 與機率流速度 $\mathbf{v}$ 之間有什麼關係？給出一個具體例子說明。</summary>
+    <div class="self-check-answer">
+      <p>機率流速度由相位梯度決定：$\mathbf{v} = \hbar\nabla\phi/m$。這意味著波函數相位在空間中的變化率直接對應於機率流的速度。對於確定動量的態 $\psi = h^{-3/2}e^{i\mathbf{x}\cdot\mathbf{p}/\hbar}$，相位 $\phi = \mathbf{x}\cdot\mathbf{p}/\hbar$，梯度為 $\mathbf{p}/\hbar$，因此 $\mathbf{v} = \mathbf{p}/m$——與古典速度完全一致。對於實波函數（$\phi = 0$ 或常數），梯度為零，機率流為零——對應於「靜止」的機率分布。$\mathbf{J} = \rho\mathbf{v}$ 的形式與流體力學中質量流密度完全類比。</p>
+      <p class="solution-note">正文依據：§2.3.5（方程 2.86–2.88）</p>
+    </div>
+  </details>
+  <details class="self-check-item">
+    <summary>5. 對於 Coulomb 位能 $V \propto 1/r$ 中的束縛態，維里定理給出動能與總能量之間什麼關係？</summary>
+    <div class="self-check-answer">
+      <p>對於 Coulomb 位能，$\alpha = -1$（因為 $V \propto r^{-1}$），維里定理 $2\langle KE\rangle = \alpha\langle V\rangle$ 給出 $2\langle KE\rangle = -\langle V\rangle$，即 $2\langle KE\rangle + \langle V\rangle = 0$。由於總能量 $E = \langle KE\rangle + \langle V\rangle$，代入得 $E = \langle KE\rangle - 2\langle KE\rangle = -\langle KE\rangle$，因此 $\langle KE\rangle = -E$——動能大小等於總能量但符號相反，位能為總能量的兩倍：$\langle V\rangle = 2E$。這解釋了為什麼氫原子中電子的束縛能為負且等於其動能的負值。</p>
+      <p class="solution-note">正文依據：§2.3.5（方程 2.93）</p>
+    </div>
+  </details>
+
+
+  <details class="self-check-item">
+    <summary>6. Hermitian 運算子的本徵值為什麼一定是實數？不同本徵值對應的本徵態之間有什麼關係？</summary>
+    <div class="self-check-answer">
+      <p>設 $Q|q_i\rangle = q_i|q_i\rangle$ 且 $Q = Q^\dagger$。考慮 $\langle q_i|Q|q_i\rangle$：一方面等於 $q_i$（因為運算子作用後再內積），另一方面等於其自身的複共軛 $(\langle q_i|Q|q_i\rangle)^* = q_i^*$。因此 $q_i = q_i^*$，本徵值必為實數。對於不同本徵值 $q_i \neq q_j$，考慮 $\langle q_i|Q|q_j\rangle$：從左作用得 $q_j\langle q_i|q_j\rangle$，從 $Q^\dagger$ 得 $q_i^*\langle q_i|q_j\rangle = q_i\langle q_i|q_j\rangle$。因此 $(q_j - q_i)\langle q_i|q_j\rangle = 0$，由於 $q_i \neq q_j$，必有 $\langle q_i|q_j\rangle = 0$——不同本徵值對應的本徵態相互正交。</p>
+      <p class="solution-note">正文依據：§2.1.1（方程 2.15a–2.15b）</p>
+    </div>
+  </details>
+  <details class="self-check-item">
+    <summary>7. 全域相位（global phase）和相對相位（relative phase）有什麼區別？為什麼一個有物理意義而另一個沒有？</summary>
+    <div class="self-check-answer">
+      <p>全域相位作用於整個態向量：$e^{i\theta}|\psi\rangle$。在計算任何可觀測量的期望值 $\langle\psi|e^{-i\theta}Q e^{i\theta}|\psi\rangle = \langle\psi|Q|\psi\rangle$ 時被消去，且在機率 $|\langle\phi|e^{i\theta}|\psi\rangle|^2 = |\langle\phi|\psi\rangle|^2$ 中也被消去，因此不影響任何物理預測。相反，相對相位是疊加態不同分量之間的相位差：$a_1|E_1\rangle + a_2 e^{i\phi}|E_2\rangle$。這裡 $\phi$ 直接影響干涉項 $2|a_1||a_2|\cos\phi$ 的大小，進而影響測量結果。例如，時間演化 $e^{-iE_nt/\hbar}$ 會改變不同能量分量的相對相位，從而導致期望值以 Bohr 頻率 $\omega = \Delta E/\hbar$ 振盪。</p>
+      <p class="solution-note">正文依據：§2.2.1（方程 2.33–2.34b）</p>
+    </div>
+  </details>
+  <details class="self-check-item">
+    <summary>8. 如何利用譜分解計算運算子 $Q$ 作用於任意態的結果？譜分解的物理意義是什麼？</summary>
+    <div class="self-check-answer">
+      <p>譜分解 $Q = \sum_i q_i |q_i\rangle\langle q_i|$ 將 $Q$ 的作用分解為三個步驟：(1) 將態投影到各本徵方向：$\langle q_i|\psi\rangle = a_i$；(2) 乘以對應的本徵值：$q_i a_i$；(3) 重新組合成態向量：$\sum_i q_i a_i |q_i\rangle$。物理意義：(i) 每一項 $q_i|q_i\rangle\langle q_i|$ 對應一個可能的測量結果 $q_i$，測量後態坍縮至 $|q_i\rangle$；(ii) 透過 $f(Q) = \sum_i f(q_i)|q_i\rangle\langle q_i|$ 可定義運算子的任意函數——例如演化算符 $U(t) = e^{-iHt/\hbar} = \sum_n e^{-iE_nt/\hbar}|E_n\rangle\langle E_n|$；(iii) 期望值 $\langle Q\rangle = \sum_i q_i|a_i|^2$——本徵值加權相應機率的和。</p>
+      <p class="solution-note">正文依據：§2.1.1（方程 2.18）</p>
+    </div>
+  </details>
+
+</section>
+
+<!-- ====== 延伸資源 ====== -->
+<section id="extras">
+  <h2>延伸資源與下一章</h2>
+  <ul class="resource-list">
+    <li><a href="#">本章公式整理</a></li>
+    <li><a href="#">本章例題與練習（原書問題 2.1–2.24）</a></li>
+    <li>建議閱讀：Dirac 的《量子力學原理》第 2 章，了解運算子理論的原始表述</li>
+    <li>數值實驗：嘗試在 Python 中用 split-step Fourier 方法模擬自由高斯波包的時間演化，觀察波包展寬</li>
+  </ul>
+  <div class="further-reading">
+    <strong>下一章預告：諧振子</strong>
+    <p>本章建立了運算子和時間演化的一般框架。第 3 章將應用這些工具研究物理學中最重要的可解模型——<strong>諧振子</strong>。我們將引入升降運算子（$a$ 和 $a^\dagger$）這一強大的代數方法，優雅地求解諧振子的能譜與本徵態，無需直接求解微分方程。同時，諧振子也是量子場論的基石。</p>
+    <a href="ch3_harmonic_zh.html">前往下一章 →</a>
+  </div>
+</section>
+
+</main>
+
+</body>
+</html>

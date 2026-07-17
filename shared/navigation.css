@@ -1,0 +1,222 @@
+/* Final navigation contract. Loaded after subject/component styles. */
+:root { --course-sidebar-width: 280px; }
+
+/* Legacy chapter styles sometimes made body a flex container.  The shared
+   shell uses a fixed sidebar and an explicitly offset reading column, so flex
+   layout would count the offset twice and clip the beginning of the article. */
+html body { display: block; }
+
+html body .chapter-page {
+  width: min(var(--course-reading-width), calc(100% - var(--course-sidebar-width)));
+  margin-left: var(--course-sidebar-width);
+  padding: 3rem clamp(1.75rem, 5vw, 4.5rem) 6rem;
+}
+
+html body .sidebar {
+  position: fixed;
+  inset: 0 auto 0 0;
+  z-index: 300;
+  display: flex;
+  width: var(--course-sidebar-width);
+  height: 100vh;
+  flex-direction: column;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  border-right: 1px solid var(--course-border);
+  border-radius: 0;
+  background: var(--course-surface);
+  box-shadow: none;
+}
+
+html body .sidebar-header {
+  flex: 0 0 auto;
+  margin: 0;
+  padding: 1.5rem 1.25rem 1rem;
+  border: 0;
+  border-bottom: 1px solid var(--course-border);
+  background: transparent;
+}
+
+html body .sidebar-title,
+html body .sidebar-header > h2 {
+  display: block;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  color: var(--course-text);
+  font-size: 1rem;
+  font-weight: 800;
+  line-height: 1.35;
+  text-decoration: none;
+}
+
+html body .sidebar-subtitle {
+  display: block;
+  margin: 0 0 0.3rem;
+  color: var(--course-muted);
+  font-size: 0.75rem;
+  line-height: 1.45;
+}
+
+html body .sidebar .toc,
+html body .sidebar .sn,
+html body .sidebar-nav {
+  flex: 1 1 auto;
+  margin: 0;
+  padding: 1rem 1.1rem 1.5rem;
+  overflow-y: auto;
+  list-style: none;
+}
+
+html body .sidebar .toc ul,
+html body .sidebar .sn ul,
+html body .sidebar-nav ul { margin: 0; padding: 0; list-style: none; }
+
+html body .sidebar .ns {
+  display: block;
+  margin: 1.45rem 0 0.35rem;
+  padding: 0;
+  color: var(--course-muted);
+  font-size: 0.68rem;
+  font-weight: 750;
+  letter-spacing: 0.09em;
+}
+
+html body .sidebar .ns:first-child { margin-top: 0; }
+
+html body .sidebar .toc a,
+html body .sidebar .sn a,
+html body .sidebar-nav a {
+  display: block;
+  position: relative;
+  margin: 0;
+  padding: 0.42rem 0.6rem 0.42rem 0.75rem;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--course-muted);
+  font-size: 0.8rem;
+  font-weight: 500;
+  line-height: 1.4;
+  text-decoration: none;
+  transition: color 0.16s ease, transform 0.16s ease;
+}
+
+/* A second level is only indented when the source actually declares one.
+   Single-level chapters remain aligned with the rest of the directory. */
+html body .sidebar .nsub > a { margin-left: 0.75rem; font-size: 0.77rem; }
+
+html body .sidebar .toc a::before,
+html body .sidebar .sn a::before,
+html body .sidebar-nav a::before {
+  position: absolute;
+  top: 0.42rem;
+  bottom: 0.42rem;
+  left: 0;
+  width: 2px;
+  content: "";
+  background: transparent;
+}
+
+html body .sidebar .toc a:hover,
+html body .sidebar .toc a.active,
+html body .sidebar .sn a:hover,
+html body .sidebar .sn a.active,
+html body .sidebar-nav a:hover,
+html body .sidebar-nav a.active {
+  color: var(--course-accent);
+  font-weight: 700;
+  transform: translateX(2px);
+}
+
+html body .sidebar .toc a.active::before,
+html body .sidebar .sn a.active::before,
+html body .sidebar-nav a.active::before { background: var(--course-accent); }
+
+html body .sidebar-tools {
+  flex: 0 0 auto;
+  margin: 0;
+  padding: 0.85rem 1.25rem 1.15rem;
+  border: 0;
+  border-top: 1px solid var(--course-border);
+  background: transparent;
+}
+
+html body .sidebar-tools button {
+  width: 100%;
+  min-height: 2.35rem;
+  padding: 0.45rem 0.65rem;
+  border: 1px solid var(--course-border);
+  border-radius: var(--course-radius-sm);
+  background: var(--course-surface);
+  color: var(--course-text);
+  font: inherit;
+  cursor: pointer;
+}
+
+html body .chapter-pager {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 0.85rem;
+  margin: 4rem 0 0;
+  padding: 0;
+}
+
+html body .chapter-pager > a,
+html body .chapter-pager > span {
+  display: flex;
+  min-width: 0;
+  min-height: 5rem;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--course-border);
+  border-radius: var(--course-radius-sm);
+  background: var(--course-surface);
+  color: var(--course-muted);
+  font-size: 0.78rem;
+  line-height: 1.35;
+  text-decoration: none;
+}
+
+html body .chapter-pager > :last-child { align-items: flex-end; text-align: right; }
+html body .chapter-pager > a > span,
+html body .chapter-pager > span > span {
+  display: block;
+  min-height: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--course-muted);
+  font-size: 0.78rem;
+  line-height: 1.35;
+}
+html body .chapter-pager strong {
+  display: block;
+  margin-top: 0.35rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--course-text);
+  font-size: 0.98rem;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+html body .chapter-pager a:hover { border-color: var(--course-accent); background: var(--course-accent-soft); }
+html body .chapter-pager [aria-disabled="true"] { opacity: 0.58; }
+
+@media (max-width: 768px) {
+  html body .sidebar { transform: translateX(-100%); transition: transform 0.22s; }
+  html body .sidebar.open { transform: none; }
+  html body .chapter-page { width: 100%; margin-left: 0; padding: 4.75rem 1rem 4rem; }
+  html body .chapter-pager { grid-template-columns: 1fr; }
+  html body .chapter-pager > :last-child { align-items: flex-start; text-align: left; }
+}
+
+@media print {
+  html body .sidebar { display: none; }
+  html body .chapter-pager { break-inside: avoid; }
+}

@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light" data-reading-width="wide">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>第 14 章 Optical Devices - 半導體物理與元件</title>
+<script src="../assets/mathjax-config.js"></script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<link rel="stylesheet" href="../assets/chapter-base.css">
+<script defer src="../assets/course-ui.js"></script>
+<link rel="stylesheet" href="../assets/photon-bandgap-model.css">
+<link rel="stylesheet" href="../assets/pn-junction-model.css">
+<script defer src="../assets/photon-bandgap-model.js"></script>
+
+<link rel="stylesheet" href="../../../../shared/core.css">
+<script src="../../../../shared/core.js" defer></script>
+<link rel="stylesheet" href="../../../../shared/models/model-host.css">
+<script defer src="../../../../shared/models/model-runtime.js"></script>
+<link rel="stylesheet" href="../../../../shared/navigation.css" data-shared-navigation>
+</head>
+<body>
+<a class="portal-home-link" href="../index.html">返回學習中心</a>
+<nav class="sidebar" aria-label="本章目錄"><div class="sidebar-header"><div class="sidebar-subtitle">半導體物理與元件</div><h2 class="sidebar-title">Optical Devices —— 光電元件</h2></div><div class="toc"><ul>
+<li><a href="#preview">14.0 預覽</a></li>
+<li class="ns">14.1 光吸收</li><li class="nsub"><a href="#s14-1-1">14.1.1 光子吸收係數</a><a href="#s14-1-2">14.1.2 電子–電洞對產生率</a></li>
+<li class="ns">14.2 太陽能電池</li><li class="nsub"><a href="#s14-2-1">14.2.1 pn 接面太陽能電池</a><a href="#s14-2-2">14.2.2 轉換效率與聚光</a><a href="#s14-2-3">14.2.3 非均勻吸收效應</a><a href="#s14-2-4">14.2.4 異質接面太陽能電池</a><a href="#s14-2-5">14.2.5 非晶矽太陽能電池</a></li>
+<li class="ns">14.3 光偵測器</li><li class="nsub"><a href="#s14-3-1">14.3.1 光導體</a><a href="#s14-3-2">14.3.2 光二極體</a><a href="#s14-3-3">14.3.3 PIN 光二極體</a><a href="#s14-3-4">14.3.4 雪崩光二極體</a><a href="#s14-3-5">14.3.5 光電晶體</a></li>
+<li class="ns">14.4 發光物理</li><li class="nsub"><a href="#s14-4-1">14.4.1 基本躍遷</a><a href="#s14-4-2">14.4.2 發光效率</a><a href="#s14-4-3">14.4.3 材料</a></li>
+<li class="ns">14.5 LED</li><li class="nsub"><a href="#s14-5-1">14.5.1 光的產生</a><a href="#s14-5-2">14.5.2 內部量子效率</a><a href="#s14-5-3">14.5.3 外部量子效率</a><a href="#s14-5-4">14.5.4 LED 元件</a></li>
+<li class="ns">14.6 雷射二極體</li><li class="nsub"><a href="#s14-6-1">14.6.1 受激放射與居量反轉</a><a href="#s14-6-2">14.6.2 光學共振腔</a><a href="#s14-6-3">14.6.3 閾值電流</a><a href="#s14-6-4">14.6.4 元件結構與特性</a></li>
+<li><a href="#photon-model">互動模型</a></li><li><a href="#summary">14.7 總結</a></li><li><a href="#common-mistakes">常見誤解</a></li><li><a href="#self-check">自我檢核</a></li><li><a href="#extras">延伸資源</a></li>
+</ul></div><div class="sidebar-tools"><button type="button" data-action="toggle-theme" aria-label="切換深色或淺色模式">切換顯示主題</button></div></nav>
+<main class="chapter-page" id="main-content" data-chapter-title="Optical Devices —— 光電元件" data-prev-href="ch13_jfet_mesfet_zh.html" data-prev-label="JFET / MESFET / HEMT" data-next-href="ch15_microwave_power_devices_zh.html" data-next-label="半導體微波與功率元件">
+<header class="chapter-header"><div class="tag">Chapter 14</div><h1>Optical Devices —— 光電元件</h1><div class="chapter-meta">對應 Donald A. Neamen《半導體物理與元件：基本原理》第四版·第 618–669 頁</div></header>
+
+<section id="preview"><h2>14.0 本章預覽</h2><div class="callout"><strong>所有主幹知識的會師點</strong>
+<p>第十四章不是附錄，也不是應用雜談。它測試的是前面十三章的基礎是否真正內化。能隙（bandgap）、光吸收、非平衡載子、復合機制、pn 接面、異質接面——所有核心概念在此一次會師，轉化為真實世界的光電元件。</p>
+<p>光電元件分成兩大類：<strong>光→電</strong>（太陽能電池、光偵測器）和<strong>電→光</strong>（LED、雷射二極體）。前者依賴光子被吸收後產生電子-電洞對（electron-hole pair, EHP），再由內建電場將其分離、收集；後者則依賴載子復合時將能量以光子形式釋放。兩者的物理基礎完全相同——只是時間箭頭相反。</p>
+<p>本章的核心物理問題只有一個：<strong>半導體如何與光交互作用？</strong>答案取決於兩個關鍵參數——吸收係數 $\alpha$（決定光能穿透多深）和能隙 $E_g$（決定什麼波長的光可以被吸收或發射）。直接能隙材料（GaAs、InP、GaN）在光電應用中遠優於間接能隙材料（Si、Ge），因為其光學躍遷不需要聲子輔助，機率高出 4–6 個數量級。</p>
+<p>如果前面只有背二極體公式而不懂直接能隙、吸收係數與載子壽命的物理意義，這一章就只會剩下元件名字。反過來，如果能清楚說出「為什麼 Si 在電子學稱霸，但在光電元件中卻必須讓位給 GaAs」，才算真正掌握了半導體物理的核心。</p>
+</div><h3>關鍵概念</h3><ol class="key-concept-list"><li><strong>光吸收</strong>：$h\nu\ge E_g$；$\alpha$ 決定穿透深度。</li><li><strong>光生載子</strong>：吸收產生 EHP，需電場分離才成電流。</li><li><strong>太陽能電池</strong>：$I=I_L-I_S(e^{eV/kT}-1)$，效率受 $FF$ 與 $E_g$ 限制。</li><li><strong>光偵測器</strong>：PIN/APD 在速度與靈敏度間取捨。</li><li><strong>電致發光</strong>：直接能隙材料輻射復合支撐 LED 與雷射。</li></ol><div class="reasoning-map" aria-labelledby="reasoning-map-title"><h3 id="reasoning-map-title">🧭 本章推理地圖</h3><ol class="reasoning-path"><li><strong>已知條件</strong><span>光子能量、材料能隙與吸收/輻射選擇律</span><small>（§14.1、§14.4）</small></li><li data-relation="決定"><strong>中間機制</strong><span>光生載子產生、分離或輻射復合決定光↔電轉換</span><small>（§14.2–§14.3、§14.5）</small></li><li data-relation="可預測"><strong>元件性能</strong><span>量子效率、響應速度與發射波長</span><small>（§14.5–§14.6）</small></li><li data-relation="因此用於"><strong>工程用途</strong><span>設計太陽能、通訊偵測與固態照明/雷射光源</span><small>（工程決策）</small></li></ol></div></div></section>
+<section id="s14-1-overview"><h2>14.1 光吸收與電子-電洞對產生</h2>
+<div>
+<strong>🔑 本節重點</strong> ① 吸收條件：$h\\nu\\ge E_g$→截止波長 $\\lambda_c=1.24/E_g$ μm ② Beer-Lambert 定律：$I(x)=I_0 e^{-\\alpha x}$——$\\alpha$ 決定光穿透深度 ③ 直接能隙 $\\alpha\\propto\\sqrt{h\\nu-E_g}$，間接能隙需聲子輔助→$\\alpha$ 小 2–4 數量級 ④ 產生率 $G_L=\\alpha\\Phi_0 e^{-\\alpha x}$——光電流 $I_L=eAG_LW$
+</div>
+
+<p>吸收條件：$h\nu\ge E_g$，截止波長 $\lambda_c=1.24/E_g$ μm；Beer-Lambert $I=I_0 e^{-\alpha x}$。</p>
+<p>直接能隙 $\alpha$ 在 $E_g$ 處急升；間接能隙需聲子，同能量下 $\alpha$ 可低 2–4 個數量級。</p>
+<p>產生率 $G_L=\alpha\Phi_0 e^{-\alpha x}$；光電流還須乘上收集機率，非僅吸收。</p>
+<p>表面復合、缺陷與擴散長度決定光生載子能否在復合前被收集。</p>
+<p>吸收、產生、收集三步分開思考，是讀光電元件的基本方法。</p>
+<div class="callout"><strong>💡 能隙門檻</strong> $h\nu<E_g$ 時材料對該波長近似透明。</div>
+<div class="callout-warn"><strong>⚠️ Si 發光</strong> 間接能隙使 Si 不適合高效率 LED，但可做光偵測與太陽能。</div>
+<details class="example"><summary>📐 例題 — GaAs 截止波長</summary><div class="example-body"><p>$E_g=1.42$ eV → $\lambda_c=1.24/1.42\approx0.87$ μm（近紅外）。</p></div></details>
+</section><section id="s14-1-1"><h2>14.1.1 光子吸收係數</h2><div class="section-keypoints"><strong>🔑 本節重點</strong> 光子門檻 · Beer–Lambert 定律 · 直接與間接能隙 · 吸收深度</div>
+<p>光電元件的第一個問題不是「導線怎麼接」，而是<strong>光子能量能不能跨過能隙</strong>。這決定了材料對特定波長的光是透明還是不透明——而這正是所有光電元件的物理起點。從太陽能電池的效率極限到 LED 的發光顏色，全部由吸收過程決定。</p>
+<p>光在半導體中的行為可以用一個簡單的物理圖像理解：光子攜帶能量 $E = h\nu = hc/\lambda$。當它進入半導體時，可能發生三種結果：(1) 若 $h\nu &lt; E_g$，光子能量不足以激發價帶電子跨過能隙 → 半導體對該波長透明；(2) 若 $h\nu \ge E_g$，光子可以將價帶電子激發到導帶 → 產生一個電子-電洞對（EHP）；(3) 光子也可能與晶格振動（聲子）或雜質能階交互作用，但這些過程對光電元件的貢獻通常較小。</p>
+
+<figure class="figure"><a class="figure-link" href="../../pages/ch14_pages/ch14_page_644_c.png" target="_blank" rel="noopener"><img src="../../pages/ch14_pages/ch14_page_644_c.png" alt="Fig 14.1 各種半導體材料的光學吸收係數對波長關係圖" loading="lazy"></a><figcaption>圖 14.1：各種半導體材料的光學吸收係數對波長（及光子能量）關係。直接能隙材料（GaAs、InP、GaN）的吸收係數在能隙處急劇上升，間接能隙材料（Si、Ge）則緩慢增加。（教科書頁 644）</figcaption></figure>
+
+<div class="eq">$$E_{\text{photon}} = h\nu = \frac{hc}{\lambda} = \frac{1.24}{\lambda\;(\mu\text{m})}\;\text{eV}$$</div>
+
+<p>這個簡單公式是光電元件設計的第一工具。例如：Si 的 $E_g=1.12$ eV → 截止波長 $\lambda_c=1.24/1.12\approx1.11\;\mu\text{m}$（紅外區）。GaAs 的 $E_g=1.42$ eV → $\lambda_c\approx0.87\;\mu\text{m}$。GaP 的 $E_g=2.26$ eV → $\lambda_c\approx0.55\;\mu\text{m}$（可見光綠區）。這解釋了為什麼 GaP LED 能發出可見光而 GaAs LED 只能發紅外光。</p>
+
+<h3>14.1.2 吸收係數 $\alpha$ 的物理推導</h3>
+<p>光子進入半導體後，其強度隨深度呈指數衰減。這個衰減率由吸收係數 $\alpha$（單位：cm⁻¹）描述。考慮一束光子強度 $I_\nu(x)$（單位：W/cm² 或光子數/cm²-s）入射在 $x$ 處，經過一層厚度 $dx$ 後，強度變為 $I_\nu(x+dx)$：</p>
+
+<div class="eq">$$I_\nu(x+dx) - I_\nu(x) = \frac{dI_\nu(x)}{dx}\cdot dx = -\alpha I_\nu(x)\,dx$$</div>
+
+<p>這是一階線性微分方程：</p>
+
+<div class="eq">$$\frac{dI_\nu(x)}{dx} = -\alpha I_\nu(x)$$</div>
+
+<p>給定邊界條件 $I_\nu(0)=I_{\nu 0}$（入射表面的光子強度），解為：</p>
+
+<div class="eq">$$\boxed{I_\nu(x) = I_{\nu 0}\,e^{-\alpha x}}$$</div>
+
+<p>這就是<strong>Beer-Lambert 吸收定律</strong>在半導體中的表達式。$\alpha$ 越大，光衰減越快。舉例來說：</p>
+<ul>
+<li>Si 對 $\lambda=1.0\;\mu\text{m}$（$h\nu\approx1.24$ eV，略大於 $E_g$）：$\alpha\approx10^2$ cm⁻¹ → 90% 的光在 $d=\ln(10)/10^2=0.023$ cm = 230 μm 內被吸收。</li>
+<li>Si 對 $\lambda=0.5\;\mu\text{m}$（$h\nu=2.48$ eV，遠大於 $E_g$）：$\alpha\approx10^4$ cm⁻¹ → 90% 的吸收深度僅 2.3 μm。</li>
+<li>GaAs 對 $\lambda=0.75\;\mu\text{m}$：$\alpha\approx0.9\times10^4$ cm⁻¹ → 吸收極快。</li>
+</ul>
+
+<div class="callout"><strong>💡 吸收係數的物理直覺</strong>：$\alpha$ 不是常數，而是光子能量和材料能隙的強函數。當 $h\nu$ 略大於 $E_g$ 時，$\alpha$ 從幾乎為零急劇上升到 $10^3$–$10^4$ cm⁻¹。這是因為當 $h\nu &lt; E_g$ 時，價帶中沒有電子具有足夠能量躍遷到導帶——但一旦 $h\nu$ 跨越 $E_g$，整個價帶的電子都成為可能的躍遷候選者，吸收機率暴增。直接能隙材料的 $\alpha$ 上升比間接能隙材料更陡峭，因為直接躍遷不需要聲子。</div>
+
+<h3>14.1.3 直接能隙 vs. 間接能隙的吸收差異</h3>
+<p>這是本章最關鍵的材料物理概念。在<strong>直接能隙</strong>半導體（GaAs、InP、GaN）中，導帶底和價帶頂位於 $k$ 空間的同一點（$\Gamma$ 點）。電子從價帶躍遷到導帶只需要吸收一個光子——動量守恆自動滿足。吸收係數在 $h\nu=E_g$ 處急劇上升，典型值 $\alpha\propto\sqrt{h\nu-E_g}$。</p>
+
+<figure class="figure"><a class="figure-link" href="../../pages/ch14_pages/ch14_page_645_c.png" target="_blank" rel="noopener"><img src="../../pages/ch14_pages/ch14_page_645_c.png" alt="Fig 14.2 直接能隙與間接能隙半導體的光吸收躍遷示意圖" loading="lazy"></a><figcaption>圖 14.2：直接能隙與間接能隙半導體中的光吸收躍遷。(a) 直接躍遷：導帶底與價帶頂位於 $k$ 空間同一點，僅需光子即可滿足能量與動量守恆。(b) 間接躍遷：需要聲子輔助以提供動量差 $\Delta k$，為三粒子過程，機率遠低於直接躍遷。（教科書頁 646）</figcaption></figure>
+
+<p>在<strong>間接能隙</strong>半導體（Si、Ge、GaP）中，導帶底和價帶頂位於 $k$ 空間的不同點。電子躍遷需要同時滿足能量守恆和動量守恆 → 必須有聲子參與以提供動量差 $\Delta k$。這是一個三粒子過程（光子+電子+聲子），機率遠低於雙粒子過程。因此間接能隙材料的 $\alpha$ 在 $h\nu=E_g$ 附近的上升較緩慢，且在略高於 $E_g$ 的值處比直接能隙材料低 2–4 個數量級。</p>
+
+<div class="callout-warn"><strong>⚡ 為什麼 Si 不是好的光電材料？</strong>根本原因就在於此：Si 是間接能隙半導體。在電子學中，Si 因成本低、氧化層優異、製程成熟而稱霸；但在光電領域，間接能隙意味著：(1) 光吸收效率低——需要更厚的材料才能吸收足夠的光；(2) 輻射復合效率極低——電子-電洞對復合時幾乎不發光（能量轉給聲子）。這就是 LED 和雷射必須用 GaAs、GaN 等直接能隙材料的原因。Si 光子學（silicon photonics）雖是熱門研究領域，但 Si 本身永遠不可能成為高效率的光發射體。</div>
+
+<details class="example"><summary>例題：用吸收深度判斷主動區厚度</summary><p>若吸收係數很大，光強在靠近表面的短距離內快速衰減，元件設計就要把空乏區或高收集效率區放在吸收發生的位置。反過來，吸收係數小的長波長光需要更厚的吸收層，否則會穿透而沒有產生足夠載子。</p></details>
+</section><section id="s14-1-2"><h2>14.1.2 電子–電洞對產生率</h2><div class="section-keypoints"><strong>🔑 本節重點</strong> 光子通量 · 局部生成率 · 指數衰減 · 量子效率</div>
+<p>光子在材料中被吸收後產生電子-電洞對。產生率 $g$（單位：#/cm³-s）與吸收的能量密度成正比：</p>
+
+<div class="eq">$$g = \frac{\alpha I_\nu(x)}{h\nu}$$</div>
+
+<p>其中 $I_\nu(x)/h\nu$ 是光子通量（#/cm²-s），乘以 $\alpha$（每單位距離被吸收的光子比例）得到單位體積的產生率。若考慮表面反射率 $R$（Si 裸晶約 35%），實際進入材料的光子通量為 $(1-R)$ 倍：</p>
+
+<div class="eq">$$G_L(x) = \alpha(\lambda)\,\Phi_0(\lambda)\,[1-R(\lambda)]\,e^{-\alpha(\lambda)x}$$</div>
+
+<p>這裡 $\Phi_0$ 是入射光子通量。若假設每個被吸收的光子產生一個 EHP（量子效率=1），則 $G_L(x)$ 就是 EHP 的產生率。</p>
+<p><strong>數值範例：</strong>GaAs 在 $\lambda=0.75\;\mu\text{m}$（$h\nu=1.65$ eV），光子強度 $I_\nu=0.05$ W/cm²（約為陽光的典型值），$\alpha\approx0.9\times10^4$ cm⁻¹：</p>
+
+<div class="eq">$$g = \frac{(0.9\times10^4)(0.05)}{(1.6\times10^{-19})(1.65)} \approx 1.70\times10^{21}\;\text{cm}^{-3}\text{-s}^{-1}$$</div>
+
+<p>若少數載子壽命 $\tau=10^{-7}$ s，則穩態過量載子濃度 $\delta n = g\tau = 1.70\times10^{14}$ cm⁻³。這顯示光產生可以在半導體中建立非常可觀的過量載子濃度——這正是太陽能電池和光偵測器運作的基礎。</p>
+
+<div class="callout"><strong>💡 產生率公式直接連結到第六章的非平衡載子理論。</strong>第六章給出了 $\delta n = g\tau$（穩態）以及過量載子如何擴散和復合。本章只是把 $g$ 的來源具體化為光子吸收。因此太陽能電池的電流分析本質上就是第六章擴散方程 + 第七章 pn 接面理論的綜合應用。</div>
+<div class="callout-warn"><strong>⚠ 常見誤解</strong> 產生率不是總光電流；它還必須乘上載子能否在復合前被接面電場或擴散機制收集。</div>
+<details class="example"><summary>例題：由光子通量估算生成率</summary><p>已知入射光子通量與吸收係數時，可先寫出深度相依的光通量，再對位置微分得到局部電子–電洞對產生率。最後把生成率在有效收集區積分，才得到可貢獻光電流的載子數。</p></details>
+</section>
+
+<section id="s14-2-overview"><h2>14.2 太陽能電池</h2>
+
+<div>
+<strong>🔑 本節重點</strong> ① I-V 方程：$I=I_L-I_S[e^{eV/kT}-1]$——光電流與二極體順向電流的疊加 ② $V_{oc}=(kT/e)\\ln(I_L/I_S)$——永遠小於 $V_{bi}$，光強增 10 倍 $V_{oc}$ 僅增 ∼60 mV ③ $FF=I_mV_m/(I_{sc}V_{oc})$，$\\eta=FF\\cdot I_{sc}V_{oc}/P_{in}$——理想 Si 極限 ∼28%（Shockley-Queisser）④ 異質接面：寬能隙窗口層（AlGaAs）→減少表面復合、提高藍光響應；非晶矽 PIN 結構補償低遷移率
+</div>
+
+<div class="callout-warn"><strong>⚠ 常見誤解</strong> 產生率不是總光電流；它還必須乘上載子能否在復合前被接面電場或擴散機制收集。</div>
+<details class="example"><summary>例題：由光子通量估算生成率</summary><p>已知入射光子通量與吸收係數時，可先寫出深度相依的光通量，再對位置微分得到局部電子–電洞對產生率。最後把生成率在有效收集區積分，才得到可貢獻光電流的載子數。</p></details>
+<div class="callout"><strong>💡 四參數</strong> Jsc、Voc、FF、η 分別反映吸收收集、復合、電阻損失與總效率。</div>
+<p>Shockley-Queisser 極限約 28%（單接面 Si）；多接面與聚光可突破單接面極限。</p>
+<p>光照 I–V 為 $I=I_L-I_S[e^{eV/kT}-1]$：光生電流與暗二極體電流疊加。</p>
+<p>短路電流 $I_{sc}\approx I_L$ 主要由吸收與收集決定；開路電壓 $V_{oc}\approx(kT/e)\ln(I_L/I_S)$ 受復合控制。</p>
+<p>填充因子 FF 反映串聯/並聯電阻與二極體品質；轉換效率 $\eta=FF\cdot I_{sc}V_{oc}/P_{in}$。</p>
+<p>異質接面窗口層可減少表面復合並改善藍光響應。</p>
+
+</section><section id="s14-2-1"><h2>14.2.1 pn 接面太陽能電池</h2><div class="section-keypoints"><strong>🔑 本節重點</strong> 光生載子分離 · 光電流 · 短路電流 · 開路電壓</div>
+<p>太陽能電池（solar cell）的核心運作原理可以濃縮為三個步驟：<strong>(1) 吸光產生 EHP</strong>（14.1 節）；<strong>(2) 內建電場分離載子</strong>（第七章的空乏區電場）；<strong>(3) 載子被收集到兩端形成外部電流</strong>（類似逆偏光二極體）。這三步驟沒有一個是新的物理——全部建立在前面章節的基礎上。</p>
+
+<figure class="figure"><a class="figure-link" href="../../pages/ch14_pages/ch14_page_646_c.png" target="_blank" rel="noopener"><img src="../../pages/ch14_pages/ch14_page_646_c.png" alt="Fig 14.4 pn 接面太陽能電池結構與能帶圖" loading="lazy"></a><figcaption>圖 14.4：pn 接面太陽能電池的 (a) 截面結構示意圖與 (b) 能帶圖。光子在空乏區及兩側中性區產生 EHP，空乏區內的 EHP 被內建電場分離——電子掃向 n 側、電洞掃向 p 側，形成光電流。（教科書頁 649）</figcaption></figure>
+
+<p>一個 pn 接面太陽能電池不需要外加偏壓。光照射在接面上，在空乏區和兩側中性區產生 EHP。空乏區中的 EHP 立即被內建電場分離——電子掃向 n 側，電洞掃向 p 側——形成<strong>光電流</strong> $I_L$，方向為逆偏方向。這個光電流流經外部負載時產生電壓降，該電壓<strong>順向偏壓</strong>了 pn 接面，產生順向二極體電流 $I_F$ 來對抗光電流。淨電流為兩者之差：</p>
+
+<div class="eq">$$\boxed{I = I_L - I_S\left[\exp\left(\frac{eV}{kT}\right) - 1\right]}$$</div>
+
+<p>這裡 $I_S$ 是二極體的反向飽和電流（第八章的 Shockley 理想二極體方程），$I_L$ 是光電流。注意這個公式就是把第八章的理想二極體方程中的電流方向反轉，再加上光電流項——這是疊加原理的直接運用。</p>
+
+<h3>14.2.2 短路電流與開路電壓</h3>
+<p>兩種極限情況定義了太陽能電池的關鍵參數：</p>
+<p><strong>短路電流 $I_{sc}$：</strong>負載電阻 $R=0$，$V=0$。此時 $I=I_{sc}=I_L$。光電流全部流出外部電路，沒有順向二極體電流的抵消。</p>
+<p><strong>開路電壓 $V_{oc}$：</strong>$R\to\infty$，$I=0$。此時光電流完全被順向二極體電流平衡。令 $I=0$：</p>
+
+<div class="eq">$$0 = I_L - I_S\left[\exp\left(\frac{eV_{oc}}{kT}\right) - 1\right] \quad\Rightarrow\quad \boxed{V_{oc} = \frac{kT}{e}\ln\left(1 + \frac{I_L}{I_S}\right) \approx V_t\ln\left(\frac{I_L}{I_S}\right)}$$</div>
+
+<p>$V_{oc}$ 的物理限制：(1) $V_{oc}$ 永遠小於內建電位 $V_{bi}$——否則空乏區電場將被完全抵消，典型比值 $V_{oc}/V_{bi}\approx0.6$–$0.8$。(2) $V_{oc}\propto\ln(I_L)\propto\ln(\text{光強度})$——光強度增加 10 倍，$V_{oc}$ 僅增加 $V_t\ln10\approx60$ mV。這就是為什麼聚光技術主要增加 $I_{sc}$ 而非 $V_{oc}$。</p>
+
+<div class="callout"><strong>💡 數值範例 —— Si pn 接面太陽能電池</strong>：$N_a=5\times10^{18}$ cm⁻³，$N_d=10^{16}$ cm⁻³，$D_n=25$ cm²/s，$D_p=10$ cm²/s，$\tau_{n0}=5\times10^{-7}$ s，$\tau_{p0}=10^{-7}$ s。計算得 $J_S\approx3.6\times10^{-11}$ A/cm²。若光電流密度 $J_L=15$ mA/cm²：$V_{oc}=0.0259\ln(1+15\times10^{-3}/3.6\times10^{-11})\approx0.514$ V。$V_{bi}=0.856$ V，$V_{oc}/V_{bi}=0.60$。</div>
+
+<div class="callout-warn"><strong>⚠ 檢查方向</strong> 太陽能電池在第四象限輸出功率，符號判讀要以「元件對外供能」為準，不要只看二極體方程式的慣例電流方向。</div>
+<details class="example"><summary>例題：從 I–V 曲線讀出輸出功率</summary><p>先找出光照下 I–V 曲線中電壓與電流乘積最大的點，再與短路電流、開路電壓比較，即可得到填充因子。這個流程能把材料吸收、接面收集與串聯電阻的影響放在同一張圖上檢查。</p></details>
+</section><section id="s14-2-2"><h2>14.2.2 轉換效率與聚光</h2><div class="section-keypoints"><strong>🔑 本節重點</strong> 最大功率點 · 填充因子 · 轉換效率 · 聚光效應</div>
+<p>太陽能電池不是操作在 $I_{sc}$ 或 $V_{oc}$ 點，而是在 $I$-$V$ 曲線上某個能輸出<strong>最大功率</strong>的點 $(I_m, V_m)$。</p>
+
+<figure class="figure"><a class="figure-link" href="../../pages/ch14_pages/ch14_page_647_c.png" target="_blank" rel="noopener"><img src="../../pages/ch14_pages/ch14_page_647_c.png" alt="Fig 14.5 太陽能電池 I-V 特性曲線：Isc, Voc, 最大功率點" loading="lazy"></a><figcaption>圖 14.5：太陽能電池的 I-V 特性曲線。標示短路電流 $I_{sc}$、開路電壓 $V_{oc}$ 以及最大功率點 $(I_m, V_m)$。填充因子 FF 為兩矩形面積之比。光照射下的 I-V 曲線為暗特性向下平移 $I_L$。（教科書頁 650）</figcaption></figure>
+
+<p>輸出功率 $P=I\cdot V$：</p>
+
+<div class="eq">$$P = I_L\cdot V - I_S\left[\exp\left(\frac{eV}{kT}\right)-1\right]\cdot V$$</div>
+
+<p>最大值條件 $dP/dV=0$ 給出：</p>
+
+<div class="eq">$$\left(1+\frac{V_m}{V_t}\right)\exp\left(\frac{V_m}{V_t}\right) = 1 + \frac{I_L}{I_S}$$</div>
+
+<p>$V_m$ 需用數值方法求解。求出 $(I_m, V_m)$ 後：</p>
+
+<div class="eq">$$\boxed{\text{FF} = \frac{I_m V_m}{I_{sc}V_{oc}} \quad\text{(填充因子, fill factor)}}$$</div>
+
+<div class="eq">$$\boxed{\eta = \frac{P_m}{P_{\text{in}}} = \frac{I_m V_m}{P_{\text{in}}} = \frac{\text{FF}\cdot I_{sc}\cdot V_{oc}}{P_{\text{in}}} \quad\text{(轉換效率)}}$$</div>
+
+<p>典型 FF 在 0.7–0.8 之間。理想 Si 單接面太陽能電池的效率極限約 28%（Shockley-Queisser 極限），實際商業模組約 15%–22%。效率損失來自：(1) $h\nu&lt;E_g$ 的光子完全不被吸收；(2) $h\nu&gt;E_g$ 的光子，超出 $E_g$ 的能量以熱的形式耗散（熱化損失）；(3) 復合損失；(4) 串聯電阻和表面反射。</p>
+
+<div class="callout"><strong>📌 設計觀察</strong> 聚光會提高入射光強，也會提高熱負載；效率提升必須同時檢查溫升、串聯電阻與復合增加。</div>
+<div class="callout-warn"><strong>⚠ 常見誤解</strong> 聚光倍數提高不代表效率等比例提高；輸出功率、效率與熱管理是三個不同層次的量。</div>
+<details class="example"><summary>例題：由最大功率點求效率</summary><p>若已知最大功率點的電壓與電流，先求輸出功率，再除以入射光功率。若題目同時給短路電流與開路電壓，則可用填充因子檢查答案是否合理。</p></details>
+</section><section id="s14-2-3"><h2>14.2.3 非均勻吸收效應</h2><div class="section-keypoints"><strong>🔑 本節重點</strong> 深度相依生成 · 擴散長度 · 表面復合 · 收集機率</div>
+<p>上述分析假設 EHP 在整個元件中均勻產生。實際上 $\alpha$ 是波長的強函數：短波長（高能量）光子在表面附近就被吸收殆盡，長波長光子則穿透較深。考慮表面反射 $R(\lambda)$ 後，各深度的產生率為：</p>
+
+<div class="eq">$$G_L(x,\lambda) = \alpha(\lambda)\Phi_0(\lambda)[1-R(\lambda)]e^{-\alpha(\lambda)x}$$</div>
+
+<p>短波長（$\alpha$ 大）→ EHP 集中在表面附近 → 表面復合損失嚴重（若表面復合速度 $s$ 高）。長波長（$\alpha$ 小）→ EHP 遠離接面 → 擴散到空乏區前可能已經復合。這就是為什麼實際太陽能電池需要精心設計接面深度和表面鈍化——在吸收和收集之間取得最佳平衡。</p>
+
+<p>非均勻吸收的核心是「生成位置」與「收集位置」不一定重合，尤其短波長光常集中在表面附近產生。</p>
+<p>若表面復合速度很大，靠近表面產生的少數載子會先被復合吃掉，短路電流因此下降。</p>
+<p>因此太陽能電池不能只追求吸收係數大，還要讓擴散長度、空乏區位置與表面鈍化互相配合。</p>
+<div class="callout"><strong>📌 判讀口訣</strong> 吸收告訴你載子在哪裡出生；擴散與漂移告訴你它們能不能活著到達電極。</div>
+<div class="callout-warn"><strong>⚠ 常見誤解</strong> 把所有光生載子都當作可收集，會高估短波長響應與總光電流。</div>
+<details class="example"><summary>例題：判斷表面復合造成的光譜損失</summary><p>若短波長響應特別差，而長波長響應仍正常，常見原因是靠近表面的生成載子被復合。改善方向包括表面鈍化、窗口層設計與把接面位置調到更有利的深度。</p></details>
+</section><section id="s14-2-4"><h2>14.2.4 異質接面太陽能電池</h2><div class="section-keypoints"><strong>🔑 本節重點</strong> 能隙工程 · 窗口層 · 界面復合 · 光譜利用</div>
+<p>同質接面（homojunction）太陽能電池使用單一材料（如 Si），所有波長的光都在同一材料中被吸收。異質接面（heterojunction）使用兩種不同能隙的材料：寬能隙材料（如 AlGaAs、a-Si:H）作為「光學窗口」，窄能隙材料作為主要吸收層。這是建立在第九章和第十二章異質接面理論上的直接應用。</p>
+
+<figure class="figure"><a class="figure-link" href="../../pages/ch14_pages/ch14_page_650_c.png" target="_blank" rel="noopener"><img src="../../pages/ch14_pages/ch14_page_650_c.png" alt="Fig 14.7 異質接面太陽能電池能帶圖" loading="lazy"></a><figcaption>圖 14.7：異質接面太陽能電池能帶圖。寬能隙窗口層（如 AlGaAs）允許低能量光子穿透至窄能隙吸收層（如 GaAs），同時在界面處形成能帶不連續，有助於載子收集並減少表面復合。（教科書頁 653）</figcaption></figure>
+
+<p>工作原理：$h\nu &lt; E_{g,\text{wide}}$ 的光子穿過寬能隙窗口層，在窄能隙吸收層中產生 EHP；$h\nu &gt; E_{g,\text{wide}}$ 的光子在窗口層被吸收，產生的載子若在擴散長度內可被收集。寬能隙窗口同時減少了表面復合（因為窗口層-吸收層界面可以設計為高品質異質界面），並降低了串聯電阻。</p>
+<p>典型結構：<strong>AlGaAs/GaAs 異質接面太陽能電池</strong>。Al$_x$Ga$_{1-x}$As 的能隙隨 $x$ 可調（$E_g=1.424+1.247x$ eV，$0\le x\le0.45$ 為直接能隙），作為 GaAs 吸收層上的窗口。這種結構可將效率提升至 25% 以上，廣泛用於太空太陽能電池。</p>
+
+<p>異質接面利用不同能隙材料組合，讓入射光先通過較寬能隙的窗口層，再在較適合吸收的主動層產生載子。</p>
+<p>窗口層的任務是降低表面吸收與表面復合，同時保留良好的電性接觸與載子選擇性。</p>
+<div class="callout"><strong>📌 設計觀察</strong> 異質接面的優勢來自能帶排列；真正要檢查的是界面處是否形成有利的載子分離與低復合通道。</div>
+<div class="callout-warn"><strong>⚠ 常見誤解</strong> 異質接面不是單純把兩種材料疊起來；晶格失配、界面態與能帶不連續都可能抵消理想優勢。</div>
+<details class="example"><summary>例題：判斷窗口層的功能</summary><p>若窗口層能隙較大且厚度適當，短波長光不會在高復合表面大量損失，更多光子能到達主動層。若窗口層太厚或導電性差，又會造成吸收損失或串聯電阻增加。</p></details>
+</section><section id="s14-2-5"><h2>14.2.5 非晶矽太陽能電池</h2><div class="section-keypoints"><strong>🔑 本節重點</strong> 無序能態 · 缺陷鈍化 · 薄膜吸收 · 光致衰退</div>
+<p>非晶矽（a-Si:H，氫化非晶矽）提供了低成本、大面積太陽能電池的可能性。與單晶 Si 不同，a-Si 沒有長程有序的晶體結構，其能帶中存在大量的<strong>遷移率邊緣</strong>（mobility edge）和隙態（band-gap states）。遷移率間隙（mobility gap）約 1.7 eV，大於單晶 Si 的 1.12 eV。</p>
+<p>關鍵特性：(1) a-Si 的吸收係數極高——在 $h\nu&gt;1.7$ eV 時 $\alpha$ 可達 $10^4$–$10^5$ cm⁻¹，比單晶 Si 高一個數量級 → 只需 ∼1 μm 厚度即可吸收大部分陽光。(2) 載子遷移率很低（$10^{-3}$–$10$ cm²/V-s），擴散長度短 → 使用 PIN 結構而非 pn 結構，讓內建電場延伸整個 i 層以確保載子收集。(3) 效率較低（∼10%），但成本優勢顯著。</p>
+
+<div class="callout-warn"><strong>⚡ Staebler-Wronski 效應</strong>：a-Si 太陽能電池的一個著名問題是光照初期效率會下降（光致衰退），然後趨於穩定。這是因為光產生的載子打破了弱 Si-Si 鍵，產生額外的懸鍵（dangling bond）作為復合中心。這是 a-Si 太陽能電池效率無法進一步提升的根本材料限制。</div>
+<p>非晶矽因為缺乏長程晶格週期，能帶邊附近會出現尾態與缺陷態，影響復合與載子傳輸。</p>
+<p>氫化可鈍化部分懸鍵缺陷，因此 a-Si:H 能以薄膜形式用於大面積低成本太陽能電池。</p>
+<p>它的吸收層可以做得很薄，但缺陷與光致衰退會限制長期效率與穩定度。</p>
+<div class="callout"><strong>📌 學習連結</strong> 這裡要把材料無序、缺陷態、吸收厚度與元件穩定度串成同一條因果鏈。</div>
+<details class="example"><summary>例題：比較晶矽與非晶矽太陽能電池</summary><p>晶矽重視少數載子擴散長度與高品質接面；非晶矽則常用薄膜吸收與內建電場收集載子。若題目提到光致衰退或缺陷鈍化，通常指向非晶矽的限制。</p></details>
+</section>
+
+<section id="s14-3-overview"><h2>14.3 光偵測器</h2>
+
+<div>
+<strong>🔑 本節重點</strong> ① 光導體增益 $\Gamma_{\text{ph}}=\tau_p/t_n$——壽命越長增益越高，但響應越慢（增益-速度取捨）② pn 光二極體：$J_L=e(W+L_n+L_p)G_L$——空乏區(瞬發)+中性區(擴散延遲) ③ PIN：i 層完全空乏→大部分光子在空乏區內吸收→高速響應(GHz)，$J_L=e\Phi_0(1-e^{-\alpha W})$ ④ APD：撞擊游離倍增 $M=10$–$100$→高靈敏度，代價為過量雜訊 $\propto M^x$ 和高偏壓
+</div>
+
+<p>非晶矽因為缺乏長程晶格週期，能帶邊附近會出現尾態與缺陷態，影響復合與載子傳輸。</p>
+<p>氫化可鈍化部分懸鍵缺陷，因此 a-Si:H 能以薄膜形式用於大面積低成本太陽能電池。</p>
+<p>它的吸收層可以做得很薄，但缺陷與光致衰退會限制長期效率與穩定度。</p>
+<div class="callout"><strong>📌 學習連結</strong> 這裡要把材料無序、缺陷態、吸收厚度與元件穩定度串成同一條因果鏈。</div>
+<details class="example"><summary>例題：比較晶矽與非晶矽太陽能電池</summary><p>晶矽重視少數載子擴散長度與高品質接面；非晶矽則常用薄膜吸收與內建電場收集載子。若題目提到光致衰退或缺陷鈍化，通常指向非晶矽的限制。</p></details>
+<div class="callout-warn"><strong>⚠️ 增益-速度</strong> 光導增益 $\Gamma_{ph}=\tau_p/t_n$ 與響應速度互相牽制。</div>
+<p>光偵測器關鍵指標：響應度、量子效率、暗電流、雜訊、頻寬與線性度。</p>
+
+</section><section id="s14-3-1"><h2>14.3.1 光導體</h2><div class="section-keypoints"><strong>🔑 本節重點</strong> 光生電導 · 載子壽命 · transit time · 光導增益</div>
+<p>光偵測器（photodetector）的任務是把光信號轉換為電信號。與太陽能電池不同，光偵測器通常操作在<strong>反向偏壓</strong>下，目的不是輸出功率，而是追求<strong>線性度、速度和靈敏度</strong>。根據運作機制，可分為光導體（photoconductor）、光二極體（photodiode）、PIN 光二極體、雪崩光二極體（APD）和光電晶體（phototransistor）五大類。</p>
+
+<h3>14.3.2 光導體 —— 最簡單的光偵測器</h3>
+<p>光導體本質上就是一塊兩端有歐姆接觸的半導體材料。光照產生 EHP → 材料導電率增加 → 在固定偏壓下電流增加。</p>
+
+<figure class="figure"><a class="figure-link" href="../../pages/ch14_pages/ch14_page_653_c.png" target="_blank" rel="noopener"><img src="../../pages/ch14_pages/ch14_page_653_c.png" alt="Fig 14.10 光導體幾何結構與運作原理" loading="lazy"></a><figcaption>圖 14.10：光導體的幾何結構。長度 $L$ 的半導體兩端有歐姆接觸，外加偏壓 $V$ 產生電場 $E=V/L$。光照均勻產生 EHP，電子在電場下漂移至陽極，電洞漂移至陰極，形成光電流。（教科書頁 658）</figcaption></figure>
+
+<p>初始（暗）導電率：$\sigma_0 = e(\mu_n n_0 + \mu_p p_0)$。光照後的導電率：$\sigma = e[\mu_n(n_0+\delta n) + \mu_p(p_0+\delta p)]$。光導電率（photoconductivity）：</p>
+
+<div class="eq">$$\Delta\sigma = e(\delta p)(\mu_n + \mu_p)$$</div>
+
+<p>光電流密度：$J_L = \Delta\sigma\cdot E = e(\delta p)(\mu_n + \mu_p)E$。其中 $\delta p = G_L\tau_p$（穩態）。</p>
+<p><strong>光導體增益</strong>是光導體最獨特的概念——定義為收集到的載子數與光產生載子數的比值：</p>
+
+<div class="eq">$$\boxed{\Gamma_{\text{ph}} = \frac{\tau_p}{t_n}\left(1 + \frac{\mu_p}{\mu_n}\right)}$$</div>
+
+<p>其中 $t_n = L/(\mu_n E)$ 是電子渡越時間。物理圖像：一個光子產生一個電子-電洞對。電子快速漂移到陽極（渡越時間 $t_n$），但為了維持電中性，陰極必須注入另一個電子來替代。這個「替代-漂移」循環在載子壽命 $\tau_p$ 期間重複 → 一個光生電子可以導致多個電子流經外部電路。增益可以遠大於 1——數值範例：Si 光導體，$L=100$ μm，$\mu_n=1350$ cm²/V-s，$V=10$ V → $t_n=7.4\times10^{-9}$ s。若 $\tau_p=10^{-6}$ s：$\Gamma_{\text{ph}}\approx(10^{-6}/7.4\times10^{-9})(1+480/1350)\approx183$。</p>
+
+<div class="callout-warn"><strong>⚡ 增益與速度的取捨</strong>：光導體增益 $\propto\tau_p$——壽命越長，增益越高。但響應速度也由 $\tau_p$ 決定——壽命越長，關閉越慢。這就是光導體的根本矛盾：高增益和高速響應不可兼得。在高速通訊應用（GHz 級）中，幾乎總是選用光二極體而非光導體。</div>
+
+<div class="callout"><strong>📌 速度取捨</strong> 光導增益來自載子壽命長於飛渡時間，但壽命越長，元件恢復速度通常越慢。</div>
+<details class="example"><summary>例題：判斷光導增益是否大於一</summary><p>若光生載子在復合前能多次穿越元件，外部電路可量到大於一次光生事件的電荷流動，光導增益就可能大於一。若壽命很短或電極距離很長，增益會降低。</p></details>
+</section><section id="s14-3-2"><h2>14.3.2 光二極體</h2><div class="section-keypoints"><strong>🔑 本節重點</strong> 反向偏壓 · 空乏區收集 · 響應度 · 暗電流</div>
+<p>光二極體是操作在反向偏壓下的 pn 接面。與光導體不同，光二極體的電流機制是載子的<strong>漂移</strong>（在空乏區內）和<strong>擴散</strong>（在中性區內），而非簡單的導電率變化。</p>
+
+<figure class="figure"><a class="figure-link" href="../../pages/ch14_pages/ch14_page_654_c.png" target="_blank" rel="noopener"><img src="../../pages/ch14_pages/ch14_page_654_c.png" alt="Fig 14.12 光二極體運作原理：反向偏壓下的 EHP 收集" loading="lazy"></a><figcaption>圖 14.12：pn 接面光二極體在反向偏壓下的運作原理。空乏區內的 EHP 被電場分離後快速掃出（瞬發光電流，∼ps 級），中性區產生的少數載子則需擴散至空乏區邊緣才被收集（延遲光電流）。（教科書頁 660）</figcaption></figure>
+
+<p><strong>瞬發光電流（prompt photocurrent）：</strong>在空乏區內產生的 EHP 立即被電場分離並掃出 → 響應極快（∼ps 級），增益=1。空乏區光電流密度：</p>
+
+<div class="eq">$$J_{L1} = e\int_{\text{depletion}} G_L\,dx = eG_L W$$</div>
+
+<p><strong>延遲光電流（delayed photocurrent）：</strong>在中性 p 區和 n 區產生的少數載子需先擴散到空乏區邊緣才會被收集。由穩態擴散方程：</p>
+
+<div class="eq">$$D_n\frac{d^2(\delta n_p)}{dx^2} - \frac{\delta n_p}{\tau_{n0}} = -G_L$$</div>
+
+<p>解（長二極體）：$\delta n_p(x) = G_L\tau_{n0} - (G_L\tau_{n0} + n_{p0})e^{x/L_n}$（$x\le0$）。擴散電流密度在 $x=0$ 處：</p>
+
+<div class="eq">$$J_{n1} = eD_n\left.\frac{d(\delta n_p)}{dx}\right|_{x=0} = eG_L L_n + \frac{eD_n n_{p0}}{L_n}$$</div>
+
+<p>第一項是光電流，第二項是理想反向飽和電流。同理可得電洞側光電流 $J_{p1}=eG_L L_p$。總穩態光電流密度：</p>
+
+<div class="eq">$$\boxed{J_L = e(W + L_n + L_p)G_L}$$</div>
+
+<p><strong>數值範例：</strong>Si pn 光二極體，$N_a=N_d=10^{16}$ cm⁻³，$D_n=25$ cm²/s，$D_p=10$ cm²/s，$\tau_{n0}=5\times10^{-7}$ s，$\tau_{p0}=10^{-7}$ s，$V_R=5$ V，$G_L=10^{21}$ cm⁻³-s⁻¹。$L_n=35.4$ μm，$L_p=10.0$ μm，$W=1.21$ μm。$J_L=1.6\times10^{-19}\times(1.21+35.4+10.0)\times10^{-4}\times10^{21}=0.75$ A/cm²——遠大於反向飽和電流。</p>
+
+<div class="callout"><strong>📌 判讀重點</strong> 光二極體常在反向偏壓下操作，目的是擴大空乏區、降低電容並加速光生載子的漂移收集。</div>
+<div class="callout-warn"><strong>⚠ 常見誤解</strong> 響應度高不一定代表速度快；暗電流、電容與空乏區厚度也會一起決定探測器品質。</div>
+<details class="example"><summary>例題：由響應度估算光電流</summary><p>若已知入射光功率與響應度，光電流可用兩者相乘估算。接著要檢查暗電流是否可忽略，因為弱光量測時雜訊常由暗電流與放大器限制。</p></details>
+</section><section id="s14-3-3"><h2>14.3.3 PIN 光二極體</h2><div class="section-keypoints"><strong>🔑 本節重點</strong> 寬本質層 · 高收集效率 · 低電容 · 飛渡時間</div>
+<p>在許多高速應用中，擴散電流（延遲光電流）因為響應慢而不可接受。解決方案是將空乏區做得盡可能寬，使大部分光子在空乏區內被吸收 → 光電流以瞬發分量為主。這就是 PIN 光二極體的設計動機。</p>
+
+<figure class="figure"><a class="figure-link" href="../../pages/ch14_pages/ch14_page_656_c.png" target="_blank" rel="noopener"><img src="../../pages/ch14_pages/ch14_page_656_c.png" alt="Fig 14.14 PIN 光二極體結構與電場分布" loading="lazy"></a><figcaption>圖 14.14：PIN 光二極體的 (a) 截面結構與 (b) 反向偏壓下的電場分布。p⁺ 與 n⁺ 層之間的本質 i 層完全空乏化，電場在 i 層內近似均勻，使光生載子以飽和漂移速度被快速收集。（教科書頁 663）</figcaption></figure>
+
+<p>PIN 結構：在 p⁺ 和 n⁺ 層之間夾一層本質（intrinsic, i）層。反向偏壓下，i 層完全空乏化。考慮非均勻吸收：光子通量 $\Phi(x)=\Phi_0 e^{-\alpha x}$。在 i 層內產生的光電流：</p>
+
+<div class="eq">$$J_L = e\int_0^W \alpha\Phi_0 e^{-\alpha x}\,dx = e\Phi_0(1 - e^{-\alpha W})$$</div>
+
+<p>當 $W\gg1/\alpha$（i 層遠大於吸收深度），$J_L\to e\Phi_0$——所有光子都被吸收並轉化為電流。數值範例：Si PIN，$W=20$ μm，$\Phi_0=10^{17}$ cm⁻²-s⁻¹，$\alpha=10^3$ cm⁻¹ → $J_L=1.6\times10^{-19}\times10^{17}(1-e^{-10^3\times20\times10^{-4}})=13.8$ mA/cm²。</p>
+
+<p>PIN 光二極體用寬本質層增加吸收與空乏區寬度，使多數光生載子能在電場中漂移收集。</p>
+<p>較寬的空乏區可降低接面電容，改善 RC 響應，但也會增加載子飛渡時間。</p>
+<div class="callout"><strong>📌 設計取捨</strong> 本質層越厚，吸收與電容通常越有利；但高速操作時必須檢查飛渡時間是否成為瓶頸。</div>
+<div class="callout-warn"><strong>⚠ 常見誤解</strong> PIN 的 i 層不是「沒有作用的隔離層」，而是吸收、漂移收集與電容控制的核心區域。</div>
+<details class="example"><summary>例題：選擇 PIN 厚度</summary><p>若應用偏向長波長吸收，可增加 i 層厚度提高量子效率；若應用偏向高速通訊，則要在吸收效率、電容與飛渡時間之間折衷。</p></details>
+</section><section id="s14-3-4"><h2>14.3.4 雪崩光二極體</h2><div class="section-keypoints"><strong>🔑 本節重點</strong> 撞擊游離 · 內部倍增 · excess noise · 崩潰偏壓</div>
+<p>APD 在 PIN 結構的基礎上將反向偏壓提高到接近崩潰電壓（參考第八章的崩潰物理），使光生載子在空乏區內通過<strong>撞擊游離</strong>（impact ionization）產生額外的 EHP——實現內部電流增益。</p>
+
+<figure class="figure"><a class="figure-link" href="../../pages/ch14_pages/ch14_page_658_c.png" target="_blank" rel="noopener"><img src="../../pages/ch14_pages/ch14_page_658_c.png" alt="Fig 14.16 雪崩光二極體的載子倍增過程" loading="lazy"></a><figcaption>圖 14.16：APD 中的撞擊游離倍增過程示意圖。光生電子（或電洞）在高電場下加速獲得足夠動能，與晶格原子碰撞產生新的 EHP，如此鏈式反應使載子數倍增。增益倍數 $M$ 可達 10–100。（教科書頁 666）</figcaption></figure>
+
+<p>增益倍數 $M$（avalanche multiplication factor）可達 10–100。APD 的增益-頻寬乘積典型值 ∼100 GHz。例如：空乏區寬度 10 μm，飽和漂移速度 $10^7$ cm/s → 渡越時間 $t=100$ ps → 基本頻率 $f=1/(2t)=5$ GHz。若 $M=20$，增益-頻寬乘積=100 GHz。</p>
+
+<div class="callout-warn"><strong>⚡ APD 的代價</strong>：增益來自撞擊游離，但撞擊游離是隨機過程 → 引入過量雜訊（excess noise），雜訊因子 $F(M)\approx M^x$（Si: $x\approx0.3$，InP: $x\approx0.7$）。此外需要高偏壓（數十至數百伏特），且增益對溫度敏感。在靈敏度要求極高的應用中（如光纖通訊接收端），APD 優於 PIN+外部放大器，但在成本和複雜度較敏感的場景中，PIN 加上低雜訊放大器（TIA）更為常見。</div>
+
+<p>雪崩光二極體在高反向偏壓下操作，讓光生載子引發撞擊游離，產生內部電流倍增。</p>
+<p>內部倍增可以提升弱光靈敏度，但同時會帶來倍增雜訊與偏壓穩定度問題。</p>
+<p>因此 APD 的重點不是只追求高增益，而是控制增益、雜訊、崩潰電壓與溫度漂移。</p>
+<div class="callout"><strong>📌 判讀重點</strong> APD 適合需要高靈敏度但仍可承受較高偏壓與雜訊校正的場合。</div>
+<details class="example"><summary>例題：比較 PIN 與 APD</summary><p>若系統光功率很低且可提供穩定高壓偏壓，APD 的內部倍增有利；若重視低雜訊、低偏壓與線性簡潔，PIN 光二極體通常較合適。</p></details>
+</section><section id="s14-3-5"><h2>14.3.5 光電晶體</h2><div class="section-keypoints"><strong>🔑 本節重點</strong> 光生基極電流 · 電流增益 · 高靈敏度 · 速度取捨</div>
+<p>光電晶體將光二極體和 BJT 的增益機制結合。典型結構為 npn BJT，基極-集極接面作為光吸收區（大面積、反向偏壓）。光生電洞累積在基極，使基極-射極接面順向偏壓 → 射極注入電子 → 正常的 BJT 放大作用。</p>
+<p>集極電流：</p>
+
+<div class="eq">$$I_C = \frac{I_L}{1-\alpha} = (1+\beta)I_L$$</div>
+
+<p>其中 $I_L$ 是基極-集極光電流，$\beta$ 是共射極電流增益。增益可達數百。但頻率響應受限於：(1) 大面積基極-集極電容；(2) Miller 效應放大輸入電容。因此光電晶體適合低頻、高增益應用。</p>
+
+<table><caption>表 1：14.3.5 光電晶體</caption><thead><tr><th>元件類型</th><th>增益</th><th>速度</th><th>優點</th><th>缺點</th></tr></thead><tbody>
+<tr><td>光導體</td><td>10–10³</td><td>慢 (μs–ms)</td><td>結構最簡單</td><td>速度與增益互斥</td></tr>
+<tr><td>pn 光二極體</td><td>1</td><td>中–快</td><td>模型直觀、低雜訊</td><td>無內部增益</td></tr>
+<tr><td>PIN 光二極體</td><td>1</td><td>快 (GHz)</td><td>高速主力</td><td>靈敏度有限</td></tr>
+<tr><td>APD</td><td>10–100</td><td>快 (GHz)</td><td>高靈敏度</td><td>高偏壓、過量雜訊</td></tr>
+<tr><td>光電晶體</td><td>100–1000</td><td>慢 (MHz)</td><td>最高增益</td><td>Miller 效應限速</td></tr>
+</tbody></table>
+<p>光電晶體把光生電流當作等效基極驅動，再透過電晶體作用放大輸出電流。</p>
+<p>因此它的靈敏度通常高於一般光二極體，但速度會受到基區儲存電荷與電晶體頻寬限制。</p>
+<div class="callout"><strong>📌 使用判斷</strong> 若目標是低速、高靈敏度偵測，光電晶體很有吸引力；若目標是高速通訊，光二極體通常更適合。</div>
+<div class="callout-warn"><strong>⚠ 常見誤解</strong> 電流增益不是免費午餐；增益越依賴載子儲存，響應速度越可能下降。</div>
+<details class="example"><summary>例題：選擇光偵測器</summary><p>遙控接收、光遮斷感測等低速應用可用光電晶體取得較大訊號；高速光纖接收器則常選 PIN 或 APD，以避免電晶體儲存效應限制頻寬。</p></details>
+</section>
+
+<section id="s14-4-overview"><h2>14.4 光致發光與電致發光</h2>
+
+<div>
+<strong>🔑 本節重點</strong> ① PL（光激發→發光，材料表徵）vs EL（電注入→發光，LED/雷射基礎）——兩者為時間反演對稱 ② 輻射復合：帶間直接躍遷（直接能隙）、雜質躍遷（DAP）；非輻射：SRH（聲子）、Auger（第三載子）③ 量子效率 $\eta_q=R_r/(R_r+R_{nr})$——直接能隙 $B$ 值比間接大 ∼$10^6$ 倍 ④ GaAs(紅外，$E_g=1.42$ eV)、AlGaAs(能隙可調)、GaAsP($x&gt;0.45$ 變間接→效率崩潰)
+</div>
+
+<p>光電晶體把光生電流當作等效基極驅動，再透過電晶體作用放大輸出電流。</p>
+<p>因此它的靈敏度通常高於一般光二極體，但速度會受到基區儲存電荷與電晶體頻寬限制。</p>
+<div class="callout"><strong>📌 使用判斷</strong> 若目標是低速、高靈敏度偵測，光電晶體很有吸引力；若目標是高速通訊，光二極體通常更適合。</div>
+<div class="callout-warn"><strong>⚠ 常見誤解</strong> 電流增益不是免費午餐；增益越依賴載子儲存，響應速度越可能下降。</div>
+<details class="example"><summary>例題：選擇光偵測器</summary><p>遙控接收、光遮斷感測等低速應用可用光電晶體取得較大訊號；高速光纖接收器則常選 PIN 或 APD，以避免電晶體儲存效應限制頻寬。</p></details>
+<p>PL 用光激發表徵材料；EL 用電注入，是 LED/雷射的基礎——兩者為時間反演對稱過程。</p>
+<p>輻射復合含帶間直接躍遷與雜質躍遷；非輻射含 SRH 與 Auger，降低量子效率。</p>
+
+</section><section id="s14-4-1"><h2>14.4.1 基本躍遷</h2><div class="section-keypoints"><strong>🔑 本節重點</strong> 自發放射 · 吸收 · 能量與動量守恆 · 直接能隙</div>
+<p>前面討論的都是「光 → 電」（光子被吸收，產生載子）。現在轉向「電 → 光」：注入的載子復合時釋放光子。這兩種過程在量子力學層面是時間反演對稱的——吸收和輻射躍遷的矩陣元素相同（Fermi's Golden Rule），區別僅在於初態和終態的載子佔據情況。</p>
+<p><strong>光致發光（Photoluminescence, PL）</strong>：用光激發產生過量載子 → 載子復合發光。PL 是材料表徵的標準工具——PL 光譜的峰值位置給出 $E_g$，譜寬反映材料品質。</p>
+<p><strong>電致發光（Electroluminescence, EL）</strong>：用電流注入產生過量載子 → 載子復合發光。這是 LED 和雷射二極體的物理基礎。本章主要關注<strong>注入式電致發光</strong>——通過 pn 接面注入少數載子。</p>
+
+<h3>14.4.2 基本躍遷過程：哪些復合會發光？</h3>
+<p>載子復合可以經由多種途徑，並非所有途徑都發光：</p>
+
+<figure class="figure"><a class="figure-link" href="../../pages/ch14_pages/ch14_page_663_c.png" target="_blank" rel="noopener"><img src="../../pages/ch14_pages/ch14_page_663_c.png" alt="Fig 14.18 半導體中的輻射與非輻射躍遷過程" loading="lazy"></a><figcaption>圖 14.18：半導體中的各種躍遷過程。(a) 帶間直接躍遷——輻射復合；(b) 雜質相關躍遷（導帶→受體、施體→價帶、DAP 對）；(c) SRH 復合——通過深層陷阱，能量轉給聲子（非輻射）；(d) Auger 復合——能量轉給第三個載子（非輻射）。（教科書頁 669）</figcaption></figure>
+
+<p><strong>帶間直接躍遷：</strong>導帶電子直接落入價帶電洞，釋放能量 $\approx E_g$ 的光子。這只在直接能隙材料中有效率。發射光譜 $I(\nu)\propto\nu^2(h\nu-E_g)^{1/2}\exp[-(h\nu-E_g)/kT]$——譜寬由熱能 $kT$ 決定（室溫 ∼0.026 eV → ∼30 nm）。</p>
+<p><strong>雜質相關躍遷：</strong>導帶→受體、施體→價帶、施體→受體對（DAP）。光子能量 $=E_g-(E_A+E_D)+e^2/(\epsilon r)$（庫倫項）。GaP 中的 Zn-O 對發光就是 DAP 躍遷的經典例子。</p>
+<p><strong>非輻射復合：</strong>SRH 復合（通過深層陷阱，能量轉給聲子）和 Auger 復合（能量轉給第三個載子，在重摻雜材料中重要）。這些過程與光發射競爭 → 降低發光效率。</p>
+
+<div class="callout"><strong>📌 物理主線</strong> 發光元件的第一個篩選條件是能帶結構；直接能隙材料比間接能隙材料更容易高效率發光。</div>
+<div class="callout-warn"><strong>⚠ 常見誤解</strong> 只要電子掉到低能階就會有效發光；若動量守恆需要聲子參與，輻射復合機率會大幅降低。</div>
+<details class="example"><summary>例題：判斷材料是否適合 LED</summary><p>若材料為直接能隙且能隙對應所需光子能量，通常是較好的發光材料候選。若材料為間接能隙，即使能隙大小合適，也可能因輻射效率低而不適合。</p></details>
+</section><section id="s14-4-2"><h2>14.4.2 發光效率</h2><div class="section-keypoints"><strong>🔑 本節重點</strong> 輻射復合 · 非輻射復合 · 內部效率 · 載子壽命</div>
+<p><strong>量子效率（quantum efficiency）</strong>定義為輻射復合速率與總復合速率的比值：</p>
+
+<div class="eq">$$\eta_q = \frac{R_r}{R} = \frac{R_r}{R_r + R_{nr}} = \frac{\tau_{nr}}{\tau_{nr} + \tau_r}$$</div>
+
+<p>其中 $R_r = Bnp$（$B$ 為輻射復合係數），$R_{nr}$ 為非輻射復合速率。直接能隙材料的 $B$ 值比間接能隙材料大約 $10^6$ 倍——這就是為什麼 GaAs（直接）可以做高效率 LED 而 Si（間接）不行。</p>
+
+<div class="callout"><strong>💡 為什麼 GaAs 的 $B$ 遠大於 Si 的 $B$？</strong>因為在直接能隙材料中，導帶底和價帶頂在同一 $k$ 點 → 電子-電洞對的波函數重疊大 → 躍遷矩陣元素大 → 輻射復合機率高。在間接能隙材料中，動量守恆要求聲子參與 → 這是二階微擾過程 → 機率低 ∼$10^{-6}$ 倍。這和 14.1 節的吸收係數差異是同一個物理根源。</div>
+
+<p>發光效率取決於注入載子有多少比例以輻射復合結束，而不是被缺陷、表面或 Auger 機制非輻射消耗。</p>
+<p>內部量子效率可視為輻射復合率相對於總復合率的比例，因此材料品質與缺陷密度非常關鍵。</p>
+<p>溫度上升常使非輻射通道變強，造成發光強度下降。</p>
+<div class="callout-warn"><strong>⚠ 常見誤解</strong> 電流增加不一定線性增加光輸出；高注入下熱效應與效率 droop 可能變得明顯。</div>
+<details class="example"><summary>例題：用壽命判斷效率</summary><p>若輻射壽命短且非輻射壽命長，輻射復合佔比高，內部效率較佳。若缺陷使非輻射壽命變短，注入電流會更多轉成熱而不是光。</p></details>
+</section><section id="s14-4-3"><h2>14.4.3 材料</h2><div class="section-keypoints"><strong>🔑 本節重點</strong> III–V 合金 · 能隙調整 · 晶格匹配 · 發光波長</div>
+<p>三個最重要的直接能隙材料系統：</p>
+<p><strong>GaAs（砷化鎵）：</strong>$E_g=1.42$ eV → $\lambda=0.873$ μm（紅外區）。是紅外 LED 和雷射的基礎材料。與 AlGaAs 形成晶格匹配的異質結構是半導體雷射的核心技術。</p>
+<p><strong>Al$_x$Ga$_{1-x}$As：</strong>能隙可調 $E_g=1.424+1.247x$（$0\le x\le0.45$，直接能隙）。$x&gt;0.45$ 變為間接能隙。折射率隨 $x$ 增大而減小（GaAs 最高 ∼3.6，AlAs ∼3.0）→ 可製作光波導。</p>
+<p><strong>GaAs$_{1-x}$P$_x$：</strong>能隙可調，$0\le x\le0.45$ 為直接能隙。$x=0.4$ → $E_g\approx1.9$ eV → $\lambda\approx0.65$ μm（紅光）→ 早期的可見光 LED。$x&gt;0.45$ 變為間接能隙，效率急劇下降。</p>
+
+<div class="callout-warn"><strong>⚡ 間接-直接能隙轉變的工程意義</strong>：GaAsP 和 AlGaAs 系統的最大教訓是——能用直接能隙就用直接能隙，千萬不要越過那條線。$x=0.45$ 是一條死線，越過之後量子效率下降 2–3 個數量級。這是材料物理對元件工程師最直接、最無情的限制。</div>
+<p>LED 材料常使用 III–V 族化合物與合金，透過組成調整能隙，進而控制發光波長。</p>
+<div class="callout"><strong>📌 材料判讀</strong> 選材料時要同時看能隙、直接或間接能隙、晶格匹配與可成長品質。</div>
+<details class="example"><summary>例題：用能隙估算發光顏色</summary><p>可用光子能量約等於能隙的想法估算波長。能隙越大，發光波長越短；但實際元件還會受到合金組成、量子井與溫度影響。</p></details>
+</section>
+
+<section id="s14-5-overview"><h2>14.5 發光二極體 (LED)</h2>
+<div>
+<strong>🔑 本節重點</strong> ① LED 是自發輻射元件——載子復合時隨機發射光子，光是非同調的 ② 內部量子效率 $\\eta_{int}$ = 輻射復合率 / 總復合率——取決於材料品質和能隙類型 ③ 外部量子效率 $\\eta_{ext}=\\eta_{int}\\times$ 出光效率——受全內反射限制，表面粗化和封裝可提升 ④ 發光波長 $\\lambda=1.24/E_g$ μm——GaN（藍光）、GaAs（紅外）、GaP（綠光）
+</div>
+
+<p>LED 材料常使用 III–V 族化合物與合金，透過組成調整能隙，進而控制發光波長。</p>
+<div class="callout"><strong>📌 材料判讀</strong> 選材料時要同時看能隙、直接或間接能隙、晶格匹配與可成長品質。</div>
+<details class="example"><summary>例題：用能隙估算發光顏色</summary><p>可用光子能量約等於能隙的想法估算波長。能隙越大，發光波長越短；但實際元件還會受到合金組成、量子井與溫度影響。</p></details>
+<div class="callout-warn"><strong>⚠️ 取光效率</strong> $\eta_{ext}=\eta_{int}\times$ 出光效率；全內反射限制外部量子效率。</div>
+<p>內部量子效率由輻射復合占比決定；封裝、粗化表面與螢光粉轉換提升取光。</p>
+<p>高電流下自熱、載子溢出與效率 droop 是 LED 工程常見限制。</p>
+<p>異質接面與量子井把載子限制在主動區，提高復合機率並控制波長。</p>
+
+</section><section id="s14-5-1"><h2>14.5.1 光的產生</h2><div class="section-keypoints"><strong>🔑 本節重點</strong> 順向注入 · 輻射復合 · 光譜寬度 · 輸出功率</div>
+<p>LED 是注入式電致發光的最直接實現：順向偏壓的 pn 接面將少數載子注入中性區 → 這些少數載子與多數載子復合 → 若復合是輻射性的 → 發光。發光波長由能隙決定：</p>
+
+<div class="eq">$$\lambda\;(\mu\text{m}) = \frac{1.24}{E_g\;(\text{eV})}$$</div>
+
+<figure class="figure"><a class="figure-link" href="../../pages/ch14_pages/ch14_page_667_c.png" target="_blank" rel="noopener"><img src="../../pages/ch14_pages/ch14_page_667_c.png" alt="Fig 14.20 LED 基本結構與發光機制" loading="lazy"></a><figcaption>圖 14.20：LED 的基本結構與發光機制。順向偏壓下電子從 n 側注入 p 側，與電洞輻射復合產生光子。發光主要發生在少數載子擴散長度範圍內。光子能量約等於能隙 $E_g$。（教科書頁 673）</figcaption></figure>
+
+<p>在 GaAs LED 中，發光主要來自 p 側——因為電子的注入效率（電子從 n 注入 p）高於電洞的注入效率（電洞從 p 注入 n），這是由於電子遷移率通常較高以及摻雜不對稱所致。</p>
+<p>LED 的輸出光強度與注入電流（擴散電流）成正比。但有一個重要前提：電流必須以輻射復合為主。如果電流主要走非輻射路徑（SRH 復合、表面復合），則 LED 效率很低。</p>
+
+<p>LED 在順向偏壓下注入電子與電洞，兩者在主動區復合時放出光子。</p>
+<p>發光光譜不是無限窄，會受到載子能量分布、能帶結構與主動區設計影響。</p>
+<div class="callout"><strong>📌 元件主線</strong> LED 是把電能轉成自發放射光；後面的效率分析就是追蹤電流有多少變成內部光子、又有多少逃出元件。</div>
+<div class="callout-warn"><strong>⚠ 常見誤解</strong> LED 的順向電流不等於全部都會發光；漏電、非輻射復合與載子溢出都會降低效率。</div>
+<details class="example"><summary>例題：判斷光輸出與電流關係</summary><p>在低到中等注入區，光輸出常隨電流增加而上升；在高電流下，溫升與非輻射機制可能使斜率變小，甚至造成效率下降。</p></details>
+</section><section id="s14-5-2"><h2>14.5.2 內部量子效率</h2><div class="section-keypoints"><strong>🔑 本節重點</strong> 輻射率 · 非輻射率 · 注入效率 · 溫度效應</div>
+<p>內部量子效率定義為二極體電流中產生光子的比例。它由兩個因子相乘：</p>
+
+<div class="eq">$$\boxed{\eta_{\text{int}} = \gamma \cdot \beta}$$</div>
+
+<p>其中：</p>
+<ul>
+<li><strong>注入效率 $\gamma$：</strong>有用電流（例如電子注入 p 區的擴散電流 $J_n$）佔總電流的比例：</li>
+</ul>
+<div class="eq">$$\gamma = \frac{J_n}{J_n + J_p + J_R}$$</div>
+
+<p>$J_p$ 是電洞擴散電流（對發光貢獻較小），$J_R$ 是空乏區復合電流（非輻射）。要讓 $\gamma\to1$，需要：(1) 使用 n⁺p 結構使 $J_p\ll J_n$；(2) 足夠大的順向偏壓使 $J_R$ 在總電流中佔比變小。</p>
+
+<ul>
+<li><strong>輻射效率 $\beta$：</strong>在注入的少數載子中，以輻射方式復合的比例：</li>
+</ul>
+<div class="eq">$$\beta = \frac{R_r}{R_r + R_{nr}} = \frac{\tau_{nr}}{\tau_{nr} + \tau_r}$$</div>
+
+<p>$\beta$ 取決於材料品質——非輻射陷阱密度 $N_t$ 越低，$\tau_{nr}$ 越長，$\beta$ 越接近 1。p 型摻雜濃度有一個最佳值：摻雜增加 → 輻射復合率增加（因為多數載子電洞更多），但注入效率 $\gamma$ 降低（因為 $J_p$ 相對增大）。</p>
+
+<p>內部量子效率描述主動區內注入載子轉成光子的比例，常由輻射與非輻射復合率競爭決定。</p>
+<div class="callout"><strong>📌 公式感</strong> 若輻射復合率遠大於非輻射復合率，內部量子效率接近一；反之會快速下降。</div>
+<div class="callout-warn"><strong>⚠ 常見誤解</strong> 內部量子效率只看元件內部產生光子的效率，還沒有包含光從半導體逃到外界的損失。</div>
+<details class="example"><summary>例題：用復合率比較效率</summary><p>若某 LED 的非輻射復合率因缺陷增加而上升，即使注入電流相同，內部產生的光子數也會下降。這通常表現在光輸出降低與溫升增加。</p></details>
+</section><section id="s14-5-3"><h2>14.5.3 外部量子效率</h2><div class="section-keypoints"><strong>🔑 本節重點</strong> 全反射 · 逃逸錐 · 折射率 · 光取出結構</div>
+<p>即使內部量子效率接近 100%，真正能從半導體射出的光子比例（外部量子效率 $\eta_{\text{ext}}$）通常只有 1%–3%。三個主要損耗機制：</p>
+<p><strong>1. 內部再吸收（Reabsorption）：</strong>發射光子能量 $h\nu\ge E_g$ → 在半導體中傳播時可能被重新吸收（band-to-band absorption）。大部分光子實際上射向基板方向，直接被吸收。</p>
+<p><strong>2. Fresnel 反射損耗：</strong>在半導體-空氣界面，折射率差導致部分光子被反射回半導體。反射係數：</p>
+
+<div class="eq">$$\Gamma = \left(\frac{\bar{n}_2 - \bar{n}_1}{\bar{n}_2 + \bar{n}_1}\right)^2$$</div>
+
+<p>GaAs（$\bar{n}_2=3.8$）到空氣（$\bar{n}_1=1.0$）：$\Gamma = (2.8/4.8)^2 = 0.34$ → 34% 的光子被反射回去。</p>
+<p><strong>3. 臨界角損耗（Total Internal Reflection）：</strong>從 Snell 定律，臨界角 $\theta_c = \sin^{-1}(\bar{n}_1/\bar{n}_2)$。GaAs 到空氣：$\theta_c=\sin^{-1}(1/3.8)=15.3°$。只有入射角小於 15.3° 的光子才能射出半導體——其餘全部被全反射困在內部。逃逸錐（escape cone）的立體角僅佔半球的 ∼2%（對於 $\bar{n}\approx3.5$ 的材料）。</p>
+
+<div class="eq">$$\eta_{\text{ext}} \approx \eta_{\text{int}} \times \frac{\bar{n}_1^2}{\bar{n}_2^2} \times (1-\Gamma) \approx \eta_{\text{int}} \times 1\%\text{–}3\%$$</div>
+
+<div class="callout-warn"><strong>⚡ 這是 LED 效率的根本物理限制。</strong>逃逸錐問題不是工程瑕疵，而是 Maxwell 方程組的直接後果。提高外部效率的方法包括：表面粗化（破壞全反射條件）、光子晶體（改變折射率對比）、圓頂封裝（增大逃逸錐）、以及使用異質結構讓光從寬能隙窗口射出（避免再吸收）。現代高亮度 LED 的 $\eta_{\text{ext}}$ 已可達 30%–60%——這些都是通過精巧的光學工程來規避基本物理限制。</div>
+
+<div class="callout"><strong>📌 光取出重點</strong> 外部量子效率把內部產生光子與逃出元件的能力合在一起，因此會受到折射率差與全反射限制。</div>
+<details class="example"><summary>例題：為何要做表面粗化或封裝透鏡</summary><p>半導體折射率高，許多光會因全反射被困在元件內。表面粗化、透明封裝與光學結構能改變出射角分布，提高逃逸機率。</p></details>
+</section><section id="s14-5-4"><h2>14.5.4 LED 元件</h2><div class="section-keypoints"><strong>🔑 本節重點</strong> 雙異質結構 · 載子侷限 · 光學侷限 · 封裝散熱</div>
+
+<figure class="figure"><a class="figure-link" href="../../pages/ch14_pages/ch14_page_670_c.png" target="_blank" rel="noopener"><img src="../../pages/ch14_pages/ch14_page_670_c.png" alt="Fig 14.22 LED 元件結構：表面發光型與側邊發光型" loading="lazy"></a><figcaption>圖 14.22：LED 元件結構。(a) 表面發光型（surface-emitting）——光從上表面射出，結構簡單，適合指示燈應用。(b) 側邊發光型（edge-emitting）——光從側面射出，可耦合至光纖，適合光通訊應用。（教科書頁 677）</figcaption></figure>
+
+<p><strong>GaAsP 可見光 LED：</strong>通過調整 GaAs$_{1-x}$P$_x$ 的 $x$ 值來調控發光顏色。$x=0.4$（$E_g\approx1.9$ eV）→ 紅光。$x&gt;0.45$ 後變間接能隙，須摻入氮（N）形成等電子陷阱（isoelectronic trap）來維持發光效率。這是早期紅色 LED 的主流技術。</p>
+<p><strong>異質結構 LED：</strong>使用寬能隙 N-AlGaAs / 窄能隙 p-GaAs 異質接面。電子從 N 層注入 p-GaAs 中復合發光，產生的光子能量 $h\nu&lt;E_{g,\text{wide}}$ → 光可以穿過 N 層而不被吸收。寬能隙窗口大幅提高了外部效率。</p>
+<p><strong>雙異質結構（DH）LED：</strong>將活性層夾在兩個寬能隙層之間，同時限制載子和光子 → 載子復合和光產生都集中在活性層 → 高效率。這是現代高亮度 LED 的基本架構。</p>
+<p>LED 元件結構常用雙異質接面或量子井，把電子、電洞與光場限制在主動區附近。</p>
+<p>封裝與散熱同樣是元件設計的一部分，因為溫度會影響效率、波長與可靠度。</p>
+<p>載子侷限提升內部復合效率，光學侷限與取出結構則決定產生的光能否有效離開晶片。</p>
+<p>實際 LED 的亮度與可靠度也受接觸電阻、電流擴散與封裝材料老化影響。</p>
+<p>因此元件結構小節要把材料、接面、光路與熱路放在同一張設計圖裡理解。</p>
+<div class="callout"><strong>📌 結構判讀</strong> 看 LED 結構時，同時問三件事：載子是否被侷限、光是否能逃出、熱是否能帶走。</div>
+<div class="callout-warn"><strong>⚠ 常見誤解</strong> 只改主動層材料不足以保證高效率；接觸、封裝、散熱與光取出常決定實際表現。</div>
+<details class="example"><summary>例題：雙異質結構的好處</summary><p>若主動層被較大能隙材料包住，電子與電洞較不易溢出，同時折射率差也可能提供光學侷限。這會提高主動區復合與光輸出的有效性。</p></details>
+</section>
+
+<section id="s14-6-overview"><h2>14.6 雷射二極體</h2>
+
+<div>
+<strong>🔑 本節重點</strong> ① 雷射三條件：居量反轉（簡併摻雜+大順偏）＋光學共振腔（Fabry-Perot）＋增益&gt;損耗 ② 居量反轉對應 $E_g&lt;h\nu&lt;E_{Fn}-E_{Fp}$——準 Fermi 能階差必須大於光子能量 ③ 閾值條件：$\gamma_t=\alpha+(1/2L)\ln(1/\Gamma_1\Gamma_2)$——增益等於材料吸收+鏡面透射損耗 ④ DH 雷射：寬能隙 AlGaAs 包夾 GaAs 活性層→載子限制($\Delta E_c$)+光學限制(折射率差)→$J_{th}$ 降 1–2 數量級
+</div>
+
+<p>LED 元件結構常用雙異質接面或量子井，把電子、電洞與光場限制在主動區附近。</p>
+<p>良好的載子侷限可提高復合機率，良好的光學設計可提高取光效率。</p>
+<p>封裝與散熱同樣是元件設計的一部分，因為溫度會影響效率、波長與可靠度。</p>
+<div class="callout"><strong>📌 結構判讀</strong> 看 LED 結構時，同時問三件事：載子是否被侷限、光是否能逃出、熱是否能帶走。</div>
+<div class="callout-warn"><strong>⚠ 常見誤解</strong> 只改主動層材料不足以保證高效率；接觸、封裝、散熱與光取出常決定實際表現。</div>
+<details class="example"><summary>例題：雙異質結構的好處</summary><p>若主動層被較大能隙材料包住，電子與電洞較不易溢出，同時折射率差也可能提供光學侷限。這會提高主動區復合與光輸出的有效性。</p></details>
+<p>雷射需居量反轉、光學共振腔與增益大於損耗三條件同時滿足。</p>
+
+</section><section id="s14-6-1"><h2>14.6.1 受激放射與居量反轉</h2><div class="section-keypoints"><strong>🔑 本節重點</strong> 受激放射 · 居量反轉 · 光學增益 · 準費米能階</div>
+<p>LED 輸出的是<strong>自發輻射</strong>（spontaneous emission）——每個電子-電洞對的復合都是獨立事件，產生的光子相位、方向、波長各異。雷射二極體（laser diode）輸出的是<strong>受激輻射</strong>（stimulated emission）——入射光子「誘導」電子復合，產生一個與入射光子完全相同（相位、方向、波長）的第二個光子。這需要三個條件同時滿足：(1) 居量反轉（population inversion）；(2) 光學共振腔（optical cavity）提供正回饋；(3) 增益大於損耗。</p>
+
+<h3>14.6.2 受激輻射與居量反轉</h3>
+<p>考慮兩個能階 $E_1$（低能）和 $E_2$（高能），電子佔據數分別為 $N_1$ 和 $N_2$。三個基本過程：</p>
+<ul>
+<li><strong>感應吸收（induced absorption）：</strong>光子被吸收，電子從 $E_1$ 躍遷到 $E_2$。速率 $\propto N_1$。</li>
+<li><strong>自發輻射（spontaneous emission）：</strong>電子自發從 $E_2$ 落到 $E_1$，釋放光子。速率 $\propto N_2$。</li>
+<li><strong>受激輻射（stimulated emission）：</strong>入射光子誘導電子從 $E_2$ 落到 $E_1$，釋放一個全同光子。速率 $\propto N_2$。</li>
+</ul>
+
+<figure class="figure"><a class="figure-link" href="../../pages/ch14_pages/ch14_page_672_c.png" target="_blank" rel="noopener"><img src="../../pages/ch14_pages/ch14_page_672_c.png" alt="Fig 14.24 受激輻射與居量反轉的能階示意圖" loading="lazy"></a><figcaption>圖 14.24：二能階系統中的 (a) 感應吸收、(b) 自發輻射、與 (c) 受激輻射。在半導體中，居量反轉對應於導帶電子與價帶空態同時存在，只有簡併摻雜的 pn 接面在大順向偏壓下才能達成此條件。（教科書頁 680）</figcaption></figure>
+
+<p>在熱平衡下，$N_2 &lt; N_1$（Boltzmann 分布）→ 吸收主導。要實現光放大（lasing），必須 $N_2 &gt; N_1$——這就是<strong>居量反轉</strong>（population inversion），一個非熱平衡條件。</p>
+<p>在半導體中，居量反轉對應於：導帶中有大量電子<strong>且</strong>價帶中有大量電洞（即空態）。這只有當 pn 接面兩側都簡併摻雜（degenerately doped，$E_F$ 進入能帶）並施加足夠大的順向偏壓時才能實現。增益條件：</p>
+
+<div class="eq">$$E_g &lt; h\nu &lt; E_{Fn} - E_{Fp}$$</div>
+
+<p>即光子能量必須大於能隙（才能產生受激輻射），但小於準 Fermi 能階差（確保居量反轉）。增益因子 $\gamma(\nu)\propto(N_2-N_1)$。</p>
+
+<div class="callout"><strong>💡 簡併摻雜的必要性</strong>：普通 pn 接面（非簡併）在順偏下，注入的少數載子濃度遠低於多數載子，導帶電子和價帶電洞的佔據機率不足以達到居量反轉。簡併摻雜使熱平衡時 $E_F$ 就在導帶（n⁺⁺）或價帶（p⁺⁺）內部 → 順偏下，空乏區附近直接就有高濃度的導帶電子和價帶空態對齊 → 居量反轉自然達成。這也是為什麼雷射二極體需要高摻雜——不是為了導電性，而是為了能帶對齊。</div>
+
+<div class="callout-warn"><strong>⚠ 常見誤解</strong> 雷射不是單純「很亮的 LED」；它需要受激放射、居量反轉與光學回授同時成立。</div>
+<details class="example"><summary>例題：判斷是否達到光學增益</summary><p>若注入使導帶與價帶的準費米能階分離足夠大，受激放射可超過吸收而形成增益。若增益仍小於腔內總損失，就還不會達到雷射閾值。</p></details>
+</section><section id="s14-6-2"><h2>14.6.2 光學共振腔</h2><div class="section-keypoints"><strong>🔑 本節重點</strong> Fabry–Pérot 腔 · 縱模 · 鏡面損失 · 回授</div>
+<p>居量反轉提供增益，但要產生相干、窄頻的雷射輸出，還需要光學共振腔來提供正回饋和頻率選擇。最簡單的共振腔是<strong>Fabry-Perot 腔</strong>——兩面平行的部分反射鏡。</p>
+
+<figure class="figure"><a class="figure-link" href="../../pages/ch14_pages/ch14_page_676_c.png" target="_blank" rel="noopener"><img src="../../pages/ch14_pages/ch14_page_676_c.png" alt="Fig 14.26 雷射二極體的 Fabry-Perot 光學共振腔" loading="lazy"></a><figcaption>圖 14.26：半導體雷射的 Fabry-Perot 光學共振腔。沿 (110) 面劈裂形成的兩個平行端面作為部分反射鏡（反射率 ∼32%），腔長 $L$ 數百 μm。光在兩鏡面間往返獲得增益，滿足共振條件 $\lambda=2\bar{n}L/N$ 的縱模被放大輸出。（教科書頁 682）</figcaption></figure>
+
+<p>在半導體雷射中，鏡面可以通過沿 (110) 面劈裂（cleaving）晶體自然形成——半導體-空氣界面的折射率差（GaAs：$\bar{n}\approx3.6$ → $\Gamma\approx0.32$）提供了約 32% 的反射率。腔長 $L$ 通常為數百 μm。</p>
+<p>共振條件——腔長必須是半波長的整數倍：</p>
+
+<div class="eq">$$N\left(\frac{\lambda}{2\bar{n}}\right) = L \quad\Rightarrow\quad \lambda = \frac{2\bar{n}L}{N}$$</div>
+
+<p>由於 $L\gg\lambda$，腔內可以容納許多模式（縱模），模式間距 $\Delta\lambda\approx\lambda^2/(2\bar{n}L)$。典型值：GaAs 雷射，$L=300$ μm，$\lambda=850$ nm → $\Delta\lambda\approx0.3$ nm。</p>
+
+<p>光學共振腔提供回授，使特定方向與特定頻率的光在腔內反覆放大。</p>
+<p>Fabry–Pérot 腔由兩個反射端面形成，腔長決定允許的縱模間距。</p>
+<div class="callout"><strong>📌 腔體角色</strong> 共振腔不是只把光關起來；它選擇模式、提供回授，並把增益與損失條件轉成可觀察的閾值。</div>
+<div class="callout-warn"><strong>⚠ 常見誤解</strong> 反射率越高不一定所有表現都更好；輸出耦合、腔內損失與模式控制要一起看。</div>
+<details class="example"><summary>例題：由腔長判斷模式間距</summary><p>腔長越長，縱模間距越小；腔長越短，模式間距越大。因此單模設計常需要額外的光柵、分佈回授或腔體工程。</p></details>
+</section><section id="s14-6-3"><h2>14.6.3 閾值電流</h2><div class="section-keypoints"><strong>🔑 本節重點</strong> 增益–損失平衡 · 侷限因子 · 閾值載子密度 · 斜率效率</div>
+<p>雷射開始振盪的條件是：光在腔內往返一周的<strong>增益等於損耗</strong>。主要損耗來自：材料吸收（$\alpha$）和鏡面透射（部分光輸出）。閾值條件：</p>
+
+<div class="eq">$$\Gamma_1\Gamma_2\,\exp\left[2(\gamma_t - \alpha)L\right] = 1$$</div>
+
+<p>其中 $\Gamma_1,\Gamma_2$ 是兩面鏡的反射率。解出閾值增益：</p>
+
+<div class="eq">$$\gamma_t = \alpha + \frac{1}{2L}\ln\left(\frac{1}{\Gamma_1\Gamma_2}\right)$$</div>
+
+<p>增益 $\gamma$ 與注入電流密度 $J$ 的關係可近似為 $\gamma=\beta J$（$\beta$ 為增益因子，由實驗或理論決定）。因此閾值電流密度：</p>
+
+<div class="eq">$$\boxed{J_{th} = \frac{1}{\beta}\left[\alpha + \frac{1}{2L}\ln\left(\frac{1}{\Gamma_1\Gamma_2}\right)\right]}$$</div>
+
+<p>典型 GaAs 同質接面雷射的 $J_{th}\approx10^3$–$10^4$ A/cm²（室溫），這意味著需要相當大的電流才能達到雷射閾值——通常只能以脈衝模式操作以避免過熱。</p>
+
+<div class="callout-warn"><strong>⚡ 閾值以下 vs. 閾值以上</strong>：在 $I<i_ led nm>I_{th}$，受激輻射急劇增加，光功率隨電流的斜率陡增（斜率效率），光譜寬度急劇縮小到 $&lt;0.1$ nm，輸出變為相干光。這個轉折點在 $P$-$I$ 曲線上是一個明顯的拐點（kink），是判斷雷射是否正常工作的最直接指標。</i_></div>
+
+<p>雷射閾值發生在材料增益乘上光學侷限後，剛好補償鏡面損失與內部損失的時候。</p>
+<div class="callout"><strong>📌 閾值判讀</strong> 降低閾值的方法通常是提高材料增益、改善載子與光學侷限，或降低腔內與鏡面損失。</div>
+<details class="example"><summary>例題：判斷閾值電流變大的原因</summary><p>若溫度升高、缺陷增加或鏡面損失變大，達到相同淨增益所需的注入電流會提高。量測上可看到 L–I 曲線的閾值往高電流移動。</p></details>
+</section><section id="s14-6-4"><h2>14.6.4 元件結構與特性</h2><div class="section-keypoints"><strong>🔑 本節重點</strong> 雙異質結構 · 量子井 · 邊射型 · 溫度與可靠度</div>
+<p>同質接面雷射的問題：載子和光子都沒有被有效限制 → 閾值電流密度過高。</p>
+
+<figure class="figure"><a class="figure-link" href="../../pages/ch14_pages/ch14_page_678_c.png" target="_blank" rel="noopener"><img src="../../pages/ch14_pages/ch14_page_678_c.png" alt="Fig 14.28 雙異質結構雷射二極體的能帶圖與折射率分布" loading="lazy"></a><figcaption>圖 14.28：雙異質結構（DH）雷射二極體。(a) 零偏壓下的能帶圖——活性層 GaAs 夾在兩層寬能隙 AlGaAs 之間。(b) 折射率分布——GaAs（∼3.6）大於 AlGaAs（∼3.2–3.4），活性層形成介質波導。(c) 順向偏壓下的能帶圖——電子被 $\Delta E_c$ 限制在活性層中。（教科書頁 685）</figcaption></figure>
+
+<p>雙異質結構（double heterostructure, DH）雷射解決了這個問題：</p>
+<ul>
+<li><strong>載子限制：</strong>活性層（窄能隙 GaAs）夾在兩層寬能隙 AlGaAs 之間。注入的電子被導帶的能帶不連續（$\Delta E_c$）阻擋在活性層中 → 載子濃度更高 → 增益更大。</li>
+<li><strong>光學限制：</strong>GaAs 的折射率（∼3.6）大於 AlGaAs（∼3.2–3.4）→ 活性層形成介質波導 → 光子被限制在活性層中 → 光模體積更小 → 光學增益更高。</li>
+</ul>
+
+<p>DH 雷射的閾值電流密度可降至 ∼$10^3$ A/cm²（室溫連續波操作），比同質接面雷射低 1–2 個數量級。這使得室溫 CW 操作的半導體雷射成為可能——是光纖通訊、CD/DVD/Blu-ray、雷射列印等應用的基礎。</p>
+<p><strong>量子井雷射（Quantum Well Laser）：</strong>將活性層厚度縮小到 ∼10 nm（與 de Broglie 波長可比）→ 量子限制效應使能階分立 → 態密度從 3D 拋物線變為 2D 階梯函數 → 增益更高、閾值電流更低（∼$10^2$ A/cm²）。這是現代半導體雷射的標準技術。</p>
+<p>元件特性還包含斜率效率、光譜模式、溫度漂移與可靠度，這些量決定雷射能否進入實際系統。</p>
+
+<div class="callout"><strong>💡 為什麼異質結構在半導體雷射中不可或缺？</strong>同質接面雷射就像在一個沒有牆壁的房間裡點火——熱量和光都散失了。DH 結構同時提供了「載子牆」（能帶不連續）和「光子牆」（折射率差），把能量集中在活性層。沒有異質接面，就沒有實用的半導體雷射。第十二章的異質接面理論在這裡找到了它最重要的應用。</div>
+<div class="callout-warn"><strong>⚠ 常見誤解</strong> 雷射二極體的結構不只是為了導電；載子侷限、光學侷限與散熱可靠度都會直接決定閾值與壽命。</div>
+<details class="example"><summary>例題：判斷雙異質雷射為何降低閾值</summary><p>若窄能隙主動層被寬能隙材料夾住，載子較集中；若折射率同時形成波導，光場也集中。兩者讓同樣電流產生更高有效增益，因此閾值電流降低。</p></details>
+</section>
+
+<section id="photon-model"><h2>🧪 互動模型：光子能量、波長與能隙門檻</h2>
+<details class="pnm-disclosure model-host" data-photon-disclosure data-model-host="photon-bandgap">
+<summary><span class="pnm-closed-label">展開互動模型</span><span class="pnm-open-label">收合互動模型</span><small>調整波長，即時判斷光子是否足以跨越各材料的能隙</small></summary>
+<div class="pnm-disclosure-body">
+<div data-photon-model data-model-mount></div>
+</div>
+</details>
+</section>
+
+<section id="summary"><h2>14.7 本章總結</h2>
+<p>第十四章將前面十三章的所有核心物理概念——能隙、能帶、非平衡載子、復合、擴散、pn 接面、異質接面——整合為一個統一的框架，說明了半導體如何與光交互作用，以及這些交互作用如何轉化為實用的光電元件。</p>
+
+<h3>核心物理概念回顧</h3>
+<ol>
+<li><strong>光吸收</strong>由 $\alpha$ 描述，$I_\nu(x)=I_{\nu0}e^{-\alpha x}$。$\alpha$ 是 $h\nu$ 和 $E_g$ 的強函數，直接能隙材料的 $\alpha$ 陡峭且大，間接能隙材料則緩慢且小。</li>
+<li><strong>EHP 產生率</strong> $g=\alpha I_\nu/h\nu$，連結光子通量和載子動力學。穩態 $\delta n=g\tau$（第六章）。</li>
+<li><strong>太陽能電池 I-V 特性</strong>：$I=I_L-I_S(e^{eV/kT}-1)$，直接建立在第八章的理想二極體方程上。$I_{sc}=I_L$，$V_{oc}=V_t\ln(1+I_L/I_S)$，$\eta=P_m/P_{in}$。</li>
+<li><strong>光偵測器</strong>的核心指標是增益和速度。光導體增益 $\Gamma_{\text{ph}}=\tau_p/t_n$（可遠大於 1 但速度慢）；光二極體增益=1 但速度快；PIN 和 APD 提供了不同的增益-速度取捨組合。</li>
+<li><strong>發光效率</strong> $\eta_q=R_r/(R_r+R_{nr})$。直接能隙材料的 $R_r$ 比間接能隙大 $10^6$ 倍——這是 LED 和雷射必須用 GaAs、GaN 等材料的根本原因。</li>
+<li><strong>LED 的外部效率</strong>受 Fresnel 反射和臨界角全反射限制，$\eta_{\text{ext}}$ 通常僅 1%–3%。異質結構和表面工程可大幅改善。</li>
+<li><strong>雷射二極體</strong>需要三個條件：(a) 居量反轉（簡併摻雜 + 大順向偏壓）；(b) 光學共振腔（Fabry-Perot，增益 &gt; 損耗）；(c) 雙異質結構以限制載子和光子。$J_{th}\propto\alpha+(1/2L)\ln(1/\Gamma_1\Gamma_2)$。</li>
+</ol>
+
+<h3>材料選擇的核心教訓</h3>
+<table><caption>表 2：材料選擇的核心教訓</caption><thead><tr><th>應用</th><th>最佳材料</th><th>關鍵原因</th></tr></thead><tbody>
+<tr><td>太陽能電池</td><td>Si（單晶/多晶）、GaAs</td><td>Si：成本；GaAs：高效率（直接能隙+可調能隙）</td></tr>
+<tr><td>紅外 LED / 雷射</td><td>GaAs、InGaAsP</td><td>直接能隙，能隙匹配紅外波長</td></tr>
+<tr><td>可見光 LED</td><td>GaN、InGaN、GaAsP</td><td>寬直接能隙（藍/綠光：GaN ∼3.4 eV）</td></tr>
+<tr><td>高速光偵測器</td><td>InGaAs、Ge</td><td>在 1.3–1.55 μm（光纖最低損耗窗口）高吸收</td></tr>
+</tbody></table>
+
+<div class="callout-warn"><strong>⚡ 如果你只能記住一個概念：直接 vs. 間接能隙。</strong>這是第十四章所有設計取捨的根源。Si 在電子學無可匹敵，但在光電元件中，當你需要高效率的光發射或光吸收時，必須轉向 GaAs、InP、GaN 等直接能隙材料。這個教訓不僅適用於本章，也適用於整個半導體物理——<strong>材料的能帶結構決定了它能做什麼和不能做什麼</strong>。</div>
+
+<p>—— 第十四章完 · 全書終 ——</p>
+</section>
+<section id="common-mistakes"><h2>常見誤解</h2>
+<div class="callout-warn"><strong>⚠ 直接能隙與間接能隙不要混用。</strong>光吸收、LED 與雷射的效率差異，主要不是只由能隙大小決定，而是由動量守恆是否需要聲子參與決定。</div>
+<div class="callout-warn"><strong>⚠ 光產生不等於可收集電流。</strong>產生率只告訴你載子在哪裡出生；是否形成外部電流，還要看壽命、擴散長度、空乏區位置與表面復合。</div>
+<div class="callout-warn"><strong>⚠ 雷射不是高電流 LED。</strong>雷射需要受激放射、居量反轉與共振腔回授，達到閾值後光譜、同調性與斜率效率才會突變。</div>
+</section>
+<section id="self-check"><h2>自我檢核</h2>
+<details class="example"><summary>為什麼 Si 適合做電子元件，卻不是高效率發光材料？</summary><p>Si 是間接能隙材料，輻射復合需要聲子協助，機率遠低於直接能隙材料；因此在電晶體與積體電路中很強，但不適合做高效率 LED 或雷射。</p></details>
+<details class="example"><summary>太陽能電池的短路電流受哪些因素限制？</summary><p>主要受入射光譜、吸收係數、反射損失、生成深度、擴散長度、表面復合與空乏區收集效率共同限制。</p></details>
+<details class="example"><summary>PIN 光二極體與 APD 的核心取捨是什麼？</summary><p>PIN 偏向高速、低雜訊與低偏壓；APD 透過雪崩倍增提高弱光靈敏度，但需要高偏壓並引入倍增雜訊。</p></details>
+</section>
+<section id="extras"><h2>延伸資源</h2>
+<p>建議把本章與第 6 章非平衡載子、第 7 章 pn 接面、第 9 章異質接面一起複習，因為光電元件其實是在同一套載子產生、復合、漂移與擴散框架下運作。</p>
+<p>若要做題目，優先練習三類：由波長判斷能否吸收、由響應度或生成率估算光電流、由增益–損失平衡判斷雷射閾值。</p>
+</section>
+<section id="learning-resources"><h2>本章學習資源</h2><p><a href="../problems_examples/ch14_problems_zh.html">光電元件可驗算補充習題</a> · <a href="../problems_examples/examples_in_chapter_zh.html#ch14">章內例題</a></p></section>
+<section id="derivation-lab" class="derive"><h2>推導、假設與章末診斷</h2><h3>光電方程的完整假設與邊界</h3><ul><li>Beer–Lambert 定律假設單色平面光、均勻材料、$\alpha$ 不隨位置變化，並忽略干涉、多重反射與散射。</li><li>$G(x)=\alpha\Phi_0e^{-\alpha x}$ 假設每個被吸收光子產生一對可用電子–電洞；量子效率不足時乘 $\eta$。</li><li>理想太陽電池採疊加原理、單一接面、均勻溫度、無串聯／並聯漏電損失。</li><li>雷射閾值邊界是一個 round trip 的模態增益恰好抵銷內部與鏡面損失。</li></ul><h3>中間推導：吸收、光電流與響應度</h3><ol><li>$d\Phi/dx=-\alpha\Phi$，邊界 $\Phi(0)=\Phi_0$，故 $\Phi(x)=\Phi_0e^{-\alpha x}$。</li><li>每單位體積生成率 $G=-d\Phi/dx=\alpha\Phi$。</li><li>厚度 $d$ 內被收集的光子率為 $\Phi_0(1-e^{-\alpha d})$，乘 $qA\eta_c$ 得光電流。</li><li>若以入射功率表示，$\mathcal R=\eta q/(h\nu)=\eta q\lambda/(hc)$。</li></ol><div class="info-card"><strong>單位／量級：</strong>$\alpha$ [cm$^{-1}$]·$\Phi$ [cm$^{-2}$s$^{-1}$] = $G$ [cm$^{-3}$s$^{-1}$]。850 nm、$\eta=1$ 的最大響應度約 0.685 A/W。</div><h3>章末練習與概念診斷</h3><details><summary>為何 Si 適合吸光卻不擅長發光？</summary><p>Si 是間接能隙，輻射復合還需聲子協助；非輻射途徑競爭強，因此發光效率低。</p></details><details><summary>Laser 為何不是「電流更大的 LED」？</summary><p>它還需 population inversion、受激放射與腔體回授，且模態增益必須超過總損失的閾值。</p></details><h3>延伸計算練習</h3><p>完成上方診斷後，請在不查公式的情況下重建代表推導，並改變一個參數檢查極限行為。更多含數值與解答的題目：<a href="../problems_examples/ch14_problems_zh.html">本章完整習題頁</a>。</p></section>
+</main>
+</body>
+</html>

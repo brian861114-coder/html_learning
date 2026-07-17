@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第 8 章 氫原子 — The Physics of Quantum Mechanics</title>
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$'], ['\\[','\\]']],
+         macros: { bra: ["\\langle{#1}|", 1], ket: ["|{#1}\\rangle", 1],
+                   braket: ["\\langle{#1}\\rangle", 1] } },
+  options: { ignoreHtmlClass: "no-mathjax" }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<link rel="stylesheet" href="../../../../shared/core.css">
+<script src="../../../../shared/core.js" defer></script>
+<link rel="stylesheet" href="../../../../shared/navigation.css" data-shared-navigation>
+</head>
+<body>
+
+<nav class="sidebar" id="sidebar" aria-label="本章目錄"><div class="sidebar-header"><div class="sidebar-subtitle">量子力學</div><h2 class="sidebar-title">第 8 章 氫原子</h2></div><div class="toc">
+    <div class="nsub"><a href="#preview">本章預覽</a></div>
+    <div class="nsub"><a href="#s8-1">8.1 氫原子的粗結構</a></div>
+    <div class="nsub"><a href="#s8-1-1">8.1.1 發射光譜</a></div>
+    <div class="nsub"><a href="#s8-1-2">8.1.2 徑向本徵函數</a></div>
+    <div class="nsub"><a href="#s8-1-3">8.1.3 屏蔽效應</a></div>
+    <div class="nsub"><a href="#s8-1-4">8.1.4 r^{-k} 的期望值</a></div>
+    <div class="nsub"><a href="#s8-2">8.2 精細結構與超越</a></div>
+    <div class="nsub"><a href="#s8-2-1">8.2.1 自旋-軌道耦合</a></div>
+    <div class="nsub"><a href="#s8-2-2">8.2.2 超精細結構</a></div>
+    <div class="nsub"><a href="#summary">關鍵概念與公式</a></div>
+    <div class="nsub"><a href="#common-mistakes">常見錯誤</a></div>
+    <div class="nsub"><a href="#self-check">自我檢測</a></div>
+    <div class="nsub"><a href="#extras">延伸資源</a></div>
+  </div>
+<div class="sidebar-tools"><button type="button" data-action="toggle-theme" aria-label="切換深色或淺色模式">切換顯示主題</button></div></nav>
+
+<main class="chapter-page" data-chapter-title="第 8 章 氫原子" data-prev-href="ch7_angular_momentum_zh.html" data-prev-label="第 7 章 角動量" data-next-href="ch9_perturbation_zh.html" data-next-label="第 9 章 微擾理論">
+<!-- ====== 章首 ====== -->
+<header class="chapter-header">
+  <div class="chapter-subtitle">
+    <a href="#">量子力學</a> &rsaquo; <a href="ch7_angular_momentum_zh.html">Ch7</a> &rsaquo; Ch8
+  </div>
+  <h1>第 8 章　氫原子</h1>
+  <div class="chapter-meta">
+    <span>原書章節：Chapter 8, Hydrogen</span>
+    <span>原書頁碼：p181–199</span>
+    <span>章長：19 頁 &middot; 2 節 &middot; 氫原子粗結構與精細結構</span>
+  </div>
+</header>
+
+<!-- ====== 本章預覽 ====== -->
+<section class="chapter-preview" id="preview">
+  <h2>本章預覽</h2>
+
+  <div class="core-question">
+    <h3>核心問題</h3>
+    <p>原子構成了我們所見的一切——從我們自身到浩瀚的宇宙。氫原子是宇宙中最簡單、最豐富的原子，它是量子力學的試金石。那麼，<strong>量子力學如何精確預測氫原子的能階、光譜線和內部結構？為什麼一個質子和一個電子的結合能產生如此豐富的物理現象——從可見光譜的 Balmer 系列，到 21 公分超精細譜線，再到 Lamb 位移所揭示的真空極化？</strong></p>
+  </div>
+
+  <div class="deep-dive">
+    <h3>10 個關鍵概念</h3>
+    <ol>
+      <li><strong>約化質量與質心分離</strong>：$\mu = m_e m_n/(m_e+m_n)$ 將雙體問題簡化為等效單體問題</li>
+      <li><strong>有效位能</strong>：$V_{\rm eff}(r) = l(l+1)\hbar^2/(2\mu r^2) - Ze^2/(4\pi\epsilon_0 r)$，離心位壘 + 庫侖吸引</li>
+      <li><strong>主量子數 n</strong>：決定能階 $E_n = -R/n^2$，$n = 1,2,\ldots$，$0 \le l \le n-1$</li>
+      <li><strong>Bohr 半徑</strong>：$a_0 = 0.529$ Å 是原子的自然長度尺度，基態波函數 $\propto e^{-r/a_0}$</li>
+      <li><strong>Rydberg 常數</strong>：$R = 13.6$ eV，$E_n = -13.6/n^2$ eV 決定所有氫光譜線</li>
+      <li><strong>光譜系列</strong>：Lyman（$n\to 1$，紫外）、Balmer（$n\to 2$，可見光）、Paschen（$n\to 3$，紅外）</li>
+      <li><strong>徑向波函數</strong>：$u_n^l(r) \propto r^l e^{-Zr/na_0} L_{n-l-1}^{(2l+1)}$，含 Laguerre 多項式</li>
+      <li><strong>自旋-軌道耦合</strong>：$H_{\rm SO} \propto \mathbf{S}\cdot\mathbf{L}/r^3$，來自相對論效應，產生精細結構分裂</li>
+      <li><strong>Lamb 位移</strong>：$|2,0,0\rangle$ 比 $|2,1,m\rangle$ 低 $4.4\times 10^{-6}$ eV——來自真空極化（QED 效應）</li>
+      <li><strong>超精細結構</strong>：21 cm 譜線（1.42 GHz）來自電子-質子自旋耦合，是星際氫氣體探測的關鍵</li>
+    </ol>
+  </div>
+
+  <div class="deep-dive">
+    <h3>🧭 本章推理地圖</h3>
+    <ol>
+      <li><strong>雙體 Hamiltonian</strong>（§8.1）→ 質心分離 → <strong>等效單體問題</strong>（§8.1）</li>
+      <li>等效單體 Schrödinger 方程（§8.1）→ 球對稱 → <strong>徑向 + 角向分離</strong>（§8.1）</li>
+      <li>徑向方程 + 梯階算子 $A_l$（§8.1）→ <strong>能階公式</strong> $E_n = -R/n^2$、量子數 $(n,l,m)$（§8.1）</li>
+      <li>能階公式（§8.1）→ <strong>發射光譜系列</strong>（Lyman, Balmer, Paschen）（§8.1.1）</li>
+      <li>$A_l^\dagger$ 作用於圓軌道波函數（§8.1.2）→ <strong>一般徑向波函數</strong> $u_n^l(r)$（§8.1.2）</li>
+      <li>屏蔽修改 $Z \to Z(r)$（§8.1.3）→ <strong>l 依賴的能量分裂</strong>（§8.1.3）→ Lamb 位移的物理基礎</li>
+      <li>相對論修正 + 電子自旋（§8.2）→ <strong>自旋-軌道耦合</strong>（§8.2.1）→ 精細結構分裂</li>
+      <li>質子磁矩（§8.2.2）→ <strong>超精細 Hamiltonian</strong> → 21 cm 譜線（§8.2.2）</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ====== 先備知識橋接 ====== -->
+<section class="prerequisite">
+  <h2>先備知識橋接</h2>
+  <p>本章假設讀者已掌握以下來自前七章的知識：</p>
+  <ul>
+    <li><strong>角動量理論（第 7 章）</strong>：$L^2$ 與 $L_z$ 的本徵值、球諧函數 $Y_l^m$、徑向動量算子 $p_r$、自旋 $\frac{1}{2}$ 系統的角動量相加</li>
+    <li><strong>Schrödinger 方程（第 2 章）</strong>：定態、本徵值問題、位置表象中的微分方程</li>
+    <li><strong>諧振子（第 3 章）</strong>：梯階算子方法——本章使用完全相同的技巧來解氫原子的徑向方程</li>
+    <li><strong>三維諧振子（第 7 章）</strong>：徑向 Hamiltonian 的分離、徑向波函數的節點結構</li>
+    <li><strong>電磁學</strong>：庫侖定律、向量勢、磁偶極矩</li>
+    <li><strong>複數與機率振幅（第 1 章）</strong>：波函數的模平方為機率密度</li>
+  </ul>
+  <p>如果你對自旋-軌道耦合中的相對論修正感到陌生，不用擔心——本章將逐步引導。<strong>最重要的不是記住所有推導細節，而是理解：為什麼氫原子的能階只依賴主量子數 n（而非 l）——這是庫侖位能的隱藏對稱性造成的簡併。</strong></p>
+</section>
+
+
+<section class="deep-dive" id="s8-intro">
+<h2>原子：量子力學的試金石</h2>
+<div class="section-keypoints">
+  <strong>🔑 本節重點</strong>
+  <span>① 原子構成了我們所見的一切——從自身到宇宙</span>
+  <span>② 量子力學的發展史與原子物理密不可分</span>
+  <span>③ 氫原子是唯一可以精確求解的原子——是所有原子物理的基礎</span>
+</div>
+
+  <p>無論我們望向何處——望向自身或望向宇宙的浩瀚——我們所見的都是原子。原子與自身以及與電磁輻射的交互作用，塑造了我們周圍的世界，賦予所有事物——無論是有生命的還是無生命的——顏色、質地、固態或流態。在更廣闊的宇宙中，可見物質聚集為恆星和星系的方式，取決於原子與輻射之間的相互作用。</p>
+
+  <p>原子結構除了固有的興趣之外，還有一個歷史事實：量子力學的形成時期 dominated by 原子結構的實驗研究。這個學科的大部分原理都是為了解釋原子現象而發展的，而這些現象在物理學家心目中的地位，因為它們在 revolutionizing 物理學中所扮演的角色而大大提升。</p>
+
+  <p>不幸的是，原子是複雜的系統，不容易被建模到它們通常被測量的精度。原子的複雜性隨著它所含電子數的增加而增加——這不僅因為電子之間相互作用，也因為電子越多，核電荷越高，電子運動越快。到了元素週期表的中部，最快電子的速度已經接近光速，相對論效應變得重要。</p>
+
+  <p>在本章中，我們為最簡單的原子——氫——發展一個模型，這個模型能解釋大部分（但不是全部）測量結果。在第 10 章中，我們將邁向第二複雜原子——氦——的模型，並指出沿著元素週期表前進時原子性質的一般趨勢。我們所使用的思想將 heavily 依賴本章發展的氫-like 系統模型。</p>
+
+  <div class="callout">
+    <strong>💡 為什麼氫原子如此特殊？</strong><br>
+    氫原子是唯一一個 Schrödinger 方程可以精確求解的原子。它的解——量子數 $(n,l,m)$、徑向波函數、能階公式——構成了所有原子物理的基礎。更複雜的原子（氦、鋰……）的近似方法，都以氫原子的精確解為出發點。此外，氫原子的光譜是天文物理學中最重要的觀測工具之一——從恆星的化學組成到宇宙膨脹的發現，都依賴於氫光譜線的精確知識。
+  </div>
+</section>
+
+<!-- ====== 8.1 粗結構 ====== -->
+<section class="deep-dive" id="s8-1">
+<h2>8.1　氫原子的粗結構</h2>
+<div class="section-keypoints">
+  <strong>🔑 本節重點</strong>
+  <span>① 忽略自旋與相對論效應的「粗結構」模型——只有動能與靜電位能</span>
+  <span>② 雙體問題透過質心分離化為等效單體問題，涉及約化質量 $\mu$</span>
+  <span>③ 徑向 Hamiltonian $H_l$ 與有效位能 $V_{\rm eff}$：離心位壘 + 庫侖吸引</span>
+  <span>④ 梯階算子 $A_l$ 給出能階 $E_n = -R/n^2$，量子數 $(n,l,m)$ 且 $l < n$</span>
+  <span>⑤ 基態能量 $-13.6$ eV、Bohr 半徑 $a_0 = 0.529$ Å</span>
+</div>
+
+  <p>我們從一個相當粗略的氫-like 離子模型開始。在這個模型中，電子和原子核都沒有自旋，電子在純靜電力下非相對論性地運動。使用這些近似得到的原子或離子結構稱為其<strong>粗結構</strong>（gross structure）。這些近似使我們易於寫下模型的 Hamiltonian，因為它們只包含三個能量貢獻：原子核和電子的動能，以及它們之間的靜電結合能：</p>
+  <div class="eq">$$H = \frac{p_n^2}{2m_n} + \frac{p_e^2}{2m_e} - \frac{Ze^2}{4\pi\epsilon_0|\mathbf{x}_e - \mathbf{x}_n|} \tag{8.1}$$</div>
+
+  <p>其中 $\mathbf{x}_e$ 和 $\mathbf{x}_n$ 分別是電子和原子核的位置算子，$\mathbf{p}_e$ 和 $\mathbf{p}_n$ 是相應的動量算子。在位置表象中，動量算子變為導數算子，本徵值方程變為六個變數的偏微分方程。關鍵的一步是引入六個新變數：</p>
+  <div class="eq">$$\mathbf{X} \equiv \frac{m_e\mathbf{x}_e + m_n\mathbf{x}_n}{m_e + m_n}, \qquad \mathbf{r} \equiv \mathbf{x}_e - \mathbf{x}_n \tag{8.3}$$</div>
+
+
+  <p><strong>變數變換的詳細推導：</strong>利用鏈式法則：</p>
+  <div class="eq">$$\frac{\partial}{\partial x_e} = \frac{\partial X}{\partial x_e} \cdot \frac{\partial}{\partial X} + \frac{\partial r}{\partial x_e} \cdot \frac{\partial}{\partial r} = \frac{m_e}{m_e+m_n}\frac{\partial}{\partial X} + \frac{\partial}{\partial r} \tag{8.4}$$</div>
+  <p>對自身取點積得到 $\nabla_e^2$。類似地計算 $\nabla_n^2$。將 $m_e^{-1}\nabla_e^2$ 和 $m_n^{-1}\nabla_n^2$ 相加時，交叉項（混合導數）恰好相消，留下：</p>
+  <p>$\mathbf{X}$ 是離子質心的位置，$\mathbf{r}$ 是從原子核指向電子的向量。透過繁瑣但直接的導數變換，動能項變成：</p>
+  <div class="eq">$$m_e^{-1}\nabla_e^2 + m_n^{-1}\nabla_n^2 = \frac{1}{m_e+m_n}\nabla_X^2 + \frac{1}{\mu}\nabla_r^2 \tag{8.6a}$$</div>
+  <p>其中<strong>約化質量</strong>（reduced mass）定義為：</p>
+  <div class="eq">$$\mu \equiv \frac{m_e m_n}{m_e + m_n} \tag{8.6b}$$</div>
+
+  <p>對氫原子而言 $m_n = m_p = 1836\,m_e$，約化質量與電子質量相差極小（$\mu = 0.99945\,m_e$）。將變數變換代入原方程，Hamiltonian 分裂為兩部分：一個是質量 $m_e+m_n$ 的自由粒子的 Hamiltonian $H_K$，另一個是質量 $\mu$ 的粒子被原點吸引的 Hamiltonian $H_r$。因為 $H_K$ 和 $H_r$ 對易，我們可以假設波函數為乘積形式：</p>
+  <div class="eq">$$\psi(\mathbf{x}_e, \mathbf{x}_n) = K(\mathbf{X})\,\psi_r(\mathbf{r}) \tag{8.8}$$</div>
+
+  <h3>徑向 Hamiltonian 與有效位能</h3>
+  <p>自由粒子的動力學我們已充分了解，因此只需關注內部結構的 Hamiltonian $H_r$。利用第 7 章的結果（方程 7.69），我們可以將動能項用徑向動量算子 $p_r$ 和總軌道角動量算子 $L^2$ 表示。$H_r$ 的本徵值方程變為：</p>
+  <div class="eq">$$H \equiv \frac{p_r^2}{2\mu} + \frac{\hbar^2 L^2}{2\mu r^2} - \frac{Ze^2}{4\pi\epsilon_0 r} \tag{8.11}$$</div>
+
+  <p>$L^2$ 與 $H$ 對易，因為 $H$ 中唯一涉及角度 $\theta,\phi$ 的地方就是 $L^2$ 本身。因此存在 $H$、$L^2$ 和 $L_z$ 的完備共同本徵態 $|E,l,m\rangle$，使得 $L^2|E,l,m\rangle = l(l+1)|E,l,m\rangle$。對於這些 ket，算子 $H$ 等效於<strong>徑向 Hamiltonian</strong>：</p>
+  <div class="eq">$$H_l \equiv \frac{p_r^2}{2\mu} + \frac{l(l+1)\hbar^2}{2\mu r^2} - \frac{Ze^2}{4\pi\epsilon_0 r} \tag{8.12}$$</div>
+
+  <p>這個算子是粒子在<strong>有效位能</strong>中做一維運動的 Hamiltonian：</p>
+  <div class="eq">$$V_{\rm eff}(r) \equiv \frac{l(l+1)\hbar^2}{2\mu r^2} - \frac{Ze^2}{4\pi\epsilon_0 r} \tag{8.13}$$</div>
+
+  <div class="callout">
+    <strong>💡 有效位能的物理圖像</strong><br>
+    有效位能 $V_{\rm eff}$ 中的第一項是角動量守恆所要求的<strong>切向運動動能</strong>——它的作用如同一個離心位壘（centrifugal barrier），阻止粒子過於接近原點。第二項是靜電位能。對於 $l>0$，$V_{\rm eff}$ 在 $r \to 0$ 時發散到 $+\infty$（被離心位壘排斥），在中等 $r$ 處有一個最小值，然後在 $r \to \infty$ 時趨近於 $0$（從下方）。這解釋了為什麼電子不會塌縮到原子核上——量子力學中，角動量提供了有效的排斥力。
+  </div>
+
+  <p>電子為什麼不會塌縮到原子核上？在古典物理中，電子沿著軌道運動，離心力與庫倘吸引平衡。但在量子力學中，沒有確切的「軌道」。電子不會塌縮的真正原因是測不準原理：如果電子太接近原子核，位置不確定度 Delta x 极小，動量不確定度 Delta p 极大，動能极大－——這抵消了位能的降低。有效位能的最小值位置正是位能與動能競爭的平衡點。
+
+  <figure class="figure" id="fig-8-1">
+    <svg class="content-diagram" viewBox="0 0 520 280" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" width="520" height="280" fill="#f8f9fa" rx="8"/>
+      <line x1="50" y1="30" x2="50" y2="250" stroke="#333" stroke-width="1.5"/>
+      <line x1="50" y1="220" x2="500" y2="220" stroke="#333" stroke-width="1.5"/>
+      <text x="30" y="140" font-size="12" fill="#333" text-anchor="middle">V_eff</text>
+      <text x="280" y="270" font-size="12" fill="#333" text-anchor="middle">r</text>
+      <path d="M 60,60 C 100,100 150,220 500,240" fill="none" stroke="#e74c3c" stroke-width="2"/>
+      <path d="M 70,30 C 90,80 110,190 200,220 L 500,240" fill="none" stroke="#3498db" stroke-width="2"/>
+      <path d="M 80,20 C 100,60 130,180 220,220 L 500,240" fill="none" stroke="#2ecc71" stroke-width="2"/>
+      <text x="430" y="210" font-size="11" fill="#e74c3c">l=0</text>
+      <text x="430" y="195" font-size="11" fill="#3498db">l=1</text>
+      <text x="430" y="180" font-size="11" fill="#2ecc71">l=2</text>
+      <text x="50" y="225" font-size="10" fill="#555">0</text>
+      <line x1="50" y1="220" x2="500" y2="220" stroke-dasharray="4,3" stroke="#999"/>
+      <text x="470" y="230" font-size="10" fill="#999">-Ze²/4πε₀r</text>
+    </svg>
+    <figcaption><strong>圖 8.1</strong>　氫原子的有效位能 $V_{\rm eff}(r)$。$l=0$（紅色）是純庫侖吸引；$l>0$ 時離心位壘在 $r\to 0$ 時占主導，形成一個位能最小值。曲線從下到上對應 $l=0,1,2$。</figcaption>
+  </figure>
+
+  <h3>梯階算子解法</h3>
+  <p>$H_l$ 與我們在三維諧振子中解過的徑向 Hamiltonian（方程 7.81）非常相似。我們使用基本相同的技巧，定義無因次梯階算子：</p>
+  <div class="eq">$$A_l \equiv \frac{a_0}{\sqrt{2}}\left(\frac{i}{\hbar}p_r - \frac{l+1}{r} + \frac{Z}{(l+1)a_0}\right) \tag{8.15a}$$</div>
+  <p>其中我們定義了<strong>Bohr 半徑</strong>：</p>
+  <div class="eq">$$a_0 \equiv \frac{4\pi\epsilon_0\hbar^2}{\mu e^2} = 5.29177 \times 10^{-11}\,\text{m} = 0.529\,\text{Å} \tag{8.15b}$$</div>
+
+  <div class="callout">
+    <strong>💡 Bohr 半徑的物理意義</strong><br>
+    將方程 (8.15b) 改寫為 $e^2/(4\pi\epsilon_0 a_0) = (\hbar/a_0)^2/\mu$。左邊是距離 $a_0$ 處的靜電位能，右邊是位置不確定度 $\sim a_0$ 的粒子零點運動動能的兩倍（§3.1）。這說明了 $a_0$ 為什麼是原子的「自然尺標」——它標誌著位能與動能競爭的平衡點。
+  </div>
+
+  <p>Bohr 半徑也是原子物理中其他長度的參考尺度。例如，原子的共價鍾長度約為 $ 的倍數，電子雵勞能的数量級為 ^2/(4\pi\epsilon_0 a_0) \approx 27.2$ eV（2 倍 Rydberg 常數），而原子光譜線的波長約為 /\alpha \approx 100$ nm（紫外區）。這些數字從 $ 出發可以輕鬆估算。
+
+
+  <p><strong>梯階算子乘積的詳細計算：</strong>$A_l^\dagger A_l$ 的計算涉及將兩個一階微分算子相乘。展開後得到三項：(1) $p_r^2/\hbar^2$ 項（來自 $ip_r$ 與 $-ip_r$ 的乘積）；(2) $[(l+1)/r - Z/(l+1)a_0]^2$ 項（來自位能項的平方）；(3) 交叉項，利用 $[r,p_r]=i\hbar$ 計算。關鍵的簡化來自交叉項：$i p_r[(l+1)/r] - [(l+1)/r](-ip_r)$ 的對易子恰好產生 $i\hbar(l+1)/r^2$。將所有項合併後：</p>
+  <p>計算 $A_l^\dagger A_l$，利用對易關係 $[r,p_r]=i\hbar$，我們得到：</p>
+  <div class="eq">$$A_l^\dagger A_l = \frac{a_0^2\mu}{\hbar^2} H_l + \frac{Z^2}{2(l+1)^2} \tag{8.17}$$</div>
+
+  <p>類似地，$A_l A_l^\dagger$ 的計算只差一個符號變化：</p>
+  <div class="eq">$$A_l A_l^\dagger = \frac{a_0^2\mu}{\hbar^2} H_{l+1} + \frac{Z^2}{2(l+1)^2} \tag{8.18}$$</div>
+
+  <p>從而對易子為 $[A_l, A_l^\dagger] = (a_0^2\mu/\hbar^2)(H_{l+1} - H_l)$。透過將 $H_l$ 寫成：</p>
+  <div class="eq">$$H_l = \frac{\hbar^2}{\mu a_0^2}\left(A_l^\dagger A_l - \frac{Z^2}{2(l+1)^2}\right) \tag{8.20}$$</div>
+
+  <p>並計算 $[A_l, H_l]$，我們證明了 $A_l$ 是梯階算子：$A_l H_l = H_{l+1} A_l$。這意味著 $A_l$ 將能量從電子的徑向運動轉移到切向運動——重複應用 $A_l, A_{l+1}, \ldots$ 最終會達到一個圓軌道，其角動量量子數記為 $L(E)$。$A_L$ 必須湮滅 $|E,L\rangle$，因為否則會有更大角動量的態。利用 $A_L|E,L\rangle = 0$ 及方程 (8.17)，定義<strong>主量子數</strong> $n \equiv L+1$，獲得氫原子的能階公式：</p>
+  <div class="eq">$$E_n = -\frac{Z^2\hbar^2}{2\mu a_0^2 n^2} = -\frac{Z^2 e^2}{8\pi\epsilon_0 a_0 n^2} = -\frac{Z^2 \mu e^4}{2n^2(4\pi\epsilon_0\hbar)^2} \tag{8.25}$$</div>
+
+  <p>定義<strong>Rydberg 常數</strong> $R$：</p>
+  <div class="eq">$$R \equiv \frac{\hbar^2}{2\mu a_0^2} = \frac{e^2}{8\pi\epsilon_0 a_0} = \frac{1}{2}\mu\left(\frac{e^2}{4\pi\epsilon_0\hbar}\right)^2 = 13.6056923\,\text{eV} \tag{8.26}$$</div>
+
+  <p>因此氫原子中允許的 $E$ 和 $l$ 值為：</p>
+  <div class="eq">$$E = -\frac{R}{n^2}\quad(n=1,2,\ldots),\qquad 0 \le l \le n-1 \tag{8.27}$$</div>
+
+  <div class="callout-warn">
+    <strong>⚠️ $l < n$ 的限制來自何處？</strong><br>
+    從物理上看，$l$ 不能超過 $n-1$ 是因為角動量來自於徑向與切向運動之間的競爭。$n$ 給定時，$l=n-1$ 對應「圓軌道」（最大角動量、最少徑向節點），而 $l=0$ 對應高度偏心的軌道（零角動量、最多徑向節點）。從數學上看，梯階算子 $A_l$ 遞減 $l$ 的過程必須終止——$A_L|E,L\rangle=0$ 給出了 $l$ 的上限。
+  </div>
+
+  <p>此後我們用 $n$ 而非 $E$ 來標記 ket 和波函數，因此 $|n,l,m\rangle = |n,l\rangle|l,m\rangle$ 是氫-like 離子的定態。基態是 $|1,0,0\rangle$。第一激發能階是四重簡併的，由 $|2,0,0\rangle$、$|2,1,0\rangle$ 和 $|2,1,\pm1\rangle$ 張成。第二激發能階是九重簡併的，依此類推。氫原子模型中，具有不同 $l$ 但相同能量的態——這是我們模型一個隱藏對稱性的反映（見附錄 F）。</p>
+
+<!-- ====== 8.1.1 發射光譜 ====== -->
+<section class="deep-dive" id="s8-1-1">
+<h2>8.1.1　發射光譜</h2>
+<div class="section-keypoints">
+  <strong>🔑 本節重點</strong>
+  <span>① 氫原子躍遷頻率：$\nu = (R/h)(1/n'^2 - 1/n^2)$</span>
+  <span>② Lyman 系列（$n'=1$）：紫外，Ly$\alpha$ 在 121.5 nm</span>
+  <span>③ Balmer 系列（$n'=2$）：可見光，H$\alpha$ 在 656.2 nm</span>
+  <span>④ 能階標度為 $Z^2$——Moseley 定律解釋了 X 射線光譜</span>
+</div>
+
+  <p>氫原子可以將其 $n$ 值改變為較小的 $n'$，將釋放的能量以頻率 $\nu = (E_n - E_{n'})/h$ 的光子形式發射出去。因此氫的發射光譜包含下列頻率的譜線：</p>
+
+  <p>光譜系列的命名來自發現它們的科學家：Lyman 系列以 Theodore Lyman（1906年）命名，Balmer 系列以 Johann Balmer（1885年）命名，Paschen 系列以 Friedrich Paschen（1908年）命名。Balmer 系列是最早被發現的，因為它們落在可見光區域。在 Bohr 模型（1913 年）提出之前，這些光譜線的規律性完全是純粹的經驗發現。Bohr 的量子化條件第一次為這些規律提供了理論解釋。
+  <div class="eq">$$\nu = \frac{R}{h}\left(\frac{1}{n'^2} - \frac{1}{n^2}\right) \tag{8.28}$$</div>
+
+  <p>與給定低能階 $n'$ 相關的譜線形成一系列頻率遞增、波長遞減的譜線。與 $n'=1$ 關聯的系列稱為<strong>Lyman 系列</strong>，其最長波長成員是 Lyman $\alpha$ 線（121.5 nm），隨後是 Ly$\beta$（102.5 nm），直至系列極限 91.2 nm。與 $n'=2$ 關聯的系列稱為<strong>Balmer 系列</strong>，始於 H$\alpha$（656.2 nm），續以 H$\beta$（486.1 nm），趨向系列極限 364.6 nm。與 $n'=3$ 關聯的是 Paschen 系列，$n'=4$ 是 Brackett 系列。</p>
+
+  <figure class="figure" id="fig-8-2">
+    <svg class="content-diagram" viewBox="0 0 520 280" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" width="520" height="280" fill="#f8f9fa" rx="8"/>
+      <!-- Energy levels -->
+      <line x1="80" y1="40" x2="280" y2="40" stroke="#333" stroke-width="1.5"/>
+      <text x="290" y="44" font-size="11" fill="#333">n=∞ (0 eV)</text>
+      <line x1="80" y1="70" x2="280" y2="70" stroke="#333" stroke-width="1"/>
+      <text x="290" y="74" font-size="11" fill="#333">n=4</text>
+      <line x1="80" y1="105" x2="280" y2="105" stroke="#333" stroke-width="1"/>
+      <text x="290" y="109" font-size="11" fill="#333">n=3</text>
+      <line x1="80" y1="160" x2="280" y2="160" stroke="#333" stroke-width="1.5"/>
+      <text x="290" y="164" font-size="11" fill="#333">n=2</text>
+      <line x1="80" y1="240" x2="280" y2="240" stroke="#333" stroke-width="2"/>
+      <text x="290" y="244" font-size="11" fill="#333">n=1 (−13.6 eV)</text>
+      <!-- Lyman series -->
+      <path d="M 200,70 L 180,240" stroke="#9b59b6" stroke-width="2" marker-end="url(#arrow)"/>
+      <path d="M 200,105 L 160,240" stroke="#9b59b6" stroke-width="2"/>
+      <path d="M 240,240 L 220,240" stroke="#9b59b6" stroke-width="2"/>
+      <text x="320" y="160" font-size="11" fill="#9b59b6">Lyman (UV)</text>
+      <!-- Balmer series -->
+      <path d="M 180,105 L 140,160" stroke="#e74c3c" stroke-width="2"/>
+      <path d="M 220,160 L 200,160" stroke="#e74c3c" stroke-width="2"/>
+      <text x="320" y="130" font-size="11" fill="#e74c3c">Balmer (visible)</text>
+      <!-- Paschen series -->
+      <path d="M 160,70 L 100,105" stroke="#3498db" stroke-width="2"/>
+      <text x="320" y="85" font-size="11" fill="#3498db">Paschen (IR)</text>
+    </svg>
+    <figcaption><strong>圖 8.2</strong>　氫原子的 Lyman、Balmer 和 Paschen 光譜系列示意圖。箭頭表示電子從高能階躍遷到低能階，發射光子。</figcaption>
+  </figure>
+
+  <p>方程 (8.25) 指出，對於給定的 $n$，電子的能量與 $Z^2$ 成正比。對於多電子原子，電子之間的電磁相互作用使這個比例關係失效。然而，對於 $n$ 最小的電子，這個比例關係近似成立，因為這些電子被束縛在原子核附近，其動力學幾乎不受較大半徑處電子的影響。<strong>Henry Moseley</strong>（1887–1915）研究了原子被自由電子轟擊時發射的 X 射線頻率。他證明不同元素的類似光譜線的頻率似乎與原子序數的平方成正比——這就是<strong>Moseley 定律</strong>。Moseley 的實驗導致鈷和鎳的原子序數被反轉，並正確預測了原子序數 43、61、72、75、87 和 91 的元素將被發現。</p>
+</section>
+
+<!-- ====== 8.1.2 徑向本徵函數 ====== -->
+<section class="deep-dive" id="s8-1-2">
+<h2>8.1.2　徑向本徵函數</h2>
+<div class="section-keypoints">
+  <strong>🔑 本節重點</strong>
+  <span>① 圓軌道（$l=n-1$）徑向波函數：$u_n^{n-1}(r) \propto r^{n-1} e^{-Zr/na_0}$</span>
+  <span>② 基態波函數：$\psi_{100} \propto e^{-r/a_0}$，指數衰減，尺度為 $a_0$</span>
+  <span>③ $A_l^\dagger$ 遞減 $l$ 產生偏心軌道——每步增加一個徑向節點</span>
+  <span>④ 所有徑向波函數為實函數 → 徑向機率流為零</span>
+</div>
+
+  <p>尋找氫-like 離子任何徑向本徵函數的第一步是將圓軌道 $(l=n-1)$ 的方程 $A_{n-1}|n,n-1\rangle = 0$ 寫為徑向波函數的微分方程：</p>
+  <div class="eq">$$\frac{\partial}{\partial r}u_n^{n-1} + \left(-\frac{n-1}{r} + \frac{Z}{na_0}\right)u_n^{n-1} = 0 \tag{8.29}$$</div>
+  <p>其中 $u_n^l(r) \equiv \langle r|n,l\rangle$。這是一階線性微分方程，其積分因子為 $r^{-(n-1)}e^{Zr/na_0}$，因此所需的徑向波函數為：</p>
+  <div class="eq">$$u_n^{n-1}(r) = C\, r^{n-1} e^{-Zr/na_0} \tag{8.32}$$</div>
+
+  <p>這個波函數與三維諧振子圓軌道的波函數（方程 7.97）非常相似——唯一的區別是高斯函數被簡單的指數函數取代。指數中的尺度長度是 $(n/Z)a_0$，因此它隨能量增加而增加，隨核電荷增加而減小。這在物理上完全合理：能量越高的電子可以離核越遠，而核電荷越高的原子核將其（最內層）電子束縛得更緊。</p>
+
+  <div class="callout">
+    <strong>💡 基態波函數的物理圖像</strong><br>
+    設 $n=1$ 得到基態徑向波函數：
+    $$u_1^0(r) = 2\left(\frac{Z}{a_0}\right)^{3/2} e^{-Zr/a_0} \tag{8.36}$$
+    完整的基態波函數為 $\psi_{100}(\mathbf{r}) = u_1^0(r) Y_0^0 = u_1^0(r)/\sqrt{4\pi}$。電子在 $r > 2a_0/Z$ 處被發現的機率約為 $13/e^4 \simeq 0.24$——在古典物理中，電子在這些半徑處的機率為零，因為位能已經超過總能量。這是<strong>量子穿隧</strong>的一個溫和範例。
+  </div>
+
+
+  <p><strong>歸一化計算：</strong>歸一化條件 $\int_0^\infty |u_n^{n-1}|^2 dr = 1$ 涉及 Gamma 函數積分 $\int_0^\infty r^{2n-2} e^{-2Zr/na_0} dr = (2n-2)!/(2Z/na_0)^{2n-1}$。利用這個結果，歸一化常數為 $C = (2Z/na_0)^{n+1/2}/\sqrt{(2n)!}$。因此：</p>
+  <p>透過正確歸一化（使用 Box 8.1 中的 Gamma 函數積分），圓軌道徑向波函數為：</p>
+  <div class="eq">$$u_n^{n-1}(r) = \frac{1}{\sqrt{(2n)!}}\left(\frac{2Z}{na_0}\right)^{3/2}\left(\frac{2Zr}{na_0}\right)^{n-1} e^{-Zr/na_0} \tag{8.35}$$</div>
+
+  <p>對於 $n>1$，波函數從原點處的零上升到位於 $r = n(n-1)a_0/Z$ 的峰值，然後隨 $r$ 增加而指數衰減。圓軌道的期望值計算顯示：</p>
+  <div class="eq">$$\langle n,n-1,m|r|n,n-1,m\rangle = \frac{n(n+\tfrac{1}{2})a_0}{Z} \tag{8.37}$$</div>
+
+  <p>在大 $n$ 的古典極限下，$\langle r\rangle \simeq n^2 a_0/Z$，因此 $E \propto 1/n^2 \propto 1/\langle r\rangle$——正如古典物理所預測的。此外，rms 不確定度為 $\langle r\rangle/\sqrt{2n+1}$，因此隨著 $n$ 增加，$r$ 的不確定度以 $n^{3/2}$ 增長，但相對不確定度以 $n^{-1/2}$ 減小。</p>
+
+  <p>這些結果具有深遠的意義。當 $n$ 很大時，電子的軌道接近古典的 Kepler 橢圓——相對不確定度趨於零，量子力學的預測趨近古典力學。這就是<strong>對應原理</strong>的一個精確實現。歷史上，這些高度激發的態被稱為<strong>Rydberg 原子</strong>，它們的體積是基態原子的 $n^4$ 倍（因為 $\langle r\rangle \propto n^2$），壽命隨 $n^3$ 增長。現代實驗可以精確操控 Rydberg 原子，用於量子資訊處理和精密測量。</p>
+
+  <p>從圓軌道出發，應用 $A_l^\dagger$ 可以生成 $l < n-1$ 的徑向波函數。對 $A_l^\dagger$ 的具體形式進行操作（方程 8.42）：</p>
+  <div class="eq">$$A_l^\dagger = -\frac{a_0}{\sqrt{2}}\left(\frac{\partial}{\partial r} + \frac{l+2}{r} - \frac{Z}{(l+1)a_0}\right) \tag{8.42}$$</div>
+
+  <p>作用於 $u_n^{n-1}$ 可得：</p>
+  <div class="eq">$$u_n^{n-2}(r) = \text{constant} \times \left(1 - \frac{Zr}{n(n-1)a_0}\right) r^{n-2} e^{-Zr/na_0} \tag{8.43}$$</div>
+
+  <p>這個波函數在 $r = n(n-1)a_0/Z$ 處有一個節點。每當 $A^\dagger$ 遞減角動量並增加徑向運動的能量時，徑向波函數的節點數就增加一個——與三維諧振子中觀察到的模式相同。</p>
+
+  <figure class="figure" id="fig-8-3">
+    <svg class="content-diagram" viewBox="0 0 500 240" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" width="500" height="240" fill="#f8f9fa" rx="8"/>
+      <line x1="50" y1="200" x2="480" y2="200" stroke="#333" stroke-width="1.5"/>
+      <line x1="50" y1="200" x2="50" y2="30" stroke="#333" stroke-width="1.5"/>
+      <text x="270" y="230" font-size="12" fill="#333">r / a₀</text>
+      <text x="25" y="115" font-size="12" fill="#333" text-anchor="middle">uₙˡ(r)</text>
+      <!-- n=1,l=0 -->
+      <path d="M 50,195 Q 100,100 250,198 Q 350,200 480,200" fill="none" stroke="#e74c3c" stroke-width="2"/>
+      <text x="350" y="140" font-size="10" fill="#e74c3c">n=1, l=0</text>
+      <!-- n=2,l=0 -->
+      <path d="M 50,195 C 80,80 150,150 200,198 C 250,210 350,200 480,200" fill="none" stroke="#3498db" stroke-width="2"/>
+      <text x="350" y="160" font-size="10" fill="#3498db">n=2, l=0</text>
+      <!-- n=3,l=2 circular -->
+      <path d="M 50,198 C 100,140 200,150 280,198 C 350,205 420,200 480,200" fill="none" stroke="#2ecc71" stroke-width="2"/>
+      <text x="350" y="180" font-size="10" fill="#2ecc71">n=3, l=2</text>
+    </svg>
+    <figcaption><strong>圖 8.3</strong>　氫原子徑向波函數 $u_n^l(r)$ 的示意圖。$n=1,l=0$（紅色）無節點；$n=2,l=0$（藍色）有一個節點；$n=3,l=2$（綠色）為無節點的圓軌道。所有波函數在 $r\to\infty$ 時指數衰減。</figcaption>
+  </figure>
+
+  <p>值得注意的是，因為 $u_n^{n-1}(r)$ 是實函數且 $A_l^\dagger$ 是實算子，所有徑向本徵函數都是實函數。由於機率流 $\mathbf{J}$ 正比於波函數相位的梯度（方程 2.87），$u_n^l(r)$ 的實性意味著原子內部的機率流沒有徑向分量。這在物理上非常合理：電子同時向內和向外運動，在任何給定點上，電子向內運動和向外運動的可能性相同。</p>
+
+  <p>對於 $n \sim 100$ 的原子，其體積是基態原子的 $10^{12}$ 倍。因此，只有在高真空密度下，這種高度激發的原子才能被視為孤立系統。射電望遠鏡探測到星際介質中氫原子從 $n\simeq 100$ 降低 $n$ 值（變化量 $\delta n$）時發射的譜線輻射。這種躍遷的頻率為：</p>
+  <div class="eq">$$\nu_n \simeq 6.58\left(\frac{100}{n}\right)^3 \delta n\;\text{GHz} \tag{8.39}$$</div>
+
+  <details class="example">
+    <summary>📝 自編概念例：氫原子能階與光譜的計算</summary>
+    <div class="example-body">
+      <p><strong>題目：</strong>(a) 計算氫原子從 $n=3$ 躍遷到 $n=2$ 時發射光子的波長（H$\alpha$ 線）。(b) 計算 $n=2, l=0$ 態中電子最可能出現的半徑。</p>
+      <p><strong>解：</strong></p>
+      <p>(a) 氫原子能階：$E_n = -13.6/n^2$ eV。</p>
+      <div class="eq">$$\Delta E = E_2 - E_3 = 13.6\left(\frac{1}{4} - \frac{1}{9}\right) = 1.889\,\text{eV}$$</div>
+      <p>波長：$\lambda = hc/\Delta E = 1240/1.889 \approx 656.3$ nm——著名的紅色 H$\alpha$ 線。</p>
+      <p>(b) $n=2, l=0$ 的徑向波函數為 $u_2^0(r) \propto (2 - r/a_0)e^{-r/2a_0}$。徑向機率密度為 $r^2|u_2^0(r)|^2 \propto r^2(2-r/a_0)^2 e^{-r/a_0}$。</p>
+      <p>對 $r$ 求導找最大值，可得最可能半徑 $r \approx 5.24a_0$。</p>
+      <p><strong>物理意義：</strong>$n=2$ 態的電子比基態電子的分佈範圍大得多——這與 $E_2 = -3.4$ eV 的較小束縛能一致。</p>
+    </div>
+  </details>
+</section>
+
+<!-- ====== 8.1.3 屏蔽效應 ====== -->
+<section class="deep-dive" id="s8-1-3">
+<h2>8.1.3　屏蔽效應</h2>
+<div class="section-keypoints">
+  <strong>🔑 本節重點</strong>
+  <span>① 真實原子中靜電位能偏離精確 $1/r$ 形式——真空極化、核有限大小、多電子屏蔽</span>
+  <span>② 屏蔽模型：$Z(r) = Z_0(1 + a/r)$ → 有效角動量 $l'$ 非整數</span>
+  <span>③ 屏蔽導致能階依賴於 $l$（破壞庫侖簡併），偏心軌道能量較低</span>
+  <span>④ Lamb 位移：$|2,0,0\rangle$ 比 $|2,1,m\rangle$ 低 $4.4\times10^{-6}$ eV——真空極化的直接證據</span>
+</div>
+
+  <p>束縛電子所處的靜電位能從未精確正比於 $1/r$。偏離的原因包括：(1) 質子和中子具有非零半徑；(2) 原子核附近的強電場導致真空中產生非零電荷密度（量子電動力學效應——電子-正子對不斷被產生和湮滅）；(3) 多電子原子中，其他電子的量子不確定性使其電荷分佈於原子核周圍的空間中。</p>
+
+  <p>這些現象統稱為<strong>屏蔽</strong>（shielding）。我們透過將 Hamiltonian 中的原子序數 $Z$ 替換為半徑的遞減函數來建模屏蔽：</p>
+  <div class="eq">$$Z(r) = Z_0\left(1 + \frac{a}{r}\right) \tag{8.44}$$</div>
+  <p>其中 $Z_0$ 和 $a$ 是可調參數。對於 $r \gg a$，核電荷趨向最大屏蔽值 $Z_0 e$。這個選擇使得徑向 Hamiltonian 變為：</p>
+  <div class="eq">$$H'_l = \frac{p_r^2}{2\mu} + \frac{\{l(l+1)-\beta\}\hbar^2}{2\mu r^2} - \frac{Z_0 e^2}{4\pi\epsilon_0 r} \tag{8.45a}$$</div>
+  <p>其中 $\beta \equiv Z_0 a \mu e^2/(2\pi\epsilon_0\hbar^2)$。有效角動量 $l'$ 由 $l'(l'+1) = l(l+1)-\beta$ 定義，且一般 $l'$ 不是整數。結果是能階公式 (8.25) 中的 $n$ 被非整數取代，且能量現在<strong>同時依賴於 $n$ 和 $l$</strong>。可以證明當 $l$ 增加 1 時，$l'$ 增加超過 1——因此在給定主量子數的態中，$l$ 最大的態具有最小的束縛能。這在物理上完全合理：偏心軌道（小 $l$）使電子接近原子核，在那裡核電荷看起來最大。</p>
+
+  <div class="callout-warn">
+    <strong>⚠️ 屏蔽破壞了庫侖簡併——但這是真實物理！</strong><br>
+    未屏蔽的粗結構模型中，$E_n$ 只依賴 $n$ 而不依賴 $l$——這是庫侖位能的特殊性質（附錄 F 中的 Runge-Lenz 向量對稱性）。屏蔽破壞了這個簡併，使 $l$ 較小的態（偏心軌道）具有較低的能量，因為它們感受到更大的有效核電荷。在真實原子中，即使是最簡單的氫原子，量子電動力學效應也產生微小的 $l$ 依賴性——這就是 Lamb 位移的來源。
+  </div>
+
+  <p>1947 年，<strong>Lamb 和 Retherford</strong> 證明在氫中 $|2,0,0\rangle$ 態比 $|2,1,m\rangle$ 態低 $4.4 \times 10^{-6}$ eV——這與 Dirac 方程的樸素預測相反（Dirac 方程預測這兩個態應具有相同能量）。這個<strong>Lamb 位移</strong>來自質子周圍真空中電子-正子對的屏蔽效應——它是量子電動力學（QED）最早的實驗確認之一。</p>
+</section>
+
+<!-- ====== 8.1.4 r^{-k} 期望值 ====== -->
+<section class="deep-dive" id="s8-1-4">
+<h2>8.1.4　$r^{-k}$ 的期望值</h2>
+<div class="section-keypoints">
+  <strong>🔑 本節重點</strong>
+  <span>① $\langle r^{-1}\rangle = Z/(n^2 a_0)$——來自 Virial 定理</span>
+  <span>② $\langle r^{-2}\rangle = Z^2/(a_0^2 n^3(l+\frac{1}{2}))$——來自屏蔽模型的微擾推導</span>
+  <span>③ $\langle r^{-3}\rangle = Z^3/(a_0^3 n^3 l(l+1)(l+\frac{1}{2}))$——來自 $[H,p_r]=0$</span>
+  <span>④ $r^{-k}$ 對 $l$ 的敏感度隨 $k$ 增加——反映偏心軌道對小 $r$ 行為的敏感性</span>
+</div>
+
+  <p>我們需要 $\langle r^{-k}\rangle$ 的公式來計算精細結構和超精細結構中的能量位移。使用<strong>Virial 定理</strong>（方程 2.93）：對於位能 $\propto r^{-1}$ 的系統，$2\langle T\rangle = -\langle V\rangle$。結合 $\langle T\rangle + \langle V\rangle = E$，得 $\langle V\rangle = 2E$，因此：</p>
+  <div class="eq">$$\langle r^{-1}\rangle = \frac{Z}{n^2 a_0} \tag{8.54}$$</div>
+
+  <p>為獲得 $\langle r^{-2}\rangle$，我們利用第 9 章將證明的結果：當 Hamiltonian 加上項 $\beta H_1$ 時，本徵能量成為 $\beta$ 的函數，且 $dE/d\beta|_{\beta=0} = \langle H_1\rangle$。將 $H_1 = -\hbar^2/(2\mu r^2)$ 應用到屏蔽模型的精確本徵值上，我們得到：</p>
+  <div class="eq">$$\langle r^{-2}\rangle = \frac{Z^2}{a_0^2 n^3(l+\frac{1}{2})} \tag{8.58}$$</div>
+
+  <p>最後，利用定態中任何可觀察量與 $H$ 的對易子的期望值為零，從 $[H, p_r] = 0$ 出發：</p>
+  <div class="eq">$$0 = \langle[H, p_r]\rangle = \frac{l(l+1)\hbar^2}{2\mu}\langle[r^{-2}, p_r]\rangle - \frac{Ze^2}{4\pi\epsilon_0}\langle[r^{-1}, p_r]\rangle \tag{8.59}$$</div>
+
+  <p>利用 $[r, p_r] = i\hbar$ 計算對易子，並代入已得的 $\langle r^{-2}\rangle$，得到：</p>
+  <div class="eq">$$\langle r^{-3}\rangle = \frac{Z^3}{a_0^3 n^3 l(l+1)(l+\frac{1}{2})} \tag{8.60}$$</div>
+
+  <div class="callout">
+    <strong>💡 $r^{-k}$ 期望值的模式</strong><br>
+    三個 $\langle r^{-k}\rangle$ 值遵循一個清晰的模式：首先是基本原子尺度 $a_0/Z$ 的 $-k$ 次方；分母上有 $2k$ 個量子數的乘積，反映了原子大小隨 $n^2$ 增長的趨勢；隨著 $k$ 從 1 增加到 3，$l$ 的因子也從零增加到三個，反映了 $\langle r^{-3}\rangle$ 對軌道偏心率的增長敏感性——偏心軌道（小 $l$）使電子更接近原子核，因此對 $r^{-3}$ 的貢獻更大。這對精細結構計算至關重要。
+  </div>
+</section>
+
+<!-- ====== 8.2 精細結構與超越 ====== -->
+<section class="deep-dive" id="s8-2">
+<h2>8.2　精細結構與超越</h2>
+<div class="section-keypoints">
+  <strong>🔑 本節重點</strong>
+  <span>① 自旋-軌道耦合將 $E_{n,l}$ 分裂為不同 $j$ 的能級</span>
+  <span>② 相對論修正與自旋-軌道耦合同量級，合稱精細結構</span>
+  <span>③ Lamb 位移打破 $2S_{1/2}$ 和 $2P_{1/2}$ 的簡併——需要 QED 解釋</span>
+  <span>④ 超精細結構來自電子磁矩與核磁矩的交互作用，產生 21 cm 線</span>
+</div>
+
+  <p>到目前為止，我們的氫原子理論忽略了相對論效應和電子自旋。這些效應雖然比庫侖能量小很多（比例約為 $\alpha^2 \sim 10^{-4}$，其中 $\alpha = e^2/(4\pi\epsilon_0\hbar c) \approx 1/137$ 是精細結構常數），但它們帶來了可觀測的能級分裂，並且揭示了更深層的物理。</p>
+
+  <p>具體例子：自旋-軌道耦合的能量修正正比於 $\langle r^{-3}
+\rangle$ ——因為 {SO} \propto \mathbf{l} \cdot \mathbf{s}/r^3$。對於 =0$ 的態，$\langle r^{-3}
+\rangle$ 的公式癴接發散（分母有 $），這表示自旋-軌道耦合在 =0$ 時不生效——這與物理直覺一致，因為 =0$ 的態沒有軌道角動量。
+
+  <h3 id="s8-2-1">自旋-軌道耦合</h3>
+
+  <p>電子有自旋角動量 $\mathbf{s}$ 和軌道角動量 $\mathbf{l}$。在電子的靜止系中，帶電的原子核繞電子運動，形成一個環形電流，這個電流在電子位置處產生磁場。這個磁場與電子的自旋磁矩 $\boldsymbol{\mu}_s = -g_s \mu_B \mathbf{s}/\hbar$（其中 $g_s \approx 2$，$\mu_B = e\hbar/(2m_e)$ 是 Bohr 磁子）交互作用，產生能量位移。具體而言，在電子靜止系中，原子核的運動產生磁場 $\mathbf{B} \propto \mathbf{l}/r^3$，交互作用能量為 $-\boldsymbol{\mu}_s \cdot \mathbf{B} \propto \mathbf{s} \cdot \mathbf{l}/r^3$。但由於我們是在非慣性系中（電子有加速度），Thomas 進動帶來一個額外的因子 $1/2$。最終結果：</p>
+  <p>電子有自旋角動量 $\mathbf{s}$ 和軌道角動量 $\mathbf{l}$。在電子的靜止系中，原子核繞電子運動產生磁場，這個磁場與電子自旋磁矩交互作用，產生能量位移：</p>
+  <div class="eq">$$H_{SO} = \frac{1}{2m_e^2 c^2} \frac{1}{r} \frac{dV}{dr} \mathbf{l} \cdot \mathbf{s} \tag{8.65}$$</div>
+  <p>其中 $V(r) = -Ze^2/(4\pi\epsilon_0 r)$ 是庫侖位能。這個 Hamiltonian 只在 $\mathbf{l} \cdot \mathbf{s}$ 的本徵態中對角化——也就是總角動量 $\mathbf{j} = \mathbf{l} + \mathbf{s}$ 的本徵態。利用 $\mathbf{j}^2 = \mathbf{l}^2 + \mathbf{s}^2 + 2\mathbf{l}\cdot\mathbf{s}$：</p>
+  <div class="eq">$$\langle \mathbf{l} \cdot \mathbf{s} \rangle = \frac{\hbar^2}{2}\big[j(j+1) - l(l+1) - s(s+1)\big] \tag{8.66}$$</div>
+  <p>對於氫原子（$s = 1/2$），$j = l \pm 1/2$（$l > 0$ 時）。這導致每個 $l > 0$ 的能級分裂為兩個：</p>
+  <div class="eq">$$\Delta E_{SO} = \frac{\alpha^2}{4} \frac{Z^4}{n^3 l(l+1/2)(l+1)} \times \begin{cases} l & \text{for } j = l + 1/2 \\ -(l+1) & \text{for } j = l - 1/2 \end{cases} \times E_n \tag{8.68}$$</div>
+
+  <div class="callout">
+    <strong>💡 自旋-軌道耦合的物理圖像</strong><br>
+    自旋-軌道耦合的本質是：電子的軌道運動在電子的靜止系中產生磁場，而電子的自旋磁矩與這個磁場的交互作用能量取決於 $\mathbf{l}$ 和 $\mathbf{s}$ 的相對方向。當 $j = l + 1/2$ 時，$\mathbf{l}$ 和 $\mathbf{s}$ 大致平行；當 $j = l - 1/2$ 時，它們大致反平行。兩者的能量差就是自旋-軌道耦合的效應。
+  </div>
+
+  <h3>相對論修正</h3>
+  <p>除了自旋-軌道耦合外，電子的相對論性動能修正也貢獻了同量級的能量位移。將 relativistic 動能 $K = \sqrt{p^2 c^2 + m_e^2 c^4} - m_e c^2$ 展開到 $p^4$ 項：</p>
+  <div class="eq">$$H_{\text{rel}} = -\frac{p^4}{8m_e^3 c^2} \tag{8.70}$$</div>
+  <p>利用微擾理論（第 9 章），這個項的能量修正為：</p>
+  <div class="eq">$$\Delta E_{\text{rel}} = -\frac{\alpha^2 Z^4}{2n^4} \left(\frac{n}{j+1/2} - \frac{3}{4}\right) E_n \tag{8.72}$$</div>
+
+  <h3>精細結構</h3>
+  <p>自旋-軌道耦合和相對論修正合稱<strong>精細結構</strong>。令驚訝的是，兩者的總效果只取決於 $n$ 和 $j$：</p>
+  <div class="eq">$$E_{nj} = E_n \left[1 + \frac{\alpha^2 Z^2}{n^2}\left(\frac{n}{j+1/2} - \frac{3}{4}\right)\right] \tag{8.73}$$</div>
+  <p>這意味著 $2S_{1/2}$（$n=2, l=0, j=1/2$）和 $2P_{1/2}$（$n=2, l=1, j=1/2$）在精細結構近似下是<strong>簡併的</strong>——它們有相同的 $n$ 和 $j$。這個簡併將被 Lamb 位移打破。</p>
+
+  <div class="callout-warn">
+    <strong>⚠️ 精細結構的適用範圍</strong><br>
+    方程 (8.73) 嚴格來說只適用於點狀原子核。真實原子核有有限大小，這會對 $s$ 態（$l=0$，電子有非零機率出現在核內）產生額外的修正。對於普通氫原子，這個效應極小；但對於 muonic 氫原子（電子被 muon 取代），有限大小效應非常顯著。
+  </div>
+
+  <h3>Lamb 位移</h3>
+  <p>1947 年，Willis Lamb 和 Robert Retherford 發現 $2S_{1/2}$ 和 $2P_{1/2}$ 之間有約 1057 MHz 的能量差——這就是<strong>Lamb 位移</strong>。這個效應無法用 Dirac 方程解釋，需要量子電動力學（QED）。</p>
+
+  <p>Lamb 位移的物理來源是<strong>真空漲落</strong>：電磁場的零點能導致電子不斷「抖動」。由於 $2S_{1/2}$ 和 $2P_{1/2}$ 的波函數在原子核附近的行為不同（$l=0$ 的態有非零波函數在原點），它們對這種抖動的響應不同，導致能量分裂。</p>
+
+  <p><strong>更詳細的物理圖像：</strong>在 QED 中，真空不是「空的」——電磁場的零點漲落不斷產生和湮滅虛光子和電子-正子對。這些虛粒子在質子周圍形成一個微小的「電荷雲」，部分屏蔽了質子的電荷。對於 $2S_{1/2}$ 態（$l=0$），電子有非零機率出現在質子附近（波函數在原點非零），因此感受到更大的有效電荷；對於 $2P_{1/2}$ 態（$l=1$），波函數在原點為零，電子「避開」了屏蔽區域。這個差異導致 $2S_{1/2}$ 的能量略高於 $2P_{1/2}$——打破精細結構的簡併。</p>
+
+  <div class="callout">
+    <strong>💡 QED 的第一次勝利</strong><br>
+    Lamb 位移的精確計算（由 Bethe 在 1947 年首先完成）是量子電動力學的第一個重大成功。Bethe 的計算結果與實驗吻合到約 10% 的精度，後來的高階計算將精度提升到 $10^{-12}$ 量級——這是物理學中理論與實驗符合最精確的例子之一。
+  </div>
+
+  <h3 id="s8-2-2">超精細結構</h3>
+  <p>比精細結構更小的效應是<strong>超精細結構</strong>——來自電子磁矩與原子核磁矩的交互作用。質子有自旋 $I = 1/2$，其磁矩 $\mu_p = g_p \mu_N \mathbf{I}/\hbar$（其中 $\mu_N = e\hbar/(2m_p)$ 是核磁子）與電子的磁場交互作用。</p>
+
+  <p>超精細 Hamiltonian 為：</p>
+  <div class="eq">$$H_{HF} = -\boldsymbol{\mu}_p \cdot \mathbf{B}_e \tag{8.78}$$</div>
+  <p>其中 $\mathbf{B}_e$ 是電子在原子核處產生的磁場。對於 $s$ 態（$l=0$），這個磁場主要來自電子自旋磁矩。結果是基態（$n=1, l=0$）分裂為兩個能級，對應總角動量 $F = I + J = 0$ 或 $1$：</p>
+  <div class="eq">$$\Delta E_{HF} = \frac{4}{3} g_p \frac{m_e}{m_p} \alpha^2 |E_1| \approx 5.88 \times 10^{-6} \text{ eV} \tag{8.80}$$</div>
+  <p>對應的躍遷頻率為：</p>
+  <div class="eq">$$\nu = \frac{\Delta E_{HF}}{h} \approx 1420 \text{ MHz} \quad (\lambda \approx 21 \text{ cm}) \tag{8.81}$$</div>
+
+  <p>這條 <strong>21 cm 線</strong>是天文物理學中最重要的譜線之一。它是中性氫原子的特徵輻射，可以用來探測星際介質的分布和運動。由於它的波長遠大於塵埃顆粒，可以穿透整個銀河系——這是可見光無法做到的。</p>
+
+  <p>21 cm 線在天文物理中的應用極為廣泛：它被用來測量銀河系的旋轉曲線、探測星際介質的溫度和密度、研究星系的形成和演化。在宇宙學中，21 cm 線用於探測宇宙的「暗時代」（第一個星系形成之前），因為它是少數可以從那個時代觀測到的訊號之一。
+
+  <div class="callout-warn">
+    <strong>⚠️ 不要混淆三個尺度</strong><br>
+    精細結構（$\sim \alpha^2 E_n \sim 10^{-4}$ eV）、Lamb 位移（$\sim \alpha^3 E_n \sim 10^{-6}$ eV）和超精細結構（$\sim (m_e/m_p)\alpha^2 E_n \sim 10^{-9}$ eV）是三個不同尺度的效應。它們的物理來源完全不同：精細結構來自相對論修正，Lamb 位移來自 QED 真空漲落，超精細結構來自核磁矩。
+  </div>
+
+  <details class="example">
+    <summary>📝 自編概念例：氫原子光譜的精細結構</summary>
+    <div class="example-body">
+      <p><strong>題目：</strong>氫原子 $n=2$ 能級的精細結構分裂。計算 $2P_{3/2}$ 和 $2P_{1/2}$ 之間的能量差。</p>
+      <p><strong>解：</strong>利用方程 (8.73)，$n=2$ 的精細結構修正為：</p>
+      <div class="eq">$$E_{2j} = E_2 \left[1 + \frac{\alpha^2}{4}\left(\frac{2}{j+1/2} - \frac{3}{4}\right)\right]$$</div>
+      <p>對於 $j = 3/2$：$E_{2,3/2} = E_2[1 + \alpha^2/4 \times (2/2 - 3/4)] = E_2[1 + \alpha^2/16]$</p>
+      <p>對於 $j = 1/2$：$E_{2,1/2} = E_2[1 + \alpha^2/4 \times (2/1 - 3/4)] = E_2[1 + 5\alpha^2/16]$</p>
+      <p>能量差：</p>
+      <div class="eq">$$\Delta E = E_{2,1/2} - E_{2,3/2} = E_2 \times \frac{4\alpha^2}{16} = \frac{\alpha^2}{4} |E_2| = \frac{(1/137)^2}{4} \times 3.4 \text{ eV} \approx 4.5 \times 10^{-5} \text{ eV}$$</div>
+      <p>對應頻率約 10.9 GHz，波長約 2.7 cm。</p>
+      <p><strong>物理意義：</strong>這個分裂遠小於 $n=1$ 和 $n=2$ 之間的能量差（10.2 eV），但可以用精密光譜儀觀測到。它是 Dirac 方程的直接預測，也是精細結構常數 $\alpha$ 的物理意義的直接體現。</p>
+    </div>
+  </details>
+</section>
+
+<!-- ====== 本章摘要 ====== -->
+<section id="summary">
+  <h2>本章摘要</h2>
+  <p>本章從 Schrödinger 方程出發，完整解出氫原子的能級結構，並考慮了精細結構和超精細結構修正。</p>
+  <div class="table-scroll" role="region" aria-label="本章關鍵概念與公式" tabindex="0">
+    <table>
+      <caption>本章關鍵概念、公式、適用條件與用途</caption>
+      <thead>
+        <tr>
+          <th scope="col">概念／公式</th>
+          <th scope="col">符號與單位</th>
+          <th scope="col">適用條件</th>
+          <th scope="col">用途</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">能級 $E_n = -\frac{Z^2}{2n^2} m_e c^2 \alpha^2$</th>
+          <td>$n = 1, 2, 3, \ldots$</th>
+          <td>點狀原子核、忽略精細結構</th>
+          <td>氫原子光譜的主要結構</th>
+        </tr>
+        <tr>
+          <th scope="row">Bohr 半徑 $a_0 = \frac{4\pi\epsilon_0\hbar^2}{m_e e^2}$</th>
+          <td>$a_0 \approx 0.529$ Å</th>
+          <td>氫原子（$Z=1$）</th>
+          <td>原子尺度的基本單位</th>
+        </tr>
+        <tr>
+          <th scope="row">量子數 $(n, l, m)$</th>
+          <td>$n \geq 1$, $0 \leq l < n$, $|m| \leq l$</th>
+          <td>庫侖位能</th>
+          <td>標記氫原子態</th>
+        </tr>
+        <tr>
+          <th scope="row">簡併度 $n^2$</th>
+          <td>每個 $n$ 有 $n^2$ 個態</th>
+          <td>純庫侖位能</th>
+          <td>氫原子的特殊對稱性</th>
+        </tr>
+        <tr>
+          <th scope="row">精細結構 $E_{nj}$</th>
+          <td>$\propto \alpha^2 E_n$</th>
+          <td>Dirac 方程</th>
+          <td>$l$ 簡併解除，依賴 $j$</th>
+        </tr>
+        <tr>
+          <th scope="row">Lamb 位移 $\sim 1057$ MHz</th>
+          <td>$\propto \alpha^3 E_n$</th>
+          <td>QED 效應</th>
+          <td>$j$ 簡併也部分解除</th>
+        </tr>
+        <tr>
+          <th scope="row">超精細 21 cm 線</th>
+          <td>$\nu \approx 1420$ MHz</th>
+          <td>核磁矩交互作用</th>
+          <td>天文物理探測中性氫</th>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ====== 常見錯誤 ====== -->
+<section id="common-mistakes">
+  <h2>初學者常見錯誤</h2>
+  <div class="callout-warn">
+    <strong>⚡ 錯誤一：混淆軌道角動量量子數 $l$ 和總角動量量子數 $j$</strong><br>
+    在沒有自旋-軌道耦合時，$l$ 是好量子數。但精細結構效應使 $j$ 成為好量子數，$l$ 不再守恆。標記能級時應使用 $j$ 而非 $l$。
+  </div>
+  <div class="callout-warn">
+    <strong>⚡ 錯誤二：以為 $n$ 決定一切</strong><br>
+    在 Bohr 模型中，$E_n$ 只取決於 $n$。但精細結構使 $E$ 也依賴 $j$，Lamb 位移進一步使 $E$ 依賴 $l$。$n$ 只是主要的量子數，不是唯一的。
+  </div>
+  <div class="callout-warn">
+    <strong>⚡ 錯誤三：把 21 cm 線當成電子躍遷</strong><br>
+    21 cm 線不是電子在不同軌道之間躍遷，而是同一軌道中質子自旋翻轉的結果。它的能量比可見光躍遷小了 $10^6$ 倍，但對天文物理極其重要。
+  </div>
+</section>
+
+<!-- ====== 自我檢測 ====== -->
+<section id="self-check">
+  <h2>自我檢測</h2>
+  <details class="self-check-item">
+    <summary>1. 氫原子的能級簡併度為何是 $n^2$？這個簡併的物理來源是什麼？</summary>
+    <div class="self-check-answer">
+      <p>每個 $n$ 對應 $l = 0, 1, \ldots, n-1$，每個 $l$ 對應 $2l+1$ 個 $m$ 值，加上自旋的 2 倍：$\sum_{l=0}^{n-1} 2(2l+1) = 2n^2$。簡併的物理來源是庫侖位能的 $SO(4)$ 對稱性——這比一般的旋轉對稱性 $SO(3)$ 更高，是氫原子的特殊性質。</p>
+      <p class="solution-note">正文依據：§8.1</p>
+    </div>
+  </details>
+  <details class="self-check-item">
+    <summary>2. 為什麼 $2S_{1/2}$ 和 $2P_{1/2}$ 在精細結構近似下是簡併的，但在 Lamb 位移後不再簡併？</summary>
+    <div class="self-check-answer">
+      <p>精細結構修正（方程 8.73）只取決於 $n$ 和 $j$，而 $2S_{1/2}$ 和 $2P_{1/2}$ 有相同的 $n=2$ 和 $j=1/2$，所以簡併。Lamb 位移來自 QED 真空漲落，其效果取決於波函數在原子核附近的行為——$l=0$ 的態（$S$ 態）有非零波函數在原點，而 $l=1$ 的態（$P$ 態）在原點為零，因此它們的 Lamb 位移不同。</p>
+      <p class="solution-note">正文依據：§8.2</p>
+    </div>
+  </details>
+  <details class="self-check-item">
+    <summary>3. 21 cm 線的物理機制是什麼？為什麼它對天文物理如此重要？</summary>
+    <div class="self-check-answer">
+      <p>21 cm 線來自氫原子基態中超精細結構的躍遷——質子自旋相對於電子自旋的翻轉。它的波長（21 cm）遠大於星際塵埃顆粒，因此可以穿透整個銀河系。天文學家用它來探測中性氫的分布、運動和密度——這是理解星系結構和演化的關鍵工具。</p>
+      <p class="solution-note">正文依據：§8.2</p>
+    </div>
+  </details>
+
+  <details class="self-check-item">
+    <summary>4. 氫原子的基態波函數 $\psi_{100}$ 在 $r > 2a_0$ 處仍有非零機率。這是否意味著電子「穿隧」出了原子？這與 $\alpha$ 粒子穿隧出原子核有何異同？</summary>
+    <div class="self-check-answer">
+      <p>是的，這是一種溫和的量子穿隧效應。在古典物理中，$E = -13.6$ eV 的電子不可能出現在 $r > a_0$（古典轉折點）之外，因為那裡的位能超過總能量。但在量子力學中，波函數在古典禁止區是指數衰減而非零。與 $\alpha$ 衰變的差異在於：(1) 氫原子的「穿隧」不改變系統的總能量——電子仍在束縛態中；(2) $\alpha$ 粒子穿隧後成為自由粒子，而氫原子中的電子只是有非零機率出現在較大半徑處。</p>
+      <p class="solution-note">正文依據：§8.1.2</p>
+    </div>
+  </details>
+  <details class="self-check-item">
+    <summary>5. 為什麼氫原子的能階只依賴 $n$ 而不依賴 $l$？這個簡併在更複雜的原子中為什麼不存在？</summary>
+    <div class="self-check-answer">
+      <p>氫原子的能階只依賴 $n$ 是庫侖位能 $V \propto 1/r$ 的特殊性質——它具有比 $SO(3)$ 旋轉對稱性更高的 $SO(4)$ 對稱性（由 Runge-Lenz 向量守恆所反映）。這個額外的對稱性使不同 $l$ 但相同 $n$ 的態具有相同能量。在多電子原子中，電子之間的排斥力破壞了 $1/r$ 位能的形式，從而破壞了 $SO(4)$ 對稱性——能階開始依賴 $l$。</p>
+      <p class="solution-note">正文依據：§8.1、§8.1.3</p>
+    </div>
+  </details>
+</section>
+
+<!-- ====== 延伸資源 ====== -->
+<section id="extras">
+  <h2>延伸資源與下一章</h2>
+  <ul class="resource-list">
+    <li><a href="#">本章公式整理</a></li>
+    <li><a href="#">本章例題與練習</a></li>
+  </ul>
+  <div class="further-reading">
+    <strong>下一章預告：微擾理論</strong>
+    <p>本章精確解出了氫原子的能級，但真實原子（如氦、鋰）無法精確求解。第 9 章將介紹微擾理論——一種系統性的近似方法，讓我們能從已知的精確解出發，計算小修正對能級的影響。這將解釋 Stark 效應、Zeeman 效應等重要物理現象。</p>
+    <a href="ch9_perturbation_zh.html">前往下一章 →</a>
+  </div>
+</section>
+
+</main>
+
+</body>
+</html>

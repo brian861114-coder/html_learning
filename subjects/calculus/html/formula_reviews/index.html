@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>公式複習 — Calculus 學習中心</title>
+<link rel="stylesheet" href="../../../../shared/core.css">
+<script src="../../../../shared/core.js" defer></script>
+</head>
+<body>
+<div class="portal-tools"><button data-action="toggle-theme" id="themeBtn">🌙 深色模式</button></div>
+
+<div class="container">
+<a class="portal-home-link" href="../../index.html">← 返回學習中心</a>
+<header>
+  <h1>📐 公式複習</h1>
+  <p>OpenStax Calculus · 章節公式速查</p>
+</header>
+
+<div class="card-grid">
+  <a class="info-card" href="ch03_derivatives_formula_zh.html"><h2>第 3 章 導數公式</h3><div class="chapter-meta">48 條公式：微分法則、三角導數、連鎖律、指數對數導數</div></a>
+  <a class="info-card" href="ch05_integration_formula_zh.html"><h3>第 5 章 積分公式</h3><div class="chapter-meta">46 條公式：基本積分表、FTC、代換法</div></a>
+  <div class="info-card status-message"><h3>第 4 章 導數應用</h3><div class="chapter-meta">即將推出</div></div>
+  <div class="info-card status-message"><h3>第 6 章 積分應用</h3><div class="chapter-meta">即將推出</div></div>
+  <div class="info-card status-message"><h3>第 7 章 積分技巧</h3><div class="chapter-meta">即將推出</div></div>
+  <div class="info-card status-message"><h3>第 9 章 級數檢驗</h3><div class="chapter-meta">即將推出</div></div>
+  <div class="info-card status-message"><h3>第 14 章 偏導數</h3><div class="chapter-meta">即將推出</div></div>
+  <div class="info-card status-message"><h3>第 16 章 向量微積分定理</h3><div class="chapter-meta">即將推出</div></div>
+</div>
+</div>
+
+<script>
+function toggleTheme(){
+  const html = document.documentElement;
+  const isDark = html.getAttribute('data-theme') === 'dark';
+  html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+  document.getElementById('themeBtn').textContent = isDark ? '🌙 深色模式' : '☀️ 淺色模式';
+  localStorage.setItem('calc-theme', isDark ? 'light' : 'dark');
+}
+(function(){
+  const s = localStorage.getItem('calc-theme');
+  if (s === 'dark') { document.documentElement.setAttribute('data-theme','dark'); document.getElementById('themeBtn').textContent='☀️ 淺色模式'; }
+})();
+</script>
+</body>
+</html>

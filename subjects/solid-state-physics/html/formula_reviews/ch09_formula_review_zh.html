@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>第九章 公式摘要 — 金半接面與異質接面（30 條完整版）</title>
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']],tags:'ams'},options:{ignoreHtmlClass:'no-math'}};</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script defer src="../assets/course-ui.js"></script>
+<link rel="stylesheet" href="../../../../shared/core.css">
+<script src="../../../../shared/core.js" defer></script>
+<link rel="stylesheet" href="../../../../shared/components/formula-problem.css">
+<link rel="stylesheet" href="../../../../shared/navigation.css" data-shared-navigation>
+</head>
+<body>
+<a class="portal-home-link" href="../index.html">返回學習中心</a>
+<nav class="sidebar" aria-label="本章目錄"><div class="sidebar-header"><div class="sidebar-subtitle">半導體物理與元件</div><h2 class="sidebar-title">第九章：金半接面與異質接面</h2></div><div class="toc"><ul>
+<li class="ns">9.1 金半接面</li><li class="nsub"><a href="#s1">9.1.1 蕭特基能障</a></li><li class="nsub"><a href="#s2">9.1.2 空乏區·電場·電容</a></li><li class="nsub"><a href="#s3">9.1.3 費米能階釘札</a></li><li class="nsub"><a href="#s4">9.1.4–9.1.5 I-V·歐姆接觸</a></li>
+<li class="ns">9.2 異質接面</li><li class="nsub"><a href="#s5">9.2 異質接面·Anderson 定則</a></li>
+<li><a href="#cheatsheet">📋 公式速查表</a></li>
+</ul></div><div class="sidebar-tools"><button type="button" data-action="toggle-theme" aria-label="切換深色或淺色模式">切換顯示主題</button></div></nav>
+<main class="chapter-page">
+<div class="chapter-header"><div class="tag">30 條公式·全部收錄</div><h1>第九章：金半接面與異質接面</h1><div class="chapter-subtitle">Semiconductor Physics & Devices, 4th Ed.·Donald A. Neamen·pp.328–347</div></div>
+<div class="content-toolbar"><button data-action="expand-details">📖 展開全部</button><button data-action="collapse-details">📕 收合全部</button></div>
+
+<!-- 9.1.1 -->
+<div class="content-section" id="s1"><h2>9.1.1 蕭特基能障高度 (9.1–9.5)</h2>
+<details class="derive" open><summary>🔍 完整推導——從功函數到能障高度（5 條公式）</summary><div class="derive-body">
+<div class="step"><span class="step-number">1</span><span class="step-label">金屬與半導體的能帶參數 (9.1)</span><div class="step-content">金屬功函數 $\phi_m$ = 真空能階 $E_0$ − 金屬 Fermi 能階 $E_{Fm}$。<br>半導體電子親和力 $\chi$ = $E_0$ − 導帶底 $E_c$。<br>理想蕭特基-Mott 模型：<span class="math">$$\boxed{\phi_{Bn} = \phi_m - \chi} \quad\text{（n 型）} \tag{9.1}$$</span>p 型能障 (9.2)：$\phi_{Bp} = \chi + E_g - \phi_m$。</div></div>
+<div class="step"><span class="step-number">2</span><span class="step-label">接觸前後能帶變化 (9.3–9.5)</span><div class="step-content">接觸前：金屬 $E_{Fm}$ 和半導體 $E_{Fs}$ 可能不同 (9.3)。<br>接觸後：電子從 $E_F$ 較高一側流向較低一側→$E_F$ 對齊→半導體側能帶彎曲 (9.4–9.5)。<br>內建電位：$V_{bi} = \phi_{Bn} - \phi_n$，其中 $\phi_n = (kT/e)\ln(N_c/N_d)$ = n 型半導體 $E_c$ 與 $E_F$ 的距離。</div></div>
+</div></details>
+</div>
+
+<!-- 9.1.2 -->
+<div class="content-section" id="s2"><h2>9.1.2 空乏區·電場·電容 (9.6–9.11)</h2>
+<details class="derive" open><summary>🔍 完整推導——與 pn 接面相同的 Poisson 分析（6 條公式）</summary><div class="derive-body">
+<div class="step"><span class="step-number">1</span><span class="step-label">內建電位 (9.6–9.7)</span><div class="step-content"><span class="math">$$V_{bi} = \phi_{Bn} - \phi_n = \phi_{Bn} - \frac{kT}{e}\ln\frac{N_c}{N_d} \tag{9.6}$$</span></div></div>
+<div class="step"><span class="step-number">2</span><span class="step-label">空乏區寬度 (9.8–9.10)</span><div class="step-content">金屬側空乏區可忽略（電子濃度極高）。半導體側與單側突變 p⁺n 接面相同：<span class="math">$$W = x_n = \sqrt{\frac{2\epsilon_s(V_{bi}+V_R)}{e N_d}} \tag{9.10}$$</span>反向偏壓：$V_{bi}\to V_{bi}+V_R$→$W$ 變寬。</div></div>
+<div class="step"><span class="step-number">3</span><span class="step-label">最大電場與接面電容 (9.11)</span><div class="step-content">$E_{\text{max}} = eN_d W/\epsilon_s$。$C_j = \epsilon_s/W$（單位面積）。與 pn 接面完全相同。</div></div>
+</div></details>
+</div>
+
+<!-- 9.1.3 -->
+<div class="content-section" id="s3"><h2>9.1.3 費米能階釘札 (9.12–9.16)</h2>
+<div class="formula-card"><div class="formula-label">實際能障——表面態的影響</div><div class="eq">實際 $\phi_{Bn} \neq \phi_m - \chi$（偏離蕭特基-Mott 理想值）</div><div class="formula-note">原因：半導體表面有大量表面態（懸鍵）→釘住 Fermi 能階。Si 的 $\phi_{Bn}$ 通常在 0.4–0.9 eV，改變金屬只能調變 ∼0.2 eV。GaAs 的表面態密度更高→$\phi_{Bn}$ 幾乎與金屬無關。</div></div>
+</div>
+
+<!-- 9.1.4-9.1.5 -->
+<div class="content-section" id="s4"><h2>9.1.4–9.1.5 電流傳輸與歐姆接觸 (9.17–9.24)</h2>
+<details class="derive" open><summary>🔍 熱離子發射理論與歐姆接觸（8 條公式）</summary><div class="derive-body">
+<div class="step"><span class="step-number">1</span><span class="step-label">⭐ 熱離子發射模型 (9.17–9.20)</span><div class="step-content">電子靠熱能越過能障（無擴散、無復合）。電流密度：<span class="math">$$\boxed{J = J_S\left(e^{eV_a/kT} - 1\right),\quad J_S = A^*T^2 e^{-e\phi_{Bn}/kT}} \tag{9.17, 9.19}$$</span>$A^*$ = 有效 Richardson 常數（n-Si: ∼120 A/cm²K²）。</div></div>
+<div class="step"><span class="step-number">2</span><span class="step-label">蕭特基 vs pn 二極體比較 (9.20–9.22)</span><div class="step-content">$J_S$（蕭特基）$\propto T^2e^{-\phi_{Bn}/kT}$；$J_S$（pn）$\propto n_i^2\propto e^{-E_g/kT}$。<br>蕭特基 $J_S$ 遠大於 pn（因 $\phi_{Bn}<E_g$）→蕭特基有較低順向壓降、較大反向漏電流。</div></div>
+<div class="step"><span class="step-number">3</span><span class="step-label">⭐ 歐姆接觸 (9.23–9.24)</span><div class="step-content">特定接觸電阻率：<span class="math">$$\rho_c = \left(\frac{dJ}{dV}\right)^{-1}_{V=0} \propto \exp\!\left(\frac{e\phi_{Bn}}{kT}\right) \tag{9.23}$$</span>實現低 $\rho_c$ 的兩種方法：① 低能障（$\phi_m<\chi$）② 重摻雜（$N_d>10^{19}$→空乏區極窄→場發射穿隧主導→$\rho_c\propto e^{\text{const}/\sqrt{N_d}}$）(9.24)。</div></div>
+</div></details>
+</div>
+
+<!-- 9.2 -->
+<div class="content-section" id="s5"><h2>9.2 異質接面 (9.25–9.30)</h2>
+<div class="formula-card"><div class="formula-label">⭐ Anderson 定則——異質接面能帶對齊</div><div class="eq">$$\boxed{\Delta E_c = \chi_1 - \chi_2} \tag{9.26}$$</div><div class="eq">$$\boxed{\Delta E_v = \Delta E_g - \Delta E_c = (E_{g2}-E_{g1}) - (\chi_1-\chi_2)} \tag{9.27}$$</div><div class="formula-note">異質接面有三種類型：Type I（跨立）、Type II（錯開）、Type III（斷開）。GaAs/AlGaAs 為 Type I——$\Delta E_c$ 和 $\Delta E_v$ 同側→載子侷限在窄能隙層中。</div></div>
+</div>
+
+<div class="content-section" id="cheatsheet"><h2>公式速查表（30 條全收錄）</h2>
+<table><caption>表 1：公式速查表（30 條全收錄）</caption><thead><tr><th>Eq</th><th>公式</th><th>備註</th></tr></thead><tbody>
+<tr><td>9.1</td><td>$\phi_{Bn}=\phi_m-\chi$（n 型）</td><td>⭐ 蕭特基能障（理想）</td></tr>
+<tr><td>9.2</td><td>$\phi_{Bp}=\chi+E_g-\phi_m$（p 型）</td><td>p 型能障</td></tr>
+<tr><td>9.6</td><td>$V_{bi}=\phi_{Bn}-\phi_n$</td><td>內建電位</td></tr>
+<tr><td>9.10</td><td>$W=\sqrt{2\epsilon_s(V_{bi}+V_R)/(e N_d)}$</td><td>空乏區寬度</td></tr>
+<tr><td>9.11</td><td>$E_{\text{max}}=eN_dW/\epsilon_s$</td><td>最大電場</td></tr>
+<tr><td>9.17</td><td>$J=J_S(e^{eV_a/kT}-1)$</td><td>⭐ 蕭特基 I-V</td></tr>
+<tr><td>9.19</td><td>$J_S=A^*T^2 e^{-e\phi_{Bn}/kT}$</td><td>⭐ 熱離子發射飽和電流</td></tr>
+<tr><td>9.23</td><td>$\rho_c\propto e^{e\phi_{Bn}/kT}$</td><td>歐姆接觸電阻率</td></tr>
+<tr><td>9.24</td><td>$\rho_c\propto e^{\text{const}/\sqrt{N_d}}$</td><td>重摻雜場發射穿隧</td></tr>
+<tr><td>9.26</td><td>$\Delta E_c=\chi_1-\chi_2$</td><td>⭐ Anderson 定則（導帶偏移）</td></tr>
+<tr><td>9.27</td><td>$\Delta E_v=\Delta E_g-\Delta E_c$</td><td>價帶偏移</td></tr>
+</tbody></table></div></main>
+<script>
+function toggleTheme(){const h=document.documentElement;const n=h.getAttribute('data-theme')==='light'?'dark':'light';h.setAttribute('data-theme',n);localStorage.setItem('theme',n);document.getElementById('tl').textContent=n==='dark'?'淺色模式':'深色模式';}
+const s=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',s);if(s==='dark')document.getElementById('tl').textContent='淺色模式';
+const secs=document.querySelectorAll('.content-section[id]');const navs=document.querySelectorAll('.sn a');window.addEventListener('scroll',()=>{let c='';secs.forEach(s=>{if(window.scrollY>=s.offsetTop-80)c=s.getAttribute('id');});navs.forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+c);});});
+</script>
+</body>
+</html>

@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第 3 章 諧振子與磁場 — The Physics of Quantum Mechanics</title>
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$'], ['\\\\[','\\\\]']] },
+  options: { ignoreHtmlClass: 'no-mathjax' }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<link rel="stylesheet" href="../../../../shared/core.css">
+<script src="../../../../shared/core.js" defer></script>
+<link rel="stylesheet" href="../../../../shared/navigation.css" data-shared-navigation>
+</head>
+<body>
+
+<nav class="sidebar" id="sidebar" aria-label="本章目錄"><div class="sidebar-header"><div class="sidebar-subtitle">量子力學</div><h2 class="sidebar-title">第 3 章 諧振子與磁場</h2></div><div class="toc">
+    <div class="nsub"><a href="#preview">本章預覽</a></div>
+    <div class="nsub"><a href="#s3-1">3.1 諧振子的定態</a></div>
+    <div class="nsub"><a href="#s3-2">3.2 諧振子的動力學</a></div>
+    <div class="nsub"><a href="#s3-3">3.3 磁場中的運動</a></div>
+    <div class="nsub"><a href="#summary">關鍵概念與公式</a></div>
+    <div class="nsub"><a href="#common-mistakes">常見錯誤</a></div>
+    <div class="nsub"><a href="#self-check">自我檢測</a></div>
+    <div class="nsub"><a href="#extras">延伸資源</a></div>
+  </div>
+<div class="sidebar-tools"><button type="button" data-action="toggle-theme" aria-label="切換深色或淺色模式">切換顯示主題</button></div></nav>
+
+<main class="chapter-page" data-chapter-title="第 3 章 諧振子與磁場" data-prev-href="ch2_operators_zh.html" data-prev-label="第 2 章 運算子、測量與時間演化" data-next-href="ch4_transformations_zh.html" data-next-label="第 4 章 變換與可觀測量">
+<!-- ====== 章首 ====== -->
+<header class="chapter-header">
+  <div class="chapter-subtitle">
+    <a href="#">量子力學</a> &rsaquo; <a href="ch2_operators_zh.html">Ch2</a> &rsaquo; Ch3
+  </div>
+  <h1>第 3 章　諧振子與磁場</h1>
+  <div class="chapter-meta">
+    <span>原書章節：Chapter 3, Harmonic oscillators and magnetic fields</span>
+    <span>原書頁碼：p37–57</span>
+    <span>章長：21 頁 &middot; 3 節 &middot; 24 個問題</span>
+  </div>
+</header>
+
+<!-- ====== 本章預覽 ====== -->
+<section class="chapter-preview" id="preview">
+  <h2>本章預覽</h2>
+
+  <div class="core-question">
+    <h3>核心問題</h3>
+    <p>一個粒子在拋物線位能阱中來回振盪——這是物理學中最基本的動力學系統。從固體中原子的熱振動到量子電動力學中的光子，諧振子無處不在。<strong>但量子諧振子與古典諧振子有本質不同：它的能量是量子化的，最低能量不為零，而且我們可以用升降算符（ladder operators）這個極其優雅的代數方法直接求出所有能階，完全不需要解微分方程。</strong>更令人驚奇的是，同一套升降算符技術還能解決一個看似完全不相干的問題——帶電粒子在均勻磁場中的運動。這揭示了量子力學中代數結構的深層統一性。</p>
+  </div>
+
+  <div class="deep-dive">
+    <h3>10 個關鍵概念</h3>
+    <ol>
+      <li><strong>諧振子 Hamiltonian</strong>：$H = \frac{1}{2m}[p^2 + (m\omega x)^2]$——動能與位能的平方和</li>
+      <li><strong>升降算符（ladder operators）</strong>：$A = \frac{m\omega x + ip}{\sqrt{2m\hbar\omega}}$ 和 $A^\dagger$，滿足 $[A, A^\dagger] = 1$</li>
+      <li><strong>能階量子化</strong>：$E_n = (n + \frac{1}{2})\hbar\omega$，能階等間距，間隔 $\hbar\omega$</li>
+      <li><strong>零點能量</strong>：$E_0 = \frac{1}{2}\hbar\omega$——即使在絕對零度，諧振子仍具有不可消除的零點運動</li>
+      <li><strong>Hermite 多項式</strong>：波函數 $\langle x|n\rangle = H_n(x/\ell) e^{-x^2/4\ell^2}$，$n$ 為節點數</li>
+      <li><strong>相干態與古典對應</strong>：$\langle x\rangle$ 以古典頻率 $\omega$ 振盪，與振幅無關</li>
+      <li><strong>非諧振子</strong>：真實位能偏離 $x^2$，導致能階間距隨能量改變，量子動力學對應古典振幅依賴週期</li>
+      <li><strong>極小耦合（minimal coupling）</strong>：磁場透過 $H = \frac{1}{2m}(\mathbf{p} - Q\mathbf{A})^2$ 進入 Hamiltonian</li>
+      <li><strong>Landau 能階</strong>：垂直磁場的運動量子化為 $E = (n + \frac{1}{2})\hbar\omega$，$\omega = QB/m$ 為迴旋頻率</li>
+      <li><strong>Aharonov-Bohm 效應</strong>：即使粒子從未進入磁場區域，向量勢仍可透過相位改變干涉圖樣</li>
+    </ol>
+  </div>
+
+  <div class="deep-dive">
+    <h3>🧭 本章推理地圖</h3>
+    <ol>
+      <li><strong>諧振子 Hamiltonian 可因式分解為升降算符</strong>（§3.1）→ $H = \hbar\omega(A^\dagger A + \frac{1}{2})$，利用對易關係 $[A, A^\dagger] = 1$ 直接導出能階。</li>
+      <li><strong>基態能量 $E_0 = \frac{1}{2}\hbar\omega > 0$</strong>（§3.1）→ 零點能量是測不準原理的直接結果：粒子不能同時靜止在原點。</li>
+      <li><strong>升降算符決定波函數結構</strong>（§3.1）→ $A|0\rangle = 0$ 給出高斯波函數；$A^\dagger$ 作用產生 Hermite 多項式。</li>
+      <li><strong>期望值 $\langle x\rangle$ 以 $\omega$ 振盪</strong>（§3.2）→ 與古典頻率一致，但需要多個能階的相干疊加才能產生運動（能量本徵態本身不演化）。</li>
+      <li><strong>非諧振子中能階間距隨能量變化</strong>（§3.2.1）→ 週期隨振幅增大而變長，與古典非線性振盪對應。</li>
+      <li><strong>磁場 Hamiltonian $H = \frac{1}{2m}(\mathbf{p} - Q\mathbf{A})^2$</strong>（§3.3）→ 在均勻磁場中可重寫為兩個獨立的諧振子，給出 Landau 能階。</li>
+      <li><strong>規範變換以相位改變波函數</strong>（§3.3.1）→ $\psi \to e^{iQ\Lambda/\hbar}\psi$ 保證物理量不變，這是規範場論的基礎。</li>
+      <li><strong>Aharonov-Bohm 效應：向量勢直接影響干涉</strong>（§3.3.3）→ 即使 $B=0$ 的區域，$A$ 仍透過相位 $e^{iQ\Phi/\hbar}$ 改變干涉圖樣。</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ====== 先備知識橋接 ====== -->
+<section class="prerequisite">
+  <h2>先備知識橋接</h2>
+  <p>本章假設讀者具備以下基礎：</p>
+  <ul>
+    <li><strong>第 2 章核心內容</strong>：運算子、對易關係 $[x, p] = i\hbar$、Schrödinger 方程、能量本徵值問題、期望值時間演化</li>
+    <li><strong>升降算符的概念</strong>：本章將從頭引入，但熟悉對易關係的代數運算會有幫助</li>
+    <li><strong>古典電磁學基礎</strong>：Lorentz 力 $\mathbf{F} = Q(\mathbf{E} + \mathbf{v} \times \mathbf{B})$、向量勢 $\mathbf{B} = \nabla \times \mathbf{A}$、規範變換 $\mathbf{A} \to \mathbf{A} + \nabla\Lambda$</li>
+    <li><strong>基本微分方程</strong>：一階線性 ODE 的積分因子解法</li>
+  </ul>
+  <div class="callout-warn">
+    <strong>⚡ 注意：本章是「代數方法」的典範</strong><br>
+    本章最重要的收穫不是諧振子的結果本身，而是<strong>升降算符方法</strong>——一種不需要解微分方程就能求出所有能階和波函數的代數技巧。這個方法在後續章節中還會用來解決氫原子問題，在量子場論中更是基本工具。學習時把注意力放在方法上，不要只記結果。
+  </div>
+</section>
+
+<!-- ====== 3.1 諧振子的定態 ====== -->
+<section class="deep-dive" id="s3-1">
+<h2>3.1　諧振子的定態</h2>
+<div class="section-keypoints">
+  <strong>🔑 本節重點</strong>
+  <span>① 諧振子 Hamiltonian $H = \frac{1}{2m}[p^2 + (m\omega x)^2]$</span>
+  <span>② 升降算符 $A, A^\dagger$ 滿足 $[A, A^\dagger] = 1$，$H = \hbar\omega(A^\dagger A + \frac{1}{2})$</span>
+  <span>③ 能階 $E_n = (n + \frac{1}{2})\hbar\omega$，等間距，基態能量 $\frac{1}{2}\hbar\omega$</span>
+  <span>④ 波函數 $\langle x|n\rangle = H_n(x/\ell) e^{-x^2/4\ell^2}$，$\ell = \sqrt{\hbar/2m\omega}$</span>
+  <span>⑤ 數算符 $N = A^\dagger A$，本徵值 $n$ 代表激發數</span>
+</div>
+
+  <p>諧振子在物理學中具有核心地位，因為絕大多數凝聚態物理和量子電動力學都圍繞著弱微擾的諧振子展開。任何在穩定平衡點附近的系統都可以用諧振子近似——這是數學上 Taylor 展開的直接結果。但諧振子的重要性遠不止於近似：在量子場論中，每種基本粒子都被理解為某個場的量子化諧振子；在固體物理中，晶格振動（聲子）是耦合諧振子的集體模式；在量子光學中，電磁場的每個模式都是一個諧振子。掌握諧振子就是掌握了量子物理的通用語言。
+
+  </p>
+  <p>一個在勢能 $V(x)$ 中運動的粒子，其平衡點是 $-\mathrm{d}V/\mathrm{d}x = 0$ 的點。將原點置於此平衡點，$V(x)$ 的 Maclaurin 展開為 $V(x) = \text{常數} + \frac{1}{2}V'' x^2 + O(x^3)$，力為 $F = -V'' x + O(x^2)$。因此，對於平衡點附近的微小偏移，粒子的運動可以很好地由諧振子近似。</p>
+
+  <p>諧振子的 Hamiltonian 選擇為：</p>
+  <div class="eq">$$H = \frac{1}{2m}\left[p^2 + (m\omega x)^2\right] \tag{3.1}$$</div>
+  <p>其中 $m$ 是質量，$\omega$ 是角頻率。這個形式確保了動能項 $\frac{p^2}{2m}$ 和位能項 $\frac{1}{2}m\omega^2 x^2$ 的對稱性。注意從本章起，我們不再給運算子加帽子（hat），運算子與其本徵值的區別應從上下文判斷。</p>
+
+  <h3>升降算符的引入</h3>
+  <p>定義無因次運算子：</p>
+  <div class="eq">$$A \equiv \frac{m\omega x + ip}{\sqrt{2m\hbar\omega}}, \qquad A^\dagger = \frac{m\omega x - ip}{\sqrt{2m\hbar\omega}} \tag{3.2}$$</div>
+  <p>$A$ 不是 Hermitian——它的伴隨是 $A^\dagger$。計算乘積 $A^\dagger A$：</p>
+  <div class="eq">$$A^\dagger A = \frac{1}{2m\hbar\omega}(m\omega x - ip)(m\omega x + ip) = \frac{1}{2m\hbar\omega}\left[(m\omega x)^2 + im\omega[x, p] + p^2\right] = \frac{H}{\hbar\omega} - \frac{1}{2} \tag{3.3}$$</div>
+  <p>其中使用了正則對易關係 $[x, p] = i\hbar$。這意味著 $H = \hbar\omega(A^\dagger A + \frac{1}{2})$，因此 $A$ 幾乎是無因次 Hamiltonian $H/\hbar\omega$ 的平方根。類似地計算 $AA^\dagger$ 得到：</p>
+  <div class="eq">$$AA^\dagger = \frac{H}{\hbar\omega} + \frac{1}{2} \tag{3.4}$$</div>
+  <p>兩式相減得到升降算符的對易關係：</p>
+  <p>讓我們仔細驗證方程 (3.3) 的推導。展開 $A^\dagger A$：</p>
+  <div class="eq">$$A^\dagger A = \frac{1}{2m\hbar\omega}(m\omega x - ip)(m\omega x + ip)$$</div>
+  <p>乘開括號：</p>
+  <div class="eq">$$= \frac{1}{2m\hbar\omega}\left[(m\omega x)^2 + im\omega x p - im\omega p x + p^2\right] = \frac{1}{2m\hbar\omega}\left[(m\omega x)^2 + p^2 + im\omega[x, p]\right]$$</div>
+  <p>利用正則對易關係 $[x, p] = i\hbar$，$im\omega[x, p] = im\omega(i\hbar) = -m\hbar\omega$。因此：</p>
+  <div class="eq">$$A^\dagger A = \frac{(m\omega x)^2 + p^2}{2m\hbar\omega} - \frac{1}{2} = \frac{H}{\hbar\omega} - \frac{1}{2}$$</div>
+  <p>對於 $AA^\dagger$，唯一的差異是 $[x, p]$ 前的符號反轉（因為 $ip$ 和 $-ip$ 互換），所以 $AA^\dagger = H/\hbar\omega + 1/2$。兩式相減直接給出 $[A, A^\dagger] = 1$。
+
+  <p><strong>歸一化常數的推導：</strong>我們需要證明 $|n+1\rangle = \frac{1}{\sqrt{n+1}}A^\dagger|n\rangle$。計算：</p>
+  <div class="eq">$$\|A^\dagger|n\rangle\|^2 = \langle n|AA^\dagger|n\rangle = \langle n|\left(\frac{H}{\hbar\omega} + \frac{1}{2}\right)|n\rangle = \frac{E_n}{\hbar\omega} + \frac{1}{2} = n + 1$$</div>
+  <p>因此 $A^\dagger|n\rangle$ 的長度是 $\sqrt{n+1}$，歸一化後的態為 $|n+1\rangle = \frac{1}{\sqrt{n+1}}A^\dagger|n\rangle$。類似地，$\|A|n\rangle\|^2 = n$，所以 $|n-1\rangle = \frac{1}{\sqrt{n}}A|n\rangle$。
+  <div class="eq">$$[A, A^\dagger] = 1 \tag{3.5}$$</div>
+
+  <div class="callout">
+    <strong>💡 代數方法的威力</strong><br>
+    方程 (3.3) 是本章最重要的等式：它將 Hamiltonian 表達為 $A^\dagger A$ 的線性函數。這意味著我們不需要解 Schrödinger 微分方程——所有能階和本徵態都可以透過 $A$ 和 $A^\dagger$ 的代數性質直接求出。這是量子力學中「對稱性決定動力學」的典型範例。
+  </div>
+
+  <h3>能階的推導</h3>
+  <p>我們想要求解 $H|E_n\rangle = E_n|E_n\rangle$。計算 $A^\dagger$ 與 $H$ 的對易關係：</p>
+  <div class="eq">$$[A^\dagger, H] = \hbar\omega[A^\dagger, A^\dagger A] = \hbar\omega A^\dagger[A^\dagger, A] = -\hbar\omega A^\dagger \tag{3.6}$$</div>
+  <p>現在計算 $H(A^\dagger|E_n\rangle)$：</p>
+  <div class="eq">$$H(A^\dagger|E_n\rangle) = (A^\dagger H + [H, A^\dagger])|E_n\rangle = (E_n A^\dagger + \hbar\omega A^\dagger)|E_n\rangle = (E_n + \hbar\omega)(A^\dagger|E_n\rangle) \tag{3.8}$$</div>
+  <p>只要 $A^\dagger|E_n\rangle$ 的長度平方不為零，它就也是 $H$ 的本徵態，對應能量 $E_n + \hbar\omega$。計算其長度平方：</p>
+  <div class="eq">$$\|A^\dagger|E_n\rangle\|^2 = \langle E_n|AA^\dagger|E_n\rangle = \langle E_n|\left(\frac{H}{\hbar\omega} + \frac{1}{2}\right)|E_n\rangle = \frac{E_n}{\hbar\omega} + \frac{1}{2} \tag{3.9}$$</div>
+  <p>由於 $H$ 是平方和，$\langle E_n|H|E_n\rangle \geq 0$，所以所有能量本徵值非負。因此 $\|A^\dagger|E_n\rangle\|^2 > 0$，我們可以重複應用 $A^\dagger$ 來構造一系列能量為 $E_n + k\hbar\omega$ 的本徵態（$k = 0, 1, \ldots$）。</p>
+
+  <p>類似地，$A|E_n\rangle$（若非零）是能量為 $E_n - \hbar\omega$ 的本徵態。由於能量必須非負，必存在某個最低能量 $E_0$ 使得 $A|E_0\rangle = 0$。計算此向量的長度平方：</p>
+  <div class="eq">$$0 = \|A|E_0\rangle\|^2 = \langle E_0|\left(\frac{H}{\hbar\omega} - \frac{1}{2}\right)|E_0\rangle = \frac{E_0}{\hbar\omega} - \frac{1}{2} \tag{3.11}$$</div>
+  <p>因此 $E_0 = \frac{1}{2}\hbar\omega$，而所有能階為：</p>
+  <div class="eq">$$E_n = \left(n + \frac{1}{2}\right)\hbar\omega, \qquad n = 0, 1, 2, \ldots \tag{3.12}$$</div>
+  <p>$A^\dagger$ 和 $A$ 分別稱為<strong>產生算符</strong>（creation operator）和<strong>消滅算符</strong>（annihilation operator），因為前者創造一個激發量子，後者消滅一個。它們也合稱<strong>升降算符</strong>（ladder operators）。在量子場論中，粒子被解釋為真空的激發，每種粒子都關聯著自己的產生和消滅算符。</p>
+
+  <div class="callout-warn">
+    <strong>⚡ 升降算符的物理意義</strong><br>
+    $A^\dagger$ 不是「憑空創造能量」——它將系統從態 $|n\rangle$ 提升到 $|n+1\rangle$，增加一個 $\hbar\omega$ 的激發量子。$A$ 則相反。因為諧振子的能階是等間距的，升降算符在能階之間「爬梯子」。記住：$A^\dagger|n\rangle \propto |n+1\rangle$（往上），$A|n\rangle \propto |n-1\rangle$（往下），$A|0\rangle = 0$（到底了）。
+  </div>
+
+
+  <div class="callout-warn">
+    <strong>⚡ 常見錯誤：混淆 $A|n\rangle$ 和 $A^\dagger|n\rangle$ 的歸一化</strong><br>
+    $A^\dagger|n\rangle = \sqrt{n+1}|n+1\rangle$（往上，因子 $\sqrt{n+1}$），$A|n\rangle = \sqrt{n}|n-1\rangle$（往下，因子 $\sqrt{n}$）。常見錯誤是寫成 $A^\dagger|n\rangle = |n+1\rangle$ 或 $A|n\rangle = |n-1\rangle$——忘記歸一化因子。記憶法：歸一化因子總是「目標態的 $n$ 值」的平方根。
+  </div>
+
+  <h3>波函數與零點能量</h3>
+  <p>以 $|n\rangle$ 標記能量為 $(n+\frac{1}{2})\hbar\omega$ 的態。基態 $|0\rangle$ 由 $A|0\rangle = 0$ 定義。在位置表象中，利用 $\langle x|p|\psi\rangle = -i\hbar\frac{\partial}{\partial x}\langle x|\psi\rangle$，此方程變為：</p>
+  <div class="eq">$$\frac{1}{\sqrt{2m\hbar\omega}}\left(m\omega x + \hbar\frac{\partial}{\partial x}\right)\langle x|0\rangle = 0 \tag{3.14}$$</div>
+  <p>這是一階線性微分方程，積分因子為 $\exp(m\omega x^2/2\hbar)$。歸一化的基態波函數為：</p>
+  <p><strong>求解過程詳解：</strong>方程 (3.14) 是一階線性 ODE：</p>
+  <div class="eq">$$\frac{d\phi}{dx} + \frac{m\omega x}{\hbar}\phi = 0, \qquad \phi(x) \equiv \langle x|0\rangle$$</div>
+  <p>分離變數：$d\phi/\phi = -m\omega x\,dx/\hbar$。積分得 $\ln\phi = -m\omega x^2/(2\hbar) + C$，即 $\phi = C' e^{-m\omega x^2/2\hbar}$。歸一化條件 $\int_{-\infty}^{\infty}|\phi|^2 dx = 1$ 利用高斯積分 $\int_{-\infty}^{\infty} e^{-ax^2}dx = \sqrt{\pi/a}$ 給出 $C' = (2\pi\ell^2)^{-1/4}$。
+  <div class="eq">$$\langle x|0\rangle = \frac{1}{(2\pi\ell^2)^{1/4}} e^{-x^2/4\ell^2}, \qquad \ell \equiv \sqrt{\frac{\hbar}{2m\omega}} \tag{3.15}$$</div>
+  <p>$\ell$ 是諧振子的<strong>特徵長度</strong>，決定了基態波函數的空間展寬。基態是高斯函數，因此位置機率分布 $P(x) = |\langle x|0\rangle|^2$ 也是高斯分布，其離散度為 $\ell$。動量分布的離散度為 $\sigma_p = \hbar/2\ell$。將 $x = \ell$ 和 $p = \sigma_p$ 代入 Hamiltonian，可知基態的動能和位能各約 $\frac{1}{4}\hbar\omega$，滿足 $\ell\sigma_p = \hbar/2$——測不準原理所允許的最小值。</p>
+
+  <div class="callout">
+    <strong>💡 零點能量——量子力學最重要的預測之一</strong><br>
+    即使在絕對零度，諧振子仍具有 $\frac{1}{2}\hbar\omega$ 的能量。這不是理論的缺陷，而是測不準原理的直接後果：粒子不可能同時精確地位於原點（位能最低）且動量為零（動能最低）。物理世界中，零點運動深刻影響著從液態氦的超流性到宇宙大尺度結構的一切。簡而言之：<strong>物質世界在任何層次上都受到零點運動的影響</strong>。
+  </div>
+
+  <p>零點能量的存在也意味著：絕對零度不可能達到。即使我們能夠將系統冷卻到絕對零度，粒子仍然會有 hbar omega/2 的零點運動能量。這個零點運動是可觀測的：它導致原子在楖波圈中的微小振動（即使在絕對零度），這些振動在中子散射實驗中可以被直接觀測。
+
+
+  <p>零點能量有許多可觀測的效應：</p>
+  <p><strong>Casimir 效應：</strong>兩片平行金屬板之間的真空零點能模式受到限制，導致板間出現淨吸引力。這個效應由 Casimir 在 1948 年預測，1997 年由 Lamoreaux 精確實驗確認。</p>
+  <p><strong>液態氦的超流性：</strong>氦-4 在 2.17 K 以下變成超流體——液體可以無摩擦地流過極細的毛細管。這是因為零點能量足夠大，使原子無法「凍結」在晶格中，即使在絕對零度仍保持液態。</p>
+  <p><strong>分子振動光譜：</strong>即使在絕對零度，雙原子分子仍以 $\frac{1}{2}\hbar\omega$ 的零點能振動。這影響了分子的鍵長和解離能。
+
+  <h3>激發態與 Hermite 多項式</h3>
+  <p>激發態的波函數可以透過重複應用 $A^\dagger$ 於 $\langle x|0\rangle$ 來獲得。歸一化常數由方程 (3.9) 和 (3.11) 決定：</p>
+  <div class="eq">$$|n+1\rangle = \frac{1}{\sqrt{n+1}} A^\dagger|n\rangle, \qquad |n-1\rangle = \frac{1}{\sqrt{n}} A|n\rangle \tag{3.17}$$</div>
+  <p>有用的記憶法則：歸一化常數總是方程中出現的最大 $n$ 值的平方根。以第一激發態為例：</p>
+  <div class="eq">$$\langle x|1\rangle = \frac{1}{\sqrt{2m\hbar\omega}}\left(m\omega x - \hbar\frac{\partial}{\partial x}\right)\langle x|0\rangle = \frac{1}{(2\pi\ell^2)^{1/4}}\frac{x}{\ell} e^{-x^2/4\ell^2} \tag{3.18}$$</div>
+  <p>基態波函數是 $x$ 的偶函數（偶宇稱），而第一激發態是奇函數（奇宇稱）。這個模式會持續——$A^\dagger$ 是 $x$ 的奇運算子，每次作用都會翻轉宇稱。因此 $\langle x|n\rangle$ 在 $n$ 為偶數時是偶宇稱，奇數時是奇宇稱。一般波函數形式為：</p>
+  <div class="eq">$$\langle x|n\rangle = H_n(x/\ell)\, e^{-x^2/4\ell^2} \tag{3.78}$$</div>
+  <p>其中 $H_n$ 是 $n$ 階 Hermite 多項式。$H_0$ 是常數，$H_1(y) = y$，$H_2(y) \propto y^2 - 1$，以此類推。波函數恰好有 $n$ 個節點（零點）。
+  <p>前幾個 Hermite 多項式的顯式形式為：</p>
+  <div class="eq">$$H_0(y) = 1, \quad H_1(y) = 2y, \quad H_2(y) = 4y^2 - 2, \quad H_3(y) = 8y^3 - 12y \tag{3.79}$$</div>
+  <p>它們滿足遞推關係 $H_{n+1}(y) = 2y H_n(y) - 2n H_{n-1}(y)$ 和微分方程 $H_n'' - 2y H_n' + 2n H_n = 0$。正交性關係為：</p>
+  <div class="eq">$$\int_{-\infty}^{\infty} H_m(y) H_n(y) e^{-y^2} dy = \sqrt{\pi}\, 2^n n!\, \delta_{mn} \tag{3.80}$$</div>
+  <p>波函數的宇稱結構很重要：$\langle x|n\rangle$ 在 $n$ 為偶數時是 $x$ 的偶函數（偶宇稱），$n$ 為奇數時是奇函數（奇宇稱）。這可以從 $A^\dagger$ 包含 $x - \ell^2 \frac{d}{dx}$ 的事實推導——每次作用翻轉宇稱。</p>
+
+  <h3>數算符與期望值</h3>
+  <p>運算子 $N \equiv A^\dagger A$ 是 Hermitian。由方程 (3.17)，$N|n\rangle = n|n\rangle$，因此 $N$ 的本徵值就是激發量子數。$N$ 稱為<strong>數算符</strong>（number operator）。</p>
+  <p>將 $x$ 用升降算符表示：</p>
+  <div class="eq">$$x = \sqrt{\frac{\hbar}{2m\omega}}(A + A^\dagger) = \ell(A + A^\dagger) \tag{3.19}$$</div>
+  <p>計算第 $n$ 激發態中的均方位移：</p>
+  <div class="eq">$$\langle n|x^2|n\rangle = \ell^2\langle n|(A + A^\dagger)^2|n\rangle = \ell^2\langle n|(AA^\dagger + A^\dagger A)|n\rangle = \ell^2(2n+1) = \ell^2\frac{2E_n}{\hbar\omega} \tag{3.21}$$</div>
+  <p>其中只保留了 $A$ 和 $A^\dagger$ 數量相等的項（其他項的矩陣元素為零）。這個結果在古典力學中也成立——這是古典與量子之間罕見的「巧合」對應。在位置表象中，$x$ 的矩陣表示為三對角矩陣，其非零元素為 $x_{n,n+1} = x_{n+1,n} = \ell\sqrt{n+1}$。</p>
+
+
+
+  <h3>相干態與古典對應</h3>
+  <p>能量本徵態 $|n\rangle$ 中 $\langle x\rangle = 0$（不動）。要描述古典振盪，需要多個能階的<strong>相干疊加</strong>。存在一類特殊的態——<strong>相干態</strong>（coherent states）$|\alpha\rangle$，定義為消滅算符 $A$ 的本徵態：</p>
+  <div class="eq">$$A|\alpha\rangle = \alpha|\alpha\rangle, \qquad \alpha \in \mathbb{C} \tag{3.22}$$</div>
+  <p>相干態可以用能量本徵態展開為：</p>
+  <div class="eq">$$|\alpha\rangle = e^{-|\alpha|^2/2} \sum_{n=0}^\infty \frac{\alpha^n}{\sqrt{n!}} |n\rangle \tag{3.23}$$</div>
+  <p>這是一個 Poisson 分布，平均激發數 $\langle N\rangle = |\alpha|^2$，變異數 $\Delta N = |\alpha|$。在大 $|\alpha|$ 極限下，相對漲落 $\Delta N/\langle N\rangle = 1/|\alpha| \to 0$——系統表現得像古典振子。</p>
+
+  <p>相干態有三個關鍵性質使其成為「最古典」的量子態：</p>
+  <p><strong>(1) 期望值以古典頻率振盪：</strong>$\langle x\rangle_t = 2\ell\,|\alpha|\cos(\omega t - \arg\alpha)$，振幅 $2\ell|\alpha|$ 正比於 $\sqrt{\langle N\rangle}$。</p>
+  <p><strong>(2) 測不準關係飽和：</strong>$\Delta x = \ell$，$\Delta p = \hbar/(2\ell)$，乘積 $\Delta x \Delta p = \hbar/2$——這是不等式所允許的最小值。</p>
+  <p><strong>(3) 時間演化保持相干態：</strong>$|\alpha, t\rangle = |\alpha e^{-i\omega t}\rangle$——態在相空間中沿圓軌道運動，不擴散。</p>
+
+  <div class="callout">
+    <strong>💡 相干態在物理中的角色</strong><br>
+    相干態是量子光學的核心：雷射輸出的光場就是相干態。在量子資訊中，相干態用於連續變數量子密碼學。在介觀物理中，超導電路中的電流振盪可以用相干態描述。相干態之所以重要，是因為它們是量子態空間中最接近古典行為的態——它們在時間演化中不擴散，測不準關係飽和，期望值遵循古典方程。
+  </div>
+  <details class="example">
+    <summary>📝 自編概念例：升降算符與能階計算</summary>
+    <div class="example-body">
+      <p><strong>題目：</strong>對於諧振子 $H = \hbar\omega(A^\dagger A + \frac{1}{2})$，已知 $|0\rangle$ 滿足 $A|0\rangle = 0$。證明 $|3\rangle \propto (A^\dagger)^3|0\rangle$ 是 $H$ 的本徵態，並求其能量和歸一化常數。</p>
+      <p><strong>解：</strong>使用 $[A, A^\dagger] = 1$，可證 $[A, (A^\dagger)^n] = n(A^\dagger)^{n-1}$。因此：</p>
+      <div class="eq">$$H(A^\dagger)^3|0\rangle = \hbar\omega\left(A^\dagger A + \frac{1}{2}\right)(A^\dagger)^3|0\rangle = \hbar\omega\left(A^\dagger(AA^\dagger)(A^\dagger)^2 + \frac{1}{2}(A^\dagger)^3\right)|0\rangle$$</div>
+      <p>利用 $AA^\dagger = A^\dagger A + 1$ 重複化簡，最終得到 $H|3\rangle = \frac{7}{2}\hbar\omega|3\rangle$。歸一化：$\||3\rangle\|^2 = \langle 0|A^3(A^\dagger)^3|0\rangle = 3! = 6$，所以 $|3\rangle = \frac{1}{\sqrt{6}}(A^\dagger)^3|0\rangle$。</p>
+      <p><strong>物理意義：</strong>$|3\rangle$ 的能量是 $\frac{7}{2}\hbar\omega$，含有 3 個激發量子。歸一化常數 $\frac{1}{\sqrt{3!}}$ 來自 $n!$ 的組合因子——每次 $A^\dagger$ 作用產生不同的排列方式。</p>
+    </div>
+  </details>
+
+  <figure class="figure" id="fig-3-1">
+    <svg class="content-diagram" viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" width="520" height="300" fill="#f8f9fa" rx="8"/>
+      <text x="260" y="25" font-size="14" fill="#333" text-anchor="middle" font-weight="bold">諧振子能階與波函數</text>
+      <line x1="80" y1="50" x2="80" y2="270" stroke="#333" stroke-width="2"/>
+      <line x1="80" y1="270" x2="490" y2="270" stroke="#333" stroke-width="2"/>
+      <text x="60" y="165" font-size="12" fill="#555" text-anchor="middle" transform="rotate(-90,60,165)">能量 E / &#295;&#969;</text>
+      <path d="M80,260 Q200,100 440,260" fill="none" stroke="#4a90d9" stroke-width="2" stroke-dasharray="5,3"/>
+      <text x="460" y="145" font-size="11" fill="#4a90d9">V(x) = &#189;m&#969;&#178;x&#178;</text>
+      <line x1="80" y1="240" x2="490" y2="240" stroke="#e74c3c" stroke-width="1" stroke-dasharray="4,2"/>
+      <text x="490" y="235" font-size="9" fill="#e74c3c">E&#8320; = &#189;&#295;&#969;</text>
+      <line x1="80" y1="200" x2="490" y2="200" stroke="#e74c3c" stroke-width="1" stroke-dasharray="4,2"/>
+      <text x="490" y="195" font-size="9" fill="#e74c3c">E&#8321; = &#179;&#8260;&#8322;&#295;&#969;</text>
+      <line x1="80" y1="160" x2="490" y2="160" stroke="#e74c3c" stroke-width="1" stroke-dasharray="4,2"/>
+      <text x="490" y="155" font-size="9" fill="#e74c3c">E&#8322; = &#8309;&#8260;&#8322;&#295;&#969;</text>
+      <line x1="80" y1="120" x2="490" y2="120" stroke="#e74c3c" stroke-width="1" stroke-dasharray="4,2"/>
+      <text x="490" y="115" font-size="9" fill="#e74c3c">E&#8323; = &#8311;&#8260;&#8322;&#295;&#969;</text>
+      <path d="M100,238 Q200,160 300,238 Q400,160 500,238" fill="none" stroke="#27ae60" stroke-width="1.5"/>
+      <text x="510" y="235" font-size="8" fill="#27ae60">n=0</text>
+      <path d="M100,198 Q160,120 250,198 Q340,120 420,198 Q460,140 500,198" fill="none" stroke="#27ae60" stroke-width="1.5"/>
+      <text x="510" y="195" font-size="8" fill="#27ae60">n=1</text>
+      <path d="M100,158 Q140,110 190,158 Q240,90 290,158 Q340,90 390,158 Q440,110 500,158" fill="none" stroke="#27ae60" stroke-width="1.5"/>
+      <text x="510" y="155" font-size="8" fill="#27ae60">n=2</text>
+      <text x="260" y="290" font-size="11" fill="#555" text-anchor="middle">能階等距 &#916;E = &#295;&#969;，基態能量 &#189;&#295;&#969;，n 個節點</text>
+    </svg>
+    <figcaption><strong>圖 3.1</strong>　諧振子的位能（藍色虛線）、離散能階（紅色虛線）及波函數（綠色實線）。能階等間距 $\Delta E = \hbar\omega$，基態 $E_0 = \frac{1}{2}\hbar\omega$，第 $n$ 態有 $n$ 個節點。</figcaption>
+  </figure>
+</section>
+
+<!-- ====== 3.2 諧振子的動力學 ====== -->
+<section class="deep-dive" id="s3-2">
+<h2>3.2　諧振子的動力學</h2>
+<div class="section-keypoints">
+  <strong>🔑 本節重點</strong>
+  <span>① 能量本徵態不演化：$|n,t\rangle = e^{-i(n+1/2)\omega t}|n,0\rangle$，$\langle Q\rangle$ 為常數</span>
+  <span>② 期望值 $\langle x\rangle$ 以古典頻率 $\omega$ 振盪，與振幅無關</span>
+  <span>③ 非諧振子能階間距隨能量改變，週期依賴振幅</span>
+  <span>④ 多能階相干疊加產生波包運動，長時間後分布擴散</span>
+</div>
+
+  <p>諧振子的第 $n$ 激發態隨時間演化為 $|n, t\rangle = e^{-i(n+1/2)\omega t}|n, 0\rangle$。注意到沒有任何態以諧振子的古典頻率 $\omega$ 振盪——$|n, t\rangle$ 和 $|n, 0\rangle$ 僅差一個整體相位（不影響任何可觀測量）。事實上，當系統處於能量本徵態時，任何與時間無關的可觀測量 $Q$ 的期望值 $\langle Q\rangle$ 都不隨時間改變——能量本徵態<strong>本身無法產生運動</strong>。</p>
+
+  <p>在古典力學中，諧振子的運動是純粹的正弦振盡：x(t) = X cos(omega t + phi)。振幅 X 和相位 phi 取決於初始條件。但在量子力學中，情況要複雜得多：我們不能同時確定位置和動量，且能量是量子化的。本節將研究量子諧振子的動力學：能量本征態的時間演化、期望值的振盡行為，以及非諧振子的特殊效應。
+
+  <p>系統只有在測量到多於一個可能能量的振幅不可忽略時才會運動。將一般態寫為 $|\psi, t\rangle = \sum_j a_j e^{-iE_j t/\hbar}|j\rangle$，則 $x$ 的期望值為：</p>
+  <div class="eq">$$\langle x\rangle = \sum_{jk} a_k^* a_j e^{i(k-j)\omega t} \langle k|x|j\rangle \tag{3.24}$$</div>
+  <p>利用 $x = \ell(A + A^\dagger)$ 以及 $A|j\rangle = \sqrt{j}|j-1\rangle$、$A^\dagger|j\rangle = \sqrt{j+1}|j+1\rangle$，得到：</p>
+  <div class="eq">$$\langle x\rangle = \ell\sum_{j=1}^\infty \sqrt{j}\left(a_{j-1}^* a_j e^{-i\omega t} + a_j^* a_{j-1} e^{i\omega t}\right) = \sum_j X_j \cos(\omega t + \phi_j) \tag{3.26}$$</div>
+  <p>因此 $\langle x\rangle$ 以古典頻率 $\omega$ 作正弦振盪，<strong>與振幅 $a_j$ 無關</strong>。我們恢復了古典結果：諧振子的振盪頻率與振幅無關，等於 $\sqrt{k/m}$（$k$ 是彈簧常數）。</p>
+
+  <div class="callout">
+    <strong>💡 為什麼本徵態不能運動？</strong><br>
+    能量本徵態中，相位因子 $e^{-iE_nt/\hbar}$ 在期望值計算時與其複共軛相消。只有在不同能量的態之間有非零的矩陣元素（如 $\langle n|x|n\pm 1\rangle$）時，才會保留隨時間振盪的相位差。這解釋了為什麼<strong>相干疊加</strong>是產生運動的必要條件——這是量子動力學的核心洞見。
+  </div>
+
+  <p>在古典極限中，非零的振幅 $a_j$ 圍繞某個大數 $n$ 聚集。測量到的能量會接近 $E_n$，均方位移 $\langle x^2\rangle \approx 2\ell^2 E_n/\hbar\omega$。古典時間平均的 $x^2$ 正比於平均位能（總能量的一半），因此 $x^2 = E/(m\omega^2)$，與量子結果精確一致。對應原理要求古典和量子的 $x^2$ 在大 $n$ 時一致——它們在所有 $n$ 下都一致，這是巧合。</p>
+
+  <h3>3.2.1 非諧振子</h3>
+  <p>真實振子的位能總是偏離純 $x^2$ 形式。偏離通常表現為 $V(x) < \frac{1}{2}V''(0)x^2$（$x > 0$ 時），如圖 3.1 所示。一個原因是：破壞一個真實物體只需要有限能量，因此 $V(\infty)$ 應該有限，而諧振子的位能隨 $x \to \infty$ 無限制增長。</p>
+
+  <p>考慮非諧振子 $V(x) = -a^2 V_0/(a^2 + x^2)$，其能譜如圖 3.2 所示。在低能量時（振子接近諧振），能階幾乎均勻分布。隨著能量升高，能階間距逐漸縮小，無限多個能階擠在 $-V_0$ 到 $0$ 的有限能量區間內（此處粒子變為自由粒子）。</p>
+
+  <p>能階間距的變化直接影響 $\langle x\rangle$ 的時間依賴。假設只有兩個態有非零振幅 $a_N$ 和 $a_{N+1}$，則 $\langle x\rangle$ 的週期為 $T = h/(E_{N+1} - E_N)$，依賴於 $N$。增大能量和振幅會增大 $N$，從而增大週期——與古典非諧振子中週期隨振幅增大而變長的現象完全對應。<strong>能階間距與古典動力學之間存在著密切的聯繫。</strong></p>
+
+  <p>當能量更不確定時（多個 $a_j$ 非零，圍繞 $j = N$），$\langle x\rangle$ 的和中不僅包含 $\langle N\pm 1|x|N\rangle$ 的項，還包含 $\langle N\pm 3|x|N\rangle$ 等矩陣元素（諧振子中這些項為零）。雖然這些額外頻率近似為 $\omega_N = (E_{N+1} - E_N)/\hbar$ 的整數倍，使運動呈週期性但非諧，但由於能階間距的微小變化，長時間後波包的峰值會逐漸展寬——對應古典圖像中初始位移的不確定性導致週期的不確定性，最終機率分布在 $|x| \lesssim X$ 範圍內均勻化。</p>
+
+  
+  <p>更精確地說，如果初始態是一個集中在 j 約等於 N 的窄波包，x 期望值的運動初期近似古典振盪，但由於能階間距的微小差異，波包的峰值會逐漸展寬——不同頻率的分量逐漸失去相位一致性。這對應古典圖像中，初始位置的微小不確定性導致不同粒子有不同的週期，最終機率分布均勻化。</p>
+
+<div class="callout-warn">
+    <strong>⚡ 古典-量子對應在非諧振子中的體現</strong><br>
+    非諧振子展示了量子力學中一個普遍而深刻的事實：<strong>能階間距決定運動的頻率</strong>。諧振子的等間距能階導致單一頻率運動；非諧振子的非等間距能階導致多頻率運動和波包擴散。這不是巧合——它是 Schrödinger 方程中 $e^{-iE_nt/\hbar}$ 相位因子的直接數學結果。
+  </div>
+
+
+
+  <h3>古典對應原理</h3>
+  <p>在古典極限中（$n \gg 1$），量子諧振子的行為趨近古典諧振子。具體來說：</p>
+  <p><strong>機率分布：</strong>第 $n$ 態的位置機率 $P_n(x) = |\langle x|n\rangle|^2$ 在大 $n$ 時趨近於古典機率分布 $P_{\text{cl}}(x) = \frac{1}{\pi\sqrt{X^2 - x^2}}$（其中 $X = \sqrt{2E/m\omega^2}$ 是古典振幅）。這個分布在轉折點 $x = \pm X$ 附近發散——古典粒子在轉折點停留最久。量子分布在 $|x| < X$ 區域內快速振盪，其平均值趨近古典分布。</p>
+  <p><strong>均方位移：</strong>量子結果 $\langle n|x^2|n\rangle = \ell^2(2n+1)$ 與古典結果 $\langle x^2\rangle_{\text{cl}} = E/(m\omega^2) = \ell^2(2n+1)$ 精確一致——不僅在大 $n$ 極限下，而是在所有 $n$ 下都成立。這是諧振子的特殊性質，不適用於一般系統。
+
+  <details class="example">
+    <summary>📝 自編概念例：能量本徵態與運動的關係</summary>
+    <div class="example-body">
+      <p><strong>題目：</strong>諧振子在 $t=0$ 時處於態 $|\psi\rangle = \frac{1}{\sqrt{2}}(|0\rangle + |1\rangle)$。(a) 求 $\langle x\rangle_t$；(b) 若 $|\psi\rangle = |1\rangle$（純本徵態），$\langle x\rangle_t$ 為何？解釋差異。</p>
+      <p><strong>解：</strong></p>
+      <p>(a) $|\psi, t\rangle = \frac{1}{\sqrt{2}}(e^{-i\omega t/2}|0\rangle + e^{-i3\omega t/2}|1\rangle)$。只有 $\langle 0|x|1\rangle = \ell$ 和 $\langle 1|x|0\rangle = \ell$ 非零：</p>
+      <div class="eq">$$\langle x\rangle_t = \frac{1}{2}\left(e^{i\omega t}\ell + e^{-i\omega t}\ell\right) = \ell\cos(\omega t)$$</div>
+      <p>(b) $|\psi\rangle = |1\rangle$ 時，$\langle x\rangle = \langle 1|x|1\rangle = 0$——因為 $x$ 只在相差 1 的態之間有矩陣元素。</p>
+      <p><strong>物理意義：</strong>純本徵態的機率分布是靜態的（$\langle x\rangle = 0$，$\langle x^2\rangle$ 不變）。要產生來回振盪的運動，必須疊加至少兩個相鄰能階（$\Delta n = 1$），這樣 $e^{-i\omega t}$ 的相位差才能產生餘弦振盪。</p>
+    </div>
+  </details>
+
+  <figure class="figure" id="fig-3-2">
+    <svg class="content-diagram" viewBox="0 0 520 260" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" width="520" height="260" fill="#f8f9fa" rx="8"/>
+      <text x="260" y="20" font-size="13" fill="#333" text-anchor="middle" font-weight="bold">非諧振子：能階與古典對應</text>
+      <line x1="70" y1="40" x2="70" y2="230" stroke="#333" stroke-width="2"/>
+      <line x1="70" y1="230" x2="480" y2="230" stroke="#333" stroke-width="2"/>
+      <text x="50" y="140" font-size="11" fill="#555" text-anchor="middle" transform="rotate(-90,50,140)">能量 E</text>
+      <path d="M70,220 Q200,80 440,230" fill="none" stroke="#4a90d9" stroke-width="2" stroke-dasharray="5,3"/>
+      <text x="460" y="195" font-size="10" fill="#4a90d9">V(x) 非諧</text>
+      <line x1="70" y1="195" x2="470" y2="195" stroke="#e74c3c" stroke-width="0.8" stroke-dasharray="3,2"/>
+      <line x1="70" y1="170" x2="470" y2="170" stroke="#e74c3c" stroke-width="0.8" stroke-dasharray="3,2"/>
+      <line x1="70" y1="150" x2="470" y2="150" stroke="#e74c3c" stroke-width="0.8" stroke-dasharray="3,2"/>
+      <line x1="70" y1="135" x2="470" y2="135" stroke="#e74c3c" stroke-width="0.8" stroke-dasharray="3,2"/>
+      <line x1="70" y1="123" x2="470" y2="123" stroke="#e74c3c" stroke-width="0.8" stroke-dasharray="3,2"/>
+      <line x1="70" y1="114" x2="470" y2="114" stroke="#e74c3c" stroke-width="0.8" stroke-dasharray="3,2"/>
+      <text x="482" y="175" font-size="8" fill="#e74c3c">低能: 近似均勻</text>
+      <text x="482" y="120" font-size="8" fill="#e74c3c">高能: 間距縮小</text>
+      <text x="260" y="252" font-size="10" fill="#555" text-anchor="middle">能階間距隨能量增大而縮小 → 古典週期變長</text>
+    </svg>
+    <figcaption><strong>圖 3.2</strong>　非諧振子的位能（藍色虛線）與能階（紅色虛線）。低能階近似均勻分布（諧振近似），高能階間距逐漸縮小，對應古典週期隨振幅增大而變長。</figcaption>
+  </figure>
+</section>
+
+<!-- ====== 3.3 磁場中的運動 ====== -->
+<section class="deep-dive" id="s3-3">
+<h2>3.3　磁場中的運動</h2>
+<div class="section-keypoints">
+  <strong>🔑 本節重點</strong>
+  <span>① 極小耦合 Hamiltonian：$H = \frac{1}{2m}(\mathbf{p} - Q\mathbf{A})^2$</span>
+  <span>② 規範變換：$\mathbf{A} \to \mathbf{A} + \nabla\Lambda$ 伴隨 $\psi \to e^{iQ\Lambda/\hbar}\psi$</span>
+  <span>③ Landau 能階：$E_n = (n+\frac{1}{2})\hbar\omega$，$\omega = QB/m$（迴旋頻率）</span>
+  <span>④ 基態簡併：迴旋中心可任意平移，$a$ 和 $b$ 兩組升降算符</span>
+  <span>⑤ 向量勢透過相位影響物理——Aharonov-Bohm 效應</span>
+</div>
+
+  <p>諧振子的升降算符方法還能解決一個看似無關的重要問題：質量 $m$、電荷 $Q$ 的粒子在均勻磁場 $\mathbf{B}$ 中的運動。首先需要確定 Hamiltonian。對於在磁場 $\mathbf{B}(\mathbf{x})$ 中運動的帶電粒子，正確的 Hamiltonian 是：</p>
+  <div class="eq">$$H = \frac{1}{2m}(\mathbf{p} - Q\mathbf{A})^2 \tag{3.31}$$</div>
+  <p>其中 $\mathbf{A}$ 是向量勢，滿足 $\mathbf{B} = \nabla \times \mathbf{A}$。這個 Hamiltonian 的最有說服力的理論推導涉及相對論，超出本書範圍。但我們可以把它當作一個猜想，然後檢驗其預測是否與實驗一致——結果證明它正確描述了原子光譜的特徵。</p>
+
+  <div class="callout">
+    <p>向量勢在古典電磁學中常被視為計算 B 的數學工具。但量子力學徹底改變了這個觀點：A 直接出現在 Hamiltonian 的動能項中，與 p 以 p - QA 的形式耦合。這意味著向量勢的任何改變都會直接影響波函數的相位，進而影響可觀測量。</p>
+    <strong>💡 極小耦合原理</strong><br>
+    將自由粒子 Hamiltonian $\frac{p^2}{2m}$ 中的 $\mathbf{p}$ 替換為 $\mathbf{p} - Q\mathbf{A}$ 稱為<strong>極小耦合</strong>（minimal coupling）。這是將電磁交互作用納入量子力學的標準處方：只要系統與電磁場耦合，動量運算子就必須以 $\mathbf{p} - Q\mathbf{A}$ 的形式出現。這一原則在整個量子場論中都是基礎性的。
+  </div>
+
+  <h3>古典極限：Lorentz 力的恢復</h3>
+  <p>在古典極限下，我們可以忽略期望值與運算子本身的差異。從 Hamiltonian (3.31) 可以推導出：</p>
+  <div class="eq">$$\langle\mathbf{p}\rangle = m\frac{\mathrm{d}\langle\mathbf{x}\rangle}{\mathrm{d}t} + Q\langle\mathbf{A}\rangle \tag{3.34}$$</div>
+  <p>這表明動量不僅包含 $m\dot{\mathbf{x}}$，還包含正比於向量勢的額外項——這項代表因電荷運動而產生的磁場動量。在古典極限下，Hamiltonian 簡化為 $\frac{1}{2}m\dot{\mathbf{x}}^2$，這很合理，因為 Lorentz 力 $Q\dot{\mathbf{x}} \times \mathbf{B}$ 對古典粒子不做功，粒子的能量就是其動能。</p>
+
+  <p>進一步計算 $\langle\mathbf{p}\rangle$ 的時間導數，可以證明：</p>
+  <div class="eq">$$m\frac{\mathrm{d}^2 x_i}{\mathrm{d}t^2} = Q\left[\dot{\mathbf{x}} \times (\nabla \times \mathbf{A})\right]_i = Q(\dot{\mathbf{x}} \times \mathbf{B})_i \tag{3.38}$$</div>
+  <p>因此 Hamiltonian (3.31) 在古典極限下確實產生 Lorentz 力，驗證了它的正確性。</p>
+
+
+
+  <h3>磁矩與 Landau 能階的物理意義</h3>
+  <p>帶電粒子在磁場中的運動產生一個等效的磁矩。對於角動量為 $\mathbf{L}$ 的粒子，磁矩為：</p>
+  <div class="eq">$$\boldsymbol{\mu} = \frac{Q}{2m}\mathbf{L} \tag{3.39}$$</div>
+  <p>磁矩與磁場的交互作用能量為 $H_{\text{mag}} = -\boldsymbol{\mu} \cdot \mathbf{B}$。對於 Landau 能階，每個量子 $\hbar\omega$ 對應一個磁矩量子 $\mu_z = Q\hbar/(2m)$。這個磁矩是量子化的——它不能取任意值，只能取 $\hbar$ 的整數倍。</p>
+
+  <p>Landau 能階的物理意義可以從兩個角度理解：</p>
+  <p><strong>古典角度：</strong>帶電粒子在垂直磁場中做圓周運動（迴旋運動），頻率 $\omega = QB/m$。量子力學將這個圓周運動的能量量子化為 $(n+1/2)\hbar\omega$。</p>
+  <p><strong>量子角度：</strong>磁場中的 Hamiltonian 在 $xy$ 平面內與諧振子同構——這不是巧合，而是因為 $[\pi_x, \pi_y] = i$ 與 $[x, p] = i\hbar$ 有相同的代數結構。升降算符方法直接適用，給出相同的能階結構。
+
+  <h3>3.3.1 規範變換</h3>
+  <p>磁場 $\mathbf{B}$ 是<strong>規範不變</strong>的：$\mathbf{A}$ 和 $\mathbf{A}' = \mathbf{A} + \nabla\Lambda$（$\Lambda$ 為任意純量函數）產生相同的磁場。然而 Hamiltonian (3.31) 在規範變換下會發生非平凡改變——這令人擔憂，因為 $H$ 應該體現物理，而物理是規範無關的。</p>
+
+  <p>解決方案是：<strong>在改變 $\mathbf{A}$ 的規範的同時，也改變所有 ket 的相位</strong>。假設 $\psi(\mathbf{x}) = \langle\mathbf{x}|E\rangle$ 是 Hamiltonian 在規範 $\mathbf{A}$ 下的本徵函數，則：</p>
+  <p><strong>詳細證明：</strong>在規範 A 下，Hamiltonian 為 H = (1/2m)(p - QA)^2。在新規範 A' = A + grad(Lambda) 下，定義 phi = exp(iQ Lambda/hbar) psi。利用 p 作用在相位因子上：p phi = exp(iQ Lambda/hbar)(p + Q grad(Lambda)) psi，因此 (p - QA')phi = exp(iQ Lambda/hbar)(p - QA)psi。這意味著 H' phi = E phi，能譜不變。</p>
+  <div class="eq">$$\phi(\mathbf{x}) \equiv e^{iQ\Lambda/\hbar}\,\psi(\mathbf{x}) \tag{3.40}$$</div>
+  <p>是 Hamiltonian 在規範 $\mathbf{A}'$ 下的本徵函數。證明關鍵在於 $e^{iQ\Lambda/\hbar}\mathbf{p} = (\mathbf{p} - Q\nabla\Lambda)e^{iQ\Lambda/\hbar}$。因此能譜在規範變換下不變，而波函數獲得一個依賴於位置的相位因子。</p>
+
+  <p>對於期望值，只要所有物理運算子中的 $\mathbf{p}$ 都以組合 $\mathbf{p} - Q\mathbf{A}$ 出現（極小耦合原理），期望值就是規範不變的。這一洞見——規範場的變換需要量子態的相位補償——在現代規範場論中具有深遠影響。</p>
+
+  <div class="callout-warn">
+    <strong>⚡ 規範對稱性是「冗餘描述」的物理</strong><br>
+    $\mathbf{A}$ 包含冗餘資訊——不同的 $\mathbf{A}$ 描述同一個物理情境。量子力學以一種絕妙的方式處理這種冗餘：將規範變換吸收進波函數的相位。這不是數學技巧，而是揭示了<strong>自然界中交互作用與量子態相位之間的深刻聯繫</strong>——這一主題在粒子物理的標準模型中達到頂峰。
+  </div>
+
+  <h3>3.3.2 Landau 能階</h3>
+  <p>現在求均勻磁場中無自旋粒子的定態。令 $z$ 軸平行於 $\mathbf{B}$，選擇規範 $\mathbf{A} = \frac{1}{2}B(-y, x, 0)$。則 Hamiltonian 為：</p>
+  <div class="eq">$$H = \frac{1}{2m}\left[\left(p_x + \frac{1}{2}QBy\right)^2 + \left(p_y - \frac{1}{2}QBx\right)^2\right] + \frac{p_z^2}{2m} \tag{3.47a}$$</div>
+  <p>$H$ 分解為兩部分：$\frac{p_z^2}{2m}$ 是沿 $z$ 方向的自由粒子 Hamiltonian（在 §2.3.3 已研究），而 $xy$ 平面部分為 $H_{xy} = \frac{1}{2}\hbar\omega(\pi_x^2 + \pi_y^2)$，其中 $\omega = QB/m$ 是 Larmor 頻率，無因次運算子 $\pi_x, \pi_y$ 滿足正則對易關係 $[\pi_x, \pi_y] = i$。</p>
+
+  <p>$H_{xy}$ 本質上就是諧振子的 Hamiltonian！定義升降算符：</p>
+  <div class="eq">$$a = \frac{1}{\sqrt{2}}(\pi_x + i\pi_y), \qquad a^\dagger = \frac{1}{\sqrt{2}}(\pi_x - i\pi_y), \qquad [a, a^\dagger] = 1 \tag{3.49}$$</div>
+  <p>則 $H_{xy} = \hbar\omega(a^\dagger a + \frac{1}{2})$。因此垂直於磁場的運動能階為 $E = (n + \frac{1}{2})\hbar\omega$（$n = 0, 1, 2, \ldots$），稱為<strong>Landau 能階</strong>。對電子而言，Larmor 頻率通常稱為迴旋頻率（cyclotron frequency），約為 $176\,(B/1\,\text{T})\,\text{GHz}$，能階間距約 $1.16 \times 10^{-4}\,(B/1\,\text{T})\,\text{eV}$。</p>
+
+  <p>室溫下電子熱能約 $0.03\,\text{eV}$，因此 Landau 能階的離散性通常在低溫強磁場下才顯著。在中子星附近，磁場可達 $B \sim 10^8\,\text{T}$，電子在 Landau 能階之間躍遷時發射或吸收硬 X 射線光子。</p>
+
+
+  <p>Landau 能階在凝聚態物理中有極其重要的應用：</p>
+  <p><strong>量子 Hall 效應：</strong>二維電子氣在強磁場和低溫下，Hall 電導被精確量子化為 $\sigma_{xy} = \nu e^2/h$，其中 $\nu$ 是填充因子（被佔據的 Landau 能階數）。這個效應的精度可達 $10^{-9}$，是計量學中電阻標準的基礎。</p>
+  <p><strong>磁化率：</strong>自由電子氣在磁場中的磁化率呈現以 $1/B$ 為週期的振盪（de Haas-van Alphen 效應），直接反映 Landau 能階穿越 Fermi 面的過程。</p>
+  <p><strong>中子星：</strong>中子星表面磁場可達 $10^8$ T，此時 Landau 能階間距達到 keV 量級，電子在能階間躍遷時發射 X 射線。
+
+  <h3>基態波函數與簡併</h3>
+  <p>在位置表象中求解 $a|0\rangle = 0$ 得到基態波函數：</p>
+  <div class="eq">$$\langle\mathbf{x}|0\rangle = C\,e^{-(x^2+y^2)/4r_B^2}, \qquad r_B \equiv \sqrt{\frac{\hbar}{QB}} \tag{3.56}$$</div>
+  <p>其中 $r_B$ 是磁長度。更一般地，基態波函數為 $\langle\mathbf{x}|0\rangle = g(u)\,e^{-uv/4r_B^2}$（$u = x+iy, v = x-iy$），其中 $g(u)$ 是 $u$ 的任意函數——<strong>基態不唯一</strong>，這與諧振子的情況截然不同。取 $g$ 為常數得到最簡單的基態，對應粒子繞原點迴旋。</p>
+
+  <p>激發態波函數為 $\langle\mathbf{x}|n\rangle \propto (x - iy)^n e^{-(x^2+y^2)/4r_B^2}$。因子 $(x-iy)^n$ 意味著粒子具有 $n$ 單位的軌道角動量。</p>
+
+  <p>由於物理在 $xy$ 平面內的平移下不變（儘管 Hamiltonian 因規範選擇而看似特殊），粒子可以繞任意點 $\mathbf{a}$ 迴旋。透過規範變換可以構造繞 $\mathbf{a}$ 迴旋的基態波函數：</p>
+  <div class="eq">$$\langle\mathbf{x}|0, \mathbf{a}\rangle = C\,e^{iQ(\mathbf{B}\times\mathbf{a})\cdot\mathbf{x}/2\hbar}\,e^{-(\mathbf{x}-\mathbf{a})^2/4r_B^2} \tag{3.60}$$</div>
+  <p>每個 Landau 能階都是<strong>高度簡併</strong>的——存在無限多個線性獨立的態，對應不同的迴旋中心。</p>
+
+  <h3>第二組升降算符</h3>
+  <p>為了得到完備的正交基底，我們注意到最初的 Hamiltonian 由四個運算子 $x, y, p_x, p_y$ 構成，但只用 $\pi_x, \pi_y$ 兩個來表示 $H_{xy}$。定義另一組運算子：</p>
+  <div class="eq">$$\xi_x \equiv \frac{p_x - \frac{1}{2}m\omega y}{\sqrt{m\omega\hbar}}, \qquad \xi_y \equiv \frac{p_y + \frac{1}{2}m\omega x}{\sqrt{m\omega\hbar}} \tag{3.61}$$</div>
+  <p>它們與 $\pi_x, \pi_y$ 對易，因此與 $H_{xy}$ 對易，且 $[\xi_x, \xi_y] = -i$。由此構造第二組升降算符 $b, b^\dagger$（滿足 $[b, b^\dagger] = 1$），它們與 $H_{xy}$ 對易。因此我們可以同時對角化 $b^\dagger b$ 和 $H_{xy}$。$b^\dagger$ 作用在基態波函數上引進 $u = x+iy$ 的冪次（而非 $a^\dagger$ 引進的 $v = x-iy$），產生一系列正交的基態波函數，對應不同的迴旋中心分布。</p>
+
+  
+  <p><strong>物理詮釋：</strong>(b, b+) 的物理意義可以用迴旋中心的座標來理解。定義引導中心座標 X = x - pi_y/(m omega), Y = y + pi_x/(m omega)。可以證明 [X, Y] = -i r_B^2，且 X, Y 與 H_xy 對易。因此 b+b 的本徵值 n_b 標記了迴旋中心在 xy 平面內的位置量子數。每個 Landau 能階 n_a 都有一個 n_b 的完整簡併。</p>
+
+<details class="example">
+    <summary>📝 自編概念例：Landau 能階的能量與簡併</summary>
+    <div class="example-body">
+      <p><strong>題目：</strong>電子（$m = 9.11 \times 10^{-31}\,\text{kg}$，$|Q| = 1.60 \times 10^{-19}\,\text{C}$）在 $B = 1\,\text{T}$ 的均勻磁場中。(a) 求 Landau 能階間距（以 eV 表示）；(b) 若電子被限制在 $10\,\text{mm} \times 10\,\text{mm}$ 的平面內，估算每個 Landau 能階的簡併度。</p>
+      <p><strong>解：</strong></p>
+      <p>(a) $\omega = QB/m = 1.76 \times 10^{11}\,\text{rad/s}$。$\hbar\omega = 1.16 \times 10^{-4}\,\text{eV}$。這遠小於室溫熱能 $k_BT \approx 0.026\,\text{eV}$，因此在室溫下量子效應被熱運動淹沒。</p>
+      <p>(b) 每個迴旋中心占據的面積約為 $2\pi r_B^2$，其中 $r_B = \sqrt{\hbar/QB} \approx 2.57 \times 10^{-8}\,\text{m}$。面積 $A = 10^{-4}\,\text{m}^2$，簡併度 $g \sim A/(2\pi r_B^2) \approx 2.4 \times 10^{10}$。</p>
+      <p><strong>物理意義：</strong>Landau 能階的巨額簡併是量子 Hall 效應的基礎。每個能階可容納大量電子，當 Fermi 能階落在 Landau 能階之間時，系統表現出非凡的導電性質。</p>
+    </div>
+  </details>
+
+  <details class="example">
+    <summary>📝 自編概念例：諧振子的研測不準原理</summary>
+    <div class="example-body">
+      <p><strong>題目：</strong>對於諧振子基態 |0>，診算 Delta x 和 Delta p，並驗證 Delta x Delta p = hbar/2。</p>
+      <p><strong>解：</strong>基態波函數是高斯函數 phi(x) = (2 pi ell^2)^{-1/4} exp(-x^2/4 ell^2)。</p>
+      <p>由於對稱性， = 0。計算 <x^2> = ell^2，所以 Delta x = ell。</p>
+      <p>動量分布也是高斯：sigma_p = hbar/(2 ell)。</p>
+      <p>乘積 = ell times hbar/(2 ell) = hbar/2－精確飾和測不準原理的最小值！這意味著諧振子基態是測不準原理的「最佳狀態」－它以最小的不確定性占據最小的空間區域。</p>
+    </div>
+  </details>
+
+  <h3>3.3.3 Aharonov-Bohm 效應</h3>
+  <p>設想在 $z$ 軸上有一根極細長的螺線管，管內有強磁場，但由於磁力線在管外極度稀疏，管外的磁場 $\mathbf{B}$ 為零。在無限細的極限下，向量勢可取為：</p>
+  <div class="eq">$$\mathbf{A} = \frac{\Phi}{2\pi}\left(\frac{-y}{r^2}, \frac{x}{r^2}, 0\right), \qquad r = \sqrt{x^2 + y^2} \tag{3.68}$$</div>
+  <p>其中 $\Phi$ 是通過螺線管的磁通量。沿半徑 $r$ 的圓周對 $\mathbf{A}$ 積分總是得到 $\Phi$（與 $r$ 無關），由 Stokes 定理可知 $\Phi$ 單位的磁通量沿 $r=0$ 軸流動，他處皆無磁通。</p>
+
+  <p>現在在 $y=0$ 平面放置一個有雙縫的屏幕，兩縫距離 $2s$，分別位於螺線管兩側。從 $y<0$ 區域以動量 $\mathbf{p} = p\mathbf{j}$ 發射粒子，在 $y=L$ 處的屏幕 $P$ 上探測——除螺線管外，此配置與 §2.3.4 的標準雙縫實驗完全相同。<strong>古典物理預測粒子不受 $\mathbf{B}$ 影響，因為它們從未進入 $\mathbf{B} \neq 0$ 的區域。</strong>但 Aharonov 和 Bohm 指出量子力學的預測截然不同。</p>
+
+  <p>考慮規範函數 $\Lambda = -\frac{\Phi}{2\pi}\theta$（$\theta$ 為 $xy$ 平面的極角）。由於 $\nabla\theta = (-y/r^2, x/r^2, 0)$，$\nabla\Lambda = -\mathbf{A}$。因此作規範變換 $\mathbf{A} \to \mathbf{A}' = \mathbf{A} + \nabla\Lambda = \mathbf{0}$，向量勢消失，Hamiltonian 化為自由粒子 $p^2/2m$。在規範 $\mathbf{A}'$ 中，透過狹縫到達屏幕 $P$ 上 $x$ 點的振幅具有相位：</p>
+  <div class="eq">$$\phi_i = \text{constant} \pm \frac{psx}{\hbar L} \tag{3.73}$$</div>
+
+  <p>但這裡有個巧妙之處：為保證 $\Lambda$ 單值（$\theta$ 必須限制在 $2\pi$ 範圍內），我們對兩個狹縫使用不同的規範！狹縫 $S_1$（$x=+s$）：$-\pi < \theta \le \pi$；狹縫 $S_2$（$x=-s$）：$-2\pi < \theta \le 0$。這樣不連續性發生在電子不經過的區域。</p>
+
+  <p>在將兩個振幅相加計算干涉圖樣之前，必須轉換到共同規範。將 $S_2$ 的振幅轉換到 $S_1$ 的規範，轉換函數 $\Delta = \Lambda_1 - \Lambda_2$。在屏幕 $P$ 上任一點，兩種 $\theta$ 的定義相差 $2\pi$，因此 $\Delta = -\Phi$。由方程 (3.40)，$S_2$ 的振幅須乘以 $e^{-iQ\Phi/\hbar}$。最終的干涉項變為：</p>
+  <div class="eq">$$\text{constant} \times \exp\left[\frac{i}{\hbar}\left(\frac{2psx}{L} + Q\Phi\right)\right] \tag{3.74}$$</div>
+
+  <p>指數中的 $Q\Phi$ 項使干涉圖樣的中心偏移 $\Delta x = -LQ\Phi/2ps$。<strong>切換螺線管中的電流就可以改變干涉圖樣——即使粒子從未進入 $\mathbf{B} \neq 0$ 的區域！</strong></p>
+
+
+  <p>Aharonov-Bohm 效應的實驗驗證是量子力學最重要的實驗之一。1960 年，Robert Chambers 使用磁化的微小鐵晶須（whisker）作為螺線管，觀測到電子干涉條紋的偏移。此後，這個效應在介觀環、碳奈米管和超導量子干涉儀（SQUID）中被反覆驗證。</p>
+
+  <p>Aharonov-Bohm 效應有一個重要的幾何詮釋：相位因子 $e^{iQ\Phi/\hbar}$ 可以被理解為波函數在非單連通空間（螺線管外部）中的<strong>拓撲性質</strong>。空間中有一個「洞」（螺線管），路徑不能連續變形為一點——這種拓撲結構導致了物理效應，即使局部的 $\mathbf{B}$ 為零。
+
+  <div class="callout">
+    <strong>💡 Aharonov-Bohm 效應的深層意義</strong><br>
+    在古典物理中，$\mathbf{A}$ 被視為只是計算 $\mathbf{B}$ 的數學輔助工具——只有 $\mathbf{B}$ 是「真實的」。Aharonov-Bohm 效應證明：<strong>在量子力學中，向量勢 $\mathbf{A}$ 本身俱有直接的物理意義</strong>。即使 $\mathbf{B}=0$ 的區域，$\mathbf{A}$ 仍可透過改變波函數的相位來影響可觀測的干涉圖樣。這是量子理論中最引人注目的預測之一，已由 Chambers 在 1960 年實驗確認。值得注意的是，干涉條紋的偏移 $\Delta x$ 與 $\hbar$ 無關，在 $\hbar \to 0$ 的極限下不消失——這在通常被視為古典極限的情況下是一個有趣的例外。
+  </div>
+
+  <div class="callout-warn">
+    <strong>⚡ 規範不變性 ≠ 向量勢無物理意義</strong><br>
+    初學者常誤以為「$\mathbf{B}$ 是規範不變的，所以只有 $\mathbf{B}$ 有物理意義」。Aharonov-Bohm 效應直接反駁了這一觀點：$\oint \mathbf{A} \cdot \mathrm{d}\mathbf{l} = \Phi$ 是規範不變的（因為 $\oint \nabla\Lambda \cdot \mathrm{d}\mathbf{l} = 0$），而這個環積分決定了干涉圖樣的偏移。物理量不是 $\mathbf{A}$ 本身，而是 $\mathbf{A}$ 的規範不變的環積分——即封閉路徑所包圍的磁通量。
+  </div>
+
+  <details class="example">
+    <summary>📝 自編概念例：Aharonov-Bohm 相位移的計算</summary>
+    <div class="example-body">
+      <p><strong>題目：</strong>電子（$Q = -e$）通過雙縫，螺線管中的磁通量 $\Phi = h/2e$（半個磁通量子）。(a) 求干涉條紋的相位偏移；(b) 若 $\Phi = h/e$（一個磁通量子），條紋是否回到原位？</p>
+      <p><strong>解：</strong></p>
+      <p>(a) 相位偏移 $\Delta\phi = Q\Phi/\hbar = -e\cdot(h/2e)/\hbar = -\pi$。這使條紋移動半個週期——原來的亮紋變成暗紋，反之亦然。</p>
+      <p>(b) $\Phi = h/e$ 時，$\Delta\phi = -e\cdot(h/e)/\hbar = -2\pi$。相位改變 $2\pi$ 對干涉圖樣無影響——條紋回到原位。</p>
+      <p><strong>物理意義：</strong>磁通量子 $\Phi_0 = h/e$ 是使 Aharonov-Bohm 相位改變 $2\pi$ 的磁通量。干涉圖樣對 $\Phi$ 具有週期 $\Phi_0$ 的週期性——這已在介觀環（mesoscopic rings）的實驗中被反覆驗證，是量子相干性的重要展現。</p>
+    </div>
+  </details>
+
+  <figure class="figure" id="fig-3-3">
+    <svg class="content-diagram" viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" width="520" height="300" fill="#f8f9fa" rx="8"/>
+      <text x="260" y="20" font-size="13" fill="#333" text-anchor="middle" font-weight="bold">Aharonov-Bohm 效應實驗配置</text>
+      <rect x="150" y="50" width="6" height="200" fill="#666"/>
+      <rect x="150" y="110" width="6" height="20" fill="#fff" stroke="#666" stroke-width="1"/>
+      <rect x="150" y="170" width="6" height="20" fill="#fff" stroke="#666" stroke-width="1"/>
+      <text x="156" y="123" font-size="9" fill="#333">S&#8321;</text>
+      <text x="156" y="183" font-size="9" fill="#333">S&#8322;</text>
+      <circle cx="153" cy="150" r="10" fill="none" stroke="#e74c3c" stroke-width="2"/>
+      <text x="175" y="155" font-size="8" fill="#e74c3c">B&#8800;0</text>
+      <text x="175" y="167" font-size="7" fill="#e74c3c">&#934; &#8800; 0</text>
+      <line x1="60" y1="140" x2="150" y2="120" stroke="#4a90d9" stroke-width="1.5" stroke-dasharray="4,3"/>
+      <line x1="60" y1="150" x2="150" y2="180" stroke="#e74c3c" stroke-width="1.5" stroke-dasharray="4,3"/>
+      <line x1="156" y1="120" x2="380" y2="140" stroke="#4a90d9" stroke-width="1.5" stroke-dasharray="4,3"/>
+      <line x1="156" y1="180" x2="380" y2="140" stroke="#e74c3c" stroke-width="1.5" stroke-dasharray="4,3"/>
+      <rect x="380" y="50" width="6" height="200" fill="#333"/>
+      <text x="383" y="40" font-size="11" fill="#333" text-anchor="middle">P</text>
+      <path d="M420,140 Q430,100 440,140 Q450,180 460,140 Q470,100 480,140 Q490,180 500,140" fill="none" stroke="#333" stroke-width="1.5"/>
+      <path d="M420,145 Q430,105 440,145 Q450,185 460,145 Q470,105 480,145 Q490,185 500,145" fill="none" stroke="#27ae60" stroke-width="1.5" stroke-dasharray="5,3"/>
+      <text x="500" y="120" font-size="9" fill="#333">&#934;=0</text>
+      <text x="500" y="135" font-size="9" fill="#27ae60">&#934;&#8800;0</text>
+      <text x="260" y="285" font-size="10" fill="#555" text-anchor="middle">雖然粒子從未進入 B&#8800;0 區域，干涉條紋仍因向量勢 A 而偏移</text>
+    </svg>
+    <figcaption><strong>圖 3.3</strong>　Aharonov-Bohm 效應實驗。螺線管（紅圈）內 $B \neq 0$，但粒子路徑（藍、紅虛線）完全在 $B=0$ 區域。接通磁場後，干涉條紋（綠色虛線）相對於無磁場時（黑色實線）發生偏移。</figcaption>
+  </figure>
+</section>
+
+<!-- ====== 本章摘要 ====== -->
+<section id="summary">
+  <h2>本章摘要</h2>
+  <p>本章是量子力學中「代數方法」的典範示範。升降算符（$A, A^\dagger$）將諧振子問題化為純代數運算，不僅直接給出能階 $E_n = (n+\frac{1}{2})\hbar\omega$ 和波函數 $\langle x|n\rangle = H_n(x/\ell)e^{-x^2/4\ell^2}$，更揭示了零點能量、數算符和相干態等深刻物理。同樣的代數結構應用於磁場問題，給出 Landau 能階和 Aharonov-Bohm 效應，展示了量子力學中看似無關的系統之間深層的數學統一性。</p>
+  <div class="table-scroll" role="region" aria-label="本章關鍵概念與公式" tabindex="0">
+    <table>
+      <caption>本章關鍵概念、公式、適用條件與用途</caption>
+      <thead>
+        <tr>
+          <th scope="col">概念／公式</th>
+          <th scope="col">符號與單位</th>
+          <th scope="col">適用條件</th>
+          <th scope="col">用途</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">升降算符 $A, A^\dagger$</th>
+          <td>$A = \frac{m\omega x+ip}{\sqrt{2m\hbar\omega}}$，$[A,A^\dagger]=1$</td>
+          <td>諧振子 $H=\frac{p^2}{2m}+\frac{1}{2}m\omega^2 x^2$</td>
+          <td>代數求解能階和本徵態</td>
+        </tr>
+        <tr>
+          <th scope="row">能階 $E_n = (n+\frac{1}{2})\hbar\omega$</th>
+          <td>$n = 0,1,2,\ldots$，$\hbar\omega$：能量單位</td>
+          <td>諧振子；Landau 能階（$\omega=QB/m$）</td>
+          <td>預測能量量子化、光譜</td>
+        </tr>
+        <tr>
+          <th scope="row">零點能量 $E_0 = \frac{1}{2}\hbar\omega$</th>
+          <td>能量，不可消除</td>
+          <td>所有束縛系統</td>
+          <td>解釋液氦超流、宇宙暴脹等</td>
+        </tr>
+        <tr>
+          <th scope="row">特徵長度 $\ell = \sqrt{\hbar/2m\omega}$</th>
+          <td>長度，決定波函數展寬</td>
+          <td>諧振子基態</td>
+          <td>$\ell\sigma_p = \hbar/2$，飽和測不準原理</td>
+        </tr>
+        <tr>
+          <th scope="row">Hermite 波函數 $\langle x|n\rangle = H_n(x/\ell)e^{-x^2/4\ell^2}$</th>
+          <td>$H_n$：$n$ 階多項式，$n$ 個節點</td>
+          <td>諧振子能量本徵態</td>
+          <td>計算機率分布、期望值</td>
+        </tr>
+        <tr>
+          <th scope="row">期望值振盪 $\langle x\rangle = \sum X_j\cos(\omega t+\phi_j)$</th>
+          <td>$\omega = \sqrt{k/m}$，古典頻率</td>
+          <td>多能階相干疊加</td>
+          <td>恢復古典運動</td>
+        </tr>
+        <tr>
+          <th scope="row">極小耦合 $H = \frac{1}{2m}(\mathbf{p}-Q\mathbf{A})^2$</th>
+          <td>$\mathbf{A}$：向量勢，$\mathbf{B}=\nabla\times\mathbf{A}$</td>
+          <td>帶電粒子在電磁場中</td>
+          <td>量子電動力學的基礎</td>
+        </tr>
+        <tr>
+          <th scope="row">規範變換 $\psi \to e^{iQ\Lambda/\hbar}\psi$</th>
+          <td>$\Lambda(\mathbf{x})$：任意純量函數</td>
+          <td>$\mathbf{A}\to\mathbf{A}+\nabla\Lambda$</td>
+          <td>保證物理量規範不變</td>
+        </tr>
+        <tr>
+          <th scope="row">Aharonov-Bohm 相位 $e^{iQ\Phi/\hbar}$</th>
+          <td>$\Phi = \oint\mathbf{A}\cdot\mathrm{d}\mathbf{l}$：磁通量</td>
+          <td>$B=0$ 但 $A\neq 0$ 的區域</td>
+          <td>解釋無磁場區的干涉偏移</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ====== 常見錯誤 ====== -->
+<section id="common-mistakes">
+  <h2>初學者常見錯誤</h2>
+  <div class="callout-warn">
+    <strong>⚡ 錯誤一：以為 $A^\dagger$ 是 Hermitian 共軛所以 $A^\dagger A$ 等於 $AA^\dagger$</strong><br>
+    $A^\dagger$ 確實是 $A$ 的 Hermitian 共軛，但 $A$ 和 $A^\dagger$ <strong>不對易</strong>。事實上 $AA^\dagger = A^\dagger A + 1$（由 $[A, A^\dagger] = 1$）。這個差異正是零點能量 $\frac{1}{2}\hbar\omega$ 的來源——$H = \hbar\omega(A^\dagger A + \frac{1}{2}) = \hbar\omega(AA^\dagger - \frac{1}{2})$。混淆 $A^\dagger A$ 和 $AA^\dagger$ 會導致能量偏移 $\hbar\omega$ 的錯誤。
+  </div>
+  <div class="callout-warn">
+    <strong>⚡ 錯誤二：認為能量本徵態可以描述運動</strong><br>
+    $|n, t\rangle = e^{-iE_nt/\hbar}|n, 0\rangle$ 與 $|n, 0\rangle$ 僅差一個整體相位。任何可觀測量的期望值 $\langle n|Q|n\rangle$ 在能量本徵態中都是常數。要描述來回振盪的運動，必須疊加至少兩個不同的能量本徵態，使相位差 $e^{i(E_k-E_j)t/\hbar} = e^{i(k-j)\omega t}$ 產生時間依賴。
+  </div>
+  <div class="callout-warn">
+    <strong>⚡ 錯誤三：把 $\mathbf{p} - Q\mathbf{A}$ 當作「真正的動量」</strong><br>
+    在古典力學中，$m\dot{\mathbf{x}}$ 是動量，而正則動量 $\mathbf{p} = m\dot{\mathbf{x}} + Q\mathbf{A}$。在量子力學中，$\mathbf{p}$ 是正則動量（滿足 $[x_i, p_j] = i\hbar\delta_{ij}$），而<strong>物理動量</strong>（決定速度的）是 $m\dot{\mathbf{x}} = \mathbf{p} - Q\mathbf{A}$。這個區別在規範變換下尤為重要：$\mathbf{p}$ 本身不是規範不變的，但 $\mathbf{p} - Q\mathbf{A}$ 是。
+  </div>
+  <div class="callout-warn">
+    <strong>⚡ 錯誤四：認為諧振子的所有性質都可以推廣到一般束縛系統</strong><br>
+    諧振子的等間距能階是極特殊的性質——它來自位能的 $x^2$ 形式以及 $[A, A^\dagger] = 1$ 的代數結構。真實系統（非諧振子）的能階間距隨能量變化，導致運動不再是單頻的。升降算符方法之所以有效，是因為 $H$ 可以寫成 $A^\dagger A$ 的線性函數——這在一般系統中不成立。
+  </div>
+</section>
+
+<!-- ====== 自我檢測 ====== -->
+<section id="self-check">
+  <h2>自我檢測</h2>
+  <details class="self-check-item">
+    <summary>1. 為什麼諧振子的基態能量不是零？這與測不準原理有什麼關係？</summary>
+    <div class="self-check-answer">
+      <p>基態能量 $E_0 = \frac{1}{2}\hbar\omega$ 不為零，因為粒子不可能同時精確地位於 $x=0$（位能最低）且動量 $p=0$（動能最低）。如果 $E_0=0$，則 $\langle 0|H|0\rangle = 0$ 意味著 $\langle p^2\rangle = 0$ 且 $\langle x^2\rangle = 0$，這違反 $\Delta x \Delta p \ge \hbar/2$。事實上基態精確飽和了測不準原理：$\ell \cdot \sigma_p = \hbar/2$，這是高斯波函數的獨特性質。</p>
+      <p class="solution-note">正文依據：§3.1</p>
+    </div>
+  </details>
+  <details class="self-check-item">
+    <summary>2. 解釋為什麼 $A|0\rangle = 0$ 這個條件足以唯一確定基態波函數（不考慮整體相位）。這個方程的物理意義是什麼？</summary>
+    <div class="self-check-answer">
+      <p>$A|0\rangle = 0$ 在位置表象中是一階線性微分方程 $(m\omega x + \hbar\frac{\partial}{\partial x})\langle x|0\rangle = 0$，其解（歸一化後）唯一確定為高斯函數。物理上，$A$ 是消滅算符——它降低一個激發量子。基態已沒有可消滅的激發，因此 $A|0\rangle = 0$ 表達了「系統處於最低可能能量態」這一事實。任何非零的 $A|0\rangle$ 都會對應一個能量更低的態，與 $|0\rangle$ 是基態矛盾。</p>
+      <p class="solution-note">正文依據：§3.1</p>
+    </div>
+  </details>
+  <details class="self-check-item">
+    <summary>3. Landau 能階的基態為什麼不是唯一的？這與諧振子基態的唯一性有何本質區別？</summary>
+    <div class="self-check-answer">
+      <p>諧振子的 Hamiltonian $H = \frac{p^2}{2m} + \frac{1}{2}m\omega^2 x^2$ 有明確的原點（位能最小值在 $x=0$），基態波函數以原點為中心。而磁場中的 Hamiltonian $H_{xy}$ 在 $xy$ 平面內具有平移對稱性——粒子可以繞任意點迴旋。雖然我們選擇的規範 $\mathbf{A} = \frac{1}{2}B(-y, x, 0)$ 看似賦予原點特殊地位，但物理是平移不變的。實際上 $a|0\rangle = 0$ 的解是 $\langle\mathbf{x}|0\rangle = g(x+iy)e^{-(x^2+y^2)/4r_B^2}$，其中 $g$ 是任意函數——這反映了平移簡併。</p>
+      <p class="solution-note">正文依據：§3.3.2</p>
+    </div>
+  </details>
+  <details class="self-check-item">
+    <summary>4. 在 Aharonov-Bohm 效應中，粒子從未進入 $B \neq 0$ 的區域，為什麼干涉圖樣仍會改變？這告訴我們關於向量勢 $\mathbf{A}$ 的什麼物理事實？</summary>
+    <div class="self-check-answer">
+      <p>雖然 $B=0$ 在粒子經過的區域，但 $\mathbf{A} \neq 0$。向量勢透過極小耦合 $\mathbf{p} - Q\mathbf{A}$ 進入 Hamiltonian，使得不同路徑的波函數獲得不同的相位因子。具體而言，沿路徑 $C$ 的相位累積為 $\exp(iQ/\hbar \int_C \mathbf{A}\cdot\mathrm{d}\mathbf{l})$。兩條路徑的相位差正比於環路所包圍的磁通量 $\Phi = \oint \mathbf{A}\cdot\mathrm{d}\mathbf{l}$，而這是規範不變的。這證明在量子力學中，$\mathbf{A}$（或其規範不變的環積分）俱有直接的物理意義，不僅僅是計算 $\mathbf{B}$ 的數學工具。</p>
+      <p class="solution-note">正文依據：§3.3.3</p>
+    </div>
+  </details>
+
+  <details class="self-check-item">
+    <summary>5. 相干態 $|\alpha\rangle$ 為什麼被稱為「最古典」的量子態？它與能量本徵態 $|n\rangle$ 有什麼本質差異？</summary>
+    <div class="self-check-answer">
+      <p>相干態滿足三個「古典」條件：(1) $\langle x\rangle$ 以古典頻率 $\omega$ 振盪；(2) 測不準關係飽和（$\Delta x \Delta p = \hbar/2$）；(3) 時間演化不擴散。相比之下，能量本徵態 $|n\rangle$ 的 $\langle x\rangle = 0$（不動），$\Delta x$ 隨 $n$ 增大，且不描述任何運動。相干態是大量相鄰能階的 Poisson 疊加，而能量本徵態是單一能階。</p>
+      <p class="solution-note">正文依據：§3.1（相干態）、§3.2（動力學）</p>
+    </div>
+  </details>
+  <details class="self-check-item">
+    <summary>6. 在 Landau 能階問題中，為什麼需要兩組升降算符 $(a, a^\dagger)$ 和 $(b, b^\dagger)$？它們各自描述什麼物理自由度？</summary>
+    <div class="self-check-answer">
+      <p>$xy$ 平面有兩個自由度（$x$ 和 $y$），但 Hamiltonian 只用了一組對易關係 $[\pi_x, \pi_y] = i$。$(a, a^\dagger)$ 描述的是迴旋運動的能量量子化（Landau 能階）。$(b, b^\dagger)$ 描述的是迴旋中心的位置——它與 $H$ 對易，因此是守恆量，代表粒子繞哪個點迴旋的自由度。兩組算符互相對易，可以同時對角化。</p>
+      <p class="solution-note">正文依據：§3.3.2</p>
+    </div>
+  </details>
+</section>
+
+<!-- ====== 延伸資源 ====== -->
+<section id="extras">
+  <h2>延伸資源與下一章</h2>
+  <h3>推薦閱讀與練習</h3>
+  <ul class="resource-list">
+    <li>原書 Problems 3.1–3.24：涵蓋升降算符代數、波函數構造、非諧振子數值計算、Landau 能階與 Aharonov-Bohm 效應</li>
+    <li>Feynman Lectures on Physics, Vol. III, Ch. 8–9：用不同視角解釋諧振子與 AB 效應</li>
+    <li>Sakurai, <em>Modern Quantum Mechanics</em>, Ch. 2：諧振子相干態的深入討論</li>
+    <li>量子 Hall 效應入門：Landau 能階簡併的直接應用（見 Problem 3.22）</li>
+  </ul>
+
+  <h3>本章公式卡</h3>
+  <div class="callout">
+    <strong>📋 升降算符速查</strong><br>
+    $A = \frac{m\omega x + ip}{\sqrt{2m\hbar\omega}}$，
+    $A^\dagger = \frac{m\omega x - ip}{\sqrt{2m\hbar\omega}}$，
+    $[A, A^\dagger] = 1$，
+    $N = A^\dagger A$，
+    $N|n\rangle = n|n\rangle$<br>
+    $A|n\rangle = \sqrt{n}|n-1\rangle$，
+    $A^\dagger|n\rangle = \sqrt{n+1}|n+1\rangle$<br>
+    $x = \ell(A + A^\dagger)$，
+    $p = \frac{i\hbar}{2\ell}(A^\dagger - A)$，
+    $\ell = \sqrt{\hbar/2m\omega}$<br>
+    Landau：$\omega = QB/m$，$r_B = \sqrt{\hbar/QB}$，$H_{xy} = \hbar\omega(a^\dagger a + \frac{1}{2})$
+  </div>
+
+  <div class="further-reading">
+    <strong>下一章預告：變換與可觀測量</strong>
+    <p>第 3 章展示了升降算符如何優雅地解決諧振子和 Landau 能階問題——核心是將 Hamiltonian 對角化。第 4 章將系統性地發展這個想法：我們會學習<strong>么正變換</strong>如何在不同表象之間轉換，如何透過適當的變換簡化問題。平移算符、時間演化算符和旋轉算符將一一登場，而這些工具將在第 5 章中用來攻克量子力學的聖杯——氫原子。</p>
+    <a href="ch4_transformations_zh.html">前往下一章 →</a>
+  </div>
+</section>
+
+</main>
+
+</body>
+</html>

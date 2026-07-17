@@ -1,0 +1,264 @@
+<html lang="zh-TW" data-theme="light" data-reading-width="wide">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>第十一章：MOSFET 進階概念 — 半導體物理與元件</title>
+<script src="../assets/mathjax-config.js"></script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<link rel="stylesheet" href="../assets/chapter-base.css">
+<link rel="prev" href="ch10_mosfet_zh.html">
+<link rel="next" href="ch12_bjt_zh.html">
+<script defer src="../assets/course-ui.js"></script>
+
+<link rel="stylesheet" href="../../../../shared/core.css">
+<script src="../../../../shared/core.js" defer></script>
+<link rel="stylesheet" href="../../../../shared/navigation.css" data-shared-navigation>
+</head>
+<body>
+<a class="portal-home-link" href="../index.html">返回學習中心</a>
+<nav class="sidebar" aria-label="本章目錄"><div class="sidebar-header"><div class="sidebar-subtitle">半導體物理與元件</div><h2 class="sidebar-title">MOSFET 進階概念</h2></div><div class="toc"><ul>
+<li><a href="#preview">📋 11.0 本章預覽</a></li><li class="ns">11.1 非理想效應</li><li class="nsub"><a href="#s11-1-1">11.1.1 次臨界導電</a></li><li class="nsub"><a href="#s11-1-2">11.1.2 通道長度調變</a></li><li class="nsub"><a href="#s11-1-3">11.1.3 遷移率變化</a></li><li class="nsub"><a href="#s11-1-4">11.1.4 速度飽和</a></li><li class="nsub"><a href="#s11-1-5">11.1.5 彈道傳輸</a></li><li class="ns">11.2 縮放</li><li class="nsub"><a href="#s11-2-1">11.2.1 定電場縮放</a></li><li class="nsub"><a href="#s11-2-2">11.2.2 臨界電壓近似</a></li><li class="nsub"><a href="#s11-2-3">11.2.3 廣義縮放</a></li><li class="ns">11.3–11.5</li><li class="nsub"><a href="#s11-3-1">11.3.1 短通道效應</a></li><li class="nsub"><a href="#s11-3-2">11.3.2 窄通道效應</a></li><li class="nsub"><a href="#s11-4-1">11.4.1 崩潰電壓</a></li><li class="nsub"><a href="#s11-4-2">11.4.2 LDD</a></li><li class="nsub"><a href="#s11-4-3">11.4.3 植入調整</a></li><li class="nsub"><a href="#s11-5-1">11.5.1 氧化層電荷</a></li><li class="nsub"><a href="#s11-5-2">11.5.2 界面態</a></li><li class="nsub"><a href="#s11-5-3">11.5.3 熱電子效應</a></li><li><a href="#summary">📋 本章摘要</a></li><li><a href="#common-mistakes">常見錯誤</a></li><li><a href="#self-check">自我檢核</a></li><li><a href="#extras">延伸學習</a></li><li><a href="#derivation-lab">🧪 推導與假設</a></li>
+</ul></div><div class="sidebar-tools"><button type="button" data-action="toggle-theme" aria-label="切換深色或淺色模式">切換顯示主題</button></div></nav>
+<main class="chapter-page" id="main-content" data-chapter-title="MOSFET 進階概念" data-prev-href="ch10_mosfet_zh.html" data-prev-label="場效電晶體（MOSFET）" data-next-href="ch12_bjt_zh.html" data-next-label="雙極性接面電晶體（BJT）—完整章">
+<header class="chapter-header"><div class="tag">第十一章</div><h1>MOSFET 進階概念</h1><div class="chapter-meta">Donald A. Neamen·《半導體物理與元件：基本原理》第四版·第 443–481 頁</div></header>
+
+<section id="preview"><h2>11.0 本章預覽</h2><div class="callout"><strong>本章核心問題</strong>
+<p>第十章建立了 MOSFET 的理想模型——長通道、均勻摻雜、無短通道效應。這個理想模型對於理解 MOSFET 的基本原理至關重要。但任何嘗試過用長通道公式來預測現代奈米級 MOSFET 行為的人都會立刻發現：理想模型完全不準。</p>
+<p>本章討論<strong>讓理想模型失效的所有效應</strong>——以及克服它們的工程解決方案。這些非理想效應不是學術好奇心；它們是每天困擾著晶片設計者和製程工程師的實際問題。每一個效應背後都有一個對應的製程解決方案（LDD、SOI、high-κ、FinFET）——了解這些方案需要先了解它們要解決的問題。</p>
+<div class="callout-warn"><strong>⚡ 本章的兩個核心主題：</strong>縮小帶來的非理想物理，以及抑制這些效應的工程方法。</div><div class="reasoning-map" aria-labelledby="reasoning-map-title"><h3 id="reasoning-map-title">🧭 本章推理地圖</h3><ol class="reasoning-path"><li>長通道假設失效產生非理想傳輸（§11.1）</li><li>縮放律預測尺寸、速度與功耗變化（§11.2）</li><li>二維靜電改變臨界電壓（§11.3）</li><li>高場帶來崩潰與可靠度工程（§11.4）</li><li>輻射與熱電子在介電層留下長期電荷（§11.5）</li></ol></div></div></section>
+<figure class="figure"><a class="figure-link" href="../../pages/ch12_pages/ch12_overview.png" target="_blank" rel="noopener"><img src="../../pages/ch12_pages/ch12_overview.png" alt="第十一章總覽圖" loading="lazy"></a><figcaption>📌 第十一章總覽圖：MOSFET進階 — 縮小法則、物理挑戰、工程解法、終極限制</figcaption></figure>
+
+<section id="s11-2-1"><h2>11.2.1 定電場縮小法則——Moore 定律的物理基礎 ⭐</h2><p>定電場縮放使單顆延遲降低、密度提高，同時理想功耗密度保持近似不變。</p><p>其成立前提是供應電壓能隨尺寸同步下降，這在低電壓時受到次臨界斜率限制。</p><div class="callout"><strong>💡 Dennard 與 Moore 不同：</strong>前者描述電性縮放，後者描述整合密度趨勢。</div><details class="example"><summary>📝 自編概念例：延遲縮放</summary><div class="example-body"><p><strong>題目：</strong>理想 $\kappa=2$。</p><p><strong>解：</strong>延遲按 $1/\kappa$。</p><p><strong>答案：</strong>單級延遲減半。</p></div></details>
+<div class="section-keypoints">
+<strong>🔑 本節重點</strong> ① $L,W,t_{ox},V$ 同除以 $\\kappa$，$N_a$ 乘 $\\kappa$→電場不變、密度 $\\times\\kappa^2$、功耗 $\\div\\kappa^2$ ② 2005 年後 Dennard 縮小失效：$V_T$ 無法再降（次臨界漏電限制）→$V_{DD}$ 卡在 ∼0.7 V ③ 縮小失效後每代性能提升從 ∼40% 降至 ∼10–15%——Moore 定律放緩的根本原因
+</div>
+<figure class="figure"><a class="figure-link" href="../../pages/ch12_pages/ch12_page_480_c.png" target="_blank" rel="noopener"><img src="../../pages/ch12_pages/ch12_page_480_c.png" alt="圖 11.12" loading="lazy"></a><figcaption>圖 11.12：Dennard 定電場縮小法則——尺寸和電壓同時縮小 $\kappa$ 倍，內部電場不變，單顆功耗降為 $1/\kappa^2$，理想功耗密度維持不變。</figcaption></figure>
+<p>1965 年，Gordon Moore 觀察到積體電路上的電晶體數量大約每兩年翻一倍。但這條著名的「定律」如果沒有物理上的可行性論證，就只是一條經驗曲線。1974 年，Robert Dennard 發表了<strong>定電場縮小法則</strong>——論證了MOSFET 可以持續縮小而不會遭遇根本性的物理障礙。</p>
+<p><strong>核心思想：</strong>如果你把電晶體的所有尺寸（$L$, $W$, $t_{ox}$）和所有電壓（$V_{DD}$, $V_T$）同時除以同一個因子 $\kappa$，並把基板摻雜增加 $\kappa$ 倍，那麼：</p>
+<ul>
+<li>內部電場保持不變（因為電壓和距離以相同比例縮小）→可靠性不受影響</li>
+<li>每單位面積的電晶體數量增加 $\kappa^2$ 倍→密度平方增長</li>
+<li>每個電晶體的延遲時間縮短 $\kappa$ 倍→速度提升</li>
+<li>每個電晶體的功耗降低 $\kappa^2$ 倍（$C\propto1/\kappa$、$V\propto1/\kappa$、$f\propto\kappa$），而密度增加 $\kappa^2$ 倍，因此理想功耗密度約維持不變；後來電壓無法等比例降低，功耗密度才成為瓶頸</li>
+</ul>
+
+
+<table><caption>定電場縮放參數</caption><thead><tr><th scope="col">參數</th><th scope="col">縮小因子</th><th scope="col">實際效益</th></tr></thead><tbody>
+<tr><td>$L, W, t_{ox}$</td><td>$1/\kappa$</td><td>尺寸縮小</td></tr>
+<tr><td>$V_{DD}, V_T, V_{DS}$</td><td>$1/\kappa$</td><td>電壓降低→功耗降低</td></tr>
+<tr><td>$N_a$（基板摻雜）</td><td>$\kappa$</td><td>保持空乏層寬度同步縮小</td></tr>
+<tr><td>延遲時間 $\tau$</td><td>$1/\kappa$</td><td>速度提升 $\kappa$ 倍</td></tr>
+<tr><td>功耗 $P$</td><td>$1/\kappa^2$</td><td>⭐ 功耗急劇降低</td></tr>
+<tr><td>功率-延遲積</td><td>$1/\kappa^3$</td><td>整體性能指標大幅改善</td></tr>
+<tr><td>密度</td><td>$\kappa^2$</td><td>每晶片電晶體數量平方增加</td></tr></tbody></table>
+
+<p><strong>為什麼 $N_a$ 必須增加？</strong>空乏層寬度 $x_d\propto1/\sqrt{N_a}$。當 $L$ 縮小 $\kappa$ 倍時，空乏層寬度也必須同步縮小——否則空乏區會延伸到通道中不該延伸的地方（例如源極和汲極的空乏區在通道下方相遇→產生穿通效應）。增加 $N_a$ 使 $x_d$ 縮小至所需的尺寸。</p>
+
+<div class="callout-warn"><strong>⚡ Dennard 縮小在 2005 年前後失效——「功耗牆」的物理根源。</strong>Dennard 縮小要求 $V_{DD}$ 和 $V_T$ 隨 $L$ 同步降低。但 $V_T$ 不能低於某個下限——因為次臨界漏電流 $I_{OFF}\propto e^{-V_T/(S/\ln10)}$。如果 $V_T$ 從 0.5 V 降到 0.2 V→$I_{OFF}$ 增加 $e^{0.3/(0.1)}\approx20$ 倍（假設 $S=100$ mV/dec）→待機功耗爆炸。<br><br>Dennard 縮小失效後，$V_{DD}$ 不再能隨 $L$ 同步縮小（從 ∼1 V 降到 ∼0.7 V 後就卡住了）。但 $L$ 繼續縮小→內部電場增大→速度飽和、熱載子效應加劇→每代新製程的性能提升幅度從之前的 ∼40% 降到 ∼10–15%。這就是為什麼 Moore 定律在放緩——不是因為電晶體不能再縮小，而是因為縮小不再帶來同等的性能回報。</div>
+</section>
+
+<section id="s11-1-3"><h2>11.1.3 遷移率變化——當閘極壓得太緊</h2>
+<div class="section-keypoints">
+<strong>🔑 本節重點</strong> ① $\\mu_{\\text{eff}}=\\mu_0/[1+\\theta(V_{GS}-V_T)]$——垂直電場將載子壓向粗糙 Si/SiO₂ 界面→界面散射+量子侷限→遷移率下降 ② $\\theta$ 取決於 $t_{ox}$（越薄→垂直電場越大→$\\theta$ 越大）和界面品質，典型 ∼0.1–0.5 V⁻¹ ③ 量子侷限協同效應：反轉層極薄(∼1–5 nm)→次能帶分立→高有效質量次能帶佔據→$\\mu$ 再降 ④ 類比設計：存在最優 $V_{GS}-V_T$(∼0.15–0.3 V)，超過後 $g_m/I_D$（跨導效率）下降
+</div>
+<p>第十一章假設反轉層中的載子遷移率 $\\mu_n$ 為常數（等於塊材中的低電場遷移率）。現實中，當 $V_{GS}$ 增大時，<strong>垂直於通道方向的電場</strong>（從閘極指向基板）將反轉層中的電子<strong>壓向</strong> Si/SiO₂ 界面。這個界面不是原子級平坦的——存在約 0.2–0.5 nm RMS 的粗糙度。載子被壓在粗糙界面上→界面粗糙度散射增加→有效遷移率下降。</p>
+
+<div class="eq">$$\mu_{\text{eff}} = \frac{\mu_0}{1 + \theta(V_{GS}-V_T)}$$</div>
+
+<p>$\theta$（遷移率退化因子）取決於氧化層厚度（$t_{ox}$ 越小→垂直電場越大→$\theta$ 越大）和界面品質。典型值 ∼0.1–0.5 V⁻¹。當 $V_{GS}-V_T=2$ V 且 $\theta=0.3$ 時，$\mu_{\text{eff}}=\mu_0/1.6=0.625\mu_0$——遷移率下降了近 40%。</p>
+
+<p><strong>物理機制——不只是界面粗糙度：</strong>除了界面粗糙度散射，垂直電場還會改變載子在反轉層中的<strong>量子侷限</strong>狀態。反轉層極薄（∼1–5 nm），電子在垂直方向的運動被量子化為離散的次能帶（subbands）。垂直電場越大→電子被壓得越緊→量子侷限越強→最低次能帶的能量升高→更多的電子佔據較高有效質量的次能帶→遷移率進一步下降。這是「表面粗糙度散射+量子侷限效應」的協同作用。</p>
+
+<div class="callout"><strong>💡 遷移率退化對類比電路設計的影響：</strong>類比設計師通常希望 $g_m$ 越大越好→傾向用大的 $V_{GS}-V_T$。但遷移率退化限制了 $g_m$ 在高過驅動電壓下的增長→存在一個最優的 $V_{GS}-V_T$（通常在 0.15–0.3 V），超過之後 $g_m/I_D$ 開始下降。</div><p>常用緊湊模型以有效遷移率隨垂直有效電場下降的經驗式描述此效應。</p><p>遷移率退化使高閘極過驅下的電流與跨導低於理想平方律預測。</p><div class="callout-warn"><strong>⚠️ 不要把低場遷移率直接用在強反轉高場通道。</strong></div><details class="example"><summary>📝 自編概念例：跨導趨勢</summary><div class="example-body"><p><strong>題目：</strong>過驅提高但有效遷移率下降。</p><p><strong>解：</strong>兩效應互相抵消。</p><p><strong>答案：</strong>$g_m$ 增幅小於常數遷移率模型。</p></div></details>
+</section>
+
+<section id="s11-1-4"><h2>11.1.4 速度飽和——短通道元件最根本的限制</h2>
+<div class="section-keypoints">
+<strong>🔑 本節重點</strong> ① 速度飽和：短通道 $E&gt;10^4$ V/cm→$v_d\to v_{\text{sat}}\approx10^7$ cm/s→$I_D=WC_{ox}(V_{GS}-V_T)v_{\text{sat}}$（線性取代平方律）② $g_m\to WC_{ox}v_{\text{sat}}$（常數上限）——加大 $V_{GS}$ 不再提高跨導→類比增益受限 ③ 飽和提前：載子在中途已達 $v_{\text{sat}}$→$V_{DS,\text{sat}}\ll V_{GS}-V_T$→電壓餘裕被壓縮 ④ FinFET 的 $I_D$–$V_{GS}$ 幾乎是直線——速度飽和的指紋；$v_{\text{sat}}$ 是 Si 材料常數，無法繞過
+</div>
+<p>第十一章的長通道模型中，$I_D$ 的平方律來自一個關鍵假設：載子漂移速度與電場成正比（$v_d=\mu_n E$）。這個假設在電場低於 ∼$10^4$ V/cm 時成立。但在短通道元件中——以 $L=20$ nm、$V_{DS}=1$ V 為例——通道中的平均電場高達 $5\times10^5$ V/cm。在這個電場強度下，載子已經遠遠進入<strong>速度飽和區</strong>（$v_d\approx v_{\text{sat}}\approx10^7$ cm/s，見第五章圖 5.8）。</p>
+
+<p>速度飽和對 $I_D$ 的影響是質變而非量變。當載子以 $v_{\text{sat}}$ 穿越整個通道時：</p>
+<div class="eq">$$\boxed{I_D(\text{sat}) = W C_{ox}(V_{GS}-V_T)v_{\text{sat}}}$$</div>
+
+<figure class="figure"><a class="figure-link" href="../../pages/ch12_pages/ch12_page_479_c.png" target="_blank" rel="noopener"><img src="../../pages/ch12_pages/ch12_page_479_c.png" alt="圖 11.11：場相依遷移率造成的 MOSFET 輸出特性變化" loading="lazy"></a><figcaption>圖 11.11：比較常數遷移率與場相依遷移率模型的 $I_D$–$V_D$ 曲線；高通道電場下的速度飽和使汲極電流低於長通道常數遷移率預測。</figcaption></figure>
+
+<p><strong>速度飽和的三個連鎖後果：</strong></p>
+
+<p><strong>① $I_D$ 變為線性而非平方律。</strong>$I_D$ 不再隨 $(V_{GS}-V_T)^2$ 增長，而只隨 $(V_{GS}-V_T)$ 線性增長→給定 $V_{GS}$ 下的驅動電流顯著降低。這直接影響了數位電路的開關速度。</p>
+
+<p><strong>② $g_m$ 趨向常數。</strong>在長通道飽和區：$g_m=\mu_n C_{ox}(W/L)(V_{GS}-V_T)$→隨 $V_{GS}$ 線性增長。在速度飽和極限：$g_m = WC_{ox}v_{\text{sat}}$→<strong>常數</strong>——加大 $V_{GS}$ 不再能提高跨導。這對類比放大器設計是災難性的——增益 $A_v=-g_m R_L$ 被固定上限。</p>
+
+<p><strong>③ 飽和提前發生。</strong>在長通道中，飽和發生在 $V_{DS}=V_{GS}-V_T$（夾止條件）。在速度飽和極限下，載子在通道中途（$V\ll V_{GS}-V_T$ 處）就已達到 $v_{\text{sat}}$→飽和發生在 $V_{DS}$ 遠小於 $V_{GS}-V_T$ 時→可用的電壓餘裕（voltage headroom）被壓縮。</p>
+
+<div class="callout-warn"><strong>⚡ 速度飽和使現代 MOSFET 偏離平方律。</strong>這是載子高場物理限制，不是單純製程缺陷。</div><div class="callout"><strong>💡 模型轉換：</strong>低場用 $v=\mu E$，高場則由 $v_{sat}$ 限制。</div><details class="example"><summary>📝 自編概念例：臨界電場</summary><div class="example-body"><p><strong>題目：</strong>$v_{sat}=10^7$ cm/s、$\mu=500$ cm²/V·s。</p><p><strong>解：</strong>$E_c=v_{sat}/\mu$。</p><p><strong>答案：</strong>約 $2\times10^4$ V/cm。</p></div></details>
+</section>
+
+<section id="s11-5-3"><h2>11.5.3 熱電子充電效應——高速電子的破壞力</h2><div class="callout"><strong>💡 熱載子老化：</strong>被氧化層或界面捕獲的電荷會逐步改變 $V_T$、$g_m$ 與汲極電流。</div><div class="callout-warn"><strong>⚠️ LDD 是緩解而非消除熱載子。</strong>高場與長時間應力仍會造成退化。</div><details class="example"><summary>📝 自編概念例：應力後參數</summary><div class="example-body"><p><strong>題目：</strong>高汲壓應力後 $V_T$ 上升且 $g_m$ 下降。</p><p><strong>解：</strong>界面與氧化層捕獲電荷增加。</p><p><strong>答案：</strong>符合熱電子充電退化。</p></div></details>
+<div class="section-keypoints">
+<strong>🔑 本節重點</strong> ① 三種破壞：注入氧化層（$V_T$ 漂移）、產生界面態（$g_m$ 退化、$S$ 劣化）、氧化層崩潰（永久擊穿）② 電子需克服 ∼3.1 eV 能障才能從 Si 導帶進入 SiO₂ 導帶——只有高能熱載子辦得到 ③ LDD：n⁻ 輕摻雜區插入通道與 n⁺ 汲極之間→空乏區延伸→峰值電場降低 30–50% ④ 熱載子注入率 $\propto e^{-E_0/E}$——電場降低 40% 可使元件壽命延長數個數量級
+</div>
+<p>在短通道元件中，即使 $V_{DS}$ 只有 1 V，汲極端的峰值電場也可達 $&gt;10^5$ V/cm。電子在汲極端空乏區中被這個高電場加速→獲得遠高於熱平衡（$kT=0.026$ eV）的動能——成為「熱」載子。某些電子的能量可達數 eV。</p>
+
+<p><strong>熱載子能造成三種破壞：</strong></p>
+
+<p><strong>① 注入氧化層。</strong>電子要從 Si 的導帶進入 SiO₂ 的導帶，需要克服 ∼3.1 eV 的能障。熱載子的能量夠高→可以直接越過這個能障進入氧化層。注入的電子在氧化層中移動，可能被氧化層中的缺陷（氧空缺等）捕獲→形成固定電荷→$V_T$ 漂移。這是長期操作中 $V_T$ 不穩定的主要原因。</p>
+
+<p><strong>② 產生界面態。</strong>高能電子撞擊 Si/SiO₂ 界面→打斷 Si-H 鍵（鈍化鍵）→產生懸鍵（dangling bond）→這些懸鍵形成能隙中的界面態。界面態會捕捉和釋放通道中的載子→$g_m$ 退化、次臨界斜率劣化、低頻雜訊增加。</p>
+
+<p><strong>③ 氧化層崩潰。</strong>長期累積的注入和陷阱充電最終導致氧化層局部電場超過 SiO₂ 的介電強度（∼$10^7$ V/cm）→氧化層永久性擊穿→閘極短路。</p>
+
+<h3>輕摻雜汲極（LDD）——對抗熱載子的工程解決方案</h3>
+<figure class="figure"><a class="figure-link" href="../../pages/ch12_pages/ch12_page_505_c.png" target="_blank" rel="noopener"><img src="../../pages/ch12_pages/ch12_page_505_c.png" alt="圖 11.35：MOSFET 汲極附近的熱載子產生與氧化層注入" loading="lazy"></a><figcaption>圖 11.35：汲極附近的高電場產生熱載子、基板電流與氧化層注入；被捕獲的電荷會逐步改變臨界電壓與跨導。</figcaption></figure>
+<p>LDD 的核心思想：在通道和重摻雜 n⁺ 汲極之間插入一段<strong>輕摻雜的 n⁻ 區域</strong>。n⁻ 區域的空間電荷密度低→Poisson 方程積分出的電場曲線更平緩→峰值電場降低。LDD 結構中的峰值電場可以從 ∼$5\times10^5$ V/cm 降到 ∼$3\times10^5$ V/cm。因為熱載子注入率對電場有極強的超線性依賴（$\propto e^{-E_0/E}$），電場降低 40% 可以使元件壽命延長數個數量級。</p>
+</section>
+
+<section id="s11-4"><h2>現代延伸 A：SOI、FinFET 與先進 CMOS 結構</h2>
+<div class="section-keypoints">
+<strong>🔑 本節重點</strong> ① SOI：埋入氧化層（BOX）消除寄生接面→降低 $C_j$、消除 body effect、提升速度 ② FinFET：三面閘極環繞通道→閘極靜電控制力大幅增強→抑制短通道效應 ③ GAA（環繞閘極）：FinFET 的終極進化——四面閘極完全包覆通道→3nm 以下節點的必要結構
+</div>
+<h3>SOI——把電晶體放在絕緣體上</h3>
+<p>在傳統塊材（bulk）MOSFET 中，通道和汲極與基板之間存在 pn 接面→寄生接面電容 $C_{j,DB}$、接面漏電流、以及基板效應（body effect：$V_{SB}$ 增加會使 $V_T$ 增加）。SOI 技術在通道下方放置一層<strong>埋入氧化層（Buried Oxide, BOX, 通常 ∼100–200 nm 厚的 SiO₂）</strong>→通道完全被絕緣體包圍→消除所有寄生接面。</p>
+<p>SOI 的優勢：寄生電容降低 30–50%→開關速度更快、動態功耗更低；接面漏電流消失→待機功耗降低；基板效應消失→$V_T$ 不受 $V_{SB}$ 調變；抗軟錯誤（soft error）能力增強（埋入氧化層阻擋 α 粒子從封裝材料進入通道）。</p>
+
+<h3>FinFET——從平面到三維的革命</h3>
+<p>在平面 MOSFET 中，閘極只從<strong>上方</strong>控制通道。當 $L_g$ 縮小到 ∼20 nm 以下時，源極和汲極的電場從通道<strong>下方</strong>（基板側）繞過——閘極失去了對通道底部區域的控制。這些不受控的區域成為次臨界漏電流的路徑。FinFET 把通道豎起來變成一個矽「鰭」→閘極從<strong>三面包圍</strong>鰭（上方+左右兩側）→閘極的靜電控制力大幅增強→短通道效應被有效抑制。這是為什麼 $L_g$ 能從 20 nm（平面 MOSFET 的極限）繼續縮小到 5 nm 以下的關鍵技術。</p>
+<p><strong>GAAFET（閘極全環繞）：</strong>FinFET 的下一步進化——通道變成水平奈米線或奈米片，閘極<strong>完全環繞</strong>通道四面。這實現了終極的靜電完整性。Samsung 2022 年發布了 3 nm GAAFET 製程，TSMC 預計在 2 nm 節點（2025）引入。</p>
+<div class="callout"><strong>💡 靜電控制</strong> SOI/FinFET/GAA 的共同目標是讓閘極重新主導通道電位。</div>
+<div class="callout-warn"><strong>⚠️ 浮體 SOI</strong> 消除體效應但可能帶來浮體效應與歷史依賴。</div>
+<details class="example"><summary>📝 自編概念例 — FinFET 優勢</summary><div class="example-body"><p>三面閘包覆鰭狀通道，閘控增強，抑制 DIBL 與短通道 roll-off。</p></div></details>
+</section>
+
+<section id="s11-5"><h2>現代延伸 B：終極尺寸的物理限制——我們能縮到多小？</h2>
+<div class="section-keypoints">
+<strong>🔑 本節重點</strong> ① 氧化層量子穿隧：$t_{ox}&lt;1$ nm→$J_G\propto e^{-t_{ox}\sqrt{2m^*\phi_B}/\hbar}$→$J_G$ 可達 $10^3$ A/cm²→high-κ 緩解但非根治 ② 摻雜波動(RDF)：$L_g=10$ nm 通道中僅 ∼10 個摻雜原子→Poisson 統計→$\Delta V_T$ 可達 50–100 mV ③ 黑暗矽：功耗密度 ∼100 W/cm²→散熱限制→大比例電晶體必須關閉或降頻 ④ 窄通道效應：$W$ 縮小→邊緣電場繞入側面空乏區→$V_T$ 升高（與短通道效應方向相反）
+</div>
+<p>Moore 定律不可能永遠持續。本節討論限制 MOSFET 繼續縮小的<strong>根本物理障壁</strong>——這些不是工程問題（可透過更聰明的設計克服），而是物理定律設定硬性限制。</p>
+
+<h3>氧化層的量子穿隧限制</h3>
+<p>SiO₂ 氧化層的厚度不能小於 ∼0.5 nm（約兩個分子層）。當 $t_{ox}&lt;1$ nm 時，直接量子穿隧（direct tunneling）導致閘極漏電流密度呈指數增長：$J_G \propto e^{-t_{ox}\sqrt{2m^*\phi_B}/\hbar}$。對 $t_{ox}=1.5$ nm→$J_G\sim1$ A/cm²；$t_{ox}=0.8$ nm→$J_G\sim10^3$ A/cm²→閘極漏電功耗超過通道導通功耗→電晶體失去意義。high-κ 材料（HfO₂, $\kappa\sim25$）可以物理厚度 5 nm 達到等效 0.8 nm 的電容→穿隧漏電降低 ∼$10^4$ 倍。但當等效厚度也縮到 ∼0.5 nm 時，穿隧限制再次出現。</p>
+
+<h3>摻雜波動（Random Dopant Fluctuation, RDF）</h3>
+<p>在 $L_g=10$ nm 的 MOSFET 中，通道體積約為 $10\times10\times10$ nm³ $=10^{-18}$ cm³。若 $N_a=10^{18}$ cm⁻³→通道中僅有 ∼<strong>10 個摻雜原子</strong>。這 10 個原子的確切數量和位置因每個電晶體而異（Poisson 統計→標準差 $\sqrt{10}\approx3$）→每個電晶體的 $V_T$ 都不同。在一個有 100 億個電晶體的晶片上，$V_T$ 的統計分布寬度可達 ∼50–100 mV——大到足以破壞 SRAM 單元的讀寫穩定性和邏輯時序。</p>
+
+<h3>功耗密度——黑暗矽（Dark Silicon）</h3>
+<p>即使每個電晶體的功耗隨縮小而降低，但密度以 $\kappa^2$ 增長→每單位面積的總功耗可能增加。現代高效能晶片的功耗密度已接近 ∼100 W/cm²——接近核反應爐的熱通量。散熱能力（空冷∼50 W/cm²，液冷∼200 W/cm²）限制了能同時全速運行的電晶體比例。這就是「黑暗矽」現象——晶片上有大比例的電晶體必須關閉或降頻以避免過熱。</p>
+
+<h3>11.3.2 窄通道效應（Narrow-Channel Effects）</h3>
+<p>短通道效應是通道<strong>長度</strong>縮小的問題。通道<strong>寬度</strong>縮小同樣帶來效應——<strong>窄通道效應</strong>。當 $W$ 縮小到與空乏區寬度可比時，閘極邊緣的電場線「繞射」到通道側面的空乏區中→需要額外的閘極電壓來覆蓋側面空乏電荷→$V_T$ <strong>升高</strong>。</p>
+<p>與短通道效應（$V_T$ 下降）相反，窄通道效應使 $V_T$ 上升。在現代 FinFET 中，通道是三維的鰭片（fin），$W$ 的定義不再是簡單的平面寬度，而是鰭片高度×2+鰭片寬度——窄通道效應的物理圖像需要重新理解。</p>
+<div class="callout"><strong>💡 多物理限制</strong> 縮小尺寸同時遭遇穿隧、RDF、散熱與窄通道效應。</div>
+<div class="callout-warn"><strong>⚠️ 黑暗矽</strong> 功耗密度限制同時全速運行的電晶體比例。</div>
+<details class="example"><summary>📐 例題 — 閘氧穿隧</summary><div class="example-body"><p>$t_{ox}$ 過薄時 $J_G\propto\exp(-t_{ox}\sqrt{2m^*\phi_B}/\hbar)$ 急增；high-κ 以較厚物理層達等效電容。</p></div></details>
+</section>
+
+<section id="s11-1-5"><h2>11.1.5 彈道傳輸——當通道比平均自由程還短</h2>
+<div class="section-keypoints">
+<strong>🔑 本節重點</strong> ① 平均自由程 $\ell=v_{th}\tau\approx10$–50 nm——$L&lt;\ell$ 時載子可能無散射從源極飛到汲極 ② Si 中 $\ell\approx10$ nm→$L&lt;10$ nm 通道進入彈道區域 ③ 彈道極限：$I_D=WC_{ox}(V_{GS}-V_T)v_{\text{inj}}$，$v_{\text{inj}}\approx v_{th}/2\approx5\times10^6$ cm/s（低於 $v_{\text{sat}}$）④ 3 nm 節點為準彈道傳輸（∼1–2 次散射）——InGaAs/Ge 具更高 $v_{\text{inj}}$ 但界面品質是挑戰
+</div>
+<p>在傳統的漂移-擴散模型中，載子在通道中經過多次散射（碰撞）才從源極到達汲極。平均自由程 $\ell = v_{th}\tau \approx 10$–$50$ nm（室溫 Si）。當通道長度 $L$ 縮小到與 $\ell$ 可比（$L &lt; 50$ nm）時，載子可能在<strong>不經過任何散射</strong>的情況下從源極飛到汲極——這就是<strong>彈道傳輸</strong>。</p>
+<p><strong>平均自由程的數值計算：</strong>$\ell = v_{th}\tau$。Si 中 $\mu_n = 300$ cm²/V·s（短通道中的有效遷移率）→$\tau = m^*\mu/e = 0.26\times9.11\times10^{-31}\times300\times10^{-4}/(1.6\times10^{-19}) \approx 4.4\times10^{-14}$ s。$v_{th} = \sqrt{8kT/(\pi m^*)} \approx 2.3\times10^7$ cm/s。$\ell = 2.3\times10^7\times4.4\times10^{-14} \approx 10$ nm。所以 $L &lt; 10$ nm 的通道確實進入彈道區域。</p>
+<p>在完全彈道極限下，$I_D$ 不再受通道中的散射限制，而是受源極端的<strong>熱離子注入率</strong>限制——就像蕭特基二極體的 thermionic emission。飽和電流：</p>
+<div class="eq">$$I_{\text{ballistic}} = WC_{ox}(V_{GS}-V_T)v_{\text{inj}}$$</div>
+<p>其中 $v_{\text{inj}} \approx v_{th}/2$（注入速度≈熱速度的一半）。對 Si，$v_{th}\sim10^7$ cm/s→$v_{\text{inj}}\sim5\times10^6$ cm/s。這比速度飽和的 $v_{sat}\sim10^7$ cm/s 還低——所以彈道傳輸在 Si 中<strong>不一定</strong>比速度飽和更優。但在高遷移率材料（如 InGaAs，$v_{th}$ 更高）中，彈道傳輸可能是突破速度瓶頸的途徑。</p>
+<div class="callout"><strong>💡 彈道傳輸的工程現實。</strong>最先進元件多屬只經歷少數散射的準彈道傳輸。</div><p>彈道極限下電流由接觸可注入的量子態與注入速度控制，而不是局部遷移率。</p><div class="callout-warn"><strong>⚠️ 彈道傳輸不代表無接觸電阻。</strong>接觸注入反而成為核心限制。</div><details class="example"><summary>📝 自編概念例：判斷傳輸區域</summary><div class="example-body"><p><strong>題目：</strong>$L$ 與平均自由程相近。</p><p><strong>解：</strong>載子只經歷少數散射。</p><p><strong>答案：</strong>屬準彈道傳輸。</p></div></details>
+</section>
+
+<section id="s11-3-1"><h2>11.3.1 短通道效應——當 $L$ 不再「長」</h2><div class="callout"><strong>💡 二維控制：</strong>短通道效應本質是汲極與源極分享了原應由閘極控制的通道勢壘。</div><details class="example"><summary>📝 自編概念例：DIBL</summary><div class="example-body"><p><strong>題目：</strong>汲壓增加使提取的 $V_T$ 降低。</p><p><strong>解：</strong>汲極電場降低源端勢壘。</p><p><strong>答案：</strong>這是 DIBL 的典型表徵。</p></div></details>
+<div class="section-keypoints">
+<strong>🔑 本節重點</strong> ① 通道縮短後，源汲空乏區會分攤閘極控制 ② 電荷共享使臨界電壓隨通道長度下降 ③ DIBL 使臨界電壓隨汲極偏壓下降 ④ 次臨界電流決定關閉狀態漏電
+</div>
+<p>長通道 MOSFET 的理想公式（$V_T$ 與 $L$ 無關、$I_D$ 飽和後平坦）在通道縮短後開始失效。源極與汲極空乏區進入通道，分攤原本應由閘極控制的空乏電荷，這是第四版 §11.3.1 所討論短通道臨界電壓降低的核心。</p>
+<figure class="figure"><a class="figure-link" href="../../pages/ch12_pages/ch12_page_484_c.png" target="_blank" rel="noopener"><img src="../../pages/ch12_pages/ch12_page_484_c.png" alt="圖 11.14–11.15：短通道 MOSFET 的空乏電荷共享" loading="lazy"></a><figcaption>圖 11.14–11.15：短通道元件中，源極與汲極空乏區侵入閘極下方並分攤空乏電荷，因此閘極建立反轉所需的電壓下降。</figcaption></figure>
+<h3>電荷共享與 DIBL</h3>
+<p>通道越短，源汲接面分攤的空乏電荷比例越大，臨界電壓便隨 $L$ 縮短而下降。提高 $V_{DS}$ 還會使汲極電場向源極方向延伸並降低源端注入能障，形成汲極引發能障降低（DIBL），使關閉電流增加。</p>
+<p>短通道臨界電壓模型必須求解二維 Poisson 方程；長通道 MOS 電容的一維公式不足以描述源極、汲極與閘極的共同控制。基板摻雜、接面深度、氧化層厚度及通道長度都會影響電荷共享程度。</p>
+<h3>次臨界斜率</h3>
+<p>實際 MOSFET 在 $V_{GS}&lt;V_T$ 時仍有擴散主導的次臨界電流。常用斜率定義為：</p>
+<div class="eq">$$S = \frac{dV_{GS}}{d(\log_{10} I_D)} \approx (\ln 10)\frac{kT}{e}\left(1+\frac{C_d}{C_{ox}}\right)$$</div>
+<p>室溫下理想極限約為 60 mV/dec；$C_d/C_{ox}$、介面態及短通道耦合都會使實際斜率變大。斜率越大，同一閘極電壓範圍內可壓低的關閉電流越少。</p>
+<div class="callout-warn"><strong>⚡ 適用範圍：</strong>60 mV/dec 是熱平衡、傳統 MOSFET 次臨界傳輸的室溫極限，不應套用到穿隧 FET 或其他非熱注入元件。</div>
+</section>
+
+<section id="s11-4-3"><h2>11.4.3 離子植入閾值調整</h2><div class="callout-warn"><strong>⚠️ 植入不只改變平均 $V_T$。</strong>也會增加晶格損傷、散射與統計變異。</div><details class="example"><summary>📝 自編概念例：植入劑量增加</summary><div class="example-body"><p><strong>題目：</strong>p 型通道調整植入增加。</p><p><strong>解：</strong>強反轉需平衡更多空乏電荷。</p><p><strong>答案：</strong>nMOS $V_T$ 通常提高。</p></div></details>
+<div class="section-keypoints">
+<strong>🔑 本節重點</strong> ① 通道離子植入是調整 $V_T$ 的標準方法：植入硼（p 型）增加有效 $N_a$→$V_T$ 升高 ② 植入劑量和能量精確控制 $V_T$ 偏移量 ③ 同一晶片上 n-MOS 和 p-MOS 需要不同的 $V_T$→需要獨立的植入步驟
+</div>
+<p>$V_T$ 的精確控制對數位電路至關重要——同一晶片上的所有 nMOS 必須有相同的 $V_T$。$V_T$ 取決於 $N_a$（基板摻雜）和 $C_{ox}$（氧化層厚度），但這些參數的製程控制精度有限。</p>
+<p><strong>離子植入（Ion Implantation）</strong>是精確調整 $V_T$ 的標準方法：在通道表面下方植入一層極薄的摻雜層（通常用 B 對 nMOS，P 或 As 對 pMOS）。植入劑量 $Q_I$（atoms/cm²）直接改變 $V_T$：</p>
+<div class="eq">$$\Delta V_T = \frac{eQ_I}{C_{ox}}$$</div>
+<p>植入深度（由離子能量決定）必須在反轉層形成的位置附近——太深則對 $V_T$ 無效，太淺則影響載子遷移率。典型的調整範圍：$\pm 100$–$300$ mV，植入劑量 $10^{12}$–$10^{13}$ cm$^{-2}$。</p>
+<p><strong>植入能量與深度的關係：</strong>離子進入 Si 後會與晶格原子碰撞而減速。投影射程 $R_p$（平均停止深度）取決於離子能量和質量：</p>
+<table><caption>常見植入離子、能量與用途</caption><thead><tr><th scope="col">離子</th><th scope="col">能量 (keV)</th><th scope="col">$R_p$ (nm)</th><th scope="col">用途</th></tr></thead><tbody>
+<tr><td>B（硼）</td><td>10</td><td>∼30</td><td>淺接面 $V_T$ 調整</td></tr>
+<tr><td>B（硼）</td><td>50</td><td>∼150</td><td>標準 $V_T$ 調整</td></tr>
+<tr><td>P（磷）</td><td>50</td><td>∼60</td><td>nMOS $V_T$ 調整</td></tr>
+<tr><td>As（砷）</td><td>50</td><td>∼30</td><td>極淺 S/D 擴展</td></tr></tbody></table>
+<p><strong>退火（Annealing）：</strong>植入過程會嚴重破壞晶格（每個離子撞出數千個 Si 原子）→必須在 900–1100°C 退火來修復晶格損傷並活化摻雜原子。現代製程使用快速熱退火（RTA，∼1 秒）或雷射退火（毫秒級）以防止摻雜原子過度擴散。</p>
+<div class="callout"><strong>💡 多閾值電壓（Multi-$V_T$）技術。</strong>現代 SoC 中不同電路區塊對速度和功耗的要求不同。高效能核心用低 $V_T$（快但漏電大），低功耗 I/O 用高 $V_T$（慢但漏電小）。透過多次離子植入（不同區域不同劑量），可以在同一晶片上實現多種 $V_T$ 的 MOSFET。這是現代手機 SoC（如 Apple A 系列、Qualcomm Snapdragon）能在效能和續航之間取得平衡的關鍵技術。</div>
+</section>
+
+<section id="s11-5-overview"><h2>11.5 補充：輻射與熱載子效應總覽</h2>
+<p>除了前節討論的熱載子效應（通道中的高能電子注入氧化層），輻射環境也會在氧化層中產生電荷。</p>
+<p><strong>輻射效應的兩種類型：</strong></p>
+<p>① <strong>總劑量效應（TID, Total Ionizing Dose）：</strong>累積的輻射劑量在氧化層中產生永久性電荷。$\gamma$ 射線或質子撞擊 SiO₂→產生電子-電洞對。電子很快被掃出（$\sim10^{-5}$ cm²/V·s），但電洞被陷阱捕獲（$\sim10^{-11}$ cm²/V·s）→形成正的固定氧化層電荷→$V_{FB}$ 負移→$V_T$ 下降。典型漂移量：</p>
+<table><caption>輻射劑量與臨界電壓偏移比較</caption><thead><tr><th scope="col">輻射劑量 (rad(Si))</th><th scope="col">$\Delta V_T$（未加固）</th><th scope="col">$\Delta V_T$（加固後）</th></tr></thead><tbody>
+<tr><td>100</td><td>∼50 mV</td><td>&lt; 10 mV</td></tr>
+<tr><td>10k</td><td>∼1 V</td><td>∼100 mV</td></tr>
+<tr><td>100k</td><td>元件失效</td><td>∼500 mV</td></tr></tbody></table>
+<p>② <strong>單一事件效應（SEE, Single Event Effects）：</strong>高能粒子（宇宙射線中的重離子或質子）穿過電晶體→沿路產生大量電子-電洞對→瞬間電流脈衝。可能導致：SEU（單一事件翻轉，SRAM 位元翻轉→軟錯誤）、SEL（單一事件鎖定，觸發寄生 SCR→大電流→永久損壞）、SEB（單一事件崩潰，功率元件中）。</p>
+<p><strong>抗輻射設計方法：</strong></p>
+<ul>
+<li>薄氧化層（$&lt;10$ nm）：減少電洞陷阱數量→TID 敏感度降低。</li>
+<li>SOI 結構：埋入氧化層消除體矽中的寄生路徑→抗 SEL。</li>
+<li>特殊的退火處理（含氫退火→減少界面態）。</li>
+<li>三模冗餘（TMR）：三個 SRAM 單元投票→容忍 SEU。</li>
+<li>矽化物閘極取代多晶矽閘極：消除空乏區中的電荷陷阱。</li>
+</ul>
+<div class="callout"><strong>💡 輻射加固是航太和軍事電子的專屬需求。</strong>國際太空站上的電子設備需要耐受 ∼100 krad/年的輻射劑量。衛星在 Van Allen 輻射帶中面臨更嚴苛的環境。軍規元件（如 BAE Systems 的 RAD750 處理器）使用特殊的抗輻射製程，代價是速度降低 5-10×、成本增加 100×。消費電子通常不需要考慮輻射效應，但在高海拔飛行（如民航飛機）中，宇宙射線仍可能導致 SRAM 軟錯誤——ECC（錯誤校正碼）是標準的防護措施。</div>
+<div class="callout-warn"><strong>⚠️ 可靠度</strong> 熱載子與輻射會改變氧化層/界面電荷，造成 $V_T$ 漂移。</div>
+<details class="example"><summary>📝 自編概念例 — TID 效應</summary><div class="example-body"><p>累積輻射在氧化層產生正固定電荷 → $V_{FB}$ 負移 → $V_T$ 下降。</p></div></details>
+</section>
+
+<section id="s11-1-1"><h2>11.1.1 次臨界導電</h2><div class="section-keypoints"><strong>🔑 本節重點</strong> ① $V_G&lt;V_T$ 仍有擴散電流 ② 電流對閘壓呈指數 ③ 次臨界斜率限制開關 ④ 溫度與電容耦合決定極限</div>
+<p>臨界電壓以下沒有強反轉通道，但表面仍存在少量電子，可由源極向汲極擴散。</p><p>次臨界電流近似隨閘極電壓呈指數增加，因此 MOSFET 不是真正的理想開關。</p><p>次臨界斜率 $S$ 表示電流增加十倍所需閘極電壓，室溫理想極限約 60 mV/dec。</p><p>空乏電容與界面態電容削弱閘極控制，使實際 $S$ 大於熱力學極限。</p><p>降低 $V_T$ 可提升速度，卻會指數增加關閉漏電，形成低功耗設計核心取捨。</p><div class="callout"><strong>💡 關閉不是零電流：</strong>次臨界區以擴散機制連續銜接到強反轉。</div><div class="callout-warn"><strong>⚠️ 不可用平方律描述次臨界電流。</strong></div><details class="example"><summary>📝 自編概念例：十倍漏電</summary><div class="example-body"><p><strong>題目：</strong>$S=80$ mV/dec，閘壓增加 160 mV。</p><p><strong>解：</strong>跨越兩個 decade。</p><p><strong>答案：</strong>電流約增加 100 倍。</p></div></details></section>
+
+<section id="s11-1-2"><h2>11.1.2 通道長度調變</h2><div class="section-keypoints"><strong>🔑 本節重點</strong> ① 夾止區隨汲壓延伸 ② 有效通道長度縮短 ③ 飽和電流仍微增 ④ 造成有限輸出電阻</div>
+<p>長通道理想模型假設飽和後夾止點固定，因此汲極電流不再隨 $V_{DS}$ 改變。</p><p>實際增加汲極電壓會擴大汲端耗盡區，使夾止點向源極移動。</p><p>有效通道長度由 $L$ 減為 $L-\Delta L$，相同通道電荷下電流因而增加。</p><p>一階模型寫成 $I_D\approx I_{D,sat}(1+\lambda V_{DS})$，其輸出電阻約為 $r_o=1/(\lambda I_D)$。</p><p>通道越短，固定耗盡區變化占總長度比例越大，通道長度調變通常越明顯。</p><div class="callout"><strong>💡 類比影響：</strong>有限 $r_o$ 直接限制共源放大器的內在增益 $g_mr_o$。</div><div class="callout-warn"><strong>⚠️ $\lambda$ 是工作區間近似參數，不是普遍常數。</strong></div><details class="example"><summary>📝 自編概念例：輸出電阻</summary><div class="example-body"><p><strong>題目：</strong>$I_D=0.5$ mA、$\lambda=0.04$ V$^{-1}$。</p><p><strong>解：</strong>$r_o=1/(\lambda I_D)$。</p><p><strong>答案：</strong>約 50 kΩ。</p></div></details></section>
+
+<section id="s11-2-2"><h2>11.2.2 臨界電壓的第一近似</h2><div class="section-keypoints"><strong>🔑 本節重點</strong> ① 尺寸與電壓理想同比縮小 ② 摻雜需提高維持耗盡尺度 ③ $V_T$ 也應按比例下降 ④ 漏電與雜訊限制實際縮放</div>
+<p>定電場縮放要求所有垂直與橫向尺寸除以比例因子 $\kappa$，供應與端點電壓也同除。</p><p>為使空乏寬度同步縮小，基板摻雜濃度需乘以 $\kappa$。</p><p>第一近似下臨界電壓也按 $1/\kappa$ 縮小，才能保留相似的反轉與電場分布。</p><p>但 $V_T$ 降低會指數增加次臨界漏電，且熱電壓 $kT/q$ 不會隨幾何縮放。</p><p>因此現代製程無法無限遵守理想比例，必須在速度、漏電與雜訊容限間折衷。</p><div class="callout"><strong>💡 縮放破局：</strong>幾何可縮，但室溫熱能尺度不會跟著縮。</div><div class="callout-warn"><strong>⚠️ 不可只縮尺寸而保持電壓不變。</strong>那會提高電場與可靠度風險。</div><details class="example"><summary>📝 自編概念例：理想縮放</summary><div class="example-body"><p><strong>題目：</strong>$\kappa=2$，原 $V_T=0.6$ V。</p><p><strong>解：</strong>第一近似按 $1/\kappa$。</p><p><strong>答案：</strong>新 $V_T\approx0.3$ V。</p></div></details></section>
+
+<section id="s11-2-3"><h2>11.2.3 廣義縮放</h2><div class="section-keypoints"><strong>🔑 本節重點</strong> ① 尺寸與電壓可採不同因子 ② 電場不必保持完全不變 ③ 性能與功耗重新權衡 ④ 描述現實非理想縮放</div>
+<p>廣義縮放允許尺寸與電壓使用不同縮放因子，以描述供應電壓無法同步下降的實際情況。</p><p>若尺寸縮得比電壓快，內部電場會增加，速度可能先提升但可靠度與熱效應惡化。</p><p>電容、電流、延遲與功耗的縮放律需分別由幾何與電壓因子重新推導。</p><p>速度飽和使電流不再遵循長通道平方律，動態功耗密度也可能隨整合度上升。</p><p>廣義縮放因此是理解 Dennard scaling 結束後製程演進的較實用框架。</p><div class="callout"><strong>💡 現代縮放：</strong>性能改善越來越依靠結構、材料與架構，而非單純等比例縮小。</div><div class="callout-warn"><strong>⚠️ 任何縮放表都必須先列出尺寸與電壓各自因子。</strong></div><details class="example"><summary>📝 自編概念例：電場趨勢</summary><div class="example-body"><p><strong>題目：</strong>長度減半而電壓只降 20%。</p><p><strong>解：</strong>電場比值為 $0.8/0.5=1.6$。</p><p><strong>答案：</strong>平均電場增加 60%。</p></div></details></section>
+
+<section id="s11-3-2"><h2>11.3.2 窄通道效應</h2><div class="section-keypoints"><strong>🔑 本節重點</strong> ① 通道邊緣出現二維耗盡 ② 隔離區增加閘極所需電荷 ③ 窄寬度可提高 $V_T$ ④ 邊緣場與製程結構重要</div>
+<p>通道寬度足夠大時，中央區域可近似一維 MOS 電容；縮窄後邊緣耗盡區占比增加。</p><p>場氧化層或隔離結構附近的電場線向側面展開，使閘極還需平衡額外邊緣電荷。</p><p>因此傳統平面 MOSFET 的臨界電壓可能隨通道寬度減小而提高。</p><p>效應大小取決於隔離幾何、場區摻雜、氧化層厚度及通道寬度。</p><p>窄通道效應與短通道效應方向可能不同，設計模型必須同時處理長與寬的二維影響。</p><div class="callout"><strong>💡 幾何判斷：</strong>短通道看源汲方向，窄通道看垂直於電流的邊緣方向。</div><div class="callout-warn"><strong>⚠️ 現代結構可能出現反窄寬效應，不能假設趨勢永遠相同。</strong></div><details class="example"><summary>📝 自編概念例：邊緣占比</summary><div class="example-body"><p><strong>題目：</strong>固定兩側邊緣寬度，總通道寬度縮小。</p><p><strong>解：</strong>邊緣區占總寬度比例上升。</p><p><strong>答案：</strong>邊緣耗盡對 $V_T$ 的影響增強。</p></div></details></section>
+
+<section id="s11-4-1"><h2>11.4.1 崩潰電壓</h2><div class="section-keypoints"><strong>🔑 本節重點</strong> ① 汲極高場可引發雪崩 ② 穿通使源汲耗盡區相接 ③ 閘極氧化層也有限場強 ④ 結構摻雜決定耐壓</div>
+<p>提高汲極電壓會在汲極–基板接面形成強電場，載子可能撞擊游離並引發雪崩。</p><p>短通道元件中，源汲耗盡區可能在基板內相互接近，造成 punch-through 電流。</p><p>薄閘極介電層也承受垂直電場，超過材料極限可能導致軟崩潰或永久擊穿。</p><p>提高耐壓通常需要較低摻雜、更長漂移區或電場整形，但會增加導通電阻與面積。</p><p>崩潰規格因此不是單一接面參數，而是接面、通道與介電層共同限制。</p><div class="callout"><strong>💡 功率取捨：</strong>耐壓與低導通電阻常彼此衝突。</div><div class="callout-warn"><strong>⚠️ 雪崩、穿通與氧化層擊穿是不同機制。</strong></div><details class="example"><summary>📝 自編概念例：電場整形</summary><div class="example-body"><p><strong>題目：</strong>為何漂移區降低摻雜可提高耐壓？</p><p><strong>解：</strong>耗盡區變寬，電壓分布於更長距離。</p><p><strong>答案：</strong>峰值電場降低。</p></div></details></section>
+
+<section id="s11-4-2"><h2>11.4.2 輕摻雜汲極電晶體</h2><div class="section-keypoints"><strong>🔑 本節重點</strong> ① LDD 在通道與重摻雜汲極間緩衝 ② 降低汲端峰值電場 ③ 抑制熱載子損傷 ④ 代價是串聯電阻增加</div>
+<p>LDD 結構在通道與 n+ 汲極之間加入較低摻雜的延伸區。</p><p>較寬的耗盡區把汲極電壓分散在更長距離，降低閘極邊緣的峰值橫向電場。</p><p>峰值電場下降會減少撞擊游離及高能電子注入氧化層，改善長期可靠度。</p><p>低摻雜延伸區同時增加源汲串聯電阻，使驅動電流與跨導下降。</p><p>側壁 spacer 常用於自對準形成 LDD 與重摻雜區的適當間距。</p><div class="callout"><strong>💡 LDD 是可靠度–性能折衷：</strong>用一些串聯電阻換取較低峰值電場。</div><div class="callout-warn"><strong>⚠️ 延伸區過長或過輕摻雜會嚴重犧牲驅動能力。</strong></div><details class="example"><summary>📝 自編概念例：LDD 的直接目的</summary><div class="example-body"><p><strong>題目：</strong>LDD 最直接降低哪個量？</p><p><strong>解：</strong>它讓汲極電壓沿更長距離下降。</p><p><strong>答案：</strong>汲端閘極邊緣的峰值電場。</p></div></details></section>
+
+<section id="s11-5-1"><h2>11.5.1 輻射誘生氧化層電荷</h2><div class="section-keypoints"><strong>🔑 本節重點</strong> ① 輻射在氧化層產生電子電洞對 ② 電子較快離開 ③ 電洞可能被陷阱捕獲 ④ 正電荷平移臨界電壓</div>
+<p>游離輻射在閘極氧化層內產生電子–電洞對，數量與吸收劑量相關。</p><p>電子遷移率較高，通常能快速被電極掃出；電洞移動慢且容易被氧化層陷阱捕獲。</p><p>殘留正氧化層電荷使平帶電壓與臨界電壓發生偏移，nMOS 常朝較負方向移動。</p><p>偏壓、氧化層厚度、製程缺陷與退火條件會改變淨捕獲量。</p><p>在太空、核能與醫療電子中，總游離劑量效應是 MOS 可靠度的重要規格。</p><div class="callout"><strong>💡 輻射記憶：</strong>瞬間產生的載子可留下長時間存在的陷阱電荷。</div><div class="callout-warn"><strong>⚠️ 劑量效應與單粒子事件不是同一失效類型。</strong></div><details class="example"><summary>📝 自編概念例：正氧化層電荷</summary><div class="example-body"><p><strong>題目：</strong>正 $Q_{ox}$ 增加對 nMOS $V_T$ 的一階影響？</p><p><strong>解：</strong>等效提供正閘極偏壓。</p><p><strong>答案：</strong>$V_T$ 通常向負方向偏移。</p></div></details></section>
+
+<section id="s11-5-2"><h2>11.5.2 輻射誘生界面態</h2><div class="section-keypoints"><strong>🔑 本節重點</strong> ① 輻射可破壞 Si–SiO₂ 鍵結 ② 界面態交換載子 ③ 降低遷移率並惡化斜率 ④ 效應具頻率與偏壓依賴</div>
+<p>輻射與後續氫反應可在 Si–SiO₂ 界面生成新的電性活性缺陷。</p><p>界面態能在不同表面位勢下捕獲或釋放載子，形成額外界面電荷。</p><p>這些態會造成 C–V stretch-out、次臨界斜率惡化與臨界電壓變化。</p><p>界面庫侖散射也會降低通道遷移率，減少驅動電流與跨導。</p><p>氧化層陷阱與界面態對元件的影響方向可能不同，總偏移可能呈非單調時間演化。</p><div class="callout"><strong>💡 診斷方式：</strong>固定電荷偏移曲線，界面態還會改變曲線形狀與頻率響應。</div><div class="callout-warn"><strong>⚠️ 只量單一 $V_T$ 無法分離兩種輻射缺陷。</strong></div><details class="example"><summary>📝 自編概念例：C–V 伸展</summary><div class="example-body"><p><strong>題目：</strong>輻射後 C–V 不只平移還明顯伸展。</p><p><strong>解：</strong>額外電荷響應隨表面位勢改變。</p><p><strong>答案：</strong>顯示界面態增加。</p></div></details></section>
+
+<section id="summary"><h2>本章摘要</h2>
+<ol>
+<li><strong>定電場縮小（Dennard Scaling）：</strong>尺寸和電壓同時除以 $\kappa$→內部電場不變→功耗 $\propto1/\kappa^2$。在 ∼90 nm 後因 $V_T$ 無法繼續降低而失效。</li>
+<li><strong>遷移率退化：</strong>$\mu_{\text{eff}}=\mu_0/[1+\theta(V_{GS}-V_T)]$。垂直電場壓迫載子至粗糙 Si/SiO₂ 界面→界面散射+量子侷限→$\mu$ 下降。</li>
+<li><strong>速度飽和：</strong>短通道 $I_D=WC_{ox}(V_{GS}-V_T)v_{\text{sat}}$（線性取代平方律）。$g_m$→$WC_{ox}v_{\text{sat}}$（常數上限）。Si 中 $v_{\text{sat}}$ 是材料常數→無法繞過。</li>
+<li><strong>熱載子效應：</strong>高能電子（數 eV）注入氧化層→$V_T$ 漂移、界面態、氧化層崩潰。LDD 結構降低峰值電場 30–50%。</li>
+<li><strong>SOI：</strong>埋入氧化層消除寄生接面電容和基板效應→更快、更低功耗。FinFET：三面閘極→靜電控制增強→$L_g$ 可縮小至 3 nm。</li>
+<li><strong>終極限制：</strong>量子穿隧→$t_{ox}&gt;0.5$ nm。RDF→$V_T$ 統計變異（通道中 ∼10 原子）。功耗密度→散熱限制→黑暗矽。</li></ol><table><caption>第十一章非理想效應與工程回應</caption><thead><tr><th scope="col">效應</th><th scope="col">主要後果</th><th scope="col">工程方向</th></tr></thead><tbody><tr><th scope="row">短通道／DIBL</th><td>閘極失去勢壘控制</td><td>多閘極、薄體</td></tr><tr><th scope="row">高場與熱電子</th><td>速度飽和、可靠度退化</td><td>LDD、降電壓</td></tr><tr><th scope="row">輻射電荷</th><td>$V_T$ 與斜率漂移</td><td>薄氧化層與加固製程</td></tr></tbody></table></section>
+<section id="common-mistakes"><h2>常見錯誤</h2><div class="callout-warn"><strong>⚠️ 把次臨界區當成完全關閉。</strong>實際漏電對閘壓呈指數依賴。</div><div class="callout-warn"><strong>⚠️ 用常數遷移率平方律描述奈米 MOSFET。</strong>遷移率退化與速度飽和會使其失效。</div><div class="callout-warn"><strong>⚠️ 把短通道與窄通道效應混為一談。</strong>兩者來自不同方向的二維電場。</div><div class="callout-warn"><strong>⚠️ 認為 LDD 沒有代價。</strong>它降低峰值電場但增加串聯電阻。</div></section>
+<section id="self-check"><h2>自我檢核</h2><details><summary>為何次臨界斜率有室溫熱力學極限？</summary><p>傳統 MOSFET 由熱分布載子越過源端勢壘，電流控制受 $kT/q$ 限制。</p></details><details><summary>速度飽和後為何平方律變弱？</summary><p>漂移速度不再隨橫向電場線性增加。</p></details><details><summary>LDD 如何降低熱載子效應？</summary><p>它把汲端電壓分散於較長的低摻雜區，降低峰值電場。</p></details><details><summary>氧化層電荷與界面態如何區分？</summary><p>前者主要平移 C–V，後者還會造成 stretch-out 與斜率退化。</p></details></section>
+<section id="extras"><h2>延伸學習</h2><p><a href="../formula_reviews/ch11_mosfet_advanced_formula_review_zh.html">第 11 章公式摘要</a> · <a href="../problems_examples/ch11_problems_zh.html">章末習題</a>。下一章將進入<a href="ch12_bjt_zh.html">雙極性電晶體</a>。</p></section>
+<section id="learning-resources"><h2>本章學習資源</h2><p><a href="../formula_reviews/ch11_mosfet_advanced_formula_review_zh.html">第 11 章公式摘要</a> · <a href="../problems_examples/ch11_problems_zh.html">章末習題</a> · <a href="../problems_examples/examples_in_chapter_zh.html#ch11">章內例題</a></p></section>
+<section id="derivation-lab" class="derive"><h2>推導、假設與章末診斷</h2><h3>進階模型的適用條件</h3><ul><li>Dennard scaling 假設所有線性尺寸與電壓同除以 $\kappa$、摻雜乘 $\kappa$、遷移率與材料參數不變。</li><li>速度飽和近似 $v\to v_{sat}$ 要求通道場接近或超過 $E_c=v_{sat}/\mu$；中間區需連續速度模型。</li><li>短通道臨界電壓模型依賴二維 Poisson 邊界；一維 MOS capacitor 公式不再充分。</li><li>彈道模型要求通道長度與平均自由程可比，接觸注入與量子傳輸取代局部漂移速度。</li></ul><h3>中間推導：定電場縮小</h3><ol><li>$L,W,t_{ox},V\to1/\kappa$，因此電場 $V/L$ 不變。</li><li>單顆電容 $C\sim C_{ox}WL$：$C_{ox}\to\kappa C_{ox}$、面積 $\to1/\kappa^2$，故 $C\to C/\kappa$。</li><li>$I\sim\mu C_{ox}(W/L)V^2\to I/\kappa$。</li><li>延遲 $CV/I\to1/\kappa$；單顆動態功耗 $CV^2f\to1/\kappa^2$，密度乘 $\kappa^2$，理想功耗密度不變。</li></ol><div class="info-card"><strong>量級：</strong>1 V 落在 20 nm 上是 $5\times10^5$ V/cm，遠高於 Si 約 $10^4$ V/cm 的速度飽和起始尺度；長通道低場模型必然失效。</div><h3>章末練習與概念診斷</h3><details><summary>Dennard scaling 為何在約 90 nm 後失效？</summary><p>$V_{DD}$ 與 $V_T$ 無法再等比例降低，否則次臨界漏電與雜訊容限惡化；電場與功耗密度因此上升。</p></details><details><summary>FinFET 解決的是遷移率不足，還是閘極控制不足？</summary><p>主要是以多面閘極改善靜電控制、降低短通道效應；遷移率仍受材料、界面與應力影響。</p></details><h3>延伸計算練習</h3><p>完成上方診斷後，請在不查公式的情況下重建代表推導，並改變一個參數檢查極限行為。更多含數值與解答的題目：<a href="../problems_examples/ch11_problems_zh.html">本章完整習題頁</a>。</p></section>
+</main>
+</body>
+</html>

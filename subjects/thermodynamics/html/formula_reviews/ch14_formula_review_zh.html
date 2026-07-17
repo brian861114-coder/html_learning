@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第十四章 公式摘要 — 電化學（15 條完整版）</title>
+<script>
+MathJax = { tex: { inlineMath: [['$','$']], displayMath: [['$$','$$']], tags:'ams' }, options:{ ignoreHtmlClass:'no-math' } };
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<link rel="stylesheet" href="../../../../shared/core.css">
+<script src="../../../../shared/core.js" defer></script>
+<link rel="stylesheet" href="../../../../shared/navigation.css" data-shared-navigation>
+</head>
+<body>
+<nav class="sidebar" aria-label="本章目錄"><div class="sidebar-header"><div class="sidebar-subtitle">材料熱力學</div><h2 class="sidebar-title">第十四章：電化學</h2></div><div class="sidebar-nav"><ul>
+    <li><a href="#constants">🔢 物理常數</a></li>
+    <li class="ns">14.1–14.2 化學—電驅動力</li>
+    <li class="nsub"><a href="#s1">14.1–14.2 自由能與電勢</a></li>
+    <li class="ns">14.3 能斯特方程式</li>
+    <li class="nsub"><a href="#s2">14.3 能斯特方程式</a></li>
+    <li class="ns">14.5 濃差電池</li>
+    <li class="nsub"><a href="#s3">14.5 濃差電池</a></li>
+    <li class="ns">14.6–14.7 溫度效應</li>
+    <li class="nsub"><a href="#s4">14.6 溫度係數與熱力學量</a></li>
+    <li class="nsub"><a href="#s5">14.7 熱效應與效率</a></li>
+    <li class="ns">14.9 標準還原電位</li>
+    <li class="nsub"><a href="#s6">14.9 標準電位與電池</a></li>
+    <li class="ns">14.10 布拜圖</li>
+    <li class="nsub"><a href="#s7">14.10 布拜（Pourbaix）圖</a></li>
+    <li><a href="#cheatsheet">📋 公式速查表</a></li>
+  </ul></div>
+  <div class="sidebar-toggle"><button data-action="toggle-theme">🌓 <span id="tl">深色模式</span></button></div>
+<div class="sidebar-tools"><button type="button" data-action="toggle-theme" aria-label="切換深色或淺色模式">切換顯示主題</button></div></nav>
+<main class="chapter-page">
+<div class="chapter-header"><div class="tag">15 條公式完整版</div><h1>第十四章：電化學</h1><div class="chapter-subtitle">Introduction to the Thermodynamics of Materials · David R. Gaskell · Chapter 14 (Electrochemistry)</div></div>
+<div class="content-toolbar"><button data-action="expand-details">📖 展開全部</button><button data-action="collapse-details">📕 收合全部</button></div>
+
+<!-- CONSTANTS -->
+<div class="content-section" id="constants"><h2>常用物理常數</h2>
+<div class="constants">
+<dt>$R$（通用氣體常數）</dt><dd>$8.3144\ \text{J/mol·K}$</dd>
+<dt>$F$（法拉第常數）</dt><dd>$96,485\ \text{C/mol}$</dd>
+<dt>$RT/F$（298 K）</dt><dd>$0.025693\ \text{V}$</dd>
+<dt>$(RT/F)\ln 10$（298 K）</dt><dd>$0.05916\ \text{V}$</dd>
+<dt>1 eV</dt><dd>$1.602 \times 10^{-19}\ \text{J}$</dd>
+<dt>1 C</dt><dd>$1\ \text{A·s}$</dd>
+</div></div>
+
+<!-- 14.1–14.2: Bridge -->
+<div class="content-section" id="s1"><h2>14.1–14.2 化學驅動力與電驅動力</h2>
+<div class="formula-card"><div class="formula-label">⭐ 核心橋樑公式 — 自由能與電勢</div><div class="eq">$$\boxed{\Delta G = -nF\mathcal{E}} \tag{14.}$$</div><div class="formula-note">$\Delta G$ = Gibbs 自由能變化（J/mol），$n$ = 轉移電子莫耳數，$F$ = 法拉第常數（96,485 C/mol），$\mathcal{E}$ = 電池電勢（V）。<strong>這是化學能↔電能的根本橋樑。</strong></div></div>
+
+<div class="formula-card"><div class="formula-label">標準狀態</div><div class="eq">$$\Delta G^\circ = -nF\mathcal{E}^\circ \tag{14.}$$</div><div class="formula-note">標準狀態（1 bar、1 M 溶質、純固體/液體）下的自由能變化與標準電勢的關係。</div></div>
+
+<details class="derive" open><summary>🔍 推導思路：為何 $\Delta G = -nF\mathcal{E}$？</summary><div class="derive-body">
+<div class="step"><span class="toc">1</span><span class="step-label">電功的基本表達式</span><div class="step-content">系統對環境做的電功：$w_\text{elec} = -\mathcal{E} \cdot (nF)$。其中 $nF$ 是通過的總電荷量（C）。</div></div>
+<div class="step"><span class="toc">2</span><span class="step-label">可逆條件</span><div class="step-content">在可逆電池中，電功等於系統 Gibbs 自由能的減少：$w_\text{rev} = \Delta G$。</div></div>
+<div class="step"><span class="toc">3</span><span class="step-label">結果</span><div class="step-content">合併得 $\Delta G = -nF\mathcal{E}$。負號表示：$\mathcal{E} > 0$ → 自發放電 → $\Delta G < 0$。</div></div>
+</div></details>
+
+<div class="callout-warn"><div class="formula-label">⚡ 符號慣例</div>$\Delta G < 0$（自發）對應 $\mathcal{E} > 0$（正值電勢）。若 $\Delta G > 0$，則 $\mathcal{E} < 0$，反應非自發，需外加電壓驅動（電解）。</div>
+</div>
+
+<!-- 14.3: Nernst -->
+<div class="content-section" id="s2"><h2>14.3 能斯特方程式（Nernst Equation）</h2>
+<div class="formula-card"><div class="formula-label">⭐ 能斯特方程式（通用形式）</div><div class="eq">$$\boxed{\mathcal{E} = \mathcal{E}^\circ - \frac{RT}{nF} \ln Q} \tag{14.}$$</div><div class="formula-note">$Q$ = 反應商數（reaction quotient），形式為 $\prod a_i^{\nu_i}$（活度乘積）。對理想稀溶液，活度 $\approx$ 濃度。</div></div>
+
+<div class="formula-card"><div class="formula-label">298 K 常用形式 — $\log_{10}$</div><div class="eq">$$\boxed{\mathcal{E} = \mathcal{E}^\circ - \frac{0.0592}{n} \log_{10} Q} \tag{14.}$$</div><div class="formula-note">$RT/F = 0.025693\ \text{V}$（298 K），乘以 $\ln 10 \approx 2.3026$ 得 $0.05916\ \text{V}$，實務上常取 $0.0592$。</div></div>
+
+<div class="formula-card"><div class="formula-label">⭐ 平衡態</div><div class="eq">$$\mathcal{E}^\circ = \frac{RT}{nF} \ln K \quad\Longleftrightarrow\quad \Delta G^\circ = -RT\ln K = -nF\mathcal{E}^\circ \tag{14.}$$</div><div class="formula-note">平衡時 $Q = K$ 且 $\mathcal{E} = 0$。標準電位可直接從平衡常數求得，反之亦然。</div></div>
+
+<details class="derive" open><summary>🔍 能斯特方程式的推導</summary><div class="derive-body">
+<div class="step"><span class="toc">1</span><span class="step-label">自由能與活度的關係</span><div class="step-content"><span class="math">$$\Delta G = \Delta G^\circ + RT\ln Q$$</span></div></div>
+<div class="step"><span class="toc">2</span><span class="step-label">帶入 $\Delta G = -nF\mathcal{E}$</span><div class="step-content"><span class="math">$$-nF\mathcal{E} = -nF\mathcal{E}^\circ + RT\ln Q$$</span></div></div>
+<div class="step"><span class="toc">3</span><span class="step-label">整理得能斯特方程式</span><div class="step-content"><span class="math">$$\mathcal{E} = \mathcal{E}^\circ - \frac{RT}{nF}\ln Q$$</span></div></div>
+</div></details>
+
+<div class="callout-warn"><div class="formula-label">⚡ $Q$ 的定義</div>對反應 $aA + bB \rightleftharpoons cC + dD$：$Q = \dfrac{a_C^{\,c} \cdot a_D^{\,d}}{a_A^{\,a} \cdot a_B^{\,b}}$。固體和純液體的活度 = 1。注意產物在分子、反應物在分母。</div>
+</div>
+
+<!-- 14.5: Concentration Cells -->
+<div class="content-section" id="s3"><h2>14.5 濃差電池（Concentration Cells）</h2>
+<div class="formula-card"><div class="formula-label">⭐ 濃差電池電勢</div><div class="eq">$$\boxed{\mathcal{E} = -\frac{RT}{nF}\, \ln\frac{C_1}{C_2}} \tag{14.}$$</div><div class="formula-note">兩電極相同但電解質濃度不同（$C_1$ 與 $C_2$）。$C_2$ 為高濃度側（陰極），$C_1$ 為低濃度側（陽極）。$\mathcal{E}^\circ = 0$。</div></div>
+
+<div class="formula-card"><div class="formula-label">氧氣濃差電池</div><div class="eq">$$\mathcal{E} = \frac{RT}{4F}\, \ln\frac{P_{\mathrm{O_2,1}}}{P_{\mathrm{O_2,2}}} \tag{14.}$$</div><div class="formula-note">氧分壓不同產生的電勢。$n = 4$（$\mathrm{O_2 + 4e^- \rightleftharpoons 2O^{2-}}$）。應用：氧氣感測器、固態氧化物燃料電池（SOFC）。</div></div>
+
+<details class="example" open><summary>📐 數值例題 — 濃差電池</summary><div class="example-body">
+兩個 $\mathrm{Ag/Ag^+}$ 半電池，$\mathrm{[Ag^+]}$ 分別為 0.01 M 和 0.1 M，$T = 298$ K，$n = 1$。<br>
+$\mathcal{E} = -\dfrac{0.0592}{1}\log_{10}\dfrac{0.01}{0.1} = -0.0592 \times (-1) = 0.0592\ \text{V}$
+</div></details>
+</div>
+
+<!-- 14.6: Temperature Coefficient -->
+<div class="content-section" id="s4"><h2>14.6 電勢的溫度係數與熱力學量</h2>
+<div class="formula-card"><div class="formula-label">⭐ 熵變與溫度係數</div><div class="eq">$$\boxed{\Delta S = nF\left(\frac{\partial \mathcal{E}}{\partial T}\right)_P} \tag{14.}$$</div><div class="formula-note">電勢的溫度係數 $(\partial \mathcal{E}/\partial T)_P$ 可直接給出反應熵。量測不同溫度下的 $\mathcal{E}$ 即可求得 $\Delta S$。</div></div>
+
+<div class="formula-card"><div class="formula-label">⭐ 焓變 — Gibbs–Helmholtz 電化學形式</div><div class="eq">$$\boxed{\Delta H = -nF\left[\mathcal{E} - T\left(\frac{\partial \mathcal{E}}{\partial T}\right)_P\right]} \tag{14.}$$</div><div class="formula-note">由 $\Delta G = \Delta H - T\Delta S$ 和 $\Delta G = -nF\mathcal{E}$ 推導。無需直接量熱，只需電勢及其溫度係數。</div></div>
+
+<details class="derive" open><summary>🔍 從 Gibbs–Helmholtz 推導 $\Delta H$ 表達式</summary><div class="derive-body">
+<div class="step"><span class="toc">1</span><span class="step-label">Gibbs–Helmholtz 方程</span><div class="step-content"><span class="math">$$\Delta H = \Delta G - T\left(\frac{\partial \Delta G}{\partial T}\right)_P$$</span></div></div>
+<div class="step"><span class="toc">2</span><span class="step-label">代入 $\Delta G = -nF\mathcal{E}$</span><div class="step-content"><span class="math">$$\Delta H = -nF\mathcal{E} - T\left(\frac{\partial (-nF\mathcal{E})}{\partial T}\right)_P = -nF\mathcal{E} + nF T\left(\frac{\partial \mathcal{E}}{\partial T}\right)_P$$</span></div></div>
+<div class="step"><span class="toc">3</span><span class="step-label">整理得</span><div class="step-content"><span class="math">$$\Delta H = -nF\left[\mathcal{E} - T\left(\frac{\partial \mathcal{E}}{\partial T}\right)_P\right]$$</span></div></div>
+</div></details>
+</div>
+
+<!-- 14.7: Thermal Effects -->
+<div class="content-section" id="s5"><h2>14.7 熱效應與理想效率</h2>
+<div class="formula-card"><div class="formula-label">可逆熱效應</div><div class="eq">$$q_\text{rev} = T\Delta S = nF T\left(\frac{\partial \mathcal{E}}{\partial T}\right)_P \tag{14.}$$</div><div class="formula-note">可逆放電過程中系統吸收（$q_\text{rev} > 0$）或放出（$q_\text{rev} < 0$）的熱量。由 $\Delta S = nF(\partial \mathcal{E}/\partial T)_P$ 直接得出。</div></div>
+
+<div class="formula-card"><div class="formula-label">⭐ 理想效率（燃料電池）</div><div class="eq">$$\boxed{\eta_\text{ideal} = \frac{\Delta G}{\Delta H} = \frac{\mathcal{E}}{\mathcal{E} - T(\partial \mathcal{E}/\partial T)_P}} \tag{14.}$$</div><div class="formula-note">燃料電池的理想熱力學效率：可輸出電功（$\Delta G$）與總化學能（$\Delta H$）之比。<br>當 $(\partial \mathcal{E}/\partial T)_P > 0$ 時，$\eta_\text{ideal} > 1$？這是因為系統從環境吸熱轉化為電功——<strong>不違反熱力學第一定律</strong>。</div></div>
+
+<details class="derive" open><summary>🔍 為什麼理想效率可以超過 100%？</summary><div class="derive-body">
+<div class="step"><span class="toc">1</span><span class="step-label">可逆過程</span><div class="step-content">電池可逆運作時，除了 $\Delta H$ 的化學能外，還能從環境吸收熱量 $q_\text{rev} = T\Delta S$ 轉化為電功。</div></div>
+<div class="step"><span class="toc">2</span><span class="step-label">效率定義</span><div class="step-content">$\eta_\text{ideal} = \dfrac{-w_\text{elec}}{-\Delta H} = \dfrac{-\Delta G}{-\Delta H} = 1 - \dfrac{T\Delta S}{\Delta H}$。</div></div>
+<div class="step"><span class="toc">3</span><span class="step-label">吸熱情況</span><div class="step-content">若 $T\Delta S < 0$（放熱），$\eta_\text{ideal} < 1$；若 $T\Delta S > 0$（吸熱），$\eta_\text{ideal} > 1$。真實燃料電池因不可逆損失，效率無法超過 100%。</div></div>
+</div></details>
+</div>
+
+<!-- 14.9: Standard Reduction Potentials -->
+<div class="content-section" id="s6"><h2>14.9 標準還原電位與電池電位</h2>
+<div class="formula-card"><div class="formula-label">⭐ 電池標準電位</div><div class="eq">$$\boxed{\mathcal{E}^\circ_\text{cell} = \mathcal{E}^\circ_\text{cathode} - \mathcal{E}^\circ_\text{anode}} \tag{14.}$$</div><div class="formula-note">陰極 = 還原反應（電位較高），陽極 = 氧化反應（電位較低）。所有標準電位均相對於標準氫電極（SHE，$\mathcal{E}^\circ \equiv 0$）。</div></div>
+
+<div class="formula-card"><div class="formula-label">自由能與電池電位</div><div class="eq">$$\Delta G^\circ_\text{cell} = -nF\mathcal{E}^\circ_\text{cell} \tag{14.}$$</div><div class="formula-note">$\Delta G^\circ_\text{cell} < 0$ 對應自發電池反應（$\mathcal{E}^\circ_\text{cell} > 0$）。可藉此判斷反應方向。</div></div>
+
+<div class="callout-warn"><div class="formula-label">⚡ 電位不具可加性 — 自由能才可加</div>
+不同半反應的標準電位<strong>不可直接加減</strong>（因為 $n$ 不同）。正確做法：將 $\Delta G^\circ = -nF\mathcal{E}^\circ$ 相加後再反求 $\mathcal{E}^\circ$。例：
+$\mathrm{A + e^- \rightarrow A^-}$（$\mathcal{E}^\circ_1$，$n_1=1$），$\mathrm{A^- + e^- \rightarrow A^{2-}}$（$\mathcal{E}^\circ_2$，$n_2=1$）
+$\rightarrow$ 總反應 $\mathrm{A + 2e^- \rightarrow A^{2-}}$ 的 $n\mathcal{E}^\circ = n_1\mathcal{E}^\circ_1 + n_2\mathcal{E}^\circ_2 = 1\cdot\mathcal{E}^\circ_1 + 1\cdot\mathcal{E}^\circ_2$。</div>
+</div>
+</div>
+
+<!-- 14.10: Pourbaix Diagrams -->
+<div class="content-section" id="s7"><h2>14.10 布拜圖（Pourbaix Diagrams）</h2>
+<div class="formula-card"><div class="formula-label">⭐ 還原反應的 Nernst 形式（pH 依賴）</div><div class="eq">$$\boxed{\mathcal{E} = \mathcal{E}^\circ - \frac{0.0592}{n}\log\frac{[\text{Red}]}{[\text{Ox}]}} \tag{14.}$$</div><div class="formula-note">298 K 下的常用形式。當 $[\text{Red}]/[\text{Ox}] = 1$ 時，$\mathcal{E} = \mathcal{E}^\circ$。注意 $n$ 為參與的電子數。</div></div>
+
+<div class="formula-card"><div class="formula-label">水穩定區 — 上邊界（氧析出）</div><div class="eq">$$\mathrm{O_2 + 4H^+ + 4e^- \rightleftharpoons 2H_2O} \quad \mathcal{E} = 1.229 - 0.0592\,\text{pH} \ \text{(V)} \tag{14.}$$</div><div class="formula-note">$n=4$。298 K 下 $\mathcal{E}^\circ = 1.229$ V（相對於 SHE）。此線以上水被氧化釋放 $\mathrm{O_2}$。</div></div>
+
+<div class="formula-card"><div class="formula-label">水穩定區 — 下邊界（氫析出）</div><div class="eq">$$\mathrm{2H^+ + 2e^- \rightleftharpoons H_2} \quad \mathcal{E} = 0.000 - 0.0592\,\text{pH} \ \text{(V)} \tag{14.}$$</div><div class="formula-note">$n=2$。$\mathcal{E}^\circ = 0$ V（SHE）。此線以下水被還原釋放 $\mathrm{H_2}$。</div></div>
+
+<div class="callout-warn"><div class="formula-label">⚡ 布拜圖使用要點</div>
+布拜圖是 $\mathcal{E}$–pH 圖，標示不同物種的熱力學穩定區域。<br>
+• 上邊界線（a 線）：$\mathrm{O_2/H_2O}$，斜率 $-0.0592$ V/pH<br>
+• 下邊界線（b 線）：$\mathrm{H^+/H_2}$，斜率 $-0.0592$ V/pH<br>
+• 兩線之間是水的熱力學穩定區。<br>
+• 布拜圖只能預測<strong>熱力學穩定性</strong>，無法預測動力學（腐蝕速率等）。</div>
+</div>
+
+<!-- CHEATSHEET -->
+<div class="content-section" id="cheatsheet"><h2>公式速查表（15 條全收錄）</h2>
+<table><caption>表 1：公式速查表（15 條全收錄）</caption><thead><tr><th>Eq</th><th>公式</th><th>備註</th></tr></thead><tbody>
+<tr><td>14.</td><td>$\Delta G = -nF\mathcal{E}$</td><td>⭐ 自由能—電勢核心橋樑</td></tr>
+<tr><td>14.</td><td>$\Delta G^\circ = -nF\mathcal{E}^\circ$</td><td>標準狀態</td></tr>
+<tr><td>14.</td><td>$\mathcal{E} = \mathcal{E}^\circ - \dfrac{RT}{nF}\ln Q$</td><td>⭐ 能斯特方程式（通用）</td></tr>
+<tr><td>14.</td><td>$\mathcal{E} = \mathcal{E}^\circ - \dfrac{0.0592}{n}\log_{10} Q$</td><td>能斯特方程式（298 K）</td></tr>
+<tr><td>14.</td><td>$\mathcal{E}^\circ = \dfrac{RT}{nF}\ln K$</td><td>標準電位與平衡常數</td></tr>
+<tr><td>14.</td><td>$\Delta G^\circ = -RT\ln K = -nF\mathcal{E}^\circ$</td><td>自由能、$K$、$\mathcal{E}^\circ$ 三角關係</td></tr>
+<tr><td>14.</td><td>$\mathcal{E} = -\dfrac{RT}{nF}\ln\dfrac{C_1}{C_2}$</td><td>濃差電池電勢</td></tr>
+<tr><td>14.</td><td>$\mathcal{E} = \dfrac{RT}{4F}\ln\dfrac{P_{\mathrm{O_2,1}}}{P_{\mathrm{O_2,2}}}$</td><td>氧氣濃差電池</td></tr>
+<tr><td>14.</td><td>$\Delta S = nF\left(\dfrac{\partial \mathcal{E}}{\partial T}\right)_P$</td><td>⭐ 熵變與溫度係數</td></tr>
+<tr><td>14.</td><td>$\Delta H = -nF\left[\mathcal{E} - T\left(\dfrac{\partial \mathcal{E}}{\partial T}\right)_P\right]$</td><td>⭐ Gibbs–Helmholtz 電化學形式</td></tr>
+<tr><td>14.</td><td>$q_\text{rev} = T\Delta S = nF T\left(\dfrac{\partial \mathcal{E}}{\partial T}\right)_P$</td><td>可逆熱效應</td></tr>
+<tr><td>14.</td><td>$\eta_\text{ideal} = \dfrac{\Delta G}{\Delta H} = \dfrac{\mathcal{E}}{\mathcal{E} - T(\partial \mathcal{E}/\partial T)_P}$</td><td>燃料電池理想效率</td></tr>
+<tr><td>14.</td><td>$\mathcal{E}^\circ_\text{cell} = \mathcal{E}^\circ_\text{cathode} - \mathcal{E}^\circ_\text{anode}$</td><td>⭐ 電池標準電位</td></tr>
+<tr><td>14.</td><td>$\mathcal{E} = \mathcal{E}^\circ - \dfrac{0.0592}{n}\log\dfrac{[\text{Red}]}{[\text{Ox}]}$</td><td>布拜圖還原線（298 K）</td></tr>
+<tr><td>14.</td><td>$\mathcal{E}(\mathrm{O_2/H_2O}) = 1.229 - 0.0592\,\text{pH}$<br>$\mathcal{E}(\mathrm{H^+/H_2}) = 0.000 - 0.0592\,\text{pH}$</td><td>水穩定區邊界（298 K）</td></tr>
+</tbody></table>
+</div>
+
+</main>
+<script>
+function toggleTheme(){
+  const h=document.documentElement;
+  const n=h.getAttribute('data-theme')==='light'?'dark':'light';
+  h.setAttribute('data-theme',n);
+  localStorage.setItem('theme',n);
+  document.getElementById('tl').textContent=n==='dark'?'淺色模式':'深色模式';
+}
+const s=localStorage.getItem('theme')||'light';
+document.documentElement.setAttribute('data-theme',s);
+if(s==='dark')document.getElementById('tl').textContent='淺色模式';
+const secs=document.querySelectorAll('.content-section[id]');
+const navs=document.querySelectorAll('.sidebar-nav a');
+window.addEventListener('scroll',()=>{
+  let c='';
+  secs.forEach(s=>{if(window.scrollY>=s.offsetTop-80)c=s.getAttribute('id');});
+  navs.forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+c);});
+});
+</script>
+</body>
+</html>

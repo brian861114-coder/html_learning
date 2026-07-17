@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第一章 公式摘要 — 導論與術語定義（7 條完整版）</title>
+<script>
+MathJax = { tex: { inlineMath: [['$','$']], displayMath: [['$$','$$']], tags:'ams' }, options:{ ignoreHtmlClass:'no-math' } };
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<link rel="stylesheet" href="../../../../shared/core.css">
+<script src="../../../../shared/core.js" defer></script>
+<link rel="stylesheet" href="../../../../shared/navigation.css" data-shared-navigation>
+</head>
+<body>
+<nav class="sidebar" aria-label="本章目錄"><div class="sidebar-header"><div class="sidebar-subtitle">材料熱力學</div><h2 class="sidebar-title">第一章：導論與術語定義</h2></div><div class="sidebar-nav"><ul>
+    <li><a href="#constants">🔢 物理常數</a></li>
+    <li class="ns">1.4 理想氣體</li>
+    <li class="nsub"><a href="#s1">1.4 理想氣體定律 (1.1–1.4)</a></li>
+    <li class="ns">1.5 能量與功</li>
+    <li class="nsub"><a href="#s2">1.5 功的定義 (1.7)</a></li>
+    <li class="ns">1.6 廣延量與強度量</li>
+    <li class="nsub"><a href="#s3">1.6 狀態方程式與變數 (1.5–1.6)</a></li>
+    <li><a href="#cheatsheet">📋 公式速查表</a></li>
+  </ul></div>
+  <div class="sidebar-toggle"><button data-action="toggle-theme">🌓 <span id="tl">深色模式</span></button></div>
+<div class="sidebar-tools"><button type="button" data-action="toggle-theme" aria-label="切換深色或淺色模式">切換顯示主題</button></div></nav>
+<main class="chapter-page">
+<div class="chapter-header"><div class="tag">7 條公式完整版</div><h1>第一章：導論與術語定義</h1><div class="chapter-subtitle">Introduction to the Thermodynamics of Materials · David R. Gaskell · pp. 24–43</div></div>
+<div class="content-toolbar"><button data-action="expand-details">📖 展開全部</button><button data-action="collapse-details">📕 收合全部</button></div>
+
+<!-- CONSTANTS -->
+<div class="content-section" id="constants"><h2>常用物理常數</h2>
+<div class="constants">
+<dt>$R$（通用氣體常數）</dt><dd>$8.3144\ \text{J/mol·K}$</dd>
+<dt>$R$（替代單位）</dt><dd>$0.082057\ \text{L·atm/mol·K}$</dd>
+<dt>$R$（熱化學）</dt><dd>$1.987\ \text{cal/mol·K}$</dd>
+<dt>STP 莫耳體積</dt><dd>$22.414\ \text{L/mol}$（0°C, 1 atm）</dd>
+<dt>$k_B$（波茲曼常數）</dt><dd>$1.381 \times 10^{-23}\ \text{J/K}$</dd>
+<dt>$N_A$（亞佛加厥數）</dt><dd>$6.022 \times 10^{23}\ \text{mol}^{-1}$</dd>
+<dt>1 cal</dt><dd>$4.184\ \text{J}$</dd>
+<dt>$T$（絕對零度）</dt><dd>$0\ \text{K} = -273.15\degree\text{C}$</dd>
+</div></div>
+
+<!-- 1.4: Ideal Gas Law -->
+<div class="content-section" id="s1"><h2>1.4 理想氣體狀態方程式 (1.1–1.4)</h2>
+<div class="formula-card"><div class="formula-label">⭐ 理想氣體定律 (1.1)</div><div class="eq">$$PV = nRT \tag{1.1}$$</div><div class="formula-note">$P$ = 壓力，$V$ = 體積，$n$ = 莫耳數，$R = 8.3144\ \text{J/mol·K}$，$T$ = 絕對溫度 (K)</div></div>
+
+<div class="formula-card"><div class="formula-label">莫耳形式 (1.2)</div><div class="eq">$$Pv = RT \tag{1.2}$$</div><div class="formula-note">$v = V/n$ = 莫耳體積。此形式只涉及強度量。</div></div>
+
+<div class="formula-card"><div class="formula-label">STP 下的莫耳體積 (1.3)</div><div class="eq">$$v = \frac{RT}{P} = \frac{0.082057 \times 273.15}{1} = 22.414\ \text{L/mol} \tag{1.3}$$</div></div>
+
+<div class="formula-card"><div class="formula-label">理想氣體定律的微分形式 (1.4)</div><div class="eq">$$P\,dV + V\,dP = nR\,dT \tag{1.4}$$</div><div class="formula-note">用於分析 $P$、$V$、$T$ 同時變化的過程。</div></div>
+
+<details class="derive" open><summary>🔍 理想氣體定律的物理基礎</summary><div class="derive-body">
+<div class="step"><span class="toc">1</span><span class="step-label">波以耳定律（$T$ 固定）</span><div class="step-content">$PV = \text{constant}$（1662）——壓力與體積成反比</div></div>
+<div class="step"><span class="toc">2</span><span class="step-label">查理定律（$P$ 固定）</span><div class="step-content">$V \propto T$（1787）——體積與絕對溫度成正比</div></div>
+<div class="step"><span class="toc">3</span><span class="step-label">亞佛加厥假說</span><div class="step-content">相同 $T$、$P$ 下，等體積氣體含等數量分子 → $V \propto n$</div></div>
+<div class="step"><span class="toc">4</span><span class="step-label">合併 → 理想氣體定律</span><div class="step-content"><span class="math">$$PV = nRT$$</span>$R$ 是比例常數，由實驗測定。</div></div>
+</div></details>
+
+<div class="callout-warn"><div class="formula-label">⚡ $R$ 的單位選擇</div>使用 $PV = nRT$ 時，$R$ 的數值取決於 $P$ 和 $V$ 的單位。最常用：<br>
+• SI：$R = 8.3144\ \text{J/mol·K}$（$P$ in Pa, $V$ in m³）<br>
+• 大氣壓：$R = 0.082057\ \text{L·atm/mol·K}$（$P$ in atm, $V$ in L）<br>
+• 熱化學：$R = 1.987\ \text{cal/mol·K}$
+</div>
+</div>
+
+<!-- 1.5: Work -->
+<div class="content-section" id="s2"><h2>1.5 能量與功的定義 (1.7)</h2>
+<div class="formula-card"><div class="formula-label">⭐ 壓力–體積功 (1.7)</div><div class="eq">$$w = \int_{V_1}^{V_2} P_{\text{ext}}\ dV \tag{1.7}$$</div><div class="formula-note">系統對抗外壓 $P_{\text{ext}}$ 膨脹時所做的功。膨脹（$dV > 0$）→ 系統對外做功 → $w < 0$（依本書符號慣例）。</div></div>
+
+<details class="derive" open><summary>🔍 功的符號慣例</summary><div class="derive-body">
+<div class="step"><span class="toc">1</span><span class="step-label">本書慣例</span><div class="step-content">系統<strong>對外</strong>做功 → $w$ 為<strong>負</strong>（系統失去能量）<br>外界<strong>對系統</strong>做功 → $w$ 為<strong>正</strong>（系統獲得能量）</div></div>
+<div class="step"><span class="toc">2</span><span class="step-label">與第一定律的關係</span><div class="step-content"><span class="math">$$\Delta U = q + w$$</span>熱 $q$ 和功 $w$ 都是從<strong>外界</strong>輸入系統的能量。</div></div>
+</div></details>
+</div>
+
+<!-- 1.6: Extensive vs Intensive -->
+<div class="content-section" id="s3"><h2>1.6 廣延量與強度量 (1.5–1.6)</h2>
+<div class="formula-card"><div class="formula-label">狀態方程式的一般形式 (1.5)</div><div class="eq">$$f(P, V, T) = 0 \tag{1.5}$$</div><div class="formula-note">三個狀態變數中只有兩個是獨立的——指定任意兩個，第三個由狀態方程式確定。</div></div>
+
+<div class="formula-card"><div class="formula-label">全微分關係 (1.6)</div><div class="eq">$$dV = \left(\frac{\partial V}{\partial T}\right)_P dT + \left(\frac{\partial V}{\partial P}\right)_T dP \tag{1.6}$$</div><div class="formula-note">$V$ 的微小變化可表示為 $T$ 和 $P$ 變化的線性組合。這是狀態函數的核心數學性質。</div></div>
+
+<details class="derive" open><summary>🔍 廣延量 vs 強度量判別法</summary><div class="derive-body">
+<div class="step-content">
+<table><caption>表 1：1.6 廣延量與強度量 (1.5–1.6)</caption><thead><tr><th>性質</th><th>廣延量</th><th>強度量</th></tr></thead><tbody>
+<tr><td>與系統大小</td><td>成正比</td><td>無關</td></tr>
+<tr><td>系統均分兩半</td><td>減半</td><td>不變</td></tr>
+<tr><td>範例</td><td>$V$, $m$, $U$, $H$, $S$, $G$</td><td>$T$, $P$, $\rho$, $v = V/n$</td></tr>
+<tr><td>兩個廣延量之比</td><td colspan="2">→ 強度量（如 $\rho = m/V$）</td></tr>
+</tbody></table>
+</div></div></details>
+</div>
+
+<!-- CHEATSHEET -->
+<div class="content-section" id="cheatsheet"><h2>公式速查表（7 條全收錄）</h2>
+<table><caption>表 2：公式速查表（7 條全收錄）</caption><thead><tr><th>Eq</th><th>公式</th><th>備註</th></tr></thead><tbody>
+<tr><td>1.1</td><td>$PV = nRT$</td><td>⭐ 理想氣體定律，$R = 8.3144\ \text{J/mol·K}$</td></tr>
+<tr><td>1.2</td><td>$Pv = RT$</td><td>莫耳形式，$v = V/n$</td></tr>
+<tr><td>1.3</td><td>$v_{\text{STP}} = 22.414\ \text{L/mol}$</td><td>標準溫壓下的莫耳體積</td></tr>
+<tr><td>1.4</td><td>$P\,dV + V\,dP = nR\,dT$</td><td>理想氣體定律的微分形式</td></tr>
+<tr><td>1.5</td><td>$f(P, V, T) = 0$</td><td>狀態方程式的一般形式</td></tr>
+<tr><td>1.6</td><td>$dV = (\partial V/\partial T)_P\,dT + (\partial V/\partial P)_T\,dP$</td><td>$V$ 的全微分展開</td></tr>
+<tr><td>1.7</td><td>$w = \int_{V_1}^{V_2} P_{\text{ext}}\,dV$</td><td>⭐ 壓力–體積功的定義</td></tr>
+</tbody></table>
+</div>
+
+</main>
+<script>
+function toggleTheme(){
+  const h=document.documentElement;
+  const n=h.getAttribute('data-theme')==='light'?'dark':'light';
+  h.setAttribute('data-theme',n);
+  localStorage.setItem('theme',n);
+  document.getElementById('tl').textContent=n==='dark'?'淺色模式':'深色模式';
+}
+const s=localStorage.getItem('theme')||'light';
+document.documentElement.setAttribute('data-theme',s);
+if(s==='dark')document.getElementById('tl').textContent='淺色模式';
+const secs=document.querySelectorAll('.content-section[id]');
+const navs=document.querySelectorAll('.sidebar-nav a');
+window.addEventListener('scroll',()=>{
+  let c='';
+  secs.forEach(s=>{if(window.scrollY>=s.offsetTop-80)c=s.getAttribute('id');});
+  navs.forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+c);});
+});
+document.querySelectorAll('.figure img').forEach(i=>i.addEventListener('click',()=>window.open(i.src,'_blank')));
+</script>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>第四章 公式摘要 — 熵的統計詮釋（24 條完整版）</title>
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']],tags:'ams'},options:{ignoreHtmlClass:'no-math'}};</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<link rel="stylesheet" href="../../../../shared/core.css">
+<script src="../../../../shared/core.js" defer></script>
+<link rel="stylesheet" href="../../../../shared/navigation.css" data-shared-navigation>
+</head>
+<body>
+<nav class="sidebar" aria-label="本章目錄"><div class="sidebar-header"><div class="sidebar-subtitle">材料熱力學</div><h2 class="sidebar-title">第四章：熵的統計詮釋</h2></div><div class="sidebar-nav"><ul>
+<li><a href="#constants">🔢 物理常數</a></li>
+<li class="ns">4.4 微正則系綜</li><li class="nsub"><a href="#s1">Boltzmann 熵公式 (4.1–4.5)</a></li>
+<li class="ns">4.5 波茲曼分布</li><li class="nsub"><a href="#s2">分布函數與配分函數 (4.6–4.15)</a></li>
+<li class="ns">4.6–4.8 溫度與平衡</li><li class="nsub"><a href="#s3">熱平衡與熵產生 (4.16–4.24)</a></li>
+<li><a href="#cheatsheet">📋 公式速查表</a></li>
+</ul></div><div class="sidebar-toggle"><button data-action="toggle-theme">🌓 <span id="tl">深色模式</span></button></div><div class="sidebar-tools"><button type="button" data-action="toggle-theme" aria-label="切換深色或淺色模式">切換顯示主題</button></div></nav>
+<main class="chapter-page">
+<div class="chapter-header"><div class="tag">24 條公式完整版</div><h1>第四章：熵的統計詮釋</h1><div class="chapter-subtitle">Introduction to the Thermodynamics of Materials · David R. Gaskell · pp. 114–141</div></div>
+<div class="content-toolbar"><button data-action="expand-details">📖 展開全部</button><button data-action="collapse-details">📕 收合全部</button></div>
+
+<div class="content-section" id="constants"><h2>常用物理常數</h2>
+<div class="constants">
+<dt>$k_B$（波茲曼常數）</dt><dd>$1.381 \times 10^{-23}\ \text{J/K}$</dd>
+<dt>$R = N_A k_B$</dt><dd>$8.3144\ \text{J/mol·K}$</dd>
+<dt>$N_A$（亞佛加厥數）</dt><dd>$6.022 \times 10^{23}\ \text{mol}^{-1}$</dd>
+<dt>$k_B T$（室溫 300 K）</dt><dd>$0.0257\ \text{eV}$</dd>
+</div></div>
+
+<!-- 4.4 -->
+<div class="content-section" id="s1"><h2>4.4 微正則系綜與 Boltzmann 熵 (4.1–4.5)</h2>
+<div class="formula-card"><div class="formula-label">⭐ Boltzmann 熵公式 (4.1)</div><div class="eq">$$\boxed{S = k_B \ln \Omega} \tag{4.1}$$</div><div class="formula-note">$\Omega$ = 系統可及的微觀態數目。$k_B = 1.381 \times 10^{-23}\ \text{J/K}$。刻在 Boltzmann 墓碑上的公式。</div></div>
+<div class="formula-card"><div class="formula-label">熵的廣延性 (4.2)</div><div class="eq">$$S_{\text{total}} = S_1 + S_2 \quad (\because \Omega = \Omega_1\Omega_2) \tag{4.2}$$</div></div>
+<div class="formula-card"><div class="formula-label">Lagrange 乘數法 — 最大化 $\ln \Omega$ (4.3)</div><div class="eq">$$\delta(\ln \Omega) - \alpha\sum_i \delta n_i - \beta\sum_i \varepsilon_i\delta n_i = 0 \tag{4.3}$$</div><div class="formula-note">約束：$\sum n_i = N$（總粒子數固定），$\sum n_i\varepsilon_i = U$（總能量固定）。</div></div>
+<div class="formula-card"><div class="formula-label">⭐ 最可能分布 (4.4)</div><div class="eq">$$\boxed{n_i = n_0\,e^{-\beta\varepsilon_i} = n_0\,e^{-\varepsilon_i/k_B T}} \tag{4.4}$$</div><div class="formula-note">$\beta = 1/k_B T$。高能態的粒子數隨能量指數衰減。</div></div>
+<div class="formula-card"><div class="formula-label">配分函數定義 (4.5)</div><div class="eq">$$\boxed{Z = \sum_i g_i\,e^{-\varepsilon_i/k_B T}} \tag{4.5}$$</div><div class="formula-note">$g_i$ = 簡併度。$Z$ = Zustandssumme（狀態總和）。所有熱力學量可從 $Z$ 推導。</div></div>
+</div>
+
+<!-- 4.5 -->
+<div class="content-section" id="s2"><h2>4.5 波茲曼分布與配分函數 (4.6–4.15)</h2>
+<div class="formula-card"><div class="formula-label">正規化分布 (4.6)</div><div class="eq">$$n_i = \frac{N}{Z}\,g_i\,e^{-\varepsilon_i/k_B T} \tag{4.6}$$</div></div>
+<div class="formula-card"><div class="formula-label">⭐ 內能（從 $Z$）(4.7)</div><div class="eq">$$\boxed{U = N k_B T^2 \left(\frac{\partial \ln Z}{\partial T}\right)_V} \tag{4.7}$$</div></div>
+<div class="formula-card"><div class="formula-label">⭐ 熵（從 $Z$）(4.8)</div><div class="eq">$$S = N k_B \ln Z + N k_B T \left(\frac{\partial \ln Z}{\partial T}\right)_V \tag{4.8}$$</div></div>
+<div class="formula-card"><div class="formula-label">⭐ 亥姆霍茲自由能（從 $Z$）(4.9)</div><div class="eq">$$\boxed{A = -N k_B T \ln Z = -nRT \ln Z} \tag{4.9}$$</div><div class="formula-note">$n$ = 莫耳數。這是最常用的關係——知道 $Z$ 就知道 $A$。</div></div>
+<div class="formula-card"><div class="formula-label">壓力（從 $Z$）(4.10)</div><div class="eq">$$P = N k_B T \left(\frac{\partial \ln Z}{\partial V}\right)_T \tag{4.10}$$</div></div>
+<div class="formula-card"><div class="formula-label">能量均分原理 (4.11)</div><div class="eq">$$\langle \varepsilon \rangle = \frac{1}{2}k_B T \quad \text{（每二次方自由度）} \tag{4.11}$$</div></div>
+<div class="formula-card"><div class="formula-label">平移配分函數 (4.12)</div><div class="eq">$$Z_{\text{trans}} = \left(\frac{2\pi m k_B T}{h^2}\right)^{3/2} V \tag{4.12}$$</div></div>
+<div class="formula-card"><div class="formula-label">旋轉配分函數（雙原子）(4.13)</div><div class="eq">$$Z_{\text{rot}} = \frac{T}{\sigma\Theta_r} \tag{4.13}$$</div><div class="formula-note">$\Theta_r = h^2/8\pi^2 I k_B$（旋轉特徵溫度），$\sigma$ = 對稱數。</div></div>
+<div class="formula-card"><div class="formula-label">振動配分函數 (4.14)</div><div class="eq">$$Z_{\text{vib}} = \frac{1}{1 - e^{-\Theta_v/T}} \tag{4.14}$$</div><div class="formula-note">$\Theta_v = h\nu/k_B$（振動特徵溫度）。低溫時 $Z_{\text{vib}} \to 1$。</div></div>
+<div class="formula-card"><div class="formula-label">總配分函數分解 (4.15)</div><div class="eq">$$Z = Z_{\text{trans}} \cdot Z_{\text{rot}} \cdot Z_{\text{vib}} \cdot Z_{\text{elec}} \tag{4.15}$$</div></div>
+</div>
+
+<!-- 4.6-4.8 -->
+<div class="content-section" id="s3"><h2>4.6–4.8 溫度、平衡與熵產生 (4.16–4.24)</h2>
+<div class="formula-card"><div class="formula-label">⭐ 溫度的統計定義 (4.16)</div><div class="eq">$$\boxed{\frac{1}{k_B T} = \left(\frac{\partial \ln \Omega}{\partial U}\right)_{V,N}} \tag{4.16}$$</div></div>
+<div class="formula-card"><div class="formula-label">熱力學溫度定義 (4.17)</div><div class="eq">$$\frac{1}{T} = \left(\frac{\partial S}{\partial U}\right)_{V,N} \tag{4.17}$$</div></div>
+<div class="formula-card"><div class="formula-label">熱平衡條件 (4.18)</div><div class="eq">$$\beta_1 = \beta_2 \quad \Rightarrow \quad T_1 = T_2 \tag{4.18}$$</div></div>
+<div class="formula-card"><div class="formula-label">兩能階系統的佔據比 (4.19)</div><div class="eq">$$\frac{n_2}{n_1} = \frac{g_2}{g_1}\,e^{-(\varepsilon_2-\varepsilon_1)/k_B T} \tag{4.19}$$</div></div>
+<div class="formula-card"><div class="formula-label">熱容量的統計表達 (4.20)</div><div class="eq">$$C_V = \left(\frac{\partial U}{\partial T}\right)_V = N k_B \frac{\sum g_i(\varepsilon_i/k_B T)^2 e^{-\varepsilon_i/k_B T}}{\sum g_i e^{-\varepsilon_i/k_B T}} \tag{4.20}$$</div></div>
+<div class="formula-card"><div class="formula-label">能量漲落 (4.21)</div><div class="eq">$$\langle (\Delta U)^2 \rangle = k_B T^2 C_V \tag{4.21}$$</div></div>
+<div class="formula-card"><div class="formula-label">⭐ 熱流引起的熵變 (4.22)</div><div class="eq">$$\Delta S_{\text{univ}} = \delta q\left(\frac{1}{T_c} - \frac{1}{T_h}\right) > 0 \tag{4.22}$$</div></div>
+<div class="formula-card"><div class="formula-label">平衡時 $\Omega$ 最大條件 (4.23)</div><div class="eq">$$\delta(\ln \Omega_{\text{total}}) = 0 \quad \text{（平衡）} \tag{4.23}$$</div></div>
+<div class="formula-card"><div class="formula-label">Lagrange 乘數 $\beta$ 的物理意義 (4.24)</div><div class="eq">$$\beta = \frac{1}{k_B T} \tag{4.24}$$</div></div>
+</div>
+
+<div class="content-section" id="cheatsheet"><h2>公式速查表（24 條全收錄）</h2>
+<table><caption>表 1：公式速查表（24 條全收錄）</caption><thead><tr><th>Eq</th><th>公式</th><th>備註</th></tr></thead><tbody>
+<tr><td>4.1</td><td>$S = k_B \ln \Omega$</td><td>⭐ Boltzmann 熵公式</td></tr>
+<tr><td>4.2</td><td>$S = S_1 + S_2$</td><td>熵的廣延性（$\Omega = \Omega_1\Omega_2$）</td></tr>
+<tr><td>4.3</td><td>$\delta(\ln\Omega) - \alpha\sum\delta n_i - \beta\sum\varepsilon_i\delta n_i = 0$</td><td>Lagrange 乘數法</td></tr>
+<tr><td>4.4</td><td>$n_i = n_0 e^{-\varepsilon_i/k_B T}$</td><td>⭐ 波茲曼分布</td></tr>
+<tr><td>4.5</td><td>$Z = \sum_i g_i e^{-\varepsilon_i/k_B T}$</td><td>⭐ 配分函數定義</td></tr>
+<tr><td>4.6</td><td>$n_i = (N/Z) g_i e^{-\varepsilon_i/k_B T}$</td><td>正規化波茲曼分布</td></tr>
+<tr><td>4.7</td><td>$U = N k_B T^2 (\partial\ln Z/\partial T)_V$</td><td>⭐ 內能（從 $Z$）</td></tr>
+<tr><td>4.8</td><td>$S = N k_B \ln Z + N k_B T (\partial\ln Z/\partial T)_V$</td><td>熵（從 $Z$）</td></tr>
+<tr><td>4.9</td><td>$A = -N k_B T \ln Z$</td><td>⭐ 亥姆霍茲自由能（從 $Z$）</td></tr>
+<tr><td>4.10</td><td>$P = N k_B T (\partial\ln Z/\partial V)_T$</td><td>壓力（從 $Z$）</td></tr>
+<tr><td>4.11</td><td>$\langle\varepsilon\rangle = \frac{1}{2}k_B T$</td><td>能量均分（每二次方自由度）</td></tr>
+<tr><td>4.12</td><td>$Z_{\text{trans}} = (2\pi m k_B T/h^2)^{3/2} V$</td><td>平移配分函數</td></tr>
+<tr><td>4.13</td><td>$Z_{\text{rot}} = T/\sigma\Theta_r$</td><td>旋轉配分函數（雙原子）</td></tr>
+<tr><td>4.14</td><td>$Z_{\text{vib}} = 1/(1 - e^{-\Theta_v/T})$</td><td>振動配分函數</td></tr>
+<tr><td>4.15</td><td>$Z = Z_{\text{trans}} Z_{\text{rot}} Z_{\text{vib}} Z_{\text{elec}}$</td><td>配分函數分解</td></tr>
+<tr><td>4.16</td><td>$1/k_B T = (\partial\ln\Omega/\partial U)_{V,N}$</td><td>⭐ 溫度的統計定義</td></tr>
+<tr><td>4.17</td><td>$1/T = (\partial S/\partial U)_{V,N}$</td><td>熱力學溫度定義</td></tr>
+<tr><td>4.18</td><td>$T_1 = T_2$（平衡）</td><td>熱平衡條件</td></tr>
+<tr><td>4.19</td><td>$n_2/n_1 = (g_2/g_1) e^{-(\varepsilon_2-\varepsilon_1)/k_B T}$</td><td>兩能階佔據比</td></tr>
+<tr><td>4.20</td><td>$C_V = N k_B \langle(\varepsilon/k_B T)^2\rangle$</td><td>熱容量的統計表達</td></tr>
+<tr><td>4.21</td><td>$\langle(\Delta U)^2\rangle = k_B T^2 C_V$</td><td>能量漲落定理</td></tr>
+<tr><td>4.22</td><td>$\Delta S_{\text{univ}} = \delta q(1/T_c - 1/T_h) > 0$</td><td>⭐ 熱流熵增</td></tr>
+<tr><td>4.23</td><td>$\delta(\ln\Omega_{\text{total}}) = 0$</td><td>平衡條件</td></tr>
+<tr><td>4.24</td><td>$\beta = 1/k_B T$</td><td>Lagrange 乘數的物理意義</td></tr>
+</tbody></table>
+</div>
+</main>
+<script>
+function toggleTheme(){const h=document.documentElement;const n=h.getAttribute('data-theme')==='light'?'dark':'light';h.setAttribute('data-theme',n);localStorage.setItem('theme',n);document.getElementById('tl').textContent=n==='dark'?'淺色模式':'深色模式';}
+const s=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',s);if(s==='dark')document.getElementById('tl').textContent='淺色模式';
+const secs=document.querySelectorAll('.content-section[id]');const navs=document.querySelectorAll('.sidebar-nav a');window.addEventListener('scroll',()=>{let c='';secs.forEach(s=>{if(window.scrollY>=s.offsetTop-80)c=s.getAttribute('id');});navs.forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+c);});});
+</script>
+</body>
+</html>

@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第 3 章 例題 — Calculus</title>
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']],tags:'ams'}};</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<link rel="stylesheet" href="../../../../shared/core.css">
+<script src="../../../../shared/core.js" defer></script>
+<link rel="stylesheet" href="../../../../shared/navigation.css" data-shared-navigation>
+</head>
+<body>
+<nav class="sidebar" aria-label="本章目錄"><div class="sidebar-header"><div class="sidebar-subtitle">微積分</div><h2 class="sidebar-title">第 3 章：導數（Derivatives）</h2></div><ul class="toc"><li class="ns"><a href="#section-1">課本例題完整詳解 · 83 題</a></li><li class="nsub"><a href="#section-2">3.1 導數的定義（Defining the Derivative）</a></li><li class="nsub"><a href="#section-3">3.2 導數作為函數（The Derivative as a Function）</a></li><li class="nsub"><a href="#section-4">3.3 微分法則（Differentiation Rules）</a></li><li class="nsub"><a href="#section-5">3.4 導數作為變化率（Derivatives as Rates of Change）</a></li><li class="nsub"><a href="#section-6">3.5 三角函數的導數（Derivatives of Trigonometric Functions）</a></li><li class="nsub"><a href="#section-7">3.6 連鎖律（The Chain Rule）</a></li><li class="nsub"><a href="#section-8">3.7 反函數的導數（Derivatives of Inverse Functions）</a></li><li class="nsub"><a href="#section-9">3.8 隱函數微分（Implicit Differentiation）</a></li><li class="nsub"><a href="#section-10">3.9 指數與對數的導數（Derivatives of Exponential and Logarithmic Functions）</a></li></ul><div class="sidebar-tools"><button type="button" data-action="toggle-theme" aria-label="切換深色或淺色模式">切換顯示主題</button></div></nav>
+
+<main class="chapter-page">
+<a class="portal-home-link" href="index.html">← 返回例題索引</a>
+<header class="chapter-header">
+<h1>第 3 章：導數（Derivatives）</h1>
+</header>
+<h2 id="section-1">課本例題完整詳解 · 83 題</h2>
+
+<h3 id="section-2">3.1 導數的定義（Defining the Derivative）</h3>
+
+<div class="problem-card">
+  <div class="problem-number">例題 3.1 — 求切線方程式（Finding a Tangent Line）</div>
+  <div class="problem-statement"><strong>題目：</strong>求函數 $f(x)=x^2$ 在 $x=3$ 處的切線方程式。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① 使用導數定義（公式 3.3）求切線斜率：<br>
+  $$m_{\text{tan}} = \lim_{x \to 3}\frac{f(x)-f(3)}{x-3} = \lim_{x \to 3}\frac{x^2-9}{x-3}$$<br>
+  ② $x^2-9 = (x-3)(x+3)$，故<br>
+  $$m_{\text{tan}} = \lim_{x \to 3}\frac{(x-3)(x+3)}{x-3} = \lim_{x \to 3}(x+3) = 6$$<br>
+  ③ 切點為 $(3, f(3)) = (3, 9)$<br>
+  ④ 點斜式：$y - 9 = 6(x - 3) \implies y = 6x - 9$<br>
+  <strong>答：</strong>$y = 6x - 9$。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 3.2 — 用 $h$ 形式求切線斜率（The Slope of a Tangent Line Revisited）</div>
+  <div class="problem-statement"><strong>題目：</strong>使用公式 3.4（$h$ 形式）求 $f(x)=x^2$ 在 $x=3$ 處的切線斜率。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① $h$ 形式的導數定義：<br>
+  $$m_{\text{tan}} = \lim_{h \to 0}\frac{f(3+h)-f(3)}{h} = \lim_{h \to 0}\frac{(3+h)^2 - 9}{h}$$<br>
+  ② 展開：$(3+h)^2 = 9 + 6h + h^2$<br>
+  $$m_{\text{tan}} = \lim_{h \to 0}\frac{6h+h^2}{h} = \lim_{h \to 0}(6+h) = 6$$<br>
+  <strong>答：</strong>切線斜率為 $6$，與例題 3.1 結果相同，說明兩種定義等價。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 3.3 — 求 $1/x$ 的切線（Finding the Equation of a Tangent Line）</div>
+  <div class="problem-statement"><strong>題目：</strong>求 $f(x)=\dfrac{1}{x}$ 在 $x=2$ 處的切線方程式。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① 使用導數定義求斜率：<br>
+  $$m = \lim_{h \to 0}\frac{\frac{1}{2+h} - \frac{1}{2}}{h}$$<br>
+  ② 通分：$\displaystyle = \lim_{h \to 0}\frac{\frac{2-(2+h)}{2(2+h)}}{h} = \lim_{h \to 0}\frac{-h}{2h(2+h)} = \lim_{h \to 0}\frac{-1}{2(2+h)} = -\frac{1}{4}$<br>
+  ③ 切點：$(2, \frac{1}{2})$<br>
+  ④ $y - \frac{1}{2} = -\frac{1}{4}(x-2) \implies y = -\frac{1}{4}x + 1$<br>
+  <strong>答：</strong>$y = -\dfrac{1}{4}x + 1$。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 3.4 — 求 $\sqrt{x}$ 的導數值（Finding a Derivative at a Point）</div>
+  <div class="problem-statement"><strong>題目：</strong>求 $f(x)=\sqrt{x}$ 在 $x=1$ 處的導數。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① $f'(1) = \displaystyle\lim_{h \to 0}\frac{\sqrt{1+h}-1}{h}$<br>
+  ② 有理化分子（乘以共軛）：<br>
+  $$= \lim_{h \to 0}\frac{\sqrt{1+h}-1}{h} \cdot \frac{\sqrt{1+h}+1}{\sqrt{1+h}+1} = \lim_{h \to 0}\frac{(1+h)-1}{h(\sqrt{1+h}+1)}$$<br>
+  ③ $= \displaystyle\lim_{h \to 0}\frac{1}{\sqrt{1+h}+1} = \frac{1}{2}$<br>
+  <strong>答：</strong>$f'(1) = \dfrac{1}{2}$。<br>
+  <strong>註：</strong>此計算驗證了 $\frac{d}{dx}\sqrt{x} = \frac{1}{2\sqrt{x}}$。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 3.5 — 求瞬時速度（Finding Velocity at a Time）</div>
+  <div class="problem-statement"><strong>題目：</strong>一物體的位置函數為 $s(t)=t^2$（$t$ 秒，$s$ 公尺）。求 $t=2$ 時的瞬時速度。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① 瞬時速度 = 位置的導數：$v(t)=s'(t)$<br>
+  ② $v(2) = \displaystyle\lim_{h \to 0}\frac{s(2+h)-s(2)}{h} = \lim_{h \to 0}\frac{(2+h)^2-4}{h}$<br>
+  ③ $= \displaystyle\lim_{h \to 0}\frac{4+4h+h^2-4}{h} = \lim_{h \to 0}(4+h) = 4$<br>
+  <strong>答：</strong>$v(2)=4$ m/s。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 3.6 — 從表格估計導數（Estimating a Derivative from a Table）</div>
+  <div class="problem-statement"><strong>題目：</strong>下表給出 $f(x)$ 之值。估計 $f'(3)$。<br>
+  $$\begin{array}{c|ccccc} x & 2.9 & 2.99 & 3 & 3.01 & 3.1 \\ \hline f(x) & 8.41 & 8.9401 & 9 & 9.0601 & 9.61 \end{array}$$</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① 使用差商估計 $f'(3)$：<br>
+  右側：$\dfrac{f(3.01)-f(3)}{0.01} = \dfrac{9.0601-9}{0.01}=6.01$<br>
+  左側：$\dfrac{f(3)-f(2.99)}{0.01} = \dfrac{9-8.9401}{0.01}=5.99$<br>
+  ② 兩側平均約 $6.00$<br>
+  <strong>答：</strong>$f'(3) \approx 6$。（實際上若 $f(x)=x^2$，$f'(3)=6$。）</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 3.7 — 求 $x^3$ 在一點的導數（Finding a Derivative）</div>
+  <div class="problem-statement"><strong>題目：</strong>求 $f(x)=x^3$ 在 $x=2$ 處的導數。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① $f'(2) = \displaystyle\lim_{h \to 0}\frac{(2+h)^3-8}{h}$<br>
+  ② $(2+h)^3 = 8 + 12h + 6h^2 + h^3$<br>
+  ③ $f'(2) = \displaystyle\lim_{h \to 0}\frac{12h+6h^2+h^3}{h} = \lim_{h \to 0}(12+6h+h^2) = 12$<br>
+  <strong>答：</strong>$f'(2)=12$。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 3.8 — 求加速度（Finding Acceleration）</div>
+  <div class="problem-statement"><strong>題目：</strong>Hennessey Venom GT 跑車在 $14.51$ 秒內從 $0$ 加速到 $200$ mph。假設速度 $v(t)=at$，求加速度 $a$。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① $v(14.51) = a \cdot 14.51 = 200$ mph<br>
+  ② $a = \dfrac{200}{14.51} \approx 13.78$ mph/s<br>
+  ③ 加速度即 $v(t)$ 的導數，恆為 $a$。<br>
+  <strong>答：</strong>$a \approx 13.78$ mph/s。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 3.9 — 有理函數的導數（Finding a Derivative）</div>
+  <div class="problem-statement"><strong>題目：</strong>求 $f(x)=\dfrac{1}{x+2}$ 在 $x=1$ 處的導數。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① $f'(1) = \displaystyle\lim_{h \to 0}\frac{\frac{1}{(1+h)+2} - \frac{1}{3}}{h} = \lim_{h \to 0}\frac{\frac{1}{h+3} - \frac{1}{3}}{h}$<br>
+  ② 通分：$= \displaystyle\lim_{h \to 0}\frac{\frac{3-(h+3)}{3(h+3)}}{h} = \lim_{h \to 0}\frac{-h}{3h(h+3)}$<br>
+  ③ $= \displaystyle\lim_{h \to 0}\frac{-1}{3(h+3)} = -\frac{1}{9}$<br>
+  <strong>答：</strong>$f'(1)=-\dfrac{1}{9}$。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 3.10 — 由圖形求切線斜率（Tangent Line Slope from a Graph）</div>
+  <div class="problem-statement"><strong>題目：</strong>觀察 $f(x)=x^2$ 的圖形，估計 $x=-1$ 處的切線斜率，並用微分驗證。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① 由圖形觀察：在 $(-1, 1)$ 附近，曲線下降，切線斜率約為 $-2$<br>
+  ② 使用導數公式驗證：$f'(x)=2x$，$f'(-1)=-2$<br>
+  <strong>答：</strong>切線斜率為 $-2$。</div>
+</div>
+
+<h3 id="section-3">3.2 導數作為函數（The Derivative as a Function）</h3>
+
+<div class="problem-card">
+  <div class="problem-number">例題 3.11 — 求導函數（Finding a Derivative Function）</div>
+  <div class="problem-statement"><strong>題目：</strong>求 $f(x)=x^2$ 的導函數 $f'(x)$。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① $f'(x) = \displaystyle\lim_{h \to 0}\frac{(x+h)^2-x^2}{h}$<br>
+  ② $= \displaystyle\lim_{h \to 0}\frac{x^2+2xh+h^2-x^2}{h} = \lim_{h \to 0}\frac{2xh+h^2}{h}$<br>
+  ③ $= \displaystyle\lim_{h \to 0}(2x+h) = 2x$<br>
+  <strong>答：</strong>$f'(x)=2x$。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 3.12 — 求 $x^3$ 的導函數（Derivative of $x^3$）</div>
+  <div class="problem-statement"><strong>題目：</strong>求 $f(x)=x^3$ 的導函數。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① $f'(x) = \displaystyle\lim_{h \to 0}\frac{(x+h)^3-x^3}{h}$<br>
+  ② $(x+h)^3 = x^3 + 3x^2h + 3xh^2 + h^3$<br>
+  ③ $f'(x) = \displaystyle\lim_{h \to 0}\frac{3x^2h+3xh^2+h^3}{h} = \lim_{h \to 0}(3x^2+3xh+h^2) = 3x^2$<br>
+  <strong>答：</strong>$f'(x)=3x^2$。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 3.13 — 立方根的導數（A Cube Root Derivative）</div>
+  <div class="problem-statement"><strong>題目：</strong>求 $f(x)=\sqrt[3]{x}$ 的導函數。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① $f'(x) = \displaystyle\lim_{h \to 0}\frac{\sqrt[3]{x+h}-\sqrt[3]{x}}{h}$<br>
+  ② 利用 $a^3-b^3=(a-b)(a^2+ab+b^2)$ 有理化：<br>
+  令 $a=\sqrt[3]{x+h},\ b=\sqrt[3]{x}$<br>
+  ③ $f'(x) = \displaystyle\lim_{h \to 0}\frac{(x+h)-x}{h[(x+h)^{2/3}+(x+h)^{1/3}x^{1/3}+x^{2/3}]}$<br>
+  ④ $= \displaystyle\lim_{h \to 0}\frac{1}{(x+h)^{2/3}+(x+h)^{1/3}x^{1/3}+x^{2/3}} = \frac{1}{3x^{2/3}}$<br>
+  <strong>答：</strong>$f'(x)=\dfrac{1}{3}x^{-2/3}$。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 3.14 — $|x|$ 在 $0$ 處的可微性（Differentiability of $|x|$）</div>
+  <div class="problem-statement"><strong>題目：</strong>討論 $f(x)=|x|$ 在 $x=0$ 處是否可微。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① 右導數：$\displaystyle\lim_{h \to 0^+}\frac{|h|-|0|}{h} = \lim_{h \to 0^+}\frac{h}{h}=1$<br>
+  ② 左導數：$\displaystyle\lim_{h \to 0^-}\frac{|h|-|0|}{h} = \lim_{h \to 0^-}\frac{-h}{h}=-1$<br>
+  ③ $1 \neq -1$，左右導數不相等 → <strong>不可微</strong>。<br>
+  <strong>答：</strong>$|x|$ 在 $x=0$ 不可微（角點 corner）。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 3.15 — $x^{2/3}$ 的可微性（Cusp）</div>
+  <div class="problem-statement"><strong>題目：</strong>討論 $f(x)=x^{2/3}$ 在 $x=0$ 處的可微性。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① $f'(0) = \displaystyle\lim_{h \to 0}\frac{h^{2/3}-0}{h} = \lim_{h \to 0}\frac{1}{h^{1/3}}$<br>
+  ② $h \to 0^+$：$\frac{1}{h^{1/3}} \to +\infty$；$h \to 0^-$：$\frac{1}{h^{1/3}} \to -\infty$<br>
+  ③ 極限不存在（無窮且符號不一致）→ <strong>不可微</strong>。<br>
+  <strong>答：</strong>$x^{2/3}$ 在 $x=0$ 不可微（尖點 cusp）。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 3.16 — 畫導函數圖形（Graphing a Derivative）</div>
+  <div class="problem-statement"><strong>題目：</strong>給定 $f(x)=x^3-3x$，畫出其導函數 $f'(x)$ 的圖形。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① $f'(x)=3x^2-3=3(x-1)(x+1)$<br>
+  ② 為開口向上拋物線，零點在 $x=\pm 1$<br>
+  ③ $x<-1$：$f'(x)>0$（遞增）；$-1< x< 1$：$f'(x)<0$（遞減）；$x>1$：$f'(x)>0$<br>
+  ④ 最小值在 $x=0$：$f'(0)=-3$<br>
+  <strong>答：</strong>$f'(x)=3x^2-3$。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 3.17 — 高階導數（Higher-Order Derivatives）</div>
+  <div class="problem-statement"><strong>題目：</strong>求 $f(x)=x^4$ 的 $f'(x), f''(x), f'''(x)$。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① $f'(x)=4x^3$<br>
+  ② $f''(x)=12x^2$<br>
+  ③ $f'''(x)=24x$<br>
+  <strong>答：</strong>$f'(x)=4x^3$，$f''(x)=12x^2$，$f'''(x)=24x$。</div>
+</div>
+
+<h3 id="section-4">3.3 微分法則（Differentiation Rules）</h3>
+
+<div class="problem-card">
+  <div class="problem-number">例題 3.18 — 冪法則（Using the Power Rule）</div>
+  <div class="problem-statement"><strong>題目：</strong>求 $f(x)=x^5$ 的導數。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① $\frac{d}{dx}x^n = nx^{n-1}$<br>
+  ② $f'(x)=5x^{5-1}=5x^4$<br>
+  <strong>答：</strong>$f'(x)=5x^4$。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 3.19 — 冪法則應用（Using the Power Rule）</div>
+  <div class="problem-statement"><strong>題目：</strong>求導數：(a) $g(x)=x^{100}$；(b) $h(x)=\dfrac{1}{x^3}$；(c) $k(x)=\sqrt{x}$。</div>
+  <div class="solution"><strong>解：</strong><br>
+  寫成 $x^n$ 後用冪法則：<br>
+  (a) $g'(x)=100x^{99}$<br>
+  (b) $h(x)=x^{-3}$ → $h'(x)=-3x^{-4}=-\dfrac{3}{x^4}$<br>
+  (c) $k(x)=x^{1/2}$ → $k'(x)=\frac{1}{2}x^{-1/2}=\dfrac{1}{2\sqrt{x}}$<br>
+  <strong>答：</strong>(a) $100x^{99}$；(b) $-\dfrac{3}{x^4}$；(c) $\dfrac{1}{2\sqrt{x}}$。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 3.20 — 常數倍數與加法法則（Constant Multiple and Sum Rules）</div>
+  <div class="problem-statement"><strong>題目：</strong>求 $f(x)=3x^2-4x+7$ 的導數。</div>
+  <div class="solution"><strong>解：</strong><br>
+  逐項微分：<br>
+  ① $\frac{d}{dx}(3x^2)=3\cdot 2x=6x$<br>
+  ② $\frac{d}{dx}(-4x)=-4$<br>
+  ③ $\frac{d}{dx}(7)=0$（常數導數為 $0$）<br>
+  <strong>答：</strong>$f'(x)=6x-4$。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 3.21 — 求切線（Finding a Tangent Line）</div>
+  <div class="problem-statement"><strong>題目：</strong>求 $f(x)=2x^3-3x+1$ 在 $x=1$ 處的切線方程式。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① $f'(x)=6x^2-3$<br>
+  ② 斜率：$f'(1)=6(1)^2-3=3$<br>
+  ③ 切點：$f(1)=2-3+1=0$<br>
+  ④ $y-0=3(x-1) \implies y=3x-3$<br>
+  <strong>答：</strong>$y=3x-3$。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 3.22 — 邊際利潤（Instantaneous Rate of Change）</div>
+  <div class="problem-statement"><strong>題目：</strong>利潤 $P(x)=-0.02x^2+40x-500$（$x$ 為產量）。求 $x=100$ 時的邊際利潤。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① 邊際利潤 $=P'(x)=-0.04x+40$<br>
+  ② $P'(100)=-0.04(100)+40=-4+40=36$<br>
+  <strong>答：</strong>$36$（每多生產一單位，利潤增加約 $\$36$）。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 3.23 — 積法則（Product Rule）</div>
+  <div class="problem-statement"><strong>題目：</strong>求 $f(x)=(x^2+1)(x^3-3x)$ 的導數。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① 積法則：$(uv)'=u'v+uv'$<br>
+  ② $u=x^2+1,\ u'=2x$；$v=x^3-3x,\ v'=3x^2-3$<br>
+  ③ $f'(x)=2x(x^3-3x)+(x^2+1)(3x^2-3)$<br>
+  ④ $=2x^4-6x^2+3x^4-3x^2+3x^2-3=5x^4-6x^2-3$<br>
+  <strong>答：</strong>$f'(x)=5x^4-6x^2-3$。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 3.24 — 積法則（Product Rule with Square Root）</div>
+  <div class="problem-statement"><strong>題目：</strong>求 $h(x)=\sqrt{x}(x^2+2)$ 的導數。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① $h(x)=x^{1/2}(x^2+2)$<br>
+  ② 積法則：$h'(x)=\frac{1}{2}x^{-1/2}(x^2+2)+x^{1/2}(2x)$<br>
+  ③ $=\dfrac{x^2+2}{2\sqrt{x}}+2x\sqrt{x}$<br>
+  ④ 通分：$=\dfrac{x^2+2+4x^2}{2\sqrt{x}}=\dfrac{5x^2+2}{2\sqrt{x}}$<br>
+  <strong>答：</strong>$h'(x)=\dfrac{5x^2+2}{2\sqrt{x}}$。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 3.25 — 商法則（Quotient Rule）</div>
+  <div class="problem-statement"><strong>題目：</strong>求 $f(x)=\dfrac{x^2}{x+1}$ 的導數。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① 商法則：$\big(\frac{u}{v}\big)'=\dfrac{u'v-uv'}{v^2}$<br>
+  ② $u=x^2,\ u'=2x$；$v=x+1,\ v'=1$<br>
+  ③ $f'(x)=\dfrac{2x(x+1)-x^2(1)}{(x+1)^2}=\dfrac{2x^2+2x-x^2}{(x+1)^2}$<br>
+  ④ $=\dfrac{x^2+2x}{(x+1)^2}=\dfrac{x(x+2)}{(x+1)^2}$<br>
+  <strong>答：</strong>$f'(x)=\dfrac{x(x+2)}{(x+1)^2}$。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 3.26 — 商法則（Quotient Rule）</div>
+  <div class="problem-statement"><strong>題目：</strong>求 $g(x)=\dfrac{2x+1}{x^2-1}$ 的導數。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① $u=2x+1,\ u'=2$；$v=x^2-1,\ v'=2x$<br>
+  ② $g'(x)=\dfrac{2(x^2-1)-(2x+1)(2x)}{(x^2-1)^2}$<br>
+  ③ $=\dfrac{2x^2-2-4x^2-2x}{(x^2-1)^2}$<br>
+  ④ $=\dfrac{-2x^2-2x-2}{(x^2-1)^2}=-\dfrac{2(x^2+x+1)}{(x^2-1)^2}$<br>
+  <strong>答：</strong>$g'(x)=-\dfrac{2(x^2+x+1)}{(x^2-1)^2}$。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 3.27 — 積法則與商法則混合（Combining Rules）</div>
+  <div class="problem-statement"><strong>題目：</strong>求 $f(x)=\dfrac{(x+1)(x-2)}{x^2+4}$ 的導數。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① 先展開分子：$(x+1)(x-2)=x^2-x-2$<br>
+  ② 用商法則：$u=x^2-x-2,\ u'=2x-1$；$v=x^2+4,\ v'=2x$<br>
+  ③ $f'(x)=\dfrac{(2x-1)(x^2+4)-(x^2-x-2)(2x)}{(x^2+4)^2}$<br>
+  ④ $=\dfrac{2x^3+8x-x^2-4-2x^3+2x^2+4x}{(x^2+4)^2}$<br>
+  ⑤ $=\dfrac{x^2+12x-4}{(x^2+4)^2}$<br>
+  <strong>答：</strong>$f'(x)=\dfrac{x^2+12x-4}{(x^2+4)^2}$。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 3.28 — 負指數微分（Negative Exponent）</div>
+  <div class="problem-statement"><strong>題目：</strong>求導數：$h(x)=\dfrac{3}{x^2}-\dfrac{2}{x^3}+\dfrac{1}{x^4}$。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① 改寫：$h(x)=3x^{-2}-2x^{-3}+x^{-4}$<br>
+  ② $h'(x)=3(-2)x^{-3}-2(-3)x^{-4}+(-4)x^{-5}$<br>
+  ③ $=-6x^{-3}+6x^{-4}-4x^{-5}$<br>
+  ④ $=-\dfrac{6}{x^3}+\dfrac{6}{x^4}-\dfrac{4}{x^5}$<br>
+  <strong>答：</strong>$h'(x)=-\dfrac{6}{x^3}+\dfrac{6}{x^4}-\dfrac{4}{x^5}$。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 3.29 — 展開後再微分（Expand Before Differentiating）</div>
+  <div class="problem-statement"><strong>題目：</strong>求 $f(x)=(3x+2)^2$ 的導數（先用展開法）。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① 展開：$f(x)=9x^2+12x+4$<br>
+  ② $f'(x)=18x+12$<br>
+  <strong>答：</strong>$f'(x)=18x+12$。（也可以用連鎖律驗證。）</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 3.30 — 多項式乘積的導數（Derivative of Polynomial Product）</div>
+  <div class="problem-statement"><strong>題目：</strong>求 $f(x)=(x^2+x+1)(x^2-x+1)$ 的導數。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① 用積法則：$u=x^2+x+1,\ u'=2x+1$；$v=x^2-x+1,\ v'=2x-1$<br>
+  ② $f'(x)=(2x+1)(x^2-x+1)+(x^2+x+1)(2x-1)$<br>
+  ③ 展開第一項：$2x^3-2x^2+2x+x^2-x+1=2x^3-x^2+x+1$<br>
+  ④ 展開第二項：$2x^3-x^2+2x^2-x+2x-1=2x^3+x^2+x-1$<br>
+  ⑤ 相加：$f'(x)=4x^3+2x$<br>
+  <strong>答：</strong>$f'(x)=4x^3+2x$。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 3.31 — 求法線方程式（Equation of a Normal Line）</div>
+  <div class="problem-statement"><strong>題目：</strong>求 $f(x)=x^3$ 在 $(1,1)$ 處的法線（垂直於切線的直線）方程式。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① 切線斜率：$f'(x)=3x^2$，$f'(1)=3$<br>
+  ② 法線斜率為切線斜率的負倒數：$m_{\text{norm}}=-\frac{1}{3}$<br>
+  ③ 點斜式：$y-1=-\frac{1}{3}(x-1)$<br>
+  <strong>答：</strong>$y=-\dfrac{1}{3}x+\dfrac{4}{3}$。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 3.32 — 求水平切線點（Finding Horizontal Tangent Points）</div>
+  <div class="problem-statement"><strong>題目：</strong>求 $f(x)=x^3-3x+2$ 上具有水平切線的所有點。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① 水平切線 $\iff f'(x)=0$<br>
+  ② $f'(x)=3x^2-3=3(x-1)(x+1)=0$<br>
+  ③ $x=1$ 或 $x=-1$<br>
+  ④ $f(1)=1-3+2=0$，$f(-1)=-1+3+2=4$<br>
+  <strong>答：</strong>水平切線點為 $(1,0)$ 和 $(-1,4)$。</div>
+</div>
+
+<h3 id="section-5">3.4 導數作為變化率（Derivatives as Rates of Change）</h3>
+
+<div class="problem-card">
+  <div class="problem-number">例題 3.33 — 自由落體（Free-Falling Object）</div>
+  <div class="problem-statement"><strong>題目：</strong>物體從靜止落下，$s(t)=16t^2$ 英尺。求 (a) $t=2$ 時的速度；(b) $t=3$ 時的加速度。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① 速度 $v(t)=s'(t)=32t$<br>
+  ② $v(2)=32(2)=64$ ft/s<br>
+  ③ 加速度 $a(t)=v'(t)=32$ ft/s²<br>
+  ④ $a(3)=32$ ft/s²（常數）<br>
+  <strong>答：</strong>(a) $64$ ft/s；(b) $32$ ft/s²。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 3.34 — 人口成長率（Population Growth Rate）</div>
+  <div class="problem-statement"><strong>題目：</strong>城市人口 $P(t)=100e^{0.02t}$（$t$ 年，$P$ 千人）。求 (a) $t=0$ 時的成長率；(b) $t=10$ 時的成長率。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① $P'(t)=100\cdot 0.02\cdot e^{0.02t}=2e^{0.02t}$<br>
+  ② $P'(0)=2e^0=2$（千人/年）<br>
+  ③ $P'(10)=2e^{0.2}\approx 2(1.2214)=2.44$（千人/年）<br>
+  <strong>答：</strong>(a) $2$ 千人/年；(b) 約 $2.44$ 千人/年。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 3.35 — 邊際成本（Marginal Cost）</div>
+  <div class="problem-statement"><strong>題目：</strong>成本 $C(x)=200+5x-0.01x^2$（$x$ 為產量）。求邊際成本函數和 $x=100$ 時的邊際成本。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① 邊際成本 $C'(x)=5-0.02x$<br>
+  ② $C'(100)=5-0.02(100)=5-2=3$<br>
+  <strong>答：</strong>邊際成本 $C'(x)=5-0.02x$；$x=100$ 時為 $3$（第 $101$ 件成本約 $\$3$）。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 3.36 — 電流隨時間變化（Current as Rate of Charge Change）</div>
+  <div class="problem-statement"><strong>題目：</strong>通過導線的電荷 $Q(t)=t^3-2t^2+6t+2$（庫侖，$t$ 秒）。求 $t=0.5$ 秒時的電流。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① 電流 $I(t)=Q'(t)=3t^2-4t+6$<br>
+  ② $I(0.5)=3(0.25)-4(0.5)+6=0.75-2+6=4.75$ 安培<br>
+  <strong>答：</strong>$I(0.5)=4.75$ A。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 3.37 — 速度與加速度分析（Velocity and Acceleration）</div>
+  <div class="problem-statement"><strong>題目：</strong>質點位置 $s(t)=t^3-6t^2+9t$（公尺，$t$ 秒，$t \ge 0$）。求速度為 $0$ 的時刻和此時的加速度。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① $v(t)=s'(t)=3t^2-12t+9=3(t^2-4t+3)=3(t-1)(t-3)$<br>
+  ② $v(t)=0 \implies t=1$ 或 $t=3$<br>
+  ③ $a(t)=v'(t)=6t-12$<br>
+  ④ $a(1)=6-12=-6$ m/s²；$a(3)=18-12=6$ m/s²<br>
+  <strong>答：</strong>$t=1$ 時 $a=-6$ m/s²（減速）；$t=3$ 時 $a=6$ m/s²（加速）。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 3.38 — 平均變化率 vs 瞬時變化率（Average vs Instantaneous Rate）</div>
+  <div class="problem-statement"><strong>題目：</strong>函數 $f(x)=x^2+2x$。求在 $[1,3]$ 上的平均變化率，以及在 $x=2$ 的瞬時變化率。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① 平均變化率：$\dfrac{f(3)-f(1)}{3-1}=\dfrac{15-3}{2}=6$<br>
+  ② 瞬時變化率：$f'(x)=2x+2$，$f'(2)=6$<br>
+  <strong>答：</strong>平均變化率 $=6$；瞬時變化率 $=6$。兩者相等是因為 $f$ 在 $[1,3]$ 上並非線性，但在此特例中巧合相同。</div>
+</div>
+
+<h3 id="section-6">3.5 三角函數的導數（Derivatives of Trigonometric Functions）</h3>
+
+<div class="problem-card">
+  <div class="problem-number">例題 3.39 — $\sin x$ 的導數（Derivative of $\sin x$）</div>
+  <div class="problem-statement"><strong>題目：</strong>求 $f(x)=\sin x$ 的導數。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① $f'(x)=\displaystyle\lim_{h \to 0}\frac{\sin(x+h)-\sin x}{h}$<br>
+  ② 使用和角公式：$\sin(x+h)=\sin x\cos h+\cos x\sin h$<br>
+  ③ $f'(x)=\displaystyle\lim_{h \to 0}\frac{\sin x(\cos h-1)+\cos x\sin h}{h}$<br>
+  ④ $=\sin x\cdot\lim_{h \to 0}\frac{\cos h-1}{h}+\cos x\cdot\lim_{h \to 0}\frac{\sin h}{h}$<br>
+  ⑤ 已知 $\lim_{h \to 0}\frac{\sin h}{h}=1$，$\lim_{h \to 0}\frac{\cos h-1}{h}=0$<br>
+  ⑥ $f'(x)=\sin x\cdot 0+\cos x\cdot 1=\cos x$<br>
+  <strong>答：</strong>$\dfrac{d}{dx}\sin x = \cos x$。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 3.40 — $\cos x$ 的導數（Derivative of $\cos x$）</div>
+  <div class="problem-statement"><strong>題目：</strong>求 $g(x)=\cos x$ 的導數。</div>
+  <div class="solution"><strong>解：</strong><br>
+  使用 $\cos x=\sin(\frac{\pi}{2}-x)$ 或直接從定義推導：<br>
+  $\dfrac{d}{dx}\cos x = -\sin x$<br>
+  <strong>答：</strong>$\dfrac{d}{dx}\cos x = -\sin x$。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 3.41 — 含 $\sin x$ 與 $\cos x$ 乘積的導數（Product with Trig Functions）</div>
+  <div class="problem-statement"><strong>題目：</strong>求 $f(x)=x^2\sin x$ 的導數。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① 用積法則：$u=x^2,\ u'=2x$；$v=\sin x,\ v'=\cos x$<br>
+  ② $f'(x)=2x\sin x + x^2\cos x$<br>
+  <strong>答：</strong>$f'(x)=2x\sin x + x^2\cos x$。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 3.42 — $\tan x$ 的導數（Derivative of $\tan x$）</div>
+  <div class="problem-statement"><strong>題目：</strong>求 $f(x)=\tan x$ 的導數。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① $\tan x = \dfrac{\sin x}{\cos x}$，用商法則：<br>
+  ② $\dfrac{d}{dx}\tan x = \dfrac{\cos x\cdot\cos x - \sin x\cdot(-\sin x)}{\cos^2 x}$<br>
+  ③ $= \dfrac{\cos^2 x + \sin^2 x}{\cos^2 x} = \dfrac{1}{\cos^2 x} = \sec^2 x$<br>
+  <strong>答：</strong>$\dfrac{d}{dx}\tan x = \sec^2 x$。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 3.43 — 三角函數的商法則（Quotient Rule with Trig）</div>
+  <div class="problem-statement"><strong>題目：</strong>求 $f(x)=\dfrac{\sin x}{1+\cos x}$ 的導數。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① 商法則：$u=\sin x,\ u'=\cos x$；$v=1+\cos x,\ v'=-\sin x$<br>
+  ② $f'(x)=\dfrac{\cos x(1+\cos x)-\sin x(-\sin x)}{(1+\cos x)^2}$<br>
+  ③ $=\dfrac{\cos x+\cos^2 x+\sin^2 x}{(1+\cos x)^2}$<br>
+  ④ 利用 $\sin^2 x+\cos^2 x=1$：$=\dfrac{\cos x+1}{(1+\cos x)^2}=\dfrac{1}{1+\cos x}$<br>
+  <strong>答：</strong>$f'(x)=\dfrac{1}{1+\cos x}$。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 3.44 — 求切線（Tangent Line with Trig）</div>
+  <div class="problem-statement"><strong>題目：</strong>求 $f(x)=\sin x$ 在 $x=\dfrac{\pi}{3}$ 處的切線方程式。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① $f'(x)=\cos x$<br>
+  ② 斜率：$f'(\frac{\pi}{3})=\cos\frac{\pi}{3}=\frac{1}{2}$<br>
+  ③ 切點：$f(\frac{\pi}{3})=\sin\frac{\pi}{3}=\frac{\sqrt{3}}{2}$<br>
+  ④ $y-\frac{\sqrt{3}}{2}=\frac{1}{2}(x-\frac{\pi}{3})$<br>
+  <strong>答：</strong>$y=\dfrac{1}{2}x-\dfrac{\pi}{6}+\dfrac{\sqrt{3}}{2}$。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 3.45 — $\sec x$ 的導數（Derivative of $\sec x$）</div>
+  <div class="problem-statement"><strong>題目：</strong>求 $\dfrac{d}{dx}\sec x$。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① $\sec x = (\cos x)^{-1}$，用連鎖律：<br>
+  ② $\dfrac{d}{dx}\sec x = -1(\cos x)^{-2}\cdot(-\sin x) = \dfrac{\sin x}{\cos^2 x}$<br>
+  ③ $= \sec x \tan x$<br>
+  <strong>答：</strong>$\dfrac{d}{dx}\sec x = \sec x \tan x$。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 3.46 — $\csc x$ 的導數（Derivative of $\csc x$）</div>
+  <div class="problem-statement"><strong>題目：</strong>求 $\dfrac{d}{dx}\csc x$。</div>
+  <div class="solution"><strong>解：</strong><br>
+  $\dfrac{d}{dx}\csc x = -\csc x \cot x$<br>
+  <strong>答：</strong>$-\csc x \cot x$。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 3.47 — $\cot x$ 的導數（Derivative of $\cot x$）</div>
+  <div class="problem-statement"><strong>題目：</strong>求 $\dfrac{d}{dx}\cot x$。</div>
+  <div class="solution"><strong>解：</strong><br>
+  $\dfrac{d}{dx}\cot x = -\csc^2 x$<br>
+  <strong>答：</strong>$-\csc^2 x$。</div>
+</div>
+
+<h3 id="section-7">3.6 連鎖律（The Chain Rule）</h3>
+
+<div class="problem-card">
+  <div class="problem-number">例題 3.48 — 基本連鎖律（Basic Chain Rule）</div>
+  <div class="problem-statement"><strong>題目：</strong>求 $f(x)=(x^2+1)^3$ 的導數。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① 連鎖律：$\frac{d}{dx}f(g(x))=f'(g(x))\cdot g'(x)$<br>
+  ② 外函數 $u^3$，導數 $3u^2$；內函數 $x^2+1$，導數 $2x$<br>
+  ③ $f'(x)=3(x^2+1)^2\cdot 2x = 6x(x^2+1)^2$<br>
+  <strong>答：</strong>$f'(x)=6x(x^2+1)^2$。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 3.49 — 連鎖律（Chain Rule with Square Root）</div>
+  <div class="problem-statement"><strong>題目：</strong>求 $f(x)=\sqrt{x^2+1}$ 的導數。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① $f(x)=(x^2+1)^{1/2}$<br>
+  ② 連鎖律：$f'(x)=\frac{1}{2}(x^2+1)^{-1/2}\cdot 2x$<br>
+  ③ $=\dfrac{x}{\sqrt{x^2+1}}$<br>
+  <strong>答：</strong>$f'(x)=\dfrac{x}{\sqrt{x^2+1}}$。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 3.50 — 重複使用連鎖律（Repeated Chain Rule）</div>
+  <div class="problem-statement"><strong>題目：</strong>求 $f(x)=\sin(x^3)$ 的導數。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① 外函數 $\sin u$，導數 $\cos u$；內函數 $x^3$，導數 $3x^2$<br>
+  ② $f'(x)=\cos(x^3)\cdot 3x^2 = 3x^2\cos(x^3)$<br>
+  <strong>答：</strong>$f'(x)=3x^2\cos(x^3)$。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 3.51 — 雙重連鎖律（Double Chain Rule）</div>
+  <div class="problem-statement"><strong>題目：</strong>求 $f(x)=\sin^3(x^2)$ 的導數。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① $f(x)=[\sin(x^2)]^3$（三層：$u^3 \circ \sin v \circ x^2$）<br>
+  ② 最外層：$3[\sin(x^2)]^2$<br>
+  ③ 乘 $\cos(x^2)$（$\sin$ 的導數）<br>
+  ④ 乘 $2x$（$x^2$ 的導數）<br>
+  ⑤ $f'(x)=3\sin^2(x^2)\cdot\cos(x^2)\cdot 2x = 6x\sin^2(x^2)\cos(x^2)$<br>
+  <strong>答：</strong>$f'(x)=6x\sin^2(x^2)\cos(x^2)$。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 3.52 — 連鎖律與商法則混合（Chain + Quotient Rule）</div>
+  <div class="problem-statement"><strong>題目：</strong>求 $f(x)=\left(\dfrac{x}{x+1}\right)^4$ 的導數。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① 連鎖律：外層 $u^4$，導數 $4u^3$<br>
+  ② $f'(x)=4\left(\dfrac{x}{x+1}\right)^3\cdot\dfrac{d}{dx}\!\left(\dfrac{x}{x+1}\right)$<br>
+  ③ 用商法則求內層導數：$\dfrac{1\cdot(x+1)-x\cdot 1}{(x+1)^2}=\dfrac{1}{(x+1)^2}$<br>
+  ④ $f'(x)=4\left(\dfrac{x}{x+1}\right)^3\cdot\dfrac{1}{(x+1)^2}=\dfrac{4x^3}{(x+1)^5}$<br>
+  <strong>答：</strong>$f'(x)=\dfrac{4x^3}{(x+1)^5}$。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 3.53 — 連鎖律：$e^{g(x)}$ 的導數（Chain Rule with $e^x$）</div>
+  <div class="problem-statement"><strong>題目：</strong>求 $f(x)=e^{2x}$ 的導數。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① $\frac{d}{dx}e^u = e^u\cdot u'$<br>
+  ② $f'(x)=e^{2x}\cdot 2 = 2e^{2x}$<br>
+  <strong>答：</strong>$f'(x)=2e^{2x}$。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 3.54 — 連鎖律與 $\cos$（Chain Rule with Cosine）</div>
+  <div class="problem-statement"><strong>題目：</strong>求 $f(x)=\cos(3x^2+2x)$ 的導數。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① $\frac{d}{dx}\cos u = -\sin u\cdot u'$<br>
+  ② $f'(x)=-\sin(3x^2+2x)\cdot(6x+2)$<br>
+  <strong>答：</strong>$f'(x)=-(6x+2)\sin(3x^2+2x)$。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 3.55 — 連鎖律多層（Multiple Layers）</div>
+  <div class="problem-statement"><strong>題目：</strong>求 $f(x)=\sqrt[3]{\sin(x^2)}$ 的導數。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① $f(x)=[\sin(x^2)]^{1/3}$<br>
+  ② $f'(x)=\frac{1}{3}[\sin(x^2)]^{-2/3}\cdot\cos(x^2)\cdot 2x$<br>
+  ③ $=\dfrac{2x\cos(x^2)}{3[\sin(x^2)]^{2/3}}$<br>
+  <strong>答：</strong>$f'(x)=\dfrac{2x\cos(x^2)}{3\sin^{2/3}(x^2)}$。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 3.56 — 參數式微分（Parametric Chain Rule）</div>
+  <div class="problem-statement"><strong>題目：</strong>已知 $h(x)=f(g(x))$，$g(2)=3$，$g'(2)=4$，$f'(3)=5$。求 $h'(2)$。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① 連鎖律：$h'(x)=f'(g(x))\cdot g'(x)$<br>
+  ② $h'(2)=f'(g(2))\cdot g'(2)=f'(3)\cdot 4=5\cdot 4=20$<br>
+  <strong>答：</strong>$h'(2)=20$。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 3.57 — 連鎖律 $n$ 次方（General Power Chain Rule）</div>
+  <div class="problem-statement"><strong>題目：</strong>求 $f(x)=(2x^3-5x+1)^{10}$ 的導數。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① $f'(x)=10(2x^3-5x+1)^9\cdot(6x^2-5)$<br>
+  <strong>答：</strong>$f'(x)=10(6x^2-5)(2x^3-5x+1)^9$。</div>
+</div>
+
+<h3 id="section-8">3.7 反函數的導數（Derivatives of Inverse Functions）</h3>
+
+<div class="problem-card">
+  <div class="problem-number">例題 3.58 — 反函數導數公式（Derivative of an Inverse Function）</div>
+  <div class="problem-statement"><strong>題目：</strong>已知 $f(2)=5$ 且 $f'(2)=3$。求 $(f^{-1})'(5)$。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① 公式：$(f^{-1})'(y_0)=\dfrac{1}{f'(x_0)}$，其中 $y_0=f(x_0)$<br>
+  ② $x_0=2$，$y_0=5$，$f'(2)=3$<br>
+  ③ $(f^{-1})'(5)=\dfrac{1}{3}$<br>
+  <strong>答：</strong>$(f^{-1})'(5)=\dfrac{1}{3}$。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 3.59 — 求反三角導數（Derivative of $\arcsin x$）</div>
+  <div class="problem-statement"><strong>題目：</strong>推導 $\dfrac{d}{dx}\sin^{-1}x$。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① 設 $y=\sin^{-1}x$，則 $\sin y=x$<br>
+  ② 隱函數微分：$\cos y\cdot y'=1$<br>
+  ③ $y'=\dfrac{1}{\cos y}=\dfrac{1}{\sqrt{1-\sin^2 y}}=\dfrac{1}{\sqrt{1-x^2}}$<br>
+  ④ 因為 $\cos y \ge 0$ 當 $y\in[-\frac{\pi}{2},\frac{\pi}{2}]$，分母取正。<br>
+  <strong>答：</strong>$\dfrac{d}{dx}\sin^{-1}x=\dfrac{1}{\sqrt{1-x^2}}$。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 3.60 — 反餘弦與反正切的導數（Derivative of $\arccos x$ and $\arctan x$）</div>
+  <div class="problem-statement"><strong>題目：</strong>求 (a) $\dfrac{d}{dx}\cos^{-1}x$；(b) $\dfrac{d}{dx}\tan^{-1}x$。</div>
+  <div class="solution"><strong>解：</strong><br>
+  (a) $\dfrac{d}{dx}\cos^{-1}x = -\dfrac{1}{\sqrt{1-x^2}}$<br>
+  (b) $\dfrac{d}{dx}\tan^{-1}x = \dfrac{1}{1+x^2}$<br>
+  <strong>答：</strong>(a) $-\dfrac{1}{\sqrt{1-x^2}}$；(b) $\dfrac{1}{1+x^2}$。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 3.61 — 反三角函數的連鎖律（Chain Rule with Inverse Trig）</div>
+  <div class="problem-statement"><strong>題目：</strong>求 $f(x)=\sin^{-1}(x^2)$ 的導數。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① $f'(x)=\dfrac{1}{\sqrt{1-(x^2)^2}}\cdot 2x$<br>
+  ② $=\dfrac{2x}{\sqrt{1-x^4}}$<br>
+  <strong>答：</strong>$f'(x)=\dfrac{2x}{\sqrt{1-x^4}}$。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 3.62 — $\arctan$ 的連鎖律（Chain Rule with $\tan^{-1}$）</div>
+  <div class="problem-statement"><strong>題目：</strong>求 $g(x)=\tan^{-1}(e^x)$ 的導數。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① $g'(x)=\dfrac{1}{1+(e^x)^2}\cdot e^x$<br>
+  ② $=\dfrac{e^x}{1+e^{2x}}$<br>
+  <strong>答：</strong>$g'(x)=\dfrac{e^x}{1+e^{2x}}$。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 3.63 — $\sec^{-1}x$ 的導數（Derivative of $\operatorname{arcsec} x$）</div>
+  <div class="problem-statement"><strong>題目：</strong>求 $\dfrac{d}{dx}\sec^{-1}x$（$|x|>1$）。</div>
+  <div class="solution"><strong>解：</strong><br>
+  $\dfrac{d}{dx}\sec^{-1}x = \dfrac{1}{|x|\sqrt{x^2-1}}$<br>
+  <strong>答：</strong>$\dfrac{1}{|x|\sqrt{x^2-1}}$。</div>
+</div>
+
+<h3 id="section-9">3.8 隱函數微分（Implicit Differentiation）</h3>
+
+<div class="problem-card">
+  <div class="problem-number">例題 3.64 — 圓的隱函數微分（Implicit Differentiation of a Circle）</div>
+  <div class="problem-statement"><strong>題目：</strong>若 $x^2+y^2=25$，求 $\dfrac{dy}{dx}$ 以及點 $(3,4)$ 處的切線斜率。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① 兩邊對 $x$ 微分（$y$ 是 $x$ 的函數）：<br>
+  $$2x+2y\cdot y'=0$$<br>
+  ② $y'=-\dfrac{2x}{2y}=-\dfrac{x}{y}$<br>
+  ③ 在 $(3,4)$：$y'=-\dfrac{3}{4}$<br>
+  <strong>答：</strong>$\dfrac{dy}{dx}=-\dfrac{x}{y}$；在 $(3,4)$ 斜率 $=-\dfrac{3}{4}$。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 3.65 — 隱函數微分（Implicit Differentiation）</div>
+  <div class="problem-statement"><strong>題目：</strong>若 $x^3+y^3=6xy$，求 $\dfrac{dy}{dx}$。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① 兩邊對 $x$ 微分：$3x^2+3y^2y'=6y+6xy'$<br>
+  ② 合併 $y'$ 項：$3y^2y'-6xy'=6y-3x^2$<br>
+  ③ $y'(3y^2-6x)=6y-3x^2$<br>
+  ④ $y'=\dfrac{6y-3x^2}{3y^2-6x}=\dfrac{2y-x^2}{y^2-2x}$<br>
+  <strong>答：</strong>$\dfrac{dy}{dx}=\dfrac{2y-x^2}{y^2-2x}$。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 3.66 — 隱函數微分求切線（Implicit Differentiation to Find Tangent）</div>
+  <div class="problem-statement"><strong>題目：</strong>求曲線 $x^2+xy+y^2=7$ 在 $(-1,2)$ 處的切線方程式。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① 隱函數微分：$2x+(y+xy')+2yy'=0$<br>
+  ② $2x+y+xy'+2yy'=0$<br>
+  ③ $y'(x+2y)=-(2x+y)$<br>
+  ④ $y'=-\dfrac{2x+y}{x+2y}$<br>
+  ⑤ 在 $(-1,2)$：$y'=-\dfrac{-2+2}{-1+4}=-\dfrac{0}{3}=0$（水平切線）<br>
+  ⑥ $y-2=0(x+1)$，即 $y=2$<br>
+  <strong>答：</strong>$y=2$。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 3.67 — 二階隱函數導數（Second Implicit Derivative）</div>
+  <div class="problem-statement"><strong>題目：</strong>若 $x^2+y^2=1$，求 $\dfrac{d^2y}{dx^2}$。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① $2x+2yy'=0 \implies y'=-\dfrac{x}{y}$<br>
+  ② $y''=\dfrac{d}{dx}\!\left(-\dfrac{x}{y}\right)=-\dfrac{1\cdot y - x\cdot y'}{y^2}$<br>
+  ③ 代入 $y'=-\dfrac{x}{y}$：$y''=-\dfrac{y-x(-\frac{x}{y})}{y^2}$<br>
+  ④ $=-\dfrac{y+\frac{x^2}{y}}{y^2}=-\dfrac{\frac{y^2+x^2}{y}}{y^2}=-\dfrac{x^2+y^2}{y^3}$<br>
+  ⑤ 但 $x^2+y^2=1$，故 $y''=-\dfrac{1}{y^3}$<br>
+  <strong>答：</strong>$\dfrac{d^2y}{dx^2}=-\dfrac{1}{y^3}$。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 3.68 — 隱函數微分（含三角函數）（Implicit Differentiation with Trig）</div>
+  <div class="problem-statement"><strong>題目：</strong>若 $\sin(x+y)=xy$，求 $\dfrac{dy}{dx}$。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① 兩邊對 $x$ 微分：$\cos(x+y)\cdot(1+y')=y+xy'$<br>
+  ② $\cos(x+y)+\cos(x+y)\cdot y'=y+xy'$<br>
+  ③ $y'(\cos(x+y)-x)=y-\cos(x+y)$<br>
+  ④ $y'=\dfrac{y-\cos(x+y)}{\cos(x+y)-x}$<br>
+  <strong>答：</strong>$\dfrac{dy}{dx}=\dfrac{y-\cos(x+y)}{\cos(x+y)-x}$。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 3.69 — 隱函數微分（冪函數）（Implicit Differentiation with Power）</div>
+  <div class="problem-statement"><strong>題目：</strong>若 $y^3+x^3=3xy$，求在 $(1.5, 1.5)$ 處的切線斜率。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① 微分：$3y^2y'+3x^2=3y+3xy'$<br>
+  ② $3y^2y'-3xy'=3y-3x^2$<br>
+  ③ $y'(y^2-x)=y-x^2 \implies y'=\dfrac{y-x^2}{y^2-x}$<br>
+  ④ 在 $(1.5, 1.5)$：$y'=\dfrac{1.5-2.25}{2.25-1.5}=\dfrac{-0.75}{0.75}=-1$<br>
+  <strong>答：</strong>斜率 $=-1$。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 3.70 — 隱函數微分與乘積（Implicit with Product）</div>
+  <div class="problem-statement"><strong>題目：</strong>若 $x^2y+xy^2=6$，求 $\dfrac{dy}{dx}$。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① 微分每項（用積法則）：<br>
+  $\dfrac{d}{dx}(x^2y)=2xy+x^2y'$<br>
+  $\dfrac{d}{dx}(xy^2)=y^2+2xyy'$<br>
+  ② $2xy+x^2y'+y^2+2xyy'=0$<br>
+  ③ $y'(x^2+2xy)=-(2xy+y^2)$<br>
+  ④ $y'=-\dfrac{2xy+y^2}{x^2+2xy}$<br>
+  <strong>答：</strong>$\dfrac{dy}{dx}=-\dfrac{2xy+y^2}{x^2+2xy}$。</div>
+</div>
+
+<h3 id="section-10">3.9 指數與對數的導數（Derivatives of Exponential and Logarithmic Functions）</h3>
+
+<div class="problem-card">
+  <div class="problem-number">例題 3.71 — $e^x$ 的導數（Derivative of $e^x$）</div>
+  <div class="problem-statement"><strong>題目：</strong>求 $f(x)=e^x$ 的導數。</div>
+  <div class="solution"><strong>解：</strong><br>
+  $\dfrac{d}{dx}e^x = e^x$<br>
+  <strong>答：</strong>$f'(x)=e^x$。自然指數的導數等於它本身。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 3.72 — $a^x$ 的導數（Derivative of $a^x$）</div>
+  <div class="problem-statement"><strong>題目：</strong>求 $f(x)=2^x$ 的導數。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① $\dfrac{d}{dx}a^x = a^x \ln a$<br>
+  ② $f'(x)=2^x \ln 2$<br>
+  <strong>答：</strong>$f'(x)=2^x\ln 2$。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 3.73 — $\ln x$ 的導數（Derivative of $\ln x$）</div>
+  <div class="problem-statement"><strong>題目：</strong>求 $f(x)=\ln x$ 的導數。</div>
+  <div class="solution"><strong>解：</strong><br>
+  $\dfrac{d}{dx}\ln x = \dfrac{1}{x}$（$x>0$）<br>
+  <strong>答：</strong>$f'(x)=\dfrac{1}{x}$。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 3.74 — $\ln x$ 的連鎖律（Chain Rule with $\ln$）</div>
+  <div class="problem-statement"><strong>題目：</strong>求 $f(x)=\ln(x^2+1)$ 的導數。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① $\dfrac{d}{dx}\ln u = \dfrac{u'}{u}$<br>
+  ② $f'(x)=\dfrac{2x}{x^2+1}$<br>
+  <strong>答：</strong>$f'(x)=\dfrac{2x}{x^2+1}$。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 3.75 — 對數微分法（Logarithmic Differentiation）</div>
+  <div class="problem-statement"><strong>題目：</strong>用對數微分法求 $y=x^x$（$x>0$）的導數。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① 取 $\ln$：$\ln y = \ln(x^x) = x\ln x$<br>
+  ② 對 $x$ 微分：$\dfrac{y'}{y} = \ln x + x\cdot\dfrac{1}{x} = \ln x + 1$<br>
+  ③ $y' = y(\ln x + 1) = x^x(\ln x + 1)$<br>
+  <strong>答：</strong>$y'=x^x(\ln x+1)$。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 3.76 — 對數微分法（乘積）（Logarithmic Differentiation with Product）</div>
+  <div class="problem-statement"><strong>題目：</strong>用對數微分法求 $y=\sqrt{x}\cdot e^{x^2}\cdot (x^2+1)^{10}$ 的導數。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① $\ln y = \frac{1}{2}\ln x + x^2 + 10\ln(x^2+1)$<br>
+  ② $\dfrac{y'}{y} = \dfrac{1}{2x} + 2x + 10\cdot\dfrac{2x}{x^2+1}$<br>
+  ③ $y' = y\left(\dfrac{1}{2x} + 2x + \dfrac{20x}{x^2+1}\right)$<br>
+  <strong>答：</strong>$y'=\sqrt{x}e^{x^2}(x^2+1)^{10}\!\left(\dfrac{1}{2x}+2x+\dfrac{20x}{x^2+1}\right)$。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 3.77 — $e^{g(x)}$ 的導數（Chain Rule with Exponential）</div>
+  <div class="problem-statement"><strong>題目：</strong>求 $f(x)=e^{x^3}$ 的導數。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① $\frac{d}{dx}e^{g(x)}=e^{g(x)}\cdot g'(x)$<br>
+  ② $f'(x)=e^{x^3}\cdot 3x^2 = 3x^2 e^{x^3}$<br>
+  <strong>答：</strong>$f'(x)=3x^2e^{x^3}$。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 3.78 — $\ln|\cdot|$ 的導數（Derivative of $\ln|x|$）</div>
+  <div class="problem-statement"><strong>題目：</strong>求 $f(x)=\ln|x|$ 的導數。</div>
+  <div class="solution"><strong>解：</strong><br>
+  $\dfrac{d}{dx}\ln|x| = \dfrac{1}{x}$（$x \neq 0$）<br>
+  <strong>答：</strong>$f'(x)=\dfrac{1}{x}$。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 3.79 — $e^x$ 與 $\sin$ 混合（Mixed $e^x$ and $\sin$）</div>
+  <div class="problem-statement"><strong>題目：</strong>求 $f(x)=e^x\sin x$ 的導數。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① 積法則：$f'(x)=e^x\sin x + e^x\cos x$<br>
+  ② $=e^x(\sin x + \cos x)$<br>
+  <strong>答：</strong>$f'(x)=e^x(\sin x + \cos x)$。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 3.80 — $\ln$ 與商法則（$\ln$ with Quotient）</div>
+  <div class="problem-statement"><strong>題目：</strong>求 $f(x)=\ln\!\left(\dfrac{x}{x+1}\right)$ 的導數。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① 利用 $\ln\frac{a}{b}=\ln a-\ln b$：$f(x)=\ln x - \ln(x+1)$<br>
+  ② $f'(x)=\dfrac{1}{x} - \dfrac{1}{x+1} = \dfrac{(x+1)-x}{x(x+1)} = \dfrac{1}{x(x+1)}$<br>
+  <strong>答：</strong>$f'(x)=\dfrac{1}{x(x+1)}$。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 3.81 — $\log_a x$ 的導數（Derivative of $\log_a x$）</div>
+  <div class="problem-statement"><strong>題目：</strong>求 $f(x)=\log_2 x$ 的導數。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① $\dfrac{d}{dx}\log_a x = \dfrac{1}{x\ln a}$<br>
+  ② $f'(x)=\dfrac{1}{x\ln 2}$<br>
+  <strong>答：</strong>$f'(x)=\dfrac{1}{x\ln 2}$。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 3.82 — 複合對數微分（Logarithmic Differentiation with Root）</div>
+  <div class="problem-statement"><strong>題目：</strong>用對數微分法求 $y=\sqrt[4]{\dfrac{x^2+1}{x^2-1}}$ 的導數。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① $y=\left(\dfrac{x^2+1}{x^2-1}\right)^{1/4}$<br>
+  ② $\ln y = \frac{1}{4}[\ln(x^2+1)-\ln(x^2-1)]$<br>
+  ③ $\dfrac{y'}{y} = \dfrac{1}{4}\!\left(\dfrac{2x}{x^2+1}-\dfrac{2x}{x^2-1}\right)$<br>
+  ④ $\dfrac{y'}{y} = \dfrac{1}{4}\cdot 2x\!\left(\dfrac{1}{x^2+1}-\dfrac{1}{x^2-1}\right)$<br>
+  ⑤ $= \dfrac{x}{2}\cdot\dfrac{(x^2-1)-(x^2+1)}{(x^2+1)(x^2-1)} = \dfrac{x}{2}\cdot\dfrac{-2}{(x^2+1)(x^2-1)}$<br>
+  ⑥ $= -\dfrac{x}{(x^2+1)(x^2-1)}$<br>
+  ⑦ $y' = y\cdot\left(-\dfrac{x}{(x^2+1)(x^2-1)}\right)$<br>
+  <strong>答：</strong>$y'=-\dfrac{x}{(x^2+1)(x^2-1)}\cdot\sqrt[4]{\dfrac{x^2+1}{x^2-1}}$。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 3.83 — 指數成長的導數（Derivative of Exponential Growth）</div>
+  <div class="problem-statement"><strong>題目：</strong>細菌數量 $N(t)=N_0e^{kt}$。若 $N_0=100$ 且 $k=0.03$，求 $t=5$ 時的成長速率。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① $N'(t)=N_0\cdot k\cdot e^{kt}=100\cdot 0.03\cdot e^{0.03t}=3e^{0.03t}$<br>
+  ② $N'(5)=3e^{0.15}\approx 3(1.1618)=3.49$<br>
+  <strong>答：</strong>約 $3.49$ 個/單位時間。</div>
+</div>
+
+</main>
+</body>
+</html>

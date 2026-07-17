@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第 9 章 微擾理論 — The Physics of Quantum Mechanics</title>
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$'], ['\\[','\\]']] },
+  options: { ignoreHtmlClass: 'no-mathjax' }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<link rel="stylesheet" href="../../../../shared/core.css">
+<script src="../../../../shared/core.js" defer></script>
+<link rel="stylesheet" href="../../../../shared/navigation.css" data-shared-navigation>
+</head>
+<body>
+
+<nav class="sidebar" id="sidebar" aria-label="本章目錄"><div class="sidebar-header"><div class="sidebar-subtitle">量子力學</div><h2 class="sidebar-title">第 9 章 微擾理論</h2></div><div class="toc">
+    <div class="nsub"><a href="#preview">本章預覽</a></div>
+    <div class="nsub"><a href="#s9-1">9.1 非時變微擾</a></div>
+    <div class="nsub"><a href="#s9-2">9.2 變分原理</a></div>
+    <div class="nsub"><a href="#s9-3">9.3 含時微擾理論</a></div>
+    <div class="nsub"><a href="#summary">關鍵概念與公式</a></div>
+    <div class="nsub"><a href="#common-mistakes">常見錯誤</a></div>
+    <div class="nsub"><a href="#self-check">自我檢測</a></div>
+    <div class="nsub"><a href="#extras">延伸資源</a></div>
+  </div>
+<div class="sidebar-tools"><button type="button" data-action="toggle-theme" aria-label="切換深色或淺色模式">切換顯示主題</button></div></nav>
+
+<main class="chapter-page" data-chapter-title="第 9 章 微擾理論" data-prev-href="ch8_hydrogen_zh.html" data-prev-label="第 8 章 氫原子" data-next-href="ch10_helium_zh.html" data-next-label="第 10 章 氦與週期表">
+<!-- ====== 章首 ====== -->
+<header class="chapter-header">
+  <div class="chapter-subtitle">
+    <a href="#">量子力學</a> &rsaquo; <a href="ch8_hydrogen_zh.html">Ch8</a> &rsaquo; Ch9
+  </div>
+  <h1>第 9 章　微擾理論</h1>
+  <div class="chapter-meta">
+    <span>原書章節：Chapter 9, Perturbation theory</span>
+    <span>原書頁碼：p203–225</span>
+    <span>章長：23 頁 &middot; 3 節 &middot; 22 個問題</span>
+  </div>
+</header>
+
+<!-- ====== 本章預覽 ====== -->
+<section class="chapter-preview" id="preview">
+  <h2>本章預覽</h2>
+
+  <div class="core-question">
+    <h3>核心問題</h3>
+    <p>量子力學中，能精確求解的系統少之又少——氫原子、簡諧振子、自由粒子，屈指可數。對於更複雜的系統（如置於電場或磁場中的原子、多電子原子、與輻射場耦合的系統），我們需要系統性的近似方法。<strong>微擾理論（perturbation theory）</strong>正是為此而生的工具：它從一個已知解的可解「模型系統」出發，將「真實系統與模型系統的差異」視為一個小量（微擾），然後逐階計算這個差異對能量和量子態的修正。本章涵蓋三種微擾方法——非時變微擾、變分原理和含時微擾——它們構成了量子力學近似計算的基石。</p>
+  </div>
+
+  <div class="deep-dive">
+    <h3>10 個關鍵概念</h3>
+    <ol>
+      <li><strong>微擾展開</strong>：$H = H_0 + \beta\Delta$，能量與態按 $\beta$ 的冪次展開——$E = E^0 + \beta E^1 + \beta^2 E^2 + \cdots$</li>
+      <li><strong>一階能量修正</strong>：$E^1 = \langle E^0 | \Delta | E^0 \rangle$——微擾在未擾態中的期望值，直觀而優雅</li>
+      <li><strong>二階能量修正</strong>：$E^2 = \sum_{k \neq 0} |\langle E_k | \Delta | E^0 \rangle|^2 / (E^0 - E_k)$——總是降低基態能量</li>
+      <li><strong>簡併微擾理論</strong>：當未擾能階簡併時，必須在簡併子空間內對角化 $\Delta$，否則會出現發散</li>
+      <li><strong>Stark 效應</strong>：外加電場使原子能階位移——基態為二次 Stark 效應（$\propto \mathcal{E}^2$），激發態為線性 Stark 效應（$\propto \mathcal{E}$）</li>
+      <li><strong>Zeeman 效應</strong>：弱磁場下自旋-軌道耦合主導，能階分裂由 Landé g 因子決定——$E_B = m g_L \mu_B B$</li>
+      <li><strong>Paschen-Back 效應</strong>：強磁場下磁場效應壓倒自旋-軌道耦合，能階由 $m_l + 2m_s$ 決定</li>
+      <li><strong>變分原理</strong>：$\langle H \rangle \ge E_0$——任何試探波函數給出的期望值都是基態能量的上界</li>
+      <li><strong>Fermi 黃金規則</strong>：躍遷率 $R = \frac{2\pi}{\hbar} |\langle \text{out} | V | \text{in} \rangle|^2 g(E_{\text{out}})$——含時微擾的核心公式</li>
+      <li><strong>選擇定則</strong>：電偶極躍遷的允許條件——$\Delta l = \pm 1$、$\Delta m = 0, \pm 1$、$\Delta s = 0$、$|\Delta j| \le 1$（但 $j=0 \to j'=0$ 禁止）</li>
+    </ol>
+  </div>
+
+  <div class="deep-dive">
+    <h3>🧭 本章推理地圖</h3>
+    <ol>
+      <li><strong>多數量子系統不可精確求解</strong>（Ch9 引言）→ 需要<strong>近似方法</strong>——從可解模型出發，加入微擾修正（§9.1）。</li>
+      <li><strong>非時變微擾</strong>：將 Hamiltonian 寫為 $H_0 + \beta\Delta$（§9.1）→ 能量與態按 $\beta$ 展開（§9.1）→ 一階能量修正為 $\langle E^0|\Delta|E^0\rangle$（§9.1）→ 應用於<strong>Stark 效應</strong>（電場中的氫原子，§9.1.1–§9.1.2）→ 當能階簡併時必須用<strong>簡併微擾理論</strong>（§9.1.2）。</li>
+      <li><strong>磁場中的原子</strong>：磁場微擾 $H_{Bs} = \mu_B B(J_z + S_z)$（§9.1.3）→ 弱場極限為 <strong>Zeeman 效應</strong>（Landé g 因子，§9.1.3）→ 強場極限為 <strong>Paschen-Back 效應</strong>（§9.1.3）。</li>
+      <li><strong>變分原理</strong>：Rayleigh 定理——$\langle H \rangle$ 的駐點對應 $H$ 的本徵態（§9.2）→ 基態能量對應最小值 → 用試探波函數求上界（§9.2）。</li>
+      <li><strong>含時微擾</strong>：$H = H_0 + V(t)$（§9.3）→ 展開 $|\psi\rangle = \sum a_n(t) e^{-iE_nt/\hbar}|E_n\rangle$（§9.3）→ 推導躍遷振幅 $a_k(t)$（§9.3）→ <strong>Fermi 黃金規則</strong>（§9.3.1）→ 應用於<strong>輻射躍遷</strong>（§9.3.2）→ <strong>選擇定則</strong>決定哪些躍遷被允許（§9.3.3）。</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ====== 先備知識橋接 ====== -->
+<section class="prerequisite">
+  <h2>先備知識橋接</h2>
+  <p>本章假設讀者已掌握以下內容：</p>
+  <ul>
+    <li><strong>氫原子的能階與波函數</strong>（Ch8）：$|nlm\rangle$ 態、$E_n = -R/n^2$、球諧函數 $Y_l^m$ 的宇稱性質</li>
+    <li><strong>角動量理論</strong>（Ch7）：$L_z$、$L^2$、$J^2$ 的本徵值、Clebsch-Gordan 係數、自旋算符 $S_z$</li>
+    <li><strong>Dirac notation</strong>（Ch1）：$\langle \phi | \psi \rangle$、正交歸一性、完備性關係 $\sum_n |n\rangle\langle n| = I$</li>
+    <li><strong>含時 Schrödinger 方程</strong>（Ch2）：$i\hbar \partial_t |\psi\rangle = H|\psi\rangle$、穩態的時間依賴 $e^{-iE_nt/\hbar}$</li>
+    <li><strong>簡諧振子的代數解法</strong>（Ch3）：升降算符 $A$、$A^\dagger$、數態 $|n\rangle$</li>
+  </ul>
+  <p>如果你對角動量的對易關係和 Clebsch-Gordan 係數還不夠熟練，建議在閱讀 §9.1.3（Zeeman 效應）前先複習 Ch7。<strong>本章最重要的不是記住每個公式的推導細節，而是掌握「何時用哪種微擾方法」的判斷力。</strong></p>
+</section>
+
+<!-- ====== 9.1 非時變微擾 ====== -->
+<section class="deep-dive" id="s9-1">
+<h2>9.1　非時變微擾</h2>
+<div class="section-keypoints">
+  <strong>🔑 本節重點</strong>
+  <span>① $E^1 = \langle E^0|\Delta|E^0\rangle$：一階能量修正就是微擾的期望值</span>
+  <span>② 一階態修正涉及其他能階的耦合：$|b\rangle = \sum_{m\neq 0} \frac{\langle E_m|\Delta|E^0\rangle}{E^0 - E_m}|E_m\rangle$</span>
+  <span>③ 簡併時必須在簡併子空間內對角化 $\Delta$</span>
+  <span>④ Stark 效應：電場位移能階；Zeeman／Paschen-Back 效應：磁場分裂能階</span>
+  <span>⑤ 微擾理論在量子力學中比古典力學中更簡單且更有效</span>
+</div>
+
+  <p>假設我們要研究的「真實系統」的 Hamiltonian 為 $H$，而我們能找到一個足夠接近的「模型系統」，其 Hamiltonian $H_0$ 的本徵值問題已被解出。兩者的差異 $\Delta \equiv H - H_0$ 被視為對 $H_0$ 的「微擾」。我們定義一個帶有參數 $\beta$ 的 Hamiltonian：</p>
+  <div class="eq">$$H_\beta = H_0 + \beta\Delta \tag{9.1}$$</div>
+  <p>想像實驗裝置上有一個標著「$\beta$」的旋鈕：當 $\beta = 0$ 時裝置就是模型系統，當旋鈕轉到 $\beta = 1$ 時裝置平滑地變形為我們真正感興趣的系統。我們尋找 $H_\beta$ 的本徵態 $|E\rangle$ 和本徵值 $E$ 作為 $\beta$ 的函數。由於 Hamiltonian 是 $\beta$ 的連續函數，我們猜測 $|E\rangle$ 和 $E$ 也是 $\beta$ 的<strong>解析函數</strong>，可以展開為冪級數：</p>
+  <div class="eq">$$|E\rangle = |a\rangle + \beta|b\rangle + \beta^2|c\rangle + \cdots; \quad E = E_a + \beta E_b + \beta^2 E_c + \cdots \tag{9.2}$$</div>
+  <p>將這些展開式代入本徵值方程 $H|\psi\rangle = E|\psi\rangle$，並令等式對<strong>任何</strong> $\beta$ 值都成立——這意味著 $\beta$ 的每個冪次的係數必須分別相等：</p>
+  <div class="eq">$$\begin{aligned} \beta^0&: & H_0|a\rangle &= E_a|a\rangle \\ \beta^1&: & H_0|b\rangle + \Delta|a\rangle &= E_a|b\rangle + E_b|a\rangle \\ \beta^2&: & H_0|c\rangle + \Delta|b\rangle &= E_a|c\rangle + E_b|b\rangle + E_c|a\rangle \end{aligned} \tag{9.4}$$</div>
+  <p>第一個方程只是確認 $E_a$ 和 $|a\rangle$ 是 $H_0$ 的本徵值與本徵態。物理上，$|a\rangle$ 就是當我們在測量能量後將旋鈕慢慢轉回零時系統所處的態。此後我們將 $E_a$ 重新標記為 $E^0$，將 $|a\rangle$ 標記為 $|E^0\rangle$——上標 0 提醒我們它與 $\beta = 0$ 的關聯。</p>
+
+  <div class="callout">
+    <strong>💡 為什麼量子微擾理論比古典微擾理論簡單</strong><br>
+    在古典力學中，微擾理論是一個只有少數專家掌握的生僻分支——原因在於古典系統中「小刺激產生大響應」的現象非常普遍（相變、窄共振、焦散線等）。在量子力學中，可精確求解的模型甚至比古典物理中更少，因此更多系統必須用近似方法處理。但更重要的是，量子微擾理論的數學結構（線性向量空間、Hermitian 算符的譜定理）使得微擾展開收斂得更好——這是量子力學的數學結構帶來的意外禮物。
+  </div>
+
+  <h3>一階與二階修正</h3>
+  <p>用 $\langle E^0|$ 乘以 $\beta^1$ 方程：$\langle E^0|H_0|b\rangle + \langle E^0|\Delta|E^0\rangle = E^0\langle E^0|b\rangle + E_b$。利用 $H_0$ 的 Hermitian 性質，$\langle E^0|H_0|b\rangle = (\langle b|H_0|E^0\rangle)^* = E^0\langle E^0|b\rangle$。消去兩邊相同的項後得到：</p>
+  <div class="eq">$$E_b = \langle E^0|\Delta|E^0\rangle \tag{9.6}$$</div>
+  <p>這是一個極其直觀的結果：<strong>一階能量修正就是微擾算符在未擾態中的期望值</strong>。這正是我們在 §8.2.1–§8.2.2 中用來估計自旋-軌道耦合和超精細結構效應的方法。</p>
+
+  <p>為求二階能量修正，用 $\langle E^0|$ 乘以 $\beta^2$ 方程，消去相同項後得到 $E_c = \langle E^0|\Delta|b\rangle - E_b\langle E^0|b\rangle$。要進一步計算需要先求出態的一階修正 $|b\rangle$。由於 $H_0$ 的本徵態 $\{|E_n\rangle\}$ 構成完備集，可以將 $|b\rangle$ 展開為：</p>
+  <div class="eq">$$|b\rangle = \sum_k b_k |E_k\rangle \tag{9.8}$$</div>
+  <p>將此展開代入 $\beta^1$ 方程，用 $\langle E_m|$（$m \neq 0$）乘以兩邊，得到：</p>
+  <div class="eq">$$b_m = \frac{\langle E_m|\Delta|E^0\rangle}{E^0 - E_m} \tag{9.9}$$</div>
+  <p>$b_0$ 這個係數（即 $|E^0\rangle$ 自身的係數）則可以通過歸一化條件確定為零——這類似於在三維空間中保持 $|\mathbf{r}| = 1$ 時，$\mathbf{r}$ 的一階變化必須垂直於 $\mathbf{r}$ 本身（見 Box 9.1）。因此：</p>
+  <div class="eq">$$|b\rangle = \sum_{m \neq 0} \frac{\langle E_m|\Delta|E^0\rangle}{E^0 - E_m} |E_m\rangle \tag{9.10}$$</div>
+  <p>將此式代入 $E_c$ 的表達式，得到<strong>二階能量修正</strong>：</p>
+  <div class="eq">$$E_c = \sum_{k \neq 0} \frac{\langle E^0|\Delta|E_k\rangle\langle E_k|\Delta|E^0\rangle}{E^0 - E_k} = \sum_{k \neq 0} \frac{|\langle E_k|\Delta|E^0\rangle|^2}{E^0 - E_k} \tag{9.11}$$</div>
+
+  <div class="callout-warn">
+    <strong>⚠️ 二階修正的符號與物理意義</strong><br>
+    對於基態（$E^0$ 是最低的能量），所有 $E_k > E^0$，因此分母 $E^0 - E_k$ 為負，而分子 $|\langle E_k|\Delta|E^0\rangle|^2$ 為正——所以<strong>基態的二階能量修正總是負的</strong>。這意味著微擾總是<strong>降低</strong>基態能量，因為系統可以透過混合激發態的成分來更好地適應微擾。這是一個普遍的物理原理。
+  </div>
+
+  <h3>9.1.1 二次 Stark 效應</h3>
+  <p>將上述理論應用於置於外加電場 $\mathbf{E} = -\nabla\Phi$ 中的氫原子。對於普通實驗室能達到的電場強度（$\lesssim 5 \times 10^{11}$ V/m），外加電場遠小於原子內部的電場，因此微擾理論應該給出很好的估計。靜電勢 $\Phi$ 的定義給出原子能量的變化為 $\delta E = e[\Phi(\mathbf{x}_p) - \Phi(\mathbf{x}_e)]$。假設電場在原子尺度上變化很小，並定義 $\mathbf{r} \equiv \mathbf{x}_e - \mathbf{x}_p$，則：</p>
+  <div class="eq">$$\delta E \simeq -e\mathbf{r} \cdot \nabla\Phi = e\mathbf{r} \cdot \mathbf{E} \tag{9.13}$$</div>
+  <p>將坐標系定向使 $\mathbf{E}$ 平行於 $z$ 軸，外加電場的效果就是在未擾 Hamiltonian 中加入一項：</p>
+  <div class="eq">$$\Delta = e\mathcal{E}z \tag{9.14}$$</div>
+  <p>對於基態 $|100\rangle$，一階能量修正為 $E_b = e\mathcal{E}\langle 100|z|100\rangle$。但正如我們在 §4.1.4 中所見，在具有確定宇稱的態中，任何 $\mathbf{x}$ 分量的期望值都為零。基態具有偶宇稱，因此 $E_b = 0$——<strong>氫原子基態沒有永久電偶極矩</strong>。能量變化由二階項主導：</p>
+  <div class="eq">$$E_c = e^2\mathcal{E}^2 \sum_{n=2}^\infty \sum_{l<n} \sum_{|m|\le l} \frac{\langle 100|z|nlm\rangle\langle nlm|z|100\rangle}{E_1 - E_n} \tag{9.16}$$</div>
+  <p>利用對稱性可以大幅簡化這個求和。首先，$[L_z, z] = 0$，因此 $z|nlm\rangle$ 是 $L_z$ 的本徵態，其本徵值為 $m$——要與 $|100\rangle$（$m=0$）有非零內積，必須 $m=0$。其次，$z$ 是奇宇稱算符，它在兩個具有相同宇稱的態之間的矩陣元素為零——因此只有奇數 $l$ 的態才有貢獻。事實上，Problem 7.21 的結果顯示只有 $l=1$ 的項不為零。所以：</p>
+  <div class="eq">$$E_c = e^2\mathcal{E}^2 \sum_{n=2}^\infty \frac{\langle 100|z|n10\rangle\langle n10|z|100\rangle}{E_1 - E_n} \tag{9.17}$$</div>
+  <p>能量變化正比於 $\mathcal{E}^2$——這就是<strong>二次 Stark 效應</strong>。物理上，外加電場使原子的機率密度發生變化（極化），產生一個正比於 $\mathcal{E}$ 的感應電偶極矩 $\mathbf{P}$。這個偶極在電場中的能量為 $-\mathbf{P} \cdot \mathbf{E} \propto \mathcal{E}^2$。</p>
+
+  <figure class="figure" id="fig-9-stark">
+    <svg class="content-diagram" viewBox="0 0 500 240" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" width="500" height="240" fill="#f8f9fa" rx="8"/>
+      <!-- Atom -->
+      <circle cx="180" cy="120" r="30" fill="#4a90d9" opacity="0.2" stroke="#4a90d9" stroke-width="2"/>
+      <circle cx="180" cy="120" r="4" fill="#e74c3c"/>
+      <text x="180" y="168" font-size="12" fill="#333" text-anchor="middle">無電場</text>
+      <!-- E field arrow -->
+      <text x="300" y="100" font-size="14" fill="#333" text-anchor="middle">$\mathcal{E}$</text>
+      <line x1="300" y1="110" x2="300" y2="170" stroke="#333" stroke-width="2" marker-end="url(#arrow)"/>
+      <!-- Polarized atom -->
+      <ellipse cx="350" cy="150" rx="35" ry="25" fill="#4a90d9" opacity="0.2" stroke="#4a90d9" stroke-width="2"/>
+      <circle cx="360" cy="150" r="4" fill="#e74c3c"/>
+      <circle cx="340" cy="150" r="4" fill="#e74c3c"/>
+      <text x="350" y="200" font-size="12" fill="#333" text-anchor="middle">極化：$\Delta E \propto \mathcal{E}^2$</text>
+      <!-- Arrow marker -->
+      <defs><marker id="arrow" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M 0 0 L 10 5 L 0 10 z" fill="#333"/></marker></defs>
+      <!-- Labels -->
+      <text x="60" y="130" font-size="12" fill="#555">電荷分布</text>
+      <text x="60" y="150" font-size="12" fill="#555">為球對稱</text>
+      <text x="410" y="130" font-size="12" fill="#555">電荷分布</text>
+      <text x="410" y="150" font-size="12" fill="#555">被扭曲</text>
+    </svg>
+    <figcaption><strong>圖 9.1 重繪</strong>　二次 Stark 效應：外加電場使原子的電荷分布極化，產生感應電偶極矩。感應偶極的能量 $\propto \mathcal{E}^2$，因此基態的能量位移是二次的。</figcaption>
+  </figure>
+
+  <h3>9.1.2 線性 Stark 效應與簡併微擾理論</h3>
+  <p>現在考慮氫原子 $n=2$、$l=0$ 態在外加電場中的能量位移。在方程 (9.16) 的求和中有一個項為 $\langle 200|z|210\rangle\langle 210|z|200\rangle / (E_{20} - E_{21})$。如果忽略非常小的 Lamb 位移（§8.1.3），分母中的能量差為零——因為 $|200\rangle$ 和 $|210\rangle$ 都是 $n=2$ 的態，在氫原子的粗結構 Hamiltonian 下具有完全相同的能量。分子非零（Problem 8.12 給出 $\langle 200|z|210\rangle = -3a_0$），因此這個項發散。一個微小的電場不太可能產生任意大的能量變化——那麼我們哪裡做錯了？</p>
+  <p>錯誤在於我們一開始就假設「小刺激產生小響應」，這正是寫下方程 (9.2) 時所做的假設。發散的根源在於方程 (9.9) 中的 $b_m$——當 $E_m \to E^0$ 時它會發散，也就是說，微擾產生的波函數變化與「原始態和被推向的態之間的能量差」成反比。這完全合理——就像推一個放在碗底的彈珠：彈珠移動的距離取決於碗的曲率。當曲率趨於零（碗底變平），無窮小的力就能把彈珠推得任意遠，因為所有位置能量相同。因此我們得出結論：當系統的初始能量是 $H_0$ 的<strong>簡併本徵值</strong> $E_d$ 時，微小的刺激可能會導致態的劇烈變化（但能量不會劇變），而我們目前的方法無法處理這種情況。</p>
+  <p>但我們不必絕望。關鍵洞察是：在態的劇變過程中，只有<strong>與 $E_d$ 能量相同的態</strong>會獲得不可忽略的振幅。也就是說，系統躍遷到的態可以表示為屬於 $E_d$ 的态的線性組合。在很多感興趣的情況下，這些态的數量很少（在我們正在處理的氫原子問題中是 4 個）。</p>
+  <p>我們要做的就是在這些态所張成的子空間內對 $\Delta$ 進行對角化。在這個小子空間中，$\Delta$ 的本徵态將是輕微擾動系統中具有確定能量的态。我們的猜測是：當 $\beta$ 從零開始增加的那一瞬間，系統的态會跳到能量最低的本徵态，然後隨著 $\beta$ 繼續增加而保持在這個态。</p>
+  <p>讓我們在氫原子 $n=2$ 的四維子空間中對角化 $e\mathcal{E}z$。將态按 $|200\rangle, |210\rangle, |211\rangle, |21\!-\!1\rangle$ 的順序列出，$\Delta$ 的矩陣為：</p>
+  <div class="eq">$$\Delta_{ij} = e\mathcal{E} \begin{pmatrix} 0 & a & 0 & 0 \\ a^* & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 \\ 0 & 0 & 0 & 0 \end{pmatrix}, \quad a = \langle 200|z|210\rangle = -3a_0 \tag{9.18}$$</div>
+  <p>$\Delta$ 的本徵值為 $\pm 3e\mathcal{E}a_0$ 和 0（二重簡併），對應的本徵态為 $2^{-1/2}(1, \mp 1, 0, 0)$、$(0,0,1,0)$ 和 $(0,0,0,1)$。一旦微擾開啟，系統會處於能量最低的态 $|\psi\rangle = 2^{-1/2}(|200\rangle + |210\rangle)$。在此態中計算一階能量修正：</p>
+  <div class="eq">$$E_b = \frac{1}{2}e\mathcal{E}\big(\langle 200| + \langle 210|\big) z \big(|200\rangle + |210\rangle\big) = -3a_0 e\mathcal{E} \tag{9.19}$$</div>
+  <p>能量位移正比於 $\mathcal{E}$——這就是<strong>線性 Stark 效應</strong>。它意味著氫原子在 $n=2$ 態具有<strong>永久電偶極矩</strong>。</p>
+
+  <div class="callout">
+    <strong>💡 古典圖像與量子圖像的對應</strong><br>
+    在古典物理中，電子的克卜勒軌道一般是橢圓形的，沿橢圓的電荷密度在遠心點（apocentre）高於近心點（pericentre），因為電子在遠心點停留更久。因此電荷中心位於橢圓幾何中心的另一側，而質子位於焦點——原子因此具有永久電偶極矩。在氫原子中，由於力場與平方反比定律的偏離極小（僅來自量子電動力學的真空極化效應），橢圓軌道的進動非常緩慢，因此即使很弱的外加電場也能阻止進動，產生穩定的電偶極。在量子圖像中，最低能量態 $(|200\rangle + |210\rangle)/\sqrt{2}$ 的機率密度如原書圖 9.1 所示，包含原點附近的密集雲和 $z \simeq -3a_0$ 處的延伸雲——可分別理解為近心點和遠心點的貢獻。$\int d^3x\, z|\psi|^2 = -3a_0$，確認了偶極矩為 $+3ea_0$。
+  </div>
+
+  <div class="callout-warn">
+    <strong>⚠️ 簡併微擾理論的核心要點</strong><br>
+    當未擾能階簡併時，<strong>絕不能</strong>直接使用非簡併微擾公式 (9.6) 和 (9.11)。必須先在簡併子空間內對角化 $\Delta$，然後以 $\Delta$ 的本徵态作為新的基底進行微擾計算。這等價於一個物理要求：當 $\beta$ 從零開始增加時，系統的态會立刻跳到 $\Delta$ 在簡併子空間中的某個本徵态——通常是能量最低的那個。
+  </div>
+
+  <h3>9.1.3 外加磁場的效應</h3>
+  <p>當原子被置於磁場中時，其光譜線的波長會發生微小變化——量子力學的很大一部分就是從理解這個現象的努力中誕生的。在 §3.3 中，我們討論了自由粒子在均勻磁場中的運動。其出發點是 Hamiltonian (3.31)，這等價於將自由粒子的 $H = p^2/2m$ 中的 $\mathbf{p}$ 替換為 $\mathbf{p} - Q\mathbf{A}$。</p>
+
+  <p>對氫原子做同樣的替換（質子：$\mathbf{p}_p \to \mathbf{p}_p - e\mathbf{A}$，電子：$\mathbf{p}_e \to \mathbf{p}_e + e\mathbf{A}$），並忽略 $O(A^2)$ 的項（在弱場下合理），經過與 §8.1 類似的質心坐標變換後，得到磁場對粗結構 Hamiltonian 的微擾項：</p>
+  <div class="eq">$$H_B = \frac{e}{2\mu}(\mathbf{p}_r \cdot \mathbf{A} + \mathbf{A} \cdot \mathbf{p}_r) \tag{9.23}$$</div>
+  <p>在原子尺度上磁場可視為均勻的，取 $\mathbf{A} = \frac{1}{2}\mathbf{B} \times \mathbf{r}$（對稱規範），並近似 $\mu \approx m_e$，得到：</p>
+  <div class="eq">$$H_B = \frac{e}{4m_e}(\mathbf{p} \cdot \mathbf{B} \times \mathbf{r} + \mathbf{B} \times \mathbf{r} \cdot \mathbf{p}) = \frac{e\hbar}{2m_e}\mathbf{B} \cdot \mathbf{L} \tag{9.24}$$</div>
+  <p>加上自旋的 Zeeman 項（方程 8.72），並將 $z$ 軸對齊 $\mathbf{B}$，最終得到均勻磁場引入的總微擾：</p>
+  <div class="eq">$$H_{Bs} = \frac{e\hbar}{2m_e} B (L_z + 2S_z) = \mu_B B (J_z + S_z) \tag{9.25}$$</div>
+  <p>其中 $\mu_B = e\hbar/2m_e$ 是 Bohr magneton。如果原子有多個價電子，$L_z$ 和 $S_z$ 分別是所有電子的總軌道和總自旋角動量的 $z$ 分量。</p>
+
+  <p>如果我們只考慮 $H_{Bs}$ 加上粗結構 Hamiltonian（忽略自旋-軌道耦合 $H_{SO}$），那麼完整的 Hamiltonian 與 $L^2, L_z, S^2, S_z$ 皆對易，其本徵态就是粗結構本徵态加上 $S^2$ 和 $S_z$ 的標籤。能量的分裂由 $m_l + 2m_s$ 決定。例如 $l=1, s=1/2$ 時，$m_l + 2m_s$ 的取值範圍為 $\pm 2$，總共有 5 個子能階。</p>
+
+  <figure class="figure" id="fig-9-2">
+    <svg class="content-diagram" viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" width="520" height="300" fill="#f8f9fa" rx="8"/>
+      <!-- Axes -->
+      <line x1="80" y1="40" x2="80" y2="280" stroke="#333" stroke-width="1.5"/>
+      <line x1="80" y1="160" x2="460" y2="160" stroke="#333" stroke-width="1.5"/>
+      <text x="70" y="30" font-size="12" fill="#333" text-anchor="end">$E$</text>
+      <text x="470" y="178" font-size="12" fill="#333" text-anchor="start">$B/A$</text>
+      <!-- Left label -->
+      <text x="40" y="120" font-size="10" fill="#555" text-anchor="middle">弱場</text>
+      <text x="40" y="135" font-size="10" fill="#555" text-anchor="middle">Zeeman</text>
+      <!-- Right label -->
+      <text x="440" y="245" font-size="10" fill="#555" text-anchor="middle">強場</text>
+      <text x="440" y="260" font-size="10" fill="#555" text-anchor="middle">Paschen-Back</text>
+      <!-- Central region -->
+      <text x="270" y="290" font-size="11" fill="#555" text-anchor="middle">自旋-軌道耦合與磁場效應相當 → 需數值求解</text>
+      <!-- Splitting lines (schematic) -->
+      <line x1="80" y1="80" x2="160" y2="60" stroke="#4a90d9" stroke-width="1.5"/>
+      <line x1="80" y1="80" x2="160" y2="80" stroke="#4a90d9" stroke-width="1.5"/>
+      <line x1="80" y1="80" x2="160" y2="100" stroke="#4a90d9" stroke-width="1.5"/>
+      <line x1="80" y1="140" x2="160" y2="140" stroke="#e74c3c" stroke-width="1.5"/>
+      <line x1="80" y1="140" x2="160" y2="160" stroke="#e74c3c" stroke-width="1.5"/>
+      <!-- Right side (Paschen-Back) -->
+      <line x1="340" y1="65" x2="460" y2="50" stroke="#333" stroke-width="1"/>
+      <line x1="340" y1="75" x2="460" y2="65" stroke="#333" stroke-width="1"/>
+      <line x1="340" y1="85" x2="460" y2="80" stroke="#333" stroke-width="1"/>
+      <line x1="340" y1="95" x2="460" y2="95" stroke="#333" stroke-width="1"/>
+      <line x1="340" y1="105" x2="460" y2="110" stroke="#333" stroke-width="1"/>
+    </svg>
+    <figcaption><strong>圖 9.2 重繪</strong>　$l=1, s=1/2$ 時，自旋相關 Hamiltonian $A\mathbf{L}\cdot\mathbf{S} + B(L_z + 2S_z)$ 的本徵值作為 $B/A$ 的函數。左側（弱場）量化 Zeeman 效應，右側（強場）量化 Paschen-Back 效應。中間區域需要數值求解。</figcaption>
+  </figure>
+
+  <p>在實際情況中，微擾 $H_{Bs}$ 總是與自旋-軌道微擾 $H_{SO}$（方程 8.73）同時作用。一般情況（兩者相當）需要數值求解，但兩個極端情況可以解析處理。</p>
+
+  <h4>Paschen-Back 效應（強磁場）</h4>
+  <p>在足夠強的磁場中，$H_{SO}$ 對原子的影響遠小於 $H_{Bs}$。此時 $H_{SO}$ 只是對「$H_{Bs}$ + 粗結構 Hamiltonian」的本徵态的微擾。利用 $\mathbf{L}\cdot\mathbf{S} = \frac{1}{2}(L_+S_- + L_-S_+) + L_z S_z$，在一階微擾中 $\langle \mathbf{L}\cdot\mathbf{S} \rangle = m_l m_s$。因此在強磁場中，能量為：</p>
+  <div class="eq">$$E = E_{\text{gross}} + \mu_B B(m_l + 2m_s) + \zeta\, m_l m_s \tag{9.27}$$</div>
+  <p>其中 $\zeta$ 是與 $m_l$ 和 $m_s$ 無關的能量量綱常數。這就是 <strong>Paschen-Back 效應</strong>——在強磁場中，原子的能階依賴於 $m_l$ 和 $m_s$，而非僅依賴於 $j$ 和 $m$。</p>
+
+  <h4>Zeeman 效應（弱磁場）</h4>
+  <p>在足夠弱的磁場中，$H_{SO}$ 的效應強於 $H_{Bs}$。自旋-軌道耦合首先將不同 $j$ 的態分開，然後較弱的磁場效應在具有相同 $j, l, s$ 但不同 $m$ 的簡併子空間內計算。幸運的是，$H_{Bs}$ 在這個子空間內已經是對角的（因為 $[J_z, S_z] = 0$），因此：</p>
+  <div class="eq">$$E_b = \langle j, m, l, s|H_{Bs}|j, m, l, s\rangle = \mu_B B\big(m + \langle j, m, l, s|S_z|j, m, l, s\rangle\big) \tag{9.28}$$</div>
+
+  <p>利用向量模型（vector model）——自旋-軌道耦合使 $\mathbf{S}$ 繞不變向量 $\mathbf{J}$ 進動，因此 $\langle \mathbf{S} \rangle$ 等於 $\mathbf{S}$ 在 $\mathbf{J}$ 上的投影：</p>
+  <div class="eq">$$\langle j, m, l, s|S_z|j, m, l, s\rangle = \frac{\langle \mathbf{J}\cdot\mathbf{S}\rangle\, m}{j(j+1)} \tag{9.33}$$</div>
+  <p>利用 $\mathbf{J}\cdot\mathbf{S} = \frac{1}{2}(J^2 - L^2 + S^2)$，最終得到：</p>
+  <div class="eq">$$E_B = m\, g_L\, \mu_B B, \quad g_L \equiv 1 + \frac{j(j+1) - l(l+1) + s(s+1)}{2j(j+1)} \tag{9.35}$$</div>
+  <p>因數 $g_L$ 稱為 <strong>Landé g 因子</strong>。在量子理論的早期，人們基於 Bohr 原子模型認為電子的磁矩就是 $\pm\mu_B$，因此預期磁場位移為 $\pm\mu_B B$。方程 (9.35) 表明實際位移是這個值的 $m g_L$ 倍。當 $g_L \neq 1$ 時，他們稱之為<strong>反常 Zeeman 效應</strong>（anomalous Zeeman effect）。</p>
+
+  <figure class="figure" id="fig-9-zeeman-levels">
+    <svg class="content-diagram" viewBox="0 0 500 200" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" width="500" height="200" fill="#f8f9fa" rx="8"/>
+      <!-- B=0 level -->
+      <text x="60" y="50" font-size="12" fill="#333" font-weight="bold">$B=0$</text>
+      <line x1="80" y1="80" x2="160" y2="80" stroke="#333" stroke-width="2"/>
+      <text x="170" y="84" font-size="12" fill="#555">$j=3/2$</text>
+      <line x1="80" y1="140" x2="160" y2="140" stroke="#333" stroke-width="2"/>
+      <text x="170" y="144" font-size="12" fill="#555">$j=1/2$</text>
+      <!-- B>0 splitting -->
+      <text x="300" y="50" font-size="12" fill="#333" font-weight="bold">$B>0$</text>
+      <line x1="310" y1="55" x2="390" y2="55" stroke="#4a90d9" stroke-width="1.5"/>
+      <line x1="310" y1="68" x2="390" y2="68" stroke="#4a90d9" stroke-width="1.5"/>
+      <line x1="310" y1="81" x2="390" y2="81" stroke="#4a90d9" stroke-width="1.5"/>
+      <line x1="310" y1="94" x2="390" y2="94" stroke="#4a90d9" stroke-width="1.5"/>
+      <line x1="310" y1="130" x2="390" y2="130" stroke="#e74c3c" stroke-width="1.5"/>
+      <line x1="310" y1="143" x2="390" y2="143" stroke="#e74c3c" stroke-width="1.5"/>
+      <!-- Labels -->
+      <text x="400" y="59" font-size="10" fill="#4a90d9">$m=+3/2$</text>
+      <text x="400" y="72" font-size="10" fill="#4a90d9">$m=+1/2$</text>
+      <text x="400" y="85" font-size="10" fill="#4a90d9">$m=-1/2$</text>
+      <text x="400" y="98" font-size="10" fill="#4a90d9">$m=-3/2$</text>
+      <text x="400" y="134" font-size="10" fill="#e74c3c">$m=+1/2$</text>
+      <text x="400" y="147" font-size="10" fill="#e74c3c">$m=-1/2$</text>
+      <!-- Note -->
+      <text x="250" y="185" font-size="12" fill="#555" text-anchor="middle">弱磁場：自旋-軌道耦合決定 $j$，磁場按 $m g_L \mu_B B$ 分裂各 $m$ 子能階</text>
+    </svg>
+    <figcaption><strong>圖 9.3 重繪</strong>　Zeeman 效應示意（$l=1, s=1/2$）。$B=0$ 時兩個自旋-軌道能階（$j=3/2, 1/2$）；$B>0$ 時每個 $j$ 能階分裂為 $2j+1$ 個子能階，能量 $\propto m g_L$。</figcaption>
+  </figure>
+
+  <details class="example">
+    <summary>📝 自編概念例：Landé g 因子的計算</summary>
+    <div class="example-body">
+      <p><strong>題目：</strong>計算 $l=1, s=1/2$ 時兩個可能的 $j$ 值對應的 Landé g 因子。解釋結果與原書圖 9.2 的對應關係。</p>
+      <p><strong>解：</strong>使用公式 $g_L = 1 + \frac{j(j+1) - l(l+1) + s(s+1)}{2j(j+1)}$。</p>
+      <p>對於 $j = 3/2$：$j(j+1) = 15/4$，$l(l+1) = 2$，$s(s+1) = 3/4$。</p>
+      <div class="eq">$$g_L = 1 + \frac{15/4 - 2 + 3/4}{2 \cdot 15/4} = 1 + \frac{15/4 - 8/4 + 3/4}{15/2} = 1 + \frac{10/4}{15/2} = 1 + \frac{5}{2} \cdot \frac{2}{15} = 1 + \frac{1}{3} = \frac{4}{3}$$</div>
+      <p>對於 $j = 1/2$：$j(j+1) = 3/4$。</p>
+      <div class="eq">$$g_L = 1 + \frac{3/4 - 2 + 3/4}{2 \cdot 3/4} = 1 + \frac{3/4 - 8/4 + 3/4}{3/2} = 1 + \frac{-2/4}{3/2} = 1 - \frac{1}{3} = \frac{2}{3}$$</div>
+      <p><strong>物理意義：</strong>$j=3/2$ 能階的 $g_L = 4/3$ 意味著其 Zeeman 分裂比「正常」值大一因子 $4/3$；$j=1/2$ 能階的 $g_L = 2/3$ 意味著分裂只有正常值的 $2/3$。在圖 9.2 左側，可以看到 $j=3/2$（四重）的能階間距與 $j=1/2$（二重）不同——這就是 $g_L$ 因子的直接體現。</p>
+    </div>
+  </details>
+
+
+
+<h3>微擾方法的選擇指南</h3>
+<p>本章介紹了多種微擾方法，初學者容易混淆「何時用哪種方法」。以下是實用的決策流程：</p>
+<p><strong>步驟一：確認微擾是否「小」。</strong>比較微擾 $\Delta$ 的典型矩陣元素與未擾 Hamiltonian $H_0$ 的能階間距。如果 $|\langle E_k|\Delta|E^0\rangle| \ll |E^0 - E_k|$ 對大多數 $k$ 成立，微擾理論適用。如果不成立，可能需要變分法或數值方法。</p>
+<p><strong>步驟二：檢查簡併性。</strong>如果 $H_0$ 的目標能階是簡併的，<strong>必須</strong>先在簡併子空間內對角化 $\Delta$（簡併微擾理論），然後才能使用非簡併公式。這是微擾理論中最常見的錯誤來源。</p>
+<p><strong>步驟三：選擇方法。</strong></p>
+<div class="eq">$$\begin{aligned}
+&\text{已知 } H_0 \text{ 的本徵態} \quad &\Rightarrow \quad &\text{非時變微擾理論（§9.1）} \\
+&\text{需要基態能量上界} \quad &\Rightarrow \quad &\text{變分原理（§9.2）} \\
+&\text{系統隨時間變化或與輻射耦合} \quad &\Rightarrow \quad &\text{含時微擾理論（§9.3）}
+\end{aligned} \tag{9.30}$$</div>
+
+<div class="callout">
+  <strong>💡 高階修正的收斂性</strong><br>
+  微擾展開 $E = E^0 + \beta E^1 + \beta^2 E^2 + \cdots$ 的收斂半徑取決於微擾的大小與能階間距的比值。對於大多數物理系統，前兩三階修正就足以達到實驗精度。在量子力學的本科應用中，一階和二階修正通常就足夠了。
+</div>
+
+</section>
+
+<!-- ====== 9.2 變分原理 ====== -->
+<section class="deep-dive" id="s9-2">
+<h2>9.2　變分原理</h2>
+<div class="section-keypoints">
+  <strong>🔑 本節重點</strong>
+  <span>① Rayleigh 定理：$\langle H \rangle$ 的駐點對應 $H$ 的本徵态</span>
+  <span>② 基態對應最小值：$\langle H \rangle \ge E_0$——任何試探波函數都給出能量上界</span>
+  <span>③ 試探波函數不必是 $H$ 的本徵态——可以用參數化形式逼近真實波函數</span>
+  <span>④ 激發態的駐點是鞍點而非最小值</span>
+  <span>⑤ 即使試探波函數品質平庸，能量上界也往往非常接近真實值</span>
+</div>
+
+  <p>變分原理（variational principle）是一種不需要將 Hamiltonian 分解為「已知部分 + 微擾」的方法。它特別擅長估計系統的基態能量。在第 10 章中我們將看到，這個方法能給出氦原子游離能的相當精確的估計值。</p>
+
+  <p>設 $H$ 是我們要求解本徵值 $E_n$ 和本徵态 $|n\rangle$ 的 Hamiltonian。將任意态 $|\psi\rangle = \sum_n a_n |n\rangle$ 展開為這些本徵态的線性組合，計算 $H$ 在此態中的期望值：</p>
+  <div class="eq">$$\langle H \rangle = \frac{\langle\psi|H|\psi\rangle}{\langle\psi|\psi\rangle} = \frac{\sum_i |a_i|^2 E_i}{\sum_j |a_j|^2} \tag{9.36}$$</div>
+  <p>（分母涵蓋了 $|\psi\rangle$ 可能未歸一化的情況。）對 $|a_k|$ 求導數並令其為零，得到駐點條件：</p>
+  <div class="eq">$$0 = |a_k|\left(E_k \sum_i |a_i|^2 - \sum_i |a_i|^2 E_i\right) \quad (k = 0, 1, \ldots) \tag{9.38}$$</div>
+  <p>對於任何 $a_k \neq 0$ 的 $k$ 值，必須有 $E_k = \sum_i |a_i|^2 E_i / \sum_i |a_i|^2$。由於這個方程的右邊不依賴於 $k$，最多只有一個 $k$ 值能使等式成立——而這顯然在 $a_i = 0$（$i \neq k$）且 $a_k = 1$ 時成立，此時 $|\psi\rangle = |k\rangle$。這證明了<strong>Rayleigh 定理</strong>：Hermitian 算符期望值的駐點出現在該算符的本徵态處。而且，<strong>所有</strong>本徵态都提供該算符的駐點。</p>
+
+  <div class="callout">
+    <strong>💡 變分原理的幾何直觀</strong><br>
+    在向量空間中，$\langle H \rangle$ 可以理解為「Rayleigh 商」——一個由态向量決定的純量函數。在基態附近，這個函數形成一個「碗」形（最小值），任何偏離基態的變化都會使 $\langle H \rangle$ 增加。激發態對應的是鞍點——沿某些方向 $\langle H \rangle$ 增加，沿另一些方向減少。Problem 9.10 用 $2\times 2$ 矩陣的幾何給出了一個漂亮的解釋。
+  </div>
+
+  <p>與基態相關的駐點是 $\langle H \rangle$ 的<strong>最小值</strong>。為證明這一點，從方程 (9.36) 兩邊減去基態能量 $E_0$：</p>
+  <div class="eq">$$\langle H \rangle - E_0 = \frac{\sum_i |a_i|^2 (E_i - E_0)}{\sum_j |a_j|^2} \ge 0 \tag{9.40}$$</div>
+  <p>分子和分母皆非負，因此 $\langle H \rangle \ge E_0$——任何態給出的期望值都不會低於真實基態能量。激發態相關的駐點則是<strong>鞍點</strong>（見 Problem 9.14）。</p>
+
+  <p>變分原理的實際應用方式如下：我們寫出一個<strong>試探波函數</strong> $\psi_a(x)$，它依賴於 $N$ 個參數 $a_1, \ldots, a_N$。這些參數可以是某些方便基底函數 $u_i(x)$ 的線性組合係數：</p>
+  <div class="eq">$$\psi_a(x) \equiv \sum_{i=1}^N a_i u_i(x) \tag{9.41}$$</div>
+  <p>更常見的是，$a_i$ 是某個由物理論證驅動的函數形式中的參數。例如在第 10 章中，我們會將氫原子波函數中出現的變數 $Z$ 視為變分參數。然後，我們用 $\psi_a$ 計算 $\langle H \rangle$ 作為 $a_i$ 的函數，並求這個函數的駐點。</p>
+
+  <p>如此得到的 $\langle H \rangle$ 最小值提供了基態能量 $E_0$ 的<strong>上界</strong>。更重要的是，由於 $\langle H \rangle$ 在真實基態波函數處是駐點，$\langle H \rangle - E_0$ 隨 $\psi_a$ 與 $\psi_0$ 之差的增長僅為<strong>二次方</strong>——因此，即使試探波函數對真實波函數的擬合相當平庸，這個上界也往往非常接近 $E_0$。</p>
+
+  <div class="callout-warn">
+    <strong>⚠️ 變分原理不保證激發態的上界</strong><br>
+    對於基態，$\langle H \rangle \ge E_0$ 是嚴格成立的。但對於激發態，$\langle H \rangle$ 在真實本徵态處是鞍點而非最小值——所以「$\langle H \rangle$ 給出能量上界」這個陳述<strong>僅對基態成立</strong>。要估計激發態能量，通常需要確保試探波函數與所有較低能態正交（即「線性變分法」中使用多個正交基底函數，對角化所得的矩陣）。
+  </div>
+
+  <details class="example">
+    <summary>📝 自編概念例：簡諧振子的變分估計</summary>
+    <div class="example-body">
+      <p><strong>題目：</strong>使用試探波函數 $\psi(x) = e^{-bx^2}$（其中 $b > 0$ 是變分參數）估計簡諧振子 $H = p^2/2m + \frac{1}{2}m\omega^2 x^2$ 的基態能量。</p>
+      <p><strong>解：</strong>首先計算所需的積分（使用高斯積分公式）。歸一化積分：</p>
+      <div class="eq">$$\langle\psi|\psi\rangle = \int_{-\infty}^\infty e^{-2bx^2}\,dx = \sqrt{\frac{\pi}{2b}}$$</div>
+      <p>位能期望值：</p>
+      <div class="eq">$$\langle\psi|x^2|\psi\rangle = \int_{-\infty}^\infty x^2 e^{-2bx^2}\,dx = \frac{1}{4b}\sqrt{\frac{\pi}{2b}}$$</div>
+      <p>動能期望值（利用 $p = -i\hbar\,d/dx$）：</p>
+      <div class="eq">$$\langle\psi|p^2|\psi\rangle = \hbar^2 \int_{-\infty}^\infty (2b - 4b^2x^2)e^{-2bx^2}\,dx = \hbar^2 b\sqrt{\frac{\pi}{2b}}$$</div>
+      <p>因此：</p>
+      <div class="eq">$$\langle H \rangle = \frac{\hbar^2 b}{2m} + \frac{m\omega^2}{8b}$$</div>
+      <p>對 $b$ 求導並令為零：$d\langle H \rangle/db = \hbar^2/2m - m\omega^2/8b^2 = 0$，得到 $b = m\omega/2\hbar$。代入：</p>
+      <div class="eq">$$\langle H \rangle_{\min} = \frac{\hbar^2}{2m}\cdot\frac{m\omega}{2\hbar} + \frac{m\omega^2}{8}\cdot\frac{2\hbar}{m\omega} = \frac{\hbar\omega}{4} + \frac{\hbar\omega}{4} = \frac{\hbar\omega}{2}$$</div>
+      <p><strong>物理意義：</strong>試探波函數的形式恰好與真實基態波函數 $\psi_0(x) \propto e^{-m\omega x^2/2\hbar}$ 一致（只是參數化形式），因此變分法給出了<strong>精確的</strong>基態能量 $\hbar\omega/2$。這展示了變分原理的威力——即使我們不知道真實波函數的形式，只要參數化形式包含了真實波函數作為特例，變分法就能收斂到精確結果。</p>
+    </div>
+  </details>
+
+
+
+<h3>線性變分法</h3>
+<p>變分原理的一個強大推廣是<strong>線性變分法</strong>（linear variational method）。選擇 $N$ 個正交歸一的基底函數 $\{u_1, u_2, \ldots, u_N\}$，將試探波函數寫為：</p>
+<div class="eq">$$|\psi\rangle = \sum_{i=1}^N c_i |u_i\rangle \tag{9.42}$$</div>
+<p>代入 $\langle H \rangle = \langle\psi|H|\psi\rangle/\langle\psi|\psi\rangle$，對每個 $c_k^*$ 求導並令為零，得到矩陣本徵值方程：</p>
+<div class="eq">$$\sum_j H_{ij} c_j = E c_i, \quad H_{ij} \equiv \langle u_i|H|u_j\rangle \tag{9.43}$$</div>
+<p>這就是將 Hamiltonian 在有限維子空間中對角化的問題——恰好是矩陣力學的核心任務。解這個 $N \times N$ 矩陣的本徵值問題，得到 $N$ 個本徵值 $E_1 \leq E_2 \leq \cdots \leq E_N$。由 Rayleigh-Ritz 定理：<strong>$E_k$ 是真實第 $k$ 個激發態能量的上界</strong>（只要 $N$ 足夠大且基底函數選擇得當）。</p>
+
+<div class="callout-warn">
+  <strong>⚡ 基底函數的選擇決定一切</strong><br>
+  線性變分法的精度完全取決於基底函數的選擇。物理上合理的基底函數應該：(1) 滿足正確的邊界條件；(2) 具有與真實波函數相似的對稱性（如宇稱、角動量）；(3) 在物理上重要的區域有足夠的靈活性。在量子化學中，常用的基底包括 Slater 型軌道（STO）和 Gaussian 型軌道（GTO）。
+</div>
+
+</section>
+
+<!-- ====== 9.3 含時微擾理論 ====== -->
+<section class="deep-dive" id="s9-3">
+<h2>9.3　含時微擾理論</h2>
+<div class="section-keypoints">
+  <strong>🔑 本節重點</strong>
+  <span>① 將態展開為 $|\psi\rangle = \sum_n a_n(t) e^{-iE_nt/\hbar}|E_n\rangle$，推導 $a_n(t)$ 的運動方程</span>
+  <span>② Fermi 黃金規則：躍遷率 $R = \frac{2\pi}{\hbar} |\langle \text{out}|V|\text{in}\rangle|^2 g(E_{\text{out}})$</span>
+  <span>③ 電偶極近似：$k \cdot \mathbf{x} \ll 1$ 時 $\delta V \propto \mathbf{p} \cdot \mathbf{A}$，躍遷率 $\propto |\langle E_k|z|E_N\rangle|^2$</span>
+  <span>④ 選擇定則：$\Delta l = \pm 1$、$\Delta m = 0, \pm 1$、$|\Delta j| \le 1$（$j=0 \to j'=0$ 禁止）</span>
+  <span>⑤ 受激輻射係數 $B$ 等於吸收係數；自發輻射係數 $A$ 通過 Einstein 關係求得</span>
+</div>
+
+  <p>現在我們轉向含時微擾理論——一種獲得含時 Schrödinger 方程近似解的方法。我們將用它來研究粒子的散射，以及原子和分子對輻射的發射和吸收。</p>
+
+  <p>考慮一個系統，其初始態幾乎（但不完全）是一個穩態。具體來說，在 $t=0$ 時它處於 $H_0$ 的第 $N$ 個本徵態。真實 Hamiltonian 與 $H_0$ 僅差一個很小的、可能含時的算符 $V$：</p>
+  <div class="eq">$$H = H_0 + V \tag{9.42}$$</div>
+  <p>我們將 tdse 的解展開為：</p>
+  <div class="eq">$$|\psi\rangle = \sum_n a_n(t) e^{-iE_nt/\hbar}|E_n\rangle \tag{9.43}$$</div>
+  <p>其中 $|E_n\rangle$ 是 $H_0$ 的（非時變）本徵态，$E_n$ 為其本徵值。這個展開式不限制 $|\psi\rangle$，因為 $\{|E_n\rangle\}$ 是完備集，而 $a_n(t)$ 是任意函數。將它代入 tdse 並乘以 $\langle E_k|$，得到 $a_n(t)$ 的運動方程組：</p>
+  <div class="eq">$$i\hbar\,\dot{a}_k e^{-iE_kt/\hbar} = \sum_n a_n e^{-iE_nt/\hbar} \langle E_k|V|E_n\rangle \tag{9.45}$$</div>
+  <p>邊界條件為 $a_N(0) = 1$，$a_n(0) = 0$（$n \neq N$）。在最早的時刻，方程右邊 $n=N$ 的項主導 $a_k$（$k \neq N$）的運動：</p>
+  <div class="eq">$$\dot{a}_k \simeq -\frac{i}{\hbar} e^{-i(E_N - E_k)t/\hbar} \langle E_k|V|E_N\rangle \tag{9.46}$$</div>
+  <p>假設 $V$ 的時間依賴性為 $V(t) = V_0 e^{i\omega t}$（這個假設在實務上並不嚴格，因為 Fourier 分析可以將任意時間函數表示為正弦函數的疊加），積分後得到：</p>
+  <div class="eq">$$a_k(t) = \frac{\langle E_k|V_0|E_N\rangle}{E_N - E_k - \hbar\omega} \left[e^{-i(E_N - E_k - \hbar\omega)t/\hbar} - 1\right] \tag{9.47}$$</div>
+  <p>由此，經過時間 $t$ 後系統躍遷到第 $k$ 個本徵态的機率為：</p>
+  <div class="eq">$$P_k(t) = |a_k|^2 = \frac{4|\langle E_k|V_0|E_N\rangle|^2}{(E_N - E_k - \hbar\omega)^2} \sin^2\!\left(\frac{(E_N - E_k - \hbar\omega)t}{2\hbar}\right) \tag{9.48}$$</div>
+
+  <div class="callout">
+    <strong>💡 躍遷機率的時間行為</strong><br>
+    方程 (9.48) 顯示，在短時間內（$t \lesssim \hbar/(E_N - E_k - \hbar\omega)$）躍遷機率以 $t^2$ 增長，此後呈現振盪。方括號內的 $\sin^2(xt)/x^2$ 因子在 $x = (E_N - E_k - \hbar\omega)/2\hbar = 0$ 處有一個高度為 $t^2$、寬度為 $2\pi/t$ 的中央峰值。這意味著：能量守恆（$E_k = E_N - \hbar\omega$）附近的態有最大的躍遷機率，而且隨著時間增加，這個峰變得越來越窄——這正是能量-時間不確定性原理的體現。
+  </div>
+
+  <h3>9.3.1 Fermi 黃金規則</h3>
+  <p>在許多應用中，$H_0$ 有大量能量落在 $E_{\text{out}} \equiv E_N - \hbar\omega$ 附近 $\hbar/t$ 範圍內的穩態，我們關心的是系統躍遷到其中<strong>任何一個</strong>態的總機率。令 $g(E_k)\,dE_k$ 為 $(E_k, E_k + dE_k)$ 範圍內的本徵值個數（態密度），則總躍遷機率為：</p>
+  <div class="eq">$$\sum_k P_k(t) = 4\int dE_k\, g(E_k)\, |\langle E_k|V|E_N\rangle|^2\, \frac{\sin^2((E_{\text{out}} - E_k)t/2\hbar)}{(E_{\text{out}} - E_k)^2} \tag{9.50}$$</div>
+  <p>引入新變數 $x = (E_{\text{out}} - E_k)/2\hbar$。對於給定的 $t$，函數 $f_t(x) \equiv \sin^2(xt)/x^2$ 在原點附近形成一個高度為 $t^2$、寬度為 $2\pi/t$ 的凸起。在大 $t$ 極限下：</p>
+  <div class="eq">$$\lim_{t\to\infty} \frac{\sin^2(xt)}{x^2} = \pi t\,\delta(x) \tag{9.53}$$</div>
+  <p>將此關係代入 (9.50) 並積分，得到：</p>
+  <div class="eq">$$\sum_k P_k = \frac{2\pi t}{\hbar}\, g(E_{\text{out}})\, |\langle \text{out}|V|\text{in}\rangle|^2 \tag{9.54}$$</div>
+  <p>這就是 <strong>Fermi 黃金規則</strong>（Fermi's golden rule）：微擾 $V e^{i\omega t}$ 使系統以速率 $R = \frac{2\pi}{\hbar} |\langle \text{out}|V|\text{in}\rangle|^2 g(E_{\text{out}})$ 躍遷到能量低 $\hbar\omega$ 的新態。類似地，若微擾的時間依賴為 $e^{-i\omega t}$，則會以相同速率引起向能量高 $\hbar\omega$ 的態的躍遷。</p>
+
+  <div class="callout-warn">
+    <strong>⚠️ Fermi 黃金規則的適用條件</strong><br>
+    黃金規則假設：(1) 微擾足夠弱，使得一階微擾理論有效；(2) 末態存在連續譜或準連續譜（態密度 $g(E)$ 平滑且非零）；(3) 時間 $t$ 足夠長，使得 $\sin^2(xt)/x^2$ 可以用 $\delta$ 函數近似，但又不至於長到 $P_k(t)$ 累積到非微擾區域（即 $\sum_k P_k \ll 1$）。在實際應用中，這些條件通常能同時滿足。
+  </div>
+
+  <h3>9.3.2 輻射躍遷率</h3>
+  <p>現在我們用方程 (9.48) 來計算電磁波誘導原子在離散穩態之間進行輻射躍遷的速率。當電磁場的量子不確定性可以忽略（例如在雷射或電波望遠鏡天線的焦點處），可以將場視為古典對象。</p>
+
+  <p>與推導 Fermi 黃金規則時假設固定頻率 $\omega$ 和連續末態不同，現在末態是離散的——我們改為論證電磁場是多個不同頻率平面波的疊加，並將每個波獨立貢獻的躍遷機率加總。在真空中，電磁波可以完全由向量勢 $\mathbf{A}$ 描述（$\mathbf{B} = \nabla\times\mathbf{A}$，$\mathbf{E} = -\partial\mathbf{A}/\partial t$）。對於單個波長遠大於原子尺寸的平面波——即 $k \cdot \mathbf{x} \ll 1$（電偶極近似）——微擾簡化為：</p>
+  <div class="eq">$$\delta V(\mathbf{x}, t) = \frac{e}{2m_e} \delta\mathbf{A}_0 \cdot \mathbf{p}\,(e^{-i\omega t} + e^{i\omega t}) \tag{9.62}$$</div>
+  <p>利用 $[H_0, \mathbf{x}] = -i(\hbar/m_e)\mathbf{p}$ 消去 $\mathbf{p}$，並將 $z$ 軸對齊 $\mathbf{A}_0$：</p>
+  <div class="eq">$$\delta V = \frac{ie\,\delta A_0}{2\hbar}[H_0, z](e^{-i\omega t} + e^{i\omega t}) \tag{9.63}$$</div>
+
+  <p>經過一系列代數運算（利用電磁場能量密度與 $\delta A_0$ 的關係、將對波的求和轉換為對頻率的積分、以及 $\delta$ 函數近似），最終得到躍遷速率：</p>
+  <div class="eq">$$R = \frac{2\pi}{a_0 m_e} |\langle E_k|z|E_N\rangle|^2 \left.\frac{d\rho}{d\nu}\right|_{\nu = |E_N - E_k|/h} \tag{9.72}$$</div>
+  <p>其中 $d\rho/d\nu$ 是輻射場在頻率 $\nu$ 處的能量密度（單位頻率、單位體積的能量）。這個結果從動力學角度恢復了 Einstein 的著名結論：<strong>受激輻射（stimulated emission）的係數 $B$ 等於吸收係數</strong>。Einstein 在 1916 年僅憑極少的量子物理知識就推導出了這個結果——他要求熱平衡下吸收率和輻射率相等。38 年後這導致了 maser 的發明，44 年後 Theodore Maiman 建造了第一台雷射。</p>
+
+  <div class="callout">
+    <strong>💡 自發輻射與零點能量</strong><br>
+    我們的處理未包含自發輻射（spontaneous emission），因為我們忽略了電磁場的量子不確定性。這種不確定性賦予電磁場零點能量（§3.1），而自發輻射可以理解為「由電磁場零點能量刺激的發射」。利用 Einstein 的 $A$ 和 $B$ 係數關係（Box 9.2），可以從我們的 $B$ 值推導出自發輻射係數 $A$：$A = 16\pi^2 h\nu^3 |\langle E_k|z|E_N\rangle|^2 / (c^3 a_0 m_e)$。對於典型的光學躍遷（$h\nu \sim 2$ eV，$\lambda \sim 650$ nm），輻射壽命 $\tau = A^{-1} \sim 4 \times 10^{-8}$ 秒——原子在輻射出能量前大約振盪了 $10^7$ 次。
+  </div>
+
+  <h3>9.3.3 選擇定則</h3>
+  <p>方程 (9.72) 表明輻射躍遷的速率正比於電偶極算符 $ez$ 的矩陣元素的模平方——因此我們所做的近似（$k \cdot \mathbf{x} \ll 1$）被稱為<strong>電偶極近似</strong>（electric dipole approximation）。在重要的情況下，對稱性會導致偶極算符在初始態和末態之間的矩陣元素為零——這種躍遷被稱為<strong>禁止躍遷</strong>（forbidden transitions），以區別於矩陣元素非零的<strong>允許躍遷</strong>（allowed transitions）。</p>
+
+  <p>禁止躍遷並非完全不可能發生——只是其速率遠小於允許躍遷的特徵速率（方程 9.74），因為其速率正比於我們在推導中可以忽略的高階項。允許躍遷的條件被歸納為<strong>選擇定則</strong>（selection rules）。</p>
+
+  <p>即使在外加電場或磁場中，平行於場方向的總角動量 $J_z$ 仍與 $H$ 對易——因此我們關心的态以 $m$ 標記。由於 $[J_z, z] = 0$，$z|E, m\rangle$ 是 $J_z$ 的本徵态，其本徵值為 $m$。因此 $\langle E, m|z|E', m'\rangle = 0$ 除非 $m = m'$——這是第一條選擇定則：<strong>當輻射的電向量平行於外加場時，量子數 $m$ 不變</strong>。</p>
+
+  <p>定義 $x_\pm \equiv x \pm iy$，可以證明 $[J_z, x_\pm] = \pm x_\pm$，因此 $x_\pm|E, m\rangle$ 是 $J_z$ 的本徵态，其本徵值為 $m \pm 1$。由此得到第二條選擇定則：<strong>當輻射的電向量垂直於外加場時，$m$ 改變 $\pm 1$</strong>。</p>
+
+  <p>當沒有外加場時，$J^2$ 也與 $H$ 對易，因此態以 $E, j, m$ 標記。利用角動量相加的規則（§7.5），偶極算符（其行為類似自旋為 1 的對象）的矩陣元素 $\langle E, j, m|x_k|E', j', m'\rangle$ 不為零的條件是：可以通過將自旋-1 對象加到自旋-$j'$ 對象上來構造自旋-$j$ 對象。這給出 $j$ 的選擇定則：<strong>$|j - j'| \le 1$，但 $j = 0 \to j' = 0$ 是禁止的</strong>（因為將自旋-1 加到自旋-0 上最多只能得到自旋-1）。</p>
+
+  <p>當自旋-軌道耦合較弱時，$L^2$ 和 $S^2$ 也是運動常數。由於 $[\mathbf{x}, \mathbf{S}] = 0$，自旋的選擇定則是 $\Delta s = 0$。軌道角動量的選擇定則來自 Problem 7.21：<strong>$|l - l'| = 1$</strong>。</p>
+
+  <div class="table-scroll" role="region" aria-label="選擇定則總結" tabindex="0">
+    <table>
+      <caption><strong>表 9.1</strong>　電偶極躍遷的選擇定則</caption>
+      <thead>
+        <tr><th scope="col">量子數</th><th scope="col">選擇定則</th><th scope="col">備註</th></tr>
+      </thead>
+      <tbody>
+        <tr><th scope="row">$l$</th><td>$|l - l'| = 1$</td><td>宇稱必須改變；來自 $[L^2, [L^2, \mathbf{x}]]$ 的計算</td></tr>
+        <tr><th scope="row">$m$</th><td>$|m - m'| \le 1$</td><td>$\mathbf{E} \parallel$ 外場時 $\Delta m = 0$；$\mathbf{E} \perp$ 外場時 $|\Delta m| = 1$</td></tr>
+        <tr><th scope="row">$j$</th><td>$|j - j'| \le 1$；$j=0 \to j'=0$ 禁止</td><td>來自角動量相加規則（Wigner-Eckart 定理）</td></tr>
+        <tr><th scope="row">$s$</th><td>$s = s'$</td><td>電偶極算符不作用於自旋</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="callout-warn">
+    <strong>⚠️ 「禁止」躍遷並非絕對禁止</strong><br>
+    所謂「禁止」躍遷實際上只是<strong>在電偶極近似下</strong>的躍遷率為零。如果考慮 $e^{i\mathbf{k}\cdot\mathbf{x}}$ 展開式中的下一階項（磁偶極躍遷、電四極躍遷），或者考慮電子內在磁矩與輻射磁場的交互作用，這些「禁止」躍遷仍然可能發生，只是速率比允許躍遷小許多個數量級。在天體物理中，許多重要的譜線（如星雲中的 [O III] 禁線）正是來自這類「禁止」躍遷。
+  </div>
+
+  <details class="example">
+    <summary>📝 自編概念例：氫原子躍遷的選擇定則應用</summary>
+    <div class="example-body">
+      <p><strong>題目：</strong>判斷以下氫原子躍遷在電偶極近似下是否被允許：(a) $|210\rangle \to |100\rangle$；(b) $|200\rangle \to |100\rangle$；(c) $|321\rangle \to |210\rangle$；(d) $|310\rangle \to |200\rangle$。</p>
+      <p><strong>解：</strong></p>
+      <p>(a) $|210\rangle$（$n=2, l=1, m=0$）→ $|100\rangle$（$n=1, l=0, m=0$）：$\Delta l = -1$ ✓，$\Delta m = 0$ ✓ → <strong>允許</strong>。這就是 Lyman-$\alpha$ 躍遷。</p>
+      <p>(b) $|200\rangle$（$n=2, l=0, m=0$）→ $|100\rangle$（$n=1, l=0, m=0$）：$\Delta l = 0$ ✗ → <strong>禁止</strong>（電偶極禁止）。$2s$ 態的壽命遠長於 $2p$ 態。</p>
+      <p>(c) $|321\rangle$（$n=3, l=2, m=1$）→ $|210\rangle$（$n=2, l=1, m=0$）：$\Delta l = -1$ ✓，$\Delta m = -1$（$|\Delta m| = 1$）✓ → <strong>允許</strong>。</p>
+      <p>(d) $|310\rangle$（$n=3, l=1, m=0$）→ $|200\rangle$（$n=2, l=0, m=0$）：$\Delta l = -1$ ✓，$\Delta m = 0$ ✓ → <strong>允許</strong>。</p>
+      <p><strong>物理意義：</strong>選擇定則 $\Delta l = \pm 1$ 是氫原子光譜中最重要的規則——它來自於電偶極算符的宇稱（奇宇稱）。$2s \to 1s$ 是電偶極禁止的，因此 $2s$ 態是亞穩態，其衰變主要通過雙光子發射進行，壽命約為 $1/7$ 秒——比 $2p$ 態的 $1.6 \times 10^{-9}$ 秒長了八個數量級。</p>
+    </div>
+  </details>
+
+
+<h3>激發態壽命與光譜線寬度</h3>
+<p>選擇定則不僅告訴我們哪些躍遷「允許」，還直接決定了激發態的壽命。從自發輻射係數 $A$ 的表達式：</p>
+<div class="eq">$$A_{ki} = \frac{16\pi^2\nu^3}{3\epsilon_0\hbar c^3} |\langle E_k|\mathbf{r}|E_i\rangle|^2 \tag{9.75}$$</div>
+<p>可以看出：躍遷率正比於偶極矩矩陣元素的模平方。對於<strong>允許躍遷</strong>（$\Delta l = \pm1$），矩陣元素的量級為 $ea_0$（Bohr 半徑），壽命約為 $10^{-8}$ 秒。對於<strong>禁戒躍遷</strong>（電偶極矩陣元素為零），衰變通過更高階的過程（磁偶極、電四極）進行，壽命可達 $10^{-3}$ 到數秒——這些態被稱為<strong>亞穩態</strong>（metastable states）。</p>
+<p>壽命與能量不確定性的關係由<strong>自然線寬</strong>給出：</p>
+<div class="eq">$$\Gamma = \frac{\hbar}{\tau}, \quad \Delta E \cdot \tau \geq \frac{\hbar}{2} \tag{9.76}$$</div>
+<p>其中 $\tau$ 是激發態壽命，$\Gamma$ 是能級的自然寬度。壽命越短，能級越寬——這就是為什麼允許躍遷的譜線比禁戒躍遷的譜線更寬。在實際光譜中，譜線寬度還受到都卜勒展寬（熱運動）和碰撞展寬（壓力效應）的影響。
+
+<div class="callout">
+  <strong>💡 亞穩態的物理重要性</strong><br>
+  亞穩態在物理和技術中有極其重要的應用。例如：(1) 氫原子的 $2s$ 態（壽命 $\sim 1/7$ 秒）是宇宙學中 21 cm 譜線的來源之一；(2) He-Ne 雷射利用氖原子的亞穩態實現粒子數反轉；(3) 雷射冷卻和原子鐘利用原子的長壽命態來達到極高的頻率精度。禁戒躍遷的「弱點」在這些應用中變成了「優勢」——長壽命意味著窄線寬，窄線寬意味著高精度。
+</div>
+
+</section>
+
+<!-- ====== 本章摘要 ====== -->
+<section id="summary">
+  <h2>本章摘要</h2>
+  <p>本章建立了量子力學中三種核心近似方法：非時變微擾理論、變分原理和含時微擾理論。以下是關鍵概念和公式的整理：</p>
+  <div class="table-scroll" role="region" aria-label="本章關鍵概念與公式" tabindex="0">
+    <table>
+      <caption>本章關鍵概念、公式、適用條件與用途</caption>
+      <thead>
+        <tr>
+          <th scope="col">概念／公式</th>
+          <th scope="col">符號與單位</th>
+          <th scope="col">適用條件</th>
+          <th scope="col">用途</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">一階能量修正 $E^1 = \langle E^0|\Delta|E^0\rangle$</th>
+          <td>$E^1$：能量</td>
+          <td>$H_0$ 的非簡併本徵態</td>
+          <td>估計微擾引起的能量位移——最常用的微擾公式</td>
+        </tr>
+        <tr>
+          <th scope="row">二階能量修正 $E^2 = \sum_{k\neq 0} \frac{|\langle E_k|\Delta|E^0\rangle|^2}{E^0 - E_k}$</th>
+          <td>$E^2$：能量；分母為能量差</td>
+          <td>非簡併、$E^1 = 0$ 或需更高精度</td>
+          <td>二次 Stark 效應、基態能量修正（總是負的）</td>
+        </tr>
+        <tr>
+          <th scope="row">簡併微擾理論：在簡併子空間內對角化 $\Delta$</th>
+          <td>$\Delta_{ij} = \langle i|\Delta|j\rangle$</td>
+          <td>$H_0$ 有簡併本徵值</td>
+          <td>線性 Stark 效應、強場 Zeeman 效應</td>
+        </tr>
+        <tr>
+          <th scope="row">Stark 效應 $\Delta = e\mathcal{E}z$</th>
+          <td>$\mathcal{E}$：電場強度（V/m）</td>
+          <td>$\mathcal{E} \lesssim 5\times 10^{11}$ V/m</td>
+          <td>光譜線在外加電場中的分裂</td>
+        </tr>
+        <tr>
+          <th scope="row">磁場微擾 $H_{Bs} = \mu_B B(J_z + S_z)$</th>
+          <td>$\mu_B = e\hbar/2m_e$</td>
+          <td>$B$ 均勻、弱場</td>
+          <td>原子在磁場中的能階位移</td>
+        </tr>
+        <tr>
+          <th scope="row">Zeeman 效應 $E_B = m g_L \mu_B B$</th>
+          <td>$g_L$：Landé g 因子（無因次）</td>
+          <td>弱場（$H_{SO} \gg H_{Bs}$）</td>
+          <td>精細結構能階的磁場分裂</td>
+        </tr>
+        <tr>
+          <th scope="row">Paschen-Back 效應 $E = E_{\text{gross}} + \mu_B B(m_l + 2m_s) + \zeta m_l m_s$</th>
+          <td>$\zeta$：能量量綱常數</td>
+          <td>強場（$H_{Bs} \gg H_{SO}$）</td>
+          <td>強磁場中能階按 $m_l, m_s$ 排列</td>
+        </tr>
+        <tr>
+          <th scope="row">變分原理 $\langle H \rangle \ge E_0$</th>
+          <td>$E_0$：真實基態能量</td>
+          <td>任意正規試探波函數</td>
+          <td>估計基態能量上界（不需微擾展開）</td>
+        </tr>
+        <tr>
+          <th scope="row">Fermi 黃金規則 $R = \frac{2\pi}{\hbar} |\langle \text{out}|V|\text{in}\rangle|^2 g(E_{\text{out}})$</th>
+          <td>$R$：躍遷率（s$^{-1}$）；$g$：態密度</td>
+          <td>弱微擾、連續末態、長時間極限</td>
+          <td>計算散射截面、輻射躍遷率</td>
+        </tr>
+        <tr>
+          <th scope="row">電偶極躍遷率 $R \propto |\langle E_k|z|E_N\rangle|^2 d\rho/d\nu$</th>
+          <td>$d\rho/d\nu$：輻射能量密度</td>
+          <td>$k\cdot\mathbf{x} \ll 1$（長波長近似）</td>
+          <td>原子與古典電磁場的交互作用</td>
+        </tr>
+        <tr>
+          <th scope="row">選擇定則</th>
+          <td>$\Delta l = \pm 1$、$\Delta m = 0,\pm 1$、$|\Delta j| \le 1$、$\Delta s = 0$</td>
+          <td>電偶極近似</td>
+          <td>判斷哪些躍遷是「允許」的</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ====== 常見錯誤 ====== -->
+<section id="common-mistakes">
+  <h2>初學者常見錯誤</h2>
+  <div class="callout-warn">
+    <strong>⚡ 錯誤一：在簡併情況下直接使用非簡併微擾公式</strong><br>
+    這是微擾理論中最常見、最危險的錯誤。當 $E^0$ 是簡併本徵值時，方程 (9.9) 中的分母 $E^0 - E_m$ 會為零，導致發散。正確的做法是<strong>先在簡併子空間內對角化 $\Delta$</strong>，以 $\Delta$ 的本徵态作為新的零階基底。物理上，這是因為微擾一開啟系統的态就會立即跳到 $\Delta$ 在這個子空間內的某個本徵态。
+  </div>
+  <div class="callout-warn">
+    <strong>⚡ 錯誤二：混淆一階態修正和一階能量修正</strong><br>
+    一階能量修正 $E_b = \langle E^0|\Delta|E^0\rangle$ 計算簡單，但一階態修正 $|b\rangle$ 涉及對<strong>所有其他</strong>能階的求和（方程 9.10），計算量大得多。初學者常誤以為求出了一階能量修正就算完成了微擾計算——實際上，要計算二階能量修正（方程 9.11），必須先知道一階態修正。
+  </div>
+  <div class="callout-warn">
+    <strong>⚡ 錯誤三：將 $\langle H \rangle \ge E_0$ 應用於激發態</strong><br>
+    變分原理中，$\langle H \rangle \ge E_0$ 的證明依賴於所有 $E_i - E_0 \ge 0$——這<strong>僅對基態成立</strong>。對於激發態，Rayleigh 商的駐點是<strong>鞍點</strong>而非最小值，因此試探波函數給出的 $\langle H \rangle$ 可能低於也可能高於真實激發態能量。要估計激發態能量，通常需要用線性變分法（多個正交基底函數），將 Hamiltonian 在這些基底上對角化。
+  </div>
+  <div class="callout-warn">
+    <strong>⚡ 錯誤四：忽略 Fermi 黃金規則中態密度 $g(E)$ 的作用</strong><br>
+    初學者使用 Fermi 黃金規則時常只計算矩陣元素 $|\langle \text{out}|V|\text{in}\rangle|^2$，而忘記乘以態密度 $g(E_{\text{out}})$。態密度反映了「有多少末態可供躍遷」——沒有末態就沒有躍遷，無論矩陣元素多大。例如，在光子晶體中工程化態密度可以抑制或增強自發輻射（Purcell 效應）。
+  </div>
+  <div class="callout-warn">
+    <strong>⚡ 錯誤五：認為「禁止躍遷」絕對不會發生</strong><br>
+    選擇定則中的「禁止」僅指<strong>電偶極近似下的最低階</strong>為零。磁偶極躍遷、電四極躍遷以及高階多極躍遷仍然可能發生，只是速率小得多。在實驗室中，許多重要的光譜線正是來自「禁止」躍遷——特別是在低密度天體物理環境中，亞穩態的禁線往往是主要的冷卻機制。
+  </div>
+</section>
+
+<!-- ====== 自我檢測 ====== -->
+<section id="self-check">
+  <h2>自我檢測</h2>
+  <details class="self-check-item">
+    <summary>1. 為什麼微擾理論在量子力學中比在古典力學中更成功？簡併能階為什麼會破壞標準微擾展開？</summary>
+    <div class="self-check-answer">
+      <p>量子微擾理論更成功的原因有兩個：(1) 可精確求解的量子模型遠少於古典模型，因此更多系統必須用近似方法處理——這推動了方法的發展；(2) 量子力學的數學結構（線性向量空間、Hermitian 算符的譜定理）使得微擾展開的收斂性遠優於古典力學中對應的非線性動力學問題。簡併能階破壞微擾展開是因為方程 (9.9) 中的分母 $E^0 - E_m$ 為零——物理上這對應於「平坦碗底」的情況，無窮小的力就能產生任意大的位移。解決方法是在簡併子空間內對角化 $\Delta$。</p>
+      <p class="solution-note">正文依據：§9.1 引言、§9.1.2</p>
+    </div>
+  </details>
+  <details class="self-check-item">
+    <summary>2. 二次 Stark 效應和線性 Stark 效應的根本物理差異是什麼？為什麼氫原子基態只有二次效應而 $n=2$ 態有線性效應？</summary>
+    <div class="self-check-answer">
+      <p>二次 Stark 效應（$\Delta E \propto \mathcal{E}^2$）發生在沒有永久電偶極矩的態——外加電場首先使原子極化（感應出正比於 $\mathcal{E}$ 的偶極矩），然後這個感應偶極與電場交互作用，產生正比於 $\mathcal{E}^2$ 的能量位移。線性 Stark 效應（$\Delta E \propto \mathcal{E}$）發生在有永久電偶極矩的態。氫原子基態 $|100\rangle$ 具有確定（偶）宇稱，因此 $\langle z \rangle = 0$——沒有永久偶極矩，只能有二次效應。$n=2$ 態中存在簡併（$2s$ 和 $2p$ 能量幾乎相同），微擾使系統形成 $|200\rangle$ 和 $|210\rangle$ 的疊加態，該疊加態不具有確定宇稱，因此可以有非零的 $\langle z \rangle$——即永久偶極矩，產生線性效應。</p>
+      <p class="solution-note">正文依據：§9.1.1–§9.1.2</p>
+    </div>
+  </details>
+  <details class="self-check-item">
+    <summary>3. Zeeman 效應和 Paschen-Back 效應的區別是什麼？在什麼條件下從一種效應過渡到另一種？</summary>
+    <div class="self-check-answer">
+      <p>兩者都描述磁場中原子能階的分裂，但對應不同的相對強度範圍：Zeeman 效應發生在弱磁場（$H_{SO} \gg H_{Bs}$），自旋-軌道耦合首先決定 $j$，然後磁場按 $m g_L \mu_B B$ 分裂各 $m$ 子能階；Paschen-Back 效應發生在強磁場（$H_{Bs} \gg H_{SO}$），磁場效應壓倒自旋-軌道耦合，能階按 $m_l + 2m_s$ 分裂。當 $H_{Bs}$ 和 $H_{SO}$ 大小相當時（中間區域），需要數值求解。圖 9.2 以 $B/A$（$A$ 表徵自旋-軌道耦合強度）為橫軸展示了平滑的過渡。</p>
+      <p class="solution-note">正文依據：§9.1.3</p>
+    </div>
+  </details>
+  <details class="self-check-item">
+    <summary>4. Fermi 黃金規則中的態密度 $g(E)$ 扮演什麼角色？為什麼在離散末態的輻射躍遷中，我們改用對輻射場頻率的積分而非對態密度求和？</summary>
+    <div class="self-check-answer">
+      <p>態密度 $g(E)$ 計算了能量在 $E$ 附近的單位能量間隔內有多少個末態。躍遷率正比於 $g(E_{\text{out}})$——因為即使單個末態的躍遷矩陣元素很大，如果沒有態可躍遷到，總躍遷率仍為零。對於離散末態（如原子的束縛態），我們不能再對末態密度積分。取而代之的是，我們認識到電磁場是多個頻率平面波的疊加——將輻射場視為具有連續譜的「bath」，對輻射場的頻率（或波）求和，利用 $\sin^2(xt)/x^2 \to \pi t\delta(x)$ 的極限關係，最終得到與輻射場能量密度 $d\rho/d\nu$ 成正比的躍遷率。</p>
+      <p class="solution-note">正文依據：§9.3.1–§9.3.2</p>
+    </div>
+  </details>
+  <details class="self-check-item">
+    <summary>5. 選擇定則 $\Delta l = \pm 1$ 的物理根源是什麼？為什麼 $2s \to 1s$ 躍遷是「禁止」的？</summary>
+    <div class="self-check-answer">
+      <p>選擇定則 $\Delta l = \pm 1$ 來自兩個因素：(1) 電偶極算符 $\mathbf{x}$ 是奇宇稱算符——它在兩個宇稱相同的態之間的矩陣元素為零；(2) 氫原子中 $|nlm\rangle$ 的宇稱由 $(-1)^l$ 給定，因此 $\langle n'l'm'|\mathbf{x}|nlm\rangle$ 只有在 $l$ 和 $l'$ 相差奇數時才不為零。更具體的角動量分析（Problem 7.21）進一步確定差值必須恰為 1。$2s$（$l=0$）到 $1s$（$l=0$）的 $\Delta l = 0$，因此宇稱沒有改變——電偶極躍遷被禁止。$2s$ 態的衰變主要通過雙光子發射（壽命 $\sim 1/7$ s），遠長於 $2p \to 1s$ 的 $1.6 \times 10^{-9}$ s。</p>
+      <p class="solution-note">正文依據：§9.3.3、§4.1.4</p>
+    </div>
+  </details>
+
+
+  <details class="self-check-item">
+    <summary>6. 變分原理為何只對基態給出嚴格的能量上界？對於激發態，我們該如何使用變分法？</summary>
+    <div class="self-check-answer">
+      <p>基態能量 $E_0$ 是 $\langle H \rangle$ 的全局最小值——任何態的期望值都不會更低（方程 9.40）。但激發態 $E_k$（$k > 0$）對應的是鞍點而非最小值：沿某些方向 $\langle H \rangle$ 增加，沿另一些方向減少。因此，一個隨意選擇的試探波函數的 $\langle H \rangle$ 可能低於 $E_k$。要估計激發態能量，使用<strong>線性變分法</strong>：選擇 $N$ 個正交基底函數，對角化 $N \times N$ 矩陣 $H_{ij}$。所得的第 $k$ 個本徵值是真實第 $k$ 個激發態的上界（Rayleigh-Ritz 定理）——前提是基底函數張成的空間包含真實波函數的良好近似。</p>
+      <p class="solution-note">正文依據：§9.2（方程 9.36–9.40）</p>
+    </div>
+  </details>
+  <details class="self-check-item">
+    <summary>7. 為什麼氫原子 $n=2$ 態在外加電場中會有永久電偶極矩，而基態不會？這與簡併性有什麼關係？</summary>
+    <div class="self-check-answer">
+      <p>基態 $|100\rangle$ 是非簡併的，具有確定的偶宇稱——$\langle z \rangle = 0$，沒有永久偶極矩。能量位移來自二階效應（感應偶極），正比於 $\mathcal{E}^2$。$n=2$ 態中 $|200\rangle$（$l=0$）和 $|210\rangle$（$l=1$）幾乎簡併（忽略 Lamb 位移），微擾使系統形成 $(|200\rangle + |210\rangle)/\sqrt{2}$ 的疊加態——這個態不具有確定宇稱，因此 $\langle z \rangle = -3a_0 \neq 0$，即有永久偶極矩。關鍵在於：簡併使不同宇稱的態可以混合，從而產生永久偶極矩。沒有簡併時，宇稱守恆禁止永久偶極的存在。</p>
+      <p class="solution-note">正文依據：§9.1.1–§9.1.2</p>
+    </div>
+  </details>
+  <details class="self-check-item">
+    <summary>8. Fermi 黃金規則中的 $\sin^2(xt)/x^2 \to \pi t\delta(x)$ 極限有什麼物理意義？為什麼需要「長時間」才能使用這個近似？</summary>
+    <div class="self-check-answer">
+      <p>$\sin^2(xt)/x^2$ 在 $x = 0$ 處有一個中央峰，高度為 $t^2$，寬度為 $\sim 2\pi/t$。當 $t$ 增大時，峰變得更高更窄——積分（峰下面積）趨近 $\pi t$。這就是 $\delta$ 函數近似的來源。物理上，$x = (E_{\text{out}} - E_{\text{in}} - \hbar\omega)/2\hbar$ 衡量能量守恆的偏差。$\delta(x)$ 說明：只有嚴格滿足能量守恆（$E_{\text{out}} = E_{\text{in}} + \hbar\omega$）的躍遷才有顯著機率——這是能量-時間不確定性原理的體現：觀測時間越長，能量守恆越嚴格。「長時間」意味著 $t \gg \hbar/\Delta E$（$\Delta E$ 是典型的能階間距），此時能量守恆的 $\delta$ 函數近似才有效。</p>
+      <p class="solution-note">正文依據：§9.3（方程 9.48–9.54）</p>
+    </div>
+  </details>
+
+</section>
+
+<!-- ====== 延伸資源 ====== -->
+<section id="extras">
+  <h2>延伸資源與下一章</h2>
+  <ul class="resource-list">
+    <li><a href="#">本章公式整理與推導要點</a></li>
+    <li><a href="#">本章問題精選解答（Problems 9.1–9.22）</a></li>
+    <li><a href="#">Stark 效應與 Zeeman 效應的實驗光譜對照</a></li>
+    <li><a href="#">Fermi 黃金規則的進階應用：散射理論與 Born 近似</a></li>
+    <li><a href="#">Wigner-Eckart 定理與選擇定則的群論推導</a></li>
+  </ul>
+  <div class="further-reading">
+    <strong>下一章預告：氦原子與多電子原子</strong>
+    <p>微擾理論和變分原理為我們提供了處理無法精確求解之系統的工具。第 10 章將這些工具應用於<strong>最簡單的多電子原子——氦</strong>。我們將看到如何利用變分原理精確估計氦的游離能，以及如何利用微擾理論理解電子-電子交互作用對能階的影響。交換交互作用、parahelium 和 orthohelium 的奧秘，以及 Hartree-Fock 自洽場方法的雛形，都將在第 10 章逐一揭示。</p>
+    <a href="ch10_helium_zh.html">前往下一章 →</a>
+  </div>
+</section>
+
+</main>
+
+</body>
+</html>

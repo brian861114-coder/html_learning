@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light" data-reading-width="wide">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第 9 章 — Calculus 學習教材</title>
+<script>
+MathJax = {
+  tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']], tags: 'ams' },
+  options: { ignoreHtmlClass: 'no-math' }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<link rel="stylesheet" href="../../../../shared/core.css">
+<script src="../../../../shared/core.js" defer></script>
+<link rel="stylesheet" href="../../../../shared/models/model-host.css">
+<script defer src="../../../../shared/models/model-runtime.js"></script>
+<link rel="stylesheet" href="../../../../shared/components/calculus-ch09-model.css">
+<link rel="stylesheet" href="../../../../shared/navigation.css" data-shared-navigation>
+</head>
+<body>
+
+<a class="portal-home-link" href="../../index.html">← 返回學習中心</a>
+
+<nav class="sidebar" aria-label="本章目錄"><div class="sidebar-header"><div class="sidebar-subtitle">微積分</div><h2 class="sidebar-title">序列與級數</h2></div><ul class="toc">
+    <li class="ns">本章預覽</li>
+    <li class="nsub"><a href="#preview">學習目標與概念地圖</a></li>
+    <li class="ns">5.1 序列</li>
+    <li class="nsub"><a href="#s5-1">序列術語、極限與單調收斂定理</a></li>
+    <li class="ns">5.2 無窮級數</li>
+    <li class="nsub"><a href="#s5-2">部分和、幾何級數、調和級數、 telescoping</a></li>
+    <li class="ns">5.3 發散與積分檢驗</li>
+    <li class="nsub"><a href="#s5-3">發散檢驗、積分檢驗、p-級數、餘項估計</a></li>
+    <li class="ns">5.4 比較檢驗</li>
+    <li class="nsub"><a href="#s5-4">比較檢驗與極限比較檢驗</a></li>
+    <li class="ns">5.5 交錯級數</li>
+    <li class="nsub"><a href="#s5-5">交錯級數檢驗、絕對與條件收斂</a></li>
+    <li class="ns">5.6 比值與根式檢驗</li>
+    <li class="nsub"><a href="#s5-6">比值檢驗、根式檢驗、收斂策略</a></li>
+    <li class="ns">本章摘要</li>
+    <li class="nsub"><a href="#summary">關鍵概念總整理</a></li>
+    <li class="nsub"><a href="#test-table">收斂檢驗一覽表</a></li>
+    <li class="nsub"><a href="#common-mistakes">初學者常見錯誤</a></li>
+    <li class="nsub"><a href="#self-check">自我檢測</a></li>
+  </ul>
+  <div class="sidebar-tools"><button type="button" data-action="toggle-theme" aria-label="切換深色或淺色模式">切換顯示主題</button></div></nav>
+
+<main class="chapter-page" data-chapter-title="序列與級數" data-prev-href="ch08_differential_equations_zh.html" data-prev-label="微分方程入門" data-next-href="ch10_power_series_zh.html" data-next-label="冪級數（Power Series）">
+
+<header class="chapter-header">
+  <div class="tag">第 9 章 · OpenStax Calculus Vol 2, Ch 5</div>
+  <h1>序列與級數</h1>
+  <div class="chapter-meta">OpenStax · Calculus Volume 2 · Sequences and Series · pp.381–476</div>
+</header>
+
+<!-- ========== PREVIEW ========== -->
+<section id="preview">
+<div class="chapter-preview">
+<h2>📌 本章要解決的核心問題</h3>
+<p>如何對「無限多項相加」給出嚴格的數學意義？Koch 雪花（如封面所示）由無限多個三角形構成——我們能否計算它的面積？答案是：可以——透過<strong>無窮級數（infinite series）</strong>這個強大工具。無窮級數不僅能回答這類幾何問題，更是將函數表示為「無限多項式」（冪級數）的基礎，在微分方程、電子電路、軌道力學中無處不在。</p>
+
+<h3>🔑 關鍵概念（10 條）</h3>
+<ol>
+  <li><strong>序列（sequence）</strong>：定義在正整數上的函數——$a_1, a_2, a_3, \ldots$</li>
+  <li><strong>序列極限</strong>：$\lim_{n\to\infty} a_n = L$ 表示當 $n$ 足夠大時，$a_n$ 任意接近 $L$</li>
+  <li><strong>單調收斂定理</strong>：有界且單調的序列必收斂</li>
+  <li><strong>無窮級數</strong>：$\sum_{n=1}^{\infty} a_n$ 定義為部分和序列 $\{S_N\}$ 的極限</li>
+  <li><strong>幾何級數</strong>：$\sum ar^{n-1}$ 當 $|r|&lt;1$ 時收斂至 $\frac{a}{1-r}$</li>
+  <li><strong>發散檢驗</strong>：若 $\lim a_n \neq 0$，則級數必發散；但 $\lim a_n = 0$ 不保證收斂</li>
+  <li><strong>積分檢驗</strong>：將級數與瑕積分比較，適用於正項遞減級數</li>
+  <li><strong>p-級數</strong>：$\sum \frac{1}{n^p}$ 當 $p>1$ 收斂，$p \le 1$ 發散</li>
+  <li><strong>交錯級數檢驗</strong>：若 $b_n$ 遞減至 $0$，則 $\sum (-1)^{n-1}b_n$ 收斂</li>
+  <li><strong>比值與根式檢驗</strong>：透過比較相鄰項的比值或 $n$ 次根來判斷收斂性</li>
+</ol>
+
+  <h3>🧭 本章推理地圖</h3>
+<p><strong>序列的收斂</strong>（§5.1） → 建立無窮過程的極限概念 → <strong>無窮級數 = 部分和序列的極限</strong>（§5.2），基本範例：幾何級數 → 問題從「求極限」轉為 <strong>「判斷斂散」</strong>（§5.3–§5.6） → <strong>積分檢驗</strong>（§5.3）連接級數與瑕積分 → <strong>比較檢驗</strong>（§5.4）用已知級數推斷未知級數 → <strong>交錯級數檢驗</strong>（§5.5）處理正負交替的級數 → <strong>比值／根式檢驗</strong>（§5.6）最通用的斂散判斷工具 → 收斂性理論為第 10 章冪級數（Ch10）的必要前提</p>
+
+  
+
+<h3>🔗 邏輯鏈</h3>
+<p>序列極限 → 部分和 → 級數定義 → 幾何級數（基準）→ 發散檢驗 → 積分檢驗 → p-級數（基準）→ 比較檢驗（與已知級數比大小）→ 極限比較檢驗（比漸近行為）→ 交錯級數檢驗（變號）→ 比值檢驗（階乘/指數）→ 根式檢驗（冪次）→ 絕對收斂 ⇒ 收斂</p>
+
+<h3>🧰 先備知識</h3>
+<p>極限的 $\varepsilon$-$N$ 定義、L'Hôpital 法則、瑕積分、部分分式分解、單調數列性質。強烈建議先複習 Ch2（極限）與 Ch3（積分技巧）。</p>
+</div>
+</section>
+
+<!-- ================================================================ -->
+<!-- 5.1 SEQUENCES -->
+<!-- ================================================================ -->
+<section id="s5-1">
+<h2>5.1 序列（Sequences）</h2>
+
+<div style="margin-bottom:14px;font-size:12px;color:var(--tx2);line-height:1.8">
+<strong style="color:var(--tx)">🔑 本節重點</strong> ①序列是定義域為正整數的函數，可用顯式公式或遞迴關係定義 ②序列極限 $\lim a_n$ 與函數極限共享相同法則（可用 L'Hôpital）③夾擠定理與連續函數定理處理複雜極限 ④單調收斂定理：有界+單調⇒收斂（不需知道極限值）⑤等比序列 $r^n$ 收斂當 $|r|<1$
+</div>
+
+<p><strong>無窮序列（infinite sequence）</strong>
+
+<p>理解序列的關鍵在於：序列本質上是<strong>定義域為正整數的函數</strong>。因此，我們可以在坐標平面上繪製序列的圖形——每個點 $(n, a_n)$ 對應一個項。這也意味著我們可以討論序列的極限：當 $n \to \infty$ 時，$a_n$ 會趨近於什麼值？</p>
+
+<div class="callout">
+<strong>💡 核心洞察：兩種特殊序列</strong><br>
+<strong>等差序列（arithmetic sequence）</strong>：相鄰兩項的差為常數 $d$。通項公式：$a_n = a_1 + (n-1)d$。<br>
+<strong>等比序列（geometric sequence）</strong>：相鄰兩項的比值為常數 $r$。通項公式：$a_n = a_1 r^{n-1}$。<br>
+這兩種序列是整個級數理論的基石——等比級數是我們第一個能精確求和的無窮級數。
+</div>
+
+<h3>序列的極限</h3>
+<p>序列極限的正式定義：若對任意 $\varepsilon > 0$，存在整數 $N$ 使得 $n \ge N$ 時 $|a_n - L| < \varepsilon$，則稱序列 $\{a_n\}$ <strong>收斂（converges）</strong>至 $L$，記為 $\lim_{n\to\infty} a_n = L$。不收斂的序列稱為<strong>發散（divergent）</strong>。</p>
+
+<div class="callout-warn">
+<strong>⚡ 常見錯誤：發散 ≠ 趨近無限大</strong><br>
+序列發散的方式有很多種：可以趨近 $+\infty$ 或 $-\infty$，也可以在兩個值之間來回振盪（例如 $a_n = (-1)^n$），甚至可以混沌地變化。不要看到「發散」就只想到 $\infty$！
+</div>
+
+<p>由於序列是函數的特例，我們可以使用<strong>函數極限的性質</strong>來計算序列極限。定理 5.1（由函數定義的序列極限）：若存在函數 $f(x)$ 使得 $a_n = f(n)$ 且 $\lim_{x\to\infty} f(x) = L$，則 $\lim_{n\to\infty} a_n = L$。這讓我們可以使用 L'Hôpital 法則等工具來處理 $\infty/\infty$ 或 $0 \cdot \infty$ 型的序列極限。</p>
+
+<div class="formula-card">
+<div class="formula-label">📐 代數極限法則（Theorem 5.2）</div>
+<p>設 $\lim a_n = A$，$\lim b_n = B$，$c$ 為常數：</p>
+<div class="eq">$$\lim (a_n \pm b_n) = A \pm B,\quad \lim (c \cdot a_n) = cA,\quad \lim (a_n b_n) = AB,\quad \lim \frac{a_n}{b_n} = \frac{A}{B}\; (B \neq 0)$$</div>
+<div class="formula-note">這些法則使我們能將複雜序列分解為簡單序列的組合來求極限。</div>
+</div>
+
+<details class="example"><summary>📝 範例</summary>
+<strong>📝 範例 5.3：求極限</strong><br>
+判斷 $\displaystyle a_n = \frac{3n^2 + 2n}{n^2 - 1}$ 是否收斂。<br>
+<strong>解：</strong>分子分母同除以 $n^2$：$\displaystyle \lim_{n\to\infty} \frac{3 + 2/n}{1 - 1/n^2} = \frac{3+0}{1-0} = 3$。序列收斂於 $3$。<br>
+對於 $\displaystyle a_n = n^{1/n}$，令 $y = n^{1/n}$，取對數後用 L'Hôpital：$\ln y = \frac{\ln n}{n} \to 0$，故 $\lim a_n = e^0 = 1$。
+</details>
+
+<h3>夾擠定理與連續函數</h3>
+<p><strong>夾擠定理（Squeeze Theorem, Theorem 5.4）</strong>：若存在 $N$ 使得 $n \ge N$ 時 $a_n \le b_n \le c_n$，且 $\lim a_n = \lim c_n = L$，則 $\lim b_n = L$。典型的應用：$\lim \frac{\cos n}{n} = 0$，因為 $-\frac{1}{n} \le \frac{\cos n}{n} \le \frac{1}{n}$ 且兩端都趨近 $0$。</p>
+
+<p><strong>連續函數定理（Theorem 5.3）</strong>：若 $\lim a_n = L$ 且 $f$ 在 $L$ 處連續，則 $\lim f(a_n) = f(L)$。例如：因為 $\lim \frac{1}{n} = 0$ 且 $e^x$ 在 $0$ 處連續，所以 $\lim e^{1/n} = e^0 = 1$。</p>
+
+<h3>有界序列與單調收斂定理</h3>
+<p>序列 $\{a_n\}$ 稱為<strong>有上界（bounded above）</strong>若存在 $M$ 使 $a_n \le M$ 對所有 $n$ 成立；<strong>有下界（bounded below）</strong>若存在 $m$ 使 $a_n \ge m$；<strong>有界（bounded）</strong>表示既有上界也有下界。</p>
+
+<p>核心定理——<strong>收斂序列必有界（Theorem 5.5）</strong>：收斂是有界的必要條件。但反過來不成立：$a_n = (-1)^n$ 有界（在 $-1$ 和 $1$ 之間）但發散。</p>
+
+<div class="callout">
+<strong>💡 單調收斂定理（Monotone Convergence Theorem, Theorem 5.6）</strong><br>
+若 $\{a_n\}$ 有界且在某一點之後為單調（遞增或遞減），則序列收斂。<br>
+這是本章最重要的定理之一——它給出了<strong>收斂的充分條件</strong>，且不需要知道極限值，這在分析遞迴定義的序列時特別有用。
+</div>
+
+<details class="example"><summary>📝 範例</summary>
+<strong>📝 範例 5.6：單調收斂定理的應用</strong><br>
+考慮 $\displaystyle a_{n+1} = \frac{1}{2}\left(a_n + \frac{2}{a_n}\right)$，$a_1 = 2$。證明收斂並求極限。<br>
+<strong>解：</strong>可證明 $a_n \ge \sqrt{2}$（有下界）且 $a_{n+1} \le a_n$（遞減），由單調收斂定理知收斂。設 $\lim a_n = L$，代入遞迴式：$L = \frac{1}{2}(L + \frac{2}{L})$，解得 $L^2 = 2$，故 $L = \sqrt{2}$。這其實就是<strong>牛頓法求 $\sqrt{2}$</strong>！
+</details>
+
+<div class="callout-warn">
+<strong>⚡ 常見錯誤：混淆序列與級數</strong><br>
+序列 $\{a_n\}$ 是一串數字；級數 $\sum a_n$ 是把這些數字加起來。序列收斂談的是 $\lim a_n$，級數收斂談的是 $\lim S_N$（部分和）。兩者完全不同的概念！
+</div>
+
+<h3>等比序列的收斂性</h3>
+<p>等比序列 $r^n$ 的極限行為總結如下：</p>
+<div class="formula-card">
+<div class="formula-label">📐 等比序列 $\{r^n\}$ 的極限</div>
+<div class="eq">$$\lim_{n\to\infty} r^n = \begin{cases} 0 & \text{if } |r| < 1 \\ 1 & \text{if } r = 1 \\ \text{發散} & \text{if } r \le -1 \text{ 或 } r > 1 \end{cases}$$</div>
+<div class="formula-note">注意 $r = -1$ 時序列為 $1, -1, 1, -1, \ldots$，在兩個值之間振盪，不收斂。</div>
+</div>
+
+<figure class="figure">
+<img src="../../pages/v2c5_pages/v2c5_page_382_c.png" alt="圖 5.2" loading="lazy">
+<figcaption>圖 5.2：序列 $\{a_n\}$ 的圖形——每個點 $(n, a_n)$ 對應一項</figcaption>
+</figure>
+
+<figure class="figure">
+<img src="../../pages/v2c5_pages/v2c5_page_386_c.png" alt="圖 5.3" loading="lazy">
+<figcaption>圖 5.3：四種序列在 $n\to\infty$ 時的不同行為——收斂至有限值、發散至無限、振盪</figcaption>
+</figure>
+</section>
+
+<!-- ================================================================ -->
+<!-- 5.2 INFINITE SERIES -->
+<!-- ================================================================ -->
+<section id="s5-2">
+<h2>5.2 無窮級數（Infinite Series）</h2>
+
+<div style="margin-bottom:14px;font-size:12px;color:var(--tx2);line-height:1.8">
+<strong style="color:var(--tx)">🔑 本節重點</strong> ①級數收斂⇔部分和序列 $\{S_N\}$ 收斂，和 $S=\lim S_N$ ②幾何級數 $\sum ar^{n-1} = \frac{a}{1-r}$（$|r|<1$），否則發散 ③調和級數 $\sum 1/n$ 發散（儘管 $\lim 1/n=0$）——關鍵反例 ④望遠鏡級數 $\sum(b_n-b_{n+1})$ 透過部分和抵消求和
+</div>
+
+<p>序列是有序的數字列表
+
+<p>定義：級數 $\sum_{n=1}^{\infty} a_n$ 的<strong>第 $N$ 部分和</strong>為 $S_N = \sum_{n=1}^{N} a_n$。若部分和序列 $\{S_N\}$ 收斂至一個實數 $S$，則稱級數<strong>收斂</strong>，$S$ 為級數的<strong>和（sum）</strong>。若 $\{S_N\}$ 發散，則級數發散。</p>
+
+<div class="callout">
+<strong>💡 核心洞察：級數收斂 ⇔ 部分和序列收斂</strong><br>
+這是級數理論的基石。所有收斂檢驗法的本質都是在判斷部分和序列是否收斂。了解這一點，你就不會被五花八門的檢驗法搞糊塗——它們只是判斷 $\{S_N\}$ 收斂性的不同方法。
+</div>
+
+<details class="example"><summary>📝 範例</summary>
+<strong>📝 範例 5.7：使用部分和判定收斂</strong><br>
+$\displaystyle \sum_{n=1}^{\infty} \frac{1}{n(n+1)}$ 是否收斂？<br>
+<strong>解：</strong>利用部分分式：$\frac{1}{n(n+1)} = \frac{1}{n} - \frac{1}{n+1}$。部分和 $S_N = (1 - \frac{1}{2}) + (\frac{1}{2} - \frac{1}{3}) + \cdots + (\frac{1}{N} - \frac{1}{N+1}) = 1 - \frac{1}{N+1}$。$\lim S_N = 1$，故級數收斂且和為 $1$。
+</details>
+
+<h3>幾何級數（Geometric Series）</h3>
+<p><strong>幾何級數</strong>是形如 $\sum_{n=1}^{\infty} ar^{n-1} = a + ar + ar^2 + \cdots$ 的級數，其中 $a$ 為<strong>首項（initial term）</strong>，$r$ 為<strong>公比（ratio）</strong>。這是我們第一個能精確求和的無窮級數類型，也是最常用的基準級數之一。</p>
+
+<div class="formula-card">
+<div class="formula-label">📐 幾何級數求和公式</div>
+<div class="eq">$$\sum_{n=1}^{\infty} ar^{n-1} = \frac{a}{1-r} \quad \text{若 } |r| < 1$$</div>
+<div class="formula-note">若 $|r| \ge 1$，幾何級數發散。推導：$S_N = a\frac{1-r^N}{1-r}$，當 $|r|&lt;1$ 時 $r^N \to 0$。</div>
+</div>
+
+<details class="example"><summary>📝 範例</summary>
+<strong>📝 範例 5.10：循環小數化分數</strong><br>
+將 $5.2\overline{7}$ 化為分數。<br>
+<strong>解：</strong>$5.2\overline{7} = 5.2 + 0.07 + 0.007 + \cdots$。後面的級數是幾何級數：首項 $0.07$，公比 $0.1$，和 $= \frac{0.07}{1-0.1} = \frac{7}{90}$。所以 $5.2\overline{7} = 5.2 + \frac{7}{90} = \frac{52}{10} + \frac{7}{90} = \frac{468+7}{90} = \frac{475}{90} = \frac{95}{18}$。
+</details>
+
+<h3>調和級數（Harmonic Series）</h3>
+<p>$\sum_{n=1}^{\infty} \frac{1}{n} = 1 + \frac{1}{2} + \frac{1}{3} + \cdots$ 稱為<strong>調和級數</strong>。儘管 $\lim \frac{1}{n} = 0$，這個級數<strong>發散</strong>！這是因為項趨近於零的「速度不夠快」。</p>
+
+<div class="callout-warn">
+<strong>⚡ 重大陷阱：$\lim a_n = 0$ 不代表級數收斂！</strong><br>
+調和級數是所有微積分課本中最經典的反例。$\lim \frac{1}{n} = 0$，但部分和 $S_N \approx \ln N + \gamma$（Euler 常數 $\gamma \approx 0.5772$），這表示 $S_N$ 緩慢但確實地趨近無限大。發散檢驗只能證明發散，不能證明收斂！
+</div>
+
+<details class="derive">
+<summary>🔬 調和級數發散的證明</summary>
+<div class="step">將部分和分組：$S_1=1$，$S_2=1+\frac{1}{2}$，$S_4 > 1+\frac{1}{2}+(\frac{1}{4}+\frac{1}{4}) = 2$，$S_8 > 2 + \frac{1}{2} = \frac{5}{2}$。一般地，$S_{2^k} > 1 + \frac{k}{2}$。當 $k \to \infty$，$S_{2^k} \to \infty$，所以調和級數發散。</div>
+</details>
+
+<h3>Telescoping 級數</h3>
+<p><strong>Telescoping 級數（望遠鏡級數）</strong>是指部分和中的大部分項互相抵消，只留下前幾項和後幾項的級數。一般形式：$\sum_{n=1}^{\infty} (b_n - b_{n+1})$。第 $N$ 部分和 $S_N = b_1 - b_{N+1}$。級數收斂若且唯若 $\lim b_{N+1}$ 存在且有限。</p>
+
+<details class="example"><summary>📝 範例</summary>
+<strong>📝 範例 5.12：Telescoping 級數</strong><br>
+$\displaystyle \sum_{n=1}^{\infty} \ln\left(\frac{n}{n+1}\right)$ 是否收斂？<br>
+<strong>解：</strong>$S_N = (\ln 1 - \ln 2) + (\ln 2 - \ln 3) + \cdots + (\ln N - \ln(N+1)) = \ln 1 - \ln(N+1) = -\ln(N+1)$。$\lim S_N = -\infty$，級數發散。
+</details>
+
+<h3>收斂級數的代數性質</h3>
+<p>（Theorem 5.7）若 $\sum a_n = S$ 且 $\sum b_n = T$，則 $\sum (a_n \pm b_n) = S \pm T$，且對任意常數 $c$，$\sum c a_n = cS$。這些性質直接繼承自序列極限的代數法則。</p>
+
+<figure class="figure">
+<img src="../../pages/v2c5_pages/v2c5_page_403_c.png" alt="圖 5.10" loading="lazy">
+<figcaption>圖 5.10：部分和序列 $\{S_N\}$ 趨近於 $2$——幾何級數 $\sum \frac{1}{2^{n-1}}$ 的收斂</figcaption>
+</figure>
+
+<figure class="figure">
+<img src="../../pages/v2c5_pages/v2c5_page_411_c.png" alt="圖 5.11" loading="lazy">
+<figcaption>圖 5.11：Koch 雪花的建構過程——有限面積但無限周長的奇妙碎形</figcaption>
+</figure>
+</section>
+
+<!-- ================================================================ -->
+<!-- 5.3 DIVERGENCE AND INTEGRAL TESTS -->
+<!-- ================================================================ -->
+<section id="s5-3">
+<h2>5.3 發散檢驗與積分檢驗（Divergence and Integral Tests）</h2>
+
+<div style="margin-bottom:14px;font-size:12px;color:var(--tx2);line-height:1.8">
+<strong style="color:var(--tx)">🔑 本節重點</strong> ①發散檢驗：若 $\lim a_n \neq 0$ 則級數發散（但 $\lim a_n=0$ 不能證收斂！）②積分檢驗：$\sum a_n$ 與 $\int_1^\infty f(x)dx$ 同收同散（$f$ 連續正遞減）③p-級數 $\sum 1/n^p$：收斂⇔ $p>1$ ④餘項估計 $\int_{N+1}^\infty f(x)dx \le R_N \le \int_N^\infty f(x)dx$
+</div>
+
+<p>在前兩節中，我們通過直接計算部分和來判斷級數的收斂性
+
+<h3>發散檢驗（Divergence Test）</h3>
+<p>若級數 $\sum_{n=1}^{\infty} a_n$ 收斂，則必有 $\lim_{n\to\infty} a_n = 0$。換言之，其<strong>逆否命題</strong>即為發散檢驗：</p>
+
+<div class="formula-card">
+<div class="formula-label">📐 發散檢驗（Theorem 5.8）</div>
+<div class="eq">$$\text{若 } \lim_{n\to\infty} a_n \neq 0 \text{（或極限不存在），則 } \sum_{n=1}^{\infty} a_n \text{ 發散}$$</div>
+<div class="formula-note">⚠️ 反過來不成立：$\lim a_n = 0$ 不保證級數收斂（調和級數即為反例）。</div>
+</div>
+
+<div class="callout-warn">
+<strong>⚡ 最常見的錯誤</strong><br>
+許多初學者看到 $\lim a_n = 0$ 就斷定級數收斂——這完全錯誤！發散檢驗<strong>只能用來證明發散</strong>，不能用來證明收斂。若 $\lim a_n = 0$，發散檢驗「無結論」（inconclusive），必須使用其他檢驗法。
+</div>
+
+<details class="example"><summary>📝 範例</summary>
+<strong>📝 範例 5.13：發散檢驗</strong><br>
+對 $\displaystyle \sum_{n=1}^{\infty} \frac{n}{n+1}$：$\lim \frac{n}{n+1} = 1 \neq 0$，故級數發散。<br>
+對 $\displaystyle \sum_{n=1}^{\infty} \frac{1}{n}$：$\lim \frac{1}{n} = 0$，發散檢驗無結論（實際上發散）。<br>
+對 $\displaystyle \sum_{n=1}^{\infty} \cos(\pi n) = \sum (-1)^n$：$\lim (-1)^n$ 不存在，故級數發散。
+</details>
+
+<h3>積分檢驗（Integral Test）</h3>
+<p>積分檢驗將無窮級數與瑕積分聯繫起來。核心思路：若 $a_n = f(n)$ 且 $f(x)$ 是連續、正、遞減的函數，則 $\sum a_n$ 與 $\int_1^{\infty} f(x)\,dx$ 同時收斂或同時發散。</p>
+
+<div class="formula-card">
+<div class="formula-label">📐 積分檢驗（Theorem 5.9）</div>
+<div class="eq">$$\sum_{n=1}^{\infty} a_n \text{ 與 } \int_1^{\infty} f(x)\,dx \text{ 同收同散}$$</div>
+<div class="formula-note">條件：$f$ 連續、正、遞減，且 $f(n) = a_n$。注意級數的<strong>值</strong>與積分的值<strong>不相同</strong>！</div>
+</div>
+
+<details class="example"><summary>📝 範例</summary>
+<strong>📝 範例 5.14：積分檢驗</strong><br>
+$\displaystyle \sum_{n=1}^{\infty} \frac{1}{n^2+1}$：令 $f(x)=\frac{1}{x^2+1}$。$\int_1^{\infty} \frac{1}{x^2+1}dx = [\arctan x]_1^{\infty} = \frac{\pi}{2} - \frac{\pi}{4} = \frac{\pi}{4}$（收斂），故級數收斂。<br>
+$\displaystyle \sum_{n=1}^{\infty} \frac{\ln n}{n}$：$f(x)=\frac{\ln x}{x}$，$\int_1^{\infty} \frac{\ln x}{x}dx = [\frac{1}{2}(\ln x)^2]_1^{\infty} = \infty$（發散），故級數發散。
+</details>
+
+<h3>p-級數（p-Series）</h3>
+<p>形如 $\sum_{n=1}^{\infty} \frac{1}{n^p}$ 的級數稱為 p-級數。這是僅次於幾何級數的第二大基準級數。</p>
+
+<div class="formula-card">
+<div class="formula-label">📐 p-級數收斂判定</div>
+<div class="eq">$$\sum_{n=1}^{\infty} \frac{1}{n^p} \begin{cases} \text{收斂} & \text{若 } p > 1 \\ \text{發散} & \text{若 } p \le 1 \end{cases}$$</div>
+<div class="formula-note">$p=1$ 即為調和級數（發散）；$p=2$ 時級數收斂至 $\pi^2/6$（Basel 問題，Euler 1734 年解決）。</div>
+</div>
+
+<div class="callout">
+<strong>💡 p-級數與積分檢驗的關係</strong><br>
+p-級數的收斂條件直接由積分檢驗導出：$\int_1^{\infty} \frac{1}{x^p}dx$ 當 $p>1$ 收斂，當 $p\le 1$ 發散。這是最標準的積分檢驗應用案例。
+</div>
+
+<h3>餘項估計（Remainder Estimate）</h3>
+<p>若級數收斂，我們可以用部分和 $S_N$ 來近似級數的和 $S$。問題是：誤差 $R_N = S - S_N$ 有多大？</p>
+
+<div class="formula-card">
+<div class="formula-label">📐 積分檢驗的餘項估計（Theorem 5.10）</div>
+<div class="eq">$$\int_{N+1}^{\infty} f(x)\,dx \le R_N \le \int_N^{\infty} f(x)\,dx$$</div>
+<div class="formula-note">這讓我們能夠<strong>量化誤差</strong>並確定需要計算多少項才能達到指定精度。</div>
+</div>
+
+<details class="example"><summary>📝 範例</summary>
+<strong>📝 範例 5.16：餘項估計</strong><br>
+用 $S_{10}$ 近似 $\displaystyle \sum_{n=1}^{\infty} \frac{1}{n^5}$，估計誤差。<br>
+<strong>解：</strong>$R_{10} \le \int_{10}^{\infty} \frac{1}{x^5}dx = [-\frac{1}{4x^4}]_{10}^{\infty} = \frac{1}{40000} = 0.000025$，所以誤差小於 $2.5 \times 10^{-5}$。
+</details>
+
+<figure class="figure">
+<img src="../../pages/v2c5_pages/v2c5_page_423_c.png" alt="圖 5.12" loading="lazy">
+<figcaption>圖 5.12：矩形和與曲線下面積的比較——積分檢驗的幾何直覺</figcaption>
+</figure>
+
+<figure class="figure">
+<img src="../../pages/v2c5_pages/v2c5_page_429_c.png" alt="圖 5.15" loading="lazy">
+<figcaption>圖 5.15：餘項 $R_N$ 的上下界——由積分給出誤差範圍</figcaption>
+</figure>
+</section>
+
+<!-- ================================================================ -->
+<!-- 5.4 COMPARISON TESTS -->
+<!-- ================================================================ -->
+<section id="s5-4">
+<h2>5.4 比較檢驗（Comparison Tests）</h2>
+
+<div style="margin-bottom:14px;font-size:12px;color:var(--tx2);line-height:1.8">
+<strong style="color:var(--tx)">🔑 本節重點</strong> ①直接比較檢驗：$a_n \le b_n$ 且 $\sum b_n$ 收斂→$\sum a_n$ 收斂；$a_n \ge b_n$ 且 $\sum b_n$ 發散→$\sum a_n$ 發散 ②極限比較檢驗：$\lim a_n/b_n = L$（$0<L<\infty$）時兩級數同收同散 ③比較對象通常選幾何級數或 p-級數 ④注意方向：小於收斂者收斂，大於發散者發散
+</div>
+
+<p>積分檢驗要求我們能找到一個容易積分的函數
+
+<h3>直接比較檢驗（Comparison Test）</h3>
+<p>核心想法非常直觀：如果一個正項級數的每一項都不超過另一個收斂級數的對應項，那麼它也收斂。反之，如果它的每一項都大於一個發散級數的對應項，那麼它也發散。</p>
+
+<div class="formula-card">
+<div class="formula-label">📐 比較檢驗（Theorem 5.11）</div>
+<div class="eq">$$\begin{aligned} &\text{若 } 0 \le a_n \le b_n \text{ 且 } \sum b_n \text{ 收斂，則 } \sum a_n \text{ 收斂}\\ &\text{若 } 0 \le b_n \le a_n \text{ 且 } \sum b_n \text{ 發散，則 } \sum a_n \text{ 發散} \end{aligned}$$</div>
+<div class="formula-note">關鍵是找到<strong>合適的比較對象</strong>。通常選擇幾何級數或 p-級數。</div>
+</div>
+
+<div class="callout-warn">
+<strong>⚡ 比較檢驗的方向性陷阱</strong><br>
+若要證明<strong>收斂</strong>，你需要找到一個<strong>更大的</strong>收斂級數（你的級數比它小）。若要證明<strong>發散</strong>，你需要找到一個<strong>更小的</strong>發散級數（你的級數比它大）。很多學生搞反方向——記住：小於收斂者收斂，大於發散者發散。
+</div>
+
+<details class="example"><summary>📝 範例</summary>
+<strong>📝 範例 5.17：比較檢驗</strong><br>
+$\displaystyle \sum_{n=1}^{\infty} \frac{1}{n^2+1}$：因為 $\frac{1}{n^2+1} < \frac{1}{n^2}$ 且 $\sum \frac{1}{n^2}$ 收斂（p-級數 $p=2>1$），所以原級數收斂。<br>
+$\displaystyle \sum_{n=1}^{\infty} \frac{1}{n-1/2}$：因為 $\frac{1}{n-1/2} > \frac{1}{n}$ 且 $\sum \frac{1}{n}$ 發散，所以原級數發散。
+</details>
+
+<h3>極限比較檢驗（Limit Comparison Test）</h3>
+<p>有時直接比較檢驗的不等式方向不對。例如對 $\sum \frac{1}{n^2-1}$，我們想與 $\sum \frac{1}{n^2}$ 比較，但 $\frac{1}{n^2-1} > \frac{1}{n^2}$（方向錯了！）。極限比較檢驗解決了這個問題——它比較的是<strong>漸近行為</strong>而非逐項大小。</p>
+
+<div class="formula-card">
+<div class="formula-label">📐 極限比較檢驗（Theorem 5.12）</div>
+<div class="eq">$$\text{設 } a_n, b_n > 0 \text{，} \lim_{n\to\infty} \frac{a_n}{b_n} = L$$</div>
+<div class="formula-note">若 $0 < L < \infty$：$\sum a_n$ 與 $\sum b_n$ 同收同散。<br>若 $L = 0$ 且 $\sum b_n$ 收斂：$\sum a_n$ 收斂。<br>若 $L = \infty$ 且 $\sum b_n$ 發散：$\sum a_n$ 發散。</div>
+</div>
+
+<details class="example"><summary>📝 範例</summary>
+<strong>📝 範例 5.18：極限比較檢驗</strong><br>
+$\displaystyle \sum_{n=1}^{\infty} \frac{1}{n^2-1}$：與 $\sum \frac{1}{n^2}$ 比較。$\lim \frac{1/(n^2-1)}{1/n^2} = \lim \frac{n^2}{n^2-1} = 1$。因為 $\sum \frac{1}{n^2}$ 收斂，所以原級數收斂。<br>
+$\displaystyle \sum_{n=2}^{\infty} \frac{1}{\ln n}$：與 $\sum \frac{1}{n}$ 比較。$\lim \frac{1/\ln n}{1/n} = \lim \frac{n}{\ln n} = \infty$。因為 $\sum \frac{1}{n}$ 發散，所以原級數發散。
+</details>
+
+<div class="callout">
+<strong>💡 如何選擇比較對象？</strong><br>
+對有理函數型（多項式之比），保留分子和分母的最高次項。例如 $\sum \frac{n+1}{n^3+2n}$ → 比較 $\sum \frac{n}{n^3} = \sum \frac{1}{n^2}$（收斂）。對指數/階乘型，使用比值檢驗通常更合適。
+</div>
+
+<figure class="figure">
+<img src="../../pages/v2c5_pages/v2c5_page_435_c.png" alt="圖 5.16" loading="lazy">
+<figcaption>圖 5.16：比較檢驗的幾何解釋——部分和被已知收斂/發散級數的部份和所界定</figcaption>
+</figure>
+
+<p><strong>極限比較檢驗的直覺：</strong>如果兩個級數的通項 $a_n$ 和 $b_n$ 在 $n$ 很大時「行為相似」（即 $\lim_{n\to\infty} a_n/b_n = c$，$c$ 為有限正數），則它們的斂散性相同。這就像判斷兩輛車誰先到終點——如果它們的速度比趨近於常數，它們要麼都到達、要麼都不到達。</p>
+
+<p><strong>選擇比較對象的策略：</strong>通常取 $b_n$ 為與 $a_n$ 最高次項相同的 $p$-級數。例如 $a_n = \frac{n+3}{n^3+2n}$，保留最高次：$b_n = \frac{n}{n^3} = \frac{1}{n^2}$（收斂 $p$-級數）。</p>
+</section>
+
+<!-- ================================================================ -->
+<!-- 5.5 ALTERNATING SERIES -->
+<!-- 5.5 ALTERNATING SERIES -->
+<section id="s5-5">
+<h2>5.5 交錯級數（Alternating Series）</h2>
+
+<div style="margin-bottom:14px;font-size:12px;color:var(--tx2);line-height:1.8">
+<strong style="color:var(--tx)">🔑 本節重點</strong> ①交錯級數檢驗：$b_n$ 遞減且 $\lim b_n=0$ 則 $\sum(-1)^{n-1}b_n$ 收斂 ②餘項估計 $|R_N| \le b_{N+1}$（誤差≤首個省略項）③絕對收斂（$\sum|a_n|$ 收斂）⇒原級數收斂 ④條件收斂（收斂但絕對值發散）可透過重排改變和（Riemann 重排定理）
+</div>
+
+<p>目前討論的檢驗法大多要求級數的項為非負
+
+<h3>交錯調和級數</h3>
+<p>$\sum_{n=1}^{\infty} \frac{(-1)^{n-1}}{n} = 1 - \frac{1}{2} + \frac{1}{3} - \frac{1}{4} + \cdots$ 稱為<strong>交錯調和級數（alternating harmonic series）</strong>。與其「正項版本」（調和級數發散）不同，這個級數<strong>收斂</strong>——其和為 $\ln 2$。</p>
+
+<div class="callout">
+<strong>💡 為什麼交錯級數能收斂？</strong><br>
+關鍵在於<strong>正負抵消（cancellation）</strong>。在一個交錯級數中，連續兩項互相部分抵消，使得部分和的振盪幅度越來越小。若 $b_n$ 遞減至 $0$，奇數部分和 $S_{2k-1}$ 遞減且有下界，偶數部分和 $S_{2k}$ 遞增且有上界，兩者趨近於同一極限。
+</div>
+
+<h3>交錯級數檢驗（Alternating Series Test）</h3>
+
+<div class="formula-card">
+<div class="formula-label">📐 交錯級數檢驗（Theorem 5.13）</div>
+<div class="eq">$$\sum_{n=1}^{\infty} (-1)^{n-1} b_n \text{（或 } \sum (-1)^n b_n \text{）收斂若：}$$</div>
+<div class="formula-note">(i) $b_n > 0$ 且 $b_{n+1} \le b_n$（遞減）對於所有足夠大的 $n$<br>(ii) $\displaystyle \lim_{n\to\infty} b_n = 0$</div>
+</div>
+
+<div class="callout-warn">
+<strong>⚡ 交錯級數檢驗的條件缺一不可</strong><br>
+若 $b_n$ 不遞減（例如 $b_n$ 在某些區間振盪），即使 $\lim b_n = 0$，級數仍可能發散。同樣地，若 $\lim b_n \neq 0$，交錯級數檢驗不適用——此時發散檢驗直接告訴你級數發散。
+</div>
+
+<details class="example"><summary>📝 範例</summary>
+<strong>📝 範例 5.19：交錯級數檢驗</strong><br>
+$\displaystyle \sum_{n=1}^{\infty} \frac{(-1)^{n-1}}{\sqrt{n}}$：$b_n = 1/\sqrt{n}$ 遞減且 $\lim b_n = 0$，故級數收斂。<br>
+$\displaystyle \sum_{n=1}^{\infty} (-1)^{n-1} \frac{n}{n+1}$：$\lim b_n = \lim \frac{n}{n+1} = 1 \neq 0$，交錯級數檢驗不適用，發散檢驗告訴我們級數發散。
+</details>
+
+<h3>交錯級數的餘項估計</h3>
+<p>對交錯級數，餘項估計特別簡潔：</p>
+
+<div class="formula-card">
+<div class="formula-label">📐 交錯級數餘項（Theorem 5.14）</div>
+<div class="eq">$$|R_N| = |S - S_N| \le b_{N+1}$$</div>
+<div class="formula-note">誤差的絕對值不超過<strong>第一個被省略的項</strong>的大小。這比積分檢驗的餘項估計簡單得多！</div>
+</div>
+
+<h3>絕對收斂與條件收斂</h3>
+<p>這是一個關鍵的區分：</p>
+<ul>
+  <li><strong>絕對收斂（absolute convergence）</strong>：$\sum |a_n|$ 收斂。此時 $\sum a_n$ 必定收斂。</li>
+  <li><strong>條件收斂（conditional convergence）</strong>：$\sum a_n$ 收斂但 $\sum |a_n|$ 發散。</li>
+</ul>
+
+<div class="callout-warn">
+<strong>⚡ 絕對收斂 ⇒ 收斂，但反過來不成立</strong><br>
+定理 5.15：若 $\sum |a_n|$ 收斂，則 $\sum a_n$ 收斂。但交錯調和級數就是一個條件收斂的反例：$\sum \frac{(-1)^{n-1}}{n}$ 收斂，但 $\sum \frac{1}{n}$（調和級數）發散。
+</div>
+
+<details class="example"><summary>📝 範例</summary>
+<strong>📝 範例 5.21：判斷絕對/條件收斂</strong><br>
+$\displaystyle \sum_{n=1}^{\infty} \frac{(-1)^{n-1}}{n^2}$：$\sum \frac{1}{n^2}$ 收斂（p-級數 $p=2$），故原級數<strong>絕對收斂</strong>。<br>
+$\displaystyle \sum_{n=1}^{\infty} \frac{(-1)^{n-1}}{\sqrt[3]{n}}$：$\sum \frac{1}{n^{1/3}}$ 發散（$p=1/3 \le 1$），但原級數滿足交錯級數檢驗條件，故<strong>條件收斂</strong>。
+</details>
+
+<div class="callout">
+<strong>💡 Riemann 重排定理</strong><br>
+條件收斂的級數可以透過<strong>重新排列項的順序</strong>來改變其和——甚至可以使其發散或收斂至任意實數。這在有限加法中完全不可能發生。絕對收斂的級數不受重排影響——這是絕對收斂最重要的性質之一。
+</div>
+
+<figure class="figure">
+<img src="../../pages/v2c5_pages/v2c5_page_446_c.png" alt="圖 5.17" loading="lazy">
+<figcaption>圖 5.17：交錯調和級數的部分和——奇數項遞減有下界，偶數項遞增有上界，兩者趨近同一極限</figcaption>
+</figure>
+
+<p><strong>交錯級數的誤差估計：</strong>交錯級數最實用的性質是誤差界限：用前 $N$ 項近似無窮級數時，誤差 $\le$ 第 $N+1$ 項的絕對值。換句話說，$|S - S_N| \le a_{N+1}$。這使交錯級數成為數值計算中的寵兒——你知道近似值有多少位是準確的。</p>
+</section>
+
+<!-- ================================================================ -->
+<!-- 5.6 RATIO AND ROOT TESTS -->
+<!-- ================================================================ -->
+<section id="s5-6">
+<h2>5.6 比值檢驗與根式檢驗（Ratio and Root Tests）</h2>
+
+<div style="margin-bottom:14px;font-size:12px;color:var(--tx2);line-height:1.8">
+<strong style="color:var(--tx)">🔑 本節重點</strong> ①比值檢驗 $
+\rho=\lim|a_{n+1}/a_n|$：$
+\rho<1$ 絕對收斂、$
+\rho>1$ 發散、$
+\rho=1$ 無結論 ②根式檢驗 $
+\rho=\lim\sqrt[n]{|a_n|}$：判斷標準同上 ③策略：階乘→比值檢驗；$n$次冪→根式檢驗 ④兩者都不需找比較對象，特別適合含階乘或指數的級數
+</div>
+
+<p>本章最後兩個收斂檢驗
+
+<h3>比值檢驗（Ratio Test）</h3>
+<p>比值檢驗透過分析相鄰項的比值 $\left|\frac{a_{n+1}}{a_n}\right|$ 來判斷收斂速度：若比值趨近於小於 $1$ 的數，表示項衰減得比幾何級數還快，級數絕對收斂。</p>
+
+<div class="formula-card">
+<div class="formula-label">📐 比值檢驗（Theorem 5.16）</div>
+<div class="eq">$$\text{令 } \rho = \lim_{n\to\infty} \left|\frac{a_{n+1}}{a_n}\right|$$</div>
+<div class="formula-note">$\rho < 1$：絕對收斂<br>$\rho > 1$（或 $\rho = \infty$）：發散<br>$\rho = 1$：無結論</div>
+</div>
+
+<details class="example"><summary>📝 範例</summary>
+<strong>📝 範例 5.23：比值檢驗</strong><br>
+$\displaystyle \sum_{n=1}^{\infty} \frac{n!}{n^n}$：$\left|\frac{a_{n+1}}{a_n}\right| = \frac{(n+1)!}{(n+1)^{n+1}} \cdot \frac{n^n}{n!} = \frac{n^n}{(n+1)^n} = \frac{1}{(1+1/n)^n} \to \frac{1}{e} < 1$。絕對收斂。<br>
+$\displaystyle \sum_{n=1}^{\infty} \frac{2^n}{n!}$：$\left|\frac{a_{n+1}}{a_n}\right| = \frac{2^{n+1}}{(n+1)!} \cdot \frac{n!}{2^n} = \frac{2}{n+1} \to 0 < 1$。絕對收斂。（實際上和為 $e^2 - 1$。）
+</details>
+
+<div class="callout-warn">
+<strong>⚡ $\rho = 1$ 時比值檢驗無結論</strong><br>
+對於任何 p-級數 $\sum 1/n^p$，$\lim |a_{n+1}/a_n| = 1$，但 p-級數有時收斂有時發散。這說明當 $\rho = 1$ 時，級數的「精細結構」才是關鍵——比值檢驗不夠靈敏。
+</div>
+
+<h3>根式檢驗（Root Test）</h3>
+<p>根式檢驗分析 $\sqrt[n]{|a_n|}$ 的極限。當 $a_n$ 本身是某個表達式的 $n$ 次冪時，根式檢驗特別方便。</p>
+
+<div class="formula-card">
+<div class="formula-label">📐 根式檢驗（Theorem 5.17）</div>
+<div class="eq">$$\text{令 } \rho = \lim_{n\to\infty} \sqrt[n]{|a_n|}$$</div>
+<div class="formula-note">$\rho < 1$：絕對收斂<br>$\rho > 1$（或 $\rho = \infty$）：發散<br>$\rho = 1$：無結論</div>
+</div>
+
+<details class="example"><summary>📝 範例</summary>
+<strong>📝 範例 5.24：根式檢驗</strong><br>
+$\displaystyle \sum_{n=1}^{\infty} \left(\frac{2n+1}{3n+2}\right)^n$：$\sqrt[n]{|a_n|} = \frac{2n+1}{3n+2} \to \frac{2}{3} < 1$。絕對收斂。<br>
+$\displaystyle \sum_{n=1}^{\infty} \frac{n^n}{2^{n^2}}$：$\sqrt[n]{|a_n|} = \frac{n}{2^n} \to 0 < 1$。絕對收斂。
+</details>
+
+<div class="callout">
+<strong>💡 比值 vs. 根式：何時用哪個？</strong><br>
+若項包含<strong>階乘（$n!$）</strong>→ 用比值檢驗（階乘在比值中簡化）。<br>
+若項包含<strong>$n$ 次冪（$(\cdots)^n$）</strong>→ 用根式檢驗（$n$ 次根消去冪次）。<br>
+若兩者都不明顯且比值檢驗在計算上可行，通常先嘗試比值檢驗。$\rho=1$ 時兩者都無結論。
+</div>
+
+<h3>收斂檢驗的策略選擇</h3>
+<p>面對一個級數時，按以下順序思考：</p>
+<ol>
+  <li><strong>是否為熟悉的級數？</strong>幾何級數？p-級數？調和級數？→ 直接判斷。</li>
+  <li><strong>是否為交錯級數？</strong>→ 用交錯級數檢驗。若要判斷絕對收斂，檢查 $\sum |a_n|$。</li>
+  <li><strong>是否類似幾何級數或 p-級數？</strong>→ 用比較檢驗或極限比較檢驗。</li>
+  <li><strong>項是否包含階乘或冪次？</strong>→ 用比值檢驗（階乘）或根式檢驗（冪次）。</li>
+  <li><strong>以上都失敗？</strong>→ 用發散檢驗。若 $\lim a_n \neq 0$，發散。若 $\lim a_n = 0$，嘗試積分檢驗。</li>
+</ol>
+
+<details class="example"><summary>📝 範例</summary>
+<strong>📝 範例 5.25：策略演練</strong><br>
+$\displaystyle \sum_{n=1}^{\infty} \frac{n^3}{3^n}$：包含冪次，比值檢驗：$\rho = \frac{1}{3} < 1$，絕對收斂。<br>
+$\displaystyle \sum_{n=1}^{\infty} \frac{(-1)^n}{\ln n}$：交錯級數，$b_n = 1/\ln n$ 遞減至 $0$，收斂（條件收斂）。<br>
+$\displaystyle \sum_{n=1}^{\infty} \left(1 + \frac{1}{n}\right)^{n^2}$：根式檢驗：$\sqrt[n]{a_n} = (1+1/n)^n \to e > 1$，發散。
+</details>
+
+<figure class="figure">
+<img src="../../pages/v2c5_pages/v2c5_page_425_c.png" alt="圖 5.14" loading="lazy">
+<figcaption>圖 5.14：積分檢驗的完整圖解——矩形內接與外接曲線，給出級數收斂與發散的幾何條件</figcaption>
+</figure>
+
+
+<details class="derive model-host" style="margin:20px 0" data-model-host="taylor">
+<summary>🎮 互動模型：Taylor 多項式逼近</summary>
+<div style="padding:8px 0"><p style="font-size:13px;color:var(--tx2);margin-bottom:12px">增加次數 n，觀察 Taylor 多項式如何逼近原函數。</p>
+<div data-taylor-model data-model-mount></div></div>
+</details>
+
+</section>
+
+<!-- ====== Key Concepts ====== -->
+<section id="key-concepts">
+<h2>📋 關鍵概念回顧（Key Concepts）</h2>
+<ol>
+  <li><strong>序列（Sequence）</strong>：定義在正整數上的函數 $\{a_n\}$。收斂指 $\lim_{n\to\infty} a_n$ 存在且有限，否則發散。</li>
+  <li><strong>單調有界定理（Monotonic Bounded Theorem）</strong>：每個有界且單調的序列必定收斂。這是判斷序列收斂的重要工具——不需知道極限值即可確認收斂。</li>
+  <li><strong>無窮級數（Infinite Series）</strong>：$\sum a_n$ 定義為部分和序列 $\{S_n\}$ 的極限。若 $\lim S_n$ 存在則級數收斂。</li>
+  <li><strong>幾何級數（Geometric Series）</strong>：$\sum ar^{n-1}$ 在 $|r| < 1$ 時收斂至 $\frac{a}{1-r}$，是判斷其他級數的基準。</li>
+  <li><strong>發散檢驗（Divergence Test）</strong>：若 $\lim a_n \neq 0$，則 $\sum a_n$ 發散。但 $\lim a_n = 0$ 不保證收斂（例如調和級數）。</li>
+  <li><strong>積分檢驗（Integral Test）</strong>：對於正項遞減函數 $f(n)=a_n$，$\sum a_n$ 與 $\int_1^\infty f(x)dx$ 同斂散。同時給出餘項估計 $R_n \le \int_n^\infty f(x)dx$。</li>
+  <li><strong>比較檢驗（Comparison / Limit Comparison Test）</strong>：將未知級數與已知斂散性的級數比較。若 $a_n \le b_n$ 且 $\sum b_n$ 收斂則 $\sum a_n$ 收斂；或 $\lim \frac{a_n}{b_n} = c > 0$ 則兩者同斂散。</li>
+  <li><strong>交錯級數檢驗（Alternating Series Test）</strong>：若 $b_n > 0$ 遞減且 $\lim b_n = 0$，則 $\sum (-1)^{n-1}b_n$ 收斂。餘項滿足 $|R_n| \le b_{n+1}$。</li>
+  <li><strong>絕對收斂與條件收斂</strong>：$\sum |a_n|$ 收斂 ⇒ $\sum a_n$ 收斂（絕對收斂）。$\sum a_n$ 收斂但 $\sum |a_n|$ 發散 = 條件收斂。</li>
+  <li><strong>比值檢驗（Ratio Test）</strong>：$\lim \left|\frac{a_{n+1}}{a_n}
+\right| = L$。$L<1$ 絕對收斂；$L>1$（或 $\infty$）發散；$L=1$ 無法判定。</li>
+  <li><strong>根式檢驗（Root Test）</strong>：$\lim \sqrt[n]{|a_n|} = L$。判別準則與比值檢驗相同，對含 $n$ 次冪的級數特別有效。</li>
+  <li><strong>策略</strong>：先測 $\lim a_n \neq 0$（發散檢驗）；若項含階乘或冪次用比值檢驗；若項含 $n$ 次冪用根式檢驗；正項遞減函數用積分檢驗；與已知級數比較用比較檢驗。</li>
+</ol>
+</section>
+
+<!-- ====== Key Equations ====== -->
+<section id="key-equations">
+<h2>📐 關鍵公式（Key Equations）</h2>
+<table><caption>表 1：📐 關鍵公式（Key Equations）</caption>
+<thead><tr><th>公式</th><th>說明</th></tr></thead>
+<tbody>
+<tr><td>$$\sum_{n=1}^\infty ar^{n-1} = \frac{a}{1-r},\quad |r|<1$$</td><td>幾何級數和</td></tr>
+<tr><td>$$\sum_{n=1}^\infty \frac{1}{n^p}\quad \begin{cases} \text{收斂}, & p>1 \\ \text{發散}, & p \le 1 \end{cases}$$</td><td>$p$-級數判別法</td></tr>
+<tr><td>$$\lim_{n\to\infty} a_n \neq 0 \;\Longrightarrow\; \sum a_n \text{ 發散}$$</td><td>發散檢驗（必要非充分條件）</td></tr>
+<tr><td>$$R_n = S - S_n \le \int_n^\infty f(x)\,dx$$</td><td>積分檢驗餘項估計</td></tr>
+<tr><td>$$\lim_{n\to\infty} \frac{a_n}{b_n} = c > 0 \;\Longrightarrow\; \sum a_n \text{ 與 } \sum b_n \text{ 同斂散}$$</td><td>極限比較檢驗</td></tr>
+<tr><td>$$\sum_{n=1}^\infty (-1)^{n-1}b_n,\; b_n>0,\; b_n\searrow,\; b_n\to 0 \;\Longrightarrow\; \text{收斂}$$</td><td>交錯級數檢驗</td></tr>
+<tr><td>$$|R_n| \le b_{n+1}$$</td><td>交錯級數餘項界限</td></tr>
+<tr><td>$$\lim_{n\to\infty} \left|\frac{a_{n+1}}{a_n}
+\right| = L \quad \begin{cases} L<1: \text{絕對收斂} \\ L>1: \text{發散} \\ L=1: \text{無法判定} \end{cases}$$</td><td>比值檢驗</td></tr>
+<tr><td>$$\lim_{n\to\infty} \sqrt[n]{|a_n|} = L \quad \text{（判別同比值檢驗）}$$</td><td>根式檢驗</td></tr>
+<tr><td>$$\sum_{n=1}^\infty \frac{1}{n} \text{ 發散（調和級數）}$$</td><td>經典反例：$a_n\to 0$ 但級數發散</td></tr>
+<tr><td>$$\sum_{n=1}^\infty \frac{(-1)^{n-1}}{n} = \ln 2$$</td><td>交錯調和級數（條件收斂）</td></tr>
+<tr><td>$$\lim_{n\to\infty} \left(1 + \frac{1}{n}
+\right)^n = e$$</td><td>$e$ 的序列定義</td></tr>
+</tbody>
+</table>
+</section>
+
+<!-- ================================================================ -->
+<!-- SUMMARY -->
+<!-- ================================================================ -->
+<section id="summary">
+<h2>本章摘要</h2>
+
+<p>本章建立了微積分中最強大的工具之一：<strong>無窮級數</strong>。從序列的基本定義出發，我們逐步建立了判斷級數收斂性的完整體系。</p>
+
+<h3>🔑 本章關鍵概念總整理</h3>
+
+<h4>5.1 序列</h4>
+<ul>
+  <li>序列是定義在正整數上的函數；收斂指 $\lim a_n$ 存在且有限</li>
+  <li>有界 + 單調 ⇒ 收斂（單調收斂定理）</li>
+  <li>等比序列 $r^n$ 在 $|r|&lt;1$ 時收斂至 $0$，$r=1$ 時收斂至 $1$，否則發散</li>
+</ul>
+
+<h4>5.2 無窮級數</h4>
+<ul>
+  <li>級數收斂 ⇔ 部分和序列 $\{S_N\}$ 收斂</li>
+  <li>幾何級數 $\sum ar^{n-1}$：$|r|&lt;1$ 時收斂至 $\frac{a}{1-r}$</li>
+  <li>調和級數 $\sum \frac{1}{n}$ 發散（經典反例！）</li>
+  <li>Telescoping 級數：大部分項消去，部分和簡化為有限項</li>
+</ul>
+
+<h4>5.3 發散與積分檢驗</h4>
+<ul>
+  <li>發散檢驗：$\lim a_n \neq 0$ ⇒ 級數發散（反過來不成立）</li>
+  <li>積分檢驗：$\sum a_n$ 與 $\int_1^{\infty} f(x)dx$ 同收同散</li>
+  <li>p-級數 $\sum 1/n^p$：$p>1$ 收斂，$p \le 1$ 發散</li>
+  <li>餘項 $R_N$ 由積分給出上下界</li>
+</ul>
+
+<h4>5.4 比較檢驗</h4>
+<ul>
+  <li>直接比較：$a_n \le b_n$ 且 $\sum b_n$ 收斂 ⇒ $\sum a_n$ 收斂</li>
+  <li>極限比較：$\lim a_n/b_n = L$，$0&lt;L&lt;\infty$ 則同收同散</li>
+</ul>
+
+<h4>5.5 交錯級數</h4>
+<ul>
+  <li>交錯級數檢驗：$b_n$ 遞減至 $0$ ⇒ $\sum (-1)^{n-1}b_n$ 收斂</li>
+  <li>餘項：$|R_N| \le b_{N+1}$</li>
+  <li>絕對收斂 ⇒ 收斂；條件收斂 ⇒ 重排可改變和</li>
+</ul>
+
+<h4>5.6 比值與根式檢驗</h4>
+<ul>
+  <li>比值檢驗：$\rho = \lim |a_{n+1}/a_n|$；$\rho&lt;1$ 收斂，$\rho>1$ 發散，$\rho=1$ 無結論</li>
+  <li>根式檢驗：$\rho = \lim \sqrt[n]{|a_n|}$；同樣準則</li>
+  <li>策略：先看是否為熟悉級數 → 交錯？→ 類似幾何/p？→ 有階乘/冪？→ 發散檢驗/積分檢驗</li>
+</ul>
+</section>
+
+<!-- ================================================================ -->
+<!-- TEST SUMMARY TABLE -->
+<!-- ================================================================ -->
+<section id="test-table">
+<h2>📊 收斂檢驗一覽表</h2>
+
+<table class="data-table" data-variant="decision"><caption>表 2：📊 收斂檢驗一覽表</caption>
+<thead>
+<tr><th>檢驗名稱</th><th>適用級數</th><th>收斂條件</th><th>發散條件</th><th>注意事項</th></tr>
+</thead>
+<tbody>
+<tr>
+  <td class="data-table__label">發散檢驗</td>
+  <td>任何 $\sum a_n$</td>
+  <td>—（不能證明收斂）</td>
+  <td>$\lim a_n \neq 0$</td>
+  <td>$\lim a_n = 0$ 時無結論</td>
+</tr>
+<tr>
+  <td class="data-table__label">幾何級數</td>
+  <td>$\sum ar^{n-1}$</td>
+  <td>$|r| < 1$</td>
+  <td>$|r| \ge 1$</td>
+  <td>和為 $\frac{a}{1-r}$</td>
+</tr>
+<tr>
+  <td class="data-table__label">p-級數</td>
+  <td>$\sum \frac{1}{n^p}$</td>
+  <td>$p > 1$</td>
+  <td>$p \le 1$</td>
+  <td>$p=1$ 為調和級數</td>
+</tr>
+<tr>
+  <td class="data-table__label">積分檢驗</td>
+  <td>正項 $a_n=f(n)$</td>
+  <td>$\int_1^{\infty} f(x)dx$ 收斂</td>
+  <td>$\int_1^{\infty} f(x)dx$ 發散</td>
+  <td>$f$ 連續正遞減</td>
+</tr>
+<tr>
+  <td class="data-table__label">比較檢驗</td>
+  <td>正項 $a_n$</td>
+  <td>$a_n \le b_n$ 且 $\sum b_n$ 收斂</td>
+  <td>$a_n \ge b_n$ 且 $\sum b_n$ 發散</td>
+  <td>方向很關鍵！</td>
+</tr>
+<tr>
+  <td class="data-table__label">極限比較檢驗</td>
+  <td>正項 $a_n, b_n$</td>
+  <td>$\lim a_n/b_n = L$，$0<L<\infty$，$\sum b_n$ 收斂</td>
+  <td>$\lim a_n/b_n = L$，$0<L<\infty$，$\sum b_n$ 發散</td>
+  <td>$L=0$ 或 $\infty$ 時也有結論</td>
+</tr>
+<tr>
+  <td class="data-table__label">交錯級數檢驗</td>
+  <td>$\sum (-1)^{n-1}b_n$</td>
+  <td>$b_n$ 遞減且 $\lim b_n = 0$</td>
+  <td>—（條件不滿足時無法用此檢驗判定發散）</td>
+  <td>餘項 $\le b_{N+1}$</td>
+</tr>
+<tr>
+  <td class="data-table__label">比值檢驗</td>
+  <td>任何 $a_n \neq 0$</td>
+  <td>$\rho = \lim |a_{n+1}/a_n| < 1$</td>
+  <td>$\rho > 1$ 或 $\rho = \infty$</td>
+  <td>$\rho=1$ 無結論；適合階乘</td>
+</tr>
+<tr>
+  <td class="data-table__label">根式檢驗</td>
+  <td>任何</td>
+  <td>$\rho = \lim \sqrt[n]{|a_n|} < 1$</td>
+  <td>$\rho > 1$ 或 $\rho = \infty$</td>
+  <td>$\rho=1$ 無結論；適合冪次</td>
+</tr>
+</tbody>
+</table>
+</section>
+
+<!-- ================================================================ -->
+<!-- COMMON MISTAKES -->
+<!-- ================================================================ -->
+<section id="common-mistakes">
+<h2>⚠️ 初學者常見錯誤</h2>
+
+<div class="callout-warn">
+<strong>⚡ 錯誤 1：把 $\lim a_n = 0$ 當成級數收斂的充分條件</strong><br>
+這恐怕是級數理論中最常見的誤解。<strong>發散檢驗只能證明發散，不能證明收斂。</strong>調和級數 $\sum 1/n$ 的項趨於 $0$ 卻發散。正確的邏輯是：若級數收斂，則 $\lim a_n = 0$（必要條件）；但 $\lim a_n = 0$ 不保證收斂。永遠記住調和級數這個反例。
+</div>
+
+<div class="callout-warn">
+<strong>⚡ 錯誤 2：比較檢驗時搞錯不等式方向</strong><br>
+要證明收斂：你需要找一個<strong>更大的</strong>收斂級數（你的小於它）。要證明發散：你需要找一個<strong>更小的</strong>發散級數（你的大於它）。口訣：「小於收斂者收斂，大於發散者發散」。如果方向不對，改用極限比較檢驗。
+</div>
+
+<div class="callout-warn">
+<strong>⚡ 錯誤 3：混淆序列收斂與級數收斂</strong><br>
+序列 $\{a_n\}$ 收斂談的是 $\lim a_n$ 是否存在。級數 $\sum a_n$ 收斂談的是 $\lim S_N$ 是否存在。這是兩個完全不同的問題。例如 $a_n = 1/n$：序列收斂至 $0$，但級數 $\sum 1/n$ 發散。
+</div>
+
+<div class="callout-warn">
+<strong>⚡ 錯誤 4：認為交錯級數檢驗的條件是可選項</strong><br>
+交錯級數檢驗要求兩個條件：(1) $b_n$ 遞減，(2) $\lim b_n = 0$。兩個條件缺一不可。若 $b_n$ 不遞減，即使 $\lim b_n = 0$，級數仍可能發散。例如構造一個交錯級數，讓 $b_n$ 在奇數項很大、偶數項很小但不遞減——級數會發散。
+</div>
+
+<div class="callout-warn">
+<strong>⚡ 錯誤 5：比值檢驗 $\rho=1$ 時強下結論</strong><br>
+對於任何 p-級數，比值檢驗和根式檢驗都給出 $\rho=1$。但 p-級數有時收斂有時發散。當 $\rho=1$ 時，必須使用其他檢驗法（比較檢驗、積分檢驗等）。永遠不要說「因為 $\rho=1$ 所以級數收斂/發散」——你應該說「比值檢驗無結論」。
+</div>
+</section>
+
+<!-- ====== Self-Check ====== -->
+<section id="self-check">
+<h2>✅ 自我檢測（Self-Check）</h2>
+<p>完成以下題目檢驗你對本章核心概念的掌握程度。點擊展開查看答案。</p>
+
+<details class="derive"><summary>題 1：幾何級數求和 — $\displaystyle\sum_{n=1}^{\infty} \left(\frac{2}{3}
+\right)^{n-1}$ 的和是多少？</summary>
+<p><strong>答案：</strong>這是首項 $a = 1$、公比 $r = \frac{2}{3}$ 的幾何級數。$|r| = \frac{2}{3} < 1$，故收斂。<br>
+和 $S = \frac{a}{1-r} = \frac{1}{1 - 2/3} = \frac{1}{1/3} = 3$。</p>
+</details>
+
+<details class="derive"><summary>題 2：p-級數判別 — $\displaystyle\sum_{n=1}^{\infty} \frac{1}{n^3}$ 收斂還是發散？$\displaystyle\sum_{n=1}^{\infty} \frac{1}{\sqrt{n}}$ 呢？</summary>
+<p><strong>答案：</strong>$p$-級數 $\sum \frac{1}{n^p}$ 當 $p>1$ 收斂，$p \leq 1$ 發散。<br>
+$\sum \frac{1}{n^3}$：$p = 3 > 1$ → <strong>收斂</strong>。<br>
+$\sum \frac{1}{\sqrt{n}} = \sum \frac{1}{n^{1/2}}$：$p = 1/2 \leq 1$ → <strong>發散</strong>。</p>
+</details>
+
+<details class="derive"><summary>題 3：發散檢驗 — $\displaystyle\sum_{n=1}^{\infty} \frac{n}{n+1}$ 收斂還是發散？</summary>
+<p><strong>答案：</strong>$\lim_{n\to\infty} \frac{n}{n+1} = 1 \neq 0$。根據發散檢驗，$\lim a_n \neq 0$ 則級數必發散。因此此級數<strong>發散</strong>。<br>
+注意：若 $\lim a_n = 0$，發散檢驗無結論（如調和級數 $\sum \frac{1}{n}$ 就是 $\lim a_n = 0$ 但發散的例子）。</p>
+</details>
+
+<details class="derive"><summary>題 4：交錯級數檢驗 — $\displaystyle\sum_{n=1}^{\infty} \frac{(-1)^{n-1}}{n}$ 收斂嗎？是絕對收斂還是條件收斂？</summary>
+<p><strong>答案：</strong>$b_n = 1/n$ 滿足：(1) $b_n$ 遞減，(2) $\lim b_n = 0$。由交錯級數檢驗知級數<strong>收斂</strong>。<br>
+絕對值級數 $\sum |a_n| = \sum \frac{1}{n}$ 為調和級數，<strong>發散</strong>。因此原級數為<strong>條件收斂</strong>。</p>
+</details>
+
+<details class="derive"><summary>題 5：極限比較檢驗 — $\displaystyle\sum_{n=2}^{\infty} \frac{1}{n^2 - 1}$ 收斂還是發散？</summary>
+<p><strong>答案：</strong>與 $\sum \frac{1}{n^2}$ 比較。$\lim_{n\to\infty} \frac{1/(n^2-1)}{1/n^2} = \lim_{n\to\infty} \frac{n^2}{n^2-1} = 1$（$0 < 1 < \infty$）。<br>
+$\sum \frac{1}{n^2}$ 是 $p=2>1$ 的 $p$-級數，收斂。由極限比較檢驗，原級數也<strong>收斂</strong>。</p>
+</details>
+</section>
+
+<!-- ====== Extras ====== -->
+<section id="extras">
+<h2>📚 延伸資源</h2>
+
+<ul>
+  <li><strong>Khan Academy — Sequences &amp; Series</strong>：互動練習，涵蓋數列極限、幾何級數、各種收斂檢驗法</li>
+  <li><strong>3Blue1Brown — Essence of Calculus</strong>：YouTube 系列，第 10 章以視覺化方式解釋泰勒級數的直覺，與本章的級數收斂性密切相關</li>
+  <li><strong>Paul's Online Notes — Series &amp; Sequences</strong>：詳盡的範例與習題，涵蓋所有檢驗法的逐步解題流程</li>
+  <li>下一章預告：<strong>第 10 章 — 冪級數</strong>將把無窮級數提升到新層次——用級數來表示函數本身，引入泰勒級數、麥克勞林級數，以及收斂區間的概念</li>
+</ul>
+</section>
+
+<script>
+
+function toggleTheme() {
+  const html = document.documentElement;
+  const btn = document.getElementById('themeBtn');
+  if (html.getAttribute('data-theme') === 'dark') {
+    html.setAttribute('data-theme', 'light');
+    btn.textContent = '🌙 深色模式';
+    localStorage.setItem('calculus-theme', 'light');
+  } else {
+    html.setAttribute('data-theme', 'dark');
+    btn.textContent = '☀️ 淺色模式';
+    localStorage.setItem('calculus-theme', 'dark');
+  }
+}
+// Restore saved theme
+(function() {
+  const saved = localStorage.getItem('calculus-theme');
+  if (saved === 'dark') {
+    document.documentElement.setAttribute('data-theme', 'dark');
+    const btn = document.getElementById('themeBtn');
+    if (btn) btn.textContent = '☀️ 淺色模式';
+  }
+})();
+</script>
+
+</main>
+<script defer src="../assets/course-ui.js"></script>
+
+<script defer src="../assets/taylor-polynomial-model.js"></script>
+</body>
+</html>

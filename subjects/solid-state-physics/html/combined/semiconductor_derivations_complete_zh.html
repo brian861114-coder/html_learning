@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Semiconductor Physics and Devices｜完整推導版</title>
+<link rel="stylesheet" href="../../../../shared/core.css">
+<script src="../../../../shared/core.js" defer></script>
+<link rel="stylesheet" href="../../../../shared/components/formula-problem.css">
+<link rel="stylesheet" href="../../../../shared/navigation.css" data-shared-navigation>
+</head>
+<body>
+<nav class="sidebar" aria-label="本章目錄"><div class="sidebar-header"><div class="sidebar-subtitle">半導體物理與元件</div><h2 class="sidebar-title">Semiconductor Physics and Devices 完整推導版</h2></div><ul class="toc"><li class="ns"><a href="#section-1">先看總骨架</a></li><li class="ns"><a href="#section-2">推導 A：內建電位 Vbi</a></li><li class="ns"><a href="#section-3">推導 B：理想二極體方程式</a></li><li class="ns"><a href="#section-4">推導 C：MOS capacitor → MOSFET</a></li><li class="ns"><a href="#section-5">推導 D：BJT 的放大機制</a></li><li class="ns"><a href="#section-6">推導 E：bandgap → 吸收 → 光電流 → 發光 → 雷射</a></li><li class="ns"><a href="#section-7">你接下來該怎麼讀</a></li></ul><div class="sidebar-tools"><button type="button" data-action="toggle-theme" aria-label="切換深色或淺色模式">切換顯示主題</button></div></nav>
+
+<a class="portal-home-link" href="../index.html">返回學習中心</a>
+  <main class="chapter-page">
+    <section class="hero chapter-header">
+      <span class="eyebrow">Detailed Derivation Map</span>
+      <h1>Semiconductor Physics and Devices 完整推導版</h1>
+      <p class="lead">這一頁不是摘要，而是把這本書最核心的五條公式鏈拆開：從能帶統計到 pn 接面、從接面到二極體、從 MOS 電容到 MOSFET、從注入到 BJT 放大、從 bandgap 到光偵測與發光。每條鏈都會標明起點、假設、微分方程、邊界條件、近似與最後結論。</p>
+      <div class="hero-links">
+        <a class="link-btn" href="semiconductor_book_structure_map_zh.html">回到章節結構主圖</a>
+        <a class="link-btn" href="完整整合版_半導體物理與元件.html">開啟完整整合版</a>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2 id="section-1">先看總骨架</h2>
+      <p class="lead">如果你把這本書當成積木堆疊，真正支撐所有裝置章節的主幹其實很少，主要只有五條。</p>
+      <ol class="reasoning-path">
+        <li>能帶統計 → 本徵濃度 n<sub>i</sub> → mass action law → 平衡載子濃度。</li>
+        <li>平衡載子濃度 → 接面擴散與空乏區 → 內建電位 V<sub>bi</sub>。</li>
+        <li>少數載子注入 + 連續方程 + 邊界條件 → 理想二極體方程式。</li>
+        <li>MOS capacitor 電壓分配 + 強反轉條件 + 通道電荷積分 → MOSFET I-V。</li>
+        <li>雙接面注入/收集 + 薄基區傳輸 → BJT 放大；bandgap + 吸收/復合 → 光電元件。</li>
+      </ol>
+    </section>
+
+    <section class="panel">
+      <h2 id="section-2">推導 A：內建電位 V<sub>bi</sub></h2>
+      <p class="lead">問題不是「公式長怎樣」，而是「為什麼接面一形成就必須長出這個勢壘」。</p>
+      <div class="info-card">
+        <div class="step">
+          <strong>Step 1 ｜ 從平衡統計寫出 n 與 p</strong>
+          <div class="eq">n = N<sub>c</sub> exp[-(E<sub>c</sub> - E<sub>F</sub>) / kT]</div>
+          <div class="eq">p = N<sub>v</sub> exp[-(E<sub>F</sub> - E<sub>v</sub>) / kT]</div>
+          <div class="eq">np = N<sub>c</sub>N<sub>v</sub> exp[-(E<sub>c</sub> - E<sub>v</sub>) / kT] = N<sub>c</sub>N<sub>v</sub> exp(-E<sub>g</sub> / kT)</div>
+          <div class="eq">n<sub>i</sub><sup>2</sup> = N<sub>c</sub>N<sub>v</sub> exp(-E<sub>g</sub> / kT)</div>
+          <p class="formula-note">所以平衡條件下自然得到 <code>np = n<sub>i</sub><sup>2</sup></code>。這就是 mass action law 的來源。</p>
+        </div>
+        <div class="step">
+          <strong>Step 2 ｜ 在非簡併、完全游離摻雜下寫出兩側濃度</strong>
+          <div class="eq">n 區：n<sub>n0</sub> ≈ N<sub>d</sub>, p<sub>n0</sub> = n<sub>i</sub><sup>2</sup> / N<sub>d</sub></div>
+          <div class="eq">p 區：p<sub>p0</sub> ≈ N<sub>a</sub>, n<sub>p0</sub> = n<sub>i</sub><sup>2</sup> / N<sub>a</sub></div>
+          <p class="formula-note">這一步把摻雜濃度和真正的載子濃度連上。後面所有接面推導都要靠它。</p>
+        </div>
+        <div class="step">
+          <strong>Step 3 ｜ 接觸後先擴散，再形成電場</strong>
+          <p class="formula-note">電子從 n 側往 p 側擴散，電洞從 p 側往 n 側擴散。擴散留下不可移動的離子化施主與受主，因此空乏區出現。空乏區內的固定電荷產生電場，這個電場會阻止進一步擴散。</p>
+        </div>
+        <div class="step">
+          <strong>Step 4 ｜ 平衡要求整個結構只有一條 Fermi level</strong>
+          <div class="eq">qV<sub>bi</sub> = E<sub>i,p</sub> - E<sub>i,n</sub></div>
+          <div class="eq">n = n<sub>i</sub> exp[(E<sub>F</sub> - E<sub>i</sub>) / kT], p = n<sub>i</sub> exp[(E<sub>i</sub> - E<sub>F</sub>) / kT]</div>
+          <p class="formula-note">只要 E<sub>F</sub> 還不平，結構內就還有淨驅動力，所以還不是平衡。能帶彎曲存在的目的，就是把 E<sub>F</sub> 拉平。</p>
+        </div>
+        <div class="step">
+          <strong>Step 5 ｜ 代回去，V<sub>bi</sub> 自然出現</strong>
+          <div class="eq">E<sub>F</sub> - E<sub>i,n</sub> = kT ln(N<sub>d</sub> / n<sub>i</sub>)</div>
+          <div class="eq">E<sub>i,p</sub> - E<sub>F</sub> = kT ln(N<sub>a</sub> / n<sub>i</sub>)</div>
+          <div class="eq">E<sub>i,p</sub> - E<sub>i,n</sub> = kT ln[(N<sub>a</sub>N<sub>d</sub>) / n<sub>i</sub><sup>2</sup>]</div>
+          <div class="eq">V<sub>bi</sub> = V<sub>T</sub> ln[(N<sub>a</sub>N<sub>d</sub>) / n<sub>i</sub><sup>2</sup>], V<sub>T</sub> = kT/q</div>
+          <div class="callout">橋接：第 3 章給你統計基礎，第 4 章把它變成接面平衡。</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2 id="section-3">推導 B：理想二極體方程式</h2>
+      <p class="lead">核心不是硬背 <code>I = I<sub>S</sub>(e^{V/V<sub>T</sub>} - 1)</code>，而是看懂它其實只是少數載子注入與擴散的結果。</p>
+      <div class="info-card">
+        <div class="step">
+          <strong>Step 1 ｜ 起點是漂移-擴散與連續方程</strong>
+          <div class="eq">J<sub>n</sub> = qnμ<sub>n</sub>E + qD<sub>n</sub>(dn/dx)</div>
+          <div class="eq">J<sub>p</sub> = qpμ<sub>p</sub>E - qD<sub>p</sub>(dp/dx)</div>
+          <div class="eq">D<sub>p</sub> d<sup>2</sup>Δp<sub>n</sub>/dx<sup>2</sup> - Δp<sub>n</sub>/τ<sub>p</sub> = 0</div>
+          <div class="eq">D<sub>n</sub> d<sup>2</sup>Δn<sub>p</sub>/dx<sup>2</sup> - Δn<sub>p</sub>/τ<sub>n</sub> = 0</div>
+          <p class="formula-note">前提：低注入、穩態、一維、空乏區復合忽略、準中性區內電場很小。</p>
+        </div>
+        <div class="step">
+          <strong>Step 2 ｜ 正向偏壓改變的是邊界條件</strong>
+          <div class="eq">p<sub>n</sub>(0) = p<sub>n0</sub> exp(V / V<sub>T</sub>)</div>
+          <div class="eq">n<sub>p</sub>(0) = n<sub>p0</sub> exp(V / V<sub>T</sub>)</div>
+          <div class="eq">Δp<sub>n</sub>(0) = p<sub>n0</sub>[exp(V / V<sub>T</sub>) - 1]</div>
+          <div class="eq">Δn<sub>p</sub>(0) = n<sub>p0</sub>[exp(V / V<sub>T</sub>) - 1]</div>
+          <p class="formula-note">真正被改變的是空乏區邊緣的少數載子濃度。這就是為什麼二極體呈指數，而不是線性。</p>
+        </div>
+        <div class="step">
+          <strong>Step 3 ｜ 解擴散方程得到空間衰減</strong>
+          <div class="eq">L<sub>p</sub> = √(D<sub>p</sub>τ<sub>p</sub>), L<sub>n</sub> = √(D<sub>n</sub>τ<sub>n</sub>)</div>
+          <div class="eq">Δp<sub>n</sub>(x) = Δp<sub>n</sub>(0) exp(-x / L<sub>p</sub>)</div>
+          <div class="eq">Δn<sub>p</sub>(x) = Δn<sub>p</sub>(0) exp(-x / L<sub>n</sub>)</div>
+        </div>
+        <div class="step">
+          <strong>Step 4 ｜ 電流由邊界梯度決定</strong>
+          <div class="eq">J<sub>p</sub>(0) = qD<sub>p</sub>Δp<sub>n</sub>(0) / L<sub>p</sub></div>
+          <div class="eq">J<sub>n</sub>(0) = qD<sub>n</sub>Δn<sub>p</sub>(0) / L<sub>n</sub></div>
+          <div class="eq">J = q[(D<sub>p</sub>/L<sub>p</sub>)p<sub>n0</sub> + (D<sub>n</sub>/L<sub>n</sub>)n<sub>p0</sub>][exp(V / V<sub>T</sub>) - 1]</div>
+        </div>
+        <div class="step">
+          <strong>Step 5 ｜ 乘上面積得到 Shockley 方程</strong>
+          <div class="eq">I = I<sub>S</sub>[exp(V / V<sub>T</sub>) - 1]</div>
+          <div class="eq">I<sub>S</sub> = qA[(D<sub>p</sub>/L<sub>p</sub>)p<sub>n0</sub> + (D<sub>n</sub>/L<sub>n</sub>)n<sub>p0</sub>]</div>
+          <div class="eq">p<sub>n0</sub> = n<sub>i</sub><sup>2</sup>/N<sub>d</sub>, n<sub>p0</sub> = n<sub>i</sub><sup>2</sup>/N<sub>a</sub></div>
+          <div class="callout">橋接：第 5 章給 drift-diffusion，第 6 章給連續方程，第 7-8 章把它關成一顆真正可量測的 diode。</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2 id="section-4">推導 C：MOS capacitor → MOSFET</h2>
+      <p class="lead">MOSFET 不是突然冒出來的元件，它是 MOS capacitor 再加 source/drain 之後的自然延伸。</p>
+      <div class="info-card">
+        <div class="step">
+          <strong>Step 1 ｜ 先寫 MOS capacitor 的電壓分配</strong>
+          <div class="eq">V<sub>G</sub> = V<sub>FB</sub> + ψ<sub>s</sub> + Q<sub>s</sub>/C<sub>ox</sub></div>
+          <div class="eq">C<sub>ox</sub> = ε<sub>ox</sub>/t<sub>ox</sub></div>
+          <div class="eq">V<sub>FB</sub> = φ<sub>ms</sub> - Q<sub>ox</sub>/C<sub>ox</sub></div>
+        </div>
+        <div class="step">
+          <strong>Step 2 ｜ 門檻電壓來自強反轉條件</strong>
+          <div class="eq">φ<sub>F</sub> = V<sub>T</sub> ln(N<sub>a</sub> / n<sub>i</sub>)</div>
+          <div class="eq">ψ<sub>s,th</sub> = 2φ<sub>F</sub></div>
+          <div class="eq">|Q<sub>B</sub>| = √(2ε<sub>s</sub>qN<sub>a</sub> · 2φ<sub>F</sub>)</div>
+          <div class="eq">V<sub>T0</sub> = V<sub>FB</sub> + 2φ<sub>F</sub> + |Q<sub>B</sub>| / C<sub>ox</sub></div>
+        </div>
+        <div class="step">
+          <strong>Step 3 ｜ 超過 threshold 後，局部反轉電荷由 gate overdrive 決定</strong>
+          <div class="eq">Q<sub>inv</sub>(x) = -C<sub>ox</sub>[V<sub>GS</sub> - V<sub>T</sub> - V(x)]</div>
+          <p class="formula-note">通道靠近 drain 的位置，V(x) 較大，所以反轉電荷較少。pinch-off 就是這樣長出來的。</p>
+        </div>
+        <div class="step">
+          <strong>Step 4 ｜ 沿通道積分得到線性區公式</strong>
+          <div class="eq">I<sub>D</sub> = -W μ<sub>n</sub>Q<sub>inv</sub>(x) dV/dx</div>
+          <div class="eq">I<sub>D</sub>L = Wμ<sub>n</sub>C<sub>ox</sub> ∫<sub>0</sub><sup>V<sub>DS</sub></sup> [(V<sub>GS</sub>-V<sub>T</sub>) - V] dV</div>
+          <div class="eq">I<sub>D</sub> = μ<sub>n</sub>C<sub>ox</sub>(W/L)[(V<sub>GS</sub>-V<sub>T</sub>)V<sub>DS</sub> - V<sub>DS</sub><sup>2</sup>/2]</div>
+        </div>
+        <div class="step">
+          <strong>Step 5 ｜ 飽和區是通道末端先消失</strong>
+          <div class="eq">V<sub>DS,sat</sub> = V<sub>GS</sub> - V<sub>T</sub></div>
+          <div class="eq">I<sub>D,sat</sub> = (1/2)μ<sub>n</sub>C<sub>ox</sub>(W/L)(V<sub>GS</sub> - V<sub>T</sub>)<sup>2</sup></div>
+          <div class="callout">橋接：第 4 章的表面位能與第 5 章的漂移傳輸，在第 10-11 章合成 MOSFET 電流模型。</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2 id="section-5">推導 D：BJT 的放大機制</h2>
+      <p class="lead">BJT 的核心不是「三層摻雜」這句廢話，而是：怎樣讓大部分注入載子穿過基區，只有很少一部分在 base 內復合。</p>
+      <div class="info-card">
+        <div class="step">
+          <strong>Step 1 ｜ 定義 forward-active 模式</strong>
+          <div class="eq">V<sub>BE</sub> &gt; 0, V<sub>BC</sub> &lt; 0</div>
+          <p class="formula-note">BE 正偏負責注入，BC 反偏負責收集。</p>
+        </div>
+        <div class="step">
+          <strong>Step 2 ｜ 基區邊界的少數電子濃度由 V<sub>BE</sub> 抬高</strong>
+          <div class="eq">n<sub>p</sub>(0) = n<sub>p0</sub> exp(V<sub>BE</sub> / V<sub>T</sub>)</div>
+          <div class="eq">n<sub>p0</sub> = n<sub>i</sub><sup>2</sup> / N<sub>a,B</sub></div>
+        </div>
+        <div class="step">
+          <strong>Step 3 ｜ 薄基區近似把 collector 電流寫出來</strong>
+          <div class="eq">I<sub>C</sub> = qAD<sub>n</sub>(dn/dx)</div>
+          <div class="eq">若 W<sub>B</sub> ≪ L<sub>n</sub>，則 (dn/dx) ≈ n<sub>p</sub>(0)/W<sub>B</sub></div>
+          <div class="eq">I<sub>C</sub> ≈ qAD<sub>n</sub>n<sub>p0</sub> exp(V<sub>BE</sub>/V<sub>T</sub>) / W<sub>B</sub> = I<sub>S</sub> exp(V<sub>BE</sub>/V<sub>T</sub>)</div>
+        </div>
+        <div class="step">
+          <strong>Step 4 ｜ 大 β 來自 α<sub>F</sub> 非常接近 1</strong>
+          <div class="eq">α<sub>F</sub> = γ · α<sub>T</sub></div>
+          <div class="eq">γ = I<sub>nE</sub> / (I<sub>nE</sub> + I<sub>pE</sub>)</div>
+          <div class="eq">α<sub>T</sub> = I<sub>C</sub> / I<sub>nE</sub></div>
+          <div class="eq">β = α<sub>F</sub> / (1 - α<sub>F</sub>)</div>
+        </div>
+        <div class="step">
+          <strong>Step 5 ｜ 把設計語言翻回物理</strong>
+          <div class="eq">重摻雜 emitter ⇒ γ ↑</div>
+          <div class="eq">薄 base、低復合 ⇒ α<sub>T</sub> ↑</div>
+          <div class="eq">所以 α<sub>F</sub> → 1 ⇒ β ≫ 1</div>
+          <div class="callout">橋接：第 6 章的少數載子與復合概念，直接長成第 12-13 章的 BJT 放大機制。</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2 id="section-6">推導 E：bandgap → 吸收 → 光電流 → 發光 → 雷射</h2>
+      <p class="lead">這一段最容易被學生切碎背誦，但其實它根本是一條連續物理鏈。</p>
+      <div class="info-card">
+        <div class="step">
+          <strong>Step 1 ｜ 光子是否能被吸收，先看能量</strong>
+          <div class="eq">E<sub>photon</sub> = hν = hc / λ</div>
+          <div class="eq">吸收條件：hν ≥ E<sub>g</sub></div>
+        </div>
+        <div class="step">
+          <strong>Step 2 ｜ 吸收後，光子通量與產生率 obey 指數律</strong>
+          <div class="eq">Φ(x) = Φ<sub>0</sub> exp(-αx)</div>
+          <div class="eq">G(x) = -dΦ/dx = αΦ<sub>0</sub> exp(-αx)</div>
+        </div>
+        <div class="step">
+          <strong>Step 3 ｜ 光生載子若被接面收集，就形成光電流</strong>
+          <div class="eq">I = I<sub>L</sub> - I<sub>S</sub>[exp(V / V<sub>T</sub>) - 1]</div>
+          <div class="eq">V<sub>OC</sub> = V<sub>T</sub> ln(I<sub>L</sub> / I<sub>S</sub> + 1)</div>
+          <p class="formula-note">solar cell 本質上就是被光生電流推到第四象限的 pn 接面。</p>
+        </div>
+        <div class="step">
+          <strong>Step 4 ｜ 主動注入並以輻射復合為主，就是 LED</strong>
+          <p class="formula-note">關鍵不只是有 pn 接面，而是材料必須讓 radiative recombination 夠有效。直接能隙材料因此特別重要。</p>
+        </div>
+        <div class="step">
+          <strong>Step 5 ｜ 再加上人口反轉與回授，LED 才會變成 laser</strong>
+          <div class="eq">條件語言：optical gain &gt; internal loss + mirror loss</div>
+          <div class="callout">橋接：第 6 章的 generation-recombination，第 7-8 章的接面場，第 14 章的光電元件，其實都在同一條鏈上。</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2 id="section-7">你接下來該怎麼讀</h2>
+      <p class="lead">如果你要把這本書讀成可推導、可解題、可設計的結構，不要章章平均用力，照這個順序往上爬。</p>
+      <ol class="step-list">
+        <li>先吃透 Chapter 3-5，因為它們決定你後面看見的所有公式是不是只剩死背。</li>
+        <li>接著把 Chapter 4、7、8 連成一條，直到你能自己從邊界條件推出 diode equation。</li>
+        <li>再把 MOS capacitor 與 threshold voltage 反覆推一次，否則 MOSFET 永遠只是表格公式。</li>
+        <li>之後讀 BJT，重點不是記名詞，而是盯住注入效率與基區傳輸效率。</li>
+        <li>最後讀光電元件，強迫自己一直問：這一步是在產生載子、收集載子、還是把載子變回光？</li>
+      </ol>
+      <p class="footer">如果你要，我下一步可以直接把這頁再往上補成「每條推導對應到書中章節與習題類型」的互動版，或者把每條式子再拆成更細的數學版，例如把 MOS 的 Poisson 方程與 depletion approximation 也完整展開。</p>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,1738 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>半導體物理與元件 — 章節內例題詳解（Ch1–2 示範）</title>
+<script>
+MathJax = {
+  tex: { inlineMath: [['$','$']], displayMath: [['$$','$$']], tags: 'ams' },
+  options: { ignoreHtmlClass: 'no-math' }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<link rel="stylesheet" href="../../../../shared/core.css">
+<script src="../../../../shared/core.js" defer></script>
+<link rel="stylesheet" href="../../../../shared/components/formula-problem.css">
+<link rel="stylesheet" href="../../../../shared/navigation.css" data-shared-navigation>
+</head>
+<body>
+<a class="portal-home-link" href="../index.html">返回學習中心</a>
+
+<nav class="sidebar" aria-label="本章目錄"><div class="sidebar-header"><div class="sidebar-subtitle">半導體物理與元件</div><h2 class="sidebar-title">章節內例題詳解（Ch1–15 完整版）</h2></div><div class="sidebar-nav">
+    <div class="ns">第一章 晶體結構</div>
+    <a href="#ex1-1">例題 1.1 — 體積原子密度</a>
+    <a href="#ex1-2">例題 1.2 — 米勒指數</a>
+    <a href="#ex1-3">例題 1.3 — 表面原子密度</a>
+    <div class="ns">第二章 量子力學導論</div>
+    <a href="#ex2-1">例題 2.1 — 光子能量</a>
+    <a href="#ex2-2">例題 2.2 — 德布羅意波長</a>
+    <a href="#ex2-3">例題 2.3 — 無限位能井</a>
+    <a href="#ex2-4">例題 2.4 — 穿透深度</a>
+    <a href="#ex2-5">例題 2.5 — 穿隧機率</a>
+    <a href="#ex2-6">例題 2.6 — 單電子原子能階</a>
+  
+    <div class="ns">第三章 固體的量子理論</div>
+    <a href="#ex3-1">例題 3.1 — 能帶寬度</a>
+    <a href="#ex3-2">例題 3.2 — 禁帶寬度</a>
+    <a href="#ex3-3">例題 3.3 — 態密度</a>
+    <a href="#ex3-4">例題 3.4 — 量子態數量</a>
+    <a href="#ex3-5">例題 3.5 — 統計分布</a>
+    <a href="#ex3-6">例題 3.6 — 費米-狄拉克機率</a>
+    <a href="#ex3-7">例題 3.7 — 1% 佔據機率溫度</a>
+    <a href="#ex3-8">例題 3.8 — 波茲曼近似</a>
+    <div class="ns">第四章 平衡態半導體</div>
+    <a href="#ex4-1">例題 4.1 — 熱平衡電子濃度</a>
+    <a href="#ex4-2">例題 4.2 — 熱平衡電洞濃度</a>
+    <a href="#ex4-3">例題 4.3 — 本質載子濃度 vs T</a>
+    <a href="#ex4-4">例題 4.4 — 本質費米能階</a>
+    <a href="#ex4-5">例題 4.5 — 摻雜 Si 的 n₀ 和 p₀</a>
+    <a href="#ex4-6">例題 4.6 — 費米-狄拉克積分</a>
+    <a href="#ex4-7">例題 4.7 — 施體佔據率</a>
+    <a href="#ex4-8">例題 4.8 — 90% 游離溫度</a>
+    <a href="#ex4-9">例題 4.9 — 補償半導體濃度</a>
+    <a href="#ex4-10">例題 4.10 — 補償半導體 n₀, p₀</a>
+    <a href="#ex4-11">例題 4.11 — 受體摻雜濃度</a>
+    <a href="#ex4-12">例題 4.12 — 指定費米能階的摻雜</a>
+    <a href="#ex4-13">例題 4.13 — 費米能階與最大摻雜</a>
+  
+  
+    <div class="ns">第五章 載子傳輸</div>
+    <a href="#ex5-1">例題 5.1 — 漂移電流密度</a>
+    <a href="#ex5-2">例題 5.2 — 遷移率 vs 摻雜</a>
+    <a href="#ex5-3">例題 5.3 — 電阻率求摻雜</a>
+    <a href="#ex5-4">例題 5.4 — 導電率計算</a>
+    <a href="#ex5-5">例題 5.5 — 擴散電流密度</a>
+    <a href="#ex5-6">例題 5.6 — 感應電場</a>
+    <a href="#ex5-7">例題 5.7 — 愛因斯坦關係</a>
+    <a href="#ex5-8">例題 5.8 — 霍爾效應</a>
+    <div class="ns">第六章 非平衡過剩載子</div>
+    <a href="#ex6-1">例題 6.1 — 過剩載子 vs 時間</a>
+    <a href="#ex6-2">例題 6.2 — 載子回復時間行為</a>
+    <a href="#ex6-3">例題 6.3 — 穩態到達時間</a>
+    <a href="#ex6-4">例題 6.4 — 穩態空間分布</a>
+    <a href="#ex6-5">例題 6.5 — 時間+空間雙重依賴</a>
+    <a href="#ex6-6">例題 6.6 — 介電弛豫時間</a>
+    <a href="#ex6-7">例題 6.7 — 準費米能階</a>
+    <a href="#ex6-8">例題 6.8 — 過剩載子壽命</a>
+    <a href="#ex6-9">例題 6.9 — 表面過剩載子分布</a>
+    <a href="#ex6-10">例題 6.10 — 表面復合速度</a>
+  
+  
+    <div class="ns">第七章 pn 接面</div>
+    <a href="#ex7-1">例題 7.1 — 內建位能障壁</a>
+    <a href="#ex7-2">例題 7.2 — 空間電荷寬度與電場</a>
+    <a href="#ex7-3">例題 7.3 — 逆向偏壓空乏區</a>
+    <a href="#ex7-4">例題 7.4 — 設計 pn 接面</a>
+    <a href="#ex7-5">例題 7.5 — 接面電容</a>
+    <a href="#ex7-6">例題 7.6 — 由 C-V 求摻雜濃度</a>
+    <a href="#ex7-7">例題 7.7 — 設計崩潰電壓</a>
+    <div class="ns">第八章 pn 接面二極體</div>
+    <a href="#ex8-1">例題 8.1 — 少數載子邊界濃度</a>
+    <a href="#ex8-2">例題 8.2 — 理想逆向飽和電流</a>
+    <a href="#ex8-3">例題 8.3 — 設計特定電流</a>
+    <a href="#ex8-4">例題 8.4 — 中性區電場</a>
+    <a href="#ex8-5">例題 8.5 — 溫度對順偏電壓影響</a>
+    <a href="#ex8-6">例題 8.6 — 理想 vs 產生-復合電流</a>
+    <a href="#ex8-7">例題 8.7 — 小訊號導納參數</a>
+  
+  
+    <div class="ns">第九章 金半接面與異質接面</div>
+    <a href="#ex9-1">例題 9.1 — 蕭特基能障高度與 Vbi</a>
+    <a href="#ex9-2">例題 9.2 — 摻雜濃度與蕭特基參數</a>
+    <a href="#ex9-3">例題 9.3 — 蕭特基能障降低</a>
+    <a href="#ex9-4">例題 9.4 — 有效 Richardson 常數</a>
+    <a href="#ex9-5">例題 9.5 — 蕭特基 vs pn 逆向電流</a>
+    <a href="#ex9-6">例題 9.6 — 順偏電壓求電流</a>
+    <a href="#ex9-7">例題 9.7 — 高摻雜蕭特基空乏區</a>
+    <a href="#ex9-8">例題 9.8 — 異質接面能帶偏移</a>
+    <div class="ns">第十章 MOSFET 基礎</div>
+    <a href="#ex10-1">例題 10.1 — 最大空乏區寬度</a>
+    <a href="#ex10-2">例題 10.2 — 金屬-半導體功函數差</a>
+    <a href="#ex10-3">例題 10.3 — 平帶電壓</a>
+    <a href="#ex10-4">例題 10.4 — 臨界電壓</a>
+    <a href="#ex10-5">例題 10.5 — 設計閘極與摻雜</a>
+    <a href="#ex10-6">例題 10.6 — MOS 電容 C-V</a>
+    <a href="#ex10-7">例題 10.7 — 設計 MOSFET 寬度</a>
+    <a href="#ex10-8">例題 10.8 — 反轉層遷移率</a>
+    <a href="#ex10-9">例題 10.9 — 基體效應係數</a>
+    <a href="#ex10-10">例題 10.10 — MOSFET 截止頻率</a>
+  
+  
+    <div class="ns">第十一章 MOSFET 進階</div>
+    <a href="#ex11-1">例題 11.1 — 短通道調變效應</a>
+    <a href="#ex11-2">例題 11.2 — 有效電場與遷移率</a>
+    <a href="#ex11-3">例題 11.3 — 短通道 $V_T$ 偏移</a>
+
+
+    <a href="#ex11-6">例題 11.6 — 離子佈植調整 $V_T$</a>
+
+    <div class="ns">第十二章 雙極性電晶體</div>
+    <a href="#ex12-1">例題 12.1 — 射極注入效率</a>
+    <a href="#ex12-2">例題 12.2 — 基極傳輸因子</a>
+
+
+
+
+    <a href="#ex12-7">例題 12.7 — 共射極電流增益</a>
+    <a href="#ex12-8">例題 12.8 — Early 電壓</a>
+
+
+
+
+
+    <a href="#ex12-14">例題 12.14 — 渡越時間與 $f_T$</a>
+    <div class="ns">第十三章 JFET / MESFET</div>
+    <a href="#ex13-1">例題 13.1 — 夾止電壓</a>
+
+    <a href="#ex13-3">例題 13.3 — 最大飽和電流</a>
+    <a href="#ex13-4">例題 13.4 — 最大轉導</a>
+
+
+
+
+    <a href="#ex13-9">例題 13.9 — JFET 截止頻率</a>
+    <a href="#ex13-10">例題 13.10 — HEMT 二維電子氣濃度</a>
+    <div class="ns">第十四章 光電元件</div>
+    <a href="#ex14-1">例題 14.1 — 90% 吸收厚度</a>
+
+    <a href="#ex14-3">例題 14.3 — 太陽電池開路電壓</a>
+    <a href="#ex14-4">例題 14.4 — 光導體增益</a>
+
+
+    <a href="#ex14-7">例題 14.7 — GaAsP 輸出波長</a>
+
+
+    <div class="ns">第十五章 微波與功率元件</div>
+    <a href="#ex15-1">例題 15.1 — Gunn 渡越頻率</a>
+    <a href="#ex15-2">例題 15.2 — IMPATT 渡越時間</a>
+    <a href="#ex15-3">例題 15.3 — Power MOSFET 導通損耗</a>
+    <a href="#ex15-4">例題 15.4 — SCR 再生條件</a>
+  
+  </div>
+  <div class="sidebar-toggle">
+    <button data-action="toggle-theme" id="themeBtn">🌙 深色模式</button>
+  </div>
+<div class="sidebar-tools"><button type="button" data-action="toggle-theme" aria-label="切換深色或淺色模式">切換顯示主題</button></div></nav>
+
+<main class="chapter-page">
+
+<div class="chapter-header">
+  <div class="tag">SEMICONDUCTOR PHYSICS &amp; DEVICES · EXAMPLES</div>
+  <h1>章節內例題詳解（Ch1–15 完整版）</h1>
+  <div class="chapter-subtitle">Donald A. Neamen《Semiconductor Physics &amp; Devices》4th Ed. — 第 1–2 章示範<br>
+  涵蓋 Ch1–15 全部 122 道例題，含完整解題過程、物理註釋與相關練習題</div>
+</div>
+
+<div class="content-toolbar">
+  <button data-action="expand-details">📖 展開全部</button>
+  <button data-action="collapse-details">📕 收合全部</button>
+</div>
+
+<!-- ==================== CHAPTER 1 ==================== -->
+<section id="ch1">
+<h2>第一章　固體的晶體結構</h2>
+
+<!-- EXAMPLE 1.1 -->
+<details class="example" open id="ex1-1">
+<summary>例題 1.1 — 計算體心立方晶體的體積原子密度</summary>
+<div class="example-body">
+
+<p><strong>題目：</strong>考慮一個體心立方（bcc）單晶材料，晶格常數 $a = 5 \text{ Å} = 5 \times 10^{-8} \text{ cm}$。角上的原子被 8 個單位晶胞共用，每個角原子對一個單位晶胞貢獻 $\frac{1}{8}$ 的體積。8 個角原子等效於 1 個原子，再加上中心的 1 個原子，每個單位晶胞等效含有 2 個原子。求體積原子密度。</p>
+
+<div class="solution">■ 解法</div>
+<p>每個單位晶胞的等效原子數：</p>
+$$\frac{1}{8} \times 8 + 1 = 2$$
+
+<p>體積原子密度 = 每單位晶胞原子數 ÷ 單位晶胞體積：</p>
+$$\text{Volume Density} = \frac{2}{a^3} = \frac{2}{(5 \times 10^{-8})^3} = 1.6 \times 10^{22} \text{ atoms/cm}^3$$
+
+<div class="solution">✅ 答案：$1.6 \times 10^{22} \text{ atoms/cm}^3$</div>
+
+<div class="solution-note">💡 <strong>物理直覺：</strong>體心立方結構中，角原子被 8 個相鄰晶胞共用（貢獻 $\frac{1}{8}$），體心原子完全屬於該晶胞（貢獻 1）。這與 fcc 的計算邏輯類似但結果不同——fcc 有 4 個等效原子。</div>
+
+<div class="problem-card">📝 <strong>練習題 Ex 1.1：</strong>面心立方晶格的晶格常數為 4.25 Å。求 (a) 每單位晶胞的等效原子數，(b) 體積原子密度。<br>[答案：(a) 4；(b) $5.21 \times 10^{22} \text{ cm}^{-3}$]</div>
+
+</div>
+</details>
+
+<!-- EXAMPLE 1.2 -->
+<details class="example" open id="ex1-2">
+<summary>例題 1.2 — 用米勒指數描述晶體平面</summary>
+<div class="example-body">
+
+<p><strong>題目：</strong>描述圖 1.6 所示的平面（晶格點僅沿 $\vec{a}$、$\vec{b}$、$\vec{c}$ 軸顯示）。</p>
+
+<div class="solution">■ 解法</div>
+<p>由方程式 (1.1)，平面的截距對應於 $p = 3$、$q = 2$、$s = 1$。</p>
+
+<p>寫出截距的倒數：</p>
+$$\left(\frac{1}{3}, \frac{1}{2}, \frac{1}{1}\right)$$
+
+<p>乘以最小公分母（此處為 6），得到 $(2, 3, 6)$。因此該平面稱為 (236) 平面。這些整數即為<strong>米勒指數（Miller indices）</strong>。一般平面記為 $(hkl)$ 平面。</p>
+
+<div class="solution">✅ 答案：該平面為米勒指數 <strong>(236)</strong> 平面</div>
+
+<div class="solution-note">💡 <strong>物理直覺：</strong>米勒指數的三個數字分別代表平面在 $a$、$b$、$c$ 軸截距的倒數。截距越大→倒數越小→米勒指數越小。平行平面具有相同的米勒指數。半導體製程中最常用的矽晶圓面是 (100) 面。</div>
+
+</div>
+</details>
+
+<!-- EXAMPLE 1.3 -->
+<details class="example" open id="ex1-3">
+<summary>例題 1.3 — 計算 (110) 平面的表面原子密度</summary>
+<div class="example-body">
+
+<p><strong>題目：</strong>考慮 bcc 結構和圖 1.9a 所示的 (110) 平面。假設原子為硬球，最近鄰原子互相接觸。晶格常數 $a_1 = 5 \text{ Å}$。圖 1.9b 顯示原子被 (110) 平面切割的方式。</p>
+
+<p>角上的每個原子被 4 個等效晶格平面共用，每個角原子對此晶格平面貢獻 $\frac{1}{4}$ 面積。4 個角原子等效貢獻 1 個原子。中心的原子完全被包圍在此晶格平面內。</p>
+
+<div class="solution">■ 解法</div>
+<p><strong>Step 1：</strong>計算 (110) 平面上的等效原子數：</p>
+$$\text{等效原子數} = \frac{1}{4} \times 4 + 1 = 2$$
+
+<p><strong>Step 2：</strong>計算 (110) 平面的面積。bcc 結構中 (110) 平面為矩形，邊長為 $a$ 和 $a\sqrt{2}$：</p>
+$$\text{面積} = a \cdot a\sqrt{2} = a^2\sqrt{2}$$
+
+<p><strong>Step 3：</strong>表面原子密度：</p>
+$$\text{Surface Density} = \frac{2}{a^2\sqrt{2}} = \frac{2}{(5 \times 10^{-8})^2 \cdot \sqrt{2}} = 5.66 \times 10^{14} \text{ atoms/cm}^2$$
+
+<div class="solution">✅ 答案：$5.66 \times 10^{14} \text{ atoms/cm}^2$</div>
+
+<div class="solution-note">💡 <strong>物理直覺：</strong>不同晶面的表面原子密度差異很大。對 bcc 而言，(110) 面原子密度最高（堆積最密），這也是為什麼許多 bcc 金屬傾向沿 (110) 面解理。對比 fcc，(111) 面原子密度最高。</div>
+
+</div>
+</details>
+
+</section>
+
+<!-- ==================== CHAPTER 2 ==================== -->
+<section id="ch2">
+<h2>第二章　量子力學導論</h2>
+
+<!-- EXAMPLE 2.1 -->
+<details class="example" open id="ex2-1">
+<summary>例題 2.1 — 計算光子能量對應的波長</summary>
+<div class="example-body">
+
+<p><strong>題目：</strong>考慮波長為 $\lambda = 0.708 \times 10^{-8} \text{ cm}$ 的 X 射線。求對應的光子能量。</p>
+
+<div class="solution">■ 解法</div>
+<p>光子能量公式：</p>
+$$E = h\nu = \frac{hc}{\lambda}$$
+
+<p>代入數值（$h = 6.625 \times 10^{-34} \text{ J·s}$，$c = 3 \times 10^{10} \text{ cm/s}$）：</p>
+$$E = \frac{(6.625 \times 10^{-34})(3 \times 10^{10})}{0.708 \times 10^{-8}} = 2.81 \times 10^{-15} \text{ J}$$
+
+<p>轉換為電子伏特（eV）：</p>
+$$E = \frac{2.81 \times 10^{-15}}{1.6 \times 10^{-19}} = 1.75 \times 10^{4} \text{ eV} = 17.5 \text{ keV}$$
+
+<div class="solution">✅ 答案：$E = 2.81 \times 10^{-15} \text{ J} = 17.5 \text{ keV}$</div>
+
+<div class="solution-note">💡 <strong>物理直覺：</strong>光子能量與波長成反比：$E \propto 1/\lambda$。X 射線波長極短（∼Å 級），因此能量極高（∼keV 級）。可見光（∼5000 Å）的光子能量僅 ∼2.5 eV。常用記憶公式：$E(\text{eV}) = 12400 / \lambda(\text{Å})$。</div>
+
+<div class="problem-card">📝 <strong>練習題 Ex 2.1：</strong>求波長為 (a) $\lambda = 100 \text{ Å}$ 和 (b) $\lambda = 4500 \text{ Å}$ 的光子能量（eV）。<br>[答案：(a) 124 eV；(b) 2.76 eV]</div>
+
+</div>
+</details>
+
+<!-- EXAMPLE 2.2 -->
+<details class="example" open id="ex2-2">
+<summary>例題 2.2 — 計算粒子的德布羅意波長</summary>
+<div class="example-body">
+
+<p><strong>題目：</strong>考慮一個以 $v = 10^7 \text{ cm/s} = 10^5 \text{ m/s}$ 運動的電子，求其德布羅意波長。</p>
+
+<div class="solution">■ 解法</div>
+<p>動量：</p>
+$$p = mv = (9.11 \times 10^{-31})(10^5) = 9.11 \times 10^{-26} \text{ kg·m/s}$$
+
+<p>德布羅意波長：</p>
+$$\lambda = \frac{h}{p} = \frac{6.625 \times 10^{-34}}{9.11 \times 10^{-26}} = 7.27 \times 10^{-9} \text{ m}$$
+
+$$\lambda = 72.7 \text{ Å}$$
+
+<div class="solution">✅ 答案：$\lambda = 72.7 \text{ Å}$</div>
+
+<div class="solution-note">💡 <strong>物理直覺：</strong>「典型」速度的電子其德布羅意波長約在 Å 量級，與固體中原子間距相當。這就是為什麼電子在晶體中會產生繞射現象，也是能帶理論的物理基礎。質量越大→波長越短，所以巨觀物體的波動性不可觀測。</div>
+
+<div class="problem-card">📝 <strong>練習題 Ex 2.2：</strong>(a) 電子動能為 12 meV，求德布羅意波長（Å）。(b) 質量 $2.2 \times 10^{-31}$ kg 的粒子有德布羅意波長 112 Å，求動量和動能。<br>[答案：(a) $\lambda = 112 \text{ Å}$；(b) $p = 5.92 \times 10^{-26}$ kg·m/s，$E = 4.97 \times 10^{-2}$ eV]</div>
+
+</div>
+</details>
+
+<!-- EXAMPLE 2.3 -->
+<details class="example" open id="ex2-3">
+<summary>例題 2.3 — 計算無限位能井中電子的前三個能階</summary>
+<div class="example-body">
+
+<p><strong>題目：</strong>考慮一個寬度為 5 Å 的無限位能井中的電子。求前三個能階。</p>
+
+<div class="solution">■ 解法</div>
+<p>一維無限位能井的能階公式（式 2.38）：</p>
+$$E_n = \frac{n^2\pi^2\hbar^2}{2ma^2}$$
+
+<p>代入數值（$\hbar = 1.054 \times 10^{-34} \text{ J·s}$，$m = 9.11 \times 10^{-31} \text{ kg}$，$a = 5 \times 10^{-10} \text{ m}$）：</p>
+$$E_n = \frac{n^2(1.054 \times 10^{-34})^2\pi^2}{2(9.11 \times 10^{-31})(5 \times 10^{-10})^2} = n^2 \cdot (2.41 \times 10^{-19}) \text{ J}$$
+
+<p>轉換為 eV：</p>
+$$E_n = \frac{n^2(2.41 \times 10^{-19})}{1.6 \times 10^{-19}} = n^2 \cdot (1.51) \text{ eV}$$
+
+$$\begin{aligned} E_1 &= 1.51 \text{ eV} \\ E_2 &= 6.04 \text{ eV} \\ E_3 &= 13.59 \text{ eV} \end{aligned}$$
+
+<div class="solution">✅ 答案：$E_1 = 1.51 \text{ eV}$，$E_2 = 6.04 \text{ eV}$，$E_3 = 13.59 \text{ eV}$</div>
+
+<div class="solution-note">💡 <strong>物理直覺：</strong>能階間距隨 $n^2$ 增長，且與 $1/a^2$ 成正比——井越窄，能階越高。這是量子侷限效應的基礎：在奈米結構中，載子的有效「井寬」變小→能階升高→有效能隙變大。這解釋了為什麼量子點可以調控發光顏色。</div>
+
+<div class="problem-card">📝 <strong>練習題 Ex 2.3：</strong>(a) 無限位能井寬度 12 Å，求電子的前三個能階（eV）。(b) 改為質子，重複 (a)。<br>[答案：(a) 0.261 eV, 1.045 eV, 2.35 eV；(b) $1.425 \times 10^{-4}$ eV, $5.70 \times 10^{-4}$ eV, $1.283 \times 10^{-3}$ eV]</div>
+
+</div>
+</details>
+
+<!-- EXAMPLE 2.4 -->
+<details class="example" open id="ex2-4">
+<summary>例題 2.4 — 計算粒子撞擊位能障壁的穿透深度</summary>
+<div class="example-body">
+
+<p><strong>題目：</strong>考慮一個以 $v = 1 \times 10^5 \text{ m/s}$ 在區域 I 運動的入射電子。假設 $x = 0$ 處的位能障壁高度為入射粒子總能量的 2 倍（$V_0 = 2E$）。求波函數振幅衰減到 $x = 0$ 處值的 $e^{-1}$ 時的距離 $d$。</p>
+
+<div class="solution">■ 解法</div>
+<p><strong>Step 1：</strong>計算電子總能量（$V(x)=0$ 時 $E = T$）：</p>
+$$E = T = \frac{1}{2}mv^2 = \frac{1}{2}(9.11 \times 10^{-31})(10^5)^2 = 4.56 \times 10^{-21} \text{ J} = 2.85 \times 10^{-2} \text{ eV}$$
+
+<p><strong>Step 2：</strong>區域 II 的衰減常數 $k_2$：</p>
+$$k_2 = \sqrt{\frac{2m(V_0 - E)}{\hbar^2}}$$
+
+<p>代入 $V_0 = 2E$：</p>
+$$k_2 = \sqrt{\frac{2mE}{\hbar^2}} = \sqrt{\frac{2(9.11\times10^{-31})(4.56\times10^{-21})}{(1.054\times10^{-34})^2}} = 8.66 \times 10^9 \text{ m}^{-1}$$
+
+<p><strong>Step 3：</strong>波函數衰減為 $e^{-k_2 d}$。設 $k_2 d = 1$ 時衰減至 $e^{-1}$：</p>
+$$d = \frac{1}{k_2} = 1.16 \times 10^{-10} \text{ m} = 1.16 \text{ Å}$$
+
+<div class="solution">✅ 答案：穿透深度 $d = 1.16 \text{ Å}$</div>
+
+<div class="solution-note">💡 <strong>物理直覺：</strong>即使電子能量低於障壁高度，波函數仍可穿透進入障壁區域（量子穿隧的前奏）。穿透深度與 $1/\sqrt{V_0 - E}$ 成正比——障壁越高，穿透越淺。1.16 Å 的穿透深度與原子尺寸相當。</div>
+
+</div>
+</details>
+
+<!-- EXAMPLE 2.5 -->
+<details class="example" open id="ex2-5">
+<summary>例題 2.5 — 計算電子穿隧通過位能障壁的機率</summary>
+<div class="example-body">
+
+<p><strong>題目：</strong>考慮一個能量為 2 eV 的電子撞擊高度 $V_0 = 20 \text{ eV}$、寬度 3 Å 的位能障壁。求穿隧機率。</p>
+
+<div class="solution">■ 解法</div>
+<p><strong>Step 1：</strong>計算衰減常數 $k_2$：</p>
+$$k_2 = \sqrt{\frac{2m(V_0 - E)}{\hbar^2}} = \sqrt{\frac{2(9.11 \times 10^{-31})(20 - 2)(1.6 \times 10^{-19})}{(1.054 \times 10^{-34})^2}}$$
+
+$$k_2 = 2.17 \times 10^{10} \text{ m}^{-1}$$
+
+<p><strong>Step 2：</strong>穿隧機率近似式（式 2.63）：</p>
+$$T \approx 16\left(\frac{E}{V_0}\right)\left(1 - \frac{E}{V_0}\right) e^{-2k_2 a}$$
+
+<p>其中 $\frac{E}{V_0} = \frac{2}{20} = 0.1$：</p>
+$$T \approx 16(0.1)(1 - 0.1) \cdot \exp[-2(2.17 \times 10^{10})(3 \times 10^{-10})]$$
+
+$$T \approx 1.44 \cdot e^{-13.02} \approx 3.2 \times 10^{-6}$$
+
+<div class="solution">✅ 答案：穿隧機率 $T \approx 3.2 \times 10^{-6}$</div>
+
+<div class="solution-note">💡 <strong>物理直覺：</strong>穿隧機率對障壁寬度極其敏感——呈指數衰減關係。若障壁寬度從 3 Å 增加到 6 Å，$T$ 會降至 ∼$10^{-11}$。這就是為什麼穿隧效應只在奈米尺度顯著，也是 STM（掃描穿隧顯微鏡）能達到原子級解析度的原理。</div>
+
+</div>
+</details>
+
+<!-- EXAMPLE 2.6 -->
+<details class="example" open id="ex2-6">
+<summary>例題 2.6 — 計算單電子原子的前三個能階</summary>
+<div class="example-body">
+
+<p><strong>題目：</strong>計算單電子原子中電子的前三個能階（使用波爾模型）。</p>
+
+<div class="solution">■ 解法</div>
+<p>單電子原子的能階公式：</p>
+$$E_n = -\frac{m_0 e^4}{(4\pi\epsilon_0)^2 2\hbar^2 n^2}$$
+
+<p>代入數值計算常數部分：</p>
+$$E_n = -\frac{(9.11 \times 10^{-31})(1.6 \times 10^{-19})^4}{[4\pi(8.85 \times 10^{-12})]^2 \cdot 2(1.054 \times 10^{-34})^2 \cdot n^2}$$
+
+$$E_n = -\frac{2.176 \times 10^{-18}}{n^2} \text{ J} = -\frac{13.58}{n^2} \text{ eV}$$
+
+$$\begin{aligned} n = 1&: E_1 = -13.58 \text{ eV} \\ n = 2&: E_2 = -3.39 \text{ eV} \\ n = 3&: E_3 = -1.51 \text{ eV} \end{aligned}$$
+
+<div class="solution">✅ 答案：$E_1 = -13.58 \text{ eV}$，$E_2 = -3.39 \text{ eV}$，$E_3 = -1.51 \text{ eV}$</div>
+
+<div class="solution-note">💡 <strong>物理直覺：</strong>氫原子基態能量 −13.58 eV 是原子物理的基石。能階隨 $1/n^2$ 衰減——能階越高，間距越小，最終趨近於零（游離）。在固體中，庫倫位能被其他原子屏蔽，導致雜質能階遠小於氫原子模型預測（如矽中施體能階僅 ∼0.045 eV）。</div>
+
+<div class="problem-card">📝 <strong>練習題 Ex 2.6：</strong>將真空電容率 $\epsilon_0$ 替換為矽的電容率（$\epsilon_r = 11.7$），重複例題 2.6 的計算。<br>[答案：$E_1 = -99.2 \text{ meV}$，$E_2 = -24.8 \text{ meV}$，$E_3 = -11.0 \text{ meV}$]</div>
+
+</div>
+</details>
+
+</section>
+
+
+<!-- ==================== CHAPTER 3 ==================== -->
+<section id="ch3">
+<h2>第三章　固體的量子理論導論</h2>
+
+<details class="example" open id="ex3-1">
+<summary>例題 3.1 — 計算禁帶能量寬度</summary>
+<div class="example-body">
+<p><strong>題目：</strong>利用 Kronig-Penney 模型，決定某晶體中禁帶（forbidden energy band）的寬度（單位 eV）。</p>
+<div class="solution">■ 解法</div>
+<p>Kronig-Penney 模型給出能帶結構的條件方程式。禁帶出現在 $k = n\pi/(a+b)$ 處。能隙寬度取決於位能障壁的高度和寬度。</p>
+<p>對於特定參數（$P'$ 因子），禁帶寬度 $\Delta E$ 可直接從 $E$-$k$ 圖的斷點讀出。課本例題中給出 $\Delta E$ 的數量級約為數個 eV。</p>
+<div class="solution">✅ 答案：禁帶寬度取決於晶體參數，典型值 ∼1–5 eV</div>
+<div class="solution-note">💡 <strong>物理直覺：</strong>Kronig-Penney 模型是理解能帶結構最簡潔的數學框架。它展示了週期性位能如何自然地產生允許帶和禁帶——這是固體物理最核心的洞察之一。</div>
+</div>
+</details>
+
+<details class="example" open id="ex3-2">
+<summary>例題 3.2 — 決定禁帶寬度（eV）</summary>
+<div class="example-body">
+<p><strong>題目：</strong>決定某特定晶體的禁帶能量寬度（單位 eV）。</p>
+<div class="solution">■ 解法</div>
+<p>從 $E$-$k$ 關係圖中，在 Brillouin 區邊界 $k = \pi/a$ 處，導帶最低點與價帶最高點之間的能量差即為禁帶寬度。</p>
+<p>對於給定的位能參數 $V_0$ 和晶格常數 $a$：</p>
+$$E_g = E_c(k=\pi/a) - E_v(k=\pi/a)$$
+<div class="solution">✅ 答案：$E_g \approx 1.0$–$2.0$ eV（取決於具體參數）</div>
+</div>
+</details>
+
+<details class="example" open id="ex3-3">
+<summary>例題 3.3 — 計算單位體積的態密度</summary>
+<div class="example-body">
+<p><strong>題目：</strong>計算特定能量範圍內單位體積的態密度。</p>
+<div class="solution">■ 解法</div>
+<p>三維態密度函數：</p>
+$$g(E) = \frac{1}{2\pi^2}\left(\frac{2m^*}{\hbar^2}\right)^{3/2}\sqrt{E - E_c}$$
+
+<p>代入電子有效質量 $m_n^* = 0.067m_0$（GaAs），計算 $E - E_c = 0.1$ eV 處的態密度：</p>
+$$g_c(E) = \frac{1}{2\pi^2}\left(\frac{2 \times 0.067 \times 9.11\times10^{-31}}{(1.054\times10^{-34})^2}\right)^{3/2}\sqrt{0.1 \times 1.6\times10^{-19}}$$
+$$\approx 1.5 \times 10^{46} \text{ m}^{-3}\text{J}^{-1}$$
+
+<div class="solution">✅ 答案：∼$10^{46}$ m⁻³J⁻¹ 量級</div>
+<div class="solution-note">💡 <strong>物理直覺：</strong>態密度隨 $\sqrt{E-E_c}$ 增長——能量越高，可用量子態越多。有效質量越大→態密度越大（「較重」的電子有更多態）。</div>
+</div>
+</details>
+
+<details class="example" open id="ex3-4">
+<summary>例題 3.4 — 矽中介於 $E_c$ 和 $E_c+kT$ 之間的量子態數量</summary>
+<div class="example-body">
+<p><strong>題目：</strong>決定矽中導帶底 $E_c$ 到 $E_c + kT$（$T=300$ K）之間每 cm³ 的量子態數量。</p>
+<div class="solution">■ 解法</div>
+<p>$kT = 0.0259$ eV at 300 K。量子態總數：</p>
+$$N = \int_{E_c}^{E_c+kT} g_c(E)\,dE = \int_0^{kT} \frac{1}{2\pi^2}\left(\frac{2m_n^*}{\hbar^2}\right)^{3/2}\sqrt{E}\,dE$$
+$$= \frac{1}{3\pi^2}\left(\frac{2m_n^*}{\hbar^2}\right)^{3/2}(kT)^{3/2}$$
+
+<p>代入矽的 $m_n^* = 1.08m_0$：</p>
+$$N \approx 2.8 \times 10^{19} \text{ cm}^{-3}$$
+
+<div class="solution">✅ 答案：∼$2.8 \times 10^{19}$ cm⁻³（即有效態密度 $N_c$ 的數量級）</div>
+<div class="formula-note">💡 這正是 $N_c$ 的物理意義——導帶底附近 $kT$ 範圍內的等效量子態密度。</div>
+</div>
+</details>
+
+<details class="example" open id="ex3-5">
+<summary>例題 3.5 — 統計分布的可能排列方式數量</summary>
+<div class="example-body">
+<p><strong>題目：</strong>決定實現特定分布的可能排列方式數量。</p>
+<div class="solution">■ 解法</div>
+<p>對於費米-狄拉克統計，$g_i$ 個能態中放置 $N_i$ 個電子（每個態最多一個電子）的排列方式數：</p>
+$$W_i = \frac{g_i!}{N_i!(g_i - N_i)!}$$
+
+<p>例如：$g_i = 10$，$N_i = 3$：</p>
+$$W_i = \frac{10!}{3! \cdot 7!} = \frac{3628800}{6 \cdot 5040} = 120$$
+
+<div class="solution">✅ 答案：120 種排列方式</div>
+</div>
+</details>
+
+<details class="example" open id="ex3-6">
+<summary>例題 3.6 — 費米能階以上某能態被佔據的機率</summary>
+<div class="example-body">
+<p><strong>題目：</strong>計算 $E_F$ 以上某能量狀態被電子佔據的機率。</p>
+<div class="solution">■ 解法</div>
+<p>費米-狄拉克分布函數：</p>
+$$f(E) = \frac{1}{1 + \exp\left(\frac{E - E_F}{kT}\right)}$$
+
+<p>當 $E - E_F = kT$（$T=300$ K，$kT=0.0259$ eV）：</p>
+$$f(E) = \frac{1}{1 + e^{1}} = \frac{1}{1 + 2.718} = 0.269$$
+
+<p>即約 26.9% 的機率。</p>
+<div class="solution">✅ 答案：$f(E_F + kT) = 0.269$（26.9%）</div>
+<div class="solution-note">💡 在 $E_F$ 以上 $kT$ 處，仍有約 27% 的機率被佔據——這解釋了為什麼半導體在室溫下有一定的導電性。</div>
+</div>
+</details>
+
+<details class="example" open id="ex3-7">
+<summary>例題 3.7 — 決定 1% 佔據機率對應的溫度</summary>
+<div class="example-body">
+<p><strong>題目：</strong>決定在 $E = E_F + 0.3$ eV 處，電子佔據機率為 1% 時的溫度。</p>
+<div class="solution">■ 解法</div>
+<p>設 $f(E) = 0.01$，$E - E_F = 0.3$ eV：</p>
+$$0.01 = \frac{1}{1 + \exp(0.3/kT)}$$
+$$1 + e^{0.3/kT} = 100$$
+$$e^{0.3/kT} = 99$$
+$$\frac{0.3}{kT} = \ln(99) = 4.595$$
+$$T = \frac{0.3}{4.595 \times 8.617\times10^{-5}} = 756 \text{ K}$$
+
+<div class="solution">✅ 答案：$T \approx 756$ K（約 483°C）</div>
+<div class="solution-note">💡 需要極高溫度才能在 $E_F$ 以上 0.3 eV 處有 1% 的佔據機率。這展示了費米-狄拉克分布在室溫下的「陡峭」特性。</div>
+</div>
+</details>
+
+<details class="example" open id="ex3-8">
+<summary>例題 3.8 — 波茲曼近似的適用能量</summary>
+<div class="example-body">
+<p><strong>題目：</strong>決定波茲曼近似（$f(E) \approx e^{-(E-E_F)/kT}$）可被視為有效的能量範圍。</p>
+<div class="solution">■ 解法</div>
+<p>波茲曼近似有效的條件：$E - E_F \gg kT$，即 $\exp((E-E_F)/kT) \gg 1$。</p>
+<p>當 $E - E_F = 3kT$ 時：</p>
+$$f(E)_{\text{exact}} = \frac{1}{1 + e^3} = 0.0474$$
+$$f(E)_{\text{Boltzmann}} = e^{-3} = 0.0498$$
+<p>誤差約 5%。當 $E - E_F \ge 3kT$ 時，誤差 < 5%，波茲曼近似可接受。</p>
+<div class="solution">✅ 答案：$E - E_F \ge 3kT$（室溫下 ∼0.078 eV）</div>
+<div class="solution-note">💡 在半導體中，$E_c - E_F$ 通常大於 $3kT$（非簡併半導體），因此 $n_0 = N_c e^{-(E_c-E_F)/kT}$ 是極佳近似。</div>
+</div>
+</details>
+
+</section>
+
+<!-- ==================== CHAPTER 4 ==================== -->
+<section id="ch4">
+<h2>第四章　平衡態半導體</h2>
+
+<details class="example" open id="ex4-1">
+<summary>例題 4.1 — 計算熱平衡電子濃度</summary>
+<div class="example-body">
+<p><strong>題目：</strong>計算 T=300 K 時矽的熱平衡電子濃度，已知 $E_c - E_F = 0.25$ eV。</p>
+<div class="solution">■ 解法</div>
+$$n_0 = N_c \exp\left(-\frac{E_c - E_F}{kT}\right)$$
+<p>$N_c$（矽，300 K）$= 2.8 \times 10^{19}$ cm⁻³，$kT = 0.0259$ eV：</p>
+$$n_0 = 2.8 \times 10^{19} \cdot e^{-0.25/0.0259} = 2.8 \times 10^{19} \cdot e^{-9.65}$$
+$$= 2.8 \times 10^{19} \cdot 6.45 \times 10^{-5} = 1.81 \times 10^{15} \text{ cm}^{-3}$$
+
+<div class="solution">✅ 答案：$n_0 = 1.81 \times 10^{15}$ cm⁻³</div>
+</div>
+</details>
+
+<details class="example" open id="ex4-2">
+<summary>例題 4.2 — 計算熱平衡電洞濃度</summary>
+<div class="example-body">
+<p><strong>題目：</strong>計算矽在 T=300 K 時熱平衡電洞濃度，已知 $E_F - E_v = 0.30$ eV。</p>
+<div class="solution">■ 解法</div>
+$$p_0 = N_v \exp\left(-\frac{E_F - E_v}{kT}\right)$$
+<p>$N_v$（矽，300 K）$= 1.04 \times 10^{19}$ cm⁻³：</p>
+$$p_0 = 1.04 \times 10^{19} \cdot e^{-0.30/0.0259} = 1.04 \times 10^{19} \cdot e^{-11.58}$$
+$$= 1.04 \times 10^{19} \cdot 9.35 \times 10^{-6} = 9.72 \times 10^{13} \text{ cm}^{-3}$$
+
+<div class="solution">✅ 答案：$p_0 = 9.72 \times 10^{13}$ cm⁻³</div>
+<div class="formula-note">💡 注意 $n_0 p_0 = (1.81\times10^{15})(9.72\times10^{13}) = 1.76\times10^{29}$。而 $n_i^2$（Si, 300 K）$= (1.5\times10^{10})^2 = 2.25\times10^{20}$——不等！因為這兩個例子中的 $E_F$ 位置不同（不同摻雜條件）。</div>
+</div>
+</details>
+
+<details class="example" open id="ex4-3">
+<summary>例題 4.3 — 矽在 T=250, 300, 350 K 的本質載子濃度</summary>
+<div class="example-body">
+<p><strong>題目：</strong>計算矽在 T = 250, 300, 350 K 時的本質載子濃度。</p>
+<div class="solution">■ 解法</div>
+$$n_i = \sqrt{N_c N_v}\, e^{-E_g/(2kT)}$$
+<p>矽 $E_g = 1.12$ eV，$N_c \propto T^{3/2}$，$N_v \propto T^{3/2}$。</p>
+<p><strong>T = 250 K：</strong>$kT=0.0216$ eV，$n_i \approx 1.5 \times 10^8$ cm⁻³</p>
+<p><strong>T = 300 K：</strong>$kT=0.0259$ eV，$n_i \approx 1.5 \times 10^{10}$ cm⁻³</p>
+<p><strong>T = 350 K：</strong>$kT=0.0302$ eV，$n_i \approx 3.6 \times 10^{11}$ cm⁻³</p>
+
+<div class="solution">✅ 答案：250 K: ∼$10^8$; 300 K: $1.5\times10^{10}$; 350 K: ∼$3.6\times10^{11}$ cm⁻³</div>
+<div class="solution-note">💡 升溫 100 K（250→350 K），$n_i$ 增加超過 2000 倍！本質載子濃度對溫度極其敏感，這是半導體元件高溫失效的根本原因。</div>
+</div>
+</details>
+
+<details class="example" open id="ex4-4">
+<summary>例題 4.4 — 本質費米能階相對於導帶的位置</summary>
+<div class="example-body">
+<p><strong>題目：</strong>計算 T=300 K 時矽的本質費米能階相對於導帶底的位置。</p>
+<div class="solution">■ 解法</div>
+$$E_{Fi} - E_{\text{midgap}} = \frac{3}{4}kT \ln\left(\frac{m_p^*}{m_n^*}\right)$$
+<p>對矽：$m_n^* = 1.08m_0$，$m_p^* = 0.56m_0$：</p>
+$$E_{Fi} - E_{\text{midgap}} = \frac{3}{4}(0.0259)\ln\left(\frac{0.56}{1.08}\right) = 0.0194 \times (-0.657) = -0.0128 \text{ eV}$$
+
+<p>本質費米能階在 midgap 以下約 0.013 eV。$E_c - E_{Fi} = E_g/2 - 0.013 = 0.56 - 0.013 = 0.547$ eV。</p>
+<div class="solution">✅ 答案：$E_c - E_{Fi} \approx 0.547$ eV（本質費米能階略低於 midgap）</div>
+</div>
+</details>
+
+<details class="example" open id="ex4-5">
+<summary>例題 4.5 — 摻雜矽的熱平衡電子和電洞濃度</summary>
+<div class="example-body">
+<p><strong>題目：</strong>T=300 K，矽摻雜 $N_d = 10^{16}$ cm⁻³ 磷原子。求 $n_0$ 和 $p_0$。</p>
+<div class="solution">■ 解法</div>
+<p>假設完全游離：$n_0 \approx N_d = 10^{16}$ cm⁻³（n-type）</p>
+$$p_0 = \frac{n_i^2}{n_0} = \frac{(1.5 \times 10^{10})^2}{10^{16}} = 2.25 \times 10^{4} \text{ cm}^{-3}$$
+
+<div class="solution-note">▸ 驗證波茲曼近似</div>
+<p>$E_c - E_F = kT \ln(N_c/n_0) = 0.0259 \ln(2.8\times10^{19}/10^{16}) = 0.206$ eV $> 3kT$ ✓</p>
+
+<div class="solution">✅ 答案：$n_0 = 10^{16}$ cm⁻³，$p_0 = 2.25 \times 10^{4}$ cm⁻³</div>
+<div class="solution-note">💡 多數載子濃度 ≈ 摻雜濃度（完全游離假設），少數載子濃度被壓低到可忽略的量級。$n_0 \gg p_0$（相差 12 個數量級）。</div>
+</div>
+</details>
+
+<details class="example" open id="ex4-6">
+<summary>例題 4.6 — 使用費米-狄拉克積分計算電子濃度</summary>
+<div class="example-body">
+<p><strong>題目：</strong>當 $E_F$ 在導帶內（簡併半導體），使用費米-狄拉克積分計算電子濃度。</p>
+<div class="solution">■ 解法</div>
+$$n_0 = \frac{2}{\sqrt{\pi}} N_c \, F_{1/2}(\eta_F), \quad \eta_F = \frac{E_F - E_c}{kT}$$
+<p>當 $\eta_F = 2$（$E_F$ 在 $E_c$ 以上 $2kT$）：</p>
+$$F_{1/2}(2) \approx 2.76$$
+$$n_0 = \frac{2}{\sqrt{\pi}} \cdot 2.8\times10^{19} \cdot 2.76 = 8.72 \times 10^{19} \text{ cm}^{-3}$$
+
+<div class="solution">✅ 答案：$n_0 \approx 8.7 \times 10^{19}$ cm⁻³（遠大於 $N_c$，簡併情形）</div>
+<div class="formula-note">💡 簡併半導體中 $n_0 > N_c$，波茲曼近似完全失效——必須使用費米-狄拉克積分。</div>
+</div>
+</details>
+
+<details class="example" open id="ex4-7">
+<summary>例題 4.7 — 仍留在施體態的電子比例</summary>
+<div class="example-body">
+<p><strong>題目：</strong>決定 T=300 K 時，$N_d = 10^{16}$ cm⁻³ 矽中仍留在施體態的電子比例。</p>
+<div class="solution">■ 解法</div>
+<p>施體佔據機率（考慮自旋簡併因子 $g=2$）：</p>
+$$f_d = \frac{1}{1 + \frac{1}{2}\exp\left(\frac{E_d - E_F}{kT}\right)}$$
+
+<p>對磷在矽中：$E_c - E_d = 0.045$ eV。$E_c - E_F = 0.206$ eV（來自例 4.5）。</p>
+<p>$E_d - E_F = (E_c - E_F) - (E_c - E_d) = 0.206 - 0.045 = 0.161$ eV</p>
+$$f_d = \frac{1}{1 + \frac{1}{2}e^{0.161/0.0259}} = \frac{1}{1 + 0.5 \cdot e^{6.22}} = \frac{1}{1 + 250} \approx 0.004$$
+
+<p>只有 0.4% 的施體態被佔據，即 99.6% 已游離——完全游離假設成立。</p>
+<div class="solution">✅ 答案：約 0.4%（幾乎完全游離）</div>
+</div>
+</details>
+
+<details class="example" open id="ex4-8">
+<summary>例題 4.8 — 90% 受體游離的溫度</summary>
+<div class="example-body">
+<p><strong>題目：</strong>決定 90% 受體原子被游離時的溫度。$N_a = 10^{16}$ cm⁻³，$E_a - E_v = 0.045$ eV。</p>
+<div class="solution">■ 解法</div>
+<p>受體游離條件：$p_0 = 0.9 N_a$。在低溫（凍結區），$p_0 \approx \sqrt{N_a N_v}\, e^{-(E_a-E_v)/(2kT)}$。</p>
+<p>設 $\sqrt{N_a N_v}\, e^{-(E_a-E_v)/(2kT)} = 0.9 N_a$：</p>
+$$e^{-0.045/(2kT)} = \frac{0.9 \times 10^{16}}{\sqrt{10^{16} \cdot 1.04\times10^{19}}} = 0.883$$
+$$\frac{0.045}{2kT} = -\ln(0.883) = 0.124$$
+$$T = \frac{0.045}{2 \times 0.124 \times 8.617\times10^{-5}} \approx 210 \text{ K}$$
+
+<div class="solution">✅ 答案：$T \approx 210$ K（約 −63°C）</div>
+<div class="solution-note">💡 在 ∼210 K 以上，90% 的受體已游離。室溫下完全游離假設穩妥。但在液氮溫度（77 K），雜質會「凍結」——載子濃度急劇下降。</div>
+</div>
+</details>
+
+<details class="example" open id="ex4-9">
+<summary>例題 4.9 — 補償半導體的熱平衡濃度</summary>
+<div class="example-body">
+<p><strong>題目：</strong>T=300 K，Si 中 $N_d = 10^{16}$ cm⁻³，$N_a = 5 \times 10^{15}$ cm⁻³。求 $n_0$ 和 $p_0$。</p>
+<div class="solution">■ 解法</div>
+<p>補償半導體：$N_d > N_a$ → n-type，有效施體濃度 $= N_d - N_a = 5 \times 10^{15}$ cm⁻³。</p>
+<p>完全游離假設下：$n_0 \approx N_d - N_a = 5 \times 10^{15}$ cm⁻³</p>
+$$p_0 = \frac{n_i^2}{n_0} = \frac{2.25 \times 10^{20}}{5 \times 10^{15}} = 4.5 \times 10^{4} \text{ cm}^{-3}$$
+
+<div class="solution">✅ 答案：$n_0 = 5 \times 10^{15}$ cm⁻³，$p_0 = 4.5 \times 10^{4}$ cm⁻³</div>
+<div class="formula-note">💡 補償（compensation）降低了有效多數載子濃度。$n_0$ 是淨摻雜濃度而非總摻雜濃度。</div>
+</div>
+</details>
+
+<details class="example" open id="ex4-10">
+<summary>例題 4.10 — 含受體的 n-type 半導體濃度計算</summary>
+<div class="example-body">
+<p><strong>題目：</strong>T=300 K 下，矽中 $N_d = 2 \times 10^{16}$ cm⁻³，$N_a = 3 \times 10^{15}$ cm⁻³。求熱平衡電子和電洞濃度。</p>
+<div class="solution">■ 解法</div>
+<p>$N_d > N_a$ → n-type。淨施體濃度 $= 2\times10^{16} - 3\times10^{15} = 1.7 \times 10^{16}$ cm⁻³。</p>
+$$n_0 \approx 1.7 \times 10^{16} \text{ cm}^{-3}$$
+$$p_0 = \frac{n_i^2}{n_0} = \frac{2.25 \times 10^{20}}{1.7 \times 10^{16}} = 1.32 \times 10^{4} \text{ cm}^{-3}$$
+
+<div class="solution">✅ 答案：$n_0 = 1.7 \times 10^{16}$ cm⁻³，$p_0 = 1.32 \times 10^{4}$ cm⁻³</div>
+</div>
+</details>
+
+<details class="example" open id="ex4-11">
+<summary>例題 4.11 — 受體摻雜 p-type 的濃度計算</summary>
+<div class="example-body">
+<p><strong>題目：</strong>T=300 K，Si 中 $N_a = 10^{16}$ cm⁻³。求 $n_0$ 和 $p_0$。</p>
+<div class="solution">■ 解法</div>
+<p>完全游離：$p_0 \approx N_a = 10^{16}$ cm⁻³（p-type）</p>
+$$n_0 = \frac{n_i^2}{p_0} = \frac{2.25 \times 10^{20}}{10^{16}} = 2.25 \times 10^{4} \text{ cm}^{-3}$$
+
+<div class="solution">✅ 答案：$p_0 = 10^{16}$ cm⁻³，$n_0 = 2.25 \times 10^{4}$ cm⁻³</div>
+</div>
+</details>
+
+<details class="example" open id="ex4-12">
+<summary>例題 4.12 — 決定達成特定費米能階所需的施體濃度</summary>
+<div class="example-body">
+<p><strong>題目：</strong>T=300 K，欲使矽中 $E_c - E_F = 0.22$ eV，求所需的施體摻雜濃度。</p>
+<div class="solution">■ 解法</div>
+$$n_0 = N_c e^{-(E_c-E_F)/kT} = 2.8 \times 10^{19} \cdot e^{-0.22/0.0259}$$
+$$= 2.8 \times 10^{19} \cdot e^{-8.49} = 2.8 \times 10^{19} \cdot 2.06 \times 10^{-4} = 5.77 \times 10^{15} \text{ cm}^{-3}$$
+
+<p>假設完全游離且無補償：$N_d \approx n_0 = 5.77 \times 10^{15}$ cm⁻³</p>
+
+<div class="solution">✅ 答案：$N_d \approx 5.8 \times 10^{15}$ cm⁻³</div>
+<div class="solution-note">💡 這是「設計」問題——反向使用 $n_0$ 公式求所需摻雜濃度。$E_c - E_F$ 越大→所需 $N_d$ 越高。</div>
+</div>
+</details>
+
+<details class="example" open id="ex4-13">
+<summary>例題 4.13 — 費米能階與最大摻雜濃度</summary>
+<div class="example-body">
+<p><strong>題目：</strong>T=300 K，決定矽中費米能階位置及不使半導體成為簡併態的最大施體摻雜濃度。</p>
+<div class="solution">■ 解法</div>
+<p>簡併條件：$E_F$ 進入導帶（$E_F \ge E_c$）。非簡併最大摻雜時 $E_F = E_c$。</p>
+$$n_{0,\text{max}} = N_c e^{-(E_c-E_F)/kT} = N_c \cdot e^0 = N_c = 2.8 \times 10^{19} \text{ cm}^{-3}$$
+
+<p>但實際上在 $E_F \approx E_c - 3kT$ 時波茲曼近似即開始失效。使用 $E_c - E_F = 3kT = 0.0777$ eV：</p>
+$$N_{d,\text{max}} \approx N_c e^{-3} = 2.8 \times 10^{19} \times 0.0498 = 1.4 \times 10^{18} \text{ cm}^{-3}$$
+
+<div class="solution">✅ 答案：非簡併最大摻雜 ∼$1.4 \times 10^{18}$ cm⁻³；簡併發生在 $N_d \gtrsim 10^{19}$ cm⁻³</div>
+<div class="solution-note">💡 當摻雜超過 ∼$10^{18}$ cm⁻³，$E_F$ 接近 $E_c$，波茲曼近似失效。摻雜 > $10^{19}$ 時 $E_F$ 進入導帶——簡併半導體，行為類似金屬。</div>
+</div>
+</details>
+
+</section>
+
+
+
+<!-- ==================== CHAPTER 5 ==================== -->
+<section id="ch5">
+<h2>第五章　載子傳輸現象</h2>
+
+<details class="example" open id="ex5-1">
+<summary>例題 5.1 — 計算半導體中的漂移電流密度</summary>
+<div class="example-body">
+<p><strong>題目：</strong>給定電場強度下，計算矽中的漂移電流密度。n-type Si，$N_d=10^{16}$ cm⁻³，外加電場 $E=10$ V/cm。</p>
+<div class="solution">■ 解法</div>
+<p>漂移電流密度：$J_{drf} = e\mu_n n_0 E$</p>
+<p>$n_0 \approx N_d = 10^{16}$ cm⁻³（完全游離）。從遷移率曲線查得 $\mu_n \approx 1100$ cm²/V·s（$N_d=10^{16}$ 時）。</p>
+$$J_{drf} = (1.6 \times 10^{-19})(1100)(10^{16})(10) = 17.6 \text{ A/cm}^2$$
+<div class="solution">✅ 答案：$J_{drf} = 17.6$ A/cm²</div>
+</div>
+</details>
+
+<details class="example" open id="ex5-2">
+<summary>例題 5.2 — 不同摻雜濃度下的電子遷移率</summary>
+<div class="example-body">
+<p><strong>題目：</strong>T=300 K，決定矽在 $N_d=10^{15}$、$10^{16}$、$10^{17}$ cm⁻³ 時的電子遷移率。</p>
+<div class="solution">■ 解法</div>
+<p>從實驗曲線（遷移率 vs 摻雜濃度）：</p>
+<p>$N_d=10^{15}$ → $\mu_n \approx 1350$ cm²/V·s<br>
+$N_d=10^{16}$ → $\mu_n \approx 1100$ cm²/V·s<br>
+$N_d=10^{17}$ → $\mu_n \approx 700$ cm²/V·s</p>
+<div class="solution">✅ 答案：1350, 1100, 700 cm²/V·s（摻雜越高→雜質散射越強→遷移率越低）</div>
+<div class="solution-note">💡 遷移率隨摻雜濃度增加而下降的主因：游離雜質庫倫散射增強。</div>
+</div>
+</details>
+
+<details class="example" open id="ex5-3">
+<summary>例題 5.3 — 由電阻率決定摻雜濃度與遷移率</summary>
+<div class="example-body">
+<p><strong>題目：</strong>n-type Si 的電阻率 $\rho = 0.5$ Ω·cm，求 $N_d$ 和 $\mu_n$。</p>
+<div class="solution">■ 解法</div>
+<p>$\sigma = 1/\rho = 2$ (Ω·cm)⁻¹。假設完全游離，$n_0 \approx N_d$。</p>
+<p>$\sigma = e\mu_n n_0$。使用迭代法：</p>
+<p>猜 $N_d=10^{16}$ → $\mu_n\approx1100$ → $\sigma=1.6\times10^{-19}\times1100\times10^{16}=1.76$ → 略低<br>
+猜 $N_d=8\times10^{15}$ → $\mu_n\approx1200$ → $\sigma=1.54$ → 低<br>
+猜 $N_d=1.2\times10^{16}$ → $\mu_n\approx1050$ → $\sigma=2.02$ → 接近</p>
+<div class="solution">✅ $N_d \approx 1.2 \times 10^{16}$ cm⁻³，$\mu_n \approx 1050$ cm²/V·s</div>
+</div>
+</details>
+
+<details class="example" open id="ex5-4">
+<summary>例題 5.4 — 導電率與電阻率計算</summary>
+<div class="example-body">
+<p><strong>題目：</strong>p-type Si，$N_a=5\times10^{15}$ cm⁻³。求導電率和電阻率。若改為 n-type 同濃度？</p>
+<div class="solution">■ 解法</div>
+<p>p-type: $\mu_p\approx400$，$\sigma = e\mu_p N_a = 1.6\times10^{-19}\times400\times5\times10^{15} = 0.32$ (Ω·cm)⁻¹<br>
+$\rho = 1/\sigma = 3.13$ Ω·cm</p>
+<p>n-type: $\mu_n\approx1300$，$\sigma = 1.6\times10^{-19}\times1300\times5\times10^{15} = 1.04$ (Ω·cm)⁻¹<br>
+$\rho = 0.96$ Ω·cm</p>
+<div class="solution">✅ p-type: $\sigma=0.32$, $\rho=3.13$ Ω·cm；n-type: $\sigma=1.04$, $\rho=0.96$ Ω·cm</div>
+<div class="formula-note">💡 相同摻雜下 n-type 導電率更高（電子遷移率 > 電洞遷移率）。</div>
+</div>
+</details>
+
+<details class="example" open id="ex5-5">
+<summary>例題 5.5 — 計算擴散電流密度</summary>
+<div class="example-body">
+<p><strong>題目：</strong>半導體中電子濃度梯度 $dn/dx = 10^{18}$ cm⁻⁴。$D_n=25$ cm²/s。求擴散電流密度。</p>
+<div class="solution">■ 解法</div>
+$$J_{\text{diff}} = e D_n \frac{dn}{dx} = (1.6 \times 10^{-19})(25)(10^{18}) = 4.0 \text{ A/cm}^2$$
+<div class="solution">✅ $J_{\text{diff}} = 4.0$ A/cm²</div>
+</div>
+</details>
+
+<details class="example" open id="ex5-6">
+<summary>例題 5.6 — 非均勻摻雜產生的感應電場</summary>
+<div class="example-body">
+<p><strong>題目：</strong>T=300 K，n-type Si 中施體濃度梯度 $dN_d/dx = 10^{20}$ cm⁻⁴。求熱平衡下的感應電場。</p>
+<div class="solution">■ 解法</div>
+<p>熱平衡下總電流為零：$J = e\mu_n n_0 E + e D_n \frac{dn_0}{dx} = 0$</p>
+$$E = -\frac{D_n}{\mu_n}\frac{1}{n_0}\frac{dn_0}{dx}$$
+
+<p>使用愛因斯坦關係 $D_n/\mu_n = kT/e = 0.0259$ V，且 $n_0 \approx N_d$：</p>
+$$E = -0.0259 \cdot \frac{10^{20}}{10^{16}} = -0.259 \text{ V/cm}$$
+
+<div class="solution">✅ $E = -0.259$ V/cm（負號表示方向與濃度梯度相反）</div>
+<div class="solution-note">💡 非均勻摻雜會自動產生內建電場來抵消擴散趨勢，維持熱平衡。</div>
+</div>
+</details>
+
+<details class="example" open id="ex5-7">
+<summary>例題 5.7 — 愛因斯坦關係：由遷移率求擴散係數</summary>
+<div class="example-body">
+<p><strong>題目：</strong>T=300 K，電子遷移率 $\mu_n=1100$ cm²/V·s，電洞遷移率 $\mu_p=400$ cm²/V·s。求 $D_n$ 和 $D_p$。</p>
+<div class="solution">■ 解法</div>
+<p>愛因斯坦關係：$D/\mu = kT/e$</p>
+$$D_n = \frac{kT}{e}\mu_n = 0.0259 \times 1100 = 28.5 \text{ cm}^2\!/\text{s}$$
+$$D_p = 0.0259 \times 400 = 10.4 \text{ cm}^2\!/\text{s}$$
+
+<div class="solution">✅ $D_n = 28.5$ cm²/s，$D_p = 10.4$ cm²/s</div>
+</div>
+</details>
+
+<details class="example" open id="ex5-8">
+<summary>例題 5.8 — 霍爾效應求載子濃度與遷移率</summary>
+<div class="example-body">
+<p><strong>題目：</strong>霍爾量測：$V_H=5$ mV，$I_x=2$ mA，$B_z=0.1$ T，樣品厚度 $d=0.01$ cm，寬度 $W=0.1$ cm，長度 $L=0.5$ cm，縱向電壓 $V_x=1$ V。求多數載子濃度和遷移率。</p>
+<div class="solution">■ 解法</div>
+<p><strong>載子濃度（霍爾效應）：</strong></p>
+$$n_0 = \frac{I_x B_z}{e d V_H} = \frac{(2\times10^{-3})(0.1)}{(1.6\times10^{-19})(0.01)(5\times10^{-3})} = 2.5 \times 10^{16} \text{ cm}^{-3}$$
+
+<p><strong>遷移率：</strong></p>
+$$\mu_n = \frac{I_x L}{e n_0 V_x W d} = \frac{(2\times10^{-3})(0.5)}{(1.6\times10^{-19})(2.5\times10^{16})(1)(0.1)(0.01)} = 1000 \text{ cm}^2\!/\text{V·s}$$
+
+<div class="solution">✅ $n_0 = 2.5 \times 10^{16}$ cm⁻³，$\mu_n = 1000$ cm²/V·s</div>
+<div class="solution-note">💡 霍爾效應是量測半導體載子濃度和遷移率的標準方法。$V_H$ 的符號可判斷 n-type 或 p-type。</div>
+</div>
+</details>
+
+</section>
+
+<!-- ==================== CHAPTER 6 ==================== -->
+<section id="ch6">
+<h2>第六章　非平衡過剩載子</h2>
+
+<details class="example" open id="ex6-1">
+<summary>例題 6.1 — 過剩載子隨時間的行為</summary>
+<div class="example-body">
+<p><strong>題目：</strong>n-type Si，$\tau_{p0}=10^{-7}$ s。$t=0$ 時產生 $\Delta p(0)=10^{14}$ cm⁻³ 的過剩載子。求 $t=0.1, 0.5, 1.0$ µs 時的 $\Delta p(t)$。</p>
+<div class="solution">■ 解法</div>
+<p>過剩載子隨時間指數衰減：$\Delta p(t) = \Delta p(0) e^{-t/\tau_{p0}}$</p>
+<p>$t=0.1$ µs: $\Delta p = 10^{14} \cdot e^{-0.1/1.0} = 10^{14} \cdot 0.905 = 9.05\times10^{13}$ cm⁻³<br>
+$t=0.5$ µs: $\Delta p = 10^{14} \cdot e^{-0.5} = 6.07\times10^{13}$ cm⁻³<br>
+$t=1.0$ µs: $\Delta p = 10^{14} \cdot e^{-1} = 3.68\times10^{13}$ cm⁻³</p>
+<div class="solution">✅ $9.05\times10^{13}$, $6.07\times10^{13}$, $3.68\times10^{13}$ cm⁻³</div>
+</div>
+</details>
+
+<details class="example" open id="ex6-2">
+<summary>例題 6.2 — 半導體回復平衡的時間行為</summary>
+<div class="example-body">
+<p><strong>題目：</strong>$t<0$ 時以均勻產生率 $G=10^{20}$ cm⁻³s⁻¹ 照射半導體（$\tau_{p0}=10^{-7}$ s）。$t=0$ 時關閉光源。求 $\Delta p(t)$。</p>
+<div class="solution">■ 解法</div>
+<p>穩態過剩濃度：$\Delta p_0 = G \cdot \tau_{p0} = 10^{20} \times 10^{-7} = 10^{13}$ cm⁻³</p>
+<p>關閉光源後：$\Delta p(t) = \Delta p_0 e^{-t/\tau_{p0}} = 10^{13} e^{-t/10^{-7}}$</p>
+<div class="solution">✅ $\Delta p(t) = 10^{13} e^{-t/10^{-7}}$ cm⁻³</div>
+</div>
+</details>
+
+<details class="example" open id="ex6-3">
+<summary>例題 6.3 — 達到穩態的時間依賴性</summary>
+<div class="example-body">
+<p><strong>題目：</strong>$t=0$ 時開啟均勻光源。求 $\Delta p(t)$ 達到穩態值 90% 所需的時間。（$\tau_{p0}=10^{-7}$ s）</p>
+<div class="solution">■ 解法</div>
+<p>開啟後：$\Delta p(t) = \Delta p_0(1 - e^{-t/\tau_{p0}})$</p>
+<p>設 $\Delta p(t) = 0.9 \Delta p_0$：<br>
+$1 - e^{-t/\tau} = 0.9$ → $e^{-t/\tau} = 0.1$ → $t = \tau \ln(10) = 10^{-7} \times 2.303 = 2.3 \times 10^{-7}$ s = 0.23 µs</p>
+<div class="solution">✅ $t = 0.23$ µs（約 2.3 個壽命時間常數）</div>
+</div>
+</details>
+
+<details class="example" open id="ex6-4">
+<summary>例題 6.4 — 穩態過剩載子的空間分布</summary>
+<div class="example-body">
+<p><strong>題目：</strong>n-type Si，$x=0$ 處維持 $\Delta p(0)=10^{14}$ cm⁻³。$D_p=10$ cm²/s，$\tau_{p0}=10^{-7}$ s。求 $\Delta p(x)$ 的穩態分布。</p>
+<div class="solution">■ 解法</div>
+<p>擴散長度：$L_p = \sqrt{D_p \tau_{p0}} = \sqrt{10 \times 10^{-7}} = 10^{-3}$ cm = 10 µm</p>
+<p>穩態分布：$\Delta p(x) = \Delta p(0) e^{-x/L_p} = 10^{14} e^{-x/10^{-3}}$</p>
+<div class="solution">✅ $\Delta p(x) = 10^{14} e^{-x/(10\text{ µm})}$ cm⁻³</div>
+<div class="solution-note">💡 擴散長度 $L_p$ 是過剩載子在復合前可擴散的特徵距離。</div>
+</div>
+</details>
+
+<details class="example" open id="ex6-5">
+<summary>例題 6.5 — 時間與空間雙重依賴性</summary>
+<div class="example-body">
+<p><strong>題目：</strong>$t=0$ 時在半導體表面產生脈衝過剩載子，隨後同時擴散和復合。$D_p=10$ cm²/s，$\tau_{p0}=10^{-6}$ s。求 $t=1$ µs 時的空間分布。</p>
+<div class="solution">■ 解法</div>
+<p>含時擴散方程的解包含擴散和衰減雙重效應。有效擴散長度隨時間演變。</p>
+<p>$L_p = \sqrt{D_p\tau_{p0}} = \sqrt{10\times10^{-6}} = 3.16\times10^{-3}$ cm = 31.6 µm</p>
+<p>在 $t=1$ µs 時，載子已擴散約 $\sqrt{D_p t} = \sqrt{10\times10^{-6}} = 31.6$ µm，同時因復合衰減至 $e^{-1/10} \approx 0.905$。</p>
+<div class="solution">✅ 空間分布為擴散+衰減的組合</div>
+</div>
+</details>
+
+<details class="example" open id="ex6-6">
+<summary>例題 6.6 — 介電弛豫時間常數</summary>
+<div class="example-body">
+<p><strong>題目：</strong>n-type Si，$N_d=10^{16}$ cm⁻³。求介電弛豫時間常數 $\tau_d$。</p>
+<div class="solution">■ 解法</div>
+$$\tau_d = \frac{\epsilon_s}{\sigma} = \frac{\epsilon_r \epsilon_0}{e\mu_n n_0}$$
+<p>$\epsilon_r$(Si)=11.7，$\mu_n\approx1100$ cm²/V·s：</p>
+$$\tau_d = \frac{11.7 \times 8.85\times10^{-14}}{(1.6\times10^{-19})(1100)(10^{16})} = 5.9 \times 10^{-13} \text{ s}$$
+
+<div class="solution">✅ $\tau_d \approx 0.6$ ps（極快，電荷擾動幾乎即時被屏蔽）</div>
+<div class="solution-note">💡 介電弛豫時間代表材料對電荷擾動的響應速度。對典型半導體而言約在 ps 量級。</div>
+</div>
+</details>
+
+<details class="example" open id="ex6-7">
+<summary>例題 6.7 — 計算準費米能階</summary>
+<div class="example-body">
+<p><strong>題目：</strong>n-type Si，$N_d=10^{15}$ cm⁻³。光照產生 $\Delta n = \Delta p = 10^{13}$ cm⁻³。T=300 K。求 $E_{Fn}$ 和 $E_{Fp}$ 相對於 $E_{Fi}$ 的位置。</p>
+<div class="solution">■ 解法</div>
+<p>熱平衡：$n_0 \approx 10^{15}$，$p_0 = n_i^2/n_0 = 2.25\times10^5$</p>
+<p>光照後：$n = n_0 + \Delta n \approx 1.01\times10^{15}$，$p \approx 10^{13}$</p>
+<p><strong>電子準費米能階：</strong></p>
+$$E_{Fn} - E_{Fi} = kT\ln\left(\frac{n}{n_i}\right) = 0.0259\ln\left(\frac{1.01\times10^{15}}{1.5\times10^{10}}\right) = 0.288 \text{ eV}$$
+
+<p><strong>電洞準費米能階：</strong></p>
+$$E_{Fi} - E_{Fp} = kT\ln\left(\frac{p}{n_i}\right) = 0.0259\ln\left(\frac{10^{13}}{1.5\times10^{10}}\right) = 0.168 \text{ eV}$$
+
+<div class="solution">✅ $E_{Fn} - E_{Fi} = 0.288$ eV, $E_{Fi} - E_{Fp} = 0.168$ eV</div>
+<div class="solution-note">💡 光照下 $E_{Fn} \neq E_{Fp}$——電子與電洞不再有共同的費米能階。$E_{Fn} - E_{Fp}$ 代表系統偏離平衡的程度。</div>
+</div>
+</details>
+
+<details class="example" open id="ex6-8">
+<summary>例題 6.8 — 本質半導體的過剩載子壽命</summary>
+<div class="example-body">
+<p><strong>題目：</strong>T=300 K，本質 Si 中 $\tau_{n0} = \tau_{p0} = 10^{-7}$ s。求過剩載子壽命 $\tau$。</p>
+<div class="solution">■ 解法</div>
+<p>對於本質半導體（$n_0 = p_0 = n_i$），SRH 理論給出：</p>
+$$\tau = \tau_{p0}\frac{n_0 + n'}{n_0 + p_0 + 2n'} + \tau_{n0}\frac{p_0 + p'}{n_0 + p_0 + 2n'}$$
+<p>當 $n' = p' = n_i$（陷阱在 midgap）：$\tau = \tau_{p0} + \tau_{n0} = 2 \times 10^{-7}$ s</p>
+<div class="solution">✅ $\tau = 2 \times 10^{-7}$ s（本質壽命約為少數載子壽命的兩倍）</div>
+</div>
+</details>
+
+<details class="example" open id="ex6-9">
+<summary>例題 6.9 — 表面附近的穩態過剩載子濃度</summary>
+<div class="example-body">
+<p><strong>題目：</strong>表面產生 $\Delta p_s = 10^{14}$ cm⁻³ 的過剩載子。$D_p=10$ cm²/s，$\tau_{p0}=10^{-6}$ s，表面復合速度 $s=10^4$ cm/s。求 $\Delta p(x)$。</p>
+<div class="solution">■ 解法</div>
+<p>擴散長度 $L_p = \sqrt{10\times10^{-6}} = 3.16\times10^{-3}$ cm。</p>
+<p>含表面復合的穩態分布：</p>
+$$\Delta p(x) = \Delta p_s \frac{e^{-x/L_p}}{1 + s\tau_{p0}/L_p}$$
+<p>$s\tau_{p0}/L_p = 10^4 \times 10^{-6} / (3.16\times10^{-3}) = 3.16$</p>
+<p>$\Delta p(x) = 10^{14} \cdot \frac{e^{-x/L_p}}{4.16} = 2.4\times10^{13} e^{-x/L_p}$</p>
+<div class="solution">✅ $\Delta p(x) = 2.4\times10^{13} e^{-x/(31.6\text{ µm})}$ cm⁻³</div>
+</div>
+</details>
+
+<details class="example" open id="ex6-10">
+<summary>例題 6.10 — 決定表面復合速度的值</summary>
+<div class="example-body">
+<p><strong>題目：</strong>實驗量測到表面過剩載子濃度為體內值的 20%。$L_p=10^{-3}$ cm，$\tau_{p0}=10^{-7}$ s。求表面復合速度 $s$。</p>
+<div class="solution">■ 解法</div>
+$$\frac{\Delta p(0)}{\Delta p_{\text{bulk}}} = \frac{1}{1 + s\tau_{p0}/L_p} = 0.20$$
+$$1 + s\tau_{p0}/L_p = 5$$
+$$s = \frac{4L_p}{\tau_{p0}} = \frac{4 \times 10^{-3}}{10^{-7}} = 4 \times 10^4 \text{ cm/s}$$
+
+<div class="solution">✅ $s = 4 \times 10^4$ cm/s</div>
+<div class="solution-note">💡 表面復合速度 $s$ 表示表面缺陷捕獲載子的效率。好的鈍化可將 $s$ 降至 < 1 cm/s。</div>
+</div>
+</details>
+
+</section>
+
+
+
+<!-- ==================== CHAPTER 7 ==================== -->
+<section id="ch7">
+<h2>第七章　pn 接面</h2>
+
+<details class="example" open id="ex7-1">
+<summary>例題 7.1 — 計算 pn 接面的內建位能障壁</summary>
+<div class="example-body">
+<p><strong>題目：</strong>T=300 K，Si pn 接面，$N_a=10^{17}$ cm⁻³，$N_d=10^{15}$ cm⁻³。求 $V_{bi}$。</p>
+<div class="solution">■ 解法</div>
+$$V_{bi} = \frac{kT}{e}\ln\left(\frac{N_a N_d}{n_i^2}\right) = 0.0259 \ln\left(\frac{10^{17} \times 10^{15}}{(1.5\times10^{10})^2}\right)$$
+$$= 0.0259 \ln(4.44\times10^{11}) = 0.0259 \times 26.82 = 0.695 \text{ V}$$
+<div class="solution">✅ $V_{bi} = 0.695$ V</div>
+<div class="solution-note">💡 摻雜越高 → $V_{bi}$ 越大。典型 Si pn 接面 $V_{bi}$ 約 0.6–0.9 V。</div>
+</div>
+</details>
+
+<details class="example" open id="ex7-2">
+<summary>例題 7.2 — 空間電荷寬度與最大電場</summary>
+<div class="example-body">
+<p><strong>題目：</strong>Si pn 接面，$N_a=10^{17}$，$N_d=10^{15}$ cm⁻³，零偏壓。求 $W$、$x_n$、$x_p$、$|E_{\max}|$。</p>
+<div class="solution">■ 解法</div>
+<p>$V_{bi}=0.695$ V（來自例 7.1）。</p>
+$$W = \sqrt{\frac{2\epsilon_s V_{bi}}{e}\left(\frac{N_a+N_d}{N_a N_d}\right)}$$
+$$= \sqrt{\frac{2(11.7)(8.85\times10^{-14})(0.695)}{1.6\times10^{-19}}\cdot\frac{1.02\times10^{17}}{10^{32}}} = 0.951 \times 10^{-4} \text{ cm} = 0.951 \text{ µm}$$
+
+<p>$x_n = W \cdot N_a/(N_a+N_d) \approx 0.942$ µm，$x_p \approx 0.009$ µm（p⁺n 單邊接面）</p>
+<p>$|E_{\max}| = 2V_{bi}/W = 1.46 \times 10^4$ V/cm</p>
+<div class="solution">✅ $W=0.95$ µm, $x_n=0.94$ µm, $x_p=0.01$ µm, $|E_{\max}|=1.46\times10^4$ V/cm</div>
+<div class="formula-note">💡 p⁺n 單邊接面：空乏區幾乎全在輕摻雜側。</div>
+</div>
+</details>
+
+<details class="example" open id="ex7-3">
+<summary>例題 7.3 — 逆向偏壓下的空乏區寬度</summary>
+<div class="example-body">
+<p><strong>題目：</strong>同例 7.2 的接面，外加 $V_R=5$ V。求 $W$ 和 $|E_{\max}|$。</p>
+<div class="solution">■ 解法</div>
+<p>逆向偏壓下 $V_{bi}+V_R$ 取代 $V_{bi}$：</p>
+$$W = \sqrt{\frac{2\epsilon_s(V_{bi}+V_R)}{e N_d}} = \sqrt{\frac{2(11.7\times8.85\times10^{-14})(5.695)}{1.6\times10^{-19}\times10^{15}}} = 2.72 \times 10^{-4} \text{ cm}$$
+$$|E_{\max}| = \frac{2(V_{bi}+V_R)}{W} = 4.19 \times 10^4 \text{ V/cm}$$
+
+<div class="solution">✅ $W=2.72$ µm（比零偏壓增加 ∼3 倍），$|E_{\max}|=4.19\times10^4$ V/cm</div>
+</div>
+</details>
+
+<details class="example" open id="ex7-4">
+<summary>例題 7.4 — 設計 pn 接面（設計題）</summary>
+<div class="example-body">
+<p><strong>題目：</strong>設計一個 Si p⁺n 接面，要求 $V_R=50$ V 時 $|E_{\max}| \le 3\times10^5$ V/cm。求 $N_d$ 最小值。</p>
+<div class="solution">■ 解法</div>
+<p>單邊 p⁺n 接面：$|E_{\max}| = \sqrt{\frac{2e N_d(V_{bi}+V_R)}{\epsilon_s}}$</p>
+<p>設 $V_{bi} \ll V_R$：</p>
+$$N_d = \frac{\epsilon_s E_{\max}^2}{2e V_R} = \frac{(11.7\times8.85\times10^{-14})(3\times10^5)^2}{2(1.6\times10^{-19})(50)} = 5.84 \times 10^{15} \text{ cm}^{-3}$$
+
+<div class="solution">✅ $N_d \ge 5.8 \times 10^{15}$ cm⁻³（輕摻雜以維持高崩潰電壓）</div>
+</div>
+</details>
+
+<details class="example" open id="ex7-5">
+<summary>例題 7.5 — 接面電容計算</summary>
+<div class="example-body">
+<p><strong>題目：</strong>Si pn 接面，面積 $A=10^{-3}$ cm²，$N_a=10^{17}$，$N_d=10^{15}$ cm⁻³。求 $V_R=0, 5, 10$ V 時的接面電容。</p>
+<div class="solution">■ 解法</div>
+$$C_j = A\sqrt{\frac{e\epsilon_s N_a N_d}{2(V_{bi}+V_R)(N_a+N_d)}} \approx A\sqrt{\frac{e\epsilon_s N_d}{2(V_{bi}+V_R)}}$$
+
+<p>$V_R=0$: $C_j = 10^{-3}\sqrt{\frac{1.6\times10^{-19}\times1.04\times10^{-12}\times10^{15}}{2\times0.695}} = 3.46 \times 10^{-12}$ F = 3.46 pF</p>
+<p>$V_R=5$: $C_j = 1.32$ pF；$V_R=10$: $C_j = 0.97$ pF</p>
+<div class="solution">✅ $V_R=0$: 3.46 pF; 5 V: 1.32 pF; 10 V: 0.97 pF</div>
+<div class="solution-note">💡 $C_j \propto 1/\sqrt{V_{bi}+V_R}$——逆向偏壓越大，空乏區越寬，電容越小。這是變容二極體的基礎。</div>
+</div>
+</details>
+
+<details class="example" open id="ex7-6">
+<summary>例題 7.6 — 由 C-V 特性求摻雜濃度</summary>
+<div class="example-body">
+<p><strong>題目：</strong>pn 接面 C-V 量測：$V_R=2$ V 時 $C=0.8$ pF；$V_R=10$ V 時 $C=0.4$ pF。$A=10^{-3}$ cm²。求 $N_a$ 和 $N_d$（單邊接面）。</p>
+<div class="solution">■ 解法</div>
+<p>由 $1/C_j^2$ vs $V_R$ 直線的斜率求摻雜：</p>
+$$\frac{d(1/C_j^2)}{dV_R} = \frac{2}{e\epsilon_s N_d A^2}$$
+
+<p>計算後得 $N_d \approx 1.5 \times 10^{15}$ cm⁻³，$N_a \approx 6.0 \times 10^{15}$ cm⁻³。</p>
+<div class="solution">✅ $N_a=6.0\times10^{15}$，$N_d=1.5\times10^{15}$ cm⁻³</div>
+</div>
+</details>
+
+<details class="example" open id="ex7-7">
+<summary>例題 7.7 — 設計崩潰電壓（設計題）</summary>
+<div class="example-body">
+<p><strong>題目：</strong>設計 Si n⁺p 單邊接面，要求崩潰電壓 $V_B = 100$ V。求輕摻雜側的摻雜濃度。</p>
+<div class="solution">■ 解法</div>
+<p>Si 單邊接面崩潰電壓經驗式：$V_B \approx 5.34 \times 10^{13} N_a^{-3/4}$（V, cm⁻³）</p>
+$$N_a = \left(\frac{5.34\times10^{13}}{V_B}\right)^{4/3} = \left(\frac{5.34\times10^{13}}{100}\right)^{4/3} = 3.7 \times 10^{15} \text{ cm}^{-3}$$
+
+<div class="solution">✅ $N_a \approx 3.7 \times 10^{15}$ cm⁻³</div>
+<div class="solution-note">💡 崩潰電壓與輕摻雜側濃度成反比。$V_B \propto N^{-3/4}$：摻雜減半 → 崩潰電壓提高約 1.7 倍。</div>
+</div>
+</details>
+
+</section>
+
+<!-- ==================== CHAPTER 8 ==================== -->
+<section id="ch8">
+<h2>第八章　pn 接面二極體</h2>
+
+<details class="example" open id="ex8-1">
+<summary>例題 8.1 — 少數載子在空乏區邊界的濃度</summary>
+<div class="example-body">
+<p><strong>題目：</strong>T=300 K，Si pn 接面，$N_a=10^{17}$，$N_d=10^{15}$ cm⁻³。順偏 $V_a=0.6$ V。求 $x_n$ 處的 $p_n$ 和 $-x_p$ 處的 $n_p$。</p>
+<div class="solution">■ 解法</div>
+<p>熱平衡少數載子：$p_{n0}=n_i^2/N_d=2.25\times10^5$，$n_{p0}=n_i^2/N_a=2.25\times10^3$ cm⁻³</p>
+<p>順偏注入：</p>
+$$p_n(x_n) = p_{n0} e^{V_a/V_t} = 2.25\times10^5 \cdot e^{0.6/0.0259} = 2.25\times10^5 \cdot e^{23.2} = 2.6 \times 10^{15} \text{ cm}^{-3}$$
+$$n_p(-x_p) = n_{p0} e^{V_a/V_t} = 2.25\times10^3 \cdot e^{23.2} = 2.6 \times 10^{13} \text{ cm}^{-3}$$
+
+<div class="solution">✅ $p_n(x_n)=2.6\times10^{15}$，$n_p(-x_p)=2.6\times10^{13}$ cm⁻³</div>
+<div class="solution-note">💡 順偏下少數載子濃度呈指數增加——注入效應。這是雙極性電晶體和 LED 的物理基礎。</div>
+</div>
+</details>
+
+<details class="example" open id="ex8-2">
+<summary>例題 8.2 — 理想逆向飽和電流密度</summary>
+<div class="example-body">
+<p><strong>題目：</strong>Si pn 接面，$N_a=10^{18}$，$N_d=10^{16}$ cm⁻³，$D_n=25$，$D_p=10$ cm²/s，$\tau_{n0}=\tau_{p0}=10^{-7}$ s。求 $J_s$。</p>
+<div class="solution">■ 解法</div>
+$$J_s = e n_i^2\left(\frac{D_n}{L_n N_a} + \frac{D_p}{L_p N_d}\right)$$
+<p>$L_n=\sqrt{D_n\tau_{n0}}=\sqrt{25\times10^{-7}}=1.58\times10^{-3}$ cm<br>
+$L_p=\sqrt{10\times10^{-7}}=10^{-3}$ cm</p>
+$$J_s = 1.6\times10^{-19}(2.25\times10^{20})\left(\frac{25}{1.58\times10^{-3}\times10^{18}} + \frac{10}{10^{-3}\times10^{16}}\right)$$
+$$= 3.6\times10^{-11} \text{ A/cm}^2$$
+
+<div class="solution">✅ $J_s = 3.6 \times 10^{-11}$ A/cm²</div>
+</div>
+</details>
+
+<details class="example" open id="ex8-3">
+<summary>例題 8.3 — 設計特定電流的二極體（設計題）</summary>
+<div class="example-body">
+<p><strong>題目：</strong>設計 Si pn 二極體，要求 $V_a=0.65$ V 時 $I=1$ mA。$\tau_{p0}=\tau_{n0}=10^{-7}$ s。求 $N_a$ 和 $N_d$。</p>
+<div class="solution">■ 解法</div>
+<p>由 $I = I_s e^{V_a/V_t}$，$I_s = 10^{-3} e^{-0.65/0.0259} = 1.2 \times 10^{-14}$ A</p>
+<p>選擇 $N_a=N_d$（對稱接面），從 $I_s$ 公式反推得 $N_a=N_d \approx 5\times10^{16}$ cm⁻³。</p>
+<div class="solution">✅ $N_a \approx N_d \approx 5\times10^{16}$ cm⁻³</div>
+</div>
+</details>
+
+<details class="example" open id="ex8-4">
+<summary>例題 8.4 — 中性區中的電場</summary>
+<div class="example-body">
+<p><strong>題目：</strong>Si 二極體 n 區中性區，$N_d=10^{16}$ cm⁻³，$I=5$ mA，$A=10^{-3}$ cm²。求該區電場。</p>
+<div class="solution">■ 解法</div>
+<p>中性區電流主要由多數載子漂移承載：</p>
+$$E = \frac{J}{e\mu_n N_d} = \frac{5\times10^{-3}/10^{-3}}{1.6\times10^{-19}\times1100\times10^{16}} = 2.84 \text{ V/cm}$$
+
+<div class="solution">✅ $E \approx 2.8$ V/cm（極小，驗證了低階注入假設的合理性）</div>
+</div>
+</details>
+
+<details class="example" open id="ex8-5">
+<summary>例題 8.5 — 溫度變化對順偏電壓的影響</summary>
+<div class="example-body">
+<p><strong>題目：</strong>Si pn 二極體在 $T=300$ K 時 $I=1$ mA 對應 $V_a=0.65$ V。求 $T=310$ K 時維持同電流所需的 $V_a$。</p>
+<div class="solution">■ 解法</div>
+<p>$I \propto n_i^2 e^{V_a/V_t} \propto T^3 e^{-E_g/kT} e^{V_a/V_t}$。恆定電流下：</p>
+$$\frac{dV_a}{dT} \approx \frac{V_a - E_g/e}{T} = \frac{0.65 - 1.12}{300} = -1.57 \text{ mV/K}$$
+
+<p>$\Delta T=10$ K → $\Delta V_a \approx -15.7$ mV → $V_a(310) \approx 0.634$ V</p>
+<div class="solution">✅ $V_a(310\text{ K}) \approx 0.634$ V。溫度係數約 −1.6 mV/°C</div>
+<div class="solution-note">💡 二極體順偏電壓隨溫度升高而下降。這特性可用於溫度感測器。</div>
+</div>
+</details>
+
+<details class="example" open id="ex8-6">
+<summary>例題 8.6 — 理想電流 vs 產生-復合電流的相對大小</summary>
+<div class="example-body">
+<p><strong>題目：</strong>Si pn 接面，比較 $V_a=0.3$ V 和 $V_a=0.6$ V 時理想擴散電流與空間電荷區復合電流的相對大小。</p>
+<div class="solution">■ 解法</div>
+<p>理想電流：$I_d \propto e^{V_a/V_t}$<br>
+SCR 復合電流：$I_{rec} \propto e^{V_a/(2V_t)}$（midgap 陷阱）</p>
+<p>$V_a=0.3$ V：$I_{rec}/I_d \propto e^{-V_a/(2V_t)} = e^{-5.8} \approx 3\times10^{-3}$ → $I_{rec}$ 主導<br>
+$V_a=0.6$ V：$I_{rec}/I_d \propto e^{-11.6} \approx 9\times10^{-6}$ → $I_d$ 主導</p>
+<div class="solution">✅ 低偏壓：復合電流主導（$n=2$）；高偏壓：擴散電流主導（$n=1$）</div>
+<div class="solution-note">💡 理想因子 $n$ 在低電流時趨近 2（復合主導），高電流時趨近 1（擴散主導）。</div>
+</div>
+</details>
+
+<details class="example" open id="ex8-7">
+<summary>例題 8.7 — 小訊號導納參數</summary>
+<div class="example-body">
+<p><strong>題目：</strong>pn 二極體 $I_{DQ}=1$ mA，$\tau_{p0}=10^{-7}$ s。求擴散電導 $g_d$ 和擴散電容 $C_d$。</p>
+<div class="solution">■ 解法</div>
+$$g_d = \frac{I_{DQ}}{V_t} = \frac{10^{-3}}{0.0259} = 0.0386 \text{ S} \quad (r_d = 25.9\ \Omega)$$
+$$C_d = \frac{I_{DQ}\tau_{p0}}{2V_t} = \frac{10^{-3}\times10^{-7}}{2\times0.0259} = 1.93 \times 10^{-9} \text{ F} = 1.93 \text{ nF}$$
+
+<div class="solution">✅ $g_d=38.6$ mS ($r_d=25.9$ Ω)，$C_d=1.93$ nF</div>
+<div class="solution-note">💡 擴散電容 $C_d \propto I_{DQ}$——直流偏壓電流越大，小訊號擴散電容越大。這是二極體高頻響應的主要限制。</div>
+</div>
+</details>
+
+</section>
+
+
+
+<!-- ==================== CHAPTER 9 ==================== -->
+<section id="ch9"><h2>第九章　金屬-半導體與半導體異質接面</h2>
+
+<details class="example" open id="ex9-1">
+<summary>例題 9.1 — 理論能障高度、內建位能與空乏區</summary>
+<div class="example-body">
+<p><strong>題目：</strong>Au/n-Si 蕭特基二極體，$N_d=10^{16}$ cm⁻³，Au 功函數 $\phi_m=5.1$ eV，Si 電子親和力 $\chi=4.01$ eV。求 $\phi_{B0}$、$V_{bi}$、$W$。</p>
+<div class="solution">■ 解法</div>
+<p>$\phi_{B0} = \phi_m - \chi = 5.1 - 4.01 = 1.09$ eV</p>
+<p>$V_{bi} = \phi_{B0} - V_t\ln(N_c/N_d) = 1.09 - 0.0259\ln(2.8\times10^{19}/10^{16}) = 1.09 - 0.206 = 0.884$ V</p>
+<p>$W = \sqrt{2\epsilon_s V_{bi}/(e N_d)} = \sqrt{2\times11.7\times8.85\times10^{-14}\times0.884/(1.6\times10^{-19}\times10^{16})} = 0.34$ µm</p>
+<div class="solution">✅ $\phi_{B0}=1.09$ eV, $V_{bi}=0.884$ V, $W=0.34$ µm</div>
+</div>
+</details>
+
+<details class="example" open id="ex9-2">
+<summary>例題 9.2 — 由 C-V 求摻雜與能障高度</summary>
+<div class="example-body">
+<p><strong>題目：</strong>蕭特基二極體 C-V 量測：$1/C^2$ vs $V_R$ 斜率 $=2.5\times10^{17}$ F⁻²/V，截距 $V_{bi}=0.50$ V。$A=10^{-3}$ cm²。求 $N_d$ 和 $\phi_{B0}$。</p>
+<div class="solution">■ 解法</div>
+<p>由斜率：$N_d = 2/(e\epsilon_s A^2 \times \text{slope}) = 2/(1.6\times10^{-19}\times1.04\times10^{-12}\times10^{-6}\times2.5\times10^{17}) = 4.8\times10^{16}$ cm⁻³</p>
+<p>$\phi_{B0} = V_{bi} + V_t\ln(N_c/N_d) = 0.50 + 0.0259\ln(2.8\times10^{19}/4.8\times10^{16}) = 0.50 + 0.165 = 0.665$ eV</p>
+<div class="solution">✅ $N_d=4.8\times10^{16}$ cm⁻³，$\phi_{B0}=0.67$ eV</div>
+</div>
+</details>
+
+<details class="example" open id="ex9-3">
+<summary>例題 9.3 — 蕭特基能障降低</summary>
+<div class="example-body">
+<p><strong>題目：</strong>Au/n-Si，$N_d=10^{16}$ cm⁻³，$V_R=5$ V。求鏡像力造成的能障降低 $\Delta\phi$ 及最大電場位置。</p>
+<div class="solution">■ 解法</div>
+<p>$|E_{\max}| = \sqrt{2e N_d(V_{bi}+V_R)/\epsilon_s} = 1.51\times10^5$ V/cm</p>
+<p>$\Delta\phi = \sqrt{e|E_{\max}|/(4\pi\epsilon_s)} = \sqrt{1.6\times10^{-19}\times1.51\times10^5/(4\pi\times1.04\times10^{-12})} = 0.043$ eV</p>
+<div class="solution">✅ $\Delta\phi=43$ meV。位置 $x_m=\sqrt{e/(16\pi\epsilon_s|E_{\max}|)}\approx20$ Å</div>
+<div class="solution-note">💡 鏡像力能障降低在逆向偏壓下更顯著——這是蕭特基二極體逆向電流大於理想值的原因之一。</div>
+</div>
+</details>
+
+<details class="example" open id="ex9-4">
+<summary>例題 9.4 — 有效 Richardson 常數</summary>
+<div class="example-body">
+<p><strong>題目：</strong>由 I-V-T 數據求蕭特基二極體的有效 Richardson 常數 $A^*$。</p>
+<div class="solution">■ 解法</div>
+<p>熱離子發射模型：$J_s = A^* T^2 e^{-\phi_{B0}/V_t}$。作 $\ln(J_s/T^2)$ vs $1/T$ 圖，斜率得 $\phi_{B0}$，截距得 $A^*$。</p>
+<p>對於 n-Si：$A^* \approx 112$ A/cm²K²（理論值）。實驗值因界面態等因素通常偏離。</p>
+<div class="solution">✅ $A^* \approx 112$ A/cm²K²（n-Si 理論值）</div>
+</div>
+</details>
+
+<details class="example" open id="ex9-5">
+<summary>例題 9.5 — 蕭特基 vs pn 接面逆向飽和電流</summary>
+<div class="example-body">
+<p><strong>題目：</strong>比較相同摻雜 Si 的蕭特基二極體和 pn 二極體的 $J_s$。（$N_d=10^{16}$，$\phi_{B0}=0.67$ eV）</p>
+<div class="solution">■ 解法</div>
+<p><strong>蕭特基：</strong>$J_{s,S} = A^*T^2 e^{-\phi_{B0}/V_t} = 112\times300^2\times e^{-0.67/0.0259} = 5.9\times10^{-5}$ A/cm²</p>
+<p><strong>pn 接面：</strong>$J_{s,pn} \approx e n_i^2 D_p/(L_p N_d) \approx 3.6\times10^{-11}$ A/cm²</p>
+<p>$J_{s,S}/J_{s,pn} \approx 1.6\times10^6$——蕭特基逆向電流大 6 個數量級！</p>
+<div class="solution">✅ 蕭特基 $J_s$ 遠大於 pn 接面（多數載子元件 vs 少數載子元件）</div>
+<div class="solution-note">💡 蕭特基二極體是多數載子元件，無少數載子儲存→開關速度快。但逆向漏電流較大。</div>
+</div>
+</details>
+
+<details class="example" open id="ex9-6">
+<summary>例題 9.6 — 順偏電壓求電流</summary>
+<div class="example-body">
+<p><strong>題目：</strong>蕭特基二極體 $J_s=5.9\times10^{-5}$ A/cm²，$A=10^{-3}$ cm²。求 $V_a=0.3, 0.4, 0.5$ V 時的 $I$。</p>
+<div class="solution">■ 解法</div>
+<p>$I = I_s(e^{V_a/V_t} - 1)$，$I_s = 5.9\times10^{-5}\times10^{-3}=5.9\times10^{-8}$ A</p>
+<p>$V_a=0.3$: $I=5.9\times10^{-8}(e^{11.6}-1)=6.4$ mA<br>
+$V_a=0.4$: $I=5.9\times10^{-8}(e^{15.4}-1)=0.30$ A<br>
+$V_a=0.5$: $I=5.9\times10^{-8}(e^{19.3}-1)=14.2$ A</p>
+<div class="solution">✅ 0.3V: 6.4 mA; 0.4V: 0.30 A; 0.5V: 14.2 A</div>
+</div>
+</details>
+
+<details class="example" open id="ex9-7">
+<summary>例題 9.7 — 高摻雜蕭特基空乏區寬度</summary>
+<div class="example-body">
+<p><strong>題目：</strong>蕭特基接觸在 $N_d=10^{18}$ cm⁻³ 的 n-Si 上。$V_{bi}=0.5$ V。求零偏壓空乏區寬度和最大電場。是否可能有顯著穿隧電流？</p>
+<div class="solution">■ 解法</div>
+<p>$W = \sqrt{2\times11.7\times8.85\times10^{-14}\times0.5/(1.6\times10^{-19}\times10^{18})} = 2.5\times10^{-6}$ cm = 25 nm</p>
+<p>$|E_{\max}| = 2V_{bi}/W = 4\times10^5$ V/cm</p>
+<p>空乏區極窄（25 nm）→ 場發射（穿隧）電流顯著 → 歐姆接觸行為。</p>
+<div class="solution">✅ $W=25$ nm。高摻雜使穿隧主導→歐姆接觸</div>
+</div>
+</details>
+
+<details class="example" open id="ex9-8">
+<summary>例題 9.8 — 異質接面能帶偏移</summary>
+<div class="example-body">
+<p><strong>題目：</strong>n-Ge/p-GaAs 異質接面。求 $\Delta E_c$、$\Delta E_v$ 和 $V_{bi}$。</p>
+<div class="solution">■ 解法</div>
+<p>使用 Anderson 模型：<br>
+$\Delta E_c = \chi_{\text{Ge}} - \chi_{\text{GaAs}} = 4.13 - 4.07 = 0.06$ eV<br>
+$\Delta E_v = E_{g,\text{GaAs}} - E_{g,\text{Ge}} + \Delta E_c = 1.42 - 0.66 + 0.06 = 0.82$ eV</p>
+<p>$V_{bi} = V_{bi,n} + V_{bi,p}$ 由兩側費米能階差決定。</p>
+<div class="solution">✅ $\Delta E_c=0.06$ eV, $\Delta E_v=0.82$ eV</div>
+<div class="solution-note">💡 異質接面能帶不連續性是 HEMT 和異質接面雙極性電晶體的物理基礎。$\Delta E_c$ 形成量子井→二維電子氣。</div>
+</div>
+</details>
+
+</section>
+
+<!-- ==================== CHAPTER 10 ==================== -->
+<section id="ch10"><h2>第十章　MOSFET 基礎</h2>
+
+<details class="example" open id="ex10-1">
+<summary>例題 10.1 — 最大空乏區寬度</summary>
+<div class="example-body">
+<p><strong>題目：</strong>p-type Si MOS，$N_a=10^{16}$ cm⁻³，T=300 K。求最大空乏區寬度 $x_{dT}$。</p>
+<div class="solution">■ 解法</div>
+<p>強反轉時表面電位 $\phi_s = 2\phi_{Fp}$，其中 $\phi_{Fp}=V_t\ln(N_a/n_i)=0.0259\ln(10^{16}/1.5\times10^{10})=0.347$ V</p>
+$$x_{dT} = \sqrt{\frac{4\epsilon_s\phi_{Fp}}{e N_a}} = \sqrt{\frac{4\times1.04\times10^{-12}\times0.347}{1.6\times10^{-19}\times10^{16}}} = 0.30 \times 10^{-4} \text{ cm} = 0.30 \text{ µm}$$
+
+<div class="solution">✅ $x_{dT}=0.30$ µm</div>
+</div>
+</details>
+
+<details class="example" open id="ex10-2">
+<summary>例題 10.2 — 金屬-半導體功函數差</summary>
+<div class="example-body">
+<p><strong>題目：</strong>Al gate / p-type Si MOS（$N_a=10^{16}$ cm⁻³）。求 $\phi_{ms}$。</p>
+<div class="solution">■ 解法</div>
+<p>$\phi_{ms} = \phi_m - (\chi + E_g/2 + \phi_{Fp})$<br>
+Al: $\phi_m=4.28$ eV，Si: $\chi=4.01$, $E_g/2=0.56$, $\phi_{Fp}=0.347$</p>
+<p>$\phi_{ms} = 4.28 - (4.01+0.56+0.347) = 4.28 - 4.917 = -0.637$ V</p>
+<div class="solution">✅ $\phi_{ms} = -0.637$ V（Al/p-Si 為負值）</div>
+</div>
+</details>
+
+<details class="example" open id="ex10-3">
+<summary>例題 10.3 — 平帶電壓</summary>
+<div class="example-body">
+<p><strong>題目：</strong>MOS 電容，氧化層厚度 $t_{ox}=20$ nm，固定氧化層電荷 $Q_f'=5\times10^{10}$ cm⁻²。Al/p-Si，$N_a=10^{16}$。求 $V_{FB}$。</p>
+<div class="solution">■ 解法</div>
+$$V_{FB} = \phi_{ms} - \frac{Q_f'}{C_{ox}}$$
+<p>$C_{ox}=\epsilon_{ox}/t_{ox}=3.9\times8.85\times10^{-14}/(2\times10^{-6})=1.73\times10^{-7}$ F/cm²</p>
+<p>$V_{FB} = -0.637 - (5\times10^{10}\times1.6\times10^{-19})/(1.73\times10^{-7}) = -0.637 - 0.046 = -0.683$ V</p>
+<div class="solution">✅ $V_{FB} = -0.68$ V</div>
+</div>
+</details>
+
+<details class="example" open id="ex10-4">
+<summary>例題 10.4 — 臨界電壓計算</summary>
+<div class="example-body">
+<p><strong>題目：</strong>同例 10.3 的 MOS，求 $V_T$。</p>
+<div class="solution">■ 解法</div>
+$$V_T = V_{FB} + 2\phi_{Fp} + \frac{\sqrt{4e\epsilon_s N_a\phi_{Fp}}}{C_{ox}}$$
+<p>$2\phi_{Fp}=0.694$ V。$\sqrt{4e\epsilon_s N_a\phi_{Fp}}/C_{ox} = 1.84\times10^{-7}/1.73\times10^{-7} = 1.06$ V</p>
+<p>$V_T = -0.683 + 0.694 + 1.06 = +1.07$ V</p>
+<div class="solution">✅ $V_T = +1.07$ V（增強型 n-channel MOSFET）</div>
+</div>
+</details>
+
+<details class="example" open id="ex10-5">
+<summary>例題 10.5 — 設計閘極材料與摻雜（設計題）</summary>
+<div class="example-body">
+<p><strong>題目：</strong>設計 n-channel MOSFET，要求 $V_T=+0.5$ V，$t_{ox}=15$ nm。選擇閘極材料並求 $N_a$。</p>
+<div class="solution">■ 解法</div>
+<p>選用 n⁺ poly-Si 閘極（$\phi_m\approx4.1$ eV，接近 Si 導帶），$\phi_{ms}\approx-0.9$ V。</p>
+<p>從 $V_T$ 公式反推 $N_a\approx2\times10^{16}$ cm⁻³。</p>
+<div class="solution">✅ n⁺ poly-Si gate，$N_a\approx2\times10^{16}$ cm⁻³</div>
+</div>
+</details>
+
+<details class="example" open id="ex10-6">
+<summary>例題 10.6 — MOS 電容 C-V 特性</summary>
+<div class="example-body">
+<p><strong>題目：</strong>p-Si MOS，$N_a=10^{16}$，$t_{ox}=20$ nm。求 $C_{ox}$、$C_{FB}$、$C'_{\min}$、$C'_{\text{inv}}$。</p>
+<div class="solution">■ 解法</div>
+<p>$C_{ox}=1.73\times10^{-7}$ F/cm²</p>
+<p>$C_{FB} = C_{ox}/(1+C_{ox}L_D/\epsilon_s)$，其中 $L_D=\sqrt{\epsilon_s V_t/(e N_a)}=1.3\times10^{-6}$ cm → $C_{FB}\approx1.35\times10^{-7}$ F/cm²</p>
+<p>$C'_{\min}=C_{ox}C_s'/(C_{ox}+C_s')$，$C_s'=\epsilon_s/x_{dT}$ → $C'_{\min}\approx3.1\times10^{-8}$ F/cm²</p>
+<p>$C'_{\text{inv}}\approx C_{ox}$（低頻）或 $C'_{\text{inv}}=C'_{\min}$（高頻）</p>
+<div class="solution">✅ $C_{ox}=1.73\times10^{-7}$, $C_{FB}=1.35\times10^{-7}$, $C'_{\min}=3.1\times10^{-8}$, $C'_{\text{inv}}=C_{ox}$ (LF) or $C'_{\min}$ (HF)</div>
+</div>
+</details>
+
+<details class="example" open id="ex10-7">
+<summary>例題 10.7 — 設計 MOSFET 寬度</summary>
+<div class="example-body">
+<p><strong>題目：</strong>n-channel MOSFET，$V_T=0.5$ V，$\mu_n=500$ cm²/V·s，$C_{ox}=1.73\times10^{-7}$ F/cm²。要求 $V_{GS}=2$ V 時 $I_D=1$ mA（飽和區）。求 $W/L$。</p>
+<div class="solution">■ 解法</div>
+<p>飽和區：$I_D = \frac{1}{2}\mu_n C_{ox}\frac{W}{L}(V_{GS}-V_T)^2$</p>
+$$\frac{W}{L} = \frac{2I_D}{\mu_n C_{ox}(V_{GS}-V_T)^2} = \frac{2\times10^{-3}}{500\times1.73\times10^{-7}\times(1.5)^2} = 10.3$$
+
+<div class="solution">✅ $W/L = 10.3$</div>
+</div>
+</details>
+
+<details class="example" open id="ex10-8">
+<summary>例題 10.8 — 反轉層載子遷移率</summary>
+<div class="example-body">
+<p><strong>題目：</strong>由 MOSFET 實驗數據求反轉層電子遷移率。$W/L=20$，$C_{ox}=2\times10^{-7}$ F/cm²，$V_T=0.5$ V。$V_{GS}=2$ V 時 $I_D=2$ mA（線性區，$V_{DS}=0.1$ V）。</p>
+<div class="solution">■ 解法</div>
+<p>線性區：$I_D = \mu_n C_{ox}\frac{W}{L}(V_{GS}-V_T)V_{DS}$</p>
+$$\mu_n = \frac{I_D}{C_{ox}(W/L)(V_{GS}-V_T)V_{DS}} = \frac{2\times10^{-3}}{2\times10^{-7}\times20\times1.5\times0.1} = 333 \text{ cm}^2\!/\text{V·s}$$
+
+<div class="solution">✅ $\mu_n = 333$ cm²/V·s（遠低於體內遷移率，因表面散射）</div>
+<div class="solution-note">💡 反轉層遷移率通常為體內值的一半或更少——Si/SiO₂ 介面的表面粗糙度和界面電荷導致額外散射。</div>
+</div>
+</details>
+
+<details class="example" open id="ex10-9">
+<summary>例題 10.9 — 基體效應係數</summary>
+<div class="example-body">
+<p><strong>題目：</strong>n-channel MOSFET，$N_a=10^{16}$，$t_{ox}=20$ nm。求基體效應係數 $\gamma$ 和 $V_{SB}=2$ V 時的 $\Delta V_T$。</p>
+<div class="solution">■ 解法</div>
+$$\gamma = \frac{\sqrt{2e\epsilon_s N_a}}{C_{ox}} = \frac{\sqrt{2\times1.6\times10^{-19}\times1.04\times10^{-12}\times10^{16}}}{1.73\times10^{-7}} = 0.33 \text{ V}^{1/2}$$
+
+$$\Delta V_T = \gamma(\sqrt{2\phi_{Fp}+V_{SB}} - \sqrt{2\phi_{Fp}}) = 0.33(\sqrt{0.694+2} - \sqrt{0.694}) = 0.33(1.642-0.833) = 0.27 \text{ V}$$
+
+<div class="solution">✅ $\gamma=0.33$ V$^{1/2}$，$\Delta V_T=0.27$ V（$V_{SB}=2$ V 時）</div>
+</div>
+</details>
+
+<details class="example" open id="ex10-10">
+<summary>例題 10.10 — MOSFET 截止頻率</summary>
+<div class="example-body">
+<p><strong>題目：</strong>n-channel MOSFET，$L=1$ µm，$\mu_n=500$ cm²/V·s，$V_{GS}-V_T=2$ V。求截止頻率 $f_T$。</p>
+<div class="solution">■ 解法</div>
+$$f_T = \frac{g_m}{2\pi C_g} = \frac{\mu_n(V_{GS}-V_T)}{2\pi L^2} = \frac{500\times2}{2\pi\times(10^{-4})^2} = 15.9 \text{ GHz}$$
+
+<div class="solution">✅ $f_T = 15.9$ GHz</div>
+<div class="solution-note">💡 $f_T \propto 1/L^2$——通道長度減半，$f_T$ 增為 4 倍。這是 Moore's Law 縮小的主要驅動力。</div>
+</div>
+</details>
+
+</section>
+
+
+
+<!-- ==================== CHAPTER 11 ==================== -->
+<section id="ch11"><h2>第十一章　MOSFET 進階概念</h2>
+
+<details class="example" open id="ex11-1">
+<summary>例題 11.1 — 短通道調變效應（通道長度調變）</summary>
+<div class="example-body">
+<p><strong>題目：</strong>n-channel MOSFET，$L=0.5$ µm，$V_{DS}=3$ V，$V_{GS}-V_T=1$ V。求 $\Delta L$ 及 $I_D$ 增加的百分比。</p>
+<div class="solution">■ 解法</div>
+<p>$\Delta L \approx \sqrt{2\epsilon_s(V_{DS}-V_{DSsat})/(e N_a)} \approx 0.05$ µm</p>
+<p>$I_D \propto 1/(L-\Delta L)$ → $I_D$ 增加約 $\Delta L/L \approx 10\%$</p>
+<div class="solution">✅ $\Delta L\approx0.05$ µm，$I_D$ 增加 ~10%</div>
+<div class="formula-note">💡 通道長度調變使飽和區 $I_D$ 隨 $V_{DS}$ 增加——即有限輸出電阻 $r_o$。短通道元件更顯著。</div>
+</div>
+</details>
+
+<details class="example" open id="ex11-2">
+<summary>例題 11.2 — 有效電場與遷移率衰減</summary>
+<div class="example-body">
+<p><strong>題目：</strong>n-MOSFET，$N_a=5\times10^{16}$，$V_{GS}-V_T=2$ V，$t_{ox}=10$ nm。求有效垂直電場 $E_{\text{eff}}$。</p>
+<div class="solution">■ 解法</div>
+<p>$E_{\text{eff}} \approx (Q_d + Q_n/2)/\epsilon_s$，其中 $Q_n \approx C_{ox}(V_{GS}-V_T)$</p>
+<p>$E_{\text{eff}} \approx 5\times10^5$ V/cm。在此電場下，表面遷移率約為體內值的 60–70%。</p>
+<div class="solution">✅ $E_{\text{eff}}\approx5\times10^5$ V/cm</div>
+</div>
+</details>
+
+<details class="example" open id="ex11-3">
+<summary>例題 11.3 — 短通道效應造成的 $V_T$ 偏移</summary>
+<div class="example-body">
+<p><strong>題目：</strong>n-MOSFET，$L=0.25$ µm，$x_{dT}=0.1$ µm，$r_j=0.05$ µm。求 $\Delta V_T$（短通道效應）。</p>
+<div class="solution">■ 解法</div>
+<p>使用幾何電荷分享模型：$\Delta V_T \approx -\frac{e N_a x_{dT} r_j}{C_{ox} L}(\sqrt{1+2x_{dT}/r_j}-1)$</p>
+<p>代入後 $\Delta V_T \approx -0.15$ V（$V_T$ 因短通道效應而降低）</p>
+<div class="solution">✅ $\Delta V_T \approx -0.15$ V（短通道使 $V_T$ 降低）</div>
+<div class="solution-note">💡 短通道效應（SCE）是 CMOS 縮小化的核心挑戰——DIBL、$V_T$ roll-off 等。</div>
+</div>
+</details>
+
+<details class="example" open id="ex11-6">
+<summary>例題 11.6 — 離子佈植調整臨界電壓</summary>
+<div class="example-body">
+<p><strong>題目：</strong>n-MOSFET 原始 $V_T=0.2$ V，目標 $V_T=0.5$ V。$t_{ox}=10$ nm。求所需的佈植劑量 $D_I$（p-type 佈植）。</p>
+<div class="solution">■ 解法</div>
+<p>$\Delta V_T = e D_I / C_{ox}$ → $D_I = C_{ox} \Delta V_T / e$</p>
+<p>$C_{ox}=3.45\times10^{-7}$ F/cm² → $D_I = 3.45\times10^{-7}\times0.3/1.6\times10^{-19} = 6.5\times10^{11}$ cm⁻²</p>
+<div class="solution">✅ $D_I = 6.5 \times 10^{11}$ cm⁻²（p-type 佈植增加 $V_T$）</div>
+</div>
+</details>
+
+</section>
+
+<!-- ==================== CHAPTER 12 ==================== -->
+<section id="ch12"><h2>第十二章　雙極性電晶體（BJT）</h2>
+
+<details class="example" open id="ex12-1">
+<summary>例題 12.1 — 射極注入效率</summary>
+<div class="example-body">
+<p><strong>題目：</strong>npn BJT，$N_E=10^{19}$，$N_B=10^{16}$ cm⁻³，$D_E=2$，$D_B=25$ cm²/s，$L_E=0.1$，$L_B=10$ µm，$x_B=1$ µm。求 $\gamma$。</p>
+<div class="solution">■ 解法</div>
+$$\gamma = \frac{1}{1 + \frac{D_E N_B x_B}{D_B N_E L_E}} = \frac{1}{1 + \frac{2\times10^{16}\times10^{-4}}{25\times10^{19}\times10^{-5}}} = 0.992$$
+<div class="solution">✅ $\gamma = 0.992$（99.2% 的射極電流由電子貢獻）</div>
+</div>
+</details>
+
+<details class="example" open id="ex12-2">
+<summary>例題 12.2 — 基極傳輸因子</summary>
+<div class="example-body">
+<p><strong>題目：</strong>npn BJT，$x_B=1$ µm，$L_B=10$ µm。求 $\alpha_T$。</p>
+<div class="solution">■ 解法</div>
+$$\alpha_T = \frac{1}{\cosh(x_B/L_B)} \approx 1 - \frac{1}{2}\left(\frac{x_B}{L_B}\right)^2 = 1 - \frac{1}{2}(0.1)^2 = 0.995$$
+<div class="solution">✅ $\alpha_T = 0.995$（99.5% 的電子通過基極到達集極）</div>
+</div>
+</details>
+
+<details class="example" open id="ex12-7">
+<summary>例題 12.7 — 共射極電流增益 $\beta$</summary>
+<div class="example-body">
+<p><strong>題目：</strong>npn BJT，$\gamma=0.992$，$\alpha_T=0.995$，$\delta=0.998$。求 $\beta$。</p>
+<div class="solution">■ 解法</div>
+<p>$\alpha = \gamma \cdot \alpha_T \cdot \delta = 0.992\times0.995\times0.998 = 0.985$</p>
+$$\beta = \frac{\alpha}{1-\alpha} = \frac{0.985}{0.015} = 65.7$$
+
+<div class="solution">✅ $\beta = 65.7$</div>
+<div class="solution-note">💡 BJT 的電流增益來自三個串聯因子：$\gamma$（注入效率）、$\alpha_T$（基極傳輸）、$\delta$（復合因子）。每個接近 1，但乘積損失使 $\beta$ 有限。</div>
+</div>
+</details>
+
+<details class="example" open id="ex12-8">
+<summary>例題 12.8 — Early 電壓與輸出電阻</summary>
+<div class="example-body">
+<p><strong>題目：</strong>npn BJT，$N_B=10^{16}$ cm⁻³，$x_B=0.5$ µm，$I_C=1$ mA。求 $V_A$（Early 電壓）和 $r_o$。</p>
+<div class="solution">■ 解法</div>
+$$V_A \approx \frac{e N_B x_B^2}{2\epsilon_s} = \frac{1.6\times10^{-19}\times10^{16}\times(5\times10^{-5})^2}{2\times1.04\times10^{-12}} = 192 \text{ V}$$
+$$r_o = V_A/I_C = 192/10^{-3} = 192 \text{ k}\Omega$$
+
+<div class="solution">✅ $V_A=192$ V，$r_o=192$ kΩ</div>
+</div>
+</details>
+
+<details class="example" open id="ex12-14">
+<summary>例題 12.14 — BJT 渡越時間與截止頻率</summary>
+<div class="example-body">
+<p><strong>題目：</strong>npn BJT，$x_B=0.2$ µm，$D_B=25$ cm²/s，$x_{dep,BC}=0.5$ µm，$v_s=10^7$ cm/s。求 $\tau_{ec}$ 和 $f_T$。</p>
+<div class="solution">■ 解法</div>
+<p>基極渡越：$\tau_B = x_B^2/(2D_B) = (2\times10^{-5})^2/(2\times25) = 8$ ps<br>
+集極空乏區渡越：$\tau_C = x_{dep}/v_s = 5\times10^{-5}/10^7 = 5$ ps<br>
+射極充電時間：$\tau_E \approx 2$ ps</p>
+<p>$\tau_{ec} \approx 8+5+2 = 15$ ps</p>
+$$f_T = \frac{1}{2\pi\tau_{ec}} = \frac{1}{2\pi\times15\times10^{-12}} = 10.6 \text{ GHz}$$
+
+<div class="solution">✅ $\tau_{ec}=15$ ps，$f_T=10.6$ GHz</div>
+</div>
+</details>
+
+</section>
+
+<!-- ==================== CHAPTER 13 ==================== -->
+<section id="ch13"><h2>第十三章　JFET 與 MESFET</h2>
+
+<details class="example" open id="ex13-1">
+<summary>例題 13.1 — 夾止電壓計算</summary>
+<div class="example-body">
+<p><strong>題目：</strong>n-channel JFET，$N_d=10^{16}$ cm⁻³，通道厚度 $a=0.5$ µm。求 $V_{p0}$ 和 $V_p$（$V_{bi}=0.8$ V）。</p>
+<div class="solution">■ 解法</div>
+$$V_{p0} = \frac{e N_d a^2}{2\epsilon_s} = \frac{1.6\times10^{-19}\times10^{16}\times(5\times10^{-5})^2}{2\times1.04\times10^{-12}} = 1.92 \text{ V}$$
+$$V_p = V_{bi} - V_{p0} = 0.8 - 1.92 = -1.12 \text{ V}$$
+<div class="solution">✅ $V_{p0}=1.92$ V, $V_p=-1.12$ V（空乏型，負的夾止電壓）</div>
+</div>
+</details>
+
+<details class="example" open id="ex13-3">
+<summary>例題 13.3 — JFET 最大飽和電流</summary>
+<div class="example-body">
+<p><strong>題目：</strong>n-channel JFET，$N_d=10^{16}$，$a=0.5$ µm，$W=100$ µm，$L=2$ µm，$\mu_n=1000$。求 $I_{DSS}$。</p>
+<div class="solution">■ 解法</div>
+<p>$G_{01} = 2e\mu_n N_d W a/L = 2\times1.6\times10^{-19}\times1000\times10^{16}\times10^{-2}\times5\times10^{-5}/(2\times10^{-4}) = 8\times10^{-4}$ S</p>
+$$I_{DSS} = G_{01} V_{p0}/3 = 8\times10^{-4}\times1.92/3 = 0.51 \text{ mA}$$
+
+<div class="solution">✅ $I_{DSS} = 0.51$ mA</div>
+</div>
+</details>
+
+<details class="example" open id="ex13-4">
+<summary>例題 13.4 — JFET 最大轉導</summary>
+<div class="example-body">
+<p><strong>題目：</strong>同例 13.3 的 JFET。求 $g_{ms}(\max)$。</p>
+<div class="solution">■ 解法</div>
+$$g_{ms}(\max) = G_{01}\left(1 - \sqrt{\frac{V_{bi}}{V_{p0}}}\right) = 8\times10^{-4}\left(1 - \sqrt{\frac{0.8}{1.92}}\right) = 0.28 \text{ mS}$$
+
+<div class="solution">✅ $g_{ms}(\max) = 0.28$ mS</div>
+</div>
+</details>
+
+<details class="example" open id="ex13-9">
+<summary>例題 13.9 — JFET 截止頻率</summary>
+<div class="example-body">
+<p><strong>題目：</strong>Si JFET，$L=1$ µm，$\mu_n=1000$，$V_{GS}=0$（$V_{p0}=2$ V, $V_{bi}=0.8$ V）。求 $f_T$。</p>
+<div class="solution">■ 解法</div>
+$$f_T = \frac{\mu_n V_{p0}}{2\pi L^2}\left[1 - \left(\frac{V_{bi}-V_{GS}}{V_{p0}}\right)^{1/2}\right]$$
+$$= \frac{1000\times2}{2\pi\times(10^{-4})^2}\left[1 - \sqrt{0.8/2}\right] = 11.7 \text{ GHz}$$
+
+<div class="solution">✅ $f_T = 11.7$ GHz</div>
+</div>
+</details>
+
+<details class="example" open id="ex13-10">
+<summary>例題 13.10 — HEMT 二維電子氣濃度</summary>
+<div class="example-body">
+<p><strong>題目：</strong>N-AlGaAs/i-GaAs HEMT，$\Delta E_c=0.3$ eV，$d=30$ nm。求 $n_s$（二維電子氣濃度）。</p>
+<div class="solution">■ 解法</div>
+<p>$n_s \approx \epsilon(\Delta E_c - E_0)/(e d)$，其中 $E_0$ 為基態子帶能量。對於典型參數，$n_s \approx 1\times10^{12}$ cm⁻²。</p>
+<div class="solution">✅ $n_s \approx 1 \times 10^{12}$ cm⁻²</div>
+<div class="solution-note">💡 HEMT 中電子被限制在異質接面的三角形量子井中，形成二維電子氣（2DEG）。高遷移率來自調變摻雜——施體與通道空間分離，減少庫倫散射。</div>
+</div>
+</details>
+
+</section>
+
+<!-- ==================== CHAPTER 14 ==================== -->
+<section id="ch14"><h2>第十四章　光電元件</h2>
+
+<details class="example" open id="ex14-1">
+<summary>例題 14.1 — 90% 光吸收所需厚度</summary>
+<div class="example-body">
+<p><strong>題目：</strong>GaAs，入射光波長 $\lambda=0.85$ µm，吸收係數 $\alpha=10^4$ cm⁻¹。求吸收 90% 光所需厚度。</p>
+<div class="solution">■ 解法</div>
+<p>$I/I_0 = e^{-\alpha d} = 0.1$ → $\alpha d = \ln(10) = 2.303$</p>
+$$d = \frac{2.303}{10^4} = 2.3 \times 10^{-4} \text{ cm} = 2.3 \text{ µm}$$
+
+<div class="solution">✅ $d = 2.3$ µm</div>
+</div>
+</details>
+
+<details class="example" open id="ex14-3">
+<summary>例題 14.3 — 太陽電池開路電壓</summary>
+<div class="example-body">
+<p><strong>題目：</strong>Si pn 太陽電池，$J_{sc}=30$ mA/cm²，$J_s=3.6\times10^{-11}$ A/cm²。求 $V_{oc}$。</p>
+<div class="solution">■ 解法</div>
+$$V_{oc} = V_t \ln\left(\frac{J_{sc}}{J_s} + 1\right) = 0.0259 \ln\left(\frac{30\times10^{-3}}{3.6\times10^{-11}}\right) = 0.0259 \times 20.5 = 0.53 \text{ V}$$
+
+<div class="solution">✅ $V_{oc} = 0.53$ V</div>
+<div class="solution-note">💡 $V_{oc}$ 與 $J_{sc}/J_s$ 的對數成正比。$J_s$ 越小 → $V_{oc}$ 越大。高效率太陽電池追求極低的逆向飽和電流。</div>
+</div>
+</details>
+
+<details class="example" open id="ex14-4">
+<summary>例題 14.4 — 光導體增益</summary>
+<div class="example-body">
+<p><strong>題目：</strong>Si 光導體，$\tau_n=10^{-3}$ s，$L=100$ µm，$\mu_n=1000$，$V=10$ V。求光導體增益。</p>
+<div class="solution">■ 解法</div>
+<p>渡越時間：$t_t = L^2/(\mu_n V) = (10^{-2})^2/(1000\times10) = 10^{-8}$ s</p>
+$$G = \frac{\tau_n}{t_t} = \frac{10^{-3}}{10^{-8}} = 10^5$$
+
+<div class="solution">✅ 增益 $= 10^5$（每個吸收光子可產生 $10^5$ 個電子的外部電流）</div>
+<div class="solution-note">💡 光導體增益可遠大於 1（與光二極體不同），但以降低響應速度為代價。</div>
+</div>
+</details>
+
+<details class="example" open id="ex14-7">
+<summary>例題 14.7 — GaAs₁₋ₓPₓ 輸出波長</summary>
+<div class="example-body">
+<p><strong>題目：</strong>GaAs₁₋ₓPₓ LED，求 $x=0.4$ 和 $x=0.6$ 時的輸出波長。GaAs $E_g=1.42$ eV，GaP $E_g=2.26$ eV。</p>
+<div class="solution">■ 解法</div>
+<p>線性插值：$E_g(x) = 1.42 + (2.26-1.42)x = 1.42 + 0.84x$</p>
+<p>$x=0.4$: $E_g=1.756$ eV → $\lambda=12400/1.756=706$ nm（紅光）<br>
+$x=0.6$: $E_g=1.924$ eV → $\lambda=645$ nm（橙紅光）</p>
+<div class="solution">✅ $x=0.4$: 706 nm; $x=0.6$: 645 nm</div>
+</div>
+</details>
+
+</section>
+
+<!-- ==================== CHAPTER 15 ==================== -->
+<section id="ch15"><h2>第十五章　半導體微波與功率元件</h2>
+<details class="example" open id="ex15-1"><summary>例題 15.1 — Gunn domain 渡越頻率</summary><div class="example-body"><p><strong>題目：</strong>GaAs 有效區長 $L=10$ µm，domain 速度 $v_d=1.0\times10^7$ cm/s，估算基本渡越頻率。</p><div class="solution">■ 解法</div><p>$L=10^{-3}$ cm，$\tau=L/v_d=10^{-10}$ s，因此 $f\approx1/\tau=10^{10}$ Hz。</p><div class="solution">✅ $f\approx10$ GHz</div></div></details>
+<details class="example" open id="ex15-2"><summary>例題 15.2 — IMPATT 渡越時間尺度</summary><div class="example-body"><p><strong>題目：</strong>漂移區寬 $W=2.0$ µm，載子以 $v_s=1.0\times10^7$ cm/s 漂移。求渡越時間；以 $\omega\tau=\pi$ 估算頻率。</p><div class="solution">■ 解法</div><p>$\tau=W/v_s=2.0\times10^{-11}$ s；$f=1/(2\tau)=25$ GHz。</p><div class="solution">✅ $\tau=20$ ps，$f\approx25$ GHz</div></div></details>
+<details class="example" open id="ex15-3"><summary>例題 15.3 — Power MOSFET 導通損耗</summary><div class="example-body"><p><strong>題目：</strong>$R_{DS(on)}=55$ mΩ，導通電流 40 A。求導通損耗。</p><div class="solution">■ 解法</div><p>$P_{cond}=I_D^2R_{DS(on)}=40^2(0.055)=88$ W。</p><div class="solution">✅ $P_{cond}=88$ W；此量級表示熱設計是元件模型的一部分，不是事後附加。</div></div></details>
+<details class="example" open id="ex15-4"><summary>例題 15.4 — SCR 再生條件</summary><div class="example-body"><p><strong>題目：</strong>二電晶體模型中 $\alpha_1=0.55$、$\alpha_2=0.42$，漏電流合計 50 µA。估算陽極電流。</p><div class="solution">■ 解法</div><p>$I_A=50\,\mu\text{A}/[1-(0.55+0.42)]=1.67$ mA。當 $\alpha_1+\alpha_2$ 接近 1，正回授急遽增強。</p><div class="solution">✅ $I_A\approx1.67$ mA</div></div></details>
+</section>
+
+
+</main>
+
+<script>
+function toggleTheme() {
+  const html = document.documentElement;
+  const btn = document.getElementById('themeBtn');
+  if (html.getAttribute('data-theme') === 'dark') {
+    html.setAttribute('data-theme', 'light');
+    btn.textContent = '🌙 深色模式';
+    localStorage.setItem('theme', 'light');
+  } else {
+    html.setAttribute('data-theme', 'dark');
+    btn.textContent = '☀️ 淺色模式';
+    localStorage.setItem('theme', 'dark');
+  }
+}
+function expandAll() { document.querySelectorAll('details').forEach(d => d.open = true); }
+function collapseAll() { document.querySelectorAll('details').forEach(d => d.open = false); }
+
+// Restore theme
+const saved = localStorage.getItem('theme');
+if (saved === 'dark') {
+  document.documentElement.setAttribute('data-theme', 'dark');
+  document.getElementById('themeBtn').textContent = '☀️ 淺色模式';
+}
+
+// Scroll spy
+const sidebarLinks = document.querySelectorAll('.sidebar-nav a');
+const sections = document.querySelectorAll('details.example');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => {
+    const top = s.getBoundingClientRect().top;
+    if (top < 200) current = s.id;
+  });
+  sidebarLinks.forEach(a => {
+    a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+  });
+});
+</script>
+
+</body>
+</html>

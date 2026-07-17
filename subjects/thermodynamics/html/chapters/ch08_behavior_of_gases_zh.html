@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light" data-reading-width="wide">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>第八章：氣體的行為 — 材料熱力學</title>
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']],tags:'ams'},options:{ignoreHtmlClass:'no-math'}};</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<link rel="stylesheet" href="../../../../shared/core.css">
+<script src="../../../../shared/core.js" defer></script>
+<link rel="stylesheet" href="../../../../shared/navigation.css" data-shared-navigation>
+</head>
+<body>
+<nav class="sidebar" aria-label="本章目錄"><div class="sidebar-header"><div class="sidebar-subtitle">材料熱力學</div><h2 class="sidebar-title">氣體的行為</h2></div><div class="toc"><ul>
+<li><a href="#preview">📋 8.0 本章預覽</a></li>
+<li class="ns">8.1–8.3 理想氣體混合物</li><li class="nsub"><a href="#s8-1">8.1–8.2 導論與 $P$–$V$–$T$</a></li><li class="nsub"><a href="#s8-3">8.3 理想氣體混合物的熱力學</a></li>
+<li class="ns">8.4–8.6 真實氣體</li><li class="nsub"><a href="#s8-4">8.4 偏離理想性與狀態方程式</a></li><li class="nsub"><a href="#s8-5">8.5 van der Waals 流體</a></li><li class="nsub"><a href="#s8-6">8.6 其他狀態方程式</a></li>
+<li class="ns">8.7 逸壓 (Fugacity)</li><li class="nsub"><a href="#s8-7">8.7 非理想氣體的熱力學處理</a></li>
+<li><a href="#common-mistakes">⚠️ 常見誤區</a></li>
+<li><a href="#self-check">✅ 自我檢核</a></li>
+<li><a href="#extras">📚 延伸閱讀</a></li>
+<li><a href="#summary">📋 本章摘要</a></li>
+</ul></div><div class="sidebar-tools"><button type="button" data-action="toggle-theme" aria-label="切換深色或淺色模式">切換顯示主題</button></div></nav>
+<main class="chapter-page" data-chapter-title="氣體的行為" data-prev-href="ch07_phase_equilibrium_one_comp_zh.html" data-prev-label="單成分系統的相平衡" data-next-href="ch09_behavior_of_solutions_zh.html" data-next-label="溶液的行為">
+<header class="chapter-header"><div class="tag">第八章</div><h1>氣體的行為</h1><div class="chapter-meta">David R. Gaskell·《Introduction to the Thermodynamics of Materials》·第 250–287 頁</div></header>
+
+<section id="preview"><div class="callout"><strong>📋 8.0 本章預覽</strong>
+<p>前七章大量使用「理想氣體」這個方便的近似（$PV = nRT$），但真實氣體在高壓或低溫下會顯著偏離理想行為。本章處理兩個核心問題：<strong>如何描述真實氣體的 $P$–$V$–$T$ 行為</strong>（van der Waals 等狀態方程式），以及<strong>如何修正熱力學關係以處理非理想氣體</strong>（引入<strong>逸壓 fugacity</strong> 來取代壓力）。這些修正對第十一章的高壓氣相反應平衡計算至關重要。</p>
+<div class="callout-warn"><strong>⚡ 為什麼需要逸壓？</strong>我們花了五章推導的理想氣體關係（如 $\mu = \mu^\circ + RT\ln P/P^\circ$、$\Delta G^\circ = -RT\ln K_P$）在真實氣體中不再成立。逸壓 $f$ 是 Lewis 的天才發明——它定義為使得 $\mu = \mu^\circ + RT\ln f/P^\circ$ 始終成立的「有效壓力」。真實氣體的所有熱力學關係只要把 $P$ 換成 $f$ 就恢復正確。Haber 法合成氨在高壓（∼300 atm）下的平衡計算若不使用逸壓修正，誤差可達 10 倍以上。</div>
+<p><strong>在本章中，我們將學習：</strong></p>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px">
+<li>壓縮因子 $Z = PV/RT$——量化偏離理想氣體的程度</li>
+<li>理想氣體混合物的熱力學：混合自由能與熵、Dalton 分壓定律</li>
+<li>van der Waals 方程式：$(P + a/V^2)(V-b) = RT$ 及其預測的臨界行為和氣–液相變</li>
+<li>對應態原理（principle of corresponding states）</li>
+<li>逸壓 $f$ 與逸壓係數 $\phi = f/P$ 的定義與計算方法</li>
+</ul>
+<h2>🧭 本章推理地圖</h3>
+<ol style="font-size:14px;color:var(--t2);margin-left:18px">
+<li><strong>偏離量化：</strong>先用壓縮因子 $Z=PV/RT$ 判斷真實氣體離理想氣體多遠。</li>
+<li><strong>模型來源：</strong>用 virial、van der Waals、RK、PR 等狀態方程式把分子作用力轉成 $P$–$V$–$T$ 資料。</li>
+<li><strong>熱力學修正：</strong>由 $Z(P)$ 積分得到逸壓係數 $\phi$，以 $f=\phi P$ 取代理想壓力。</li>
+<li><strong>材料應用：</strong>把逸壓帶入高壓氣相反應、CVD、合成氨與氧化還原平衡計算。</li>
+</ol>
+
+<div class="callout"><strong>🔗 跨章節導覽：</strong>本章與全書多個章節有緊密連結。第二章的 $P$–$V$ 功計算在真實氣體中需使用狀態方程式修正（見 §8.4–8.5）。第六章的熱容量 $C_P$ 和 $C_V$ 在真實氣體中隨壓力變化，其壓力依賴性可由本章的狀態方程式推導（見 §8.5）。第十一章的高壓氣相反應平衡必須使用本章引入的逸壓概念（見 §8.7）。讀者應在本章學習過程中時刻對照這些相關章節。</div>
+</section>
+
+<section id="s8-1"><h2>8.1–8.2 導論與氣體的 $P$–$V$–$T$ 關係</h2>
+<div class="section-keypoints"><strong>本節重點：</strong><ul style="font-size:13px;color:var(--t2);margin-left:18px"><li>理想氣體假設在低壓高溫下成立，高壓低溫時需修正。</li><li>壓縮因子 $Z$ 是判斷非理想性的第一個量。</li><li>virial 係數把巨觀 $Z$ 行為連回分子間位能。</li></ul></div>
+<p>理想氣體定律 $PV = nRT$ 基於兩個假設：氣體分子沒有體積，且分子之間沒有交互作用力。這兩個假設在低壓（分子間距離大）和高溫（動能遠大於位能）下近似成立。但當壓力升高或溫度降低時，分子間力和分子體積不再能被忽略。</p>
+
+<figure class="figure">
+  <img src="../../pages/ch08_pages/ch08_page_31_c.png" alt="圖 1.3 - P-V-T 曲面">
+  <figcaption><strong>圖 1.3（第 250 頁）</strong> 氣體的 $P$–$V$–$T$ 曲面。圖中展示了理想氣體與真實氣體在 $P$–$V$–$T$ 空間中的行為差異。曲面上的每個點對應於一個平衡態；等溫線（恆溫曲線）和等壓線（恆壓曲線）在曲面上形成網格。從第二章的角度來看，等溫可逆 $P$–$V$ 功 $W = -\int P\,dV$ 對應於沿等溫線在 $V$ 方向的路徑積分——真實氣體的這個積分值偏離理想氣體的 $RT\ln(V_2/V_1)$。</figcaption>
+</figure>
+
+<p><strong>壓縮因子（compressibility factor）</strong>$Z$ 是量化偏離理想性的標準工具：</p>
+<div class="eq">$$\boxed{Z = \frac{PV}{RT}} \tag{8.1}$$</div>
+<p>$Z = 1$ 表示理想氣體行為。$Z < 1$ 表示氣體比理想情況<strong>更容易</strong>壓縮——分子間吸引力使氣體「收縮」。$Z > 1$ 表示更<strong>難</strong>壓縮——分子體積和短程排斥力開始主導。</p>
+
+<p><strong>$Z$ 的微觀詮釋與推導：</strong>壓縮因子可以從統計力學的 virial 展開理解。將 $Z$ 表示為體積倒數的級數：</p>
+<div class="eq">$$Z = 1 + \frac{B(T)}{V} + \frac{C(T)}{V^2} + \cdots \tag{8.1a}$$</div>
+<p>其中第二 virial 係數 $B(T)$ 直接與分子對（pair）的交互作用位能 $\phi(r)$ 有關：</p>
+<div class="eq">$$B(T) = -2\pi N_A \int_0^\infty \left( e^{-\phi(r)/k_B T} - 1 \right) r^2 dr \tag{8.1b}$$</div>
+<p>這裡 $N_A$ 是亞佛加厥常數，$k_B$ 是波茲曼常數，$r$ 是分子間距離。若 $\phi(r)$ 為純吸引位能（如 Lennard-Jones 勢能），則 $B(T) < 0$，導致 $Z < 1$；若排斥效應佔優勢，則 $B(T) > 0$，$Z > 1$。這個方程建立了宏觀 $P$–$V$–$T$ 行為與微觀分子間力的直接橋樑。</p>
+
+<figure class="figure">
+  <img src="../../pages/ch08_pages/ch08_page_258_c.png" alt="圖 8.1 - Z vs P 對各種氣體">
+  <figcaption><strong>圖 8.1（第 257 頁）</strong> 不同氣體在 0°C 下的 $Z$ vs $P$ 圖。H₂ 在所有壓力下 $Z > 1$（分子體積效應主導）；CO₂ 在低壓時 $Z < 1$（吸引力主導），隨壓力升高 $Z$ 先降後升。N₂ 和 O₂ 的行為介於兩者之間。所有氣體在 $P \to 0$ 時趨近 $Z = 1$（理想極限）。</figcaption>
+</figure>
+
+<p>$Z$–$P$ 圖（在不同溫度下）揭示了豐富的行為：</p>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li>低壓時，所有氣體的 $Z \to 1$（趨近理想行為）</li>
+<li>中等壓力：低溫時 $Z < 1$（吸引力主導），高溫時 $Z > 1$（排斥力/體積主導）</li>
+<li><strong>Boyle 溫度 $T_B$：</strong>在此溫度，$\lim_{P\to 0}(\partial Z/\partial P)_T = 0$——氣體在低壓下的行為正好是理想的。對於 van der Waals 氣體，$T_B = a/(Rb)$。</li>
+</ul>
+
+<figure class="figure">
+  <img src="../../pages/ch08_pages/ch08_page_259_c.png" alt="圖 8.2 - Z vs P 不同溫度">
+  <figcaption><strong>圖 8.2（第 259 頁）</strong> 同一氣體在不同溫度下的 $Z$–$P$ 曲線。低於 Boyle 溫度 $T_B$ 時，曲線初始斜率為負（$Z$ 先下降後上升）；高於 $T_B$ 時，斜率始終為正。在 $T = T_B$ 時，初始斜率為零——氣體在低壓範圍內表現為理想氣體。</figcaption>
+</figure>
+
+<figure class="figure">
+  <img src="../../pages/ch08_pages/ch08_page_259_c.png" alt="圖 8.3 - Boyle 溫度示意">
+  <figcaption><strong>圖 8.3（第 259 頁）</strong> Boyle 溫度的示意圖。在 $T = T_B$ 時，$(\partial Z/\partial P)_{P=0} = 0$。這意味著在 Boyle 溫度下，第二 virial 係數 $B(T) = 0$——分子間吸引和排斥效應在低壓下恰好抵消。常見氣體的 Boyle 溫度：He ∼ 22 K，H₂ ∼ 110 K，N₂ ∼ 327 K，CO₂ ∼ 714 K。</figcaption>
+</figure>
+
+<h3>常見氣體的壓縮因子實例</h3>
+<p>下表列出若干常見氣體在 $T = 298\;\text{K}$ 下不同壓力時的 $Z$ 值（近似值）：</p>
+<table><caption>常見氣體在 298 K 不同壓力下的壓縮因子近似值</caption><thead><tr><th scope="col">氣體</th><th scope="col">1 atm</th><th scope="col">10 atm</th><th scope="col">50 atm</th><th scope="col">100 atm</th><th scope="col">200 atm</th></tr></thead><tbody>
+<tr><td>N₂</td><td>0.9995</td><td>0.994</td><td>0.970</td><td>0.940</td><td>0.880</td></tr>
+<tr><td>O₂</td><td>0.9993</td><td>0.992</td><td>0.963</td><td>0.926</td><td>0.865</td></tr>
+<tr><td>CO₂</td><td>0.994</td><td>0.942</td><td>0.785</td><td>0.610</td><td>0.485</td></tr>
+<tr><td>H₂</td><td>1.000</td><td>1.008</td><td>1.042</td><td>1.086</td><td>1.175</td></tr>
+<tr><td>CH₄</td><td>0.998</td><td>0.978</td><td>0.920</td><td>0.855</td><td>0.780</td></tr>
+</tbody></table>
+<p>注意 CO₂ 在 50 atm 時 $Z$ 已降至 0.785——強吸引力使其極度偏離理想行為。H₂ 則始終 $Z > 1$（即使在高壓下），因為其分子間的排斥力（和分子體積效應）總是主導——這與 H₂ 的低 Boyle 溫度（∼110 K）有關，在 298 K 下已遠高於其 $T_B$。一般來說，$|Z-1| < 0.05$ 時工程上可安全使用理想氣體近似。</p>
+
+<div class="callout"><strong>🔗 與第二章的連結：</strong>第二章定義的 $P$–$V$ 功 $W = -\int P_{\text{ext}}\,dV$ 在真實氣體中需要使用真實狀態方程式。例如，van der Waals 氣體的等溫可逆膨脹功為：
+$$W = -\int_{V_1}^{V_2} \left(\frac{RT}{V-b} - \frac{a}{V^2}\right) dV = -RT\ln\frac{V_2-b}{V_1-b} - a\left(\frac{1}{V_2} - \frac{1}{V_1}\right)$$
+與理想氣體的 $W = -RT\ln(V_2/V_1)$ 相比，$b$ 修正了對數項中的有效體積比，$a$ 項產生了額外的 $1/V$ 修正。當 $V \gg b$（低壓）時兩者趨於一致。</div>
+
+<div class="callout"><strong>💡 $Z$ 就是「理想與現實的差距」的數字化。</strong>$Z$ 偏離 1 的程度告訴你需要多大程度的非理想修正。在化學工程設計中，如果 $|Z-1| < 0.05$，通常可以使用理想氣體近似而不會引入顯著誤差。</div>
+<div class="callout-warn"><strong>⚠️ 不要只看壓力判斷理想性。</strong>同樣 100 atm 下，H₂ 可表現為 $Z>1$，CO₂ 則可能 $Z\ll1$；溫度、Boyle 溫度與分子間吸引力同樣重要。</div>
+<details class="example"><summary>例題 8.1：用 $Z$ 判斷理想氣體近似是否可用</summary><p>若某氣體在操作條件下 $Z=0.97$，則體積與理想氣體估算差約 3%。</p><p>若工程容許誤差為 5%，可暫用理想近似；若 $Z=0.61$，理想近似會嚴重高估體積或低估有效壓力。</p><p>因此 $Z$ 是決定是否進入真實氣體模型的快速 gate。</p></details>
+</section>
+
+<section id="s8-3"><h2>8.3 理想氣體混合物的熱力學性質</h2>
+<div class="section-keypoints"><strong>本節重點：</strong><ul style="font-size:13px;color:var(--t2);margin-left:18px"><li>理想氣體混合物滿足 Dalton 分壓定律。</li><li>理想混合的 $\Delta G_{\text{mix}}<0$ 完全來自混合熵。</li><li>化學位降低 $RT\ln x_i$ 是混合自發性的局部驅動力。</li></ul></div>
+<p>在處理氣相反應之前（第十一章），我們需要知道氣體混合物的熱力學行為。對於理想氣體混合物，核心結果簡潔而強大：</p>
+
+<h3>Dalton 分壓定律</h3>
+<div class="eq">$$P_i = x_i P_{\text{total}} \tag{8.2}$$</div>
+<p>每種氣體的行為如同它<strong>單獨佔據</strong>整個體積。這是因為理想氣體之間沒有交互作用——每個分子「感覺不到」其他種類分子的存在。</p>
+
+<h3>混合熱力學量</h3>
+<div class="eq">$$\boxed{\Delta G_{\text{mix}} = nRT\sum_i x_i \ln x_i} \quad (< 0) \tag{8.3}$$</div>
+<div class="eq">$$\Delta S_{\text{mix}} = -nR\sum_i x_i \ln x_i \quad (> 0) \tag{8.4}$$</div>
+<div class="eq">$$\Delta H_{\text{mix}} = 0, \quad \Delta V_{\text{mix}} = 0 \tag{8.5}$$</div>
+
+<p>這些結果有深刻的物理意義：</p>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li>$\Delta G_{\text{mix}} < 0$：混合永遠是自發的（因為 $x_i < 1$，$\ln x_i < 0$）</li>
+<li>$\Delta S_{\text{mix}} > 0$：混合增加無序度。對於等莫耳二元混合物（$x_A = x_B = 0.5$），每莫耳 $\Delta S_{\text{mix}} = R\ln 2 \approx 5.76\ \text{J/mol·K}$</li>
+<li>$\Delta H_{\text{mix}} = 0$：無混合熱——因為分子間沒有交互作用，混合不需要打斷或形成任何「鍵」</li>
+</ul>
+
+<h3>數值範例：氮氣與氧氣的混合</h3>
+<p>考慮將 2 mol N₂ 和 1 mol O₂ 在 $T = 298\;\text{K}$、$P = 1\;\text{atm}$ 下混合：</p>
+<p>總莫耳數 $n = 3\;\text{mol}$。莫耳分率 $x_{\text{N}_2} = 2/3$，$x_{\text{O}_2} = 1/3$。</p>
+<div class="eq">$$\begin{aligned}
+\Delta G_{\text{mix}} &= nRT\left(x_{\text{N}_2}\ln x_{\text{N}_2} + x_{\text{O}_2}\ln x_{\text{O}_2}\right) \\
+&= 3 \times 8.314 \times 298 \times \left(\frac{2}{3}\ln\frac{2}{3} + \frac{1}{3}\ln\frac{1}{3}\right) \\
+&= 3 \times 8.314 \times 298 \times (-0.6365) \\
+&= -4727\ \text{J} \approx -4.73\ \text{kJ}
+\end{aligned}$$</div>
+<div class="eq">$$\Delta S_{\text{mix}} = -\frac{\Delta G_{\text{mix}}}{T} = \frac{4727}{298} = 15.86\ \text{J/K}$$</div>
+<p>混合焓 $\Delta H_{\text{mix}} = 0$（理想氣體假設下）。注意混合自由能的負值完全來自熵項（$\Delta G_{\text{mix}} = -T\Delta S_{\text{mix}}$），因為 $\Delta H_{\text{mix}} = 0$。</p>
+
+<p><strong>推廣到多成分系統：</strong>當混合物包含 $m$ 種氣體且各成分莫耳數相等時，混合熵達到最大值 $\Delta S_{\text{max}} = -nR\sum (1/m)\ln(1/m) = nR\ln m$。例如，三種氣體等莫耳混合時 $\Delta S_{\text{mix}} = nR\ln 3 \approx n \times 9.13\ \text{J/K}$。</p>
+
+<div class="callout"><strong>💡 這些公式在第九章（溶液）中幾乎逐字重現。</strong>理想溶液的行為與理想氣體混合物在數學上完全相同——只是用液體成分取代氣體分壓。這不是巧合：兩者都源於「成分之間無特殊交互作用」這個共同假設。</div>
+<div class="callout-warn"><strong>⚡ 等莫耳混合的 $\Delta S_{\text{mix}} = R\ln 2$ 是一個非常常用的「檢查數字」。</strong>如果你計算的混合熵遠離這個值，檢查你的計算。對於多成分系統，最大混合熵發生在所有 $x_i$ 相等時：$\Delta S_{\text{max}} = R\ln m$（$m$ = 成分數）。</div>
+
+<h3>混合前後的化學位變化</h3>
+<p>混合前每種純氣體的化學位為 $\mu_i^* = \mu_i^\circ + RT\ln P$（在總壓 $P$ 下）。混合後，成分 $i$ 的化學位為 $\mu_i = \mu_i^\circ + RT\ln P_i = \mu_i^\circ + RT\ln(x_i P)$。因此混合前後的化學位變化為：</p>
+<div class="eq">$$\Delta\mu_i = \mu_i - \mu_i^* = RT\ln x_i < 0$$</div>
+<p>這個負的 $\Delta\mu_i$ 是混合驅動力的微觀來源——每種成分在混合物中的化學位低於其純態，因此混合是自發的。化學位的降低也直接解釋了 $\Delta G_{\text{mix}} = \sum n_i\Delta\mu_i = nRT\sum x_i\ln x_i < 0$。</p>
+
+<figure class="figure">
+  <img src="../../pages/ch08_pages/ch08_page_260_c.png" alt="圖 8.4 - virial 方程式擬合">
+  <figcaption><strong>圖 8.4（第 260 頁）</strong> Virial 展開對真實氣體 $P$–$V$–$T$ 數據的擬合。圖中展示了 $Z-1$ 對 $1/V$ 作圖，其截距為第二 virial 係數 $B(T)$。高階項（$C/V^2$ 等）在低壓下可忽略，但在高壓下變得重要。Virial 展開的優點是有嚴格的統計力學基礎——每個係數都與特定階數的分子間交互作用對應。</figcaption>
+</figure>
+<details class="example"><summary>例題 8.3：等莫耳二元混合的熵</summary><p>一莫耳 A 與一莫耳 B 混合後，總莫耳數為 2，且 $x_A=x_B=0.5$。</p><p>$\Delta S_{\text{mix}}=-2R[0.5\ln0.5+0.5\ln0.5]=2R\ln2$。</p><p>每莫耳混合物的混合熵為 $R\ln2$，這是檢查理想混合計算的標準數字。</p></details>
+</section>
+
+<section id="s8-4"><h2>8.4 偏離理想性與真實氣體的狀態方程式</h2>
+<div class="section-keypoints"><strong>本節重點：</strong><ul style="font-size:13px;color:var(--t2);margin-left:18px"><li>真實氣體方程式用吸引力與排斥體積修正理想氣體。</li><li>van der Waals 方程式用 $a$ 表示吸引力、$b$ 表示排除體積。</li><li>狀態方程式是計算真實氣體功、體積與熱力學修正的基礎。</li></ul></div>
+<p>當 $PV \neq nRT$ 時，我們需要更複雜的狀態方程式。這些方程式通常引入參數來捕捉分子間交互作用的兩個基本面向：<strong>吸引力</strong>（使氣體更易壓縮）和<strong>排斥體積</strong>（使氣體更難壓縮）。</p>
+
+<h3>van der Waals 方程式（1873）⭐</h3>
+<p>這是最著名、最具啟發性的真實氣體狀態方程式。Johannes van der Waals 在 1873 年的博士論文中提出，並因此獲得 1910 年諾貝爾物理學獎：</p>
+<div class="eq">$$\boxed{\left(P + \frac{a}{V^2}\right)(V - b) = RT} \quad \text{（每莫耳）} \tag{8.6}$$</div>
+<p>兩個參數的物理意義：</p>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li><strong>$a$（吸引力參數）：</strong>$a/V^2$ 修正壓力——氣體內部的分子間吸引力減少了撞擊器壁的分子數量和動量，使實際壓力低於理想值。$a$ 越大，分子間吸引力越強。從微觀角度看，$a$ 與分子對位能的體積積分成正比。</li>
+<li><strong>$b$（排斥體積參數）：</strong>$V-b$ 修正體積——氣體分子本身佔據空間，實際可用的自由體積小於容器體積。$b$ 大約等於分子本身體積的四倍（由於 excluded volume 效應，兩個分子的質心不能接近到半徑和以內）。</li>
+</ul>
+<div class="callout"><strong>💡 van der Waals 方程式的歷史意義：</strong>它是第一個能夠<strong>同時</strong>描述氣相和液相、並預測氣–液相變的狀態方程式。在 $T < T_c$ 時，等溫線出現一個 S 形迴圈（van der Waals loop），對應於不穩定的 $(\partial P/\partial V)_T > 0$ 區域。Maxwell 的等面積法則（equal area rule）用於在此迴圈中畫出實際的氣–液共存水平線。</div>
+<div class="callout-warn"><strong>⚠️ van der Waals 不是高精度資料庫模型。</strong>它很適合建立物理直覺與推導臨界行為，但工業設計常需 RK、SRK、Peng–Robinson 或實驗資料校正。</div>
+<details class="example"><summary>例題 8.4：判讀 $a$ 與 $b$ 的影響</summary><p>若兩種氣體的 $b$ 類似，但 A 的 $a$ 較大，則 A 的分子吸引力較強。</p><p>在中低溫與中等壓力下，A 更可能出現 $Z<1$，也更容易液化。</p><p>若 $b$ 較大，則高壓下排除體積效應更早使 $Z>1$。</p></details>
+</section>
+
+<section id="s8-5"><h2>8.5 van der Waals 流體</h2>
+<div class="section-keypoints"><strong>本節重點：</strong><ul style="font-size:13px;color:var(--t2);margin-left:18px"><li>臨界點由等溫線的一階與二階體積導數同時為零決定。</li><li>van der Waals 模型預測 $V_c=3b$、$T_c=8a/(27Rb)$、$P_c=a/(27b^2)$。</li><li>對應態原理用對比變數把不同氣體放到共同座標上比較。</li></ul></div>
+<p>van der Waals 方程式最深刻的是它預測了<strong>臨界點</strong>的存在。臨界點是等溫線上 $(\partial P/\partial V)_T = 0$ 和 $(\partial^2 P/\partial V^2)_T = 0$ 同時成立的點——這是迴圈的消失點。</p>
+
+<h3>從 van der Waals 方程式推導臨界參數</h3>
+<p>臨界點滿足等溫線上的拐點條件：</p>
+<div class="eq">$$\left(\frac{\partial P}{\partial V}\right)_T = 0, \quad \left(\frac{\partial^2 P}{\partial V^2}\right)_T = 0 \tag{8.7a}$$</div>
+<p>從 van der Waals 方程式 $P = \frac{RT}{V-b} - \frac{a}{V^2}$ 出發，逐次求偏導：</p>
+<div class="eq">$$\left(\frac{\partial P}{\partial V}\right)_T = -\frac{RT}{(V-b)^2} + \frac{2a}{V^3} = 0 \tag{8.7b}$$</div>
+<div class="eq">$$\left(\frac{\partial^2 P}{\partial V^2}\right)_T = \frac{2RT}{(V-b)^3} - \frac{6a}{V^4} = 0 \tag{8.7c}$$</div>
+<p>令 $V = V_c$ 代入。由 (8.7b)：$\frac{RT_c}{(V_c-b)^2} = \frac{2a}{V_c^3}$。由 (8.7c)：$\frac{2RT_c}{(V_c-b)^3} = \frac{6a}{V_c^4}$。將兩式相除（第一式除第二式）得：</p>
+<div class="eq">$$\frac{(V_c-b)/2}{1} = \frac{V_c/3}{1} \quad\Rightarrow\quad V_c - b = \frac{2}{3}V_c \quad\Rightarrow\quad \boxed{V_c = 3b}$$</div>
+<p>將 $V_c = 3b$ 代入 (8.7b)：</p>
+<div class="eq">$$\frac{RT_c}{(3b-b)^2} = \frac{2a}{(3b)^3} \quad\Rightarrow\quad \frac{RT_c}{4b^2} = \frac{2a}{27b^3} \quad\Rightarrow\quad \boxed{T_c = \frac{8a}{27Rb}}$$</div>
+<p>最後將 $V_c$ 和 $T_c$ 代回 van der Waals 方程式求 $P_c$：</p>
+<div class="eq">$$P_c = \frac{RT_c}{V_c-b} - \frac{a}{V_c^2} = \frac{R \cdot \frac{8a}{27Rb}}{3b-b} - \frac{a}{(3b)^2} = \frac{8a/(27b)}{2b} - \frac{a}{9b^2} = \frac{4a}{27b^2} - \frac{3a}{27b^2} = \boxed{\frac{a}{27b^2}}$$</div>
+<p>總結臨界參數：</p>
+<div class="eq">$$\boxed{T_c = \frac{8a}{27Rb}, \quad P_c = \frac{a}{27b^2}, \quad V_c = 3b} \tag{8.7}$$</div>
+
+<p>由此可以得到一個非常有趣的關係——<strong>臨界壓縮因子</strong>：</p>
+<div class="eq">$$Z_c = \frac{P_c V_c}{RT_c} = \frac{(a/27b^2)(3b)}{R(8a/27Rb)} = \frac{a/9b}{8a/27b} = \frac{3}{8} = 0.375$$</div>
+<p>van der Waals 方程式預測所有氣體的 $Z_c = 0.375$。實際氣體的 $Z_c$ 在 0.25–0.30 範圍內——van der Waals 給出的是近似值，但預測了 $Z_c$ 是普適常數這一重要事實。$Z_c$ 的偏差反映了 van der Waals 方程式在臨界區域的定量局限性，但這不影響它在概念上的巨大價值。</p>
+
+<figure class="figure">
+  <img src="../../pages/ch08_pages/ch08_page_261_c.png" alt="圖 8.5 - van der Waals P-V 等溫線">
+  <figcaption><strong>圖 8.5（第 261 頁）</strong> van der Waals 方程式在不同溫度下的 $P$–$V$ 等溫線。$T > T_c$ 時曲線單調遞減（類似理想氣體），$T = T_c$ 時出現一個拐點（臨界點），$T < T_c$ 時出現 S 形迴圈（van der Waals loop）。子臨界等溫線中的 $\partial P/\partial V > 0$ 區域對應於熱力學不穩定態。</figcaption>
+</figure>
+
+<h3>Maxwell 等面積法則與氣–液相變</h3>
+<p>van der Waals 方程式在 $T < T_c$ 時預測的 $P$–$V$ 等溫線呈現 S 形迴圈（van der Waals loop）。然而實際的等溫線在氣–液共存區是水平的——壓縮氣體時壓力保持不變，直到所有氣體都轉變為液體。James Clerk Maxwell（1875）指出，正確的共存壓力 $P_{\text{sat}}$ 由以下條件決定：</p>
+<div class="eq">$$\int_{V_{\text{液}}}^{V_{\text{氣}}} \left[ P_{\text{vdW}}(V) - P_{\text{sat}} \right] dV = 0 \tag{8.7d}$$</div>
+<p>其中 $V_{\text{液}}$ 和 $V_{\text{氣}}$ 是該壓力下水平線與 van der Waals 等溫線的交點體積。此條件等價於 S 形迴圈中高於 $P_{\text{sat}}$ 的部分和低於 $P_{\text{sat}}$ 的部分<strong>面積相等</strong>——因此稱為<strong>等面積法則</strong>（equal area rule）。</p>
+
+<p><strong>Maxwell 的熱力學論證：</strong>在可逆的氣–液相變中，兩相平衡要求 $\Delta G = 0$。沿等溫路徑 $dG = V\,dP$，因此 $\int_{\text{液}}^{\text{氣}} V\,dP = 0$。通過分部積分 $\int V\,dP = PV - \int P\,dV$，並考慮到積分路徑的起終點壓力相同（均為 $P_{\text{sat}}$），可得 $\int P\,dV = P_{\text{sat}}(V_{\text{氣}} - V_{\text{液}})$，這正是等面積法則的積分形式。</p>
+
+<p>等面積法則揭示了 van der Waals 方程式的一個關鍵不足：S 形迴圈中的 $(\partial P/\partial V)_T > 0$ 區域對應於熱力學不穩定態（壓縮導致壓力下降），實際系統會分離成共存的氣相和液相。van der Waals 方程式雖然能夠定性描述相變，但定量預測需要更精確的模型。</p>
+
+<figure class="figure">
+  <img src="../../pages/ch08_pages/ch08_page_263_c.png" alt="圖 8.6 - Maxwell 等面積法則">
+  <figcaption><strong>圖 8.6（第 262 頁）</strong> Maxwell 等面積法則的幾何示意。藍色曲線為 van der Waals 等溫線（$T < T_c$），紅色水平線為實際氣–液共存壓力 $P_{\text{sat}}$。上方陰影區域（高於 $P_{\text{sat}}$）與下方陰影區域（低於 $P_{\text{sat}}$）面積相等。$V_{\text{液}}$ 和 $V_{\text{氣}}$ 分別是共存液相和氣相的莫耳體積。</figcaption>
+</figure>
+
+<figure class="figure">
+  <img src="../../pages/ch08_pages/ch08_page_263_c.png" alt="圖 8.7 - 臨界點示意">
+  <figcaption><strong>圖 8.7（第 264 頁）</strong> van der Waals 流體的臨界點示意。$T_c$ 對應的等溫線以紅色標示，臨界點 $C$ 位於該等溫線的拐點處。在臨界點以上（$T > T_c$），無論壓力多大，氣體都無法被液化——這是臨界溫度的根本定義。圖中也展示了不同溫度的等溫線族，顯示出從次臨界到超臨界的連續過渡。</figcaption>
+</figure>
+
+<h3>對應態原理（Principle of Corresponding States）</h3>
+<p>用<strong>對比變數</strong>（reduced variables）：$T_r = T/T_c$，$P_r = P/P_c$，$V_r = V/V_c$，van der Waals 方程式可以寫成<strong>不包含任何物質特定參數</strong>的通用形式。代入 $T = T_r T_c$、$P = P_r P_c$、$V = V_r V_c$ 到 van der Waals 方程式：</p>
+<div class="eq">$$\left(P_r P_c + \frac{a}{(V_r V_c)^2}\right)(V_r V_c - b) = R T_r T_c$$</div>
+<p>代入 $P_c = a/(27b^2)$、$V_c = 3b$、$T_c = 8a/(27Rb)$：</p>
+<div class="eq">$$\left(P_r \cdot \frac{a}{27b^2} + \frac{a}{9b^2 V_r^2}\right)(3b V_r - b) = R T_r \cdot \frac{8a}{27Rb}$$</div>
+<div class="eq">$$\frac{a}{27b^2} \left(P_r + \frac{3}{V_r^2}\right) \cdot b(3V_r - 1) = \frac{8a}{27b} T_r$$</div>
+<p>化簡後得到<strong>通用 van der Waals 方程式</strong>：</p>
+<div class="eq">$$\boxed{\left(P_r + \frac{3}{V_r^2}\right)(3V_r - 1) = 8T_r} \tag{8.7e}$$</div>
+<p>這個方程式完全不包含 $a$ 和 $b$——也就是說，<strong>任何 van der Waals 氣體在相同的對比條件下具有完全相同的 $P$–$V$–$T$ 行為</strong>。這就是<strong>對應態原理</strong>的數學表達。</p>
+<p>對應態原理的實用價值巨大：只需知道氣體的 $T_c$ 和 $P_c$（查表可得），就可以用通用壓縮因子圖（$Z$ vs $P_r$ 在不同 $T_r$ 下）估算任何 $T$ 和 $P$ 下的體積。對於工程初步設計，精度通常在 5% 以內。然而，對應態原理只是近似成立——它假設所有氣體具有相同的分子間位能函數形式，這對化學性質相似的氣體（如稀有氣體）效果最好，對極性分子（如水、氨）則有較大偏差。</p>
+
+<figure class="figure">
+  <img src="../../pages/ch08_pages/ch08_page_266_c.png" alt="圖 8.8 - 對應態原理">
+  <figcaption><strong>圖 8.8（第 265 頁）</strong> 對應態原理的圖示——不同氣體的壓縮因子 $Z$ 對對比壓力 $P_r$ 作圖，在不同對比溫度 $T_r$ 下，所有氣體的數據點落在一條主曲線上。這驗證了對應態原理的普適性。工程中常用的通用壓縮因子圖（generalized compressibility chart）即基於此原理繪製。</figcaption>
+</figure>
+
+<figure class="figure">
+  <img src="../../pages/ch08_pages/ch08_page_266_c.png" alt="圖 8.9 - Z_c 相關性">
+  <figcaption><strong>圖 8.9（第 265 頁）</strong> 不同氣體的臨界壓縮因子 $Z_c$ 的相關性。van der Waals 方程式預測 $Z_c = 0.375$，但實際氣體的 $Z_c$ 範圍為 0.25–0.30。圖中展示了 $Z_c$ 與偏心因子 $\omega$（acentric factor）的相關性——$\omega$ 描述了分子形狀偏離球對稱的程度，是改進對應態原理的重要參數。</figcaption>
+</figure>
+
+<div class="callout"><strong>💡 對應態原理的實用價值：</strong>如果你知道一種氣體的 $T_c$ 和 $P_c$（查表即可），就可以用通用壓縮因子圖估算它在任何 $T$ 和 $P$ 下的體積——不需要做實驗。對於工程初步設計，精度通常在 5% 以內。</div>
+
+<div class="callout"><strong>🔗 與第六章的連結：</strong>第六章討論的熱容量 $C_P$ 和 $C_V$ 在真實氣體中會隨壓力變化。從熱力學恆等式 $(\partial C_P/\partial P)_T = -T(\partial^2 V/\partial T^2)_P$ 可知，只要知道狀態方程式，就可以計算 $C_P$ 的壓力依賴性。對於 van der Waals 氣體，透過推導可得：
+$$C_P - C_V = R\left[1 + \frac{2a}{RTV^3}(V-b)^2\right]$$
+這偏離了理想氣體的 $C_P - C_V = R$。當 $V \gg b$（即低壓下）時，兩者趨於一致。這個差異在處理真實氣體的絕熱過程（第三章、第六章）時必須考慮。</div>
+<div class="callout-warn"><strong>⚠️ 臨界點附近最不能草率使用簡化模型。</strong>在臨界區，壓縮性、熱容量與密度漲落都會異常放大，van der Waals 可給定性圖像，但定量臨界指數與實驗不同。</div>
+<details class="example"><summary>例題 8.5：由臨界資料反推 van der Waals 參數</summary><p>若已知 $T_c$ 與 $P_c$，可由 $P_c=a/(27b^2)$ 與 $T_c=8a/(27Rb)$ 解出 $a$、$b$。</p><p>得到的參數可用於粗估該氣體的 $P$–$V$–$T$ 行為。</p><p>但若目標是精準液相密度或相平衡，仍應改用更高精度 EOS。</p></details>
+</section>
+
+<section id="s8-6"><h2>8.6 其他非理想氣體的狀態方程式</h2>
+<div class="section-keypoints"><strong>本節重點：</strong><ul style="font-size:13px;color:var(--t2);margin-left:18px"><li>不同 EOS 在精度、適用範圍與物理透明度上取捨不同。</li><li>RK/SRK/PR 常用於工程氣液平衡，virial 展開適合低密度且有統計力學基礎。</li><li>選 EOS 時要匹配氣體種類、壓力溫度範圍與所需輸出。</li></ul></div>
+<p>van der Waals 方程式是概念上的里程碑，但定量精度有限。後續發展了許多更精確的方程式：</p>
+<table><caption>常見真實氣體狀態方程式與典型用途</caption><thead><tr><th scope="col">方程式</th><th scope="col">形式</th><th scope="col">特點</th></tr></thead><tbody>
+<tr><td><strong>Redlich–Kwong (1949)</strong></td><td>$P = \frac{RT}{V-b} - \frac{a}{T^{1/2}V(V+b)}$</td><td>改進溫度依賴，預測液相密度更準</td></tr>
+<tr><td><strong>Peng–Robinson (1976)</strong></td><td>$P = \frac{RT}{V-b} - \frac{a(T)}{V(V+b)+b(V-b)}$</td><td>石油工業標準——精確預測烴類氣–液平衡</td></tr>
+<tr><td><strong>Virial 展開</strong></td><td>$\frac{PV}{RT} = 1 + \frac{B}{V} + \frac{C}{V^2} + \cdots$</td><td>有堅實的統計力學基礎；$B$（第二 virial 係數）反映分子對交互作用</td></tr>
+</tbody></table>
+<p>Virial 展開特別值得注意——它不是經驗擬合，而是從統計力學嚴格推導的。第二 virial 係數 $B(T)$ 可以直接從分子間位能函數計算（使用第四章的配分函數方法）。$B < 0$ 對應吸引力主導，$B > 0$ 對應排斥力主導。</p>
+
+<figure class="figure">
+  <img src="../../pages/ch08_pages/ch08_page_268_c.png" alt="圖 8.10 - Redlich-Kwong P-V">
+  <figcaption><strong>圖 8.10（第 267 頁）</strong> Redlich–Kwong 狀態方程式預測的 $P$–$V$ 等溫線。與 van der Waals 方程式相比，Redlich–Kwong 在 $T^{1/2}$ 項中引入了更精確的溫度依賴性，因此在較寬的溫度和壓力範圍內具有更好的定量精度。它在低溫區域對液相體積的預測顯著優於 van der Waals 方程式。</figcaption>
+</figure>
+
+<h3>Redlich–Kwong 方程式的深入分析</h3>
+<p>Redlich–Kwong（RK）方程式是 van der Waals 最成功的改良之一：</p>
+<div class="eq">$$P = \frac{RT}{V-b} - \frac{a}{T^{1/2}V(V+b)} \tag{8.8a}$$</div>
+<p>RK 方程式的參數 $a$ 和 $b$ 亦可從臨界點條件推導：</p>
+<div class="eq">$$a = \frac{0.42748 R^2 T_c^{2.5}}{P_c}, \quad b = \frac{0.08664 R T_c}{P_c} \tag{8.8b}$$</div>
+<p>RK 方程式的臨界壓縮因子 $Z_c = 1/3 \approx 0.333$，比 van der Waals 的 0.375 更接近實際值（0.25–0.30）。Soave（1972）進一步引入了偏心因子 $\omega$ 來改進 RK 的溫度依賴性（稱為 SRK 方程式），使其成為工業模擬軟體（如 Aspen Plus、HYSYS）中廣泛使用的標準狀態方程式之一。</p>
+
+<h3>Peng–Robinson 方程式的優勢</h3>
+<p>Peng–Robinson（PR）方程式在 1976 年被提出，專門針對烴類系統的氣–液平衡計算進行了優化：</p>
+<div class="eq">$$P = \frac{RT}{V-b} - \frac{a(T)}{V(V+b)+b(V-b)} \tag{8.8c}$$</div>
+<p>其中 $a(T) = 0.45724\frac{R^2 T_c^2}{P_c} \cdot \alpha(T)$，$\alpha(T) = [1 + \kappa(1 - \sqrt{T_r})]^2$，$\kappa = 0.37464 + 1.54226\omega - 0.26992\omega^2$。PR 方程式預測 $Z_c = 0.307$，比 RK 更接近實際值，因此對於高精度相平衡計算尤其適用。</p>
+
+<figure class="figure">
+  <img src="../../pages/ch08_pages/ch08_page_269_c.png" alt="Fig 8.11">
+  <figcaption><strong>圖 8.11</strong>（Gaskell 第 269 頁）P -V isotherms for van der Waals CO2</figcaption>
+</figure>
+
+<figure class="figure">
+  <img src="../../pages/ch08_pages/ch08_page_270_c.png" alt="Fig 8.12">
+  <figcaption><strong>圖 8.12</strong>（Gaskell 第 270 頁）</strong> 逸壓係數 $\phi$ 在不同對比溫度下的完整曲線族（第二部分）。低 $T_r$ 下 $\phi$ 隨 $P_r$ 增加先迅速下降後回升；高 $T_r$ 下 $\phi$ 變化較平緩。這反映了分子間吸引力與排斥體積在不同條件下的相對重要性。</figcaption>
+</figure>
+
+<figure class="figure">
+  <img src="../../pages/ch08_pages/ch08_page_270_c.png" alt="Fig 8.13">
+  <figcaption><strong>圖 8.13</strong>（Gaskell 第 270 頁）</strong> 高對比壓力範圍（$P_r$ 高達 10）下的逸壓係數圖表（第三部分）。注意在極高壓下 $\phi$ 可以遠大於 1——此時分子體積效應（排斥力）完全主導，氣體的「有效壓力」高於其實際壓力。</figcaption>
+</figure>
+
+<figure class="figure">
+  <img src="../../pages/ch08_pages/ch08_page_275_c.png" alt="Fig 8.14">
+  <figcaption><strong>圖 8.14</strong>（Gaskell 第 275 頁）</strong> 低對比壓力範圍的逸壓係數細節（第四部分）。在 $P_r < 1$ 的區域，$\phi$ 的變化最為劇烈，尤其是低 $T_r$ 時——這正是氣–液共存區域附近，分子間吸引力的影響最為顯著。</figcaption>
+</figure>
+
+<figure class="figure">
+  <img src="../../pages/ch08_pages/ch08_page_278_c.png" alt="Fig 8.15">
+  <figcaption><strong>圖 8.15</strong>（Gaskell 第 278 頁）</strong> 綜合逸壓係數圖表（第五部分），覆蓋了 $T_r = 0.5$ 到 $T_r = 15$、$P_r = 0$ 到 $P_r = 15$ 的完整範圍。這張圖表是化工設計中查詢氣體非理想性的標準工具——相當於「逸壓係數的國家標準局參考數據」。</figcaption>
+</figure>
+<div class="callout"><strong>💡 EOS 選擇就是模型風險管理。</strong>van der Waals 適合教學推導，virial 適合低壓精密修正，Peng–Robinson 適合許多烴類與高壓工程估算；沒有一個方程式在所有材料系統都最好。</div>
+<div class="callout-warn"><strong>⚠️ 不要把經驗 EOS 外推到未驗證區域。</strong>接近臨界點、強極性氣體、氫鍵流體或混合氣體時，參數與混合規則會主導誤差。</div>
+<details class="example"><summary>例題 8.6：如何初選狀態方程式？</summary><p>若處理低壓 N₂/O₂ 混合物，可先用理想氣體或 virial 二階修正。</p><p>若處理高壓烴類氣液平衡，Peng–Robinson 通常比 van der Waals 合適。</p><p>若處理水蒸氣臨界區，應查專門水蒸氣表或高精度資料庫。</p></details>
+</section>
+
+<section id="s8-7"><h2>8.7 非理想氣體的進一步熱力學處理——逸壓（Fugacity）</h2>
+<div class="section-keypoints"><strong>本節重點：</strong><ul style="font-size:13px;color:var(--t2);margin-left:18px"><li>逸壓讓真實氣體化學位保留理想氣體的對數形式。</li><li>逸壓係數 $\phi=f/P$ 可由 $\ln\phi=\int_0^P (Z-1)/P\,dP$ 計算。</li><li>高壓氣相反應平衡必須用逸壓而不是直接用壓力。</li></ul></div>
+<p>這是本章最重要的概念。對於理想氣體，我們有簡潔的關係 $\mu = \mu^\circ + RT\ln(P/P^\circ)$。對於真實氣體，如果我們直接用壓力代入，化學位的計算就會出錯。Gilbert Lewis（1901）的解決方案極其優雅：</p>
+<div class="eq">$$\boxed{\mu = \mu^\circ + RT\ln\frac{f}{P^\circ}} \tag{8.8}$$</div>
+<p>其中 $f$ 是<strong>逸壓（fugacity）</strong>——「有效壓力」。逸壓的定義確保這個簡單對數形式<strong>始終成立</strong>。$f$ 不是一個新的物理量——它是壓力經過非理想性修正後的結果。</p>
+
+<h3>逸壓定義的嚴格推導</h3>
+<p>從化學位的微分形式出發：</p>
+<div class="eq">$$d\mu = -\bar{S}\,dT + \bar{V}\,dP \tag{8.8d}$$</div>
+<p>等溫下 $d\mu = \bar{V}\,dP$。對於理想氣體 $\bar{V} = RT/P$，積分得 $\mu = \mu^\circ + RT\ln(P/P^\circ)$。對於真實氣體，$\bar{V} \neq RT/P$，但我們希望保持化學位的對數形式。為此定義逸壓 $f$ 使得等溫下：</p>
+<div class="eq">$$d\mu = RT\,d\ln f \quad \text{（等溫下）} \tag{8.8e}$$</div>
+<p>且滿足邊界條件 $\lim_{P\to 0} f/P = 1$（低壓極限下趨於理想行為）。比較 $d\mu = \bar{V}\,dP$ 和 $d\mu = RT\,d\ln f$，得到：</p>
+<div class="eq">$$RT\,d\ln f = \bar{V}\,dP \tag{8.8f}$$</div>
+
+<h3>逸壓係數的計算公式</h3>
+<div class="eq">$$\phi = \frac{f}{P} \tag{8.9}$$</div>
+<p>$\phi = 1$ 表示理想行為；$\phi < 1$ 表示吸引力主導（$f < P$——氣體「行為像」壓力低於實際壓力）；$\phi > 1$ 表示排斥力/體積主導。低壓極限下所有氣體趨近理想行為：</p>
+<div class="eq">$$\lim_{P \to 0} \frac{f}{P} = 1 \tag{8.10}$$</div>
+
+<h3>從 $P$–$V$–$T$ 數據計算逸壓——核心推導</h3>
+<p>從 $RT\,d\ln f = \bar{V}\,dP$ 出發，等溫下同時加減 $RT\,d\ln P$：</p>
+<div class="eq">$$\begin{aligned}
+RT\,d\ln f - RT\,d\ln P &= \bar{V}\,dP - RT\,d\ln P \\
+RT\,d\ln\frac{f}{P} &= \left(\bar{V} - \frac{RT}{P}\right) dP \\
+d\ln\frac{f}{P} &= \left(\frac{\bar{V}}{RT} - \frac{1}{P}\right) dP
+\end{aligned}$$</div>
+<p>從 $P = 0$（此時 $f/P = 1$）積分到壓力 $P$：</p>
+<div class="eq">$$\ln\frac{f}{P} = \int_0^P \left( \frac{\bar{V}}{RT} - \frac{1}{P'} \right) dP' \tag{8.11a}$$</div>
+<p>利用 $Z = P\bar{V}/RT$，即 $\bar{V}/RT = Z/P$，代入上式：</p>
+<div class="eq">$$\boxed{\ln\phi = \ln\frac{f}{P} = \int_0^P \frac{Z-1}{P'}\,dP'} \tag{8.11}$$</div>
+<p>這就是最實用的逸壓計算公式——只要你有 $Z(P)$ 的數據（來自 $P$–$V$–$T$ 測量或狀態方程式），就可以計算任何壓力下的逸壓係數。注意到在低壓極限下，被積函數 $(Z-1)/P$ 趨近於 $(\partial Z/\partial P)_{P=0}$，因此積分收斂。</p>
+
+<h3>逸壓的實際計算範例</h3>
+<p>假設從實驗或狀態方程式得到某氣體在 $T = 300\;\text{K}$ 下 $Z$ 隨 $P$ 的變化如下：</p>
+<table><caption>由壓縮因子數據估算逸壓係數的積分輸入</caption><thead><tr><th scope="col">$P$ (atm)</th><th scope="col">$Z$</th><th scope="col">$(Z-1)/P$</th></tr></thead><tbody>
+<tr><td>0</td><td>1.000</td><td>0（極限值）</td></tr>
+<tr><td>10</td><td>0.985</td><td>-0.00150</td></tr>
+<tr><td>20</td><td>0.968</td><td>-0.00160</td></tr>
+<tr><td>50</td><td>0.920</td><td>-0.00160</td></tr>
+<tr><td>100</td><td>0.880</td><td>-0.00120</td></tr>
+</tbody></table>
+<p>數值積分 $\ln\phi = \int_0^{100} (Z-1)/P\,dP$（例如使用梯形法則）得到 $\ln\phi \approx -0.142$，因此 $\phi \approx 0.868$。這意味著在 100 atm 下該氣體的逸壓 $f = \phi P = 86.8\;\text{atm}$——其「有效熱力學壓力」僅為實際壓力的 86.8%。</p>
+
+<h3>從狀態方程式計算逸壓</h3>
+<p>如果已知狀態方程式的解析形式，逸壓係數可以用體積積分計算。從 (8.11) 出發，變換積分變量 $P \to V$：</p>
+<div class="eq">$$\ln\phi = \int_V^\infty \left( \frac{1}{V'} - \frac{1}{RT}P(V') \right) dV' - \ln Z + (Z-1) \tag{8.11b}$$</div>
+<p>對於 van der Waals 氣體，代入 $P = RT/(V-b) - a/V^2$ 可推得：</p>
+<div class="eq">$$\ln\phi_{\text{vdW}} = \frac{b}{V-b} - \frac{2a}{RTV} - \ln\left[Z\left(1 - \frac{b}{V}\right)\right] \tag{8.11c}$$</div>
+<p>這個解析表達式使 van der Waals 氣體的逸壓可以直接從 $V$ 和 $T$ 計算，無需數值積分。</p>
+
+<div class="callout-warn"><strong>⚡ 逸壓在第十一章的關鍵應用：</strong>對於高壓氣相反應，平衡常數必須用逸壓而非壓力來定義：
+$$K_f = \prod \left(\frac{f_i}{P^\circ}\right)^{\nu_i} = \prod \left(\phi_i x_i P_{\text{total}}\right)^{\nu_i} / (P^\circ)^{\sum \nu_i}$$
+$K_f$ 才是真正的熱力學平衡常數——它只取決於溫度（見第十一章 van't Hoff 方程式），與壓力無關。$K_P$（以壓力定義的「平衡常數」）在高壓下會隨壓力變化。以 Haber 法合成氨為例：$N_2 + 3H_2 \rightleftharpoons 2NH_3$，在 500°C、300 atm 下，若不使用逸壓修正，計算的平衡產率與實際值可相差一個數量級。</div>
+
+<div class="callout"><strong>🔗 與第十一章的深入連結：</strong>第十一章中涉及高壓氣相反應平衡（如合成氨、甲醇合成）時，反應平衡條件為 $\sum \nu_i \mu_i = 0$。代入 $\mu_i = \mu_i^\circ + RT\ln(f_i/P^\circ)$ 得：
+$$0 = \sum \nu_i \mu_i^\circ + RT\sum \nu_i \ln\frac{f_i}{P^\circ} \quad\Rightarrow\quad -RT\ln K_f = \Delta G^\circ$$
+其中 $K_f = \prod (f_i/P^\circ)^{\nu_i}$。在反應器中混合氣體的逸壓需要通過混合規則（mixing rule）從純組分的逸壓推導——常用的混合規則包括 van der Waals 混合規則和 Peng–Robinson 的組成依賴參數。這些內容是化工熱力學和第十一章的核心。</div>
+
+<div class="callout"><strong>💡 逸壓 vs 活性：</strong>逸壓是氣體的「活性」。第九章將定義凝聚態溶液的活性 $a_i$，數學結構完全平行：$\mu_i = \mu_i^\circ + RT\ln a_i$。逸壓就是氣體活性的一種特定形式（$a = f/P^\circ$）。這是熱力學統一性的另一個體現——無論是氣體、液體還是固體溶液，化學位總是通過一個對數項與「有效濃度」相連。</div>
+
+<h3>Generalized Fugacity Chart 的應用</h3>
+<p>基於對應態原理的通用逸壓圖表（圖 8.11–8.15）使工程師可以快速估算任何氣體的逸壓係數。使用方法如下：</p>
+<ol style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li>查表獲得該氣體的 $T_c$ 和 $P_c$</li>
+<li>計算對比變數 $T_r = T/T_c$ 和 $P_r = P/P_c$</li>
+<li>在圖中找到對應的 $T_r$ 曲線，讀取 $P_r$ 下的 $\phi$ 值</li>
+<li>計算 $f = \phi P$</li>
+</ol>
+<p>例如，估算 CO₂ 在 400 K、100 atm 下的逸壓。CO₂ 的 $T_c = 304.2\;\text{K}$，$P_c = 72.9\;\text{atm}$，因此 $T_r = 400/304.2 = 1.315$，$P_r = 100/72.9 = 1.372$。查通用逸壓圖得 $\phi \approx 0.70$，因此 $f \approx 70\;\text{atm}$。這個快速估算的結果與實驗值非常接近。</p>
+<details class="example"><summary>例題 8.7：逸壓修正對平衡計算的意義</summary><p>若某氣體在 100 atm 下 $\phi=0.70$，則化學位中的有效壓力不是 100 atm，而是 $f=70$ atm。</p><p>對反應式中化學計量係數較大的氣體，這個差異會被指數式地放大。</p><p>因此高壓反應使用 $K_P$ 可能造成明顯錯誤，需改用 $K_f$。</p></details>
+</section>
+
+<section id="common-mistakes"><h2>常見誤區</h2>
+<div class="callout-warn"><strong>⚠️ 把高壓氣體一律當理想氣體：</strong>先檢查 $Z$ 或 $\phi$，尤其是 CO₂、NH₃、H₂O、烴類與接近液化條件的氣體。</div>
+<div class="callout-warn"><strong>⚠️ 混淆 $Z$ 與 $\phi$：</strong>$Z$ 修正體積行為，$\phi$ 修正化學位；兩者相關但不是同一個量。</div>
+<div class="callout-warn"><strong>⚠️ 忘記低壓邊界條件：</strong>所有合理逸壓定義都必須滿足 $f/P\to1$，否則標準態或積分常數有問題。</div>
+<div class="callout-warn"><strong>⚠️ 把純氣體 fugacity 直接套到混合氣體：</strong>混合氣體需使用成分逸壓與混合規則，不能只查純物質圖表就結束。</div>
+</section>
+
+<section id="self-check"><h2>自我檢核</h2>
+<details class="example"><summary>檢核 1：$Z<1$ 通常代表什麼？</summary><p>代表吸引力主導，氣體比理想氣體更容易被壓縮，實際體積小於理想估算。</p></details>
+<details class="example"><summary>檢核 2：理想氣體混合為何 $\Delta H_{\text{mix}}=0$？</summary><p>因為理想氣體分子間沒有交互作用，混合不改變分子間能量，只增加熵。</p></details>
+<details class="example"><summary>檢核 3：逸壓為何稱為有效壓力？</summary><p>它是讓真實氣體化學位仍可寫成 $\mu=\mu^\circ+RT\ln(f/P^\circ)$ 的壓力修正量。</p></details>
+<details class="example"><summary>檢核 4：何時該避免簡單 Clausius 或理想氣體處理？</summary><p>高壓、低溫、接近臨界點、強吸引力或極性氣體條件下都應使用真實氣體模型與逸壓。</p></details>
+</section>
+
+<section id="extras"><h2>延伸閱讀</h2>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px">
+<li><strong>工程模型：</strong>比較 van der Waals、SRK、Peng–Robinson 在 CO₂、CH₄、NH₃ 上的 $Z$ 與 $\phi$ 預測。</li>
+<li><strong>材料製程：</strong>將 fugacity 概念連到 CVD 前驅物輸送、氧分壓控制與高壓還原反應。</li>
+<li><strong>統計力學：</strong>延伸 virial 係數與 Lennard-Jones 位能，理解 $B(T)$ 的符號轉換。</li>
+<li><strong>後續章節：</strong>預習第九章活性 $a_i$，看逸壓如何推廣為凝聚態溶液的有效濃度。</li>
+</ul>
+</section>
+
+<section id="summary"><h2>本章摘要</h2>
+<ol style="font-size:14px;color:var(--t2);margin-left:18px">
+<li><strong>壓縮因子：</strong>$Z = PV/RT$。$Z < 1$→吸引力主導；$Z > 1$→排斥力/體積主導。從微觀角度看，$Z$ 可展開為 virial 級數 $Z = 1 + B/V + C/V^2 + \cdots$，其中 $B(T)$ 直接關聯到分子間位能。</li>
+<li><strong>理想氣體混合物：</strong>$\Delta G_{\text{mix}} = nRT\sum x_i\ln x_i$（永遠負→混合自發），$\Delta H_{\text{mix}} = 0$，$\Delta S_{\text{mix}} = -nR\sum x_i\ln x_i$。化學位變化 $\Delta\mu_i = RT\ln x_i < 0$ 提供了混合驅動力的微觀解釋。</li>
+<li><strong>van der Waals 方程式：</strong>$(P + a/V^2)(V-b) = RT$。$a$ 修正吸引力，$b$ 修正分子體積。預測臨界點（$T_c = 8a/27Rb$，$P_c = a/27b^2$，$V_c = 3b$，$Z_c = 0.375$）和氣–液相變。Maxwell 等面積法則決定了實際的氣–液共存壓力。</li>
+<li><strong>對應態原理：</strong>用 $T_r = T/T_c$ 和 $P_r = P/P_c$ 歸一化後，所有氣體遵循相似的 $P$–$V$–$T$ 行為。通用壓縮因子圖和逸壓圖表是基於此原理的工程實用工具。</li>
+<li><strong>逸壓：</strong>$\mu = \mu^\circ + RT\ln(f/P^\circ)$。$\phi = f/P$。$\ln\phi = \int_0^P (Z-1)/P\,dP$。高壓氣相反應平衡必須使用逸壓（$K_f$ 而非 $K_P$）。</li>
+</ol>
+
+<div class="callout"><strong>📚 跨章節複習指引：</strong></div>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px">
+<li><strong>第二章：</strong>真實氣體的 $P$–$V$ 功計算——本章的 van der Waals 方程式提供了更精確的 $P(V)$ 關係。</li>
+<li><strong>第六～七章：</strong>真實氣體的 $C_P$–$C_V$ 差和熱容量壓力依賴性——可使用本章的狀態方程式推導。</li>
+<li><strong>第九章：</strong>逸壓對應於氣體活性——溶液熱力學的活性概念是逸壓的直接推廣。</li>
+<li><strong>第十一章：</strong>高壓氣相反應平衡必須使用逸壓定義 $K_f$，這是本章概念最重要的應用場景。</li>
+</ul>
+</section>
+</main>
+<script>
+function toggleTheme(){const h=document.documentElement;const n=h.getAttribute('data-theme')==='light'?'dark':'light';h.setAttribute('data-theme',n);localStorage.setItem('theme',n);document.getElementById('tl').textContent=n==='dark'?'淺色模式':'深色模式';}
+const s=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',s);if(s==='dark')document.getElementById('tl').textContent='淺色模式';
+document.querySelector('[data-action="toggle-theme"]').addEventListener('click',toggleTheme);
+const secs=document.querySelectorAll('section[id]');const navs=document.querySelectorAll('.sn a');window.addEventListener('scroll',()=>{let c='';secs.forEach(s=>{if(window.scrollY>=s.offsetTop-80)c=s.getAttribute('id');});navs.forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+c);});});
+document.querySelectorAll('.figure img').forEach(i=>i.addEventListener('click',()=>window.open(i.src,'_blank')));
+</script>
+</body>
+</html>

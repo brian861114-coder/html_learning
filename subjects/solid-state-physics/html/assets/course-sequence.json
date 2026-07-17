@@ -1,0 +1,62 @@
+[
+  {
+    "file": "ch01_crystal_structure_zh.html",
+    "label": "第 1 章　晶體結構"
+  },
+  {
+    "file": "ch02_intro_qm_zh.html",
+    "label": "第 2 章　量子力學導論"
+  },
+  {
+    "file": "ch03_quantum_theory_solids_zh.html",
+    "label": "第 3 章　固體量子理論"
+  },
+  {
+    "file": "ch04_semiconductor_equilibrium_zh.html",
+    "label": "第 4 章　平衡半導體"
+  },
+  {
+    "file": "ch05_carrier_transport_zh.html",
+    "label": "第 5 章　載子輸運"
+  },
+  {
+    "file": "ch06_nonequilibrium_excess_carriers_zh.html",
+    "label": "第 6 章　非平衡過量載子"
+  },
+  {
+    "file": "ch07_pn_junction_zh.html",
+    "label": "第 7 章　pn 接面"
+  },
+  {
+    "file": "ch08_pn_junction_diode_zh.html",
+    "label": "第 8 章　pn 接面二極體"
+  },
+  {
+    "file": "ch09_ms_heterojunction_zh.html",
+    "label": "第 9 章　金半接面與異質接面"
+  },
+  {
+    "file": "ch10_mosfet_zh.html",
+    "label": "第 10 章　MOSFET"
+  },
+  {
+    "file": "ch11_mosfet_advanced_zh.html",
+    "label": "第 11 章　進階 MOSFET"
+  },
+  {
+    "file": "ch12_bjt_zh.html",
+    "label": "第 12 章　雙極性接面電晶體"
+  },
+  {
+    "file": "ch13_jfet_mesfet_zh.html",
+    "label": "第 13 章　JFET／MESFET／HEMT"
+  },
+  {
+    "file": "ch14_optical_devices_zh.html",
+    "label": "第 14 章　光電元件"
+  },
+  {
+    "file": "ch15_microwave_power_devices_zh.html",
+    "label": "第 15 章　微波與功率元件"
+  }
+]

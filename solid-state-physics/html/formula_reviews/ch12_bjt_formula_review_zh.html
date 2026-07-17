@@ -1,123 +1,14 @@
-<!DOCTYPE html>
-<html lang="zh-TW" data-theme="light">
+<!doctype html>
+<html lang="zh-Hant">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>第十二章 公式摘要 — BJT（55 條完整版）</title>
-<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']],tags:'ams'},options:{ignoreHtmlClass:'no-math'}};</script>
-<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-<style>
-:root{--bg:#fff;--b2:#F5F5F7;--b3:#E8F0FE;--tx:#1D1D1F;--t2:#1D1D1F;--ac:#007AFF;--bd:#D2D2D7;--sh:0 2px 8px rgba(0,0,0,.08);--fbg:#FAFBFC;--fbd:#E5E5EA;--dbg:#E8F0FE;--dac:#007AFF;--wbg:#FFF9F0;--wbd:#FFB340;--wtx:#B8700A;--hv:#F0F4FF;--nw:240px}
-[data-theme="dark"]{--bg:#1C1C1E;--b2:#2C2C2E;--b3:#1A2332;--tx:#F5F5F7;--t2:#A1A1A6;--ac:#0A84FF;--bd:#48484A;--fbg:#252528;--fbd:#3A3A3C;--dbg:#1A2332;--dac:#0A84FF;--wbg:#2C2416;--wbd:#8B6914;--wtx:#FFB340;--hv:#1E2A3A}
-*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth;scroll-padding-top:16px}
-body{font-family:-apple-system,BlinkMacSystemFont,'Noto Sans TC','Microsoft JhengHei',sans-serif;background:var(--b2);color:var(--tx);line-height:1.75;display:flex;min-height:100vh}
-.sidebar{position:fixed;top:0;left:0;width:var(--nw);height:100vh;background:var(--bg);border-right:1px solid var(--bd);overflow-y:auto;z-index:100;padding:20px 16px;display:flex;flex-direction:column}
-.sh{margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--fbd)}.sh h2{font-size:14px;font-weight:600;color:var(--ac)}.sh .bk{font-size:11px;color:var(--t2)}
-.sn{flex:1}.sn ul{list-style:none}.sn a{display:block;padding:3px 10px;font-size:10.5px;color:var(--t2);text-decoration:none;border-radius:5px;transition:.12s;line-height:1.3}.sn a:hover{background:var(--b3);color:var(--ac)}.sn a.active{background:var(--b3);color:var(--ac);font-weight:500}.sn .ns{font-weight:600;font-size:11.5px;color:var(--tx);margin-top:8px;padding:2px 10px}.sn .nsub a{padding-left:18px;font-size:10px}
-.st{margin-top:auto;padding-top:12px;border-top:1px solid var(--fbd)}.st button{width:100%;padding:6px;border:1px solid var(--bd);border-radius:6px;background:var(--b2);color:var(--tx);cursor:pointer;font-size:12px}
-.main{margin-left:var(--nw);flex:1;max-width:1100px;padding:32px 40px 80px}
-.header{margin-bottom:24px;padding-bottom:20px;border-bottom:2px solid var(--ac)}.header .tag{font-size:12px;font-weight:600;color:var(--ac);letter-spacing:1px}.header h1{font-size:26px;font-weight:700;margin:6px 0}.header .sub{font-size:13px;color:var(--t2)}
-.tbar{display:flex;gap:8px;margin-bottom:20px}.tbar button{padding:5px 16px;font-size:12px;border:1px solid var(--ac);border-radius:20px;background:var(--bg);color:var(--ac);cursor:pointer;font-weight:500;transition:.15s}.tbar button:hover{background:var(--ac);color:#fff}
-.section{margin-bottom:44px}.section h2{font-size:19px;font-weight:700;color:var(--ac);margin-bottom:4px;padding-bottom:6px;border-bottom:1px solid var(--bd)}
-.fcard{background:var(--bg);border:1px solid var(--fbd);border-radius:10px;padding:16px 20px;margin:14px 0;box-shadow:var(--sh)}.fcard .lbl{font-size:11px;font-weight:700;color:var(--ac);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}.fcard .eq{text-align:center;padding:8px 0;font-size:15px}.fcard .note{font-size:12px;color:var(--t2);margin-top:6px;padding-top:6px;border-top:1px solid var(--fbd);line-height:1.6}
-details.derive{background:var(--dbg);border-left:4px solid var(--dac);border-radius:0 10px 10px 0;margin:16px 0;transition:.2s}details.derive[open]{background:var(--bg)}
-details.derive>summary{padding:14px 18px;cursor:pointer;list-style:none;display:flex;align-items:center;gap:8px;font-weight:700;color:var(--ac);font-size:13px;letter-spacing:.3px;user-select:none}details.derive>summary::-webkit-details-marker{display:none}details.derive>summary::before{content:'▸';display:inline-block;font-size:11px;transition:transform .2s;width:14px;text-align:center}details.derive[open]>summary::before{transform:rotate(90deg)}details.derive>summary:hover{background:var(--hv);border-radius:0 10px 0 0}
-details.derive .dbo{padding:0 18px 16px 18px}details.derive .step{margin:8px 0;padding:6px 0}details.derive .snb{display:inline-block;background:var(--ac);color:#fff;width:22px;height:22px;border-radius:50%;text-align:center;font-size:11px;font-weight:700;line-height:22px;margin-right:8px}details.derive .sl{font-weight:700;font-size:13px;color:var(--tx)}details.derive .sc{margin:4px 0 4px 30px;font-size:13px;color:var(--t2)}details.derive .sc .math{display:block;text-align:center;padding:6px 0}
-table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12px}thead th{background:var(--b3);padding:8px 12px;font-size:12px;font-weight:600;border-bottom:2px solid var(--bd)}tbody td{padding:6px 10px;border-bottom:1px solid var(--fbd);font-size:11px}
-.warn-box{background:var(--wbg);border:1px solid var(--wbd);border-radius:10px;padding:14px 18px;margin:16px 0;font-size:14px}.warn-box .wt{font-weight:700;color:var(--wtx);font-size:12px;margin-bottom:6px}
-@media(max-width:768px){.sidebar{transform:translateX(-100%);transition:.3s}.sidebar.open{transform:translateX(0)}.main{margin-left:0;padding:20px 16px 60px}}
-@media print{.sidebar,.tbar{display:none}details.derive{display:block!important}.main{margin-left:0;max-width:100%;padding:0}}
-</style>
-<link rel="stylesheet" href="../assets/course-ui.css">
-<script defer src="../assets/course-ui.js"></script>
-
-<script src="../assets/reading-preferences.js" defer></script>
-<style id="portal-home-link-style">.portal-home-link{position:fixed;top:16px;right:16px;z-index:1000;display:inline-flex;align-items:center;min-height:36px;padding:7px 11px;border:1px solid #cbd5e1;border-radius:8px;background:#fff;color:#1d4ed8;font:600 13px/1.2 -apple-system,BlinkMacSystemFont,"Noto Sans TC","Microsoft JhengHei",sans-serif;text-decoration:none;box-shadow:0 2px 10px rgba(15,23,42,.08)}.portal-home-link:hover{background:#eff6ff}.portal-home-link:focus-visible{outline:3px solid rgba(37,99,235,.35);outline-offset:2px}@media(max-width:768px){.portal-home-link{top:10px;right:10px;min-height:34px;padding:7px 9px;font-size:12px}}</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="refresh" content="0; url=../../../subjects/solid-state-physics/html/formula_reviews/ch12_bjt_formula_review_zh.html">
+  <link rel="canonical" href="../../../subjects/solid-state-physics/html/formula_reviews/ch12_bjt_formula_review_zh.html">
+  <title>頁面已移動</title>
+  <script src="../../../assets/legacy-redirect.js" data-legacy-target="../../../subjects/solid-state-physics/html/formula_reviews/ch12_bjt_formula_review_zh.html" defer></script>
 </head>
 <body>
-<a class="portal-home-link" href="../index.html">返回學習中心</a>
-<nav class="sidebar"><div class="sh"><div class="bk">半導體物理與元件·第四版</div><h2>第十二章 公式摘要</h2></div><div class="sn"><ul>
-<li class="ns">10.1 BJT 原理</li><li class="nsub"><a href="#s1">12.1.1–12.1.4 結構·電流·模式</a></li>
-<li class="nsub"><a href="#s2">12.2 少數載子分布</a></li>
-<li class="ns">10.2 增益參數</li><li class="nsub"><a href="#s3">12.3.1–12.3.4 $\alpha,\beta,\gamma$ ⭐</a></li>
-<li class="nsub"><a href="#s4">12.5.1 Ebers-Moll 模型</a></li>
-<li class="ns">10.3–10.4</li><li class="nsub"><a href="#s5">12.4 非理想效應·Early</a></li><li class="nsub"><a href="#s6">12.5.3 小訊號等效電路</a></li>
-<li><a href="#cheatsheet">📋 公式速查表</a></li>
-</ul></div><div class="st"><button onclick="toggleTheme()">🌓 <span id="tl">深色模式</span></button></div></nav>
-<main class="main">
-<div class="header"><div class="tag">55 條公式·全部收錄</div><h1>第十二章：雙極性接面電晶體（BJT）</h1><div class="sub">Semiconductor Physics & Devices, 4th Ed.·Donald A. Neamen·pp.491–558</div></div>
-<div class="tbar"><button onclick="document.querySelectorAll('details').forEach(d=>d.open=true)">📖 展開全部</button><button onclick="document.querySelectorAll('details').forEach(d=>d.open=false)">📕 收合全部</button></div>
-
-<!-- 10.1.1-10.1.3 -->
-<div class="section" id="s1"><h2>12.1.1–12.1.4 BJT 結構、電流關係、操作模式 </h2>
-<div class="fcard"><div class="lbl">BJT 的兩種結構</div><div class="eq">npn：n⁺射極 / p 基極 / n 集極<br>pnp：p⁺射極 / n 基極 / p 集極</div><div class="note">射極重摻雜（∼10¹⁸–10²⁰ cm⁻³），基極輕摻雜且極窄（$W_B\sim0.1$–1 µm），集極輕摻雜（∼10¹⁵–10¹⁶ cm⁻³）。</div></div>
-<details class="derive" open><summary>🔍 電流組成與操作模式（9 條公式）</summary><div class="dbo">
-<div class="step"><span class="snb">1</span><span class="sl">端點電流關係 (10.1–10.3)</span><div class="sc"><span class="math">$$I_E = I_B + I_C \tag{12.1}$$</span>射極電流 = 基極電流 + 集極電流（Kirchhoff 電流律）。npn：$I_E$ 流出，$I_B$ 和 $I_C$ 流入。pnp 方向相反。</div></div>
-<div class="step"><span class="snb">2</span><span class="sl">四種操作模式 (10.4–10.7)</span><div class="sc"><table><thead><tr><th>模式</th><th>BE</th><th>BC</th><th>用途</th></tr></thead><tbody>
-<tr><td>順向主動 (Forward-active)</td><td>順偏</td><td>逆偏</td><td>線性放大器</td></tr>
-<tr><td>截止 (Cutoff)</td><td>逆偏</td><td>逆偏</td><td>OFF 開關</td></tr>
-<tr><td>飽和 (Saturation)</td><td>順偏</td><td>順偏</td><td>ON 開關</td></tr>
-<tr><td>反向主動 (Inverse-active)</td><td>逆偏</td><td>順偏</td><td>少用</td></tr></tbody></table></div></div>
-<div class="step"><span class="snb">3</span><span class="sl">順向主動模式的電流組成 (10.8–10.9)</span><div class="sc">射極電流 $I_E$ = 電子注入基極的電流 + 電洞從基極注入射極的電流。<br>集極電流 $I_C$ = 收集到的電子電流 + BC 接面反向飽和電流。</div></div>
-</div></details>
-</div>
-
-<!-- 10.1.4 -->
-<div class="section" id="s2"><h2>12.2 少數載子分布 </h2>
-<details class="derive" open><summary>🔍 基極中少數載子分布的推導（9 條公式）</summary><div class="dbo">
-<div class="step"><span class="snb">1</span><span class="sl">基極中的擴散方程 (10.10–10.13)</span><div class="sc">基極中無電場→純擴散。穩態擴散方程：$d^2\delta n_B/dx^2 = \delta n_B/L_B^2$。<br>因為 $W_B \ll L_B$（基極極窄），復合項可忽略→$d^2\delta n_B/dx^2 \approx 0$ (10.12)。</div></div>
-<div class="step"><span class="snb">2</span><span class="sl">線性濃度分布 (10.14–10.15)</span><div class="sc">無復合→擴散方程解為直線：$\delta n_B(x) = \delta n_B(0)(1-x/W_B)$。<br>邊界條件：$x=0$（BE 接面邊界）$\delta n_B(0)=n_{B0}(e^{eV_{BE}/kT}-1)$ (10.14)。$x=W_B$（BC 接面邊界）$\delta n_B(W_B)\approx0$（逆偏收集）(10.15)。</div></div>
-<div class="step"><span class="snb">3</span><span class="sl">擴散電流 (10.16–10.18)</span><div class="sc"><span class="math">$$J_n = e D_B\frac{d\delta n_B}{dx} = -e D_B\frac{\delta n_B(0)}{W_B} \tag{12.17}$$</span>濃度梯度 = $\delta n_B(0)/W_B$（常數！→擴散電流均勻）。$W_B$ 越窄→梯度越大→電流越大。</div></div>
-</div></details>
-</div>
-
-<!-- 10.2.1-10.2.2 -->
-<div class="section" id="s3"><h2>12.3.1–12.3.4 電流增益參數 ⭐ </h2>
-<details class="derive" open><summary>🔍 完整推導——射極效率·基極傳輸因子·電流增益（18 條公式）</summary><div class="dbo">
-<div class="step"><span class="snb">1</span><span class="sl">射極注入效率 $\gamma$ (10.19–10.25)</span><div class="sc"><span class="math">$$\gamma = \frac{I_{nE}}{I_{nE}+I_{pE}} = \frac{1}{1 + \dfrac{D_E N_B W_B}{D_B N_E L_E}} \tag{12.24}$$</span>$I_{nE}$ = 從射極注入基極的電子電流（有用）；$I_{pE}$ = 從基極注入射極的電洞電流（浪費）。<br>要使 $\gamma\approx1$：$N_E \gg N_B$（射極遠重於基極），$W_B$ 小，$L_E$ 大。</div></div>
-<div class="step"><span class="snb">2</span><span class="sl">基極傳輸因子 $\alpha_T$ (10.26–10.29)</span><div class="sc"><span class="math">$$\alpha_T = \frac{I_{nC}}{I_{nE}} \approx 1 - \frac{1}{2}\left(\frac{W_B}{L_B}\right)^2 \tag{12.29}$$</span>$W_B \ll L_B$ → $\alpha_T \approx 1$。在基極中復合的電子比例 $\propto (W_B/L_B)^2$。</div></div>
-<div class="step"><span class="snb">3</span><span class="sl">⭐ 共基極電流增益 $\alpha$ (10.30–10.31)</span><div class="sc"><span class="math">$$\boxed{\alpha = \frac{I_C}{I_E} = \gamma \cdot \alpha_T} \tag{12.31}$$</span>$\alpha$ 略小於 1（典型 0.98–0.998）。</div></div>
-<div class="step"><span class="snb">4</span><span class="sl">⭐ 共射極電流增益 $\beta$ (10.32–10.36)</span><div class="sc">$I_C = \alpha I_E + I_{CBO}$，$I_B = (1-\alpha)I_E - I_{CBO}$ (10.32–10.34)。<span class="math">$$\boxed{\beta = \frac{I_C}{I_B} = \frac{\alpha}{1-\alpha}} \tag{12.36}$$</span>$\alpha=0.99\rightarrow\beta=99$；$\alpha=0.995\rightarrow\beta=199$；$\alpha=0.998\rightarrow\beta=499$。</div></div>
-</div></details>
-</div>
-
-<!-- 10.2.3 -->
-<div class="section" id="s4"><h2>12.5.1 Ebers-Moll 模型 </h2>
-<div class="fcard"><div class="lbl">⭐ Ebers-Moll 方程（完整耦合二極體模型）</div><div class="eq">$$\boxed{I_E = I_{ES}(e^{eV_{BE}/kT}-1) - \alpha_R I_{CS}(e^{eV_{BC}/kT}-1)} \tag{12.37a}$$</div><div class="eq">$$\boxed{I_C = \alpha_F I_{ES}(e^{eV_{BE}/kT}-1) - I_{CS}(e^{eV_{BC}/kT}-1)} \tag{12.37b}$$</div><div class="note">$\alpha_F$ = 順向共基極增益，$\alpha_R$ = 反向共基極增益。$I_{ES}, I_{CS}$ = 射極和集極飽和電流。互易關係：$\alpha_F I_{ES} = \alpha_R I_{CS}$。</div></div>
-</div>
-
-<!-- 10.3 -->
-<div class="section" id="s5"><h2>12.4 非理想效應 </h2>
-<details class="derive" open><summary>🔍 基極寬度調變·Early 效應·高階注入（11 條公式）</summary><div class="dbo">
-<div class="step"><span class="snb">1</span><span class="sl">基極寬度調變 (10.38–10.43)</span><div class="sc">$V_{CE}$ 增加→BC 接面逆偏增加→BC 空乏區變寬→有效基極寬度 $W_B$ 變窄 (10.38–10.40)。<br>$W_B$ 變窄→濃度梯度 $n_{B0}/W_B$ 變大→$I_C$ 增加 (10.41–10.43)。</div></div>
-<div class="step"><span class="snb">2</span><span class="sl">⭐ Early 效應 (10.44–10.48)</span><div class="sc">輸出特性上傾：<span class="math">$$\boxed{I_C = I_S\,e^{eV_{BE}/kT}\!\left(1 + \frac{V_{CE}}{V_A}\right)} \tag{12.48}$$</span>$V_A$ = Early 電壓（通常 50–300 V）。$V_A$ 越大→輸出特性越平→$r_o$ 越大。</div></div>
-</div></details>
-</div>
-
-<!-- 10.4 -->
-<div class="section" id="s6"><h2>12.5.3 小訊號等效電路 </h2>
-<div class="fcard"><div class="lbl">⭐ 混合-π 模型參數</div><div class="eq">$$g_m = \frac{I_{CQ}}{kT/e} = \frac{I_{CQ}}{V_T} \tag{12.52a}$$</div><div class="eq">$$r_\pi = \frac{\beta}{g_m} = \frac{\beta V_T}{I_{CQ}} \tag{12.52b}$$</div><div class="eq">$$r_o = \frac{V_A}{I_{CQ}} \tag{12.52c}$$</div><div class="note">$g_m$ = 跨導（控制量），$r_\pi$ = 輸入電阻（基極-射極），$r_o$ = 輸出電阻（集極-射極，來自 Early 效應）。$V_T = kT/e = 0.0259$ V (300 K)。</div></div>
-</div>
-
-<div class="section" id="cheatsheet"><h2>公式速查表（55 條全收錄）</h2>
-<table><thead><tr><th>Eq</th><th>公式</th><th>備註</th></tr></thead><tbody>
-<tr><td>12.1</td><td>$I_E=I_B+I_C$</td><td>Kirchhoff 電流律</td></tr>
-<tr><td>12.4–10.7</td><td>四種操作模式（BE,BC 偏壓組合）</td><td>順向主動/截止/飽和/反向</td></tr>
-<tr><td>12.12</td><td>$d^2\delta n_B/dx^2\approx0$（$W_B\ll L_B$）</td><td>基極無復合近似</td></tr>
-<tr><td>12.14</td><td>$\delta n_B(0)=n_{B0}(e^{eV_{BE}/kT}-1)$</td><td>BE 邊界條件</td></tr>
-<tr><td>12.17</td><td>$J_n=-eD_B\delta n_B(0)/W_B$</td><td>基極電子擴散電流</td></tr>
-<tr><td>12.24</td><td>$\gamma=1/[1+(D_E N_B W_B)/(D_B N_E L_E)]$</td><td>⭐ 射極注入效率</td></tr>
-<tr><td>12.29</td><td>$\alpha_T\approx1-\frac{1}{2}(W_B/L_B)^2$</td><td>⭐ 基極傳輸因子</td></tr>
-<tr><td>12.31</td><td>$\alpha=\gamma\cdot\alpha_T$</td><td>⭐ 共基極電流增益</td></tr>
-<tr><td>12.36</td><td>$\beta=\alpha/(1-\alpha)$</td><td>⭐ 共射極電流增益</td></tr>
-<tr><td>12.37</td><td>Ebers-Moll 完整模型</td><td>⭐ BJT 等效電路基礎</td></tr>
-<tr><td>12.48</td><td>$I_C=I_S e^{V_{BE}/V_T}(1+V_{CE}/V_A)$</td><td>⭐ Early 效應</td></tr>
-<tr><td>12.52</td><td>$g_m=I_{CQ}/V_T,\;r_\pi=\beta/g_m,\;r_o=V_A/I_{CQ}$</td><td>⭐ 混合-π 小訊號參數</td></tr>
-<tr><td>12.53</td><td>$\mu_f=g_m r_o=V_A/V_T$</td><td>最大電壓增益因子</td></tr>
-</tbody></table></div></main>
-<script>
-function toggleTheme(){const h=document.documentElement;const n=h.getAttribute('data-theme')==='light'?'dark':'light';h.setAttribute('data-theme',n);localStorage.setItem('theme',n);document.getElementById('tl').textContent=n==='dark'?'淺色模式':'深色模式';}
-const s=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',s);if(s==='dark')document.getElementById('tl').textContent='淺色模式';
-const secs=document.querySelectorAll('.section[id]');const navs=document.querySelectorAll('.sn a');window.addEventListener('scroll',()=>{let c='';secs.forEach(s=>{if(window.scrollY>=s.offsetTop-80)c=s.getAttribute('id');});navs.forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+c);});});
-</script>
+  <p>頁面已移動至<a href="../../../subjects/solid-state-physics/html/formula_reviews/ch12_bjt_formula_review_zh.html">新的教材位置</a>。</p>
 </body>
 </html>

@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第 4 章 例題 — Calculus</title>
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']],tags:'ams'}};</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<link rel="stylesheet" href="../../../../shared/core.css">
+<script src="../../../../shared/core.js" defer></script>
+<link rel="stylesheet" href="../../../../shared/navigation.css" data-shared-navigation>
+</head>
+<body>
+<nav class="sidebar" aria-label="本章目錄"><div class="sidebar-header"><div class="sidebar-subtitle">微積分</div><h2 class="sidebar-title">第 4 章：導數的應用（Applications of Derivatives）</h2></div><ul class="toc"><li class="ns"><a href="#section-1">課本例題完整詳解 · 54 題</a></li><li class="nsub"><a href="#section-2">4.1 相關變率（Related Rates）</a></li><li class="nsub"><a href="#section-3">4.2 線性近似與微分（Linear Approximations and Differentials）</a></li><li class="nsub"><a href="#section-4">4.3 極大值與極小值（Maxima and Minima）</a></li><li class="nsub"><a href="#section-5">4.4 均值定理（The Mean Value Theorem）</a></li><li class="nsub"><a href="#section-6">4.5 導數與函數圖形（Derivatives and the Shape of a Graph）</a></li><li class="nsub"><a href="#section-7">4.6 無窮遠處的極限與漸近線（Limits at Infinity and Asymptotes）</a></li><li class="nsub"><a href="#section-8">4.7 應用最佳化問題（Applied Optimization Problems）</a></li><li class="nsub"><a href="#section-9">4.8 洛必達法則（L&#x27;Hôpital&#x27;s Rule）</a></li><li class="nsub"><a href="#section-10">4.9 牛頓法（Newton&#x27;s Method）</a></li><li class="nsub"><a href="#section-11">4.10 反導數（Antiderivatives）</a></li></ul><div class="sidebar-tools"><button type="button" data-action="toggle-theme" aria-label="切換深色或淺色模式">切換顯示主題</button></div></nav>
+
+<main class="chapter-page">
+<a class="portal-home-link" href="index.html">← 返回例題索引</a>
+<header class="chapter-header">
+<h1>第 4 章：導數的應用（Applications of Derivatives）</h1>
+</header>
+<h2 id="section-1">課本例題完整詳解 · 54 題</h2>
+
+<h3 id="section-2">4.1 相關變率（Related Rates）</h3>
+
+<div class="problem-card">
+  <div class="problem-number">例題 4.1 — 吹氣球（Inflating a Balloon）</div>
+  <div class="problem-statement"><strong>題目：</strong>球形氣球以恆定速率 $2\ \text{cm}^3\!/\text{s}$ 充氣。當半徑 $r=3$ cm 時，半徑的增加速率為何？</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① 球體積 $V = \frac{4}{3}\pi r^3$<br>
+  ② 對 $t$ 微分：$\dfrac{dV}{dt} = 4\pi r^2 \cdot \dfrac{dr}{dt}$<br>
+  ③ 已知 $\dfrac{dV}{dt}=2$，當 $r=3$ 時：<br>
+  $$2 = 4\pi(3)^2 \cdot \dfrac{dr}{dt} = 36\pi \cdot \dfrac{dr}{dt}$$<br>
+  ④ $\dfrac{dr}{dt} = \dfrac{2}{36\pi} = \dfrac{1}{18\pi} \approx 0.018$ cm/s<br>
+  <strong>答：</strong>半徑增加速率 $\dfrac{1}{18\pi}$ cm/s（約 $0.018$ cm/s）。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 4.2 — 飛機飛行（An Airplane Flying at a Constant Elevation）</div>
+  <div class="problem-statement"><strong>題目：</strong>飛機在 $4000$ ft 高度水平飛行，速度 $600$ ft/s。地面上觀測者在無線電塔基座 $3000$ ft 處。當飛機正好在塔上方時，觀測者與飛機的距離變化率為何？</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① 設 $x$ 為飛機水平距離（從塔正上方算），$s$ 為觀測者到飛機距離<br>
+  ② 畢氏定理：$s^2 = (x+3000)^2 + 4000^2$<br>
+  ③ 微分：$2s\cdot\dfrac{ds}{dt} = 2(x+3000)\cdot\dfrac{dx}{dt}$<br>
+  ④ 當飛機在塔正上方：$x=0$，$s=\sqrt{3000^2+4000^2}=\sqrt{9\cdot 10^6+16\cdot 10^6}=\sqrt{25\cdot 10^6}=5000$<br>
+  ⑤ 代入：$2(5000)\cdot\dfrac{ds}{dt}=2(3000)\cdot 600$<br>
+  ⑥ $\dfrac{ds}{dt}=\dfrac{3000\cdot 600}{5000}=360$ ft/s<br>
+  <strong>答：</strong>$360$ ft/s。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 4.3 — 火箭發射（A Rocket Launch）</div>
+  <div class="problem-statement"><strong>題目：</strong>火箭垂直上升，攝影機距發射台 $5000$ ft。當火箭高度 $1000$ ft 且速度 $600$ ft/s 時，攝影機仰角 $\theta$ 的變化率為何？</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① $\tan\theta = \dfrac{h}{5000}$<br>
+  ② 微分：$\sec^2\theta\cdot\dfrac{d\theta}{dt} = \dfrac{1}{5000}\cdot\dfrac{dh}{dt}$<br>
+  ③ 當 $h=1000$：$\tan\theta=\frac{1000}{5000}=0.2$，$\sec^2\theta=1+\tan^2\theta=1+0.04=1.04$<br>
+  ④ $\dfrac{dh}{dt}=600$ ft/s<br>
+  ⑤ $1.04\cdot\dfrac{d\theta}{dt}=\dfrac{600}{5000}=0.12$<br>
+  ⑥ $\dfrac{d\theta}{dt}=\dfrac{0.12}{1.04}\approx 0.1154$ rad/s<br>
+  <strong>答：</strong>約 $0.115$ rad/s（約 $6.6^\circ$/s）。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 4.4 — 漏斗排水（Water Draining from a Funnel）</div>
+  <div class="problem-statement"><strong>題目：</strong>圓錐形漏斗，高 $2$ ft，頂端半徑 $1$ ft。水以 $0.03\ \text{ft}^3\!/\text{s}$ 流出。當水深 $\frac{1}{2}$ ft 時，水面下降速率為何？</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① 相似三角形：$\dfrac{r}{h}=\dfrac{1}{2}$，故 $r=\frac{1}{2}h$<br>
+  ② 體積 $V=\frac{1}{3}\pi r^2 h = \frac{1}{3}\pi(\frac{h}{2})^2 h = \frac{\pi}{12}h^3$<br>
+  ③ 微分：$\dfrac{dV}{dt}=\dfrac{\pi}{4}h^2\cdot\dfrac{dh}{dt}$<br>
+  ④ $\dfrac{dV}{dt}=-0.03$（流出），$h=\frac{1}{2}$：<br>
+  $$-0.03 = \dfrac{\pi}{4}\!\left(\frac{1}{2}\right)^{\!2}\!\cdot\dfrac{dh}{dt} = \dfrac{\pi}{16}\cdot\dfrac{dh}{dt}$$<br>
+  ⑤ $\dfrac{dh}{dt} = -0.03\cdot\dfrac{16}{\pi} \approx -0.153$ ft/s<br>
+  <strong>答：</strong>約 $-0.153$ ft/s（下降）。</div>
+</div>
+
+<h3 id="section-3">4.2 線性近似與微分（Linear Approximations and Differentials）</h3>
+
+<div class="problem-card">
+  <div class="problem-number">例題 4.5 — 線性近似（Linear Approximation of $\sqrt{x}$）</div>
+  <div class="problem-statement"><strong>題目：</strong>用線性近似估計 $\sqrt{4.1}$。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① 取 $f(x)=\sqrt{x}$，在 $a=4$ 處線性化<br>
+  ② $f'(x)=\dfrac{1}{2\sqrt{x}}$，$f'(4)=\dfrac{1}{4}$<br>
+  ③ $L(x)=f(4)+f'(4)(x-4)=2+\dfrac{1}{4}(x-4)$<br>
+  ④ $L(4.1)=2+\dfrac{1}{4}(0.1)=2+0.025=2.025$<br>
+  ⑤ 實際值：$\sqrt{4.1}\approx 2.0248$（誤差極小）<br>
+  <strong>答：</strong>$\sqrt{4.1}\approx 2.025$。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 4.6 — 線性近似（Linear Approximation of $\sqrt[3]{x}$）</div>
+  <div class="problem-statement"><strong>題目：</strong>用線性近似估計 $\sqrt[3]{8.1}$。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① $f(x)=\sqrt[3]{x}$，$a=8$，$f(8)=2$<br>
+  ② $f'(x)=\dfrac{1}{3}x^{-2/3}$，$f'(8)=\dfrac{1}{3}\cdot\dfrac{1}{4}=\dfrac{1}{12}$<br>
+  ③ $L(x)=2+\dfrac{1}{12}(x-8)$<br>
+  ④ $L(8.1)=2+\dfrac{0.1}{12}=2+0.00833=2.00833$<br>
+  <strong>答：</strong>$\sqrt[3]{8.1}\approx 2.0083$。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 4.7 — 微分近似誤差（Using Differentials to Approximate Error）</div>
+  <div class="problem-statement"><strong>題目：</strong>測量立方體邊長得 $10$ cm，可能誤差 $\pm 0.1$ cm。用微分估計體積的可能誤差。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① $V=s^3$，$dV=3s^2\,ds$<br>
+  ② $s=10$，$ds=\pm 0.1$<br>
+  ③ $dV=3(10)^2(\pm 0.1)=300(\pm 0.1)=\pm 30$ cm³<br>
+  <strong>答：</strong>體積誤差約 $\pm 30$ cm³（相對誤差 $\frac{30}{1000}=3\%$）。</div>
+</div>
+
+<h3 id="section-4">4.3 極大值與極小值（Maxima and Minima）</h3>
+
+<div class="problem-card">
+  <div class="problem-number">例題 4.8 — 求極值（Finding Extrema）</div>
+  <div class="problem-statement"><strong>題目：</strong>求 $f(x)=x^3-3x$ 在 $[-2,2]$ 上的絕對極值。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① $f'(x)=3x^2-3=3(x-1)(x+1)$，臨界點 $x=-1,1$<br>
+  ② 比較端點與臨界點：<br>
+  　$f(-2)=-8+6=-2$<br>
+  　$f(-1)=-1+3=2$（局部極大）<br>
+  　$f(1)=1-3=-2$（局部極小）<br>
+  　$f(2)=8-6=2$<br>
+  <strong>答：</strong>絕對最大值 $2$（在 $x=\pm 2$ 和 $x=-1$）；絕對最小值 $-2$（在 $x=1$）。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 4.9 — 閉區間極值（Extrema on a Closed Interval）</div>
+  <div class="problem-statement"><strong>題目：</strong>求 $f(x)=x^2-4x+5$ 在 $[0,3]$ 上的絕對極值。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① $f'(x)=2x-4$，臨界點 $x=2$<br>
+  ② $f(0)=5$，$f(2)=4-8+5=1$，$f(3)=9-12+5=2$<br>
+  <strong>答：</strong>絕對最大值 $5$（$x=0$）；絕對最小值 $1$（$x=2$）。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 4.10 — 臨界點（Finding Critical Points）</div>
+  <div class="problem-statement"><strong>題目：</strong>求 $f(x)=x^{2/3}(x-2)$ 的臨界點。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① $f'(x)=\frac{2}{3}x^{-1/3}(x-2)+x^{2/3}(1)=\dfrac{2(x-2)}{3x^{1/3}}+x^{2/3}$<br>
+  ② 通分：$f'(x)=\dfrac{2x-4+3x}{3x^{1/3}}=\dfrac{5x-4}{3x^{1/3}}$<br>
+  ③ $f'(x)=0$ 得 $x=\frac{4}{5}$；$f'(x)$ 不存在得 $x=0$<br>
+  <strong>答：</strong>臨界點：$x=0$（導數不存在）和 $x=\frac{4}{5}$（導數為零）。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 4.11 — 求最大值（Finding Maximum Value）</div>
+  <div class="problem-statement"><strong>題目：</strong>函數 $f(x)=-x^2+6x-5$。求其最大值。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① $f'(x)=-2x+6$，臨界點 $x=3$<br>
+  ② $f''(x)=-2<0$，故 $x=3$ 為極大點<br>
+  ③ $f(3)=-9+18-5=4$<br>
+  <strong>答：</strong>最大值 $4$（發生在 $x=3$）。</div>
+</div>
+
+<h3 id="section-5">4.4 均值定理（The Mean Value Theorem）</h3>
+
+<div class="problem-card">
+  <div class="problem-number">例題 4.12 — 驗證均值定理（Verifying MVT）</div>
+  <div class="problem-statement"><strong>題目：</strong>驗證 $f(x)=x^2$ 在 $[0,2]$ 上滿足均值定理，並求滿足定理的 $c$。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① $f$ 在 $[0,2]$ 連續且可微<br>
+  ② MVT：存在 $c\in(0,2)$ 使 $f'(c)=\dfrac{f(2)-f(0)}{2-0}=\dfrac{4-0}{2}=2$<br>
+  ③ $f'(x)=2x$，$2c=2 \implies c=1$<br>
+  <strong>答：</strong>$c=1$。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 4.13 — 均值定理應用（Applying MVT）</div>
+  <div class="problem-statement"><strong>題目：</strong>若 $f(0)=-3$ 且對所有 $x$ 有 $f'(x)\le 5$，則 $f(2)$ 最大可為多少？</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① 由 MVT：存在 $c\in(0,2)$ 使 $f'(c)=\dfrac{f(2)-f(0)}{2-0}$<br>
+  ② $f'(c)\le 5 \implies \dfrac{f(2)-(-3)}{2}\le 5$<br>
+  ③ $f(2)+3\le 10 \implies f(2)\le 7$<br>
+  <strong>答：</strong>$f(2)$ 最大為 $7$。</div>
+</div>
+
+<h3 id="section-6">4.5 導數與函數圖形（Derivatives and the Shape of a Graph）</h3>
+
+<div class="problem-card">
+  <div class="problem-number">例題 4.14 — 一階導數判別法（First Derivative Test）</div>
+  <div class="problem-statement"><strong>題目：</strong>用一階導數判別法求 $f(x)=x^3-3x^2-9x+5$ 的局部極值。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① $f'(x)=3x^2-6x-9=3(x^2-2x-3)=3(x-3)(x+1)$<br>
+  ② 臨界點：$x=-1, 3$<br>
+  ③ 符號表：$x<-1$：$f'>0$（遞增）；$-1< x< 3$：$f'<0$（遞減）；$x>3$：$f'>0$（遞增）<br>
+  ④ $x=-1$：由增轉減 → 局部極大，$f(-1)=-1-3+9+5=10$<br>
+  ⑤ $x=3$：由減轉增 → 局部極小，$f(3)=27-27-27+5=-22$<br>
+  <strong>答：</strong>局部極大 $10$（$x=-1$）；局部極小 $-22$（$x=3$）。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 4.15 — 二階導數判別法（Second Derivative Test）</div>
+  <div class="problem-statement"><strong>題目：</strong>用二階導數判別法求 $f(x)=x^4-4x^3$ 的局部極值。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① $f'(x)=4x^3-12x^2=4x^2(x-3)$<br>
+  ② 臨界點：$x=0, 3$<br>
+  ③ $f''(x)=12x^2-24x=12x(x-2)$<br>
+  ④ $f''(3)=12(3)(1)=36>0$ → 局部極小，$f(3)=81-108=-27$<br>
+  ⑤ $f''(0)=0$，二階判別法失效，需用一階判別法：$x<0$ 時 $f'<0$，$0< x< 3$ 時 $f'<0$ → 非極值（拐點）<br>
+  <strong>答：</strong>局部極小 $-27$（$x=3$）；$x=0$ 處非極值。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 4.16 — 求拐點（Finding Inflection Points）</div>
+  <div class="problem-statement"><strong>題目：</strong>求 $f(x)=x^3-3x$ 的拐點和凹性區間。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① $f'(x)=3x^2-3$，$f''(x)=6x$<br>
+  ② $f''(x)=0 \implies x=0$<br>
+  ③ $x<0$：$f''<0$（凹向下）；$x>0$：$f''>0$（凹向上）<br>
+  ④ 拐點：$(0, f(0))=(0,0)$<br>
+  <strong>答：</strong>拐點 $(0,0)$；$x<0$ 凹向下，$x>0$ 凹向上。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 4.17 — 繪圖分析（Curve Sketching）</div>
+  <div class="problem-statement"><strong>題目：</strong>對 $f(x)=\dfrac{x^2}{x-1}$ 進行完整的繪圖分析（定義域、截距、漸近線、增減、極值、凹性）。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① 定義域：$x\neq 1$<br>
+  ② $x=0$ 時 $y=0$；$y=0$ 時 $x=0$（原點）<br>
+  ③ 垂直漸近線：$x=1$；水平漸近線：無（$\deg$分子 $>$ $\deg$分母）<br>
+  ④ 斜漸近線：$f(x)=x+1+\dfrac{1}{x-1}$，故 $y=x+1$ 為斜漸近線<br>
+  ⑤ $f'(x)=\dfrac{2x(x-1)-x^2}{(x-1)^2}=\dfrac{x^2-2x}{(x-1)^2}=\dfrac{x(x-2)}{(x-1)^2}$<br>
+  ⑥ 臨界點：$x=0, 2$（$x=1$ 不在定義域）<br>
+  ⑦ $x<0$：$f'>0$；$0< x< 1$：$f'<0$；$1< x< 2$：$f'<0$；$x>2$：$f'>0$<br>
+  ⑧ $x=0$：局部極大 $f(0)=0$；$x=2$：局部極小 $f(2)=4$<br>
+  <strong>答：</strong>圖形有垂直漸近線 $x=1$、斜漸近線 $y=x+1$、極大 $(0,0)$、極小 $(2,4)$。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 4.18 — 圖形描繪（Sketching a Graph）</div>
+  <div class="problem-statement"><strong>題目：</strong>畫出 $f(x)=3x^4-4x^3-12x^2+5$ 的圖形草圖。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① $f'(x)=12x^3-12x^2-24x=12x(x^2-x-2)=12x(x-2)(x+1)$<br>
+  ② 臨界點：$x=-1, 0, 2$<br>
+  ③ $f''(x)=36x^2-24x-24=12(3x^2-2x-2)$<br>
+  ④ 端點行為：當 $x\to\pm\infty$，$f(x)\to+\infty$（四次多項式首項係數為正）<br>
+  ⑤ $f(-1)=3+4-12+5=0$；$f(0)=5$；$f(2)=48-32-48+5=-27$<br>
+  ⑥ 增減：遞減→$-1$→遞增→$0$→遞減→$2$→遞增<br>
+  <strong>答：</strong>圖形為 W 形四次曲線。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 4.19 — 凹性分析（Concavity Analysis）</div>
+  <div class="problem-statement"><strong>題目：</strong>求 $f(x)=x^4-6x^2$ 的凹性區間和拐點。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① $f'(x)=4x^3-12x$，$f''(x)=12x^2-12=12(x-1)(x+1)$<br>
+  ② $f''(x)=0 \implies x=\pm 1$<br>
+  ③ $x<-1$：$f''>0$（凹向上）；$-1< x< 1$：$f''<0$（凹向下）；$x>1$：$f''>0$<br>
+  ④ 拐點：$f(-1)=1-6=-5$，$f(1)=1-6=-5$<br>
+  <strong>答：</strong>拐點 $(-1,-5)$ 和 $(1,-5)$。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 4.20 — 求極值並繪圖（Extrema and Sketch）</div>
+  <div class="problem-statement"><strong>題目：</strong>求 $f(x)=x+\dfrac{1}{x}$ 的局部極值並畫草圖（$x>0$ 部分）。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① $f'(x)=1-\dfrac{1}{x^2}=\dfrac{x^2-1}{x^2}$<br>
+  ② 臨界點（$x>0$）：$x=1$<br>
+  ③ $f''(x)=\dfrac{2}{x^3}>0$ for $x>0$，故 $x=1$ 為極小<br>
+  ④ $f(1)=1+1=2$；當 $x\to 0^+$，$f(x)\to\infty$；當 $x\to\infty$，$f(x)\to\infty$<br>
+  <strong>答：</strong>局部（也是全局）極小 $2$（$x=1$）。</div>
+</div>
+
+<h3 id="section-7">4.6 無窮遠處的極限與漸近線（Limits at Infinity and Asymptotes）</h3>
+
+<div class="problem-card">
+  <div class="problem-number">例題 4.21 — 無窮遠處的極限（Limit at Infinity）</div>
+  <div class="problem-statement"><strong>題目：</strong>求 $\displaystyle\lim_{x \to \infty}\dfrac{3x^2-2x+1}{x^2+4}$。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① 分子分母同除以最高次項 $x^2$：<br>
+  $$\lim_{x \to \infty}\dfrac{3-\frac{2}{x}+\frac{1}{x^2}}{1+\frac{4}{x^2}}$$<br>
+  ② 當 $x\to\infty$，$\frac{1}{x}\to 0$，$\frac{1}{x^2}\to 0$<br>
+  ③ 極限值 $=\dfrac{3-0+0}{1+0}=3$<br>
+  <strong>答：</strong>$3$。水平漸近線 $y=3$。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 4.22 — 比較次數的極限（Limits by Comparing Degrees）</div>
+  <div class="problem-statement"><strong>題目：</strong>求 (a) $\displaystyle\lim_{x \to \infty}\dfrac{2x+3}{x^2-1}$；(b) $\displaystyle\lim_{x \to \infty}\dfrac{x^2}{x+1}$。</div>
+  <div class="solution"><strong>解：</strong><br>
+  (a) 分子次數 $1<$ 分母次數 $2$ → 極限為 $0$<br>
+  (b) 分子次數 $2>$ 分母次數 $1$ → 極限為 $\infty$<br>
+  <strong>答：</strong>(a) $0$；(b) $\infty$。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 4.23 — 求水平漸近線（Finding Horizontal Asymptotes）</div>
+  <div class="problem-statement"><strong>題目：</strong>求 $f(x)=\dfrac{\sqrt{4x^2+1}}{x}$ 的水平漸近線。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① 當 $x\to\infty$：$\displaystyle\lim_{x \to \infty}\dfrac{\sqrt{4x^2+1}}{x}=\lim_{x \to \infty}\dfrac{x\sqrt{4+\frac{1}{x^2}}}{x}=\sqrt{4}=2$<br>
+  ② 當 $x\to -\infty$：$\sqrt{x^2}=|x|=-x$<br>
+  $\displaystyle\lim_{x \to -\infty}\dfrac{\sqrt{4x^2+1}}{x}=\lim_{x \to -\infty}\dfrac{(-x)\sqrt{4+\frac{1}{x^2}}}{x}=-\sqrt{4}=-2$<br>
+  <strong>答：</strong>$y=2$（$x\to\infty$）和 $y=-2$（$x\to -\infty$）。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 4.24 — 斜漸近線（Finding a Slant Asymptote）</div>
+  <div class="problem-statement"><strong>題目：</strong>求 $f(x)=\dfrac{x^2+1}{x-1}$ 的斜漸近線。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① 多項式長除法：$x^2+1 \div (x-1)$<br>
+  ② $x^2+1 = (x+1)(x-1)+2$<br>
+  ③ $f(x)=x+1+\dfrac{2}{x-1}$<br>
+  ④ 當 $x\to\pm\infty$，$\dfrac{2}{x-1}\to 0$，故斜漸近線為 $y=x+1$<br>
+  <strong>答：</strong>$y=x+1$。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 4.25 — $e^x$ 的極限（Limits Involving $e^x$）</div>
+  <div class="problem-statement"><strong>題目：</strong>求 (a) $\displaystyle\lim_{x \to \infty}e^{-x}$；(b) $\displaystyle\lim_{x \to -\infty}e^x$。</div>
+  <div class="solution"><strong>解：</strong><br>
+  (a) $\lim_{x \to \infty}e^{-x}=0$<br>
+  (b) $\lim_{x \to -\infty}e^x=0$<br>
+  <strong>答：</strong>兩者皆為 $0$。$y=0$ 是 $y=e^x$ 的水平漸近線。</div>
+</div>
+
+<h3 id="section-8">4.7 應用最佳化問題（Applied Optimization Problems）</h3>
+
+<div class="problem-card">
+  <div class="problem-number">例題 4.26 — 最大面積矩形（Maximizing Area of a Rectangle）</div>
+  <div class="problem-statement"><strong>題目：</strong>用 $100$ 公尺的籬笆圍成矩形，求最大面積。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① 設長 $x$，寬 $y$，周長 $2x+2y=100 \implies y=50-x$<br>
+  ② 面積 $A(x)=x(50-x)=50x-x^2$<br>
+  ③ $A'(x)=50-2x=0 \implies x=25$，$y=25$<br>
+  ④ $A''(x)=-2<0$ → 極大。$A(25)=625$<br>
+  <strong>答：</strong>$25\times 25$ 正方形，面積 $625$ m²。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 4.27 — 最小表面積圓柱（Minimizing Surface Area）</div>
+  <div class="problem-statement"><strong>題目：</strong>體積 $1000$ cm³ 的圓柱形罐頭。求最小表面積所需的半徑與高度。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① $V=\pi r^2 h=1000 \implies h=\dfrac{1000}{\pi r^2}$<br>
+  ② 表面積 $S=2\pi r^2+2\pi r h=2\pi r^2+2\pi r\cdot\dfrac{1000}{\pi r^2}=2\pi r^2+\dfrac{2000}{r}$<br>
+  ③ $S'(r)=4\pi r-\dfrac{2000}{r^2}=0$<br>
+  ④ $4\pi r^3=2000 \implies r^3=\dfrac{500}{\pi} \implies r=\sqrt[3]{\dfrac{500}{\pi}}\approx 5.42$ cm<br>
+  ⑤ $h=\dfrac{1000}{\pi r^2}=\dfrac{1000}{\pi\cdot\frac{500^{2/3}}{\pi^{2/3}}}=2r\approx 10.84$ cm<br>
+  <strong>答：</strong>$r\approx 5.42$ cm，$h\approx 10.84$ cm（高度 = 直徑）。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 4.28 — 最大利潤（Maximizing Profit）</div>
+  <div class="problem-statement"><strong>題目：</strong>價格函數 $p(x)=50-0.1x$，成本 $C(x)=10x+1000$。求最大利潤的產量。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① 收入 $R(x)=x\cdot p(x)=50x-0.1x^2$<br>
+  ② 利潤 $P(x)=R(x)-C(x)=(50x-0.1x^2)-(10x+1000)$<br>
+  ③ $P(x)=-0.1x^2+40x-1000$<br>
+  ④ $P'(x)=-0.2x+40=0 \implies x=200$<br>
+  ⑤ $P''(x)=-0.2<0$ → 極大<br>
+  ⑥ $P(200)=-0.1(40000)+40(200)-1000=-4000+8000-1000=3000$<br>
+  <strong>答：</strong>產量 $200$ 件，最大利潤 $\$3000$。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 4.29 — 最小化成本（Minimizing Cost）</div>
+  <div class="problem-statement"><strong>題目：</strong>矩形儲存箱，底部正方形，體積 $32$ ft³。底部造價 $\$10/$ft²，側面 $\$6/$ft²，頂部 $\$2/$ft²。求最小造價的尺寸。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① 設底邊 $x$，高 $h$：$x^2h=32 \implies h=\dfrac{32}{x^2}$<br>
+  ② 造價 $C=10x^2+4(6xh)+2x^2=12x^2+24xh$<br>
+  ③ $C(x)=12x^2+24x\cdot\dfrac{32}{x^2}=12x^2+\dfrac{768}{x}$<br>
+  ④ $C'(x)=24x-\dfrac{768}{x^2}=0 \implies 24x^3=768 \implies x^3=32 \implies x=\sqrt[3]{32}\approx 3.17$<br>
+  ⑤ $h=\dfrac{32}{x^2}\approx 3.17$<br>
+  <strong>答：</strong>$x=h\approx 3.17$ ft（立方體）。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 4.30 — 最短距離（Minimizing Distance）</div>
+  <div class="problem-statement"><strong>題目：</strong>求點 $(2,0)$ 到曲線 $y=\sqrt{x}$ 的最短距離。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① 距離平方 $D(x)=(x-2)^2+(\sqrt{x}-0)^2=(x-2)^2+x$<br>
+  ② $D'(x)=2(x-2)+1=2x-4+1=2x-3$<br>
+  ③ $D'(x)=0 \implies x=\frac{3}{2}$<br>
+  ④ $D''(x)=2>0$ → 極小<br>
+  ⑤ 距離 $=\sqrt{D(\frac{3}{2})}=\sqrt{(\frac{3}{2}-2)^2+\frac{3}{2}}=\sqrt{\frac{1}{4}+\frac{3}{2}}=\sqrt{\frac{7}{4}}=\frac{\sqrt{7}}{2}$<br>
+  <strong>答：</strong>最短距離 $\dfrac{\sqrt{7}}{2}$。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 4.31 — 圍欄隔板問題（Fence with Divider）</div>
+  <div class="problem-statement"><strong>題目：</strong>農夫有 $2400$ ft 籬笆，要圍矩形場地並在中間加一道隔板（平行於一邊）。求最大面積。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① 設長 $x$，寬 $y$（隔板平行於 $y$ 邊）。總籬笆：$2x+3y=2400$<br>
+  ② $y=\dfrac{2400-2x}{3}$<br>
+  ③ $A(x)=x\cdot y=x\cdot\dfrac{2400-2x}{3}=\dfrac{2400x-2x^2}{3}$<br>
+  ④ $A'(x)=\dfrac{2400-4x}{3}=0 \implies x=600$<br>
+  ⑤ $y=\dfrac{2400-1200}{3}=400$<br>
+  ⑥ $A(600)=600\cdot 400=240000$ ft²<br>
+  <strong>答：</strong>$600\times 400$ ft，面積 $240000$ ft²。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 4.32 — 最大化收入（Maximizing Revenue）</div>
+  <div class="problem-statement"><strong>題目：</strong>需求函數 $p=100-0.01x$（$x$ 為售出數量）。求最大收入。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① $R(x)=x\cdot p(x)=100x-0.01x^2$<br>
+  ② $R'(x)=100-0.02x=0 \implies x=5000$<br>
+  ③ $R(5000)=100(5000)-0.01(25\cdot 10^6)=500000-250000=250000$<br>
+  <strong>答：</strong>售出 $5000$ 件，最大收入 $\$250,000$。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 4.33 — 光線折射時間最小化（Snell's Law / Minimizing Time）</div>
+  <div class="problem-statement"><strong>題目：</strong>光從 A 點到 B 點經過兩種介質。在介質 1 速度 $v_1$，介質 2 速度 $v_2$。推導 Snell 定律。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① 時間函數 $T(x)=\dfrac{\sqrt{a^2+x^2}}{v_1}+\dfrac{\sqrt{b^2+(d-x)^2}}{v_2}$<br>
+  ② $T'(x)=\dfrac{x}{v_1\sqrt{a^2+x^2}}-\dfrac{d-x}{v_2\sqrt{b^2+(d-x)^2}}=0$<br>
+  ③ 化為 $\dfrac{\sin\theta_1}{v_1}=\dfrac{\sin\theta_2}{v_2}$（Snell 定律）<br>
+  <strong>答：</strong>$\dfrac{\sin\theta_1}{v_1}=\dfrac{\sin\theta_2}{v_2}$。</div>
+</div>
+
+<h3 id="section-9">4.8 洛必達法則（L'Hôpital's Rule）</h3>
+
+<div class="problem-card">
+  <div class="problem-number">例題 4.34 — 基本洛必達（Basic L'Hôpital）</div>
+  <div class="problem-statement"><strong>題目：</strong>求 $\displaystyle\lim_{x \to 0}\dfrac{\sin x}{x}$。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① 形式 $\frac{0}{0}$，用洛必達法則：<br>
+  $$\lim_{x \to 0}\dfrac{\sin x}{x} = \lim_{x \to 0}\dfrac{\cos x}{1} = \dfrac{1}{1}=1$$<br>
+  <strong>答：</strong>$1$。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 4.35 — 洛必達法則（L'Hôpital's Rule with Polynomials）</div>
+  <div class="problem-statement"><strong>題目：</strong>求 $\displaystyle\lim_{x \to 2}\dfrac{x^2-4}{x-2}$。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① 形式 $\frac{0}{0}$，洛必達：<br>
+  $$\lim_{x \to 2}\dfrac{x^2-4}{x-2} = \lim_{x \to 2}\dfrac{2x}{1}=4$$<br>
+  <strong>答：</strong>$4$。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 4.36 — $\frac{\infty}{\infty}$ 形式（L'Hôpital for $\frac{\infty}{\infty}$）</div>
+  <div class="problem-statement"><strong>題目：</strong>求 $\displaystyle\lim_{x \to \infty}\dfrac{e^x}{x^2}$。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① $\frac{\infty}{\infty}$ 形式，洛必達：$\displaystyle\lim_{x \to \infty}\dfrac{e^x}{2x}$<br>
+  ② 仍為 $\frac{\infty}{\infty}$，再次洛必達：$\displaystyle\lim_{x \to \infty}\dfrac{e^x}{2}=\infty$<br>
+  <strong>答：</strong>$\infty$（指數成長遠快於多項式）。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 4.37 — $\infty-\infty$ 形式（Indeterminate Form $\infty-\infty$）</div>
+  <div class="problem-statement"><strong>題目：</strong>求 $\displaystyle\lim_{x \to 0^+}\!\left(\dfrac{1}{x}-\dfrac{1}{\sin x}\right)$。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① $\infty-\infty$ 形式，合併：$\dfrac{\sin x - x}{x\sin x}$（$\frac{0}{0}$）<br>
+  ② 洛必達：$\displaystyle\lim_{x \to 0^+}\dfrac{\cos x - 1}{\sin x + x\cos x}$（仍 $\frac{0}{0}$）<br>
+  ③ 再次：$\displaystyle\lim_{x \to 0^+}\dfrac{-\sin x}{\cos x + \cos x - x\sin x}=\dfrac{0}{2}=0$<br>
+  <strong>答：</strong>$0$。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 4.38 — $0\cdot\infty$ 形式（Indeterminate Form $0\cdot\infty$）</div>
+  <div class="problem-statement"><strong>題目：</strong>求 $\displaystyle\lim_{x \to 0^+}x\ln x$。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① $0\cdot(-\infty)$ 形式，改寫為 $\dfrac{\ln x}{1/x}$（$\frac{-\infty}{\infty}$）<br>
+  ② 洛必達：$\displaystyle\lim_{x \to 0^+}\dfrac{1/x}{-1/x^2}=\lim_{x \to 0^+}(-x)=0$<br>
+  <strong>答：</strong>$0$。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 4.39 — $1^\infty$ 形式（Indeterminate Form $1^\infty$）</div>
+  <div class="problem-statement"><strong>題目：</strong>求 $\displaystyle\lim_{x \to \infty}\!\left(1+\dfrac{1}{x}\right)^{\!x}$。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① 設 $y=(1+\frac{1}{x})^x$，取 $\ln$：$\ln y = x\ln(1+\frac{1}{x})$<br>
+  ② $\displaystyle\lim_{x \to \infty}x\ln(1+{\textstyle\frac{1}{x}})$（$\infty\cdot 0$）<br>
+  ③ 改寫為 $\dfrac{\ln(1+\frac{1}{x})}{1/x}$（$\frac{0}{0}$），洛必達：<br>
+  $$\lim_{x \to \infty}\dfrac{\frac{1}{1+1/x}\cdot(-\frac{1}{x^2})}{-1/x^2}=\lim_{x \to \infty}\dfrac{1}{1+1/x}=1$$<br>
+  ④ $\ln y \to 1 \implies y \to e^1 = e$<br>
+  <strong>答：</strong>$e$。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 4.40 — $0^0$ 形式（Indeterminate Form $0^0$）</div>
+  <div class="problem-statement"><strong>題目：</strong>求 $\displaystyle\lim_{x \to 0^+}x^x$。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① 設 $y=x^x$，$\ln y = x\ln x$<br>
+  ② $\displaystyle\lim_{x \to 0^+}x\ln x = 0$（例題 4.38）<br>
+  ③ $\ln y \to 0 \implies y \to e^0 = 1$<br>
+  <strong>答：</strong>$1$。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 4.41 — 洛必達與對數（L'Hôpital with Logarithms）</div>
+  <div class="problem-statement"><strong>題目：</strong>求 $\displaystyle\lim_{x \to \infty}\dfrac{\ln x}{\sqrt{x}}$。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① $\frac{\infty}{\infty}$ 形式，洛必達：$\displaystyle\lim_{x \to \infty}\dfrac{1/x}{\frac{1}{2}x^{-1/2}}=\lim_{x \to \infty}\dfrac{2}{\sqrt{x}}=0$<br>
+  <strong>答：</strong>$0$（$\ln x$ 成長比任何正冪次慢）。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 4.42 — 多次洛必達（Repeated L'Hôpital）</div>
+  <div class="problem-statement"><strong>題目：</strong>求 $\displaystyle\lim_{x \to 0}\dfrac{e^x-e^{-x}-2x}{x-\sin x}$。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① $\frac{0}{0}$，洛必達：$\displaystyle\lim_{x \to 0}\dfrac{e^x+e^{-x}-2}{1-\cos x}$<br>
+  ② 仍 $\frac{0}{0}$，再次：$\displaystyle\lim_{x \to 0}\dfrac{e^x-e^{-x}}{\sin x}$<br>
+  ③ 仍 $\frac{0}{0}$，第三次：$\displaystyle\lim_{x \to 0}\dfrac{e^x+e^{-x}}{\cos x}=\dfrac{2}{1}=2$<br>
+  <strong>答：</strong>$2$。</div>
+</div>
+
+<h3 id="section-10">4.9 牛頓法（Newton's Method）</h3>
+
+<div class="problem-card">
+  <div class="problem-number">例題 4.43 — 牛頓法求根（Newton's Method to Find a Root）</div>
+  <div class="problem-statement"><strong>題目：</strong>用牛頓法求 $f(x)=x^3-2x-5=0$ 的根，起始猜測 $x_0=2$（計算 $x_1$ 和 $x_2$）。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① $f'(x)=3x^2-2$<br>
+  ② $x_1 = x_0 - \dfrac{f(x_0)}{f'(x_0)} = 2 - \dfrac{8-4-5}{12-2} = 2 - \dfrac{-1}{10} = 2.1$<br>
+  ③ $f(2.1)=9.261-4.2-5=0.061$，$f'(2.1)=3(4.41)-2=11.23$<br>
+  ④ $x_2 = 2.1 - \dfrac{0.061}{11.23} \approx 2.1 - 0.00543 = 2.09457$<br>
+  <strong>答：</strong>$x_1=2.1$，$x_2\approx 2.0946$（精確根約為 $2.09455$）。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 4.44 — 牛頓法求 $\sqrt{2}$（Newton's Method for $\sqrt{2}$）</div>
+  <div class="problem-statement"><strong>題目：</strong>用牛頓法估計 $\sqrt{2}$，即解 $x^2-2=0$，起始值 $x_0=1.5$。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① $f(x)=x^2-2$，$f'(x)=2x$<br>
+  ② $x_1 = 1.5 - \dfrac{2.25-2}{3} = 1.5 - \dfrac{0.25}{3} = 1.5 - 0.08333 = 1.41667$<br>
+  ③ $x_2 = 1.41667 - \dfrac{2.00694-2}{2.83334} = 1.41667 - \dfrac{0.00694}{2.83334} \approx 1.41422$<br>
+  <strong>答：</strong>$x_2 \approx 1.41422$（$\sqrt{2}\approx 1.41421$，收斂極快）。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 4.45 — 牛頓法失敗案例（When Newton's Method Fails）</div>
+  <div class="problem-statement"><strong>題目：</strong>用牛頓法求 $f(x)=x^{1/3}$（解 $f(x)=0$），起始值 $x_0=1$。說明問題。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① $f'(x)=\dfrac{1}{3}x^{-2/3}$<br>
+  ② $x_1 = x_0 - \dfrac{x_0^{1/3}}{\frac{1}{3}x_0^{-2/3}} = x_0 - 3x_0 = -2x_0 = -2$<br>
+  ③ $x_2 = -2 - \dfrac{(-2)^{1/3}}{\frac{1}{3}(-2)^{-2/3}} = -2 - 3(-2) = 4$<br>
+  ④ 數列發散！牛頓法無法收斂到根 $x=0$（因 $f'(0)$ 不存在）。<br>
+  <strong>答：</strong>牛頓法發散，因導數在根處不存在。</div>
+</div>
+
+<h3 id="section-11">4.10 反導數（Antiderivatives）</h3>
+
+<div class="problem-card">
+  <div class="problem-number">例題 4.46 — 求反導數（Finding Antiderivatives）</div>
+  <div class="problem-statement"><strong>題目：</strong>求 $f(x)=3x^2$ 的所有反導數。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① 反導數 $F(x)$ 滿足 $F'(x)=3x^2$<br>
+  ② $\dfrac{d}{dx}x^3=3x^2$，故 $F(x)=x^3+C$（$C$ 為任意常數）<br>
+  <strong>答：</strong>$F(x)=x^3+C$。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 4.47 — 多項式的反導數（Antiderivative of a Polynomial）</div>
+  <div class="problem-statement"><strong>題目：</strong>求 $f(x)=4x^3-6x+2$ 的所有反導數。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① 逐項求反導數：<br>
+  　$\int 4x^3\,dx = x^4$<br>
+  　$\int -6x\,dx = -3x^2$<br>
+  　$\int 2\,dx = 2x$<br>
+  ② 加上積分常數 $C$：<br>
+  $$F(x)=x^4-3x^2+2x+C$$<br>
+  <strong>答：</strong>$F(x)=x^4-3x^2+2x+C$。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 4.48 — 給定初始條件的反導數（Antiderivative with Initial Condition）</div>
+  <div class="problem-statement"><strong>題目：</strong>求 $f(x)=\dfrac{1}{x^2}$ 的反導數，且 $F(1)=3$。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① $f(x)=x^{-2}$，反導數 $F(x)=\dfrac{x^{-1}}{-1}+C=-\dfrac{1}{x}+C$<br>
+  ② $F(1)=3 \implies -1+C=3 \implies C=4$<br>
+  <strong>答：</strong>$F(x)=-\dfrac{1}{x}+4$。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 4.49 — 三角函數的反導數（Antiderivatives of Trig Functions）</div>
+  <div class="problem-statement"><strong>題目：</strong>求 $f(x)=\cos x$ 的所有反導數。</div>
+  <div class="solution"><strong>解：</strong><br>
+  $\int\cos x\,dx = \sin x + C$<br>
+  <strong>答：</strong>$F(x)=\sin x + C$。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 4.50 — 指數與冪函數的反導數（Antiderivative of Exponential and Power）</div>
+  <div class="problem-statement"><strong>題目：</strong>求 $f(x)=e^x + \dfrac{1}{x}$ 的反導數（$x>0$）。</div>
+  <div class="solution"><strong>解：</strong><br>
+  $\int e^x\,dx = e^x + C_1$，$\int \dfrac{1}{x}\,dx = \ln|x| + C_2$<br>
+  合併：$F(x)=e^x + \ln|x| + C$<br>
+  <strong>答：</strong>$F(x)=e^x + \ln|x| + C$。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 4.51 — 運動問題（Motion Problem with Antiderivatives）</div>
+  <div class="problem-statement"><strong>題目：</strong>物體加速度 $a(t)=6t$。已知 $v(0)=5$，$s(0)=10$。求位置函數 $s(t)$。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① $v(t)=\int a(t)\,dt = \int 6t\,dt = 3t^2 + C_1$<br>
+  ② $v(0)=5 \implies C_1=5$，故 $v(t)=3t^2+5$<br>
+  ③ $s(t)=\int v(t)\,dt = \int(3t^2+5)\,dt = t^3+5t+C_2$<br>
+  ④ $s(0)=10 \implies C_2=10$，故 $s(t)=t^3+5t+10$<br>
+  <strong>答：</strong>$s(t)=t^3+5t+10$。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 4.52 — $\sin$ 和 $\cos$ 的反導數（Antiderivatives of $\sin$ and $\cos$）</div>
+  <div class="problem-statement"><strong>題目：</strong>求 $f(x)=3\sin x - 2\cos x$ 的所有反導數。</div>
+  <div class="solution"><strong>解：</strong><br>
+  $\int\sin x\,dx = -\cos x$，$\int\cos x\,dx = \sin x$<br>
+  $F(x)=3(-\cos x)-2(\sin x)+C = -3\cos x - 2\sin x + C$<br>
+  <strong>答：</strong>$F(x)=-3\cos x - 2\sin x + C$。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 4.53 — 分段函數的反導數（Antiderivative of a Piecewise Function）</div>
+  <div class="problem-statement"><strong>題目：</strong>求 $f(x)=\begin{cases} 2x & x\le 1 \\ 2 & x>1 \end{cases}$ 的反導數（連續的）。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① $x\le 1$：$F(x)=x^2+C$<br>
+  ② $x>1$：$F(x)=2x+D$<br>
+  ③ 要求 $F$ 在 $x=1$ 連續：$1^2+C=2(1)+D \implies D=C-1$<br>
+  <strong>答：</strong>$F(x)=\begin{cases} x^2+C & x\le 1 \\ 2x+(C-1) & x>1 \end{cases}$。</div>
+</div>
+
+<div class="problem-card">
+  <div class="problem-number">例題 4.54 — $\sec^2 x$ 和 $\csc^2 x$ 的反導數（Antiderivatives of $\sec^2$ and $\csc^2$）</div>
+  <div class="problem-statement"><strong>題目：</strong>求 $f(x)=\sec^2 x$ 的反導數。</div>
+  <div class="solution"><strong>解：</strong><br>
+  ① $\dfrac{d}{dx}\tan x = \sec^2 x$<br>
+  ② 故反導數為 $\tan x + C$<br>
+  <strong>答：</strong>$F(x)=\tan x + C$。（同理 $\int\csc^2 x\,dx = -\cot x + C$）。</div>
+</div>
+
+</main>
+</body>
+</html>

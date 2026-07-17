@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>第三章 公式摘要 — 導數（48 條公式完整版）</title>
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']],tags:'ams'},options:{ignoreHtmlClass:'no-math'}};</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script defer src="../assets/course-ui.js"></script>
+<link rel="stylesheet" href="../../../../shared/core.css">
+<script src="../../../../shared/core.js" defer></script>
+<link rel="stylesheet" href="../../../../shared/components/formula-problem.css">
+<link rel="stylesheet" href="../../../../shared/navigation.css" data-shared-navigation>
+</head>
+<body>
+<a class="portal-home-link" href="../../index.html">返回學習中心</a>
+<nav class="sidebar" aria-label="本章目錄"><div class="sidebar-header"><div class="sidebar-subtitle">微積分</div><h2 class="sidebar-title">第三章：導數（Derivatives）</h2></div><div class="toc"><ul>
+<li><a href="#s0">📐 導數定義</a></li>
+<li class="ns">基本微分規則</li><li class="nsub"><a href="#s1">冪法則·常數法則·和差法則</a></li><li class="nsub"><a href="#s2">積法則·商法則</a></li>
+<li class="ns">三角函數導數</li><li class="nsub"><a href="#s3">sin / cos / tan 導數</a></li><li class="nsub"><a href="#s4">cot / sec / csc 導數</a></li>
+<li class="ns">進階微分技巧</li><li class="nsub"><a href="#s5">⭐ 連鎖律</a></li><li class="nsub"><a href="#s6">隱函數微分</a></li>
+<li class="ns">反三角函數導數</li><li class="nsub"><a href="#s7">arcsin / arccos / arctan</a></li><li class="nsub"><a href="#s8">arccot / arcsec / arccsc</a></li>
+<li class="ns">指數與對數導數</li><li class="nsub"><a href="#s9">eˣ / aˣ / ln x / logₐ x</a></li>
+<li class="ns">進階主題</li><li class="nsub"><a href="#s10">高階導數</a></li><li class="nsub"><a href="#s11">對數微分法</a></li>
+<li><a href="#cheatsheet">📋 公式速查表</a></li>
+</ul></div><div class="sidebar-tools"><button type="button" data-action="toggle-theme" aria-label="切換深色或淺色模式">切換顯示主題</button></div></nav>
+<main class="chapter-page">
+<div class="chapter-header"><div class="tag">48 條公式完整版 · 含推導與例題</div><h1>第三章：導數（Derivatives）</h1><div class="chapter-subtitle">Calculus Vol 1 · OpenStax · Gilbert Strang & Edwin Herman</div></div>
+<div class="content-toolbar"><button data-action="expand-details">📖 展開全部</button><button data-action="collapse-details">📕 收合全部</button></div>
+
+<!-- s0: 導數定義 -->
+<div class="content-section" id="s0"><h2>導數的定義</h2>
+<div class="callout-warn"><div class="formula-label">⚡ 核心概念</div>導數 $f'(x)$ 測量函數在某一點的瞬時變化率，即切線斜率。導數是微積分的核心運算，連結變化量與函數行為。</div>
+
+<div class="formula-card"><div class="formula-label">定義 — 差商極限</div><div class="eq">$$f'(x) = \lim_{h \to 0} \frac{f(x+h) - f(x)}{h}$$</div><div class="formula-note">若極限存在，則稱 $f$ 在 $x$ 處<strong>可微</strong>（differentiable）。可微 ⇒ 連續，但連續 ⇏ 可微。</div></div>
+
+<div class="formula-card"><div class="formula-label">等價定義 — 另一種寫法</div><div class="eq">$$f'(a) = \lim_{x \to a} \frac{f(x) - f(a)}{x - a}$$</div><div class="formula-note">此形式在計算特定點 $x=a$ 的導數時特別方便。</div></div>
+
+<div class="formula-card"><div class="formula-label">導數的記號</div><div class="eq">$$f'(x) = y' = \frac{dy}{dx} = \frac{df}{dx} = \frac{d}{dx}f(x) = D_x f(x)$$</div><div class="formula-note">Leibniz 記號 $\frac{dy}{dx}$ 強調導數是 $y$ 對 $x$ 的變化率比值，在連鎖律中特別有用。</div></div>
+
+<details class="derive" open><summary>🔍 定義推導 — 從割線到切線</summary><div class="derive-body">
+<div class="step"><span class="step-number">1</span><span class="step-label">割線斜率（平均變化率）</span><div class="step-content">過點 $(x, f(x))$ 和 $(x+h, f(x+h))$ 的割線斜率：<span class="math">$$m_{\text{sec}} = \frac{f(x+h) - f(x)}{h}$$</span></div></div>
+<div class="step"><span class="step-number">2</span><span class="step-label">取極限 → 切線斜率（瞬時變化率）</span><div class="step-content">令 $h \to 0$，割線趨近切線：<span class="math">$$f'(x) = \lim_{h \to 0} m_{\text{sec}} = \lim_{h \to 0} \frac{f(x+h) - f(x)}{h}$$</span></div></div>
+<div class="step"><span class="step-number">3</span><span class="step-label">切線方程式</span><div class="step-content">在 $x=a$ 處的切線：<span class="math">$$y - f(a) = f'(a)(x - a)$$</span></div></div>
+</div></details>
+
+<details class="example" open><summary>📐 例題 — 用定義求 $f(x)=x^2$ 在 $x=3$ 的導數</summary><div class="example-body">
+$f'(3) = \lim_{h \to 0} \frac{(3+h)^2 - 9}{h} = \lim_{h \to 0} \frac{9 + 6h + h^2 - 9}{h} = \lim_{h \to 0} (6 + h) = 6$
+<br>∴ 在 $x=3$ 處的切線斜率為 6，切線方程式：$y - 9 = 6(x-3)$
+</div></details>
+</div>
+
+<!-- s1: 基本微分規則 -->
+<div class="content-section" id="s1"><h2>基本微分規則 — 冪法則·常數法則·和差法則</h2>
+
+<div class="formula-card"><div class="formula-label">常數法則（Constant Rule）</div><div class="eq">$$\frac{d}{dx}[c] = 0, \quad c \in \mathbb{R}$$</div><div class="formula-note">常數函數的圖形是水平線，斜率處處為 0。</div></div>
+
+<div class="formula-card"><div class="formula-label">⭐ 冪法則（Power Rule）</div><div class="eq">$$\boxed{\frac{d}{dx}[x^n] = n x^{n-1}}, \quad n \in \mathbb{R}$$</div><div class="formula-note">適用於任意實數冪次 $n$（正整數、負整數、分數……）。例：$\frac{d}{dx}[x^5]=5x^4$，$\frac{d}{dx}[x^{-2}]=-2x^{-3}$，$\frac{d}{dx}[\sqrt{x}]=\frac{1}{2\sqrt{x}}$。</div></div>
+
+<div class="formula-card"><div class="formula-label">常數倍法則（Constant Multiple Rule）</div><div class="eq">$$\frac{d}{dx}[c \cdot f(x)] = c \cdot f'(x)$$</div><div class="formula-note">常數可以提出微分運算之外。</div></div>
+
+<div class="formula-card"><div class="formula-label">和差法則（Sum/Difference Rule）</div><div class="eq">$$\frac{d}{dx}[f(x) \pm g(x)] = f'(x) \pm g'(x)$$</div><div class="formula-note">微分是線性運算：和的導數 = 導數的和。</div></div>
+
+<details class="derive" open><summary>🔍 冪法則推導（正整數 $n$）</summary><div class="derive-body">
+<div class="step"><span class="step-number">1</span><span class="step-label">二項式展開</span><div class="step-content">$(x+h)^n = x^n + n x^{n-1}h + \binom{n}{2}x^{n-2}h^2 + \cdots + h^n$</div></div>
+<div class="step"><span class="step-number">2</span><span class="step-label">代入差商</span><div class="step-content"><span class="math">$$\frac{(x+h)^n - x^n}{h} = \frac{n x^{n-1}h + \binom{n}{2}x^{n-2}h^2 + \cdots + h^n}{h} = n x^{n-1} + h \cdot (\cdots)$$</span></div></div>
+<div class="step"><span class="step-number">3</span><span class="step-label">取極限 $h \to 0$</span><div class="step-content">所有含 $h$ 的項 → 0，僅剩 $n x^{n-1}$。<span class="math">$$\therefore \frac{d}{dx}[x^n] = n x^{n-1}$$</span></div></div>
+</div></details>
+
+<details class="example" open><summary>📐 例題 — $f(x)=3x^4-5x^2+2x-7$ 的導數</summary><div class="example-body">
+$f'(x) = 3 \cdot 4x^3 - 5 \cdot 2x + 2 \cdot 1 - 0 = 12x^3 - 10x + 2$
+</div></details>
+</div>
+
+<!-- s2: 積法則·商法則 -->
+<div class="content-section" id="s2"><h2>積法則與商法則</h2>
+
+<div class="callout-warn"><div class="formula-label">⚡ 關鍵提醒</div>積的導數 ≠ 導數的積！$(fg)' \neq f'g'$。同樣，商的導數 ≠ 導數的商。</div>
+
+<div class="formula-card"><div class="formula-label">⭐ 積法則（Product Rule）</div><div class="eq">$$\boxed{\frac{d}{dx}[f(x) g(x)] = f'(x) g(x) + f(x) g'(x)}$$</div><div class="formula-note">口訣：「前微後不微，前不微後微，兩者相加。」</div></div>
+
+<div class="formula-card"><div class="formula-label">⭐ 商法則（Quotient Rule）</div><div class="eq">$$\boxed{\frac{d}{dx}\!\left[\frac{f(x)}{g(x)}\right] = \frac{f'(x) g(x) - f(x) g'(x)}{[g(x)]^2}}$$</div><div class="formula-note">口訣：「下微上不微，減上微下不微，除以下平方。」（分子：$g f' - f g'$）<br>注意次序：分子是 $g f'$ 減 $f g'$，不是反過來的。</div></div>
+
+<details class="derive" open><summary>🔍 積法則推導</summary><div class="derive-body">
+<div class="step"><span class="step-number">1</span><span class="step-label">寫出差商</span><div class="step-content"><span class="math">$$\frac{f(x+h)g(x+h) - f(x)g(x)}{h}$$</span></div></div>
+<div class="step"><span class="step-number">2</span><span class="step-label">加減 $f(x+h)g(x)$（巧妙拆項）</span><div class="step-content"><span class="math">$$= \frac{f(x+h)g(x+h) - f(x+h)g(x) + f(x+h)g(x) - f(x)g(x)}{h}$$</span><span class="math">$$= f(x+h)\frac{g(x+h)-g(x)}{h} + g(x)\frac{f(x+h)-f(x)}{h}$$</span></div></div>
+<div class="step"><span class="step-number">3</span><span class="step-label">取極限 $h \to 0$</span><div class="step-content">$\lim f(x+h)=f(x)$（連續性），$\lim \frac{g(x+h)-g(x)}{h}=g'(x)$，$\lim \frac{f(x+h)-f(x)}{h}=f'(x)$。<span class="math">$$\therefore (fg)' = f g' + g f'$$</span></div></div>
+</div></details>
+
+<details class="example" open><summary>📐 例題 — $h(x) = (x^2+1)(x^3-2x)$ 的導數</summary><div class="example-body">
+$f(x)=x^2+1$, $f'(x)=2x$<br>
+$g(x)=x^3-2x$, $g'(x)=3x^2-2$<br>
+$h'(x) = 2x(x^3-2x) + (x^2+1)(3x^2-2) = 2x^4-4x^2 + 3x^4 - 2x^2 + 3x^2 - 2 = 5x^4 - 3x^2 - 2$
+</div></details>
+
+<details class="example" open><summary>📐 例題 — $h(x) = \frac{x^2}{x+1}$ 的導數</summary><div class="example-body">
+$f(x)=x^2$, $f'(x)=2x$；$g(x)=x+1$, $g'(x)=1$<br>
+$h'(x) = \frac{2x(x+1) - x^2(1)}{(x+1)^2} = \frac{2x^2+2x - x^2}{(x+1)^2} = \frac{x^2+2x}{(x+1)^2}$
+</div></details>
+</div>
+
+<!-- s3: sin/cos/tan 導數 -->
+<div class="content-section" id="s3"><h2>三角函數導數 — sin / cos / tan</h2>
+
+<div class="callout-warn"><div class="formula-label">⚡ 重要前提</div>以下公式在 $x$ 以<strong>弧度</strong>為單位時成立。若使用度數，需先轉換。兩個基本極限：$\lim_{h\to 0}\frac{\sin h}{h}=1$，$\lim_{h\to 0}\frac{\cos h - 1}{h}=0$。</div>
+
+<div class="formula-card"><div class="formula-label">⭐ sin x 的導數</div><div class="eq">$$\boxed{\frac{d}{dx}[\sin x] = \cos x}$$</div></div>
+
+<div class="formula-card"><div class="formula-label">⭐ cos x 的導數</div><div class="eq">$$\boxed{\frac{d}{dx}[\cos x] = -\sin x}$$</div><div class="formula-note">注意負號！$\cos$ 的導數是 $-\sin$，不是 $+\sin$。</div></div>
+
+<div class="formula-card"><div class="formula-label">⭐ tan x 的導數</div><div class="eq">$$\boxed{\frac{d}{dx}[\tan x] = \sec^2 x}$$</div><div class="formula-note">可由 $\tan x = \frac{\sin x}{\cos x}$ 及商法則推出。</div></div>
+
+<details class="derive" open><summary>🔍 sin 與 cos 導數推導</summary><div class="derive-body">
+<div class="step"><span class="step-number">1</span><span class="step-label">sin 導數 — 使用和角公式</span><div class="step-content"><span class="math">$$\frac{d}{dx}\sin x = \lim_{h \to 0} \frac{\sin(x+h)-\sin x}{h} = \lim_{h \to 0} \frac{\sin x \cos h + \cos x \sin h - \sin x}{h}$$</span><span class="math">$$= \sin x \cdot \lim_{h\to 0}\frac{\cos h - 1}{h} + \cos x \cdot \lim_{h\to 0}\frac{\sin h}{h}$$</span><span class="math">$$= \sin x \cdot 0 + \cos x \cdot 1 = \cos x$$</span></div></div>
+<div class="step"><span class="step-number">2</span><span class="step-label">cos 導數 — 同樣手法</span><div class="step-content"><span class="math">$$\frac{d}{dx}\cos x = \lim_{h \to 0} \frac{\cos(x+h)-\cos x}{h} = \lim_{h \to 0} \frac{\cos x \cos h - \sin x \sin h - \cos x}{h}$$</span><span class="math">$$= \cos x \cdot 0 - \sin x \cdot 1 = -\sin x$$</span></div></div>
+<div class="step"><span class="step-number">3</span><span class="step-label">tan 導數 — 商法則</span><div class="step-content"><span class="math">$$\frac{d}{dx}\tan x = \frac{d}{dx}\frac{\sin x}{\cos x} = \frac{\cos x \cdot \cos x - \sin x \cdot (-\sin x)}{\cos^2 x} = \frac{\cos^2 x + \sin^2 x}{\cos^2 x} = \frac{1}{\cos^2 x} = \sec^2 x$$</span></div></div>
+</div></details>
+
+<details class="example" open><summary>📐 例題 — $f(x)=x^2\sin x$ 的導數</summary><div class="example-body">
+使用積法則：$f'(x) = 2x\sin x + x^2\cos x$
+</div></details>
+</div>
+
+<!-- s4: cot/sec/csc 導數 -->
+<div class="content-section" id="s4"><h2>三角函數導數 — cot / sec / csc</h2>
+
+<div class="formula-card"><div class="formula-label">cot x 的導數</div><div class="eq">$$\boxed{\frac{d}{dx}[\cot x] = -\csc^2 x}$$</div><div class="formula-note">$\cot x = \frac{\cos x}{\sin x}$，使用商法則可得。</div></div>
+
+<div class="formula-card"><div class="formula-label">sec x 的導數</div><div class="eq">$$\boxed{\frac{d}{dx}[\sec x] = \sec x \tan x}$$</div><div class="formula-note">$\sec x = \frac{1}{\cos x}$，使用商法則或直接由 $(\cos x)^{-1}$ 用連鎖律。</div></div>
+
+<div class="formula-card"><div class="formula-label">csc x 的導數</div><div class="eq">$$\boxed{\frac{d}{dx}[\csc x] = -\csc x \cot x}$$</div><div class="formula-note">注意負號！$\csc x = \frac{1}{\sin x}$。</div></div>
+
+<details class="derive" open><summary>🔍 sec 與 csc 導數推導</summary><div class="derive-body">
+<div class="step"><span class="step-number">1</span><span class="step-label">sec 導數 — 使用商法則</span><div class="step-content"><span class="math">$$\frac{d}{dx}\sec x = \frac{d}{dx}\frac{1}{\cos x} = \frac{0\cdot\cos x - 1\cdot(-\sin x)}{\cos^2 x} = \frac{\sin x}{\cos^2 x} = \frac{1}{\cos x}\cdot\frac{\sin x}{\cos x} = \sec x \tan x$$</span></div></div>
+<div class="step"><span class="step-number">2</span><span class="step-label">csc 導數 — 同樣手法</span><div class="step-content"><span class="math">$$\frac{d}{dx}\csc x = \frac{d}{dx}\frac{1}{\sin x} = \frac{0\cdot\sin x - 1\cdot\cos x}{\sin^2 x} = -\frac{\cos x}{\sin^2 x} = -\csc x \cot x$$</span></div></div>
+<div class="step"><span class="step-number">3</span><span class="step-label">cot 導數 — 商法則</span><div class="step-content"><span class="math">$$\frac{d}{dx}\cot x = \frac{d}{dx}\frac{\cos x}{\sin x} = \frac{(-\sin x)\sin x - \cos x(\cos x)}{\sin^2 x} = -\frac{\sin^2 x + \cos^2 x}{\sin^2 x} = -\frac{1}{\sin^2 x} = -\csc^2 x$$</span></div></div>
+</div></details>
+
+<details class="example" open><summary>📐 例題 — $f(x)=\sec x \tan x$ 的導數</summary><div class="example-body">
+使用積法則：$f'(x) = (\sec x \tan x)\tan x + \sec x(\sec^2 x) = \sec x \tan^2 x + \sec^3 x$
+</div></details>
+</div>
+
+<!-- s5: 連鎖律 -->
+<div class="content-section" id="s5"><h2>⭐ 連鎖律（Chain Rule）</h2>
+
+<div class="callout-warn"><div class="formula-label">⚡ 最重要的微分規則</div>連鎖律是處理複合函數微分的核心工具。若 $y=f(u)$ 且 $u=g(x)$，則 $y$ 對 $x$ 的變化率 = $y$ 對 $u$ 的變化率 × $u$ 對 $x$ 的變化率。</div>
+
+<div class="formula-card"><div class="formula-label">⭐ 連鎖律 — 標準形式</div><div class="eq">$$\boxed{\frac{d}{dx}\bigl[f(g(x))\bigr] = f'(g(x)) \cdot g'(x)}$$</div><div class="formula-note">「外函數微分（保持內函數不變）× 內函數微分」</div></div>
+
+<div class="formula-card"><div class="formula-label">Leibniz 記號形式</div><div class="eq">$$\boxed{\frac{dy}{dx} = \frac{dy}{du} \cdot \frac{du}{dx}}$$</div><div class="formula-note">此形式直觀地展示了「變化率相乘」的概念，可推廣到多層複合。</div></div>
+
+<div class="formula-card"><div class="formula-label">多層連鎖律</div><div class="eq">$$\frac{d}{dx}\bigl[f(g(h(x)))\bigr] = f'(g(h(x))) \cdot g'(h(x)) \cdot h'(x)$$</div><div class="formula-note">從最外層微分到最內層，每一層的導數相乘。</div></div>
+
+<details class="derive" open><summary>🔍 連鎖律推導（直觀版）</summary><div class="derive-body">
+<div class="step"><span class="step-number">1</span><span class="step-label">設 $u = g(x)$，$y = f(u)$</span><div class="step-content">當 $x$ 變化 $\Delta x$，$u$ 變化 $\Delta u = g(x+\Delta x)-g(x)$，$y$ 變化 $\Delta y$。</div></div>
+<div class="step"><span class="step-number">2</span><span class="step-label">變化率相乘</span><div class="step-content"><span class="math">$$\frac{\Delta y}{\Delta x} = \frac{\Delta y}{\Delta u} \cdot \frac{\Delta u}{\Delta x}$$</span>取極限 $\Delta x \to 0$（則 $\Delta u \to 0$）：<span class="math">$$\frac{dy}{dx} = \frac{dy}{du} \cdot \frac{du}{dx}$$</span></div></div>
+</div></details>
+
+<details class="example" open><summary>📐 例題 1 — $h(x)=\sin(x^2)$</summary><div class="example-body">
+外函數 $f(u)=\sin u$，$f'(u)=\cos u$。內函數 $g(x)=x^2$，$g'(x)=2x$。<br>
+$h'(x) = \cos(x^2) \cdot 2x = 2x\cos(x^2)$
+</div></details>
+
+<details class="example" open><summary>📐 例題 2 — $h(x)=\sqrt{3x^2+1}$</summary><div class="example-body">
+$h(x) = (3x^2+1)^{1/2}$<br>
+$h'(x) = \frac{1}{2}(3x^2+1)^{-1/2} \cdot 6x = \frac{3x}{\sqrt{3x^2+1}}$
+</div></details>
+</div>
+
+<!-- s6: 隱函數微分 -->
+<div class="content-section" id="s6"><h2>隱函數微分（Implicit Differentiation）</h2>
+
+<div class="callout-warn"><div class="formula-label">⚡ 當 $y$ 無法（或不方便）寫成 $y=f(x)$ 的顯式時使用</div></div>
+
+<div class="formula-card"><div class="formula-label">隱函數微分步驟</div><div class="eq">對方程式兩邊同時對 $x$ 微分，將 $y$ 視為 $x$ 的函數，每遇到 $y$ 就乘以 $\frac{dy}{dx}$（連鎖律）。</div><div class="formula-note">方程式 $F(x,y)=0$ 定義隱函數 $y=y(x)$。對 $F(x,y(x))=0$ 兩邊對 $x$ 微分：$\frac{\partial F}{\partial x} + \frac{\partial F}{\partial y}\frac{dy}{dx}=0$，因此 $\frac{dy}{dx} = -\frac{F_x}{F_y}$。</div></div>
+
+<details class="derive" open><summary>🔍 隱函數微分推導與公式</summary><div class="derive-body">
+<div class="step"><span class="step-number">1</span><span class="step-label">基本原則</span><div class="step-content"><span class="math">$$\frac{d}{dx}[y^n] = n y^{n-1} \cdot \frac{dy}{dx}$$</span>對 $y$ 的任何函數微分時，都要用連鎖律乘上 $\frac{dy}{dx}$。</div></div>
+<div class="step"><span class="step-number">2</span><span class="step-label">隱函數定理</span><div class="step-content">若 $F(x,y)=0$ 且 $F_y \neq 0$：<span class="math">$$\boxed{\frac{dy}{dx} = -\frac{F_x}{F_y}}$$</span></div></div>
+</div></details>
+
+<details class="example" open><summary>📐 例題 — 求圓 $x^2+y^2=25$ 在點 $(3,4)$ 的切線斜率</summary><div class="example-body">
+兩邊對 $x$ 微分：$2x + 2y\frac{dy}{dx} = 0$<br>
+⇒ $\frac{dy}{dx} = -\frac{x}{y}$<br>
+在 $(3,4)$：$\frac{dy}{dx} = -\frac{3}{4}$
+</div></details>
+</div>
+
+<!-- s7: 反三角 arcsin/arccos/arctan -->
+<div class="content-section" id="s7"><h2>反三角函數導數 — arcsin / arccos / arctan</h2>
+
+<div class="callout-warn"><div class="formula-label">⚡ 反三角函數的定義域限制</div>反三角函數的主值範圍限制了其導數的定義域。例如 $\arcsin x$ 定義在 $[-1,1]$，導數在 $x=\pm 1$ 處不存在。</div>
+
+<div class="formula-card"><div class="formula-label">⭐ arcsin x 的導數</div><div class="eq">$$\boxed{\frac{d}{dx}[\arcsin x] = \frac{1}{\sqrt{1-x^2}}}, \quad |x| < 1$$</div></div>
+
+<div class="formula-card"><div class="formula-label">arccos x 的導數</div><div class="eq">$$\boxed{\frac{d}{dx}[\arccos x] = -\frac{1}{\sqrt{1-x^2}}}, \quad |x| < 1$$</div><div class="formula-note">注意負號！$\arccos$ 導數與 $\arcsin$ 導數差一個負號。</div></div>
+
+<div class="formula-card"><div class="formula-label">⭐ arctan x 的導數</div><div class="eq">$$\boxed{\frac{d}{dx}[\arctan x] = \frac{1}{1+x^2}}$$</div><div class="formula-note">定義在全實數軸上，導數恆正。</div></div>
+
+<details class="derive" open><summary>🔍 arcsin 導數推導（隱函數法）</summary><div class="derive-body">
+<div class="step"><span class="step-number">1</span><span class="step-label">設 $y = \arcsin x$</span><div class="step-content">則 $\sin y = x$，且 $y \in [-\pi/2, \pi/2]$。</div></div>
+<div class="step"><span class="step-number">2</span><span class="step-label">隱函數微分</span><div class="step-content"><span class="math">$$\frac{d}{dx}[\sin y] = \frac{d}{dx}[x] \quad\Rightarrow\quad \cos y \cdot \frac{dy}{dx} = 1 \quad\Rightarrow\quad \frac{dy}{dx} = \frac{1}{\cos y}$$</span></div></div>
+<div class="step"><span class="step-number">3</span><span class="step-label">用 $\cos y = \sqrt{1-\sin^2 y} = \sqrt{1-x^2}$</span><div class="step-content">因 $y \in [-\pi/2, \pi/2]$，$\cos y \geq 0$，取正根。<span class="math">$$\therefore \frac{dy}{dx} = \frac{1}{\sqrt{1-x^2}}$$</span></div></div>
+</div></details>
+
+<details class="example" open><summary>📐 例題 — $f(x)=\arcsin(3x)$ 的導數</summary><div class="example-body">
+使用連鎖律：$f'(x) = \frac{1}{\sqrt{1-(3x)^2}} \cdot 3 = \frac{3}{\sqrt{1-9x^2}}$
+</div></details>
+</div>
+
+<!-- s8: arccot/arcsec/arccsc -->
+<div class="content-section" id="s8"><h2>反三角函數導數 — arccot / arcsec / arccsc</h2>
+
+<div class="formula-card"><div class="formula-label">arccot x 的導數</div><div class="eq">$$\boxed{\frac{d}{dx}[\operatorname{arccot} x] = -\frac{1}{1+x^2}}$$</div></div>
+
+<div class="formula-card"><div class="formula-label">arcsec x 的導數</div><div class="eq">$$\boxed{\frac{d}{dx}[\operatorname{arcsec} x] = \frac{1}{|x|\sqrt{x^2-1}}}, \quad |x| > 1$$</div><div class="formula-note">絕對值！分子是 $|x|$，不是 $x$。</div></div>
+
+<div class="formula-card"><div class="formula-label">arccsc x 的導數</div><div class="eq">$$\boxed{\frac{d}{dx}[\operatorname{arccsc} x] = -\frac{1}{|x|\sqrt{x^2-1}}}, \quad |x| > 1$$</div></div>
+
+<details class="derive" open><summary>🔍 arcsec 導數推導</summary><div class="derive-body">
+<div class="step"><span class="step-number">1</span><span class="step-label">設 $y = \operatorname{arcsec} x$</span><div class="step-content">則 $\sec y = x$，$y \in [0,\pi/2) \cup (\pi/2,\pi]$。</div></div>
+<div class="step"><span class="step-number">2</span><span class="step-label">隱函數微分</span><div class="step-content"><span class="math">$$\frac{d}{dx}[\sec y] = \frac{d}{dx}[x] \quad\Rightarrow\quad \sec y \tan y \cdot \frac{dy}{dx} = 1$$</span><span class="math">$$\frac{dy}{dx} = \frac{1}{\sec y \tan y}$$</span></div></div>
+<div class="step"><span class="step-number">3</span><span class="step-label">化簡</span><div class="step-content">$\sec y = x$，$\tan y = \sqrt{\sec^2 y - 1} = \sqrt{x^2-1}$（值域內 $\tan y \geq 0$ 當 $y\in[0,\pi/2)$，$\tan y \leq 0$ 當 $y\in(\pi/2,\pi]$），搭配 $\sec y$ 的符號得 $|x|$）。<span class="math">$$\therefore \frac{dy}{dx} = \frac{1}{|x|\sqrt{x^2-1}}$$</span></div></div>
+</div></details>
+</div>
+
+<!-- s9: 指數與對數導數 -->
+<div class="content-section" id="s9"><h2>指數函數與對數函數的導數</h2>
+
+<div class="formula-card"><div class="formula-label">⭐ eˣ 的導數</div><div class="eq">$$\boxed{\frac{d}{dx}[e^x] = e^x}$$</div><div class="formula-note">$e^x$ 是唯一導數等於自身的函數（不考慮常數倍）。這是自然指數的特殊性質。</div></div>
+
+<div class="formula-card"><div class="formula-label">aˣ 的導數（$a>0, a\neq 1$）</div><div class="eq">$$\boxed{\frac{d}{dx}[a^x] = a^x \ln a}$$</div><div class="formula-note">可由 $a^x = e^{x\ln a}$ 及連鎖律推出。</div></div>
+
+<div class="formula-card"><div class="formula-label">⭐ ln x 的導數</div><div class="eq">$$\boxed{\frac{d}{dx}[\ln x] = \frac{1}{x}}, \quad x > 0$$</div></div>
+
+<div class="formula-card"><div class="formula-label">一般對數的導數</div><div class="eq">$$\boxed{\frac{d}{dx}[\log_a x] = \frac{1}{x \ln a}}, \quad x > 0$$</div></div>
+
+<details class="derive" open><summary>🔍 ln x 導數推導</summary><div class="derive-body">
+<div class="step"><span class="step-number">1</span><span class="step-label">使用定義</span><div class="step-content"><span class="math">$$\frac{d}{dx}\ln x = \lim_{h \to 0} \frac{\ln(x+h)-\ln x}{h} = \lim_{h \to 0} \frac{1}{h}\ln\!\left(1+\frac{h}{x}\right)$$</span></div></div>
+<div class="step"><span class="step-number">2</span><span class="step-label">使用 $\lim_{n\to\infty}(1+1/n)^n = e$</span><div class="step-content">令 $n=x/h$：<span class="math">$$= \lim_{n\to\infty} \frac{n}{x}\ln\!\left(1+\frac{1}{n}\right) = \frac{1}{x}\lim_{n\to\infty}\ln\!\left[\left(1+\frac{1}{n}\right)^n\right] = \frac{1}{x}\ln e = \frac{1}{x}$$</span></div></div>
+</div></details>
+
+<details class="example" open><summary>📐 例題 — $f(x)=e^{x^2}\ln x$ 的導數</summary><div class="example-body">
+$f'(x) = e^{x^2}\cdot 2x \cdot \ln x + e^{x^2} \cdot \frac{1}{x} = e^{x^2}\!\left(2x\ln x + \frac{1}{x}\right)$
+</div></details>
+</div>
+
+<!-- s10: 高階導數 -->
+<div class="content-section" id="s10"><h2>高階導數（Higher-Order Derivatives）</h2>
+
+<div class="formula-card"><div class="formula-label">二階導數</div><div class="eq">$$f''(x) = \frac{d^2y}{dx^2} = \frac{d}{dx}\!\left[\frac{dy}{dx}\right]$$</div><div class="formula-note">二階導數測量變化率的變化率，即<strong>加速度</strong>。$f''(x)>0$ ⇒ 凹向上（concave up）；$f''(x)<0$ ⇒ 凹向下（concave down）。</div></div>
+
+<div class="formula-card"><div class="formula-label">n 階導數記號</div><div class="eq">$$f^{(n)}(x) = \frac{d^n y}{dx^n}$$</div><div class="formula-note">$f^{(4)}$ 表示四階導數（括號避免與冪次混淆）。</div></div>
+
+<details class="example" open><summary>📐 例題 — $f(x)=x^4$ 的各階導數</summary><div class="example-body">
+$f'(x)=4x^3$，$f''(x)=12x^2$，$f'''(x)=24x$，$f^{(4)}(x)=24$，$f^{(5)}(x)=0$
+</div></details>
+</div>
+
+<!-- s11: 對數微分法 -->
+<div class="content-section" id="s11"><h2>對數微分法（Logarithmic Differentiation）</h2>
+
+<div class="callout-warn"><div class="formula-label">⚡ 處理複雜乘積、冪指函數的技巧</div>對 $y=f(x)$ 取 $\ln$，利用 $\ln(AB)=\ln A+\ln B$ 將乘積轉為和，然後隱函數微分。</div>
+
+<div class="formula-card"><div class="formula-label">對數微分法步驟</div><div class="eq">1. 取 $\ln y = \ln f(x)$<br>2. 化簡右側（利用對數性質）<br>3. 兩邊對 $x$ 微分：$\frac{1}{y}\frac{dy}{dx} = \cdots$<br>4. 解得 $\frac{dy}{dx} = y \cdot (\cdots)$</div></div>
+
+<details class="example" open><summary>📐 例題 — $y = x^x$ 的導數</summary><div class="example-body">
+$\ln y = \ln(x^x) = x\ln x$<br>
+$\frac{1}{y}\frac{dy}{dx} = \ln x + x\cdot\frac{1}{x} = \ln x + 1$<br>
+$\frac{dy}{dx} = x^x(\ln x + 1)$
+</div></details>
+
+<details class="example" open><summary>📐 例題 — $y = \frac{(x^2+1)^3\sqrt{x-1}}{x^4}$ 的導數</summary><div class="example-body">
+$\ln y = 3\ln(x^2+1) + \frac{1}{2}\ln(x-1) - 4\ln x$<br>
+$\frac{y'}{y} = 3\cdot\frac{2x}{x^2+1} + \frac{1}{2}\cdot\frac{1}{x-1} - \frac{4}{x}$<br>
+$y' = \frac{(x^2+1)^3\sqrt{x-1}}{x^4}\left(\frac{6x}{x^2+1} + \frac{1}{2(x-1)} - \frac{4}{x}\right)$
+</div></details>
+</div>
+
+<!-- CHEATSHEET -->
+<div class="content-section" id="cheatsheet"><h2>公式速查表（48 條收錄）</h2>
+<table><caption>表 1：公式速查表（48 條收錄）</caption><thead><tr><th>類別</th><th>公式</th><th>備註</th></tr></thead><tbody>
+<tr><td>定義</td><td>$f'(x)=\lim_{h\to 0}\frac{f(x+h)-f(x)}{h}$</td><td>導數定義</td></tr>
+<tr><td>常數</td><td>$\frac{d}{dx}[c]=0$</td><td>常數法則</td></tr>
+<tr><td>冪次</td><td>$\frac{d}{dx}[x^n]=nx^{n-1}$</td><td>⭐ 冪法則（任意實數 $n$）</td></tr>
+<tr><td>常數倍</td><td>$\frac{d}{dx}[cf(x)]=cf'(x)$</td><td>常數倍法則</td></tr>
+<tr><td>和差</td><td>$\frac{d}{dx}[f(x)\pm g(x)]=f'(x)\pm g'(x)$</td><td>和差法則</td></tr>
+<tr><td>積</td><td>$\frac{d}{dx}[f(x)g(x)]=f'(x)g(x)+f(x)g'(x)$</td><td>⭐ 積法則</td></tr>
+<tr><td>商</td><td>$\frac{d}{dx}\!\left[\frac{f}{g}\right]=\frac{f'g-fg'}{g^2}$</td><td>⭐ 商法則</td></tr>
+<tr><td>連鎖</td><td>$\frac{d}{dx}[f(g(x))]=f'(g(x))\cdot g'(x)$</td><td>⭐ 連鎖律</td></tr>
+<tr><td>sin</td><td>$\frac{d}{dx}[\sin x]=\cos x$</td><td>⭐</td></tr>
+<tr><td>cos</td><td>$\frac{d}{dx}[\cos x]=-\sin x$</td><td>⭐ 注意負號</td></tr>
+<tr><td>tan</td><td>$\frac{d}{dx}[\tan x]=\sec^2 x$</td><td>⭐</td></tr>
+<tr><td>cot</td><td>$\frac{d}{dx}[\cot x]=-\csc^2 x$</td><td></td></tr>
+<tr><td>sec</td><td>$\frac{d}{dx}[\sec x]=\sec x\tan x$</td><td></td></tr>
+<tr><td>csc</td><td>$\frac{d}{dx}[\csc x]=-\csc x\cot x$</td><td></td></tr>
+<tr><td>arcsin</td><td>$\frac{d}{dx}[\arcsin x]=\frac{1}{\sqrt{1-x^2}}$</td><td>⭐ $|x|<1$</td></tr>
+<tr><td>arccos</td><td>$\frac{d}{dx}[\arccos x]=-\frac{1}{\sqrt{1-x^2}}$</td><td>$|x|<1$</td></tr>
+<tr><td>arctan</td><td>$\frac{d}{dx}[\arctan x]=\frac{1}{1+x^2}$</td><td>⭐ 全實數定義</td></tr>
+<tr><td>arccot</td><td>$\frac{d}{dx}[\operatorname{arccot} x]=-\frac{1}{1+x^2}$</td><td></td></tr>
+<tr><td>arcsec</td><td>$\frac{d}{dx}[\operatorname{arcsec} x]=\frac{1}{|x|\sqrt{x^2-1}}$</td><td>$|x|>1$</td></tr>
+<tr><td>arccsc</td><td>$\frac{d}{dx}[\operatorname{arccsc} x]=-\frac{1}{|x|\sqrt{x^2-1}}$</td><td>$|x|>1$</td></tr>
+<tr><td>$e^x$</td><td>$\frac{d}{dx}[e^x]=e^x$</td><td>⭐ 導數等於自身</td></tr>
+<tr><td>$a^x$</td><td>$\frac{d}{dx}[a^x]=a^x\ln a$</td><td></td></tr>
+<tr><td>$\ln x$</td><td>$\frac{d}{dx}[\ln x]=\frac{1}{x}$</td><td>⭐ $x>0$</td></tr>
+<tr><td>$\log_a x$</td><td>$\frac{d}{dx}[\log_a x]=\frac{1}{x\ln a}$</td><td>$x>0$</td></tr>
+<tr><td>隱函數</td><td>$\frac{dy}{dx}=-\frac{F_x}{F_y}$</td><td>隱函數定理</td></tr>
+<tr><td>高階</td><td>$f^{(n)}(x)=\frac{d^n y}{dx^n}$</td><td>$n$ 階導數</td></tr>
+<tr><td>對數微分</td><td>$\frac{dy}{dx}=y\cdot\frac{d}{dx}[\ln y]$</td><td>對數微分法</td></tr>
+</tbody></table></div>
+</main>
+<script>
+function toggleTheme(){const h=document.documentElement;const n=h.getAttribute('data-theme')==='light'?'dark':'light';h.setAttribute('data-theme',n);localStorage.setItem('theme',n);document.getElementById('tl').textContent=n==='dark'?'淺色模式':'深色模式';}
+const s=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',s);if(s==='dark')document.getElementById('tl').textContent='淺色模式';
+const secs=document.querySelectorAll('.content-section[id]');const navs=document.querySelectorAll('.sn a');
+window.addEventListener('scroll',()=>{let c='';secs.forEach(s=>{if(window.scrollY>=s.offsetTop-80)c=s.getAttribute('id');});navs.forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+c);});});
+</script>
+</body>
+</html>

@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第 5 章 階梯勢中的運動 — The Physics of Quantum Mechanics</title>
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$'], ['\\[','\\]']] },
+  options: { ignoreHtmlClass: 'no-mathjax' }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<link rel="stylesheet" href="../../../../shared/core.css">
+<script src="../../../../shared/core.js" defer></script>
+<link rel="stylesheet" href="../../../../shared/navigation.css" data-shared-navigation>
+</head>
+<body>
+
+<nav class="sidebar" id="sidebar" aria-label="本章目錄"><div class="sidebar-header"><div class="sidebar-subtitle">量子力學</div><h2 class="sidebar-title">第 5 章 階梯勢中的運動</h2></div><div class="toc">
+    <div class="nsub"><a href="#preview">本章預覽</a></div>
+    <div class="nsub"><a href="#s5-1">5.1 方形位能井</a></div>
+    <div class="nsub"><a href="#s5-1-1">5.1.1 極限情況</a></div>
+    <div class="nsub"><a href="#s5-2">5.2 雙方形位能井</a></div>
+    <div class="nsub"><a href="#s5-2-1">5.2.1 氨分子與氨微波激射器</a></div>
+    <div class="nsub"><a href="#s5-3">5.3 自由粒子的散射</a></div>
+    <div class="nsub"><a href="#s5-3-1">5.3.1 穿隧通過位能障壁</a></div>
+    <div class="nsub"><a href="#s5-3-2">5.3.2 古典允許區的散射</a></div>
+    <div class="nsub"><a href="#s5-3-3">5.3.3 共振散射與 Breit–Wigner 截面</a></div>
+    <div class="nsub"><a href="#s5-4">5.4 我們的結果適用嗎？</a></div>
+    <div class="nsub"><a href="#summary">關鍵概念與公式</a></div>
+    <div class="nsub"><a href="#common-mistakes">常見錯誤</a></div>
+    <div class="nsub"><a href="#self-check">自我檢測</a></div>
+    <div class="nsub"><a href="#extras">延伸資源</a></div>
+  </div>
+<div class="sidebar-tools"><button type="button" data-action="toggle-theme" aria-label="切換深色或淺色模式">切換顯示主題</button></div></nav>
+
+<main class="chapter-page" data-chapter-title="第 5 章 階梯勢中的運動" data-prev-href="ch4_transformations_zh.html" data-prev-label="第 4 章 變換與可觀測量" data-next-href="ch6_composite_zh.html" data-next-label="第 6 章 複合系統">
+<!-- ====== 章首 ====== -->
+<header class="chapter-header">
+  <div class="chapter-subtitle">
+    <a href="../../index.html">量子力學</a> &rsaquo; <a href="ch4_transformations_zh.html">Ch4</a> &rsaquo; Ch5
+  </div>
+  <h1>第 5 章　階梯勢中的運動</h1>
+  <div class="chapter-meta">
+    <span>原書章節：Chapter 5, Motion in step potentials</span>
+    <span>原書頁碼：p75–103</span>
+    <span>章長：29 頁 &middot; 5 節 &middot; 15 個公式</span>
+  </div>
+</header>
+
+<!-- ====== 本章預覽 ====== -->
+<section class="chapter-preview" id="preview">
+  <h2>本章預覽</h2>
+
+  <div class="core-question">
+    <h3>核心問題</h3>
+    <p>當粒子遇到位能突然變化的區域時會發生什麼事？古典物理給出簡單的答案：能量不夠就反彈，能量夠就通過。但量子力學告訴我們：<strong>粒子總是有非零的機率被反射，也總是有非零的機率穿隧通過古典上不可穿透的障壁。</strong>這些「階梯勢」雖然人為，卻能讓我們精確解析地探索量子力學最深刻的現象——束縛態的量子化、穿隧效應、共振散射——這些現象在真實世界中無所不在，從氨分子微波激射器到原子核放射性衰變。</p>
+  </div>
+
+  <div class="deep-dive">
+    <h3>10 個關鍵概念</h3>
+    <ol>
+      <li><strong>方形位能井的束縛態</strong>：任何一維方形井必有至少一個束縛態；無因次參數 $W$ 決定束縛態數量</li>
+      <li><strong>能量量子化</strong>：要求的波函數在無窮遠處消失導致能量只能取離散值</li>
+      <li><strong>宇稱對稱性</strong>：$V(x)=V(-x)$ 時 Hamiltonian 與宇稱算符對易，可找完備的確定宇稱能量本徵態</li>
+      <li><strong>無限深井極限</strong>：$V_0\to\infty$ 時波函數在井邊界為零，$E_n\propto n^2$</li>
+      <li><strong>雙井與穿隧振盪</strong>：兩個相同位能井透過障壁耦合，粒子在兩井間以頻率 $(E_o-E_e)/\pi\hbar$ 振盪</li>
+      <li><strong>氨分子二能階系統</strong>：$|\pm\rangle$ 基底下的 Hamiltonian 是 $2\times2$ 矩陣，外加電場可用來分離激發態分子</li>
+      <li><strong>穿隧機率</strong>：粒子穿越古典禁止區的機率 $\propto e^{-4Ka}$，隨障壁高度與寬度指數衰減</li>
+      <li><strong>量子干涉反射振盪</strong>：反射機率隨能量振盪，來自前緣與後緣反射振幅的干涉</li>
+      <li><strong>共振散射與 Breit–Wigner 截面</strong>：散射截面在位能井近束縛態能量處出現窄峰，寬度 $\Gamma$ 與束縛態壽命 $t_R$ 滿足 $t_R\Gamma\sim\hbar$</li>
+      <li><strong>階梯近似的適用條件</strong>：位能變化必須在一個 de Broglie 波長內完成，否則反射振幅被嚴重高估</li>
+    </ol>
+  </div>
+
+  <div class="deep-dive">
+    <h3>🧭 本章推理地圖</h3>
+    <ol>
+      <li><strong>給定階梯位能 $V(x)$</strong>（§5.1）→ TISE 在每個常數位能區簡化為 $\frac{d^2u}{dx^2}=\pm k^2 u$（§5.1）</li>
+      <li>波函數與導數在邊界上的<strong>連續性條件</strong>（§5.1）→ 產生 $k$ 的代數方程式 → 決定束縛態能量（§5.1）</li>
+      <li>$V(x)$ 為偶函數 → 宇稱對稱性使本徵態分為<strong>偶宇稱與奇宇稱</strong>兩類（§5.1，§5.2）</li>
+      <li>雙位能井系統中偶宇稱態能量略低於奇宇稱態（§5.2）→ $|\pm\rangle$ 疊加態描述粒子確定在左井或右井（§5.2）</li>
+      <li>時間演化使 $|+\rangle$ 振盪為 $|-\rangle$（§5.2）→ <strong>穿隧振盪</strong>，頻率由 $E_o-E_e$ 決定（§5.2）</li>
+      <li>氨分子實現此雙井模型（§5.2.1）→ 外加電場可調控能階，實現<strong>氨微波激射器</strong>（§5.2.1）</li>
+      <li>自由粒子散射中，偶宇稱與奇宇稱解的<strong>相位差 $\Delta\varphi$</strong>（§5.3）→ 決定反射與穿透機率：$P_{\text{refl}}=\cos^2\Delta\varphi$，$P_{\text{trans}}=\sin^2\Delta\varphi$（§5.3）</li>
+      <li>古典禁止區（$E<V_0$）→ 穿隧機率 $\propto e^{-4Ka}$（§5.3.1）；古典允許區（$E>V_0$）→ 反射機率隨能量振盪（§5.3.2）</li>
+      <li>雙 $\delta$ 障壁模型（§5.3.3）→ 共振散射，截面在近束縛態能量處出現<strong>Breit–Wigner 峰</strong>（§5.3.3）</li>
+      <li>峰寬 $\Gamma$ 與束縛態壽命關係 $t_R=\hbar/\Gamma$（§5.3.3）→ 解釋原子核 $\alpha$ 衰變的極長壽命（Ch12）</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ====== 先備知識橋接 ====== -->
+<section class="prerequisite">
+  <h2>先備知識橋接</h2>
+  <p>本章假設讀者具備以下基礎：</p>
+  <ul>
+    <li><strong>TISE（與時間無關的 Schrödinger 方程）</strong>：$-\frac{\hbar^2}{2m}\frac{d^2u}{dx^2}+V(x)u=Eu$，以及波函數的連續性與歸一化條件（Ch2）</li>
+    <li><strong>宇稱算符 $P$</strong>：$P\psi(x)=\psi(-x)$，與偶函數位能的 Hamiltonian 對易（Ch4）</li>
+    <li><strong>機率振幅與 Dirac notation</strong>：$|\psi\rangle$、$\langle\phi|\psi\rangle$、疊加原理（Ch1）</li>
+    <li><strong>簡諧振子</strong>：束縛態能量量子化的基本概念（Ch4）</li>
+    <li><strong>複數與三角函數</strong>：$e^{ikx}=\cos kx+i\sin kx$，$\tan$、$\cot$、$\sinh$、$\cosh$ 的基本性質</li>
+  </ul>
+  <p>如果你對雙曲函數（$\sinh$、$\cosh$、$\tanh$）不太熟悉，本章會在用到時解釋它們的意義。<strong>最重要的不是背誦每個代數步驟，而是理解：為什麼連續性條件導致能量量子化？為什麼相位差決定散射機率？</strong></p>
+</section>
+
+<!-- ====== 5.1 方形位能井 ====== -->
+<section class="deep-dive" id="s5-1">
+<h2>5.1　方形位能井</h2>
+<div class="section-keypoints">
+  <strong>🔑 本節重點</strong>
+  <span>① 方形井 $V(|x|<a)=0$,$V(|x|>a)=V_0$ 的束縛態由連續性條件決定</span>
+  <span>② 無因次參數 $W\equiv\sqrt{2mV_0a^2/\hbar^2}$ 控制束縛態數量</span>
+  <span>③ 無論井多窄多淺，至少有一個束縛態（偶宇稱）</span>
+  <span>④ 對於淺井，粒子大部分機率在古典禁止區——與不確定性原理不矛盾</span>
+</div>
+
+  <p>我們考慮一個粒子在如圖 5.1 所示的方形位能井中運動。位能定義為 $V(x)=0$（當 $|x|<a$），$V(x)=V_0>0$（其他區域）。因為 $V$ 是 $x$ 的偶函數，Hamiltonian $H=-\frac{\hbar^2}{2m}\frac{d^2}{dx^2}+V(x)$ 與宇稱算符 $P$ 對易，因此存在一組完備的具有確定宇稱的能量本徵態。這意味著波函數 $u(x)\equiv\langle x|E\rangle$ 要麼是 $x$ 的偶函數，要麼是奇函數——這個事實大大簡化了求解過程。</p>
+
+  <p>階梯位能電似乎是人為的模型－——真實世界中位能不會突然跸變。但它們是量子力學中最有價值的工具之一，因為它們允許我們精確解析地求解 Schrödinger 方程，從而揭示量子力學的核心現象。更重要的是，這些結果對於更一般的位能也定性上正確——這是因為位能的細節經常只影響定量結果，不改變定性行為。
+
+  <p>在位能為階梯狀的假設下，與時間無關的 Schrödinger 方程（TISE）在每個常數位能區域簡化為極簡單的形式。在井內（$|x|<a$），$V=0$，所以：</p>
+  <div class="eq">$$\frac{d^2u}{dx^2}=-\frac{2mE}{\hbar^2}u \qquad (|x|<a) \tag{5.3a}$$</div>
+  <p>而在井外（$|x|>a$），$V=V_0$：</p>
+  <div class="eq">$$\frac{d^2u}{dx^2}=\frac{2m(V_0-E)}{\hbar^2}u \qquad (|x|>a) \tag{5.3b}$$</div>
+
+  <p>我們只考慮束縛態，即 $E<V_0$（可以證明 $E>0$）。在井外，方程 (5.3b) 的解為指數函數 $u(x)=Ae^{\pm Kx}$，其中：</p>
+  <div class="eq">$$K\equiv\sqrt{\frac{2m(V_0-E)}{\hbar^2}} \tag{5.4}$$</div>
+  <p>為了使波函數可歸一化，當 $|x|\to\infty$ 時 $u(x)$ 必須衰減到零。因此在 $x>a$ 處 $u(x)=Ae^{-Kx}$，在 $x<-a$ 處 $u(x)=\pm Ae^{+Kx}$（偶宇稱取正號，奇宇稱取負號）。</p>
+
+  <p>在井內（$E>0$），方程 (5.3a) 的解是正弦或餘弦函數，取決於宇稱：偶宇稱時 $u(x)=B\cos(kx)$，奇宇稱時 $u(x)=B\sin(kx)$，其中：</p>
+  <div class="eq">$$k\equiv\sqrt{\frac{2mE}{\hbar^2}} \tag{5.5}$$</div>
+  <p>波函數和其導數在 $x=\pm a$ 處必須連續，否則 $d^2u/dx^2$ 會無定義，TISE 將不被滿足。以偶宇稱情況為例，在 $x=a$ 處的連續性條件給出：</p>
+  <div class="eq">$$B\cos(ka)=Ae^{-Ka},\qquad -kB\sin(ka)=-KAe^{-Ka} \tag{5.6}$$</div>
+
+  <p>將每組方程的第二式除以第一式消去 $A$ 和 $B$，偶宇稱情況得到：</p>
+  <div class="eq">$$k\tan(ka)=K=\sqrt{\frac{2mV_0}{\hbar^2}-k^2} \tag{5.7}$$</div>
+  <p>這是一個決定 $k$（從而決定能量 $E$）的代數方程。引入無因次變數 $W$ 改寫為：</p>
+  <div class="eq">$$\tan(ka)=\sqrt{\frac{W^2}{(ka)^2}-1},\qquad W\equiv\sqrt{\frac{2mV_0a^2}{\hbar^2}} \tag{5.8}$$</div>
+
+  <p>圖 5.2 展示了方程 (5.8) 左右兩側作為 $ka$ 的函數。因為在 $ka=0$ 時左側從原點出發而右側從無窮大出發，並且左側在 $ka=\pi/2$ 處趨於無窮大而右側在 $ka=W$ 處終止，所以方程<strong>永遠至少有一個解</strong>。這意味著無論 $V_0$ 和 $a$ 多小，方形位能井總能束縛住粒子。$W$ 越大，解的數量越多：第二個解在 $W=\pi$ 時出現，第三個在 $W=2\pi$ 時出現。類似地，奇宇稱束縛態要求 $W>\pi/2$，額外的奇宇稱解在 $W=(2r+1)\pi/2$（$r=1,2,\ldots$）時出現。</p>
+
+  <div class="callout">
+    <strong>💡 核心洞察：淺井中的粒子不在井裡</strong><br>
+    從不確定性原理的角度看，任何井都有束縛態這個結果似乎矛盾：粒子動量不能超過 $p_{\text{max}}=\sqrt{2mV_0}$，如果粒子被限制在井內，$\Delta x\Delta p<4a\sqrt{2mV_0}=4\hbar W$，當 $W\ll 1$ 時這趨於零，違反 $\Delta x\Delta p\gtrsim\hbar$。矛盾的解決在於：<strong>粒子並未被限制在井內</strong>——在 $W\ll 1$ 的極限下，粒子在古典禁止區 $|x|>a$ 中被發現的機率不可忽略。事實上，當 $W\to 0$ 時，粒子被一個它「確定永遠不會在其中被發現」的井束縛著！
+  </div>
+
+  <div class="callout-warn">
+    <strong>⚡ 連續性條件是能量量子化的根源</strong><br>
+    在古典物理中，束縛態粒子可以有任意能量。在量子力學中，<strong>波函數與其導數在邊界處必須同時連續</strong>的要求產生了 $k$ 的代數方程式——只有離散的 $k$ 值（從而是離散的能量 $E$）能滿足它。這與簡諧振子的能量量子化機制不同（那裡來自多項式的截斷），但物理結果相同：束縛態能量是離散的。
+  </div>
+
+  <h3>本徵態的宇稱分類</h3>
+  <p>偶宇稱態的波函數在 $x=0$ 處有極值（$\propto\cos(kx)$），奇宇稱態在原點處為零（$\propto\sin(kx)$）。這個分類不僅簡化了代數運算，還反映了物理對稱性：因為位能關於原點對稱， Hamiltonian 的本徵態必須是宇稱算符的本徵態。</p>
+
+  <figure class="figure" id="fig-5-1">
+    <svg class="content-diagram" viewBox="0 0 520 280" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" width="520" height="280" fill="#f8f9fa" rx="8"/>
+      <!-- Axes -->
+      <line x1="60" y1="140" x2="460" y2="140" stroke="#333" stroke-width="1.5"/>
+      <line x1="260" y1="40" x2="260" y2="240" stroke="#333" stroke-width="1.5"/>
+      <text x="470" y="145" font-size="12" fill="#333">x</text>
+      <!-- Potential well -->
+      <rect x="160" y="60" width="200" height="80" fill="#e8f4fd" stroke="#4a90d9" stroke-width="1.5"/>
+      <line x1="60" y1="60" x2="160" y2="60" stroke="#4a90d9" stroke-width="2" stroke-dasharray="6,3"/>
+      <line x1="360" y1="60" x2="460" y2="60" stroke="#4a90d9" stroke-width="2" stroke-dasharray="6,3"/>
+      <text x="420" y="55" font-size="12" fill="#4a90d9">V = V₀</text>
+      <text x="200" y="100" font-size="11" fill="#4a90d9">V = 0</text>
+      <!-- Ground state wavefunction -->
+      <path d="M60,140 Q120,135 160,105 Q180,90 200,70 Q220,50 260,45 Q300,50 320,70 Q340,90 360,105 Q400,135 460,140" fill="none" stroke="#e74c3c" stroke-width="2"/>
+      <text x="130" y="125" font-size="11" fill="#e74c3c">u₀(x)</text>
+      <!-- Labels -->
+      <text x="155" y="50" font-size="11" fill="#333">−a</text>
+      <text x="358" y="50" font-size="11" fill="#333">+a</text>
+      <text x="265" y="250" font-size="12" fill="#333">x = 0</text>
+      <!-- Well markers -->
+      <line x1="160" y1="60" x2="160" y2="140" stroke="#333" stroke-width="0.5" stroke-dasharray="3,3"/>
+      <line x1="360" y1="60" x2="360" y2="140" stroke="#333" stroke-width="0.5" stroke-dasharray="3,3"/>
+    </svg>
+    <figcaption><strong>圖 5.1</strong>　方形位能井 $V(x)$（虛線）與基態波函數（紅色實線）。粒子在古典禁止區 $|x|>a$ 中的機率不為零。</figcaption>
+  </figure>
+
+  <details class="example">
+    <summary>📝 自編概念例：方形井束縛態數量的估算</summary>
+    <div class="example-body">
+      <p><strong>題目：</strong>一個電子被限制在寬度 $2a=1.0\text{ nm}$、深度 $V_0=10\text{ eV}$ 的方形位能井中。估算此井有多少個束縛態。</p>
+      <p><strong>已知與假設：</strong>$m_e=9.11\times 10^{-31}\text{ kg}$，$\hbar=1.055\times 10^{-34}\text{ J·s}$，$1\text{ eV}=1.602\times 10^{-19}\text{ J}$。</p>
+      <p><strong>解：</strong>計算無因次參數 $W$：</p>
+      <div class="eq">$$W=\sqrt{\frac{2mV_0a^2}{\hbar^2}}=\sqrt{\frac{2\cdot 9.11\times10^{-31}\cdot 10\cdot1.602\times10^{-19}\cdot(5\times10^{-10})^2}{(1.055\times10^{-34})^2}}\approx\sqrt{65.5}\approx 8.09$$</div>
+      <p>偶宇稱態條件：$W>\pi\approx 3.14$ 時出現第二個，$W>2\pi\approx 6.28$ 時第三個，$W>3\pi\approx 9.42$ 時第四個。奇宇稱態條件：$W>\pi/2\approx 1.57$ 時第一個，$W>3\pi/2\approx 4.71$ 時第二個，$W>5\pi/2\approx 7.85$ 時第三個。</p>
+      <p>$W=8.09$ 時：偶宇稱態有 3 個（$W>2\pi$ 但 $<3\pi$），奇宇稱態有 3 個（$W>5\pi/2$ 但 $<7\pi/2$）。</p>
+      <p><strong>物理意義：</strong>總共約 6 個束縛態。一個「奈米尺度、10 eV 深」的位能井能束縛約 6 個量子態——這比同尺寸的古典粒子（可有連續能量）少得多，但對於量子元件設計來說已經足夠豐富。</p>
+    </div>
+  </details>
+</section>
+
+<!-- ====== 5.1.1 極限情況 ====== -->
+<section class="deep-dive" id="s5-1-1">
+<h2>5.1.1　極限情況</h2>
+<div class="section-keypoints">
+  <strong>🔑 本節重點</strong>
+  <span>① 無限深井：波函數在邊界為零，$E_n=n^2\frac{\hbar^2\pi^2}{8ma^2}$</span>
+  <span>② 無限窄井（$\delta$ 位能）：只有一個束縛態，$E=-mV_\delta^2/2\hbar^2$</span>
+  <span>③ $\delta$ 井中粒子確定不在井內——極端的「無所在束縛」</span>
+  <span>④ 無限深井滿足 $\Delta x\Delta p\simeq 2\hbar\pi$，與不確定性原理一致</span>
+</div>
+
+  <h3>(a) 無限深井</h3>
+  <p>當 $V_0\to\infty$ 而 $a$ 固定時，井變成無限深。此時 $W\to\infty$，方程 (5.8) 的解趨於 $ka=(2r+1)\pi/2$。偶宇稱波函數變為：</p>
+  <div class="eq">$$u(x)=\begin{cases}A\cos[(2r+1)\pi x/2a] & |x|<a \\ 0 & |x|>a\end{cases} \tag{5.9}$$</div>
+  <p>波函數在 $x=a$ 處的導數出現不連續性——這是因為在極限過程中井外的曲率 $K$ 趨於無窮大，而邊界條件退化為簡單的 $u(\pm a)=0$。奇宇稱解則由 $\sin(s\pi x/a)$ 給出（$s=1,2,\ldots$），同樣在井邊界處為零。</p>
+
+  <p>由此我們得到一個重要原則：<strong>在無限位能區域的邊界處，波函數必須為零。</strong>無限深方形井的任意束縛態能量為：</p>
+  <div class="eq">$$E_n=\frac{n^2}{8m}\left(\frac{\hbar\pi}{a}\right)^2,\qquad n=1,2,\ldots \tag{5.10}$$</div>
+  <p>基態（$n=1$）動量約為 $\hbar k=\hbar\pi/2a$，其正負號不確定，因此動量不確定性 $\Delta p\simeq\hbar\pi/a$。位置不確定性 $\Delta x\simeq 2a$，所以 $\Delta x\Delta p\simeq 2\hbar\pi$，與不確定性原理（§2.3.2）一致。</p>
+
+  <h3>(b) 無限窄井（$\delta$ 函數位能）</h3>
+  <p>在 §11.5.1 我們將研究共價鍵模型，其中用到讓井寬度趨於零而深度趨於無窮大、但乘積 $V_0a$ 保持不變的極限。在這個極限下 $W\propto a\sqrt{V_0}\to 0$，因此只有一個束縛態（偶宇稱）。</p>
+
+  <p>更方便的做法是重新設定能量零點：令井外 $V=0$，井內 $V$ 為負。寫 $V(x)=-V_\delta\delta(x)$，其中 $V_\delta>0$，$\delta(x)$ 是 Dirac $\delta$ 函數。TISE 變為：</p>
+  <div class="eq">$$-\frac{\hbar^2}{2m}\frac{d^2u}{dx^2}-V_\delta\delta(x)u=Eu \tag{5.11}$$</div>
+  <p>從 $x=-\epsilon$ 到 $x=+\epsilon$ 積分（$\epsilon\to 0$），得到波函數導數在原點處有一個躍變：</p>
+  <div class="eq">$$\left[\frac{du}{dx}\right]_{-\epsilon}^{\epsilon}=-\frac{2mV_\delta}{\hbar^2}u(0) \tag{5.13}$$</div>
+
+  <p>由於我們尋求的是偶宇稱解，波函數形式為 $u(x)=Ae^{\mp Kx}$（$x>0$ 取負號）。代入 (5.13) 得到：</p>
+  <div class="eq">$$K=\frac{mV_\delta}{\hbar^2} \tag{5.14}$$</div>
+  <p>將 $u=e^{-Kx}$ 代入 $x>0$ 處的 (5.11)，得到 $E=-\hbar^2K^2/2m$，因此束縛於 $\delta$ 函數位能的粒子能量為：</p>
+  <div class="eq">$$E=-\frac{mV_\delta^2}{2\hbar^2} \tag{5.15}$$</div>
+
+  <p>圖 5.5 顯示 $|\psi(x)|^2$ 在井中有限，但井無限窄，所以在井中發現粒子的機率為零——<strong>粒子確定永遠不會在被束縛它的井中被找到！</strong>這個結果是淺井不確定性原理討論中所述現象的極端案例。</p>
+
+  <div class="callout">
+    <strong>💡 核心洞察：束縛態的存在不依賴井的細節</strong><br>
+    我們的結論——方形井總有束縛態——可以推廣到任意形狀的位能井：考慮圖 5.3 中的一般位能 $U$，在其中內接一個更淺更窄的方形井。既然這個較弱的方形井已有束縛態，原來的位能 $U$ 也必然至少有一個束縛態。這是一個拓樸性的結果，不依賴於位能的具體函數形式。
+  </div>
+
+  <div class="callout-warn">
+    <strong>⚡ $\delta$ 位能的導數躍變條件</strong><br>
+    初學者常忘記：$\delta$ 函數位能<strong>不</strong>要求波函數導數連續。積分 TISE 跨越 $\delta$ 函數的位置給出的條件是 $du/dx$ 的<strong>躍變</strong>等於 $-(2mV_\delta/\hbar^2)u(0)$。這個條件取代了通常的導數連續性。忘記這個躍變條件是處理 $\delta$ 位能時最常見的錯誤。
+  </div>
+
+  <details class="example">
+    <summary>📝 自編概念例：$\delta$ 井束縛態能量</summary>
+    <div class="example-body">
+      <p><strong>題目：</strong>一個電子束縛於 $\delta$ 函數位能 $V(x)=-V_\delta\delta(x)$，$V_\delta=1.0\text{ eV·nm}$。求束縛態能量，並計算在 $|x|<0.1\text{ nm}$ 區域內找到電子的機率。</p>
+      <p><strong>解：</strong>$K=mV_\delta/\hbar^2$</p>
+      <div class="eq">$$K=\frac{9.11\times10^{-31}\cdot(1.0\times1.602\times10^{-19}\times10^{-9})}{(1.055\times10^{-34})^2}=\frac{1.46\times10^{-58}}{1.113\times10^{-68}}\approx 1.31\times10^{10}\text{ m}^{-1}=13.1\text{ nm}^{-1}$$</div>
+      <div class="eq">$$E=-\frac{\hbar^2K^2}{2m}=-\frac{(1.055\times10^{-34})^2\cdot(1.31\times10^{10})^2}{2\cdot9.11\times10^{-31}}\approx-1.05\times10^{-20}\text{ J}\approx -0.066\text{ eV}$$</div>
+      <p>波函數（歸一化後）：$u(x)=\sqrt{K}e^{-K|x|}$。在 $|x|<0.1\text{ nm}$ 內的機率：</p>
+      <div class="eq">$$P=\int_{-0.1}^{0.1}|u(x)|^2 dx=2K\int_0^{0.1}e^{-2Kx}dx=1-e^{-2K\cdot0.1}=1-e^{-2.62}\approx 0.927$$</div>
+      <p><strong>物理意義：</strong>雖然 $\delta$ 井無限窄，但束縛態的波函數有有限的空間延伸（約 $1/K\approx 0.076\text{ nm}$）。超過 92% 的機率在 $|x|<0.1\text{ nm}$ 內——粒子雖不在井中，但「緊貼」在井附近。</p>
+    </div>
+  </details>
+</section>
+
+<!-- ====== 5.2 雙方形位能井 ====== -->
+<section class="deep-dive" id="s5-2">
+<h2>5.2　雙方形位能井</h2>
+<div class="section-keypoints">
+  <strong>🔑 本節重點</strong>
+  <span>① 兩個相同位能井由有限障壁分隔時，能階成對出現</span>
+  <span>② 偶宇稱態能量略低於奇宇稱態——穿隧 splitting</span>
+  <span>③ $|\pm\rangle=(|e\rangle\pm|o\rangle)/\sqrt{2}$ 描述粒子確定在單一井中</span>
+  <span>④ 粒子在兩井間以頻率 $(E_o-E_e)/\pi\hbar$ 振盪——穿隧時間指數增長</span>
+</div>
+
+  <p>現在考慮一對由有限高度與寬度的障壁分隔的位能井。位能如圖 5.6 所示：$V(x)=V_0$（$|x|<a$），$V(x)=0$（$a<|x|<b$），$V(x)=\infty$（$|x|>b$）。為簡化起見，我們假設 $|x|>b$ 處位能為無窮大，且粒子在 $|x|<a$ 區域內是古典禁止的。</p>
+
+  <p>在古典禁止區 $|x|<a$，波函數為 $u(x)=A\cosh(Kx)$（偶宇稱）或 $u(x)=A\sinh(Kx)$（奇宇稱），其中 $K$ 由 (5.4) 定義。在 $a<x<b$ 區域，波函數可寫為 $u(x)=B\sin(kx+\varphi)$，其中 $k$ 由 (5.5) 定義。從單一方形井的研究可知，在 $x=b$ 處 $u$ 必須為零，因此 $\sin(kb+\varphi)=0$，即：</p>
+  <div class="eq">$$\varphi=r\pi-kb,\qquad r=0,1,\ldots \tag{5.17}$$</div>
+
+  <p>在 $x=a$ 處要求 $u$ 和 $du/dx$ 連續，得到類似於 (5.6) 的方程組。消去常數後，得到決定 $ka$ 的方程：</p>
+  <div class="eq">$$\tan[r\pi-k(b-a)]\sqrt{\frac{W^2}{(ka)^2}-1}=\begin{cases}\coth\!\big(\sqrt{W^2-(ka)^2}\big) & \text{偶宇稱} \\ \tanh\!\big(\sqrt{W^2-(ka)^2}\big) & \text{奇宇稱}\end{cases} \tag{5.19}$$</div>
+
+  <p>圖 5.7 繪出了方程 (5.19) 兩側的圖像。$ka$ 值成對出現：一個對應偶宇稱態，另一個對應稍大的 $k$ 值（奇宇稱態），兩者非常接近。這一對的 $k$ 值之差隨 $k$ 增大而增大。</p>
+
+  <p>$k$ 值的接近意味著在右井中偶宇稱波函數 $u_e(x)$ 和奇宇稱波函數 $u_o(x)$ 幾乎相同，而在左井中兩者只差一個正負號（見圖 5.8）。此外，在古典禁止區 $|x|<a$ 中波函數的振幅很小。因此，線性組合：</p>
+  <div class="eq">$$\psi_\pm(x)\equiv\frac{1}{\sqrt{2}}[u_e(x)\pm u_o(x)] \tag{5.20}$$</div>
+  <p>分別是粒子幾乎確定在右井（$\psi_+$）和幾乎確定在左井（$\psi_-$）的態的波函數。</p>
+
+  <div class="callout">
+    <strong>💡 穿隧振盪：量子力學中「不可能」的運動</strong><br>
+    考慮系統在 $t=0$ 時處於 $|\psi_+\rangle$（粒子在右井）。根據方程 (2.32)，在時間 $t$ 時：$\psi(x,t)=\frac{1}{\sqrt{2}}e^{-iE_et/\hbar}[u_e(x)+u_o(x)e^{-i(E_o-E_e)t/\hbar}]$。經過時間 $T=\pi\hbar/(E_o-E_e)$，指數因子變為 $-1$，波函數變為 $[u_e(x)-u_o(x)]/\sqrt{2}$——粒子確定在左井。在古典物理中，粒子會永遠留在初始的井中。實際上，一個熟悉的光開關的位置由兩個相似的相鄰位能井控制，而這樣的開關絕對不會在「開」和「關」之間振盪！我們在古典領域看不到穿隧是因為 $E_o-E_e$ 隨 $W$ 增大而衰減得比 $e^{-2W}$ 還快（問題 5.16），因此穿隧所需的時間增長得比 $e^{2W}$ 還快——對於古典系統來說極其漫長。
+  </div>
+
+  <div class="callout-warn">
+    <strong>⚡ $|\pm\rangle$ 不是能量本徵態</strong><br>
+    $|\pm\rangle$ 是位置確定的態（粒子在左井或右井），但它們<strong>不是</strong> Hamiltonian 的本徵態。只有 $|e\rangle$ 和 $|o\rangle$ 是能量本徵態。$|\pm\rangle$ 是兩個不同能量本徵態的疊加，因此它們會隨時間演化——這正是穿隧振盪的來源。混淆「位置確定的態」和「能量本徵態」是理解雙井系統時常見的錯誤。
+  </div>
+
+  <figure class="figure" id="fig-5-8">
+    <svg class="content-diagram" viewBox="0 0 520 280" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" width="520" height="280" fill="#f8f9fa" rx="8"/>
+      <line x1="60" y1="200" x2="460" y2="200" stroke="#333" stroke-width="1.5"/>
+      <line x1="260" y1="40" x2="260" y2="240" stroke="#333" stroke-width="1"/>
+      <!-- Double well -->
+      <rect x="60" y="140" width="100" height="60" fill="#e8f4fd" stroke="#4a90d9" stroke-width="1"/>
+      <rect x="360" y="140" width="100" height="60" fill="#e8f4fd" stroke="#4a90d9" stroke-width="1"/>
+      <rect x="160" y="140" width="200" height="60" fill="#4a90d9" stroke="#4a90d9" stroke-width="1" opacity="0.4"/>
+      <text x="420" y="130" font-size="11" fill="#4a90d9">V₀</text>
+      <text x="260" y="130" font-size="10" fill="#333">障壁</text>
+      <!-- Wavefunctions -->
+      <path d="M60,200 Q80,160 110,140 Q130,125 160,130 Q180,135 200,145 Q220,150 260,155 Q300,150 320,145 Q340,135 360,130 Q390,125 410,140 Q440,160 460,200" fill="none" stroke="#e74c3c" stroke-width="2"/>
+      <path d="M60,200 Q80,160 110,140 Q130,125 160,130 Q180,135 200,145 Q220,150 260,155 Q300,150 320,145 Q340,135 360,130 Q390,125 410,140 Q440,160 460,200" fill="none" stroke="#2ecc71" stroke-width="2" stroke-dasharray="5,3"/>
+      <text x="100" y="120" font-size="10" fill="#e74c3c">uₑ</text>
+      <text x="400" y="120" font-size="10" fill="#2ecc71">uₒ (右井)</text>
+      <!-- Labels -->
+      <text x="155" y="215" font-size="11" fill="#333">−b</text>
+      <text x="360" y="215" font-size="11" fill="#333">+b</text>
+      <text x="235" y="215" font-size="11" fill="#333">−a</text>
+      <text x="275" y="215" font-size="11" fill="#333">+a</text>
+    </svg>
+    <figcaption><strong>圖 5.8</strong>　雙方形位能井的基態（偶宇稱，紅色實線）與第一激發態（奇宇稱，綠色虛線）。在右井中兩者幾乎重合，在左井中符號相反。</figcaption>
+  </figure>
+
+  <details class="example">
+    <summary>📝 自編概念例：雙井穿隧時間估算</summary>
+    <div class="example-body">
+      <p><strong>題目：</strong>兩個相同的方形位能井，寬度各為 $0.5\text{ nm}$，由寬 $0.3\text{ nm}$、高 $5\text{ eV}$ 的障壁分隔。估算粒子（電子）在兩井間穿隧振盪的週期。</p>
+      <p><strong>已知與假設：</strong>使用 (5.8) 定義的 $W$ 和 (5.19) 式。因 $W$ 較大，能量分裂 $\Delta E=E_o-E_e\propto e^{-2W\sqrt{1-E/V_0}}$。</p>
+      <p><strong>近似解：</strong>障壁半寬 $a=0.15\text{ nm}$，$V_0=5\text{ eV}$，$W\approx\sqrt{2m_eV_0a^2}/\hbar\approx 4.4$。假設基態能量 $E\approx 1\text{ eV}$，$K\approx\sqrt{2m_e(V_0-E)}/\hbar\approx 10.2\text{ nm}^{-1}$。穿隧 splitting 約為 $\Delta E\sim(\hbar^2/m a b)e^{-2Ka}\approx 10^{-3}\text{ eV}$。</p>
+      <p>振盪週期 $T=2\pi\hbar/\Delta E\approx 4\times 10^{-12}\text{ s}=4\text{ ps}$。</p>
+      <p><strong>物理意義：</strong>對於奈米尺度的電子雙井結構，穿隧振盪發生在皮秒尺度——這正是量子穿隧元件（如共振穿隧二極體）運作的時間尺度。相比之下，對於宏觀光開關（$W\sim 10^{30}$），穿隧時間遠超宇宙年齡。</p>
+    </div>
+  </details>
+</section>
+
+<!-- ====== 5.2.1 氨分子與氨微波激射器 ====== -->
+<section class="deep-dive" id="s5-2-1">
+<h2>5.2.1　氨分子與氨微波激射器</h2>
+<div class="section-keypoints">
+  <strong>🔑 本節重點</strong>
+  <span>① 氨分子 NH₃ 是天然的雙位能井系統——氮原子可位於氫原子平面上方或下方</span>
+  <span>② 在 $|\pm\rangle$ 基底中，Hamiltonian 為 $2\times2$ 矩陣 $H=\begin{pmatrix}E&-A\\-A&E\end{pmatrix}$</span>
+  <span>③ 外加電場可打破雙井對稱性，使分子產生偶極矩</span>
+  <span>④ 氨微波激射器利用電場梯度分離激發態分子，實現微波放大</span>
+</div>
+
+  <p>大自然提供了一個絕美的雙位能井系統的物理實現：<strong>氨分子 NH₃</strong>。氨含有四個原子核和十個電子，實際上是極複雜的動力學系統。但在 §11.5.2 我們將展示：思考分子低能行為的有效方式是設想電子提供輕彈簧將原子核維繫在一起，原子核圍繞這些彈簧位能所定義的平衡位置振盪。</p>
+
+  <p>在 NH₃ 中，當三個氫原子位於正三角形的頂點而氮原子位於三角形平面「上方」或「下方」某個距離 $x$ 時，位能達到最小（圖 5.9）。如果我們把分子的位能作為 $x$ 的函數繪出，會得到類似圖 5.6 的圖形——只是井的側壁是傾斜的而非筆直。這個函數會產生成對的本徵能量，就像我們的方形井例子一樣。</p>
+
+  <p>在許多物理情境中，分子的能量極低，以至於只有在兩個最低束縛態中被發現的振幅不可忽略。我們可以只包含這兩個態的振幅來獲得氨動力學的極佳近似。令 $|+\rangle$ 為氮原子確定在氫原子平面上方的態，$|-\rangle$ 為氮原子在下方的態。這些 $|\pm\rangle$ 態是 Hamiltonian 本徵態 $|e\rangle$ 和 $|o\rangle$ 的線性組合：</p>
+  <div class="eq">$$|\pm\rangle=\frac{1}{\sqrt{2}}(|e\rangle\pm|o\rangle) \tag{5.22}$$</div>
+
+  <p>在 $|\pm\rangle$ 基底中計算 Hamiltonian 的矩陣元，得到：</p>
+  <div class="eq">$$H=\begin{pmatrix}E & -A \\ -A & E\end{pmatrix} \tag{5.24}$$</div>
+  <p>其中 $E=\frac{1}{2}(E_e+E_o)$，$A\equiv\frac{1}{2}(E_o-E_e)$，兩者皆為正數。這個簡單的 $2\times2$ 矩陣完整描述了氨分子在低能下的量子動力學。</p>
+
+  <p>氨的電子結構使氮原子帶有小量負電荷 $-q$，對應的正電荷 $+q$ 分佈在氫原子上。處於 $|+\rangle$ 或 $|-\rangle$ 態的氨分子具有垂直於氫原子平面的電偶極矩，大小為 $qs$。一個初始在 $|+\rangle$ 的分子會在 $|+\rangle$ 和 $|-\rangle$ 之間以頻率 $(E_o-E_e)/2\pi\hbar=A/\pi\hbar$ 振盪——這是一個振盪偶極，會以該頻率發射電磁波。這個頻率是 150 GHz，因此氨分子發射<strong>微波輻射</strong>。</p>
+
+
+  <div class="callout">
+    <strong>💡 氨微波激射器的歷史意義</strong><br>
+    1954 年，Charles Townes、James Gordon 和 Herbert Zeiger 成功展示了世界上第一台氨微波激射器（maser，microwave amplification by stimulated emission of radiation）。這是人類第一次實現受激輻射放大——在此之前，輻射的受激發射只是 Einstein 在 1917 年提出的理論概念。Townes 因此獲得 1964 年的諾貝爾物理學獎。氨微波激射器不僅是量子電子學的開端，也為後來的雷射（laser）技術奠定了基礎——可以說，沒有這個簡單的雙態量子系統，就沒有現代的光纖通訊、雷射切割和 CD 播放器。
+  </div>
+
+  <h3>氨微波激射器（Ammonia Maser）</h3>
+  <p>在零電場下，分隔氨的基態和第一激發態的能量 $2A$ 極小——約 $10^{-4}\text{ eV}$。因此在室溫下，這兩個能態中的分子數量相近。氨微波激射器的原理是：<strong>分離出處於第一激發態的分子，然後收集它們衰變到基態時發射的輻射。</strong></p>
+
+  <p>分離是通過外加電場實現的。定義偶極矩算符 $P$：$P|+\rangle=-qs|+\rangle$，$P|-\rangle=+qs|-\rangle$。在外加電場 $\mathcal{E}$ 下，新的 Hamiltonian 為：</p>
+  <div class="eq">$$H=\begin{pmatrix}E+q\mathcal{E}s & -A \\ -A & E-q\mathcal{E}s\end{pmatrix} \tag{5.26}$$</div>
+  <p>其本徵值為：</p>
+  <div class="eq">$$E_\pm=E\pm\sqrt{A^2+(q\mathcal{E}s)^2} \tag{5.27}$$</div>
+
+  <p>圖 5.10 顯示這些能階隨電場的變化。當 $\mathcal{E}=0$ 時，能階如前述。隨著 $\mathcal{E}$ 增大，基態能量先以二次方下降（因為 $\sqrt{A^2+(q\mathcal{E}s)^2}\simeq A+(q\mathcal{E}s)^2/2A$），在大電場極限下則線性變化。物理圖像是：電場打破了兩井之間的對稱性，使氮原子傾向於佔據電場推動它去的井，從而使基態產生偶極矩。第一激發態則產生相反的極化——從古典角度看這是「異常」的。</p>
+
+  <div class="callout">
+    <strong>💡 Ehrenfest 定理與分子分離</strong><br>
+    Ehrenfest 定理 (2.57) 告訴我們，算符的期望值遵循古典運動方程。分子的動量期望值滿足 $d\langle p_x\rangle/dt=-\langle\partial V/\partial x\rangle$。位能通過電場依賴於 $x$，因此 $d\langle p_x\rangle/dt=\langle P\rangle\,\partial\mathcal{E}/\partial x$。因為 $\langle P\rangle$ 的正負號取決於分子處於基態還是第一激發態，當氨分子束通過一個 $\mathcal{E}$ 變化的區域時，激發態分子可以從基態分子中<strong>被空間分離</strong>出來。收集到激發態分子後，將它們導入一個共振於 150 GHz 的共振腔，就能獲得受激輻射——這就是 Charles Townes 等人首次展示的氨微波激射器，開啟了雷射科技的革命。
+  </div>
+
+  <div class="callout-warn">
+    <strong>⚡ $A$ 不是躍遷矩陣元——它是能量差的一半</strong><br>
+    在 (5.24) 中，非對角元 $-A$ 是 Hamiltonian 矩陣在 $|\pm\rangle$ 基底中的矩陣元，它的物理意義是 $A=(E_o-E_e)/2$。在量子力學中，$2\times2$ Hamiltonian 的非對角元通常被解釋為兩個基底態之間的<strong>耦合強度</strong>——它決定了 $|\pm\rangle$ 態之間躍遷的頻率。但要注意：$-A$ 之所以出現，是因為 $|\pm\rangle$ 不是能量本徵態，而非因為存在某種外在的「躍遷驅動力」。
+  </div>
+
+  <details class="example">
+    <summary>📝 自編概念例：氨分子在外加電場下的能階</summary>
+    <div class="example-body">
+      <p><strong>題目：</strong>氨分子在零電場下的能階分裂為 $2A=10^{-4}\text{ eV}$，偶極矩 $qs=1.5\text{ D}=5.0\times10^{-30}\text{ C·m}$。求當外加電場 $\mathcal{E}=10^6\text{ V/m}$ 時，基態與第一激發態的能量變化。</p>
+      <p><strong>解：</strong>$q\mathcal{E}s=(5.0\times10^{-30})(10^6)=5.0\times10^{-24}\text{ J}=3.1\times10^{-5}\text{ eV}$。</p>
+      <div class="eq">$$E_\pm=E\pm\sqrt{A^2+(q\mathcal{E}s)^2}=E\pm\sqrt{(5\times10^{-5})^2+(3.1\times10^{-5})^2}=E\pm 5.9\times10^{-5}\text{ eV}$$</div>
+      <p>相較於零電場時的 $E\pm 5.0\times10^{-5}\text{ eV}$，能階分裂增加了約 18%。</p>
+      <p><strong>物理意義：</strong>在 $10^6\text{ V/m}$（實驗上可達到的電場）下，能階已有明顯的 Stark 位移。在大電場極限（$q\mathcal{E}s\gg A$）下，能階分裂主要來自電場效應而非穿隧耦合——此時分子被「凍結」在其中一個井中。</p>
+    </div>
+  </details>
+</section>
+
+<!-- ====== 5.3 自由粒子的散射 ====== -->
+<section class="deep-dive" id="s5-3">
+<h2>5.3　自由粒子的散射</h2>
+<div class="section-keypoints">
+  <strong>🔑 本節重點</strong>
+  <span>① 自由粒子散射中，宇稱解的相位差 $\Delta\varphi$ 決定反射／穿透機率</span>
+  <span>② $P_{\text{refl}}=\cos^2\Delta\varphi$，$P_{\text{trans}}=\sin^2\Delta\varphi$——適用於任何對稱的有限範圍散射位能</span>
+  <span>③ 散射截面 $\sigma=|R|^2+|T|^2$ 可從相位完全確定</span>
+  <span>④ 使用宇稱解而非指數解可將邊界條件數量減半</span>
+</div>
+
+  <p>現在我們轉向一個新問題：一個沿 $x$ 軸運動的自由粒子，遇到一個位能急劇變化的區域時會發生什麼？在古典物理中，結果關鍵取決於位能上升的量是否超過入射粒子的動能：如果超過，粒子確定被反射；否則粒子繼續向右運動。我們將發現量子力學預測<strong>反射與穿透通常都有非零機率</strong>，無論位能上升是否超過初始動能。</p>
+
+  <p>我們假設每個粒子具有確定的能量 $E$，因此其波函數滿足 TISE。考慮位能 $V(x)=V_0$（$|x|<a$），$V(x)=0$（其他區域）。在 $|x|>a$ 處，TISE 的相關解為 $e^{\pm ikx}$ 或 $\sin(kx+\varphi)$，其中 $k=\sqrt{2mE}/\hbar$。在 $|x|<a$ 處，根據 $E>V_0$ 或 $E<V_0$，解為 $e^{\pm iKx}$ 或 $e^{\pm Kx}$（及相應的正弦／雙曲函數），其中 $K=\sqrt{2m|E-V_0|}/\hbar$。</p>
+
+  <p>與束縛態問題不同，散射問題<strong>物理上高度不對稱</strong>——粒子只從左側入射。然而，使用具有確定宇稱的解（而非指數解）來處理散射問題可以大大簡化代數：滿足 $x=a$ 處的條件後，$x=-a$ 處的條件會自動滿足。我們尋求如下形式的解：</p>
+  <div class="eq">$$\psi_e(x)=\begin{cases}B\sin(k|x|+\varphi) & |x|>a \\ \cos(Kx)\text{ 或 }\cosh(Kx) & |x|<a\end{cases},\quad \psi_o(x)=\begin{cases}B'\sin(kx+\varphi') & x>a \\ A\sin(Kx)\text{ 或 }A\sinh(Kx) & |x|\le a \\ -B'\sin(k|x|+\varphi') & x<-a\end{cases} \tag{5.33}$$</div>
+
+  <p>一個關鍵點：在束縛態問題中，波函數在無窮遠處為零的要求只能對離散的 $E$ 值滿足——這導致能量量子化。而在散射問題中，對於<strong>任意給定的 $E$</strong>，我們都可以分別構造偶宇稱和奇宇稱的解。這些解的線性組合是不具有確定宇稱的能量本徵態——我們將展示如何將它們組合成描述實際散射過程的解。</p>
+
+  <p>我們尋求一個「沒有粒子從右側入射」的解。將偶宇稱和奇宇稱解相加，在 $x>a$ 處得到：</p>
+  <div class="eq">$$\psi_e(x)+\psi_o(x)=\frac{e^{ikx}}{2i}(Be^{i\varphi}+B'e^{i\varphi'})-\frac{e^{-ikx}}{2i}(Be^{-i\varphi}+B'e^{-i\varphi'}) \tag{5.34}$$</div>
+  <p>要求 $e^{-ikx}$ 的係數為零（沒有從右側來的波），得到條件 $B'=-Be^{i(\varphi'-\varphi)}$。滿足此條件後，可以讀出入射、反射和穿透振幅。反射機率與穿透機率分別為：</p>
+  <div class="eq">$$P_{\text{refl}}=\cos^2(\Delta\varphi),\qquad P_{\text{trans}}=\sin^2(\Delta\varphi) \tag{5.38}$$</div>
+  <p>其中 $\Delta\varphi\equiv\varphi'-\varphi$ 是奇宇稱與偶宇稱解在 $|x|>a$ 處的相位差。<strong>這兩個公式是普遍成立的</strong>——它們的推導完全沒有用到 $|x|<a$ 處波函數的具體形式，因此對任何具有偶宇稱且在有限範圍外為零的散射位能 $V(x)$ 都適用。</p>
+
+
+  <h3>散射截面</h3>
+  <p>在 $V_0 < 0$（位能井）的情況下，$x > a$ 處的出射波代表兩個物理上不同的可能性：(i) 入射粒子未與位能井交互作用，繼續向右運動；(ii) 粒子暫時被困在井中，然後向右逃逸。我們將出射波的振幅寫為 $1 + T$ 倍入射振幅，其中 1 代表「通過不受影響」，$T$ 代表真正的前向散射。</p>
+  <p>從方程 (5.37) 的振幅公式，可以得到：</p>
+  <div class="eq">$$T = \frac{1}{2}(e^{2i\varphi'} - e^{2i\varphi}) - 1, \qquad R = -\frac{1}{2}(e^{2i\varphi'} + e^{2i\varphi}) \tag{5.39}$$</div>
+  <p>總散射截面定義為前向和後向散射機率之和：</p>
+  <div class="eq">$$\sigma = |R|^2 + |T|^2 = 2 - \cos(2\varphi') + \cos(2\varphi) = 2(\sin^2\varphi' + \cos^2\varphi) \tag{5.43}$$</div>
+  <p>這個結果只適用於一維散射問題。三維散射截面的定義見 §12.3。</p>
+
+  <div class="callout">
+    <strong>💡 為什麼使用宇稱解？</strong><br>
+    如果使用指數解 $e^{\pm ikx}$，我們必須在 $x=\pm a$ 兩處分別施加連續性條件——共四個方程。使用宇稱解後，只需在 $x=+a$ 處施加條件，$x=-a$ 處會自動滿足。這將代數工作量減半。更深層的原因是：<strong>宇稱對稱性允許我們將散射問題分解為兩個獨立的「通道」（偶宇稱和奇宇稱），每個通道只涉及在 $x=a$ 處的匹配。</strong>
+  </div>
+
+  <div class="callout-warn">
+    <strong>⚡ $\Delta\varphi$ 決定一切——但 $\varphi$ 和 $\varphi'$ 本身有歧義</strong><br>
+    由於對任何 $x$，$\tan(x+\pi)=\tan x$，決定 $\varphi$ 和 $\varphi'$ 的方程有無窮多個相差 $r\pi$ 的解。這些解給出的反射和穿透振幅完全相同，散射截面也相同。因此我們只需要考慮落在 $-ka\pm\pi/2$ 範圍內唯一的 $\varphi$ 和 $\varphi'$ 值。初學者有時會混淆：雖然 $\varphi$ 本身不唯一，但 $\Delta\varphi$ 模 $\pi$ 是唯一的。
+  </div>
+
+  <details class="example">
+    <summary>📝 自編概念例：從相位差計算散射機率</summary>
+    <div class="example-body">
+      <p><strong>題目：</strong>對於某個散射位能，數值計算給出 $\varphi=0.3$ rad，$\varphi'=0.8$ rad。求反射機率與穿透機率，並驗證機率守恆。</p>
+      <p><strong>解：</strong>$\Delta\varphi=\varphi'-\varphi=0.8-0.3=0.5$ rad。</p>
+      <div class="eq">$$P_{\text{refl}}=\cos^2(0.5)=0.770,\qquad P_{\text{trans}}=\sin^2(0.5)=0.230$$</div>
+      <p>$P_{\text{refl}}+P_{\text{trans}}=0.770+0.230=1.000\;\checkmark$</p>
+      <p><strong>物理意義：</strong>機率自動守恆——這是 (5.38) 式的直接結果（$\cos^2+\sin^2=1$）。當 $\Delta\varphi=0$ 時 $P_{\text{refl}}=1$（全反射），當 $\Delta\varphi=\pi/2$ 時 $P_{\text{trans}}=1$（全穿透）。一般情況下，兩者皆非零——這與古典物理的「要麼全反射，要麼全穿透」截然不同。</p>
+    </div>
+  </details>
+</section>
+
+<!-- ====== 5.3.1 穿隧通過位能障壁 ====== -->
+<section class="deep-dive" id="s5-3-1">
+<h2>5.3.1　穿隧通過位能障壁</h2>
+<div class="section-keypoints">
+  <strong>🔑 本節重點</strong>
+  <span>① $E<V_0$ 時古典預測全反射——量子力學預測非零穿透機率</span>
+  <span>② 穿透機率 $P_{\text{trans}}=\sin^2\Delta\varphi$，$\Delta\varphi$ 由 (5.46) 給出</span>
+  <span>③ 高障壁極限下 $P_{\text{trans}}\propto e^{-4Ka}$——指數衰減</span>
+  <span>④ 即使 $E=V_0$ 穿透機率也未必是 100%</span>
+</div>
+
+  <p>現在考慮 $V_0>E$ 的情況——古典物理預測所有粒子都被反射。在 $|x|<a$ 處波函數為 $\cosh(Kx)$（偶宇稱）或 $\sinh(Kx)$（奇宇稱），其中 $K=\sqrt{2m(V_0-E)}/\hbar$。在 $x=a$ 處的連續性條件給出：</p>
+  <div class="eq">$$\tan(ka+\varphi)=(k/K)\coth(Ka),\qquad \tan(ka+\varphi')=(k/K)\tanh(Ka) \tag{5.45}$$</div>
+
+  <p>從這些表達式可得相位差：</p>
+  <div class="eq">$$\Delta\varphi=\arctan\!\left(\frac{k}{K}\tanh(Ka)\right)-\arctan\!\left(\frac{k}{K}\coth(Ka)\right) \tag{5.46}$$</div>
+
+  <p>圖 5.12 顯示了穿透機率 $\sin^2(\Delta\varphi)$ 作為入射粒子能量的函數（對應不同的無因次參數 $(2mV_0a^2/\hbar^2)^{1/2}$）。對於穿透性最好的障壁，當能量僅為古典穿越所需能量的三分之一時，穿透機率就達到了 50%。另一方面，同樣高度但三倍厚的障壁在 $E=V_0/3$ 時只有 2% 的穿透機率，即使在 $E=V_0$ 時也只有三分之一的機會。</p>
+
+
+  <p><strong>高障壁極限的推導：</strong>當 $Ka \gg 1$ 時，$\tanh(Ka) \approx 1 - 2e^{-2Ka}$（展開雙曲正切），$\coth(Ka) = 1/\tanh(Ka) \approx 1 + 2e^{-2Ka}$。因此 (5.46) 中的兩個 $\arctan$ 函數的參數非常接近。利用 $\arctan(x+\delta) \approx \arctan(x) + \delta/(1+x^2)$ 展開：</p>
+  <div class="eq">$$\Delta\varphi \approx \frac{k/K \cdot (\tanh(Ka) - \coth(Ka))}{1 + (k/K)^2} \approx \frac{-4(k/K)e^{-2Ka}}{1 + (k/K)^2}$$</div>
+  <p>在 $k \ll K$（高障壁）的極限下，$1 + (k/K)^2 \approx 1$，因此：</p>
+  <p>當障壁很高時，$Ka\gg 1$，因此 $\tanh(Ka)$ 和 $\coth(Ka)=1/\tanh(Ka)$ 都接近 1。展開 $\arctan$ 函數，得到近似表達式：</p>
+  <div class="eq">$$\Delta\varphi\simeq -\frac{4e^{-2Ka}}{Kt/k+k/Kt}\simeq -\frac{4k}{K}e^{-2Ka}\qquad (Ka\gg 1) \tag{5.49}$$</div>
+  <p>因此穿透機率 $\sin^2(\Delta\varphi)\simeq (4k/K)^2 e^{-4Ka}$——<strong>穿透機率隨障壁高度指數衰減。</strong>這個 $e^{-4Ka}$ 的依賴性是穿隧效應的標誌性特徵。</p>
+
+  <div class="callout">
+    <strong>💡 穿隧效應的物理圖像</strong><br>
+    在古典物理中，粒子在障壁區域的動能 $E-V_0$ 為負——這「不可能」。在量子力學中，波函數在障壁內不是零，而是以 $e^{-Kx}$ 的形式衰減。如果障壁足夠薄，波函數在遠端仍有可觀的振幅——粒子「穿隧」通過了障壁。關鍵在於：波函數在障壁內是指數衰減而非振盪，因此穿隧機率對障壁寬度極其敏感——這是穿隧顯微鏡（STM）能達到原子級解析度的物理基礎。
+  </div>
+
+
+  <h3>穿隧效應的應用</h3>
+  <p>穿隧效應不是純粹的理論概念——它在現代科技中扮演關鍵角色：</p>
+  <p><strong>掃描穿隧顯微鏡（STM）：</strong>一根極細的金屬探針在樣品表面上方約 1 nm 處掃描。由於穿隧效應，探針與樣品之間有電流流動，電流對距離極其敏感（$\propto e^{-2Kd}$）。通過監測電流變化，STM 可以「看到」單個原子——這是第一種能直接觀察原子的儀器。</p>
+  <p><strong>放射性衰變：</strong>$\alpha$ 粒子被困在原子核的位能井中，但由於穿隧效應可以逃逸。不同原子核的半衰期從微秒到數十億年不等——這個巨大的範圍完全來自穿隧機率對 $Ka$ 的指數敏感性。</p>
+  <p><strong>Josephson 效應：</strong>兩個超導體之間的薄絕緣層形成位能障壁。Cooper 對可以穿隧通過這個障壁，產生超導穿隧電流——這是 SQUID（超導量子干涉儀）的物理基礎，用於測量極微弱的磁場。</p>
+
+  <div class="callout-warn">
+    <strong>⚡ 穿隧不是「粒子變成了波」</strong><br>
+    一種流行的誤解是：穿隧效應意味著「粒子在障壁內變成了波，通過後又變回粒子」。這是不正確的。在量子力學中，粒子<strong>總是</strong>由波函數描述，無論是否在穿隧。穿隧只是波函數在古典禁止區內非零這一事實的結果——無需訴諸任何「波粒二象性」的模糊概念。
+  </div>
+
+  <details class="example">
+    <summary>📝 自編概念例：電子穿隧機率的數量級估算</summary>
+    <div class="example-body">
+      <p><strong>題目：</strong>一個電子（動能 $E=1\text{ eV}$）遇到高度 $V_0=3\text{ eV}$、寬度 $2a=0.5\text{ nm}$ 的方形障壁。估算穿隧機率。</p>
+      <p><strong>解：</strong>$K=\sqrt{2m_e(V_0-E)}/\hbar=\sqrt{2\cdot9.11\times10^{-31}\cdot 2\cdot1.602\times10^{-19}}/1.055\times10^{-34}\approx 7.2\times10^9\text{ m}^{-1}=7.2\text{ nm}^{-1}$。</p>
+      <p>$Ka=7.2\times 0.25=1.8$，$k=\sqrt{2m_eE}/\hbar\approx 5.1\text{ nm}^{-1}$。</p>
+      <div class="eq">$$P_{\text{trans}}\simeq\left(\frac{4k}{K}\right)^2 e^{-4Ka}=\left(\frac{4\cdot5.1}{7.2}\right)^2 e^{-4\cdot1.8}\approx 8.0\times e^{-7.2}\approx 6.0\times10^{-3}$$</div>
+      <p><strong>物理意義：</strong>穿透機率約 0.6%——即每 1000 個入射電子約有 6 個穿隧通過。若障壁寬度加倍至 1.0 nm，$Ka=3.6$，$P_{\text{trans}}\propto e^{-14.4}\approx 5\times10^{-7}$——小了四個數量級。穿隧機率對障壁寬度的指數敏感性是掃描穿隧顯微鏡（STM）能達到原子級解析度的物理基礎。</p>
+    </div>
+  </details>
+</section>
+
+<!-- ====== 5.3.2 古典允許區的散射 ====== -->
+<section class="deep-dive" id="s5-3-2">
+<h2>5.3.2　古典允許區的散射</h2>
+<div class="section-keypoints">
+  <strong>🔑 本節重點</strong>
+  <span>① $E>V_0$ 時，古典預測零反射——量子力學預測非零反射機率</span>
+  <span>② 反射機率隨能量振盪——來自前緣與後緣反射振幅的量子干涉</span>
+  <span>③ 在某些特定能量下反射機率為零——全穿透共振</span>
+  <span>④ 位能井（$V_0<0$）也有非零反射機率，且在低能時很大</span>
+</div>
+
+  <p>現在考慮 $E>V_0$ 的情況——散射區域是古典允許的。物理上這個區域可以是古典可克服的障壁（$V_0>0$）或位能井（$V_0<0$）。在 $|x|<a$ 處，具有確定宇稱的波函數現在是 $\cos(Kx)$ 或 $\sin(Kx)$，其中 $K=\sqrt{2m(E-V_0)}/\hbar$。在 $x=a$ 處的連續性條件給出：</p>
+  <div class="eq">$$\tan(ka+\varphi)=-(k/K)\cot(Ka),\qquad \tan(ka+\varphi')=(k/K)\tan(Ka) \tag{5.51}$$</div>
+
+  <p>圖 5.13 顯示了三種不同寬度障壁的反射機率 $\cos^2(\varphi'-\varphi)$。對於 $E>V_0$ 的部分，反射機率平滑地連接到 $E<V_0$ 的部分。反射機率隨 $E/V_0$ 增大而趨於零——這符合直覺——但它對障壁厚度的依賴卻令人意外：<strong>在 $E/V_0=2$ 時，最厚的障壁反而有最低的反射機率。</strong>事實上，對於最厚的障壁，反射機率在 $E\approx 2V_0$ 時降至零，然後在更高能量處又上升。</p>
+
+  <p>這個意外現象的原因是<strong>量子干涉</strong>：來自障壁前緣和後緣的反射振幅之間的干涉。當障壁具有特定厚度時，這兩個振幅恰好互相抵消——這就是全穿透的「共振」條件。當 $V_0<0$（位能井），古典反射機率為零，但如圖 5.14 所示，量子反射機率一般非零，且在 $E/|V_0|\ll 1$ 時很大。反射機率的振盪同樣來自井的兩個邊緣處反射振幅之間的量子干涉。</p>
+
+  <div class="callout">
+    <strong>💡 為什麼古典物理看不到這些振盪？</strong><br>
+    反射機率的振盪是量子干涉的結果——來自前緣和後緣的反射振幅具有不同的相位，它們的疊加產生干涉圖樣。在古典物理中，我們直接加機率而非振幅，因此沒有干涉項。在宏觀尺度上，粒子的 de Broglie 波長極短，振盪週期遠小於任何實驗的能量解析度——測量到的只是平均值，而平均值對應古典結果。
+  </div>
+
+  <div class="callout-warn">
+    <strong>⚡ $V_0<0$ 時不是「吸引力就沒有反射」</strong><br>
+    古典直覺告訴我們：粒子遇到吸引力（位能井）時只會加速通過，不會反射。這個直覺在量子力學中是<strong>錯的</strong>。如圖 5.14 所示，位能井的反射機率在低能時可以很大。原因同樣是量子干涉：粒子在進入和離開井時，波函數的波長發生變化（$k\to K\to k$），兩個界面處的反射振幅產生干涉。這是量子力學中最違反古典直覺的結果之一。
+  </div>
+
+  <details class="example">
+    <summary>📝 自編概念例：全穿透條件的物理理解</summary>
+    <div class="example-body">
+      <p><strong>題目：</strong>證明當 $Ka=n\pi/2$（$n$ 為整數）時，位能井（$V_0<0$）的反射機率為零。用物理圖像解釋。</p>
+      <p><strong>解：</strong>從 (5.51) 第二式，$\tan(ka+\varphi')=(k/K)\tan(Ka)$。當 $Ka=n\pi/2$ 時，$\tan(Ka)$ 要麼為 0（$n$ 偶數）要麼發散（$n$ 奇數）。對應地，$\varphi'$ 取特定值。代入 $\Delta\varphi=\varphi'-\varphi$ 後可證 $\Delta\varphi=\pi/2$ 模 $\pi$，因此 $P_{\text{refl}}=\cos^2\Delta\varphi=0$。</p>
+      <p><strong>物理圖像：</strong>$Ka=n\pi/2$ 意味著在半個井中恰好容納整數個四分之一波長。在這種條件下，從井的前緣和後緣反射的波<strong>相位差恰好使它們在入射側互相抵消</strong>——就像光學中的抗反射塗層。這被稱為 Ramsauer–Townsend 效應。</p>
+    </div>
+  </details>
+</section>
+
+<!-- ====== 5.3.3 共振散射與 Breit–Wigner 截面 ====== -->
+<section class="deep-dive" id="s5-3-3">
+<h2>5.3.3　共振散射與 Breit–Wigner 截面</h2>
+<div class="section-keypoints">
+  <strong>🔑 本節重點</strong>
+  <span>① 雙 $\delta$ 障壁形成位能井，散射截面在近束縛態能量處出現窄峰</span>
+  <span>② 峰來自相位 $\varphi$ 在共振能量附近的急劇變化</span>
+  <span>③ Breit–Wigner 公式 $\sigma=\text{const}+2(\Gamma/2)^2/[(\Gamma/2)^2+(E-E_R)^2]$</span>
+  <span>④ 共振寬度 $\Gamma$ 與束縛態壽命 $t_R$ 滿足 $t_R=\hbar/\Gamma$</span>
+</div>
+
+  <p>當障壁變得非常高時，它反射入射粒子的機率趨於 1。因此，一個遇到<strong>兩個</strong>高障壁的粒子可以在兩障壁之間來回彈跳很多次，然後才最終穿隧通過其中一個障壁逃逸到無窮遠處。這種情況出現在原子核中：短程的「強作用力」將帶電粒子（如質子和 $\alpha$ 粒子）束縛在核內，即使從能量角度它們逃逸出去更有利——帶正電粒子遠離帶正電原子核時釋放的靜電能可以超過克服強作用力所需的功（見圖 5.15）。</p>
+
+  <p>我們使用雙 $\delta$ 函數障壁作為這個物理的玩具模型：</p>
+  <div class="eq">$$V(x)=V_\delta[\delta(x+a)+\delta(x-a)],\qquad V_\delta>0 \tag{5.52}$$</div>
+  <p>每個 $\delta$ 障壁使波函數導數產生大小為 $K\equiv 2mV_\delta/\hbar^2$ 的躍變。在 $x=a$ 處，施加連續性和導數躍變條件後，得到決定 $\varphi$ 和 $\varphi'$ 的方程：</p>
+  <div class="eq">$$\cot(ka+\varphi)=K/k-\tan(ka),\qquad \cot(ka+\varphi')=K/k+\cot(ka) \tag{5.56}$$</div>
+
+  <p>圖 5.17 顯示了兩種不同高度障壁的總散射截面 $\sigma$。對於高障壁（$Ka=40$），截面在 $ka=n\pi/2$（$n=1,2,\ldots$）附近出現一系列尖峰。這些位置的物理意義是：如果障壁完全不可穿透，粒子將在 $ka=n\pi/2$ 處有束縛態（這是波函數在 $x=\pm a$ 處為零的條件）。<strong>每個散射截面峰都關聯著一個這樣的「近束縛態」。</strong></p>
+
+  <p>當粒子能量接近一個近束縛態的能量時，它可以暫時被困在井中，來回彈跳多次後才逃逸——這導致散射截面異常大。被困態 $|\text{trap}\rangle$ 不是穩定態，它可以展開為能量範圍 $(E_0-\Gamma/2,E_0+\Gamma/2)$ 內穩定態的線性疊加。$\Gamma$ 越小（峰越窄），粒子被困的時間越長。</p>
+
+  <h3>Breit–Wigner 截面</h3>
+  <p>圖 5.18 顯示了 $\varphi$ 和 $\varphi'$ 作為 $k$ 的函數：在大多數 $k$ 值處兩者相等，但在共振附近，$\varphi$ 急速上升約 $\pi$ 然後瞬間下降。在 $\varphi$ 的「突變」（glitch）中心，$\cos^2\varphi=1$，$\sin^2\varphi'=1$，因此 $\sigma=4$——是背景值的四倍。</p>
+
+  <p>對共振附近的 $\varphi$ 進行 Taylor 展開，可以得到：</p>
+  <div class="eq">$$\sigma=\text{const}+\frac{2(\Gamma/2)^2}{(\Gamma/2)^2+(E-E_R)^2} \tag{5.64a}$$</div>
+  <div class="eq">$$\Gamma\equiv\frac{2\hbar^2k_R}{(1+K^2/k_R^2)am}\simeq\frac{2\hbar^2k_R^3}{K^2am} \tag{5.64b}$$</div>
+  <p>這就是著名的<strong>Breit–Wigner 截面公式</strong>。$\Gamma$ 具有能量的因次，是共振的特徵寬度。圖 5.19 顯示了中子被 $^{238}$U 原子核散射的實驗數據——完美符合 Breit–Wigner 形狀。</p>
+
+  <p>根據不確定性原理，寬度 $\Gamma$ 對應時間尺度 $t_R=\hbar/\Gamma$。一個樸素的計算確認 $t_R$ 正是粒子逃離位能井的特徵時間：粒子每次撞擊 $\delta$ 障壁的穿隧機率為 $P_{\text{tun}}\simeq 4(k_R/K)^2$，來回一趟的時間為 $t_f=2am/\hbar k_R$，因此被困機率的對數衰減率為 $-P_{\text{tun}}/t_f=-1/t_R$，與 (5.65) 完全吻合。</p>
+
+  <div class="callout">
+    <strong>💡 共振散射與阻尼諧振子的類比</strong><br>
+    在共振附近，相位 $\varphi$ 的急劇變化和散射截面 $\sigma$ 的行為，與輕阻尼諧振子在其共振頻率附近的行為極為相似（Box 5.1）。具體而言，當驅動頻率接近共振頻率時，諧振子的穩態響應相位從接近零增加到 $\pi/2$，然後在通過共振時躍變為 $-\pi/2$。這暗示一個物理圖像：<strong>量子位能井就像一個被入射機率振幅「驅動」的諧振子</strong>，阻尼由 $\Gamma$ 決定，Breit–Wigner 截面的 Lorentzian 形狀對應諧振子振幅的 Lorentzian 形狀。
+  </div>
+
+  <div class="callout-warn">
+    <strong>⚡ $\Gamma$ 不是「能階寬度」——它是散射共振的寬度</strong><br>
+    Breit–Wigner 公式中的 $\Gamma$ 描述的是散射截面峰的寬度，不是束縛態能階的內在寬度。束縛態（如果存在）具有確定的能量——沒有「寬度」。$\Gamma$ 反映的是<strong>散射態</strong>在近束縛態能量附近的行為：入射粒子可以暫時被困住，被困時間 $t_R\sim\hbar/\Gamma$。這是散射理論的核心概念。
+  </div>
+
+  <details class="example">
+    <summary>📝 自編概念例：$\alpha$ 衰變壽命的數量級估算</summary>
+    <div class="example-body">
+      <p><strong>題目：</strong>$^{238}$U 通過 $\alpha$ 衰變的半衰期為 $6.4\times10^9$ 年。假設 $\alpha$ 粒子在核內以約 $c/3$ 的速度來回運動，核直徑約 $10^{-14}\text{ m}$。估算障壁的 $W$ 值。</p>
+      <p><strong>解：</strong>每次撞擊障壁的穿隧機率 $P_{\text{tun}}\simeq e^{-4Ka}$。來回時間 $t_f\simeq 2\times10^{-14}/(10^8)\approx 2\times10^{-22}\text{ s}$。在 $6.4\times10^9$ 年（$\approx 2\times10^{17}\text{ s}$）內撞擊約 $10^{39}$ 次。因此 $P_{\text{tun}}\sim 10^{-39}$，$e^{-4Ka}\sim 10^{-39}$，$4Ka\approx 90$，$Ka\approx 22.5$。</p>
+      <p>已知釋放能量約 4 MeV，障壁來自庫倫排斥 $V(r)=Z_1Z_2e^2/4\pi\epsilon_0 r$。粗略估計 $W=\sqrt{2mV_0a^2}/\hbar\sim Ka\sim 22$（假設 $V_0\gg E$）。</p>
+      <p><strong>物理意義：</strong>$W\sim 20$—$30$ 的障壁產生 $10^{-39}$ 量級的穿隧機率，對應數十億年的壽命。這說明為什麼 $\alpha$ 衰變的半衰期範圍極廣（從微秒到數十億年）——穿隧機率對 $W$ 的指數敏感性使小幅的 $W$ 變化對應巨大的壽命差異。</p>
+    </div>
+  </details>
+</section>
+
+<!-- ====== 5.4 我們的結果適用嗎？ ====== -->
+<section class="deep-dive" id="s5-4">
+<h2>5.4　我們的結果適用嗎？</h2>
+<div class="section-keypoints">
+  <strong>🔑 本節重點</strong>
+  <span>① 真實位能不會不連續——階梯近似的適用性需要檢驗</span>
+  <span>② 當一側為古典禁止區時，階梯結果定性正確</span>
+  <span>③ 兩側皆為古典允許區時，階梯近似只在 $kb<1$ 時定量可靠</span>
+  <span>④ 對電子而言，階梯位能只在 $E\lesssim 1\text{ eV}$ 時才現實</span>
+</div>
+
+  <p>極少真實系統具有不連續的位能 $V(x)$——我們的結果只有在足夠陡峭的位能變化可以被近似為不連續時才有實際意義。本節調查：位能變化需要多麼突然，才能使基於不連續位能的結果成立？</p>
+
+  <p>當波函數在位能不連續的一側是衰減的（$\propto e^{\pm Kx}$）時，我們的結果可以推廣到連續變化的位能：在 $E<V(x)$ 的區域，波函數不再是簡單的指數，但其相位保持不變而振幅單調遞減；在 $E>V(x)$ 的區域，正弦式的 $\psi(x)\propto e^{ikx}$ 被其他形式但振幅相似的振盪函數取代。<strong>因此在 $E<V$ 的情況下，階梯位能束縛態的結果定性上對連續位能也成立。</strong></p>
+
+  <p>當位能變化兩側都是古典允許區（$E>V(x)$）時，情況就不那麼清楚了。考慮如下平滑變化的位能：</p>
+  <div class="eq">$$V(x)=V_0\begin{cases}0 & x<-b \\ \tfrac{1}{2}[1+\sin(\pi x/2b)] & |x|<b \\ 1 & x>b\end{cases} \tag{5.69}$$</div>
+  <p>該位能在 $2b$ 的距離內從 0 平滑變化到 $V_0$。圖 5.20 顯示了反射機率：當 $kb\ll 1$ 時（即位能變化距離遠小於 de Broglie 波長），反射機率接近階梯位能的結果；但當 $kb\gtrsim 2$ 時，反射機率遠小於階梯近似值。</p>
+
+  <p>圖 5.21 進一步顯示了有限區域（障壁或位能井）的反射機率。對於平滑障壁（$kb=1$），反射機率比尖銳階梯小約 1.7 倍；對於 $kb=2$，小了近十倍。對於位能井，即使更小的 $kb$ 值也必須滿足才能使階梯近似有用。<strong>因此，將位能變化建模為尖銳階梯會嚴重誤導——除非過渡區域的半寬 $b$ 滿足 $kb<1$，即位能變化在一個 de Broglie 波長內完成。</strong></p>
+
+  <p>對電子束而言，de Broglie 波長為 $\lambda=1.16\,(E/1\text{ eV})^{-1/2}\text{ nm}$。要使一維近似成立，電子束寬度必須遠大於 $\lambda$；要使階梯近似成立，位能變化必須在遠小於 $\lambda$ 的距離內完成。實際上這些條件只有在位能變化與介質變化相關聯時才能同時滿足。如果介質由原子構成，變化至少延伸 0.1 nm，因此我們需要 $E\lesssim 1\text{ eV}$。</p>
+
+  <p>現實中，階梯位能主要對質量更小的粒子——光子和微中子——有實際意義。光子在玻璃／空氣界面等尖銳位能變化處的部分反射與部分穿透在光學中扮演重要角色。相比之下，電子、中子和質子不太可能被一個變化位能區域部分反射和部分穿透。這些考慮解釋了為什麼部分反射和部分穿透的現象在古典力學中不為人知——古典力學關注的是質量巨大的物體，它們的 de Broglie 波長在任何實驗可達的能量下都比原子小許多數量級。</p>
+
+  <div class="callout">
+    <strong>💡 de Broglie 波長是判斷量子效應何時重要的標尺</strong><br>
+    古典力學與量子力學的邊界不是由絕對尺寸決定，而是由<strong>系統的特徵尺寸與 de Broglie 波長 $\lambda=h/p$ 的比較</strong>決定。當位能變化的空間尺度遠大於 $\lambda$ 時，量子反射極小——古典物理是極好的近似。當變化尺度與 $\lambda$ 可比或更小時，量子效應（反射、穿隧、干涉）變得重要。這解釋了為什麼原子（$\lambda\sim 0.1\text{ nm}$）顯示強量子效應，而棒球（$\lambda\sim 10^{-34}\text{ m}$）純粹是古典的。
+  </div>
+
+  <div class="callout-warn">
+    <strong>⚡ 平滑位能的反射振幅遠小於尖銳階梯的預測</strong><br>
+    這是一個常見的陷阱：使用尖銳階梯模型計算宏觀系統的反射機率，然後驚訝於實驗上看不到量子反射。<strong>當位能平滑變化時，反射振幅急劇衰減</strong>——這是因為平滑變化意味著「阻抗」是漸進的，波函數有機會「適應」而不產生強反射。在 WKB 近似（§11.6）中，反射振幅對平滑度的依賴可以用指數衰減因子 $e^{-2\int|K|dx}$ 來定量描述。
+  </div>
+
+  <details class="example">
+    <summary>📝 自編概念例：de Broglie 波長與階梯近似的適用性</summary>
+    <div class="example-body">
+      <p><strong>題目：</strong>一個電子以動能 $E=100\text{ eV}$ 運動，遇到在 $b=0.2\text{ nm}$ 內平滑變化的位能。判斷階梯近似是否適用。如果換成質子又如何？</p>
+      <p><strong>解：</strong>電子 de Broglie 波長 $\lambda_e=1.16/\sqrt{100}\approx 0.116\text{ nm}$。$k=2\pi/\lambda_e\approx 54\text{ nm}^{-1}$，$kb\approx 54\times0.2=10.8\gg 1$——階梯近似<strong>不適用</strong>，會嚴重高估反射機率。</p>
+      <p>質子質量約為電子的 1836 倍，$\lambda_p=\lambda_e/\sqrt{1836}\approx 0.0027\text{ nm}$，$kb$ 更大——更不適用。</p>
+      <p><strong>物理意義：</strong>對於典型的實驗室電子能量（$>10\text{ eV}$），階梯近似對真實的平滑位能幾乎從不適用——這解釋了為什麼部分反射在電子光學中不常見。相比之下，可見光光子（$\lambda\sim 500\text{ nm}$）在界面處（變化距離 $\ll\lambda$）的反射完全符合階梯近似。</p>
+    </div>
+  </details>
+</section>
+
+<!-- ====== 本章摘要 ====== -->
+<section id="summary">
+  <h2>本章摘要</h2>
+  <p>本章使用理想化的階梯位能探索了量子力學中超越古典物理的關鍵現象：束縛態的能量量子化、穿隧效應、雙井振盪和共振散射。這些現象雖然是在簡化模型中推導的，但它們揭示了量子力學的普遍特徵。以下是核心概念和公式的整理：</p>
+  <div class="table-scroll" role="region" aria-label="本章關鍵概念與公式" tabindex="0">
+    <table>
+      <caption>本章關鍵概念、公式、適用條件與用途</caption>
+      <thead>
+        <tr>
+          <th scope="col">概念／公式</th>
+          <th scope="col">符號與單位</th>
+          <th scope="col">適用條件</th>
+          <th scope="col">用途</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">方形井束縛態條件 $\tan(ka)=\sqrt{W^2/(ka)^2-1}$</th>
+          <td>$W=\sqrt{2mV_0a^2}/\hbar$，無因次</td>
+          <td>$E<V_0$，任意 $W$</td>
+          <td>決定偶宇稱束縛態能量</td>
+        </tr>
+        <tr>
+          <th scope="row">無限深井能譜 $E_n=n^2\hbar^2\pi^2/(8ma^2)$</th>
+          <td>$n=1,2,\ldots$</td>
+          <td>$V_0\to\infty$ 極限</td>
+          <td>量子井、量子點中電子態的簡單模型</td>
+        </tr>
+        <tr>
+          <th scope="row">$\delta$ 井束縛態能量 $E=-mV_\delta^2/(2\hbar^2)$</th>
+          <td>$V_\delta>0$，J·m</td>
+          <td>極窄深井極限</td>
+          <td>短程位能束縛的簡化模型</td>
+        </tr>
+        <tr>
+          <th scope="row">雙井 Hamiltonian $H=\begin{pmatrix}E&-A\\-A&E\end{pmatrix}$</th>
+          <td>$A=(E_o-E_e)/2$，能量</td>
+          <td>低能近似的二能階系統</td>
+          <td>描述氨分子、量子位元等雙態系統</td>
+        </tr>
+        <tr>
+          <th scope="row">散射機率 $P_{\text{refl}}=\cos^2\Delta\varphi$，$P_{\text{trans}}=\sin^2\Delta\varphi$</th>
+          <td>$\Delta\varphi=\varphi'-\varphi$，rad</td>
+          <td>任何對稱的有限範圍位能</td>
+          <td>從宇稱解相位差計算散射</td>
+        </tr>
+        <tr>
+          <th scope="row">穿隧機率 $P_{\text{trans}}\propto e^{-4Ka}$</th>
+          <td>$K=\sqrt{2m(V_0-E)}/\hbar$</td>
+          <td>$Ka\gg 1$，高障壁</td>
+          <td>估算穿隧電流、$\alpha$ 衰變率</td>
+        </tr>
+        <tr>
+          <th scope="row">Breit–Wigner 截面 $\sigma=\text{const}+2(\Gamma/2)^2/[(\Gamma/2)^2+(E-E_R)^2]$</th>
+          <td>$\Gamma$：共振寬度，能量</td>
+          <td>近束縛態能量附近</td>
+          <td>擬合核散射、粒子物理共振數據</td>
+        </tr>
+        <tr>
+          <th scope="row">共振壽命 $t_R=\hbar/\Gamma$</th>
+          <td>$t_R$：被困時間，s</td>
+          <td>窄共振</td>
+          <td>從截面寬度推斷束縛態壽命</td>
+        </tr>
+        <tr>
+          <th scope="row">階梯近似條件 $kb<1$</th>
+          <td>$b$：位能過渡區半寬</td>
+          <td>$E>V$ 兩側皆是</td>
+          <td>判斷階梯結果是否定量適用</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ====== 常見錯誤 ====== -->
+<section id="common-mistakes">
+  <h2>初學者常見錯誤</h2>
+  <div class="callout-warn">
+    <strong>⚡ 錯誤一：忘記束縛態要求 $E>0$</strong><br>
+    在研究方形井時，初學者有時會問「如果 $E$ 是負的會怎麼樣？」對於定義為 $V(|x|<a)=0$、$V(|x|>a)=V_0>0$ 的方形井，可以嚴格證明<strong>束縛態能量 $E$ 必須大於零</strong>——這是因為波函數在原點附近的行為排除了 $E\le 0$ 的可能性。$E<0$ 只有在我們將能量零點移至井外時才可能（如 $\delta$ 井模型）。
+  </div>
+  <div class="callout-warn">
+    <strong>⚡ 錯誤二：混淆 $|\pm\rangle$ 態和 $|e\rangle,|o\rangle$ 態的物理意義</strong><br>
+    在雙井系統中，$|e\rangle$ 和 $|o\rangle$ 是<strong>能量本徵態</strong>（穩定態），而 $|\pm\rangle$ 是<strong>位置本徵態</strong>（非穩定態）。$|+\rangle$ 中的粒子不在能量本徵態，因此會隨時間演化——這正是穿隧振盪的來源。如果你想要一個不隨時間改變的態，必須使用 $|e\rangle$ 或 $|o\rangle$。
+  </div>
+  <div class="callout-warn">
+    <strong>⚡ 錯誤三：認為散射中宇稱解「不物理」</strong><br>
+    散射問題物理上不對稱（粒子只從左側來），所以有人認為使用具有確定宇稱的解是錯誤的。但實際上，<strong>線性疊加原理</strong>允許我們將兩個宇稱解的適當組合構成不對稱的物理散射態。使用宇稱解的優勢是巨大的代數簡化——這是理論物理中「先求對稱解，再組合出所需不對稱解」策略的典範。
+  </div>
+  <div class="callout-warn">
+    <strong>⚡ 錯誤四：將 $\Delta\varphi$ 的歧義性誤解為物理歧義</strong><br>
+    決定 $\varphi$ 和 $\varphi'$ 的方程有無窮多個相差 $\pi$ 的解，但不同的選擇給出<strong>相同的反射和穿透機率</strong>。這是因為 $\cos^2(\Delta\varphi)$ 和 $\sin^2(\Delta\varphi)$ 在 $\Delta\varphi\to\Delta\varphi+\pi$ 下不變。物理量沒有歧義——只有中間的相位角有。
+  </div>
+</section>
+
+<!-- ====== 自我檢測 ====== -->
+<section id="self-check">
+  <h2>自我檢測</h2>
+  <details class="self-check-item">
+    <summary>1. 為什麼任何一維方形位能井（無論多窄多淺）都至少有一個束縛態？這是否違反不確定性原理？</summary>
+    <div class="self-check-answer">
+      <p>方程 (5.8) 的圖解（圖 5.2）顯示 $\tan(ka)$ 和 $\sqrt{W^2/(ka)^2-1}$ 總是至少有一個交點——因為左側從原點出發而右側從無窮大出發。這<strong>不</strong>違反不確定性原理，因為對於淺井（$W\ll 1$），粒子在古典禁止區 $|x|>a$ 中有大量機率——$\Delta x$ 遠大於 $a$，使得 $\Delta x\Delta p$ 仍然滿足 $\gtrsim\hbar$。極端情況是 $\delta$ 井：粒子「確定」不在井內。</p>
+      <p class="solution-note">正文依據：§5.1</p>
+    </div>
+  </details>
+  <details class="self-check-item">
+    <summary>2. 氨分子中的氮原子如何在兩個位能井之間「穿隧」？為什麼我們在日常生活中看不到光開關這樣振盪？</summary>
+    <div class="self-check-answer">
+      <p>氮原子初始在 $|+\rangle$（在氫原子平面上方），這個態是 $|e\rangle$ 和 $|o\rangle$ 的等權重疊加。由於 $|e\rangle$ 和 $|o\rangle$ 具有略微不同的能量，疊加態隨時間演化，經過 $T=\pi\hbar/(E_o-E_e)$ 後變為 $|-\rangle$（在下方）。穿隧速率由能量分裂 $A=(E_o-E_e)/2$ 決定，而 $A$ 指數地依賴於 $e^{-2W}$。對於宏觀物體（如光開關），$W$ 極大（$\sim 10^{30}$），$A$ 極小，穿隧時間遠超宇宙年齡。</p>
+      <p class="solution-note">正文依據：§5.2–§5.2.1</p>
+    </div>
+  </details>
+  <details class="self-check-item">
+    <summary>3. 散射問題中，為什麼 $P_{\text{refl}}=\cos^2\Delta\varphi$ 和 $P_{\text{trans}}=\sin^2\Delta\varphi$ 這兩個公式是「普遍」的？它們在什麼條件下成立？</summary>
+    <div class="self-check-answer">
+      <p>這兩個公式的推導<strong>完全沒有用到 $|x|<a$ 處波函數的具體形式</strong>——只涉及 $|x|>a$ 處入射波和出射波的振幅關係。因此它們對任何具有偶宇稱且在 $|x|>a$ 處為零的散射位能都成立。唯一的要求是散射位能具有偶宇稱且在有限範圍外為零。這是一個極其強大的結果——散射機率完全由兩個宇稱解的遠方相位差決定。</p>
+      <p class="solution-note">正文依據：§5.3</p>
+    </div>
+  </details>
+  <details class="self-check-item">
+    <summary>4. Breit–Wigner 共振截面中的 $\Gamma$ 有什麼物理意義？如何從 $\Gamma$ 推斷束縛態的壽命？</summary>
+    <div class="self-check-answer">
+      <p>$\Gamma$ 是散射共振的能量寬度。它的物理意義是：被困在位能井中的粒子態不是能量本徵態（因為障壁有限高），它可以展開為能量範圍 $\sim\Gamma$ 內穩定態的疊加。根據不確定性原理，能量不確定性 $\Gamma$ 對應時間尺度 $t_R=\hbar/\Gamma$——這正是粒子被困在井中的特徵時間。$\Gamma$ 越小，共振越窄，粒子被困越久。這一關係在核物理和粒子物理中被廣泛用於從散射實驗推斷共振態的壽命。</p>
+      <p class="solution-note">正文依據：§5.3.3</p>
+    </div>
+  </details>
+
+  <details class="self-check-item">
+    <summary>5. 為什麼位能井（$V_0 < 0$）也會反射粒子？這與古典物理的預測有何不同？</summary>
+    <div class="self-check-answer">
+      <p>古典物理中，粒子遇到吸引力只會加速通過，不會反射。但在量子力學中，波函數在進入井時波長從 $\lambda_1 = 2\pi\hbar/\sqrt{2mE}$ 變為 $\lambda_2 = 2\pi\hbar/\sqrt{2m(E+|V_0|)}$（更短），在離開時又變回 $\lambda_1$。這兩個「界面」處的反射振幅產生量子干涉——當井的寬度恰好使兩個反射振幅相消時，反射機率為零（Ramsauer-Townsend 效應）；否則有非零反射。這是純量子效應，古典物理中不存在。</p>
+      <p class="solution-note">正文依據：§5.3.2</p>
+    </div>
+  </details>
+  <details class="self-check-item">
+    <summary>6. $\alpha$ 衰變的半衰期為什麼範圍如此之廣（從微秒到數十億年）？</summary>
+    <div class="self-check-answer">
+      <p>$\alpha$ 粒子穿隧通過庫倫障壁的機率 $\propto e^{-4Ka}$，其中 $K = \sqrt{2m(V_0-E)}/\hbar$。$Ka$ 取決於障壁高度 $V_0$（與原子核電荷 $Z$ 相關）和寬度 $a$（與核半徑相關）。由於指數函數的敏感性，$Ka$ 從 20 變到 30（僅 50% 的變化）就使穿隧機率從 $10^{-35}$ 變到 $10^{-52}$，對應半衰期從秒級變到數十億年。這就是為什麼 $\alpha$ 衰變的半衰期是核物理中最敏感的量之一。</p>
+      <p class="solution-note">正文依據：§5.3.3</p>
+    </div>
+  </details>
+</section>
+
+<!-- ====== 延伸資源 ====== -->
+<section id="extras">
+  <h2>延伸資源與下一章</h2>
+  <ul class="resource-list">
+    <li><a href="#">本章公式整理</a></li>
+    <li><a href="#">本章例題與練習（原書問題 5.1–5.17）</a></li>
+    <li><a href="ch6_composite_zh.html">第 6 章：複合系統與量子糾纏</a></li>
+  </ul>
+  <div class="further-reading">
+    <strong>下一章預告：複合系統與量子糾纏</strong>
+    <p>本章我們研究的是單一粒子在一維階梯勢中的運動。但量子力學最令人驚奇的現象——糾纏、EPR 悖論、Bell 不等式——都涉及<strong>多粒子複合系統</strong>。第 6 章將引入張量積空間來描述複合系統，定義糾纏態，並探討著名的 Einstein–Podolsky–Rosen 論證。你在本章學到的雙態系統（如氨分子）將成為理解糾纏的起點——因為兩個自旋-$\\frac{1}{2}$ 粒子的複合系統就是一個四維的張量積空間。</p>
+    <a href="ch6_composite_zh.html">前往下一章 →</a>
+  </div>
+</section>
+
+</main>
+
+</body>
+</html>

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第 8 章例題詳解 — Calculus</title>
+<script>
+MathJax = {
+  tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']], tags: 'ams' },
+  options: { ignoreHtmlClass: 'no-math' }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<link rel="stylesheet" href="../../../../shared/core.css">
+<script src="../../../../shared/core.js" defer></script>
+<link rel="stylesheet" href="../../../../shared/navigation.css" data-shared-navigation>
+</head>
+<body>
+<nav class="sidebar" aria-label="本章目錄"><div class="sidebar-header"><div class="sidebar-subtitle">微積分</div><h2 class="sidebar-title">微分方程</h2></div><ul class="toc"><li class="ns"><a href="#section-1">8.1 微分方程基礎 (Basics of Differential Equations)</a></li><li class="ns"><a href="#section-2">8.2 方向場與數值方法 (Direction Fields and Numerical Methods)</a></li><li class="ns"><a href="#section-3">8.3 可分離微分方程 (Separable Equations)</a></li><li class="ns"><a href="#section-4">8.4 羅吉斯方程 (The Logistic Equation)</a></li><li class="ns"><a href="#section-5">8.5 一階線性微分方程 (First-order Linear Equations)</a></li></ul><div class="sidebar-tools"><button type="button" data-action="toggle-theme" aria-label="切換深色或淺色模式">切換顯示主題</button></div></nav>
+
+<main class="chapter-page">
+
+<a class="portal-home-link" href="../../index.html">← 返回學習中心</a>
+
+<a class="portal-home-link" href="index.html">← 例題與習題目錄</a>
+
+<header class="chapter-header">
+  <div class="tag">第 8 章 · Calculus Vol 2, Ch 4</div>
+  <h1>微分方程</h1>
+  <div class="chapter-meta">Introduction to Differential Equations · OpenStax Calculus · pp. 315–370 · 共 19 個課本例題</div>
+</header>
+
+<p>以下收錄本章所有課本例題，包含<strong>題目、詳細逐步解題過程與答案</strong>。內容以繁體中文呈現，數學式使用 MathJax 渲染。課本有詳解者翻譯為繁體中文；課本僅提供答案者，補上完整逐步解。</p>
+
+<section id="ss4-1">
+<h2 id="section-1">8.1 微分方程基礎 (Basics of Differential Equations)</h2>
+<p style="font-size:13px;color:var(--tx2);margin-bottom:16px"><strong>🔑 本節重點：</strong>微分方程的階、通解與特解、初始值問題、驗證解</p>
+
+<div class="example">
+<div class="example-label">📝 例題 8.1</div>
+<div class="example-title">驗證微分方程的解</div>
+<div class="problem-statement">驗證 $y = e^{-3x} + 2x + 3$ 是微分方程 $y' + 3y = 6x + 11$ 的解。</div>
+<div class="solution"><strong>解：</strong>先求導數：$y' = -3e^{-3x} + 2$。代入左側：$y' + 3y = (-3e^{-3x} + 2) + 3(e^{-3x} + 2x + 3)$<br>$= -3e^{-3x} + 2 + 3e^{-3x} + 6x + 9 = 6x + 11$。等於右側，驗證完畢。</div>
+<div class="solution">✅ 答案：$y = e^{-3x} + 2x + 3$ 滿足方程式 ✓</div>
+
+</div>
+
+<div class="example">
+<div class="example-label">📝 例題 8.2</div>
+<div class="example-title">辨識微分方程的階</div>
+<div class="problem-statement">求下列微分方程的階： (a) $y' + y = 3x^2$ (b) $y'' + 2y' + y = 0$ (c) $y^{(4)} + y''' = \cos x$</div>
+<div class="solution"><strong>解：</strong>(a) 最高導數為 $y'$，階為 <strong>1</strong>。<br>(b) 最高導數為 $y''$，階為 <strong>2</strong>。<br>(c) 最高導數為 $y^{(4)}$，階為 <strong>4</strong>。</div>
+<div class="solution">✅ 答案：(a) 1 階 (b) 2 階 (c) 4 階</div>
+
+</div>
+
+<div class="example">
+<div class="example-label">📝 例題 8.3</div>
+<div class="example-title">通解與特解</div>
+<div class="problem-statement">求微分方程 $y' = 2x$ 的通解，並求滿足 $y(0) = 3$ 的特解。</div>
+<div class="solution"><strong>解：</strong>通解：積分 $\int y'\,dx = \int 2x\,dx$，得 $y = x^2 + C$。<br>特解：代入 $y(0)=3$，得 $0^2 + C = 3$，故 $C = 3$。特解為 $y = x^2 + 3$。</div>
+<div class="solution">✅ 答案：通解：$y = x^2 + C$；特解：$y = x^2 + 3$</div>
+
+</div>
+
+<div class="example">
+<div class="example-label">📝 例題 8.4</div>
+<div class="example-title">初始值問題</div>
+<div class="problem-statement">解初始值問題：$y' = \frac{y}{x}$，$y(1) = 2$。</div>
+<div class="solution"><strong>解：</strong>分離變數：$\frac{dy}{y} = \frac{dx}{x}$。積分：$\ln|y| = \ln|x| + C$。取指數：$|y| = e^C|x|$，即 $y = Kx$（$K = \pm e^C$）。<br>代入 $y(1)=2$：$2 = K \cdot 1$，得 $K=2$。故特解為 $y = 2x$。</div>
+<div class="solution">✅ 答案：$y = 2x$</div>
+
+</div>
+
+</section>
+
+<section id="ss4-2">
+<h2 id="section-2">8.2 方向場與數值方法 (Direction Fields and Numerical Methods)</h2>
+<p style="font-size:13px;color:var(--tx2);margin-bottom:16px"><strong>🔑 本節重點：</strong>方向場繪製、歐拉法近似解</p>
+
+<div class="example">
+<div class="example-label">📝 例題 8.5</div>
+<div class="example-title">繪製方向場</div>
+<div class="problem-statement">描繪 $y' = x - y$ 的方向場（部分格子點）。</div>
+<div class="solution"><strong>解：</strong>在網格點 $(x,y)$ 處，斜率 $m = x - y$。例如：$(0,0): m=0$；$(1,0): m=1$；$(0,1): m=-1$；$(1,1): m=0$；$(2,0): m=2$。<br>在每個網格點畫一小段斜率為 $m$ 的線段，即構成方向場。積分曲線沿著這些小線段的方向走。</div>
+<div class="solution">✅ 答案：方向場如上述描述</div>
+
+</div>
+
+<div class="example">
+<div class="example-label">📝 例題 8.6</div>
+<div class="example-title">歐拉法：y'=y，y(0)=1</div>
+<div class="problem-statement">使用歐拉法，步長 $h=0.1$，近似 $y' = y$、$y(0)=1$ 在 $x=0.5$ 的解。</div>
+<div class="solution"><strong>解：</strong>$y_0 = 1$，$f(x,y)=y$。<br>$y_1 = y_0 + h f(x_0,y_0) = 1 + 0.1 \cdot 1 = 1.1$<br>$y_2 = 1.1 + 0.1 \cdot 1.1 = 1.21$<br>$y_3 = 1.21 + 0.1 \cdot 1.21 = 1.331$<br>$y_4 = 1.331 + 0.1 \cdot 1.331 = 1.4641$<br>$y_5 = 1.4641 + 0.1 \cdot 1.4641 = 1.61051$<br>精確解 $y=e^{0.5} \approx 1.6487$，歐拉近似 $\approx 1.6105$。</div>
+<div class="solution">✅ 答案：$y(0.5) \approx 1.6105$</div>
+
+</div>
+
+</section>
+
+<section id="ss4-3">
+<h2 id="section-3">8.3 可分離微分方程 (Separable Equations)</h2>
+<p style="font-size:13px;color:var(--tx2);margin-bottom:16px"><strong>🔑 本節重點：</strong>分離變數法、指數成長與衰減、牛頓冷卻定律</p>
+
+<div class="example">
+<div class="example-label">📝 例題 8.7</div>
+<div class="example-title">基本分離變數：y'=x²/y</div>
+<div class="problem-statement">解 $\frac{dy}{dx} = \frac{x^2}{y}$。</div>
+<div class="solution"><strong>解：</strong>分離變數：$y\,dy = x^2\,dx$。積分：$\int y\,dy = \int x^2\,dx$，得 $\frac{y^2}{2} = \frac{x^3}{3} + C$。<br>乘以 2：$y^2 = \frac{2x^3}{3} + 2C$。令 $K = 2C$：$y = \pm\sqrt{\frac{2x^3}{3} + K}$。</div>
+<div class="solution">✅ 答案：$y = \pm\sqrt{\frac{2x^3}{3} + K}$</div>
+
+</div>
+
+<div class="example">
+<div class="example-label">📝 例題 8.8</div>
+<div class="example-title">指數成長：dp/dt=kp</div>
+<div class="problem-statement">解 $\frac{dp}{dt} = kp$，初始條件 $p(0) = p_0$。</div>
+<div class="solution"><strong>解：</strong>分離：$\frac{dp}{p} = k\,dt$。積分：$\ln|p| = kt + C$。$|p| = e^{kt+C} = e^C e^{kt}$。<br>$p = A e^{kt}$（$A = \pm e^C$）。代入 $p(0)=p_0$：$A = p_0$。故 $p = p_0 e^{kt}$。</div>
+<div class="solution">✅ 答案：$p(t) = p_0 e^{kt}$</div>
+
+</div>
+
+<div class="example">
+<div class="example-label">📝 例題 8.9</div>
+<div class="example-title">指數衰減：放射性衰變</div>
+<div class="problem-statement">放射性物質的半衰期為 5 年。若初始質量為 100g，求 10 年後的剩餘質量。</div>
+<div class="solution"><strong>解：</strong>$m(t) = m_0 e^{-kt}$。半衰期：$50 = 100 e^{-k \cdot 5}$，即 $e^{-5k} = 0.5$，$-5k = \ln 0.5 = -\ln 2$，$k = \frac{\ln 2}{5}$。<br>$m(10) = 100 e^{-\frac{\ln 2}{5} \cdot 10} = 100 e^{-2\ln 2} = 100 \cdot \frac{1}{4} = 25$g。</div>
+<div class="solution">✅ 答案：$25$ g</div>
+
+</div>
+
+<div class="example">
+<div class="example-label">📝 例題 8.10</div>
+<div class="example-title">牛頓冷卻定律</div>
+<div class="problem-statement">物體從 100°C 放入 20°C 環境中。1 分鐘後溫度降至 80°C。求 3 分鐘後的溫度。</div>
+<div class="solution"><strong>解：</strong>$\frac{dT}{dt} = -k(T - 20)$。分離：$\frac{dT}{T-20} = -k\,dt$。積分：$\ln|T-20| = -kt + C$，$T-20 = Ae^{-kt}$。<br>$T(0)=100$：$100-20 = 80 = A$，故 $T-20 = 80e^{-kt}$。<br>$T(1)=80$：$80-20 = 60 = 80e^{-k}$，$e^{-k} = 0.75$，$k = -\ln 0.75$。<br>$T(3) = 20 + 80(e^{-k})^3 = 20 + 80(0.75)^3 = 20 + 80 \cdot 0.421875 = 53.75$°C。</div>
+<div class="solution">✅ 答案：$53.75$°C</div>
+
+</div>
+
+</section>
+
+<section id="ss4-4">
+<h2 id="section-4">8.4 羅吉斯方程 (The Logistic Equation)</h2>
+<p style="font-size:13px;color:var(--tx2);margin-bottom:16px"><strong>🔑 本節重點：</strong>羅吉斯成長模型、承載容量、解的推導與應用</p>
+
+<div class="example">
+<div class="example-label">📝 例題 8.11</div>
+<div class="example-title">羅吉斯方程的通解</div>
+<div class="problem-statement">解 $\frac{dP}{dt} = rP\left(1 - \frac{P}{K}\right)$。</div>
+<div class="solution"><strong>解：</strong>使用部分分式：$\frac{1}{P(1-P/K)} = \frac{1}{P} + \frac{1/K}{1-P/K}$。<br>分離變數後積分：$\int \left(\frac{1}{P} + \frac{1/K}{1-P/K}\right)dP = \int r\,dt$<br>$\ln|P| - \ln|1-P/K| = rt + C$。$\ln\left|\frac{P}{1-P/K}\right| = rt + C$。<br>$\frac{P}{1-P/K} = Ae^{rt}$。解出 $P$：$P = \frac{K}{1 + Be^{-rt}}$，其中 $B = \frac{K-P_0}{P_0}$。</div>
+<div class="solution">✅ 答案：$P(t) = \frac{K}{1 + \left(\frac{K-P_0}{P_0}\right)e^{-rt}}$</div>
+
+</div>
+
+<div class="example">
+<div class="example-label">📝 例題 8.12</div>
+<div class="example-title">羅吉斯成長應用</div>
+<div class="problem-statement">人口以羅吉斯模型成長，$r=0.1$、$K=1000$、$P_0=100$。求 $t=20$ 時的人口。</div>
+<div class="solution"><strong>解：</strong>$P(t) = \frac{1000}{1 + 9e^{-0.1t}}$（因為 $\frac{1000-100}{100}=9$）。<br>$P(20) = \frac{1000}{1 + 9e^{-2}} = \frac{1000}{1 + 9 \cdot 0.1353} = \frac{1000}{2.218} \approx 451$。</div>
+<div class="solution">✅ 答案：$P(20) \approx 451$</div>
+
+</div>
+
+<div class="example">
+<div class="example-label">📝 例題 8.13</div>
+<div class="example-title">羅吉斯方程：求承載容量</div>
+<div class="problem-statement">羅吉斯模型 $\frac{dP}{dt} = 0.5P\left(1 - \frac{P}{500}\right)$。求承載容量與成長率。</div>
+<div class="solution"><strong>解：</strong>比較標準形式 $\frac{dP}{dt} = rP(1-P/K)$：$r = 0.5$、$K = 500$。承載容量為 500，最大相對成長率為 0.5。</div>
+<div class="solution">✅ 答案：$K = 500$，$r = 0.5$</div>
+
+</div>
+
+</section>
+
+<section id="ss4-5">
+<h2 id="section-5">8.5 一階線性微分方程 (First-order Linear Equations)</h2>
+<p style="font-size:13px;color:var(--tx2);margin-bottom:16px"><strong>🔑 本節重點：</strong>積分因子法、標準形式 y'+P(x)y=Q(x)</p>
+
+<div class="example">
+<div class="example-label">📝 例題 8.14</div>
+<div class="example-title">積分因子法基本型</div>
+<div class="problem-statement">解 $y' + 2y = e^x$。</div>
+<div class="solution"><strong>解：</strong>$P(x)=2$，積分因子 $\mu(x) = e^{\int 2\,dx} = e^{2x}$。<br>乘 $\mu$：$e^{2x}y' + 2e^{2x}y = e^{3x}$，即 $\frac{d}{dx}(e^{2x}y) = e^{3x}$。<br>積分：$e^{2x}y = \int e^{3x}\,dx = \frac{e^{3x}}{3} + C$。$y = \frac{e^x}{3} + Ce^{-2x}$。</div>
+<div class="solution">✅ 答案：$y = \frac{e^x}{3} + Ce^{-2x}$</div>
+
+</div>
+
+<div class="example">
+<div class="example-label">📝 例題 8.15</div>
+<div class="example-title">積分因子法：y'+xy=x</div>
+<div class="problem-statement">解 $y' + xy = x$。</div>
+<div class="solution"><strong>解：</strong>$P(x)=x$，$\mu(x)=e^{\int x\,dx}=e^{x^2/2}$。<br>$\frac{d}{dx}(e^{x^2/2}y) = x e^{x^2/2}$。<br>積分：$e^{x^2/2}y = \int x e^{x^2/2}\,dx$。令 $u = x^2/2$、$du = x\,dx$：$= e^{x^2/2} + C$。<br>$y = 1 + Ce^{-x^2/2}$。</div>
+<div class="solution">✅ 答案：$y = 1 + Ce^{-x^2/2}$</div>
+
+</div>
+
+<div class="example">
+<div class="example-label">📝 例題 8.16</div>
+<div class="example-title">積分因子法：y'+(1/x)y=sin x</div>
+<div class="problem-statement">解 $y' + \frac{1}{x}y = \sin x$（$x>0$）。</div>
+<div class="solution"><strong>解：</strong>$P(x)=1/x$，$\mu(x)=e^{\ln|x|}=x$。<br>$\frac{d}{dx}(xy) = x\sin x$。<br>積分：使用分部積分 $\int x\sin x\,dx = -x\cos x + \sin x + C$。<br>$xy = -x\cos x + \sin x + C$，$y = -\cos x + \frac{\sin x}{x} + \frac{C}{x}$。</div>
+<div class="solution">✅ 答案：$y = -\cos x + \frac{\sin x}{x} + \frac{C}{x}$</div>
+
+</div>
+
+<div class="example">
+<div class="example-label">📝 例題 8.17</div>
+<div class="example-title">RL 電路問題</div>
+<div class="problem-statement">RL 電路：$L\frac{di}{dt} + Ri = E$。若 $L=1$H、$R=10\Omega$、$E=12$V、$i(0)=0$，求 $i(t)$。</div>
+<div class="solution"><strong>解：</strong>$\frac{di}{dt} + 10i = 12$。$P(t)=10$，$\mu=e^{10t}$。<br>$\frac{d}{dt}(e^{10t}i) = 12e^{10t}$。<br>積分：$e^{10t}i = \frac{12}{10}e^{10t} + C = 1.2e^{10t} + C$。<br>$i(0)=0$：$0 = 1.2 + C$，$C=-1.2$。$i = 1.2(1-e^{-10t})$。</div>
+<div class="solution">✅ 答案：$i(t) = 1.2(1 - e^{-10t})$ A</div>
+
+</div>
+
+<div class="example">
+<div class="example-label">📝 例題 8.18</div>
+<div class="example-title">混合問題（鹽水槽）</div>
+<div class="problem-statement">水槽含 100L 純水。鹽水以 5L/min 注入（濃度 2g/L），同時以 5L/min 排出。求時刻 $t$ 的鹽量。</div>
+<div class="solution"><strong>解：</strong>設鹽量 $Q(t)$。$\frac{dQ}{dt} = \text{注入率} - \text{排出率} = 5 \cdot 2 - 5 \cdot \frac{Q}{100} = 10 - \frac{Q}{20}$。<br>$\frac{dQ}{dt} + \frac{1}{20}Q = 10$。$\mu = e^{t/20}$。<br>$\frac{d}{dt}(e^{t/20}Q) = 10e^{t/20}$。$e^{t/20}Q = 200e^{t/20} + C$。<br>$Q(0)=0$：$0 = 200 + C$，$C=-200$。$Q = 200(1-e^{-t/20})$。</div>
+<div class="solution">✅ 答案：$Q(t) = 200(1 - e^{-t/20})$ g</div>
+
+</div>
+
+<div class="example">
+<div class="example-label">📝 例題 8.19</div>
+<div class="example-title">積分因子：y'+3x²y=6x²</div>
+<div class="problem-statement">解 $y' + 3x^2 y = 6x^2$。</div>
+<div class="solution"><strong>解：</strong>$P(x)=3x^2$，$\mu=e^{x^3}$。<br>$\frac{d}{dx}(e^{x^3}y) = 6x^2 e^{x^3}$。<br>令 $u=x^3$、$du=3x^2dx$：$\int 6x^2 e^{x^3}\,dx = 2\int e^u\,du = 2e^{x^3} + C$。<br>$e^{x^3}y = 2e^{x^3} + C$，$y = 2 + Ce^{-x^3}$。</div>
+<div class="solution">✅ 答案：$y = 2 + Ce^{-x^3}$</div>
+
+</div>
+
+</section>
+
+</main>
+</body>
+</html>

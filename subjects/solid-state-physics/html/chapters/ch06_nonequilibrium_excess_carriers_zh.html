@@ -1,0 +1,319 @@
+<html lang="zh-TW" data-theme="light" data-reading-width="wide">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>第六章：非平衡過量載子 — 半導體物理與元件</title>
+<script src="../assets/mathjax-config.js"></script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<link rel="stylesheet" href="../assets/chapter-base.css">
+<script defer src="../assets/course-ui.js"></script>
+
+<link rel="stylesheet" href="../../../../shared/core.css">
+<script src="../../../../shared/core.js" defer></script>
+<link rel="stylesheet" href="../../../../shared/navigation.css" data-shared-navigation>
+</head>
+<body>
+<a class="portal-home-link" href="../index.html">返回學習中心</a>
+<nav class="sidebar" aria-label="本章目錄"><div class="sidebar-header"><div class="sidebar-subtitle">半導體物理與元件</div><h2 class="sidebar-title">非平衡過量載子</h2></div><div class="toc"><ul>
+<li><a href="#preview">📋 6.0 本章預覽</a></li><li class="ns">6.1 產生與復合</li><li class="nsub"><a href="#s6-1-1">6.1.1 熱平衡</a></li><li class="nsub"><a href="#s6-1-2">6.1.2 過量載子</a></li><li class="ns">6.2 連續性</li><li class="nsub"><a href="#s6-2-1">6.2.1 連續性方程</a></li><li class="nsub"><a href="#s6-2-2">6.2.2 擴散方程</a></li><li class="ns">6.3 雙極傳輸</li><li class="nsub"><a href="#s6-3-1">6.3.1 推導</a></li><li class="nsub"><a href="#s6-3-2">6.3.2 低階注入</a></li><li class="nsub"><a href="#s6-3-3">6.3.3 應用</a></li><li class="nsub"><a href="#s6-3-4">6.3.4 弛豫時間</a></li><li class="nsub"><a href="#s6-3-5">6.3.5 H-S 實驗</a></li><li class="nsub"><a href="#s6-4">6.4 準 Fermi 能階</a></li><li class="ns">6.5–6.6 壽命與表面</li><li class="nsub"><a href="#s6-5-1">6.5.1 SRH</a></li><li class="nsub"><a href="#s6-5-2">6.5.2 壽命極限</a></li><li class="nsub"><a href="#s6-6-1">6.6.1 表面態</a></li><li class="nsub"><a href="#s6-6-2">6.6.2 表面復合</a></li><li><a href="#summary">📋 本章摘要</a></li><li><a href="#common-mistakes">⚠ 常見誤解</a></li><li><a href="#self-check">✅ 自我檢核</a></li><li><a href="#extras">🔎 延伸學習</a></li><li><a href="#derivation-lab">🧪 推導診斷</a></li>
+</ul></div><div class="sidebar-tools"><button type="button" data-action="toggle-theme" aria-label="切換深色或淺色模式">切換顯示主題</button></div></nav>
+<main class="chapter-page" id="main-content" data-chapter-title="非平衡過量載子" data-prev-href="ch05_carrier_transport_zh.html" data-prev-label="載子傳輸現象" data-next-href="ch07_pn_junction_zh.html" data-next-label="pn 接面">
+<header class="chapter-header"><div class="tag">第六章</div><h1>非平衡過量載子</h1><div class="chapter-meta">Donald A. Neamen·《半導體物理與元件：基本原理》第四版·第 192–240 頁</div></header>
+
+<section id="preview"><h2>6.0 本章預覽</h2><div class="callout"><strong>📋 6.0 本章預覽</strong>
+<p>第四章假設半導體處於<strong>熱平衡</strong>——沒有外部激發，$n_0 p_0 = n_i^2$。但實際的半導體元件<strong>永遠在非平衡狀態下運作</strong>。當你把 pn 接面順向偏壓時，你<strong>注入</strong>了過量少數載子。當光照射太陽能電池時，光子<strong>產生</strong>了電子-電洞對。當 MOSFET 的通道導通時，閘極電壓<strong>吸引</strong>了過量載子到表面。</p>
+<p>本章回答：過量載子從哪裡來（產生）、去哪裡（復合）、如何移動（雙極傳輸）、活多久（壽命）、以及如何用 Fermi 統計描述非平衡狀態（準 Fermi 能階）。</p>
+<div class="callout-warn"><strong>⚡ 第六章是從「材料物理」到「元件物理」的轉折點。</strong>前五章建立了平衡態的完整圖像。本章打開了非平衡的大門——而所有半導體元件的操作都是非平衡過程。pn 接面（第七章）的電流來自過量少數載子的注入與復合；BJT 的增益來自基極中過量載子的傳輸；太陽能電池的效率取決於光產生載子的收集。</div></div><h3>關鍵概念</h3><ol class="key-concept-list"><li><strong>過量載子</strong>：光照或注入使 $np>n_i^2$，偏離熱平衡。</li><li><strong>連續性方程</strong>：漂移 + 擴散 + 產生 − 復合。</li><li><strong>低階注入</strong>：少數載子擴散方程主導元件電流。</li><li><strong>準 Fermi 能階</strong>：$E_{Fn},E_{Fp}$ 描述非平衡統計。</li><li><strong>壽命與表面復合</strong>：SRH 與表面態決定載子存留時間。</li></ol><div class="reasoning-map" aria-labelledby="reasoning-map-title"><h3 id="reasoning-map-title">🧭 本章推理地圖</h3><ol class="reasoning-path"><li><strong>已知條件</strong><span>外部激發或偏壓打破熱平衡，產生過量載子</span><small>（§6.1）</small></li><li data-relation="決定"><strong>中間機制</strong><span>連續性方程與復合過程控制載子分布隨時間演化</span><small>（§6.2–§6.5）</small></li><li data-relation="可預測"><strong>非平衡態</strong><span>準 Fermi 能階分離量對應外加偏壓與注入強度</span><small>（§6.4）</small></li><li data-relation="因此用於"><strong>工程用途</strong><span>分析 pn 接面注入、光電產生與開關暫態</span><small>（Ch7–Ch8、Ch14）</small></li></ol></div></div></section>
+<figure class="figure"><a class="figure-link" href="../../pages/ch06_pages/ch06_overview.png" target="_blank" rel="noopener"><img src="../../pages/ch06_pages/ch06_overview.png" alt="第六章總覽圖" loading="lazy"></a><figcaption>📌 第六章總覽圖：非平衡過量載子 — 產生與復合、連續性方程、雙極傳輸、準Fermi能階</figcaption></figure>
+
+<section id="s6-1-overview"><h2>6.1 載子產生與復合</h2>
+<div class="section-keypoints"><strong>🔑 本節重點</strong> ① 熱平衡下 $G_0=R_0$，外部激發打破平衡→過量載子 $\delta n=\delta p$ ② 低階注入：$\delta n\ll n_0$，少數載子濃度巨幅變化而多數載子幾乎不變 ③ SRH 復合：陷阱輔助兩步驟復合，$E_t\approx E_{Fi}$ 時復合效率最高 ④ 陷阱是禁帶中的「中途島」——間接能隙半導體（Si）中 SRH 遠快於直接復合
+</div>
+<figure class="figure"><a class="figure-link" href="../../pages/ch06_pages/ch6_page_218_c.png" target="_blank" rel="noopener"><img src="../../pages/ch06_pages/ch6_page_218_c.png" alt="圖 6.1" loading="lazy"></a><figcaption>圖 6.1：半導體中的載子產生與復合過程——熱產生、光產生、SRH 復合、直接復合。</figcaption></figure>
+<p>在熱平衡下，熱產生率 $G_0$ 和復合率 $R_0$ 精確相等——電子不斷從價帶被熱激發到導帶（產生），同時導帶中的電子也不斷落回價帶（復合）。兩個過程速率相等→淨載子濃度不變。</p>
+<p>但當你<strong>外加激發</strong>時（光照、電壓注入），產生率超過復合率→出現<strong>過量載子</strong>：</p>
+<div class="eq">$$\delta n = n - n_0,\qquad \delta p = p - p_0 \tag{6.1}$$</div>
+<p>因為電子和電洞成對產生（一個電子跳到導帶必然在價帶留下一個電洞），過量電子和過量電洞的濃度<strong>相等</strong>：$\delta n = \delta p$。這稱為<strong>電中性條件</strong>。</p>
+<h3>低階注入 vs 高階注入</h3>
+<p><strong>低階注入（low-level injection）：</strong>過量載子濃度遠小於多數載子熱平衡濃度。例如 n 型 Si（$n_0=10^{16}$ cm⁻³）中注入 $\delta n = \delta p = 10^{12}$ cm⁻³→$\delta n \ll n_0$（小了四個數量級）→多數載子濃度幾乎不變（$n\approx n_0$），但少數載子濃度變化劇烈（$p$ 從 $p_0=2.25\times10^4$ 變成 $\sim10^{12}$——增加了<strong>八個數量級</strong>）。</p>
+<p><strong>高階注入（high-level injection）：</strong>$\delta n$ 與 $n_0$（或 $p_0$）可比擬甚至更大。</p>
+<div class="callout-warn"><strong>⚡ 低階注入是半導體元件分析中最常見的假設。</strong>pn 接面順向偏壓、BJT 主動區操作、光電二極體——這些都在低階注入條件下。因為少數載子濃度在過量注入下<strong>劇烈</strong>變化，而多數載子幾乎不變，所以元件的電流主要由<strong>少數載子的行為</strong>決定。這就是為什麼我們花了這麼多力氣研究少數載子的傳輸。</div>
+<h3>SRH 復合理論——陷阱輔助復合</h3>
+<p>直接能帶間復合（電子從導帶直接跳到價帶）在間接能隙半導體（如 Si）中效率極低，因為需要聲子參與來保持動量守恆。實際上，Si 中的復合主要透過<strong>陷阱（trap）</strong>——能隙中的深層缺陷能階。</p>
+<figure class="figure"><a class="figure-link" href="../../pages/ch06_pages/ch6_page_220_c.png" target="_blank" rel="noopener"><img src="../../pages/ch06_pages/ch6_page_220_c.png" alt="圖 6.2" loading="lazy"></a><figcaption>圖 6.2：Shockley-Read-Hall 復合的四步驟——(1)電子被捕獲、(2)電洞被捕獲、(3)電子發射、(4)電洞發射。陷阱能階 $E_t$ 在能隙中央時復合效率最高。</figcaption></figure>
+<p><strong>物理圖像：</strong>陷阱就像一個「中途島」——電子不會直接從導帶跳到價帶（能量差太大），而是先跳到陷阱能階 $E_t$（第一步），再從 $E_t$ 跳到價帶（第二步）。陷阱越靠近能隙中央（$E_t\approx E_{Fi}$），兩步的能量差都適中→復合效率最高。</p>
+<div class="callout"><strong>💡 章節轉折</strong> Ch4 平衡態 → Ch6 非平衡過程，是元件物理的入口。</div>
+<details class="example"><summary>📝 自編概念例 — $\delta n=\delta p$</summary><div class="example-body"><p>光產生一電子必同時產生一電洞，過剩濃度成對且相等（準中性）。</p></div></details>
+</section>
+
+<section id="s6-1-1"><h2>6.1.1 熱平衡下的半導體</h2>
+<div class="section-keypoints"><strong>🔑 本節重點</strong> 產生率 · 復合率 · 熱平衡</div>
+<p>熱平衡下，電子與電洞仍不斷產生與復合，但平均產生率 $G_0$ 等於平均復合率 $R_0$，載子濃度維持不變。平衡不是沒有微觀事件，而是正反過程的淨效果為零。</p>
+<p>在平衡時，整個半導體可用單一 Fermi 能階 $E_F$ 描述；$n_0$、$p_0$ 由同一化學勢決定，且滿足 $n_0 p_0 = n_i^2$。</p>
+<p>一旦受到光照、注入或偏壓，產生與復合不再平衡，出現過剩載子 $\delta n = \delta p$（電中性）。</p>
+<div class="callout"><strong>💡 動態平衡</strong> 熱平衡是 $G_0=R_0$，不是載子靜止不動。</div>
+<div class="callout-warn"><strong>⚠ 非平衡</strong> 打破平衡後單一 $E_F$ 不足，需準 Fermi 能階（§6.4）。</div>
+<p>理解「平衡是動態」後，連續性方程中的 $G-R$ 項才有明確物理意義。</p>
+<details class="example"><summary>📝 自編概念例</summary><div class="example-body"><p>室溫 Si 中 $G_0\sim10^{10}$ cm⁻³s⁻¹ 量級，與 $R_0$ 精確抵消。</p></div></details>
+</section>
+<section id="s6-1-2"><h2>6.1.2 過量載子的產生與復合</h2>
+<div class="section-keypoints"><strong>🔑 本節重點</strong> 過量載子 · 低階注入 · 復合機制</div>
+<p>過量載子可由光吸收、電流注入、高能粒子或熱擾動產生。在 n 型材料中，多數電子濃度幾乎不變，真正改變元件行為的常是少數載子電洞。</p>
+<div class="eq">$$\delta n = n - n_0,\qquad \delta p = p - p_0,\qquad \delta n = \delta p$$</div>
+<p>復合是過剩載子回到平衡的過程：直接復合、SRH 陷阱輔助復合、輻射復合與 Auger 復合，機制決定材料適合發光還是低漏電。</p>
+<p><strong>低階注入：</strong>$\delta n \ll n_0$（n 型），少數載子劇變、多數載子近似常數。<strong>高階注入：</strong>$\delta n$ 與 $n_0$ 可比，線性近似失效。</p>
+<div class="callout"><strong>💡 元件電流</strong> 二極體、BJT、光電二極體多在低階注入下分析。</div>
+<div class="callout-warn"><strong>⚠ SRH 主導</strong> 間接能隙 Si 中，陷阱輔助復合通常遠快於直接帶間復合。</div>
+<p>低階/高階注入判斷是本章所有簡化能否成立的第一道關卡。</p>
+<details class="example"><summary>📐 例題 — 低階注入檢核</summary><div class="example-body"><p>n 型 $n_0=10^{16}$ cm⁻³，注入 $\delta n=10^{12}$ → $\delta n/n_0=10^{-4}$，低階注入成立。</p></div></details>
+</section>
+<section id="s6-2-overview"><h2>6.2 連續性方程與擴散長度</h2>
+<div class="section-keypoints"><strong>🔑 本節重點</strong> ① 連續性方程 $\partial p/\partial t = -(1/e)\partial J_p/\partial x + G_p - R_p$——濃度變化 = 傳輸 + 產生 − 復合 ② 穩態無電場時退化為 $D_p d^2\delta p/dx^2 = \delta p/\tau_{p0}$ ③ 擴散長度 $L_p=\sqrt{D_p\tau_{p0}}$——少數載子復合前的平均行進距離 ④ $\delta p(x)=\delta p(0)e^{-x/L_p}$，每經過一個 $L_p$ 濃度降為 $1/e$
+</div>
+<p>第五章的漂移-擴散方程告訴我們載子<strong>如何移動</strong>。</p>
+<div class="eq">$$\frac{\partial p}{\partial t} = -\frac{1}{e}\frac{\partial J_p}{\partial x} + G_p - R_p \tag{6.24}$$</div>
+<p><strong>逐項物理解讀：</strong></p>
+<ul>
+<li><strong>$\partial p/\partial t$：</strong>某點電洞濃度的時間變化率。穩態下為零。</li>
+<li><strong>$-(1/e)\partial J_p/\partial x$：</strong>電流的散度——如果 $J_p$ 隨 $x$ 增大（流入多於流出），該點的電洞濃度增加。注意負號：$J_p$ 向右增大意味著更多電洞流出→濃度下降。</li>
+<li><strong>$G_p$：</strong>產生率（cm⁻³s⁻¹）。光照射（光電效應）、碰撞電離（崩潰）、熱產生（空乏區中 $np &lt; n_i^2$ 時）。</li>
+<li><strong>$R_p = \delta p/\tau_{p0}$：</strong>復合率。過量載子以壽命 $\tau$ 為時間尺度衰減。$R_p$ 正比於 $\delta p$——載子越多，復合越快。</li>
+</ul>
+<p>這就像一個浴缸的水位變化 = 水龍頭進水（產生）+ 排水孔出水（復合）+ 從隔壁浴缸流過來的水（電流）。</p>
+<p>在半導體中，通常沒有外部產生（$G'=0$），也沒有電場（中性區），只剩下擴散和復合：</p>
+<div class="eq">$$D_p\frac{d^2\delta p}{dx^2} - \frac{\delta p}{\tau_{p0}} = 0 \quad\text{（穩態）}$$</div>
+<p>這個微分方程的解是 $\delta p(x) = \delta p(0)\,e^{-x/L_p}$，其中：</p>
+<div class="eq">$$\boxed{L_p = \sqrt{D_p\tau_{p0}}} \tag{6.34}$$</div>
+<p><strong>擴散長度的數值：</strong>對 Si 中的少數載子電洞（$D_p \approx 12$ cm²/s，$\tau_{p0} = 1$ µs）：$L_p = \sqrt{12\times10^{-6}} \approx 35$ µm。若 $\tau_{p0} = 1$ ms（高品質 FZ-Si）：$L_p \approx 1.1$ mm。這就是為什麼太陽能電池的基板厚度通常在 100–200 µm——必須薄於 $L_p$ 才能有效收集光生載子。</p>
+<div class="callout"><strong>💡 擴散長度的物理意義：</strong>$L_p$ 是少數載子在復合之前平均能走多遠。如果一個 pn 接面的中性區寬度 $W \ll L_p$→大部分注入的少數載子能活著到達接面→高效率。如果 $W \gg L_p$→大部分載子在到達接面前就復合了→低效率。這就是為什麼太陽能電池和光電二極體的設計要確保擴散長度大於吸收深度。</div>
+<figure class="figure"><a class="figure-link" href="../../pages/ch06_pages/ch6_page_239_c.png" target="_blank" rel="noopener"><img src="../../pages/ch06_pages/ch6_page_239_c.png" alt="圖 6.10" loading="lazy"></a><figcaption>圖 6.10：過量少數載子濃度隨距離的指數衰減——每經過一個 $L_p$，濃度降為 $1/e$。</figcaption></figure>
+<div class="callout-warn"><strong>⚠ 建模順序</strong> 先判斷穩態/暫態、一維/三維、可否忽略電場，再簡化連續性方程。</div>
+<details class="example"><summary>📐 例題 — Si 的 $L_p$</summary><div class="example-body"><p>$D_p=12$ cm²/s、$\tau=1$ µs → $L_p\approx35$ µm。</p></div></details>
+</section>
+
+<section id="s6-2-1"><h2>6.2.1 連續性方程</h2>
+<div class="section-keypoints"><strong>🔑 本節重點</strong> 守恆 · 電流散度 · 產生復合</div>
+<p>連續性方程本質上是粒子數守恆。對電子：</p>
+<div class="eq">$$\frac{\partial n}{\partial t} = \frac{1}{e}\frac{\partial J_n}{\partial x} + G_n - R_n$$</div>
+<p>濃度變化來自電流散度、產生率與復合率。電流流出多於流入會降低濃度；產生增加、復合降低濃度。電洞方程符號相反，需留意電荷方向。</p>
+<p>穩態時 $\partial/\partial t=0$；無電場時擴散主導；一維問題可大幅簡化。不同元件模型即對連續性方程做不同合理近似。</p>
+<div class="callout"><strong>💡 總框架</strong> Ch6 之後所有非平衡分析都從連續性方程出發。</div>
+<div class="callout-warn"><strong>⚠ 非均勻</strong> 光從表面吸收、局部缺陷會使 $G$、$R$ 隨位置變化，解不再是簡單指數。</div>
+<p>建模時先問：穩態？一維？低階注入？可否忽略電場？每拿掉一項都需物理理由。</p>
+<details class="example"><summary>📝 自編概念例 — 浴缸類比</summary><div class="example-body"><p>$\partial p/\partial t$ = 流入淨量 + 水龍頭（$G$）− 排水孔（$R$）。</p></div></details>
+</section>
+<section id="s6-2-2"><h2>6.2.2 時間相依擴散方程</h2>
+<div class="section-keypoints"><strong>🔑 本節重點</strong> 擴散 · 壽命 · 擴散長度</div>
+<p>無電場、無體產生時，過剩少數載子滿足</p>
+<div class="eq">$$D_p\frac{\partial^2\delta p}{\partial x^2} - \frac{\delta p}{\tau_{p0}} = \frac{\partial\delta p}{\partial t}$$</div>
+<p>穩態解 $\delta p(x)=\delta p(0)e^{-x/L_p}$，其中 $L_p=\sqrt{D_p\tau_{p0}}$。瞬態則描述光脈衝關閉後的衰減或注入建立過程。</p>
+<p>擴散係數決定空間展開速度，壽命決定時間衰減；兩者合成可收集距離 $L_p$。太陽能電池、BJT 基極、光偵測器都依賴 $L_p$ 與幾何尺寸的比較。</p>
+<div class="callout"><strong>💡 穩態 vs 暫態</strong> 直流元件看穩態分布；壽命量測常利用暫態衰減。</div>
+<div class="callout-warn"><strong>⚠ 邊界條件</strong> 半無限樣品 $\delta p(\infty)=0$；表面復合則用 $D(d\delta p/dx)=S\delta p$。</div>
+<p>Si 中 $D_p\sim12$ cm²/s、$\tau_{p0}=1$ µs → $L_p\approx35$ µm，是設計吸收厚度的關鍵尺度。</p>
+<details class="example"><summary>📐 例題 — 估算 $L_p$</summary><div class="example-body"><p>$D_p=25$ cm²/s、$\tau=4$ µs → $L_p=\sqrt{25\times4\times10^{-6}}=10$ mm（高品質材料）。</p></div></details>
+</section>
+<section id="s6-3-overview"><h2>6.3 雙極傳輸 ⭐</h2>
+<div class="section-keypoints"><strong>🔑 本節重點</strong> ① 電子和電洞因庫侖吸引力耦合——不能獨立擴散/漂移，必須一起移動 ② 雙極擴散係數 $D'$ 和雙極遷移率 $\mu'$ 描述耦合運動的有效參數 ③ 低階注入 n 型：$D'\approx D_p$、$\mu'\approx\mu_p$——由少數載子參數主導 ④ 介電弛豫時間 $\tau_d=\epsilon/\sigma\sim$ ps——多數載子響應比少數載子快一百萬倍
+</div>
+<figure class="figure"><a class="figure-link" href="../../pages/ch06_pages/ch6_page_241_c.png" target="_blank" rel="noopener"><img src="../../pages/ch06_pages/ch6_page_241_c.png" alt="圖 6.11" loading="lazy"></a><figcaption>圖 6.11：介電弛豫過程——多數載子重新分布以維持電中性的時間尺度（皮秒級）。</figcaption></figure>
+<p>一個常見的誤解是：過量電子和過量電洞各自獨立地擴散和漂移。這是錯的。</p>
+<p>因為電子和電洞帶<strong>相反電荷</strong>，它們之間有庫侖吸引力。如果電子試圖擴散得比電洞快（電子的 $D_n$ 通常大於 $D_p$），就會產生微小的電荷分離→產生內建電場→這個電場<strong>拖慢電子、加快電洞</strong>→迫使兩者以相同的有效速度一起移動。這就是<strong>雙極傳輸（ambipolar transport）</strong>的本質。</p>
+<figure class="figure"><a class="figure-link" href="../../pages/ch06_pages/ch6_page_226_c.png" target="_blank" rel="noopener"><img src="../../pages/ch06_pages/ch6_page_226_c.png" alt="圖 6.5" loading="lazy"></a><figcaption>圖 6.5：雙極傳輸——電子和電洞因庫侖耦合而一起移動。注意內建電場 $E$-field 的方向。</figcaption></figure>
+<p>雙極傳輸方程與單一載子的擴散方程<strong>形式完全相同</strong>，但用等效的雙極參數取代：</p>
+<div class="eq">$$D'\frac{\partial^2\delta p}{\partial x^2} - \mu'\mathcal{E}\frac{\partial\delta p}{\partial x} + G' - \frac{\delta p}{\tau_{p0}} = \frac{\partial\delta p}{\partial t} \tag{6.67}$$</div>
+<p><strong>關鍵簡化（低階注入 n 型）：</strong>$D' \approx D_p$（雙極擴散係數≈少數載子擴散係數），$\mu' \approx \mu_p$。這意味著在 n 型材料中，過量載子的傳輸由<strong>少數載子（電洞）的參數</strong>決定。這是一個巨大的簡化——我們不需要解兩個耦合的傳輸方程，只需要解少數載子的擴散方程。</p>
+<div class="callout"><strong>💡 介電弛豫時間——為什麼多數載子能「瞬間」響應。</strong>當過量少數載子注入時，多數載子必須重新分布以維持電中性。這個重新分布的速度由 $\tau_d = \epsilon/\sigma$ 決定。對 Si（$\sigma\sim1$ (Ω·cm)⁻¹）：$\tau_d\sim10^{-12}$ 秒——皮秒級！相比少數載子壽命（$\tau_{p0}\sim10^{-6}$ 秒），多數載子響應快了<strong>一百萬倍</strong>。這就是為什麼我們可以假設多數載子永遠處於準平衡狀態。</div>
+<div class="callout-warn"><strong>⚠ 常見誤解</strong> 過剩電子與電洞不能獨立擴散，庫侖耦合產生內建電場。</div>
+<details class="example"><summary>📝 自編概念例</summary><div class="example-body"><p>低階 n 型：$D'\approx D_p$，雙極問題退化成少數載子擴散。</p></div></details>
+</section>
+
+<section id="s6-3-1"><h2>6.3.1 雙極方程推導</h2>
+<div class="section-keypoints"><strong>🔑 本節重點</strong> 電子電洞耦合 · 電中性 · 雙極參數</div>
+<p>電子與電洞電流方程、連續性方程與近似電中性一起使用，可化簡為描述共同過剩載子 $\delta n=\delta p$ 的<strong>雙極傳輸方程</strong>，有效參數為 $D'$、$\mu'$。</p>
+<div class="eq">$$D'\frac{\partial^2\delta p}{\partial x^2} - \mu'\mathcal{E}\frac{\partial\delta p}{\partial x} + G' - \frac{\delta p}{\tau_{p0}} = \frac{\partial\delta p}{\partial t}$$</div>
+<p>若電子擴散快於電洞，局部電荷分離產生內建電場，拖慢快的、拉動慢的載子，使兩者以共同速度運動。$D'$ 正是這種耦合後的有效擴散係數。</p>
+<p>低階注入 n 型：$D'\approx D_p$、$\mu'\approx\mu_p$，只需解少數載子方程。</p>
+<div class="callout"><strong>💡 簡化</strong> 雙極方程形式與單載子擴散方程相同，但參數含兩種載子貢獻。</div>
+<div class="callout-warn"><strong>⚠ 高階注入</strong> 過剩濃度與多數載子可比時，$D'$、$\mu'$ 不再近似為少數載子參數。</div>
+<p>光生載子、注入載子問題中，成對產生的電子—電洞幾乎總是雙極耦合。</p>
+<details class="example"><summary>📝 自編概念例</summary><div class="example-body"><p>庫侖吸引力使 $\delta n$ 與 $\delta p$ 空間分布同步，不能各解一方程後忽略耦合。</p></div></details>
+</section>
+<section id="s6-3-2"><h2>6.3.2 外質摻雜與低階注入極限</h2>
+<div class="section-keypoints"><strong>🔑 本節重點</strong> 少數載子主導 · 低階注入 · 簡化</div>
+<p>外質 n 型材料中，電子為多數載子且 $n_0$ 很大；過剩載子傳輸由少數載子電洞主導，方程可寫成僅含 $\delta p$ 的擴散—復合形式。p 型則角色對調。</p>
+<p>低階注入判準：$\delta n \ll n_0$（n 型）或 $\delta p \ll p_0$（p 型）。此時 $n\approx n_0$、$p\approx p_0+\delta p$，多數載子濃度視為常數。</p>
+<p>注入過強時進入高階注入，準 Fermi 能階分裂增大，復合機制與遷移率都可能改變，少數載子單方程近似失效。</p>
+<div class="callout"><strong>💡 實務</strong> 二極體小訊號、少數載子擴散解都建立在低階注入上。</div>
+<div class="callout-warn"><strong>⚠ 檢查</strong> 大功率 LED、強光注入太陽能電池可能接近或進入高階區。</div>
+<p>先判斷材料類型與注入量級，再決定能否只用少數載子方程。</p>
+<details class="example"><summary>📐 例題 — n 型低階極限</summary><div class="example-body"><p>$N_d=10^{15}$ cm⁻³，$\delta p=10^{13}$ → $\delta p\ll n_0$，可用 $D'\approx D_p$。</p></div></details>
+</section>
+<section id="s6-3-3"><h2>6.3.3 雙極傳輸的應用</h2>
+<div class="section-keypoints"><strong>🔑 本節重點</strong> 光生載子 · pn 注入 · 收集效率</div>
+<p>光照產生電子—電洞對；若未立即被電場分離，便以雙極方式擴散。p-n 接面正向偏壓注入少數載子到中性區，擴散並復合形成二極體電流。</p>
+<p>太陽能電池：空乏區光生載子由電場分離；中性區則須擴散至接面才被收集。壽命、$D$ 與表面復合直接影響量子效率。</p>
+<p>中性區少數載子常呈 $\delta p(x)=\delta p(0)e^{-x/L_p}$，衰減長度即 $L_p$，此圖像導向 Shockley 二極體方程。</p>
+<div class="callout"><strong>💡 收集</strong> 器件厚度、$L_p$ 與吸收深度三者需匹配。</div>
+<div class="callout-warn"><strong>⚠ 表面</strong> 靠近表面產生的載子易受表面復合影響（§6.6）。</div>
+<p>雙極傳輸把光電與 pn 電流統一在同一套擴散—復合語言下。</p>
+<details class="example"><summary>📝 自編概念例</summary><div class="example-body"><p>$W\ll L_p$ 時大部分注入少數載子可到達接面；$W\gg L_p$ 則多數在途中復合。</p></div></details>
+</section>
+<section id="s6-3-4"><h2>6.3.4 介電弛豫時間常數</h2>
+<div class="section-keypoints"><strong>🔑 本節重點</strong> 電荷中性 · ε/σ · 快時間尺度</div>
+<p>局部淨電荷會建立內建電場，驅動多數載子重新分布以恢復<strong>近似電中性</strong>。此過程的時間尺度為介電弛豫時間：</p>
+<div class="eq">$$\tau_d = \frac{\epsilon}{\sigma}$$</div>
+<p>對 Si（$\sigma\sim1$ (Ω·cm)⁻¹）：$\tau_d\sim10^{-12}$ s（皮秒），比少數載子壽命（µs）快約 $10^6$ 倍。因此除空乏區或極短瞬態外，可假設 $\delta n=\delta p$。</p>
+<p>這解釋了為何過剩電子與電洞濃度必須一起變化，也為雙極傳輸的電中性前提提供時間尺度依據。</p>
+<div class="callout"><strong>💡 準平衡</strong> 多數載子「瞬間」響應，維持準中性；少數載子決定擴散與復合動力學。</div>
+<div class="callout-warn"><strong>⚠ 空乏區</strong> 淨固定電荷主導區域不能假設局部電中性。</div>
+<p>比較 $\tau_d$ 與載子渡越時間，可判斷傳輸問題能否使用準中性近似。</p>
+<details class="example"><summary>📐 例題 — $\tau_d$ 量級</summary><div class="example-body"><p>$\epsilon_s=1.04\times10^{-12}$ F/cm、$\sigma=10$ (Ω·cm)⁻¹ → $\tau_d\approx10^{-13}$ s。</p></div></details>
+</section>
+<section id="s6-3-5"><h2>6.3.5 Haynes-Shockley 實驗——直接測量 $D$, $\mu$, $\tau$</h2><div class="section-keypoints"><strong>🔑 本節重點</strong> 光脈衝 · 漂移 · 擴散 · 壽命</div>
+<p>1951 年，Haynes 和 Shockley 做了一個優美的實驗，首次<strong>直接</strong>測量了少數載子的遷移率、擴散係數和壽命——這三個參數是半導體物理的核心。</p>
+<p><strong>實驗裝置：</strong>一根長條形的 n 型 Ge 晶體。左端有一個「注入點」（用脈衝光或電脈衝注入過量電洞），右端有一個「探測點」（測量電洞到達時產生的電壓訊號）。晶體兩端施加一個縱向電場 $\mathcal{E}$。</p>
+<p><strong>測量原理：</strong></p>
+<p>① <strong>遷移率 $\mu_p$：</strong>施加電場後，過量電洞的「波包」以漂移速度 $v_d = \mu_p \mathcal{E}$ 向探測點移動。測量注入到偵測的時間 $t_d$，已知距離 $d$ 和電場 $\mathcal{E}$：$\mu_p = d/(t_d \mathcal{E})$。</p>
+<p>② <strong>擴散係數 $D_p$：</strong>電洞波包在漂移的同時也會擴散（變寬）。偵測到的訊號 pulse 寬度 $\Delta t$ 反映了擴散程度：$D_p = (\Delta x)^2/(2t_d)$，其中 $\Delta x$ 是 pulse 的空間寬度。</p>
+<p>③ <strong>壽命 $\tau_{p0}$：</strong>隨著距離增加，pulse 的<strong>振幅</strong>逐漸衰減（因為復合）。從振幅衰減的速率可推算壽命。</p>
+<div class="callout"><strong>💡 Haynes-Shockley 實驗的歷史意義。</strong>這是半導體物理的「Rutherford 散射實驗」——用簡單優雅的裝置直接測量了微觀參數。在此之前，$\mu$ 和 $D$ 只能間接估算。這個實驗也驗證了 Einstein 關係 $D/\mu = kT/e$——Haynes 和 Shockley 分別測得的 $D$ 和 $\mu$ 完美符合這個關係。</div>
+<div class="callout-warn"><strong>⚠ 樣品品質</strong> 需低摻雜長條樣品與良好歐姆接觸，脈衝寬度須短於壽命。</div>
+<details class="example"><summary>📐 例題 — Einstein 關係檢核</summary><div class="example-body"><p>分別測得 $D_p$、$\mu_p$ 後檢查 $D/\mu=kT/e$ 是否在實驗誤差內成立。</p></div></details>
+</section>
+<section id="s6-4"><h2>6.4 準 Fermi 能階</h2><div class="section-keypoints"><strong>🔑 本節重點</strong> 非平衡 · EFn · EFp · 注入</div>
+<p>在熱平衡下，整個系統只有<strong>一個</strong> Fermi 能階 $E_F$。但在非平衡狀態下，電子和電洞不再處於同一熱平衡→必須引入<strong>兩個獨立的</strong> Fermi 能階：</p>
+<div class="eq">$$n = n_i\,\exp\!\left(\frac{E_{Fn} - E_{Fi}}{kT}\right) \tag{6.83}$$</div>
+<div class="eq">$$p = n_i\,\exp\!\left(-\frac{E_{Fp} - E_{Fi}}{kT}\right) \tag{6.84}$$</div>
+<p><strong>何時需要準 Fermi 能階？</strong>只要系統偏離熱平衡（有外加電壓、光照、或注入），$np \neq n_i^2$，就必須用 $E_{Fn}$ 和 $E_{Fp}$ 來分別描述電子和電洞的統計分布。在平衡態中性區，$E_{Fn} = E_{Fp} = E_F$（統一的 Fermi 能階）。在空乏區或有注入的區域，$E_{Fn} \neq E_{Fp}$。</p>
+<figure class="figure"><a class="figure-link" href="../../pages/ch06_pages/ch6_page_245_c.png" target="_blank" rel="noopener"><img src="../../pages/ch06_pages/ch6_page_245_c.png" alt="圖 6.15" loading="lazy"></a><figcaption>圖 6.15：pn 接面順向偏壓時的準 Fermi 能階——$E_{Fn}$ 和 $E_{Fp}$ 在空乏區中分離，在中性區中趨近。</figcaption></figure>
+<p><strong>物理意義：</strong>$E_{Fn} - E_{Fp}$ 的大小是偏離熱平衡程度的直接度量。平衡時 $E_{Fn}=E_{Fp}=E_F$。順向偏壓注入過量載子→$np>n_i^2$→$E_{Fn}>E_{Fp}$。反向偏壓抽取載子→$np<n_i^2$→$E_{Fn}<E_{Fp}$。</p>
+<p><strong>在 pn 接面中的行為：</strong>順向偏壓下，$E_{Fn}$ 在 n 側高、$E_{Fp}$ 在 p 側低。在空乏區中，$E_{Fn}$ 和 $E_{Fp}$ 逐漸趨近——但它們<strong>不在空乏區內對齊</strong>（這是常見的誤解）。它們在空乏區邊緣才恢復到統一的 $E_F$。$eV_a = E_{Fn}(n\text{側}) - E_{Fp}(p\text{側})$——施加的電壓直接對應於兩個準 Fermi 能階的差。</p>
+<div class="callout-warn"><strong>⚡ 準 Fermi 能階是理解 pn 接面電流-電壓特性的關鍵。</strong>Shockley 理想二極體方程的推導中，邊界條件 $pn=n_i^2e^{eV_a/kT}$ 就是來自準 Fermi 能階在空乏區邊緣的對齊。第七章會大量使用這個概念。記住：$E_{Fn} - E_{Fp} = eV_a$ 是整個 pn 接面理論的核心關係。</div>
+<div class="callout"><strong>💡 核心關係</strong> $E_{Fn}-E_{Fp}=eV_a$ 連接偏壓與載子統計（Ch7）。</div>
+<details class="example"><summary>📐 例題 — 準 Fermi 分裂</summary><div class="example-body"><p>順偏注入使 $np&gt;n_i^2$ → $E_{Fn}&gt;E_{Fp}$；開路太陽能電池中分裂對應可輸出電壓上限。</p></div></details>
+</section>
+<section id="s6-5-overview"><h2>6.5 過量載子壽命</h2>
+<div class="section-keypoints"><strong>🔑 本節重點</strong> ① SRH 壽命 $\tau_{p0}=1/(\sigma_p v_{th} N_t)$——陷阱密度 $N_t$ 越高壽命越短 ② 陷阱在禁帶中央（$E_t\approx E_i$）時復合效率最高——兩步速率均衡 ③ 深能階雜質（Au、Cu、Fe）對壽命影響巨大 ④ 高摻雜時 Auger 復合主導，低摻雜時 SRH 主導
+</div>
+<p>少數載子不會永遠活著——它們最終會與多數載子復合。從產生到復合的<strong>平均存活時間</strong>就是<strong>少數載子壽命</strong> $\tau$。</p>
+
+<h3>SRH 復合理論——陷阱輔助復合的定量分析</h3>
+<p>在禁帶中存在深層陷阱能階（來自晶格缺陷、雜質、或界面態）。這些陷阱提供了「台階」——電子先從導帶落入陷阱，再從陷阱落入價帶。兩步的總速率比直接復合快得多（因為每步的能量差都適中）。</p>
+<figure class="figure"><a class="figure-link" href="../../pages/ch06_pages/ch6_page_235_c.png" target="_blank" rel="noopener"><img src="../../pages/ch06_pages/ch6_page_235_c.png" alt="圖 6.7" loading="lazy"></a><figcaption>圖 6.7：SRH 復合機制——電子從導帶落入禁帶中的陷阱能階 $E_t$，再從陷阱進入價帶。陷阱在禁帶中央時復合效率最高。</figcaption></figure>
+<p>SRH 穩態壽命：</p>
+<div class="eq">$$\tau_{p0} = \frac{1}{\sigma_p v_{th} N_t}$$</div>
+<p>其中 $\sigma_p$ 是陷阱的捕獲截面（$\sim10^{-15}$ cm²），$v_{th}$ 是載子熱速度（$\sim10^7$ cm/s），$N_t$ 是陷阱密度（cm$^{-3}$）。對 $N_t = 10^{12}$ cm$^{-3}$：$\tau_{p0} = 1/(10^{-15}\times10^7\times10^{12}) = 10^{-4}$ s = 100 µs。</p>
+
+<p><strong>陷阱能階位置的重要性：</strong>最有效的復合陷阱位於禁帶<strong>中央</strong>（$E_t \approx E_i$）。為什麼？因為兩步過程（導帶→陷阱→價帶）的速率取決於兩步中較慢的一步。如果陷阱靠近導帶→第一步快但第二步慢（陷阱到價帶的能量差大）。如果陷阱在中央→兩步都適中→總速率最大。這就是為什麼 Au、Cu、Fe 等深能階雜質對 Si 的壽命影響巨大——它們的能階恰好在禁帶中央附近。</p>
+
+<p><strong>壽命與摻雜濃度的關係：</strong>典型 Si 的少數載子壽命在 $10^{-7}$ 到 $10^{-3}$ 秒範圍內：</p>
+<table><caption>表 1：SRH 復合理論——陷阱輔助復合的定量分析</caption><thead><tr><th>材料</th><th>壽命範圍</th><th>限制因素</th></tr></thead><tbody>
+<tr><td>浮區（FZ）高純 Si</td><td>∼1 ms</td><td>Auger 復合（高注入時）</td></tr>
+<tr><td>Czochralski（CZ）Si</td><td>∼1–10 µs</td><td>氧相關缺陷（Czochralski 氧沉澱）</td></tr>
+<tr><td>含重金屬污染的 Si</td><td>∼0.1–1 µs</td><td>深能階雜質（Au, Cu, Fe）</td></tr>
+<tr><td>多晶 Si</td><td>∼1–100 ns</td><td>晶界復合</td></tr></tbody></table>
+<figure class="figure"><a class="figure-link" href="../../pages/ch06_pages/ch6_page_247_c.png" target="_blank" rel="noopener"><img src="../../pages/ch06_pages/ch6_page_247_c.png" alt="圖 6.16" loading="lazy"></a><figcaption>圖 6.16：少數載子壽命與摻雜濃度和注入程度的關係——高摻雜時 Auger 復合主導，低摻雜時 SRH 復合主導。</figcaption></figure>
+
+<div class="callout"><strong>💡 壽命對元件的影響無處不在。</strong>太陽能電池：壽命越長→光產生的載子越有機會到達電極→效率越高（高效 PERC 太陽能電池用背面鈍化將壽命提升到 &gt;1 ms）。BJT：基極中的少數載子壽命決定了基極傳輸因子 $\alpha_T$→直接影響電流增益 $\beta$。功率 MOSFET 中的內建二極體（body diode）：壽命決定了反向恢復時間和開關損耗——工程師有時會刻意用電子束或金摻雜來降低壽命以加快開關速度，代價是漏電流增大。</div>
+<div class="callout-warn"><strong>⚠ 條件相依</strong> 單一 $\tau$ 值必須附帶注入程度與溫度，否則無法比較不同量測。</div>
+<details class="example"><summary>📐 例題 — 陷阱位置</summary><div class="example-body"><p>$E_t$ 在禁帶中央時 SRH 復合最快；靠近能帶邊則某一步成瓶頸。</p></div></details>
+</section>
+
+<section id="s6-5-1"><h2>6.5.1 Shockley–Read–Hall 理論</h2>
+<div class="section-keypoints"><strong>🔑 本節重點</strong> 陷阱 · 捕獲截面 · SRH 壽命</div>
+<p>SRH 復合透過能隙中的陷阱能階分兩步進行：導帶電子落入陷阱，再落入價帶填補電洞。陷阱接近能隙中央（$E_t\approx E_{Fi}$）時兩步速率均衡，復合效率最高。</p>
+<div class="eq">$$\tau_{p0} = \frac{1}{\sigma_p v_{th} N_t}$$</div>
+<p>晶格缺陷、金屬污染、界面態都會引入復合中心。對太陽能電池與光偵測器，長壽命有利；對高速開關，有時刻意縮短壽命以降低反向恢復時間。</p>
+<p>空乏區陷阱還會促進產生—復合電流，增加漏電，使二極體偏離理想 $I$–$V$。</p>
+<div class="callout"><strong>💡 材料品質</strong> 製程潔淨度直接透過 $N_t$ 影響 $\tau$。</div>
+<div class="callout-warn"><strong>⚠ 深能階雜質</strong> Au、Cu、Fe 在 Si 禁帶中央附近，對壽命殺傷力極大。</div>
+<p>量測壽命時應註明注入條件與主導復合機制。</p>
+<details class="example"><summary>📐 例題 — SRH 壽命</summary><div class="example-body"><p>$N_t=10^{12}$ cm⁻³、$\sigma_p=10^{-15}$ cm²、$v_{th}=10^7$ cm/s → $\tau_{p0}=100$ µs。</p></div></details>
+</section>
+<section id="s6-5-2"><h2>6.5.2 外質摻雜與低階注入極限</h2>
+<div class="section-keypoints"><strong>🔑 本節重點</strong> 少數載子壽命 · 摻雜 · Auger</div>
+<p>低階注入下，復合率常近似 $R_p=\delta p/\tau_{p0}$，連續性方程線性化，易得指數空間解。二極體與 BJT 少數載子分布推導皆用此近似。</p>
+<p>摻雜影響壽命：高摻雜增加多數載子濃度，可能增強 Auger 復合；缺陷與應力也會引入陷阱。實際 $\tau$ 隨注入、溫度與製程變化，未必為常數。</p>
+<p>壽命告訴你載子能活多久，$L=\sqrt{D\tau}$ 才告訴你能走多遠；元件設計關心的是可收集距離。</p>
+<div class="callout"><strong>💡 配對</strong> 高 $\tau$ 但低 $D$ 仍可能限制收集；兩者需一併考量。</div>
+<div class="callout-warn"><strong>⚠ 高注入</strong> 輻射復合與 Auger 在高注入或重摻雜時可能主導，$R\propto\delta p$ 失效。</div>
+<p>FZ 高純 Si 壽命可達 ms；多晶 Si 因晶界復合僅 ns–µs。</p>
+<details class="example"><summary>📝 自編概念例</summary><div class="example-body"><p>壽命增 10 倍 → $L_p$ 只增 $\sqrt{10}\approx3.16$ 倍。</p></div></details>
+</section>
+<section id="s6-6-overview"><h2>6.6 表面效應</h2>
+<div class="section-keypoints"><strong>🔑 本節重點</strong> ① 表面懸鍵（dangling bonds）是極其有效的復合中心，$D_{it}\sim10^{15}$ cm⁻²eV⁻¹（裸 Si）② 表面復合速度 $s$ 定義表面處復合率 $=s\delta p(0)$ ③ SiO₂ + 含氫退火（FGA）可將 $s$ 從 $10^5$ 降至 $&lt;10$ cm/s ④ 表面鈍化（Al₂O₃、SiNₓ）是高效太陽能電池（PERC）和 FinFET 的關鍵技術
+</div>
+<p>到目前為止我們假設晶體是無限大的。但真實元件有<strong>表面</strong>——晶體突然終止的地方。表面有大量的<strong>懸鍵（dangling bonds）</strong>——未飽和的共價鍵，它們是極其有效的復合中心。</p>
+<p><strong>表面態密度 $D_{it}$：</strong>未處理的 Si 表面有 $\sim10^{15}$ cm$^{-2}$eV$^{-1}$ 的表面態——相當於每平方公分有 $10^{15}$ 個「復合陷阱」。以表面態均勻分布在禁帶中計算，等效的表面復合中心密度極高。</p>
+<figure class="figure"><a class="figure-link" href="../../pages/ch06_pages/ch6_page_252_c.png" target="_blank" rel="noopener"><img src="../../pages/ch06_pages/ch6_page_252_c.png" alt="圖 6.17" loading="lazy"></a><figcaption>圖 6.17：表面態的能階分布和表面復合機制——懸鍵在禁帶中形成連續分布的陷阱態，捕獲載子並促進表面復合。</figcaption></figure>
+<p><strong>表面復合速度 $s$</strong> 定義為表面處的復合率除以過量載子濃度：</p>
+<div class="eq">$$D_p\frac{\partial\delta p}{\partial x}\bigg|_{x=0} = s_p\,\delta p(0) \tag{6.117}$$</div>
+<p>$s$ 的物理意義：載子到達表面後被復合的「有效速度」。$s$ 越大→表面復合越劇烈。</p>
+<table><caption>表 2：6.6 表面效應</caption><thead><tr><th>表面處理</th><th>$s$ (cm/s)</th><th>$D_{it}$ (cm⁻²eV⁻¹)</th></tr></thead><tbody>
+<tr><td>未處理裸 Si 表面</td><td>$10^3$–$10^5$</td><td>$\sim10^{15}$</td></tr>
+<tr><td>熱氧化 SiO₂（未退火）</td><td>$10^2$–$10^3$</td><td>$\sim10^{11}$–$10^{12}$</td></tr>
+<tr><td>SiO₂ + 含氫退火</td><td>1–10</td><td>$\sim10^{10}$</td></tr>
+<tr><td>Al₂O₃ 鈍化（PERC 太陽能電池）</td><td>&lt; 5</td><td>$\sim10^{10}$–$10^{11}$</td></tr>
+<tr><td>a-Si:H 鈍化（HIT 太陽能電池）</td><td>&lt; 2</td><td>$&lt;10^{10}$</td></tr></tbody></table>
+
+<p><strong>鈍化技術的物理原理：</strong>SiO₂ 鈍化的關鍵是氫原子——氫可以填補 Si/SiO₂ 界面處的懸鍵→將 $D_{it}$ 從 $10^{15}$ 降到 $10^{10}$。含氫退火（Forming Gas Anneal, FGA：400°C 的 H₂/N₂ 氣氛）是半導體製程的標準步驟。Al₂O₃ 的優勢是帶有<strong>固定負電荷</strong>→在 p 型 Si 表面形成反轉層→場效應鈍化（與化學鈍化互補）。</p>
+
+<div class="callout-warn"><strong>⚡ 表面復合是太陽能電池效率的頭號殺手。</strong>光在表面附近被吸收→產生的載子若在表面復合→永遠無法被收集。這就是為什麼高效太陽能電池要使用<strong>表面鈍化層</strong>（如 SiNₓ、Al₂O₃）來降低表面復合速度。PERC（Passivated Emitter and Rear Cell）技術將電池效率從 ~20% 提升到 &gt;23%——核心就是背面鈍化。這也是 FinFET 等三維電晶體面臨的挑戰——表面積對體積的比例更大→表面效應更顯著→需要更先進的鈍化方案。</div>
+<div class="callout"><strong>💡 收集效率</strong> 非平衡載子能否被收集，常取決於表面/界面是否先復合掉。</div>
+<details class="example"><summary>📝 自編概念例 — $s$ 比較</summary><div class="example-body"><p>裸 Si $s\sim10^4$ cm/s；Al₂O₃ 鈍化可 &lt;5 cm/s，差 3–4 個數量級。</p></div></details>
+</section>
+
+<section id="s6-6-1"><h2>6.6.1 表面態</h2>
+<div class="section-keypoints"><strong>🔑 本節重點</strong> 懸鍵 · 界面陷阱 · 鈍化</div>
+<p>晶體表面晶格終止，產生懸鍵與界面缺陷，在能隙中形成<strong>表面態</strong>，可捕獲電子或電洞，改變表面電荷與能帶彎曲。</p>
+<p>未處理 Si 表面 $D_{it}\sim10^{15}$ cm⁻²eV⁻¹，是極有效的復合中心。光生載子在表面附近產生時，常在到達電極前被復合。</p>
+<p>表面態還可能釘扎 Fermi 能階，使 MOS 臨界電壓、次臨界斜率與 C–V 特性偏離理想值。</p>
+<div class="callout"><strong>💡 鈍化</strong> SiO₂、氫退火、Al₂O₃ 等可降低 $D_{it}$ 與表面復合。</div>
+<div class="callout-warn"><strong>⚠ 奈米尺度</strong> 表面積/體積比增大，表面效應主導有效壽命。</div>
+<p>薄膜太陽能電池、FinFET 與光偵測器都高度依賴界面工程。</p>
+<details class="example"><summary>📝 自編概念例</summary><div class="example-body"><p>FGA（含氫退火）用 H 填補 Si/SiO₂ 懸鍵，$D_{it}$ 可降 5 個數量級。</p></div></details>
+</section>
+<section id="s6-6-2"><h2>6.6.2 表面復合速度</h2>
+<div class="section-keypoints"><strong>🔑 本節重點</strong> 邊界條件 · 表面速度 · 收集效率</div>
+<p>表面復合速度 $S$（或 $s_p$）把表面復合通量與表面過剩濃度聯繫：</p>
+<div class="eq">$$D_p\frac{\partial\delta p}{\partial x}\bigg|_{x=0} = s_p\,\delta p(0)$$</div>
+<p>$S$ 越大，表面越像強吸收邊界；$S$ 越小，代表鈍化良好。裸 Si $s\sim10^3$–$10^5$ cm/s；Al₂O₃ 鈍化可 $<5$ cm/s。</p>
+<p>當樣品厚度 $t\ll L_p$ 時，載子易達表面，有效體壽命由表面主導，即使體材料很純亦然。</p>
+<p>降低表面復合是提升太陽能電池效率（PERC、HIT）與改善 MOS 可靠度的核心技術之一。</p>
+<div class="callout"><strong>💡 PERC</strong> 背面 Al₂O₃ 鈍化將效率從 ~20% 推升至 &gt;23%。</div>
+<div class="callout-warn"><strong>⚠ 邊界</strong> 求解擴散方程時，表面條件與體內 $\tau$ 同等重要。</div>
+<p>界面品質因此是連接材料參數與器件性能的關鍵環節。</p>
+<details class="example"><summary>📐 例題 — 表面邊界</summary><div class="example-body"><p>$S\to\infty$ 對應 $\delta p(0)=0$（完全吸收）；$S=0$ 對應零法向梯度（反射邊界）。</p></div></details>
+</section>
+<section id="summary"><h2>本章摘要</h2>
+<ol>
+<li><strong>過量載子：</strong>$\delta n=n-n_0$，$\delta p=p-p_0$。電中性要求 $\delta n=\delta p$。</li>
+<li><strong>低階注入：</strong>$\delta n\ll n_0$（n 型）——最常見的元件操作條件。</li>
+<li><strong>SRH 復合：</strong>陷阱輔助兩步驟復合。$E_t\approx E_{Fi}$ 時最有效。</li>
+<li><strong>連續性方程：</strong>濃度變化 = 傳輸 + 產生 − 復合。</li>
+<li><strong>擴散長度：</strong>$L_p=\sqrt{D_p\tau_{p0}}$——少數載子復合前的平均行進距離。</li>
+<li><strong>雙極傳輸：</strong>電子電洞庫侖耦合→一起移動。低階注入下由少數載子參數主導。</li>
+<li><strong>介電弛豫時間：</strong>$\tau_d=\epsilon/\sigma$∼皮秒——多數載子響應極快。</li>
+<li><strong>準 Fermi 能階：</strong>$E_{Fn}$ 和 $E_{Fp}$ 分離→度量偏離平衡程度。</li>
+<li><strong>載子壽命：</strong>SRH 理論決定 $\tau$ 與摻雜和陷阱密度的關係。</li>
+<li><strong>表面復合：</strong>懸鍵提供額外復合中心。鈍化可將 $s$ 降低數千倍。</li></ol></section>
+<section id="common-mistakes"><h2>常見誤解與修正</h2>
+<div class="callout-warn"><strong>⚠ 把公式當成孤立記憶</strong><p>非平衡載子 的公式都來自特定物理假設；請先確認適用條件，再代入數字。</p></div>
+<div class="callout-warn"><strong>⚠ 忽略符號與方向</strong><p>電場、電流、濃度梯度與載子流方向常不同，建議先畫圖再判斷正負號。</p></div>
+<div class="callout-warn"><strong>⚠ 忽略近似條件</strong><p>低階注入、空乏近似、非簡併與一維模型都不是永遠成立。</p></div>
+</section>
+<section id="self-check"><h2>自我檢核</h2>
+<details class="example"><summary>我能不能用一句話說出本章主軸？</summary><p>本章主軸是把前面章節的材料物理量放進 非平衡載子 的具體問題中。</p></details>
+<details class="example"><summary>我能不能列出本章最重要的近似？</summary><p>請確認你能指出每個公式背後的平衡、空乏、低階注入或非簡併條件。</p></details>
+<details class="example"><summary>我能不能用圖解釋主要公式？</summary><p>若能畫出能帶、電場、濃度或電荷分布，公式通常就不會變成死背。</p></details>
+</section>
+<section id="extras"><h2>延伸學習與下一步</h2>
+<p>建議把本章公式整理成「物理意義、適用條件、常見錯誤」三欄表。</p>
+<p>若要銜接下一章，請特別注意本章中作為邊界條件或材料參數的量。</p>
+<p>完成後可回到習題頁，用一題數值題檢查量級是否合理。</p>
+<div class="callout"><strong>🔎 建議練習</strong> 選一個代表公式，從文字物理圖像重新推導到符號式。</div>
+</section>
+<section id="derivation-lab" class="derive"><h2>推導、假設與章末診斷</h2><h3>方程式使用契約與邊界條件</h3><ul><li>單一壽命模型 $R=\Delta p/\tau_p$ 假設低階注入、均勻材料與小訊號復合；高注入或 SRH 能階細節需用完整復合率。</li><li>一維擴散方程常假設準中性、$D$ 與 $\tau$ 常數且沒有內建電場。</li><li>半無限樣品邊界：$\Delta p(0)=\Delta p_s$、$\Delta p(\infty)=0$；有限接觸可改用表面復合 $D(d\Delta p/dx)=S\Delta p$。</li><li>準 Fermi 能階只在載子各自接近局部熱平衡時有意義。</li></ul><h3>中間推導：擴散長度</h3><ol><li>穩態、無體生成時，連續方程為 $D_p d^2\Delta p/dx^2-\Delta p/\tau_p=0$。</li><li>特徵方程 $r^2-1/(D_p\tau_p)=0$。</li><li>定義 $L_p=\sqrt{D_p\tau_p}$，解為 $Ae^{-x/L_p}+Be^{x/L_p}$。</li><li>半無限遠有限要求 $B=0$，表面邊界給 $A=\Delta p_s$。</li></ol><div class="info-card"><strong>單位／量級：</strong>$D\tau$ 是 cm²，平方根為 cm。若 $D=25$ cm²/s、$\tau=1$ µs，$L=50$ µm。</div><h3>章末練習與概念診斷</h3><details><summary>壽命增加十倍，擴散長度增加十倍嗎？</summary><p>不是；$L\propto\sqrt{\tau}$，只增加 $\sqrt{10}\approx3.16$ 倍。</p></details><details><summary>高表面復合速度的邊界代表什麼？</summary><p>表面像強吸收接觸，過量載子在表面被快速消耗，濃度降低且梯度增大。</p></details><h3>延伸計算練習</h3><p>完成上方診斷後，請在不查公式的情況下重建代表推導，並改變一個參數檢查極限行為。更多含數值與解答的題目：<a href="../problems_examples/ch06_problems_zh.html">本章完整習題頁</a>。</p></section>
+</main>
+</body>
+</html>

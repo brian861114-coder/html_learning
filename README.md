@@ -1,149 +1,69 @@
-# 📚 材料學習資源中心
+# 理工學習中心
 
-> 互動式 HTML 學習筆記 — 半導體物理、材料熱力學、微積分、材料科學  
-> 適合手機／平板／電腦隨時閱讀
+互動式繁體中文理工教材，提供章節導覽、閱讀設定、學習進度、自我檢測、非線性學習路徑與互動模型。
 
-[![GitHub Pages](https://img.shields.io/badge/GitHub%20Pages-線上閱讀-007AFF?style=flat&logo=github)](https://brian861114-coder.github.io/html_learning/)
+線上閱讀：[brian861114-coder.github.io/html_learning](https://brian861114-coder.github.io/html_learning/)
 
----
+## 學習主題
 
-## 📖 內容涵蓋
+| 科目 | 章節 | 互動模型 | 練習 | 狀態 |
+| --- | ---: | ---: | ---: | --- |
+| 微積分 | 17 | 10 | 604 | 可完整閱讀 |
+| 材料科學與工程 | 15 | 0 | 55 | 可完整閱讀 |
+| 量子力學 | 12 | 0 | 81 | 可完整閱讀 |
+| 半導體物理與元件 | 15 | 8 | 405 | 可完整閱讀 |
+| 材料熱力學 | 15 | 0 | 52 | 可完整閱讀 |
 
-### 🔵 半導體物理與元件
-**課本**：*Semiconductor Physics and Devices* — Donald A. Neamen, 4th Edition
+## 主要功能
 
-| Part | 章節範圍 | 內容 |
-|------|----------|------|
-| I — 半導體材料性質 | Ch 1–6 | 晶體結構、量子力學、能帶理論、平衡態半導體、載子傳輸、非平衡載子 |
-| II — 半導體元件基礎 | Ch 7–12 | pn 接面、二極體、金半接面、BJT、MOSFET、進階 MOSFET |
-| III — 進階與特殊元件 | Ch 13–15 | BJT 進階、JFET/MESFET/HEMT、光學元件、微波與功率元件 |
+- 首頁「繼續學習」與各科閱讀進度
+- 章節先備知識、摘要、常見錯誤、自我檢測及延伸路徑
+- 深色／淺色主題、字級與閱讀寬度設定
+- 標準、專注、完整及自訂內容顯示模式
+- 內容來源、推導、例題、圖表、練習及模型的個別顯示控制
+- 手機、平板與桌面響應式版面
+- 本機瀏覽器儲存閱讀位置、掌握度與顯示偏好
 
-> 含 12 份公式摘要、16 組習題與例題、完整整合版
+所有學習紀錄都保存在使用者目前瀏覽器的 localStorage，不會上傳或跨裝置同步。
 
-### 🟠 材料熱力學
-**課本**：*Introduction to the Thermodynamics of Materials* — David R. Gaskell, 6th Edition
+## 目錄結構
 
-| Part | 章節範圍 | 內容 |
-|------|----------|------|
-| I — 熱力學基本原理 | Ch 1–6 | 術語定義、第一/第二定律、統計熵、基本方程式、熱容與第三定律 |
-| II — 相平衡與溶液 | Ch 7–10 | 單成分相平衡、氣體行為、溶液行為、吉布斯自由能與二元相圖 |
-| III — 化學反應與應用 | Ch 11–15 | 氣相反應、Ellingham 圖、凝態反應平衡、電化學、相變態 |
+```text
+html_learning/
+├─ index.html                 全站首頁
+├─ assets/                    首頁與學習進度資產
+├─ shared/                    共用閱讀介面、導覽與模型資產
+├─ subjects/
+│  ├─ calculus/
+│  ├─ material-science/
+│  ├─ quantum-mechanics/
+│  ├─ solid-state-physics/
+│  └─ thermodynamics/
+├─ calculus/                  舊網址相容轉址
+├─ material-science/          舊網址相容轉址
+├─ solid-state-physics/       舊網址相容轉址
+├─ thermodynamics/            舊網址相容轉址
+└─ .nojekyll                  關閉 GitHub Pages 的 Jekyll 處理
+```
 
-> 含 15 份公式摘要
+舊的 `/<subject>/...` HTML 網址會自動轉址到 `/subjects/<subject>/...`，以維持既有書籤與外部連結。
 
-### 🟢 微積分
-**課本**：*Calculus: Early Transcendentals* — James Stewart
+## 本機閱讀
 
-| Part | 章節範圍 | 內容 |
-|------|----------|------|
-| I — 微分與積分基礎 | Ch 1–6 | 函數與圖形、極限、導數、導數應用、積分、積分應用 |
-| II — 進階技巧與級數 | Ch 7–11 | 積分技巧、微分方程入門、序列與級數、冪級數、參數方程式與極座標 |
-| III — 多變量與向量微積分 | Ch 12–17 | 空間向量、向量值函數、偏導數、多重積分、向量微積分、二階微分方程 |
-
-> 含 17 組習題、10 個互動 SVG 模型
-
-### 🟣 材料科學與工程
-**課本**：*Materials Science and Engineering* — William D. Callister, Jr.
-
-| Part | 章節範圍 | 內容 |
-|------|----------|------|
-| I — 基礎與力學性質 | Ch 1–8 | 導論、原子結構與鍵結、晶體結構、缺陷、擴散、力學性質、差排、破損 |
-| II — 相圖與材料家族 | Ch 9–15 | 相圖、相變化、金屬合金、陶瓷結構與應用、高分子結構與應用 |
-
-> 含 376 張原文書對照圖
-
----
-
-## ✨ 功能特色
-
-- 🌓 **深淺色主題切換** — 自動記憶偏好（localStorage）
-- 🔍 **全域搜尋** — 搜尋所有章節、公式摘要、習題
-- 📱 **響應式設計** — 手機／平板／電腦皆可舒適閱讀
-- 🧭 **卡片式導覽** — 依 Part 分類、章節一目了然
-- 🖼️ **原文書對照** — 關鍵圖表截圖嵌入內文
-- 📐 **MathJax 數學渲染** — 公式清晰呈現
-- 🎮 **互動模型** — 微積分含 10 個互動式 SVG 數學模型
-
----
-
-## 🚀 使用方式
-
-### 線上閱讀（推薦）
-開啟 👉 **[brian861114-coder.github.io/html_learning](https://brian861114-coder.github.io/html_learning/)**
-
-### 本機執行
 ```bash
 git clone https://github.com/brian861114-coder/html_learning.git
 cd html_learning
-# 直接用瀏覽器開啟 index.html，或：
 python -m http.server 8080
-# 然後開啟 http://localhost:8080
 ```
 
----
+然後開啟 <http://localhost:8080/>。部分數學公式使用 CDN 載入 MathJax，第一次顯示時需要網路連線。
 
-## 📁 目錄結構
+## 部署說明
 
-```
-html_learning/
-├── index.html                  # 主入口導航頁（4 科目）
-├── reading-preferences.js      # 主題偏好管理
-├── images/                     # 原文書頁面截圖
-│   ├── solid-state-physics/    #   半導體物理 (133 張)
-│   └── thermodynamics/         #   材料熱力學 (175 張)
-├── solid-state-physics/
-│   ├── pages/                  # HTML 引用的裁切圖片
-│   └── html/
-│       ├── chapters/           # 16 章 HTML 學習頁面
-│       ├── formula_reviews/    # 12 份公式摘要
-│       ├── problems_examples/  # 16 組習題與例題
-│       ├── combined/           # 完整整合版 & 結構地圖
-│       └── assets/             # 心智圖與互動模型
-├── thermodynamics/
-│   └── html/
-│       ├── chapters/           # 15 章 HTML 學習頁面
-│       └── formula_reviews/    # 15 份公式摘要
-├── calculus/
-│   ├── pages/                  # 223 張裁切圖片
-│   └── html/
-│       ├── chapters/           # 17 章 HTML 學習頁面
-│       ├── problems_examples/  # 17 組習題
-│       └── assets/             # 10 個互動 SVG 模型 + CSS/JS
-└── material-science/
-    ├── pages/                  # 153 張裁切圖片
-    └── html/
-        ├── chapters/           # 15 章 HTML 學習頁面
-        └── assets/             # CSS/JS
-```
+此倉庫是 GitHub Pages 發布產物。正式內容由獨立的教材來源專案透過 allowlist 同步；部署流程不會包含原始 PDF、來源 metadata、測試、維護工具或建置產物。請勿直接修改自動同步的 `index.html`、`assets/`、`shared/`、`subjects/` 與舊網址轉址檔。
 
----
+## 內容與授權
 
-## 🛠 技術棧
+教材內容以原始教科書、來源索引與已驗證素材為依據，並加入繁體中文教學整理。原書及引用內容的權利歸其各自權利人所有；本倉庫僅供個人學習與教學整理使用。
 
-- 純 HTML/CSS/JavaScript，無框架依賴
-- Apple HIG 設計風格（淺色／深色主題）
-- MathJax 3 數學公式渲染
-- 互動式 SVG 模型（原生 JS + CSS）
-- 靜態檔案，可直接部署 GitHub Pages
-
----
-
-## 📊 統計
-
-| 科目 | 章節 | 公式摘要 | 習題 | 圖片 |
-|------|------|----------|------|------|
-| 半導體物理 | 16 | 12 | 16 | ~130 |
-| 材料熱力學 | 15 | 15 | — | ~175 |
-| 微積分 | 17 | — | 17 | 223 |
-| 材料科學 | 15 | — | — | 153 |
-| **合計** | **63** | **27** | **33** | **~700** |
-
----
-
-## 📝 License
-
-個人學習用途。教材內容版權歸原作者所有，本 repo 僅包含自行整理的學習筆記與摘要。
-
----
-
-*最後更新：2026/07/05*
+最後更新：2026-07-17

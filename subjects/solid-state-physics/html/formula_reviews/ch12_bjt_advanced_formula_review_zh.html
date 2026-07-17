@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>第十二章（進階篇） 公式摘要 — BJT 進階概念（完整版）</title>
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']],tags:'ams'},options:{ignoreHtmlClass:'no-math'}};</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script defer src="../assets/course-ui.js"></script>
+<link rel="stylesheet" href="../../../../shared/core.css">
+<script src="../../../../shared/core.js" defer></script>
+<link rel="stylesheet" href="../../../../shared/components/formula-problem.css">
+<link rel="stylesheet" href="../../../../shared/navigation.css" data-shared-navigation>
+</head>
+<body>
+<a class="portal-home-link" href="../index.html">返回學習中心</a>
+<nav class="sidebar" aria-label="本章目錄"><div class="sidebar-header"><div class="sidebar-subtitle">半導體物理與元件</div><h2 class="sidebar-title">第十二章（進階篇）：BJT 進階概念</h2></div><div class="toc"><ul>
+<li class="ns">13.1 BJT 結構</li><li class="nsub"><a href="#s1">13.1 BJT 物理回顧·多邊結構</a></li>
+<li class="ns">13.2 頻率限制</li><li class="nsub"><a href="#s2">13.2 $f_T$·$f_{\max}$·四時間常數 ⭐</a></li>
+<li class="ns">13.3 開關</li><li class="nsub"><a href="#s3">12.7 大訊號開關·儲存時間</a></li>
+<li class="ns">13.4–13.5</li><li class="nsub"><a href="#s4">12.5.3 小訊號模型·$C_\pi$·$C_\mu$</a></li>
+<li class="nsub"><a href="#s5">13.5 HBT·SiGe·$\beta$ 突破</a></li>
+<li><a href="#cheatsheet">📋 公式速查表</a></li>
+</ul></div><div class="sidebar-tools"><button type="button" data-action="toggle-theme" aria-label="切換深色或淺色模式">切換顯示主題</button></div></nav>
+<main class="chapter-page">
+<div class="chapter-header"><div class="tag">全部公式·含完整推導</div><h1>第十二章（進階篇）：BJT 進階概念</h1><div class="chapter-subtitle">Semiconductor Physics & Devices, 4th Ed.·Donald A. Neamen·pp.491–558</div></div>
+<div class="content-toolbar"><button data-action="expand-details">📖 展開全部</button><button data-action="collapse-details">📕 收合全部</button></div>
+
+<div class="content-section" id="s1"><h2>12.1–12.4 BJT 作用回顧與多邊結構</h2>
+<div class="formula-card"><div class="formula-label">BJT 核心參數回顧</div><div class="eq">$$\alpha = \gamma \cdot \alpha_T,\quad \beta = \frac{\alpha}{1-\alpha}$$</div><div class="eq">$$I_C = I_S e^{V_{BE}/V_T},\quad I_E = I_B + I_C$$</div></div>
+</div>
+
+<div class="content-section" id="s2"><h2>12.6 BJT 頻率限制——四個時間常數 ⭐</h2>
+<details class="derive" open><summary>🔍 $f_T$ 的完整推導——四個延遲成分的物理來源</summary><div class="derive-body">
+<div class="step"><span class="step-number">1</span><span class="step-label">⭐ 截止頻率定義 (12.97)</span><div class="step-content"><span class="math">$$\boxed{f_T = \frac{1}{2\pi\tau_{ec}}},\quad \tau_{ec} = \tau_e + \tau_b + \tau_d + \tau_c \tag{12.97}$$</span></div></div>
+<div class="step"><span class="step-number">2</span><span class="step-label">① 射極充電時間 $\tau_e = r_e C_{je}$</span><div class="step-content">$r_e = V_T/I_E \approx 25.9/I_E(\text{mA})$ Ω。$C_{je}$ = BE 接面電容。充放電 BE 接面的 RC 延遲。</div></div>
+<div class="step"><span class="step-number">3</span><span class="step-label">② 基極傳輸時間 $\tau_b = W_B^2/(2D_B)$</span><div class="step-content">⭐ 最重要的延遲成分。來自擴散方程：粒子從 $x=0$ 擴散到 $x=W_B$ 的平均時間。<br>數值：$W_B=0.1$ µm, $D_B=30$ cm²/s→$\tau_b=1.7$ ps→$f_T\approx100$ GHz（僅此項）。</div></div>
+<div class="step"><span class="step-number">4</span><span class="step-label">③ 集極空乏層渡越時間 $\tau_d = x_d/(2v_{\text{sat}})$</span><div class="step-content">$v_{\text{sat}}\approx10^7$ cm/s。$x_d$ 隨 $V_{CB}$ 增加→高速 BJT 需低 $V_{CB}$ 操作。</div></div>
+<div class="step"><span class="step-number">5</span><span class="step-label">④ 集極充電時間 $\tau_c = r_c C_{jc}$</span><div class="step-content">$r_c$ = 集極串聯電阻。$C_{jc}$ = BC 接面電容。</div></div>
+</div></details>
+<div class="formula-card"><div class="formula-label">⭐ 最大振盪頻率 $f_{\max}$ (12.102)</div><div class="eq">$$\boxed{f_{\max} = \sqrt{\frac{f_T}{8\pi\,r_b\,C_{jc}}}} \tag{12.102}$$</div><div class="formula-note">功率增益 = 1 的頻率。$r_b$（基極電阻）和 $C_{jc}$（BC 接面電容）形成輸入-輸出耦合的 RC 濾波器。$r_b C_{jc}$ 是功率增益的瓶頸。</div></div>
+<div class="formula-card"><div class="formula-label">共射極截止頻率 $f_\beta$ (12.105–12.106)</div><div class="eq">$$f_\beta = \frac{f_T}{\beta_0} \tag{12.105}$$</div><div class="eq">$$\beta(f) = \frac{\beta_0}{1 + j(f/f_\beta)} \tag{12.106a, 12.106b}$$</div><div class="formula-note">$f_\beta$ = 電流增益 $\beta$ 降至低頻值 $\beta_0$ 的 $1/\sqrt{2}$ 時的頻率。$f_\beta \ll f_T$（差 $\beta_0$ 倍）。</div></div>
+<div class="formula-card"><div class="formula-label">射極-集極延遲完整表達式 (12.107–12.108)</div><div class="eq">$$\tau_{ec} = \frac{V_T}{I_E}C_{je} + \frac{W_B^2}{2D_B} + \frac{x_d}{2v_{\text{sat}}} + r_c C_{jc} \tag{12.107}$$</div><div class="formula-note">(12.108) 給出各成分的相對重要性——基極傳輸時間通常主導。</div></div>
+</div>
+
+<div class="content-section" id="s3"><h2>12.7 大訊號開關</h2>
+<div class="formula-card"><div class="formula-label">開關延遲時間</div><div class="eq">$$t_s \approx \tau_s\ln\!\left(1 + \frac{I_F}{I_R}\right)$$</div><div class="formula-note">$\tau_s$ = 飽和區等效壽命。$I_F$ = 順向基極電流，$I_R$ = 反向抽取電流。<br>蕭特基箝位防止飽和→$t_s$ 大幅降低（$\tau_s$ 變為主動區壽命，短得多）。</div></div>
+</div>
+
+<div class="content-section" id="s4"><h2>12.5.3 小訊號模型</h2>
+<div class="formula-card"><div class="formula-label">⭐ 完整混合-π 模型（含電容）</div><div class="eq">$$g_m = \frac{I_C}{V_T},\quad r_\pi = \frac{\beta}{g_m},\quad r_o = \frac{V_A}{I_C}$$</div><div class="eq">$$C_\pi = C_{je} + \tau_F g_m,\quad C_\mu = C_{jc}$$</div><div class="formula-note">$C_\pi$（輸入電容）= 接面電容 $C_{je}$ + 擴散電容 $\tau_F g_m$（$\propto I_C$）。<br>$C_\mu$ = BC 接面電容（Miller 效應→輸入端放大 $(1+g_m R_L)$ 倍）。</div></div>
+</div>
+
+<div class="content-section" id="s5"><h2>12.8 HBT 與 SiGe 技術</h2>
+<div class="formula-card"><div class="formula-label">HBT 射極注入效率的突破</div><div class="eq">$$\gamma_{\text{HBT}} \approx 1,\quad \beta_{\text{HBT}} \gg \beta_{\text{BJT}}$$</div><div class="formula-note">寬能隙射極→價帶能障阻止電洞從基極注入射極→$I_{pE}\approx0$→$\gamma\approx1$ 即使 $N_E$ 不重於 $N_B$。<br>可重摻雜基極→$r_b$ 降低→$f_{\max}$ 提升。</div></div>
+</div>
+
+<div class="content-section" id="cheatsheet"><h2>公式速查表（完整）</h2>
+<table><caption>表 1：公式速查表（完整）</caption><thead><tr><th>Eq</th><th>公式</th><th>備註</th></tr></thead><tbody>
+<tr><td>12.97</td><td>$f_T=1/(2\pi\tau_{ec})$, $\tau_{ec}=\tau_e+\tau_b+\tau_d+\tau_c$</td><td>⭐ 截止頻率定義</td></tr>
+<tr><td>—</td><td>$\tau_e=r_e C_{je}=V_T C_{je}/I_E$</td><td>射極充電時間</td></tr>
+<tr><td>—</td><td>$\tau_b=W_B^2/(2D_B)$</td><td>⭐ 基極傳輸時間</td></tr>
+<tr><td>—</td><td>$\tau_d=x_d/(2v_{\text{sat}})$</td><td>集極空乏層渡越</td></tr>
+<tr><td>—</td><td>$\tau_c=r_c C_{jc}$</td><td>集極充電時間</td></tr>
+<tr><td>12.102</td><td>$f_{\max}=\sqrt{f_T/(8\pi r_b C_{jc})}$</td><td>⭐ 最大振盪頻率</td></tr>
+<tr><td>12.105</td><td>$f_\beta=f_T/\beta_0$</td><td>共射極截止頻率</td></tr>
+<tr><td>12.106</td><td>$\beta(f)=\beta_0/[1+j(f/f_\beta)]$</td><td>頻率相關的電流增益</td></tr>
+<tr><td>12.107</td><td>$\tau_{ec}$ 完整表達式</td><td>四項總和</td></tr>
+<tr><td>—</td><td>$C_\pi=C_{je}+\tau_F g_m$, $C_\mu=C_{jc}$</td><td>⭐ 混合-π 電容</td></tr>
+<tr><td>—</td><td>$t_s\approx\tau_s\ln(1+I_F/I_R)$</td><td>儲存時間</td></tr>
+</tbody></table></div></main>
+<script>
+function toggleTheme(){const h=document.documentElement;const n=h.getAttribute('data-theme')==='light'?'dark':'light';h.setAttribute('data-theme',n);localStorage.setItem('theme',n);document.getElementById('tl').textContent=n==='dark'?'淺色模式':'深色模式';}
+const s=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',s);if(s==='dark')document.getElementById('tl').textContent='淺色模式';
+const secs=document.querySelectorAll('.content-section[id]');const navs=document.querySelectorAll('.sn a');window.addEventListener('scroll',()=>{let c='';secs.forEach(s=>{if(window.scrollY>=s.offsetTop-80)c=s.getAttribute('id');});navs.forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+c);});});
+</script>
+</body>
+</html>

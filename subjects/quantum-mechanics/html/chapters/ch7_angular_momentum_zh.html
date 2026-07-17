@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第 7 章 角動量 — The Physics of Quantum Mechanics</title>
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$'], ['\\[','\\]']] },
+  options: { ignoreHtmlClass: 'no-mathjax' }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<link rel="stylesheet" href="../../../../shared/core.css">
+<script src="../../../../shared/core.js" defer></script>
+<link rel="stylesheet" href="../../../../shared/navigation.css" data-shared-navigation>
+</head>
+<body>
+
+<nav class="sidebar" id="sidebar" aria-label="本章目錄"><div class="sidebar-header"><div class="sidebar-subtitle">量子力學</div><h2 class="sidebar-title">第 7 章 角動量</h2></div><div class="toc">
+    <div class="nsub"><a href="#preview">本章預覽</a></div>
+    <div class="nsub"><a href="#s7-1">7.1 J<sub>z</sub> 與 J² 的本徵值</a></div>
+    <div class="nsub"><a href="#s7-2">7.2 軌道角動量</a></div>
+    <div class="nsub"><a href="#s7-3">7.3 自旋角動量</a></div>
+    <div class="nsub"><a href="#s7-4">7.4 磁場中的帶電粒子</a></div>
+    <div class="nsub"><a href="#s7-5">7.5 角動量的加法</a></div>
+    <div class="nsub"><a href="#summary">關鍵概念與公式</a></div>
+    <div class="nsub"><a href="#common-mistakes">常見錯誤</a></div>
+    <div class="nsub"><a href="#self-check">自我檢測</a></div>
+    <div class="nsub"><a href="#extras">延伸資源</a></div>
+  </div>
+<div class="sidebar-tools"><button type="button" data-action="toggle-theme" aria-label="切換深色或淺色模式">切換顯示主題</button></div></nav>
+
+<main class="chapter-page" data-chapter-title="第 7 章 角動量" data-prev-href="ch6_composite_zh.html" data-prev-label="第 6 章 複合系統" data-next-href="ch8_hydrogen_zh.html" data-next-label="第 8 章 氫原子">
+<!-- ====== 章首 ====== -->
+<header class="chapter-header">
+  <div class="chapter-subtitle">
+    <a href="#">量子力學</a> &rsaquo; <a href="ch6_composite_zh.html">Ch6</a> &rsaquo; Ch7
+  </div>
+  <h1>第 7 章　角動量</h1>
+  <div class="chapter-meta">
+    <span>原書章節：Chapter 7, Angular Momentum（Binney &amp; Skinner, 2013）</span>
+    <span>原書頁碼：p139–180</span>
+    <span>章長：42 頁 &middot; 5 節 &middot; 28 個問題</span>
+  </div>
+</header>
+
+<!-- ====== 本章預覽 ====== -->
+<section class="chapter-preview" id="preview">
+  <h2>本章預覽</h2>
+
+  <div class="core-question">
+    <h3>核心問題</h3>
+    <p>在第 4 章中，我們將角動量運算子 J<sub>i</sub> 引入為旋轉的生成元，並發現它們滿足對易關係 $[J_i, J_j] = i\hbar\varepsilon_{ijk}J_k$。但是我們當時並未確定它們的完整能譜，也沒有揭示「角動量」這個名稱的真正物理內涵。<strong>本章將完成這兩個任務：從對易關係出發，完全確定角動量的本徵值譜；並展示軌道角動量、自旋角動量、以及它們的組合力學如何刻畫微觀系統的取向與動力學。</strong>你將看到：角動量量子數可以是整數或半整數——這個簡單事實深刻區分了玻色子與費米子，並決定了原子結構與化學鍵的本質。</p>
+  </div>
+
+  <div class="deep-dive">
+    <h3>10 個關鍵概念</h3>
+    <ol>
+      <li><strong>對易關係決定能譜</strong>：$[J_i,J_j]=i\hbar\varepsilon_{ijk}J_k$ 迫使 J² 的本徵值為 $j(j+1)\hbar^2$，$j$ 為整數或半整數</li>
+      <li><strong>升降運算子</strong>：$J_\pm = J_x \pm iJ_y$ 改變 $m$ 而不改變 $j$，係數 $\alpha_\pm=\sqrt{j(j+1)-m(m\pm1)}$</li>
+      <li><strong>雙原子分子旋轉譜</strong>：$E_j=j(j+1)\hbar^2/2I$，觀測 CO 的 115 GHz 譜線是星際介質探測的關鍵</li>
+      <li><strong>軌道角動量</strong>：$L = \frac{1}{\hbar}\mathbf{x}\times\mathbf{p}$，僅取整數 $l$；球諧函數 $Y_l^m$ 是本徵函數</li>
+      <li><strong>徑向動量與動能分解</strong>：$p^2/2m = p_r^2/2m + \hbar^2 L^2/2mr^2$，將動能拆分為徑向與切向部分</li>
+      <li><strong>自旋角動量</strong>：$S = J - L$，與空間運動無關的內秉角動量；電子為自旋-½ 系統</li>
+      <li><strong>Pauli 矩陣</strong>：$\sigma_x,\sigma_y,\sigma_z$ 是自旋-½ 系統的運算子表示，滿足 $\sigma_i^2=I$ 和 $\{\sigma_i,\sigma_j\}=2\delta_{ij}$</li>
+      <li><strong>Stern–Gerlach 實驗</strong>：銀原子束在非均勻磁場中分裂為兩束——直接證明自旋的量子化</li>
+      <li><strong>核磁共振（NMR）</strong>：質子在磁場中進動，頻率 $\omega=-2\mu_p B/\hbar$——現代化學與醫學影像的基礎</li>
+      <li><strong>Clebsch–Gordan 係數</strong>：將兩個角動量 $j_1,j_2$ 合成總角動量 $j=|j_1-j_2|,\ldots,j_1+j_2$ 的振幅</li>
+    </ol>
+  </div>
+
+  <div class="deep-dive">
+    <h3>🧭 本章推理地圖</h3>
+    <ol>
+      <li><strong>角動量對易關係 $[J_i,J_j]=i\hbar\varepsilon_{ijk}J_k$</strong>（Ch4）→ 利用 $J_\pm$ 升降運算子推導 J² 與 J<sub>z</sub> 的完整本徵值譜（§7.1）→ $j$ 必須是整數或半整數。</li>
+      <li><strong>$2\pi$ 旋轉下的行為差異</strong>（§7.1）→ 整數 $j$ 回到原態，半整數 $j$ 改變符號 → 區分玻色子與費米子。</li>
+      <li><strong>雙原子分子模型</strong>（§7.1.1）→ 剛體轉子 Hamiltonian $H=\hbar^2 J^2/2I$ → 旋轉譜 $E_j=j(j+1)\hbar^2/2I$ → 光子能量 $\Delta E \propto j$。</li>
+      <li><strong>軌道角動量定義 $L=\frac{1}{\hbar}\mathbf{x}\times\mathbf{p}$</strong>（§7.2）→ $L$ 是環形平移的生成元（§7.2.1）→ $L_z$ 僅有整數本徵值（§7.2.2）。</li>
+      <li>球座標中 $L_z=-i\partial/\partial\varphi$（§7.2.3）→ 本徵函數 $\psi\propto e^{im\varphi}$ → 球諧函數 $Y_l^m(\theta,\varphi)$ 為 $L^2$ 與 $L_z$ 的同時本徵函數（§7.2.3–§7.2.4）。</li>
+      <li><strong>$L^2$ 與 Laplacian 的關係</strong>（§7.2.5）→ $p^2 = p_r^2 + \hbar^2 L^2/r^2$ → 徑向與角向動能分離 → 為第 8 章氫原子鋪路。</li>
+      <li><strong>自旋的定義 $S=J-L$</strong>（§7.3）→ 自旋與空間運動無關，僅描述內秉取向 → 自旋-½ 的 Pauli 矩陣表示（§7.3.2）。</li>
+      <li><strong>Stern–Gerlach 過濾器</strong>（§7.3.2）→ 測量 $S_z$ 分裂為兩束 → 連續過濾展示量子測量的擾動本質 → 自旋-1 的三束分裂（§7.3.3）→ 古典極限（§7.3.4）。</li>
+      <li><strong>磁場中的磁偶極</strong>（§7.3.5）→ $H=-\boldsymbol{\mu}\cdot\mathbf{B}$ → 進動頻率 $\omega$ → NMR 原理與化學位移（§7.3.5）。</li>
+      <li><strong>角動量加法</strong>（§7.5）→ $J=J_1+J_2$，總 $j$ 從 $|j_1-j_2|$ 到 $j_1+j_2$ → Clebsch–Gordan 係數編碼子系統間的量子關聯 → 等先驗機率原理（§7.5.3）。</li>
+    </ol>
+  </div>
+
+  <div class="callout-warn">
+    <strong>⚡ 先備知識</strong><br>
+    本章假設讀者熟悉：①第 4 章的旋轉運算子與角動量對易關係 $[J_i,J_j]=i\hbar\varepsilon_{ijk}J_k$；②第 2 章的位置與動量正則對易關係 $[x_i,p_j]=i\hbar\delta_{ij}$；③第 6 章的複合系統態與純態/混合態概念；④球座標的基本微分運算。如果你對球諧函數或 Legendre 多項式不熟——本章將逐步推導，無需死記公式表。
+  </div>
+</section>
+
+<!-- ====== 7.1 Jz 與 J² 的本徵值 ====== -->
+<section class="deep-dive" id="s7-1">
+<h2>7.1　J<sub>z</sub> 與 J² 的本徵值</h2>
+<div class="section-keypoints">
+  <strong>🔑 本節重點</strong>
+  <span>① $J_\pm=J_x\pm iJ_y$ 升降 $m$ 而不改變 $j$</span>
+  <span>② $J^2$ 本徵值 $j(j+1)\hbar^2$，$j=0,\frac12,1,\frac32,\ldots$</span>
+  <span>③ $J_z$ 本徵值 $m\hbar$，$-j\le m\le j$，整數步進</span>
+  <span>④ 半整數 $j$ 在 $2\pi$ 旋轉下改變符號——費米子標誌</span>
+  <span>⑤ 雙原子分子旋轉譜 $E_j=j(j+1)\hbar^2/2I$</span>
+</div>
+
+<p>在第 4 章中我們將角動量運算子 $J_i$ 引入為旋轉的生成元，並證明它們構成贗向量，因此 $J^2=\sum_i J_i^2$ 是純量。我們發現 $J_i$ 與所有純量運算子對易——包括 $J^2$ 本身——並推導出 $J_i$ 與任意向量運算子分量的對易關係。由此得出 $J_i$ 之間滿足著名的角動量對易關係：</p>
+
+<div class="eq">$$[J_i, J_j] = i\hbar\sum_k \varepsilon_{ijk} J_k$$</div>
+
+<p>其中 $\varepsilon_{ijk}$ 是 Levi-Civita 全反對稱張量（$\varepsilon_{123}=1$，交換任意兩個指標改變符號）。此式是整個角動量理論的基石——<strong>僅僅從這個對易關係出發，我們就能完全確定角動量的本徵值譜</strong>，而不需要知道系統的具體物理性質。</p>
+
+<p>由於 $J$ 的任兩個分量不對易，我們無法找到兩個不同分量的同時本徵態。但 $J^2$ 與每個 $J_i$ 都對易：$[J^2,J_i]=0$。因此我們可以找到 $J^2$ 與某一個分量（習慣取 $J_z$）的同時本徵態。令 $|\beta,m\rangle$ 滿足：</p>
+
+<div class="eq">$$J^2|\beta,m\rangle = \beta|\beta,m\rangle,\qquad J_z|\beta,m\rangle = m|\beta,m\rangle \tag{7.1}$$</div>
+
+<h3>升降運算子</h3>
+<p>定義升降運算子 $J_\pm \equiv J_x \pm iJ_y$。這些運算子與 $J^2$ 對易，但與 $J_z$ 的對易關係為 $[J_z,J_\pm]=\pm J_\pm$。這意味著 $J_\pm|\beta,m\rangle$ 仍然是 $J^2$ 的本徵態（本徵值 $\beta$），但 $J_z$ 的本徵值變為 $m\pm1$。因此 $J_+$ 將 $m$「升高」1，$J_-$ 將其「降低」1。我們可以寫 $J_\pm|\beta,m\rangle = \alpha_\pm|\beta,m\pm1\rangle$，其中常數 $\alpha_\pm$ 由歸一化決定。利用 $J_+^\dagger = J_-$：</p>
+
+<div class="eq">$$|\alpha_+|^2 = \langle\beta,m|J_-J_+|\beta,m\rangle = \langle\beta,m|(J^2-J_z^2-J_z)|\beta,m\rangle = \beta - m(m+1) \tag{7.6}$$</div>
+
+<p>同理 $|\alpha_-|^2 = \beta - m(m-1)$。因此 $\alpha_\pm = \sqrt{\beta - m(m\pm1)}$。</p>
+
+<h3>本徵值譜的確定</h3>
+<p>由於 $J_i$ 是 Hermitian 運算子，$\langle J_i^2\rangle \ge 0$，因此 $\beta = \langle J^2\rangle \ge m^2$。這說明不能無限制地應用 $J_+$ 來增加 $m$——在達到某個最大值 $m_{\max}$ 時，$\alpha_+$ 必須為零：$\beta - m_{\max}(m_{\max}+1) = 0$。同理，最小值 $m_{\min}$ 滿足 $\beta - m_{\min}(m_{\min}-1) = 0$。消去 $\beta$，解二次方程得到 $m_{\min} = -m_{\max}$。定義 $j \equiv m_{\max}$，則 $\beta = j(j+1)$，且 $-j \le m \le j$。</p>
+
+<p>從 $|j,j\rangle$ 到 $|j,-j\rangle$ 需要整數步的 $J_-$ 操作，因此 $2j$ 必須是整數——<strong>$j$ 可以是 $0,\frac12,1,\frac32,2,\ldots$</strong>。歸一化的升降運算子作用為：</p>
+
+<div class="eq">$$J_\pm|j,m\rangle = \sqrt{j(j+1)-m(m\pm1)}\;|j,m\pm1\rangle \tag{7.13}$$</div>
+
+<p>等價的有用形式為 $\alpha_+(m) = \sqrt{(j-m)(j+m+1)}$ 和 $\alpha_-(m) = \sqrt{(j+m)(j-m+1)}$。</p>
+
+<div class="callout">
+  <strong>💡 為什麼角動量量子化？</strong><br>
+  角動量的量子化並非外加假設，而是對易關係 $[J_i,J_j]=i\hbar\varepsilon_{ijk}J_k$ 的純數學結果。這個對易關係本身源自旋轉群的結構——角動量運算子是旋轉群的 Lie 代數表示。因此，<strong>角動量量子化是空間旋轉對稱性的直接體現</strong>。$j$ 為整數或半整數的區別對應於旋轉群的不同不可約表示：整數 $j$ 對應 SO(3) 的忠實表示，半整數 $j$ 對應 SU(2) 的表示。
+</div>
+
+<div class="callout-warn">
+  <strong>⚠️ 沒有「角動量向量」的確定態</strong><br>
+  當 $j&gt;0$ 時，$|j,m\rangle$ 永遠不可能同時是 $J_x$ 或 $J_y$ 的本徵態。$J_x = \frac12(J_++J_-)$ 作用在 $|j,m\rangle$ 上會產生 $|j,m\pm1\rangle$ 的疊加。因此，<strong>對於 $j&gt;0$ 的系統，角動量向量永遠沒有一個確定指向</strong>——這與動量向量 $p$（其分量互相對易）完全不同。$j=0$ 時所有分量都確定為 0，但零向量沒有方向。
+</div>
+
+<h3>$2\pi$ 旋轉與自旋統計</h3>
+<p>繞 $z$ 軸旋轉 $\alpha$ 角時，態的變換為 $U(\alpha)=e^{-i\alpha J_z}$。對於本徵態 $|j,m\rangle$：$U(\alpha)|j,m\rangle = e^{-i\alpha m}|j,m\rangle$。當 $\alpha=2\pi$ 時：若 $m$ 為整數（$j$ 為整數），$e^{-2\pi i m}=1$——系統回到原態；若 $m$ 為半整數（$j$ 為半整數），$e^{-2\pi i m}=-1$——<strong>態改變符號</strong>！</p>
+
+<p>這個看似古怪的結果具有深遠的物理後果：量子場論證明，半整數自旋的場永遠無法達到宏觀值——其量子漲落與場值本身同量級。整數自旋的場（如電磁場、重力場）則可以達到宏觀值，這就解釋了為何古典物理只涉及整數自旋場。半整數自旋粒子遵循 Fermi–Dirac 統計（費米子）且滿足 Pauli 不相容原理；整數自旋粒子遵循 Bose–Einstein 統計（玻色子）。因此，<strong>元素週期表的結構、化學鍵的形成、金屬與絕緣體的區別——這些宏觀現象的根源都追溯到角動量的這個簡單量子性質</strong>。</p>
+
+
+
+<h3>自旋-統計定理與 Pauli 不相容原理</h3>
+<p>$2\pi$ 旋轉的結果——半整數自旋態獲得負號——看似是一個數學細節，但它有深刻的物理後果。量子場論證明了一個基本定理：<strong>自旋-統計定理</strong>——半整數自旋的粒子必須遵循 Fermi-Dirac 統計（費米子），整數自旋的粒子必須遵循 Bose-Einstein 統計（玻色子）。</p>
+<p>費米子的關鍵特徵是 <strong>Pauli 不相容原理</strong>：兩個全同費米子不能佔據相同的量子態。數學上，兩個費米子的交換使態獲得負號：$|\psi(1,2)\rangle = -|\psi(2,1)\rangle$。如果兩個費米子處於相同的態，交換不改變任何東西，但負號要求態為零——概率為零，因此不可能。</p>
+<p>玻色子則相反：交換使態不變（獲得正號），多個玻色子可以佔據同一態。這就是為什麼光子可以大量聚集在同一態中形成雷射，而電子必須一個一個填充不同的能態形成原子的電子殼層結構。</p>
+
+<div class="callout">
+  <strong>💡 化學鍵的量子根源</strong><br>
+  沒有 Pauli 不相容原理，所有電子都會塌縮到氫原子的基態 $1s$——化學將不復存在。正是因為電子是費米子，它們必須佔據不同的態，才形成了元素週期表的殼層結構、化學鍵的多樣性、以及固體的導電與絕緣性質。角動量量子數 $j$ 取半整數這一事實，通過自旋-統計定理和 Pauli 不相容原理，間接決定了我們周圍物質世界的全部化學性質。
+</div>
+
+<div class="callout-warn">
+  <strong>⚡ 負號不是「相位模糊」</strong><br>
+  初學者有時認為 $2\pi$ 旋轉的負號只是全域相位，沒有物理意義。但對於費米子，這個負號是<strong>物理的</strong>——它出現在交換兩個全同粒子時的振幅中，直接導致 Pauli 不相容。實驗上，中子干涉儀可以觀測到 $2\pi$ 旋轉的負號效應：將中子束分成兩路，其中一路繞 $2\pi$ 旋轉後重新合併，干涉條紋會從建設性變為破壞性——這是半整數自旋負號的直接實驗驗證。
+</div>
+
+<h3>7.1.1　雙原子分子的旋轉譜</h3>
+<p>將角動量能譜應用於雙原子分子（如 CO）是本章第一個重要的物理應用。將分子近似為兩個點質量（碳核與氧核）由「輕桿」（電子雲）連接的剛體轉子。對於軸對稱的雙原子分子，設對稱軸沿 $z$，則 $I\equiv I_x=I_y$ 且 $I_z\ll I$（繞分子軸的轉動慣量極小）。能量本徵值為：</p>
+
+<div class="eq">$$E_{jm} = \frac{\hbar^2}{2}\left[\frac{j(j+1)}{I} + m^2\left(\frac{1}{I_z}-\frac{1}{I}\right)\right] \tag{7.21}$$</div>
+
+<p>由於 $I_z$ 極小，$|m|&gt;0$ 的態能量極高，低能態的 $m=0$，能量簡化為 $E_j = j(j+1)\hbar^2/2I$。</p>
+
+<p>CO 是有極分子——碳原子帶正電，氧原子帶負電。旋轉的電偶極會發射光子，每個光子攜帶 $\hbar$ 的角動量。因此躍遷僅發生在 $\Delta j = \pm1$ 的相鄰能階之間，光子能量為 $E_\gamma = \pm j\hbar^2/I$。對應的頻率為 $\nu_j = j\hbar/(2\pi I)$。對於 $^{12}$CO，$j$ 的係數為 113.1724 GHz——譜線出現在此頻率的整數倍處。</p>
+
+<p>測量 115 GHz 及其倍頻的輻射是探測星際冷氣體的兩個最重要手段之一（另一個是第 8 章將討論的氫原子超精細譜線）。氫分子 H<sub>2</sub> 因對稱而無電偶極矩，無法透過旋轉譜觀測，因此天文學家依賴含量僅百萬分之幾的 CO 來研究星際介質。</p>
+
+<p>譜線的相對強度提供了溫度信息。從 $j$ 能階發射的強度 $I_j \propto (2j+1)\exp(-E_j/k_BT)$，其中簡併度 $g=2j+1$ 來自 $m$ 的可能取向數。低溫時 $I_j$ 先隨 $j$ 增加（簡併度主導），後隨 Boltzmann 因子衰減。擬合此公式可同時測量氣體溫度並驗證簡併度因子的正確性。高 $j$ 時離心力拉伸鍵長，增大 $I$ 從而降低譜線頻率——這是方程 (7.24) 偏離觀測的原因（問題 7.2）。</p>
+
+<details class="example">
+  <summary>📝 範例：CO 分子旋轉譜線間距</summary>
+  <div class="example-body">
+    <p><strong>題目：</strong>$^{12}$CO 的 $j=4\to3$ 躍遷頻率為 461.04077 GHz，$j=36\to35$ 為 4115.6055 GHz。估算非旋轉 CO 分子的核間距 $s$ 和電子雲提供的有效力常數。</p>
+    <p><strong>解：</strong>從方程 (7.24)，$\nu_j = j\hbar/(2\pi I)$。對於低 $j$（$j=4$），$I = 4\hbar/(2\pi\times 461.04077\times10^9) \approx 1.45\times10^{-46}$ kg·m²。CO 的約化質量 $\mu = (12\times16)/(28)\times1.66\times10^{-27} = 1.14\times10^{-26}$ kg。因此 $s = \sqrt{I/\mu} \approx 0.113$ nm。</p>
+    <p>對於高 $j$，離心力 $F=m\omega^2 r$ 拉伸鍵長。等效彈簧的力常數 $k \approx 1904$ N/m，對應振動頻率 $\sim6.47\times10^{13}$ Hz——與實測值 $6.43\times10^{13}$ Hz 非常接近。</p>
+    <p><strong>物理意義：</strong>CO 的旋轉譜不僅驗證了角動量量子化，還提供了分子結構（鍵長）和動力學（力常數）的精確信息。離心力造成的頻率偏移是分子光譜學中「離心畸變」的標準範例。</p>
+  </div>
+</details>
+
+<figure class="figure" id="fig-7-2">
+  <svg class="content-diagram" viewBox="0 0 500 220" xmlns="http://www.w3.org/2000/svg">
+    <rect x="0" y="0" width="500" height="220" fill="#f8f9fa" rx="8"/>
+    <text x="250" y="25" font-size="13" fill="#333" text-anchor="middle" font-weight="bold">圖 7.2　CO 旋轉譜示意</text>
+    <line x1="60" y1="170" x2="460" y2="170" stroke="#333" stroke-width="1.5"/>
+    <line x1="60" y1="55" x2="460" y2="55" stroke="#333" stroke-width="1.5"/>
+    <text x="50" y="115" font-size="11" fill="#555" text-anchor="middle" transform="rotate(-90,50,115)">強度</text>
+    <text x="260" y="195" font-size="11" fill="#555" text-anchor="middle">頻率 ν (GHz)</text>
+    <line x1="90" y1="170" x2="90" y2="75" stroke="#4a90d9" stroke-width="2"/><text x="90" y="183" font-size="8" fill="#555">115</text>
+    <line x1="170" y1="170" x2="170" y2="68" stroke="#4a90d9" stroke-width="2"/><text x="170" y="183" font-size="8" fill="#555">230</text>
+    <line x1="250" y1="170" x2="250" y2="76" stroke="#4a90d9" stroke-width="2"/><text x="250" y="183" font-size="8" fill="#555">345</text>
+    <line x1="330" y1="170" x2="330" y2="86" stroke="#4a90d9" stroke-width="2"/><text x="330" y="183" font-size="8" fill="#555">460</text>
+    <line x1="410" y1="170" x2="410" y2="96" stroke="#4a90d9" stroke-width="2"/><text x="410" y="183" font-size="8" fill="#555">575</text>
+    <line x1="140" y1="170" x2="140" y2="72" stroke="#e74c3c" stroke-width="1.5" stroke-dasharray="4,3"/>
+    <line x1="300" y1="170" x2="300" y2="82" stroke="#e74c3c" stroke-width="1.5" stroke-dasharray="4,3"/>
+    <text x="250" y="210" font-size="9" fill="#555" text-anchor="middle">實線：觀測　虛線：倍頻（離心畸變使高頻線偏離等間距）</text>
+  </svg>
+  <figcaption><strong>圖 7.2</strong>　CO 的旋轉譜示意圖。實線為觀測到的躍遷頻率，虛線為最低頻率的整數倍。低 $j$ 時兩者重疊，高 $j$ 時離心拉伸使觀測線向低頻偏移。</figcaption>
+</figure>
+</section>
+
+<!-- ====== 7.2 軌道角動量 ====== -->
+<section class="deep-dive" id="s7-2">
+<h2>7.2　軌道角動量</h2>
+<div class="section-keypoints">
+  <strong>🔑 本節重點</strong>
+  <span>① $L=\frac{1}{\hbar}\mathbf{x}\times\mathbf{p}$ 為環形平移的生成元</span>
+  <span>② $L$ 僅有整數本徵值 $l=0,1,2,\ldots$</span>
+  <span>③ 球諧函數 $Y_l^m$ 為 $L^2$ 與 $L_z$ 的同時本徵函數</span>
+  <span>④ $p^2 = p_r^2 + \hbar^2 L^2/r^2$ 將動能分解為徑向+切向</span>
+  <span>⑤ 宇稱：$P Y_l^m = (-1)^l Y_l^m$</span>
+</div>
+
+<p>從古典力學獲得啟發，我們定義無因次的軌道角動量運算子：</p>
+
+<div class="eq">$$\mathbf{L} \equiv \frac{1}{\hbar}\mathbf{x}\times\mathbf{p},\quad L_i \equiv \frac{1}{\hbar}\sum_{jk}\varepsilon_{ijk}x_j p_k \tag{7.26}$$</div>
+
+<p>$L_i$ 是 Hermitian 的，因為 $x_j$ 和 $p_k$ 當 $j\neq k$ 時對易。$L^2 \equiv \mathbf{L}\cdot\mathbf{L} = L_x^2+L_y^2+L_z^2$ 也是 Hermitian。$L$ 與 $x$、$p$ 的對易關係為：</p>
+
+<div class="eq">$$[L_i, x_l] = i\sum_j \varepsilon_{ilj}x_j,\qquad [L_i, p_l] = i\sum_j \varepsilon_{ilj}p_j \tag{7.29,7.30}$$</div>
+
+<p>這些對易關係與總角動量 $J$ 的對應關係完全相同（僅將 $J$ 換為 $L$）。由此可得 $L_i$ 與純量 $x^2$、$p^2$ 和 $\mathbf{x}\cdot\mathbf{p}$ 對易。$L$ 的分量之間的對易關係同樣鏡像 $J$：$[L_x,L_y] = iL_z$ 及其循環置換。$L$ 是一個向量運算子，$L^2$ 是純量運算子。</p>
+
+<p>但 $L$ 與 $J$ 有一項關鍵區別：$L^2$ 與總角動量 $J^2$ 不對易：</p>
+
+<div class="eq">$$[J^2, L_i] = i\sum_{jk}\varepsilon_{jik}(L_k J_j + J_j L_k) \neq 0 \tag{7.34}$$</div>
+
+<p>這個非零對易子的物理意義是：如果系統處於確定總角動量的態，一般而言其軌道角動量分量會有不確定性——這個事實將在 §7.5 中進一步探討。</p>
+
+<h3>7.2.1　L 作為環形平移的生成元</h3>
+<p>在 §4.1.1 中我們看到：將系統平移 $\mathbf{a}$ 時，態由 $U(\mathbf{a})=e^{-i\mathbf{a}\cdot\mathbf{p}/\hbar}$ 作用。現在考慮將系統繞原點移動一個小圓弧：當旋轉角 $\alpha$ 增加 $\delta\alpha$ 時，位移為 $\delta\mathbf{a} = \delta\alpha\,\mathbf{n}\times\mathbf{x}$（其中 $\mathbf{n}$ 是圓面的單位法向量）。對應的么正運算子為：</p>
+
+<div class="eq">$$U(\delta\mathbf{a}) = \exp\left(-\frac{i}{\hbar}\delta\alpha\,(\mathbf{n}\times\mathbf{x})\cdot\mathbf{p}\right) = e^{-i\delta\alpha\,\mathbf{n}\cdot\mathbf{L}} \tag{7.37}$$</div>
+
+<p>因此，繞完整一圈的運算子為 $U(\boldsymbol{\alpha}) = e^{-i\boldsymbol{\alpha}\cdot\mathbf{L}}$，其中 $\boldsymbol{\alpha} = \alpha\mathbf{n}$。</p>
+
+<div class="callout">
+  <strong>💡 J 與 L 的物理區別</strong><br>
+  $J$ 是<strong>完整旋轉</strong>的生成元——它既移動系統的位置，也改變系統的取向（包括自旋方向）。$L$ 僅是<strong>環形平移</strong>的生成元——它將系統沿圓弧移動，但保持其取向不變。二者的差 $S=J-L$ 就是自旋角動量——它只改變取向，與空間位置無關。用轉盤的比喻：把系統放在轉盤上旋轉 → $e^{-i\boldsymbol{\alpha}\cdot\mathbf{J}}$；把系統提起來繞一圈放回原處 → $e^{-i\boldsymbol{\alpha}\cdot\mathbf{L}}$。前者既移動又旋轉，後者僅移動。
+</div>
+
+<h3>7.2.2　L² 與 L<sub>z</sub> 的能譜</h3>
+<p>由於 $L_i$ 之間的對易關係與 $J_i$ 完全相同，從 §7.1 的推導可直接得知 $L^2$ 和 $L_z$ 的可能本徵值為 $l(l+1)$ 和 $m$，其中 $-l\le m\le l$，且 $l=0,\frac12,1,\frac32,\ldots$。</p>
+
+<p>但 $L$ 與 $J$ 有一項根本差異：考慮系統在 $L_z$ 的本徵態 $|l,m\rangle$ 下繞 $z$ 軸進行完整的 $2\pi$ 旋轉——這相當於將系統沿一個完整的圓移動回到起點：</p>
+
+<div class="eq">$$|l,m\rangle = e^{-2\pi i L_z}|l,m\rangle = e^{-2m\pi i}|l,m\rangle \tag{7.39}$$</div>
+
+<p>由於將系統移回起點的運算子必須是恆等運算子（這是純粹的空間平移，不改變取向），右側的指數必須等於 1——這要求 $m$ 是整數。因此 $L_z$（以及 $l$）<strong>只能取整數值</strong>：$l = 0,1,2,\ldots$。這與 $J$ 可以取半整數形成鮮明對比——半整數角動量的來源是自旋，不是軌道運動。</p>
+
+<h3>7.2.3　軌道角動量的本徵函數——球諧函數</h3>
+<p>在位置表象中，$L_i$ 變成微分運算子。使用球座標 $(r,\theta,\varphi)$：</p>
+
+<div class="eq">$$L_z = -i\frac{\partial}{\partial\varphi} \tag{7.43}$$</div>
+
+<p>$L_z$ 的本徵方程 $-i\partial\psi_{lm}/\partial\varphi = m\psi_{lm}$ 的解為：</p>
+
+<div class="eq">$$\psi_{lm}(r,\theta,\varphi) = K_{lm}(r,\theta)\,e^{im\varphi} \tag{7.45}$$</div>
+
+<p>由於 $m$ 為整數，$\psi_{lm}$ 是位置的單值函數。為了找到完整的本徵函數，我們需要升降運算子在球座標中的形式：</p>
+
+<div class="eq">$$L_+ = e^{i\varphi}\left(\frac{\partial}{\partial\theta} + i\cot\theta\frac{\partial}{\partial\varphi}\right),\quad L_- = -e^{-i\varphi}\left(\frac{\partial}{\partial\theta} - i\cot\theta\frac{\partial}{\partial\varphi}\right) \tag{7.52}$$</div>
+
+<p>最高態 $|l,l\rangle$ 滿足 $L_+|l,l\rangle = 0$。代入位置表象得到一階微分方程 $\partial K_{ll}/\partial\theta - l\cot\theta\,K_{ll}=0$，其解為 $K_{ll}=R(r)\sin^l\theta$。因此：</p>
+
+<div class="eq">$$\psi_{ll}(r,\theta,\varphi) = R(r)\sin^l\theta\,e^{il\varphi} \tag{7.54}$$</div>
+
+<p>反覆應用 $L_-$ 可生成所有較低 $m$ 的波函數。這些函數的角向部分（不含 $R(r)$）稱為<strong>球諧函數</strong> $Y_l^m(\theta,\varphi)$，歸一化條件為 $\int d^2\Omega\,|Y_l^m|^2 = 1$，其中 $d^2\Omega \equiv \sin\theta\,d\theta d\varphi$ 是立體角元素。前幾個球諧函數為：</p>
+
+<div class="eq">$$Y_0^0 = \sqrt{\frac{1}{4\pi}},\quad Y_1^0 = \sqrt{\frac{3}{4\pi}}\cos\theta,\quad Y_1^{\pm1} = \mp\sqrt{\frac{3}{8\pi}}\sin\theta\,e^{\pm i\varphi}$$</div>
+
+<div class="eq">$$Y_2^0 = \sqrt{\frac{5}{16\pi}}(3\cos^2\theta-1),\quad Y_2^{\pm1} = \mp\sqrt{\frac{15}{8\pi}}\sin\theta\cos\theta\,e^{\pm i\varphi}$$</div>
+
+<div class="callout">
+  <strong>💡 球諧函數的物理圖像</strong><br>
+  $Y_l^l \propto \sin^l\theta\,e^{il\varphi}$ 在赤道附近（$\theta\approx\pi/2$）達到最大——對應於幾乎所有軌道角動量都平行於 $z$ 軸的態，粒子不遠離 $xy$ 平面。隨著 $m$ 從 $l$ 減小到 0，$Y_l^m$ 的非零區域逐漸從赤道向兩極擴展——軌道面越來越偏離 $xy$ 平面。$Y_l^m$ 的相位隨 $\varphi$ 以 $e^{im\varphi}$ 變化，對應於粒子在 $xy$ 平面內的切向運動。對於任何 $m$，$L_x$ 和 $L_y$ 的期望值均為零（因為 $L_x=\frac12(L_++L_-)$），因此 $xy$ 平面內的角動量分量方向完全不定——這就是為什麼 $|Y_l^m|$ 與 $\varphi$ 無關。
+</div>
+
+<h3>7.2.4　軌道角動量與宇稱</h3>
+<p>宇稱運算子 $P$ 將波函數變換為 $\psi'(\mathbf{x}) = \psi(-\mathbf{x})$。在球座標中，$\mathbf{x}\to-\mathbf{x}$ 對應 $\theta\to\pi-\theta$、$\varphi\to\varphi+\pi$。$Y_l^l\propto\sin^l\theta\,e^{il\varphi}$，在宇稱變換下 $\sin^l\theta$ 不變，$e^{il\varphi}\to(-1)^l e^{il\varphi}$，因此 $Y_l^l\to(-1)^l Y_l^l$。由於 $L_-$（以及 $L_x$、$L_y$、$L_z$）是偶宇稱運算子，所有 $Y_l^m$ 對固定 $l$ 具有相同的宇稱：</p>
+
+<div class="eq">$$P\,Y_l^m = (-1)^l\,Y_l^m \tag{7.59}$$</div>
+
+<p>這個簡單規則在原子物理中極其重要：它決定了電偶極躍遷的選擇規則（$\Delta l = \pm1$），因為位置運算子 $\mathbf{x}$ 是奇宇稱的。</p>
+
+
+
+<h3>電偶極躍遷的選擇定則</h3>
+<p>宇稱守恆對原子光譜有直接且深遠的影響。當原子發射或吸收光子時，電偶極躍遷的矩陣元素為：</p>
+<div class="eq">$$\langle n', l', m'|\mathbf{x}|n, l, m\rangle \tag{7.60}$$</div>
+<p>位置運算子 $\mathbf{x}$ 是<strong>奇宇稱</strong>（$P\mathbf{x}P = -\mathbf{x}$）。要使矩陣元素不為零，初態和末態必須有<strong>相反的宇稱</strong>——即 $(-1)^l \neq (-1)^{l'}$。這給出：</p>
+<div class="eq">$$\Delta l = l' - l = \pm 1 \quad \text{（電偶極躍遷的選擇定則）} \tag{7.60b}$$</div>
+<p>此外，角動量守恆要求光子帶走一個單位的角動量（$\hbar$），因此 $\Delta m = 0, \pm1$。這些選擇定則解釋了為什麼原子光譜不是一片連續，而是由離散的譜線組成——只有滿足選擇定則的躍遷才會發生。</p>
+
+<div class="callout">
+  <strong>💡 球諧函數的節面結構</strong><br>
+  $Y_l^m(\theta, \varphi)$ 的模平方 $|Y_l^m|^2$ 描述了角動量態中粒子的角向機率分布。$Y_l^m$ 有 $l - |m|$ 個 $\theta$-節面（$Y_l^m = 0$ 的錐面）和 $|m|$ 個 $\varphi$-節面（半平面）。總節面數為 $l$。例如：
+  <ul>
+    <li>$Y_0^0$：無節面——球對稱（$s$ 軌道）</li>
+    <li>$Y_1^0 \propto \cos\theta$：一個節面在赤道（$p_z$ 軌道的「啞鈴」形）</li>
+    <li>$Y_2^0 \propto 3\cos^2\theta - 1$：兩個錐面節面（$d_{z^2}$ 軌道的「甜甜圈」形）</li>
+    <li>$Y_2^{\pm1}$：一個錐面 + 一個半平面（$d_{xz}$ 和 $d_{yz}$ 軌道）</li>
+    <li>$Y_2^{\pm2}$：兩個半平面（$d_{xy}$ 和 $d_{x^2-y^2}$ 軌道）</li>
+  </ul>
+  節面數隨 $l$ 增加——這與一維波函數中能量越高節點越多的規律完全平行。角動量越大，波函數在角向的「起伏」越多，對應更高的角向動能。
+</div>
+
+<h3>7.2.5　軌道角動量與動能——徑向-角向分解</h3>
+<p>現在我們推導一個極其有用的動能運算子分解。首先證明 $L^2$ 與 Laplacian 運算子的角向部分密切相關：</p>
+
+<div class="eq">$$L^2 = -\left[\frac{1}{\sin\theta}\frac{\partial}{\partial\theta}\left(\sin\theta\frac{\partial}{\partial\theta}\right) + \frac{1}{\sin^2\theta}\frac{\partial^2}{\partial\varphi^2}\right] \tag{7.61}$$</div>
+
+<p>這正是 $-r^2$ 乘以 $\nabla^2$ 的角向部分。為了完成徑向部分，我們定義徑向動量運算子。$\hat{\mathbf{r}}\cdot\mathbf{p}$ 不是 Hermitian，但對稱化後的版本是：</p>
+
+<div class="eq">$$p_r \equiv \frac{1}{2}(\hat{\mathbf{r}}\cdot\mathbf{p} + \mathbf{p}\cdot\hat{\mathbf{r}}) = -i\hbar\left(\frac{\partial}{\partial r} + \frac{1}{r}\right) \tag{7.63,7.66}$$</div>
+
+<p>$p_r$ 滿足正則對易關係 $[r,p_r] = i\hbar$。計算 $p_r^2$：</p>
+
+<div class="eq">$$p_r^2 = -\frac{\hbar^2}{r^2}\frac{\partial}{\partial r}\left(r^2\frac{\partial}{\partial r}\right) \tag{7.68}$$</div>
+
+<p>這就是 $-\hbar^2$ 乘以 $\nabla^2$ 的徑向部分。結合 $L^2$ 的角向部分，我們得到動能運算子的分解：</p>
+
+<div class="eq">$$H_K = \frac{p^2}{2m} = \frac{1}{2m}\left(p_r^2 + \frac{\hbar^2 L^2}{r^2}\right) \tag{7.69}$$</div>
+
+<p><strong>物理詮釋極其清晰</strong>：古典力學中，$\hbar\mathbf{L} = m\mathbf{r}\times\mathbf{v} = mr\mathbf{v}_t$（其中 $\mathbf{v}_t$ 為切向速度），因此 $\hbar^2 L^2/2mr^2 = \frac12 m v_t^2$ 正是切向動能。$p_r^2/2m = \frac12 m v_r^2$ 是徑向動能。這個分解是第 8 章分析氫原子的關鍵工具——它允許我們將三維問題化簡為徑向一維問題。</p>
+
+<div class="callout-warn">
+  <strong>⚠️ 徑向動量的陷阱</strong><br>
+  初學者常誤以為徑向動量就是 $-i\hbar\,\partial/\partial r$。這個運算子不是 Hermitian！正確的 Hermitian 形式是 $p_r = -i\hbar(\partial/\partial r + 1/r)$。這是非對易運算子乘積 $\hat{\mathbf{r}}\cdot\mathbf{p}$ 的普遍現象：$AB$ 當 $[A,B]\neq 0$ 時不是 Hermitian，必須使用對稱化形式 $\frac12(AB+BA)$。
+</div>
+
+<h3>Legendre 多項式</h3>
+<p>$Y_l^0$ 是僅依賴 $\theta$ 的特殊球諧函數。由於在 $[0,\pi]$ 上 $\theta$ 與 $\mu\equiv\cos\theta$ 一一對應，我們可以令 $Y_l^0 \propto P_l(\mu)$。$P_l$ 滿足 Legendre 方程：</p>
+
+<div class="eq">$$\frac{d}{d\mu}\left[(1-\mu^2)\frac{dP_l}{d\mu}\right] + l(l+1)P_l = 0 \tag{7.71}$$</div>
+
+<p>尋求多項式解 $P_l = \sum_n b_n\mu^n$，代入後要求各冪次係數為零，得到遞推關係 $b_{k+2}(k+2)(k+1) = b_k[k(k+1)-l(l+1)]$。當 $k=l$ 時右側為零，因此 $P_l(\mu)$ 是 $l$ 階多項式。前幾個 Legendre 多項式為 $P_0=1$、$P_1=\mu$、$P_2=\frac12(3\mu^2-1)$、$P_3=\frac12(5\mu^3-3\mu)$。常規歸一化為 $P_l(1)=1$。歸一化的球諧函數與 Legendre 多項式的關係為：</p>
+
+<div class="eq">$$Y_l^0(\theta) = \sqrt{\frac{2l+1}{4\pi}}\,P_l(\cos\theta) \tag{7.75}$$</div>
+
+<details class="example">
+  <summary>📝 範例：從角動量本徵態提取 L² 與 L<sub>z</sub> 的測量結果</summary>
+  <div class="example-body">
+    <p><strong>題目：</strong>某系統的波函數角向部分正比於 $\sqrt{2}\cos\theta + \sin\theta e^{-i\varphi} - \sin\theta e^{i\varphi}$。測量 (a) $L^2$ 和 (b) $L_z$ 的可能結果及其機率為何？</p>
+    <p><strong>解：</strong>將波函數用球諧函數展開。注意到 $\cos\theta \propto Y_1^0$，$\sin\theta e^{\pm i\varphi} \propto Y_1^{\pm1}$。因此波函數正比於 $\sqrt{2}Y_1^0 + aY_1^{-1} + bY_1^1$。比較係數可知這僅涉及 $l=1$ 的態。歸一化後：</p>
+    <p>(a) 測量 $L^2$ 必然得到 $l(l+1)=2$（以 $\hbar^2$ 為單位），機率 100%。</p>
+    <p>(b) 測量 $L_z$ 的可能結果為 $m=1,0,-1$。各 $m$ 的機率正比於對應球諧函數係數的模平方。計算後得 $P(m=0)=1/2$，$P(m=1)=1/4$，$P(m=-1)=1/4$。期望值 $\langle L_z\rangle = 0$。</p>
+    <p><strong>物理意義：</strong>此態中軌道角動量的大小確定為 $\sqrt{2}\hbar$，但其 $z$ 分量有三種可能值——這是量子不確定性的典型體現。</p>
+  </div>
+</details>
+</section>
+
+<!-- ====== 7.2 補充：三維諧振子 ====== -->
+<section class="deep-dive" id="s7-2-ho">
+<h2>7.2 補充　三維諧振子——軌道角動量的應用</h2>
+<div class="section-keypoints">
+  <strong>🔑 本節重點</strong>
+  <span>① $H = p^2/2m + \frac12 m\omega^2 r^2$ 在球座標中分離為 $H_l$</span>
+  <span>② 有效勢 $V_{\rm eff} = l(l+1)\hbar^2/2mr^2 + \frac12 m\omega^2 r^2$</span>
+  <span>③ 升降運算子 $A_l$ 改變 $l$ 的同時改變能量</span>
+  <span>④ 圓軌道：$r^L e^{-r^2/4\ell^2}$，$\ell=\sqrt{\hbar/2m\omega}$</span>
+</div>
+
+<p>三維諧振子是少有能完全解析求解的中心力問題，也是第 8 章氫原子的極佳預演。Hamiltonian 為 $H = p^2/2m + \frac12 m\omega^2 r^2$。在 Cartesian 座標中，$H = H_x+H_y+H_z$ 分解為三個一維諧振子之和，能階為 $E = (n_x+n_y+n_z+\frac32)\hbar\omega$。但這種處理掩蓋了系統的球對稱性——我們也可以尋找 $H$、$L^2$ 和 $L_z$ 的同時本徵態。</p>
+
+<p>利用動能分解 $p^2/2m = p_r^2/2m + \hbar^2 L^2/2mr^2$，對 $L^2$ 本徵值為 $l(l+1)$ 的態，Hamiltonian 化為徑向部分：</p>
+
+<div class="eq">$$H_l = \frac{p_r^2}{2m} + \frac{l(l+1)\hbar^2}{2mr^2} + \frac12 m\omega^2 r^2 \tag{7.81}$$</div>
+
+<p>這描述粒子在有效勢 $V_{\rm eff}(r) = l(l+1)\hbar^2/2mr^2 + \frac12 m\omega^2 r^2$ 中的一維運動。第一項是「離心勢壘」——角動量越大，粒子被推離原點越遠。</p>
+
+<p>仿照一維諧振子的因子分解法，定義升降運算子：</p>
+
+<div class="eq">$$A_l \equiv \frac{1}{\sqrt{2m\hbar\omega}}\left(ip_r - \frac{(l+1)\hbar}{r} + m\omega r\right) \tag{7.84}$$</div>
+
+<p>計算發現 $H_l = \hbar\omega[A_l^\dagger A_l + (l+\frac32)]$，與一維諧振子的 $H = \hbar\omega(A^\dagger A + \frac12)$ 極為相似。關鍵結果是 $A_l$ 將 $|E,l\rangle$ 映射為 $H_{l+1}$ 的本徵態，且能量降低 $\hbar\omega$：</p>
+
+<div class="eq">$$A_l|E,l\rangle = \alpha_-|E-\hbar\omega, l+1\rangle \tag{7.93}$$</div>
+
+<p>也就是說，$A_l$ 將徑向動能轉化為更大的軌道角動量。反覆應用 $A_l$，最終達到量子版的「圓軌道」——所有動能都在切向，徑向動能耗盡。此時 $A_L|E,L\rangle = 0$，給出 $E = (L+\frac32)\hbar\omega$，即基態能量 $\frac32\hbar\omega$ 且 $l=0$。</p>
+
+<p>圓軌道的徑向波函數（$r$ 乘以徑向部分）為 $u_L(r) \propto r^L e^{-r^2/4\ell^2}$，其中 $\ell \equiv \sqrt{\hbar/2m\omega}$ 是諧振子的特徵長度。徑向機率密度 $P(r) = r^2 u_L^2 \propto r^{2L+2}e^{-r^2/2\ell^2}$。對於大 $L$，$P(r)$ 在 $r/\ell \approx \sqrt{2L+2}$ 處尖銳峰值——對應古典圓軌道的半徑。</p>
+
+<p>$A_l^\dagger$ 則是「升能降 $l$」運算子，從圓軌道出發反覆應用可生成非圓軌道——每次操作增加一個徑向節點（波函數為零的半徑數）。這與一維諧振子中 $A^\dagger$ 增加節點數的機制完全平行。圖 7.8 展示了 $(E,l)$ 平面上的階梯結構：從 $(E,L)$ 的圓軌道出發，$A_l$ 向右上移動，$A_{l-1}^\dagger$ 向右下移動。</p>
+
+<details class="example">
+  <summary>📝 範例：圓軌道的徑向機率峰值</summary>
+  <div class="example-body">
+    <p><strong>題目：</strong>求三維諧振子圓軌道（角動量量子數 $l$）徑向機率密度 $P(r)$ 的峰值位置。</p>
+    <p><strong>解：</strong>$P(r) \propto r^{2l+2}e^{-r^2/2\ell^2}$。對 $\ln P$ 求導：$d\ln P/dr = (2l+2)/r - r/\ell^2 = 0$，得 $r_{\rm peak} = \ell\sqrt{2l+2}$。</p>
+    <p>古典結果：圓軌道中離心力 $m\omega^2 r = mv_t^2/r$。角動量 $L = mrv_t = l\hbar$（大 $l$ 時），因此 $r = \sqrt{l\hbar/m\omega} = \ell\sqrt{2l}$。量子結果 $\ell\sqrt{2l+2}$ 在大 $l$ 時趨近古典值。</p>
+    <p><strong>物理意義：</strong>三維諧振子的圓軌道提供了量子-古典對應的清晰範例——大 $l$ 時徑向機率峰值精確對應古典軌道半徑。</p>
+  </div>
+</details>
+</section>
+
+<!-- ====== 7.3 自旋角動量 ====== -->
+<section class="deep-dive" id="s7-3">
+<h2>7.3　自旋角動量</h2>
+<div class="section-keypoints">
+  <strong>🔑 本節重點</strong>
+  <span>① $S=J-L$ 是內秉角動量，與空間運動無關</span>
+  <span>② 自旋可為半整數：電子 $s=1/2$</span>
+  <span>③ Pauli 矩陣 $\sigma_x,\sigma_y,\sigma_z$ 表示自旋-½ 運算子</span>
+  <span>④ Stern–Gerlach 實驗直接展示自旋量子化</span>
+  <span>⑤ 大 $s$ 古典極限：量子干涉重建確定取向</span>
+</div>
+
+<p>在 §7.2.1 中我們看到 $J$ 與 $L$ 的關鍵差別：$J$ 是完整旋轉的生成元，$L$ 僅是環形平移的生成元。因此它們的差：</p>
+
+<div class="eq">$$\mathbf{S} \equiv \mathbf{J} - \mathbf{L} \tag{7.103}$$</div>
+
+<p>是僅改變系統取向、而不伴隨整體運動的生成元——這就是<strong>自旋角動量</strong>。$S$ 的分量繼承了角動量的標準對易關係 $[S_i,S_j] = i\hbar\sum_k\varepsilon_{ijk}S_k$。$S$ 的一個決定性特徵是它與所有空間運算子對易：</p>
+
+<div class="eq">$$[\mathbf{S},\mathbf{x}] = [\mathbf{S},\mathbf{p}] = [\mathbf{S},\mathbf{L}] = 0 \tag{7.104}$$</div>
+
+<p>這意味著<strong>自旋與系統的位置和運動完全無關</strong>——它是內秉的、不可化約為空間運動的角動量。</p>
+
+<h3>7.3.1　自旋與取向</h3>
+<p>任何態 $|\psi\rangle$ 可以用 $S_z$ 和 $S^2$ 的本徵態 $|s,m\rangle$ 展開：</p>
+
+<div class="eq">$$|\psi\rangle = \sum_{s=0,\frac12,1,\ldots}\sum_{m=-s}^{s}\langle s,m|\psi\rangle\,|s,m\rangle \tag{7.106}$$</div>
+
+<p>幸運的是，量子效應顯著的系統通常只有少數幾個非零振幅。三種最重要的情況是：</p>
+
+<ul>
+<li><strong>自旋-0</strong>（$s=0$）：如 $\pi$ 介子。僅有一個態 $|0,0\rangle$，任意旋轉下完全不受影響——因此稱為「純量粒子」。</li>
+<li><strong>自旋-½</strong>（$s=1/2$）：電子、夸克、質子、中子。僅有兩個態 $|+\rangle$ 和 $|-\rangle$。這是自然界最常見的費米子類型。取向的不確定性極大——我們最多只能知道自旋向量位於某個半球內。</li>
+<li><strong>自旋-1</strong>（$s=1$）：W 和 Z 玻色子。三個態 $m=1,0,-1$。取向可以被限制在極冠或赤道帶內。</li>
+</ul>
+
+<p>系統的自旋 $s$ 越大，我們對其角動量向量取向的約束就越精確——就像陀螺轉得越快，其軸向越穩定。</p>
+
+<h3>7.3.2　自旋-½ 系統與 Pauli 矩陣</h3>
+<p>自旋-½ 系統的態為 $|\psi\rangle = a|+\rangle + b|-\rangle$。在 $\{|+\rangle,|-\rangle\}$ 基底中，自旋運算子表示為 $2\times2$ 矩陣：</p>
+
+<div class="eq">$$S_x = \frac{\hbar}{2}\begin{pmatrix}0&1\\1&0\end{pmatrix},\quad S_y = \frac{\hbar}{2}\begin{pmatrix}0&-i\\i&0\end{pmatrix},\quad S_z = \frac{\hbar}{2}\begin{pmatrix}1&0\\0&-1\end{pmatrix} \tag{7.111}$$</div>
+
+<p>其中出現的矩陣就是著名的<strong>Pauli 矩陣</strong>：</p>
+
+<div class="eq">$$\sigma_x = \begin{pmatrix}0&1\\1&0\end{pmatrix},\quad \sigma_y = \begin{pmatrix}0&-i\\i&0\end{pmatrix},\quad \sigma_z = \begin{pmatrix}1&0\\0&-1\end{pmatrix} \tag{7.112}$$</div>
+
+<p>因此 $\mathbf{S} = \frac{\hbar}{2}\boldsymbol{\sigma}$。Pauli 矩陣的基本代數性質：</p>
+<div class="eq">$$\sigma_i^2 = I,\qquad \{\sigma_i,\sigma_j\} = 2\delta_{ij}I,\qquad [\sigma_i,\sigma_j] = 2i\varepsilon_{ijk}\sigma_k \tag{7.113}$$</div>
+
+<p>$\sigma_i^2 = I$ 意味著對於任何態，$\langle S_i^2\rangle = \hbar^2/4$——與測量 $S_i$ 只能得到 $\pm\hbar/2$ 的事實一致。Pauli 矩陣加上單位矩陣 $I$ 構成所有 $2\times2$ 矩陣的完備基底。</p>
+
+<div class="callout">
+  <strong>💡 Pauli 矩陣的幾何意義</strong><br>
+  任何方向的單位向量 $\mathbf{n}=(\sin\theta\cos\varphi,\sin\theta\sin\varphi,\cos\theta)$ 對應的自旋運算子 $\mathbf{n}\cdot\boldsymbol{\sigma}$ 的本徵值為 $\pm1$，本徵態為：<br>
+  $|+,\mathbf{n}\rangle = \sin(\theta/2)e^{i\varphi/2}|-\rangle + \cos(\theta/2)e^{-i\varphi/2}|+\rangle$<br>
+  $|-,\mathbf{n}\rangle = \cos(\theta/2)e^{i\varphi/2}|-\rangle - \sin(\theta/2)e^{-i\varphi/2}|+\rangle$<br>
+  當 $\theta=\pi/2$（$\mathbf{n}$ 在 $xy$ 平面）時，兩個振幅的模均為 $1/\sqrt{2}$——無法區分 $+z$ 和 $-z$ 方向。當 $\theta=\pi$（$\mathbf{n}=-\hat{z}$），$|+,-\hat{z}\rangle = |-\rangle$——完全翻轉。
+</div>
+
+<h3>Stern–Gerlach 實驗</h3>
+<p>1922 年，Stern 和 Gerlach 用銀原子束進行了量子物理史上最優美的實驗之一。銀原子是自旋-½ 系統並具有磁偶極矩 $\boldsymbol{\mu} = g\mathbf{S}$。在非均勻磁場 $\mathbf{B}$ 中，磁偶極受力 $\mathbf{F} = \nabla(\boldsymbol{\mu}\cdot\mathbf{B})$。磁場強度向上增加時，自旋平行於 $\mathbf{B}$ 的原子被向上偏轉，反平行的被向下偏轉。</p>
+
+<p>Stern–Gerlach（SG）過濾器的關鍵發現：銀原子束通過 SG 裝置後<strong>分裂為兩束——而非連續分佈</strong>。這直接證明了 $S_z$ 僅取兩個離散值 $\pm\hbar/2$。將 $S_z=-\hbar/2$ 的子束阻擋後，只剩 $|+\rangle$ 態的原子。</p>
+
+<p>現在將第二個 SG 過濾器 F2 的磁軸 $\mathbf{n}$ 相對於 $z$ 軸旋轉 $\theta$ 角（在 $yz$ 平面內）。F2 測量 $\mathbf{n}\cdot\mathbf{S}$。原子通過 F2 的振幅為 $\langle+,\theta|+,z\rangle = \cos(\theta/2)$，因此通過機率為：</p>
+
+<div class="eq">$$P_2 = \cos^2(\theta/2) \tag{7.118}$$</div>
+
+<p>當 $\theta=0$（同向）時 $P_2=1$；當 $\theta=\pi/2$（垂直）時 $P_2=1/2$——這很合理，因為磁矩垂直於磁軸時沒有偏好的方向；當 $\theta=\pi$（反向）時 $P_2=0$——全部被阻擋。</p>
+
+<p><strong>三個連續過濾器的驚人結果</strong>：設 $\theta=\pi/2$（F2 的磁軸沿 $y$），$\phi=\pi$（F3 的磁軸沿 $-z$）。沒有 F2 時，F3 會阻擋所有從 F1 出來的 $|+\rangle$ 原子。但插入 F2 後，<strong>F3 竟然允許 $1/4$ 的原子通過</strong>！這些原子出來時 $S_z=-\hbar/2$。F2 的測量改變了原子的態——這是量子力學中反覆出現的主題：沒有測量可以完全不擾動系統，對於足夠小的系統，擾動會顯著改變其動力學。</p>
+
+<div class="callout-warn">
+  <strong>⚠️ 量子測量不可忽略</strong><br>
+  Stern–Gerlach 連續過濾實驗是量子測量擾動本質的最佳展示。在古典物理中，通過 F1 後原子「就是」$|+\rangle$，與之後發生的事無關。在量子力學中，F2 的測量<strong>改變</strong>了態——從 $|+\rangle$ 變為 $|+,\theta\rangle$ 的疊加，使得原本不可能通過 F3 的原子現在有了非零機率。這不是知識的更新，是真實的物理變化。
+</div>
+
+<h3>7.3.3　自旋-1 系統</h3>
+<p>自旋-1 系統有三個態 $m=1,0,-1$。自旋運算子表示為 $3\times3$ 矩陣：</p>
+
+<div class="eq">$$S_x = \frac{\hbar}{\sqrt{2}}\begin{pmatrix}0&1&0\\1&0&1\\0&1&0\end{pmatrix},\quad S_z = \hbar\begin{pmatrix}1&0&0\\0&0&0\\0&0&-1\end{pmatrix} \tag{7.122}$$</div>
+
+<p>SG 過濾器會將自旋-1 原子束分裂為<strong>三束</strong>。F2 通過機率（從 $m=+1$ 到沿 $\theta$ 方向的 $m=+1$）為 $P_3 = \cos^4(\theta/2) = \frac14(1+\cos\theta)^2$。當 $\theta=\pi/2$ 時 $P_3=1/4$，遠小於自旋-½ 情況的 $1/2$。</p>
+
+<p>這個差異的物理原因是：自旋-1 系統中 $S^2 = s(s+1)=2$（以 $\hbar^2$ 為單位），是 $S_z$ 最大值的兩倍。即使在 $|1,z\rangle$ 態中，仍有可觀的角動量分量位於 $xy$ 平面——使得將其重新對準到垂直方向更加困難。</p>
+
+<h3>7.3.4　古典極限</h3>
+<p>宏觀物體的角動量量子數極大（例如直徑 1 cm、10 g 的馬達以 100 rps 旋轉，$s\sim10^{31}$）。在這種極限下，量子形式主義如何重現古典物理的確定取向？</p>
+
+<p>對大 $s$，$|\mathbf{n};s,s\rangle$（沿 $\mathbf{n}$ 確定有 $s$ 的態）在 $|s,m\rangle$ 基底中的振幅 $a_m$ 在 $m = s\cos\theta$ 附近尖銳峰值。計算 $S_y$ 的期望值：</p>
+
+<div class="eq">$$\langle S_y\rangle \simeq s\sin\theta\sum_m |a_m|^2 = s\sin\theta \tag{7.130}$$</div>
+
+<p>恰好對應古典角動量向量的 $y$ 分量。而且 $\langle S_y^2\rangle \simeq \langle S_y\rangle^2$——$S_y$ 的不確定性可忽略。$\langle S_x\rangle$ 和 $\langle S_x^2\rangle$ 均約為零。</p>
+
+<p>關鍵洞察：正是<strong>量子干涉</strong>——不同 $m$ 態之間的干涉——在古典極限中產生了確定取向。這是第三次我們看到熟悉的世界透過量子干涉重現：子彈的位置-動量（§2.3.3）、激發振子的運動（§3.2）、以及現在陀螺的確定取向。在古典範疇中，某個可觀測量的極微小不確定性允許大量態具有非零振幅，而這些態之間的干涉狹窄地定義了正則共軛變量的值。</p>
+
+<h3 id="s7-4">7.3.5　磁場中的進動——NMR 的量子基礎</h3>
+<p>磁偶極 $\boldsymbol{\mu}$ 在磁場 $\mathbf{B}$ 中的古典位能為 $H = -\boldsymbol{\mu}\cdot\mathbf{B}$。假設質子的磁矩運算子 $\boldsymbol{\mu} = 2\mu_p\mathbf{S}$，則 Hamiltonian 為：</p>
+
+<div class="eq">$$H = -2\mu_p B\,S_z \tag{7.134}$$</div>
+
+<p>（取 $\mathbf{B}=B\hat{z}$）。定態為 $S_z$ 的本徵態 $|\pm\rangle$，能量 $E_\pm = \mp\mu_p B$。任何自旋態的時間演化為：</p>
+
+<div class="eq">$$|\psi,t\rangle = a_- e^{-iE_- t/\hbar}|-\rangle + a_+ e^{-iE_+ t/\hbar}|+\rangle \tag{7.136}$$</div>
+
+<p>若初始時沿 $\mathbf{n}=(\sin\theta,0,\cos\theta)$ 的自旋確定為 $+\hbar/2$，則 $a_-=\sin(\theta/2)$、$a_+=\cos(\theta/2)$。時間演化後：</p>
+
+<div class="eq">$$|\psi,t\rangle = \sin(\theta/2)e^{i\omega t/2}|-\rangle + \cos(\theta/2)e^{-i\omega t/2}|+\rangle \tag{7.137}$$</div>
+
+<p>其中 $\omega = -2\mu_p B/\hbar$。這恰好是沿 $\mathbf{n}'(t)=(\sin\theta\cos\omega t,\sin\theta\sin\omega t,\cos\theta)$ 的自旋向上態——<strong>自旋軸繞磁場以頻率 $\omega$ 進動</strong>，與古典陀螺的預期完全一致。</p>
+
+<p>這就是<strong>核磁共振（NMR）</strong>的物理基礎。在強磁場中，樣本中的大多數質子自旋與 $\mathbf{B}$ 對齊以最小化能量。頻率為 $\omega$ 的輻射恰好有足夠能量將質子踢到反平行的高能態，因此被選擇性吸收。質子所處位置的磁場包含了來自周圍電子自旋的貢獻——稱為化學位移——不同化學環境中的質子有不同的共振頻率。例如甲醇 CH<sub>3</sub>OH 中有三種不同環境的質子，對應三個不同的 NMR 頻率。這就是 NMR 能揭示分子結構的原因。</p>
+
+<div class="callout">
+  <strong>💡 NMR 與量子相干</strong><br>
+  NMR 現象本質上是量子干涉效應：對齊態 $|+\rangle$ 與反對齊態 $|-\rangle$ 之間的量子干涉產生了以頻率 $\omega$ 進動的期望磁矩。這個進動的磁矩與外加輻射場共振耦合——完全類似古典物理中進動磁偶極與交變磁場的共振。正是這種量子-古典對應使 NMR 的物理圖像既直觀又精確。
+</div>
+
+<details class="example">
+  <summary>📝 範例：質子自旋在磁場中的進動</summary>
+  <div class="example-body">
+    <p><strong>題目：</strong>一個質子初始處於 $|+,x\rangle$ 態（自旋沿 $+x$ 確定為 $+\hbar/2$），置於沿 $z$ 軸的磁場 $B$ 中。求 $\langle S_x\rangle$ 和 $\langle S_y\rangle$ 隨時間的變化。</p>
+    <p><strong>解：</strong>$|+,x\rangle = \frac{1}{\sqrt{2}}(|+\rangle + |-\rangle)$。時間演化：$|\psi,t\rangle = \frac{1}{\sqrt{2}}(e^{i\omega t/2}|-\rangle + e^{-i\omega t/2}|+\rangle)$，其中 $\omega = -2\mu_p B/\hbar$。</p>
+    <p>$\langle S_x\rangle = \langle\psi|S_x|\psi\rangle = \frac{\hbar}{2}\cos\omega t$，$\langle S_y\rangle = \frac{\hbar}{2}\sin\omega t$，$\langle S_z\rangle = 0$。</p>
+    <p><strong>物理意義：</strong>自旋的期望向量在 $xy$ 平面內以角頻率 $\omega$ 旋轉——這就是 NMR 中觀測到的進動信號。注意：$\langle S_z\rangle=0$ 意味著測量 $S_z$ 得到 $\pm\hbar/2$ 的機率各半，但期望值以完全確定的方式進動——再次展示了量子不確定性與確定期望值可以共存。</p>
+  </div>
+</details>
+</section>
+
+
+
+<h3>Bloch 球與自旋態的幾何表示</h3>
+<p>自旋-½ 系統的態可以用一個直觀的幾何對象來表示——<strong>Bloch 球</strong>。任何歸一化的自旋-½ 態都可以寫成：</p>
+<div class="eq">$$|\psi\rangle = \cos(\theta/2)|+\rangle + e^{i\varphi}\sin(\theta/2)|-\rangle \tag{7.139}$$</div>
+<p>其中 $(\theta, \varphi)$ 定義了 Bloch 球面上的一個點。球的北極對應 $|+\rangle$（自旋沿 $+z$），南極對應 $|-\rangle$（自旋沿 $-z$），赤道上的點對應 $xy$ 平面內的自旋態。Bloch 球的半徑為 1，代表歸一化條件。</p>
+<p>Bloch 球揭示了一個深刻的幾何事實：自旋-½ 態的空間是<strong>三維球面 $S^3$</strong>（不是二維球面 $S^2$）。球面上對蹠點（如北極和南極）代表<strong>正交態</strong>——$\langle+|-\rangle = 0$。但物理態與其全域相位等價，因此 Bloch 球上每一點對應一個唯一的物理態——二維球面 $S^2$ 就夠了。</p>
+
+<div class="callout">
+  <strong>💡 NMR 中的自旋回波</strong><br>
+  在真實的 NMR 實驗中，磁場在空間中不是完全均勻的——不同位置的質子感受到略微不同的磁場，導致進動頻率有微小差異。一段時間後，這些質子的相位會「散開」，NMR 信號衰減。1950 年，Hahn 發明了<strong>自旋回波</strong>技術：先用一個 $\pi/2$ 脈衝將所有自旋翻轉到 $xy$ 平面，等待時間 $\tau$ 後施加一個 $\pi$ 脈衝（將所有自旋反轉），再等待 $\tau$——所有質子的相位重新對齊，信號「回聲」出現。這個技術是現代 MRI（磁共振成像）的基礎，使人類第一次能夠無創地觀察活體內部結構。
+</div>
+
+<!-- ====== 7.5 angular momentum addition ====== -->
+<section class="deep-dive" id="s7-5">
+<h2>7.5　角動量的合成</h2>
+<div class="section-keypoints">
+  <strong>🔑 本節重點</strong>
+  <span>① 總角動量量子數 $j$ 取值從 $|j_1-j_2|$ 到 $j_1+j_2$</span>
+  <span>② 張量積基底與耦合基底由 Clebsch-Gordan 係數聯繫</span>
+  <span>③ 兩個自旋-½ 合成：三重態($j=1$)+單態($j=0$)</span>
+  <span>④ 不同系統的角動量運算子互相對易</span>
+</div>
+
+  <p>在量子力學的實際應用中，我們經常需要處理由多個子系統組成的複合系統，每個子系統各自攜帶角動量。例如氫原子中的質子和電子各有自旋角動量 $\frac{1}{2}\hbar$，電子還有軌道角動量。原子的總角動量是這些貢獻的和，因此理解如何合成角動量至關重要。</p>
+
+  <p>考慮兩個「陀螺」（角動量確定的系統），量子數分別為 $j_1$ 和 $j_2$（假設 $j_1 \geq j_2$）。它們各自的態為：</p>
+  <div class="eq">$$|\psi_1\rangle = \sum_{m=-j_1}^{j_1} c_m |j_1, m\rangle, \quad |\psi_2\rangle = \sum_{m=-j_2}^{j_2} d_m |j_2, m\rangle \tag{7.138}$$</div>
+  <p>複合系統的態是張量積 $|\psi\rangle = |\psi_1\rangle |\psi_2\rangle$。兩個不同系統的運算子互相對易：$[J_{1i}, J_{2j}] = 0$。總角動量運算子為：</p>
+  <div class="eq">$$J_z = J_{1z} + J_{2z}, \quad J_\pm = J_{1\pm} + J_{2\pm} \tag{7.140}$$</div>
+  <div class="eq">$$J^2 = J_1^2 + J_2^2 + 2\mathbf{J}_1 \cdot \mathbf{J}_2 \tag{7.141}$$</div>
+
+  <p>我們有兩組自然的基底：張量積基底 $|j_1, m_1\rangle |j_2, m_2\rangle$（各子系統角動量確定）和耦合基底 $|j, m\rangle$（總角動量確定）。兩者之間的轉換由 <strong>Clebsch-Gordan 係數</strong>給出：</p>
+  <div class="eq">$$|j, m\rangle = \sum_{m_1, m_2} \langle j_1, m_1; j_2, m_2 | j, m\rangle \, |j_1, m_1\rangle |j_2, m_2\rangle \tag{7.145}$$</div>
+  <p>其中 $m_1 + m_2 = m$（角動量 $z$ 分量守恆）。</p>
+
+  <h3>合成規則</h3>
+  <p>總角動量量子數 $j$ 的允許值為：</p>
+  <div class="eq">$$j = |j_1 - j_2|, \, |j_1 - j_2| + 1, \, \ldots, \, j_1 + j_2 \tag{7.146}$$</div>
+  <p>這個結果可以用一個簡單的圖形規則來記憶：把 $j_1$ 和 $j_2$ 想像成長度，它們可以「頭尾相接」形成從 $|j_1 - j_2|$（反平行）到 $j_1 + j_2$（平行）的所有長度。每個 $j$ 值對應 $(2j+1)$ 個 $m$ 值。驗證：$\sum_{j=|j_1-j_2|}^{j_1+j_2} (2j+1) = (2j_1+1)(2j_2+1)$——恰好等於張量積空間的維度。</p>
+
+  <div class="callout">
+    <strong>💡 為什麼需要 Clebsch-Gordan 係數？</strong><br>
+    在張量積基底中，$J^2$ 不是對角的——它包含 $J_{1+}J_{2-}$ 和 $J_{1-}J_{2+}$ 項，會混合不同的 $m_1, m_2$。耦合基底恰好使 $J^2$ 和 $J_z$ 同時對角化。這在計算原子光譜、分子鍵結和粒子物理的散射振幅時至關重要。
+  </div>
+
+  <h3>兩個自旋-½ 的合成</h3>
+  <p>最簡單且最重要的例子：$j_1 = j_2 = 1/2$。根據合成規則，$j = 0$ 或 $j = 1$：</p>
+  <p><strong>$j = 1$（三重態，triplet）</strong>——對稱，三個態：</p>
+  <div class="eq">$$|1, 1\rangle = |+\rangle|+\rangle, \quad |1, 0\rangle = \frac{1}{\sqrt{2}}(|+\rangle|-\rangle + |-\rangle|+\rangle), \quad |1, -1\rangle = |-\rangle|-\rangle \tag{7.148}$$</div>
+  <p><strong>$j = 0$（單態，singlet）</strong>——反對稱，一個態：</p>
+  <div class="eq">$$|0, 0\rangle = \frac{1}{\sqrt{2}}(|+\rangle|-\rangle - |-\rangle|+\rangle) \tag{7.149}$$</div>
+
+  <div class="callout-warn">
+    <strong>⚠️ 三重態與單態的物理差異</strong><br>
+    三重態是對稱的（交換兩個粒子，態不變），單態是反對稱的（交換兩個粒子，態變號）。對於電子這樣的費米子，兩個電子的總波函數必須是反對稱的——如果空間部分是對稱的，自旋部分就必須是單態；反之亦然。這直接導致了化學鍵和原子結構的多樣性。
+  </div>
+
+  <details class="example">
+    <summary>📝 自編概念例：兩個自旋-½ 的合成</summary>
+    <div class="example-body">
+      <p><strong>題目：</strong>兩個電子的自旋態為 $|\psi\rangle = |+\rangle|+\rangle$。這是 $J^2$ 的本徵態嗎？$j$ 和 $m$ 是多少？</p>
+      <p><strong>解：</strong>$|+\rangle|+\rangle = |1, 1\rangle$（方程 7.148），所以這是 $J^2$ 的本徵態，$j = 1$，$m = 1$。</p>
+      <p>$J^2$ 的本徵值為 $j(j+1)\hbar^2 = 2\hbar^2$，$J_z$ 的本徵值為 $m\hbar = \hbar$。</p>
+      <p><strong>物理意義：</strong>兩個電子自旋平行排列（都「向上」），總自旋最大。這是三重態中 $m$ 最大的態。</p>
+    </div>
+  </details>
+
+  <p>Clebsch-Gordan 係數有許多對稱性和遞推關係，使得它們可以系統地計算。對於常見的情況（如兩個自旋-½、自旋-1 與自旋-½），結果可以用簡單的代數公式表達。對於更複雜的情況，有標準的數值表可用。</p>
+
+  <p>合成規則可以遞推應用：要合成三個角動量，先合成前兩個，再將結果與第三個合成。例如氫原子中電子的軌道角動量 $l$ 與電子自旋 $s_e = 1/2$ 合成為 $j = l \pm 1/2$（$l > 0$ 時），然後再與質子自旋 $s_p = 1/2$ 合成。這個多步合成過程是理解原子光譜精細結構的基礎。</p>
+
+  <div class="callout-warn">
+    <strong>⚠️ 古典極限</strong><br>
+    當 $j_1, j_2 \gg 1$ 時，量子合成規則趨近古典的向量加法。但在微觀尺度（$j = 1/2$），量子效應完全主導——例如單態 $|0,0\rangle$ 在古典物理中不可能存在。
+  </div>
+
+
+<h3>Clebsch-Gordan 係數的計算範例</h3>
+<p>讓我們用一個具體例子展示 CG 係數的計算過程。考慮 $j_1 = 1$（自旋-1）和 $j_2 = 1/2$（自旋-½）的合成。可能的 $j$ 值為 $3/2$ 和 $1/2$。</p>
+<p><strong>最高態 $|3/2, 3/2\rangle$：</strong>唯一滿足 $m_1 + m_2 = 3/2$ 的組合是 $m_1 = 1, m_2 = 1/2$：</p>
+<div class="eq">$$|3/2, 3/2\rangle = |1, 1\rangle|1/2, 1/2\rangle \tag{7.150}$$</div>
+<p><strong>用 $J_-$ 降階：</strong>$J_-|3/2, 3/2\rangle = \sqrt{3}|3/2, 1/2\rangle$。同時 $J_- = J_{1-} + J_{2-}$：</p>
+<div class="eq">$$J_-|1,1\rangle|1/2,1/2\rangle = \sqrt{2}|1,0\rangle|1/2,1/2\rangle + |1,1\rangle|1/2,-1/2\rangle \tag{7.151}$$</div>
+<p>因此 $|3/2, 1/2\rangle = \sqrt{2/3}|1,0\rangle|1/2,1/2\rangle + \sqrt{1/3}|1,1\rangle|1/2,-1/2\rangle$。</p>
+<p><strong>$j = 1/2$ 的態：</strong>與 $|3/2, 1/2\rangle$ 正交：$|1/2, 1/2\rangle = \sqrt{1/3}|1,0\rangle|1/2,1/2\rangle - \sqrt{2/3}|1,1\rangle|1/2,-1/2\rangle$。</p>
+<p>這些係數就是 CG 係數：$\langle 1,0;1/2,1/2|3/2,1/2\rangle = \sqrt{2/3}$ 等。完整的 CG 係數表可以在教科書或線上資料庫中找到。
+
+<div class="callout-warn">
+  <strong>⚡ CG 係數的正交性</strong><br>
+  CG 係數構成一個么正矩陣——不同 $j$ 的態相互正交，同一 $j$ 不同 $m$ 的態也相互正交。這意味著：如果你知道一個複合系統在張量積基底中的振幅 $c_{m_1 m_2}$，就可以通過 CG 係數轉換到耦合基底，反之亦然。這種轉換在計算原子光譜的強度時至關重要——因為選擇定則在耦合基底中最簡單（$\Delta j = 0, \pm1$），而實際的物理態可能在張量積基底中最自然。
+</div>
+
+</section>
+
+<!-- ====== 本章摘要 ====== -->
+<section id="summary">
+  <h2>本章摘要</h2>
+  <p>本章建立了角動量的完整量子理論——從對易關係出發，推導出本徵值、升降運算子、球諧函數、自旋-½ 的矩陣力學，以及角動量合成規則。</p>
+  <div class="table-scroll" role="region" aria-label="本章關鍵概念與公式" tabindex="0">
+    <table>
+      <caption>本章關鍵概念、公式、適用條件與用途</caption>
+      <thead>
+        <tr>
+          <th scope="col">概念／公式</th>
+          <th scope="col">符號與單位</th>
+          <th scope="col">適用條件</th>
+          <th scope="col">用途</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">角動量對易關係 $[J_i, J_j] = i\hbar \epsilon_{ijk} J_k$</th>
+          <td>$J_i$：角動量分量（J·s）</td>
+          <td>所有角動量</td>
+          <td>角動量代數的出發點</td>
+        </tr>
+        <tr>
+          <th scope="row">$J^2$ 本徵值 $j(j+1)\hbar^2$</th>
+          <td>$j = 0, 1/2, 1, 3/2, \ldots$</td>
+          <td>角動量量子數</td>
+          <td>決定總角動量大小</td>
+        </tr>
+        <tr>
+          <th scope="row">$J_z$ 本徵值 $m\hbar$</th>
+          <td>$m = -j, \ldots, j$</td>
+          <td>給定 $j$</td>
+          <td>決定角動量 $z$ 分量</td>
+        </tr>
+        <tr>
+          <th scope="row">升降運算子 $J_\pm |j,m\rangle$</th>
+          <td>$\alpha_\pm = \sqrt{j(j+1)-m(m\pm 1)}$</td>
+          <td>同 $j$ 的態之間</td>
+          <td>改變 $m$ 但不改變 $j$</td>
+        </tr>
+        <tr>
+          <th scope="row">球諧函數 $Y_l^m(\theta,\phi)$</th>
+          <td>無因次</td>
+          <td>整數 $l$</td>
+          <td>原子波函數角度部分</td>
+        </tr>
+        <tr>
+          <th scope="row">Pauli 矩陣 $\sigma_x, \sigma_y, \sigma_z$</th>
+          <td>$2\times 2$ 無因次矩陣</td>
+          <td>自旋-½ 系統</td>
+          <td>自旋運算子的矩陣表示</td>
+        </tr>
+        <tr>
+          <th scope="row">Zeeman 效應 $\Delta E = g_J \mu_B B m_j$</th>
+          <td>$g_J$：Landé g 因子</td>
+          <td>外磁場中原子</td>
+          <td>光譜線分裂</td>
+        </tr>
+        <tr>
+          <th scope="row">角動量合成 $j = |j_1-j_2|, \ldots, j_1+j_2$</th>
+          <td>Clebsch-Gordan 係數</td>
+          <td>兩個角動量合成</td>
+          <td>多電子原子、粒子物理</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ====== 常見錯誤 ====== -->
+<section id="common-mistakes">
+  <h2>初學者常見錯誤</h2>
+  <div class="callout-warn">
+    <strong>⚡ 錯誤一：把角動量方向當成古典向量</strong><br>
+    在量子力學中，角動量的三個分量 $J_x, J_y, J_z$ 不能同時確定（$j > 0$ 時）。不能把 $|j, m\rangle$ 想像成一個指向某個方向的箭頭。
+  </div>
+  <div class="callout-warn">
+    <strong>⚡ 錯誤二：混淆軌道角動量和自旋角動量</strong><br>
+    軌道角動量 $l$ 只能取整數（$l = 0, 1, 2, \ldots$），而自旋可以是半整數。軌道角動量有經典對應，自旋則是粒子的內稟性質。
+  </div>
+  <div class="callout-warn">
+    <strong>⚡ 錯誤三：忽略 Pauli 矩陣的非對易性</strong><br>
+    $\sigma_x \sigma_y \neq \sigma_y \sigma_x$——實際上 $\sigma_x \sigma_y = i\sigma_z$。在計算自旋相關的物理量時，必須注意運算子的順序。
+  </div>
+</section>
+
+<!-- ====== 自我檢測 ====== -->
+<section id="self-check">
+  <h2>自我檢測</h2>
+  <details class="self-check-item">
+    <summary>1. 角動量量子數 $j$ 為什麼只能取整數或半整數？</summary>
+    <div class="self-check-answer">
+      <p>從對易關係出發，用升降運算子從 $|j, j\rangle$ 到 $|j, -j\rangle$ 需要 $2j$ 步（整數步），因此 $2j$ 必須是整數。旋轉 $2\pi$ 後，$|j, m\rangle \to e^{-2\pi i m}|j, m\rangle$，$m$ 為整數時回到原態，$m$ 為半整數時多一個負號。</p>
+      <p class="solution-note">正文依據：§7.1</p>
+    </div>
+  </details>
+  <details class="self-check-item">
+    <summary>2. 為什麼 $|+, x\rangle$ 和 $|+, y\rangle$ 對 $s_z$ 給出相同機率，卻是不同態？</summary>
+    <div class="self-check-answer">
+      <p>兩者都有 $P(s_z = +1/2) = 1/2$。差異在於振幅的相位：$|+, x\rangle$ 中 $a_+/a_- = 1$，而 $|+, y\rangle$ 中 $a_+/a_- = i$。這個相位差在測量 $s_x$ 或 $s_y$ 時表現出來。</p>
+      <p class="solution-note">正文依據：§1.3.5、§7.3</p>
+    </div>
+  </details>
+  <details class="self-check-item">
+    <summary>3. 兩個自旋-½ 的單態 $|0,0\rangle$ 為什麼不能寫成 $|+\rangle|-\rangle$？</summary>
+    <div class="self-check-answer">
+      <p>$|+\rangle|-\rangle$ 不是 $J^2$ 的本徵態。單態 $|0,0\rangle = \frac{1}{\sqrt{2}}(|+\rangle|-\rangle - |-\rangle|+\rangle)$ 是 $J^2$ 的本徵態（$j=0$），具有旋轉不變性——在任何方向測量總自旋都得到零。</p>
+      <p class="solution-note">正文依據：§7.5</p>
+    </div>
+  </details>
+  <details class="self-check-item">
+    <summary>4. Landé $g$ 因子的物理意義是什麼？</summary>
+    <div class="self-check-answer">
+      <p>$g_J$ 描述了原子磁矩與總角動量的比值。它取決於軌道角動量和自旋角動量的相對貢獻（$g_L = 1$，$g_S \approx 2$）。不同 $J$ 值導致不同的 $g_J$，這就是反常 Zeeman 效應的來源。</p>
+      <p class="solution-note">正文依據：§7.4</p>
+    </div>
+  </details>
+
+
+  <details class="self-check-item">
+    <summary>5. 為什麼軌道角動量量子數 $l$ 只能取整數，而自旋 $s$ 可以是半整數？</summary>
+    <div class="self-check-answer">
+      <p>軌道角動量 $L$ 是環形平移的生成元——將系統沿圓弧移動一圈回到原處。這個操作必須是恆等操作（位置不變），要求 $e^{-2\pi i m} = 1$，因此 $m$（以及 $l$）必須是整數。自旋 $S = J - L$ 是取向的改變，不需要對應空間的單值性——$2\pi$ 旋轉可以改變態的符號（$e^{-2\pi i m} = -1$ 對半整數 $m$）。物理上，軌道角動量來自空間運動（$L = \mathbf{x} \times \mathbf{p}/\hbar$），而自旋是粒子的內稟性質，與空間無關。</p>
+      <p class="solution-note">正文依據：§7.2.2（方程 7.39）</p>
+    </div>
+  </details>
+  <details class="self-check-item">
+    <summary>6. 在 Stern-Gerlach 實驗中，為什麼銀原子束分裂為兩束而非三束或更多？</summary>
+    <div class="self-check-answer">
+      <p>銀原子的價電子是 $5s^1$（$l = 0$），因此軌道角動量為零，總角動量完全來自電子自旋 $s = 1/2$。$S_z$ 的可能值為 $m_s = \pm 1/2$——只有兩個值。每個值對應一個不同的磁偶極力 $F = \mu_z \partial B_z/\partial z$，因此原子束分裂為兩束。如果銀原子有 $l > 0$（如 $p$ 軌道電子），則 $j = l \pm 1/2$，$S_z$ 的可能值更多，分裂的束數也更多。選擇銀原子是因為它的 $l = 0$ 簡化了實驗——只看到純自旋效應。</p>
+      <p class="solution-note">正文依據：§7.3.2</p>
+    </div>
+  </details>
+  <details class="self-check-item">
+    <summary>7. 解釋為什麼 $J^2 = J_1^2 + J_2^2 + 2\mathbf{J}_1 \cdot \mathbf{J}_2$ 中的交叉項 $2\mathbf{J}_1 \cdot \mathbf{J}_2$ 使耦合基底成為必要。</summary>
+    <div class="self-check-answer">
+      <p>在張量積基底 $|j_1, m_1\rangle|j_2, m_2\rangle$ 中，$J_1^2$ 和 $J_2^2$ 是對角的（分別給出 $j_1(j_1+1)\hbar^2$ 和 $j_2(j_2+1)\hbar^2$），$J_z = J_{1z} + J_{2z}$ 也是對角的（給出 $(m_1+m_2)\hbar$）。但交叉項 $\mathbf{J}_1 \cdot \mathbf{J}_2 = J_{1z}J_{2z} + \frac{1}{2}(J_{1+}J_{2-} + J_{1-}J_{2+})$ 中的升降運算子項會混合不同的 $(m_1, m_2)$ 組合（保持 $m_1+m_2$ 不變）。因此 $J^2$ 在張量積基底中不是對角的。耦合基底 $|j, m\rangle$ 正是使 $J^2$ 和 $J_z$ 同時對角化的基底——這就是 CG 係數存在的物理原因。</p>
+      <p class="solution-note">正文依據：§7.5（方程 7.141、7.145）</p>
+    </div>
+  </details>
+  <details class="self-check-item">
+    <summary>8. 為什麼 NMR 中的進動頻率 $\omega = -2\mu_p B/\hbar$ 與古典磁偶極進動的 Larmor 頻率完全一致？</summary>
+    <div class="self-check-answer">
+      <p>在古典物理中，磁偶極 $\boldsymbol{\mu}$ 在磁場 $\mathbf{B}$ 中的運動方程為 $d\boldsymbol{\mu}/dt = \gamma\boldsymbol{\mu} \times \mathbf{B}$，其中 $\gamma = g\mu_p/\hbar$ 是旋磁比。這個方程的解是繞 $\mathbf{B}$ 的進動，頻率 $\omega_L = -\gamma B$。在量子力學中，從 Heisenberg 方程 $d\langle\mathbf{S}\rangle/dt = (1/i\hbar)\langle[\mathbf{S}, H]\rangle$ 出發，利用 $H = -2\mu_p B S_z$ 和 $[S_x, S_z] = -i\hbar S_y$ 等對易關係，得到 $d\langle S_x\rangle/dt = \omega\langle S_y\rangle$、$d\langle S_y\rangle/dt = -\omega\langle S_x\rangle$——與古典方程形式完全相同。這是 Ehrenfest 定理的又一個體現：量子期望值遵循古典運動方程。</p>
+      <p class="solution-note">正文依據：§7.3.5（方程 7.134–7.137）</p>
+    </div>
+  </details>
+
+</section>
+
+<!-- ====== 延伸資源 ====== -->
+<section id="extras">
+  <h2>延伸資源與下一章</h2>
+  <ul class="resource-list">
+    <li><a href="#">本章公式整理</a></li>
+    <li><a href="#">本章例題與練習</a></li>
+  </ul>
+  <div class="further-reading">
+    <strong>下一章預告：氫原子</strong>
+    <p>第 8 章將把角動量理論應用到最簡單的原子——氫原子。量子數 $(n, l, m)$ 如何從 Schrödinger 方程中湧現，能級結構如何解釋光譜，以及精細結構和超精細結構如何修正 Bohr 模型。</p>
+    <a href="ch8_hydrogen_zh.html">前往下一章 →</a>
+  </div>
+</section>
+
+</main>
+
+</body>
+</html>'''

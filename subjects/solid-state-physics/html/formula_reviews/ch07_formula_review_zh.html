@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>第七章 公式摘要 — pn 接面（82 條完整版）</title>
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']],tags:'ams'},options:{ignoreHtmlClass:'no-math'}};</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script defer src="../assets/course-ui.js"></script>
+<link rel="stylesheet" href="../../../../shared/core.css">
+<script src="../../../../shared/core.js" defer></script>
+<link rel="stylesheet" href="../../../../shared/components/formula-problem.css">
+<link rel="stylesheet" href="../../../../shared/navigation.css" data-shared-navigation>
+</head>
+<body>
+<a class="portal-home-link" href="../index.html">返回學習中心</a>
+<nav class="sidebar" aria-label="本章目錄"><div class="sidebar-header"><div class="sidebar-subtitle">半導體物理與元件</div><h2 class="sidebar-title">第七章：pn 接面</h2></div><div class="toc"><ul>
+<li class="ns">7.1–7.2 零偏壓</li><li class="nsub"><a href="#s1">7.1 基本結構·內建電位</a></li><li class="nsub"><a href="#s2">7.2.2 電場·空間電荷</a></li><li class="nsub"><a href="#s3">7.2.3 空乏區寬度 ⭐</a></li>
+<li class="ns">7.3 反向偏壓</li><li class="nsub"><a href="#s4">7.3 反向偏壓·接面電容</a></li>
+<li class="ns">7.4–7.5</li><li class="nsub"><a href="#s5">7.4 接面崩潰</a></li><li class="nsub"><a href="#s6">7.5 非均勻摻雜接面</a></li>
+<li><a href="#cheatsheet">📋 公式速查表</a></li>
+</ul></div><div class="sidebar-tools"><button type="button" data-action="toggle-theme" aria-label="切換深色或淺色模式">切換顯示主題</button></div></nav>
+<main class="chapter-page">
+<div class="chapter-header"><div class="tag">82 條公式·含 12 例題+7 TYU</div><h1>第七章：pn 接面</h1><div class="chapter-subtitle">Semiconductor Physics & Devices, 4th Ed.·Donald A. Neamen·pp.232–277</div></div>
+<div class="content-toolbar"><button data-action="expand-details">📖 展開全部</button><button data-action="collapse-details">📕 收合全部</button></div>
+
+<!-- 7.1-7.2.1 -->
+<div class="content-section" id="s1"><h2>7.1–7.2.1 基本結構·內建電位 (7.1–7.14)</h2>
+<div class="formula-card"><div class="formula-label">⭐ 內建電位差（Built-in Potential）</div><div class="eq">$$\boxed{V_{bi} = \frac{kT}{e}\ln\!\left(\frac{N_a N_d}{n_i^2}\right)} \tag{7.10}$$</div><div class="formula-note">$V_{bi}$ 是 pn 接面在熱平衡下的本質電位障壁。取決於兩側的摻雜濃度和本徵載子濃度。</div></div>
+<details class="derive" open><summary>🔍 完整推導——從能帶圖到內建電位（14 條公式）</summary><div class="derive-body">
+<div class="step"><span class="step-number">1</span><span class="step-label">接面形成前的能帶 (7.1–7.4)</span><div class="step-content">p 區 $E_F$ 靠近 $E_v$，n 區 $E_F$ 靠近 $E_c$ (7.1–7.2)。兩者接觸→$E_F$ 必須在整個系統中為常數 (7.3)→能帶彎曲 (7.4)。</div></div>
+<div class="step"><span class="step-number">2</span><span class="step-label">內建電位 $V_{bi}$ 推導 (7.5–7.10)</span><div class="step-content">n 區：$n_{n0}=n_i e^{(E_F-E_{Fi})_n/kT}$ (7.5)，p 區：$p_{p0}=n_i e^{-(E_F-E_{Fi})_p/kT}$ (7.6)。<br>能帶彎曲量 $(E_{Fi})_p-(E_{Fi})_n = eV_{bi}$ (7.7)。<span class="math">$$V_{bi} = \frac{kT}{e}\ln\frac{n_{n0}}{n_{p0}} = \frac{kT}{e}\ln\frac{N_a N_d}{n_i^2} \tag{7.8-7.10}$$</span>Si 典型 $V_{bi}$：0.6–0.8 V。</div></div>
+<div class="step"><span class="step-number">3</span><span class="step-label">空乏區近似 (7.11–7.14)</span><div class="step-content">空乏區內無自由載子→空間電荷密度 $\rho = +eN_d$（n 側）、$\rho = -eN_a$（p 側）(7.11–7.12)。<br>Poisson 方程 (7.13)：$d^2\phi/dx^2 = -\rho/\epsilon_s$。積分得電場 (7.14)。</div></div>
+</div></details>
+<details class="example" open><summary>📐 例題 7.1 — Si pn 接面 $V_{bi}$</summary><div class="example-body">$N_a=10^{17}$ cm⁻³，$N_d=10^{16}$ cm⁻³，$T=300$ K，$n_i=1.5\times10^{10}$ cm⁻³。<br>$V_{bi}=0.0259\ln(10^{17}\times10^{16}/(1.5\times10^{10})^2)=0.0259\times\ln(4.44\times10^{12})=0.754$ V。</div></details>
+</div>
+
+<!-- 7.2.2 -->
+<div class="content-section" id="s2"><h2>7.2.2 電場與空間電荷 (7.15–7.26)</h2>
+<details class="derive" open><summary>🔍 Poisson 方程→電場分布（12 條公式）</summary><div class="derive-body">
+<div class="step"><span class="step-number">1</span><span class="step-label">Poisson 方程積分 (7.15–7.19)</span><div class="step-content">p 側 ($-x_p<x<0$) (7.15)：$d^2\phi/dx^2 = eN_a/\epsilon_s$ → $E(x) = -(eN_a/\epsilon_s)(x+x_p)$。<br>n 側 ($0<x<x_n$) (7.17)：$d^2\phi/dx^2 = -eN_d/\epsilon_s$ → $E(x) = (eN_d/\epsilon_s)(x-x_n)$。</div></div>
+<div class="step"><span class="step-number">2</span><span class="step-label">⭐ 最大電場 (7.20–7.21)</span><div class="step-content">在 $x=0$（冶金接面）處電場最大：<span class="math">$$\boxed{E_{\text{max}} = -\frac{eN_a x_p}{\epsilon_s} = -\frac{eN_d x_n}{\epsilon_s}} \tag{7.21}$$</span></div></div>
+<div class="step"><span class="step-number">3</span><span class="step-label">電荷守恆 (7.22–7.23)</span><div class="step-content">總正電荷 = 總負電荷：$N_a x_p = N_d x_n$ (7.22)。重摻雜側空乏區較窄 (7.23)。</div></div>
+<div class="step"><span class="step-number">4</span><span class="step-label">電位分布 (7.24–7.26)</span><div class="step-content">積分電場得電位：$\phi(x) = -\int E(x)dx$。總電位差 $=V_{bi}$。</div></div>
+</div></details>
+</div>
+
+<!-- 7.2.3 -->
+<div class="content-section" id="s3"><h2>7.2.3 空間電荷寬度 ⭐ (7.27–7.34)</h2>
+<div class="formula-card"><div class="formula-label">⭐ 空乏區寬度（熱平衡）</div><div class="eq">$$\boxed{W = x_n + x_p = \sqrt{\frac{2\epsilon_s V_{bi}}{e}\left(\frac{N_a+N_d}{N_a N_d}\right)}} \tag{7.31}$$</div><div class="formula-note">$W \propto \sqrt{V_{bi}}$。摻雜越高→$W$ 越小（因為空間電荷密度大→較短的距離就能建立足夠電位差）。</div></div>
+<div class="formula-card"><div class="formula-label">各側空乏區寬度 (7.32–7.33)</div><div class="eq">$$x_n = \sqrt{\frac{2\epsilon_s V_{bi}}{e}\left(\frac{N_a}{N_d(N_a+N_d)}\right)} \tag{7.32}$$</div><div class="formula-note">重摻雜側空乏區更窄：若 $N_a\gg N_d$（p⁺n 接面），$x_p\ll x_n$。</div></div>
+</div>
+
+<!-- 7.3 -->
+<div class="content-section" id="s4"><h2>7.3 反向偏壓 (7.35–7.52)</h2>
+<div class="formula-card"><div class="formula-label">⭐ 反向偏壓下的空乏區寬度</div><div class="eq">$$\boxed{W = \sqrt{\frac{2\epsilon_s(V_{bi}+V_R)}{e}\left(\frac{N_a+N_d}{N_a N_d}\right)}} \tag{7.36}$$</div><div class="formula-note">反向偏壓增加 $V_R$→空乏區變寬。$W \propto \sqrt{V_{bi}+V_R}$。</div></div>
+<div class="formula-card"><div class="formula-label">⭐ 接面電容（Junction Capacitance）</div><div class="eq">$$\boxed{C_j = \frac{\epsilon_s}{W} = \epsilon_s\sqrt{\frac{e}{2\epsilon_s(V_{bi}+V_R)}\frac{N_a N_d}{N_a+N_d}}} \tag{7.40, 7.42}$$</div><div class="formula-note">$C_j \propto 1/\sqrt{V_{bi}+V_R}$。反向偏壓越大→$W$ 越大→$C_j$ 越小。<br>單側突變接面 ($p^+n$) (7.45)：$C_j = A\sqrt{e\epsilon_s N_d/[2(V_{bi}+V_R)]}$。</div></div>
+</div>
+
+<!-- 7.4 -->
+<div class="content-section" id="s5"><h2>7.4 接面崩潰 (7.53–7.66)</h2>
+<div class="formula-card"><div class="formula-label">崩潰電壓（單側突變接面）</div><div class="eq">$$V_B \approx \frac{\epsilon_s E_{\text{crit}}^2}{2e N_B} \tag{7.60}$$</div><div class="formula-note">$E_{\text{crit}}$ = 臨界電場（Si ∼ $3\times10^5$ V/cm）。$N_B$ = 輕摻雜側濃度。<br>$V_B \propto 1/N_B$——輕摻雜→高崩潰電壓（功率元件）；重摻雜→低崩潰（高速開關）。</div></div>
+</div>
+
+<!-- 7.5 -->
+<div class="content-section" id="s6"><h2>7.5 非均勻摻雜接面 (7.67–7.82)</h2>
+<div class="formula-card"><div class="formula-label">線性梯度接面</div><div class="eq">$$W \propto (V_{bi}+V_R)^{1/3},\quad C_j \propto (V_{bi}+V_R)^{-1/3} \tag{7.75, 7.78}$$</div><div class="formula-note">與突變接面的 $W\propto V^{1/2}$、$C_j\propto V^{-1/2}$ 不同。<br>超突變接面 (7.80–7.82)：$C_j \propto (V_{bi}+V_R)^{-m}$，$m>1/2$→壓控振盪器用。</div></div>
+</div>
+
+<div class="content-section" id="cheatsheet"><h2>公式速查表（82 條全收錄）</h2>
+<table><caption>表 1：公式速查表（82 條全收錄）</caption><thead><tr><th>Eq</th><th>公式</th><th>備註</th></tr></thead><tbody>
+<tr><td>7.10</td><td>$V_{bi}=\frac{kT}{e}\ln(N_a N_d/n_i^2)$</td><td>⭐ 內建電位差</td></tr>
+<tr><td>7.13</td><td>$d^2\phi/dx^2=-\rho/\epsilon_s$</td><td>Poisson 方程</td></tr>
+<tr><td>7.21</td><td>$E_{\text{max}}=-eN_a x_p/\epsilon_s$</td><td>⭐ 最大電場</td></tr>
+<tr><td>7.22</td><td>$N_a x_p=N_d x_n$</td><td>電荷守恆</td></tr>
+<tr><td>7.31</td><td>$W=\sqrt{2\epsilon_s V_{bi}(N_a+N_d)/(e N_a N_d)}$</td><td>⭐ 空乏區寬度（平衡）</td></tr>
+<tr><td>7.36</td><td>$W=\sqrt{2\epsilon_s(V_{bi}+V_R)(N_a+N_d)/(e N_a N_d)}$</td><td>⭐ 反向偏壓空乏區寬度</td></tr>
+<tr><td>7.40</td><td>$C_j=\epsilon_s/W$</td><td>單位面積接面電容</td></tr>
+<tr><td>7.42</td><td>$C_j=\sqrt{e\epsilon_s N_a N_d/[2(V_{bi}+V_R)(N_a+N_d)]}$</td><td>⭐ 接面電容</td></tr>
+<tr><td>7.60</td><td>$V_B\approx\epsilon_s E_{\text{crit}}^2/(2e N_B)$</td><td>⭐ 崩潰電壓</td></tr>
+<tr><td>7.75</td><td>$W\propto(V_{bi}+V_R)^{1/3}$</td><td>線性梯度接面</td></tr>
+</tbody></table></div></main>
+<script>
+function toggleTheme(){const h=document.documentElement;const n=h.getAttribute('data-theme')==='light'?'dark':'light';h.setAttribute('data-theme',n);localStorage.setItem('theme',n);document.getElementById('tl').textContent=n==='dark'?'淺色模式':'深色模式';}
+const s=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',s);if(s==='dark')document.getElementById('tl').textContent='淺色模式';
+const secs=document.querySelectorAll('.content-section[id]');const navs=document.querySelectorAll('.sn a');window.addEventListener('scroll',()=>{let c='';secs.forEach(s=>{if(window.scrollY>=s.offsetTop-80)c=s.getAttribute('id');});navs.forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+c);});});
+</script>
+</body>
+</html>

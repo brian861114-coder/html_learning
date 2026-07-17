@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light" data-reading-width="wide">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第 7 章 — Calculus 學習教材</title>
+<script>
+MathJax = {
+  tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']], tags: 'ams' },
+  options: { ignoreHtmlClass: 'no-math' }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<link rel="stylesheet" href="../../../../shared/core.css">
+<script src="../../../../shared/core.js" defer></script>
+<link rel="stylesheet" href="../../../../shared/navigation.css" data-shared-navigation>
+</head>
+<body>
+
+<a class="portal-home-link" href="../../index.html">← 返回學習中心</a>
+
+<nav class="sidebar" aria-label="本章目錄"><div class="sidebar-header"><div class="sidebar-subtitle">微積分</div><h2 class="sidebar-title">積分技巧</h2></div><ul class="toc">
+    <li class="ns">本章預覽</li>
+    <li class="nsub"><a href="#preview">學習目標與概念地圖</a></li>
+    <li class="ns">3.1 分部積分</li>
+    <li class="nsub"><a href="#s3-1">分部積分法、LIATE 法則、定積分應用</a></li>
+    <li class="ns">3.2 三角函數積分</li>
+    <li class="nsub"><a href="#s3-2">sin/cos 冪次、tan/sec 冪次、降冪公式</a></li>
+    <li class="ns">3.3 三角代換</li>
+    <li class="nsub"><a href="#s3-3">√(a²−x²)、√(a²+x²)、√(x²−a²) 型積分</a></li>
+    <li class="ns">3.4 部分分式</li>
+    <li class="nsub"><a href="#s3-4">有理函數分解、重複因式、二次不可約因式</a></li>
+    <li class="ns">3.5 其他積分策略</li>
+    <li class="nsub"><a href="#s3-5">積分表、電腦代數系統 (CAS)</a></li>
+    <li class="ns">3.6 數值積分</li>
+    <li class="nsub"><a href="#s3-6">中點法則、梯形法則、辛普森法則</a></li>
+    <li class="ns">3.7 瑕積分</li>
+    <li class="nsub"><a href="#s3-7">無窮區間、不連續被積函數、比較定理</a></li>
+    <li class="ns">本章摘要</li>
+    <li class="nsub"><a href="#summary">關鍵概念總整理</a></li>
+    <li class="nsub"><a href="#common-mistakes">初學者常見錯誤</a></li>
+    <li class="nsub"><a href="#self-check">自我檢測</a></li>
+    <li class="nsub"><a href="#extras">延伸資源</a></li>
+  </ul>
+  <div class="sidebar-tools"><button type="button" data-action="toggle-theme" aria-label="切換深色或淺色模式">切換顯示主題</button></div></nav>
+
+<main class="chapter-page" data-chapter-title="積分技巧" data-prev-href="ch06_applications_integration_zh.html" data-prev-label="積分的應用" data-next-href="ch08_differential_equations_zh.html" data-next-label="微分方程入門">
+
+<header class="chapter-header">
+  <div class="tag">第 7 章 · OpenStax Calculus Vol 2, Ch 3</div>
+  <h1>積分技巧</h1>
+  <div class="chapter-meta">OpenStax · Calculus Volume 2 · Techniques of Integration · pp. 239–314</div>
+</header>
+
+<section id="preview">
+<div class="chapter-preview">
+<h2>📌 本章要解決的核心問題</h3>
+<p>在前兩章中，我們已經學會了基本的積分公式和<strong>代換法（u-substitution）</strong>。然而，現實世界中大量函數無法簡單地透過基本公式或代換法來積分——例如 $x e^x$、$\sqrt{a^2 - x^2}$、$\frac{1}{x^2-1}$ 等等。本章系統性地介紹七種進階積分技巧，從<strong>分部積分（integration by parts）</strong>出發，依序涵蓋三角函數積分、三角代換、部分分式分解、積分表與 CAS 工具、數值積分，最後討論<strong>瑕積分（improper integrals）</strong>——也就是涉及無窮區間或不連續點的積分。</p>
+
+<h3>🔑 關鍵概念（10 條）</h3>
+<ol>
+  <li><strong>分部積分公式</strong>：$\int u\,dv = uv - \int v\,du$——以一個積分換取另一個（希望更簡單的）積分</li>
+  <li><strong>LIATE 法則</strong>：選擇 $u$ 的優先順序——對數 → 反三角 → 代數 → 三角 → 指數</li>
+  <li><strong>三角函數積分策略</strong>：奇次冪保留一個因式用於 $u$ 代換，偶次冪使用半角公式降冪</li>
+  <li><strong>三角代換三種型式</strong>：$\sqrt{a^2-x^2}$ → $x=a\sin\theta$；$\sqrt{a^2+x^2}$ → $x=a\tan\theta$；$\sqrt{x^2-a^2}$ → $x=a\sec\theta$</li>
+  <li><strong>部分分式分解</strong>：將複雜有理函數拆解為簡單分式之和，每一項都可以用對數或反正切積分</li>
+  <li><strong>積分表與 CAS</strong>：查表或使用電腦代數系統可以快速解決大多數積分——但要會判讀結果</li>
+  <li><strong>數值積分三法</strong>：中點法則、梯形法則、辛普森法則——當解析解不存在時的近似方法</li>
+  <li><strong>誤差界限公式</strong>：給定 $n$ 與 $f''$ 或 $f^{(4)}$ 的最大值，可以保證近似值的精確度</li>
+  <li><strong>瑕積分的定義</strong>：無窮區間或不連續點的積分必須透過極限來定義——收斂或發散</li>
+  <li><strong>比較定理</strong>：當直接計算困難時，可以透過與已知積分比較來判斷斂散性</li>
+</ol>
+
+<h3>🧭 本章推理地圖</h3>
+<p><strong>基本積分公式 + 代換法</strong>（回顧 §5.4–§5.5）只能處理有限類型的積分 → <strong>分部積分</strong>（§3.1）將乘積規則逆轉，處理多項式×指數等混合型 → <strong>三角積分</strong>（§3.2）利用恆等式化簡 sin/cos 的冪次 → <strong>三角代換</strong>（§3.3）將根號 √(a²±x²) 轉為三角函數 → <strong>部分分式</strong>（§3.4）系統性拆解有理函數 → 當解析解不可得時，<strong>數值積分</strong>（§3.6）提供近似 → <strong>瑕積分</strong>（§3.7）將積分推廣到無窮區間與不連續點</p>
+
+<div class="callout-warn"><strong>⚡ 先備知識提醒</strong>：本章假設你已熟練基本的 $u$ 代換法、基本積分公式（$\int x^n dx$、$\int e^x dx$、$\int \sin x\,dx$ 等）、三角恆等式（$\sin^2\theta + \cos^2\theta = 1$、$\tan^2\theta+1=\sec^2\theta$ 等），以及有理函數的部分分式分解。若對這些基礎感到生疏，建議先複習第 1 章的積分回顧部分。</div>
+</div>
+</section>
+
+<!-- ====== Section 3.1 ====== -->
+<section id="s3-1">
+<h2>3.1 分部積分（Integration by Parts）</h2>
+
+<div style="margin-bottom:14px;font-size:12px;color:var(--tx2);line-height:1.8">
+<strong style="color:var(--tx)">🔑 本節重點</strong> ①LIATE 法則選擇 u 與 dv ②∫udv = uv − ∫vdu ③循環型設 I 解方程 ④定積分分部積分公式 ⑤降冪公式逐次降低冪次
+</div>
+
+<p>到目前為止，我們已經能夠處理許多基本積分。然而，像 $\int x e^x\,dx$ 這種看似簡單的積分卻無法直接用基本公式或 $u$ 代換解決。
+
+<div class="formula-card">
+  <div class="formula-label">定理 3.1：分部積分公式</div>
+  <div class="eq">$$\int u\,dv = uv - \int v\,du$$</div>
+  <div class="formula-note">其中 $u$ 和 $v$ 都是可微函數。這個公式的精髓是：將一個積分 $\int u\,dv$ 轉換為另一個（希望更簡單的）積分 $\int v\,du$。</div>
+</div>
+
+<details class="derive">
+<summary>📐 推導：從乘積規則到分部積分公式</summary>
+<div class="step">
+<p>已知微分的乘積規則：$\frac{d}{dx}[u(x)v(x)] = u'(x)v(x) + u(x)v'(x)$。對兩邊同時積分：</p>
+</div>
+<div class="step">
+<div class="eq">$$\int \frac{d}{dx}[u(x)v(x)]\,dx = \int u'(x)v(x)\,dx + \int u(x)v'(x)\,dx$$</div>
+</div>
+<div class="step">
+<p>左邊化簡為 $u(x)v(x)$。令 $du = u'(x)dx$、$dv = v'(x)dx$，移項得：</p>
+</div>
+<div class="step">
+<div class="eq">$$\int u\,dv = uv - \int v\,du$$</div>
+</div>
+<div class="step">
+<p>這就是分部積分公式——它不直接計算原積分，而是以一個積分換取另一個積分，關鍵在於<strong>選擇恰當的 $u$ 和 $dv$</strong>。</p>
+</div>
+</details>
+
+<p>分部積分的威力在於：我們可以將一個無法直接積分的乘積，轉換成一個更容易處理的形式。但這裡有一個關鍵問題：<strong>如何選擇 $u$ 和 $dv$？</strong> 選錯了不但不會簡化，反而會讓積分變得更複雜。為此，數學家發展出 LIATE 記憶法則。</p>
+
+<div class="callout"><strong>💡 LIATE 法則：選擇 $u$ 的優先順序</strong><br>
+按優先級從高到低：<strong>L</strong>ogarithmic（對數函數，如 $\ln x$）→ <strong>I</strong>nverse trigonometric（反三角函數，如 $\arctan x$）→ <strong>A</strong>lgebraic（代數函數，如 $x^n$）→ <strong>T</strong>rigonometric（三角函數，如 $\sin x$）→ <strong>E</strong>xponential（指數函數，如 $e^x$）<br><br>
+為什麼是這個順序？因為我們需要 $dv$ 是可以積分的，而對數和反三角函數沒有簡單的積分公式，所以它們應該優先選為 $u$（要被微分的對象）。相較之下，指數和三角函數容易積分，所以適合放在 $dv$。</div>
+
+<h3>基本範例</h3>
+
+<p>考慮 $\int x e^x\,dx$。根據 LIATE：$x$ 是代數函數（A），$e^x$ 是指數函數（E），A 在 E 之前，所以選 $u = x$、$dv = e^x dx$。則 $du = dx$、$v = e^x$。</p>
+
+<details class="example">
+<summary>📝 範例 3.1：使用分部積分</summary>
+<p><strong>求</strong> $\int x e^x\,dx$。</p>
+<p><strong>解：</strong>令 $u = x$、$dv = e^x dx$，則 $du = dx$、$v = e^x$。代入公式：</p>
+<div class="eq">$$\int x e^x\,dx = x e^x - \int e^x\,dx = x e^x - e^x + C = e^x(x-1) + C$$</div>
+<p><strong>驗算：</strong>微分 $\frac{d}{dx}[e^x(x-1)] = e^x(x-1) + e^x(1) = x e^x$ ✓</p>
+</details>
+
+<div class="callout-warn"><strong>⚡ 如果選錯 $u$ 和 $dv$ 會怎樣？</strong><br>
+假如我們選擇 $u = e^x$、$dv = x\,dx$，則 $du = e^x dx$、$v = \frac{x^2}{2}$。代入公式得到 $\int x e^x dx = \frac{x^2}{2}e^x - \int \frac{x^2}{2}e^x dx$——新的積分比原來的更複雜！這說明了正確選擇 $u$ 和 $dv$ 的重要性。</div>
+
+<h3>需要重複使用分部積分</h3>
+
+<p>有時一次分部積分不足以解決問題。例如 $\int x^2 e^x\,dx$：第一次分部積分後，$x$ 的冪次從 2 降到 1；第二次分部積分後再降到 0，最終得到解答。這種逐次降低冪次的模式是分部積分的常見應用。</p>
+
+<details class="example">
+<summary>📝 範例 3.3：重複使用分部積分</summary>
+<p><strong>求</strong> $\int x^2 e^x\,dx$。</p>
+<p><strong>解：</strong>第一次：令 $u = x^2$、$dv = e^x dx$，則 $du = 2x\,dx$、$v = e^x$。</p>
+<div class="eq">$$\int x^2 e^x\,dx = x^2 e^x - \int 2x e^x\,dx = x^2 e^x - 2\int x e^x\,dx$$</div>
+<p>第二次：對 $\int x e^x\,dx$ 使用分部積分（如範例 3.1），得 $\int x e^x dx = e^x(x-1)$。代入：</p>
+<div class="eq">$$\int x^2 e^x\,dx = x^2 e^x - 2e^x(x-1) + C = e^x(x^2 - 2x + 2) + C$$</div>
+</details>
+
+<h3>循環型分部積分</h3>
+
+<p>某些積分經過兩次分部積分後，原積分會重新出現。例如 $\int e^x \sin x\,dx$ 和 $\int \sec^3 x\,dx$。這時我們不直接求值，而是將原積分設為 $I$，建立一個關於 $I$ 的方程式來求解。這是最優雅的分部積分應用之一。</p>
+
+<details class="example">
+<summary>📝 範例 3.5：循環型分部積分</summary>
+<p><strong>求</strong> $\int e^x \sin x\,dx$。</p>
+<p><strong>解：</strong>設 $I = \int e^x \sin x\,dx$。第一次分部積分：令 $u = \sin x$、$dv = e^x dx$，則 $du = \cos x\,dx$、$v = e^x$。</p>
+<div class="eq">$$I = e^x \sin x - \int e^x \cos x\,dx$$</div>
+<p>第二次分部積分（對 $\int e^x \cos x\,dx$）：令 $u = \cos x$、$dv = e^x dx$，則 $du = -\sin x\,dx$、$v = e^x$。</p>
+<div class="eq">$$\int e^x \cos x\,dx = e^x \cos x + \int e^x \sin x\,dx = e^x \cos x + I$$</div>
+<p>代回原式：$I = e^x \sin x - (e^x \cos x + I) = e^x \sin x - e^x \cos x - I$。因此 $2I = e^x(\sin x - \cos x)$，得：</p>
+<div class="eq">$$\int e^x \sin x\,dx = \frac{e^x}{2}(\sin x - \cos x) + C$$</div>
+</details>
+
+<h3>定積分的分部積分</h3>
+
+<div class="formula-card">
+  <div class="formula-label">定理 3.2：定積分的分部積分公式</div>
+  <div class="eq">$$\int_a^b u\,dv = \Big[uv\Big]_a^b - \int_a^b v\,du$$</div>
+  <div class="formula-note">只需在不定積分的公式基礎上，加上上下限的計算即可。注意 $[uv]_a^b = u(b)v(b) - u(a)v(a)$。</div>
+</div>
+
+<p>分部積分也可以用來建立<strong>降冪公式（reduction formulas）</strong>——將 $\int x^n e^x dx$ 或 $\int \sin^n x\,dx$ 等高次冪積分，轉換為較低次冪的積分。這在重複計算時特別有用。</p>
+
+<details class="example">
+<summary>📝 範例 3.6：求面積</summary>
+<p><strong>求</strong> $y = xe^{-x}$ 與 $x$ 軸之間、在 $[0,1]$ 上的面積。</p>
+<p><strong>解：</strong>面積 $= \int_0^1 xe^{-x}\,dx$。令 $u = x$、$dv = e^{-x}dx$，則 $du = dx$、$v = -e^{-x}$。</p>
+<div class="eq">$$\int_0^1 xe^{-x}\,dx = \Big[-xe^{-x}\Big]_0^1 - \int_0^1 (-e^{-x})\,dx = \Big[-xe^{-x} - e^{-x}\Big]_0^1$$</div>
+<div class="eq">$$= \Big[-\frac{x+1}{e^x}\Big]_0^1 = -\frac{2}{e} + 1 = 1 - \frac{2}{e} \approx 0.264$$</div>
+</details>
+
+<div class="figure">
+  <img src="../../pages/v2c3_pages/v2c3_page_245_c.png" alt="分部積分求面積" loading="lazy">
+  <figcaption>圖 3.2：要求陰影區域的面積，必須使用分部積分——該區域在 $y=xe^{-x}$ 下方、$x$ 軸上方、$[0,1]$ 之間</figcaption>
+</div>
+
+<details class="example"><summary>📝 範例</summary><strong>📝 練習：分部積分基本型</strong><br>使用分部積分求 $\int x \ln x\,dx$。<br><br><strong>解：</strong>根據 LIATE，$\ln x$（對數）優先於 $x$（代數），所以選 $u = \ln x$、$dv = x\,dx$。則 $du = \frac{1}{x}dx$、$v = \frac{x^2}{2}$。代入：$\int x \ln x\,dx = \frac{x^2}{2}\ln x - \int \frac{x^2}{2}\cdot\frac{1}{x}dx = \frac{x^2}{2}\ln x - \frac{1}{2}\int x\,dx = \frac{x^2}{2}\ln x - \frac{x^2}{4} + C$。</details>
+
+</section>
+
+<!-- ====== Section 3.2 ====== -->
+<section id="s3-2">
+<h2>3.2 三角函數積分（Trigonometric Integrals）</h2>
+
+<div style="margin-bottom:14px;font-size:12px;color:var(--tx2);line-height:1.8">
+<strong style="color:var(--tx)">🔑 本節重點</strong> ①sin^m cos^n 三種策略（奇次冪/偶次冪）②tan^m sec^n 兩種策略 ③半角公式與降冪公式 ④積化和差公式 ⑤循環型分部積分求∫sec³x
+</div>
+
+<p>三角函數積分是處理 $\sin^m x \cos^n x$ 和 $\tan^m x \sec^n x$ 這類乘冪積分的系統性方法。
+
+<h3>$\sin^m x \cos^n x$ 型的積分策略</h3>
+
+<p>對於 $\int \sin^m x \cos^n x\,dx$，基本策略是：利用三角恆等式 $\sin^2 x + \cos^2 x = 1$ 將積分化為可以用 $u$ 代換的形式。</p>
+
+<div class="formula-card">
+  <div class="formula-label">策略總結：$\sin^m x \cos^n x$ 的積分</div>
+  <p><strong>情況 1：$m$ 為奇數</strong>——保留一個 $\sin x$，將其餘 $\sin^{m-1} x$ 用 $\cos^2 x = 1 - \sin^2 x$ 轉換為 $\cos x$ 的函數。令 $u = \cos x$、$du = -\sin x\,dx$。</p>
+  <p><strong>情況 2：$n$ 為奇數</strong>——保留一個 $\cos x$，將其餘 $\cos^{n-1} x$ 用 $\sin^2 x = 1 - \cos^2 x$ 轉換為 $\sin x$ 的函數。令 $u = \sin x$、$du = \cos x\,dx$。</p>
+  <p><strong>情況 3：$m$ 和 $n$ 皆為偶數</strong>——使用半角公式降冪：$\sin^2 x = \frac{1-\cos 2x}{2}$、$\cos^2 x = \frac{1+\cos 2x}{2}$，重複降冪直到可積。</p>
+  <div class="formula-note">若 $m$ 和 $n$ 皆為奇數，兩種策略都可以使用。</div>
+</div>
+
+<details class="example">
+<summary>📝 範例 3.8–3.9：奇次冪的積分</summary>
+<p><strong>求</strong> $\int \sin^3 x\,dx$。</p>
+<p><strong>解：</strong>$m=3$ 為奇數。$\sin^3 x = \sin^2 x \cdot \sin x = (1-\cos^2 x)\sin x$。令 $u = \cos x$、$du = -\sin x\,dx$：</p>
+<div class="eq">$$\int \sin^3 x\,dx = \int (1-u^2)(-du) = \int (u^2-1)du = \frac{u^3}{3} - u + C = \frac{\cos^3 x}{3} - \cos x + C$$</div>
+</details>
+
+<details class="example">
+<summary>📝 範例 3.10–3.12：偶次冪的積分</summary>
+<p><strong>求</strong> $\int \sin^2 x\,dx$。</p>
+<p><strong>解：</strong>$m=2$ 為偶數，使用半角公式：$\sin^2 x = \frac{1-\cos 2x}{2}$。</p>
+<div class="eq">$$\int \sin^2 x\,dx = \int \frac{1-\cos 2x}{2}\,dx = \frac{1}{2}x - \frac{1}{4}\sin 2x + C$$</div>
+<p><strong>求</strong> $\int \sin^2 x \cos^2 x\,dx$。</p>
+<p><strong>解：</strong>兩個都是偶數。$\sin^2 x \cos^2 x = \frac{1-\cos 2x}{2} \cdot \frac{1+\cos 2x}{2} = \frac{1-\cos^2 2x}{4} = \frac{1}{4}\sin^2 2x$。再用半角公式：$= \frac{1}{4}\cdot\frac{1-\cos 4x}{2} = \frac{1-\cos 4x}{8}$。積分得 $\frac{x}{8} - \frac{\sin 4x}{32} + C$。</p>
+</details>
+
+<div class="callout"><strong>💡 不同角度的正弦與餘弦乘積</strong><br>
+當積分包含 $\sin(ax)\sin(bx)$、$\sin(ax)\cos(bx)$、$\cos(ax)\cos(bx)$ 時（$a \neq b$），使用積化和差公式：
+$$\sin A \sin B = \frac{1}{2}[\cos(A-B) - \cos(A+B)]$$
+$$\sin A \cos B = \frac{1}{2}[\sin(A-B) + \sin(A+B)]$$
+$$\cos A \cos B = \frac{1}{2}[\cos(A-B) + \cos(A+B)]$$
+這些公式將乘積轉換為和差，使得積分變得十分容易。</div>
+
+<h3>$\tan^m x \sec^n x$ 型的積分策略</h3>
+
+<p>處理含有 $\tan x$ 和 $\sec x$ 冪次的積分時，關鍵恆等式是 $\sec^2 x = 1 + \tan^2 x$。策略取決於 $m$（$\tan x$ 的冪次）和 $n$（$\sec x$ 的冪次）的奇偶性。</p>
+
+<div class="formula-card">
+  <div class="formula-label">策略總結：$\tan^m x \sec^n x$ 的積分</div>
+  <p><strong>情況 1：$n$ 為偶數</strong>——保留 $\sec^2 x$，將其餘 $\sec^{n-2}x$ 轉換為 $\tan x$。令 $u = \tan x$、$du = \sec^2 x\,dx$。</p>
+  <p><strong>情況 2：$m$ 為奇數</strong>——保留 $\sec x \tan x$，將其餘 $\tan^{m-1}x$ 轉換為 $\sec x$。令 $u = \sec x$、$du = \sec x \tan x\,dx$。</p>
+  <p><strong>情況 3：$m$ 為偶數且 $n$ 為奇數</strong>——將所有 $\tan x$ 轉換為 $\sec x$，然後對 $\sec x$ 的奇次冪使用分部積分（或降冪公式）。</p>
+  <div class="formula-note">基本積分公式：$\int \tan x\,dx = \ln|\sec x| + C$、$\int \sec x\,dx = \ln|\sec x + \tan x| + C$</div>
+</div>
+
+<div class="callout-warn"><strong>⚡ 常見錯誤：混淆 $\sec x$ 和 $\tan x$ 的積分</strong><br>
+$\int \sec x\,dx = \ln|\sec x + \tan x| + C$，很多學生忘記是 $\sec x + \tan x$ 而非單獨的 $\sec x$。這個公式的推導需要一個巧妙的技巧：分子分母同乘 $(\sec x + \tan x)$，然後令 $u = \sec x + \tan x$。</div>
+
+<details class="example">
+<summary>📝 範例 3.18：$\int \sec^3 x\,dx$ 的循環型積分</summary>
+<p><strong>求</strong> $\int \sec^3 x\,dx$。</p>
+<p><strong>解：</strong>使用分部積分。令 $u = \sec x$、$dv = \sec^2 x\,dx$，則 $du = \sec x \tan x\,dx$、$v = \tan x$。</p>
+<div class="eq">$$\int \sec^3 x\,dx = \sec x \tan x - \int \sec x \tan^2 x\,dx$$</div>
+<p>利用 $\tan^2 x = \sec^2 x - 1$：</p>
+<div class="eq">$$\int \sec^3 x\,dx = \sec x \tan x - \int \sec x(\sec^2 x - 1)\,dx = \sec x \tan x - \int \sec^3 x\,dx + \int \sec x\,dx$$</div>
+<p>移項：$2\int \sec^3 x\,dx = \sec x \tan x + \ln|\sec x + \tan x| + C$，最終：</p>
+<div class="eq">$$\int \sec^3 x\,dx = \frac{1}{2}\sec x \tan x + \frac{1}{2}\ln|\sec x + \tan x| + C$$</div>
+</details>
+
+<h3>降冪公式（Reduction Formulas）</h3>
+
+<div class="formula-card">
+  <div class="formula-label">降冪公式</div>
+  <div class="eq">$$\int \sin^n x\,dx = -\frac{1}{n}\sin^{n-1}x\cos x + \frac{n-1}{n}\int \sin^{n-2}x\,dx$$</div>
+  <div class="eq">$$\int \cos^n x\,dx = \frac{1}{n}\cos^{n-1}x\sin x + \frac{n-1}{n}\int \cos^{n-2}x\,dx$$</div>
+  <div class="formula-note">這些公式將 $n$ 次冪降為 $n-2$ 次冪，重複使用直到冪次降為 0 或 1。對於 $\int \sec^n x\,dx$ 和 $\int \tan^n x\,dx$ 也有類似的降冪公式。</div>
+</div>
+
+<details class="example"><summary>📝 範例</summary><strong>📝 練習：$\tan^m x \sec^n x$ 型</strong><br>求 $\int \tan^3 x \sec^4 x\,dx$。<br><br><strong>解：</strong>$m=3$（奇數）、$n=4$（偶數）。可用情況 1（$n$ 偶）：保留 $\sec^2 x$：$\tan^3 x \sec^4 x = \tan^3 x \sec^2 x \cdot \sec^2 x = \tan^3 x (\tan^2 x + 1) \sec^2 x$。令 $u = \tan x$、$du = \sec^2 x\,dx$：$\int u^3(u^2+1)du = \int (u^5+u^3)du = \frac{u^6}{6} + \frac{u^4}{4} + C = \frac{\tan^6 x}{6} + \frac{\tan^4 x}{4} + C$。</details>
+
+</section>
+
+<!-- ====== Section 3.3 ====== -->
+<section id="s3-3">
+<h2>3.3 三角代換（Trigonometric Substitution）</h2>
+
+<div style="margin-bottom:14px;font-size:12px;color:var(--tx2);line-height:1.8">
+<strong style="color:var(--tx)">🔑 本節重點</strong> ①√(a²−x²)→x=a sinθ ②√(a²+x²)→x=a tanθ ③√(x²−a²)→x=a secθ ④參考三角形轉換回 x ⑤定義域限制與絕對值處理
+</div>
+
+<p>三角代換是處理含有 $\sqrt{a^2 - x^2}$、$\sqrt{a^2 + x^2}$、$\sqrt{x^2 - a^2}$ 這類根號表達式積分的強大技術。
+
+<div class="callout"><strong>💡 為什麼三角代換有效？</strong><br>
+關鍵在於三個畢氏恆等式：$1 - \sin^2\theta = \cos^2\theta$、$1 + \tan^2\theta = \sec^2\theta$、$\sec^2\theta - 1 = \tan^2\theta$。只要將 $x$ 替換為適當的三角函數，根號內的表達式就會變成完全平方，根號隨即消失。</div>
+
+<h3>第一型：$\sqrt{a^2 - x^2}$</h3>
+
+<p>考慮積分 $\int \sqrt{a^2 - x^2}\,dx$。令 $x = a\sin\theta$，則 $dx = a\cos\theta\,d\theta$，且 $\sqrt{a^2 - x^2} = \sqrt{a^2 - a^2\sin^2\theta} = a\sqrt{1-\sin^2\theta} = a|\cos\theta|$。對於 $\theta \in [-\frac{\pi}{2}, \frac{\pi}{2}]$，$\cos\theta \geq 0$，因此根號化為 $a\cos\theta$。代換後的積分為 $\int a\cos\theta \cdot a\cos\theta\,d\theta = a^2\int \cos^2\theta\,d\theta$，這就可以用半角公式求解了。</p>
+
+<div class="formula-card">
+  <div class="formula-label">三角代換三型總表</div>
+  <table><caption>表 1：第一型：$\sqrt{a^2 - x^2}$</caption>
+    <tr><th>根號型式</th><th>代換</th><th>微分</th><th>根號化簡</th></tr>
+    <tr><td>$\sqrt{a^2 - x^2}$</td><td>$x = a\sin\theta$</td><td>$dx = a\cos\theta\,d\theta$</td><td>$a\cos\theta$</td></tr>
+    <tr><td>$\sqrt{a^2 + x^2}$</td><td>$x = a\tan\theta$</td><td>$dx = a\sec^2\theta\,d\theta$</td><td>$a\sec\theta$</td></tr>
+    <tr><td>$\sqrt{x^2 - a^2}$</td><td>$x = a\sec\theta$</td><td>$dx = a\sec\theta\tan\theta\,d\theta$</td><td>$a\tan\theta$（$x>a$）</td></tr>
+  </table>
+  <div class="formula-note">注意：代換後必須使用參考三角形（reference triangle）將最終答案從 $\theta$ 轉換回 $x$。</div>
+</div>
+
+<div class="figure">
+  <img src="../../pages/v2c3_pages/v2c3_page_259_c.png" alt="√(a²−x²) 的參考三角形" loading="lazy">
+  <figcaption>圖 3.4：參考三角形——當 $x = a\sin\theta$ 時，$\sin\theta = \frac{x}{a}$，因此對邊 $=x$、斜邊 $=a$、鄰邊 $=\sqrt{a^2-x^2}$。由此可讀出所有三角函數值。</figcaption>
+</div>
+
+<details class="derive">
+<summary>📐 完整推導：$\int \sqrt{a^2 - x^2}\,dx$</summary>
+<div class="step">
+<p><strong>步驟 1：代換。</strong>令 $x = a\sin\theta$，則 $dx = a\cos\theta\,d\theta$。</p>
+</div>
+<div class="step">
+<div class="eq">$$\int \sqrt{a^2 - x^2}\,dx = \int \sqrt{a^2 - a^2\sin^2\theta} \cdot a\cos\theta\,d\theta = \int a\cos\theta \cdot a\cos\theta\,d\theta = a^2\int \cos^2\theta\,d\theta$$</div>
+</div>
+<div class="step">
+<p><strong>步驟 2：使用半角公式。</strong> $\cos^2\theta = \frac{1+\cos 2\theta}{2}$。</p>
+</div>
+<div class="step">
+<div class="eq">$$a^2\int \frac{1+\cos 2\theta}{2}\,d\theta = \frac{a^2}{2}\left(\theta + \frac{1}{2}\sin 2\theta\right) + C = \frac{a^2}{2}(\theta + \sin\theta\cos\theta) + C$$</div>
+</div>
+<div class="step">
+<p><strong>步驟 3：使用參考三角形轉換回 $x$。</strong> $\sin\theta = \frac{x}{a}$，所以 $\theta = \arcsin\frac{x}{a}$。$\cos\theta = \frac{\sqrt{a^2-x^2}}{a}$。</p>
+</div>
+<div class="step">
+<div class="eq">$$\int \sqrt{a^2 - x^2}\,dx = \frac{a^2}{2}\arcsin\frac{x}{a} + \frac{x}{2}\sqrt{a^2-x^2} + C$$</div>
+</div>
+</details>
+
+<details class="example">
+<summary>📝 範例 3.21：第一型三角代換</summary>
+<p><strong>求</strong> $\int \frac{\sqrt{9-x^2}}{x^2}\,dx$。</p>
+<p><strong>解：</strong>令 $x = 3\sin\theta$，則 $dx = 3\cos\theta\,d\theta$、$\sqrt{9-x^2} = 3\cos\theta$。</p>
+<div class="eq">$$\int \frac{3\cos\theta}{9\sin^2\theta} \cdot 3\cos\theta\,d\theta = \int \frac{\cos^2\theta}{\sin^2\theta}\,d\theta = \int \cot^2\theta\,d\theta = \int (\csc^2\theta - 1)d\theta$$</div>
+<div class="eq">$$= -\cot\theta - \theta + C$$</div>
+<p>從參考三角形（$\sin\theta = x/3$）：$\cot\theta = \frac{\sqrt{9-x^2}}{x}$、$\theta = \arcsin\frac{x}{3}$。因此：</p>
+<div class="eq">$$\int \frac{\sqrt{9-x^2}}{x^2}\,dx = -\frac{\sqrt{9-x^2}}{x} - \arcsin\frac{x}{3} + C$$</div>
+</details>
+
+<div class="figure">
+  <img src="../../pages/v2c3_pages/v2c3_page_260_c.png" alt="範例 3.21 的參考三角形" loading="lazy">
+  <figcaption>圖 3.5：範例 3.21 的參考三角形——$\sin\theta = x/3$，對邊 $=x$，斜邊 $=3$，鄰邊 $=\sqrt{9-x^2}$</figcaption>
+</div>
+
+<h3>第二型：$\sqrt{a^2 + x^2}$</h3>
+
+<p>對於 $\sqrt{a^2 + x^2}$，令 $x = a\tan\theta$，則 $dx = a\sec^2\theta\,d\theta$，而 $\sqrt{a^2 + x^2} = \sqrt{a^2(1+\tan^2\theta)} = a\sec\theta$（對 $\theta \in (-\frac{\pi}{2}, \frac{\pi}{2})$，$\sec\theta > 0$）。</p>
+
+<details class="derive">
+<summary>📐 完整推導：$\int \frac{dx}{\sqrt{a^2 + x^2}}$</summary>
+<div class="step">
+<p>令 $x = a\tan\theta$，則 $dx = a\sec^2\theta\,d\theta$、$\sqrt{a^2+x^2} = a\sec\theta$。</p>
+</div>
+<div class="step">
+<div class="eq">$$\int \frac{dx}{\sqrt{a^2 + x^2}} = \int \frac{a\sec^2\theta}{a\sec\theta}\,d\theta = \int \sec\theta\,d\theta = \ln|\sec\theta + \tan\theta| + C$$</div>
+</div>
+<div class="step">
+<p>從參考三角形（$\tan\theta = x/a$）：$\sec\theta = \frac{\sqrt{a^2+x^2}}{a}$。因此：</p>
+</div>
+<div class="step">
+<div class="eq">$$\int \frac{dx}{\sqrt{a^2 + x^2}} = \ln\left|\frac{\sqrt{a^2+x^2}}{a} + \frac{x}{a}\right| + C = \ln\left|\sqrt{a^2+x^2} + x\right| + C'$$</div>
+</div>
+<div class="step">
+<p>注意常數 $-\ln|a|$ 被吸收進 $C'$ 中。這個公式非常重要——$\int \frac{dx}{\sqrt{a^2+x^2}} = \ln|\sqrt{a^2+x^2} + x| + C$。</p>
+</div>
+</details>
+
+<div class="figure">
+  <img src="../../pages/v2c3_pages/v2c3_page_261_c.png" alt="範例 3.22 的參考三角形" loading="lazy">
+  <figcaption>圖 3.6：範例 3.22 的參考三角形——$\tan\theta = x/a$，對邊 $=x$，鄰邊 $=a$，斜邊 $=\sqrt{a^2+x^2}$</figcaption>
+</div>
+
+<div class="callout-warn"><strong>⚡ 常見陷阱：絕對值與定義域</strong><br>
+在三角代換中，根號化簡為 $\sqrt{a^2\cos^2\theta} = a|\cos\theta|$。我們通常限制 $\theta$ 的範圍使得三角函數為正，從而可以省略絕對值。例如在第一型代換中，限制 $\theta \in [-\frac{\pi}{2}, \frac{\pi}{2}]$ 確保 $\cos\theta \geq 0$。但若不定積分的結果需要涵蓋整個定義域，就必須小心處理絕對值。考試中常見的失分點就是忽略這個細節。</div>
+
+<h3>第三型：$\sqrt{x^2 - a^2}$</h3>
+
+<p>對於 $\sqrt{x^2 - a^2}$（$x > a$），令 $x = a\sec\theta$，則 $dx = a\sec\theta\tan\theta\,d\theta$，而 $\sqrt{x^2 - a^2} = \sqrt{a^2(\sec^2\theta-1)} = a|\tan\theta|$。對於 $x > a$（即 $\theta \in [0, \frac{\pi}{2})$），$\tan\theta \geq 0$，根號化為 $a\tan\theta$。</p>
+
+<details class="example">
+<summary>📝 範例 3.24：第三型三角代換</summary>
+<p><strong>求</strong> $\int \frac{\sqrt{x^2-4}}{x}\,dx$，$x > 2$。</p>
+<p><strong>解：</strong>令 $x = 2\sec\theta$，則 $dx = 2\sec\theta\tan\theta\,d\theta$、$\sqrt{x^2-4} = 2\tan\theta$。</p>
+<div class="eq">$$\int \frac{2\tan\theta}{2\sec\theta} \cdot 2\sec\theta\tan\theta\,d\theta = 2\int \tan^2\theta\,d\theta = 2\int (\sec^2\theta - 1)d\theta = 2(\tan\theta - \theta) + C$$</div>
+<p>從參考三角形（$\sec\theta = x/2$）：$\tan\theta = \frac{\sqrt{x^2-4}}{2}$、$\theta = \text{arcsec}\frac{x}{2}$。最終：</p>
+<div class="eq">$$\int \frac{\sqrt{x^2-4}}{x}\,dx = \sqrt{x^2-4} - 2\,\text{arcsec}\frac{x}{2} + C$$</div>
+</details>
+
+<div class="figure">
+  <img src="../../pages/v2c3_pages/v2c3_page_264_c.png" alt="√(x²−a²) 的參考三角形" loading="lazy">
+  <figcaption>圖 3.7：第三型的參考三角形——$\sec\theta = x/a$，斜邊 $=x$，鄰邊 $=a$，對邊 $=\sqrt{x^2-a^2}$</figcaption>
+</div>
+
+<details class="example"><summary>📝 範例</summary><strong>📝 練習：選擇適當的代換</strong><br>求 $\int \frac{dx}{(x^2+1)^{3/2}}$。<br><br><strong>解：</strong>這是 $\sqrt{x^2+1}$ 型（第二型）。令 $x = \tan\theta$、$dx = \sec^2\theta\,d\theta$。$(x^2+1)^{3/2} = (\sec^2\theta)^{3/2} = \sec^3\theta$。積分變為 $\int \frac{\sec^2\theta}{\sec^3\theta}d\theta = \int \cos\theta\,d\theta = \sin\theta + C$。由 $\tan\theta = x$，畫參考三角形得 $\sin\theta = \frac{x}{\sqrt{x^2+1}}$。答案：$\frac{x}{\sqrt{x^2+1}} + C$。</details>
+
+</section>
+
+<!-- ====== Section 3.4 ====== -->
+<section id="s3-4">
+<h2>3.4 部分分式（Partial Fractions）</h2>
+
+<div style="margin-bottom:14px;font-size:12px;color:var(--tx2);line-height:1.8">
+<strong style="color:var(--tx)">🔑 本節重點</strong> ①長除法確保 deg(P) < deg(Q) ②四種因式分解模板 ③係數比較法與策略代入法 ④配方法處理不可約二次式 ⑤逐項積分得對數與反正切
+</div>
+
+<p>部分分式分解是處理有理函數積分的系統性方法。
+
+<div class="callout"><strong>💡 核心思想</strong><br>任何有理函數都可以分解為「部分分式」之和。例如 $\frac{1}{x^2-1} = \frac{1/2}{x-1} - \frac{1/2}{x+1}$。左邊看起來難以積分，但右邊的每一項都是 $\int \frac{A}{x-a}dx = A\ln|x-a| + C$ 的形式，十分簡單。</div>
+
+<h3>基本步驟</h3>
+
+<div class="formula-card">
+  <div class="formula-label">部分分式分解步驟</div>
+  <p><strong>步驟 1：</strong>若 $\deg(P) \geq \deg(Q)$，先進行多項式長除法，將 $\frac{P(x)}{Q(x)}$ 寫成 $S(x) + \frac{R(x)}{Q(x)}$，其中 $\deg(R) < \deg(Q)$。</p>
+  <p><strong>步驟 2：</strong>將 $Q(x)$ 分解為線性因式和不可約二次因式的乘積。</p>
+  <p><strong>步驟 3：</strong>根據 $Q(x)$ 的因式類型設定分解形式，解出待定係數。</p>
+  <p><strong>步驟 4：</strong>逐項積分。</p>
+  <div class="formula-note">關鍵：分解形式的設定必須正確——每種因式類型有對應的分解規則。</div>
+</div>
+
+<table><caption>表 2：基本步驟</caption>
+  <thead><tr><th>分母因式類型</th><th>分解形式</th></tr></thead>
+  <tbody>
+    <tr><td>不重複線性因式 $(x-a)$</td><td>$\frac{A}{x-a}$</td></tr>
+    <tr><td>重複線性因式 $(x-a)^n$</td><td>$\frac{A_1}{x-a} + \frac{A_2}{(x-a)^2} + \cdots + \frac{A_n}{(x-a)^n}$</td></tr>
+    <tr><td>不重複不可約二次因式 $(x^2+bx+c)$</td><td>$\frac{Ax+B}{x^2+bx+c}$</td></tr>
+    <tr><td>重複不可約二次因式 $(x^2+bx+c)^n$</td><td>$\frac{A_1x+B_1}{x^2+bx+c} + \cdots + \frac{A_nx+B_n}{(x^2+bx+c)^n}$</td></tr>
+  </tbody>
+</table>
+
+<div class="callout-warn"><strong>⚡ 常見錯誤：忘記長除法</strong><br>
+部分分式分解只能在 $\deg(P) < \deg(Q)$ 時進行。如果分子的次數大於或等於分母，必須先做長除法。跳過這一步直接設定分解形式會得到錯誤結果——這是考試中最常見的陷阱之一。</div>
+
+<h3>不重複線性因式</h3>
+
+<p>當分母可以分解為互不相同的線性因式乘積時（如 $Q(x) = (x-a)(x-b)(x-c)$），分解形式為 $\frac{A}{x-a} + \frac{B}{x-b} + \frac{C}{x-c}$。求解待定係數有兩種方法：<strong>係數比較法</strong>和<strong>策略性代入法</strong>。</p>
+
+<details class="example">
+<summary>📝 範例 3.29：不重複線性因式</summary>
+<p><strong>求</strong> $\int \frac{3x+2}{x^3 - x^2 - 2x}\,dx$。</p>
+<p><strong>解：</strong>分母分解：$x^3-x^2-2x = x(x-2)(x+1)$。設 $\frac{3x+2}{x(x-2)(x+1)} = \frac{A}{x} + \frac{B}{x-2} + \frac{C}{x+1}$。通分後比較分子：$3x+2 = A(x-2)(x+1) + Bx(x+1) + Cx(x-2)$。</p>
+<p>策略性代入：$x=0$ → $2 = A(-2)(1)$ → $A = -1$；$x=2$ → $8 = B(2)(3)$ → $B = 4/3$；$x=-1$ → $-1 = C(-1)(-3)$ → $C = -1/3$。</p>
+<div class="eq">$$\int \frac{3x+2}{x^3-x^2-2x}dx = \int\left(-\frac{1}{x} + \frac{4/3}{x-2} - \frac{1/3}{x+1}\right)dx = -\ln|x| + \frac{4}{3}\ln|x-2| - \frac{1}{3}\ln|x+1| + C$$</div>
+</details>
+
+<h3>重複線性因式</h3>
+
+<p>當分母包含 $(x-a)^n$ 時，分解必須包含所有從 1 次到 $n$ 次的項：$\frac{A_1}{x-a} + \frac{A_2}{(x-a)^2} + \cdots + \frac{A_n}{(x-a)^n}$。這確保了每一項對應的積分公式（$\int \frac{dx}{(x-a)^k} = \frac{(x-a)^{-k+1}}{-k+1} + C$，$k \neq 1$）都能被使用。</p>
+
+<details class="example">
+<summary>📝 範例 3.32：重複線性因式</summary>
+<p><strong>求</strong> $\int \frac{x-2}{(x+1)^2(x-1)}\,dx$。</p>
+<p><strong>解：</strong>分解形式：$\frac{x-2}{(x+1)^2(x-1)} = \frac{A}{x+1} + \frac{B}{(x+1)^2} + \frac{C}{x-1}$。通分比較係數得 $A = \frac{3}{4}, B = \frac{3}{2}, C = -\frac{1}{4}$。積分：</p>
+<div class="eq">$$\int\left(\frac{3/4}{x+1} + \frac{3/2}{(x+1)^2} - \frac{1/4}{x-1}\right)dx = \frac{3}{4}\ln|x+1| - \frac{3}{2(x+1)} - \frac{1}{4}\ln|x-1| + C$$</div>
+</details>
+
+<h3>不可約二次因式</h3>
+
+<p>對於不可約二次因式 $ax^2+bx+c$（判別式 $b^2-4ac < 0$），分解形式為 $\frac{Ax+B}{ax^2+bx+c}$。積分時通常需要<strong>配方法（completing the square）</strong>將其轉換為 $\int \frac{du}{u^2+p^2}$ 或 $\int \frac{u\,du}{u^2+p^2}$ 的形式，前者用到反正切，後者用到對數。</p>
+
+<details class="example">
+<summary>📝 範例 3.33–3.34：不可約二次因式</summary>
+<p><strong>求</strong> $\int \frac{2x-3}{x^3+x}\,dx$。</p>
+<p><strong>解：</strong>$x^3+x = x(x^2+1)$，其中 $x^2+1$ 是不可約二次因式。設 $\frac{2x-3}{x(x^2+1)} = \frac{A}{x} + \frac{Bx+C}{x^2+1}$。解得 $A = -3, B = 3, C = 2$。積分：</p>
+<div class="eq">$$\int\left(-\frac{3}{x} + \frac{3x+2}{x^2+1}\right)dx = -3\ln|x| + \frac{3}{2}\ln(x^2+1) + 2\arctan x + C$$</div>
+</details>
+
+<div class="figure">
+  <img src="../../pages/v2c3_pages/v2c3_page_277_c.png" alt="部分分式求體積" loading="lazy">
+  <figcaption>圖 3.11：使用殼層法求旋轉體體積——需要用到部分分式分解來計算定積分</figcaption>
+</div>
+
+<details class="example"><summary>📝 範例</summary><strong>📝 練習：部分分式分解</strong><br>求 $\int \frac{x+1}{x^2-4}\,dx$。<br><br><strong>解：</strong>$x^2-4 = (x-2)(x+2)$。設 $\frac{x+1}{(x-2)(x+2)} = \frac{A}{x-2} + \frac{B}{x+2}$。$x+1 = A(x+2) + B(x-2)$。代入 $x=2$：$3 = 4A$ → $A = 3/4$。代入 $x=-2$：$-1 = -4B$ → $B = 1/4$。積分得 $\frac{3}{4}\ln|x-2| + \frac{1}{4}\ln|x+2| + C$。</details>
+
+</section>
+
+<!-- ====== Section 3.5 ====== -->
+<section id="s3-5">
+<h2>3.5 其他積分策略（Other Strategies for Integration）</h2>
+
+<div style="margin-bottom:14px;font-size:12px;color:var(--tx2);line-height:1.8">
+<strong style="color:var(--tx)">🔑 本節重點</strong> ①積分表使用要訣與配方法匹配 ②電腦代數系統 (CAS) 輔助 ③不同形式的答案可能等價 ④微分驗算確認正確性
+</div>
+
+<p>除了前面四節介紹的系統性技巧外，實務上還有兩種重要的輔助工具：<strong>積分表（integration tables）</strong>和<strong>電腦代數系統（computer algebra systems, CAS）</strong>。
+
+<h3>積分表的使用</h3>
+
+<p>積分表是收錄了大量積分公式的參考資料。使用積分表的關鍵技巧是：<strong>將給定的積分透過代數操作（配方法、變數變換、分子分母同乘某個因式）轉換為表中某個公式的標準形式</strong>。例如，$\int \frac{dx}{\sqrt{4x^2+9}}$ 可以透過提出 $\sqrt{4}$ 來匹配 $\int \frac{dx}{\sqrt{x^2+a^2}}$ 的公式。</p>
+
+<div class="callout"><strong>💡 積分表使用要訣</strong><br>
+1. 先判斷積分屬於哪一種「類型」（根號型、有理函數型、三角函數型等）<br>
+2. 透過配方法將二次式整理成標準形式（例如 $ax^2+bx+c \to a(x-h)^2+k$）<br>
+3. 若找不到完全匹配的公式，嘗試 $u$ 代換或提出常數因式來調整<br>
+4. 使用積分表後，<strong>務必微分驗算</strong></div>
+
+<h3>電腦代數系統（CAS）</h3>
+
+<p>現代數學軟體（如 Wolfram Alpha、Mathematica、Maple、SymPy）可以在幾秒內求出大多數積分的解析解。但使用 CAS 時需要注意兩點：</p>
+
+<p><strong>第一，CAS 的輸出可能與手算結果「看起來」完全不同。</strong>例如 $\int \frac{dx}{\sqrt{x^2+1}}$，手算可能得到 $\ln|\sqrt{x^2+1} + x| + C$，而 CAS 可能輸出 $\text{arcsinh}\,x + C$。這兩個答案實際上是等價的（因為 $\text{arcsinh}\,x = \ln(x + \sqrt{x^2+1})$）。</p>
+
+<p><strong>第二，CAS 有時會使用你不熟悉的特殊函數來表達積分結果。</strong>例如某些積分可能以橢圓積分（elliptic integrals）或超幾何函數（hypergeometric functions）表示，這些對初學者來說可能難以解讀。在這種情況下，可以考慮使用數值積分（第 3.6 節）來獲得近似值。</p>
+
+<details class="example">
+<summary>📝 範例 3.36：使用積分表</summary>
+<p><strong>求</strong> $\int \frac{dx}{x\sqrt{4x+9}}$。</p>
+<p><strong>解：</strong>查積分表公式 $\int \frac{dx}{x\sqrt{ax+b}} = \frac{2}{\sqrt{-b}}\arctan\sqrt{\frac{ax+b}{-b}} + C$（當 $b < 0$ 時）。這裡 $a=4, b=9$，$b$ 為正，所以使用另一個公式。查表得：$\int \frac{dx}{x\sqrt{ax+b}} = \frac{1}{\sqrt{b}}\ln\left|\frac{\sqrt{ax+b}-\sqrt{b}}{\sqrt{ax+b}+\sqrt{b}}\right| + C$（$b > 0$）。代入得 $\frac{1}{3}\ln\left|\frac{\sqrt{4x+9}-3}{\sqrt{4x+9}+3}\right| + C$。</p>
+</details>
+
+<div class="callout-warn"><strong>⚡ 兩個「不同」的答案可能都對</strong><br>
+積分的反導數（antiderivative）不唯一——任何兩個正確的反導數之間只相差一個常數。因此，如果你的答案和解答本或 CAS 的答案看起來不同，不要急著認定自己錯了。驗證方法：將兩個答案相減，如果差是一個常數（或化簡後是常數），則兩者都對。例如 $\int \sin x \cos x\,dx$，用 $u=\sin x$ 得到 $\frac{1}{2}\sin^2 x + C$，用 $u=\cos x$ 得到 $-\frac{1}{2}\cos^2 x + C$。兩者差 $\frac{1}{2}$，都是正確的。</div>
+
+<div class="figure">
+  <img src="../../pages/v2c3_pages/v2c3_page_282_c.png" alt="CAS 等價解比較" loading="lazy">
+  <figcaption>圖 3.12：兩個看似不同的反導數的圖形——它們實際上是完全重合的（identical），驗證了 CAS 結果與手算結果等價</figcaption>
+</div>
+
+<details class="example"><summary>📝 範例</summary><strong>📝 練習：使用積分表</strong><br>使用積分表求 $\int x^2 \sqrt{x^2-4}\,dx$。<br><br><strong>解：</strong>查積分表可得公式 $\int x^2\sqrt{x^2-a^2}\,dx = \frac{x}{8}(2x^2-a^2)\sqrt{x^2-a^2} - \frac{a^4}{8}\ln|x+\sqrt{x^2-a^2}| + C$。這裡 $a=2$。代入得 $\frac{x}{8}(2x^2-4)\sqrt{x^2-4} - 2\ln|x+\sqrt{x^2-4}| + C$。</details>
+
+</section>
+
+<!-- ====== Section 3.6 ====== -->
+<section id="s3-6">
+<h2>3.6 數值積分（Numerical Integration）</h2>
+
+<div style="margin-bottom:14px;font-size:12px;color:var(--tx2);line-height:1.8">
+<strong style="color:var(--tx)">🔑 本節重點</strong> ①中點法則 M_n 用中點函數值 ②梯形法則 T_n 用端點值 ③辛普森法則係數 1-4-2-4 模式 ④誤差界限與 n²、n⁴ 成反比 ⑤凹性決定高低估方向
+</div>
+
+<p>並非所有函數都有初等函數形式的反導數。
+
+<div class="callout"><strong>💡 為什麼需要數值積分？</strong><br>即使我們知道微積分基本定理——$\int_a^b f(x)dx = F(b)-F(a)$——但如果 $f(x)$ 的反導數 $F(x)$ 無法用已知函數表達，這個定理就無法直接使用。數值積分繞過了尋找反導數的需求，直接從 $f(x)$ 的函數值來估計積分值。</div>
+
+<h3>中點法則（Midpoint Rule）</h3>
+
+<p>中點法則是最直觀的數值積分方法：將區間 $[a, b]$ 分割為 $n$ 個等寬子區間，每個子區間用一個矩形來近似——矩形的高度取在<strong>子區間的中點</strong>處的函數值。</p>
+
+<div class="formula-card">
+  <div class="formula-label">中點法則</div>
+  <div class="eq">$$M_n = \Delta x \sum_{i=1}^n f(\bar{x}_i), \quad \text{其中 } \bar{x}_i = \frac{x_{i-1} + x_i}{2}, \quad \Delta x = \frac{b-a}{n}$$</div>
+  <div class="formula-note">中點法則的精確度通常優於使用左右端點的黎曼和，因為中點處的函數值更能代表整個子區間的平均值。</div>
+</div>
+
+<div class="figure">
+  <img src="../../pages/v2c3_pages/v2c3_page_285_c.png" alt="中點法則示意圖" loading="lazy">
+  <figcaption>圖 3.13：中點法則——用中點處的函數值作為矩形高度來近似曲線下面積</figcaption>
+</div>
+
+<h3>梯形法則（Trapezoidal Rule）</h3>
+
+<p>梯形法則用梯形（而非矩形）來近似每個子區間上的面積。與中點法則不同，梯形法則使用子區間<strong>端點</strong>處的函數值。</p>
+
+<div class="formula-card">
+  <div class="formula-label">梯形法則</div>
+  <div class="eq">$$T_n = \frac{\Delta x}{2}\Big(f(x_0) + 2f(x_1) + 2f(x_2) + \cdots + 2f(x_{n-1}) + f(x_n)\Big)$$</div>
+  <div class="formula-note">其中 $\Delta x = \frac{b-a}{n}$，$x_i = a + i\Delta x$。注意：端點 $f(x_0)$ 和 $f(x_n)$ 的係數是 1，其餘內點的係數是 2。</div>
+</div>
+
+<div class="figure">
+  <img src="../../pages/v2c3_pages/v2c3_page_286_c.png" alt="梯形法則示意圖" loading="lazy">
+  <figcaption>圖 3.14：梯形法則——用梯形來近似曲線下面積，比矩形更貼近曲線</figcaption>
+</div>
+
+<div class="callout-warn"><strong>⚡ 凹性與系統性偏差</strong><br>
+梯形法則有一個重要特性：對於<strong>凹口向上（concave up）</strong>的函數，梯形法則會<strong>高估</strong>積分值；對於<strong>凹口向下（concave down）</strong>的函數，梯形法則會<strong>低估</strong>積分值。而中點法則的偏差方向剛好相反。因此，兩者的平均值通常比單一方法更準確——這正是辛普森法則的基礎。</div>
+
+<h3>辛普森法則（Simpson's Rule）</h3>
+
+<p>辛普森法則將中點法則和梯形法則的優點結合起來：它用<strong>二次函數（拋物線）</strong>來近似每<strong>兩個相鄰子區間</strong>上的函數。這使得辛普森法則的精確度遠高於前兩種方法。</p>
+
+<div class="formula-card">
+  <div class="formula-label">辛普森法則</div>
+  <div class="eq">$$S_n = \frac{\Delta x}{3}\Big(f(x_0) + 4f(x_1) + 2f(x_2) + 4f(x_3) + \cdots + 2f(x_{n-2}) + 4f(x_{n-1}) + f(x_n)\Big)$$</div>
+  <div class="formula-note">$n$ 必須是偶數。係數模式為 1-4-2-4-2-...-4-2-4-1。辛普森法則也可以表示為 $S_n = \frac{2M_{n/2} + T_{n/2}}{3}$。</div>
+</div>
+
+<div class="figure">
+  <img src="../../pages/v2c3_pages/v2c3_page_290_c.png" alt="辛普森法則示意圖" loading="lazy">
+  <figcaption>圖 3.16：辛普森法則——用分段二次函數（拋物線）來近似原始函數，大幅提高精確度</figcaption>
+</div>
+
+<h3>誤差界限</h3>
+
+<p>使用數值積分時，我們需要知道近似值的可靠性。以下定理給出了三種方法的誤差上界。</p>
+
+<div class="formula-card">
+  <div class="formula-label">誤差界限公式</div>
+  <p><strong>中點法則誤差：</strong>$|E_M| \leq \frac{M_2(b-a)^3}{24n^2}$，其中 $M_2 = \max_{[a,b]} |f''(x)|$</p>
+  <p><strong>梯形法則誤差：</strong>$|E_T| \leq \frac{M_2(b-a)^3}{12n^2}$，其中 $M_2 = \max_{[a,b]} |f''(x)|$</p>
+  <p><strong>辛普森法則誤差：</strong>$|E_S| \leq \frac{M_4(b-a)^5}{180n^4}$，其中 $M_4 = \max_{[a,b]} |f^{(4)}(x)|$</p>
+  <div class="formula-note">注意辛普森法則的誤差與 $n^4$ 成反比——當 $n$ 加倍時，誤差約減少為原來的 $1/16$，收斂速度遠快於中點和梯形法則。</div>
+</div>
+
+<details class="example">
+<summary>📝 範例 3.39–3.41：使用數值積分法</summary>
+<p><strong>用中點法則和梯形法則（$n=4$）估計</strong> $\int_0^1 x^2\,dx$，並比較精確值。</p>
+<p><strong>解：</strong>精確值為 $\frac{1}{3} \approx 0.333333$。</p>
+<p><strong>中點法則：</strong>$\Delta x = 0.25$，中點為 $0.125, 0.375, 0.625, 0.875$。$M_4 = 0.25[(0.125)^2 + (0.375)^2 + (0.625)^2 + (0.875)^2] = 0.25[0.015625 + 0.140625 + 0.390625 + 0.765625] = 0.328125$。</p>
+<p><strong>梯形法則：</strong>$T_4 = \frac{0.25}{2}[0^2 + 2(0.25^2+0.5^2+0.75^2) + 1^2] = 0.125[0 + 2(0.0625+0.25+0.5625) + 1] = 0.125[2.75+1] = 0.34375$。</p>
+<p>中點法則低估 $0.005$，梯形法則高估 $0.010$——與理論一致（$f(x)=x^2$ 凹口向上，梯形法則高估）。</p>
+</details>
+
+<div class="figure">
+  <img src="../../pages/v2c3_pages/v2c3_page_288_c.png" alt="中點 vs 梯形比較" loading="lazy">
+  <figcaption>圖 3.15：中點法則與梯形法則的比較——中點法則通常比梯形法則更準確，因為它能部分抵消高估和低估的誤差</figcaption>
+</div>
+
+<details class="example"><summary>📝 範例</summary><strong>📝 練習：決定所需的 $n$</strong><br>若要使用梯形法則估計 $\int_0^1 e^{-x^2}\,dx$ 且誤差不超過 $0.0001$，至少需要多少子區間？<br><br><strong>解：</strong>$f(x)=e^{-x^2}$，$f''(x) = 2e^{-x^2}(2x^2-1)$。在 $[0,1]$ 上，$|f''(x)|$ 的最大值約為 $2$。代入梯形誤差公式：$\frac{2(1-0)^3}{12n^2} \leq 0.0001$ → $\frac{2}{12n^2} \leq 10^{-4}$ → $n^2 \geq \frac{2}{12 \times 10^{-4}} \approx 1666.7$ → $n \geq 41$。因此至少需要 41 個子區間。</details>
+
+</section>
+
+<!-- ====== Section 3.7 ====== -->
+<section id="s3-7">
+<h2>3.7 瑕積分（Improper Integrals）</h2>
+
+<div style="margin-bottom:14px;font-size:12px;color:var(--tx2);line-height:1.8">
+<strong style="color:var(--tx)">🔑 本節重點</strong> ①第一類無窮區間瑕積分取極限 ②p-積分 p>1 收斂 p≤1 發散 ③第二類不連續點取單側極限 ④比較定理判斷斂散性 ⑤加百列號角體積有限表面積無限
+</div>
+
+<p>截至目前，我們處理的定積分都有兩個基本前提：
+
+<p>一個經典例子：$\int_1^\infty \frac{1}{x}\,dx$ 和 $\int_1^\infty \frac{1}{x^2}\,dx$。兩個積分的被積函數看起來相似，但前者發散（面積無限大），後者收斂到 1。這個差異對於理解機率分布、物理中的「加百列號角」（Gabriel's Horn）等概念至關重要。</p>
+
+<div class="figure">
+  <img src="../../pages/v2c3_pages/v2c3_page_296_c.png" alt="無窮區間瑕積分" loading="lazy">
+  <figcaption>圖 3.17：要在無窮區間上積分，我們考慮積分上限趨於無窮時的極限——先計算有限區間的積分，再取極限</figcaption>
+</div>
+
+<h3>第一類瑕積分：無窮區間</h3>
+
+<div class="formula-card">
+  <div class="formula-label">無窮區間的瑕積分定義</div>
+  <p><strong>無窮上限：</strong>$\int_a^\infty f(x)dx = \lim_{t \to \infty} \int_a^t f(x)dx$</p>
+  <p><strong>無窮下限：</strong>$\int_{-\infty}^b f(x)dx = \lim_{t \to -\infty} \int_t^b f(x)dx$</p>
+  <p><strong>雙邊無窮：</strong>$\int_{-\infty}^\infty f(x)dx = \int_{-\infty}^c f(x)dx + \int_c^\infty f(x)dx$（須兩部分都收斂）</p>
+  <div class="formula-note">若對應的極限存在（為有限值），稱積分<strong>收斂（converge）</strong>；否則稱積分<strong>發散（diverge）</strong>。</div>
+</div>
+
+<details class="example">
+<summary>📝 範例 3.47：判斷斂散性</summary>
+<p><strong>判斷</strong> $\int_1^\infty \frac{1}{x}\,dx$ 收斂還是發散。</p>
+<p><strong>解：</strong></p>
+<div class="eq">$$\int_1^\infty \frac{1}{x}\,dx = \lim_{t \to \infty} \int_1^t \frac{1}{x}\,dx = \lim_{t \to \infty} [\ln|x|]_1^t = \lim_{t \to \infty} (\ln t - \ln 1) = \infty$$</div>
+<p>極限為無窮，積分發散。相比之下，$\int_1^\infty \frac{1}{x^2}dx = \lim_{t \to \infty} [-\frac{1}{x}]_1^t = \lim_{t \to \infty}(1 - \frac{1}{t}) = 1$，收斂。</p>
+<p><strong>一般規則：</strong>$\int_1^\infty \frac{1}{x^p}dx$ 在 $p > 1$ 時收斂，在 $p \leq 1$ 時發散。這是瑕積分最重要的基準測試之一。</p>
+</details>
+
+<div class="figure">
+  <img src="../../pages/v2c3_pages/v2c3_page_297_c.png" alt="1/x 的無窮區間面積" loading="lazy">
+  <figcaption>圖 3.18：$y = 1/x$ 在 $[1,\infty)$ 上的面積——雖然曲線趨近於 $x$ 軸，但面積累積為無窮大</figcaption>
+</div>
+
+<h3>加百列號角（Gabriel's Horn）</h3>
+
+<p>這是一個令人驚嘆的數學現象：考慮 $y = 1/x$（$x \geq 1$）繞 $x$ 軸旋轉所生成的立體。其表面積為無窮大，但體積卻是有窮的！</p>
+
+<details class="example">
+<summary>📝 範例 3.48：加百列號角的體積</summary>
+<p><strong>求</strong> $y = 1/x$（$x \geq 1$）繞 $x$ 軸旋轉的體積。</p>
+<p><strong>解：</strong>使用圓盤法：</p>
+<div class="eq">$$V = \int_1^\infty \pi\left(\frac{1}{x}\right)^2 dx = \pi \lim_{t \to \infty} \int_1^t \frac{1}{x^2}dx = \pi \lim_{t \to \infty} \left[-\frac{1}{x}\right]_1^t = \pi \lim_{t \to \infty} \left(1 - \frac{1}{t}\right) = \pi$$</div>
+<p>體積為 $\pi$——有限的！但表面積為無窮大。這意味著你可以用有限量的油漆「填滿」這個號角，但卻無法用有限量的油漆「塗滿」它的表面。</p>
+</details>
+
+<div class="figure">
+  <img src="../../pages/v2c3_pages/v2c3_page_298_c.png" alt="加百列號角" loading="lazy">
+  <figcaption>圖 3.19：加百列號角——$y=1/x$ 繞 $x$ 軸旋轉生成的立體，體積有限但表面積無限</figcaption>
+</div>
+
+<h3>第二類瑕積分：不連續被積函數</h3>
+
+<p>當被積函數在積分區間內有<strong>無窮不連續點（vertical asymptote）</strong>時，也需要透過極限來定義積分。</p>
+
+<div class="formula-card">
+  <div class="formula-label">不連續被積函數的瑕積分</div>
+  <p><strong>右端點不連續：</strong>若 $f$ 在 $x=b$ 處有垂直漸近線，則 $\int_a^b f(x)dx = \lim_{t \to b^-} \int_a^t f(x)dx$</p>
+  <p><strong>左端點不連續：</strong>若 $f$ 在 $x=a$ 處有垂直漸近線，則 $\int_a^b f(x)dx = \lim_{t \to a^+} \int_t^b f(x)dx$</p>
+  <p><strong>內部點不連續：</strong>若 $f$ 在 $c \in (a,b)$ 處有垂直漸近線，則拆成兩部分分別取極限，兩部分都收斂才算收斂。</p>
+</div>
+
+<details class="example">
+<summary>📝 範例 3.52–3.54：不連續被積函數</summary>
+<p><strong>判斷</strong> $\int_0^4 \frac{1}{\sqrt{x}}\,dx$ 收斂還是發散。</p>
+<p><strong>解：</strong>$f(x)=1/\sqrt{x}$ 在 $x=0$ 處不連續。使用瑕積分定義：</p>
+<div class="eq">$$\int_0^4 \frac{1}{\sqrt{x}}\,dx = \lim_{t \to 0^+} \int_t^4 x^{-1/2}\,dx = \lim_{t \to 0^+} [2\sqrt{x}]_t^4 = \lim_{t \to 0^+} (4 - 2\sqrt{t}) = 4$$</div>
+<p>收斂到 4。</p>
+<p><strong>判斷</strong> $\int_{-1}^1 \frac{1}{x^2}\,dx$ 收斂還是發散。</p>
+<p><strong>解：</strong>$f(x)=1/x^2$ 在 $x=0$ 處不連續。拆分為 $\int_{-1}^0 \frac{1}{x^2}dx + \int_0^1 \frac{1}{x^2}dx$。計算第二項：$\int_0^1 x^{-2}dx = \lim_{t \to 0^+}[-x^{-1}]_t^1 = \lim_{t \to 0^+}(-1 + \frac{1}{t}) = \infty$。發散！因此原積分發散。注意：千萬不要直接套用 $\int x^{-2}dx = -1/x$ 在 $[-1,1]$ 上——這樣會得到 $(-1/1)-(-1/(-1)) = -2$ 這個錯誤答案。</p>
+</details>
+
+<div class="figure">
+  <img src="../../pages/v2c3_pages/v2c3_page_302_c.png" alt="不連續點的瑕積分示意" loading="lazy">
+  <figcaption>圖 3.21：當 $t$ 從左側趨近 $b$ 時，面積 $\int_a^t f(x)dx$ 趨近於 $\int_a^b f(x)dx$——這正是瑕積分的極限定義</figcaption>
+</div>
+
+<div class="callout-warn"><strong>⚡ 致命陷阱：內部不連續點</strong><br>
+這是所有瑕積分錯誤中最常見的一種：$\int_{-1}^1 \frac{1}{x^2}dx$ 如果直接當作一般定積分計算會得到 $-2$，但正確答案應該是<strong>發散</strong>。原因是 $f(x)=1/x^2$ 在 $x=0$ 處有垂直漸近線，而 $x=0$ 正好在積分區間內部。遇到這種情況，<strong>必須</strong>將積分拆成兩部分，分別取極限——永遠不要越過不連續點積分。</div>
+
+<h3>比較定理（Comparison Theorem）</h3>
+
+<p>有時瑕積分難以直接計算。在這種情況下，我們可以使用<strong>比較定理</strong>來判斷其斂散性——將待判斷的積分與一個已知斂散性的積分進行比較。</p>
+
+<div class="formula-card">
+  <div class="formula-label">定理 3.7：比較定理</div>
+  <p>若對所有 $x \geq a$ 有 $0 \leq f(x) \leq g(x)$，則：</p>
+  <p>(i) 若 $\int_a^\infty g(x)dx$ 收斂，則 $\int_a^\infty f(x)dx$ 也收斂。</p>
+  <p>(ii) 若 $\int_a^\infty f(x)dx$ 發散，則 $\int_a^\infty g(x)dx$ 也發散。</p>
+  <div class="formula-note">直覺解釋：如果「較大」的函數的積分收斂，「較小」的一定也收斂。反之，如果「較小」的都發散了，「較大」的必定發散。</div>
+</div>
+
+<details class="example"><summary>📝 範例</summary><strong>📝 練習：瑕積分</strong><br>判斷 $\int_1^\infty \frac{\sin^2 x}{x^2}\,dx$ 的斂散性。<br><br><strong>解：</strong>由於 $0 \leq \frac{\sin^2 x}{x^2} \leq \frac{1}{x^2}$，而 $\int_1^\infty \frac{1}{x^2}dx$ 收斂（$p=2>1$）。根據比較定理，$\int_1^\infty \frac{\sin^2 x}{x^2}dx$ 也收斂。</details>
+
+</section>
+
+<!-- ====== Key Concepts ====== -->
+<section id="key-concepts">
+<h2>📋 關鍵概念回顧（Key Concepts）</h2>
+<ol>
+  <li><strong>分部積分公式（Integration by Parts）</strong>：$\int u\,dv = uv - \int v\,du$，是乘積規則的逆運算，適用於兩個不同類型函數的乘積積分。</li>
+  <li><strong>LIATE 法則</strong>：選擇 $u$ 的優先順序——對數（Logarithmic）、反三角（Inverse trig）、代數（Algebraic）、三角（Trigonometric）、指數（Exponential）。排越前面的函數越優先選為 $u$。</li>
+  <li><strong>三角函數積分策略</strong>：$\int \sin^m x \cos^n x\,dx$——奇次冪保留一個用於 $u$ 代換，偶次冪使用半角公式降次。$\int \tan^m x \sec^n x\,dx$ 依 $m$ 和 $n$ 的奇偶性選擇策略。</li>
+  <li><strong>三角代換（Trigonometric Substitution）</strong>：將含 $\sqrt{a^2-x^2}$、$\sqrt{a^2+x^2}$、$\sqrt{x^2-a^2}$ 的積分透過 $x=a\sin\theta$、$x=a\tan\theta$、$x=a\sec\theta$ 代換為三角積分，最後用參考三角形轉換回 $x$。</li>
+  <li><strong>部分分式分解（Partial Fractions）</strong>：將有理函數 $\frac{P(x)}{Q(x)}$ 分解為 $\frac{A}{x-a}$、$\frac{Bx+C}{x^2+bx+c}$ 等簡單分式之和，利用對數和反正切完成積分。</li>
+  <li><strong>數值積分（Numerical Integration）</strong>：當無法求出封閉形式的反導數時，使用梯形法則（Trapezoidal Rule）或辛普森法則（Simpson's Rule）近似計算定積分。</li>
+  <li><strong>瑕積分（Improper Integrals）</strong>：積分區間無界或被積函數在區間內有不連續點的情況。透過取極限定義收斂或發散。</li>
+  <li><strong>比較定理（Comparison Theorem）</strong>：對於非負函數的瑕積分，若 $0 \le f(x) \le g(x)$ 且 $\int g(x)dx$ 收斂，則 $\int f(x)dx$ 也收斂；反之若 $\int f(x)dx$ 發散，則 $\int g(x)dx$ 也發散。</li>
+  <li><strong>積分表與 CAS</strong>：實務上常使用積分表或電腦代數系統求積分，需能判斷不同形式的答案是否等價。</li>
+  <li><strong>$p$-積分判別法</strong>：$\int_1^\infty \frac{1}{x^p}dx$ 在 $p>1$ 時收斂，$p \le 1$ 時發散。這是瑕積分比較的基準。</li>
+  <li><strong>加百列號角（Gabriel's Horn）</strong>：$y=1/x$ 繞 $x$ 軸旋轉的體積有限（$\pi$），但表面積無限——經典的有限體積、無限表面積悖論。</li>
+</ol>
+</section>
+
+<!-- ====== Key Equations ====== -->
+<section id="key-equations">
+<h2>📐 關鍵公式（Key Equations）</h2>
+<table><caption>表 3：📐 關鍵公式（Key Equations）</caption>
+<thead><tr><th>公式</th><th>說明</th></tr></thead>
+<tbody>
+<tr><td>$$\int u\,dv = uv - \int v\,du$$</td><td>分部積分公式</td></tr>
+<tr><td>$$\int \sin^n x\,dx = -\frac{1}{n}\sin^{n-1}x\cos x + \frac{n-1}{n}\int \sin^{n-2}x\,dx$$</td><td>$\sin^n x$ 的降次遞推公式</td></tr>
+<tr><td>$$\int \cos^n x\,dx = \frac{1}{n}\cos^{n-1}x\sin x + \frac{n-1}{n}\int \cos^{n-2}x\,dx$$</td><td>$\cos^n x$ 的降次遞推公式</td></tr>
+<tr><td>$$\sin^2 x = \frac{1-\cos 2x}{2},\quad \cos^2 x = \frac{1+\cos 2x}{2}$$</td><td>半角公式（用於偶次冪降次）</td></tr>
+<tr><td>$$\sqrt{a^2-x^2} \;\to\; x = a\sin\theta,\; dx = a\cos\theta\,d\theta$$</td><td>三角代換第一型</td></tr>
+<tr><td>$$\sqrt{a^2+x^2} \;\to\; x = a\tan\theta,\; dx = a\sec^2\theta\,d\theta$$</td><td>三角代換第二型</td></tr>
+<tr><td>$$\sqrt{x^2-a^2} \;\to\; x = a\sec\theta,\; dx = a\sec\theta\tan\theta\,d\theta$$</td><td>三角代換第三型</td></tr>
+<tr><td>$$\int \sec x\,dx = \ln|\sec x + \tan x| + C$$</td><td>$\sec x$ 的積分</td></tr>
+<tr><td>$$\frac{P(x)}{Q(x)} = \sum \frac{A_i}{(x-a)^i} + \sum \frac{B_j x + C_j}{(x^2+bx+c)^j}$$</td><td>部分分式分解的一般形式</td></tr>
+<tr><td>$$T_n = \frac{\Delta x}{2}\bigl[f(x_0)+2f(x_1)+\cdots+2f(x_{n-1})+f(x_n)\bigr]$$</td><td>梯形法則（$n$ 個子區間）</td></tr>
+<tr><td>$$S_n = \frac{\Delta x}{3}\bigl[f(x_0)+4f(x_1)+2f(x_2)+\cdots+4f(x_{n-1})+f(x_n)\bigr]$$</td><td>辛普森法則（$n$ 為偶數）</td></tr>
+<tr><td>$$|E_T| \le \frac{K(b-a)^3}{12n^2},\quad K = \max|f''(x)|$$</td><td>梯形法則誤差界限</td></tr>
+<tr><td>$$|E_S| \le \frac{K(b-a)^5}{180n^4},\quad K = \max|f^{(4)}(x)|$$</td><td>辛普森法則誤差界限</td></tr>
+<tr><td>$$\int_a^\infty f(x)\,dx = \lim_{t\to\infty}\int_a^t f(x)\,dx$$</td><td>第一類瑕積分（無窮上限）</td></tr>
+<tr><td>$$\int_1^\infty \frac{1}{x^p}\,dx \quad \begin{cases} \text{收斂}, & p>1 \\ \text{發散}, & p \le 1 \end{cases}$$</td><td>$p$-積分判別法</td></tr>
+<tr><td>$$\Gamma(n) = \int_0^\infty x^{n-1}e^{-x}\,dx,\quad \Gamma(n+1)=n!$$</td><td>Gamma 函數（階乘的連續推廣）</td></tr>
+</tbody>
+</table>
+</section>
+
+<!-- ====== Summary ====== -->
+<section id="summary">
+<h2>本章摘要</h2>
+
+<div class="callout"><strong>🔑 核心收穫</strong><br>
+本章建立了微積分中最完整的積分工具箱。以下是十個最重要的觀念：
+<ol>
+  <li><strong>分部積分 $\int u\,dv = uv - \int v\,du$</strong>——處理兩個函數乘積積分的首選武器，LIATE 法則指導 $u$ 的選擇</li>
+  <li><strong>三角函數積分</strong>——$\sin^m x \cos^n x$ 型：奇次冪保留一個用於 $u$ 代換，偶次冪使用半角公式；$\tan^m x \sec^n x$ 型依奇偶性選擇策略</li>
+  <li><strong>三角代換三型</strong>——$\sqrt{a^2-x^2} \to x=a\sin\theta$、$\sqrt{a^2+x^2} \to x=a\tan\theta$、$\sqrt{x^2-a^2} \to x=a\sec\theta$，代換後用參考三角形轉換回 $x$</li>
+  <li><strong>部分分式分解</strong>——將有理函數拆解為 $\frac{A}{x-a} + \frac{Bx+C}{x^2+bx+c}$ 等形式，利用對數和反正切積分</li>
+  <li><strong>積分表與 CAS</strong>——實務上不可或缺的工具，但要會判斷不同形式的答案是否等價</li>
+  <li><strong>中點法則</strong>——$M_n = \Delta x \sum f(\bar{x}_i)$，誤差 $\propto 1/n^2$</li>
+  <li><strong>梯形法則</strong>——$T_n = \frac{\Delta x}{2}(f_0 + 2f_1 + \cdots + 2f_{n-1} + f_n)$，誤差 $\propto 1/n^2$</li>
+  <li><strong>辛普森法則</strong>——$S_n = \frac{\Delta x}{3}(f_0 + 4f_1 + 2f_2 + \cdots + 4f_{n-1} + f_n)$，誤差 $\propto 1/n^4$，精度最高</li>
+  <li><strong>瑕積分 = 極限定義</strong>——$\int_a^\infty f(x)dx = \lim_{t\to\infty} \int_a^t f(x)dx$，收斂若極限為有限值</li>
+  <li><strong>$\int_1^\infty \frac{1}{x^p}dx$ 基準</strong>——$p>1$ 收斂，$p \leq 1$ 發散；比較定理擴展了斂散性判斷能力</li>
+</ol>
+</div>
+
+<table><caption>表 4：本章摘要</caption>
+  <thead><tr><th>技巧</th><th>適用情境</th><th>核心公式 / 法則</th></tr></thead>
+  <tbody>
+    <tr><td>分部積分</td><td>兩個函數乘積的積分</td><td>$\int u\,dv = uv - \int v\,du$，LIATE 法則</td></tr>
+    <tr><td>三角函數積分</td><td>$\sin^m x\cos^n x$、$\tan^m x\sec^n x$</td><td>奇次冪 → $u$ 代換；偶次冪 → 半角公式</td></tr>
+    <tr><td>三角代換</td><td>$\sqrt{a^2\pm x^2}$、$\sqrt{x^2-a^2}$</td><td>$x=a\sin\theta$ / $a\tan\theta$ / $a\sec\theta$</td></tr>
+    <tr><td>部分分式</td><td>有理函數 $\frac{P(x)}{Q(x)}$</td><td>依因式類型設定分解形式，解待定係數</td></tr>
+    <tr><td>積分表 / CAS</td><td>各類積分（快速求解）</td><td>匹配標準形式或使用軟體</td></tr>
+    <tr><td>中點法則</td><td>無解析解的定積分</td><td>$M_n = \Delta x \sum f(\frac{x_{i-1}+x_i}{2})$</td></tr>
+    <tr><td>梯形法則</td><td>無解析解的定積分</td><td>$T_n = \frac{\Delta x}{2}[f_0 + 2\sum f_i + f_n]$</td></tr>
+    <tr><td>辛普森法則</td><td>需要高精確度的數值積分</td><td>$S_n$ 係數模式 1-4-2-4-2-...-4-1</td></tr>
+    <tr><td>瑕積分</td><td>無窮區間或不連續被積函數</td><td>透過極限定義，使用 $p$-測試和比較定理判斷斂散</td></tr>
+  </tbody>
+</table>
+</section>
+
+<!-- ====== Common Mistakes ====== -->
+<section id="common-mistakes">
+<h2>⚠️ 初學者常見錯誤</h2>
+
+<div class="callout-warn"><strong>❌ 錯誤 1：分部積分中 $u$ 和 $dv$ 選錯</strong><br>
+選錯 $u$ 和 $dv$ 是最常見的分部積分錯誤。例如 $\int x e^x dx$ 如果選 $u=e^x$、$dv=x\,dx$，會得到比原積分更複雜的 $\int \frac{x^2}{2}e^x dx$。<strong>解決方法：</strong>永遠遵循 LIATE 法則——對數和反三角函數優先選為 $u$，指數和三角函數優先選為 $dv$。如果第一組選擇不奏效，嘗試交換。</div>
+
+<div class="callout-warn"><strong>❌ 錯誤 2：忽略「隱藏的 1」——分部積分的特殊情況</strong><br>
+$\int \ln x\,dx$ 看起來只有一個函數，似乎不適用分部積分。但實際上可以寫成 $\int 1 \cdot \ln x\,dx$，令 $u=\ln x$、$dv=dx$。許多學生在考試中遇到 $\int \ln x\,dx$ 或 $\int \arctan x\,dx$ 會卡住，就是因為沒想到這個「$dv=dx$」的技巧。</div>
+
+<div class="callout-warn"><strong>❌ 錯誤 3：三角代換後忘記使用參考三角形</strong><br>
+三角代換的最後一步——也是最容易被跳過的一步——是將答案從 $\theta$ 轉換回 $x$。許多學生在積分完三角函數後就直接宣告完成，忘記需要畫參考三角形並用 $x$ 表達 $\sin\theta$、$\cos\theta$、$\tan\theta$ 等。這是扣分的常見原因。</div>
+
+<div class="callout-warn"><strong>❌ 錯誤 4：部分分式分解前忘記長除法</strong><br>
+$\int \frac{x^3}{x^2-1}dx$ 中，分子的次數（3）大於分母的次數（2），必須先做長除法得到 $x + \frac{x}{x^2-1}$，再對 $\frac{x}{x^2-1}$ 做部分分式分解。直接設 $\frac{x^3}{x^2-1} = \frac{A}{x-1} + \frac{B}{x+1}$ 是錯誤的——分解形式必須對應於<strong>化簡後的真分式</strong>。</div>
+
+<div class="callout-warn"><strong>❌ 錯誤 5：瑕積分中有不連續點卻直接積分</strong><br>
+這是最危險的錯誤，因為你可能會算出一個看似合理的數字，但實際上是錯的。$\int_{-1}^2 \frac{1}{x}dx$ 不能直接寫成 $[\ln|x|]_{-1}^2$，因為 $x=0$ 在區間內部而 $\ln|x|$ 在 $x=0$ 處無定義。必須拆成 $\int_{-1}^0 + \int_0^2$ 分別取極限——而 $\int_{-1}^0 \frac{1}{x}dx$ 發散，所以原積分發散。</div>
+
+<div class="callout-warn"><strong>❌ 錯誤 6：混淆 $\int_1^\infty \frac{1}{x}dx$（發散）和 $\int_1^\infty \frac{1}{x^2}dx$（收斂）</strong><br>
+這兩個積分的被積函數看起來只差一個指數，但斂散性完全不同。$\int_1^\infty \frac{1}{x^p}dx$ 的基準是 $p=1$：$p>1$ 收斂，$p \leq 1$ 發散。這個規則必須牢記，因為它在比較定理中是最常使用的參考積分。</div>
+
+</section>
+
+<!-- ====== Self-Check ====== -->
+<section id="self-check">
+<h2>✅ 自我檢測（Self-Check）</h2>
+<p>完成以下題目檢驗你對本章核心概念的掌握程度。點擊展開查看答案。</p>
+
+<details class="derive"><summary>題 1：分部積分 — 使用 LIATE 法則求 $\int x \ln x\,dx$</summary>
+<p><strong>答案：</strong>根據 LIATE，$\ln x$（對數）優先於 $x$（代數），選 $u = \ln x$、$dv = x\,dx$。則 $du = \frac{1}{x}dx$、$v = \frac{x^2}{2}$。<br>
+$\int x \ln x\,dx = \frac{x^2}{2}\ln x - \int \frac{x^2}{2} \cdot \frac{1}{x}\,dx = \frac{x^2}{2}\ln x - \frac{1}{2}\int x\,dx = \frac{x^2}{2}\ln x - \frac{x^2}{4} + C$。</p>
+</details>
+
+<details class="derive"><summary>題 2：三角代換 — 求 $\displaystyle\int \frac{dx}{\sqrt{9-x^2}}$</summary>
+<p><strong>答案：</strong>這是第一型 $\sqrt{a^2-x^2}$（$a=3$）。令 $x = 3\sin\theta$，$dx = 3\cos\theta\,d\theta$，$\sqrt{9-x^2} = 3\cos\theta$。<br>
+$\displaystyle\int \frac{3\cos\theta}{3\cos\theta}\,d\theta = \int d\theta = \theta + C = \arcsin\frac{x}{3} + C$。</p>
+</details>
+
+<details class="derive"><summary>題 3：部分分式 — 求 $\displaystyle\int \frac{dx}{x^2-1}$</summary>
+<p><strong>答案：</strong>分解 $\frac{1}{x^2-1} = \frac{1}{(x-1)(x+1)} = \frac{1/2}{x-1} - \frac{1/2}{x+1}$。<br>
+$\displaystyle\int \frac{dx}{x^2-1} = \frac{1}{2}\ln|x-1| - \frac{1}{2}\ln|x+1| + C = \frac{1}{2}\ln\left|\frac{x-1}{x+1}
+\right| + C$。</p>
+</details>
+
+<details class="derive"><summary>題 4：瑕積分斂散判斷 — $\displaystyle\int_1^\infty \frac{dx}{x^2}$ 收斂還是發散？</summary>
+<p><strong>答案：</strong>$\displaystyle\int_1^\infty \frac{dx}{x^2} = \lim_{b\to\infty} \int_1^b x^{-2}\,dx = \lim_{b\to\infty} \left[-\frac{1}{x}
+\right]_1^b = \lim_{b\to\infty} \left(1 - \frac{1}{b}
+\right) = 1$。<br>
+積分收斂，值為 $1$。這符合 $p$-測試：$\int_1^\infty \frac{dx}{x^p}$ 當 $p>1$ 收斂，此處 $p=2>1$。</p>
+</details>
+
+<details class="derive"><summary>題 5：分部積分循環型 — 求 $\displaystyle\int e^x \sin x\,dx$ 的策略</summary>
+<p><strong>答案：</strong>設 $I = \int e^x \sin x\,dx$。第一次分部積分：$u = \sin x, dv = e^x dx$ → $I = e^x\sin x - \int e^x\cos x\,dx$。<br>
+第二次分部積分：$u = \cos x, dv = e^x dx$ → $\int e^x\cos x\,dx = e^x\cos x + I$。<br>
+代入：$I = e^x\sin x - e^x\cos x - I$ → $2I = e^x(\sin x - \cos x)$ → $I = \frac{e^x}{2}(\sin x - \cos x) + C$。</p>
+</details>
+</section>
+
+<!-- ====== Extras ====== -->
+<section id="extras">
+<h2>📚 延伸資源</h2>
+
+<ul>
+  <li><strong>Khan Academy — Integration Techniques</strong>：涵蓋分部積分、三角代換、部分分式的互動練習和影片教學</li>
+  <li><strong>Paul's Online Math Notes — Calculus II</strong>：詳細的積分技巧筆記，包含大量例題和常見錯誤分析</li>
+  <li><strong>3Blue1Brown — Integration and the fundamental theorem</strong>：YouTube 系列，提供積分技巧的視覺直覺</li>
+  <li><strong>Wolfram Alpha</strong>：強大的線上 CAS，可以驗算你的積分答案</li>
+  <li><strong>Desmos Graphing Calculator</strong>：可視化數值積分（中點、梯形、辛普森）的收斂過程</li>
+  <li>下一章預告：<strong>第 4 章 — 微分方程</strong>將大量使用本章學到的所有積分技巧來求解微分方程</li>
+  <li><strong>Gabriel's Horn 互動展示</strong>：在線上探索這個令人驚嘆的「有限體積、無限表面積」的數學奇觀</li>
+</ul>
+</section>
+
+</main>
+
+<script>
+// Sidebar scroll spy
+(function(){
+  const navs = document.querySelectorAll('.sn a, .nsub a');
+  const sections = [];
+  navs.forEach(a => {
+    const id = a.getAttribute('href');
+    if (id && id.startsWith('#')) {
+      const el = document.getElementById(id.substring(1));
+      if (el) sections.push({a, el});
+    }
+  });
+  function onScroll(){
+    let current = sections[0];
+    for (const s of sections) {
+      if (s.el.offsetTop <= window.scrollY + 120) current = s;
+    }
+    navs.forEach(a => a.classList.remove('active'));
+    if (current) current.a.classList.add('active');
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+})();
+
+// Theme toggle
+function toggleTheme(){ if(window.toggleTheme) window.toggleTheme(); } catch(e){}
+}
+(function(){
+  try {
+    const saved = localStorage.getItem('learning-portal-reading-preferences');
+    if (saved === 'dark') {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      document.getElementById('themeBtn').textContent = '☀️ 淺色模式';
+    }
+  } catch(e){}
+})();
+
+// Mobile sidebar
+</script>
+<script defer src="../assets/course-ui.js"></script>
+</body>
+</html>

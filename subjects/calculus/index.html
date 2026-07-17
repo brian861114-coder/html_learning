@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculus 學習中心 — OpenStax Vol 1–3</title>
+<link rel="stylesheet" href="../../assets/portal.css">
+<link rel="stylesheet" href="../../assets/learning-experience.css">
+<script src="../../assets/subject-progress.js" defer></script>
+</head>
+<body>
+<div class="portal-tools"><button data-action="toggle-theme" id="themeBtn">🌙 深色模式</button></div>
+
+<div class="shell">
+<header class="hero">
+  <h1>📐 Calculus 學習中心</h1>
+  <p>OpenStax Calculus Volumes 1–3 · 繁體中文互動教材 · 原文書替代品</p>
+  <div class="portal-stats">
+    <span><strong>17</strong> 章節</span>
+    <span><strong>10</strong> 模型</span>
+    <span><strong>604</strong> 練習</span>
+    <span><strong>可完整閱讀</strong></span>
+  </div>
+  <div class="search">
+    <span aria-hidden="true">🔍</span>
+    <input type="text" id="searchInput" placeholder="搜尋章節（如：導數、積分、極限、泰勒...）">
+  </div>
+</header>
+
+<div class="portal-section">
+  <div class="portal-title">Volume 1 · Calculus I</div>
+  <div class="portal-subtitle">函數 → 極限 → 導數 → 積分（基礎微積分）</div>
+  <div class="card-grid" id="vol1-grid"></div>
+</div>
+
+<div class="portal-section">
+  <div class="portal-title">Volume 2 · Calculus II</div>
+  <div class="portal-subtitle">積分技巧 → 微分方程 → 序列級數 → 參數與極座標</div>
+  <div class="card-grid" id="vol2-grid"></div>
+</div>
+
+<div class="portal-section">
+  <div class="portal-title">Volume 3 · Calculus III</div>
+  <div class="portal-subtitle">向量 → 偏導數 → 多重積分 → 向量微積分（多變數微積分）</div>
+  <div class="card-grid" id="vol3-grid"></div>
+</div>
+
+<div class="portal-section">
+  <div class="portal-title">補充資料</div>
+  <div class="portal-subtitle">公式整理與各章例題，供複習與練習時使用。</div>
+  <div class="card-grid">
+    <a class="card" href="html/formula_reviews/index.html"><div class="ch-num">REFERENCE</div><h2>公式整理</h2><div class="chapter-meta">Formula Reviews</div></a>
+    <a class="card" href="html/problems_examples/index.html"><div class="ch-num">PRACTICE</div><h2>例題與練習</h2><div class="chapter-meta">Problems and Examples</div></a>
+  </div>
+</div>
+
+<footer>
+  <p>內容基於 OpenStax Calculus (CC BY 4.0) · 繁體中文由 AI 輔助製作</p>
+  <p style="margin-top:4px">OpenStax Calculus Volumes 1–3</p>
+</footer>
+</div>
+
+<script>
+const chapters = [
+  {vol:1, ch:1, id:'ch01', file:'html/chapters/ch01_functions_zh.html', title:'函數與圖形', en:'Functions and Graphs', sections:'1.1–1.5（5 節）', topics:'定義域、值域、函數類型、變換、反函數、指數對數'},
+  {vol:1, ch:2, id:'ch02', file:'html/chapters/ch02_limits_zh.html', title:'極限', en:'Limits', sections:'2.1–2.5（5 節）', topics:'極限定義、極限法則、連續性、ε-δ 定義'},
+  {vol:1, ch:3, id:'ch03', file:'html/chapters/ch03_derivatives_zh.html', title:'導數', en:'Derivatives', sections:'3.1–3.9（9 節）', topics:'導數定義、微分法則、連鎖律、隱函數微分'},
+  {vol:1, ch:4, id:'ch04', file:'html/chapters/ch04_applications_derivatives_zh.html', title:'導數的應用', en:'Applications of Derivatives', sections:'4.1–4.10（10 節）', topics:'相關變率、極值、均值定理、最佳化、羅必達'},
+  {vol:1, ch:5, id:'ch05', file:'html/chapters/ch05_integration_zh.html', title:'積分', en:'Integration', sections:'5.1–5.7（7 節）', topics:'Riemann 和、FTC、代換法'},
+  {vol:1, ch:6, id:'ch06', file:'html/chapters/ch06_applications_integration_zh.html', title:'積分的應用', en:'Applications of Integration', sections:'6.1–6.9（9 節）', topics:'面積、體積、弧長、物理應用、質心'},
+  {vol:2, ch:7, id:'ch07', file:'html/chapters/ch07_integration_techniques_zh.html', title:'積分技巧', en:'Techniques of Integration', sections:'3.1–3.7（7 節）', topics:'分部積分、三角積分、部分分式、瑕積分'},
+  {vol:2, ch:8, id:'ch08', file:'html/chapters/ch08_differential_equations_zh.html', title:'微分方程入門', en:'Intro to Differential Equations', sections:'4.1–4.5（5 節）', topics:'可分離方程、邏輯斯諦方程、一階線性'},
+  {vol:2, ch:9, id:'ch09', file:'html/chapters/ch09_sequences_series_zh.html', title:'序列與級數', en:'Sequences and Series', sections:'5.1–5.6（6 節）', topics:'無窮級數、收斂檢驗、交錯級數'},
+  {vol:2, ch:10, id:'ch10', file:'html/chapters/ch10_power_series_zh.html', title:'冪級數', en:'Power Series', sections:'6.1–6.4（4 節）', topics:'泰勒級數、麥克勞林級數、收斂半徑'},
+  {vol:2, ch:11, id:'ch11', file:'html/chapters/ch11_parametric_polar_zh.html', title:'參數方程式與極座標', en:'Parametric & Polar', sections:'7.1–7.5（5 節）', topics:'參數曲線、極座標、圓錐曲線'},
+  {vol:3, ch:12, id:'ch12', file:'html/chapters/ch12_vectors_space_zh.html', title:'空間向量', en:'Vectors in Space', sections:'2.1–2.7（7 節）', topics:'點積、叉積、直線與平面、二次曲面'},
+  {vol:3, ch:13, id:'ch13', file:'html/chapters/ch13_vector_functions_zh.html', title:'向量值函數', en:'Vector-Valued Functions', sections:'3.1–3.4（4 節）', topics:'空間曲線、弧長、曲率、空間運動'},
+  {vol:3, ch:14, id:'ch14', file:'html/chapters/ch14_partial_derivatives_zh.html', title:'偏導數', en:'Partial Derivatives', sections:'4.1–4.8（8 節）', topics:'偏微分、切平面、梯度、Lagrange 乘數'},
+  {vol:3, ch:15, id:'ch15', file:'html/chapters/ch15_multiple_integration_zh.html', title:'多重積分', en:'Multiple Integration', sections:'5.1–5.7（7 節）', topics:'二重/三重積分、極座標、Jacobian'},
+  {vol:3, ch:16, id:'ch16', file:'html/chapters/ch16_vector_calculus_zh.html', title:'向量微積分', en:'Vector Calculus', sections:'6.1–6.8（8 節）', topics:'線積分、Green/Stokes/Divergence 定理'},
+  {vol:3, ch:17, id:'ch17', file:'html/chapters/ch17_second_order_ode_zh.html', title:'二階微分方程', en:'Second-Order ODEs', sections:'7.1–7.4（4 節）', topics:'齊次/非齊次、級數解、彈簧振動'}
+];
+
+function renderCards(filter=''){
+  const term = filter.toLowerCase();
+  ['vol1-grid','vol2-grid','vol3-grid'].forEach(id => document.getElementById(id).innerHTML = '');
+  
+  chapters.forEach(c => {
+    if (term && !c.title.includes(term) && !c.en.toLowerCase().includes(term) && !c.topics.includes(term)) return;
+    const gridId = `vol${c.vol}-grid`;
+    const card = document.createElement('a');
+    card.className = 'card';
+    card.href = c.file;
+    card.innerHTML = `
+      <div class="ch-num">Volume ${c.vol} · Chapter ${c.ch}</div>
+      <h2>${c.title}</h2>
+      <div class="chapter-meta">${c.en}</div>
+      <div class="sections">📖 ${c.sections}</div>
+      <div class="chapter-meta" style="margin-top:6px">${c.topics}</div>
+    `;
+    document.getElementById(gridId).appendChild(card);
+  });
+}
+
+function filterChapters(){
+  renderCards(document.getElementById('searchInput').value);
+}
+
+document.getElementById('searchInput').addEventListener('input', filterChapters);
+
+function toggleTheme(){
+  const html = document.documentElement;
+  const isDark = html.getAttribute('data-theme') === 'dark';
+  html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+  document.getElementById('themeBtn').textContent = isDark ? '🌙 深色模式' : '☀️ 淺色模式';
+  localStorage.setItem('calc-theme', isDark ? 'light' : 'dark');
+}
+(function(){
+  const s = localStorage.getItem('calc-theme');
+  if (s === 'dark') { document.documentElement.setAttribute('data-theme','dark'); document.getElementById('themeBtn').textContent = '☀️ 淺色模式'; }
+})();
+
+renderCards();
+</script>
+</body>
+</html>

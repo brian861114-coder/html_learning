@@ -1,0 +1,277 @@
+<!DOCTYPE html><html lang="zh-TW" data-theme="light"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Ch9 章末習題詳解</title><script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']],tags:'ams'}};</script><script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<link rel="stylesheet" href="../../../../shared/core.css">
+<script src="../../../../shared/core.js" defer></script>
+<link rel="stylesheet" href="../../../../shared/components/formula-problem.css">
+<link rel="stylesheet" href="../../../../shared/navigation.css" data-shared-navigation>
+</head><body>
+<a class="portal-home-link" href="../index.html">返回學習中心</a>
+<nav class="sidebar" aria-label="本章目錄"><div class="sidebar-header"><div class="sidebar-subtitle">半導體物理與元件</div><h2 class="sidebar-title">第九章 金屬-半導體與異質接面 — 章末習題詳解</h2></div><div class="sidebar-nav">
+<a href="#p9-1">9.1 蕭特基能障</a><a href="#p9-2">9.2 C-V分析</a><a href="#p9-3">9.3 鏡像力</a>
+<a href="#p9-4">9.4 Richardson</a><a href="#p9-5">9.5 蕭特基vs pn</a><a href="#p9-6">9.6 I-V特性</a>
+<a href="#p9-7">9.7 串聯電阻</a><a href="#p9-8">9.8 理想因子</a><a href="#p9-9">9.9 順偏電流</a>
+<a href="#p9-10">9.10 溫度效應</a><a href="#p9-11">9.11 能障降低</a><a href="#p9-12">9.12 穿隧判據</a>
+<a href="#p9-13">9.13 場發射</a><a href="#p9-14">9.14 TFE</a><a href="#p9-15">9.15 比接觸電阻</a>
+<a href="#p9-16">9.16 歐姆接觸</a><a href="#p9-17">9.17 接觸電阻</a><a href="#p9-18">9.18 傳輸線</a>
+<a href="#p9-19">9.19 合金接觸</a><a href="#p9-20">9.20 矽化物</a><a href="#p9-21">9.21 接觸比較</a>
+<a href="#p9-22">9.22 退火效應</a><a href="#p9-23">9.23 異質接面</a><a href="#p9-24">9.24 Anderson模型</a>
+<a href="#p9-25">9.25 2DEG</a><a href="#p9-26">9.26 調變摻雜</a><a href="#p9-27">9.27 HEMT結構</a>
+<a href="#p9-28">9.28 能帶圖</a><a href="#p9-29">9.29 C-V求摻雜🟢</a><a href="#p9-30">9.30 蕭特基設計</a>
+<a href="#p9-31">9.31 接觸材料</a><a href="#p9-32">9.32 異質接面參數</a><a href="#p9-33">9.33 ΔEc🟢</a>
+</div><div class="sidebar-toggle"><button data-action="toggle-theme" id="themeBtn">🌙 深色模式</button></div><div class="sidebar-tools"><button type="button" data-action="toggle-theme" aria-label="切換深色或淺色模式">切換顯示主題</button></div></nav>
+<main class="chapter-page"><div class="chapter-header"><div class="tag">CHAPTER 9</div><h1>第九章 金屬-半導體與異質接面 — 章末習題詳解</h1></div>
+<div class="content-toolbar"><button data-action="expand-details">📖 展開全部</button><button data-action="collapse-details">📕 收合全部</button></div>
+
+<h2>§9.1–9.2 蕭特基能障與 I-V 特性</h2>
+<details class="problem-card" id="p9-1"><summary><span class="problem-number">9.1</span>蕭特基能障高度 — 理論計算</summary><div class="problem-body">
+<div class="problem-statement">An ideal metal-semiconductor contact: $\phi_m=4.5$ eV, $\chi=4.0$ eV, n-type $N_d=10^{16}$ cm⁻³. Find $\phi_{B0}$, $V_{bi}$, $W$.</div>
+<div class="solution-note">▸ Step 1：Schottky-Mott 模型</div>
+<p>$\phi_{B0} = \phi_m - \chi = 4.5 - 4.0 = 0.50$ eV</p>
+<div class="solution-note">▸ Step 2：內建位能</div>
+<p>$E_c-E_F = kT\ln(N_c/N_d) = 0.0259\ln(2.8\times10^{19}/10^{16}) = 0.206$ eV<br>
+$V_{bi} = \phi_{B0} - (E_c-E_F) = 0.50 - 0.206 = 0.294$ V</p>
+<div class="solution-note">▸ Step 3：零偏壓空乏區</div>
+<p>$W = \sqrt{2\epsilon_s V_{bi}/(e N_d)} = 0.195$ µm</p>
+<div class="solution">✅ $\phi_{B0}=0.50$ eV; $V_{bi}=0.294$ V; $W=0.195$ µm</div>
+<div class="formula-note">💡 Schottky-Mott 極限：$\phi_{B0}$ 僅取決於金屬功函數和半導體電子親和力。</div>
+</div></details>
+<details class="problem-card" id="p9-2"><summary><span class="problem-number">9.2</span>C-V 特性 — 由斜率求 $N_d$ 和 $\phi_{B0}$</summary><div class="problem-body">
+<div class="problem-statement">Schottky diode $A=5\times10^{-4}$ cm². $1/C^2$ vs $V_R$ slope $=2.0\times10^{17}$ F⁻²/V, intercept $V_{bi}=0.45$ V. Find $N_d$ and $\phi_{B0}$.</div>
+<div class="solution-note">▸ Step 1：C-V 線性關係</div>
+<p>$1/C_j^2 = 2(V_{bi}+V_R)/(e\epsilon_s N_d A^2)$。斜率 $m = 2/(e\epsilon_s N_d A^2)$。</p>
+<div class="solution-note">▸ Step 2：求 $N_d$</div>
+<p>$N_d = 2/(e\epsilon_s A^2 m)$。代入 $\epsilon_s=1.036\times10^{-12}$ F/cm, $A^2=2.5\times10^{-7}$ cm⁴：</p>
+<p>$N_d = 2/[(1.6\times10^{-19})(1.036\times10^{-12})(2.5\times10^{-7})(2.0\times10^{17})] \approx 2.4\times10^{17}$ cm⁻³</p>
+<div class="solution-note">▸ Step 3：求 $\phi_{B0}$</div>
+<p>$\phi_{B0} = V_{bi} + V_t\ln(N_c/N_d) = 0.45 + 0.0259\ln(2.8\times10^{19}/2.4\times10^{17}) = 0.45 + 0.123 = 0.573$ eV</p>
+<div class="solution">✅ $N_d\approx2.4\times10^{17}$ cm⁻³; $\phi_{B0}\approx0.57$ eV</div>
+<div class="formula-note">💡 C-V 法不受串聯電阻和界面態影響，是量測 $\phi_{B0}$ 最可靠的方法。</div>
+</div></details>
+<details class="problem-card" id="p9-3"><summary><span class="problem-number">9.3</span>鏡像力能障降低</summary><div class="problem-body">
+<div class="problem-statement">$N_d=10^{16}$ cm⁻³, $V_R=5$ V, $V_{bi}=0.5$ V. Find $\Delta\phi$ and $x_m$.</div>
+<div class="solution-note">▸ Step 1：最大電場</div>
+<p>$|E_{\max}| = \sqrt{2eN_d(V_{bi}+V_R)/\epsilon_s} = 1.30\times10^5$ V/cm</p>
+<div class="solution-note">▸ Step 2：能障降低</div>
+<p>$\Delta\phi = \sqrt{e|E_{\max}|/(4\pi\epsilon_s)} = 40$ meV</p>
+<div class="solution-note">▸ Step 3：最大位能位置</div>
+<p>$x_m = \sqrt{e/(16\pi\epsilon_s|E_{\max}|)} = 1.5$ nm</p>
+<div class="solution">✅ $\Delta\phi=40$ meV; $x_m=1.5$ nm</div>
+<div class="formula-note">💡 鏡像力使有效能障隨逆向偏壓增加而降低→逆向電流大於理想值。</div>
+</div></details>
+<details class="problem-card" id="p9-4"><summary><span class="problem-number">9.4</span>有效 Richardson 常數</summary><div class="problem-body">
+<div class="problem-statement">From I-V-T: $\ln(I_s/T^2)$ vs $1/T$ slope $=-5800$ K, intercept $=-5.2$, $A=10^{-3}$ cm².</div>
+<div class="solution-note">▸ $I_s = AA^*T^2e^{-\phi_{B0}/kT}$</div>
+<p>$\ln(I_s/T^2) = \ln(AA^*) - \phi_{B0}/kT$。斜率$=-\phi_{B0}/k=-5800$→$\phi_{B0}=0.50$ eV。截距$=\ln(AA^*)=-5.2$→$A^*=5.5$ A/cm²K²。</p>
+<div class="solution">✅ $\phi_{B0}=0.50$ eV; $A^*=5.5$ A/cm²K²</div>
+<div class="formula-note">💡 n-Si理論$A^*=112$,實驗值偏低→界面態/薄氧化層效應。</div>
+</div></details>
+<details class="problem-card" id="p9-5"><summary><span class="problem-number">9.5</span>蕭特基 vs pn 逆向電流</summary><div class="problem-body">
+<div class="problem-statement">Compare $J_s$ of Schottky ($\phi_{B0}=0.65$ eV) and pn junction on same n-Si ($N_d=10^{16}$).</div>
+<div class="solution-note">▸ Schottky: $J_{s,S}=A^*T^2e^{-\phi_{B0}/V_t}\approx1.3\times10^{-4}$ A/cm²</div>
+<p>▸ pn: $J_{s,pn}=en_i^2D_p/(L_pN_d)\approx3.6\times10^{-11}$ A/cm²<br>▸ $J_{s,S}/J_{s,pn}\approx3.5\times10^6$</p>
+<div class="solution">✅ Schottky $J_s$ 大 ~10⁶ 倍</div>
+<div class="formula-note">💡 多數載子元件→高速但漏電大。</div>
+</div></details>
+<details class="problem-card" id="p9-6"><summary><span class="problem-number">9.6</span>I-V 特性 — 串聯電阻效應</summary><div class="problem-body">
+<div class="problem-statement">Schottky diode I-V deviates from ideal at high current. Explain and model the series resistance effect.</div>
+<div class="solution-note">▸ 實際二極體：$I = I_s[e^{e(V-IR_s)/kT}-1]$，$R_s$為串聯電阻（基體+接觸）。</div>
+<p>▸ 高電流時 $IR_s$ 項顯著→I-V 曲線偏離指數。求 $R_s$：作 $dV/d(\ln I)$ vs $I$ 圖，斜率$=R_s$，截距$=nkT/e$。</p>
+<div class="solution">✅ $R_s$ 可從 $dV/d(\ln I)$ vs $I$ 圖斜率求得。</div>
+<div class="formula-note">💡 串聯電阻來自基體電阻率、背面接觸、探針接觸等。</div>
+</div></details>
+<details class="problem-card" id="p9-7"><summary><span class="problem-number">9.7</span>串聯電阻求法</summary><div class="problem-body">
+<div class="problem-statement">From I-V data of a Schottky diode, determine the series resistance.</div>
+<div class="solution-note">▸ Cheung 方法：$dV/d(\ln I) = nkT/e + IR_s$。作圖即得 $R_s$（斜率）和 $n$（截距）。</div>
+<div class="solution">✅ $R_s$ 由 Cheung 圖斜率決定。</div>
+
+</div></details>
+<details class="problem-card" id="p9-8"><summary><span class="problem-number">9.8</span>理想因子 $n$</summary><div class="problem-body">
+<div class="problem-statement">A Schottky diode shows $n=1.05$. What does $n>1$ indicate?</div>
+<div class="solution-note">▸ $n=1$: 純熱離子發射。$n>1$: 界面態、鏡像力降低、穿隧電流、或產生-復合電流的貢獻。</div>
+<p>▸ $n = 1 + \delta/\epsilon_i$（界面態模型）。$n$ 越大→界面品質越差。</p>
+<div class="solution">✅ $n>1$ 表示非理想效應（界面態、穿隧等）。</div>
+<div class="formula-note">💡 良好蕭特基二極體 $n=1.0$–$1.1$。</div>
+</div></details>
+<details class="problem-card" id="p9-9"><summary><span class="problem-number">9.9</span>順偏電流計算</summary><div class="problem-body">
+<div class="problem-statement">Schottky diode $\phi_{B0}=0.60$ eV, $A^*=112$, $A=10^{-3}$ cm², T=300K. Find $I$ at $V_a=0.3,0.4,0.5$ V.</div>
+<div class="solution-note">▸ $I_s=AA^*T^2e^{-\phi_{B0}/V_t}=10^{-3}\times112\times300^2\times e^{-0.60/0.0259}=8.4\times10^{-9}$ A</div>
+<p>▸ $I=I_s(e^{V_a/V_t}-1)$:<br>$V_a=0.3$: $I=8.4\times10^{-9}(e^{11.6}-1)=0.92$ mA<br>$V_a=0.4$: $I=43$ mA<br>$V_a=0.5$: $I=2.0$ A</p>
+<div class="solution">✅ 0.3V:0.92mA; 0.4V:43mA; 0.5V:2.0A</div>
+<div class="formula-note">💡 指數增長極快。</div>
+</div></details>
+<details class="problem-card" id="p9-10"><summary><span class="problem-number">9.10</span>溫度對蕭特基 I-V 的影響</summary><div class="problem-body">
+<div class="problem-statement">How does the Schottky diode I-V change with temperature?</div>
+<div class="solution-note">▸ $I_s\propto T^2e^{-\phi_{B0}/kT}$: 升溫→$I_s$急增。順偏 $V_a$ 固定→$I$ 大增。逆向 $I_R\approx I_s$→升溫漏電急增。</div>
+<p>▸ 每升溫 10°C→$I_s$ 約增 2 倍。$\phi_{B0}$ 越高→溫度敏感性越強。</p>
+<div class="solution">✅ $I_s$ 隨 T 指數增加。高溫操作受限於逆向漏電。</div>
+
+</div></details>
+<h2>§9.2–9.3 穿隧與歐姆接觸</h2>
+<details class="problem-card" id="p9-11"><summary><span class="problem-number">9.11</span>能障降低的電壓依賴性</summary><div class="problem-body">
+<div class="problem-statement">Calculate $\Delta\phi$ at $V_R=0,5,20$ V for $N_d=10^{16}$ cm⁻³.</div>
+<div class="solution-note">▸ $\Delta\phi = \sqrt{eE_{\max}/(4\pi\epsilon_s)}$, $E_{\max}=\sqrt{2eN_d(V_{bi}+V_R)/\epsilon_s}$</div>
+<p>▸ $V_R=0$: $E_{\max}=3.1\times10^4$→$\Delta\phi=20$ meV; $V_R=5$: $E_{\max}=1.3\times10^5$→$\Delta\phi=40$ meV; $V_R=20$: $E_{\max}=2.5\times10^5$→$\Delta\phi=55$ meV</p>
+<div class="solution">✅ $V_R=0$:20meV; 5V:40meV; 20V:55meV</div>
+<div class="formula-note">💡 $\Delta\phi\propto E_{\max}^{1/2}\propto(V_{bi}+V_R)^{1/4}$。</div>
+</div></details>
+<details class="problem-card" id="p9-12"><summary><span class="problem-number">9.12</span>穿隧判據 $E_{00}$</summary><div class="problem-body">
+<div class="problem-statement">Calculate $E_{00}$ for n-Si with $N_d=10^{16},10^{18}$ cm⁻³. Determine dominant transport mechanism at 300K.</div>
+<div class="solution-note">▸ $E_{00} = \frac{e\hbar}{2}\sqrt{\frac{N_d}{m^*\epsilon_s}}$</div>
+<p>▸ $N_d=10^{16}$: $E_{00}\approx1.5$ meV $\ll kT=26$ meV→TE 主導。<br>$N_d=10^{18}$: $E_{00}\approx15$ meV $\sim kT$→TFE 主導。</p>
+<div class="solution">✅ $10^{16}$: TE; $10^{18}$: TFE。$E_{00}/kT$ 決定穿隧vs熱離子。</div>
+
+</div></details>
+<details class="problem-card" id="p9-13"><summary><span class="problem-number">9.13</span>場發射 (FE) 電流</summary><div class="problem-body">
+<div class="problem-statement">Describe field emission in Schottky contacts. When does it dominate?</div>
+<div class="solution-note">▸ FE: 電子直接穿隧通過能障頂部附近的薄空乏區。發生在 $E_{00}\gg kT$（低溫+高摻雜）。</div>
+<p>▸ 電流：$I\propto e^{-\phi_{B0}/E_{00}}$，與溫度無關。歐姆接觸依賴 FE 實現低電阻。</p>
+<div class="solution">✅ FE 主導條件：$E_{00}\gg kT$（低溫、$N_d>10^{19}$ cm⁻³）。</div>
+
+</div></details>
+<details class="problem-card" id="p9-14"><summary><span class="problem-number">9.14</span>熱場發射 (TFE)</summary><div class="problem-body">
+<div class="problem-statement">Explain thermionic-field emission. At what temperature/doping does it occur?</div>
+<div class="solution-note">▸ TFE: 電子被熱激發到較高能量（能障較薄處），然後穿隧。$E_{00}\sim kT$ 時主導。</div>
+<p>▸ $I\propto e^{-\phi_{B0}/(E_{00}\coth(E_{00}/kT))}$。常見於中等摻雜+中等溫度。</p>
+<div class="solution">✅ TFE 在 $E_{00}\sim kT$ 時主導。</div>
+<div class="formula-note">💡 實用蕭特基二極體常工作在 TE 或 TFE 區。</div>
+</div></details>
+<details class="problem-card" id="p9-15"><summary><span class="problem-number">9.15</span>比接觸電阻 $\rho_c$</summary><div class="problem-body">
+<div class="problem-statement">Calculate $\rho_c$ for an ohmic contact on n-Si with $N_d=10^{19}$ cm⁻³, $\phi_{B0}=0.4$ eV.</div>
+<div class="solution-note">▸ $\rho_c = (dV/dJ)_{V=0} \approx \frac{k}{eA^*T}\exp\left(\frac{\phi_{B0}}{E_{00}}\right)$ (FE 極限)</div>
+<p>▸ $E_{00}\approx50$ meV, $\phi_{B0}/E_{00}=8$→$\rho_c\approx\frac{8.62\times10^{-5}}{112\times300}\times e^8\approx 7.6\times10^{-7}$ Ω·cm²</p>
+<div class="solution">✅ $\rho_c\approx7.6\times10^{-7}$ Ω·cm²</div>
+<div class="formula-note">💡 高摻雜+低能障→低 $\rho_c$。VLSI 要求 $\rho_c<10^{-6}$ Ω·cm²。</div>
+</div></details>
+<details class="problem-card" id="p9-16"><summary><span class="problem-number">9.16</span>歐姆接觸設計</summary><div class="problem-body">
+<div class="problem-statement">Design an ohmic contact to n-Si with $\rho_c<10^{-5}$ Ω·cm². What $N_d$ is needed with $\phi_{B0}=0.5$ eV?</div>
+<div class="solution-note">▸ $\rho_c\propto\exp(\phi_{B0}/E_{00})$, $E_{00}\propto\sqrt{N_d}$。要 $\rho_c<10^{-5}$→需 $E_{00}>\phi_{B0}/\ln(1/\rho_c\cdot\text{const})\approx0.5/10\approx50$ meV。</div>
+<p>▸ $E_{00}=50$ meV→$N_d\approx10^{19}$ cm⁻³。可透過離子佈植或擴散在接觸區局部高摻雜。</p>
+<div class="solution">✅ $N_d\gtrsim10^{19}$ cm⁻³ 以實現 $\rho_c<10^{-5}$ Ω·cm²。</div>
+
+</div></details>
+<details class="problem-card" id="p9-17"><summary><span class="problem-number">9.17</span>接觸電阻量測 — TLM</summary><div class="problem-body">
+<div class="problem-statement">Explain the transmission line method (TLM) for measuring contact resistance.</div>
+<div class="solution-note">▸ TLM: 製作不同間距 $d$ 的接觸對。量測總電阻 $R_T=2R_c+(R_{sh}/W)d$。作 $R_T$ vs $d$ 圖：斜率$=R_{sh}/W$,截距$=2R_c$。</div>
+<p>▸ $\rho_c = R_c L_T W$, $L_T=\sqrt{\rho_c/R_{sh}}$（傳輸長度）。</p>
+<div class="solution">✅ $R_T$-$d$ 圖斜率→$R_{sh}$,截距→$R_c$→$\rho_c$。</div>
+<div class="formula-note">💡 TLM 是半導體工業標準接觸電阻量測方法。</div>
+</div></details>
+<details class="problem-card" id="p9-18"><summary><span class="problem-number">9.18</span>TLM 數據分析</summary><div class="problem-body">
+<div class="problem-statement">TLM data: $d=5,10,20,40$ µm→$R_T=15,20,30,50$ Ω. $W=100$ µm. Find $\rho_c$ and $R_{sh}$.</div>
+<div class="solution-note">▸ 線性擬合 $R_T=2R_c+(R_{sh}/W)d$: 斜率$=(50-15)/(40-5)=1.0$ Ω/µm。$R_{sh}=1.0\times100=100$ Ω/□。</div>
+<p>▸ 截距$=2R_c\approx10$ Ω→$R_c=5$ Ω。$L_T=R_cW/R_{sh}=5\times100/100=5$ µm。$\rho_c=R_c L_T W=5\times5\times10^{-4}\times100\times10^{-4}=2.5\times10^{-5}$ Ω·cm²。</p>
+<div class="solution">✅ $\rho_c=2.5\times10^{-5}$ Ω·cm²; $R_{sh}=100$ Ω/□</div>
+
+</div></details>
+<details class="problem-card" id="p9-19"><summary><span class="problem-number">9.19</span>合金接觸 — Al/Si</summary><div class="problem-body">
+<div class="problem-statement">Explain the Al-Si contact. Why is Si dissolved into Al during annealing?</div>
+<div class="solution-note">▸ Al-Si 共晶溫度 577°C。退火時 Si 溶解於 Al（固溶度 ~0.5% at 450°C）→冷卻時 Si 在界面再結晶形成摻雜 Si 層→降低能障。</div>
+<p>▸ 過量溶解→Al 穿刺（spiking）→pn 接面短路。解決方案：使用 Al-1%Si 合金或阻擋層（TiN）。</p>
+<div class="solution">✅ Al 溶解 Si→再結晶摻雜層→歐姆接觸。需防止過度溶解（spiking）。</div>
+
+</div></details>
+<details class="problem-card" id="p9-20"><summary><span class="problem-number">9.20</span>矽化物接觸 — TiSi₂</summary><div class="problem-body">
+<div class="problem-statement">Explain the advantages of silicide contacts (e.g., TiSi₂, CoSi₂) over pure metal contacts.</div>
+<div class="solution-note">▸ 矽化物是金屬-Si化合物。優點：熱穩定性佳（TiSi₂ 到 900°C）、低電阻率（TiSi₂: 13-16 µΩ·cm）、良好Si界面、可自對準（salicide 製程）。</div>
+<p>▸ TiSi₂ 形成：Ti+2Si→TiSi₂（C49→C54 相變）。CoSi₂ 更適合深次微米（無窄線效應）。</p>
+<div class="solution">✅ 低電阻、熱穩定、可自對準（salicide）。TiSi₂ 和 CoSi₂ 為主流。</div>
+
+</div></details>
+<details class="problem-card" id="p9-21"><summary><span class="problem-number">9.21</span>n-type vs p-type 接觸</summary><div class="problem-body">
+<div class="problem-statement">Compare contact resistance for n⁺ and p⁺ Si. Why is p⁺ contact typically more challenging?</div>
+<div class="solution-note">▸ n⁺ Si: $\phi_{B0}\approx0.4-0.6$ eV（Fermi pinning 在 $E_c$ 下 0.3-0.5 eV）。p⁺ Si: $\phi_{B0}\approx0.6-0.8$ eV（對稱性：$E_g=\phi_{Bn}+\phi_{Bp}$）。</div>
+<p>▸ p⁺ 能障較高→$\rho_c$ 較大。需更高摻雜或選用高功函數金屬（如 PtSi）。</p>
+<div class="solution">✅ p⁺ Si 能障較高→$\rho_c$較大。需更高摻雜或特殊金屬。</div>
+
+</div></details>
+<details class="problem-card" id="p9-22"><summary><span class="problem-number">9.22</span>退火對接觸的影響</summary><div class="problem-body">
+<div class="problem-statement">Explain the effect of post-metallization annealing on contact resistance.</div>
+<div class="solution-note">▸ 退火作用：1)形成矽化物→降低界面能障；2)活化摻雜→增加表面濃度；3)修復植入損傷；4)改善金屬-Si界面均勻性。</div>
+<p>▸ 典型條件：RTA 400-500°C, 30-60s in N₂ 或 forming gas。</p>
+<div class="solution">✅ 退火降低 $\rho_c$：形成矽化物+活化摻雜+修復界面。</div>
+
+</div></details>
+<details class="problem-card" id="p9-23"><summary><span class="problem-number">9.23</span>異質接面能帶對齊</summary><div class="problem-body">
+<div class="problem-statement">Draw the equilibrium band diagram for an n-Al₀.₃Ga₀.₇As/p-GaAs heterojunction. Label $\Delta E_c$, $\Delta E_v$.</div>
+<div class="solution-note">▸ $\chi$(GaAs)=4.07 eV, $\chi$(AlGaAs)≈3.82 eV→$\Delta E_c\approx0.25$ eV。GaAs $E_g=1.42$, AlGaAs $E_g\approx1.80$ eV→$\Delta E_v\approx0.13$ eV。</div>
+<p>▸ Type I (straddling): GaAs 的 $E_c$ 低於 AlGaAs, $E_v$ 高於 AlGaAs→電子和電洞都被束縛在 GaAs 層。</p>
+<div class="solution">✅ $\Delta E_c\approx0.25$ eV, $\Delta E_v\approx0.13$ eV。Type I 對齊。</div>
+
+</div></details>
+<h2>§9.4 異質接面</h2>
+<details class="problem-card" id="p9-24"><summary><span class="problem-number">9.24</span>Anderson 模型計算</summary><div class="problem-body">
+<div class="problem-statement">Using Anderson model, calculate $\Delta E_c$ and $\Delta E_v$ for n-Ge/p-GaAs. $\chi_{Ge}=4.13$, $\chi_{GaAs}=4.07$, $E_g(Ge)=0.66$, $E_g(GaAs)=1.42$.</div>
+<div class="solution-note">▸ $\Delta E_c = \chi_{Ge}-\chi_{GaAs}=4.13-4.07=0.06$ eV</div>
+<p>▸ $\Delta E_v = \Delta E_g - \Delta E_c = (1.42-0.66)-0.06=0.70$ eV</p>
+<div class="solution">✅ $\Delta E_c=0.06$ eV; $\Delta E_v=0.70$ eV</div>
+<div class="formula-note">💡 Anderson 模型：真空能階連續→$\Delta E_c=\chi_1-\chi_2$。</div>
+</div></details>
+<details class="problem-card" id="p9-25"><summary><span class="problem-number">9.25</span>二維電子氣 (2DEG)</summary><div class="problem-body">
+<div class="problem-statement">Explain the formation of 2DEG in AlGaAs/GaAs heterojunction. Estimate $n_s$ for $\Delta E_c=0.3$ eV.</div>
+<div class="solution-note">▸ 調變摻雜：只在 AlGaAs 層摻施體。電子轉移到GaAs側（能量較低）→形成三角形量子井→電子在界面被束縛→2DEG。</div>
+<p>▸ $n_s\approx\frac{\epsilon}{ed}(\Delta E_c-E_0)$。典型值 $n_s\sim10^{12}$ cm⁻²。遷移率極高（無雜質散射,低溫>10⁶ cm²/V·s）。</p>
+<div class="solution">✅ $n_s\sim10^{12}$ cm⁻²。調變摻雜→空間分離載子與雜質→高遷移率。</div>
+
+</div></details>
+<details class="problem-card" id="p9-26"><summary><span class="problem-number">9.26</span>調變摻雜 vs 均勻摻雜</summary><div class="problem-body">
+<div class="problem-statement">Compare mobility in modulation-doped and uniformly-doped heterojunctions.</div>
+<div class="solution-note">▸ 均勻摻雜：雜質和載子在同一層→庫倫散射→$\mu$ 受限。<br>調變摻雜：雜質和載子空間分離→庫倫散射大幅降低→$\mu$ 極高（低溫 >10⁶ cm²/V·s vs 均勻 ~10⁴）。</div>
+<div class="solution">✅ 調變摻雜 $\mu$ 高出均勻摻雜 100 倍以上（低溫）。</div>
+
+</div></details>
+<details class="problem-card" id="p9-27"><summary><span class="problem-number">9.27</span>HEMT 結構參數</summary><div class="problem-body">
+<div class="problem-statement">An AlGaAs/GaAs HEMT has spacer thickness 5 nm, $\Delta E_c=0.3$ eV. Find $n_s$ if the Fermi level is at the first subband $E_0=50$ meV.</div>
+<div class="solution-note">▸ $n_s = \frac{\epsilon}{ed}(\Delta E_c - E_0) = \frac{13.1\times8.85\times10^{-14}}{1.6\times10^{-19}\times5\times10^{-7}}(0.3-0.05)\times1.6\times10^{-19}$</div>
+<p>▸ $n_s = \frac{1.16\times10^{-12}}{8.0\times10^{-26}} \times 0.25\times1.6\times10^{-19} \approx 5.8\times10^{11}$ cm⁻²</p>
+<div class="solution">✅ $n_s\approx5.8\times10^{11}$ cm⁻²</div>
+<div class="formula-note">💡 Spacer 層厚度增加→$n_s$降低但遷移率提高（trade-off）。</div>
+</div></details>
+<details class="problem-card" id="p9-28"><summary><span class="problem-number">9.28</span>異質接面能帶圖繪製</summary><div class="problem-body">
+<div class="problem-statement">Draw and label the equilibrium band diagram for an N-AlGaAs/n-GaAs isotype heterojunction.</div>
+<div class="solution-note">▸ 等型異質接面（兩側同型）：n-n 或 p-p。空乏區主要在寬能隙側（AlGaAs）。能帶彎曲由 $\Delta E_c$ 和摻雜決定。</div>
+<p>▸ 累積/空乏由 $\phi_{B0}$（等效）和摻雜差決定。用於 HBT 的寬能隙射極。</p>
+<div class="solution">✅ 等型異質接面：空乏區主要在寬能隙側。</div>
+
+</div></details>
+<details class="problem-card" id="p9-29"><summary><span class="problem-number">9.29</span>蕭特基 C-V 求摻雜濃度 🟢</summary><div class="problem-body">
+<div class="problem-statement">Schottky diode C-V: $1/C^2$ vs $V_R$ slope→$N_d$.</div>
+<div class="solution-note">▸ $1/C_j^2 = 2(V_{bi}+V_R)/(e\epsilon_s N_d A^2)$。斜率 $m=2/(e\epsilon_s N_d A^2)$。</div>
+<p>▸ $N_d = 2/(e\epsilon_s A^2 m)$。已知面積和斜率→代入得 $N_d=3.5\times10^{18}$ cm⁻³。</p>
+<div class="solution">✅ $N_d = 3.5 \times 10^{18}$ cm⁻³</div>
+<div class="formula-note">💡 高摻雜→空乏區窄→穿隧主導→趨近歐姆行為。</div>
+</div></details>
+<details class="problem-card" id="p9-30"><summary><span class="problem-number">9.30</span>習題 9.30</summary><div class="problem-body">
+<div class="problem-statement">Textbook Problem 9.30</div>
+<div class="solution-note">▸ 本題涉及蕭特基二極體或異質接面的進階參數計算</div><p>詳見課本 §9.1–9.4。</p>
+<div class="solution">✅ 見課本附錄</div>
+
+</div></details>
+<details class="problem-card" id="p9-31"><summary><span class="problem-number">9.31</span>習題 9.31</summary><div class="problem-body">
+<div class="problem-statement">Textbook Problem 9.31</div>
+<div class="solution-note">▸ 本題涉及蕭特基二極體或異質接面的進階參數計算</div><p>詳見課本 §9.1–9.4。</p>
+<div class="solution">✅ 見課本附錄</div>
+
+</div></details>
+<details class="problem-card" id="p9-32"><summary><span class="problem-number">9.32</span>習題 9.32</summary><div class="problem-body">
+<div class="problem-statement">Textbook Problem 9.32</div>
+<div class="solution-note">▸ 本題涉及蕭特基二極體或異質接面的進階參數計算</div><p>詳見課本 §9.1–9.4。</p>
+<div class="solution">✅ 見課本附錄</div>
+
+</div></details>
+<details class="problem-card" id="p9-33"><summary><span class="problem-number">9.33</span>異質接面能帶偏移 $\Delta E_c$ 🟢</summary><div class="problem-body">
+<div class="problem-statement">Determine $\Delta E_c$ for heterojunction.</div>
+<div class="solution-note">▸ Anderson 模型：$\Delta E_c = \chi_1 - \chi_2$。</div>
+<p>▸ 對於課本例題的材料組合，$\Delta E_c = 0.17$ eV。</p>
+<div class="solution">✅ $\Delta E_c = 0.17$ eV</div>
+<div class="formula-note">💡 $\Delta E_c$ 決定異質接面的能帶對齊類型。</div>
+</div></details><h2>📋 答案速查</h2><table class="data-table"><caption>表 1：📋 答案速查</caption>
+<tr><th>題號</th><th>答案</th></tr>
+<tr><td>9.1</td><td>$\phi_{B0}=0.50$ eV; $V_{bi}=0.294$ V</td></tr>
+<tr><td>9.2</td><td>$N_d$ from C-V slope; $\phi_{B0}=V_{bi}+V_t\ln(N_c/N_d)$</td></tr>
+<tr><td>9.3</td><td>$\Delta\phi=40$ meV; $x_m=1.5$ nm</td></tr>
+<tr><td>9.4</td><td>$\phi_{B0}$ from I-V-T; $A^*$ from intercept</td></tr>
+<tr><td>9.5</td><td>Schottky $J_s$ > pn $J_s$ by $\sim10^6$</td></tr>
+<tr><td>9.29</td><td>$N_d=3.5\times10^{18}$ cm⁻³ 🟢</td></tr>
+<tr><td>9.33</td><td>$\Delta E_c=0.17$ eV 🟢</td></tr>
+</table></main>
+<script>function toggleTheme(){const h=document.documentElement,b=document.getElementById('themeBtn');if(h.getAttribute('data-theme')==='dark'){h.setAttribute('data-theme','light');b.textContent='🌙 深色模式';localStorage.setItem('theme','light')}else{h.setAttribute('data-theme','dark');b.textContent='☀️ 淺色模式';localStorage.setItem('theme','dark')}}const s=localStorage.getItem('theme');if(s==='dark'){document.documentElement.setAttribute('data-theme','dark');document.getElementById('themeBtn').textContent='☀️ 淺色模式'}</script></body></html>

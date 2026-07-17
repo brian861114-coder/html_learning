@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第 9 章例題詳解 — Calculus</title>
+<script>
+MathJax = {
+  tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']], tags: 'ams' },
+  options: { ignoreHtmlClass: 'no-math' }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<link rel="stylesheet" href="../../../../shared/core.css">
+<script src="../../../../shared/core.js" defer></script>
+<link rel="stylesheet" href="../../../../shared/navigation.css" data-shared-navigation>
+</head>
+<body>
+<nav class="sidebar" aria-label="本章目錄"><div class="sidebar-header"><div class="sidebar-subtitle">微積分</div><h2 class="sidebar-title">序列與級數</h2></div><ul class="toc"><li class="ns"><a href="#section-1">9.1 序列 (Sequences)</a></li><li class="ns"><a href="#section-2">9.2 無窮級數 (Infinite Series)</a></li><li class="ns"><a href="#section-3">9.3 發散檢驗與積分檢驗 (Divergence and Integral Tests)</a></li><li class="ns"><a href="#section-4">9.4 比較檢驗 (Comparison Tests)</a></li><li class="ns"><a href="#section-5">9.5 交錯級數 (Alternating Series)</a></li><li class="ns"><a href="#section-6">9.6 比值檢驗與根值檢驗 (Ratio and Root Tests)</a></li></ul><div class="sidebar-tools"><button type="button" data-action="toggle-theme" aria-label="切換深色或淺色模式">切換顯示主題</button></div></nav>
+
+<main class="chapter-page">
+
+<a class="portal-home-link" href="../../index.html">← 返回學習中心</a>
+
+<a class="portal-home-link" href="index.html">← 例題與習題目錄</a>
+
+<header class="chapter-header">
+  <div class="tag">第 9 章 · Calculus Vol 2, Ch 5</div>
+  <h1>序列與級數</h1>
+  <div class="chapter-meta">Sequences and Series · OpenStax Calculus · pp. 381–460 · 共 25 個課本例題</div>
+</header>
+
+<p>以下收錄本章所有課本例題，包含<strong>題目、詳細逐步解題過程與答案</strong>。內容以繁體中文呈現，數學式使用 MathJax 渲染。課本有詳解者翻譯為繁體中文；課本僅提供答案者，補上完整逐步解。</p>
+
+<section id="ss5-1">
+<h2 id="section-1">9.1 序列 (Sequences)</h2>
+<p style="font-size:13px;color:var(--tx2);margin-bottom:16px"><strong>🔑 本節重點：</strong>序列的定義、通項公式、序列的極限、收斂與發散、單調有界定理</p>
+
+<div class="example">
+<div class="example-label">📝 例題 9.1</div>
+<div class="example-title">求序列的通項公式</div>
+<div class="problem-statement">求序列 $\{-\frac{1}{2},\frac{2}{3},-\frac{3}{4},\frac{4}{5},\ldots\}$ 的通項公式。</div>
+<div class="solution"><strong>解：</strong>分子：$1,2,3,4,\ldots = n$。分母：$2,3,4,5,\ldots = n+1$。交錯符號：奇數項為負、偶數項為正，因子為 $(-1)^n$。<br>通項：$a_n = (-1)^n \frac{n}{n+1}$。</div>
+<div class="solution">✅ 答案：$a_n = (-1)^n \frac{n}{n+1}$</div>
+
+</div>
+
+<div class="example">
+<div class="example-label">📝 例題 9.2</div>
+<div class="example-title">序列極限：a_n=(n+1)/n</div>
+<div class="problem-statement">求 $\lim_{n\to\infty} \frac{n+1}{n}$。</div>
+<div class="solution"><strong>解：</strong>$\lim_{n\to\infty} \frac{n+1}{n} = \lim_{n\to\infty} \left(1 + \frac{1}{n}\right) = 1 + 0 = 1$。序列收斂至 1。</div>
+<div class="solution">✅ 答案：$1$（收斂）</div>
+
+</div>
+
+<div class="example">
+<div class="example-label">📝 例題 9.3</div>
+<div class="example-title">序列極限：a_n=(-1)ⁿ</div>
+<div class="problem-statement">求 $\lim_{n\to\infty} (-1)^n$。</div>
+<div class="solution"><strong>解：</strong>序列為 $-1, 1, -1, 1, \ldots$，在 $-1$ 與 $1$ 之間振盪，無唯一極限值。故序列發散。</div>
+<div class="solution">✅ 答案：發散（振盪）</div>
+
+</div>
+
+<div class="example">
+<div class="example-label">📝 例題 9.4</div>
+<div class="example-title">序列極限：aₙ=ln(n)/n</div>
+<div class="problem-statement">求 $\lim_{n\to\infty} \frac{\ln n}{n}$。</div>
+<div class="solution"><strong>解：</strong>使用羅必達法則（$\infty/\infty$ 型）：$\lim_{n\to\infty} \frac{\ln n}{n} = \lim_{n\to\infty} \frac{1/n}{1} = 0$。</div>
+<div class="solution">✅ 答案：$0$（收斂）</div>
+
+</div>
+
+<div class="example">
+<div class="example-label">📝 例題 9.5</div>
+<div class="example-title">幾何序列的極限</div>
+<div class="problem-statement">討論 $\{r^n\}$ 的收斂性，其中 $r$ 為常數。</div>
+<div class="solution"><strong>解：</strong>若 $|r| < 1$：$\lim_{n\to\infty} r^n = 0$（收斂）。<br>若 $r = 1$：$\lim_{n\to\infty} 1^n = 1$（收斂）。<br>若 $|r| > 1$ 或 $r = -1$：發散。</div>
+<div class="solution">✅ 答案：$|r|<1$ 或 $r=1$ 收斂，其餘發散</div>
+
+</div>
+
+<div class="example">
+<div class="example-label">📝 例題 9.6</div>
+<div class="example-title">單調有界定理應用</div>
+<div class="problem-statement">證明 $a_{n+1} = \frac{a_n}{2} + \frac{1}{a_n}$，$a_1 = 2$ 收斂，並求極限。</div>
+<div class="solution"><strong>解：</strong>可證明 $a_n > \sqrt{2}$（下界）且遞減。由單調有界定理，序列收斂。設 $\lim a_n = L$，則 $L = \frac{L}{2} + \frac{1}{L}$。<br>$\frac{L}{2} = \frac{1}{L}$，$L^2 = 2$，$L = \sqrt{2}$（取正根）。</div>
+<div class="solution">✅ 答案：$\sqrt{2}$</div>
+
+</div>
+
+</section>
+
+<section id="ss5-2">
+<h2 id="section-2">9.2 無窮級數 (Infinite Series)</h2>
+<p style="font-size:13px;color:var(--tx2);margin-bottom:16px"><strong>🔑 本節重點：</strong>部分和、幾何級數、伸縮級數、調和級數</p>
+
+<div class="example">
+<div class="example-label">📝 例題 9.7</div>
+<div class="example-title">幾何級數的和</div>
+<div class="problem-statement">求 $\sum_{n=0}^{\infty} \left(\frac{1}{2}\right)^n$。</div>
+<div class="solution"><strong>解：</strong>幾何級數，$a=1$、$r=1/2$、$|r|<1$。和 $= \frac{a}{1-r} = \frac{1}{1-1/2} = 2$。</div>
+<div class="solution">✅ 答案：$2$</div>
+
+</div>
+
+<div class="example">
+<div class="example-label">📝 例題 9.8</div>
+<div class="example-title">伸縮級數的和</div>
+<div class="problem-statement">求 $\sum_{n=1}^{\infty} \frac{1}{n(n+1)}$。</div>
+<div class="solution"><strong>解：</strong>使用部分分式：$\frac{1}{n(n+1)} = \frac{1}{n} - \frac{1}{n+1}$。<br>部分和 $S_N = (1-\frac{1}{2}) + (\frac{1}{2}-\frac{1}{3}) + \cdots + (\frac{1}{N}-\frac{1}{N+1}) = 1 - \frac{1}{N+1}$。<br>$\lim_{N\to\infty} S_N = 1$。</div>
+<div class="solution">✅ 答案：$1$</div>
+
+</div>
+
+<div class="example">
+<div class="example-label">📝 例題 9.9</div>
+<div class="example-title">調和級數發散</div>
+<div class="problem-statement">證明 $\sum_{n=1}^{\infty} \frac{1}{n}$ 發散。</div>
+<div class="solution"><strong>解：</strong>使用積分檢驗：$\int_1^\infty \frac{dx}{x}$ 發散（$p=1$），故調和級數發散。</div>
+<div class="solution">✅ 答案：發散</div>
+
+</div>
+
+<div class="example">
+<div class="example-label">📝 例題 9.10</div>
+<div class="example-title">級數部分和的計算</div>
+<div class="problem-statement">求 $\sum_{n=1}^{\infty} \frac{3}{10^n}$ 的和。</div>
+<div class="solution"><strong>解：</strong>幾何級數：$a = 3/10$、$r = 1/10$。和 $= \frac{3/10}{1-1/10} = \frac{3/10}{9/10} = \frac{1}{3}$。</div>
+<div class="solution">✅ 答案：$\frac{1}{3}$</div>
+
+</div>
+
+</section>
+
+<section id="ss5-3">
+<h2 id="section-3">9.3 發散檢驗與積分檢驗 (Divergence and Integral Tests)</h2>
+<p style="font-size:13px;color:var(--tx2);margin-bottom:16px"><strong>🔑 本節重點：</strong>第 n 項發散檢驗、積分檢驗、p-級數</p>
+
+<div class="example">
+<div class="example-label">📝 例題 9.11</div>
+<div class="example-title">第 n 項檢驗</div>
+<div class="problem-statement">判斷 $\sum_{n=1}^{\infty} \frac{n}{n+1}$ 的斂散性。</div>
+<div class="solution"><strong>解：</strong>$\lim_{n\to\infty} a_n = \lim_{n\to\infty} \frac{n}{n+1} = 1 \neq 0$。由第 n 項發散檢驗，級數發散。</div>
+<div class="solution">✅ 答案：發散</div>
+
+</div>
+
+<div class="example">
+<div class="example-label">📝 例題 9.12</div>
+<div class="example-title">p-級數：p=2</div>
+<div class="problem-statement">判斷 $\sum_{n=1}^{\infty} \frac{1}{n^2}$ 的斂散性。</div>
+<div class="solution"><strong>解：</strong>使用積分檢驗：$\int_1^\infty \frac{dx}{x^2} = 1$，收斂。故級數收斂。這是一個 $p$-級數，$p=2>1$。</div>
+<div class="solution">✅ 答案：收斂（和 $= \frac{\pi^2}{6}$）</div>
+
+</div>
+
+<div class="example">
+<div class="example-label">📝 例題 9.13</div>
+<div class="example-title">p-級數：p=1/2</div>
+<div class="problem-statement">判斷 $\sum_{n=1}^{\infty} \frac{1}{\sqrt{n}}$ 的斂散性。</div>
+<div class="solution"><strong>解：</strong>$p = 1/2 \leq 1$。$\int_1^\infty \frac{dx}{\sqrt{x}}$ 發散，故級數發散。</div>
+<div class="solution">✅ 答案：發散</div>
+
+</div>
+
+<div class="example">
+<div class="example-label">📝 例題 9.14</div>
+<div class="example-title">積分檢驗：∑(ln n)/n²</div>
+<div class="problem-statement">判斷 $\sum_{n=2}^{\infty} \frac{\ln n}{n^2}$ 的斂散性。</div>
+<div class="solution"><strong>解：</strong>使用積分檢驗：$\int_2^\infty \frac{\ln x}{x^2}\,dx$。分部積分：$u=\ln x$、$dv=x^{-2}dx$，$du=dx/x$、$v=-1/x$。<br>$\int \frac{\ln x}{x^2}\,dx = -\frac{\ln x}{x} - \frac{1}{x} + C$。從 2 到 $\infty$ 收斂。故級數收斂。</div>
+<div class="solution">✅ 答案：收斂</div>
+
+</div>
+
+</section>
+
+<section id="ss5-4">
+<h2 id="section-4">9.4 比較檢驗 (Comparison Tests)</h2>
+<p style="font-size:13px;color:var(--tx2);margin-bottom:16px"><strong>🔑 本節重點：</strong>直接比較檢驗、極限比較檢驗</p>
+
+<div class="example">
+<div class="example-label">📝 例題 9.15</div>
+<div class="example-title">直接比較檢驗</div>
+<div class="problem-statement">判斷 $\sum_{n=1}^{\infty} \frac{1}{n^2+1}$ 的斂散性。</div>
+<div class="solution"><strong>解：</strong>對 $n \geq 1$：$n^2+1 > n^2$，故 $\frac{1}{n^2+1} < \frac{1}{n^2}$。$\sum \frac{1}{n^2}$ 收斂（$p=2>1$），由直接比較檢驗，原級數收斂。</div>
+<div class="solution">✅ 答案：收斂</div>
+
+</div>
+
+<div class="example">
+<div class="example-label">📝 例題 9.16</div>
+<div class="example-title">極限比較檢驗</div>
+<div class="problem-statement">判斷 $\sum_{n=1}^{\infty} \frac{1}{2^n-1}$ 的斂散性。</div>
+<div class="solution"><strong>解：</strong>與 $\sum \frac{1}{2^n}$ 比較：$\lim_{n\to\infty} \frac{1/(2^n-1)}{1/2^n} = \lim_{n\to\infty} \frac{2^n}{2^n-1} = 1$（有限正數）。已知 $\sum \frac{1}{2^n}$ 收斂（幾何級數，$r=1/2$），故原級數收斂。</div>
+<div class="solution">✅ 答案：收斂</div>
+
+</div>
+
+<div class="example">
+<div class="example-label">📝 例題 9.17</div>
+<div class="example-title">比較檢驗：∑1/√(n³+1)</div>
+<div class="problem-statement">判斷 $\sum_{n=1}^{\infty} \frac{1}{\sqrt{n^3+1}}$ 的斂散性。</div>
+<div class="solution"><strong>解：</strong>$\frac{1}{\sqrt{n^3+1}} < \frac{1}{\sqrt{n^3}} = \frac{1}{n^{3/2}}$。$\sum \frac{1}{n^{3/2}}$ 為 $p$-級數，$p=3/2>1$，收斂。由比較檢驗，原級數收斂。</div>
+<div class="solution">✅ 答案：收斂</div>
+
+</div>
+
+</section>
+
+<section id="ss5-5">
+<h2 id="section-5">9.5 交錯級數 (Alternating Series)</h2>
+<p style="font-size:13px;color:var(--tx2);margin-bottom:16px"><strong>🔑 本節重點：</strong>交錯級數檢驗、絕對收斂與條件收斂</p>
+
+<div class="example">
+<div class="example-label">📝 例題 9.18</div>
+<div class="example-title">交錯調和級數</div>
+<div class="problem-statement">判斷 $\sum_{n=1}^{\infty} \frac{(-1)^{n+1}}{n}$ 的斂散性。</div>
+<div class="solution"><strong>解：</strong>$b_n = 1/n$ 遞減且 $\lim b_n = 0$。由交錯級數檢驗，級數收斂。但 $\sum |a_n| = \sum \frac{1}{n}$ 發散，故為條件收斂。</div>
+<div class="solution">✅ 答案：條件收斂（和 $= \ln 2$）</div>
+
+</div>
+
+<div class="example">
+<div class="example-label">📝 例題 9.19</div>
+<div class="example-title">交錯級數檢驗應用</div>
+<div class="problem-statement">判斷 $\sum_{n=1}^{\infty} \frac{(-1)^n}{n^2}$ 的斂散性。</div>
+<div class="solution"><strong>解：</strong>交錯級數檢驗：$b_n = 1/n^2$ 遞減且 $\lim b_n = 0$，收斂。$\sum 1/n^2$ 也收斂，故為絕對收斂。</div>
+<div class="solution">✅ 答案：絕對收斂</div>
+
+</div>
+
+<div class="example">
+<div class="example-label">📝 例題 9.20</div>
+<div class="example-title">交錯級數誤差估計</div>
+<div class="problem-statement">用 $\sum_{n=1}^{\infty} \frac{(-1)^{n+1}}{n^4}$ 的前 5 項近似，估計誤差。</div>
+<div class="solution"><strong>解：</strong>交錯級數的誤差 $\leq$ 首個未取項的絕對值：$|R_5| \leq b_6 = \frac{1}{6^4} = \frac{1}{1296} \approx 0.00077$。</div>
+<div class="solution">✅ 答案：$|R_5| \leq \frac{1}{1296} \approx 0.00077$</div>
+
+</div>
+
+</section>
+
+<section id="ss5-6">
+<h2 id="section-6">9.6 比值檢驗與根值檢驗 (Ratio and Root Tests)</h2>
+<p style="font-size:13px;color:var(--tx2);margin-bottom:16px"><strong>🔑 本節重點：</strong>比值檢驗、根值檢驗</p>
+
+<div class="example">
+<div class="example-label">📝 例題 9.21</div>
+<div class="example-title">比值檢驗：∑n!/nⁿ</div>
+<div class="problem-statement">判斷 $\sum_{n=1}^{\infty} \frac{n!}{n^n}$ 的斂散性。</div>
+<div class="solution"><strong>解：</strong>$\rho = \lim_{n\to\infty} \left|\frac{a_{n+1}}{a_n}\right| = \lim_{n\to\infty} \frac{(n+1)!}{(n+1)^{n+1}} \cdot \frac{n^n}{n!} = \lim_{n\to\infty} \frac{n+1}{n+1} \cdot \left(\frac{n}{n+1}\right)^n$<br>$= \lim_{n\to\infty} \left(\frac{n}{n+1}\right)^n = \frac{1}{e} < 1$。由比值檢驗，級數收斂。</div>
+<div class="solution">✅ 答案：收斂（$\rho = 1/e < 1$）</div>
+
+</div>
+
+<div class="example">
+<div class="example-label">📝 例題 9.22</div>
+<div class="example-title">比值檢驗：∑n/2ⁿ</div>
+<div class="problem-statement">判斷 $\sum_{n=1}^{\infty} \frac{n}{2^n}$ 的斂散性。</div>
+<div class="solution"><strong>解：</strong>$\rho = \lim_{n\to\infty} \left|\frac{n+1}{2^{n+1}} \cdot \frac{2^n}{n}\right| = \lim_{n\to\infty} \frac{n+1}{2n} = \frac{1}{2} < 1$。由比值檢驗，收斂。</div>
+<div class="solution">✅ 答案：收斂（和 $= 2$）</div>
+
+</div>
+
+<div class="example">
+<div class="example-label">📝 例題 9.23</div>
+<div class="example-title">根值檢驗：∑(1/n)ⁿ</div>
+<div class="problem-statement">判斷 $\sum_{n=1}^{\infty} \left(\frac{1}{n}\right)^n$ 的斂散性。</div>
+<div class="solution"><strong>解：</strong>$\rho = \lim_{n\to\infty} \sqrt[n]{|a_n|} = \lim_{n\to\infty} \frac{1}{n} = 0 < 1$。由根值檢驗，收斂。</div>
+<div class="solution">✅ 答案：收斂</div>
+
+</div>
+
+<div class="example">
+<div class="example-label">📝 例題 9.24</div>
+<div class="example-title">根值檢驗：∑(3ⁿ+1)/4ⁿ</div>
+<div class="problem-statement">判斷 $\sum_{n=1}^{\infty} \frac{3^n+1}{4^n}$ 的斂散性。</div>
+<div class="solution"><strong>解：</strong>$\lim_{n\to\infty} \sqrt[n]{\frac{3^n+1}{4^n}} = \lim_{n\to\infty} \frac{\sqrt[n]{3^n+1}}{4} = \frac{3}{4} < 1$。由根值檢驗，收斂。</div>
+<div class="solution">✅ 答案：收斂</div>
+
+</div>
+
+<div class="example">
+<div class="example-label">📝 例題 9.25</div>
+<div class="example-title">比值檢驗失效：p-級數</div>
+<div class="problem-statement">對 $\sum \frac{1}{n^2}$ 使用比值檢驗，說明檢驗不確定。</div>
+<div class="solution"><strong>解：</strong>$\rho = \lim_{n\to\infty} \frac{1/(n+1)^2}{1/n^2} = \lim_{n\to\infty} \left(\frac{n}{n+1}\right)^2 = 1$。$\rho = 1$ 時比值檢驗不確定，但我們已知此 $p$-級數收斂。</div>
+<div class="solution">✅ 答案：比值檢驗不確定（$\rho=1$），但級數已知收斂</div>
+
+</div>
+
+</section>
+
+</main>
+</body>
+</html>

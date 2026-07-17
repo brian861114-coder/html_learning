@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light" data-reading-width="wide"><head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第 11 章 金屬合金的應用與加工 — 材料科學</title>
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']],tags:'ams'}}</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<link rel="stylesheet" href="../../../../shared/core.css">
+<script src="../../../../shared/core.js" defer></script>
+<link rel="stylesheet" href="../../../../shared/navigation.css" data-shared-navigation>
+</head>
+<body>
+<a class="portal-home-link" href="../../index.html">← 返回學習中心</a>
+<nav class="sidebar" aria-label="本章目錄"><div class="sidebar-header"><div class="sidebar-subtitle">材料科學與工程</div><h2 class="sidebar-title">金屬合金的應用與加工</h2></div><ul class="toc"><li class="ns">本章預覽</li><li class="nsub"><a href="#preview">學習目標</a></li><li class="ns">11.1–11.3 合金導論</li><li class="nsub"><a href="#s11-1">11.1 導論</a></li><li class="nsub"><a href="#s11-2">11.2 鋼鐵</a></li><li class="ns">11.4–11.10 加工</li><li class="nsub"><a href="#s11-4">成形、鑄造與熱處理</a></li><li class="ns">摘要</li><li class="nsub"><a href="#summary">關鍵概念</a></li><li class="nsub"><a href="#common-mistakes">常見錯誤</a></li><li class="nsub"><a href="#extras">延伸資源</a></li></ul><div class="sidebar-tools"><button type="button" data-action="toggle-theme" aria-label="切換深色或淺色模式">切換顯示主題</button></div></nav>
+<main class="chapter-page" data-chapter-title="金屬合金的應用與加工" data-prev-href="ch10_phase_transformations_zh.html" data-prev-label="相變化：微觀結構與力學性質" data-next-href="ch12_ceramic_structures_zh.html" data-next-label="第 12 章 陶瓷的結構與性質">
+<header class="chapter-header"><div class="tag">第 11 章 · Callister Ch 11, pp.366–422</div><h1>金屬合金的應用與加工</h1><div class="chapter-meta">Applications and Processing of Metal Alloys · 57 頁 · 10 節</div></header>
+
+<section id="preview"><div class="chapter-preview"><h2>📌 核心問題</h3><p>為什麼不銹鋼不生鏽？為什麼飛機用鋁合金而不是鋼？為什麼工具鋼能切削其他金屬？本章從前幾章的科學原理轉向<strong>工程應用</strong>——實際金屬合金的分類、命名系統、加工方法和熱處理製程。</p>
+<h3>🔑 關鍵概念</h3><ol>
+<li><strong>鋼的分類</strong>：低碳（<0.25% C）、中碳（0.25–0.60%）、高碳（>0.60%）、合金鋼、不銹鋼</li>
+<li><strong>AISI/SAE 命名</strong>：四位數——前兩碼合金元素、後兩碼碳含量（如 1040 = 0.40% C 碳鋼）</li>
+<li><strong>不銹鋼三類</strong>：肥粒鐵（430, BCC）、沃斯田鐵（304, FCC, Ni 穩定）、麻田散鐵（410, 可淬火硬化）</li>
+<li><strong>鑄鐵</strong>：灰口（片狀石墨）、延性（球狀石墨）、白口（Fe₃C）、展性（退火白口）</li>
+<li><strong>非鐵合金</strong>：鋁（2xxx–8xxx）、銅（黃銅/青銅）、鈦（Ti-6Al-4V）、鎳超合金（渦輪引擎）</li>
+<li><strong>析出硬化</strong>：固溶→淬火→時效。Al-Cu：過飽和 α → GP 區 → θ'' → θ' → θ (CuAl₂)</li>
+<li><strong>退火</strong>：完全退火、正常化、製程退火、應力消除</li>
+<li><strong>成形</strong>：熱作（>再結晶溫度）vs 冷作。鑄造、鍛造、軋延、擠製、3D 列印</li>
+</ol>
+<div class="deep-dive"><h3>🧭 本章推理地圖</h3>
+<ol>
+<li>載荷、溫度、腐蝕、重量與成本（§11.1）→ 轉換成可比較的<strong>性能需求</strong>（§11.1）。</li>
+<li>合金元素改變相穩定性、強化與耐蝕能力（§11.2–§11.9）→ 形成鋼、鑄鐵與非鐵合金的不同性質組合（§11.2–§11.9）。</li>
+<li>鑄造、成形、焊接與熱處理改變晶粒、缺陷與相組成（§11.10及各合金小節）→ 同一牌號可有不同性能。</li>
+<li>選擇牌號（§11.2–§11.9）→ 指定製程、熱處理狀態與檢驗標準（§11.1、§11.10）→ 得到可重現的零件性能。</li>
+<li>比較生命週期中的製造性、可靠度與成本（§11.1、§11.10）→ 完成合金與製程的整合選擇。</li>
+</ol></div></div></section>
+
+<section id="prereq-bridge"><h2>先備知識橋接</h2>
+<div class="callout-warn"><strong>⚡ 進入本章前需具備的基礎</strong><br>
+<ul>
+<li>Ch9：Fe–Fe₃C 相圖——鋼的分類（亞共析/共析/過共析、鋼 vs 鑄鐵）、槓桿定律計算相比例</li>
+<li>Ch10：TTT/CCT 圖、淬透性（Jominy）、回火——本章討論的合金如何透過熱處理獲得特定性質</li>
+<li>Ch7：四大強化機制——本章展示這些機制在真實工業合金中的組合應用</li>
+<li>Ch4：固溶體與 Hume-Rothery 規則——理解合金元素為什麼能溶入鐵中</li>
+</ul></div></section>
+
+<!-- ══════ 11.1 導論 ══════ -->
+<section id="s11-1">
+<h2>11.1　導論——金屬合金的工程世界</h2>
+<figure class="figure"><img src="../../pages/ch11_images/fig_11_6_c.png" alt="" loading="lazy" decoding="async"><figcaption><strong>圖 11.11</strong>　Schematic diagram illustrating the process flow protocols for 3D printing (or additive manufacturing).</figcaption></figure>
+
+
+<div class="deep-dive">
+<h3>可追溯性也是材料性能的一部分</h3>
+<p>材料證明書應連結爐號、成分分析、熱處理批次與機械試驗；關鍵零件還需正材鑑別，避免外觀相似牌號混料。成分落在規格內也不保證性能一致，偏析、夾雜潔淨度、晶粒與製程波動仍會改變疲勞和韌性。</p>
+<h3>替代材料不能只比較強度</h3>
+<p>新材料可能具有不同模數、熱膨脹、電偶電位、尺寸變化與焊接程序，進而改變載荷分配和接頭壽命。替代評估應從失效模式出發，以材料試片、接頭與實際零件逐級驗證。若性能只能在極窄製程窗口達成，量產良率與品質成本也必須納入決策。</p>
+<p>材料資料還必須標示測試方向與統計基礎。板材縱向的平均拉伸值不能直接代表厚度方向的斷裂或焊接接頭；航太、壓力容器等高後果用途通常採最低保證值、批次放行與無損檢測共同管理。這比追求型錄上的最高典型強度更接近真正的工程可靠度。</p>
+<p>材料、製程、檢驗與設計必須形成閉環。</p>
+</div>
+<div class="deep-dive">
+<h3>從性能需求回推組織與製程</h3>
+<p>合金選擇可用「功能—性質—組織—製程」鏈條思考：先定義零件必須承受的載荷、溫度、環境與壽命，再轉成降伏、疲勞、破裂韌性、耐蝕或導電等量化需求；接著選擇能提供這些性質的晶粒、相分率、析出物與缺陷狀態，最後確認鑄造、成形、熱處理與接合能穩定製造。只按材料名稱選擇，常會忽略同一合金不同狀態間數倍的強度差。</p>
+<h3>材料規格的四個層次</h3>
+<p>完整規格至少包含化學成分範圍、產品形態與尺寸、熱處理／加工狀態，以及驗收性質與試驗方向。例如「6061 鋁」資訊不足，6061-O、T4、T6 的強度、延性與殘留應力不同；厚板中心的淬火速率也可能低於表面。鋼材同樣需區分鑄件、鍛件、板材與焊管，因缺陷族群、織構和方向性各異。</p>
+<h3>成本必須看零件生命週期</h3>
+<p>每公斤價格低不代表零件總成本低。高強材料可減薄但可能增加成形回彈、焊接預熱與防腐成本；耐蝕合金初期昂貴，卻可降低停機、塗裝與更換。選材矩陣可將重量、加工良率、維護、回收與失效後果納入，並以敏感度分析找出最關鍵假設。</p>
+<p>資料表數值通常來自標準試片與受控環境。實際零件還有尺寸效應、缺口、表面、焊接熱影響區與多軸載荷；設計容許值應由適用規範、統計下限和安全係數建立，不能直接使用典型平均值。</p>
+</div>
+<p><strong>選材不是追求單一最高數值：</strong>合金設計需同時平衡強度、延性、韌性、耐蝕、密度、工作溫度、成形與焊接能力。相同牌號還會因鑄造、鍛造、冷加工或熱處理形成不同組織，因此規格應同時指定成分、產品形態與材料狀態。</p>
+<div class="section-keypoints"><strong>🔑 本節重點</strong> ①本章從「金屬學原理」進入「工業合金實務」②三大主軸：鋼鐵（ferrous）→非鐵合金（nonferrous）→加工與熱處理 ③材料選擇 = 性質需求 + 成本 + 可製造性 + 供應鏈 ④「最好的材料」不存在——只有「最適合特定應用的材料」</div>
+
+<p>前 10 章建立了金屬材料科學的完整基礎——從原子鍵結（Ch2）和晶體結構（Ch3）開始，經過缺陷（Ch4）、擴散（Ch5）、力學性質（Ch6）、差排與強化（Ch7）、斷裂與疲勞（Ch8）、相圖（Ch9）和相變化熱處理（Ch10），一路建立了<strong>結構–性質–製程</strong>的核心關係。第 11 章是這一切的<strong>應用篇</strong>——將所有原理匯聚在一起，解釋數千種工業合金的設計邏輯。</p>
+
+<p>金屬合金的種類繁多——但記住一個框架就能理清頭緒：<strong>鋼鐵（ferrous）為主 + 非鐵（nonferrous）為輔</strong>。鋼鐵（以鐵為主要組元）佔全球金屬使用量的 <strong>~90%（以噸計）</strong>——從建築鋼筋、汽車車身、橋樑、管線到機械零件，鋼鐵無所不在。碳鋼（僅含 C + Mn）是最大宗的類別；合金鋼（含 Cr, Ni, Mo, V 等）針對特定性能設計——不銹鋼（Cr ≥ 10.5%）、工具鋼（高速鋼 HSS）、耐熱鋼。非鐵合金（鋁、銅、鎂、鈦、鎳合金等）雖然用量較少，但在<strong>高價值應用</strong>中不可或缺——航空（鈦、鋁、鎳超合金）、電子（銅）、輕量化（鎂）、生物相容（鈦）。</p>
+
+<p>一個實用的工程法則：<strong>只有四個變數決定鋼鐵的性質</strong>——(1) 碳含量（決定可達到的硬度上限）；(2) 合金元素（Cr, Ni, Mo 等，決定淬透性和特殊性質）；(3) 熱處理狀態（退火/正火/淬火/回火——微觀結構的「控制桿」）；(4) 晶粒大小（Hall-Petch——細晶 = 強+韌）。理解這個 4 變數框架，你就能看懂任何鋼鐵的規格書。</p>
+
+<div class="callout"><strong>🏭 金屬合金的經濟現實——為何鋼鐵佔絕對主導？</strong><br>鋼鐵的優勢不只在於性能，更在於<strong>成本</strong>：(1) 鐵礦石豐富——地殼中鐵是第四豐富元素（~5%）；(2) 大規模連續生產——高爐+轉爐一條龍，規模經濟極致；(3) 回收性——鋼鐵是全球回收率最高的工程材料（>85%），電弧爐（EAF）以廢鋼為原料；(4) 完整的供應鏈——從礦場到經銷商，全球網絡成熟。鈦合金雖然性能卓越，但 Kroll 製程的海綿鈦成本是鋼的 50–100 倍——這就是為什麼鈦只用於「不惜代價」的航空和醫療應用。</div>
+
+</section>
+
+<section id="s11-2"><h2>
+11.2　鋼鐵——碳鋼與合金鋼</h2>
+<div class="deep-dive"><h3>鋼種分類與組織控制</h3>
+<p>碳鋼依碳量增加，珠光體或碳化物比例提高，淬火後麻田散鐵硬度也上升；代價是焊接熱裂、冷裂與低溫韌性風險增加。低合金鋼加入少量 Cr、Mo、Ni、Mn，不只固溶強化，更重要的是推遲波來鐵與變韌鐵形成。熱處理應以截面中心的冷卻曲線設計，表面硬不代表心部也完成淬硬。</p>
+<p>微合金鋼以 Nb、V、Ti 的碳氮化物釘扎晶界並析出強化，配合控制軋延取得細晶；它能在較低碳量下維持高強度，因而改善焊接性。比較鋼種時需同時查看碳當量、板厚、衝擊轉變溫度與焊後熱處理要求。</p></div>
+<p><strong>碳量決定潛在硬度，合金元素調整淬透性：</strong>低碳鋼易成形焊接，高碳鋼可獲較高硬度但韌性與焊接性下降。Mn、Cr、Mo、Ni 等延遲擴散型轉變，使較厚截面也能形成麻田散鐵；這不代表合金元素必然提高淬後最高硬度。</p>
+<div class="section-keypoints"><strong>🔑 本節重點</strong> ①AISI/SAE 四位數編號系統 ②碳鋼（10xx）vs 合金鋼（41xx, 43xx, 86xx...）③HSLA 鋼——微量 Nb/V/Ti + 控制軋延 → 高強度+優異焊接性 ④工具鋼與不銹鋼</div>
+
+<p>鋼的分類基於化學成分和應用。AISI/SAE 編號系統：前兩碼 = 主要合金元素，後兩碼 = 碳含量（wt% × 100）。10xx = 碳鋼（無合金元素）；41xx = Cr-Mo 鋼（高溫強度）；43xx = Ni-Cr-Mo 鋼（高淬透性）；86xx = Ni-Cr-Mo 低碳滲碳鋼；52100 = 高碳 Cr 軸承鋼（1.0% C，非 0.00%！——52xxx 系列有特殊編碼規則）。</p>
+
+<p><strong>HSLA 鋼</strong>（High-Strength Low-Alloy）是材料設計的典範：僅添加 <0.1 wt% 的 Nb, V, Ti → 控制軋延過程中形成奈米級碳氮化物（~5–20 nm）→ 同時實現晶粒細化（釘紮沃斯田鐵晶界）+ 析出強化 + 低碳保持優異焊接性。降伏強度可達 350–700 MPa（普通碳鋼僅 200–300 MPa），用於管線鋼（X65–X80）、汽車車身、船體結構。</p>
+
+</section>
+
+<section id="s11-3"><h2>11.3　不銹鋼——五種類型的選擇指南</h2>
+
+
+<p><strong>後處理同樣關鍵：</strong>酸洗與鈍化可去除熱色與游離鐵污染；若碳鋼工具或磨料污染表面，即使牌號正確也可能出現銹斑並破壞局部鈍化。</p>
+<div class="deep-dive"><h3>耐蝕取決於局部環境</h3>
+<p>Cr 含量足以形成鈍化膜只是起點。氯離子可在膜的弱點誘發孔蝕，狹縫內氧耗盡與酸化會造成縫隙腐蝕，拉應力加特定介質則可能發生應力腐蝕開裂。Mo 常提高抗孔蝕能力，Ni 穩定奧氏體並改善韌性；但牌號選擇仍需依溫度、氯濃度、pH、流速與清洗條件判斷。</p>
+<h3>焊接會改變原本的耐蝕性</h3>
+<p>焊接熱循環可能在晶界析出 Cr-rich 碳化物，使鄰近區域貧 Cr 而敏化。低碳 L 級或 Ti/Nb 穩定化鋼可降低風險，適當固溶退火則能重新溶解碳化物。雙相鋼還需控制肥粒鐵／奧氏體比例與有害 σ 相；熱輸入太高或太低都可能破壞平衡。</p>
+<p>麻田散鐵型可熱處理到高硬度，適合刀具與閥件；肥粒鐵型成本較低、抗氯化物應力腐蝕較佳但低溫韌性有限；析出硬化型兼顧高強和耐蝕。沒有一種「最好」的不銹鋼，只有和失效模式相符的類型。</p></div>
+<p><strong>「不銹」來自鈍化而非永不腐蝕：</strong>足量 Cr 形成奈米級 Cr₂O₃ 保護膜，但氯離子、縫隙、缺氧與高溫可破壞鈍化。奧氏體、肥粒鐵、麻田散鐵、雙相與析出硬化型各有不同強化、焊接與應力腐蝕表現，選型必須對應環境與加工。</p>
+<div class="section-keypoints"><strong>🔑 本節重點</strong> ①沃斯田鐵（304, 316）——FCC，不可熱處理硬化，優異耐蝕性 ②肥粒鐵（430）——BCC，磁性，較便宜 ③麻田散鐵（410, 420）——可淬火硬化 ④雙相（2205）+ 析出硬化（17-4PH）</div>
+
+<p>不銹鋼的關鍵在於 Cr ≥ ~11 wt% → 表面形成 ~1–5 nm 厚的緻密 Cr₂O₃ 鈍化膜（自癒合）。五種類型：(1) <strong>沃斯田鐵</strong>（304, 316）——FCC 結構（Ni 穩定 γ 至室溫），佔市場 ~70%。優異成形性和耐蝕性，<strong>不可熱處理硬化</strong>（只能加工硬化——冷軋可達 ~1000 MPa）。316 含 2–3% Mo → 耐孔蝕性顯著提高（海洋環境）。(2) <strong>肥粒鐵</strong>（430）——BCC，有磁性，不含 Ni（較便宜），但韌性和焊接性較差。(3) <strong>麻田散鐵</strong>（410, 420）——可淬火形成麻田散鐵硬化，用於刀具和閥門。(4) <strong>雙相</strong>（2205）——約 50% α + 50% γ，強度是 304 的兩倍 + 優異抗 SCC。(5) <strong>PH</strong>（17-4PH）——析出硬化，高強度+良好耐蝕性，用於航太扣件。304L 低碳版（<0.03% C）避免焊接時 Cr₂₃C₆ 晶界析出導致的<strong>敏化</strong>（sensitization）和晶界腐蝕。</p>
+
+</section><section id="s11-copper"><h2>銅合金與鎂合金——被忽視的工程材料</h2>
+
+<div class="section-keypoints"><strong>🔑 本節重點</strong> ①黃銅=Cu-Zn，青銅=Cu-Sn，兩者性質和用途截然不同 ②鈹銅是唯一可析出硬化的銅合金 ③鎂合金是最輕的結構金屬（密度 ~1.7 g/cm³）</div>
+
+<p><strong>銅合金</strong>以導電和導熱為核心應用。(1) <strong>黃銅</strong>（brass, Cu-Zn）——Zn 含量 5–40%。單相 α-黃銅（<35% Zn, FCC）：優異冷成形性（彈殼 brass cartridge——深拉成形後退火再深拉，多達 4–5 個道次）。雙相 α+β 黃銅（35–45% Zn）：β 相（BCC）在高溫存在→<strong>熱作性</strong>佳，用於熱鍛閥體和管件。海軍黃銅（admiralty brass, Cu-28Zn-1Sn）：Sn 提高耐蝕性→冷凝管和熱交換器。黃銅的季節開裂（season cracking）——殘留拉伸應力 + 氨氣環境 → 應力腐蝕開裂。退火消除殘留應力可防止。</p>
+<p>(2) <strong>青銅</strong>（bronze）——Cu-Sn（~5–12% Sn），歷史最悠久的合金（青銅時代始於 ~3000 BC）。比黃銅更高的強度和耐蝕性，用於船用螺旋槳、軸承、彈簧。磷青銅（phosphor bronze，含 ~0.1% P）有優異的彈性疲勞抗性。鋁青銅（Cu-5–11% Al）的強度和耐蝕性可與中碳鋼競爭。(3) <strong>鈹銅</strong>（beryllium copper, Cu-1.8–2% Be）——銅合金中唯一可析出硬化的。固溶處理（800°C）→淬火→時效（300–350°C）→ Be 析出物使強度達 1200–1500 MPa，同時保持導電性。用於航太彈簧、無火花工具（油氣環境）、電子接點。</p>
+
+<p><strong>鎂合金</strong>是所有結構金屬中最輕的（密度 ~1.7 g/cm³，比鋁輕 35%）。Mg 的 HCP 結構使室溫成形性差（基底滑移僅 2 個獨立系統），但添加 Al, Zn, Mn 和高溫成形可緩解。主要合金系列：AZ91（Mg-9Al-1Zn，最常用鑄造鎂合金——汽車方向盤骨架、變速箱殼體、筆記型電腦外殼）；WE43（Mg-Y-Nd-Zr，析出硬化，用於航空座椅和直升機變速箱——在 250°C 仍保持優異強度）。鎂合金的最大挑戰：<strong>腐蝕</strong>（Mg 是結構金屬中最活潑的——電偶序最負）和<strong>燃燒風險</strong>（鎂粉/薄片可燃燒，熔煉和加工需嚴格防火措施）。</p>
+</section>
+
+<section id="s11-4"><h2>
+11.4　鋁合金——四大系列與熱處理</h2>
+
+
+<div class="deep-dive"><h3>疲勞與接頭設計</h3>
+<p>鋁合金通常沒有明確疲勞限，需指定目標循環數的疲勞強度。孔邊刮痕、腐蝕坑與拉伸殘留應力會顯著縮短壽命；滾壓、噴丸、冷擴孔和良好表面處理可延緩起裂。最高靜態強度狀態未必具有最佳損傷容限。</p>
+<p>鋁的熱膨脹約為鋼的兩倍，與陶瓷、複材或鋼嵌件接合時，熱循環會產生界面應力與鬆動。接頭需容許差異膨脹，並以絕緣墊片、密封或塗層避免異種材料電偶腐蝕。</p></div>
+<div class="deep-dive"><h3>狀態代號背後的組織</h3>
+<p>O 表示退火軟化，H 系列以加工硬化及部分退火控制，T 系列則描述固溶、淬火、自然或人工時效組合。T4 保留較高成形性並自然時效，T6 常取得較高強度，T7 過時效可犧牲部分強度換取尺寸、耐蝕或抗應力腐蝕穩定。設計圖若只寫合金系列而漏掉 temper，幾乎無法確定力學性質。</p>
+<h3>淬火敏感性與焊接軟化</h3>
+<p>厚件中心冷卻慢，粗大晶界析出會消耗溶質並形成無析出帶，使強度和耐蝕性與薄試片不同。熔焊也會使熱影響區的析出物溶解或過時效，最弱位置常不在焊金屬本身。可藉焊後熱處理、摩擦攪拌焊或結構補強改善，但大型件未必能重新完整固溶淬火。</p>
+<p>鋁表面氧化膜耐一般大氣，卻會干擾熔焊與釬焊潤濕；與碳纖維、銅或鋼接觸時也需防電偶腐蝕。高強 2xxx、7xxx 的耐蝕和焊接性通常不如 5xxx、6xxx，選材必須平衡。</p></div>
+<p><strong>先分可熱處理與不可熱處理系列：</strong>2xxx、6xxx、7xxx 主要靠固溶處理、淬火與時效析出強化；1xxx、3xxx、5xxx 多靠固溶與加工硬化。鋁的彈性模數不會因高強化而大幅提高，故薄壁構件仍可能由剛度、屈曲或疲勞控制。</p>
+<div class="section-keypoints"><strong>🔑 本節重點</strong> ①2xxx（Al-Cu）——航空蒙皮（2024-T3）②6xxx（Al-Mg-Si）——擠製型材（6061-T6）③7xxx（Al-Zn-Mg-Cu）——最高強度（7075-T6, ~500 MPa）④T3/T4/T6/T7 熱處理標記</div>
+
+<p>鋁合金依主要合金元素分為四大系列：(1) <strong>2xxx（Al-Cu-Mg）</strong>——2024（Al-4.5Cu-1.5Mg-0.6Mn，T3 態 $\sigma_y \approx 345$ MPa）。飛機機身蒙皮的經典材料。析出序列：過飽和 α → GP 區（Cu 原子單層聚集盤，室溫自然時效）→ $\theta''$（峰值強度，~150–190°C 人工時效）→ $\theta'$ → $\theta$（CuAl₂ 平衡相，過時效）。缺點：不可焊接。(2) <strong>6xxx（Al-Mg-Si）</strong>——6061-T6 是最通用的鋁合金（$\sigma_y \approx 275$ MPa），良好耐蝕性和焊接性，擠製型材首選。(3) <strong>7xxx（Al-Zn-Mg-Cu）</strong>——7075-T6（$\sigma_y \approx 500$ MPa）是強度最高的鋁合金。7075-T73 是過時效態——犧牲 10–15% 強度換取優異抗 SCC。鋁合金的熱處理標記（temper）至關重要——T3/T4/T6/T7 的強度可相差 2–3 倍。(4) <strong>Al-Li 合金</strong>——每 1% Li 降低密度 ~3% 提高剛性 ~6%，用於最新航空器。</p>
+
+</section>
+
+<section id="s11-5"><h2>11.5　鎂合金——最輕的結構金屬</h2>
+<p><strong>加工安全：</strong>鎂屑與細粉可燃，機加工需控制切屑堆積、火源與粉塵，並準備適用的 D 類滅火介質；金屬火災不能以水直接處理。</p>
+<div class="deep-dive"><h3>成形與織構</h3>
+<p>室溫軋延鎂板常形成強基底織構，使厚度方向變形困難、拉壓降伏不對稱並易產生耳高。升溫可啟動非基底滑移並促進動態再結晶，改善成形；稀土合金化也能弱化織構。壓鑄鎂適合薄壁複雜件，但孔隙會限制焊接、熱處理與高疲勞應用。</p>
+<h3>腐蝕與接觸設計</h3>
+<p>鎂電位活潑，與鋼、銅或碳纖維接觸且有電解液時易成為陽極快速溶解。塗層若局部破損，面積比還可能放大腐蝕。設計需隔離異種材料、避免積水縫隙並控制 Fe、Ni、Cu 等微量雜質，因它們會形成高效陰極點。</p></div>
+<p><strong>低密度伴隨製程限制：</strong>HCP 結構使室溫滑移系統不足，板材成形常需升溫；熔融鎂活性高，鑄造需防氧化與燃燒。其比強度優良，但彈性模數低、耐蝕與高溫潛變能力需藉合金化、塗層和結構設計補足。</p>
+<div class="section-keypoints"><strong>🔑 本節重點</strong> ①密度 ~1.7 g/cm³（比鋁輕 35%）②HCP 結構 → 室溫成形性差 ③AZ91——最常用鑄造鎂合金 ④最大挑戰：腐蝕和燃燒風險</div>
+
+<p>鎂合金是所有結構金屬中最輕的。Mg 的 HCP 結構使室溫成形性差（基底滑移僅 2 個獨立系統），但添加 Al, Zn, Mn 和高溫成形可緩解。主要合金：AZ91（Mg-9Al-1Zn）——最常用鑄造鎂合金（汽車方向盤骨架、筆電外殼）；WE43（Mg-Y-Nd-Zr）——析出硬化，在 250°C 仍保持優異強度（直升機變速箱）。最大挑戰：(1) 腐蝕——Mg 是結構金屬中最活潑的（電偶序最負），與其他金屬接觸時作為陽極被加速腐蝕；(2) 燃燒風險——鎂粉/薄片可燃燒（熔煉和加工需嚴格防火措施）。</p>
+
+</section>
+
+<section id="s11-6"><h2>11.6　鈦合金——最高的比強度</h2>
+<figure class="figure"><img src="../../pages/ch11_images/fig_11_10_c.png" alt="" loading="lazy" decoding="async"><figcaption><strong>圖 11.10</strong>　Schematic cross-sectional representation showing the zones in the vicinity of a typical fusion weld. [From Iron Casti...</figcaption></figure>
+
+<figure class="figure"><img src="../../pages/ch11_images/fig_11_11_c.png" alt="" loading="lazy" decoding="async"><figcaption><strong>圖 11.11</strong>　Schematic diagram illustrating the process flow protocols for 3D printing (or additive manufacturing).</figcaption></figure>
+
+
+
+
+<div class="deep-dive"><h3>相變與熱處理窗口</h3>
+<p>跨越 $\beta$ 轉變溫度加熱再冷卻，可得到粗大 prior-$\beta$ 晶粒內的板條組織，適合破裂與潛變需求；在兩相區加工與退火則可形成等軸或雙峰組織，兼顧疲勞與延性。冷卻極快時可能形成 $\alpha'$ 麻田散鐵，後續時效再分解。熱歷史不同，即使都是 Ti–6Al–4V 也不能視為同一材料。</p>
+<h3>表面與氫氧污染</h3>
+<p>高溫鈦會強烈吸收 O、N、H，形成硬脆 alpha case 或氫化物；鍛造、熱處理和焊接需真空或惰性保護，污染層常要機加工去除。鈦的耐蝕膜雖穩定，摩擦磨耗卻可能反覆破膜並造成咬合，因此滑動接觸常需塗層或異材配對。</p></div>
+<p><strong>$\alpha/\beta$ 相比例控制性能：</strong>Al 等穩定 $\alpha$ 相，V、Mo 等穩定 $\beta$ 相；熱處理可調整板條、等軸或雙峰組織。鈦耐蝕來自緻密氧化膜，但加工時導熱差、化學活性高且易咬刀，成本不能只看原料金屬價格。</p>
+<div class="section-keypoints"><strong>🔑 本節重點</strong> ①Ti-6Al-4V 佔市場 >50% ②α+β 雙相可透過熱處理調控 ③比強度（$\sigma_y/\rho$）是所有金屬中最高的 ④缺點：昂貴、加工困難</div>
+
+<p>Ti-6Al-4V（Grade 5，α+β 雙相）是鈦合金的主力。Al 穩定 α（HCP）、V 穩定 β（BCC）——雙相微觀結構可透過熱處理調控 α/β 比例和形貌（等軸 vs 層狀）。比強度是所有金屬中最高的，在 −250°C 到 400°C 保持優異性能。應用：航空引擎前半段（壓縮機葉片，~500°C）、人工髖關節和牙科植入物（骨整合性優異）、高爾夫球桿頭（低彈性模數 → 擊球感佳）。缺點：海綿鈦的 Kroll 製程能耗極高 → 價格昂貴；低導熱率 → 切削升溫 → 刀具磨損快；高溫下與 O₂/N₂ 反應 → 表面硬化層。</p>
+
+</section>
+
+<section id="s11-7"><h2>11.7　鎳超合金——高溫極限的守門人</h2>
+<figure class="figure"><img src="../../pages/ch11_images/fig_11_7_c.png" alt="" loading="lazy" decoding="async"><figcaption><strong>圖 11.7</strong>　Photograph showing 1-euro, 2-euro, 20-euro-cent, and 50-euro-cent coins. (Photograph courtesy of Outokumpu Copper.)</figcaption></figure>
+
+
+
+
+<div class="deep-dive"><h3>$\gamma/\gamma'$ 微結構如何承載</h3>
+<p>FCC $\gamma$ 基體提供韌性，有序 L1₂ $\gamma'$ 顆粒與基體近共格，迫使差排成對切過以維持有序，或在較大顆粒間繞過。高溫長時下 $\gamma'$ 可能沿應力方向筏化；這不一定立即失效，其影響取決於載荷方向、通道寬度與差排機制。單晶葉片還以晶向控制降低彈性與潛變不利。</p>
+<h3>塗層與冷卻是材料系統的一部分</h3>
+<p>葉片表面常用 MCrAlY 或擴散鋁化物形成保護 Al₂O₃，再覆低導熱陶瓷隔熱層；內部通道與氣膜冷卻降低金屬溫度。塗層氧化成長、熱膨脹不匹配與熱循環會引起剝落，所以壽命不能只由基材拉伸強度預測。</p></div>
+<p><strong>高溫強度依賴穩定障礙：</strong>有序共格 $\gamma'$ 析出物在高溫仍能阻擋差排，固溶難熔元素減慢擴散，Cr/Al 則形成保護氧化膜。過度添加可能形成 TCP 脆性相並耗盡強化元素，因此長期相穩定性和抗氧化與室溫強度同等重要。</p>
+<div class="section-keypoints"><strong>🔑 本節重點</strong> ①燃氣渦輪熱區的唯一選擇（>800°C）②$\gamma'$（Ni₃Al）體積分率 50–70%，與基材完全共格 ③Re（錸）固溶強化——年產量僅 ~50 噸 ④單晶鑄造消除晶界潛變</div>
+
+<p>鎳超合金的三重防禦：(1) <strong>$\gamma'$（Ni₃Al, L1₂ 有序結構）</strong>——佔體積 50–70%，與 FCC 基材完全共格（晶格失配 <0.5%），高溫下極穩定。差排必須成對切穿 $\gamma'$（形成超晶格部分差排對）——需要極高應力。(2) <strong>固溶強化</strong>——W, Mo, Re 溶入基材。Re 是關鍵元素：原子半徑大 → 晶格膨脹 → 阻礙差排攀移。但全球年產量僅 ~50 噸（比黃金稀有 50 倍！），單晶葉片含 ~6% Re。(3) <strong>單晶鑄造</strong>——定向凝固製程：底部水冷+線圈加熱 → 晶體沿 [001] 方向垂直生長 → 完全消除晶界。高溫下晶界是弱點——晶界滑動和空洞成核的優先位置。</p>
+
+</section>
+
+<section id="s11-8"><h2>11.8　銅合金——從導電到耐蝕的多元應用</h2>
+<figure class="figure"><img src="../../pages/ch11_images/fig_11_8_c.png" alt="" loading="lazy" decoding="async"><figcaption><strong>圖 11.8</strong>　Classification scheme of metal fabrication techniques discussed in this chapter.</figcaption></figure>
+
+
+
+
+<p><strong>析出型銅合金的平衡：</strong>Cu–Cr–Zr、Cu–Be 等先固溶再時效，可用細小析出物提高強度，同時讓基體中的溶質濃度下降而恢復部分導電率。若過時效，強度下降但導電可能繼續改善，因此電極、彈片與散熱構件需按主要功能選擇狀態。</p>
+<p><strong>導電率與強度通常互相競爭：</strong>溶質與缺陷會散射電子，因此純銅導電最好卻較軟；黃銅、青銅與 Cu–Be 可藉固溶、加工或析出提高強度，但導電率下降。接點材料還需考慮應力鬆弛、電弧侵蝕與電偶腐蝕。</p>
+<div class="section-keypoints"><strong>🔑 本節重點</strong> ①黃銅（Cu-Zn）——優異冷成形性，彈殼材料 ②青銅（Cu-Sn）——耐蝕性，船用螺旋槳 ③鈹銅（Cu-Be）——唯一可析出硬化的銅合金（強度達 1200–1500 MPa）</div>
+
+<p>銅合金以導電和導熱為核心應用。黃銅（brass, Cu-Zn）——單相 α-黃銅（<35% Zn, FCC）有優異冷成形性（彈殼經 4–5 道次深拉+工序間退火）。海軍黃銅（Cu-28Zn-1Sn）——Sn 提高耐蝕性，用於冷凝管。青銅（bronze, Cu-Sn）——歷史最悠久（青銅時代 ~3000 BC），用於船用螺旋槳和軸承。鈹銅（Cu-1.8–2% Be）——固溶處理+時效 → Be 析出物使強度達 1200–1500 MPa，同時保持優異導電性，用於航太彈簧和無火花工具。</p>
+
+</section>
+
+<section id="s11-9"><h2>
+11.9　鑄鐵——石墨形態決定性質</h2>
+<figure class="figure"><img src="../../pages/ch11_images/fig_11_3_c.png" alt="" loading="lazy" decoding="async"><figcaption><strong>圖 11.3</strong>　Optical photomicrographs of various cast irons. (a) Gray iron: the dark graphite flakes are embedded in an α-ferrite ...</figcaption></figure>
+
+<figure class="figure"><img src="../../pages/ch11_images/fig_11_4_c.png" alt="" loading="lazy" decoding="async"><figcaption><strong>圖 11.4</strong>　Comparison of the relative vibrational damping capacities of (a) steel and (b) gray cast iron. (From Metals Engineeri...</figcaption></figure>
+
+<figure class="figure"><img src="../../pages/ch11_images/fig_11_5_c.png" alt="" loading="lazy" decoding="async"><figcaption><strong>圖 11.5</strong>　From the iron–carbon phase diagram, composition ranges for commercial cast irons. Also shown are schematic microstruc...</figcaption></figure>
+
+
+
+
+<p><strong>截面敏感性：</strong>厚薄位置冷卻速率不同，同一鑄件可能形成不同石墨數量、基體與硬度。品質控制應在代表位置檢查球化率、節瘤數、碳化物與縮鬆；只量一個表面硬度不足以代表整件。</p>
+<p>加工餘量也應避開表面冷硬層與縮鬆集中區。</p>
+<div class="deep-dive"><h3>凝固路徑與孕育處理</h3>
+<p>碳可依穩定 Fe–C 系統析出石墨，也可依亞穩 Fe–Fe₃C 系統形成滲碳體。Si、慢冷與有效石墨核促進石墨化；快速冷卻、薄壁或孕育不足則容易白口。澆注前加入孕育劑增加成核位置，可減少過冷、細化共晶團並改善截面均勻性。</p>
+<h3>不同石墨形態的破壞含義</h3>
+<p>片狀石墨提供內部缺口，故灰鑄鐵抗拉弱但壓縮、阻尼與導熱佳；球狀石墨降低尖端集中，使球墨鑄鐵可有明顯延性。蠕墨鑄鐵介於兩者，兼具較佳導熱與強度，常用於柴油引擎缸體。最終性質還取決於基體是肥粒鐵、波來鐵、變韌鐵或麻田散鐵。</p></div>
+<p><strong>石墨形狀改變缺口效應：</strong>灰鑄鐵片狀石墨尖端應力集中高，抗拉與延性低但阻尼、導熱與切削性佳；球墨鑄鐵以 Mg 處理使石墨球化，大幅改善韌性。冷卻速率與 Si 含量還會決定基體為肥粒鐵、波來鐵或形成白口滲碳體。</p>
+<div class="section-keypoints"><strong>🔑 本節重點</strong> ①灰口鑄鐵——片狀石墨（內缺口 → 低拉伸強度，優異阻尼）②
+延性鑄鐵——球狀石墨（兼具鑄造性和延性）③白口鑄鐵——Fe₃C（極硬極脆，耐磨）</div>
+
+<p>鑄鐵的分類以石墨形態區分：(1) <strong>灰口鑄鐵</strong>（gray iron）——Si >2%+緩冷 → 片狀石墨。石墨片的內缺口效應 → 拉伸強度低（150–400 MPa）但壓縮強度高（600–1000 MPa），振動阻尼極佳（機床底座）。(2) <strong>
+延性鑄鐵</strong>（ductile iron, SG iron）——添加少量 Mg/Ce → 石墨以球狀析出。球狀的應力集中遠小於片狀 → 拉伸強度 400–800 MPa + %EL 2–18%（曲軸、轉向節）。(3) <strong>白口鑄鐵</strong>（white iron）——快冷+低 Si → 碳以 Fe₃C 存在（無石墨）。HRC 50–60，極硬極脆，用於礦石粉碎機襯板。(4) <strong>展性鑄鐵</strong>（malleable iron）——白口鑄鐵經 ~900°C 數十小時退火 → Fe₃C 分解為團絮狀石墨。歷史悠久但現代已大量被
+延性鑄鐵取代。</p>
+
+</section>
+
+<section id="s11-10"><h2>11.10　金屬成形與加工——熱作、冷作與鑄造</h2>
+
+
+<div class="deep-dive"><h3>製程缺陷與檢驗</h3>
+<p>熱作可能產生氧化皮、折疊與中心疏鬆未焊合；冷作會引入回彈、橘皮、殘留應力與方向性；鑄造則需防縮孔、氣孔、夾雜、冷隔和熱裂。每種缺陷需要不同檢測：表面裂紋可用滲透或磁粉，內部體積缺陷用超音波或射線，尺寸與殘留應力則另行量測。</p>
+<h3>近淨成形與後續加工</h3>
+<p>鍛造纖維流線可提高疲勞與衝擊可靠度，但模具昂貴；精密鑄造能製造複雜高熔點零件，卻需控制陶殼反應和凝固方向；積層製造提供內部通道與客製幾何，但快速熱循環形成柱狀晶、孔隙和高殘留應力，常需熱等靜壓與熱處理。最佳路線由產量、尺寸、容許缺陷及後加工共同決定。</p></div>
+<p><strong>熱作與冷作以再結晶溫度區分：</strong>熱作可持續消除加工硬化、允許大變形，但氧化、尺寸精度與表面品質較差；冷作精度高且可強化，卻需要更大載荷並累積殘留應力。鑄造能製造複雜形狀，但凝固收縮、氣孔、偏析與熱裂需靠模流和補縮設計控制。</p>
+<div class="section-keypoints"><strong>🔑 本節重點</strong> ①熱作（>$0.6T_m$）——動態再結晶消除加工硬化 ②冷作（<$0.3T_m$）——加工硬化提高強度+精確尺寸 ③鑄造——共晶合金流動性最佳 ④金屬 3D 列印（PBF）——複雜幾何但成本高</div>
+
+<p><strong>熱作</strong>（hot working, $T > 0.6T_m$）：金屬在加工同時<strong>動態再結晶</strong>，差排持續被消除 → 可在較低力量下完成大變形量（鍛造鋼錠從數噸加工到數百公斤）。終止溫度需控制——過高 → 晶粒粗化，過低 → 殘留加工硬化。<strong>冷作</strong>（cold working, $T < 0.3T_m$）：差排累積 → 加工硬化 → 強度上升+精確尺寸+良好表面。用於最終精加工（冷軋板材、冷鍛螺栓）。</p>
+
+<p><strong>鑄造</strong>的關鍵：澆鑄性取決於流動性和凝固範圍。純金屬和共晶合金（固定熔點）流動性最佳；糊狀凝固的合金流動性差。補充澆口（riser）必須最後凝固以補償收縮。<strong>金屬 3D 列印</strong>（PBF 粉末床熔融）可製造內部共形冷卻通道和拓撲優化輕量化結構，但成本仍遠高於傳統鑄造，目前主要用於航太和醫療。</p>
+
+</section><section id="s11-recycle">
+<h2>金屬的回收與永續性——材料選擇的宏觀視角</h2>
+
+<div class="section-keypoints"><strong>🔑 本節重點</strong> ①金屬是最可回收的工程材料——理論上 100% 可循環 ②鋼和鋁的回收節能巨大 ③合金元素在回收中的角色——既是資源也是污染</div>
+
+<p>金屬在永續性方面具有獨特優勢：它們可以<strong>無限次回收而不損失本質性質</strong>（與塑膠的降級回收不同）。<strong>鋼</strong>是全球回收率最高的材料——新製造的鋼中 ~60% 來自廢鋼（EAF 電弧爐路線），回收煉鋼比從鐵礦石煉鋼（BF-BOF 路線）節能 ~60–74% 並減少碳排放 ~58%。電弧爐的原料幾乎 100% 是廢鋼。磁選分離使鋼的回收極其高效——廢車體和家電在粉碎機中粉碎後，磁鐵自動分離鐵金屬。</p>
+
+<p><strong>鋁</strong>的回收節能更驚人——從鋁廢料重熔僅需從鋁礬土（Bauxite）電解煉鋁（Hall-Héroult 製程）能源的<strong>5%</strong>！這是因為鋁的化學活性極高，從氧化物還原需要巨大的電能（~15 kWh/kg Al），而重熔僅需熱能（~0.7 kWh/kg Al）。飲料罐的閉環回收（can-to-can）僅需 60 天從廢罐回到貨架。但鋁合金回收的最大挑戰是<strong>合金元素的累積</strong>——不同系列的鋁合金（鑄造 Al-Si vs 鍛造 Al-Cu vs Al-Mg）混合後，雜質元素（Fe, Si, Cu）超標→降級為鑄造合金（不能再做鍛造產品）。因此高價值鋁廢料（如 7075 機翼結構）需要嚴格的分類回收。</p>
+
+<div class="callout"><strong>🔧 關鍵金屬的供應風險——地緣政治的材料維度</strong><br>有些合金元素正面臨供應鏈風險：<strong>Re（錸）</strong>——單晶鎳超合金的關鍵元素，全球年產量 ~50 噸，主要來自智利的銅鉬礦副產物。若供應中斷，現代航空引擎的生產將停滯。<strong>Co（鈷）</strong>——硬質合金（WC-Co）和電池的關鍵元素，~60% 來自剛果民主共和國（政治不穩定和童工問題）。<strong>稀土（REE）</strong>——Nd, Dy 用於永久磁鐵（電動車馬達和風力發電機），~60% 產自中國。這些供應鏈風險推動了<strong>都市採礦</strong>（urban mining——從廢棄電子產品回收貴重金屬）和<strong>替代元素開發</strong>（如無稀土磁鐵的研究）。材料選擇不僅是技術問題，也是<strong>地緣政治和倫理問題</strong>。</div>
+</section>
+
+<section id="s11-select"><h2>鋼鐵選材速查——從 AISI 號碼到應用</h2>
+<div class="section-keypoints"><strong>🔑 本節重點</strong> ①10xx=碳鋼（無合金元素）②41xx=Cr-Mo 鋼（高溫強度）③43xx=Ni-Cr-Mo 鋼（高淬透性）④86xx=Ni-Cr-Mo 低碳滲碳鋼 ⑤52100=高碳鉻軸承鋼</div>
+
+<table><caption>表 1：鋼鐵選材速查——從 AISI 號碼到應用</caption>
+<tr><th>AISI</th><th>類型</th><th>標誌性應用</th><th>熱處理</th></tr>
+<tr><td>1020</td><td>低碳鋼</td><td>管線、結構型鋼</td><td>熱軋態直接使用</td></tr>
+<tr><td>1045</td><td>中碳鋼</td><td>曲軸、齒輪、螺栓</td><td>淬火+回火（調質）</td></tr>
+<tr><td>1095</td><td>高碳鋼</td><td>彈簧、刀具、鋼琴線</td><td>淬火+低溫回火</td></tr>
+<tr><td>4140</td><td>Cr-Mo 鋼</td><td>重型軸、齒輪</td><td>油淬+回火（優異淬透性）</td></tr>
+<tr><td>4340</td><td>Ni-Cr-Mo 鋼</td><td>飛機起落架、重型曲軸</td><td>油淬+回火（極深硬化）</td></tr>
+<tr><td>52100</td><td>高碳 Cr 鋼</td><td>滾珠軸承、滾柱</td><td>淬火+低溫回火（HRC 60–64）</td></tr>
+<tr><td>8620</td><td>Ni-Cr-Mo 低碳鋼</td><td>滲碳齒輪、差速器齒輪</td><td>滲碳→淬火→低溫回火</td></tr>
+<tr><td>304</td><td>沃斯田鐵不銹鋼</td><td>食品設備、建築</td><td>固溶退火（不可淬火硬化）</td></tr>
+<tr><td>440C</td><td>麻田散鐵不銹鋼</td><td>高級刀具、軸承</td><td>淬火+深冷處理+低溫回火</td></tr>
+</table>
+</section>
+
+
+<!-- ══════ Materials of Importance: Euro Coins ══════ -->
+<section class="info-card" id="moi-coins">
+  <div class="formula-label">🪙 Materials of Importance — 歐元硬幣的材料選擇</div>
+  <p>歐元硬幣的八種面額使用四種不同合金——每種的選擇反映功能需求、成本和偽造防範的平衡：</p>
+  <table class="structure-table"><caption>表 2：鋼鐵選材速查——從 AISI 號碼到應用</caption>
+    <tr><th>面額</th><th>顏色</th><th>合金</th><th>選擇原因</th></tr>
+    <tr><td>1, 2, 5 分</td><td>紅銅色</td><td>銅包鋼</td><td>低成本、傳統貨幣外觀</td></tr>
+    <tr><td>10, 20, 50 分</td><td>金色</td><td>北歐金（89Cu-5Al-5Zn-1Sn）</td><td>無鎳（抗過敏）、優良鑄造性</td></tr>
+    <tr><td>€1/€2 外環</td><td>金色</td><td>鎳黃銅（75Cu-20Zn-5Ni）</td><td>耐磨、與內芯對比鮮明</td></tr>
+    <tr><td>€1/€2 內芯</td><td>銀色</td><td>銅鎳合金三層</td><td>獨特電磁簽名——自動販賣機防偽</td></tr>
+  </table>
+  <p>€1 和 €2 的雙金屬設計具有特定<strong>電導率和磁導率簽名</strong>——自動販賣機透過感應線圈測量這些性質區分真偽。這是<strong>功能性質</strong>被刻意思考進產品設計的實例。</p>
+</section>
+
+<section id="summary"><h2>本章摘要</h2>
+
+<h3>主要合金系統對照表</h3>
+<table><caption>表 3：主要合金系統對照表</caption>
+<tr><th>合金類別</th><th>代表性材料</th><th>主要強化機制</th><th>典型應用</th></tr>
+<tr><td>低碳鋼</td><td>AISI 1020 (0.20% C)</td><td>肥粒鐵+波來鐵比例</td><td>結構型鋼、管線</td></tr>
+<tr><td>中碳鋼</td><td>AISI 1045 (0.45% C)</td><td>淬火+回火（麻田散鐵→回火麻田散鐵）</td><td>曲軸、齒輪、連桿</td></tr>
+<tr><td>合金鋼</td><td>AISI 4340 (Ni-Cr-Mo)</td><td>高淬透性→深層麻田散鐵+回火</td><td>飛機起落架、重型軸</td></tr>
+<tr><td>沃斯田鐵不銹鋼</td><td>304 (18Cr-8Ni)</td><td>固溶強化+加工硬化（不可熱處理）</td><td>食品設備、建築裝飾</td></tr>
+<tr><td>肥粒鐵不銹鋼</td><td>430 (17Cr)</td><td>固溶強化</td><td>汽車排氣系統</td></tr>
+<tr><td>麻田散鐵不銹鋼</td><td>410 (12Cr)</td><td>淬火硬化</td><td>刀具、閥門</td></tr>
+<tr><td>Al-Cu (2xxx)</td><td>2024 (Al-4.5Cu)</td><td>析出硬化（GP區→θ''→θ'→θ）</td><td>飛機機身蒙皮</td></tr>
+<tr><td>Al-Zn (7xxx)</td><td>7075 (Al-Zn-Mg-Cu)</td><td>析出硬化（η' 析出物）</td><td>飛機機翼結構</td></tr>
+<tr><td>Ti-6Al-4V</td><td>Grade 5</td><td>α+β 雙相；固溶+時效</td><td>渦輪葉片、人工關節</td></tr>
+<tr><td>鎳超合金</td><td>Inconel 718</td><td>γ' (Ni₃Al) 析出+固溶強化</td><td>燃氣渦輪熱區</td></tr>
+</table>
+
+<div class="callout"><strong>🔑 核心收穫</strong><br>
+<ol>
+<li><strong>鋼的世界</strong>：碳含量 + 合金元素 + 熱處理 = 幾乎無限的性質組合。AISI 四位數系統編碼了成分和特性。</li>
+<li><strong>不銹鋼 = Cr ≥ 11%</strong>：鈍化膜是耐蝕關鍵。三類不銹鋼對應不同的晶體結構和強化方式。</li>
+<li><strong>鋁合金靠析出硬化</strong>：過飽和→GP 區→過渡相（峰值強度）→平衡相（過時效軟化）。控制析出序列是鋁合金熱處理的核心。</li>
+<li><strong>鎳超合金 + 單晶 = 極限高溫性能</strong>：γ' 析出物 + 固溶元素 + 消除晶界 = 1000°C 下數萬小時服役。</li>
+</ol></div>
+</section>
+
+<section id="self-check"><h2>📝 概念診斷題</h2>
+<ol>
+<li><strong>AISI 1040 鋼的碳含量是多少？與 AISI 1080 相比，哪個更適合用於需要高硬度的切削工具？哪個更適合用於需要良好焊接性的結構件？</strong></li>
+<li><strong>304 和 304L 不銹鋼的化學成分幾乎相同，唯一的差別是 304L 的碳含量 <0.03%。這個微小的差異為什麼對焊接至關重要？</strong></li>
+<li><strong>7075 鋁合金（Al-Zn-Mg-Cu）在峰值時效（T6）狀態的強度高達 ~570 MPa，但不可焊接。2024（Al-Cu）也難以焊接。為什麼高強度鋁合金普遍焊接性差？</strong></li>
+<li><strong>為什麼單晶渦輪葉片的成本是多晶的 5–10 倍，但現代航空引擎的高壓渦輪仍然使用單晶？</strong></li>
+<li><strong>灰口鑄鐵中的石墨是片狀的，
+延性鑄鐵中的石墨是球狀的。這個形狀差異如何影響力學性質？</strong></li>
+</ol>
+</section>
+
+<section id="derivation-lab" class="derive"><h2>🧪 診斷</h2>
+<h3>方程式使用契約</h3>
+<ul>
+<li>不銹鋼的「耐蝕性」不是二元的（「生鏽」vs「不生鏽」）——是<strong>腐蝕速率</strong>的數量級差異。304 在沿海環境中仍可能發生孔蝕，316 更耐孔蝕，雙相不銹鋼幾乎免疫</li>
+<li>鋁合金的熱處理標記（T3, T4, T6, T7）有精確定義——不可混淆：T3=固溶+冷加工+自然時效；T4=固溶+自然時效；T6=固溶+人工時效（峰值）；T7=固溶+過時效（犧牲強度換抗 SCC）</li>
+<li>AISI/SAE 鋼號系統：四位數的前兩碼=主要合金元素，後兩碼=碳含量（wt% × 100）。1040=碳鋼（10xx）含 0.40% C；4340=Ni-Cr-Mo 鋼（43xx）含 0.40% C</li>
+</ul>
+</section>
+
+<section id="common-mistakes"><h2>⚠️ 常見錯誤</h2>
+<div class="callout-warn"><strong>❌ 不銹鋼絕對不生鏽？</strong><br>錯。不銹鋼在缺氧環境（如縫隙、螺栓接頭）或氯離子環境（海水）中仍可能發生孔蝕和縫隙腐蝕。304 在沿海環境中可能生鏽；316（含 Mo）的耐孔蝕性更佳。</div>
+<div class="callout-warn"><strong>❌ 所有鋁合金都可以熱處理強化</strong><br>錯。只有<strong>可析出硬化的合金</strong>（2xxx, 6xxx, 7xxx）可以熱處理。1xxx（純鋁）、3xxx（Al-Mn）、5xxx（Al-Mg）只能<strong>加工硬化</strong>——加熱只會退火軟化，不會強化。選擇焊接填充金屬時必須考慮這個差異。</div>
+<div class="callout-warn"><strong>❌ 鋼的 AISI 編號中，後兩碼就是碳含量的百分比</strong><br>對大部分鋼是對的（1040 = 0.40% C），但有例外：52100 的碳含量是 ~1.0%（不是 0.00%！），因為 52xxx 系列用不同的編碼規則。工具鋼（A, D, H, M, T, W 系列）、不銹鋼（3xx, 4xx）都不遵循 AISI 四位數規則。永遠查閱規格表而非盲目解讀編號。</div>
+</section>
+
+<section id="extras"><h2>📚 延伸資源</h2>
+<ul>
+<li>ASM Handbook Vol. 1: <em>Properties and Selection: Irons, Steels, and High-Performance Alloys</em> — 各類鋼鐵和合金的性質數據與選材指南</li>
+<li>Davis, J.R. (ed.), <em>Aluminum and Aluminum Alloys</em> — 鋁合金冶金學與應用的綜合參考</li>
+<li>Donachie, M.J. & Donachie, S.J., <em>Superalloys: A Technical Guide</em> — 鎳超合金的完整指南，從冶煉到單晶鑄造</li>
+<li>下一章：<strong><a href="ch12_ceramic_structures_zh.html">第 12 章：陶瓷的結構與性質</a></strong>——從金屬的延性世界轉向陶瓷的離子/共價鍵結和高溫脆性</li>
+</ul></section>
+</main>
+<script defer src="../assets/course-ui.js"></script>
+</body></html>

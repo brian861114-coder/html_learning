@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light" data-reading-width="wide">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>第十二章：雙極性接面電晶體（完整章）— 半導體物理與元件</title>
+<script src="../assets/mathjax-config.js"></script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<link rel="stylesheet" href="../assets/chapter-base.css">
+<link rel="prev" href="ch11_mosfet_advanced_zh.html">
+<script defer src="../assets/course-ui.js"></script>
+<link rel="stylesheet" href="../assets/device-models.css">
+<link rel="stylesheet" href="../../../../shared/models/model-host.css">
+<script defer src="../assets/bjt-base-model.js"></script>
+<script defer src="../../../../shared/models/model-runtime.js"></script>
+
+<link rel="next" href="ch13_jfet_mesfet_zh.html"><link rel="stylesheet" href="../../../../shared/core.css">
+<script src="../../../../shared/core.js" defer></script>
+<link rel="stylesheet" href="../../../../shared/navigation.css" data-shared-navigation>
+</head>
+<body>
+<a class="portal-home-link" href="../index.html">返回學習中心</a>
+<nav class="sidebar" aria-label="本章目錄"><div class="sidebar-header"><div class="sidebar-subtitle">半導體物理與元件</div><h2 class="sidebar-title">雙極性接面電晶體（BJT）—完整章</h2></div><div class="toc"><ul>
+<li><a href="#preview">📋 12.0 本章預覽</a></li>
+<li class="ns">12.1 BJT 作用</li><li class="nsub"><a href="#s12-1-1">12.1.1 基本原理</a></li><li class="nsub"><a href="#s12-1-2">12.1.2 電流關係</a></li><li class="nsub"><a href="#s12-1-3">12.1.3 操作模式</a></li><li class="nsub"><a href="#s12-1-4">12.1.4 放大</a></li><li class="ns">12.2–12.3</li><li class="nsub"><a href="#s12-2-1">12.2.1 順向主動分布</a></li><li class="nsub"><a href="#s12-2-2">12.2.2 其他模式</a></li><li class="nsub"><a href="#s12-3-1">12.3.1 增益因子</a></li><li class="nsub"><a href="#s12-3-2">12.3.2 電流分量</a></li><li class="nsub"><a href="#s12-3-3">12.3.3 總結</a></li><li class="nsub"><a href="#s12-3-4">12.3.4 計算</a></li><li class="ns">12.4 非理想效應</li><li class="nsub"><a href="#s12-4-1">12.4.1 Early effect</a></li><li class="nsub"><a href="#s12-4-2">12.4.2 高注入</a></li><li class="nsub"><a href="#s12-4-3">12.4.3 能隙窄化</a></li><li class="nsub"><a href="#s12-4-4">12.4.4 電流擁擠</a></li><li class="nsub"><a href="#s12-4-5">12.4.5 基極摻雜</a></li><li class="nsub"><a href="#s12-4-6">12.4.6 崩潰</a></li><li><a href="#summary">📋 基礎篇摘要</a></li><li><a href="#common-mistakes">常見錯誤</a></li><li><a href="#self-check">自我檢核</a></li><li><a href="#extras">延伸學習</a></li>
+</ul></div><div class="sidebar-tools"><button type="button" data-action="toggle-theme" aria-label="切換深色或淺色模式">切換顯示主題</button></div></nav>
+<main class="chapter-page" id="main-content" data-chapter-title="雙極性接面電晶體（BJT）—完整章" data-prev-href="ch11_mosfet_advanced_zh.html" data-prev-label="MOSFET 進階概念" data-next-href="ch13_jfet_mesfet_zh.html" data-next-label="JFET / MESFET / HEMT">
+<header class="chapter-header"><div class="tag">第十二章</div><h1>雙極性接面電晶體（BJT）—完整章</h1><div class="chapter-meta">Donald A. Neamen·《半導體物理與元件：基本原理》第四版·第 491–558 頁</div></header>
+
+<section id="preview"><h2>12.0 本章預覽</h2><div class="callout"><strong>本篇核心問題</strong>
+<p>pn 接面二極體（第七、八章）是兩端元件——你只能控制它導通或不導通，無法實現<strong>放大</strong>。放大的本質是<strong>用小信號控制大信號</strong>。這需要第三個端點。</p>
+<p>BJT 是第一個被發明的三端固態放大元件（1947 年，Bardeen、Brattain、Shockley）。它的基本結構是兩個 pn 接面背靠背放置，讓它們<strong>互相作用</strong>——一個接面注入少數載子，另一個接面收集它們。透過這種「注入→傳輸→收集」的機制，一個從基極流入的<strong>小電流</strong> $I_B$（微安級）可以控制一個從集極流入的<strong>大電流</strong> $I_C$（毫安級），實現電流放大。</p>
+<p>雖然 MOSFET 後來取代 BJT 成為數位電路的主流，但 BJT 在類比領域（音頻放大器、射頻前端、電源管理）仍然佔有重要地位——它的跨導更高、匹配更好、雜訊更低。</p>
+<div class="callout-warn"><strong>⚡ 本章的邏輯鏈：</strong>BJT 結構（12.1.1）→ 四種操作模式（12.1.3）→ 基極中少數載子分布（12.2.1）→ 射極注入效率 $\gamma$（12.3.1）→ 基極傳輸因子 $\alpha_T$（12.3.1）→ 電流增益 $\alpha,\beta$（12.3.2）→ Ebers-Moll 完整模型（12.3.3）→ 非理想效應：Early 效應等（12.4）→ 小訊號混合-π 模型（12.5.3）。每一步都精確建立在前一步的物理基礎上。</div>
+<div class="reasoning-map" aria-labelledby="reasoning-map-title"><h3 id="reasoning-map-title">🧭 本章推理地圖</h3><ol class="reasoning-path"><li>兩接面共享薄基極產生 transistor action（§12.1）</li><li>邊界條件決定基極少數載子分布（§12.2）</li><li>注入與傳輸因子建立電流增益（§12.3）</li><li>幾何、高注入與高場造成非理想效應（§12.4）</li><li>進階篇以模型、頻率與結構延伸（§12.5–§12.8）</li></ol></div></div></section>
+
+<figure class="figure"><a class="figure-link" href="../../pages/ch13_pages/ch13_overview.png" target="_blank" rel="noopener"><img src="../../pages/ch13_pages/ch13_overview.png" alt="第十二章 BJT 總覽圖" loading="lazy"></a><figcaption>📌 第十二章總覽圖：BJT 的結構與操作模式、少數載子分布、電流增益、非理想效應與等效模型。</figcaption></figure>
+
+<section id="s12-1-overview"><h2>12.1 補充：BJT 結構、電流關係與操作模式</h2>
+<div class="section-keypoints"><strong>🔑 本節重點</strong> ① BJT = 兩個背靠背pn接面共享極薄基極，實現「注入→傳輸→收集」 ② 順向主動模式：BE順偏注入、BC逆偏收集，I_E=I_B+I_C ③ n⁺射極（重摻雜→γ≈1）、p基極（W_B≪L_n→α_T≈1）、n集極（輕摻雜→高崩潰電壓）④ 放大本質：小I_B控制大I_C，能量來自V_CC非輸入訊號 ⑤ 四種操作模式：順向主動（線性放大）、截止（OFF）、飽和（ON）、反向主動（少用）</div>
+<h3>從兩個二極體到一個電晶體</h3>
+<figure class="figure"><a class="figure-link" href="../../pages/ch13_pages/ch13_page_520_c.png" target="_blank" rel="noopener"><img src="../../pages/ch13_pages/ch13_page_520_c.png" alt="圖 12.5：順向主動模式 npn BJT 的截面與電子注入收集路徑" loading="lazy"></a><figcaption>圖 12.5：順向主動模式中，電子由重摻雜射極注入薄基極；大部分電子穿越基極後被反向偏壓的集極接面收集。</figcaption></figure>
+<p>如果你只是把兩個 pn 二極體背靠背放在一起（p-n-p 或 n-p-n），而不讓它們的基極區域<strong>共用</strong>，你得到的只是兩個獨立的二極體——沒有放大功能。BJT 的奧妙在於：兩個接面<strong>共用同一個狹窄的基極區域</strong>。射極注入的少數載子跨過這個狹窄基極，被集極收集。基極寬度 $W_B$ 必須遠小於少數載子的擴散長度 $L_B$——這是 BJT 能夠放大的根本原因。</p>
+
+<figure class="figure"><a class="figure-link" href="../../pages/ch13_pages/ch13_page_518_c.png" target="_blank" rel="noopener"><img src="../../pages/ch13_pages/ch13_page_518_c.png" alt="圖 12.2–12.3：積體 npn BJT 截面結構與理想化摻雜分布" loading="lazy"></a><figcaption>圖 12.2–12.3：積體 npn BJT 的縱向結構與理想化摻雜輪廓；射極重摻雜、基極薄且較輕摻雜，集極則兼顧載子收集與耐壓。</figcaption></figure>
+
+<p><strong>為什麼射極要重摻雜？</strong>射極的任務是注入大量電子到基極。重摻雜 n⁺ 射極確保射極電流中以電子為主（$\gamma\approx1$）——相較之下從基極注入射極的電洞很少。如果射極和基極摻雜相同，兩種載子的注入量相當→沒有淨放大。</p>
+
+<p><strong>為什麼基極要極窄？</strong>注入的電子在基極中是少數載子，會與多數載子（電洞）復合。如果基極太寬，大部分電子在到達集極前就復合了→沒有集極電流→沒有放大。$W_B \ll L_B$ 確保絕大多數電子存活並被收集。</p>
+
+<p><strong>為什麼集極要輕摻雜？</strong>集極的主要任務是收集電子，但 BC 接面的空乏區主要在輕摻雜側→輕摻雜的集極側承擔了大部分電壓降→提高了崩潰電壓（$V_{CE}$ 耐壓）。</p>
+
+<h3>四種操作模式</h3>
+<table><caption>BJT 四種操作模式</caption><thead><tr><th scope="col">模式</th><th scope="col">BE 接面</th><th scope="col">BC 接面</th><th scope="col">物理行為</th><th scope="col">用途</th></tr></thead><tbody>
+<tr><td><strong>順向主動</strong> (Forward-active)</td><td>順偏</td><td>逆偏</td><td>射極注入→基極傳輸→集極收集</td><td>線性放大器</td></tr>
+<tr><td><strong>截止</strong> (Cutoff)</td><td>逆偏</td><td>逆偏</td><td>兩個接面都不注入→$I_C\approx0$</td><td>數位 OFF</td></tr>
+<tr><td><strong>飽和</strong> (Saturation)</td><td>順偏</td><td>順偏</td><td>兩個接面都注入→基極充滿過量載子</td><td>數位 ON</td></tr>
+<tr><td><strong>反向主動</strong> (Inverse)</td><td>逆偏</td><td>順偏</td><td>集極當射極用→$\beta_R\ll\beta_F$</td><td>少用</td></tr></tbody></table>
+
+<p>在順向主動模式下，$V_{BE}\approx0.7$ V（順偏），$V_{BC}&lt;0$（逆偏）。三個端點電流滿足 Kirchhoff 電流律：$I_E = I_B + I_C$。</p>
+
+<figure class="figure"><a class="figure-link" href="../../pages/ch13_pages/ch13_page_521_c.png" target="_blank" rel="noopener"><img src="../../pages/ch13_pages/ch13_page_521_c.png" alt="圖 12.6：順向偏壓 npn BJT 的少數載子分布與基本電流" loading="lazy"></a><figcaption>圖 12.6：順向主動模式的少數載子分布與電流成分；射極注入電子、基極復合及反向偏壓集極接面的收集共同決定 $I_E$、$I_B$ 與 $I_C$。</figcaption></figure>
+
+<div class="callout"><strong>💡 BJT 的電流放大本質上是一個「效率遊戲」。</strong>射極發射了 100 個電子。其中 99 個成功跨越基極被集極收集（$\alpha=0.99$），只有 1 個在半路復合。基極必須從外部補充 1 個電洞來維持電中性——這就是 $I_B$。所以 $I_C/I_B=99/1=99=\beta$。$\beta$ 衡量的就是這個收集過程的效率。</div>
+
+<h3>12.1.4 BJT 放大原理——為什麼三端元件能放大？</h3>
+<p>BJT 能放大訊號的根本原因：用<strong>小的基極電流 $I_B$</strong> 控制<strong>大的集極電流 $I_C = \beta I_B$</strong>。在共射極組態中，輸入加在 BE 端，輸出從 CE 端取出。</p>
+<p><strong>電壓放大：</strong>輸入端的 BE 接面是順偏二極體→小訊號電阻 $r_\pi = \beta/g_m$（通常幾 kΩ）。輸出端的 CE 之間有大電阻 $r_o = V_A/I_C$（通常幾百 kΩ）。電壓增益 $A_v = -g_m R_L$——輸入電阻低、輸出電阻高→用一個小的輸入電壓變化就能控制一個大的輸出電壓變化。</p>
+<div class="callout"><strong>💡 放大的能量從哪裡來？</strong>不是無中生有！BJT 用小的輸入訊號控制從電源（$V_{CC}$）流向負載的大電流。就像水龍頭——你用很小的力轉動閥門（$I_B$），就能控制大量的水流（$I_C$）。能量來自電源 $V_{CC}$，不是來自輸入訊號。放大器的本質是<strong>能量轉換器</strong>，不是能量產生器。</div>
+<div class="callout-warn"><strong>⚠️ 共用基極</strong> 兩個背靠背二極體若基極不共用，不會有電流放大；BJT 關鍵是薄基極耦合兩接面。</div>
+<details class="example"><summary>📝 自編概念例 — 模式判斷</summary><div class="example-body"><p><strong>題目：</strong>BE 順偏、BC 逆偏時屬何模式？</p><p><strong>答案：</strong>順向主動，適合線性放大。</p></div></details>
+</section>
+
+<section id="s12-2-overview"><h2>12.2 補充：基極中少數載子的分布</h2>
+<div class="section-keypoints"><strong>🔑 本節重點</strong> ① W_B ≪ L_n → 復合可忽略 → d²δn_B/dx²≈0 → 少數載子呈線性分布 ② 邊界條件：δn_B(0)=n_{B0}e^{V_{BE}/V_T}，δn_B(W_B)≈0（BC逆偏收集）③ 線性分布→濃度梯度為常數→I_C在整個基極中守恆 ④ I_C ∝ 1/W_B——基極越薄，濃度梯度越陡，電流越大 ⑤ 這是「短二極體」近似（§8.1.8）在BJT中的直接應用</div>
+<p>這節是 BJT 物理的核心。中性基極中沒有顯著電場，少數載子主要靠擴散穿越基極。</p>
+
+<p>因為基極極窄（$W_B\ll L_B = \sqrt{D_B\tau_B}$），電子在基極中的<strong>傳輸時間遠短於復合時間</strong>→復合項可忽略→$d^2\delta n_B/dx^2\approx0$。這意味著電子濃度在基極中呈<strong>線性分布</strong>——這是 BJT 分析中最關鍵的簡化結果。</p>
+<p><strong>為什麼線性分布如此重要？</strong>① 擴散電流 $J_n = eD_B(dn/dx)$ 與梯度成正比。線性分布→梯度為常數→電流在整個基極中<strong>不隨位置變化</strong>→沒有載子在半路「消失」。② 梯度 $= \delta n_B(0)/W_B$→$I_C \propto 1/W_B$→基極越薄，電流越大。③ 這是「短二極體」近似（8.1.8）的直接應用——BJT 的基極本質上就是一個短二極體。</p>
+
+<figure class="figure"><a class="figure-link" href="../../pages/ch13_pages/ch13_page_528_c.png" target="_blank" rel="noopener"><img src="../../pages/ch13_pages/ch13_page_528_c.png" alt="圖 12.14：順向主動模式 npn BJT 基極中的少數載子分布" loading="lazy"></a><figcaption>圖 12.14：順向主動模式下，基極少數載子濃度由射極端高值向集極端低值下降；其梯度決定穿越基極的電子擴散電流。</figcaption></figure>
+
+<p>在 BE 接面邊界（$x=0$），Shockley 邊界條件給出：$\delta n_B(0)=n_{B0}(e^{V_{BE}/V_T}-1)$。在 BC 接面邊界（$x=W_B$），逆偏將所有到達的電子掃入集極→$\delta n_B(W_B)\approx0$。直線連接兩點→斜率為常數→擴散電流 $J_n=eD_B\,\delta n_B(0)/W_B$ 在整個基極中為<strong>常數</strong>。</p>
+
+<div class="callout"><strong>💡 $W_B$ 越小→$I_C$ 越大——為什麼？</strong>$I_C\propto1/W_B$：基極越窄，濃度梯度越陡→擴散越強。這就是為什麼 BJT 的電流增益和速度都隨基極寬度縮小而提升。現代 SiGe HBT 的基極寬度僅有 ∼10 nm——透過精確的 SiGe 磊晶來實現。</div>
+<div class="callout-warn"><strong>⚠️ 短基極條件</strong> $W_B\ll L_B$ 才可用線性分布；基極變寬時須回到完整擴散解。</div>
+<details class="example"><summary>📐 例題 — 梯度與電流</summary><div class="example-body"><p>$\delta n_B(0)=10^{12}$ cm⁻³、$W_B=0.2$ µm、$D_B=10$ cm²/s → $J_n=e D_B \delta n_B(0)/W_B\approx0.8$ A/cm²。</p></div></details>
+</section>
+
+<section id="interactive-bjt-base">
+<h2>互動模型｜BJT 基極少數載子分布與電流增益</h2>
+<p>調整 BE／BC 偏壓、基極寬度與擴散長度，比較完整擴散方程和短基極線性近似，並觀察基極復合如何降低傳輸因子與電流增益。</p>
+<details class="model-host" data-model-host="bjt-base">
+<summary><span><span class="dm-closed-label">🎛️ 開啟 BJT 基極載子模型</span><span class="dm-open-label">收合 BJT 基極載子模型</span></span><small>接面偏壓與 W_B/L_n → 載子分布、J_C、α_T、β</small></summary>
+<div class="model-host__body"><div data-model-mount data-bjt-base-model></div></div>
+</details>
+</section>
+<section id="s12-3-overview"><h2>12.3 補充：電流增益的物理根源 ⭐</h2>
+<div class="section-keypoints"><strong>🔑 本節重點</strong> ① α = γ·α_T——兩個因子乘積決定總電流增益 ② γ = I_{nE}/(I_{nE}+I_{pE})→N_E ≫ N_B確保注入效率趨近1 ③ α_T ≈ 1−½(W_B/L_n)²→W_B越小傳輸越完整 ④ β = α/(1−α)，α的微小變化（1%）可使β劇變（50%）——對製程極敏感 ⑤ 必須用負回授（射極電阻）穩定偏壓點，電路設計不可假設β為精確值</div>
+<figure class="figure"><a class="figure-link" href="../../pages/ch13_pages/ch13_page_535_c.png" target="_blank" rel="noopener"><img src="../../pages/ch13_pages/ch13_page_535_c.png" alt="圖 12.19：順向主動模式 npn BJT 的電流密度分量" loading="lazy"></a><figcaption>圖 12.19：沿射極、基極與集極追蹤電子及電洞電流密度，可看出射極注入效率與基極傳輸損失如何共同限制共基極電流增益。</figcaption></figure>
+<p>BJT 的電流放大本質上由兩個因子乘積決定：</p>
+<div class="eq">$$\boxed{\alpha = \frac{I_C}{I_E} = \gamma \cdot \alpha_T}$$</div>
+
+<h3>射極注入效率 $\gamma$：「有用的 vs 浪費的」</h3>
+<p>射極電流 $I_E$ 有兩個成分：從射極注入基極的電子電流 $I_{nE}$（有用），和從基極注入射極的電洞電流 $I_{pE}$（浪費——這些電洞只在射極中與多數載子復合，對集極電流無貢獻）。</p>
+<div class="eq">$$\gamma = \frac{I_{nE}}{I_{nE}+I_{pE}} = \frac{1}{1+\dfrac{D_E N_B W_B}{D_B N_E L_E}}$$</div>
+<p>要使 $\gamma\to1$，分母中的修正項必須 $\ll1$。這要求：$N_E\gg N_B$（射極遠重於基極）、$W_B$ 小、$L_E$ 大（射極中電洞擴散長度大→電洞在射極深處復合而非在界面附近堆積）。這就是為什麼射極是 n⁺、基極是 p、且基極極窄的根本原因。</p>
+
+<h3>基極傳輸因子 $\alpha_T$：「活著到達 vs 半路復合」</h3>
+<p>射極注入的電子不會全部到達集極。有些在基極中與電洞復合。復合損失的比例取決於基極寬度與擴散長度的比值：</p>
+<div class="eq">$$\alpha_T \approx 1 - \frac{1}{2}\left(\frac{W_B}{L_B}\right)^2$$</div>
+<p>$W_B/L_B$ 越小→$\alpha_T$ 越接近 1。典型 BJT：$W_B\sim0.2$ µm，$L_B\sim10$ µm→$W_B/L_B\sim0.02$→$\alpha_T\approx0.9998$。</p>
+
+<h3>⭐ 共射極電流增益 $\beta$</h3>
+<div class="eq">$$\boxed{\beta = \frac{I_C}{I_B} = \frac{\alpha}{1-\alpha}}$$</div>
+<p>$I_B$ 主要由兩部分組成：補充基極復合損失的電洞（$I_{rB}$），和從基極注入射極的浪費電洞電流（$I_{pE}$）。</p>
+
+<div class="callout-warn"><strong>⚡ $\beta$ 對 $\alpha$ 的極端敏感性——BJT 電路設計的關鍵教訓。</strong><br>$\alpha=0.99$→$\beta=99$；$\alpha=0.98$→$\beta=49$；$\alpha=0.995$→$\beta=199$；$\alpha=0.9$→$\beta=9$。<br><br>$\alpha$ 從 0.99 降到 0.98 僅有 <strong>1% 的變化</strong>，但 $\beta$ 從 99 降到 49——<strong>下降了 50%</strong>！這就是為什麼 BJT 電路<strong>不能</strong>假設 $\beta$ 是精確值——你必須透過負回授（射極電阻、集極回授）來穩定偏壓點。這也是為什麼 BJT 放大器通常設計為對 $\beta&gt;\beta_{\min}$ 都能正常工作。<br><br>也是因為這個敏感性，MOSFET 在數位電路中取代了 BJT：MOSFET 的「增益」由 $g_m$ 決定，$g_m$ 對製程變異的敏感度遠低於 BJT 的 $\beta$。</div>
+<div class="callout"><strong>💡 $\beta$ 敏感性</strong> $\beta=\alpha/(1-\alpha)$；$\alpha$ 微小變化會造成 $\beta$ 大幅波動，電路須用回授穩定。</div>
+<details class="example"><summary>📐 例題 — 由 $\alpha$ 求 $\beta$</summary><div class="example-body"><p>$\alpha=0.995$ → $\beta=0.995/0.005=199$。</p></div></details>
+</section>
+
+<section id="s12-basic-ebers-supplement"><h2>補充：Ebers-Moll 模型</h2>
+<div class="section-keypoints"><strong>🔑 本節重點</strong> ① 雙二極體（BE+BC）+ 雙耦合電流源（α_F I_F、α_R I_R）→涵蓋全部四種操作模式 ② 互易關係 α_F I_{ES}=α_R I_{CS}→僅3個獨立參數而非4個 ③ 順向主動：I_C≈α_F I_{ES}e^{V_{BE}/V_T}；飽和：兩接面皆順偏→V_{CE,sat}≈0.1–0.2V ④ 傳輸型使用單一I_S，可與Gummel-Poon對接 ⑤ Ebers-Moll是大訊號DC模型；SPICE中BJT模型的基礎</div>
+<p>Ebers-Moll 模型是 BJT 最通用的描述
+</p><p><strong>等效電路的四個元件：</strong></p>
+<ul>
+<li><strong>BE 二極體：</strong>$I_F = I_{ES}(e^{V_{BE}/V_T}-1)$——BE 接面的順向電流。</li>
+<li><strong>BC 二極體：</strong>$I_R = I_{CS}(e^{V_{BC}/V_T}-1)$——BC 接面的電流（順向或反向取決於偏壓）。</li>
+<li><strong>$\alpha_F I_F$（受控電流源）：</strong>BE 電流中成功穿越基極到達集極的比例。$\alpha_F \approx 0.99$。</li>
+<li><strong>$\alpha_R I_R$（受控電流源）：</strong>BC 電流中穿越基極到達射極的比例。$\alpha_R \ll \alpha_F$（因為集極設計不是為了高效注入）。</li>
+</ul>
+<div class="eq">$$I_E = I_{ES}(e^{V_{BE}/V_T}-1) - \alpha_R I_{CS}(e^{V_{BC}/V_T}-1)$$</div>
+<div class="eq">$$I_C = \alpha_F I_{ES}(e^{V_{BE}/V_T}-1) - I_{CS}(e^{V_{BC}/V_T}-1)$$</div>
+
+<figure class="figure"><a class="figure-link" href="../../pages/ch13_pages/ch13_page_562_c.png" target="_blank" rel="noopener"><img src="../../pages/ch13_pages/ch13_page_562_c.png" alt="圖 12.36：Ebers-Moll 模型的電流方向與電壓極性" loading="lazy"></a><figcaption>圖 12.36：Ebers–Moll 模型採所有端點電流流入元件的符號約定，並明確定義 $V_{BE}$ 與 $V_{BC}$ 的正方向；套用方程式前必須先遵守此極性契約。</figcaption></figure>
+
+<p><strong>在順向主動模式（$V_{BE}&gt;0$, $V_{BC}&lt;0$）：</strong>$e^{V_{BC}/V_T}\approx0$→$I_C\approx\alpha_F I_{ES}e^{V_{BE}/V_T} = \alpha_F I_E\approx I_S e^{V_{BE}/V_T}$。這就是我們熟悉的指數關係。</p>
+<p><strong>在飽和模式（$V_{BE}&gt;0$, $V_{BC}&gt;0$）：</strong>兩個二極體都導通→$I_C = \alpha_F I_F - I_R$。$I_R$ 開始抵消 $\alpha_F I_F$→$V_{CE}$ 降得很低（$V_{CE,sat} \approx 0.1$–$0.2$ V）。飽和區中兩個接面都順偏→基極中儲存大量過量載子→開關延遲（本章進階篇 §12.7）。</p>
+<p><strong>互易關係（reciprocity）：</strong>$\alpha_F I_{ES} = \alpha_R I_{CS}$——這不是巧合，而是半導體物理的自洽要求（來自二極體飽和電流的微觀定義）。這個關係減少了獨立參數的數量——Ebers-Moll 模型只需要 3 個獨立參數（$I_{ES}$, $\alpha_F$, $\alpha_R$）而非 4 個。</p>
+<div class="callout"><strong>💡 Ebers-Moll vs 混合-π 模型。</strong>Ebers-Moll 是大訊號 DC 模型——描述 BJT 在任意偏壓點的電流。混合-π 模型（12.5.3）是小訊號 AC 模型——描述 BJT 在特定偏壓點附近的小訊號響應。在 SPICE 模擬中，大訊號 Ebers-Moll（或更先進的 Gummel-Poon）用於 DC 和暫態分析；小訊號混合-π 用於 AC 分析。兩者是同一物理的不同數學近似。</div>
+<div class="callout-warn"><strong>⚠️ 參數獨立性</strong> Ebers–Moll 僅 3 個獨立參數；勿把 $\alpha_F$、$\alpha_R$、$I_{ES}$、$I_{CS}$ 當成彼此無關。</div>
+<details class="example"><summary>📝 自編概念例 — 飽和區</summary><div class="example-body"><p>兩接面皆順偏時 $I_R$ 抵消部分 $\alpha_F I_F$，$V_{CE,sat}$ 降至約 0.1–0.2 V 並儲存基極電荷。</p></div></details>
+</section>
+
+<section id="s12-4-overview"><h2>12.4 補充：非理想效應總覽</h2>
+<div class="section-keypoints"><strong>🔑 本節重點</strong> ① Early效應：V_{CE}↑→BC空乏區展寬→W_B↓→I_C=I_S e^{V_{BE}/V_T}(1+V_{CE}/V_A) ② r_o=V_A/I_C——輸出電阻有限，限制放大器最大增益 ③ Webster效應：高注入δn_B≈p_{B0}→電中性要求p↑→γ↓→β隨I_C下降 ④ BV_{CEO}≈BV_{CBO}/β^{1/n}——β越大崩潰電壓越低（設計取捨）⑤ Kirk效應：極高I_C→BC空乏區空間電荷改變電場→有效基極延伸→f_T↓</div>
+<h3>基極寬度調變與 Early 效應</h3>
+<figure class="figure"><a class="figure-link" href="../../pages/ch13_pages/ch13_page_548_c.png" target="_blank" rel="noopener"><img src="../../pages/ch13_pages/ch13_page_548_c.png" alt="圖 12.22：BJT 集極電流與集射極電壓的 Early 效應" loading="lazy"></a><figcaption>圖 12.22：集極—基極逆偏增加會縮窄中性基極，使 $I_C$ 隨 $V_{CE}$ 上升；輸出曲線外插至負電壓軸可定義 Early 電壓 $V_A$。</figcaption></figure>
+<p>在理想 BJT 中，$I_C$ 只取決於 $V_{BE}$，與 $V_{CE}$ 無關。但現實中 $V_{CE}$ 增加→BC 接面逆偏增加→BC 空乏區向基極側擴展→<strong>有效基極寬度 $W_B$ 變窄</strong>。</p>
+<p>$W_B$ 變窄有兩個效應：① 電子濃度梯度 $\delta n_B(0)/W_B$ 變大→$I_C$ 增加。② 基極傳輸時間變短→$\alpha_T$ 輕微增大。兩者都使 $I_C$ 隨 $V_{CE}$ 增加而增加——這就是 <strong>Early 效應</strong>。</p>
+
+
+<div class="eq">$$I_C = I_S\,e^{V_{BE}/V_T}\!\left(1 + \frac{V_{CE}}{V_A}\right)$$</div>
+
+<p><strong>$V_A$（Early 電壓）的物理意義：</strong>$V_A$ 越大→$I_C$–$V_{CE}$ 曲線越平→輸出電阻 $r_o=V_A/I_C$ 越大→放大器增益越高。$V_A$ 取決於基極寬度——$W_B$ 越大，BC 空乏區的變化對 $W_B$ 的<strong>比例影響</strong>越小→$V_A$ 越高。但 $W_B$ 大也會降低 $\beta$（因 $\alpha_T$ 下降）。這是 BJT 設計中的經典取捨：$\beta$ vs $V_A$。</p>
+
+<h3>其他非理想效應</h3>
+<p><strong>Webster 效應（高階注入）：</strong>當 $I_C$ 很大時，注入基極的電子濃度與基極多數載子電洞濃度可比（$\delta n_B\approx p_{B0}$）→為維持電中性，電洞濃度也必須增加→注入射極的電洞電流增大→$\gamma$ 下降→$\beta$ 隨 $I_C$ 增加而下降。</p>
+<p><strong>Kirk 效應（基極推擠）：</strong>在極高 $I_C$ 下，集極電流的空間電荷在 BC 空乏區中產生顯著的附加電場→空乏區向集極側移動→有效基極向集極延伸→$W_B$ 增加→截止頻率 $f_T$ 下降。</p>
+<p><strong>崩潰（Breakdown）：</strong>$V_{CE}$ 太高→BC 接面雪崩倍增→$I_C$ 急劇增大（與 pn 接面崩潰機制相同）。BJT 中崩潰電壓記為 $BV_{CEO}$（基極開路）或 $BV_{CBO}$（射極開路）。</p>
+
+<h3>12.4.6 崩潰電壓——BJT 的電壓天花板</h3>
+<p>BJT 有兩個關鍵的崩潰電壓指標：</p>
+<p><strong>$BV_{CBO}$（射極開路）：</strong>純粹是 BC 接面的雪崩崩潰電壓——與一個獨立的 pn 接面相同。取決於集極側的摻雜濃度 $N_C$：$N_C$ 越低→空乏區越寬→崩潰電壓越高。典型值：50–300 V。</p>
+<p><strong>$BV_{CEO}$（基極開路）：</strong>比 $BV_{CBO}$ <strong>低得多</strong>。為什麼？因為在共射極組態中，雪崩倍增產生的額外電子被掃到集極→增加了 $I_C$→增加了 $I_B$（通過 $\beta$ 反饋）→進一步增加 $I_C$→正反饋迴路→在更低的電壓下就發生崩潰。</p>
+<div class="eq">$$BV_{CEO} \approx \frac{BV_{CBO}}{\beta^{1/n}}$$</div>
+<p>其中 $n$ 是雪崩倍增指數（通常 3–4 對 Si）。對 $\beta=100$，$n=4$：$BV_{CEO} \approx BV_{CBO}/100^{0.25} \approx BV_{CBO}/3.2$。所以一個 $BV_{CBO}=100$ V 的 BJT，$BV_{CEO}$ 只有約 30 V。</p>
+<div class="callout-warn"><strong>⚡ 崩潰電壓 vs $\beta$ 的兩難。</strong>$\beta$ 越大→$BV_{CEO}$ 越低。高壓 BJT 必須犧牲 $\beta$（用較寬的基極）。功率 BJT 通常用厚集極區（低 $N_C$）來提高 $BV_{CBO}$，同時用較寬的基極來控制 $\beta$——但這會犧牲速度。這就是為什麼功率 BJT 的 $f_T$ 通常只有幾 MHz，而小訊號 BJT 可達 GHz。</div>
+<div class="callout"><strong>💡 Early 效應</strong> $V_{CE}$ 增加使 BC 空乏區展寬、有效 $W_B$ 變窄，$I_C$ 略升；$r_o=V_A/I_C$ 限制電壓增益。</div>
+<details class="example"><summary>📐 例題 — 估算 $r_o$</summary><div class="example-body"><p>$V_A=80$ V、$I_C=2$ mA → $r_o=40$ kΩ。</p></div></details>
+</section>
+
+<section id="s12-basic-hybrid-pi-supplement"><h2>補充：混合-π 小訊號模型</h2>
+<div class="section-keypoints"><strong>🔑 本節重點</strong> ① g_m=I_{CQ}/V_T——BJT跨導比MOSFET大4–10倍（類比電路核心優勢）② r_π=β/g_m=V_T/I_B——基極看向射極的小訊號輸入電阻 ③ r_o=V_A/I_{CQ}——來自Early效應的有限輸出電阻 ④ A_v=−g_m R_L——共射極電壓增益 ⑤ BJT在低雜訊放大器、射頻前端仍不可替代：高g_m→高增益、低輸入參考雜訊</div>
+<p>在 DC 偏壓點
+
+</p><div class="eq">$$\boxed{g_m = \frac{I_{CQ}}{V_T} \qquad r_\pi = \frac{\beta}{g_m} \qquad r_o = \frac{V_A}{I_{CQ}}}$$</div>
+
+<p><strong>$g_m$（跨導）——最核心的參數：</strong>$g_m = \partial I_C/\partial V_{BE} = I_{CQ}/V_T$。它告訴你 $V_{BE}$ 的微小變化能產生多大的 $I_C$ 變化：$i_c = g_m v_{be}$。室溫（$V_T=0.026$ V）：$I_C=1$ mA→$g_m=38.5$ mS。$I_C=10$ µA→$g_m=0.385$ mS。注意 $g_m\propto I_{CQ}$——偏壓電流直接控制增益。</p>
+
+<p><strong>$r_\pi$（輸入電阻）：</strong>$r_\pi = v_{be}/i_b = \beta/g_m = \beta V_T/I_{CQ}$。$I_C=1$ mA、$\beta=100$→$r_\pi=2.6$ kΩ。$r_\pi$ 是從基極看向射極的等效電阻。</p>
+
+<p><strong>$r_o$（輸出電阻）：</strong>$r_o = \partial V_{CE}/\partial I_C = V_A/I_{CQ}$。來自 Early 效應的有限輸出阻抗。$I_C=1$ mA、$V_A=100$ V→$r_o=100$ kΩ。</p>
+
+<div class="callout"><strong>💡 BJT 的 $g_m$ 比 MOSFET 大——這是 BJT 在類比電路中仍占優勢的根本原因。</strong><br><br>BJT：$g_m=I_C/V_T=38.5$ mS/mA（每毫安偏壓電流產生 38.5 mS 的跨導）。<br>MOSFET（飽和區）：$g_m=2I_D/(V_{GS}-V_{TH})$。同樣 1 mA：若 $V_{GS}-V_{TH}=0.2$ V→$g_m=10$ mS；若 $V_{GS}-V_{TH}=0.5$ V→$g_m=4$ mS。<br><br>BJT 的 $g_m$ 大了 4–10 倍。更大的 $g_m$→更大的電壓增益（$A_v=-g_m R_C$）、更低的輸入參考雜訊。這就是為什麼低雜訊放大器（LNA）、高速運算放大器輸入級、和射頻功率放大器仍然偏好使用 BJT（或 BiCMOS 製程中的 BJT 部分）。<br><br>但 BJT 有 $r_\pi$ 的負載效應（輸入阻抗有限）和基極電流的散粒雜訊——這在極高阻抗信號源應用中不利。</div>
+<div class="callout-warn"><strong>⚠️ 工作點相依</strong> $g_m$、$r_\pi$、$r_o$ 皆隨 $I_{CQ}$ 改變，不能把單一偏壓點參數套到所有電流。</div>
+<details class="example"><summary>📐 例題 — 估算 $g_m$</summary><div class="example-body"><p>300 K、$I_{CQ}=2$ mA → $g_m=I_C/V_T\approx2/0.026\approx77$ mS。</p></div></details>
+</section>
+
+<section id="s12-1-1"><h2>12.1.1 基本操作原理</h2><div class="section-keypoints"><strong>🔑 本節重點</strong> ① BJT 由兩接面共享薄基極 ② 射極注入載子 ③ 基極傳輸載子 ④ 集極收集載子</div>
+<p>npn BJT 由重摻雜 n+ 射極、薄 p 型基極與較輕摻雜 n 型集極構成。</p><p>順向主動模式下，射極–基極接面順偏，電子由射極注入基極成為少數載子。</p><p>基極很薄且復合有限，大部分注入電子能擴散到反偏的基極–集極接面。</p><p>集極接面電場把電子掃入集極，形成遠大於基極復合電流的集極電流。</p><p>BJT 的放大能力因此來自注入、傳輸與收集三個連續物理步驟。</p><div class="callout"><strong>💡 transistor action：</strong>兩個獨立二極體背靠背並不等同 BJT；關鍵是共享薄基極。</div><div class="callout-warn"><strong>⚠️ 電流能量來自集極電源，不是基極訊號本身。</strong></div><details class="example"><summary>📝 自編概念例：薄基極的作用</summary><div class="example-body"><p><strong>題目：</strong>基極寬度遠小於電子擴散長度。</p><p><strong>解：</strong>載子穿越前復合比例小。</p><p><strong>答案：</strong>集極收集效率提高。</p></div></details></section>
+
+<section id="s12-1-2"><h2>12.1.2 簡化電流關係</h2><div class="section-keypoints"><strong>🔑 本節重點</strong> ① 端點滿足 $I_E=I_C+I_B$ ② $\alpha$ 描述共基極增益 ③ $\beta$ 描述共射極增益 ④ 兩增益可相互轉換</div>
+<p>依端點電流守恆，射極電流等於集極電流與基極電流之和。</p><p>共基極電流增益定義為 $\alpha=I_C/I_E$，理想良好 BJT 的 $\alpha$ 接近但小於 1。</p><p>共射極增益定義為 $\beta=I_C/I_B$，它把較小基極電流與較大集極電流相連。</p><p>利用電流守恆可得 $\beta=\alpha/(1-\alpha)$ 與 $\alpha=\beta/(\beta+1)$。</p><p>因 $\alpha$ 接近 1，其微小製程變化可造成 $\beta$ 的大幅變動，所以電路不應依賴精確固定的 $\beta$。</p><div class="callout"><strong>💡 敏感度：</strong>$\alpha$ 從 0.98 變為 0.99，$\beta$ 會從 49 增至 99。</div><div class="callout-warn"><strong>⚠️ $\beta$ 不是普適材料常數。</strong>它隨電流、溫度、偏壓與元件而變。</div><details class="example"><summary>📝 自編概念例：增益換算</summary><div class="example-body"><p><strong>題目：</strong>$\alpha=0.99$。</p><p><strong>解：</strong>$\beta=0.99/(1-0.99)$。</p><p><strong>答案：</strong>$\beta=99$。</p></div></details></section>
+
+<section id="s12-1-3"><h2>12.1.3 操作模式</h2><div class="section-keypoints"><strong>🔑 本節重點</strong> ① 截止兩接面不注入 ② 順向主動用於放大 ③ 飽和兩接面皆順偏 ④ 反向主動交換角色</div>
+<p>BJT 模式由射極–基極與集極–基極兩個接面的偏壓組合決定。</p><p>順向主動模式是 BE 順偏、BC 反偏，提供正常的射極注入與集極收集。</p><p>截止模式沒有足夠 BE 順偏，端點電流只剩漏電，適合作為數位關閉狀態。</p><p>飽和模式兩接面都順偏，基極與集極儲存大量電荷，端電壓低但關斷變慢。</p><p>反向主動模式交換射極與集極功能，但因結構摻雜不對稱，電流增益通常很低。</p><div class="callout"><strong>💡 模式判斷：</strong>先判斷兩個接面偏壓，不要只看 $V_{CE}$ 大小。</div><div class="callout-warn"><strong>⚠️ 飽和不是速度更快的「完全導通」。</strong>儲存電荷會拖慢關斷。</div><details class="example"><summary>📝 自編概念例：模式辨認</summary><div class="example-body"><p><strong>題目：</strong>npn 的 BE、BC 都順偏。</p><p><strong>解：</strong>兩接面都在注入載子。</p><p><strong>答案：</strong>飽和模式。</p></div></details></section>
+
+<section id="s12-1-4"><h2>12.1.4 BJT 放大</h2><div class="section-keypoints"><strong>🔑 本節重點</strong> ① 小 $v_{BE}$ 改變指數電流 ② 工作點提供線性化中心 ③ 跨導為 $I_C/V_T$ ④ 負載把電流轉成電壓</div>
+<p>順向主動區的集極電流近似 $I_C=I_Se^{V_{BE}/V_T}$。</p><p>在直流工作點附近加入小訊號，可把指數曲線用切線線性化。</p><p>小訊號跨導為 $g_m=\partial I_C/\partial V_{BE}=I_C/V_T$。</p><p>集極負載把電流變化轉成電壓變化，共射極級通常產生反相電壓增益。</p><p>偏壓必須讓輸出擺動仍留在主動區，避免一端進入截止、另一端進入飽和而失真。</p><div class="callout"><strong>💡 放大是局部線性化：</strong>不是 BJT 的指數特性消失，而是只使用其小範圍切線。</div><div class="callout-warn"><strong>⚠️ 放大器輸出能量由電源提供。</strong></div><details class="example"><summary>📝 自編概念例：跨導</summary><div class="example-body"><p><strong>題目：</strong>300 K、$I_C=1$ mA。</p><p><strong>解：</strong>$g_m=I_C/V_T=1\text{ mA}/25.9\text{ mV}$。</p><p><strong>答案：</strong>約 38.6 mS。</p></div></details></section>
+
+<section id="s12-2-1"><h2>12.2.1 順向主動模式</h2><div class="section-keypoints"><strong>🔑 本節重點</strong> ① BE 邊界濃度指數上升 ② 薄基極近似線性分布 ③ 濃度梯度形成擴散電流 ④ BC 電場收集載子</div>
+<p>BE 順偏使基極射極端的少數電子濃度按 $\exp(V_{BE}/V_T)$ 增加。</p><p>BC 反偏使集極端少數載子濃度接近零，建立跨越基極的濃度差。</p><p>當基極寬度遠小於擴散長度，復合有限，少數載子分布可近似為線性。</p><p>濃度梯度驅動電子擴散到集極端，再由 BC 空乏區電場快速掃入集極。</p><p>基極內少量復合需要由基極端補充，形成基極電流並使 $\alpha_T$ 小於 1。</p><div class="callout"><strong>💡 基極是傳輸區，不是主要供應載子的端點。</strong></div><div class="callout-warn"><strong>⚠️ 線性分布依賴短基極與低階注入近似。</strong></div><details class="example"><summary>📝 自編概念例：基極變窄</summary><div class="example-body"><p><strong>題目：</strong>保持邊界濃度，$W_B$ 減半。</p><p><strong>解：</strong>濃度梯度約加倍。</p><p><strong>答案：</strong>理想擴散集極電流約增大。</p></div></details></section>
+
+<section id="s12-2-2"><h2>12.2.2 其他操作模式</h2><div class="section-keypoints"><strong>🔑 本節重點</strong> ① 截止分布近熱平衡 ② 飽和兩端皆注入 ③ 反向主動方向相反 ④ 邊界條件統一描述模式</div>
+<p>截止時兩接面沒有顯著順偏，基極少數載子接近平衡值。</p><p>飽和時 BE 與 BC 都順偏，基極兩端少數載子濃度都提高，分布不再降到近零。</p><p>兩端同時注入造成大量儲存電荷，是飽和 BJT 關斷延遲的根源。</p><p>反向主動時 BC 接面作為注入端、BE 接面作為收集端，分布斜率反向。</p><p>使用兩接面的 Shockley 邊界條件，可用同一套少數載子方程描述所有模式。</p><div class="callout"><strong>💡 統一觀點：</strong>模式改變就是基極兩端邊界濃度改變。</div><div class="callout-warn"><strong>⚠️ 反向主動增益通常不能直接沿用正向 $\beta$。</strong></div><details class="example"><summary>📝 自編概念例：飽和分布</summary><div class="example-body"><p><strong>題目：</strong>基極兩端少數載子都高於平衡。</p><p><strong>解：</strong>BE 與 BC 均在注入。</p><p><strong>答案：</strong>對應飽和模式。</p></div></details></section>
+
+<section id="s12-3-1"><h2>12.3.1 電流增益因子</h2><div class="section-keypoints"><strong>🔑 本節重點</strong> ① 射極注入效率為 $\gamma$ ② 基極傳輸因子為 $\alpha_T$ ③ $\alpha=\gamma\alpha_T$ ④ $\beta$ 對 $\alpha$ 極敏感</div>
+<p>射極注入效率 $\gamma$ 是射極注入電子電流占總射極注入電流的比例。</p><p>重摻雜射極與較輕摻雜基極可抑制基極向射極的電洞反注入，使 $\gamma$ 接近 1。</p><p>基極傳輸因子 $\alpha_T$ 是到達集極端的電子占進入基極電子的比例。</p><p>薄基極與長少數載子擴散長度減少復合，使 $\alpha_T$ 接近 1。</p><p>總共基極增益近似 $\alpha=\gamma\alpha_T$，再由 $\beta=\alpha/(1-\alpha)$ 得共射極增益。</p><div class="callout"><strong>💡 高增益需要兩關都好：</strong>注入選擇性與基極傳輸效率缺一不可。</div><div class="callout-warn"><strong>⚠️ 接近 1 的因子相乘，任何一項退化都會明顯降低 $\beta$。</strong></div><details class="example"><summary>📝 自編概念例：兩因子相乘</summary><div class="example-body"><p><strong>題目：</strong>$\gamma=0.995$、$\alpha_T=0.995$。</p><p><strong>解：</strong>$\alpha=0.990025$。</p><p><strong>答案：</strong>$\beta\approx99.3$。</p></div></details></section>
+
+<section id="s12-3-2"><h2>12.3.2 電流分量推導</h2><div class="section-keypoints"><strong>🔑 本節重點</strong> ① 電子注入形成主要集極電流 ② 電洞反注入降低效率 ③ 基極復合形成基極電流 ④ 各分量由邊界梯度求得</div>
+<p>射極向基極的電子擴散電流由 BE 邊界電子濃度與基極寬度決定。</p><p>基極向射極也會注入電洞，形成不貢獻正常集極電流的射極電流分量。</p><p>電子穿越基極時的復合造成電流沿位置減少，差額由基極端供應。</p><p>到達 BC 空乏區的電子被收集形成主要集極電流，另有接面漏電分量。</p><p>把電子注入、電洞反注入、基極復合與漏電分別列出，才能看出摻雜與幾何如何控制增益。</p><div class="callout"><strong>💡 基極電流不是單一機制：</strong>它包含反注入與基極復合等分量。</div><div class="callout-warn"><strong>⚠️ 推導時需保持端點電流方向定義一致。</strong></div><details class="example"><summary>📝 自編概念例：射極效率</summary><div class="example-body"><p><strong>題目：</strong>電子注入 0.99 mA、電洞反注入 0.01 mA。</p><p><strong>解：</strong>$\gamma=0.99/(0.99+0.01)$。</p><p><strong>答案：</strong>$\gamma=0.99$。</p></div></details></section>
+
+<section id="s12-3-3"><h2>12.3.3 電流與增益總結</h2><div class="section-keypoints"><strong>🔑 本節重點</strong> ① 指數由 BE 偏壓決定 ② 結構因子決定增益 ③ 電流守恆連結三端 ④ 非理想效應使增益依工作點改變</div>
+<p>順向主動區的集極電流主要由 $V_{BE}$ 的指數關係控制。</p><p>射極摻雜、基極摻雜、基極寬度與壽命則透過 $\gamma$、$\alpha_T$ 決定電流增益。</p><p>三端始終滿足 $I_E=I_C+I_B$，這是檢查符號與推導的基本條件。</p><p>$\alpha$ 適合描述共基極傳輸，$\beta$ 適合共射極電路，但兩者不是互相獨立的參數。</p><p>在很低或很高電流、強 Early effect 或接近崩潰時，簡化增益關係需要修正。</p><div class="callout"><strong>💡 分工：</strong>$V_{BE}$ 決定「多少電流」，結構設計決定「多少成為集極電流」。</div><div class="callout-warn"><strong>⚠️ 不要用單一資料表 $\beta$ 覆蓋所有偏壓與溫度。</strong></div><details class="example"><summary>📝 自編概念例：基極電流</summary><div class="example-body"><p><strong>題目：</strong>$I_C=2$ mA、$\beta=100$。</p><p><strong>解：</strong>$I_B=I_C/\beta$。</p><p><strong>答案：</strong>20 µA。</p></div></details></section>
+
+<section id="s12-3-4"><h2>12.3.4 計算例題</h2><div class="section-keypoints"><strong>🔑 本節重點</strong> ① 先列材料與幾何 ② 求注入與傳輸因子 ③ 換算 $\alpha$、$\beta$ ④ 檢查低階注入與單位</div>
+<p>例題計算應先確認射極、基極摻雜，基極寬度、擴散係數與載子壽命。</p><p>由少數載子濃度與擴散長度求射極注入效率，再由基極寬度與擴散長度求傳輸因子。</p><p>把兩因子相乘得到 $\alpha$，再換算 $\beta$，可避免直接套用無來源的增益值。</p><p>所得端點電流須滿足守恆，且量級應符合低階注入與順向主動假設。</p><p>改變一個參數並檢查極限趨勢，是辨認公式是否使用正確的有效方法。</p><div class="callout"><strong>💡 建議順序：</strong>物理分量→增益因子→端點電流，而不是反向硬套 $\beta$。</div><div class="callout-warn"><strong>⚠️ 自編數值不可冒充原書 Example。</strong></div><details class="example"><summary>📝 自編概念例：由 $\gamma$、$\alpha_T$ 求 $\beta$</summary><div class="example-body"><p><strong>題目：</strong>$\gamma=0.998$、$\alpha_T=0.997$。</p><p><strong>解：</strong>$\alpha=0.995006$，$\beta=\alpha/(1-\alpha)$。</p><p><strong>答案：</strong>$\beta\approx199$。</p></div></details></section>
+
+<section id="s12-4-1"><h2>12.4.1 基極寬度調變</h2><div class="section-keypoints"><strong>🔑 本節重點</strong> ① BC 反偏擴大耗盡區 ② 中性基極有效寬度縮短 ③ 集極電流隨 $V_{CE}$ 增加 ④ 形成 Early 電壓與 $r_o$</div>
+<p>集極–基極反偏增加時，BC 空乏區向較輕摻雜側擴張並侵入基極。</p><p>有效中性基極寬度縮短，使少數載子濃度梯度變陡，集極電流增加。</p><p>輸出特性曲線因此不是完全水平，外插後交於負電壓軸的 Early 電壓。</p><p>一階模型寫成 $I_C\approx I_{C0}(1+V_{CE}/V_A)$。</p><p>對應小訊號輸出電阻約為 $r_o=V_A/I_C$，會限制放大器電壓增益。</p><div class="callout"><strong>💡 Early effect 是幾何調變：</strong>輸出電壓改變有效基極寬度。</div><div class="callout-warn"><strong>⚠️ 它不同於雪崩崩潰。</strong></div><details class="example"><summary>📝 自編概念例：輸出電阻</summary><div class="example-body"><p><strong>題目：</strong>$V_A=100$ V、$I_C=1$ mA。</p><p><strong>解：</strong>$r_o=V_A/I_C$。</p><p><strong>答案：</strong>100 kΩ。</p></div></details></section>
+
+<section id="s12-4-2"><h2>12.4.2 高階注入</h2><div class="section-keypoints"><strong>🔑 本節重點</strong> ① 注入少數載子接近摻雜 ② 多數載子也需增加 ③ 射極效率與增益下降 ④ 電流指數斜率改變</div>
+<p>低階注入假設基極中的過量少數載子遠小於平衡多數載子。</p><p>大 $V_{BE}$ 下過量電子可接近或超過基極摻雜，電中性迫使電洞濃度也增加。</p><p>載子分布與電場因此偏離簡單擴散模型，集極電流的電壓依賴改變。</p><p>射極反注入與基極電導調變會使 $\beta$ 在高電流區下降。</p><p>功率與高速 BJT 的最大可用電流密度常受高階注入與 Kirk effect 限制。</p><div class="callout"><strong>💡 增益不是越大電流越高：</strong>高注入區反而常出現 beta roll-off。</div><div class="callout-warn"><strong>⚠️ 高階注入與空乏區復合都可能改變半對數斜率，但機制不同。</strong></div><details class="example"><summary>📝 自編概念例：低階注入判斷</summary><div class="example-body"><p><strong>題目：</strong>過量電子為基極摻雜的 1%。</p><p><strong>解：</strong>多數載子擾動仍小。</p><p><strong>答案：</strong>通常仍可視為低階注入。</p></div></details></section>
+
+<section id="s12-4-3"><h2>12.4.3 射極能隙窄化</h2><div class="section-keypoints"><strong>🔑 本節重點</strong> ① 極重摻雜改變能帶 ② 有效能隙縮小 ③ 本徵濃度提高 ④ 射極效率可能下降</div>
+<p>為提高射極注入效率，射極通常採用極重摻雜，但此時非退化與固定能隙近似可能失效。</p><p>多體效應會造成有效能隙窄化，使射極中的有效本徵載子濃度增加。</p><p>射極少數電洞濃度因此高於簡單 $n_i^2/N_D$ 預測，電洞反注入增加。</p><p>反注入提高會降低射極注入效率，限制重摻雜原本預期的增益改善。</p><p>精確模型需使用摻雜依賴的 bandgap narrowing 與退化統計參數。</p><div class="callout"><strong>💡 過度摻雜的反作用：</strong>提高多數載子同時也改變材料能帶與少數載子平衡。</div><div class="callout-warn"><strong>⚠️ 極重摻雜時不可盲用 Boltzmann 近似。</strong></div><details class="example"><summary>📝 自編概念例：能隙縮小</summary><div class="example-body"><p><strong>題目：</strong>有效能隙縮小而溫度不變。</p><p><strong>解：</strong>$n_i$ 的指數因子增大。</p><p><strong>答案：</strong>有效本徵濃度與少數載子濃度提高。</p></div></details></section>
+
+<section id="s12-4-4"><h2>12.4.4 電流擁擠</h2><div class="section-keypoints"><strong>🔑 本節重點</strong> ① 基極片電阻造成橫向壓降 ② 局部 $V_{BE}$ 不均 ③ 電流集中於接觸邊緣 ④ 增加損耗與熱點</div>
+<p>實際射極與基極具有有限面積，基極電流需沿具有片電阻的基極層流向接觸。</p><p>橫向電阻造成位置相關的基極電位，使射極下方 $V_{BE}$ 不均勻。</p><p>因電流對 $V_{BE}$ 呈指數關係，微小電壓差會讓電流集中在基極接觸附近。</p><p>電流擁擠減少有效射極面積、提高基極電阻損耗，並可能形成局部熱點。</p><p>交錯指狀接觸、降低基極片電阻與縮小橫向距離可改善均勻性。</p><div class="callout"><strong>💡 幾何效應：</strong>一維截面模型無法描述橫向基極壓降。</div><div class="callout-warn"><strong>⚠️ 總面積增加不保證電流均勻利用全部面積。</strong></div><details class="example"><summary>📝 自編概念例：局部壓降</summary><div class="example-body"><p><strong>題目：</strong>遠離基極接觸處基極電位較低。</p><p><strong>解：</strong>局部 $V_{BE}$ 較小。</p><p><strong>答案：</strong>電流集中在較靠近接觸的位置。</p></div></details></section>
+
+<section id="s12-4-5"><h2>12.4.5 非均勻基極摻雜</h2><div class="section-keypoints"><strong>🔑 本節重點</strong> ① 摻雜梯度建立內建電場 ② 電場可加速少數載子 ③ 減少基極渡越時間 ④ 同時改變增益與 Early effect</div>
+<p>基極摻雜若沿射極到集極方向變化，平衡費米能階要求能帶產生對應斜率。</p><p>這個能帶斜率形成準中性基極內建電場，會漂移少數電子。</p><p>若方向設計正確，電場協助電子朝集極移動，縮短基極渡越時間。</p><p>摻雜梯度也會改變少數載子濃度、復合與基極寬度調變敏感度。</p><p>SiGe HBT 利用漸變能隙產生類似加速場，是此概念的重要延伸。</p><div class="callout"><strong>💡 準中性不等於零電場：</strong>摻雜或能隙梯度可在近中性區建立場。</div><div class="callout-warn"><strong>⚠️ 電場方向設計錯誤會阻礙而非加速載子。</strong></div><details class="example"><summary>📝 自編概念例：渡越時間</summary><div class="example-body"><p><strong>題目：</strong>內建場協助電子向集極漂移。</p><p><strong>解：</strong>除擴散外增加定向漂移。</p><p><strong>答案：</strong>基極渡越時間下降。</p></div></details></section>
+
+<section id="s12-4-6"><h2>12.4.6 崩潰電壓</h2><div class="section-keypoints"><strong>🔑 本節重點</strong> ① CB 接面可發生雪崩 ② 開路基極存在電晶體回授 ③ $BV_{CEO}$ 低於 $BV_{CBO}$ ④ 增益與耐壓形成取捨</div>
+<p>提高集極反偏會使 CB 接面電場增強，最終由撞擊游離引發雪崩。</p><p>若射極開路，量得的是集極–基極接面本身的 $BV_{CBO}$。</p><p>基極開路時，雪崩產生的電洞流入基極並觸發額外電晶體作用，形成正回授。</p><p>因此共射極崩潰電壓 $BV_{CEO}$ 通常顯著低於 $BV_{CBO}$。</p><p>較高 $\beta$ 會放大雪崩回授，常使高增益與高耐壓成為設計取捨。</p><div class="callout"><strong>💡 端點條件重要：</strong>同一結構的崩潰規格會隨基極接法不同。</div><div class="callout-warn"><strong>⚠️ 不可把 $BV_{CEO}$ 與 $BV_{CBO}$ 混用。</strong></div><details class="example"><summary>📝 自編概念例：哪個耐壓較高</summary><div class="example-body"><p><strong>題目：</strong>比較 $BV_{CBO}$ 與 $BV_{CEO}$。</p><p><strong>解：</strong>後者包含電晶體正回授。</p><p><strong>答案：</strong>通常 $BV_{CBO}&gt;BV_{CEO}$。</p></div></details></section>
+
+<section id="s12-5-1" data-merged-from="ch12_bjt_advanced_zh.html"><h2>12.5.1 Ebers–Moll 模型——雙二極體耦合等效電路 ⭐</h2><div class="callout-warn"><strong>⚠️ Ebers–Moll 是大訊號準靜態模型。</strong>高頻儲存與寄生需另加模型。</div><details class="example"><summary>📝 自編概念例：順向主動簡化</summary><div class="example-body"><p><strong>題目：</strong>BE 順偏、BC 強反偏。</p><p><strong>解：</strong>反向傳輸項可忽略。</p><p><strong>答案：</strong>模型化簡為主要正向受控電流。</p></div></details>
+<div class="section-keypoints"><strong>🔑 本節重點</strong> ① 雙二極體+雙電流源模型，涵蓋全部四種操作模式 ② 互易關係α_F I_{ES}=α_R I_{CS}→僅3個獨立參數 ③ 傳輸型使用單一I_S，與Gummel-Poon自然對接 ④ 飽和V_{CE}(sat)由對數項給出→對I_C/I_B變化不敏感 ⑤ 限制：假設α_F、α_R為常數，無Early和高注入效應</div>
+<p>Ebers-Moll 模型是 BJT 最經典的等效電路模型，由 J. J. Ebers 和 J. L. Moll 於 1954 年提出。它將 BJT 視為兩個互相耦合的 pn 接面二極體加上兩個受控電流源，簡潔地捕捉了 BJT 的核心行為。此模型的獨特優勢在於：<strong>適用於 BJT 的所有四種操作模式</strong>——順向主動、逆向主動、飽和、截止——因此特別適合用於開關電路分析和數位邏輯設計。</p>
+<figure class="figure"><a class="figure-link" href="../../pages/ch13_pages/ch13_page_562_c.png" target="_blank" rel="noopener"><img src="../../pages/ch13_pages/ch13_page_562_c.png" alt="圖 12.36：Ebers-Moll 模型的電流方向與電壓極性" loading="lazy"></a><figcaption>圖 12.36：Ebers–Moll 模型的端點電流與接面電壓符號約定；所有端點電流定義為流入元件，使用模型方程前必須先統一方向。</figcaption></figure>
+
+<h3>基本方程與符號約定</h3>
+<p>Ebers-Moll 模型定義所有端電流皆<strong>流入</strong>元件，因此滿足：</p>
+<div class="eq">$$I_E + I_B + I_C = 0$$</div>
+<p>這與我們習慣的 npn 射極電流流出方向不同——但只要在分析中保持一致，方向定義並不影響結果。集極電流和射極電流的完整表達式為：</p>
+<div class="eq">$$\boxed{I_C = \alpha_F I_{ES}\left[\exp\!\left(\frac{eV_{BE}}{kT}\right) - 1\right] - I_{CS}\left[\exp\!\left(\frac{eV_{BC}}{kT}\right) - 1\right]}$$</div>
+<div class="eq">$$\boxed{I_E = \alpha_R I_{CS}\left[\exp\!\left(\frac{eV_{BC}}{kT}\right) - 1\right] - I_{ES}\left[\exp\!\left(\frac{eV_{BE}}{kT}\right) - 1\right]}$$</div>
+<p>其中 $\alpha_F$ 是順向共基極電流增益，$\alpha_R$ 是逆向共基極電流增益（通常 $\alpha_R \ll \alpha_F$，因為逆向操作時集極的摻雜較低→注入效率差）。$I_{ES}$ 是 BE 接面逆向飽和電流，$I_{CS}$ 是 BC 接面逆向飽和電流。</p>
+
+<h3>互易關係——四個參數，三個獨立</h3>
+<p>Ebers-Moll 模型看似有四個參數（$\alpha_F, \alpha_R, I_{ES}, I_{CS}$），但實際上只有三個是獨立的。它們之間存在一個重要的<strong>互易關係（reciprocity relation）</strong>：</p>
+<div class="eq">$$\boxed{\alpha_F I_{ES} = \alpha_R I_{CS}}$$</div>
+<p>這個關係源自半導體物理的基本對稱性——pn 接面的電流-電壓關係必須滿足 Onsager 互易定理。它不僅減少了需要量測的獨立參數數量，也保證了模型在數學上的內部一致性。</p>
+
+<h3>傳輸型（Transport Version）Ebers-Moll</h3>
+<p>上述形式稱為「注入型」Ebers-Moll 模型。另一種更常用於電路模擬器的等價表示法是<strong>傳輸型（transport version）</strong>。傳輸型使用單一飽和電流 $I_S$，並定義兩個傳輸電流：$I_{CC} = I_S[\exp(eV_{BE}/kT)-1]$（順向傳輸電流）和 $I_{EC} = I_S[\exp(eV_{BC}/kT)-1]$（逆向傳輸電流）。集極和射極電流簡化為：</p>
+<div class="eq">$$I_C = I_{CC} - \frac{I_{EC}}{\alpha_R},\qquad I_E = \frac{I_{CC}}{\alpha_F} - I_{EC}$$</div>
+<p>傳輸型的優勢在於只需要一個飽和電流參數 $I_S$，並且與 Gummel-Poon 模型自然對接——SPICE 內部實際上使用傳輸型表示。</p>
+
+<h3>四種操作模式下的 Ebers-Moll 行為</h3>
+<table><caption>Ebers–Moll 模型的操作模式</caption><thead><tr><th scope="col">操作模式</th><th scope="col">$V_{BE}$</th><th scope="col">$V_{BC}$</th><th scope="col">主導項</th></tr></thead><tbody>
+<tr><td><strong>順向主動</strong></td><td>&gt;0</td><td>&lt;0</td><td>$I_C \approx \alpha_F I_{ES}\,e^{V_{BE}/V_T}$，$I_E \approx -I_{ES}\,e^{V_{BE}/V_T}$</td></tr>
+<tr><td><strong>逆向主動</strong></td><td>&lt;0</td><td>&gt;0</td><td>$I_E \approx \alpha_R I_{CS}\,e^{V_{BC}/V_T}$，$I_C \approx -I_{CS}\,e^{V_{BC}/V_T}$</td></tr>
+<tr><td><strong>飽和</strong></td><td>&gt;0</td><td>&gt;0</td><td>兩個接面皆順偏；$V_{CE}(sat) = V_{BE} - V_{BC}$ 約 0.1–0.2 V</td></tr>
+<tr><td><strong>截止</strong></td><td>&lt;0</td><td>&lt;0</td><td>兩個接面皆逆偏；$I_C, I_E \approx 0$（僅剩漏電流）</td></tr></tbody></table>
+
+<h3>飽和電壓 $V_{CE}(sat)$ 的解析解</h3>
+<p>從 Ebers-Moll 方程可以推導出飽和區的集極-射極電壓的解析表達式：</p>
+<div class="eq">$$V_{CE}(sat) = V_T \ln\!\left[\frac{I_C(1-\alpha_R) + I_B}{\alpha_F I_B - (1-\alpha_F)I_C} \cdot \frac{\alpha_F}{\alpha_R}\right]$$</div>
+<p>對於典型矽 npn BJT（$\alpha_F=0.99, \alpha_R=0.20, I_C=1$ mA, $I_B=50$ µA），$V_{CE}(sat) \approx 0.12$ V。由於對數函數的壓縮特性，$V_{CE}(sat)$ 對 $I_C$ 和 $I_B$ 的變化並不敏感——這與實驗觀測一致。</p>
+
+<div class="callout"><strong>💡 Ebers-Moll 的適用邊界。</strong>Ebers-Moll 模型最適合<strong>直流偏壓計算</strong>和<strong>大訊號開關分析</strong>。它的主要限制是隱含假設 $\alpha_F$ 和 $\alpha_R$ 為常數——無法捕捉高注入時 $\beta$ 的衰降（Webster 效應）或 $V_{CB}$ 變化導致的基極寬度調變（Early 效應）。對於需要考慮這些非理想效應的情況，應使用下一節的 Gummel-Poon 模型。</div>
+</section>
+
+<section id="s12-5-2" data-merged-from="ch12_bjt_advanced_zh.html"><h2>12.5.2 Gummel–Poon 模型——積分電荷控制</h2><details class="example"><summary>📝 自編概念例：何時升級模型</summary><div class="example-body"><p><strong>題目：</strong>需同時模擬高注入、Early effect 與儲存電荷。</p><p><strong>解：</strong>簡單 Ebers–Moll 參數不足。</p><p><strong>答案：</strong>使用 Gummel–Poon 類電荷控制模型。</p></div></details>
+<div class="section-keypoints"><strong>🔑 本節重點</strong> ① 積分電荷控制：I_C由基極總電荷Q_B決定，非直接由接面電壓 ② Q_B隨V_{CB}↑而↓→I_C↑（自然納入Early效應）③ Q_B隨高注入而↑→I_C增長減緩（自然納入Webster效應）④ Q_B=Q_{B0}+C_{je}V_{BE}+C_{jc}V_{BC}+τ_F I_{TF}+τ_R I_{TR}——電荷分區 ⑤ Q_B=Q_{B0}時退化為Ebers-Moll；所有SPICE BJT模型的基礎</div>
+<p>Ebers-Moll 模型（前一節）用兩個互相耦合的二極體和兩個受控電流源來描述 BJT。它在大多數情況下夠用，但有一個重要限制：<strong>它假設 $\alpha_F$ 和 $\alpha_R$ 是常數</strong>——不隨電流或電壓變化。現實中，$\beta$ 隨 $I_C$ 變化很大（低電流時復合損失主導、高電流時高注入效應主導），且 $V_{CB}$ 變化會透過 Early 效應調變集極電流。</p>
+
+<h3>電荷控制方程——Gummel-Poon 的核心</h3>
+<p>Gummel-Poon 模型的核心創新是引入<strong>積分電荷控制關係（integral charge-control relation）</strong>。傳輸電流不是由接面電壓直接決定，而是由基極中的<strong>總多數載子電荷（Gummel 數）$Q_B$</strong> 決定。對於 npn BJT：</p>
+<div class="eq">$$\boxed{I_C = \frac{qA\,n_i^2 D_B}{Q_B} \cdot Q_{B0}\left[\exp\!\left(\frac{V_{BE}}{V_T}\right) - \exp\!\left(\frac{V_{BC}}{V_T}\right)\right]}$$</div>
+<p>其中 $Q_B = \int_0^{x_B} p(x)\,dx$ 是基極中總電洞電荷的積分，$Q_{B0}$ 是零偏壓時的基極電荷。$Q_B$ <strong>不是常數</strong>——當 $V_{CB}$ 增加時，BC 空乏區展寬→中性基極變窄→$Q_B$ 減小→$I_C$ 增加（這就是 Early 效應的自然納入！）；當 $V_{BE}$ 過大時，注入的過量少數載子濃度接近基極多數載子濃度→$p$ 增加以維持電中性→$Q_B$ 增加→$I_C$ 增長減緩（這就是高注入效應的自然納入！）。</p>
+
+<h3>基極電荷分區——模型的擴展性</h3>
+<p>在完整的 Gummel-Poon 模型中，總基極電荷被分解為幾個物理成分：</p>
+<div class="eq">$$Q_B = Q_{B0} + C_{je}V_{BE} + C_{jc}V_{BC} + \tau_F I_{TF} + \tau_R I_{TR}$$</div>
+<p>其中 $Q_{B0}$ 為零偏壓基極電荷；$C_{je}V_{BE}$ 和 $C_{jc}V_{BC}$ 代表 BE 和 BC 空乏層電容的充電電荷；$\tau_F I_{TF}$ 和 $\tau_R I_{TR}$ 則代表順向和逆向傳輸相關的擴散電荷（少數載子儲存在基極中的電荷）。這種電荷分區使 Gummel-Poon 模型能夠<strong>自然地包含 Early 效應、高注入效應（Webster 效應）和 Kirk 效應</strong>——這些都是 Ebers-Moll 模型需要外加修正項才能處理的。</p>
+
+<h3>Gummel-Poon 與 Ebers-Moll 的關係</h3>
+<p>可以證明，當 $Q_B = Q_{B0}$（零偏壓基極電荷）且忽略所有非理想效應時，Gummel-Poon 模型<strong>退化為傳輸型 Ebers-Moll 模型</strong>。Gummel-Poon 的額外複雜性來自於它允許 $Q_B$ 隨偏壓動態變化。這也是為什麼所有現代 SPICE 電路模擬器中的 BJT 模型（包括 VBIC、MEXTRAM、HICUM 等）都以 Gummel-Poon 的電荷控制框架為基礎。工程師從 Gummel plot（$\log I_C$ 和 $\log I_B$ vs $V_{BE}$）中提取 $I_S$、$\beta_F$、$\beta_R$、$V_A$（Early 電壓）和 $\tau_F$（順向傳輸時間）等參數→灌入 SPICE→精確模擬電路行為。</p>
+
+<div class="callout"><strong>💡 SPICE BJT 模型參數命名。</strong>在 SPICE 中，Gummel-Poon 模型的關鍵參數包括：IS（傳輸飽和電流）、BF（理想順向 $\beta$）、BR（理想逆向 $\beta$）、VAF（順向 Early 電壓）、VAR（逆向 Early 電壓）、TF（理想順向傳輸時間）、TR（理想逆向傳輸時間）、IKF（順向 $\beta$ 高電流衰降拐點電流）。這些參數都可以從 Gummel plot 和輸出特性曲線中系統性地提取。</div>
+
+<div class="callout-warn"><strong>⚠️ Gummel-Poon 的限制。</strong>儘管 Gummel-Poon 涵蓋了 Early 效應和高注入效應，但仍無法處理某些更精細的物理效應，例如：Kirk 效應（極高電流時基極向集極「推入」導致有效基極寬度增加）、準飽和效應（集極串聯電阻導致的壓降使內部 BC 接面順偏）、以及自發熱效應（高功率時接面溫度上升→參數漂移）。這些需要 VBIC（Vertical Bipolar Inter-Company）或 MEXTRAM 等更先進的緊湊模型。</div>
+</section>
+
+<section id="s12-5-3" data-merged-from="ch12_bjt_advanced_zh.html"><h2>12.5.3 混合-π（Hybrid-Pi）小訊號等效電路</h2><div class="callout-warn"><strong>⚠️ 混合-π 參數依直流工作點而變。</strong></div><details class="example"><summary>📝 自編概念例：求 $r_\pi$</summary><div class="example-body"><p><strong>題目：</strong>$\beta=100$、$g_m=40$ mS。</p><p><strong>解：</strong>$r_\pi=\beta/g_m$。</p><p><strong>答案：</strong>2.5 kΩ。</p></div></details>
+<div class="section-keypoints">
+<strong>🔑 本節重點</strong> ① $r_\\pi=\\beta/g_m=V_T/I_B$——基極-射極小訊號輸入電阻 ② $r_o=V_A/I_C$——輸出電阻，捕捉 Early 效應 ③ $C_\\pi=C_{je}+\\tau_F g_m$——BE 接面電容 + 擴散電容（正比於 $I_C$）④ $C_\\mu=C_{jc}$——BC 接面電容，跨接在輸入輸出之間（Miller 效應的來源）
+</div>
+
+<p>當 BJT 工作於線性放大器（順向主動模式，疊加小訊號於直流偏壓上），我們需要一個<strong>小訊號等效電路</strong>來分析增益、輸入阻抗和頻率響應。混合-π（Hybrid-Pi）模型就是為此設計的——它將 BJT 的非線性直流特性在操作點附近線性化，並加入電容元件來捕捉高頻行為。</p>
+
+<h3>核心小訊號參數</h3>
+<p>混合-π 模型的每一個元件都對應一個明確的物理機制：</p>
+
+<p><strong>① 跨導 $g_m$（transconductance）：</strong>定義為集極電流對 BE 電壓的導數，是 BJT 放大能力的核心度量。</p>
+<div class="eq">$$\boxed{g_m = \frac{\partial I_C}{\partial V_{BE}}\bigg|_{Q} = \frac{I_C}{V_T}}$$</div>
+<p>在室溫下 $V_T \approx 26$ mV→$g_m = I_C/0.026$。對於 $I_C=1$ mA，$g_m \approx 38.5$ mS（毫西門子）。這遠大於相同電流下的 MOSFET 跨導——這是 BJT 在高頻應用中的核心優勢之一。</p>
+
+<p><strong>② 輸入電阻 $r_\pi$：</strong>小訊號基極-射極電阻，來自 BE 接面的動態電阻。</p>
+<div class="eq">$$\boxed{r_\pi = \frac{\beta_0}{g_m} = \frac{\beta_0 V_T}{I_C}}$$</div>
+<p>這是 $\beta_0$（低頻共射極電流增益）和 $g_m$ 之間的橋樑。對於 $\beta_0=100$、$I_C=1$ mA→$r_\pi = 100/0.0385 \approx 2.6$ kΩ。</p>
+
+<p><strong>③ 輸出電阻 $r_o$：</strong>來自 Early 效應——$V_{CE}$ 增加→集極電流微幅增加。</p>
+<div class="eq">$$\boxed{r_o = \frac{V_A}{I_C}}$$</div>
+<p>其中 $V_A$ 是 Early 電壓（典型值 50–200 V）。$r_o$ 通常在數十至數百 kΩ 範圍。$r_o$ 限制了 BJT 放大器能達到的最大電壓增益。</p>
+
+<p><strong>④ 輸入電容 $C_\pi$：</strong>BE 接面的總等效電容，是頻率響應的首要限制因素。</p>
+<div class="eq">$$\boxed{C_\pi = C_{je} + \tau_F g_m}$$</div>
+<p>$C_{je}$ 是 BE 空乏層電容（~0.1–1 pF，與 $V_{BE}$ 相關），$\tau_F g_m$ 是擴散電容（$= g_m \cdot W_B^2/2D_B$，$\propto I_C$）。在順向偏壓下，擴散電容通常主導——$I_C=1$ mA 時 $\tau_F g_m$ 可達數 pF。擴散電容的存在意味著：<strong>要讓 $V_{BE}$ 改變，你必須同時改變基極中儲存的少數載子電荷</strong>——這是 BJT 速度的根本物理限制。</p>
+
+<p><strong>⑤ 回授電容 $C_\mu$（Miller 電容）：</strong>BC 接面電容，將輸出信號耦合回輸入。</p>
+<div class="eq">$$\boxed{C_\mu = C_{jc}}$$</div>
+<p>$C_\mu$ 雖然數值小（~0.01–0.5 pF），但由於 Miller 效應，它在輸入端的等效電容被放大為 $C_\mu(1+g_m R_L)$——當負載電阻 $R_L$ 較大時，這個放大倍數可能達到 10–100 倍！因此 $C_\mu$ 往往是限制共射極放大器高頻增益的關鍵瓶頸。高速 BJT 設計的一個重要目標就是最小化 $C_{jc}$（小面積集極、高 $V_{CB}$ 偏壓、低摻雜集極）。</p>
+
+<h3>完整混合-π 等效電路結構</h3>
+<p>完整的混合-π 模型將上述元件組合，並加入寄生的串聯電阻：$r_b$（基極串聯電阻——來自基極窄區域的橫向歐姆電阻，典型值 10–500 Ω）、$r_c$（集極串聯電阻——集極磊晶層和埋層的電阻，~10–100 Ω）、$r_{ex}$（射極串聯電阻，~1–5 Ω）。在計算機模擬中，這些寄生電阻在高頻時扮演重要角色——特別是在功率放大器中，$r_b$ 直接影響 $f_{\max}$。</p>
+
+<h3>三大模型比較——何時使用哪個？</h3>
+<table><caption>BJT 等效模型比較</caption><thead><tr><th scope="col">模型</th><th scope="col">適用場景</th><th scope="col">涵蓋的物理效應</th><th scope="col">限制</th></tr></thead><tbody>
+<tr><td><strong>Ebers-Moll</strong></td><td>直流偏壓計算、大訊號開關分析</td><td>四種操作模式、飽和電壓</td><td>假設 $\alpha_F, \alpha_R$ 為常數；無 Early 效應、無高注入</td></tr>
+<tr><td><strong>Gummel-Poon</strong></td><td>SPICE 模擬、包含非理想效應的直流/暫態分析</td><td>Early 效應、高注入效應、非均勻基極摻雜、電荷存儲</td><td>無 Kirk 效應、無自發熱、無準飽和</td></tr>
+<tr><td><strong>Hybrid-Pi</strong></td><td>小訊號 AC 分析、頻率響應、放大器設計</td><td>線性增益、輸入/輸出阻抗、頻率響應、Miller 效應</td><td>僅在操作點附近線性化；不適用於大訊號切換</td></tr></tbody></table>
+
+<div class="callout"><strong>💡 混合-π 與上兩節的關係。</strong>混合-π 模型的 $g_m$ 和 $r_\pi$ 可以從 Ebers-Moll 或 Gummel-Poon 模型的直流方程微分得到。實際上，SPICE 先使用 Gummel-Poon 模型計算直流操作點，然後在該操作點自動建立混合-π 小訊號參數來進行 AC 分析。因此這三個模型並非競爭關係，而是用於同一元件的不同分析層面。</div>
+</section>
+
+<section id="s12-6-overview" data-merged-from="ch12_bjt_advanced_zh.html"><h2>12.6 補充：BJT 的頻率限制</h2>
+<div class="section-keypoints"><strong>🔑 本節重點</strong> ① f_T=1/(2πτ_{ec})，τ_{ec}=τ_e+τ_b+τ_d+τ_c——四個物理延遲成分 ② τ_b=W_B²/(2D_B)——基極傳輸時間，縮小W_B是提升f_T的首要手段 ③ f_β=f_T/β_0——共射極−3dB頻率比f_T低β_0倍 ④ f_{max}=√(f_T/(8π r_b C_{jc}))——功率增益指標，r_b C_{jc}時間常數為瓶頸 ⑤ SiGe HBT：f_T∼500 GHz，f_{max}∼800 GHz——毫米波/太赫茲應用</div>
+<p>BJT 不是瞬間響應的。從射極電壓變化到集極電流變化，需要一段延遲——這就是<strong>射極-集極傳輸時間 $\tau_{ec}$</strong>。當信號頻率超過 $f_T = 1/(2\pi\tau_{ec})$ 時，BJT 不再能放大電流（電流增益降為 1）。</p>
+
+<div class="eq">$$\boxed{\frac{1}{2\pi f_T} = \tau_{ec} = \tau_e + \tau_b + \tau_d + \tau_c}$$</div>
+
+<p>這四個時間常數各自代表一個物理過程——理解它們的來源和大小，就是理解如何設計高速 BJT：</p>
+
+<h3>① 射極充電時間 $\tau_e = r_e C_{je}$</h3>
+<p>$C_{je}$ 是 BE 接面電容（空乏層電容 + 擴散電容）。$r_e = V_T/I_E$ 是射極的小訊號電阻。$\tau_e = (V_T/I_E)C_{je}$——物理圖像是：要改變 $V_{BE}$，你必須先對 $C_{je}$ 充放電，而充放電的電流路徑經過 $r_e$。$\tau_e \propto 1/I_E$——射極電流越大，$\tau_e$ 越小。這就是為什麼高速 BJT 傾向操作在較高的偏壓電流。</p>
+
+<h3>② 基極傳輸時間 $\tau_b = W_B^2/(2D_B)$</h3>
+<p>這是最重要的時間常數——少數載子擴散跨越基極所需的平均時間。它來自擴散方程的解：一個粒子從 $x=0$ 擴散到 $x=W_B$ 的平均時間是 $W_B^2/(2D_B)$。</p>
+<p><strong>數值例子：</strong>$W_B=0.1$ µm，$D_B=30$ cm²/s→$\tau_b=(10^{-5})^2/(2\times30)=1.7\times10^{-12}$ s = 1.7 ps。單這個時間常數對應的 $f_T$ 約為 100 GHz。如果 $W_B=0.5$ µm→$\tau_b=42$ ps→$f_T$ 僅 ∼4 GHz。這就是為什麼所有高速 BJT 的首要設計目標就是<strong>縮小基極寬度</strong>。</p>
+
+<h3>③ 集極空乏層渡越時間 $\tau_d = x_d/(2v_{\text{sat}})$</h3>
+<p>電子穿過 BC 空乏區時，該區域電場極高→電子以飽和速度 $v_{\text{sat}}\approx10^7$ cm/s 運動。$x_d$ 是 BC 空乏區寬度（隨 $V_{CB}$ 增加）。$\tau_d = x_d/(2v_{\text{sat}})$——因子 1/2 來自平均（從 0 加速到 $v_{\text{sat}}$ 的過程）。$x_d=0.2$ µm→$\tau_d=0.2\times10^{-4}/(2\times10^7)=1$ ps。</p>
+
+<h3>④ 集極充電時間 $\tau_c = r_c C_{jc}$</h3>
+<p>$C_{jc}$ 是 BC 接面電容。$r_c$ 是集極串聯電阻（集極中性區的電阻）。這與 $\tau_e$ 對稱——充放電 BC 接面電容所需的時間。</p>
+
+<h3>⭐ $f_{\max}$——比 $f_T$ 更嚴格的指標</h3>
+<p>$f_T$ 只考慮電流增益，但對於功率放大器設計，更重要的是<strong>功率增益</strong>。$f_{\max}$（最大振盪頻率）是功率增益降至 1 的頻率：</p>
+<div class="eq">$$\boxed{f_{\max} = \sqrt{\frac{f_T}{8\pi\,r_b\,C_{jc}}}}$$</div>
+<p>$r_b$（基極電阻）和 $C_{jc}$（BC 接面電容）形成一個低通 RC 濾波器——訊號必須先對 $C_{jc}$ 充放電才能到達輸出。$r_b C_{jc}$ 時間常數限制了功率增益。</p>
+
+<h3>⭐ $f_\beta$——共射極電流的 3 dB 頻率</h3>
+<p>從混合-π 模型可以推導出共射極電流增益的頻率響應：</p>
+<div class="eq">$$\boxed{|\beta(f)| = \frac{\beta_0}{\sqrt{1 + (f/f_\beta)^2}}}$$</div>
+<p>其中 $f_\beta$（beta 截止頻率）是 $|\beta|$ 降至 $\beta_0/\sqrt{2}$（即 −3 dB）時的頻率。$f_\beta$ 與 $f_T$ 的關係為：</p>
+<div class="eq">$$\boxed{f_\beta = \frac{f_T}{\beta_0}}$$</div>
+<p>這是一個非常重要的結果：<strong>$f_\beta$ 比 $f_T$ 低 $\beta_0$ 倍</strong>。例如，若 $f_T = 10$ GHz 且 $\beta_0 = 100$，則 $f_\beta$ 僅為 100 MHz——也就是說，在這個頻率以上，共射極電流增益就開始衰降了！這凸顯了 $f_T$ 作為「終極速度指標」的意義，但也提醒我們：實際電路中增益開始衰降的頻率遠低於 $f_T$。</p>
+
+<h3>$f_T$ 與 $f_\alpha$ 的關係</h3>
+<p>共基極電流增益 $\alpha$ 也有自己的截止頻率 $f_\alpha$（alpha 截止頻率）。由於 $\alpha_0 \approx 1$，$f_\alpha \approx f_T$。實際上：</p>
+<div class="eq">$$f_T \approx f_\alpha = \frac{1}{2\pi\tau_{ec}}$$</div>
+<p>這意味著<strong>共基極組態的頻率響應遠優於共射極組態</strong>——在需要極高頻率操作的應用中（如射頻前端），共基極或 Cascode 組態常常是更好的選擇。</p>
+
+<h3>現代 SiGe HBT 的數值例子</h3>
+<p>為了直觀感受這些數字，考慮一個現代 SiGe HBT 的典型參數：$W_B=20$ nm、$D_B=30$ cm²/s→$\tau_b = (2\times10^{-6})^2/(2\times30) \approx 0.07$ ps；$\tau_e \approx 0.1$ ps（高 $I_E$）、$\tau_d \approx 0.1$ ps、$\tau_c \approx 0.03$ ps→$\tau_{ec} \approx 0.3$ ps→$f_T \approx 1/(2\pi \times 0.3\times10^{-12}) \approx 530$ GHz。</p>
+<p>若 $r_b=50$ Ω、$C_{jc}=5$ fF→$f_{\max} \approx \sqrt{530\times10^9/(8\pi\times50\times5\times10^{-15})} \approx 920$ GHz。這些數據說明了為什麼 SiGe HBT 能夠勝任毫米波 (30–300 GHz) 甚至太赫茲頻段的應用。</p>
+
+<div class="callout"><strong>💡 $f_T$ vs $f_{\max}$——哪個更重要？</strong>對於低雜訊放大器（LNA）和一般的小訊號放大器，$f_T$ 是主要指標——它決定電路能提供的電流增益頻寬。對於功率放大器（PA）和振盪器，$f_{\max}$ 更為關鍵——它決定電路還能提供功率增益的最高頻率。在現代 RF 設計中，$f_{\max} &gt; f_T$ 是常見的（因為 $f_{\max}$ 還取決於 $r_b$ 和 $C_{jc}$），但提升 $f_{\max}$ 需要同時降低 $r_b$ 和 $C_{jc}$——這兩個目標常常互相衝突（降低 $r_b$ 需要重摻雜基極→增大 $C_{jc}$）。</div>
+
+<div class="callout-warn"><strong>⚡ BJT vs MOSFET 的速度比較：</strong>現代 SiGe HBT 的 $f_T$ 可達 300–500 GHz，$f_{\max}$ 可達 500–800 GHz。這遠高於相同節點的 Si MOSFET（$f_T$∼300 GHz for $L_g=14$ nm FinFET）。BJT 的速度優勢來自兩個物理事實：① 基極寬度（∼10–50 nm）可以比 MOSFET 的通道長度更窄，因為 BJT 的 $W_B$ 由磊晶控制（而非光罩）。② BJT 的跨導 $g_m=I_C/V_T$ 比 MOSFET 的 $g_m$ 大數倍→充放電寄生電容更快。這就是為什麼毫米波（30–300 GHz）和太赫茲電路仍然主要使用 III-V 或 SiGe HBT。</div>
+</section>
+
+<section id="s12-6-1" data-merged-from="ch12_bjt_advanced_zh.html"><h2>12.6.1 時間延遲因子</h2><div class="section-keypoints"><strong>🔑 本節重點</strong> ① 射極充電需要時間 ② 基極渡越常是核心延遲 ③ 集極耗盡區亦有渡越時間 ④ RC 寄生加入總延遲</div>
+<p>BJT 的高頻響應受多個載子儲存與渡越過程串聯限制。</p><p>BE 接面與射極儲存電荷需要充放，形成射極相關延遲。</p><p>少數電子穿越中性基極的時間稱基極渡越時間，薄基極可大幅縮短它。</p><p>載子通過 BC 空乏區仍需有限漂移時間，且集極電容與電阻形成額外 RC 延遲。</p><p>總 forward transit time 可近似為各延遲相加，最慢項常主導改善方向。</p><div class="callout"><strong>💡 延遲預算：</strong>提高速度必須找出最大時間項，而不是只縮小一個電容。</div><div class="callout-warn"><strong>⚠️ 更薄基極會加劇 Early effect 與 punch-through 風險。</strong></div><details class="example"><summary>📝 自編概念例：延遲相加</summary><div class="example-body"><p><strong>題目：</strong>三項延遲為 2、3、5 ps。</p><p><strong>解：</strong>總延遲近似相加。</p><p><strong>答案：</strong>約 10 ps。</p></div></details></section>
+
+<section id="s12-6-2" data-merged-from="ch12_bjt_advanced_zh.html"><h2>12.6.2 電晶體截止頻率</h2><div class="section-keypoints"><strong>🔑 本節重點</strong> ① $f_T$ 定義電流增益為 1 ② 與總渡越時間成反比 ③ 隨集極電流先升後降 ④ 寄生與高注入限制峰值</div>
+<p>截止頻率 $f_T$ 定義為短路共射極電流增益下降到 1 的頻率。</p><p>簡化電荷控制模型給出 $f_T\approx1/(2\pi\tau_F)$，其中 $\tau_F$ 是總正向延遲。</p><p>低電流時接面電容與跨導限制 $f_T$；提高電流後跨導增加，$f_T$ 上升。</p><p>高電流時高階注入、Kirk effect 與寄生電阻增加，$f_T$ 會達峰值後下降。</p><p>量測與報告 $f_T$ 必須同時標示偏壓與電流密度，不能只給一個無條件數字。</p><div class="callout"><strong>💡 $f_T$ 是電流增益指標，不等同電路可用最高振盪頻率。</strong></div><div class="callout-warn"><strong>⚠️ 最大 $f_T$ 工作點未必是最低雜訊或最佳功耗點。</strong></div><details class="example"><summary>📝 自編概念例：由延遲估算 $f_T$</summary><div class="example-body"><p><strong>題目：</strong>$\tau_F=10$ ps。</p><p><strong>解：</strong>$f_T=1/(2\pi\tau_F)$。</p><p><strong>答案：</strong>約 15.9 GHz。</p></div></details></section>
+
+<section id="s12-7-overview" data-merged-from="ch12_bjt_advanced_zh.html"><h2>12.7 補充：大訊號開關特性</h2>
+<div class="section-keypoints"><strong>🔑 本節重點</strong> ① 四個階段：t_d（延遲）→ t_r（上升）→ t_s（⭐儲存時間，最關鍵）→ t_f（下降）② t_s根源：飽和時BE+BC皆順偏→基極儲存大量過量載子需時間移除 ③ t_s≈τ_s ln[(I_F+I_R)/I_R]——長壽命=高β但長t_s（設計矛盾）④ 蕭特基箝位：BC並聯蕭特基二極體→V_{BC}箝在∼0.3V→儲存電荷呈指數衰減→t_s&lt;1ns ⑤ Baker箝位為離散電路實現，原理相同</div>
+<p>在數位電路中，BJT 頻繁地在截止（OFF）和飽和（ON）之間切換。與小訊號放大不同，開關涉及<strong>大訊號變化</strong>——電流和電壓在全範圍內變化，少數載子分佈需要時間來建立和消除。開關速度受限於四個階段，每個階段對應不同的物理過程。</p>
+
+<h3>開關波形與四個時間參數</h3>
+<p>圖 12.43 展示了一個完整的 BJT 開關週期，從截止→飽和→截止。四個關鍵時間參數為：</p>
+<table><caption>混合-π 小訊號參數</caption><thead><tr><th scope="col">參數</th><th scope="col">符號</th><th scope="col">定義</th><th scope="col">物理機制</th></tr></thead><tbody>
+<tr><td><strong>延遲時間</strong></td><td>$t_d$</td><td>$I_C$ 從 0 升至 10% 最終值</td><td>BE 接面從逆偏轉為順偏——對 $C_{je}$ 充電 + 空乏區縮窄</td></tr>
+<tr><td><strong>上升時間</strong></td><td>$t_r$</td><td>$I_C$ 從 10% 升至 90% 最終值</td><td>基極中少數載子濃度梯度逐步建立→$I_C$ 持續增長</td></tr>
+<tr><td><strong>儲存時間</strong></td><td>$t_s$</td><td>基極驅動反轉到 $I_C$ 降至 90%</td><td><strong>⭐ 最關鍵的延遲</strong>——移除飽和時儲存在基極和集極中的過量少數載子</td></tr>
+<tr><td><strong>下降時間</strong></td><td>$t_f$</td><td>$I_C$ 從 90% 降至 10%</td><td>BC 接面恢復逆偏後，剩餘基極儲存電荷繼續被移除</td></tr></tbody></table>
+
+<figure class="figure"><a class="figure-link" href="../../pages/ch13_pages/ch13_page_575_c.png" target="_blank" rel="noopener"><img src="../../pages/ch13_pages/ch13_page_575_c.png" alt="圖 12.43：BJT 開關電路、基極驅動與集極電流暫態" loading="lazy"></a><figcaption>圖 12.43：BJT 由截止切換至飽和再關斷時，集極電流依序經歷延遲、上升、儲存與下降階段；飽和區儲存電荷造成關斷延遲。</figcaption></figure>
+
+<h3>儲存時間 $t_s$ 的物理根源</h3>
+<p>在飽和模式下，BE 和 BC 兩個接面都順偏→少數載子從<strong>兩側</strong>注入基極（電子從射極和集極同時注入基極）。這導致基極中存儲了遠多於順向主動模式的過量載子，如圖 12.44 所示。儲存電荷包含三個部分：$Q_B$（順向主動時的正常基極電荷）、$Q_{BX}$（飽和額外的基極電荷）、$Q_C$（集極中因 BC 接面順偏而注入的電荷）。</p>
+<p>當基極驅動電壓反轉為負值時，反向基極電流開始<strong>抽取</strong>這些過量載子。但集極電流不會立即變化——因為 BC 接面仍然順偏，載子濃度梯度尚未改變。只有在 $Q_{BX}$ 和 $Q_C$ 被移除、BC 接面恢復逆偏之後，基極中的濃度梯度才會開始縮減→$I_C$ 開始下降。這就是儲存時間的物理本質。</p>
+<p>儲存時間可以近似為：</p>
+<div class="eq">$$t_s \approx \tau_s \ln\!\left(\frac{I_F + I_R}{I_R}\right)$$</div>
+<p>其中 $\tau_s$ 是飽和區的等效少數載子壽命，$I_F$ 和 $I_R$ 分別是順向和反向基極驅動電流。$\tau_s$ 越大（BJT 的材料品質越好）→儲存時間越長——這是一個有趣的矛盾：<strong>好的 DC 特性（長壽命→高 $\beta$）與快的開關速度（短壽命→短 $t_s$）互相衝突</strong>。</p>
+
+<h3>蕭特基箝位電晶體（Schottky-Clamped Transistor）</h3>
+<p>防止 BJT 進入深度飽和的最經典方法是使用<strong>蕭特基箝位</strong>——在基極和集極之間並聯一個蕭特基二極體。蕭特基二極體的順向壓降（~0.3 V for Si）約為矽 pn 接面（~0.6–0.7 V）的一半。當 BJT 嘗試進入飽和、$V_{BC}$ 開始順偏時，蕭特基二極體在 $V_{BC} \approx 0.3$ V 就導通了→多餘的基極驅動電流被<strong>旁路（shunt）</strong>到集極，而非注入基極→$V_{CE}$ 被箝在約 0.3–0.4 V（而不是深度飽和的 ~0.1 V）。</p>
+<p>效果是驚人的：BC 接面順偏電壓從 ~0.5 V 降至 ~0.3 V→過量少數載子濃度以指數關係減少（$\propto e^{V_{BC}/V_T}$）→降低超過三個數量級→儲存時間降至 <strong>1 ns 以下</strong>。這就是 74S/74LS 系列 TTL 邏輯（蕭特基 TTL）的核心創新。</p>
+
+<h3>Baker 箝位電路</h3>
+<p>Baker 箝位是蕭特基箝位的離散電路實現形式——使用一個蕭特基二極體和一個普通二極體的組合。在積體電路中，蕭特基二極體可以直接在 BJT 的基極-集極接觸區域形成（利用金屬-半導體接面），不需要額外的製程步驟。在離散電路中，Baker 箝位提供了一種使用外部蕭特基二極體來加速 BJT 開關的方法。Baker 箝位的原理與蕭特基箝位相同：限制 $V_{BC}$ 的順偏程度，防止基極中的過量電荷累積。</p>
+
+<div class="callout"><strong>💡 儲存時間的工程權衡。</strong>在設計 BJT 開關電路時，工程師面臨一個三維權衡：① 若需要高開關速度→使用蕭特基箝位或 Baker 箝位→犧牲的是 $V_{CE}(sat)$ 從 ~0.1 V 升至 ~0.3 V（靜態功耗增加）。② 若需要低 $V_{CE}(sat)$（低功耗）→允許深度飽和→犧牲的是儲存時間。③ 折衷方案是使用金摻雜（gold doping）來引入復合中心→降低 $\tau_s$→減少儲存時間，但這也降低了 $\beta$。現代 BiCMOS 技術中，這類權衡通常透過使用 MOSFET 作為開關來規避。</div>
+</section>
+
+<section id="s12-7-1" data-merged-from="ch12_bjt_advanced_zh.html"><h2>12.7.1 開關特性</h2><div class="section-keypoints"><strong>🔑 本節重點</strong> ① 導通需建立基極電荷 ② 飽和會增加儲存電荷 ③ 關斷先抽取多餘電荷 ④ 延遲取決於驅動與復合</div>
+<p>BJT 從截止切到導通時，BE 接面先充電並在基極建立少數載子分布。</p><p>若驅動使 BC 接面也順偏，元件進入飽和並儲存超過主動區所需的基極電荷。</p><p>外部命令關斷後，這些電荷必須由反向基極電流抽取或等待復合。</p><p>儲存時間常成為飽和 BJT 關斷的主要延遲，並造成開關損耗與交越電流。</p><p>限制過度基極驅動、提供反向抽取路徑或避免深飽和都可提升速度。</p><div class="callout"><strong>💡 關斷是電荷控制問題：</strong>端點電壓改變不代表內部儲存電荷立即消失。</div><div class="callout-warn"><strong>⚠️ 更大的基極導通電流可能降低 $V_{CE,sat}$，但也可能延長儲存時間。</strong></div><details class="example"><summary>📝 自編概念例：反向基極驅動</summary><div class="example-body"><p><strong>題目：</strong>關斷時提供較大反向基極電流。</p><p><strong>解：</strong>儲存電荷抽取速度提高。</p><p><strong>答案：</strong>儲存時間通常縮短。</p></div></details></section>
+
+<section id="s12-7-2" data-merged-from="ch12_bjt_advanced_zh.html"><h2>12.7.2 蕭特基箝位電晶體</h2><div class="section-keypoints"><strong>🔑 本節重點</strong> ① 蕭特基二極體跨接基集極 ② 箝制 BC 正偏 ③ 避免深飽和 ④ 降低儲存時間</div>
+<p>蕭特基箝位 BJT 在基極與集極間加入低順向壓降的金屬–半導體二極體。</p><p>當基極電位試圖使 BC 接面明顯順偏時，蕭特基二極體先導通並分流基極電流。</p><p>這可限制 BJT 進入深飽和，減少基極與集極區域的過量儲存電荷。</p><p>關斷時需抽取的電荷減少，因此儲存時間與邏輯延遲下降。</p><p>代價是導通狀態端電壓與可用雜訊容限受到箝位電壓影響。</p><div class="callout"><strong>💡 速度來源：</strong>蕭特基箝位不是讓載子跑更快，而是避免先存入太多電荷。</div><div class="callout-warn"><strong>⚠️ 箝位二極體的寄生電容與漏電仍需計入。</strong></div><details class="example"><summary>📝 自編概念例：箝位目的</summary><div class="example-body"><p><strong>題目：</strong>為何 TTL 使用 Schottky-clamped BJT？</p><p><strong>解：</strong>防止 BC 接面深度順偏。</p><p><strong>答案：</strong>縮短飽和儲存與關斷時間。</p></div></details></section>
+
+<section id="s12-8-overview" data-merged-from="ch12_bjt_advanced_zh.html"><h2>12.8 補充：先進 BJT 結構</h2>
+<div class="section-keypoints"><strong>🔑 本節重點</strong> ① 多晶矽射極：低D_E→壓縮濃度梯度→I_{pE}↓→β↑，同時實現淺接面（小C_{je}）② SiGe HBT：漸進Ge→能隙漸縮→內建加速電場→τ_b降至亞皮秒→f_T&gt;500 GHz ③ SiGe同時提升β(∼4×)和V_A(∼12×)——毫米波/太赫茲首選 ④ HBT：寬能隙射極→價帶能障阻止電洞注入→γ≈1→可重摻雜基極（降r_b）+輕摻雜射極（降C_{je}）⑤ III-V HBT（AlGaAs/GaAs、InGaP/GaAs、InP）涵蓋手機PA到太赫茲應用</div>
+<p>第十二章基礎篇討論的 BJT 是同質接面（Si 射極/Si 基極/Si 集極）。隨著半導體製程的演進，三種先進結構顯著提升了 BJT 的性能：<strong>多晶矽射極 BJT</strong>（提升 $\beta$ 且實現淺射極接面）、<strong>SiGe 基極電晶體</strong>（內建加速電場→降低 $\tau_b$）、以及<strong>異質接面雙極性電晶體 HBT</strong>（寬能隙射極→突破 $\gamma$ 的限制）。</p>
+
+<h3>12.8.1 多晶矽射極 BJT（Polysilicon Emitter BJT）</h3>
+<p>現代積體電路中的 BJT 射極通常不是單晶矽，而是<strong>多晶矽（polysilicon）</strong>。圖 12.46 展示了這種結構的截面：在 p 型基極之上有一層極薄的 n⁺ 單晶矽，上面覆蓋 n⁺ 多晶矽。這個看似簡單的改變帶來了兩個關鍵優勢：</p>
+<p><strong>① 電流增益提升：</strong>多晶矽中的載子遷移率遠低於單晶矽（晶界散射）→多晶矽中的少數載子擴散係數 $D_{E(poly)}$ 很小。從基極注入射極的電洞在多晶矽/單晶矽介面處遇到「擴散瓶頸」——濃度梯度在單晶矽側被壓縮（如圖 12.47 所示）→注入射極的電洞電流 $I_{pE}$ 減小→射極注入效率 $\gamma$ 提高→$\beta$ 增大。這意味著可以實現更淺的射極接面（減少寄生電容）而不犧牲 $\beta$。</p>
+<p><strong>② 淺射極接面：</strong>多晶矽可以作為擴散源——雜質從多晶矽擴散進入下方單晶矽，形成極淺（~10–50 nm）的射極接面。淺接面→較小的 $C_{je}$→較短的 $\tau_e$→較高的 $f_T$。</p>
+<p>多晶矽射極 BJT 是現代 BiCMOS 技術中 BJT 結構的標準配置——它使 BJT 能夠與先進 CMOS 製程相容，同時保持優異的類比性能。</p>
+
+<h3>12.8.2 SiGe 基極電晶體——矽基高速的王者</h3>
+<p>SiGe HBT 是目前商用頻率最高的矽基元件：$f_T$ 達 300–500 GHz，$f_{\max}$ 達 500–800 GHz。關鍵創新是<strong>基極中漸進的 Ge 組成</strong>。</p>
+<p>將 Ge 摻入 Si 基極會縮小能隙 $E_g$（Si: 1.12 eV → SiGe: 可低至 ~0.8 eV，取決於 Ge 含量）。Ge 含量從射極端（最少）向集極端（最多）<strong>漸進增加</strong>→能隙漸進縮小→導帶邊緣形成一個<strong>內建準電場（quasi-electric field）</strong>——這個電場的方向是從射極指向集極，強度可達 $10^3$–$10^4$ V/cm。注入基極的電子在擴散的同時被這個電場<strong>加速推向集極</strong>→基極傳輸時間 $\tau_b$ 降至亞皮秒級。</p>
+
+<p><strong>SiGe HBT 的其他優勢：</strong>能隙縮小還使集極電流增大（$n_i^2$ 增加），而基極電流主要由 BE 接面參數決定→$\beta$ 提升約 4 倍（對於 100 meV 能隙縮小）；Early 電壓 $V_A$ 也因能隙漸變效應而增大約 12 倍（100 meV 能隙縮小）；$\tau_e$ 減小（因為 $I_E$ 增大而 $r_e \propto 1/I_E$）。所有這些效應共同作用，使 SiGe HBT 成為毫米波和太赫茲應用的首選元件。SiGe HBT 是手機 RF 前端、光纖通訊驅動器（100 Gbps）、汽車雷達（77 GHz）的主力元件。</p>
+
+<h3>12.8.3 異質接面雙極性電晶體（HBT）——寬能隙射極的革命</h3>
+<p>同質接面 BJT 的根本矛盾在於：要提高 $\beta$→需要提高 $\gamma$→需要 $N_E \gg N_B$→但 $N_E$ 不能無限提高（重摻雜→能隙縮小→$\gamma$ 反而下降）。<strong>HBT 用材料工程突破了這個限制</strong>。</p>
+<p>HBT 的核心思想是用一個<strong>寬能隙材料</strong>作為射極（如 AlGaAs、InGaP），基極和集極使用窄能隙材料（如 GaAs）。寬能隙射極在價帶處產生一個大的能障 $V_h$→阻止電洞從基極注入射極→$I_{pE}$ 幾乎消失→$\gamma \approx 1$，即使射極摻雜不必高於基極。這使設計者可以<strong>重摻雜基極</strong>（降低 $r_b$→提升 $f_{\max}$）、<strong>輕摻雜射極</strong>（降低 $C_{je}$→提升 $f_T$）——同時實現高 $\beta$、高 $f_T$、和高 $f_{\max}$。</p>
+
+<p><strong>III-V HBT 的優勢：</strong>除了寬能隙射極的注入效率優勢，GaAs 中的電子遷移率約為矽的 5 倍→GaAs HBT 的基極傳輸時間 $\tau_b$ 大幅縮短。實驗中，基極寬度 0.1 µm 的 AlGaAs/GaAs HBT 已實現 $f_T \approx 40$ GHz（1980 年代數據；現代 InP HBT 的 $f_T$ 可達 500–800 GHz）。主要的權衡在於 GaAs 的少數載子壽命較短→BE 接面復合電流較大→$\delta$（復合因子）下降，但透過窄基極設計，仍可實現 $\beta \approx 150$。</p>
+
+<div class="callout"><strong>💡 HBT 技術的應用版圖。</strong><li><strong>SiGe HBT</strong>（矽基）：手機 RF 前端、Wi-Fi 功率放大器、汽車雷達、高速資料轉換器。優勢：與 CMOS 製程相容→低成本、高整合度。</li><li><strong>AlGaAs/GaAs HBT</strong>（GaAs 基）：基地台功率放大器、衛星通訊。優勢：高功率密度、高線性度。</li><li><strong>InGaP/GaAs HBT</strong>：手持裝置功率放大器的主力。優勢：比 AlGaAs/GaAs 更高的可靠性和蝕刻選擇性（InGaP 可被選擇性蝕刻而不傷及 GaAs）。</li><li><strong>InP HBT</strong>：太赫茲頻段（&gt;300 GHz）應用——光纖通訊（&gt;100 Gbps）、雷達成像、射頻天文。優勢：極高的電子遷移率、極低的基極電阻。</li></div>
+</section>
+
+<section id="s12-8-1" data-merged-from="ch12_bjt_advanced_zh.html"><h2>12.8.1 多晶矽射極 BJT</h2><div class="section-keypoints"><strong>🔑 本節重點</strong> ① 多晶矽層抑制電洞反注入 ② 射極效率提高 ③ 可形成淺接面 ④ 界面品質影響增益</div>
+<p>多晶矽射極在單晶射極上方加入重摻雜多晶矽接觸層。</p><p>多晶矽晶界、界面氧化層與載子傳輸共同降低基極電洞向射極接觸的反注入。</p><p>電洞電流下降而電子注入維持，可提高射極注入效率與 $\beta$。</p><p>多晶矽製程也有利於形成淺射極與自對準結構，降低接面電容。</p><p>界面層過厚或缺陷過多則會增加射極電阻，使速度與一致性惡化。</p><div class="callout"><strong>💡 增益改善：</strong>重點是選擇性抑制不需要的電洞反注入。</div><div class="callout-warn"><strong>⚠️ 多晶矽界面不能簡化成理想歐姆接觸。</strong></div><details class="example"><summary>📝 自編概念例：反注入下降</summary><div class="example-body"><p><strong>題目：</strong>電子注入不變、電洞反注入減半。</p><p><strong>解：</strong>總射極電流中電子占比提高。</p><p><strong>答案：</strong>射極注入效率與 $\beta$ 提高。</p></div></details></section>
+
+<section id="s12-8-2" data-merged-from="ch12_bjt_advanced_zh.html"><h2>12.8.2 矽鍺基極電晶體</h2><div class="section-keypoints"><strong>🔑 本節重點</strong> ① SiGe 縮小基極能隙 ② 漸變 Ge 建立加速場 ③ 基極渡越時間下降 ④ 增益與頻率性能提高</div>
+<p>SiGe BJT 在矽基極中加入鍺，使基極能隙小於矽射極與集極。</p><p>能隙差提高射極電子注入相對於電洞反注入的比例，改善電流增益。</p><p>沿基極漸變鍺含量可建立準電場，協助電子由射極端移向集極端。</p><p>加速場縮短基極渡越時間，因而提高 $f_T$ 與高速類比性能。</p><p>應變、缺陷、鍺分布與熱預算需精確控制，否則界面品質與可靠度會退化。</p><div class="callout"><strong>💡 SiGe 的雙重作用：</strong>能隙工程同時改善注入效率與基極傳輸速度。</div><div class="callout-warn"><strong>⚠️ Ge 含量與梯度不是越大越好，受應變與製程穩定性限制。</strong></div><details class="example"><summary>📝 自編概念例：漸變基極</summary><div class="example-body"><p><strong>題目：</strong>能隙沿射極到集極逐漸降低。</p><p><strong>解：</strong>形成協助電子前進的有效場。</p><p><strong>答案：</strong>基極渡越時間可下降。</p></div></details></section>
+
+<section id="s12-8-3" data-merged-from="ch12_bjt_advanced_zh.html"><h2>12.8.3 異質接面雙極性電晶體</h2><div class="section-keypoints"><strong>🔑 本節重點</strong> ① 寬能隙射極抑制電洞注入 ② 可重摻雜基極降低電阻 ③ 保持高射極效率 ④ 適合高速與高頻功率</div>
+<p>HBT 使用不同半導體形成射極–基極異質接面，最常見設計是寬能隙射極配窄能隙基極。</p><p>價帶能障強烈抑制基極電洞注入射極，而導帶設計仍允許有效電子注入。</p><p>射極效率不再只靠射極與基極摻雜比，因此基極可較重摻雜以降低基極電阻。</p><p>低基極電阻、高注入效率與短渡越時間使 HBT 適合射頻、毫米波與功率放大。</p><p>能帶偏移、界面缺陷、熱管理與崩潰電壓仍是材料系統選擇的重要限制。</p><div class="callout"><strong>💡 HBT 的核心自由度：</strong>用能隙差取代部分摻雜取捨。</div><div class="callout-warn"><strong>⚠️ 異質接面需同時考慮導帶與價帶偏移，不能只看總能隙。</strong></div><details class="example"><summary>📝 自編概念例：寬能隙射極</summary><div class="example-body"><p><strong>題目：</strong>價帶能障提高。</p><p><strong>解：</strong>基極電洞更難注入射極。</p><p><strong>答案：</strong>射極效率提高。</p></div></details></section>
+
+<section id="summary"><h2>本章摘要</h2>
+<ol>
+<li><strong>BJT 結構：</strong>n⁺-p-n（或 p⁺-n-p）。射極重摻雜→$\gamma\approx1$；基極極窄（$W_B\ll L_B$）→$\alpha_T\approx1$；集極輕摻雜→高崩潰電壓。</li>
+<li><strong>順向主動模式：</strong>BE 順偏（注入）、BC 逆偏（收集）。$I_E=I_B+I_C$。</li>
+<li><strong>基極傳輸：</strong>$W_B\ll L_B$→無復合→少數載子線性分布→擴散電流 $J_n\propto1/W_B$。$W_B$ 越窄→$I_C$ 越大。</li>
+<li><strong>電流增益：</strong>$\alpha=\gamma\cdot\alpha_T$。$\beta=\alpha/(1-\alpha)$。$\alpha$ 的微小變化（1%）使 $\beta$ 劇烈波動（50%）。</li>
+<li><strong>Ebers-Moll 模型：</strong>兩個背靠背二極體+耦合電流源。BJT 所有四種操作模式的統一描述。SPICE BJT 模型的基礎。</li>
+<li><strong>Early 效應：</strong>$V_{CE}$ 調變 $W_B$→$I_C=I_Se^{V_{BE}/V_T}(1+V_{CE}/V_A)$。$r_o=V_A/I_C$。$W_B$ 大→$V_A$ 大但 $\beta$ 小→設計取捨。</li>
+<li><strong>小訊號混合-π 模型：</strong>$g_m=I_{CQ}/V_T$（BJT 的 $g_m$ 比 MOSFET 大 4–10×），$r_\pi=\beta/g_m$，$r_o=V_A/I_{CQ}$。</li></ol><table><caption>第十二章基礎篇模式與核心量</caption><thead><tr><th scope="col">主題</th><th scope="col">核心量</th><th scope="col">物理意義</th></tr></thead><tbody><tr><th scope="row">注入與傳輸</th><td>$\gamma,\alpha_T$</td><td>決定 $\alpha$ 與 $\beta$</td></tr><tr><th scope="row">Early effect</th><td>$V_A,r_o$</td><td>輸出電壓調變基極寬度</td></tr><tr><th scope="row">高注入</th><td>beta roll-off</td><td>大電流下增益下降</td></tr></tbody></table></section>
+<section id="common-mistakes"><h2>常見錯誤</h2><div class="callout-warn"><strong>⚠️ 把兩個背靠背二極體等同 BJT。</strong>共享薄基極的載子傳輸才是 transistor action。</div><div class="callout-warn"><strong>⚠️ 把 $\beta$ 當固定常數。</strong>它隨偏壓、電流與溫度改變。</div><div class="callout-warn"><strong>⚠️ 認為飽和只是更強的主動區。</strong>BC 接面順偏會帶來額外儲存電荷。</div></section>
+<section id="self-check"><h2>自我檢核</h2><details><summary>為何基極必須很薄？</summary><p>減少注入載子在抵達集極前復合，提高基極傳輸因子。</p></details><details><summary>高 $\beta$ 需要哪兩個因子接近 1？</summary><p>射極注入效率 $\gamma$ 與基極傳輸因子 $\alpha_T$。</p></details><details><summary>Early effect 的直接原因是什麼？</summary><p>BC 空乏區隨反偏擴張，使有效中性基極變窄。</p></details></section>
+<section id="extras"><h2>延伸學習</h2><p><a href="../formula_reviews/ch12_bjt_formula_review_zh.html">第 12 章基礎公式摘要</a> · <a href="../formula_reviews/ch12_bjt_advanced_formula_review_zh.html">第 12 章進階公式摘要</a> · <a href="../problems_examples/ch12_problems_zh.html">補充習題</a>。下一章進入<a href="ch13_jfet_mesfet_zh.html">JFET／MESFET／HEMT</a>。</p></section><section id="learning-resources"><h2>本章學習資源</h2><p><a href="../formula_reviews/ch12_bjt_formula_review_zh.html">第 12 章基礎公式摘要</a> · <a href="../formula_reviews/ch12_bjt_advanced_formula_review_zh.html">第 12 章進階公式摘要</a> · <a href="../problems_examples/ch12_problems_zh.html">可驗算補充習題</a> · <a href="../problems_examples/examples_in_chapter_zh.html#ch12">章內例題</a></p></section><section id="derivation-lab" class="derive"><h2>推導、假設與章末診斷</h2><h3>BJT 基礎模型的完整假設與邊界</h3><ul><li>一維、均勻摻雜、穩態、低階注入、非退化，射極與集極接觸理想。</li><li>順向主動模式：BE 順偏、BC 反偏；基極準中性且 $W_B\ll L_{nB}$。</li><li>簡化線性濃度分布忽略基極內電場與復合；若基極有漸變摻雜或高注入，須解含漂移與非線性復合的連續方程。</li><li>邊界 $\Delta n_B(0)=n_{B0}(e^{V_{BE}/V_T}-1)$，反偏 BC 邊緣 $\Delta n_B(W_B)\approx0$。</li></ul><h3>中間推導：窄基極集極電流</h3><ol><li>$W_B\ll L_{nB}$ 時，$d^2\Delta n_B/dx^2\approx0$，濃度近似線性。</li><li>$d\Delta n_B/dx\approx-\Delta n_B(0)/W_B$。</li><li>電子擴散電流大小 $J_C\approx qD_{nB}\Delta n_B(0)/W_B$。</li><li>所以 $I_C\propto e^{V_{BE}/V_T}/W_B$；再以射極注入效率 $\gamma$ 與基極傳輸因子 $\alpha_T$ 得 $\alpha_F=\gamma\alpha_T$、$\beta=\alpha_F/(1-\alpha_F)$。</li></ol><div class="info-card"><strong>單位／量級：</strong>$qADn/W$ 是 A。若 $\alpha_F=0.99$，$\beta=99$；$\alpha$ 僅下降到 0.98，$\beta$ 已降到 49，顯示高度敏感。</div><h3>章末練習與概念診斷</h3><details><summary>兩顆分離二極體背靠背為何不能形成 BJT？</summary><p>它們沒有共享極窄基極，射極注入的少數載子不能擴散到另一接面並被集極收集。</p></details><details><summary>基極越窄是否永遠越好？</summary><p>不是；雖可提高傳輸因子與速度，但 Early effect、punch-through、製程變異與耐壓會惡化。</p></details><h3>延伸計算練習</h3><p>完成上方診斷後，請在不查公式的情況下重建代表推導，並改變一個參數檢查極限行為。更多含數值與解答的題目：<a href="../problems_examples/ch12_problems_zh.html">本章完整習題頁</a>。</p></section>
+</main>
+</body>
+</html>

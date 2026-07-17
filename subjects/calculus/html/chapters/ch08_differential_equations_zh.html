@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light" data-reading-width="wide">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第 8 章 — Calculus 學習教材</title>
+<script>
+MathJax = {
+  tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']], tags: 'ams' },
+  options: { ignoreHtmlClass: 'no-math' }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<link rel="stylesheet" href="../../../../shared/core.css">
+<script src="../../../../shared/core.js" defer></script>
+<link rel="stylesheet" href="../../../../shared/models/model-host.css">
+<script defer src="../../../../shared/models/model-runtime.js"></script>
+<link rel="stylesheet" href="../../../../shared/components/calculus-ch08-model.css">
+<link rel="stylesheet" href="../../../../shared/navigation.css" data-shared-navigation>
+</head>
+<body>
+
+<a class="portal-home-link" href="../../index.html">← 返回學習中心</a>
+
+<nav class="sidebar" aria-label="本章目錄"><div class="sidebar-header"><div class="sidebar-subtitle">微積分</div><h2 class="sidebar-title">微分方程入門</h2></div><ul class="toc">
+    <li class="ns">本章預覽</li>
+    <li class="nsub"><a href="#preview">學習目標與概念地圖</a></li>
+    <li class="ns">4.1 微分方程基礎</li>
+    <li class="nsub"><a href="#s4-1">階數、解、初始值問題</a></li>
+    <li class="ns">4.2 方向場與數值方法</li>
+    <li class="nsub"><a href="#s4-2">方向場繪製、歐拉法</a></li>
+    <li class="ns">4.3 可分離方程</li>
+    <li class="nsub"><a href="#s4-3">分離變數法與應用</a></li>
+    <li class="ns">4.4 邏輯斯諦方程</li>
+    <li class="nsub"><a href="#s4-4">承載容量、Logistic 模型推導</a></li>
+    <li class="ns">4.5 一階線性方程</li>
+    <li class="nsub"><a href="#s4-5">積分因子法、RL/RC 電路</a></li>
+    <li class="ns">本章摘要</li>
+    <li class="nsub"><a href="#summary">關鍵概念總整理</a></li>
+    <li class="nsub"><a href="#common-mistakes">初學者常見錯誤</a></li>
+    <li class="nsub"><a href="#self-check">自我檢測</a></li>
+    <li class="nsub"><a href="#extras">延伸資源</a></li>
+  </ul>
+  <div class="sidebar-tools"><button type="button" data-action="toggle-theme" aria-label="切換深色或淺色模式">切換顯示主題</button></div></nav>
+
+<main class="chapter-page" data-chapter-title="微分方程入門" data-prev-href="ch07_integration_techniques_zh.html" data-prev-label="積分技巧" data-next-href="ch09_sequences_series_zh.html" data-next-label="序列與級數">
+
+<header class="chapter-header">
+  <div class="tag">第 8 章 · OpenStax Calculus Vol 2, Ch 4</div>
+  <h1>微分方程入門</h1>
+  <div class="chapter-meta">OpenStax · Calculus Volume 2 · Introduction to Differential Equations · pp.315–376 · 5 節</div>
+</header>
+
+<!-- ====== Preview ====== -->
+<section id="preview">
+<div class="chapter-preview">
+<h2>📌 本章要解決的核心問題</h3>
+<p>在微積分第一卷中，我們學習了<strong>導數</strong>和<strong>積分</strong>這兩大運算。但真正的應用場景往往是：我們知道某個量的<strong>變化率</strong>，卻不知道這個量本身。例如——我們知道人口的增長速度與當前人口成正比，那麼未來任何時刻的人口是多少？本章引入<strong>微分方程（differential equation）</strong>這個強大的數學工具來回答這類問題。微分方程是描述物理、生物、工程、經濟等領域中「變化規律」的語言，從自由落體到電路分析、從流行病傳播到人口預測，無所不包。</p>
+
+<div class="figure">
+  <img src="../../pages/v2c4_pages/v2c4_page_315_c.png" alt="白尾鹿——微分方程可用於研究動物族群" loading="lazy">
+  <figcaption>圖 4.1：美國東部的白尾鹿（Odocoileus virginianus）。微分方程可以用來研究動物族群的動態變化——例如，鹿的數量會如何隨時間增長？有沒有上限？（credit: modification of work by Rachel Kramer, Flickr）</figcaption>
+</div>
+
+<h3>🔑 關鍵概念（10 條）</h3>
+<ol>
+  <li><strong>微分方程的階（order）</strong>：方程中出現的最高階導數的階數</li>
+  <li><strong>通解 vs 特解</strong>：通解包含任意常數，代表一整族解；特解由初始條件決定</li>
+  <li><strong>初始值問題（IVP）</strong>：微分方程 + 初始條件 = 唯一確定的解</li>
+  <li><strong>方向場（direction field）</strong>：不需求解就能視覺化微分方程解的走勢</li>
+  <li><strong>歐拉法（Euler's Method）</strong>：用逐步線性逼近來數值求解微分方程</li>
+  <li><strong>分離變數法</strong>：當 $y' = f(x)g(y)$ 時可將 $x$ 和 $y$ 分到等號兩邊再積分</li>
+  <li><strong>邏輯斯諦方程（Logistic Equation）</strong>：$\frac{dP}{dt} = rP\left(1 - \frac{P}{K}\right)$——指數增長 + 承載容量限制</li>
+  <li><strong>承載容量（carrying capacity）</strong>：環境能長期維持的最大族群數量 $K$</li>
+  <li><strong>積分因子（integrating factor）</strong>：$\mu(x) = e^{\int p(x)dx}$——解一階線性方程的萬能鑰匙</li>
+  <li><strong>平衡解與穩定性</strong>：$y = c$ 使 $y' = 0$ 的解——可以穩定、不穩定或半穩定</li>
+</ol>
+
+<h3>🧭 本章推理地圖</h3>
+<p><strong>物理定律常以變化率表述</strong>（§4.1） → 形成微分方程（DE），求解 = 找出滿足關係的函數 → <strong>方向場</strong>（§4.2）提供幾何洞察：不解方程也能看見解的形狀 → <strong>分離變數法</strong>（§4.3）處理最簡單的一階 DE：dy/dx = f(x)g(y) → <strong>邏輯斯諦方程</strong>（§4.4）模型化有限資源下的種群增長 → <strong>積分因子法</strong>（§4.5）解一般一階線性 DE → 應用於冷卻定律、鹽水槽混合、RL/RC 電路 → 為第 17 章二階 DE（Ch17）奠定基礎</p>
+
+<div class="callout-warn"><strong>⚡ 先備知識提醒</strong>：本章需要熟練掌握微積分第一卷的以下內容：(1) 基本導數公式（冪函數、指數、對數、三角函數）；(2) 不定積分與反導數；(3) 分部積分法與部分分式分解；(4) 鏈鎖律（chain rule）。如果你對 $\int \frac{1}{x}dx = \ln|x| + C$ 或 $\frac{d}{dx}e^{f(x)} = e^{f(x)}f'(x)$ 感到不確定，建議先複習 Vol 1 的第 3–5 章。</div>
+</div>
+</section>
+
+<!-- ============================================================ -->
+<!-- Section 4.1 -->
+<!-- ============================================================ -->
+<section id="s4-1">
+<h2>4.1 微分方程基礎（Basics of Differential Equations）</h2>
+
+<div style="margin-bottom:14px;font-size:12px;color:var(--tx2);line-height:1.8">
+<strong style="color:var(--tx)">🔑 本節重點</strong> ①階數決定通解中常數個數 ②通解含任意常數、初始條件挑特解 ③自由落體模型 ma = −mg ④驗證解代入原方程 ⑤n 階方程需 n 個初始條件
+</div>
+
+<p>微積分是研究<strong>變化</strong>的數學。
+
+<div class="formula-card">
+  <div class="formula-label">微分方程的正式定義</div>
+  <p><strong>微分方程</strong>是一個包含未知函數 $y = f(x)$ 及其一個或多個導數的方程式。一階微分方程的一般形式為 $y' = f(x, y)$。</p>
+  <div class="formula-note">例如：$y' = 3x^2$、$y' + 2y = e^x$、$y'' - 4y' + 4y = 0$ 都是微分方程。</div>
+</div>
+
+<p>驗證一個函數是否為某個微分方程的<strong>解（solution）</strong>，方法很直接：把函數和它的導數代入方程，檢查等式是否成立。例如 $y = x^3$ 是 $y' = 3x^2$ 的解，因為對 $y = x^3$ 微分得到 $y' = 3x^2$，代入後等式成立。</p>
+
+<p>一個關鍵的觀察是：微分方程的解<strong>通常不唯一</strong>。例如 $y' = 3x^2$ 的解可以是 $y = x^3$、$y = x^3 + 5$、$y = x^3 - 2$……因為常數的導數為零，所以把任何常數加到解上都不會改變導數。這就引出了<strong>通解（general solution）</strong>和<strong>特解（particular solution）</strong>的區別。</p>
+
+<div class="figure">
+  <img src="../../pages/v2c4_pages/v2c4_page_318_c.png" alt="微分方程 y'=2x 的解族" loading="lazy">
+  <figcaption>圖 4.2：$y' = 2x$ 的解族——每一條曲線都對應一個不同的積分常數 $C$，它們的「形狀」相同但垂直位置不同</figcaption>
+</div>
+
+<h3>階數（Order）</h3>
+
+<p>微分方程的<strong>階（order）</strong>定義為方程中出現的未知函數的<strong>最高階導數的階數</strong>。例如 $y' + y = 0$ 是一階（first-order），因為最高導數是一階導數 $y'$；$y'' + 3y' - 4y = \sin x$ 是二階（second-order）；$y''' = 2x$ 是三階。階數決定了通解中會出現<strong>多少個任意常數</strong>——一階方程的通解有一個常數，二階方程的通解有兩個常數，以此類推。</p>
+
+<div class="callout"><strong>💡 物理直覺：為什麼階數 = 常數個數？</strong><br>想像你在開車。如果你只知道「加速度（二階導數）為常數 $a$」，你需要知道<strong>兩個</strong>資訊才能完全確定位置：初始位置和初始速度。同理，一個 $n$ 階微分方程需要 $n$ 個初始條件才能確定唯一的特解。每一次積分都會引入一個積分常數，因此 $n$ 階方程的通解包含 $n$ 個任意常數。</div>
+
+<h3>初始值問題（Initial-Value Problem, IVP）</h3>
+
+<p>一個<strong>初始值問題</strong>由兩部分組成：(1) 一個微分方程，(2) 一個或多個初始條件。初始條件指定了在某一點（通常是 $t = 0$ 或 $x = 0$）處函數及其導數的值。例如：</p>
+
+<div class="formula-card">
+  <div class="formula-label">初始值問題的標準形式</div>
+  <div class="eq">$$\begin{cases} y' = f(x, y) \\ y(x_0) = y_0 \end{cases}$$</div>
+  <div class="formula-note">給定一個初始點 $(x_0, y_0)$，從解族中挑出恰好通過該點的那一條曲線——這就是特解。</div>
+</div>
+
+<div class="figure">
+  <img src="../../pages/v2c4_pages/v2c4_page_319_c.png" alt="解族與特解" loading="lazy">
+  <figcaption>圖 4.3：$y' = 2x$ 的解族與特解 $y = x^2 + 1$（通過 $(0, 1)$ 的那一條）</figcaption>
+</div>
+
+<details class="example"><summary>📝 範例</summary><strong>📝 範例 4.5：解初始值問題</strong><br>求解 $y' = 2x + 1$，$y(0) = 3$。<br><br><strong>解：</strong>先求通解：對 $y' = 2x + 1$ 積分得到 $y = x^2 + x + C$。代入初始條件 $y(0) = 3$：$0^2 + 0 + C = 3$ → $C = 3$。因此特解為 $y = x^2 + x + 3$。這就是解族中恰好通過 $(0, 3)$ 的那條拋物線。</details>
+
+<div class="callout-warn"><strong>⚡ 常見錯誤：驗證解時忘記鏈鎖律</strong><br>驗證 $y = e^{-2t}\sin 3t$ 是否為 $y'' + 4y' + 13y = 0$ 的解時，必須小心使用乘積法則和鏈鎖律來計算 $y'$ 和 $y''$。很多學生在對 $e^{-2t}\sin 3t$ 求導時漏掉內層函數的導數，或者忘記乘積法則中的交叉項。一個實用的檢查方法：代入 $t = 0$ 驗算——如果代入後的數字對不上，說明你的導數算錯了。</div>
+
+<h3>應用：自由落體（Free Fall）</h3>
+
+<p>微分方程最基本的物理應用之一是<strong>自由落體</strong>。假設一個質量為 $m$ 的棒球在只受重力（忽略空氣阻力）的條件下運動。根據牛頓第二定律 $F = ma$，加速度 $a = v'(t)$，而重力 $F = -mg$（負號表示向下）。因此：</p>
+
+<div class="eq">$$m \frac{dv}{dt} = -mg \quad\Rightarrow\quad \frac{dv}{dt} = -g$$</div>
+
+<p>這是一個一階微分方程！初始條件為初始速度 $v(0) = v_0$。求解：積分得到 $v(t) = -gt + v_0$。再積分一次得到位置：$s(t) = -\frac{1}{2}gt^2 + v_0t + s_0$。注意：物體的<strong>質量 $m$ 在方程中被約掉了</strong>——在無空氣阻力的理想情況下，所有物體以相同的加速度下墜（伽利略的著名結論）。</p>
+
+<div class="figure">
+  <img src="../../pages/v2c4_pages/v2c4_page_321_c.png" alt="自由落體的棒球——只受重力" loading="lazy">
+  <figcaption>圖 4.4–4.5：自由落體中，唯一作用力是重力（忽略空氣阻力）。$v > 0$ 表示上升，$v < 0$ 表示下降</figcaption>
+</div>
+
+<details class="example"><summary>📝 範例</summary><strong>📝 範例 4.6：棒球的速度</strong><br>一顆棒球從離地 3 公尺的高度以初速 10 m/s 垂直上拋，質量 0.15 kg，只受重力（$g = 9.8$ m/s²）。求 (a) 速度函數 $v(t)$；(b) 2 秒後的速度。<br><br><strong>解：</strong>(a) 微分方程為 $\frac{dv}{dt} = -9.8$，初始條件 $v(0) = 10$。積分得 $v(t) = -9.8t + 10$。(b) $v(2) = -9.8(2) + 10 = -9.6$ m/s。負號表示棒球正在以 9.6 m/s 的速度下降。</details>
+
+</section>
+
+<!-- ============================================================ -->
+<!-- Section 4.2 -->
+<!-- ============================================================ -->
+<section id="s4-2">
+<h2>4.2 方向場與數值方法（Direction Fields and Numerical Methods）</h2>
+
+<div style="margin-bottom:14px;font-size:12px;color:var(--tx2);line-height:1.8">
+<strong style="color:var(--tx)">🔑 本節重點</strong> ①方向場提供解的幾何直覺 ②平衡解分穩定/不穩定/半穩定 ③歐拉法 y_{n+1}=y_n+h·f(x_n,y_n) ④步長 h 越小精度越高 ⑤自治方程 y'=f(y) 的相位線分析
+</div>
+
+<p>在很多情況下，我們無法用初等函數來表示微分方程的解析解（analytical solution）——也就是說，不存在一個由多項式、指數、三角函數等基本函數構成的封閉形式。
+
+<h3>方向場（Direction Field / Slope Field）</h3>
+
+<p>對於一階微分方程 $y' = f(x, y)$，在平面上的每一點 $(x, y)$，我們都可以計算出一個<strong>斜率值</strong> $f(x, y)$——這就是通過該點的解曲線在該點的切線斜率。如果在網格上的大量點都畫上一小段具有該斜率的線段，我們就得到了一個<strong>方向場</strong>。</p>
+
+<div class="figure">
+  <img src="../../pages/v2c4_pages/v2c4_page_326_c.png" alt="牛頓冷卻定律的方向場" loading="lazy">
+  <figcaption>圖 4.6：$T' = -0.4(T - 72)$ 的方向場——兩條解曲線分別從高於和低於環境溫度 $72^\circ$F 的初始值出發</figcaption>
+</div>
+
+<p>方向場的美妙之處在於：你不需要解出微分方程，就可以「讀出」解的<strong>長期行為</strong>（long-term behavior）。例如在圖 4.6 中，無論初始溫度是多少，所有解曲線都趨向 $T = 72$——環境溫度。這在數學上被稱為一個<strong>漸近穩定平衡解（asymptotically stable equilibrium）</strong>。</p>
+
+<div class="figure">
+  <img src="../../pages/v2c4_pages/v2c4_page_327_c.png" alt="y'=3x²+2x+1 的方向場" loading="lazy">
+  <figcaption>圖 4.7：$y' = 3x^2 + 2x + 1$ 的方向場——由於右側只依賴 $x$ 不依賴 $y$，每一條垂直線上的斜率都相同</figcaption>
+</div>
+
+<div class="callout"><strong>💡 核心洞察：方向場 = 微分方程的指紋</strong><br>每一個一階微分方程都有一個獨特的方向場，就像指紋一樣。你可以從方向場中看出：(1) 哪些區域的解在上升/下降；(2) 平衡解在哪裡（水平線段）；(3) 平衡解是穩定還是不穩定（附近的箭頭是「指向」還是「遠離」平衡線）。這讓方向場成為分析微分方程<strong>定性行為</strong>的最強工具。</div>
+
+<h3>平衡解與穩定性</h3>
+
+<p>對於自治微分方程（autonomous differential equation）$y' = f(y)$（右側只依賴 $y$，不依賴 $x$），設 $f(y) = 0$ 可以解出<strong>平衡解（equilibrium solutions）</strong>——也就是常數函數 $y = c$ 使得 $y' = 0$。根據附近解的行為，平衡解分為三類：</p>
+
+<ul>
+  <li><strong>漸近穩定（asymptotically stable）</strong>：附近的所有解都趨向該平衡值</li>
+  <li><strong>漸近不穩定（asymptotically unstable）</strong>：附近的所有解都遠離該平衡值</li>
+  <li><strong>半穩定（semi-stable）</strong>：一側的解趨向、另一側的解遠離</li>
+</ul>
+
+<div class="figure">
+  <img src="../../pages/v2c4_pages/v2c4_page_329_c.png" alt="y'=(x-3)(y²-4) 的方向場與平衡解" loading="lazy">
+  <figcaption>圖 4.9：$y' = (x-3)(y^2 - 4)$ 的方向場——$y = 2$ 和 $y = -2$ 是平衡解。注意解曲線在 $y=2$ 附近的行為（一條略高、一條略低）顯示了穩定性質</figcaption>
+</div>
+
+<div class="callout-warn"><strong>⚡ 常見錯誤：混淆 $x$ 和 $y$ 的角色</strong><br>在閱讀方向場時，很多初學者會搞混誰是自變數、誰是應變數。記住：水平軸永遠是自變數（通常是 $x$ 或 $t$），垂直軸永遠是應變數 $y$。方向場中的每一小段線的斜率 $m = y'$ 表示的是：當 $x$ 向右移動一點點時，$y$ 應該沿著斜率 $m$ 的方向變化。不要把方向場中的箭頭誤解為「速度向量場」——它只是切線斜率的圖形化。</div>
+
+
+
+<details class="derive model-host" style="margin:20px 0" data-model-host="direction-field">
+<summary>🎮 互動模型：方向場與 Euler 法</summary>
+<div style="padding:8px 0"><p style="font-size:13px;color:var(--tx2);margin-bottom:12px">調整起點和步長，觀察 Euler 路徑與精確解的比較。</p>
+<div data-direction-field-model data-model-mount></div></div>
+</details>
+
+<h3>歐拉法（Euler's Method）</h3>
+
+<p>歐拉法是數值求解微分方程最古老、最直觀的方法。核心思想是：從初始點 $(x_0, y_0)$ 出發，沿著該點的切線方向走一小步（步長 $h$），到達一個新的近似點 $(x_1, y_1)$；然後在那裡重新計算斜率，再走一步……如此反覆。</p>
+
+<div class="formula-card">
+  <div class="formula-label">歐拉法公式（定理 4.1）</div>
+  <div class="eq">$$x_{n+1} = x_n + h,\qquad y_{n+1} = y_n + h \cdot f(x_n, y_n)$$</div>
+  <div class="formula-note">其中 $h$ 是步長（step size）。$h$ 越小，精度越高，但計算量越大。$h$ 越大，計算越快，但誤差也越大。</div>
+</div>
+
+<div class="figure">
+  <img src="../../pages/v2c4_pages/v2c4_page_332_c.png" alt="歐拉法示意圖——紅色折線逼近真實解曲線" loading="lazy">
+  <figcaption>圖 4.13：歐拉法——紅色折線由一系列切線段組成，逐步逼近真實解（藍色曲線）。初始點相同，每一步沿當前斜率走 $h$ 的距離</figcaption>
+</div>
+
+<div class="figure">
+  <img src="../../pages/v2c4_pages/v2c4_page_334_c.png" alt="不同步長的歐拉法比較" loading="lazy">
+  <figcaption>圖 4.14：歐拉法在不同步長下的表現——(a) $h = 0.1$ 提供了相當好的近似；(b) $h = 0.5$ 明顯偏離真實解。步長的選擇是精度與效率的權衡</figcaption>
+</div>
+
+<details class="example"><summary>📝 範例</summary><strong>📝 範例 4.9：使用歐拉法</strong><br>對於初始值問題 $y' = x + y$，$y(0) = 1$，使用步長 $h = 0.1$ 生成 $x$ 從 0 到 1 之間的近似值表。<br><br><strong>解：</strong>$f(x,y) = x + y$，從 $(x_0, y_0) = (0, 1)$ 開始：<br>$y_1 = 1 + 0.1 \cdot (0 + 1) = 1.1$<br>$y_2 = 1.1 + 0.1 \cdot (0.1 + 1.1) = 1.22$<br>$y_3 = 1.22 + 0.1 \cdot (0.2 + 1.22) = 1.362$<br>……以次類推。真實解為 $y = 2e^x - x - 1$，$y(1) \approx 3.4366$。<br>歐拉法（10 步）給出 $y(1) \approx 3.1875$——誤差約 7%，但計算極其簡單。使用 $h = 0.01$（100 步）可以將誤差降至約 0.7%。</details>
+
+<p>歐拉法雖然簡單，但它揭示了所有現代數值方法（如 Runge-Kutta 方法）的核心原理：<strong>用局部線性近似來追蹤非線性系統的演化</strong>。在電腦時代，歐拉法及其變體被嵌入到幾乎所有科學計算軟體中。</p>
+
+</section>
+
+<!-- ============================================================ -->
+<!-- Section 4.3 -->
+<!-- ============================================================ -->
+<section id="s4-3">
+<h2>4.3 可分離方程（Separable Equations）</h2>
+
+<div style="margin-bottom:14px;font-size:12px;color:var(--tx2);line-height:1.8">
+<strong style="color:var(--tx)">🔑 本節重點</strong> ①分離變數法五步驟 ②先找 g(y)=0 的常數解 ③鹽水槽 u' = 流入率 − 流出率 ④牛頓冷卻定律 T'=−k(T−T_a) ⑤除以 g(y) 前檢查遺失解
+</div>
+
+<p>如果一個一階微分方程可以寫成 $y' = f(x) \cdot g(y)$ 的形式——即右側可以「分離」成只含 $x$ 的函數乘以只含 $y$ 的函數——我們稱之為<strong>可分離微分方程（separable differential equation）</strong>。
+
+<div class="formula-card">
+  <div class="formula-label">可分離方程的標準形式</div>
+  <div class="eq">$$\frac{dy}{dx} = f(x) \cdot g(y)$$</div>
+  <div class="formula-note">若 $g(y) \neq 0$，可重寫為 $\frac{1}{g(y)}dy = f(x)dx$——這就是「分離變數」名稱的由來</div>
+</div>
+
+<h3>分離變數法（Separation of Variables）的五步驟</h3>
+
+<ol>
+  <li><strong>找常數解</strong>：設 $g(y) = 0$，解出 $y$ 的值——這些是平衡解（常數解）</li>
+  <li><strong>分離變數</strong>：重寫為 $\frac{1}{g(y)} dy = f(x) dx$</li>
+  <li><strong>兩邊積分</strong>：$\int \frac{1}{g(y)} dy = \int f(x) dx$</li>
+  <li><strong>解出 $y$</strong>：如果可能的話，將 $y$ 表示為 $x$ 的顯函數</li>
+  <li><strong>代入初始條件</strong>（如有）：解出積分常數 $C$</li>
+</ol>
+
+<details class="example"><summary>📝 範例</summary><strong>📝 範例 4.10：分離變數法</strong><br>求 $y' = \frac{x}{y}$ 的通解。<br><br><strong>解：</strong>Step 1：$g(y) = 1/y$，$g(y) = 0$ 無解（無常數解）。<br>Step 2：重寫為 $y \, dy = x \, dx$。<br>Step 3：積分兩邊：$\frac{y^2}{2} = \frac{x^2}{2} + C$。<br>Step 4：乘以 2：$y^2 = x^2 + 2C$。令 $C_1 = 2C$，得 $y = \pm\sqrt{x^2 + C_1}$。這就是通解——一族雙曲線。</details>
+
+<details class="example"><summary>📝 範例</summary><strong>📝 範例 4.11：含初始條件的可分離方程</strong><br>求解 $y' = y(1 - y)$，$y(0) = 0.5$。<br><br><strong>解：</strong>Step 1：$g(y) = y(1-y) = 0$ → $y = 0$ 或 $y = 1$ 為常數解。<br>分離變數：$\frac{dy}{y(1-y)} = dx$。使用部分分式：$\frac{1}{y(1-y)} = \frac{1}{y} + \frac{1}{1-y}$。<br>積分：$\ln|y| - \ln|1-y| = x + C$ → $\ln\left|\frac{y}{1-y}\right| = x + C$。<br>指數化：$\frac{y}{1-y} = C_1 e^x$。解出 $y$：$y = \frac{C_1 e^x}{1 + C_1 e^x}$。<br>代入 $y(0) = 0.5$：$\frac{C_1}{1 + C_1} = 0.5$ → $C_1 = 1$。<br>因此 $y = \frac{e^x}{1 + e^x} = \frac{1}{1 + e^{-x}}$。這正是邏輯斯諦函數！（預告了 4.4 節的內容）</details>
+
+<div class="figure">
+  <img src="../../pages/v2c4_pages/v2c4_page_345_c.png" alt="初始值問題 y'=y(1-y), y(0)=0.5 的解圖" loading="lazy">
+  <figcaption>圖 4.15：$y' = y(1-y)$，$y(0) = 0.5$ 的解曲線——這是一條 S 形曲線（sigmoid），從 $y=0.5$ 開始單調遞增，趨近於 $y=1$</figcaption>
+</div>
+
+<h3>應用一：鹽水槽（Brine Tank / Solution Concentration）</h3>
+
+<p>考慮一個裝有 100 公升鹽水的槽，初始含有 4 公斤的鹽。含鹽濃度為 0.5 kg/L 的鹽水以 2 L/min 的速率流入，同時混合均勻的溶液以相同的速率從底部流出（保持體積不變）。問題：槽中鹽量 $u(t)$ 如何隨時間變化？</p>
+
+<div class="figure">
+  <img src="../../pages/v2c4_pages/v2c4_page_346_c.png" alt="鹽水槽示意圖" loading="lazy">
+  <figcaption>圖 4.16：鹽水槽——流入的鹽水濃度固定，流出的濃度隨槽中鹽量變化而變化。關鍵假設：槽中溶液始終充分混合</figcaption>
+</div>
+
+<p>微分方程的建模邏輯是 $u'(t) = \text{流入率} - \text{流出率}$。流入率 = 2 L/min × 0.5 kg/L = 1 kg/min。流出率 = 2 L/min × $\frac{u(t)}{100}$ kg/L = $\frac{u(t)}{50}$ kg/min。因此：</p>
+
+<div class="eq">$$u' = 1 - \frac{u}{50} = \frac{50 - u}{50},\qquad u(0) = 4$$</div>
+
+<p>這是一個可分離方程。求解後得到 $u(t) = 50 - 46e^{-t/50}$。當 $t \to \infty$ 時，$u(t) \to 50$ 公斤——這正好對應於「流入濃度 × 槽體積 = 0.5 × 100 = 50」的穩態值。</p>
+
+<h3>應用二：牛頓冷卻定律（Newton's Law of Cooling）</h3>
+
+<p>牛頓冷卻定律指出：物體溫度變化的速率與物體當前溫度 $T$ 和環境溫度 $T_a$ 之間的<strong>差值成正比</strong>：</p>
+
+<div class="formula-card">
+  <div class="formula-label">牛頓冷卻定律</div>
+  <div class="eq">$$\frac{dT}{dt} = -k(T - T_a)$$</div>
+  <div class="formula-note">$k > 0$ 是冷卻常數，取決於物體和環境的特性。負號表示：如果 $T > T_a$，物體冷卻（$T' < 0$）；如果 $T < T_a$，物體升溫（$T' > 0$）</div>
+</div>
+
+<div class="figure">
+  <img src="../../pages/v2c4_pages/v2c4_page_348_c.png" alt="披薩冷卻——牛頓冷卻定律的應用" loading="lazy">
+  <figcaption>圖 4.17：剛出爐的披薩——根據牛頓冷卻定律，如果披薩在 1 分鐘內從 450°F 降到 350°F（廚房 75°F），還需要等多久才能降到可食用的 110°F？</figcaption>
+</div>
+
+<div class="callout"><strong>💡 牛頓冷卻定律 = 指數衰減的變形</strong><br>注意 $T' = -k(T - T_a)$ 的解是 $T(t) = T_a + (T_0 - T_a)e^{-kt}$。這不是單純的指數衰減，而是以<strong>環境溫度為漸近線</strong>的指數趨近。實際上，如果你做變數變換 $U = T - T_a$（溫差），方程變成 $U' = -kU$——就是最簡單的指數衰減！這個「先平移再求解」的思路在微分方程中反覆出現。</div>
+
+<div class="callout-warn"><strong>⚡ 常見錯誤：忘記常數解</strong><br>在分離變數的 Step 1 中，必須檢查 $g(y) = 0$ 是否給出常數解。例如在解 $y' = y^2 - 4$ 時，$y = \pm 2$ 是兩個常數解。如果你跳過這一步直接分離變數，就會「遺失」這些解。數學上這是因為你在分離時除以了 $g(y)$，而除以零是非法的——被除掉的解必須手動補回來。</div>
+
+</section>
+
+<!-- ============================================================ -->
+<!-- Section 4.4 -->
+<!-- ============================================================ -->
+<section id="s4-4">
+<h2>4.4 邏輯斯諦方程（The Logistic Equation）</h2>
+
+<div style="margin-bottom:14px;font-size:12px;color:var(--tx2);line-height:1.8">
+<strong style="color:var(--tx)">🔑 本節重點</strong> ①承載容量 K 限制指數增長 ②dP/dt=rP(1−P/K) ③平衡解 P=0 不穩定、P=K 穩定 ④反曲點在 P=K/2 ⑤推導用部分分式+分離變數
+</div>
+
+<p>人口增長的最簡單模型是指數模型：$\frac{dP}{dt} = rP$，其中 $r > 0$ 是增長率。
+
+<div class="figure">
+  <img src="../../pages/v2c4_pages/v2c4_page_352_c.png" alt="指數增長模型" loading="lazy">
+  <figcaption>圖 4.18：指數增長模型 $P(t) = P_0 e^{rt}$——人口以無限制的方式增長。這種模型只有在資源無限的假設下才成立</figcaption>
+</div>
+
+<div class="formula-card">
+  <div class="formula-label">邏輯斯諦微分方程</div>
+  <div class="eq">$$\frac{dP}{dt} = rP\left(1 - \frac{P}{K}\right)$$</div>
+  <div class="formula-note">$P(t)$ = 時間 $t$ 時的族群大小；$r > 0$ = 內秉增長率（intrinsic growth rate）；$K > 0$ = 環境承載容量（carrying capacity）。當 $P \ll K$ 時，$P/K \approx 0$，方程退化成指數增長 $P' \approx rP$；當 $P \to K$ 時，$P' \to 0$，增長停止。</div>
+</div>
+
+<h3>邏輯斯諦方程的定性分析</h3>
+
+<p>邏輯斯諦方程是一個<strong>自治微分方程</strong>（右側只依賴 $P$）。設 $f(P) = rP(1 - P/K) = 0$，得到兩個平衡解：$P = 0$（滅絕）和 $P = K$（承載容量）。</p>
+
+<div class="figure">
+  <img src="../../pages/v2c4_pages/v2c4_page_354_c.png" alt="邏輯斯諦方程的相位線" loading="lazy">
+  <figcaption>圖 4.19：邏輯斯諦方程的相位線（phase line）——$P = 0$ 是不穩定平衡（箭頭遠離），$P = K$ 是穩定平衡（箭頭指向）。任何初始值 $P_0 > 0$ 都最終趨向 $K$</figcaption>
+</div>
+
+<p>相位線（phase line）是分析自治微分方程的強大工具。當 $0 < P < K$ 時，$P/K < 1$，所以 $P' > 0$——人口增長。當 $P > K$ 時，$P/K > 1$，所以 $P' < 0$——人口減少（資源不足以支撐過多個體）。<strong>無論從哪個正初始值出發，$P(t)$ 都趨向 $K$。</strong></p>
+
+<h3>邏輯斯諦方程的完整推導（求解過程）</h3>
+
+<div class="derive">
+<h3>📐 推導實驗室：邏輯斯諦方程的解析解</h3>
+<p>以下是從微分方程到顯式解的完整推導。這使用了分離變數法和部分分式分解——兩個在 4.3 節中學到的核心技術。</p>
+</div>
+
+<details class="derive">
+<summary>🔍 完整推導：從 $\frac{dP}{dt} = rP\left(1 - \frac{P}{K}\right)$ 到 $P(t) = \frac{K}{1 + \left(\frac{K-P_0}{P_0}\right)e^{-rt}}$</summary>
+
+<div class="step"><span class="step-number">1</span><div><strong>分離變數。</strong>將方程重寫為 $\frac{dP}{P(1 - P/K)} = r\,dt$。右側只含 $P$，左側只含 $t$——這是可分離方程的標準形式。</div></div>
+
+<div class="step"><span class="step-number">2</span><div><strong>部分分式分解。</strong>對 $\frac{1}{P(1 - P/K)}$ 做分解：$\frac{1}{P(1 - P/K)} = \frac{1}{P} + \frac{1/K}{1 - P/K} = \frac{1}{P} + \frac{1}{K - P}$。驗證：通分後 $\frac{K-P + P}{P(K-P)} = \frac{K}{P(K-P)} = \frac{1}{P(1-P/K)}$ ✓</div></div>
+
+<div class="step"><span class="step-number">3</span><div><strong>兩邊積分。</strong>$\int \left(\frac{1}{P} + \frac{1}{K-P}\right) dP = \int r\,dt$。積分得：$\ln|P| - \ln|K-P| = rt + C$。合併對數：$\ln\left|\frac{P}{K-P}\right| = rt + C$。</div></div>
+
+<div class="step"><span class="step-number">4</span><div><strong>指數化。</strong>$\frac{P}{K-P} = \pm e^{rt + C} = C_1 e^{rt}$，其中 $C_1 = \pm e^C$ 是一個非零常數。對於 $P$ 在 $(0, K)$ 之間的情況，$C_1 > 0$。</div></div>
+
+<div class="step"><span class="step-number">5</span><div><strong>解出 $P$。</strong>$P = C_1 e^{rt}(K - P)$ → $P = C_1 K e^{rt} - C_1 P e^{rt}$ → $P(1 + C_1 e^{rt}) = C_1 K e^{rt}$ → $P(t) = \frac{C_1 K e^{rt}}{1 + C_1 e^{rt}}$。分子分母同除以 $C_1 e^{rt}$：$P(t) = \frac{K}{1 + (1/C_1)e^{-rt}}$。</div></div>
+
+<div class="step"><span class="step-number">6</span><div><strong>用初始條件 $P(0) = P_0$ 求 $C_1$。</strong>代入 $t=0$ 到步驟 4 的方程 $\frac{P_0}{K-P_0} = C_1$。因此 $1/C_1 = \frac{K-P_0}{P_0}$。</div></div>
+
+<div class="step"><span class="step-number">7</span><div><strong>最終解（定理 4.2）。</strong>$P(t) = \dfrac{K}{1 + \left(\frac{K-P_0}{P_0}\right)e^{-rt}}$。這就是邏輯斯諦函數——一條 S 形曲線，以 $P = K$ 為水平漸近線。</div></div>
+
+</details>
+
+<p>這條 S 形曲線有一個重要的特徵：<strong>反曲點（inflection point）</strong>發生在 $P = K/2$ 處（當 $P_0 < K/2$ 時）。在反曲點之前，人口加速增長（$P'' > 0$，concave up）；在反曲點之後，增長開始減速（$P'' < 0$，concave down），最終趨於平穩。這個特性使邏輯斯諦模型成為描述「先快後慢」增長現象（如技術採納、流行病傳播、市場滲透率）的首選工具。</p>
+
+<div class="figure">
+  <img src="../../pages/v2c4_pages/v2c4_page_356_c.png" alt="肯塔基州鹿群的邏輯斯諦曲線" loading="lazy">
+  <figcaption>圖 4.21：肯塔基州白尾鹿的邏輯斯諦預測——$P_0 = 900,000$，$r = 0.2311$，$K = 1,072,560$（以每平方英里 27 隻鹿 × 39,732 平方英里計算）</figcaption>
+</div>
+
+<details class="example"><summary>📝 範例</summary><strong>📝 範例 4.14：肯塔基州鹿群模型</strong><br>根據肯塔基州魚類與野生動物資源部的數據：(a) 建立初始值問題；(b) 求解；(c) 預測 3 年後的人口，並與「每 3 年翻倍」的指數預測比較。<br><br><strong>解：</strong>(a) $P_0 = 900,000$，$r = 0.2311$（基於每 3 年翻倍的觀察），$K = 1,072,560$。IVP：$\frac{dP}{dt} = 0.2311P\left(1 - \frac{P}{1,072,560}\right)$，$P(0) = 900,000$。<br>(b) $P(t) = \frac{1,072,560}{1 + \left(\frac{1,072,560 - 900,000}{900,000}\right)e^{-0.2311t}} \approx \frac{1,072,560}{1 + 0.1917e^{-0.2311t}}$。<br>(c) 3 年後：$P(3) \approx 1,018,690$。指數預測（每 3 年翻倍）：$900,000 \times 2 = 1,800,000$。邏輯斯諦模型的預測遠低於指數模型——因為當 $P$ 接近 $K$ 時，增長速度急劇下降。實際的生物學觀察證實了這個飽和效應。</details>
+
+<h3>指數 vs 邏輯斯諦：一目了然的對比</h3>
+
+<div class="figure">
+  <img src="../../pages/v2c4_pages/v2c4_page_359_c.png" alt="指數增長與邏輯斯諦增長的對比" loading="lazy">
+  <figcaption>圖 4.23：指數增長（綠色）vs 邏輯斯諦增長（藍色）——初始族群相同（$900,000$），增長率相同（$r = 0.2311$）。注意邏輯斯諦曲線在初期幾乎和指數曲線重合，但隨著 $P$ 增長逐漸「彎曲」並趨向承載容量 $K$（紅色虛線）</figcaption>
+</div>
+
+<div class="callout"><strong>💡 邏輯斯諦方程為什麼是「$1 - P/K$」而不是其他形式？</strong><br>因子 $(1 - P/K)$ 被稱為「抑制項」（inhibition term）。當 $P = 0$ 時，抑制項 = 1，增長不受限；當 $P = K$ 時，抑制項 = 0，增長停止。任何滿足這兩個邊界條件的遞減函數都可以作為抑制項，但線性形式 $1 - P/K$ 是最簡單的選擇——而且它恰好讓微分方程變得可分離且可解析求解。在更複雜的模型中（如 Gompertz 方程），抑制項採用對數形式 $\ln(K/P)$，這會產生不對稱的 S 形曲線。</div>
+
+<div class="callout-warn"><strong>⚡ 常見錯誤：混淆「增長率 $r$」和「實際增長速度 $dP/dt$」</strong><br>很多學生認為 $r$ 越大，人口就增長得越快。這只對了一半。實際的增長速度是 $\frac{dP}{dt} = rP(1 - P/K)$——它同時取決於 $r$、當前人口 $P$、以及 $P$ 與 $K$ 的比值。當 $P$ 接近 $K$ 時，即使 $r$ 很大，實際增長速度也接近零。在閱讀人口模型的研究報告時，務必區分這兩個概念。</div>
+
+<h3>閾值族群模型（Threshold Population Model）</h3>
+
+<p>邏輯斯諦模型的一個重要推廣是加入<strong>閾值族群（threshold population）</strong>$T$——物種生存所需的最小族群數量。微分方程變為：</p>
+
+<div class="formula-card">
+  <div class="formula-label">含閾值的邏輯斯諦方程</div>
+  <div class="eq">$$\frac{dP}{dt} = rP\left(1 - \frac{P}{K}\right)\left(1 - \frac{T}{P}\right)$$</div>
+  <div class="formula-note">當 $P < T$ 時，$(1 - T/P) < 0$，所以 $P' < 0$——族群過小，走向滅絕（Allee 效應）。這解釋了為什麼極度瀕危物種即使在不被捕獵的情況下也可能無法恢復：牠們的數量低於了生存閾值。</div>
+</div>
+
+</section>
+
+<!-- ============================================================ -->
+<!-- Section 4.5 -->
+<!-- ============================================================ -->
+<section id="s4-5">
+<h2>4.5 一階線性方程（First-order Linear Equations）</h2>
+
+<div style="margin-bottom:14px;font-size:12px;color:var(--tx2);line-height:1.8">
+<strong style="color:var(--tx)">🔑 本節重點</strong> ①標準形式 y'+p(x)y=q(x) ②積分因子 μ=e^{∫p dx} ③通解 y=(1/μ)[∫μq dx+C] ④RL 電路 L di/dt+Ri=E ⑤空氣阻力自由落體 v'+(k/m)v=−g
+</div>
+
+<p>一階線性微分方程的標準形式是 $y' + p(x)y = q(x)$。
+
+<h3>標準形式（Standard Form）</h3>
+
+<p>一階微分方程是<strong>線性</strong>的，若且唯若它可以寫成 $a(x)y' + b(x)y = c(x)$，其中 $y$ 和 $y'$ 的次數都是 1（沒有 $y^2$、$\sin y$、$yy'$ 等非線性項）。除以 $a(x)$（假設 $a(x) \neq 0$）得到標準形式：</p>
+
+<div class="formula-card">
+  <div class="formula-label">一階線性微分方程的標準形式</div>
+  <div class="eq">$$y' + p(x)y = q(x)$$</div>
+  <div class="formula-note">$p(x)$ 和 $q(x)$ 是 $x$ 的任意連續函數。若 $q(x) \equiv 0$，方程稱為<strong>齊次（homogeneous）</strong>；否則稱為<strong>非齊次（nonhomogeneous）</strong></div>
+</div>
+
+<p>例如 $y' + \frac{2}{x}y = x^2$ 是線性的（$p(x) = 2/x$，$q(x) = x^2$）。而 $y' + y^2 = \sin x$ 不是線性的（因為 $y^2$ 項）。$y' + \sin y = 0$ 也不是線性的（因為 $\sin y$ 不是 $y$ 的線性函數）。線性這個條件看似嚴格，但它涵蓋了大量有實際意義的方程——從 RL 電路到空氣阻力下的自由落體。</p>
+
+<h3>積分因子法（Integrating Factor Method）</h3>
+
+<p>積分因子法的核心思想是：找到一個函數 $\mu(x) > 0$，使得當我們用 $\mu(x)$ 乘以標準形式 $y' + p(x)y = q(x)$ 的兩邊後，左側恰好是某個乘積的導數。具體來說：</p>
+
+<div class="formula-card">
+  <div class="formula-label">積分因子公式</div>
+  <div class="eq">$$\mu(x) = e^{\int p(x)\,dx}$$</div>
+  <div class="formula-note">為簡化計算，通常取積分常數 $C = 0$（任何常數倍數的 $\mu(x)$ 都同樣有效）</div>
+</div>
+
+<p>乘以 $\mu(x)$ 後的方程變為 $\mu(x)y' + \mu(x)p(x)y = \mu(x)q(x)$。由於 $\mu'(x) = \mu(x)p(x)$（根據 $\mu(x)$ 的定義），左側恰好等於 $(\mu(x)y)'$。因此：</p>
+
+<div class="eq">$$\frac{d}{dx}\left[\mu(x)y\right] = \mu(x)q(x)$$</div>
+
+<p>兩邊對 $x$ 積分：$\mu(x)y = \int \mu(x)q(x)\,dx + C$。最終解出 $y$：</p>
+
+<div class="formula-card">
+  <div class="formula-label">一階線性方程的通解公式</div>
+  <div class="eq">$$y = \frac{1}{\mu(x)}\left[\int \mu(x)q(x)\,dx + C\right]$$</div>
+  <div class="formula-note">這是一個萬能公式——只要你能計算兩個積分（$\int p(x)dx$ 和 $\int \mu(x)q(x)dx$），就能得到解析解</div>
+</div>
+
+<details class="derive">
+<summary>🔍 為什麼積分因子恰好是 $e^{\int p(x)dx}$？</summary>
+<div class="step"><span class="step-number">1</span><div>我們希望 $\mu(x)y' + \mu(x)p(x)y$ 等於 $(\mu(x)y)' = \mu(x)y' + \mu'(x)y$。</div></div>
+<div class="step"><span class="step-number">2</span><div>比較兩式的第二項：$\mu(x)p(x)y = \mu'(x)y$。由於這必須對所有 $y$ 成立，我們要求 $\mu'(x) = \mu(x)p(x)$。</div></div>
+<div class="step"><span class="step-number">3</span><div>這本身就是一個可分離微分方程！$\frac{d\mu}{\mu} = p(x)dx$ → $\ln|\mu| = \int p(x)dx$ → $\mu = e^{\int p(x)dx}$。</div></div>
+</details>
+
+<details class="example"><summary>📝 範例</summary><strong>📝 範例 4.16：積分因子法</strong><br>求 $xy' + 2y = x^2$ 的通解（假設 $x > 0$）。<br><br><strong>解：</strong>Step 1：化為標準形式。除以 $x$：$y' + \frac{2}{x}y = x$。所以 $p(x) = 2/x$，$q(x) = x$。<br>Step 2：計算積分因子 $\mu(x) = e^{\int \frac{2}{x}dx} = e^{2\ln x} = x^2$。<br>Step 3：乘以 $\mu(x)$：$x^2y' + 2xy = x^3$。注意左側等於 $(x^2y)'$。<br>Step 4：積分：$x^2y = \int x^3 dx = \frac{x^4}{4} + C$。<br>Step 5：$y = \frac{x^2}{4} + \frac{C}{x^2}$。</details>
+
+<details class="example"><summary>📝 範例</summary><strong>📝 範例 4.17：含初始條件的積分因子法</strong><br>求解 $y' + y\tan x = \sec x$，$y(0) = 2$。<br><br><strong>解：</strong>$p(x) = \tan x$，$q(x) = \sec x$。$\mu(x) = e^{\int \tan x\,dx} = e^{\ln|\sec x|} = \sec x$（取 $x$ 在 $(-\pi/2, \pi/2)$ 範圍內，$\sec x > 0$）。<br>乘以 $\mu(x)$：$\sec x \cdot y' + \sec x \tan x \cdot y = \sec^2 x$。左側 = $(\sec x \cdot y)'$。<br>積分：$\sec x \cdot y = \int \sec^2 x\,dx = \tan x + C$。<br>$y = \tan x \cos x + C\cos x = \sin x + C\cos x$。<br>代入 $y(0) = 2$：$\sin 0 + C\cos 0 = C = 2$。所以 $y = \sin x + 2\cos x$。</details>
+
+<h3>應用一：空氣阻力下的自由落體</h3>
+
+<p>在 4.1 節中我們假設沒有空氣阻力。現在加入與速度成正比的空氣阻力 $F_{\text{air}} = -kv$（$k > 0$）。由牛頓第二定律：</p>
+
+<div class="eq">$$m\frac{dv}{dt} = -mg - kv \quad\Rightarrow\quad \frac{dv}{dt} + \frac{k}{m}v = -g$$</div>
+
+<p>這是一個一階線性微分方程！$p(t) = k/m$，$q(t) = -g$。積分因子 $\mu(t) = e^{(k/m)t}$。求解過程與範例 4.16 類似。</p>
+
+<div class="figure">
+  <img src="../../pages/v2c4_pages/v2c4_page_365_c.png" alt="有空氣阻力的棒球——受力分析" loading="lazy">
+  <figcaption>圖 4.24：有空氣阻力的棒球——重力向下，空氣阻力與運動方向相反。上升時空氣阻力向下（與重力同向），下降時空氣阻力向上（與重力反向）</figcaption>
+</div>
+
+<details class="example"><summary>📝 範例</summary><strong>📝 範例 4.18：有空氣阻力的壁球</strong><br>一顆質量 0.0427 kg 的壁球以初速 2 m/s 垂直上拋，空氣阻力 $F_{\text{air}} = -0.5v$。(a) 求 $v(t)$；(b) 何時到達最高點？(c) 若從 1 公尺高拋出，最高高度？<br><br><strong>解：</strong>(a) $m = 0.0427$，$k = 0.5$。$\frac{dv}{dt} + \frac{0.5}{0.0427}v = -9.8$ → $v' + 11.71v = -9.8$。<br>$\mu(t) = e^{11.71t}$。推導後：$v(t) = -0.837 + (2 + 0.837)e^{-11.71t} = -0.837 + 2.837e^{-11.71t}$。<br>(b) 設 $v(t) = 0$：$2.837e^{-11.71t} = 0.837$ → $t \approx 0.104$ 秒。<br>(c) $s(t) = \int v(t)dt = -0.837t - 0.242e^{-11.71t} + C$。$s(0) = 1$ → $C = 1.242$。$s(0.104) \approx 1.088$ 公尺——壁球幾乎沒有上升多少，因為空氣阻力對於輕物體來說非常顯著。</details>
+
+<h3>應用二：RL 與 RC 電路</h3>
+
+<div class="figure">
+  <img src="../../pages/v2c4_pages/v2c4_page_372_c.png" alt="RLC 串聯電路" loading="lazy">
+  <figcaption>圖 4.25：典型的 RLC 串聯電路——包含電壓源 $(V_S)$、電容器 $(C)$、電感器 $(L)$ 和電阻器 $(R)$。Kirchhoff 迴路定律將電路分析轉化為微分方程</figcaption>
+</div>
+
+<p>根據 Kirchhoff 迴路定律，閉合電路中各元件的電壓降之和等於電源的電動勢。對於 RL 電路（無電容器）：</p>
+
+<div class="formula-card">
+  <div class="formula-label">RL 電路的微分方程</div>
+  <div class="eq">$$L\frac{di}{dt} + Ri = E(t)$$</div>
+  <div class="formula-note">$L$ = 電感（henrys），$R$ = 電阻（ohms），$i(t)$ = 電流（amperes），$E(t)$ = 電動勢（volts）</div>
+</div>
+
+<p>這是一個標準的一階線性微分方程：$\frac{di}{dt} + \frac{R}{L}i = \frac{E(t)}{L}$。積分因子 $\mu(t) = e^{(R/L)t}$。對於常數電壓 $E(t) = E_0$ 和初始條件 $i(0) = 0$，解為：</p>
+
+<div class="eq">$$i(t) = \frac{E_0}{R}\left(1 - e^{-(R/L)t}\right)$$</div>
+
+<p>這和鹽水槽的解形式上完全一樣！初始電流為零，最終趨向穩態值 $E_0/R$（歐姆定律）。時間常數 $\tau = L/R$ 決定了趨近穩態的速度——$\tau$ 越小，電路響應越快。</p>
+
+<div class="callout"><strong>💡 萬物皆可「RC」</strong><br>注意 RL 電路（電流）、鹽水槽（鹽量）、和牛頓冷卻（溫度）的微分方程結構完全一致：都是 $y' + \alpha y = \beta$（$\alpha, \beta$ 為常數）。解的形式也都是 $y(t) = \frac{\beta}{\alpha} + (y_0 - \frac{\beta}{\alpha})e^{-\alpha t}$。一旦你認出這個模式，一大類看似不相關的應用問題都變成了同一個數學問題。這就是微分方程作為「萬能建模語言」的力量。</div>
+
+<div class="callout-warn"><strong>⚡ 常見錯誤：忘記將方程化為標準形式</strong><br>積分因子法要求 $y'$ 的係數為 1。很多學生在看到 $2xy' + y = e^x$ 時，直接說 $p(x) = 2x$ 並計算 $\mu(x) = e^{x^2}$。但正確的做法是先除以 $2x$：$y' + \frac{1}{2x}y = \frac{e^x}{2x}$，此時 $p(x) = \frac{1}{2x}$，$\mu(x) = e^{\int \frac{1}{2x}dx} = \sqrt{x}$。跳過「除以 $a(x)$」這一步是積分因子法中最常見的錯誤來源。</div>
+
+</section>
+
+<!-- ====== Key Concepts ====== -->
+<section id="key-concepts">
+<h2>📋 關鍵概念回顧（Key Concepts）</h2>
+<ol>
+  <li><strong>微分方程（Differential Equation）</strong>：包含未知函數及其導數的方程式。階數由最高階導數決定，通解中包含與階數相同數量的任意常數。</li>
+  <li><strong>初始值問題（Initial Value Problem, IVP）</strong>：微分方程加上初始條件，可唯一決定一個特解。這是所有實際科學與工程應用的起點。</li>
+  <li><strong>方向場（Direction Field）</strong>：在座標平面上畫出短線段表示 $y' = f(x,y)$ 在每個點的斜率，提供解的定性行為——即使不求解析解也能看出解的長期趨勢。</li>
+  <li><strong>歐拉法（Euler's Method）</strong>：最簡單的數值解法，以 $y_{n+1} = y_n + h \cdot f(x_n, y_n)$ 逐步近似。步長 $h$ 越小精度越高，但計算量越大。</li>
+  <li><strong>分離變數法（Separation of Variables）</strong>：將 $y' = f(x)g(y)$ 重寫為 $\frac{dy}{g(y)} = f(x)dx$，兩邊積分求解。需注意 $g(y)=0$ 可能給出常數解。</li>
+  <li><strong>邏輯斯諦方程（Logistic Equation）</strong>：$\frac{dP}{dt} = rP\left(1 - \frac{P}{K}
+\right)$。$r$ 為內秉增長率，$K$ 為環境承載容量。解為 S 形曲線，從指數增長逐漸趨近 $K$。</li>
+  <li><strong>一階線性微分方程</strong>：標準形式 $y' + p(x)y = q(x)$。使用積分因子 $\mu(x) = e^{\int p(x)dx}$ 將左側化為 $(\mu y)'$，對兩邊積分求解。</li>
+  <li><strong>積分因子（Integrating Factor）</strong>：$\mu(x) = e^{\int p(x)dx}$ 是求解一階線性方程的關鍵。乘以 $\mu(x)$ 後左側恰好是 $(\mu(x)y)'$。</li>
+  <li><strong>混合問題（Mixing Problems）</strong>：鹽水槽等應用——鹽量變化率 = 流入速率 − 流出速率，導出一階線性方程。</li>
+  <li><strong>牛頓冷卻定律（Newton's Law of Cooling）</strong>：$\frac{dT}{dt} = -k(T - T_s)$，物體溫度變化率與環境溫差成正比，為可分離方程。</li>
+  <li><strong>平衡解與穩定性</strong>：$y' = f(y)$ 的常數解 $y = y^*$（滿足 $f(y^*)=0$）稱為平衡解。若解的軌跡趨近平衡解則為穩定，遠離則不穩定。</li>
+</ol>
+</section>
+
+<!-- ====== Key Equations ====== -->
+<section id="key-equations">
+<h2>📐 關鍵公式（Key Equations）</h2>
+<table><caption>表 1：📐 關鍵公式（Key Equations）</caption>
+<thead><tr><th>公式</th><th>說明</th></tr></thead>
+<tbody>
+<tr><td>$$\frac{dy}{dx} = f(x)g(y) \;\Longrightarrow\; \int \frac{dy}{g(y)} = \int f(x)\,dx$$</td><td>分離變數法</td></tr>
+<tr><td>$$y_{n+1} = y_n + h \cdot f(x_n, y_n)$$</td><td>歐拉法</td></tr>
+<tr><td>$$\frac{dP}{dt} = rP\left(1 - \frac{P}{K}
+\right)$$</td><td>邏輯斯諦微分方程</td></tr>
+<tr><td>$$P(t) = \frac{K}{1 + \left(\frac{K-P_0}{P_0}
+\right)e^{-rt}}$$</td><td>邏輯斯諦方程的解</td></tr>
+<tr><td>$$y' + p(x)y = q(x)$$</td><td>一階線性微分方程標準形式</td></tr>
+<tr><td>$$\mu(x) = e^{\int p(x)\,dx}$$</td><td>積分因子</td></tr>
+<tr><td>$$\frac{d}{dx}\bigl[\mu(x)y\bigr] = \mu(x)q(x) \;\Longrightarrow\; y = \frac{1}{\mu(x)}\int \mu(x)q(x)\,dx$$</td><td>積分因子法求解</td></tr>
+<tr><td>$$\frac{dT}{dt} = -k(T - T_s) \;\Longrightarrow\; T(t) = T_s + (T_0 - T_s)e^{-kt}$$</td><td>牛頓冷卻定律</td></tr>
+<tr><td>$$\frac{dy}{dt} = ky \;\Longrightarrow\; y(t) = y_0 e^{kt}$$</td><td>指數增長 / 衰減</td></tr>
+<tr><td>$$\frac{dA}{dt} = (\text{流入速率}) - (\text{流出速率})$$</td><td>混合問題基本方程</td></tr>
+<tr><td>$$y' = f(y) \;\text{的平衡解:}\; f(y^*) = 0$$</td><td>平衡解（Equilibrium Solution）</td></tr>
+</tbody>
+</table>
+</section>
+
+<!-- ============================================================ -->
+<!-- Summary -->
+<!-- ============================================================ -->
+<section id="summary">
+<h2>本章摘要</h2>
+
+<div class="callout"><strong>🔑 核心收穫</strong><br>
+本章建立了微分方程的完整基礎——從基本定義到三種主要求解方法。以下是七個最重要的觀念：
+<ol>
+  <li><strong>微分方程 = 包含未知函數及其導數的方程式</strong>——階數決定通解中任意常數的個數</li>
+  <li><strong>初始值問題（IVP）</strong>：微分方程 + 初始條件 = 唯一特解——這是所有實際應用的起點</li>
+  <li><strong>方向場</strong>提供定性分析（不求解析解也能看出解的長期行為），<strong>歐拉法</strong>提供數值近似</li>
+  <li><strong>分離變數法</strong>是求解 $y' = f(x)g(y)$ 的標準方法——適用於大量物理應用（冷卻、鹽水槽）</li>
+  <li><strong>邏輯斯諦方程</strong> $P' = rP(1 - P/K)$ 是人口模型的黃金標準——指數增長 + 承載容量限制 → S 形曲線</li>
+  <li><strong>積分因子法</strong> $\mu(x) = e^{\int p(x)dx}$ 是解一階線性方程 $y' + p(x)y = q(x)$ 的萬能工具</li>
+  <li><strong>三大應用領域</strong>：（1）力學（自由落體 ± 空氣阻力）；（2）熱力學（牛頓冷卻）；（3）電路（RL/RC 電路）——全都可以化為本章學過的方程類型</li>
+</ol>
+</div>
+
+<table><caption>表 2：本章摘要</caption>
+  <thead><tr><th>方法</th><th>適用方程類型</th><th>核心技巧</th><th>典型應用</th></tr></thead>
+  <tbody>
+    <tr><td>方向場 + 歐拉法</td><td>任何 $y' = f(x,y)$</td><td>幾何直覺 / 逐步線性近似</td><td>無法求得解析解時的備案</td></tr>
+    <tr><td>分離變數法</td><td>$y' = f(x)g(y)$</td><td>$\int \frac{dy}{g(y)} = \int f(x)dx$</td><td>人口增長、冷卻、鹽水槽</td></tr>
+    <tr><td>邏輯斯諦公式</td><td>$P' = rP(1 - P/K)$</td><td>定理 4.2 直接套用</td><td>族群動態、技術採納、流行病</td></tr>
+    <tr><td>積分因子法</td><td>$y' + p(x)y = q(x)$</td><td>$\mu(x) = e^{\int p(x)dx}$</td><td>空氣阻力、RL/RC 電路</td></tr>
+  </tbody>
+</table>
+</section>
+
+<!-- ============================================================ -->
+<!-- Common Mistakes -->
+<!-- ============================================================ -->
+<section id="common-mistakes">
+<h2>⚠️ 初學者常見錯誤</h2>
+
+<div class="callout-warn"><strong>❌ 錯誤 1：跳過常數解（在分離變數時除以零）</strong><br>
+在執行分離變數法的 Step 2（除以 $g(y)$）之前，<strong>必須</strong>先檢查 $g(y) = 0$ 的解。例如在解 $y' = y(2 - y)$ 時，$y = 0$ 和 $y = 2$ 是兩個平衡解。如果你直接分離為 $\frac{dy}{y(2-y)} = dx$，你在過程中已經假設了 $y \neq 0$ 和 $y \neq 2$——那些被除掉的解必須手動補回來。實務上，遺失常數解可能導致你錯過整個系統的穩態行為。</div>
+
+<div class="callout-warn"><strong>❌ 錯誤 2：積分因子法前忘記化為標準形式</strong><br>
+積分因子 $\mu(x) = e^{\int p(x)dx}$ 中的 $p(x)$ 必須是<strong>標準形式</strong> $y' + p(x)y = q(x)$ 中 $y$ 的係數。如果你看到 $2y' + 4y = e^x$ 就直接說 $p(x) = 4$，那就錯了——正確做法是先除以 2 得到 $y' + 2y = \frac{1}{2}e^x$，此時 $p(x) = 2$。養成第一步永遠寫出標準形式的習慣，可以避免大量不必要的計算錯誤。</div>
+
+<div class="callout-warn"><strong>❌ 錯誤 3：混淆「線性」與「可分離」</strong><br>
+並非所有一階方程要嘛是線性、要嘛是可分離——這兩個分類<strong>有交集但互不包含</strong>。例如 $y' = xy$ 既是線性（$p(x) = -x$，$q(x) = 0$）又是可分離（$f(x) = x$，$g(y) = y$）。但 $y' = x + y$ 是線性而非可分離；$y' = y^2 \sin x$ 是可分離而非線性；$y' = \sin(xy)$ 兩者都不是。做題目前先判斷方程類型，選擇正確的求解策略——這是微分方程解題的第一步也是最重要的一步。</div>
+
+<div class="callout-warn"><strong>❌ 錯誤 4：絕對值處理不當</strong><br>
+在積分過程中，$\int \frac{1}{y} dy = \ln|y| + C$，不是 $\ln y + C$。很多初學者忽略絕對值，然後在指數化時得到 $y = Ce^{f(x)}$ 而非 $|y| = Ce^{f(x)}$。雖然對於很多應用（如人口模型，$P > 0$ 是物理約束）絕對值可以安全移除，但如果不寫絕對值就直接「變號」，邏輯上是不嚴格的。養成先寫 $|y|$，再論證正負號的習慣。</div>
+
+<div class="callout-warn"><strong>❌ 錯誤 5：忘記歐拉法的誤差會累積</strong><br>
+歐拉法每步的局部誤差是 $O(h^2)$，但經過 $n = (b-a)/h$ 步之後，全局誤差累積為 $O(h)$。很多初學者認為 $h = 0.1$ 就足夠精確，但在長區間上誤差可能大到使結果完全不可靠。一個好的實務習慣：用兩個不同的步長（如 $h$ 和 $h/2$）計算，比較結果差異來估計誤差——如果差異仍然很大，繼續減半步長。</div>
+
+</section>
+
+<!-- ============================================================ -->
+<!-- Self-Check -->
+<!-- ============================================================ -->
+<section id="self-check">
+<h2>✅ 自我檢測（Self-Check）</h2>
+<p>完成以下題目檢驗你對本章核心概念的掌握程度。點擊展開查看答案。</p>
+
+<details class="derive"><summary>題 1：分離變數法 — 求解 $y' = xy$，$y(0) = 2$</summary>
+<p><strong>答案：</strong>分離變數：$\frac{dy}{y} = x\,dx$（$y \neq 0$）。積分：$\ln|y| = \frac{x^2}{2} + C$。<br>
+指數化：$|y| = e^{x^2/2 + C} = C_1 e^{x^2/2}$。代入 $y(0)=2$：$C_1 = 2$。因此 $y = 2e^{x^2/2}$。</p>
+</details>
+
+<details class="derive"><summary>題 2：積分因子法 — 求解 $y' + 2y = e^x$，$y(0) = 0$</summary>
+<p><strong>答案：</strong>標準形式 $y' + 2y = e^x$，$p(x) = 2$，積分因子 $\mu = e^{\int 2\,dx} = e^{2x}$。<br>
+乘 $\mu$：$e^{2x}y' + 2e^{2x}y = e^{3x}$ → $\frac{d}{dx}(e^{2x}y) = e^{3x}$。<br>
+積分：$e^{2x}y = \frac{1}{3}e^{3x} + C$ → $y = \frac{1}{3}e^x + Ce^{-2x}$。<br>
+代入 $y(0)=0$：$0 = \frac{1}{3} + C$ → $C = -\frac{1}{3}$。故 $y = \frac{1}{3}(e^x - e^{-2x})$。</p>
+</details>
+
+<details class="derive"><summary>題 3：邏輯斯諦方程 — $\frac{dP}{dt} = 0.1P(1 - P/100)$ 的平衡解為何？穩定嗎？</summary>
+<p><strong>答案：</strong>設 $f(P) = 0.1P(1 - P/100) = 0$ → $P = 0$ 或 $P = 100$。<br>
+當 $0 < P < 100$：$f(P) > 0$ → $P$ 增加（箭頭指向 $P=100$）。<br>
+當 $P > 100$：$f(P) < 0$ → $P$ 減少（箭頭指向 $P=100$）。<br>
+因此 $P = 0$ 是<strong>不穩定</strong>平衡，$P = 100$ 是<strong>漸近穩定</strong>平衡（承載容量）。</p>
+</details>
+
+<details class="derive"><summary>題 4：歐拉法 — 對 $y' = x + y$，$y(0) = 1$，用步長 $h=0.1$ 求 $y(0.2)$ 的近似值</summary>
+<p><strong>答案：</strong>$f(x,y) = x + y$。從 $(x_0, y_0) = (0, 1)$ 開始。<br>
+第一步：$y_1 = 1 + 0.1 \cdot (0 + 1) = 1.1$，此時 $x_1 = 0.1$。<br>
+第二步：$y_2 = 1.1 + 0.1 \cdot (0.1 + 1.1) = 1.1 + 0.12 = 1.22$。<br>
+因此 $y(0.2) \approx 1.22$。</p>
+</details>
+
+<details class="derive"><summary>題 5：牛頓冷卻定律 — 咖啡初始 $90^\circ$C，室溫 $25^\circ$C，1 分鐘後降至 $75^\circ$C，求冷卻常數 $k$</summary>
+<p><strong>答案：</strong>$T' = -k(T - 25)$，解為 $T(t) = 25 + (90 - 25)e^{-kt} = 25 + 65e^{-kt}$。<br>
+$T(1) = 75$ → $75 = 25 + 65e^{-k}$ → $50 = 65e^{-k}$ → $e^{-k} = 50/65 = 10/13$。<br>
+取對數：$-k = \ln(10/13)$ → $k = \ln(13/10) \approx 0.262$。</p>
+</details>
+</section>
+
+<!-- ============================================================ -->
+<!-- Extras -->
+<!-- ============================================================ -->
+<section id="extras">
+<h2>📚 延伸資源</h2>
+
+<ul>
+  <li><strong>3Blue1Brown — Differential Equations</strong>：YouTube 系列，提供微分方程的幾何直覺和視覺化理解</li>
+  <li><strong>Khan Academy — Differential Equations</strong>：互動練習，涵蓋可分離方程、積分因子、邏輯斯諦模型</li>
+  <li><strong>Desmos Slope Field Generator</strong>：線上工具，可即時生成任意一階微分方程的方向場</li>
+  <li><strong>MIT OCW 18.03 — Differential Equations</strong>：Arthur Mattuck 教授的經典課程，深入探討線性微分方程和振動系統</li>
+  <li><strong>Python / SciPy <code>solve_ivp</code></strong>：使用 Runge-Kutta 方法（歐拉法的現代進階版）來數值求解任意初始值問題</li>
+  <li>下一章預告：<strong>第 5 章 — 數列與級數</strong>將引入無窮級數的收斂性判別法，以及用冪級數求解微分方程的強大技術</li>
+</ul>
+</section>
+
+</main>
+
+<script>
+// Sidebar scroll spy
+(function(){
+  const navs = document.querySelectorAll('.sn a, .nsub a');
+  const sections = [];
+  navs.forEach(a => {
+    const id = a.getAttribute('href');
+    if (id && id.startsWith('#')) {
+      const el = document.getElementById(id.substring(1));
+      if (el) sections.push({a, el});
+    }
+  });
+  function onScroll(){
+    let current = sections[0];
+    for (const s of sections) {
+      if (s.el.offsetTop <= window.scrollY + 120) current = s;
+    }
+    navs.forEach(a => a.classList.remove('active'));
+    if (current) current.a.classList.add('active');
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+})();
+
+// Theme toggle
+function toggleTheme(){ if(window.toggleTheme) window.toggleTheme(); } catch(e){}
+}
+(function(){
+  try {
+    const saved = localStorage.getItem('learning-portal-reading-preferences');
+    if (saved === 'dark') {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      document.getElementById('themeBtn').textContent = '☀️ 淺色模式';
+    }
+  } catch(e){}
+})();
+
+// Mobile sidebar
+</script>
+<script defer src="../assets/course-ui.js"></script>
+
+<script defer src="../assets/direction-field-model.js"></script>
+</body>
+</html>

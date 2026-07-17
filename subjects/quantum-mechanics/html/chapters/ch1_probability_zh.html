@@ -1,0 +1,729 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第 1 章 機率與機率振幅 — The Physics of Quantum Mechanics</title>
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$'], ['\\[','\\]']] },
+  options: { ignoreHtmlClass: 'no-mathjax' }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<link rel="stylesheet" href="../../../../shared/core.css">
+<script src="../../../../shared/core.js" defer></script>
+<link rel="stylesheet" href="../../../../shared/navigation.css" data-shared-navigation>
+</head>
+<body>
+
+<nav class="sidebar" id="sidebar" aria-label="本章目錄"><div class="sidebar-header"><div class="sidebar-subtitle">量子力學</div><h2 class="sidebar-title">第 1 章 機率與機率振幅</h2></div><div class="toc">
+    <div class="nsub"><a href="#preview">本章預覽</a></div>
+    <div class="nsub"><a href="#s1-1">1.1 機率法則</a></div>
+    <div class="nsub"><a href="#s1-2">1.2 機率振幅</a></div>
+    <div class="nsub"><a href="#s1-3">1.3 量子態</a></div>
+    <div class="nsub"><a href="#s1-4">1.4 測量</a></div>
+    <div class="nsub"><a href="#summary">關鍵概念與公式</a></div>
+    <div class="nsub"><a href="#common-mistakes">常見錯誤</a></div>
+    <div class="nsub"><a href="#self-check">自我檢測</a></div>
+    <div class="nsub"><a href="#extras">延伸資源</a></div>
+  </div>
+<div class="sidebar-tools"><button type="button" data-action="toggle-theme" aria-label="切換深色或淺色模式">切換顯示主題</button></div></nav>
+
+<main class="chapter-page" data-chapter-title="第 1 章 機率與機率振幅" data-prev-href="../../index.html" data-prev-label="回到科目首頁" data-next-href="ch2_operators_zh.html" data-next-label="第 2 章 運算子、測量與時間演化">
+<header class="chapter-header">
+  <div class="chapter-subtitle">
+    <a href="#">量子力學</a> &rsaquo; Ch1
+  </div>
+  <h1>第 1 章　機率與機率振幅</h1>
+  <div class="chapter-meta">
+    <span>原書章節：Chapter 1, Probability and probability amplitudes</span>
+    <span>原書頁碼：p1–16</span>
+    <span>章長：16 頁 &middot; 4 節 &middot; 44 個公式</span>
+  </div>
+</header>
+
+<!-- ====== 本章預覽 ====== -->
+<section class="chapter-preview" id="preview">
+  <h2>本章預覽</h2>
+  <div class="core-question">
+    <h3>核心問題</h3>
+    <p>物理學向來追求確定的預測——梯子會不會滑倒、鐘擺每小時擺動幾次、冰塊融化後水溫幾度。但當我們深入到原子尺度，確定性消失了。量子力學告訴我們：<strong>機率不是因為我們知道得不夠多，而是深植於現實的本質之中。</strong>那麼，量子力學如何計算機率？它使用的「機率振幅」是什麼？為什麼這個數學結構能如此精確地描述自然？</p>
+  </div>
+  <div class="deep-dive">
+    <h3>10 個關鍵概念</h3>
+    <ol>
+      <li><strong>古典機率</strong>：互斥事件機率相加、獨立事件機率相乘——這是所有機率理論的基礎</li>
+      <li><strong>期望值與變異數</strong>：$\langle x \rangle$ 描述平均，$\Delta^2 x$ 描述離散程度，兩者都具有重要的線性性質</li>
+      <li><strong>機率振幅</strong>：量子力學用複數振幅 $A$ 的模平方 $p = |A|^2$ 來計算機率——這是量子力學的獨特之處</li>
+      <li><strong>疊加原理</strong>：$A(S \text{ or } T) = A(S) + A(T)$——振幅相加而非機率相加，產生干涉項</li>
+      <li><strong>量子干涉</strong>：$2\,\mathrm{Re}(A_S A_T^*)$ 這個交叉項是古典機率理論中不存在的，它是量子力學的核心數學機制</li>
+      <li><strong>雙縫實驗</strong>：電子通過雙縫後在螢幕上形成干涉條紋——即使一次只發射一個電子，這是量子力學最深刻的展示</li>
+      <li><strong>Dirac notation</strong>：$|\psi\rangle$（ket）代表完整的一組振幅，$\langle \phi|$（bra）是線性函數，兩者構成 bra-ket 形式體系</li>
+      <li><strong>向量空間與對偶空間</strong>：量子態構成複數向量空間 $V$，bra 是 $V$ 的對偶空間 $V'$ 中的元素</li>
+      <li><strong>能量表象</strong>：$a_k = \langle E_k | \psi \rangle$ 提取能量為 $E_k$ 的振幅——這是從抽象態到具體預測的橋樑</li>
+      <li><strong>波函數坍縮</strong>：測量會不可逆地改變量子態——從疊加態變成確定態，這是量子力學最反直覺的特徵</li>
+    </ol>
+  </div>
+  <div class="deep-dive">
+    <h3>🧭 本章推理地圖</h3>
+    <ol>
+      <li><strong>物理預測必然帶有不確定性</strong>（§1.1）→ 需要<strong>機率</strong>來量化不確定性（§1.1）。</li>
+      <li>古典機率的加法規則 $p(A \text{ or } C) = p(A) + p(C)$（§1.1）→ 在量子世界被違反（§1.2）。</li>
+      <li>量子力學用<strong>複數振幅</strong>取代機率（§1.2）→ $p = |A|^2$，振幅相加產生<strong>干涉項</strong>（§1.2）。</li>
+      <li>干涉項 $2\,\mathrm{Re}(A_S A_T^*)$（§1.2）→ 雙縫實驗出現明暗條紋（§1.2.1）。</li>
+      <li>完整振幅集合構成<strong>向量空間</strong>（§1.3）→ Dirac notation 提取任意測量的振幅（§1.3.2–§1.3.4）。</li>
+      <li><strong>測量</strong>使波函數坍縮（§1.4）→ 疊加態變為確定態，此過程不可逆（§1.4）。</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ====== 先備知識橋接 ====== -->
+<section class="prerequisite">
+  <h2>先備知識橋接</h2>
+  <p>本章假設讀者具備以下數學基礎：</p>
+  <ul>
+    <li><strong>複數運算</strong>：$z = x + iy$，模 $|z| = \sqrt{x^2 + y^2}$，共軛 $z^* = x - iy$，以及 $|z|^2 = z z^*$。複數的極座標表示 $z = |z|e^{i\theta}$ 其中 $\theta = \arg(z)$ 是相位——這個相位在量子力學中扮演核心角色。</li>
+    <li><strong>基本機率</strong>：機率介於 0 與 1 之間、所有互斥結果的機率總和為 1</li>
+    <li><strong>求和符號</strong>：$\sum_{i=1}^N a_i$ 的意義與基本運算，包括雙重求和 $\sum_i \sum_j a_{ij}$</li>
+    <li><strong>向量基本概念</strong>：知道向量可以相加、可以乘以純量、內積的意義</li>
+  </ul>
+  <p>如果你對複數不太熟悉，別擔心——本章會逐步解釋所有需要的運算。<strong>最重要的不是記住公式，而是理解：為什麼物理學需要「振幅」而不是「機率」。</strong></p>
+</section>
+
+<!-- ====== 1.1 機率法則 ====== -->
+<section class="deep-dive" id="s1-1">
+<h2>1.1　機率法則</h2>
+<div class="section-keypoints">
+  <strong>🔑 本節重點</strong>
+  <span>① 機率量化不確定性，$p=0$ 不可能、$p=1$ 確定</span>
+  <span>② 獨立事件：$p(A \text{ and } B) = p(A)\,p(B)$</span>
+  <span>③ 互斥事件：$p(A \text{ or } C) = p(A) + p(C)$</span>
+  <span>④ 期望值 $\langle x \rangle = \sum_i p_i x_i$，變異數 $\Delta^2 x = \langle x^2 \rangle - \langle x \rangle^2$</span>
+</div>
+
+  <p>物理學的核心任務是預測未來。梯子會不會滑倒？鐘擺一小時擺動幾次？冰塊融化後水溫幾度？在許多情況下，物理學能給出令人滿意的確定答案——梯子不會滑，只要它與垂直方向的夾角小於 23.34°；鐘擺每小時擺動 3602 次；水溫最終達到 6.43°C。但如果追求更高的精度，我們就必須承認不確定性——因為我們的預測依賴的數據總是帶有測量誤差和理想化假設。</p>
+
+  <p>例如，梯子的臨界角度取決於兩端的摩擦係數，而牆面和地板的微小不規則意味著這些係數無法精確給出；鐘擺的週期略受振幅影響，而振幅又隨溫度和濕度變化；水的最終溫度取決於透過保溫瓶壁的熱傳導和水面的蒸發速率，而這些又受到房間內氣流和濕度的影響。當我們需要高精度預測時，就只能說「梯子滑倒的機率是 0.8」或「鐘擺週期落在 1.0004 秒到 1.0007 秒之間的機率是 0.5」。</p>
+
+  <p>機率的概念使我們能將科學推向極限，做出最精確和最可靠的陳述。機率以兩種方式進入物理學：<strong>不確定的數據</strong>和<strong>隨機的外在影響</strong>。這兩種情況有本質的差異。</p>
+
+  <p>在第一種情況下，系統的某個性質（如鐘擺的長度）有確定的值，只是我們知道得不夠精確。如果能更精確地測量這個性質，就能做出更準確的預測。這種不確定性反映的是我們<strong>知識的不足</strong>——系統本身是確定性的。</p>
+
+  <p>在第二種情況下，系統本身就受到本質上隨機的影響——例如造成水溫不確定的氣流。要獲得更高的確定性，有兩種策略：(1) 提高系統的隔離程度（例如在保溫瓶上加蓋子），或 (2) 擴大研究系統的範圍，使原本隨機的影響變成系統內部可計算的交互作用。第二種策略在某些情況下非常有效：例如過去一千萬年的氣候變化，可以視為複雜動力系統（大氣耦合海洋）對隨機外部刺激的響應；但當我們把太陽和月球也納入系統時，就能更完整地解釋氣候變化——因為地球自轉軸相對於軌道平面的傾斜和太陽日冕活動對氣候有強烈影響。</p>
+
+  <div class="callout">
+    <strong>💡 為什麼微觀世界必然是機率性的</strong><br>
+    低質量系統比大質量系統更難隔離。地球的軌道幾乎不受陽光輻射壓力影響，但微米級的塵粒會在輻射壓力下螺旋墜入太陽——只需幾千年就能從地球軌道落到太陽。同樣地，浴缸裡的橡皮鴨靜止不動，但旁邊的花粉顆粒卻在做劇烈的布朗運動——每分鐘沿著鋸齒路徑移動遠超自身大小的距離。原子恰好處於「機率性佔主導」的尺度——它們無法被完全隔離（所有原子都與電磁場耦合，也與電子、中微子、夸克和各種規範玻色子的場耦合），而且測量儀器本身就是由原子構成的，測量過程不可避免地會擾動被測系統。因此，小尺度系統的物理學<strong>必然</strong>是機率性的。
+  </div>
+
+  <p>量子力學描述的是<strong>所有</strong>系統的動力學——不論大小。它不做出確定的預測，而是計算機率。如果系統很大，這些機率可能非常接近零或一，我們就有了有效的確定性；如果系統很小，理論的機率面向就更為明顯。原子尺度恰好是機率性佔主導的尺度，這反映了一個事實：沒有任何原子是真正隔離的，而且我們無法建造任意精密的測量儀器。</p>
+
+  <p>此外，我們無法建造任意精密的測量儀器。測量原子的儀器通常本身就是由原子構成的，使用攜帶足夠能量的電子或光子來顯著改變原子。我們很少知道測量儀器在接觸被測系統之前的精確狀態，因此即使我們知道原子在測量前的精確狀態（實際上我們不知道），測量結果仍然不確定。而且，測量行為不可避免地會擾動原子，使其處於與測量前不同的狀態。量子力學允許我們計算每個可能最終狀態的機率。</p>
+
+  <p>令人驚訝的是，從理論中我們發現：即使我們對系統的狀態擁有邏輯上可能的最完整資訊，某些測量的結果仍然不確定。<strong>在古典世界中，不確定性可以通過足夠仔細的工作來任意縮小；但在量子世界中，不確定性是編織在現實的纖維之中的。</strong></p>
+
+  <h3>機率的基本規則</h3>
+  <p>當事件可以重複時（例如擲骰子），我們希望分配機率使得在大量試驗 $N$ 中，事件 $A$ 發生的次數 $n_A$ 滿足：</p>
+  <div class="eq">$$n_A \simeq p_A N \tag{1.1}$$</div>
+  <p>其中 $p_A$ 是事件 $A$ 的機率。這個關係很少是精確的等式——它的意義在於，隨著 $N$ 增大，$n_A/N$ 會在 $p_A$ 周圍的越來越小的區間內波動。我們應該選擇 $p_A$ 使得 $n_A/N$ 的波動盡可能小。</p>
+
+  <p>事件可以邏輯地組合形成複合事件。如果 $A$ 是紅色骰子擲出 1 的事件，$B$ 是白色骰子擲出 5 的事件，那麼 $AB$ 就是兩個骰子同時擲出紅 1 白 5 的事件。在所有擲骰子的試驗中，大約有 $p_A$ 的比例紅色骰子顯示 1，而在這些試驗中又有 $p_B$ 的比例白色骰子顯示 5。因此事件 $AB$ 發生的比例大約是 $p_A p_B$，我們應該取：</p>
+  <div class="eq">$$p(A \text{ and } B) = p(A)\,p(B) \quad \text{（獨立事件）} \tag{1.2}$$</div>
+  <p>這裡「<strong>獨立</strong>」意味著我們沒有理由認為一個骰子的結果會影響另一個骰子的結果。如果兩個事件不是獨立的（例如一個人的身高和體重），就不能簡單地將機率相乘。</p>
+
+  <p>由於一個骰子在一次擲骰中只能顯示一個數字，事件 $A$（顯示 1）和事件 $C$（顯示 2）是<strong>互斥</strong>的——它們不能同時發生。顯示 1 或 2 的機率是各自機率的和：</p>
+  <div class="eq">$$p(A \text{ or } C) = p(A) + p(C) \quad \text{（互斥事件）} \tag{1.3}$$</div>
+  <p>在可重複事件的情況下，這個規則顯然與「$A$ 或 $C$ 發生的試驗比例等於各自比例之和」的原則一致。</p>
+
+  <p>如果我們擲一個骰子，出現的數字必然是 1、2、3、4、5、6 中的一個。根據剛才的規則，這六個互斥結果的機率總和必須為 1。除非我們知道骰子被做了手腳，否則我們假設沒有哪個數字比其他數字更容易出現，因此六個機率必須相等，都等於 $1/6$。推廣這個例子：</p>
+  <div class="eq">$$\sum_{i=1}^{N} p_i = 1 \tag{1.4}$$</div>
+  <p>如果所有 $N$ 個互斥結果等可能，則 $p_i = 1/N$。</p>
+
+  <div class="callout-warn">
+    <strong>⚠️ 機率相加規則只適用於互斥事件</strong><br>
+    初學者常犯的錯誤是把「互斥」和「獨立」搞混。互斥意味著兩個事件<strong>不能同時發生</strong>（如骰子同時顯示 1 和 2）；獨立意味著一個事件的發生<strong>不影響</strong>另一個事件的機率（如兩個不同骰子的結果）。互斥事件的機率相加，獨立事件的機率相乘——不可混用。特別注意：兩個互斥事件<strong>不可能</strong>同時是獨立的（如果知道 $A$ 發生了，就知道 $C$ 沒有發生，所以 $A$ 和 $C$ 不獨立）。
+  </div>
+
+  <h3>期望值</h3>
+  <p>一個<strong>隨機變數</strong> $x$ 是一個可以測量但結果不確定的量。如果只有離散值 $x_i$ 可以被測量到，且 $p_i$ 是測量到 $x_i$ 的機率，則 $x$ 的<strong>期望值</strong>定義為：</p>
+  <div class="eq">$$\langle x \rangle \equiv \sum_i p_i x_i \tag{1.5}$$</div>
+  <p>如果事件可以重複，當試驗次數 $N$ 趨於無窮時，所有測量值的平均會趨近 $\langle x \rangle$。因此期望值常被稱為「平均值」。</p>
+
+  <p>假設有兩個隨機變數 $x$ 和 $y$。令 $p_{ij}$ 為同時測量到 $x = x_i$ 且 $y = y_j$ 的機率。那麼 $x + y$ 的期望值為：</p>
+  <div class="eq">$$\langle x + y \rangle = \sum_{ij} p_{ij}(x_i + y_j) = \sum_{ij} p_{ij} x_i + \sum_{ij} p_{ij} y_j \tag{1.6}$$</div>
+  <p>現在，$\sum_j p_{ij}$ 是「測量到 $x = x_i$ 而不論 $y$ 的值」的機率，因此它必須等於 $p_i$（$x$ 的邊際分布）。同樣地，$\sum_i p_{ij} = p_j$。將這些代入方程 (1.6)，我們得到：</p>
+  <div class="eq">$$\langle x + y \rangle = \sum_i p_i x_i + \sum_j p_j y_j = \langle x \rangle + \langle y \rangle \tag{1.7}$$</div>
+  <p><strong>期望值的線性性質</strong>：不管 $x$ 和 $y$ 是否獨立，它們之和的期望值都等於各自期望值的和。這個性質極其重要——它意味著我們可以分別計算各個量的期望值再相加，而不需要知道它們之間的關聯。這個性質在量子力學中將被反覆使用。</p>
+
+  <h3>變異數</h3>
+  <p>衡量一個隨機變數每次測量值偏離其平均值多少的量是<strong>變異數</strong>。我們來推導它的表達式：</p>
+  <div class="eq">$$(x - \langle x \rangle)^2 = x^2 - 2x\langle x \rangle + \langle x \rangle^2$$</div>
+  <p>取期望值，利用方程 (1.7) 的線性性質：</p>
+  <div class="eq">$$\langle (x - \langle x \rangle)^2 \rangle = \langle x^2 \rangle - 2\langle x \rangle \langle x \rangle + \langle x \rangle^2 = \langle x^2 \rangle - \langle x \rangle^2$$</div>
+  <p>因此：</p>
+  <div class="eq">$$\Delta^2 x \equiv \langle (x - \langle x \rangle)^2 \rangle = \langle x^2 \rangle - \langle x \rangle^2 \tag{1.9}$$</div>
+  <p>這裡我們用到了 $\langle x \rangle$ 不是隨機變數（它有確定值）的事實，所以 $\langle x \langle x \rangle \rangle = \langle x \rangle^2$。變異數的平方根 $\Delta x$ 稱為<strong>標準差</strong>，給出了測量值典型偏離平均值的幅度。變異數為零意味著每次測量都得到相同的值——這時就沒有不確定了。</p>
+
+  <details class="example">
+    <summary>📝 自編概念例：擲骰子的期望值與變異數</summary>
+    <div class="example-body">
+      <p><strong>題目：</strong>一個公平的六面骰子，求其點數的期望值和變異數。</p>
+      <p><strong>解：</strong>每個面的機率 $p_i = 1/6$，$x_i = 1, 2, 3, 4, 5, 6$。</p>
+      <p>期望值：</p>
+      <div class="eq">$$\langle x \rangle = \sum_{i=1}^{6} \frac{1}{6} x_i = \frac{1}{6}(1+2+3+4+5+6) = \frac{21}{6} = 3.5$$</div>
+      <p>計算 $\langle x^2 \rangle$：</p>
+      <div class="eq">$$\langle x^2 \rangle = \frac{1}{6}(1+4+9+16+25+36) = \frac{91}{6} \approx 15.17$$</div>
+      <p>變異數：</p>
+      <div class="eq">$$\Delta^2 x = \langle x^2 \rangle - \langle x \rangle^2 = \frac{91}{6} - \left(\frac{21}{6}\right)^2 = \frac{91}{6} - \frac{441}{36} = \frac{546 - 441}{36} = \frac{105}{36} \approx 2.92$$</div>
+      <p>標準差：$\Delta x = \sqrt{105/36} \approx 1.71$。</p>
+      <p><strong>物理意義：</strong>期望值 3.5 不是任何一個面的實際點數——它是大量試驗後的平均。變異數約 2.92 告訴我們，典型結果會在 $3.5 \pm 1.71$ 的範圍內波動。注意：即使骰子只有整數面，期望值也可以是非整數——這正說明了「期望值」是一個統計概念，不是任何單次試驗的結果。</p>
+    </div>
+  </details>
+
+  <figure class="figure" id="fig-1-1">
+    <svg class="content-diagram" viewBox="0 0 500 200" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" width="500" height="200" fill="#f8f9fa" rx="8"/>
+      <rect x="60" y="60" width="50" height="50" fill="white" stroke="#333" stroke-width="2" rx="6"/>
+      <circle cx="75" cy="75" r="3" fill="#333"/>
+      <circle cx="95" cy="75" r="3" fill="#333"/>
+      <circle cx="75" cy="95" r="3" fill="#333"/>
+      <circle cx="95" cy="95" r="3" fill="#333"/>
+      <circle cx="85" cy="85" r="3" fill="#333"/>
+      <rect x="190" y="60" width="50" height="50" fill="white" stroke="#333" stroke-width="2" rx="6"/>
+      <circle cx="215" cy="85" r="4" fill="#333"/>
+      <text x="260" y="90" font-size="18" fill="#555" text-anchor="middle">+</text>
+      <rect x="290" y="60" width="50" height="50" fill="white" stroke="#333" stroke-width="2" rx="6"/>
+      <circle cx="300" cy="75" r="3" fill="#333"/>
+      <circle cx="310" cy="85" r="3" fill="#333"/>
+      <circle cx="320" cy="95" r="3" fill="#333"/>
+      <circle cx="300" cy="95" r="3" fill="#333"/>
+      <circle cx="320" cy="75" r="3" fill="#333"/>
+      <text x="370" y="90" font-size="18" fill="#555" text-anchor="middle">=</text>
+      <text x="430" y="90" font-size="22" fill="#333" text-anchor="middle" font-weight="bold">?</text>
+      <text x="250" y="155" font-size="13" fill="#4a90d9" text-anchor="middle" font-weight="bold">獨立事件：各骰子結果互不影響 → 機率相乘</text>
+      <text x="250" y="178" font-size="13" fill="#e74c3c" text-anchor="middle" font-weight="bold">互斥事件：同一骰子不能同時顯示兩個數字 → 機率相加</text>
+    </svg>
+    <figcaption><strong>圖 1.1</strong>　機率的兩種組合規則。獨立事件（如兩個不同骰子的結果）：機率相乘，$p(5 \text{ and } 3) = \frac{1}{6} \times \frac{1}{6} = \frac{1}{36}$。互斥事件（如同一骰子顯示 5 或 3）：機率相加，$p(5 \text{ or } 3) = \frac{1}{6} + \frac{1}{6} = \frac{1}{3}$。</figcaption>
+  </figure>
+</section>
+
+<!-- ====== 1.2 機率振幅 ====== -->
+<section class="deep-dive" id="s1-2">
+<h2>1.2　機率振幅</h2>
+<div class="section-keypoints">
+  <strong>🔑 本節重點</strong>
+  <span>① 量子力學用複數振幅的模平方計算機率：$p = |A|^2$</span>
+  <span>② 疊加原理：$A(S \text{ or } T) = A(S) + A(T)$——振幅相加</span>
+  <span>③ 干涉項 $2\,\mathrm{Re}(A_S A_T^*)$ 違反古典機率加法規則</span>
+  <span>④ 雙縫實驗是干涉的原型展示，子彈也有干涉但條紋間距極小</span>
+</div>
+
+  <p>許多社會科學、物理科學和醫學科學都大量使用機率，但量子力學在計算機率的方式上獨樹一幟。在所有其他領域中，我們直接使用機率；但在量子力學中，我們<strong>總是</strong>先計算一個複數 $A$，然後取它的模平方得到機率：</p>
+  <div class="eq">$$p = |A|^2 \tag{1.10}$$</div>
+  <p>這個複數 $A$ 稱為 $p$ 的<strong>機率振幅</strong>（probability amplitude）。機率振幅是量子力學獨有的概念——沒有任何其他知識領域會出現它。至今沒有人真正理解為什麼自然界需要它。我們只知道：這個規則<strong>有效</strong>。每當你查看數位手錶、觸摸電腦鍵盤、聆聽 CD 播放器，或與任何經量子力學輔助設計的電子設備互動時，你都在測試和驗證這個理論的正確性。我們的文明現在完全依賴方程 (1.11) 的有效性。</p>
+
+  <p>機率振幅透過以下基本原理產生古典物理中完全不存在的現象。假設某件事可以透過兩條互斥的路徑 $S$ 或 $T$ 發生，路徑 $S$ 的機率振幅為 $A(S)$，路徑 $T$ 的機率振幅為 $A(T)$。那麼，<strong>不論走哪條路徑</strong>這件事發生的機率振幅是：</p>
+  <div class="eq">$$A(S \text{ or } T) = A(S) + A(T) \tag{1.11}$$</div>
+
+  <p>注意：是<strong>振幅相加</strong>，而不是機率相加。這個規則取代了古典機率的加法規則（方程 1.3），但與之不相容。為什麼？讓我們展開計算。振幅 $A(S)$ 和 $A(T)$ 是複數，可以寫成極座標形式 $A(S) = |A(S)| e^{i\phi_S}$ 和 $A(T) = |A(T)| e^{i\phi_T}$。那麼：</p>
+  <div class="eq">$$\begin{aligned} p(S \text{ or } T) &= |A(S) + A(T)|^2 \\ &= \big(A(S) + A(T)\big)\big(A(S) + A(T)\big)^* \\ &= |A(S)|^2 + A(S) A^*(T) + A^*(S) A(T) + |A(T)|^2 \\ &= p(S) + p(T) + 2\,\mathrm{Re}\!\big(A(S) A^*(T)\big) \end{aligned} \tag{1.12}$$</div>
+  <p>其中我們使用了 $A(S)A^*(T) + A^*(S)A(T) = 2\,\mathrm{Re}(A(S)A^*(T))$。用極座標表示，干涉項為：</p>
+  <div class="eq">$$2\,\mathrm{Re}\!\big(A(S) A^*(T)\big) = 2|A(S)|\,|A(T)|\,\cos(\phi_S - \phi_T)$$</div>
+  <p>這個<strong>干涉項</strong>取決於兩個振幅的<strong>相位差</strong> $\phi_S - \phi_T$，而相位不會出現在單一路徑的機率 $p(S) = |A(S)|^2$ 中。當相位差為 0 時，干涉項為正（建設性干涉）；當相位差為 $\pi$ 時，干涉項為負（破壞性干涉）；當相位差為 $\pi/2$ 時，干涉項為零。</p>
+
+  <div class="callout">
+    <strong>💡 干涉項是量子力學的核心</strong><br>
+    每當事件發生的機率不等於各互斥路徑機率的簡單相加時，我們就說出現了<strong>量子干涉</strong>。方程 (1.12) 中的 $2\,\mathrm{Re}(A(S) A^*(T))$ 就是量子干涉的數學來源。在某些情況下，這個干涉項的平均值為零，古典機率理論就看起來成立——但這只是近似，不是本質。干涉項的存在意味著：<strong>即使我們不監測粒子走了哪條路徑，路徑之間仍然存在物理交互作用</strong>——這是古典物理中完全不存在的。
+  </div>
+
+  <div class="callout-warn">
+    <strong>⚠️ 振幅不是機率——最常見的錯誤</strong><br>
+    機率振幅是<strong>複數</strong>，可以有相位，可以相互抵消。機率是實數且非負，不能抵消。$|A(S) + A(T)|^2 \neq |A(S)|^2 + |A(T)|^2$——除非 $A(S)$ 和 $A(T)$ 的相位差恰好使交叉項為零。忘記這個交叉項是初學者最常犯的錯誤。記住：<strong>振幅相加，然後取模平方</strong>；不是先取模平方再相加。
+  </div>
+
+  <h3>雙縫干涉</h3>
+  <p>一個思想實驗可以清楚說明疊加原理的物理含義。裝置由電子槍 $G$、開有兩個狹縫 $S_1$ 和 $S_2$ 的螢幕，以及感光板 $P$ 組成（見圖 1.2）。</p>
+
+  <figure class="figure" id="fig-1-2">
+    <svg class="content-diagram" viewBox="0 0 520 280" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" width="520" height="280" fill="#f8f9fa" rx="8"/>
+      <rect x="20" y="120" width="40" height="40" fill="#4a90d9" rx="4"/>
+      <text x="40" y="145" font-size="12" fill="white" text-anchor="middle" font-weight="bold">G</text>
+      <rect x="200" y="30" width="8" height="90" fill="#666"/>
+      <rect x="200" y="115" width="8" height="20" fill="#fff" stroke="#666" stroke-width="1"/>
+      <rect x="200" y="145" width="8" height="20" fill="#fff" stroke="#666" stroke-width="1"/>
+      <rect x="200" y="170" width="8" height="80" fill="#666"/>
+      <text x="204" y="128" font-size="10" fill="#333" text-anchor="start">S_1</text>
+      <text x="204" y="158" font-size="10" fill="#333" text-anchor="start">S_2</text>
+      <rect x="380" y="30" width="6" height="220" fill="#333"/>
+      <text x="383" y="20" font-size="12" fill="#333" text-anchor="middle">P</text>
+      <line x1="60" y1="140" x2="200" y2="125" stroke="#4a90d9" stroke-width="1.5" stroke-dasharray="4,3"/>
+      <line x1="60" y1="140" x2="200" y2="155" stroke="#e74c3c" stroke-width="1.5" stroke-dasharray="4,3"/>
+      <line x1="208" y1="125" x2="380" y2="140" stroke="#4a90d9" stroke-width="1.5" stroke-dasharray="4,3"/>
+      <line x1="208" y1="155" x2="380" y2="140" stroke="#e74c3c" stroke-width="1.5" stroke-dasharray="4,3"/>
+      <path d="M420,140 Q430,100 440,140 Q450,180 460,140 Q470,100 480,140 Q490,180 500,140" fill="none" stroke="#333" stroke-width="2"/>
+      <text x="460" y="260" font-size="11" fill="#555" text-anchor="middle">干涉條紋</text>
+      <text x="130" y="110" font-size="11" fill="#4a90d9" text-anchor="middle">路徑 S_1</text>
+      <text x="130" y="180" font-size="11" fill="#e74c3c" text-anchor="middle">路徑 S_2</text>
+      <text x="300" y="260" font-size="11" fill="#555" text-anchor="middle">$P(x) = |A_1(x) + A_2(x)|^2$</text>
+    </svg>
+    <figcaption><strong>圖 1.2</strong>　雙縫干涉實驗。電子從 $G$ 出發，通過狹縫 $S_1$ 或 $S_2$，在感光板 $P$ 上形成干涉條紋。機率分布 $P(x)$ 不是兩條路徑機率的簡單相加，而是包含干涉項 $2\,\mathrm{Re}(A_1 A_2^*)$——這個項在 $x$ 變化時正負交替，產生明暗條紋。</figcaption>
+  </figure>
+
+  <p>當電子從 $G$ 發射後，它有振幅 $A_1(x)$ 經過狹縫 $S_1$ 到達螢幕上的 $x$ 點，也有振幅 $A_2(x)$ 經過 $S_2$ 到達同一點。因此電子到達 $x$ 的機率是：</p>
+  <div class="eq">$$P(x) = |A_1(x) + A_2(x)|^2 = |A_1(x)|^2 + |A_2(x)|^2 + 2\,\mathrm{Re}\!\big(A_1(x) A_2^*(x)\big) \tag{1.13}$$</div>
+  <p>$|A_1(x)|^2$ 是電子經過狹縫 $S_1$ 後到達 $x$ 的機率——我們預期這是一個大致以 $x_1$（從 $G$ 穿過 $S_1$ 中心的直線與螢幕的交點）為中心的高斯分布 $p_1(x)$。$|A_2(x)|^2$ 類似地是以 $x_2$ 為中心的 $p_2(x)$。將振幅寫成 $A_i = \sqrt{p_i}\, e^{i\phi_i}$，其中 $\phi_i$ 是振幅的相位，則干涉項為：</p>
+  <div class="eq">$$I(x) = 2\sqrt{p_1(x)\, p_2(x)}\; \cos\!\big(\phi_1(x) - \phi_2(x)\big) \tag{1.14b}$$</div>
+  <p>在離兩個狹縫等距的點附近，$p_1 \simeq p_2$，干涉項的大小與 $p_1 + p_2$ 相當。在§2.3.4 中我們將證明相位 $\phi_i(x)$ 大致是 $x$ 的線性函數，因此在許多電子從 $G$ 到 $P$ 之後，感光板在 $x$ 處的黑化程度（大致正比於到達 $x$ 的電子數）將呈現正弦圖樣。</p>
+
+  <h3>為什麼子彈看不到干涉？</h3>
+  <p>如果我們用機槍子彈取代電子，日常經驗告訴我們古典物理適用——子彈到達 $x$ 的機率就是 $p_1(x) + p_2(x)$，沒有干涉條紋。但量子力學預測：子彈<strong>確實</strong>有干涉條紋，我們相信所有物質都服從量子力學。</p>
+
+  <p>然而，在§2.3.4 中我們將發現，量子力學預測干涉條紋的峰谷間距 $\Delta$ 隨粒子質量增大而急劇縮小。對於子彈質量的粒子，$\Delta \sim 10^{-29}$ m——比原子核小了 15 個數量級，完全無法測量。任何實際實驗測到的都是 $I(x)$ 在許多峰谷上的平均值。由於 $\phi_1(x) - \phi_2(x)$ 在這些微小間距內快速振盪，干涉項的平均值為零，因此與古典預測 $p_1(x) + p_2(x)$ 一致。</p>
+
+  <p>這個分析揭示了一個深刻的道理：<strong>古典力學不是量子力學的對立面，而是量子力學在大質量極限下的近似</strong>。當粒子質量足夠大時，干涉條紋的間距遠小於任何可觀測的尺度，干涉效應被「平均掉」了，剩下的就是古典的機率相加規則。</p>
+
+  <h3>物質波？</h3>
+  <p>雙縫干涉的正弦圖樣與楊氏雙縫實驗中光波的干涉圖樣完全相同。光的波動理論很容易解釋干涉條紋的存在，因此自然有人推斷：粒子是某種介質中的波。這個推斷有相當的真實性，在更高級的量子場論中，這個想法被具體化為場的量子化。</p>
+
+  <p>但在非相對論量子力學的框架中，「物質波」的概念<strong>弊大於利</strong>。理由如下：</p>
+  <p><strong>第一</strong>，粒子就是粒子，它通過一條縫或另一條縫。正弦圖樣之所以出現，是因為機率振幅是複數，其疊加方式與波振幅相同。這是數學上的對應，不是物理上的同一。</p>
+  <p><strong>第二</strong>，量子干涉不僅出現在空間運動的問題中。在自旋系統中，干涉現象同樣存在——例如一個電子可以通過「自旋向上」和「自旋向下」兩條「路徑」到達同一個最終態，產生干涉。但在自旋空間中沒有「波」在傳播，因此不能用物質波來解釋這種干涉。</p>
+  <p><strong>第三</strong>，在能量密度方面，波的強度正比於波振幅的模平方，就像粒子的機率密度正比於機率振幅的模平方。因此在數學層面上，粒子通過雙縫和光波通過雙縫之間存在一一對應。但我們不能從這個對應推斷粒子「就是」波，因為量子干涉也出現在比單粒子更複雜的系統中，而且在這些系統中根本無法將干涉歸因於空間中傳播的物理波。</p>
+
+  <details class="example">
+    <summary>📝 自編概念例：兩路徑干涉的計算</summary>
+    <div class="example-body">
+      <p><strong>題目：</strong>某事件有兩條互斥路徑，路徑 $S$ 的振幅為 $A(S) = \frac{1}{2}$，路徑 $T$ 的振幅為 $A(T) = \frac{i}{2}$。求：(a) 各路徑的機率；(b) 事件發生的總機率；(c) 如果忽略干涉項，總機率會是多少？(d) 比較 (b) 和 (c) 的結果。</p>
+      <p><strong>解：</strong></p>
+      <p>(a) 各路徑機率：</p>
+      <div class="eq">$$p(S) = |A(S)|^2 = \left|\frac{1}{2}\right|^2 = \frac{1}{4}, \quad p(T) = |A(T)|^2 = \left|\frac{i}{2}\right|^2 = \frac{1}{4}$$</div>
+      <p>(b) 正確的總機率（含干涉項）：</p>
+      <div class="eq">$$p = |A(S) + A(T)|^2 = \left|\frac{1}{2} + \frac{i}{2}\right|^2 = \left(\frac{1}{2}\right)^2 + \left(\frac{1}{2}\right)^2 = \frac{1}{2}$$</div>
+      <p>展開計算干涉項：$2\,\mathrm{Re}\!\big(\frac{1}{2} \cdot \frac{-i}{2}\big) = 2\,\mathrm{Re}\!\big(\frac{-i}{4}\big) = 0$——恰好為零，因為兩個振幅的相位差是 $\pi/2$。</p>
+      <p>(c) 忽略干涉項的結果：$p(S) + p(T) = 1/4 + 1/4 = 1/2$——與正確答案相同。</p>
+      <p>(d) 此例中 (b) 和 (c) 相等，但這<strong>只是巧合</strong>——因為相位差恰好是 $\pi/2$，使干涉項為零。如果改為 $A(T) = \frac{1}{2}$（相位差為零），則 $p = |1/2 + 1/2|^2 = 1$，而 $p(S) + p(T) = 1/2$——差了一倍！</p>
+      <p><strong>物理意義：</strong>干涉項是否為零取決於振幅的相位關係。一般情況下它不為零，這就是為什麼我們必須用振幅而不是機率來計算。相位是量子力學的核心——它不在機率中出現，但通過振幅的干涉而產生可觀測的效應。</p>
+    </div>
+  </details>
+</section>
+<!-- ====== 1.3 量子態 ====== -->
+<section class="deep-dive" id="s1-3">
+<h2>1.3　量子態</h2>
+<div class="section-keypoints">
+  <strong>🔑 本節重點</strong>
+  <span>① 量子態由完整振幅集合描述——取代古典的單一數值</span>
+  <span>② Dirac notation：$|\psi\rangle$ 是振幅的容器，如同向量是分量的容器</span>
+  <span>③ $\langle \phi | \psi \rangle = \sum_i b_i^* a_i$，類似向量內積</span>
+  <span>④ 能量表象：$a_k = \langle E_k | \psi \rangle$ 提取能量為 $E_k$ 的振幅</span>
+  <span>⑤ 自旋-½ 粒子和光子偏振是向量空間結構的具體展示</span>
+</div>
+
+  <p>物理學是對自然現象的定量描述。定量描述一個系統，必然從定義測量方式開始。對於一個粒子，我們可以測量它的 $x, y, z$ 座標、動量分量、能量和角動量。系統越複雜，可測量的量就越多。</p>
+
+  <p>每個測量都伴隨著一組可能的數值——稱為該測量的<strong>能譜</strong>（spectrum）。例如，粒子在空間中的 $x$ 座標的能譜是 $(-\infty, \infty)$，而動能的能譜是 $(0, \infty)$。有些測量的能譜是離散的——例如角動量沿任何給定軸的分量只能取 $\ldots, (k-1)\hbar, k\hbar, (k+1)\hbar, \ldots$，其中 $k$ 是 $0$ 或 $1/2$。當能譜是一組離散的數字時，我們稱這些數字為測量的<strong>允許值</strong>。</p>
+
+  <p>對於能譜中的每個值，都有一個<strong>量子振幅</strong>——即測量得到該值的機率振幅。量子力學就是計算這些振幅的科學，前提是我們對系統有足夠的先前測量結果。</p>
+
+  <h3>完整振幅集合</h3>
+  <p>假設我們研究某個物理系統——離子阱中的粒子、一滴液態氦、共振腔中的電磁場。我們對系統狀態的知識有兩種類型：</p>
+  <p><strong>(1) 系統的物理性質</strong>——例如共振腔的大小和形狀。在量子力學中，這些資訊用一個稱為 Hamiltonian $H$ 的物件來描述（將在方程 2.5 中定義）。</p>
+  <p><strong>(2) 系統當前的動力學狀態</strong>——這更為微妙。它必須包含對測量結果的預測。由於這些結果本質上是不確定的，你的資訊必須涉及不同結果的機率，而在最簡單的情況下，就是由相關機率振幅的值組成。例如，你的知識可能由各種可能的能量測量結果的振幅組成，或者由動量測量結果的振幅組成。</p>
+
+  <p>因此，在量子力學中，<strong>系統當前動力學狀態的知識由一組量子振幅來體現</strong>。在古典物理中，我們可以確定地說出測量結果，用一個數值（「座標」）就能描述系統狀態。但在量子力學中，<strong>一組量子振幅取代了單一數字</strong>。</p>
+
+  <p>一個重要的概念是<strong>完整振幅集合</strong>：這個集合包含足夠的資訊，使我們能計算任何測量結果的振幅。以電子自旋為例：電子的自旋角動量沿任何軸的分量只能取 $\pm \frac{1}{2}\hbar$。如果我們知道沿 $z$ 軸測量的兩個振幅 $a_+$ 和 $a_-$，就能計算沿任何其他方向的振幅（這將在§1.3.5 中展示）。集合 $\{a_+, a_-\}$ 就構成了電子自旋的完整振幅集合。</p>
+
+  <p>完整集合通常被理解為<strong>最小</strong>集合——其中沒有一個振幅可以從其他振幅計算出來。如果只知道 $a_+$ 而不知道 $a_-$，就無法計算沿任何其他方向的振幅。</p>
+
+  <div class="callout">
+    <strong>💡 自旋在完整振幅集合中的角色</strong><br>
+    大多數基本粒子（電子、質子、中微子、夸克等）都有內稟角動量或「自旋」（§7.4）。對於有自旋的粒子，完整振幅集合必須包含自旋方向的資訊。為簡化討論，我們在本節假設粒子沒有自旋——除非明確聲明相反。但讀者應記住：自旋粒子是更普遍的情況，自旋無粒子是罕見的例外。
+  </div>
+
+  <h3>Dirac notation</h3>
+  <p>Dirac 引入了符號 $|\psi\rangle$（讀作「ket psi」）來表示系統的完整振幅集合。如果系統是一個被困在勢阱中的粒子，$|\psi\rangle$ 可以是能量振幅 $a_n$ 的集合，也可以是位置振幅 $\psi(x)$ 的集合，也可以是動量振幅 $a(p)$ 的集合。</p>
+
+  <p>使用抽象符號 $|\psi\rangle$ 使我們能在<strong>不指定具體使用哪組振幅</strong>的情況下討論系統——就像位置向量 $\mathbf{x}$ 使我們能在不指定座標系 $(x,y,z)$ 或 $(r,\theta,\phi)$ 的情況下討論一個幾何點。<strong>$|\psi\rangle$ 是振幅集合的容器，就像向量 $\mathbf{x}$ 是分量的容器。</strong></p>
+
+  <p>$|\psi\rangle$ 體現了<strong>量子態</strong>的關鍵概念——它獨立於我們選擇用來量化的具體振幅集合，對物理學的幾個分支都是基礎性的。</p>
+
+  <p>由於振幅可以相加（疊加原理）且可以乘以任意複數，我們寫：</p>
+  <div class="eq">$$|\psi_3\rangle = |\psi_1\rangle + |\psi_2\rangle \tag{1.15}$$</div>
+  <p>意思是 $|\psi_3\rangle$ 中的每個振幅都等於 $|\psi_1\rangle$ 和 $|\psi_2\rangle$ 中對應振幅的和。這完全類似向量加法：$\mathbf{b}_3 = \mathbf{b}_1 + \mathbf{b}_2$ 意味著 $\mathbf{b}_3$ 的每個分量都是 $\mathbf{b}_1$ 和 $\mathbf{b}_2$ 對應分量的和。</p>
+
+  <p>同樣地，對於任意複數 $\alpha$：</p>
+  <div class="eq">$$|\psi'\rangle = \alpha |\psi\rangle \tag{1.16}$$</div>
+  <p>意思是 $|\psi'\rangle$ 中的每個振幅都是 $|\psi\rangle$ 中對應振幅的 $\alpha$ 倍。這也類似向量的數乘：$3\mathbf{b}$ 的 $x$ 分量是 $3b_x$，等等。</p>
+
+  <h3>向量空間與對偶空間</h3>
+  <p>ket 和向量之間的類比非常富有成果。對於數學家來說，可以相加和乘以任意複數的物件構成一個<strong>向量空間</strong>。由於我們生活在三維向量空間中，我們對一般向量空間中出現的結構有強烈的直覺。但我們的日常經驗沒有準備我們面對一般向量空間的一個重要性質：<strong>伴隨空間</strong>的存在。在量子力學中，這兩個空間是可以區分的。</p>
+
+  <p>量子力學中一個重要的角色是由向量空間 $V$ 上的<strong>複值線性函數</strong>扮演的。令 $\langle f|$（讀作「bra f」）是這樣的函數。我們用 $\langle f | \psi \rangle$ 表示這個函數作用在 $|\psi\rangle$ 上的結果——一個複數（機率振幅），在一般函數記號中會寫成 $f(|\psi\rangle)$。線性意味著：</p>
+  <div class="eq">$$\langle f | \big(\alpha |\psi\rangle + \beta |\phi\rangle\big) = \alpha \langle f | \psi \rangle + \beta \langle f | \phi \rangle \tag{1.18}$$</div>
+  <p>注意右邊是兩個複數乘積的和，因此是良定義的。</p>
+
+  <p>我們可以定義兩個 bra 的和 $\langle h| \equiv \langle f| + \langle g|$ 以及 bra 乘以複數 $\langle p| \equiv \alpha \langle f|$：</p>
+  <div class="eq">$$\langle h | \psi \rangle = \langle f | \psi \rangle + \langle g | \psi \rangle \tag{1.19}$$</div>
+  <div class="eq">$$\langle p | \psi \rangle = \alpha \langle f | \psi \rangle \tag{1.20}$$</div>
+  <p>由於我們知道了如何將這些函數相加和乘以複數，它們構成一個向量空間 $V'$，稱為 $V$ 的<strong>對偶空間</strong>。</p>
+
+  <p><strong>$V$ 和 $V'$ 有相同的維度。</strong>證明如下：令 $\{|i\rangle\}$（$i = 1, \ldots, N$）是 $V$ 的一組基底。那麼一個線性函數 $\langle f|$ 完全由 $N$ 個數 $\langle f | i \rangle$ 決定。為什麼？因為利用方程 (1.17)（$|\psi\rangle = \sum_i a_i |i\rangle$）和 $\langle f|$ 的線性，我們可以計算 $\langle f|$ 作用在任意向量上的結果：</p>
+  <div class="eq">$$\langle f | \psi \rangle = \sum_{i=1}^N a_i \langle f | i \rangle \tag{1.21}$$</div>
+  <p>這意味著我們可以定義 $N$ 個函數 $\langle j|$（$j = 1, \ldots, N$）通過：</p>
+  <div class="eq">$$\langle j | i \rangle = \delta_{ij} \tag{1.22}$$</div>
+  <p>其中 $\delta_{ij}$ 是 Kronecker delta：$i = j$ 時為 1，否則為 0。這些方程指定了每個 bra $\langle j|$ 在每個基底向量 $|i\rangle$ 上的值，因此通過方程 (1.21)，它指定了 $\langle j|$ 作用在任意向量 $|\psi\rangle$ 上的值。</p>
+
+  <p>現在考慮以下線性組合：</p>
+  <div class="eq">$$\langle F| \equiv \sum_{j=1}^N \langle f | j \rangle \langle j| \tag{1.23}$$</div>
+  <p>很容易驗證對於任何 $i$，$\langle F | i \rangle = \langle f | i \rangle$。由於 bra 完全由它在基底向量上的值決定，$\langle F| = \langle f|$。因此任何 bra 都可以表示為 $N$ 個由方程 (1.22) 指定的 bra 的線性組合，而後者顯然是線性獨立的。這證明了 $V'$ 的維度是 $N$——與 $V$ 相同。</p>
+
+  <p><strong>伴隨的定義：</strong>我們承認 $|i\rangle$ 和 $\langle i|$ 之間的親密關係——$\langle i | i \rangle = 1$，$\langle j | i \rangle = 0$（$j \neq i$）——稱 $\langle i|$ 是 $|i\rangle$ 的<strong>伴隨</strong>（adjoint）。對於任意 ket $|\psi\rangle = \sum_i a_i |i\rangle$，其伴隨定義為：</p>
+  <div class="eq">$$\langle \psi| \equiv \sum_i a_i^* \langle i| \tag{1.24}$$</div>
+  <p><strong>注意複共軛！</strong>這是 bra 和 ket 之間最關鍵的差異。有了這個定義：</p>
+  <div class="eq">$$\langle \psi | \psi \rangle = \left(\sum_i a_i^* \langle i|\right)\left(\sum_j a_j |j\rangle\right) = \sum_i \sum_j a_i^* a_j \langle i | j \rangle = \sum_i \sum_j a_i^* a_j \delta_{ij} = \sum_i |a_i|^2 \geq 0 \tag{1.25}$$</div>
+  <p>這個數是實數且非負，只在所有 $a_i = 0$（即 $|\psi\rangle = 0$）時為零。我們稱之為 $|\psi\rangle$ 的<strong>長度</strong>（或長度平方）。</p>
+
+  <p>對於任意兩個態 $|\phi\rangle = \sum_i b_i |i\rangle$ 和 $|\psi\rangle = \sum_i a_i |i\rangle$，類似的計算給出：</p>
+  <div class="eq">$$\langle \phi | \psi \rangle = \sum_i b_i^* a_i \tag{1.26}$$</div>
+  <p>同樣地 $\langle \psi | \phi \rangle = \sum_i a_i^* b_i$，從此可得：</p>
+  <div class="eq">$$\langle \psi | \phi \rangle = \big(\langle \phi | \psi \rangle\big)^* \tag{1.27}$$</div>
+  <p>我們將經常使用這個方程。</p>
+
+  <div class="callout">
+    <strong>💡 向量空間類比的威力</strong><br>
+    在三維空間中，向量 $\mathbf{b} = b_x \mathbf{i} + b_y \mathbf{j} + b_z \mathbf{k}$ 的長度平方是 $b_x^2 + b_y^2 + b_z^2$——這是因為分量是實數，向量和它的伴隨無法區分。在量子力學中，分量是複數，伴隨的分量是原向量分量的複共軛，因此 ket 和 bra 是<strong>可以區分的</strong>。方程 (1.26) 與向量內積 $\mathbf{b} \cdot \mathbf{a} = b_x a_x + b_y a_y + b_z a_z$ 密切相關——唯一的差異是 $b_i^* $取代了 $b_i$。這是量子力學與古典向量的關鍵差異。
+  </div>
+
+  <h3>能量表象</h3>
+  <p>假設系統是一個被困在勢阱中的粒子，其允許的能譜是離散的 $E_0, E_1, \ldots$。令 $\{|i\rangle\}$ 為系統量子態空間的一組基底 ket，則：</p>
+  <div class="eq">$$|\psi\rangle = \sum_i a_i |i\rangle \tag{1.28}$$</div>
+  <p>要理解某個特定基底 ket（如 $|k\rangle$）的物理意義，我們令 $|\psi\rangle = |k\rangle$，此時 $a_i = 0$（$i \neq k$）且 $a_k = 1$——這是能量確定為 $E_k$ 的態。我們說 $|k\rangle$ 是<strong>能量確定的態</strong>。為了記住這個重要的對應，我們重新標記基底 ket，寫 $|E_i\rangle$ 代替 $|i\rangle$：</p>
+  <div class="eq">$$|\psi\rangle = \sum_i a_i |E_i\rangle \tag{1.29}$$</div>
+
+  <p>用 $\langle E_k|$ 乘以兩邊。利用線性和正交關係 $\langle E_k | E_i \rangle = \delta_{ki}$：</p>
+  <div class="eq">$$\langle E_k | \psi \rangle = \sum_i a_i \langle E_k | E_i \rangle = \sum_i a_i \delta_{ki} = a_k$$</div>
+  <p>因此：</p>
+  <div class="eq">$$a_k = \langle E_k | \psi \rangle \tag{1.30}$$</div>
+  <p>這是一個<strong>極其重要的結果</strong>——它告訴我們如何從任意量子態 $|\psi\rangle$ 中提取「能量為 $E_k$」的振幅。這個公式是量子力學中計算的起點：給定一個態，乘以適當的 bra，就得到預測。</p>
+
+  <p>方程 (1.25) 給出：</p>
+  <div class="eq">$$\langle \psi | \psi \rangle = \sum_i |a_i|^2 = \sum_i p_i = 1 \tag{1.31}$$</div>
+  <p>最後的等號成立是因為如果測量能量，必然得到某個值，所以機率總和為 1。因此，描述真實量子態的 ket 必須有單位長度——稱為<strong>正確歸一化</strong>。</p>
+
+  <p>在計算過程中，我們經常遇到未歸一化的 ket。重要的是記住，方程 (1.30) 只能從正確歸一化的 ket 中提取預測。幸運的是，任何 ket $|\phi\rangle = \sum_i b_i |i\rangle$ 都可以輕易歸一化：</p>
+  <div class="eq">$$|\psi\rangle \equiv \sum_i \frac{b_i}{\sqrt{\langle \phi | \phi \rangle}} |i\rangle \tag{1.32}$$</div>
+  <p>不論 $b_i$ 的值如何，這個 $|\psi\rangle$ 都是正確歸一化的。</p>
+
+  <details class="example">
+    <summary>📝 自編概念例：從 ket 提取振幅</summary>
+    <div class="example-body">
+      <p><strong>題目：</strong>某粒子的量子態為 $|\psi\rangle = \frac{1}{\sqrt{3}} |E_1\rangle + \frac{i}{\sqrt{3}} |E_2\rangle + \frac{1}{\sqrt{3}} |E_3\rangle$。驗證此態已正確歸一化，並求測量能量得到各能階的機率。</p>
+      <p><strong>解：</strong>先驗證歸一化：</p>
+      <div class="eq">$$\langle \psi | \psi \rangle = \left|\frac{1}{\sqrt{3}}\right|^2 + \left|\frac{i}{\sqrt{3}}\right|^2 + \left|\frac{1}{\sqrt{3}}\right|^2 = \frac{1}{3} + \frac{1}{3} + \frac{1}{3} = 1 \checkmark$$</div>
+      <p>各能階的振幅和機率：</p>
+      <div class="eq">$$a_1 = \langle E_1 | \psi \rangle = \frac{1}{\sqrt{3}}, \quad p_1 = |a_1|^2 = \frac{1}{3}$$</div>
+      <div class="eq">$$a_2 = \langle E_2 | \psi \rangle = \frac{i}{\sqrt{3}}, \quad p_2 = |a_2|^2 = \frac{1}{3}$$</div>
+      <div class="eq">$$a_3 = \langle E_3 | \psi \rangle = \frac{1}{\sqrt{3}}, \quad p_3 = |a_3|^2 = \frac{1}{3}$$</div>
+      <p>驗證：$p_1 + p_2 + p_3 = 1 \checkmark$</p>
+      <p><strong>物理意義：</strong>即使態已歸一化，各能階的機率不一定相等。此態中三個能階各有 $1/3$ 的機率——但這是特例。注意 $a_2$ 是純虛數——這不影響機率（$|i/\sqrt{3}|^2 = 1/3$），但會影響與其他振幅的干涉。</p>
+    </div>
+  </details>
+
+  <h3>自旋-½ 粒子的取向</h3>
+  <p>自旋為 $\frac{1}{2}\hbar$ 的粒子（如電子）提供了一個展示抽象數學結構如何預測實驗結果的絕佳範例。§7.4.2 中我們將推導自旋角動量分量的公式，這裡我們直接使用結果。</p>
+
+  <p>如果測量電子自旋沿 $z$ 軸的分量 $s_z$，只能得到兩個結果：$s_z = +\frac{1}{2}$ 或 $s_z = -\frac{1}{2}$。態 $|+\rangle$（保證測到 $+\frac{1}{2}$）和 $|-\rangle$（保證測到 $-\frac{1}{2}$）構成自旋的完整態集合。任何自旋態都可以寫成：</p>
+  <div class="eq">$$|\psi\rangle = a_- |-\rangle + a_+ |+\rangle \tag{1.33}$$</div>
+
+  <p>令 $\mathbf{n}$ 為極座標 $(\theta, \phi)$ 方向的單位向量。沿 $\mathbf{n}$ 測量自旋分量確定得到 $+\frac{1}{2}$ 的態為（問題 7.6）：</p>
+  <div class="eq">$$|+, \mathbf{n}\rangle = \sin(\theta/2)\, e^{i\phi/2} |-\rangle + \cos(\theta/2)\, e^{-i\phi/2} |+\rangle \tag{1.34a}$$</div>
+  <p>確定得到 $-\frac{1}{2}$ 的態為：</p>
+  <div class="eq">$$|-, \mathbf{n}\rangle = \cos(\theta/2)\, e^{i\phi/2} |-\rangle - \sin(\theta/2)\, e^{-i\phi/2} |+\rangle \tag{1.34b}$$</div>
+  <p>這些態的物理意義：它們是自旋沿 $\mathbf{n}$ 方向「對齊」和「反對齊」的態。注意 $\theta$ 和 $\phi$ 出現在三角函數和相位因子中——這反映了自旋方向和量子態之間的非平凡對應。</p>
+
+  <p>方程 (1.24) 給出這些 ket 的伴隨：</p>
+  <div class="eq">$$\langle +, \mathbf{n}| = \sin(\theta/2)\, e^{-i\phi/2} \langle -| + \cos(\theta/2)\, e^{i\phi/2} \langle +| \tag{1.35a}$$</div>
+  <div class="eq">$$\langle -, \mathbf{n}| = \cos(\theta/2)\, e^{-i\phi/2} \langle -| - \sin(\theta/2)\, e^{i\phi/2} \langle +| \tag{1.35b}$$</div>
+  <p>很容易驗證這些 ket 正確歸一化且互相正交。</p>
+
+  <p>假設剛測完 $s_z = +\frac{1}{2}$，系統處於 $|\psi\rangle = |+\rangle$。沿 $\mathbf{n}$ 方向測到 $s = -\frac{1}{2}$ 的振幅為：</p>
+  <div class="eq">$$A_-(\mathbf{n}) = \langle -, \mathbf{n} | +\rangle = -\sin(\theta/2)\, e^{i\phi/2} \tag{1.36}$$</div>
+  <p>這裡我們使用了 $\langle - | + \rangle = 0$ 和 $\langle + | + \rangle = 1$。機率為：</p>
+  <div class="eq">$$P_-(\mathbf{n}) = |A_-(\mathbf{n})|^2 = \sin^2(\theta/2) \tag{1.37}$$</div>
+  <p>當 $\theta = 0$（即 $\mathbf{n} = \hat{z}$）時，$P_- = 0$——符合預期，因為此時測的就是 $s_z$ 本身，而我們剛測過 $s_z = +1/2$。當 $\theta = \pi/2$（$\mathbf{n}$ 在 $xy$ 平面）時，$P_- = 1/2$——測到 $\pm \frac{1}{2}$ 的機率各半。</p>
+
+  <p>將 $\theta = \pi/2$、$\phi = 0$ 代入方程 (1.34)，我們得到自旋沿 $x$ 軸確定的態：</p>
+  <div class="eq">$$|+, x\rangle = \frac{1}{\sqrt{2}}\big(|-\rangle + |+\rangle\big); \quad |-, x\rangle = \frac{1}{\sqrt{2}}\big(|-\rangle - |+\rangle\big) \tag{1.38}$$</div>
+  <p>類似地，$\theta = \pi/2$、$\phi = \pi/2$ 給出沿 $y$ 軸的態：</p>
+  <div class="eq">$$|+, y\rangle = \frac{e^{i\pi/4}}{\sqrt{2}}\big(|-\rangle - i|+\rangle\big); \quad |-, y\rangle = \frac{e^{i\pi/4}}{\sqrt{2}}\big(|-\rangle + i|+\rangle\big) \tag{1.39}$$</div>
+
+  <p>注意：$|+, x\rangle$ 和 $|+, y\rangle$ 都有 $1/2$ 的機率測到 $s_z = +1/2$。它們的物理差異在於：測到 $s_z = \pm 1/2$ 的振幅<strong>比值</strong>不同——$|+, x\rangle$ 中比值是 1，而 $|+, y\rangle$ 中比值是 $i$。相位不只是數學技巧——它有可觀測的物理效應。</p>
+
+  <div class="callout">
+    <strong>💡 相位的物理效應</strong><br>
+    $|+, x\rangle$ 和 $|+, y\rangle$ 對 $s_z$ 的測量給出相同的機率分布，但對 $s_x$ 的測量給出完全不同的結果：$|+, x\rangle$ 保證測到 $s_x = +1/2$（機率為 1），而 $|+, y\rangle$ 測到 $s_x = \pm 1/2$ 的機率各半。這說明<strong>振幅的相位攜帶著物理資訊</strong>——單靠機率無法完整描述量子態。
+  </div>
+
+  <h3>光子偏振</h3>
+  <p>光子偏振展示了量子振幅與古典物理之間的有趣聯繫。在平面偏振光中，電向量 $\mathbf{E}$ 的方向保持不變。偏振片只傳播一個方向的分量，因此傳輸的能量比例為 $\cos^2\theta$。</p>
+
+  <p>在量子力學中，個別光子要麼完整通過偏振片，要麼被吸收——沒有中間狀態。令 $|\rightarrow\rangle$ 為光子被傳輸的態，$|\uparrow\rangle$ 為被阻擋的態，則入射光子的態為：</p>
+  <div class="eq">$$|\psi\rangle = \cos\theta\, |\rightarrow\rangle + \sin\theta\, |\uparrow\rangle \tag{1.40}$$</div>
+  <p>每個光子通過的振幅為 $a_\rightarrow = \cos\theta$，機率 $P_\rightarrow = \cos^2\theta$——與古典預測一致。但機制完全不同：古典物理說「每個光子的一部分通過」，量子力學說「每個光子要麼完全通過，要麼完全不通過」。$\cos^2\theta$ 是大量光子的統計結果。</p>
+
+  <p>$|\rightarrow\rangle$ 和 $|\uparrow\rangle$ 構成光子偏振的一組完整態集合。另一組完整的集合是圓偏振態 $|+\rangle$（右旋）和 $|-\rangle$（左旋）。它們可以表示為線偏振態的疊加：</p>
+  <div class="eq">$$|\pm\rangle = \frac{1}{\sqrt{2}}\big(|\rightarrow\rangle \mp i|\uparrow\rangle\big) \tag{1.43}$$</div>
+  <p>反之，線偏振態可以表示為圓偏振態的疊加：</p>
+  <div class="eq">$$|\rightarrow\rangle = \frac{1}{\sqrt{2}}\big(|+\rangle + |-\rangle\big) \tag{1.44}$$</div>
+
+  <p>在實驗室中，圓偏振光通常由平面偏振光通過雙折射材料（如方解石）產生，方解石的光軸與入射偏振方向成 45°。入射光被分解為沿方解石兩個軸的分量，其中一個分量的相位被移動 $\pi/2$。</p>
+
+  <div class="callout-warn">
+    <strong>⚠️ 古典物理與量子力學的關鍵差異</strong><br>
+    在古典物理中，複數只是表示 $\cos(\omega t + \phi)$ 的方便工具，物理量是實數。在量子力學中，振幅是<strong>本質上複數的</strong>——不使用 $\mathrm{Re}$ 運算子。古典物理中光束可以是某個方向的線偏振或某個手性的圓偏振；量子力學中，單個光子同時具有各種偏振方向和手性的振幅。某個偏振方向的振幅可能為零，或某個手性的振幅可能為零——但在一般情況下，光子在任何方向和任何手性都有非零的振幅。
+  </div>
+
+  <details class="example">
+    <summary>📝 自編概念例：光子偏振的計算</summary>
+    <div class="example-body">
+      <p><strong>題目：</strong>一個沿 $45°$ 偏振的光子通過一個水平偏振片。求：(a) 光子通過的機率；(b) 通過偏振片後，光子的偏振態是什麼？</p>
+      <p><strong>解：</strong></p>
+      <p>(a) 入射態 $|\psi\rangle = \cos 45°\, |\rightarrow\rangle + \sin 45°\, |\uparrow\rangle = \frac{1}{\sqrt{2}}|\rightarrow\rangle + \frac{1}{\sqrt{2}}|\uparrow\rangle$。</p>
+      <p>通過的振幅：$a_\rightarrow = \langle \rightarrow | \psi \rangle = \frac{1}{\sqrt{2}}$。</p>
+      <p>機率：$P = |a_\rightarrow|^2 = \frac{1}{2}$。</p>
+      <p>(b) 測量後波函數坍縮：$|\psi\rangle \to |\rightarrow\rangle$。光子現在確定是水平偏振。</p>
+      <p><strong>物理意義：</strong>即使入射光子「一半偏振水平、一半偏振垂直」，通過偏振片後它<strong>完全</strong>變成水平偏振。偏振片不只是「過濾」——它改變了光子的量子態。如果再放一個 45° 偏振片，光子又有 $1/2$ 的機率通過——測量過程不可逆地改變了系統。</p>
+    </div>
+  </details>
+</section>
+<!-- ====== 1.4 測量 ====== -->
+<section class="deep-dive" id="s1-4">
+<h2>1.4　測量</h2>
+<div class="section-keypoints">
+  <strong>🔑 本節重點</strong>
+  <span>① 測量前態為疊加 $|\psi\rangle = \sum_i a_i |i\rangle$，結果不確定</span>
+  <span>② 測量後態「坍縮」到對應的基底態 $|I\rangle$</span>
+  <span>③ 坍縮是真實的物理過程，不只是知識的更新</span>
+  <span>④ 古典不確定性可縮小，量子不確定性是現實的基本特徵</span>
+</div>
+
+  <p>方程 (1.29) 將量子態 $|\psi\rangle$ 展開為特定測量（如能量）確定得到某個值的態的和。展開係數的模平方給出各結果的機率。因此，只要展開式中有多於一項，測量結果就是<strong>不確定的</strong>——這種不確定性不是測量儀器的缺陷，而是物理情境中<strong>固有的</strong>。任何儀器的缺陷只會<strong>增加</strong>不確定性，使其超過展開係數所暗示的不可約最低值。</p>
+
+  <p>這裡我們討論的是<strong>理想測量</strong>——它們是可重複的。如果在第一次測量後立即進行第二次測量，會得到相同的結果。這個觀察有深刻的意義：它告訴我們，第一次測量將系統的量子態從 $|\psi\rangle = \sum_i a_i |i\rangle$ 改變為 $|\psi\rangle = |I\rangle$，其中 $|I\rangle$ 是保證得到第一次測量結果的那個態。</p>
+
+  <p>量子態伴隨測量而發生的這種突然變化稱為<strong>波函數坍縮</strong>（collapse of the wavefunction）。</p>
+
+  <div class="callout">
+    <strong>💡 坍縮是物理過程嗎？</strong><br>
+    一個自然的想法是：坍縮不是物理事件，而只是我們對系統知識的更新——系統在測量前就已經處於態 $|I\rangle$，我們只是在測量時才知道這一點。這個解釋稱為「認識論詮釋」。但這個解釋<strong>站不住腳</strong>，波函數坍縮伴隨著對系統的真實物理擾動。為什麼？因為如果系統在測量前就已經處於態 $|I\rangle$，那麼對不同測量量的測量結果之間的統計關聯（將在§6.5 中討論）就無法解釋。這個話題將在第 6 章進一步探討。
+  </div>
+
+  <div class="callout-warn">
+    <strong>⚠️ 不確定性 ≠ 無知——量子力學最深刻的教訓</strong><br>
+    古典世界中，不確定性可以通過更仔細的工作來任意縮小——更精確的儀器、更好的隔離、更完善的理論。但在量子世界中，<strong>不確定性是編織在現實的纖維之中的</strong>。即使我們對系統的狀態擁有邏輯上可能的最完整資訊，某些測量的結果仍然不確定。這是量子力學與古典物理最深刻的差異——它不是技術上的限制，而是自然界的本質特徵。
+  </div>
+
+  <h3>測量與疊加的區別</h3>
+  <p>一個常見的困惑是：如果系統處於疊加態 $|\psi\rangle = a_1 |E_1\rangle + a_2 |E_2\rangle$，這是否意味著系統「同時處於兩個能量」？答案是否定的。疊加態不是說系統同時擁有多個值，而是說<strong>測量結果是不確定的</strong>——測量時會得到 $E_1$ 或 $E_2$ 中的一個，而不是兩者的某種混合。</p>
+
+  <p>疊加態的物理意義在於：<strong>不同態之間存在干涉</strong>。這是「系統同時處於兩個態」這種說法無法捕捉的。如果只是「不知道是哪個態」（古典無知），就不會有干涉。只有當系統真正處於疊加態時，干涉才會出現——這正是§1.2 中干涉項的來源。</p>
+
+  <details class="example">
+    <summary>📝 自編概念例：測量與坍縮</summary>
+    <div class="example-body">
+      <p><strong>題目：</strong>某粒子處於態 $|\psi\rangle = \frac{1}{\sqrt{2}} |E_1\rangle + \frac{1}{\sqrt{2}} |E_2\rangle$。先測量能量，得到 $E_1$。問：(a) 測量前，測到 $E_1$ 的機率是多少？(b) 測量後，系統的態是什麼？(c) 立即再測一次能量，結果如何？(d) 等待一段時間後再測，結果會相同嗎？</p>
+      <p><strong>解：</strong></p>
+      <p>(a) 測到 $E_1$ 的振幅 $a_1 = \langle E_1 | \psi \rangle = 1/\sqrt{2}$，機率 $p_1 = |a_1|^2 = 1/2$。</p>
+      <p>(b) 測量後波函數坍縮：$|\psi\rangle \to |E_1\rangle$。</p>
+      <p>(c) 再次測量能量，態 $|E_1\rangle$ 保證得到 $E_1$，機率為 1。</p>
+      <p>(d) 如果系統是孤立的，且 $|E_1\rangle$ 是 Hamiltonian 的本徵態，則態不會隨時間改變（只多一個整體相位因子），再次測量仍得到 $E_1$。但如果系統與環境交互作用，態可能改變，再次測量可能得到不同的結果。</p>
+      <p><strong>物理意義：</strong>第一次測量「選擇」了一個結果，並將系統投射到對應的態。此後系統「記住」了這個結果——直到某種外部擾動改變它。這就是為什麼理想測量是可重複的。</p>
+    </div>
+  </details>
+
+  <details class="example">
+    <summary>📝 自編概念例：疊加態不是混合態</summary>
+    <div class="example-body">
+      <p><strong>題目：</strong>考慮以下兩種情況：(A) 系統處於疊加態 $|\psi\rangle = \frac{1}{\sqrt{2}}(|E_1\rangle + |E_2\rangle)$；(B) 系統以 50% 機率處於 $|E_1\rangle$ 或 $|E_2\rangle$（我們不知道是哪個）。這兩種情況在測量能量時有什麼不同？</p>
+      <p><strong>解：</strong>兩種情況下，測量能量得到 $E_1$ 或 $E_2$ 的機率都是 $1/2$。<strong>但疊加態 (A) 有干涉效應，而混合態 (B) 沒有。</strong></p>
+      <p>具體來說，如果我們不是測量能量，而是測量另一個量（如位置），其本徵態是 $|E_1\rangle$ 和 $|E_2\rangle$ 的線性組合，那麼 (A) 和 (B) 會給出不同的機率分布。在 (A) 中，$|E_1\rangle$ 和 $|E_2\rangle$ 的振幅會干涉；在 (B) 中，它們只是機率相加。</p>
+      <p><strong>物理意義：</strong>疊加態和混合態的差異是量子力學的核心。疊加態有相位關係，可以干涉；混合態沒有相位關係，只是古典機率的混合。這個差異將在第 6 章用密度算符的語言更精確地描述。</p>
+    </div>
+  </details>
+</section>
+
+<!-- ====== 本章摘要 ====== -->
+<section id="summary">
+  <h2>本章摘要</h2>
+  <p>本章建立了量子力學的數學語言：機率振幅、Dirac notation 和向量空間結構。以下是核心概念和公式的整理：</p>
+  <div class="table-scroll" role="region" aria-label="本章關鍵概念與公式" tabindex="0">
+    <table>
+      <caption>本章關鍵概念、公式、適用條件與用途</caption>
+      <thead>
+        <tr>
+          <th scope="col">概念／公式</th>
+          <th scope="col">符號與單位</th>
+          <th scope="col">適用條件</th>
+          <th scope="col">用途</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">機率振幅 $p = |A|^2$</th>
+          <td>$A$：無因次複數</td>
+          <td>所有量子測量</td>
+          <td>量子力學計算機率的核心規則</td>
+        </tr>
+        <tr>
+          <th scope="row">疊加原理 $A(S\text{ or }T) = A(S) + A(T)$</th>
+          <td>振幅相加</td>
+          <td>互斥路徑、不監測路徑</td>
+          <td>產生干涉項，解釋雙縫實驗</td>
+        </tr>
+        <tr>
+          <th scope="row">干涉項 $2\,\mathrm{Re}(A_S A_T^*)$</th>
+          <td>實數，可正可負</td>
+          <td>兩路徑疊加</td>
+          <td>違反古典機率加法規則的根源</td>
+        </tr>
+        <tr>
+          <th scope="row">Dirac bra-ket $\langle \phi | \psi \rangle = \sum_i b_i^* a_i$</th>
+          <td>複數（振幅）</td>
+          <td>歸一化態</td>
+          <td>提取任意測量結果的振幅</td>
+        </tr>
+        <tr>
+          <th scope="row">正交性 $\langle j | i \rangle = \delta_{ij}$</th>
+          <td>0 或 1</td>
+          <td>基底態之間</td>
+          <td>從疊加態中提取單一成分</td>
+        </tr>
+        <tr>
+          <th scope="row">歸一化 $\langle \psi | \psi \rangle = 1$</th>
+          <td>無因次</td>
+          <td>物理態</td>
+          <td>確保機率總和為 1</td>
+        </tr>
+        <tr>
+          <th scope="row">伴隨 $\langle \psi| = \sum_i a_i^* \langle i|$</th>
+          <td>分量取複共軛</th>
+          <td>任意 ket</th>
+          <td>計算內積和期望值</td>
+        </tr>
+        <tr>
+          <th scope="row">波函數坍縮 $|\psi\rangle \to |I\rangle$</th>
+          <td>態的突然改變</td>
+          <td>理想測量</td>
+          <td>測量後系統處於確定態</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ====== 常見錯誤 ====== -->
+<section id="common-mistakes">
+  <h2>初學者常見錯誤</h2>
+  <div class="callout-warn">
+    <strong>⚡ 錯誤一：混淆振幅與機率</strong><br>
+    機率振幅是<strong>複數</strong>，可以為負或為虛數，可以相互抵消（干涉）。機率是實數且非負，不能抵消。$|A_1 + A_2|^2 \neq |A_1|^2 + |A_2|^2$——忘記交叉項是最常見的計算錯誤。記住：<strong>先相加再取模平方</strong>，不是先取模平方再相加。
+  </div>
+  <div class="callout-warn">
+    <strong>⚡ 錯誤二：把 ket 當成「一個數」</strong><br>
+    $|\psi\rangle$ 不是一個數值，而是一組完整的振幅——它類似一個向量，而不是一個分量。問「$|\psi\rangle$ 等於多少」就像問「向量 $\mathbf{v}$ 等於多少」——必須先指定座標系（選擇哪組基底），才能給出分量值。不同基底下的分量不同，但態本身是獨立於基底的。
+  </div>
+  <div class="callout-warn">
+    <strong>⚡ 錯誤三：以為測量只是「發現」系統本來的狀態</strong><br>
+    在古典物理中，測量只是揭示系統已經擁有的值。但在量子力學中，測量<strong>改變</strong>系統的態——從疊加態坍縮到確定態。這種改變是不可逆的，不是知識的更新。測量前系統「不是」某個特定的態，而是各可能態的疊加。
+  </div>
+  <div class="callout-warn">
+    <strong>⚡ 錯誤四：忽略歸一化條件</strong><br>
+    只有正確歸一化的態（$\langle \psi | \psi \rangle = 1$）才能用方程 (1.30) 提取振幅。未歸一化的態必須先用方程 (1.32) 歸一化，否則算出的「機率」可能大於 1 或不等於 1 的總和。
+  </div>
+  <div class="callout-warn">
+    <strong>⚡ 錯誤五：把疊加態理解成「不知道是哪個態」</strong><br>
+    疊加態 $|\psi\rangle = a_1|E_1\rangle + a_2|E_2\rangle$ 不是說「系統在 $|E_1\rangle$ 或 $|E_2\rangle$ 中，只是我們不知道是哪個」。疊加態有相位關係，會產生干涉；而「不知道是哪個」只是古典無知，不會干涉。這個區別是量子力學最反直覺的地方。
+  </div>
+</section>
+
+<!-- ====== 自我檢測 ====== -->
+<section id="self-check">
+  <h2>自我檢測</h2>
+  <details class="self-check-item">
+    <summary>1. 量子力學為什麼使用「機率振幅」而不是直接使用「機率」？干涉項的物理意義是什麼？</summary>
+    <div class="self-check-answer">
+      <p>量子力學使用機率振幅是因為疊加原理要求<strong>振幅相加</strong>而非機率相加。干涉項 $2\,\mathrm{Re}(A_S A_T^*)$ 來自兩個路徑振幅的相位干涉，它使總機率偏離各路徑機率的簡單相加。這是量子力學與古典機率理論的根本差異——在古典理論中，互斥事件的機率嚴格相加。</p>
+      <p class="solution-note">正文依據：§1.2</p>
+    </div>
+  </details>
+  <details class="self-check-item">
+    <summary>2. $\langle \phi | \psi \rangle$ 和 $\langle \psi | \phi \rangle$ 之間有什麼關係？這與向量內積有何異同？</summary>
+    <div class="self-check-answer">
+      <p>$\langle \psi | \phi \rangle = (\langle \phi | \psi \rangle)^*$——兩者互為複共軛。在三維實向量空間中，內積是對稱的（$\mathbf{a} \cdot \mathbf{b} = \mathbf{b} \cdot \mathbf{a}$），因為分量是實數。在量子力學的複向量空間中，這個對稱性被共軛對稱性取代——這是因為 bra 的分量是 ket 分量的複共軛。</p>
+      <p class="solution-note">正文依據：§1.3.3</p>
+    </div>
+  </details>
+  <details class="self-check-item">
+    <summary>3. 為什麼雙縫實驗中子彈看不到干涉條紋？這是否意味著子彈不服從量子力學？</summary>
+    <div class="self-check-answer">
+      <p>子彈<strong>確實</strong>服從量子力學，干涉條紋確實存在。但條紋間距 $\Delta \sim 10^{-29}$ m 遠小於任何可測量的尺度。任何實際實驗測到的是干涉項在許多峰谷上的平均，而這個平均為零，因此與古典預測一致。這說明古典力學是量子力學在大質量極限下的近似。</p>
+      <p class="solution-note">正文依據：§1.2.1</p>
+    </div>
+  </details>
+  <details class="self-check-item">
+    <summary>4. 在自旋-½ 粒子的例子中，$|+, x\rangle$ 和 $|+, y\rangle$ 有什麼物理差異？它們對 $s_z$ 的測量有什麼不同的預測？</summary>
+    <div class="self-check-answer">
+      <p>$|+, x\rangle$ 和 $|+, y\rangle$ 都有 $1/2$ 的機率測到 $s_z = +1/2$。它們的物理差異在於<strong>相位</strong>：$|+, x\rangle$ 中測到 $s_z = \pm 1/2$ 的振幅比值是 1，而 $|+, y\rangle$ 中比值是 $i$。這個相位差異會在測量 $s_x$ 或 $s_y$ 時表現出來——$|+, x\rangle$ 保證測到 $s_x = +1/2$，而 $|+, y\rangle$ 則不會。</p>
+      <p class="solution-note">正文依據：§1.3.5</p>
+    </div>
+  </details>
+  <details class="self-check-item">
+    <summary>5. 為什麼 $\langle \psi | \psi \rangle$ 必須是實數且非負？這與機率的什麼性質對應？</summary>
+    <div class="self-check-answer">
+      <p>$\langle \psi | \psi \rangle = \sum_i |a_i|^2$，而每個 $|a_i|^2$ 都是實數且非負，所以總和也是實數且非負。這對應機率的基本性質：機率不能為負，且所有互斥結果的機率總和必須等於 1（歸一化態）。如果 $\langle \psi | \psi \rangle$ 為負，就會出現負機率——物理上無意義。</p>
+      <p class="solution-note">正文依據：§1.3.3、方程 (1.25)</p>
+    </div>
+  </details>
+  <details class="self-check-item">
+    <summary>6. 伴隨空間 $V'$ 為什麼與 $V$ 有相同的維度？這個結果的物理意義是什麼？</summary>
+    <div class="self-check-answer">
+      <p>因為 $V'$ 中的任何 bra 都可以表示為 $N$ 個由 $\langle j | i \rangle = \delta_{ij}$ 定義的 bra 的線性組合（方程 1.23），而這 $N$ 個 bra 是線性獨立的。物理意義：對於每個量子態（ket），都有一個對應的「測量函數」（bra），而且態空間和測量空間有相同的「自由度」——這保證了我們可以從任何態中提取任何測量的振幅。</p>
+      <p class="solution-note">正文依據：§1.3.3</p>
+    </div>
+  </details>
+  <details class="self-check-item">
+    <summary>7. 疊加態和混合態有什麼本質差異？舉例說明。</summary>
+    <div class="self-check-answer">
+      <p>疊加態 $|\psi\rangle = a_1|E_1\rangle + a_2|E_2\rangle$ 有確定的相位關係，不同態之間會干涉。混合態是「以某機率處於某態」的古典無知，沒有相位關係，不會干涉。例如：疊加態 $\frac{1}{\sqrt{2}}(|E_1\rangle + |E_2\rangle)$ 和 $\frac{1}{\sqrt{2}}(|E_1\rangle - |E_2\rangle)$ 對能量測量給出相同機率，但對其他測量可能給出不同結果——因為相位不同。</p>
+      <p class="solution-note">正文依據：§1.4（自編概念例）</p>
+    </div>
+  </details>
+  <details class="self-check-item">
+    <summary>8. 如果量子態 $|\psi\rangle$ 未歸一化（$\langle \psi | \psi \rangle \neq 1$），我們如何計算測量結果的機率？</summary>
+    <div class="self-check-answer">
+      <p>首先用方程 (1.32) 歸一化：$|\psi_{\text{norm}}\rangle = |\psi\rangle / \sqrt{\langle \psi | \psi \rangle}$。然後用 $a_k = \langle E_k | \psi_{\text{norm}} \rangle$ 提取振幅，機率為 $p_k = |a_k|^2$。或者直接計算 $p_k = |\langle E_k | \psi \rangle|^2 / \langle \psi | \psi \rangle$。</p>
+      <p class="solution-note">正文依據：§1.3.4、方程 (1.32)</p>
+    </div>
+  </details>
+</section>
+
+<!-- ====== 延伸資源 ====== -->
+<section id="extras">
+  <h2>延伸資源與下一章</h2>
+  <ul class="resource-list">
+    <li><a href="#">本章公式整理</a></li>
+    <li><a href="#">本章例題與練習</a></li>
+  </ul>
+  <div class="further-reading">
+    <strong>下一章預告：運算子、測量與時間演化</strong>
+    <p>本章建立了量子態的數學語言，但還沒有回答一個關鍵問題：<strong>量子態如何隨時間演化？</strong>第 2 章將引入運算子的概念——它們是對系統進行測量的數學對應物，也是驅動時間演化的引擎。我們將看到 Schrödinger 方程如何從機率振幅的結構中自然湧現，以及不確定性原理如何從運算子的非對易性中產生。</p>
+    <a href="ch2_operators_zh.html">前往下一章 →</a>
+  </div>
+</section>
+
+</main>
+
+</body>
+</html>

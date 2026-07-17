@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第 6 章 複合系統 — The Physics of Quantum Mechanics</title>
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$'], ['\\[','\\]']] },
+  options: { ignoreHtmlClass: 'no-mathjax' }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<link rel="stylesheet" href="../../../../shared/core.css">
+<script src="../../../../shared/core.js" defer></script>
+<link rel="stylesheet" href="../../../../shared/navigation.css" data-shared-navigation>
+</head>
+<body>
+
+<nav class="sidebar" id="sidebar" aria-label="本章目錄"><div class="sidebar-header"><div class="sidebar-subtitle">量子力學</div><h2 class="sidebar-title">第 6 章 複合系統</h2></div><div class="toc">
+    <div class="nsub"><a href="#preview">本章預覽</a></div>
+    <div class="nsub"><a href="#s6-1">6.1 複合系統</a></div>
+    <div class="nsub"><a href="#s6-2">6.2 量子計算</a></div>
+    <div class="nsub"><a href="#s6-3">6.3 密度算符</a></div>
+    <div class="nsub"><a href="#s6-4">6.4 熱力學</a></div>
+    <div class="nsub"><a href="#s6-5">6.5 測量</a></div>
+    <div class="nsub"><a href="#summary">關鍵概念與公式</a></div>
+    <div class="nsub"><a href="#common-mistakes">常見錯誤</a></div>
+    <div class="nsub"><a href="#self-check">自我檢測</a></div>
+    <div class="nsub"><a href="#extras">延伸資源</a></div>
+  </div>
+<div class="sidebar-tools"><button type="button" data-action="toggle-theme" aria-label="切換深色或淺色模式">切換顯示主題</button></div></nav>
+
+<main class="chapter-page" data-chapter-title="第 6 章 複合系統" data-prev-href="ch5_step_potentials_zh.html" data-prev-label="第 5 章 階梯勢中的運動" data-next-href="ch7_angular_momentum_zh.html" data-next-label="第 7 章 角動量">
+<!-- ====== 章首 ====== -->
+<header class="chapter-header">
+  <div class="chapter-subtitle">
+    <a href="../../index.html">量子力學</a> &rsaquo; <a href="ch5_step_potentials_zh.html">Ch5</a> &rsaquo; Ch6
+  </div>
+  <h1>第 6 章　複合系統</h1>
+  <div class="chapter-meta">
+    <span>原書章節：Chapter 6, Composite systems</span>
+    <span>原書頁碼：p105–138</span>
+    <span>章長：35 頁 · 5 節 · 60+ 個公式</span>
+  </div>
+</header>
+
+<!-- ====== 本章預覽 ====== -->
+<section class="chapter-preview" id="preview">
+  <h2>本章預覽</h2>
+
+  <div class="core-question">
+    <h3>核心問題</h3>
+    <p>量子力學的前五章處理的是單一系統——單粒子、單自旋、單諧振子。但真實世界中的系統很少是孤立存在的：氫原子由質子和電子組成，鑽石由 $10^{23}$ 個碳原子構成，測量儀器必定與被測系統耦合。<strong>當我們把兩個量子系統組合在一起時會發生什麼？為什麼這種組合會導致「糾纏」這種古典物理完全沒有的奇異現象？量子糾纏如何挑戰我們對現實本質的理解——甚至讓愛因斯坦感到不安？</strong>本章帶你從兩個量子系統的張量積出發，一路走到量子計算的前景、熱力學的量子根源，以及測量問題的哲學深淵。</p>
+  </div>
+
+  <div class="deep-dive">
+    <h3>10 個關鍵概念</h3>
+    <ol>
+      <li><strong>張量積態</strong>：複合系統的態是子系統態的張量積 $|AB; i,j\\rangle = |A;i\\rangle |B;j\\rangle$——$N_A N_B$ 個振幅取代了 $N_A + N_B$ 個</li>
+      <li><strong>量子糾纏</strong>：當複合系統的態不能寫成子系統態的乘積時，子系統之間就存在不可約化的量子關聯</li>
+      <li><strong>波函數坍縮</strong>：測量子系統 A 會瞬間改變子系統 B 的態——即使兩者相距遙遠</li>
+      <li><strong>EPR 悖論</strong>：愛因斯坦、Podolski 和 Rosen 提出糾纏實驗試圖證明量子力學不完備——隱變數可能存在</li>
+      <li><strong>Bell 不等式</strong>：任何局部隱變數理論都必須滿足的數學約束——量子力學的預測違反此不等式，實驗也證實了這一點</li>
+      <li><strong>量子位元（qubit）</strong>：量子計算的基本單位，與古典位元不同，qubit 可以是 $|0\\rangle$ 和 $|1\\rangle$ 的任意疊加</li>
+      <li><strong>量子平行性</strong>：$N$ 個 qubit 的暫存器可以同時代表 $2^N$ 個數——這是量子計算指數級加速的來源</li>
+      <li><strong>密度算符</strong>：$\\rho = \\sum_n p_n |n\\rangle\\langle n|$——當我們對系統的態只有機率性知識時，密度算符是描述系統的正確工具</li>
+      <li><strong>Shannon 熵與 von Neumann 熵</strong>：$s = -\\sum_i p_i \\ln p_i$ 量化缺失的資訊——它是熱力學熵的量子根源</li>
+      <li><strong>量子去相干</strong>：系統與環境的糾纏使純態變成混合態——這是古典世界從量子世界中「浮現」的機制</li>
+    </ol>
+  </div>
+
+  <div class="deep-dive">
+    <h3>🧭 本章推理地圖</h3>
+    <ol>
+      <li><strong>兩個量子系統組合 → 張量積態空間（§6.1）</strong>→ $N_A N_B$ 個振幅描述複合系統，遠多於 $N_A + N_B$ 個乘積態振幅</li>
+      <li><strong>一般複合態無法分解為乘積 → 量子糾纏（§6.1）</strong>→ 子系統之間出現不可約化的量子關聯，沒有古典對應</li>
+      <li><strong>交互作用 Hamiltonian $H_{\\text{int}}$ 驅動糾纏的產生（§6.1.3）</strong>→ 幾乎任何耦合都會使子系統糾纏</li>
+      <li><strong>糾纏 + 測量坍縮 → EPR 悖論（§6.1.4）</strong>→ 看似違反局域性，引發隱變數的猜測</li>
+      <li><strong>隱變數理論必須滿足 Bell 不等式（§6.1.4）</strong>→ 量子力學違反此不等式，隱變數被實驗排除</li>
+      <li><strong>$N$ 個 qubit 的態空間維度 $2^N$ → 量子計算的平行性（§6.2）</strong>→ 一個量子暫存器同時代表所有可表示的數</li>
+      <li><strong>我們無法完全知道宏觀系統的態 → 密度算符 $\\rho$（§6.3）</strong>→ 用機率加權的投影算符描述不完全知識</li>
+      <li><strong>子系統與環境糾纏 → 縮減密度算符 $\\rho_A$（§6.3.1）</strong>→ 對環境取偏跡後，子系統從純態變成混合態（去相干）</li>
+      <li><strong>最大化 Shannon 熵給出 Gibbs 分布（§6.4）</strong>→ $p_i = e^{-\\beta E_i}/Z$，由此推導出全部熱力學關係</li>
+      <li><strong>測量 = 被測系統與宏觀儀器的糾纏（§6.5）</strong>→ 坍縮假設是繞過儀器動力學的捷徑，真正理解測量需要擴展量子力學</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ====== 先備知識橋接 ====== -->
+<section class="prerequisite">
+  <h2>先備知識橋接</h2>
+  <p>本章假設讀者已掌握以下內容：</p>
+  <ul>
+    <li><strong>Dirac notation 與線性代數</strong>：$|\\psi\\rangle$、$\\langle\\phi|\\psi\\rangle$、基底展開、正交歸一性（Ch1）</li>
+    <li><strong>運算子與可觀察量</strong>：Hermitian 算符、本徵值與本徵態、期望值 $\\langle Q\\rangle = \\langle\\psi|Q|\\psi\\rangle$（Ch2）</li>
+    <li><strong>時間演化</strong>：Schrödinger 方程 $i\\hbar\\,\\partial|\\psi\\rangle/\\partial t = H|\\psi\\rangle$、時間演化算符 $U(t) = e^{-iHt/\\hbar}$（Ch4）</li>
+    <li><strong>諧振子</strong>：產生與消滅算符、零點能、Fock 態（Ch5）</li>
+    <li><strong>自旋-½ 系統</strong>：$|+\\rangle$ 與 $|-\\rangle$ 態、沿任意方向的測量機率（Ch1 §1.3.5）</li>
+  </ul>
+  <p><strong>新概念預告：</strong>本章引入張量積（$\\otimes$）——這是你第一次看到兩個量子系統如何「放在一起」。好消息是：張量積的規則非常簡單，第二章中「算符只作用在自己的系統上」這個直覺會派上大用場。</p>
+</section>
+
+<!-- ====== 6.1 複合系統 ====== -->
+<section class="deep-dive" id="s6-1">
+<h2>6.1　複合系統</h2>
+<div class="section-keypoints">
+  <strong>🔑 本節重點</strong>
+  <span>① 複合系統的態是張量積 $|AB;i,j\\rangle = |A;i\\rangle|B;j\\rangle$</span>
+  <span>② 一般態需要 $N_A N_B$ 個振幅——遠多於乘積態的 $N_A+N_B$</span>
+  <span>③ 無法分解為乘積的態 = 糾纏態，子系統間有不可約化的關聯</span>
+  <span>④ 交互作用 Hamiltonian 驅動糾纏的產生</span>
+  <span>⑤ EPR 實驗 + Bell 不等式排除局部隱變數理論</span>
+</div>
+
+  <p>系統通常由多個部分組成。氫原子由一個質子和一個電子組成，鑽石由極大量的碳原子組成。在這些複合系統中，組成部分之間存在顯著的物理交互作用——電子在質子的電磁場中運動，鑽石中各原子之間有電磁力。但原則上，複合系統的各部分之間不需要有物理交互作用：只要我們把各部分視為一個整體系統就足夠了。例如，「量子密碼學」利用的是相距遙遠且互不交互作用的光子之間的關聯。</p>
+
+  <p>即使在古典物理中，描述複合系統的狀態也是一件複雜的事，因為一般情況下各部分之間存在關聯：對於某個子系統的一個可觀察量得到某個值的機率，取決於另一個子系統的狀態。在量子力學中，關聯是透過系統各態之間的量子干涉產生的，這導致關聯有時伴隨著意想不到且有時令人困惑的現象。</p>
+
+  <h3>張量積與態空間</h3>
+  <p>假設 $\\{|A;i\\rangle\\}$ 和 $\\{|B;j\\rangle\\}$ 分別是系統 A 和 B 的態集合。那麼符號乘積 $|A;i\\rangle|B;j\\rangle$ 用來表示複合系統中 A 處於態 $|A;i\\rangle$ 且 B 處於態 $|B;j\\rangle$ 的態。我們將此寫為：</p>
+  <div class="eq">$$|AB; i,j\\rangle = |A;i\\rangle|B;j\\rangle \\tag{6.1a}$$</div>
+  <p>其 Hermitian 伴隨為 $\\langle AB; i,j| = \\langle A;i|\\langle B;j|$。bra 與 ket 的乘積規則定義為：</p>
+  <div class="eq">$$\\langle AB; i',j' | AB; i,j\\rangle = \\langle A;i'|A;i\\rangle\\,\\langle B;j'|B;j\\rangle \\tag{6.2}$$</div>
+  <p>這個規則是物理上合理的，因為它意味著 AB 處於態 $i'j'$ 的機率是 A 處於態 $i'$ 和 B 處於態 $j'$ 的機率之乘積：$p(AB;i',j') = |\\langle AB;i',j'|AB;i,j\\rangle|^2 = p(A;i')\\,p(B;j')$。</p>
+
+  <p>任何能寫成 A 的態和 B 的態之乘積的 AB 態都是相當特殊的。考慮最簡單的非平凡例子：A 和 B 都是雙態系統，以 $|+\\rangle$、$|-\\rangle$ 為 A 的基底，$|\\uparrow\\rangle$、$|\\downarrow\\rangle$ 為 B 的基底。則 AB 的乘積態為：</p>
+  <div class="eq">$$|AB\\rangle = (a_-|-\\rangle + a_+|+\\rangle)(b_\\downarrow|\\downarrow\\rangle + b_\\uparrow|\\uparrow\\rangle) = a_-b_\\downarrow|-\\rangle|\\downarrow\\rangle + a_-b_\\uparrow|-\\rangle|\\uparrow\\rangle + a_+b_\\downarrow|+\\rangle|\\downarrow\\rangle + a_+b_\\uparrow|+\\rangle|\\uparrow\\rangle \\tag{6.5}$$</div>
+  <p>關鍵在於：當 AB 的態可以寫成乘積 $|A\\rangle|B\\rangle$ 時，找到 B 為 up 的機率與 A 的狀態無關——兩個子系統是<strong>統計獨立</strong>的。然而，通常子系統的態是相關的，此時 AB 的態<strong>不能</strong>表示為簡單乘積 $|A\\rangle|B\\rangle$。</p>
+
+  <div class="callout">
+    <strong>💡 為什麼振幅數量爆炸式增長</strong><br>
+    如果 A 有 $N_A$ 個基底態，B 有 $N_B$ 個基底態，則複合系統 AB 的完備態集合有 $N_A N_B$ 個元素。例如 $N_A = N_B = 1000$ 時，需要一百萬個振幅來描述一般態——相比之下，乘積態只需要 2000 個振幅。多出來的振幅正是用來描述子系統之間的關聯。這是以後討論量子計算指數級加速的關鍵。
+  </div>
+
+  <p>可以證明，由方程 (6.1a) 構成的態集合對複合系統是完備的。任何 AB 的態 $|AB;\\psi\\rangle$ 都可以寫成：</p>
+  <div class="eq">$$|AB;\\psi\\rangle = \\sum_{ij} c_{ij}|AB;i,j\\rangle = \\sum_{ij} c_{ij}|A;i\\rangle|B;j\\rangle \\tag{6.9}$$</div>
+  <p>這意味著描述複合系統所需的振幅數量隨著子系統的複雜度極其迅速地增長。</p>
+
+  <h3>糾纏的數學條件</h3>
+  <p>當展開係數 $c_{ij}$ 不能寫成兩個向量 $a_i$ 和 $b_j$ 的乘積時，我們就說子系統 A 和 B 是<strong>糾纏</strong>的（entangled）。可以用一個簡單的測試來判斷：當 $c_{ij} = a_i b_j$ 時，比率 $c_{ij}/c_{ij'}$ 與 $i$ 無關——也就是說，$c_{ij}$ 形成的矩陣中每一列都是第一列的倍數，每一行都是第一行的倍數。如果這個條件不成立，態就是糾纏的。</p>
+
+  <div class="callout-warn">
+    <strong>⚡ 糾纏 ≠ 古典關聯</strong><br>
+    在古典物理中，兩個齒輪嚙合後也會產生關聯——但那是因為齒輪之間有物理接觸。量子糾纏則不同：即使 A 和 B 之間完全沒有交互作用，它們仍然可以處於糾纏態。糾纏本質上是量子力學的振幅疊加所導致的——它是「用振幅相加來描述關聯」的結果，在古典物理中沒有對應物。
+  </div>
+
+  <div class="callout">
+    <strong>💡 氫原子的例子</strong><br>
+    在位置表象中，氫原子的波函數為 $\\psi(\\mathbf{x}_e, \\mathbf{x}_p) = \\langle\\mathbf{x}_e,\\mathbf{x}_p|\\psi\\rangle$。使用完備集 $u_i(\\mathbf{x}_e)$ 和 $U_j(\\mathbf{x}_p)$，我們有 $\\psi(\\mathbf{x}_e,\\mathbf{x}_p) = \\sum_{ij} c_{ij}u_i(\\mathbf{x}_e)U_j(\\mathbf{x}_p)$。$c_{ij}$ 是找到電子在態 $|u_i\\rangle$ 且質子在態 $|U_j\\rangle$ 的振幅。如果電子與質子之間沒有交互作用，態可以寫成乘積；但庫侖交互作用必然導致它們糾纏。
+  </div>
+
+  <h3>6.1.1 波函數坍縮</h3>
+  <p>再次考慮 A 和 B 都是雙態系統的情況。令 AB 處於糾纏態：</p>
+  <div class="eq">$$|AB\\rangle = a|+\\rangle|\\uparrow\\rangle + |-\\rangle(b|\\uparrow\\rangle + c|\\downarrow\\rangle) \\tag{6.18a}$$</div>
+  <p>如果對子系統 A 進行測量並得到 $+$，則測量後 AB 的態為 $|AB\\rangle = |+\\rangle|\\uparrow\\rangle$。如果測量 A 得到 $-$，則測量後的態為 $|AB\\rangle = \\frac{1}{\\sqrt{|b|^2+|c|^2}}|-\\rangle(b|\\uparrow\\rangle + c|\\downarrow\\rangle)$。</p>
+
+  <p>新的轉折是：當我們將複合系統的態展開為要測量的子系統的態的線性組合時，這些態的<strong>係數是另一個子系統的態</strong>，而不是單純的振幅。因此，對第二個子系統進行後續測量所得到的振幅<strong>取決於</strong>第一次測量的結果。這就是量子糾纏的「鬼魅般的超距作用」——愛因斯坦對它的著名描述。</p>
+
+  <h3>6.1.2 複合系統的算符</h3>
+  <p>子系統的 ket 是相乘的，但子系統的算符是<strong>相加</strong>的。例如，如果 A 和 B 都是自由粒子，複合系統的 Hamiltonian 為：</p>
+  <div class="eq">$$H_{AB} = H_A + H_B = \\frac{p_A^2}{2m_A} + \\frac{p_B^2}{2m_B} \\tag{6.20}$$</div>
+  <p>當存在物理交互作用時，需要加入交互作用 Hamiltonian。例如兩個帶電粒子之間的庫侖交互作用：$H_{\\text{int}} = \\frac{Q^2}{4\\pi\\epsilon_0|\\mathbf{x}_A - \\mathbf{x}_B|}$。當算符作用在乘積 ket 上時，屬於另一個系統的 ket 像複數一樣「旁觀」：$p_B|A;i\\rangle|B;j\\rangle = |A;i\\rangle(p_B|B;j\\rangle)$。</p>
+
+  <p>每一個子系統 A 的算符都與每一個子系統 B 的算符對易。當 $H_{AB} = H_A + H_B$（沒有交互作用）時，$H_{AB}$ 與 $H_A$ 和 $H_B$ 都對易。因此存在 $H_{AB}$、$H_A$ 和 $H_B$ 的共同本徵態完備集，即乘積態 $|AB;i,j\\rangle = |A;i\\rangle|B;j\\rangle$，對應的本徵值為 $E_i^A + E_j^B$。在位置表象中，本徵函數為乘積 $\\psi^{AB}_{ij}(\\mathbf{x}_A,\\mathbf{x}_B) = u_i^A(\\mathbf{x}_A)u_j^B(\\mathbf{x}_B)$。</p>
+
+  <h3>6.1.3 糾纏的產生</h3>
+  <p>「糾纏」這個名稱非常恰當，因為子系統就像風箏線一樣容易糾纏在一起。考慮複合系統 AB 的動力學演化。使用滿足孤立子系統 tdse 的基底態，複合系統的一般態為 $|AB\\rangle = \\sum_{ij} c_{ij}|A;i\\rangle|B;j\\rangle$，其中 $c_{ij}$ 是時間的函數。複合系統的 Hamiltonian 為 $H_{AB} = H_A + H_B + H_{\\text{int}}$。</p>
+
+  <p>代入 tdse 並利用基底態滿足各自 tdse 的條件，化簡後得到：</p>
+  <div class="eq">$$i\\hbar\\frac{dc_{kl}}{dt} = \\sum_{ij} c_{ij}\\,\\langle AB;kl|H_{\\text{int}}|AB;ij\\rangle \\tag{6.32}$$</div>
+  <p>這告訴我們：展開係數的時間演化<strong>完全由交互作用 Hamiltonian 驅動</strong>。如果沒有耦合（$H_{\\text{int}} = 0$），$c_{ij}$ 是常數——如果系統一開始沒有糾纏，就永遠不會糾纏。但幾乎<strong>任何</strong>耦合都會使子系統從未糾纏的初始條件變成糾纏態。</p>
+
+  <div class="callout-warn">
+    <strong>⚡ 為什麼「去相干」是量子計算的最大敵人</strong><br>
+    這個結果也說明了量子計算面臨的核心挑戰：量子暫存器必然與環境耦合（$H_{\\text{int}} \\neq 0$），因此必然與環境糾纏。一旦糾纏發生，暫存器就不再處於純態——量子平行性被破壞了。實驗上，量子計算的進展很大程度上取決於能否抑制這種去相干過程。
+  </div>
+
+  <h3>6.1.4 Einstein–Podolski–Rosen 實驗與 Bell 不等式</h3>
+  <p>1935 年，Einstein、Podolski 和 Rosen（EPR）提出了一個涉及糾纏粒子的思想實驗，他們認為這個實驗將證明量子力學是不完備的理論——需要引入「隱變數」來完整描述物理系統的狀態。1964 年，J.S. Bell 證明了對於類似的實驗，量子力學的預測與隱變數的存在<strong>不相容</strong>。1972 年，此類實驗首次成功實施，結果支持量子力學。</p>
+
+  <p>實驗裝置如下：一個不帶自旋的原子核衰變成另一個不帶自旋的態，同時放出一個電子和一個正電子。由於原子核始終沒有角動量，電子和正電子的自旋角動量必須大小相等、方向相反。在距離原子核一定距離處，Alice 偵測電子並測量其自旋沿她選擇的方向 $\\mathbf{a}$ 的分量；Bob 則偵測正電子並測量其自旋沿他選擇的方向 $\\mathbf{b}$ 的分量。</p>
+
+  <p>由於電子-正電子對的總角動量為零，其態可以寫成（詳見 §7.5.1）：</p>
+  <div class="eq">$$|\\psi\\rangle = \\frac{1}{\\sqrt{2}}\\big(|e+\\rangle|p-\\rangle - |e-\\rangle|p+\\rangle\\big) \\tag{6.33}$$</div>
+  <p>如果 Alice 測量得到 $+\\frac{1}{2}$，系統的態坍縮為 $|\\psi'\\rangle = |e+\\rangle|p-\\rangle$。此時 Bob 測量正電子自旋沿 $\\mathbf{b}$ 方向得到 $+\\frac{1}{2}$ 的機率為：</p>
+  <div class="eq">$$P_B(+|A+) = \\sin^2(\\theta/2) \\tag{6.37}$$</div>
+  <p>其中 $\\cos\\theta = \\mathbf{a}\\cdot\\mathbf{b}$。當 $\\mathbf{a} \\simeq \\mathbf{b}$ 時此機率很小，與常識一致。</p>
+
+  <p>EPR 擔憂的是：Alice 測量後，存在一個方向使 Bob 永遠不會測到 $+\\frac{1}{2}$，而這個方向取決於 Alice 選擇的方向。這似乎意味著正電子以某種方式「知道」Alice 對電子測量了什麼——但相對論禁止 Alice 的測量結果以超光速影響正電子。因此 EPR 認為，所需的資訊必定以<strong>隱變數</strong>的形式隨正電子一起傳播出去。</p>
+
+  <h3>Bell 不等式</h3>
+  <p>Bell 證明：任何隱變數理論都會產生比量子力學<strong>更弱</strong>的關聯。Alice 和 Bob 的測量結果記為 $\\sigma_A = \\pm\\frac{1}{2}$ 和 $\\sigma_B = \\pm\\frac{1}{2}$。乘積 $\\sigma_A\\sigma_B$ 的期望值在量子力學中為：</p>
+  <div class="eq">$$\\langle\\sigma_A\\sigma_B\\rangle = -\\frac{1}{4}\\cos\\theta = -\\frac{1}{4}\\,\\mathbf{a}\\cdot\\mathbf{b} \\tag{6.41}$$</div>
+
+  <p>假設存在隱變數向量 $\\mathbf{v}$，使得測量結果由函數 $\\sigma_e(\\mathbf{v},\\mathbf{a})$ 和 $\\sigma_p(\\mathbf{v},\\mathbf{b})$ 完全決定。則可以推導出 Bell 不等式：</p>
+  <div class="eq">$$\\big|\\langle\\sigma_e(\\mathbf{a})\\sigma_p(\\mathbf{b})\\rangle - \\langle\\sigma_e(\\mathbf{a})\\sigma_p(\\mathbf{b}')\\rangle\\big| \\leq \\frac{1}{4} + \\langle\\sigma_e(\\mathbf{b})\\sigma_p(\\mathbf{b}')\\rangle \\tag{6.46}$$</div>
+
+  <p>將量子力學的結果代入，選擇 $\\mathbf{a}\\cdot\\mathbf{b}=0$ 和 $\\mathbf{b}' = \\mathbf{b}\\cos\\phi + \\mathbf{a}\\sin\\phi$，則左右兩邊分別為 $\\frac{1}{4}|\\sin\\phi|$ 和 $\\frac{1}{4}(1-\\cos\\phi)$。除了 $\\phi = 0$ 和 $\\pi/2$ 之外，<strong>不等式被違反</strong>。因此量子力學的預測與隱變數的存在不相容。</p>
+
+  <div class="callout">
+    <strong>💡 EPR 實驗的深遠結論</strong><br>
+    Bell 不等式被實驗違反確立了幾件事：(1) 量子力學不會被隱變數理論取代——自旋向量<strong>沒有</strong>確定的方向；(2) 宏觀物體之所以看起來有確定的方向，只是因為它們不處於確定自旋的態——「自旋指向確定方向」這個概念是古典的，不適用於確實有確定自旋的物體（如電子）；(3) 量子力學要求<strong>整體性思維</strong>：我們必須把電子-正電子對視為一個整體系統，而不是孤立地處理每個粒子。
+  </div>
+
+
+
+<h3>Schmidt 分解與糾纏的判定</h3>
+<p>是否存在一個系統的方法來判斷一個給定的複合態是否糾纏？答案是 <strong>Schmidt 分解定理</strong>：任何雙系統的純態 $|\psi_{AB}\rangle$ 都可以寫成以下標準形式：</p>
+<div class="eq">$$|\psi_{AB}\rangle = \sum_{k=1}^{r} \lambda_k |u_k\rangle|v_k\rangle \tag{6.47}$$</div>
+<p>其中 $\lambda_k > 0$ 稱為 <strong>Schmidt 係數</strong>，$\{|u_k\rangle\}$ 和 $\{|v_k\rangle\}$ 分別是子系統 A 和 B 的正交歸一基底，$r \leq \min(N_A, N_B)$ 是 Schmidt 秩。這個分解的關鍵在於：兩個子系統使用<strong>相同</strong>的係數集合 $\{\lambda_k\}$。</p>
+<p>Schmidt 分解給出了一個簡單的糾纏判定準則：</p>
+<div class="eq">$$\text{純態是糾纏的} \quad \Longleftrightarrow \quad \text{Schmidt 秩 } r > 1 \tag{6.48}$$</div>
+<p>當 $r = 1$ 時，態是乘積態 $|\psi_{AB}\rangle = \lambda_1|u_1\rangle|v_1\rangle$，子系統之間沒有糾纏。當 $r > 1$ 時，態無法分解為單一乘積——子系統糾纏在一起。</p>
+
+<div class="callout">
+  <strong>💡 Schmidt 分解的計算方法</strong><br>
+  給定 $|\psi_{AB}\rangle = \sum_{ij}c_{ij}|A;i\rangle|B;j\rangle$，構造矩陣 $C_{ij} = c_{ij}$。對 $C$ 進行奇異值分解（SVD）：$C = U\Sigma V^\dagger$，其中 $\Sigma$ 的對角元素就是 Schmidt 係數 $\lambda_k$。$U$ 的列向量是 $\{|u_k\rangle\}$，$V$ 的列向量是 $\{|v_k\rangle\}$。Schmidt 係數滿足歸一化條件 $\sum_k \lambda_k^2 = 1$。例如，對於 Bell 態 $|\Phi^+\rangle = \frac{1}{\sqrt{2}}(|00\rangle + |11\rangle)$，矩陣 $C = \frac{1}{\sqrt{2}}\begin{pmatrix}1&0\\0&1\end{pmatrix}$，Schmidt 秩為 $2$——確認這是最大糾纏態。
+</div>
+
+<h3>糾纏作為資源</h3>
+<p>在量子資訊科學中，糾纏被視為一種<strong>物理資源</strong>——就像能量一樣可以被「消耗」來完成有用的任務。兩個重要的應用：</p>
+<p><strong>量子隱形傳態</strong>（quantum teleportation）：Alice 希望將一個未知量子態 $|\chi\rangle = a|0\rangle + b|1\rangle$ 傳送給 Bob。利用一對預先共享的糾纏 qubit 和兩個 bit 的古典通訊，Alice 可以將 $|\chi\rangle$ 完美地傳給 Bob——但 Alice 的原始態在傳輸過程中被摧毀（這不違反不可克隆定理）。</p>
+<p><strong>超密編碼</strong>（superdense coding）：Alice 和 Bob 預先共享一對糾纏 qubit。Alice 通過操縱她的 qubit（施加四種么正運算子之一），可以向 Bob 傳送兩個 bit 的古典資訊——只傳送一個 qubit。糾纏使通訊容量加倍。</p>
+
+<div class="callout-warn">
+  <strong>⚡ 糾纏不能超光速傳遞資訊</strong><br>
+  量子隱形傳態和超密編碼都需要<strong>古典通訊通道</strong>才能完成任務。在隱形傳態中，Alice 必須將她的測量結果（2 bits）通過古典通道告訴 Bob，Bob 才能恢復 $|\chi\rangle$。在超密編碼中，Bob 必須對兩個 qubit 進行 Bell 基底測量才能解碼 Alice 的訊息。沒有古典通訊，這些方案完全無法運作——因此糾纏<strong>不能</strong>用於超光速通訊，相對論的因果律得到維護。
+</div>
+
+  <details class="example">
+    <summary>📝 自編概念例：Bell 態與關聯強度</summary>
+    <div class="example-body">
+      <p><strong>題目：</strong>考慮雙 qubit 系統的四個 Bell 態之一 $|\\Phi^+\\rangle = \\frac{1}{\\sqrt{2}}(|0\\rangle|0\\rangle + |1\\rangle|1\\rangle)$。Alice 持有第一個 qubit，Bob 持有第二個。(a) 如果 Alice 測量她的 qubit 在 $\\{|0\\rangle,|1\\rangle\\}$ 基底並得到 $0$，Bob 的 qubit 的態是什麼？(b) 在 Alice 測量之前，Bob 單獨測量他的 qubit 得到 $0$ 的機率是多少？(c) 比較 (a) 和 (b)，說明糾纏的「超距關聯」。</p>
+      <p><strong>解：</strong></p>
+      <p>(a) Alice 測量得到 $0$ 後，系統坍縮為 $|0\\rangle|0\\rangle$，Bob 的 qubit 確定處於 $|0\\rangle$。</p>
+      <p>(b) 在 Alice 測量之前，Bob 的縮減密度算符為 $\\rho_B = \\frac{1}{2}(|0\\rangle\\langle 0| + |1\\rangle\\langle 1|)$，測到 $0$ 的機率為 $1/2$。</p>
+      <p>(c) 即使 Alice 和 Bob 相距遙遠，Alice 的測量瞬間將 Bob 對其 qubit 的知識從「$50\\%$ 機率是 $0$」變為「確定是 $0$」。這不是訊息傳遞（Bob 需要知道 Alice 的結果才能利用此資訊），但確實展示了量子關聯的非局域性。</p>
+      <p><strong>物理意義：</strong>Bell 態是最大糾纏態——對一個 qubit 的測量完全決定了另一個 qubit 的態。這種關聯不能用任何古典機率分布來解釋。</p>
+    </div>
+  </details>
+
+  <figure class="figure" id="fig-6-1">
+    <svg class="content-diagram" viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" width="520" height="300" fill="#f8f9fa" rx="8"/>
+      <!-- nucleus -->
+      <circle cx="260" cy="150" r="25" fill="#e74c3c" opacity="0.6"/>
+      <text x="260" y="155" font-size="11" fill="white" text-anchor="middle" font-weight="bold">N</text>
+      <!-- electron -->
+      <circle cx="120" cy="120" r="12" fill="#4a90d9"/>
+      <text x="120" y="124" font-size="9" fill="white" text-anchor="middle">e⁻</text>
+      <!-- positron -->
+      <circle cx="400" cy="180" r="12" fill="#e67e22"/>
+      <text x="400" y="184" font-size="9" fill="white" text-anchor="middle">e⁺</text>
+      <!-- arrows for spin -->
+      <line x1="120" y1="100" x2="120" y2="70" stroke="#4a90d9" stroke-width="2"/>
+      <polygon points="115,75 120,68 125,75" fill="#4a90d9"/>
+      <text x="120" y="62" font-size="9" fill="#4a90d9" text-anchor="middle">σₑ=+½</text>
+      <line x1="400" y1="200" x2="400" y2="230" stroke="#e67e22" stroke-width="2"/>
+      <polygon points="395,225 400,232 405,225" fill="#e67e22"/>
+      <text x="400" y="248" font-size="9" fill="#e67e22" text-anchor="middle">σₚ=−½</text>
+      <!-- Alice and Bob -->
+      <text x="80" y="40" font-size="12" fill="#4a90d9" font-weight="bold">Alice (a)</text>
+      <text x="400" y="40" font-size="12" fill="#e67e22" font-weight="bold">Bob (b)</text>
+      <!-- state -->
+      <text x="260" y="270" font-size="11" fill="#555" text-anchor="middle">$|\\psi\\rangle = \\frac{1}{\\sqrt{2}}(|e+\\rangle|p-\\rangle - |e-\\rangle|p+\\rangle)$</text>
+      <text x="260" y="290" font-size="10" fill="#999" text-anchor="middle">Bell 態——最大糾纏</text>
+    </svg>
+    <figcaption><strong>圖 6.1</strong>　EPR 實驗示意。原子核衰變產生電子-正電子對，自旋沿任何方向的分量必定相反。Alice 測量電子自旋沿 $\\mathbf{a}$，Bob 測量正電子自旋沿 $\\mathbf{b}$。量子力學預測的關聯強度違反 Bell 不等式，排除隱變數。（原書 Fig. 6.1，p114）</figcaption>
+  </figure>
+</section>
+
+<!-- ====== 6.2 量子計算 ====== -->
+<section class="deep-dive" id="s6-2">
+<h2>6.2　量子計算</h2>
+<div class="section-keypoints">
+  <strong>🔑 本節重點</strong>
+  <span>① $N$ 個 qubit 的態空間維度為 $2^N$——指數增長</span>
+  <span>② Hadamard 算符將 $|0\\rangle$ 變成疊加態 $(|0\\rangle+|1\\rangle)/\\sqrt{2}$</span>
+  <span>③ 量子平行性使一個暫存器同時代表所有可表示的數</span>
+  <span>④ 測量坍縮是量子計算的核心制約——需要巧妙演算法</span>
+</div>
+
+  <p>有個古老的故事：一位數學家為中國皇帝提供了明智的建議，皇帝請他提出想要的獎賞。「偉大的皇帝，請在棋盤的第一格放一粒米，第二格放兩粒，第三格放四粒，以此類推，直到放滿 64 格。」皇帝同意了——然後發現全帝國的米都不夠付。因為 $2^{64} - 1 \\sim 10^{19}$ 粒米，約 $10^{12}$ 噸，遠超全球年產量。</p>
+
+  <p>這個故事與量子力學的關聯在於：兩個雙態系統組成的複合系統有四個基底態；再加一個雙態系統就得到八個基底態；64 個雙態系統組成的複合系統將有 $2^{64} \\sim 10^{19}$ 個基底態。64 個雙態系統可能只是 64 個原子或 64 個電子——物理上極其微小，但要計算其動力學就得積分 $10^{19}$ 個振幅的運動方程！這對物理學來說是極壞的消息。</p>
+
+  <p><strong>量子計算的想法正是要將物理學的這個失望轉化為數學的福音。</strong>我們也許無法求解 $10^{19}$ 條運動方程，但大自然可以演化這個物理系統，而對系統進行適當的測量應該能使我們發現計算的結果——如果我們有時間去完成這些計算的話。</p>
+
+  <h3>Qubit 與暫存器</h3>
+  <p>在量子計算中，我們將雙態系統稱為<strong>量子位元（qubit）</strong>，並將其基底態記為 $|0\\rangle$ 和 $|1\\rangle$。$N$ 個 qubit 構成一個<strong>暫存器（register）</strong>，其完備態集合為 $|x\\rangle|x'\\rangle\\cdots|x''\\rangle$ 形式的態，其中 $x, x', \\ldots = 0, 1$。給定一個二進位數字（如 $7 = 4+2+1 = 111$），我們將其與暫存器的基底態 $|0\\rangle\\cdots|0\\rangle|1\\rangle|1\\rangle|1\\rangle$ 關聯起來。這樣就在 $0$ 到 $2^N-1$ 的整數與 $N$ 個 qubit 的暫存器的基底態之間建立了一一對應。為簡潔起見，我們將基底態寫成 $|7\\rangle$ 等。</p>
+
+  <p>量子暫存器與古典暫存器的關鍵區別在於：古典暫存器總是處於與某個確定數字關聯的態，而量子暫存器的<strong>一般態 $|\\psi\\rangle$ 是與不同數字關聯的態的線性組合</strong>：</p>
+  <div class="eq">$$|\\psi\\rangle = \\sum_{j=0}^{2^N-1} c_j|j\\rangle \\tag{6.49}$$</div>
+  <p>因此，量子暫存器的幾乎所有態不是與單個數字關聯，而是<strong>同時與所有可表示的數字關聯</strong>。正是量子暫存器的這種能力——讓單一態與巨大數量的整數關聯——使量子計算機能夠進行大規模平行計算。</p>
+
+  <h3>基本量子閘</h3>
+  <p>量子計算機的核心問題是：我們需要一個滿足么正性的時間演化算符 $U$。由於 $U$ 必須有逆，它不能將兩個不同的輸入態映射到同一個輸出態。解決方案是使用兩個暫存器：<strong>控制暫存器 X</strong> 和<strong>數據暫存器 Y</strong>，讓演化為 $|x\\rangle|y\\rangle \\to |x\\rangle|y+f(x)\\rangle$。第二個暫存器使計算機「記住」它在機器週期開始之前的狀態。</p>
+
+  <p>可以證明，任何 $n$ 個 qubit 暫存器上的么正變換都可以由以下基本算符的組合來模擬：</p>
+
+  <p><strong>受控加法算符 $U_+$</strong>：在計算基底中，$U_+|x\\rangle|y\\rangle = |x\\rangle|y+x\\rangle$（模 2 加法）：</p>
+  <div class="eq">$$U_+ = \\begin{pmatrix} 1 & 0 & 0 & 0 \\\\ 0 & 1 & 0 & 0 \\\\ 0 & 0 & 0 & 1 \\\\ 0 & 0 & 1 & 0 \\end{pmatrix} \\tag{6.50}$$</div>
+
+  <p><strong>受控相位算符 $U_\\phi$</strong>：$U_\\phi|x\\rangle|y\\rangle = e^{ixy\\phi}|x\\rangle|y\\rangle$，在計算基底中：</p>
+  <div class="eq">$$U_\\phi = \\begin{pmatrix} 1 & 0 & 0 & 0 \\\\ 0 & 1 & 0 & 0 \\\\ 0 & 0 & 1 & 0 \\\\ 0 & 0 & 0 & e^{i\\phi} \\end{pmatrix} \\tag{6.54}$$</div>
+
+  <p><strong>相位算符 $U^1_\\phi$</strong>（單 qubit）：$U^1_\\phi|0\\rangle = |0\\rangle$，$U^1_\\phi|1\\rangle = e^{i\\phi}|1\\rangle$：</p>
+  <div class="eq">$$U^1_\\phi = \\begin{pmatrix} 1 & 0 \\\\ 0 & e^{i\\phi} \\end{pmatrix} \\tag{6.56}$$</div>
+
+  <p><strong>Hadamard 算符 $U_H$</strong>（單 qubit）：這是最重要的量子閘——它將確定數字的態變成疊加態：</p>
+  <div class="eq">$$U_H = \\frac{1}{\\sqrt{2}}\\begin{pmatrix} 1 & 1 \\\\ 1 & -1 \\end{pmatrix} \\tag{6.57}$$</div>
+  <p>$U_H|0\\rangle = (|0\\rangle + |1\\rangle)/\\sqrt{2}$，且 $U_H^2 = I$（Hadamard 是自己的逆）。</p>
+
+  <div class="callout">
+    <strong>💡 量子平行性的實現</strong><br>
+    如果將 Hadamard 算符作用到一個 $n$ 個 qubit 暫存器的每個 qubit 上（暫存器初始為 $|0\\rangle$），我們得到：$\\frac{1}{2^{n/2}}\\sum_{x=0}^{2^n-1}|x\\rangle$——暫存器處於所有可表示數字的均勻疊加。然後對這個態進行函數求值 $f$，就可以<strong>同時</strong>在所有輸入上計算 $f$：$\\frac{1}{2^{n/2}}\\sum_{x=0}^{2^n-1}|x\\rangle|0\\rangle \\to \\frac{1}{2^{n/2}}\\sum_{x=0}^{2^n-1}|x\\rangle|f(x)\\rangle$。這就是量子平行性的核心。
+  </div>
+
+
+
+<h3>量子閘的矩陣乘法計算</h3>
+<p>量子電路中的計算就是矩陣乘法。讓我們用一個具體例子來展示這個過程。考慮 2-qubit 暫存器和受控相位閘 $U_\phi$：</p>
+<div class="eq">$$U_\phi = \begin{pmatrix} 1 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 1 & 0 \\ 0 & 0 & 0 & e^{i\phi} \end{pmatrix} \tag{6.54b}$$</div>
+<p>在計算基底 $\{|00\rangle, |01\rangle, |10\rangle, |11\rangle\}$ 中，$U_\phi$ 的作用是：</p>
+<div class="eq">$$\begin{aligned}
+U_\phi|00\rangle &= |00\rangle \\
+U_\phi|01\rangle &= |01\rangle \\
+U_\phi|10\rangle &= |10\rangle \\
+U_\phi|11\rangle &= e^{i\phi}|11\rangle
+\end{aligned} \tag{6.54c}$$</div>
+<p>只有當兩個 qubit 都是 $|1\rangle$ 時，才會產生相位因子 $e^{i\phi}$。現在計算 Hadamard + $U_\phi$ + Hadamard 的複合效果：</p>
+<div class="eq">$$(U_H \otimes U_H)\, U_\phi\, (U_H \otimes U_H) = \frac{1}{2}\begin{pmatrix} 1+e^{i\phi} & 1-e^{i\phi} & 0 & 0 \\ 1-e^{i\phi} & 1+e^{i\phi} & 0 & 0 \\ 0 & 0 & 1+e^{i\phi} & 1-e^{i\phi} \\ 0 & 0 & 1-e^{i\phi} & 1+e^{i\phi} \end{pmatrix} \tag{6.54d}$$</div>
+<p>這個計算展示了量子電路的核心模式：Hadamard 閘將確定態轉為疊加態 → 中間閘在疊加態上進行計算 → 最後的 Hadamard 閘利用干涉提取結果。這種「疊加→計算→干涉」的三步驟是所有量子演算法的基本結構。
+
+<div class="callout">
+  <strong>💡 為什麼量子計算需要巧妙的演算法</strong><br>
+  雖然量子暫存器可以同時代表 $2^N$ 個數，但測量只會返回<strong>一個</strong>隨機結果。因此，量子計算的藝術在於：設計電路使得我們感興趣的答案在測量時有高機率出現。這需要利用干涉——讓「好答案」的振幅相互增強（建設性干涉），讓「壞答案」的振幅相互抵消（破壞性干涉）。Shor 的質因數分解演算法利用量子 Fourier 變換來實現這種干涉，Grover 的搜尋演算法則使用迭代振幅放大。兩者都遵循「疊加→計算→干涉」的基本範式。
+</div>
+
+  <h3>Deutsch 演算法</h3>
+  <p>量子計算面臨的核心挑戰是：雖然暫存器的態依賴於 $f$ 的所有值，但任何測量都會使態坍縮，只返回<strong>一個隨機的</strong> $f(X)$。因此要勝過古典計算機，必須回答那些涉及 $f$ 的所有值但答案簡單的問題。</p>
+
+  <p>一個經典例子：已知 $f(x)$ 要麼是常數函數（對所有 $x$，$f(x)=0$ 或 $f(x)=1$），要麼是平衡函數（對一半的 $x$，$f(x)=0$；對另一半，$f(x)=1$）。問題是判斷 $f$ 是常數還是平衡。古典計算機在最壞情況下需要檢查超過一半的輸入。Deutsch 的量子演算法則只需常數次機器週期——這是量子計算指數級加速的早期範例。</p>
+
+  <div class="callout-warn">
+    <strong>⚡ 量子計算的現實挑戰</strong><br>
+    儘管世界各地的研究團隊付出了巨大努力，量子計算仍是一個尚未實現的夢想。理論上的挑戰是：設計能在測量坍縮後仍能提取有用資訊的演算法。實驗上的挑戰是：將量子暫存器與環境充分隔離，使其在計算過程中不發生顯著的去相干。Shor 的質因數分解演算法和 Grover 的資料庫搜尋演算法是兩個里程碑式的理論成果——前者威脅到現有加密系統，後者展示了平方根級別的加速。
+  </div>
+
+  <details class="example">
+    <summary>📝 自編概念例：Hadamard 閘的量子平行性</summary>
+    <div class="example-body">
+      <p><strong>題目：</strong>一個 2-qubit 暫存器初始為 $|0\\rangle|0\\rangle$。對每個 qubit 施加 Hadamard 閘後，暫存器的態是什麼？如果此時對暫存器測量，得到 $|10\\rangle$（即數字 2）的機率是多少？</p>
+      <p><strong>解：</strong></p>
+      <p>$U_H|0\\rangle \\otimes U_H|0\\rangle = \\frac{1}{\\sqrt{2}}(|0\\rangle+|1\\rangle) \\otimes \\frac{1}{\\sqrt{2}}(|0\\rangle+|1\\rangle) = \\frac{1}{2}(|00\\rangle + |01\\rangle + |10\\rangle + |11\\rangle) = \\frac{1}{2}(|0\\rangle + |1\\rangle + |2\\rangle + |3\\rangle)$。</p>
+      <p>測量得到 $|10\\rangle$（即數字 $2$）的機率為 $|c_2|^2 = |1/2|^2 = 1/4$。四個數字的機率均為 $1/4$。</p>
+      <p><strong>物理意義：</strong>2 個 qubit 的暫存器同時「代表」4 個數字。10 個 qubit 就能同時代表 1024 個數字，64 個 qubit 能同時代表 $10^{19}$ 個數字。這就是指數級平行性的威力——但測量只能提取一個結果，如何利用這種平行性是量子演算法設計的核心。</p>
+    </div>
+  </details>
+
+  <figure class="figure" id="fig-6-2">
+    <svg class="content-diagram" viewBox="0 0 520 280" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" width="520" height="280" fill="#f8f9fa" rx="8"/>
+      <!-- Qubit lines -->
+      <line x1="80" y1="80" x2="460" y2="80" stroke="#333" stroke-width="2"/>
+      <line x1="80" y1="140" x2="460" y2="140" stroke="#333" stroke-width="2"/>
+      <line x1="80" y1="200" x2="460" y2="200" stroke="#333" stroke-width="2"/>
+      <!-- Labels -->
+      <text x="60" y="84" font-size="13" fill="#333" text-anchor="end" font-weight="bold">|0⟩</text>
+      <text x="60" y="144" font-size="13" fill="#333" text-anchor="end" font-weight="bold">|0⟩</text>
+      <text x="60" y="204" font-size="13" fill="#333" text-anchor="end" font-weight="bold">|0⟩</text>
+      <!-- Hadamard gates -->
+      <rect x="110" y="68" width="30" height="24" fill="#4a90d9" rx="3"/>
+      <text x="125" y="85" font-size="10" fill="white" text-anchor="middle" font-weight="bold">H</text>
+      <rect x="110" y="128" width="30" height="24" fill="#4a90d9" rx="3"/>
+      <text x="125" y="145" font-size="10" fill="white" text-anchor="middle" font-weight="bold">H</text>
+      <rect x="110" y="188" width="30" height="24" fill="#4a90d9" rx="3"/>
+      <text x="125" y="205" font-size="10" fill="white" text-anchor="middle" font-weight="bold">H</text>
+      <!-- U_f box -->
+      <rect x="210" y="60" width="80" height="160" fill="#e8f4e8" stroke="#27ae60" stroke-width="2" rx="4"/>
+      <text x="250" y="145" font-size="12" fill="#27ae60" text-anchor="middle" font-weight="bold">U_f</text>
+      <!-- Hadamard gates again -->
+      <rect x="350" y="68" width="30" height="24" fill="#4a90d9" rx="3"/>
+      <text x="365" y="85" font-size="10" fill="white" text-anchor="middle" font-weight="bold">H</text>
+      <!-- Output -->
+      <text x="470" y="84" font-size="12" fill="#333" text-anchor="start" font-weight="bold">→ 測量</text>
+      <!-- Annotation -->
+      <text x="170" y="258" font-size="11" fill="#555" text-anchor="middle">均勻疊加</text>
+      <text x="250" y="258" font-size="11" fill="#555" text-anchor="middle">同時計算所有 x</text>
+      <text x="390" y="258" font-size="11" fill="#555" text-anchor="middle">干涉提取</text>
+    </svg>
+    <figcaption><strong>圖 6.2</strong>　Deutsch 演算法的量子電路示意。頂部三個 qubit 形成控制暫存器，初始為 $|0\\rangle$。Hadamard 閘產生均勻疊加；$U_f$ 同時在所有輸入上計算 $f$；最後的 Hadamard 閘利用干涉提取全域資訊（常數 vs 平衡）。（原書 Fig. 6.3，p119）</figcaption>
+  </figure>
+</section>
+
+<!-- ====== 6.3 密度算符 ====== -->
+<section class="deep-dive" id="s6-3">
+<h2>6.3　密度算符</h2>
+<div class="section-keypoints">
+  <strong>🔑 本節重點</strong>
+  <span>① $\\rho = \\sum_n p_n|n\\rangle\\langle n|$ 描述不完全知識下的系統</span>
+  <span>② 期望值 $\\bar{Q} = \\operatorname{Tr}(\\rho Q)$——跡運算</span>
+  <span>③ 縮減密度算符 $\\rho_A = \\operatorname{Tr}_B(\\rho_{AB})$ 描述子系統</span>
+  <span>④ Shannon 熵 $s = -\\sum_i p_i\\ln p_i$ 是唯一一致的缺失資訊度量</span>
+  <span>⑤ von Neumann 熵 $s(\\rho) = -\\operatorname{Tr}(\\rho\\ln\\rho)$</span>
+</div>
+
+  <p>到目前為止，我們一直假設我們知道系統處於什麼量子態。對於宏觀物體，這個假設完全不切實際——我們怎麼可能發現鑽石中 $\\sim 10^{23}$ 個碳原子的量子態？即使對於原子尺度的物體，我們也需要謹慎：現實的測量伴隨著實驗誤差，結果是「可觀察量的值為 $x \\pm y$」而不是精確值。</p>
+
+  <p>讓我們承認我們不知道系統處於什麼態，但猜測系統處於完備態集 $\\{|n\\rangle\\}$ 中的某一個態，並對每個 $n$ 賦予一個機率 $p_n$。需要明確的是：我們<strong>不是</strong>在說系統處於態 $|\\phi\\rangle = \\sum_n \\sqrt{p_n}|n\\rangle$（那是一個明確的量子態）——我們是在說系統可能處於 $|1\\rangle$，可能處於 $|2\\rangle$，可能處於 $|3\\rangle$……並對每種可能賦予機率。這是<strong>古典機率</strong>與量子態的混合。</p>
+
+  <p>在這種不完全資訊下，測量某個可觀察量 $Q$ 的期望值為：</p>
+  <div class="eq">$$\\bar{Q} = \\sum_n p_n\\langle n|Q|n\\rangle \\tag{6.62}$$</div>
+  <p>這是 $p_1$ 乘以系統處於 $|1\\rangle$ 時 $Q$ 的期望值，加 $p_2$ 乘以系統處於 $|2\\rangle$ 時的期望值，以此類推。當我們對系統的知識不完全時，我們說系統處於<strong>混合態</strong>（impure state）；相對地，常規態 $|\\psi\\rangle$ 被稱為<strong>純態</strong>（pure state）。</p>
+
+  <div class="callout-warn">
+    <strong>⚡ 「混合態」的術語陷阱</strong><br>
+    「混合態」這個術語有些誤導：處於「混合態」的系統仍然處於某個完全良好的量子態——問題是<strong>我們不確定</strong>它處於哪個態。不純的是我們對系統的知識，而不是系統的態本身。密度算符引入了一個質性新特徵：<strong>主觀性</strong>——$p_n$ 量化的是我們的知識狀態，而不是硬物理現實。
+  </div>
+
+  <h3>密度算符的定義與性質</h3>
+  <p>我們定義<strong>密度算符</strong>為：</p>
+  <div class="eq">$$\\rho \\equiv \\sum_n p_n|n\\rangle\\langle n| \\tag{6.64}$$</div>
+  <p>其中 $p_n$ 是上面引入的機率。$\\rho$ 是 Hermitian 算符（因為 $p_n$ 是實數），但不應被視為可觀察量——$p_n$ 是主觀的而不是客觀的。密度算符的重要性在於，透過它我們可以獲得任何可觀察量的期望值：</p>
+  <div class="eq">$$\\operatorname{Tr}(\\rho Q) \\equiv \\sum_m \\langle m|\\rho Q|m\\rangle = \\bar{Q} \\tag{6.67}$$</div>
+  <p>其中 $\\operatorname{Tr}$ 是跡（trace）運算——對角線元素之和。跡的重要性質包括：跡的值與基底無關（Box 6.3）；$\\operatorname{Tr}(AB) = \\operatorname{Tr}(BA)$；$\\operatorname{Tr}(ABC) = \\operatorname{Tr}(CAB)$。</p>
+
+  <p>密度算符的運動方程可以從 tdse 推導出來。由於 $p_n$ 與時間無關（系統在 $t$ 時處於 $|n\\rangle$，則在任何後續時間它都必定處於 $|n\\rangle$ 演化到的任何態），我們有：</p>
+  <div class="eq">$$i\\hbar\\frac{d\\rho}{dt} = [H, \\rho] \\tag{6.70}$$</div>
+  <p>這被稱為<strong>Liouville–von Neumann 方程</strong>。當我們確實知道系統的初始態時，可以設定 $\\rho = |\\psi\\rangle\\langle\\psi|$——此時使用密度算符是可選的而非強制的。</p>
+
+  <h3>6.3.1 縮減密度算符</h3>
+  <p>任何兩個量子系統之間的物理交互作用都可能使它們糾纏。沒有系統是真正孤立的（也許除了整個宇宙！），因此真實系統會不斷地與其環境糾纏。即使我們的系統從純態開始，一旦與環境糾纏，它就處於混合態。</p>
+
+  <p>考慮由子系統 A（我們的系統）和子系統 B（環境）組成的系統。整個系統的密度算符為 $\\rho_{AB}$。對於僅屬於子系統 A 的可觀察量 $Q$，其期望值為：</p>
+  <div class="eq">$$\\bar{Q} = \\operatorname{Tr}(Q\\rho_{AB}) = \\sum_{mi}\\langle A;m|Q|A;i\\rangle \\sum_n \\rho_{inmn} \\tag{6.74}$$</div>
+  <p>我們定義子系統 A 的<strong>縮減密度算符</strong>為對子系統 B 的態取偏跡：</p>
+  <div class="eq">$$\\rho_A \\equiv \\sum_n \\langle B;n|\\rho_{AB}|B;n\\rangle \\tag{6.75}$$</div>
+  <p>則 $\\bar{Q} = \\operatorname{Tr}(Q\\rho_A)$。縮減密度算符使我們能夠在不理會子系統 B 的態的情況下，獲得子系統 A 的可觀察量的期望值。</p>
+
+  <div class="callout">
+    <strong>💡 去相干的數學機制</strong><br>
+    假設兩個 qubit 演化到糾纏態 $|\\psi\\rangle = \\frac{1}{\\sqrt{2}}(|A;0\\rangle|B;0\\rangle + |A;1\\rangle|B;1\\rangle)$。對 B 取偏跡後，$\\rho_A = \\frac{1}{2}(|A;0\\rangle\\langle A;0| + |A;1\\rangle\\langle A;1|)$——這是高度混合的密度算符。物理上：子系統 A 有 $50\\%$ 的機率處於 $|0\\rangle$，$50\\%$ 處於 $|1\\rangle$。我們失去了由關聯攜帶的資訊——如果選擇孤立地考慮系統 A，就無法獲得完整的資訊。這個從純態到混合態的過渡稱為<strong>量子去相干</strong>（quantum decoherence）。
+  </div>
+
+
+
+<h3>偏跡的計算範例</h3>
+<p>偏跡是從複合系統的密度算符中提取子系統資訊的數學工具。讓我們用一個具體例子展示偏跡的計算過程。</p>
+<p>考慮糾纏態 $|\psi\rangle = \frac{1}{\sqrt{3}}|00\rangle + \sqrt{\frac{2}{3}}|11\rangle$。複合系統的密度算符為：</p>
+<div class="eq">$$\rho_{AB} = |\psi\rangle\langle\psi| = \frac{1}{3}|00\rangle\langle 00| + \frac{\sqrt{2}}{3}|00\rangle\langle 11| + \frac{\sqrt{2}}{3}|11\rangle\langle 00| + \frac{2}{3}|11\rangle\langle 11| \tag{6.76}$$</div>
+<p>對子系統 B 取偏跡——將 B 的基底態「收縮」：</p>
+<div class="eq">$$\rho_A = \langle B;0|\rho_{AB}|B;0\rangle + \langle B;1|\rho_{AB}|B;1\rangle = \frac{1}{3}|A;0\rangle\langle A;0| + \frac{2}{3}|A;1\rangle\langle A;1| \tag{6.77}$$</div>
+<p>注意：交叉項 $|00\rangle\langle 11|$ 在偏跡下消失了——因為 $\langle B;0|B;1\rangle = 0$（正交歸一性）。這就是去相干的數學根源：糾纏在子系統的縮減密度算符中抹去了量子相干性。</p>
+<p>子系統 A 的 von Neumann 熵為 $s(\rho_A) = -\frac{1}{3}\ln\frac{1}{3} - \frac{2}{3}\ln\frac{2}{3} \approx 0.637$。子系統 B 的縮減密度算符為 $\rho_B = \frac{1}{3}|B;0\rangle\langle B;0| + \frac{2}{3}|B;1\rangle\langle B;1|$——<strong>與 $\rho_A$ 完全相同</strong>！這是 Schmidt 分解的結果：對於純態，兩個子系統的縮減密度算符有相同的非零本徵值，因此相同的 von Neumann 熵。
+
+<div class="callout">
+  <strong>💡 純度判據：如何分辨純態與混合態</strong><br>
+  判斷一個密度算符是否代表純態，有三個等價的判據：
+  <ul>
+    <li><strong>$\operatorname{Tr}(\rho^2) = 1$</strong>：純態；$\operatorname{Tr}(\rho^2) < 1$：混合態。量 $P = \operatorname{Tr}(\rho^2)$ 稱為<strong>純度</strong>（purity）。</li>
+    <li><strong>$\rho^2 = \rho$</strong>：純態（投影算符）。混合態不滿足冪等性。</li>
+    <li><strong>$s(\rho) = 0$</strong>：純態；$s(\rho) > 0$：混合態。</li>
+  </ul>
+  對於上面的例子：$\rho_A^2 = \frac{1}{9}|0\rangle\langle 0| + \frac{4}{9}|1\rangle\langle 1|$，$\operatorname{Tr}(\rho_A^2) = 5/9 < 1$——確認是混合態。
+</div>
+
+<div class="callout-warn">
+  <strong>⚡ 混合態 ≠ 疊加態</strong><br>
+  初學者最常犯的錯誤之一是混淆混合態與疊加態。態 $|\psi\rangle = \frac{1}{\sqrt{2}}(|0\rangle + |1\rangle)$ 是<strong>純態</strong>——它是一個確定的量子態，$s = 0$。態 $\rho = \frac{1}{2}|0\rangle\langle 0| + \frac{1}{2}|1\rangle\langle 1|$ 是<strong>混合態</strong>——我們不知道系統處於哪個態，$s = \ln 2 > 0$。兩者的物理行為截然不同：純態在 $x$ 方向測量自旋時有確定結果（$|+\rangle_x$ 的機率為 1），混合態在 $x$ 方向測量時是隨機的（$|+\rangle_x$ 和 $|-\rangle_x$ 各 50%）。區分方法：計算 $\operatorname{Tr}(\rho^2)$。
+</div>
+
+  <h3>6.3.2 Shannon 熵</h3>
+  <p>一旦意識到系統通常處於混合態，我們自然希望量化一個態的「混合程度」。一個機率分布 $\\{p_i\\}$ 提供了關於某次調查結果的一定量的資訊。如果一個機率接近 1，它提供的資訊幾乎是完整的；如果所有機率都很小，缺失的資訊就很大。</p>
+
+  <p>邏輯決定了缺失資訊的度量 $s(p_1,\\ldots,p_n)$ 必須滿足以下性質：(1) 連續且對稱；(2) 當所有結果等可能時（$p_i = 1/n$）最大，且 $s_{n+1} > s_n$；(3) 一致性——不同的結果枚舉方式給出相同的缺失資訊。</p>
+
+  <p>從這些要求可以推導出唯一的度量就是<strong>Shannon 熵</strong>（以 Claude Shannon 命名）：</p>
+  <div class="eq">$$s(p_1,\\ldots,p_n) = -\\sum_i p_i\\ln p_i \\tag{6.89}$$</div>
+  <p>密度算符 $\\rho$ 的 Shannon 熵——也稱為<strong>von Neumann 熵</strong>——定義為：</p>
+  <div class="eq">$$s(\\rho) = -\\operatorname{Tr}(\\rho\\ln\\rho) \\tag{6.90}$$</div>
+  <p>當 $\\rho$ 以對角形式 $\\rho = \\sum_i p_i|i\\rangle\\langle i|$ 表示時，$s(\\rho) = -\\sum_n p_n\\ln p_n$——就是機率分布 $\\{p_n\\}$ 的 Shannon 熵。純態只有一個 $p_n = 1$，其餘為 0，熵為零；完全混合態（所有 $p_i$ 相等）熵最大。</p>
+
+  <details class="example">
+    <summary>📝 自編概念例：氫原子的去相干</summary>
+    <div class="example-body">
+      <p><strong>題目：</strong>一個氫原子最初處於第一激發態，電磁場處於真空態 $|F;0\\rangle$。原子-場複合系統的態演化為 $|\\psi,t\\rangle = a_0(t)|A;0\\rangle|F;1\\rangle + a_1(t)|A;1\\rangle|F;0\\rangle$，其中 $|A;n\\rangle$ 是原子的第 $n$ 激發態，$|F;n\\rangle$ 是電磁場中有 $n$ 個光子的態。如果不監測電磁場，求原子的縮減密度算符及其 Shannon 熵。</p>
+      <p><strong>解：</strong>對電磁場取偏跡：</p>
+      <div class="eq">$$\\rho_A = \\langle F;0|\\rho_{AB}|F;0\\rangle + \\langle F;1|\\rho_{AB}|F;1\\rangle = |a_0|^2|A;0\\rangle\\langle A;0| + |a_1|^2|A;1\\rangle\\langle A;1|$$</div>
+      <p>Shannon 熵：$s(\\rho_A) = -(|a_0|^2\\ln|a_0|^2 + |a_1|^2\\ln|a_1|^2)$。</p>
+      <p>當 $|a_0|^2 = |a_1|^2 = 1/2$ 時，$s = \\ln 2$——最大混合。當 $|a_1|^2 = 1$（原子尚未衰變）或 $|a_0|^2 = 1$（完全衰變）時，$s = 0$——純態。</p>
+      <p><strong>物理意義：</strong>原子自發衰變的過程就是與電磁場糾纏的過程。不監測場時，原子的態從純態（$s=0$）演變為混合態（$s>0$），最終回到純態（$s=0$）。這是量子去相干的一個精確可解的範例。</p>
+    </div>
+  </details>
+</section>
+
+<!-- ====== 6.4 熱力學 ====== -->
+<section class="deep-dive" id="s6-4">
+<h2>6.4　熱力學</h2>
+<div class="section-keypoints">
+  <strong>🔑 本節重點</strong>
+  <span>① 最大化 Shannon 熵給出 Gibbs 分布 $p_i = e^{-\\beta E_i}/Z$</span>
+  <span>② 配分函數 $Z = \\sum_i e^{-\\beta E_i}$ 決定所有熱力學量</span>
+  <span>③ $F = -k_B T\\ln Z$，$U = -\\partial\\ln Z/\\partial\\beta$</span>
+  <span>④ $dU = TdS - PdV$ 是從量子力學推導的熱力學核心方程</span>
+</div>
+
+  <p>熱力學處理的是我們所知極少的宏觀系統——遠不足以定義量子態。例如，系統可能是一個裝滿流體的氣缸，我們只知道流體的化學性質、質量、體積，以及與之平衡的環境溫度。在正則圖像中，流體的能量在平均值 $U$ 附近波動，壓力在平均值 $P$ 附近波動，但體積 $V$ 是確定的且受我們控制。</p>
+
+  <p>要從系統的微觀結構獲得熱力學變數之間的關係，我們需要對系統的每個量子態賦予一個機率 $p_i$。最合理的賦予方式是：選擇能夠再現我們對系統的任何測量結果，且<strong>最大化 Shannon 熵</strong>的 $p_i$。最大化熵的要求來自一個原則：我們的機率必須「說實話、全部的實話、只說實話」——不能指定超出測量結果所包含的資訊。</p>
+
+  <p>可以證明（Problem 6.16），在給定內能 $U = \\sum_i E_i p_i$ 的約束下最大化 Shannon 熵的機率分布為：</p>
+  <div class="eq">$$p_i = \\frac{1}{Z}e^{-\\beta E_i}, \\quad Z \\equiv \\sum_i e^{-\\beta E_i} \\tag{6.93}$$</div>
+  <p>其中 $\\beta \\equiv 1/(k_B T)$ 是逆溫度，$Z$ 是<strong>配分函數</strong>（partition function），它是 $T$ 的函數，也（不太明顯地）是體積 $V$ 和其他定義 Hamiltonian 能譜 $\\{E_i\\}$ 的參數的函數。</p>
+
+  <p>由於此機率分布在給定內能下最大化 Shannon 熵，我們將熱力學系統的密度算符取為在能量表象中對角的 Gibbs 分布：</p>
+  <div class="eq">$$\\rho = \\frac{1}{Z}\\sum_i e^{-\\beta E_i}|i\\rangle\\langle i| \\tag{6.94}$$</div>
+
+  <p>內能 $U$ 就是 Hamiltonian 的期望值：$U = \\operatorname{Tr}(H\\rho) = \\sum_n p_n E_n$。利用 Gibbs 分布可以導出重要關係式 $U = -\\partial\\ln Z/\\partial\\beta$。Shannon 熵與熱力學量的關係為 $s = \\beta U + \\ln Z$。引入<strong>熱力學熵</strong> $S \\equiv k_B s$ 和<strong>Helmholtz 自由能</strong> $F \\equiv -k_B T\\ln Z$，我們得到古典熱力學的核心關係：</p>
+  <div class="eq">$$F = U - TS \\tag{6.100}$$</div>
+
+  <p>透過對 $U$ 和 $S$ 進行微分並使用 Gibbs 分布，可以推導出：</p>
+  <div class="eq">$$dU = TdS - PdV \\tag{6.106a}$$</div>
+  <p>其中壓力定義為 $P \\equiv -\\sum_i p_i\\,\\partial E_i/\\partial V$。方程 (6.106a) 是熱力學的<strong>核心方程</strong>——它同時包含了第一定律（能量守恆）和第二定律（熵增）。</p>
+
+  <div class="callout">
+    <strong>💡 量子力學使古典熱力學變得多餘</strong><br>
+    19 世紀上半葉的物理學家在量子力學出現之前就發現了熱力學——他們使用極其精巧的熱機論證。量子力學使這些論證變得完全多餘：只要從 Gibbs 分布出發，所有熱力學關係都可以用幾行推導得到。儘管如此，古典熱力學的論證因其美感而繼續存在於世界各地的本科課程中——但這就像銅版書寫和計算尺一樣，理應從學校中消失。
+  </div>
+
+<h3>從配分函數推導熱力學量</h3>
+<p>配分函數 $Z = \sum_i e^{-\beta E_i}$ 是熱力學的「生成函數」——所有熱力學量都可以從 $Z$ 及其導數得到。以下是完整的推導鏈：</p>
+<p><strong>步驟一：內能 $U$。</strong></p>
+<div class="eq">$$U = \sum_i p_i E_i = \frac{1}{Z}\sum_i E_i e^{-\beta E_i} = -\frac{\partial \ln Z}{\partial \beta} \tag{6.101}$$</div>
+<p>最後一步利用了 $\frac{\partial}{\partial\beta}\sum_i e^{-\beta E_i} = -\sum_i E_i e^{-\beta E_i}$。</p>
+<p><strong>步驟二：熵 $S$。</strong></p>
+<div class="eq">$$S = k_B s = -k_B\sum_i p_i\ln p_i = -k_B\sum_i p_i(-\beta E_i - \ln Z) = \frac{U}{T} + k_B\ln Z \tag{6.102}$$</div>
+<p>整理得 $F = U - TS = -k_B T\ln Z$——Helmholtz 自由能。</p>
+<p><strong>步驟三：壓力 $P$。</strong></p>
+<div class="eq">$$P = -\left(\frac{\partial F}{\partial V}\right)_T = k_B T\frac{\partial \ln Z}{\partial V} = \sum_i p_i\left(-\frac{\partial E_i}{\partial V}\right) \tag{6.103}$$</div>
+<p>其中 $\partial E_i/\partial V$ 是第 $i$ 個能階對體積的依賴性（例如粒子在盒子中的能階 $E_n \propto V^{-2/3}$）。</p>
+<p><strong>步驟四：熱力學核心方程。</strong></p>
+<div class="eq">$$dU = TdS - PdV \tag{6.106b}$$</div>
+<p>這可以從 $U = -\partial\ln Z/\partial\beta$ 直接驗證：$dU = \frac{\partial U}{\partial T}dT + \frac{\partial U}{\partial V}dV$，利用 $S = -\partial F/\partial T$ 和 $P = -\partial F/\partial V$ 就得到 (6.106b)。
+
+<div class="callout">
+  <strong>💡 配分函數的威力</strong><br>
+  整個古典熱力學可以壓縮為一個函數 $Z(T, V)$——配分函數。一旦知道 $Z$，所有熱力學量都是 $Z$ 的對數的導數。這就是為什麼量子力學「使古典熱力學變得多餘」：我們只需要寫下 Hamiltonian 的能譜 $\{E_i\}$，計算配分函數 $Z = \sum_i e^{-\beta E_i}$，然後對 $Z$ 取導數。例如，諧振子的 $Z = (1-e^{-\beta\hbar\omega})^{-1}$，從中可以立即得到 Planck 輻射定律。
+</div>
+
+
+
+  <div class="callout-warn">
+    <strong>⚡ 量子統計的整體性：為什麼古典氣體理論失敗</strong><br>
+    在古典物理中，計算理想氣體的性質時，我們對每個分子的相空間位置獨立求和——這導致三個分子在相空間位置 $\\mathbf{x}_1, \\mathbf{x}_2, \\mathbf{x}_3$ 處有 6 種不同的「態」，取決於哪個分子在哪個位置。量子力學告訴我們：氣體的態完全由列出三個佔據的態 $|1\\rangle, |2\\rangle, |3\\rangle$ 來指定——說「哪個分子處於哪個態」是<strong>沒有意義的</strong>。這種古典計數方式即使在室溫下也會導致荒謬的結果（Gibbs 悖論）。這再次說明量子力學中的<strong>整體性思維</strong>：我們必須對整個氣缸的量子態求和，而不是對個別分子的態求和。
+  </div>
+
+  <details class="example">
+    <summary>📝 自編概念例：qubit 的熱力學</summary>
+    <div class="example-body">
+      <p><strong>題目：</strong>一個 qubit 的 $|0\\rangle$ 態能量為 $0$，$|1\\rangle$ 態能量為 $\\epsilon$。求在溫度 $T$ 下的配分函數、內能和比熱，並討論低溫與高溫極限。</p>
+      <p><strong>解：</strong>配分函數：$Z = e^{-\\beta\\cdot 0} + e^{-\\beta\\epsilon} = 1 + e^{-\\beta\\epsilon}$。</p>
+      <p>內能：$U = -\\frac{\\partial\\ln Z}{\\partial\\beta} = \\frac{\\epsilon e^{-\\beta\\epsilon}}{1+e^{-\\beta\\epsilon}} = \\frac{\\epsilon}{e^{\\beta\\epsilon}+1}$。</p>
+      <p>比熱：$C = \\frac{\\partial U}{\\partial T} = k_B\\frac{(\\beta\\epsilon)^2 e^{\\beta\\epsilon}}{(e^{\\beta\\epsilon}+1)^2}$。</p>
+      <p><strong>低溫極限</strong>（$\\beta\\epsilon \\gg 1$）：$U \\simeq \\epsilon e^{-\\beta\\epsilon} \\to 0$，$C \\to 0$。系統幾乎確定處於基態 $|0\\rangle$。</p>
+      <p><strong>高溫極限</strong>（$\\beta\\epsilon \\ll 1$）：$U \\simeq \\epsilon/2$，兩個態等機率佔據。比熱 $C \\to 0$（因為能量已達飽和）。</p>
+      <p><strong>物理意義：</strong>$T \\to 0$ 時比熱趨於零是量子系統的普遍特徵（Nernst 定理/熱力學第三定律）。古典物理會預測常數比熱，這在低溫下與實驗不符。中間溫度處比熱有一個峰值（Schottky 異常），對應於熱能足以激發 qubit 從 $|0\\rangle$ 到 $|1\\rangle$ 的區域。</p>
+    </div>
+  </details>
+</section>
+
+<!-- ====== 6.5 測量 ====== -->
+<section class="deep-dive" id="s6-5">
+<h2>6.5　測量</h2>
+<div class="section-keypoints">
+  <strong>🔑 本節重點</strong>
+  <span>① 坍縮假設是繞過儀器動力學的捷徑，不是基本物理</span>
+  <span>② 真實測量有誤差，不會使系統處於確定態</span>
+  <span>③ 測量 = 被測系統與宏觀儀器的糾纏</span>
+  <span>④ 測量的機率性來自儀器初始態的不完全知識</span>
+</div>
+
+  <p>在 §1.4 中，我們斷言系統的態在測量可觀察量 $Q$ 的瞬間「坍縮」到 $Q$ 的算符的某個本徵態 $|q_j\\rangle$。現在是時候批判性地審視這個坍縮假設了。</p>
+
+  <p>從表面上看，坍縮假設只是斷言測量是可重複的——如果我們快速連續地測量某個量兩次，會得到相同的結果。但系統的量子態 $|\\psi\\rangle$ 理應描述系統的<strong>真實物理狀態</strong>，而不僅僅是我們對它的知識。所以必定有某種物理事件使 $|\\psi\\rangle$ 從測量前的值轉移到測量後的態 $|q_j\\rangle \\neq |\\psi\\rangle$。注意：從 $|\\psi\\rangle$ 到 $|q_j\\rangle$ 的演化<strong>不是</strong>從 tdse 推導出來的——tdse 是支配 $|\\psi\\rangle$ 時間演化的方程。因此<strong>Copenhagen 詮釋</strong>暗示每次測量都會導致運動方程的暫時懸置，使系統被未指定的力量操控到一個隨機選擇的態。這不是嚴肅的物理學。</p>
+
+  <p>從 Copenhagen 向真實世界邁出的第一步是認識到：由於真實測量伴隨著誤差條，它們不會使系統處於後續測量結果確定的態。因此真實的 $Q$ 測量一般不會使系統處於某個 $|q_i\\rangle$——<strong>坍縮假設是錯的</strong>。</p>
+
+  <div class="callout">
+    <strong>💡 Copenhagen 詮釋的正確洞察與失誤</strong><br>
+    Copenhagen 詮釋正確地強調：(1) 任何測量都會物理性地擾動系統——測量前後的態顯著不同；(2) 對一個可觀察量測量結果確定的態，一般不同於對另一個可觀察量測量結果確定的態（不相容可觀察量）。它的失誤在於：假設可以在不知道測量儀器任何資訊的情況下考慮測量的擾動——但擾動是儀器造成的，忽略儀器的物理原理怎麼可能預測系統的演化？
+  </div>
+
+  <p>Copenhagen 詮釋透過兩個策略取得進展。第一，假設儀器製造者足夠聰明，製造出本質上可重複測量的儀器——因此儀器使系統留下的態必定是可觀察量算符的某個本徵態。第二，放棄因果律並斷言測量結果本質上不確定——只提供各種結果的機率。</p>
+
+  <p>然而，儀器本身就是一個動力學系統，其動力學由量子力學支配。我們進行測量時，將儀器與系統「接觸」——即確保儀器和系統由不可忽略的 Hamiltonian 動力學耦合。一旦接觸，儀器和系統共同構成複合系統，並很快變得<strong>糾纏</strong>。儀器的態與系統的態產生關聯——正是由於這種糾纏，儀器才能顯示反映被測系統狀態的讀數。</p>
+
+  <p>儀器必須足夠宏觀才能被人類讀取——如果是微觀的，就需要另一個儀器來測量它，如此類推直到最終達到宏觀尺度。任何宏觀物體都處於混合態（§6.3）。因此，一旦與宏觀儀器建立交互作用，實驗結果就將是機率性的——正如 Copenhagen 詮釋所斷言的那樣。測量也將是不可逆的，因為計算系統在交互作用之前的態需要對儀器測量後的態有完整的知識。</p>
+
+  <div class="callout-warn">
+    <strong>⚡ 量子力學的智識黑洞</strong><br>
+    坍縮假設其實是一個巧妙的方式，用來規避我們不願追蹤系統／儀器交互作用動力學的事實。要真正擺脫坍縮假設，我們可能需要擴展量子力學本身——因為用傳統量子力學來描述測量儀器，終究要在某個時刻使用坍縮假設來「觀察」儀器。量子力學是一個理論競技場，離開它通往真實世界的唯一出口就是坍縮假設的旋轉門。任何成功包含測量行為的擴展都應以密度算符來表述——因為對儀器態的不完全知識無疑對測量的不確定結果做出了重大貢獻，甚至可能完全解釋它。
+  </div>
+
+  <details class="example">
+    <summary>📝 自編概念例：測量作為糾纏</summary>
+    <div class="example-body">
+      <p><strong>題目：</strong>一個自旋-½ 粒子初始處於 $|+\\rangle_z$。我們使用一個 Stern-Gerlach 裝置沿 $z$ 軸測量自旋。描述測量過程如何使粒子與儀器糾纏，以及為何最終結果是機率性的。</p>
+      <p><strong>解：</strong>測量前：粒子處於 $|+\\rangle_z$，儀器處於「待命」態 $|M_0\\rangle$。總態為 $|+\\rangle_z|M_0\\rangle$。</p>
+      <p>測量交互作用（由 $H_{\\text{int}}$ 描述）使總態演化為糾纏態：$|+\\rangle_z|M_0\\rangle \\to |+\\rangle_z|M_+\\rangle$，其中 $|M_+\\rangle$ 是儀器顯示「+」的態。</p>
+      <p>如果粒子初始處於疊加態 $\\frac{1}{\\sqrt{2}}(|+\\rangle_z + |-\\rangle_z)$，則測量交互作用產生：$\\frac{1}{\\sqrt{2}}(|+\\rangle_z|M_+\\rangle + |-\\rangle_z|M_-\\rangle)$——粒子與儀器糾纏。</p>
+      <p>儀器是宏觀的，因此處於混合態。對儀器態取偏跡給出粒子的縮減密度算符：$\\rho = \\frac{1}{2}(|+\\rangle_z\\langle+|_z + |-\\rangle_z\\langle-|_z)$。這就是為什麼我們觀測到粒子有 $50\\%$ 機率自旋向上、$50\\%$ 機率自旋向下。</p>
+      <p><strong>物理意義：</strong>測量的機率性不是因為量子力學不完備，而是因為我們無法追蹤宏觀儀器的所有自由度。坍縮假設是這個更完整描述的實用捷徑——它在大多數情況下給出正確答案，但模糊了測量過程的真實物理。</p>
+    </div>
+  </details>
+</section>
+
+<!-- ====== 本章摘要 ====== -->
+<section id="summary">
+  <h2>本章摘要</h2>
+  <p>本章將量子力學從單一系統擴展到複合系統。核心創新是張量積——它使態空間維度以指數方式增長，並產生了糾纏、去相干、量子計算和熱力學等豐富現象。以下是核心概念和公式的整理：</p>
+  <div class="table-scroll" role="region" aria-label="本章關鍵概念與公式" tabindex="0">
+    <table>
+      <caption>本章關鍵概念、公式、適用條件與用途</caption>
+      <thead>
+        <tr>
+          <th scope="col">概念／公式</th>
+          <th scope="col">符號與單位</th>
+          <th scope="col">適用條件</th>
+          <th scope="col">用途</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">張量積態 $|AB;i,j\\rangle = |A;i\\rangle|B;j\\rangle$</th>
+          <td>$i,j$：量子數</td>
+          <td>任何複合系統</td>
+          <td>組合子系統的完備態集</td>
+        </tr>
+        <tr>
+          <th scope="row">一般複合態 $|AB;\\psi\\rangle = \\sum_{ij} c_{ij}|A;i\\rangle|B;j\\rangle$</th>
+          <td>$c_{ij}$：$N_A N_B$ 個振幅</td>
+          <td>$\\{|A;i\\rangle\\}$ 和 $\\{|B;j\\rangle\\}$ 完備</td>
+          <td>描述任意關聯／糾纏</td>
+        </tr>
+        <tr>
+          <th scope="row">複合 Hamiltonian $H_{AB} = H_A + H_B + H_{\\text{int}}$</th>
+          <td>$H_{\\text{int}}$：交互作用項</td>
+          <td>算符相加規則</td>
+          <td>驅動糾纏與時間演化</td>
+        </tr>
+        <tr>
+          <th scope="row">EPR 態 $|\\psi\\rangle = \\frac{1}{\\sqrt{2}}(|e+\\rangle|p-\\rangle - |e-\\rangle|p+\\rangle)$</th>
+          <td>最大糾纏態</td>
+          <td>總自旋為零的雙粒子系統</td>
+          <td>EPR 實驗、Bell 不等式檢驗</td>
+        </tr>
+        <tr>
+          <th scope="row">Bell 不等式 $|\\langle\\sigma_e(\\mathbf{a})\\sigma_p(\\mathbf{b})\\rangle - \\cdots| \\leq \\frac{1}{4} + \\cdots$</th>
+          <td>$\\sigma = \\pm\\frac{1}{2}$</td>
+          <td>任何局部隱變數理論</td>
+          <td>排除隱變數——量子力學勝出</td>
+        </tr>
+        <tr>
+          <th scope="row">Hadamard 算符 $U_H = \\frac{1}{\\sqrt{2}}\\begin{pmatrix}1&1\\\\1&-1\\end{pmatrix}$</th>
+          <td>么正 $2\\times2$ 矩陣</td>
+          <td>單 qubit</td>
+          <td>產生疊加態，實現量子平行性</td>
+        </tr>
+        <tr>
+          <th scope="row">密度算符 $\\rho = \\sum_n p_n|n\\rangle\\langle n|$</th>
+          <td>$p_n$：古典機率</td>
+          <td>不完全知識的系統</td>
+          <td>計算所有可觀察量的期望值</td>
+        </tr>
+        <tr>
+          <th scope="row">Liouville–von Neumann 方程 $i\\hbar\\,d\\rho/dt = [H,\\rho]$</th>
+          <td>$[\\cdot,\\cdot]$：對易子</td>
+          <td>密度算符的時間演化</td>
+          <td>混合態的動力學</td>
+        </tr>
+        <tr>
+          <th scope="row">縮減密度算符 $\\rho_A = \\operatorname{Tr}_B(\\rho_{AB})$</th>
+          <td>偏跡運算</td>
+          <td>複合系統中的子系統</td>
+          <td>描述去相干——純態變混合態</td>
+        </tr>
+        <tr>
+          <th scope="row">Shannon 熵 $s = -\\sum_i p_i\\ln p_i$</th>
+          <td>無因次</td>
+          <td>任何機率分布</td>
+          <td>唯一一致的缺失資訊度量</td>
+        </tr>
+        <tr>
+          <th scope="row">von Neumann 熵 $s(\\rho) = -\\operatorname{Tr}(\\rho\\ln\\rho)$</th>
+          <td>無因次</td>
+          <td>密度算符</td>
+          <td>量化混合度，連接熱力學</td>
+        </tr>
+        <tr>
+          <th scope="row">Gibbs 分布 $p_i = e^{-\\beta E_i}/Z$</th>
+          <td>$\\beta = 1/(k_B T)$，$Z = \\sum_i e^{-\\beta E_i}$</td>
+          <td>給定內能最大化熵</td>
+          <td>推導全部熱力學關係</td>
+        </tr>
+        <tr>
+          <th scope="row">熱力學核心方程 $dU = TdS - PdV$</th>
+          <td>$U$：內能，$S$：熵</td>
+          <td>準靜態過程</td>
+          <td>統一熱力學第一和第二定律</td>
+        </tr>
+        <tr>
+          <th scope="row">Helmholtz 自由能 $F = -k_B T\\ln Z = U - TS$</th>
+          <td>$[F] = J$</td>
+          <td>正則系綜</td>
+          <td>決定 $S = -\\partial F/\\partial T$，$P = -\\partial F/\\partial V$</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ====== 常見錯誤 ====== -->
+<section id="common-mistakes">
+  <h2>初學者常見錯誤</h2>
+  <div class="callout-warn">
+    <strong>⚡ 錯誤一：混淆乘積態與一般糾纏態</strong><br>
+    很多初學者看到 $|AB\\rangle = \\sum_{ij}c_{ij}|A;i\\rangle|B;j\\rangle$ 就以為這是有糾纏的——不是的。關鍵判據是 $c_{ij}$ 能否分解為 $a_i b_j$。如果 $c_{ij}/c_{ij'}$ 與 $i$ 無關，則態是可分解的乘積態，子系統之間<strong>沒有</strong>糾纏。一個常見的陷阱是：$\\frac{1}{\\sqrt{2}}(|0\\rangle|0\\rangle + |0\\rangle|1\\rangle) = |0\\rangle \\otimes \\frac{1}{\\sqrt{2}}(|0\\rangle+|1\\rangle)$——這看起來像疊加，但實際上是乘積態，根本沒有糾纏。
+  </div>
+  <div class="callout-warn">
+    <strong>⚡ 錯誤二：以為密度算符的非對角項代表量子相干</strong><br>
+    密度算符的非對角元素 $\\rho_{ij}$（$i \\neq j$）確實與量子相干有關——但前提是 $\\rho$ 代表純態（$\\rho = |\\psi\\rangle\\langle\\psi|$）。對於混合態，非對角元素可以為零（如 Gibbs 分布）也可以不為零，取決於使用的基底。關鍵是：$\\operatorname{Tr}(\\rho^2) = 1$ 當且僅當 $\\rho$ 是純態；$\\operatorname{Tr}(\\rho^2) < 1$ 表示混合態。不要只憑非對角項是否存在來判斷純度。
+  </div>
+  <div class="callout-warn">
+    <strong>⚡ 錯誤三：把量子糾纏當成超光速通訊</strong><br>
+    EPR 實驗中，Alice 測量她的粒子會「瞬間」影響 Bob 的粒子的態——但這<strong>不能</strong>用來傳遞訊息。Bob 測量他的粒子只能得到隨機結果（$+\\frac{1}{2}$ 或 $-\\frac{1}{2}$），他無法知道這個結果是因為 Alice 做了測量還是自然的隨機。只有當 Alice 透過古典通道告訴 Bob 她的結果後，Bob 才能確認關聯。量子力學不違反相對論的因果律——「鬼魅般的超距作用」是真實的，但不可用於通訊。
+  </div>
+  <div class="callout-warn">
+    <strong>⚡ 錯誤四：混淆 Shannon 熵與熱力學熵的適用範圍</strong><br>
+    Shannon 熵 $s = -\\sum_i p_i\\ln p_i$ 是資訊理論概念，適用於任何機率分布。熱力學熵 $S = k_B s$ 只有在使用 Gibbs 分布（最大化熵的分布）時才給出正確的熱力學結果。如果我們隨意選擇一個不符合物理約束的機率分布，計算出的 $S$ 就不是系統的真實熱力學熵。另外，純態的 von Neumann 熵為零——這不違反熱力學第三定律，因為第三定律說的是<strong>熱平衡態</strong>在 $T \\to 0$ 時的熵趨於零。
+  </div>
+</section>
+
+<!-- ====== 自我檢測 ====== -->
+<section id="self-check">
+  <h2>自我檢測</h2>
+  <details class="self-check-item">
+    <summary>1. 兩個自旋-½ 粒子處於態 $|\\psi\\rangle = \\frac{1}{\\sqrt{2}}(|+\\rangle|+\\rangle + |-\\rangle|-\\rangle)$。這個態是糾纏的嗎？如果是，測量第一個粒子的自旋並得到 $+$ 後，第二個粒子的態是什麼？</summary>
+    <div class="self-check-answer">
+      <p>是的，這是兩個 Bell 態之一，是<strong>最大糾纏態</strong>。嘗試分解：如果 $|\\psi\\rangle = (a|+\\rangle + b|-\\rangle)(c|+\\rangle + d|-\\rangle)$，則 $ac = 1/\\sqrt{2}$、$bd = 1/\\sqrt{2}$、$ad = 0$、$bc = 0$。從 $ad=0$ 可知要麼 $a=0$ 要麼 $d=0$，但這與 $ac=1/\\sqrt{2}$ 或 $bd=1/\\sqrt{2}$ 矛盾——無法分解，因此是糾纏態。測量第一個粒子得到 $+$ 後，態坍縮為 $|+\\rangle|+\\rangle$，第二個粒子確定處於 $|+\\rangle$。</p>
+      <p class="solution-note">正文依據：§6.1</p>
+    </div>
+  </details>
+  <details class="self-check-item">
+    <summary>2. 解釋為什麼量子計算中的 $U_f$ 必須使用雙暫存器（控制 + 數據），而不能簡單地使用 $|x\\rangle \\to |f(x)\\rangle$。</summary>
+    <div class="self-check-answer">
+      <p>因為時間演化算符必須是<strong>么正</strong>的（$U^\\dagger U = I$），因此必須有逆。如果 $f(n) = f(m) = F$ 但 $n \\neq m$，則 $U|n\\rangle = |F\\rangle$ 且 $U|m\\rangle = |F\\rangle$——兩個不同的輸入態映射到同一個輸出態。此時 $U^\\dagger|F\\rangle$ 必須同時等於 $|n\\rangle$ 和 $|m\\rangle$，這是不可能的。雙暫存器設計 $|x\\rangle|y\\rangle \\to |x\\rangle|y+f(x)\\rangle$ 解決了這個問題：控制暫存器「記住」了輸入，使映射成為一對一的。</p>
+      <p class="solution-note">正文依據：§6.2</p>
+    </div>
+  </details>
+  <details class="self-check-item">
+    <summary>3. 一個系統的密度算符為 $\\rho = \\frac{1}{3}|0\\rangle\\langle 0| + \\frac{2}{3}|1\\rangle\\langle 1|$。(a) 計算 $\\operatorname{Tr}(\\rho)$ 和 $\\operatorname{Tr}(\\rho^2)$。(b) 這個態是純態還是混合態？(c) 求其 Shannon 熵。</summary>
+    <div class="self-check-answer">
+      <p>(a) $\\operatorname{Tr}(\\rho) = 1/3 + 2/3 = 1$（歸一化條件）。$\\rho^2 = \\frac{1}{9}|0\\rangle\\langle 0| + \\frac{4}{9}|1\\rangle\\langle 1|$，$\\operatorname{Tr}(\\rho^2) = 1/9 + 4/9 = 5/9 < 1$。</p>
+      <p>(b) 因為 $\\operatorname{Tr}(\\rho^2) < 1$，這是<strong>混合態</strong>。（純態必須滿足 $\\rho^2 = \\rho$，此時 $\\operatorname{Tr}(\\rho^2)=1$。）</p>
+      <p>(c) $s = -\\frac{1}{3}\\ln\\frac{1}{3} - \\frac{2}{3}\\ln\\frac{2}{3} = \\ln 3 - \\frac{2}{3}\\ln 2 \\approx 0.637$。最大熵（均勻分布時）為 $\\ln 2 \\approx 0.693$。</p>
+      <p class="solution-note">正文依據：§6.3、§6.3.2</p>
+    </div>
+  </details>
+  <details class="self-check-item">
+    <summary>4. 從 Gibbs 分布 $p_i = e^{-\\beta E_i}/Z$ 出發，推導熱力學關係 $F = U - TS$，並解釋 $F$ 的物理意義。</summary>
+    <div class="self-check-answer">
+      <p>Shannon 熵：$s = -\\sum_i p_i\\ln p_i$。代入 $\\ln p_i = -\\beta E_i - \\ln Z$：$s = -\\sum_i p_i(-\\beta E_i - \\ln Z) = \\beta\\sum_i p_i E_i + \\ln Z\\sum_i p_i = \\beta U + \\ln Z$。兩邊乘以 $k_B T$：$k_B T s = U + k_B T\\ln Z$。定義 $F \\equiv -k_B T\\ln Z$ 和 $S \\equiv k_B s$，則 $TS = U - F$，即 $F = U - TS$。$F$ 是 Helmholtz 自由能——在等溫過程中，系統能做的<strong>最大功</strong>等於 $F$ 的減少。$F$ 也可透過 $S = -\\partial F/\\partial T$ 和 $P = -\\partial F/\\partial V$ 導出所有熱力學量。</p>
+      <p class="solution-note">正文依據：§6.4</p>
+    </div>
+  </details>
+  <details class="self-check-item">
+    <summary>5. 評論以下陳述：「量子力學中的測量問題已經被 Copenhagen 詮釋完全解決——測量使波函數坍縮到本徵態，這就是全部。」</summary>
+    <div class="self-check-answer">
+      <p>這個陳述不正確。Copenhagen 詮釋把坍縮當作<strong>公設</strong>而非推導結果——它沒有解釋坍縮的物理機制，只是假設它發生。坍縮假設存在多個問題：(1) 它與 tdse 矛盾——tdse 給出連續的么正演化，坍縮是非么正的跳躍；(2) 它沒有說明什麼構成「測量」——儀器是量子系統，為什麼儀器與被測系統的交互作用不遵循 tdse？(3) 它依賴於「觀測者」的概念但沒有定義觀測者。更現代的觀點是：測量 = 被測系統與宏觀儀器的糾纏 + 對儀器態的不完全知識導致的有效坍縮。但這仍然沒有完全解決測量問題——它只是把問題轉移到了「為什麼宏觀物體總是處於混合態」。</p>
+      <p class="solution-note">正文依據：§6.5</p>
+    </div>
+  </details>
+
+
+  <details class="self-check-item">
+    <summary>6. 計算 Bell 態 $|\Phi^+\rangle = \frac{1}{\sqrt{2}}(|00\rangle + |11\rangle)$ 的 Schmidt 分解，並證明它是最大糾纏態。</summary>
+    <div class="self-check-answer">
+      <p>矩陣 $C = \frac{1}{\sqrt{2}}\begin{pmatrix}1&0\\0&1\end{pmatrix}$ 已經是對角形式。Schmidt 係數為 $\lambda_1 = \lambda_2 = 1/\sqrt{2}$，Schmidt 秩 $r = 2$。因為 $r > 1$，態是糾纏的。這是最大糾纏態，因為兩個 Schmidt 係數相等——任何進一步的糾纏都無法增加子系統 A 的 von Neumann 熵（已達最大值 $\ln 2$）。比較：$|\psi\rangle = \frac{1}{\sqrt{3}}|00\rangle + \sqrt{\frac{2}{3}}|11\rangle$ 的 Schmidt 秩也是 2，但 $\lambda_1 \neq \lambda_2$，因此不是最大糾纏態（$s(\rho_A) < \ln 2$）。</p>
+      <p class="solution-note">正文依據：§6.1（Schmidt 分解）</p>
+    </div>
+  </details>
+  <details class="self-check-item">
+    <summary>7. 一個 qubit 的密度算符為 $\rho = \frac{3}{4}|0\rangle\langle 0| + \frac{1}{4}|1\rangle\langle 1|$。計算純度 $\operatorname{Tr}(\rho^2)$ 和 von Neumann 熵 $s(\rho)$。如果我們對這個 qubit 施加 Hadamard 閘，新的密度算符是什麼？</summary>
+    <div class="self-check-answer">
+      <p>(a) $\rho^2 = \frac{9}{16}|0\rangle\langle 0| + \frac{1}{16}|1\rangle\langle 1|$，$\operatorname{Tr}(\rho^2) = \frac{10}{16} = 0.625 < 1$——混合態。</p>
+      <p>(b) $s = -\frac{3}{4}\ln\frac{3}{4} - \frac{1}{4}\ln\frac{1}{4} = \ln 2 - \frac{3}{4}\ln 3 + \frac{3}{4}\ln 4 \approx 0.562$。</p>
+      <p>(c) Hadamard 變換：$\rho' = U_H\rho U_H^\dagger = U_H\rho U_H$（因為 $U_H = U_H^\dagger$）。利用 $U_H|0\rangle = \frac{1}{\sqrt{2}}(|0\rangle+|1\rangle)$ 和 $U_H|1\rangle = \frac{1}{\sqrt{2}}(|0\rangle-|1\rangle)$：</p>
+      <p>$\rho' = \frac{3}{4}\cdot\frac{1}{2}\begin{pmatrix}1&1\\1&1\end{pmatrix} + \frac{1}{4}\cdot\frac{1}{2}\begin{pmatrix}1&-1\\-1&1\end{pmatrix} = \frac{1}{2}\begin{pmatrix}1&1/2\\1/2&1\end{pmatrix}$</p>
+      <p>$\rho' = \frac{1}{2}(|0\rangle\langle 0| + |1\rangle\langle 1|) + \frac{1}{4}(|0\rangle\langle 1| + |1\rangle\langle 0|)$。注意非對角項的出現——Hadamard 閘在計算基底中「製造」了量子相干性。但純度不變：$\operatorname{Tr}(\rho'^2) = \operatorname{Tr}(\rho^2) = 0.625$（么正變換保持純度）。</p>
+      <p class="solution-note">正文依據：§6.3（密度算符性質）</p>
+    </div>
+  </details>
+  <details class="self-check-item">
+    <summary>8. 為什麼量子去相干不能完全解決測量問題？試從縮減密度算符的角度分析。</summary>
+    <div class="self-check-answer">
+      <p>去相干成功解釋了為什麼我們觀測到的系統處於混合態——當系統與環境糾纏時，對環境取偏跡後，系統的縮減密度算符從純態變為混合態。這解釋了為什麼宏觀物體不會表現出量子干涉——干涉項被環境的糾纏「洗掉」了。</p>
+      <p>但去相干<strong>沒有</strong>解釋測量的「確定結果」問題。混合態 $\rho = \sum_i p_i|i\rangle\langle i|$ 仍然同時包含所有可能的結果 $|i\rangle$——只是我們不知道是哪一個。去相干沒有說明為什麼我們<strong>實際上只觀測到一個</strong>結果。這是測量問題的核心謎團：去相干把「為什麼態坍縮」的問題轉化為「為什麼我們只觀測到一個結果」的問題——後者可能同樣深刻。</p>
+      <p class="solution-note">正文依據：§6.5</p>
+    </div>
+  </details>
+
+</section>
+
+<!-- ====== 延伸資源 ====== -->
+<section id="extras">
+  <h2>延伸資源與下一章</h2>
+  <ul class="resource-list">
+    <li><a href="#">本章公式整理</a></li>
+    <li><a href="#">本章例題與練習（Problems 6.1–6.23）</a></li>
+    <li>延伸閱讀：J.S. Bell, <em>Speakable and Unspeakable in Quantum Mechanics</em>（Bell 不等式與量子力學基礎的經典文集）</li>
+    <li>延伸閱讀：M.A. Nielsen & I.L. Chuang, <em>Quantum Computation and Quantum Information</em>（量子計算的標準教科書）</li>
+  </ul>
+  <div class="further-reading">
+    <strong>下一章預告：第 7 章　角動量</strong>
+    <p>第 6 章教會我們如何組合量子系統——而第 7 章將引入量子力學中最華麗的對稱性結構：<strong>角動量</strong>。我們將看到自旋和軌道角動量如何從旋轉對稱性中自然湧現，角動量算符的對易關係如何決定其本徵值譜（整數和半奇整數），以及如何用 CG 係數組合多個角動量。第 7 章是通往原子物理、分子光譜和粒子物理的大門。</p>
+    <a href="ch7_angular_momentum_zh.html">前往下一章 →</a>
+  </div>
+</section>
+
+</main>
+
+</body>
+</html>

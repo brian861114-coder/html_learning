@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>第七章 公式摘要 — 單成分系統相平衡（8 條完整版）</title>
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']],tags:'ams'},options:{ignoreHtmlClass:'no-math'}};</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<link rel="stylesheet" href="../../../../shared/core.css">
+<script src="../../../../shared/core.js" defer></script>
+<link rel="stylesheet" href="../../../../shared/navigation.css" data-shared-navigation>
+</head>
+<body>
+<nav class="sidebar" aria-label="本章目錄"><div class="sidebar-header"><div class="sidebar-subtitle">材料熱力學</div><h2 class="sidebar-title">第七章：單成分系統的相平衡</h2></div><div class="sidebar-nav"><ul>
+<li><a href="#s1">7.2–7.4 $G$ 的溫度與壓力依賴</a></li>
+<li><a href="#s2">7.5 Clapeyron 與 Clausius–Clapeyron</a></li>
+<li><a href="#s3">7.7–7.8 固–固平衡與磁場效應</a></li>
+<li><a href="#cheatsheet">📋 公式速查表</a></li>
+</ul></div><div class="sidebar-toggle"><button data-action="toggle-theme">🌓 <span id="tl">深色模式</span></button></div><div class="sidebar-tools"><button type="button" data-action="toggle-theme" aria-label="切換深色或淺色模式">切換顯示主題</button></div></nav>
+<main class="chapter-page">
+<div class="chapter-header"><div class="tag">8 條公式完整版 · 含 Clapeyron + Clausius–Clapeyron</div><h1>第七章：單成分系統的相平衡</h1><div class="chapter-subtitle">Introduction to the Thermodynamics of Materials · David R. Gaskell · pp. 220–249</div></div>
+<div class="content-toolbar"><button data-action="expand-details">📖 展開全部</button><button data-action="collapse-details">📕 收合全部</button></div>
+
+<div class="content-section" id="s1"><h2>7.2–7.4 $G$ 對 $T$ 與 $P$ 的依賴</h2>
+<div class="formula-card"><div class="formula-label">⭐ $G$–$T$ 關係 (7.1)</div><div class="eq">$$\boxed{\left(\frac{\partial G}{\partial T}\right)_P = -S} \tag{7.1}$$</div><div class="formula-note">$S > 0$ → $G$ 隨 $T$ 升高而降低。$S$ 越大→降越快→高溫時高熵相穩定。</div></div>
+<div class="formula-card"><div class="formula-label">⭐ $G$–$P$ 關係 (7.2)</div><div class="eq">$$\boxed{\left(\frac{\partial G}{\partial P}\right)_T = V} \tag{7.2}$$</div><div class="formula-note">$V > 0$ → $G$ 隨 $P$ 升高而增加。高壓時低體積相穩定。</div></div>
+<div class="formula-card"><div class="formula-label">$G$ 的全微分 (7.3)</div><div class="eq">$$dG = -S\,dT + V\,dP \tag{7.3}$$</div></div>
+</div>
+
+<div class="content-section" id="s2"><h2>7.5 Clapeyron 與 Clausius–Clapeyron 方程式</h2>
+<div class="formula-card"><div class="formula-label">⭐ Clapeyron 方程式 (7.4)</div><div class="eq">$$\boxed{\frac{dP}{dT} = \frac{\Delta S}{\Delta V} = \frac{\Delta H}{T\Delta V}} \tag{7.4}$$</div><div class="formula-note">沿兩相共存曲線。$\Delta H$ = 相變熱，$\Delta V$ = 體積變化。適用於所有一階相變。</div></div>
+<div class="formula-card"><div class="formula-label">⭐ Clausius–Clapeyron 方程式 (7.5)</div><div class="eq">$$\boxed{\frac{d\ln P}{dT} = \frac{\Delta H_{\text{vap}}}{RT^2}} \tag{7.5}$$</div><div class="formula-note">適用於氣–凝態平衡。假設 $\Delta V \approx V_{\text{gas}} = RT/P$。</div></div>
+<div class="formula-card"><div class="formula-label">積分形式 (7.6)</div><div class="eq">$$\ln\frac{P_2}{P_1} = -\frac{\Delta H_{\text{vap}}}{R}\left(\frac{1}{T_2} - \frac{1}{T_1}\right) \tag{7.6}$$</div><div class="formula-note">假設 $\Delta H_{\text{vap}}$ 在 $T_1$–$T_2$ 範圍內為常數。</div></div>
+</div>
+
+<div class="content-section" id="s3"><h2>7.7–7.8 固–固平衡與磁場效應</h2>
+<div class="formula-card"><div class="formula-label">固–固 Clapeyron</div><div class="eq">$$\frac{dP}{dT} = \frac{\Delta H_{\text{tr}}}{T\Delta V_{\text{tr}}} \tag{7.7}$$</div><div class="formula-note">同素異形體轉變。$\Delta V_{\text{tr}}$ 小→$dP/dT$ 大→相邊界近垂直。</div></div>
+<div class="formula-card"><div class="formula-label">磁場對相變的影響 (7.8)</div><div class="eq">$$\frac{dT}{dH} = -\frac{\Delta M}{\Delta S} \tag{7.8}$$</div><div class="formula-note">$\Delta M$ = 磁化強度變化。用於磁制冷材料設計。</div></div>
+</div>
+
+<div class="content-section" id="cheatsheet"><h2>公式速查表（8 條全收錄）</h2>
+<table><caption>表 1：公式速查表（8 條全收錄）</caption><thead><tr><th>Eq</th><th>公式</th><th>備註</th></tr></thead><tbody>
+<tr><td>7.1</td><td>$(\partial G/\partial T)_P = -S$</td><td>⭐ $G$ 的溫度依賴</td></tr>
+<tr><td>7.2</td><td>$(\partial G/\partial P)_T = V$</td><td>⭐ $G$ 的壓力依賴</td></tr>
+<tr><td>7.3</td><td>$dG = -S\,dT + V\,dP$</td><td>$G$ 的全微分</td></tr>
+<tr><td>7.4</td><td>$dP/dT = \Delta H/T\Delta V$</td><td>⭐ Clapeyron 方程式</td></tr>
+<tr><td>7.5</td><td>$d\ln P/dT = \Delta H_{\text{vap}}/RT^2$</td><td>⭐ Clausius–Clapeyron</td></tr>
+<tr><td>7.6</td><td>$\ln(P_2/P_1) = -(\Delta H_{\text{vap}}/R)(1/T_2-1/T_1)$</td><td>Clausius–Clapeyron 積分</td></tr>
+<tr><td>7.7</td><td>$dP/dT = \Delta H_{\text{tr}}/T\Delta V_{\text{tr}}$</td><td>固–固 Clapeyron</td></tr>
+<tr><td>7.8</td><td>$dT/dH = -\Delta M/\Delta S$</td><td>磁場效應 Clapeyron</td></tr>
+</tbody></table>
+</div>
+</main>
+<script>
+function toggleTheme(){const h=document.documentElement;const n=h.getAttribute('data-theme')==='light'?'dark':'light';h.setAttribute('data-theme',n);localStorage.setItem('theme',n);document.getElementById('tl').textContent=n==='dark'?'淺色模式':'深色模式';}
+const s=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',s);if(s==='dark')document.getElementById('tl').textContent='淺色模式';
+const secs=document.querySelectorAll('.content-section[id]');const navs=document.querySelectorAll('.sidebar-nav a');window.addEventListener('scroll',()=>{let c='';secs.forEach(s=>{if(window.scrollY>=s.offsetTop-80)c=s.getAttribute('id');});navs.forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+c);});});
+</script>
+</body>
+</html>

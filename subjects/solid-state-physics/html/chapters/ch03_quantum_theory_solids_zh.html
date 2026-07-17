@@ -1,0 +1,409 @@
+<html lang="zh-TW" data-theme="light" data-reading-width="wide">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>第三章：固體的量子理論導論 — 半導體物理與元件</title>
+<script src="../assets/mathjax-config.js"></script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<link rel="stylesheet" href="../assets/chapter-base.css">
+<script defer src="../assets/course-ui.js"></script>
+
+<link rel="stylesheet" href="../../../../shared/core.css">
+<script src="../../../../shared/core.js" defer></script>
+<link rel="stylesheet" href="../../../../shared/navigation.css" data-shared-navigation>
+</head>
+<body>
+<a class="portal-home-link" href="../index.html">返回學習中心</a>
+<nav class="sidebar" aria-label="本章目錄"><div class="sidebar-header"><div class="sidebar-subtitle">半導體物理與元件</div><h2 class="sidebar-title">固體的量子理論導論</h2></div><div class="toc"><ul>
+<li><a href="#preview">📋 3.0 本章預覽</a></li><li class="ns">3.1 能帶理論</li><li class="nsub"><a href="#s3-1-1">3.1.1 能帶形成</a></li><li class="nsub"><a href="#s3-1-2">3.1.2 Kronig-Penney</a></li><li class="nsub"><a href="#s3-1-3">3.1.3 k 空間圖</a></li><li class="ns">3.2 電傳導</li><li class="nsub"><a href="#s3-2-1">3.2.1 能帶與鍵結</a></li><li class="nsub"><a href="#s3-2-2">3.2.2 漂移電流</a></li><li class="nsub"><a href="#s3-2-3">3.2.3 有效質量</a></li><li class="nsub"><a href="#s3-2-4">3.2.4 電洞</a></li><li class="nsub"><a href="#s3-2-5">3.2.5 材料分類</a></li><li class="ns">3.3–3.5 統計與態密度</li><li class="nsub"><a href="#s3-3-1">3.3.1 Si/GaAs</a></li><li class="nsub"><a href="#s3-3-2">3.3.2 有效質量</a></li><li class="nsub"><a href="#s3-4-1">3.4.1 態密度</a></li><li class="nsub"><a href="#s3-4-2">3.4.2 半導體延伸</a></li><li class="nsub"><a href="#s3-5-1">3.5.1 統計定律</a></li><li class="nsub"><a href="#s3-5-2">3.5.2 F-D 函數</a></li><li class="nsub"><a href="#s3-5-3">3.5.3 分布函數</a></li><li><a href="#summary">📋 本章摘要</a></li><li><a href="#common-mistakes">⚠ 常見誤解</a></li><li><a href="#self-check">✅ 自我檢核</a></li><li><a href="#extras">🔎 延伸學習</a></li><li><a href="#derivation-lab">🧪 推導診斷</a></li>
+</ul></div><div class="sidebar-tools"><button type="button" data-action="toggle-theme" aria-label="切換深色或淺色模式">切換顯示主題</button></div></nav>
+<main class="chapter-page" id="main-content" data-chapter-title="固體的量子理論導論" data-prev-href="ch02_intro_qm_zh.html" data-prev-label="量子力學導論" data-next-href="ch04_semiconductor_equilibrium_zh.html" data-next-label="平衡態半導體">
+<header class="chapter-header"><div class="tag">第三章</div><h1>固體的量子理論導論</h1><div class="chapter-meta">Donald A. Neamen·《半導體物理與元件：基本原理》第四版·第 58–105 頁</div></header>
+
+<section id="preview"><h2>3.0 本章預覽</h2><div class="callout"><strong>📋 3.0 本章預覽</strong>
+<p>第二章教會我們單個電子在各種位能下的行為。但在固體中，我們面對的不是一個電子，而是<strong>每立方公分約 $10^{22}$ 個原子、每個原子有多個電子</strong>的集體行為。本章將量子力學從「一個電子+一個原子」擴展到「海量電子+週期性晶格」，回答兩個核心問題：</p>
+<p>① 在晶格的週期性位能中，電子的允許能量是什麼？→ <strong>能帶理論</strong><br>② 在熱平衡下，大量電子如何分布在各能態中？→ <strong>Fermi-Dirac 統計</strong></p>
+<div class="callout-warn"><strong>⚡ 第三章是第二章和第四章之間的關鍵橋樑。</strong>第二章給了我們薛丁格方程→第三章把它應用在晶格上得到能帶結構、態密度、和統計分布→第四章利用這些結果計算實際的載子濃度。沒有第三章，你就無法理解為什麼 Si 是半導體而 SiO₂ 是絕緣體、為什麼 GaAs 能發光而 Si 不行、以及摻雜為什麼能改變導電性。</div>
+<h3>關鍵概念</h3><ol class="key-concept-list"><li><strong>能帶形成</strong>：原子能階在晶格中分裂成允帶與禁帶 $E_g$。</li><li><strong>Bloch 定理</strong>：週期位能中電子態為調幅平面波。</li><li><strong>有效質量</strong>：$m^*=\hbar^2/(d^2E/dk^2)$ 吸收晶格對電子動力學的影響。</li><li><strong>直接/間接能隙</strong>：決定光吸收與發光效率（GaAs vs Si）。</li><li><strong>Fermi-Dirac 統計</strong>：$f_F(E)$ 與態密度共同決定載子佔據。</li></ol><div class="reasoning-map" aria-labelledby="reasoning-map-title"><h3 id="reasoning-map-title">🧭 本章推理地圖</h3><ol class="reasoning-path"><li><strong>已知條件</strong><span>週期晶格位能使電子態形成連續能帶而非孤立能階</span><small>（§3.1）</small></li><li data-relation="決定"><strong>中間機制</strong><span>$E$–$k$ 關係、有效質量與態密度描述導/價帶載子</span><small>（§3.2–§3.4）</small></li><li data-relation="可預測"><strong>材料分類</strong><span>金屬、半導體、絕緣體由 $E_g$ 與 Fermi 位置區分</span><small>（§3.2.5、§3.5）</small></li><li data-relation="因此用於"><strong>工程用途</strong><span>為第四章載子濃度與後續元件模型提供材料參數</span><small>（Ch4）</small></li></ol></div></div></section>
+
+<figure class="figure"><a class="figure-link" href="../../pages/ch03_pages/ch03_overview.png" target="_blank" rel="noopener"><img src="../../pages/ch03_pages/ch03_overview.png" alt="第三章總覽圖" loading="lazy"></a><figcaption>📌 第三章總覽圖：固體的量子理論 — 能帶形成、E-k關係、電洞概念、態密度、Fermi-Dirac統計、金屬/半導體/絕緣體</figcaption></figure>
+
+<section id="s3-1-1"><h2>3.1.1 能帶的形成</h2>
+<div class="section-keypoints">
+<strong>🔑 本節重點</strong> ① 孤立原子→離散能階；原子靠近→波函數重疊→Pauli 原理→一個能階分裂成兩個 ② $10^{22}$ 原子→每條能階分裂成一個能帶→能階間距 ~$10^{-19}$ eV→視為準連續 ③ 矽：3s²3p²→交互作用→分裂成價帶（滿）和導帶（空），中間為禁帶（$E_g$） ④ 金屬 $E_g=0$→導電；絕緣體 $E_g&gt;3$–$5$ eV→不導電；半導體 $E_g=0.5$–$2$ eV→可控制導電
+</div>
+<figure class="figure"><a class="figure-link" href="../../pages/ch03_pages/ch3_page_85_c.png" target="_blank" rel="noopener"><img src="../../pages/ch03_pages/ch3_page_85_c.png" alt="圖 3.2" loading="lazy"></a><figcaption>圖 3.2：從孤立原子到晶體的能帶演化——離散能階→允帶+禁帶。</figcaption></figure>
+<p>回顧第二章：單一孤立原子的電子有分立的能階（$E_n = -13.6/n^2$ eV）。現在想像把兩個原子慢慢靠近。當它們的波函數開始重疊時，電子之間產生交互作用→原來的一個能階<strong>分裂成兩個</strong>。這不是巧合——Pauli 原理要求每個電子有獨特的量子態，兩個電子不能佔據同一個態，所以能階必須分裂。</p>
+<figure class="figure"><a class="figure-link" href="../../pages/ch03_pages/ch3_page_84_c.png" target="_blank" rel="noopener"><img src="../../pages/ch03_pages/ch3_page_84_c.png" alt="圖 3.1" loading="lazy"></a><figcaption>圖 3.1：(a) 孤立氫原子的徑向機率密度；(b) 兩個靠近的氫原子波函數重疊；(c) n=1 能階分裂成兩個。</figcaption></figure>
+<p>現在把這個圖像擴展到 $10^{22}$ 個原子（一個晶體）：每個原始能階分裂成含有<strong>極大量離散能階的能帶</strong>。在平衡原子間距處，能帶內相鄰能階的間距只有約 $10^{-19}$ eV——遠小於室溫下的 $kT$（0.026 eV）→實際可視為<strong>准連續的能量分布</strong>。</p>
+<p><strong>以矽為例（圖 3.4）：</strong>Si 原子有 4 個價電子（3s²3p²）。當原子形成晶體時，3s 和 3p 態交互作用→分裂成兩個能帶，每個能帶每原子有 4 個量子態。$T=0$ K 時，下方能帶（<strong>價帶</strong>）完全填滿，上方能帶（<strong>導帶</strong>）完全空著。兩者之間是<strong>禁帶（能隙 $E_g$）</strong>——沒有任何量子態存在。</p>
+<p>這個模型也說明了為什麼「能帶」不是畫圖方便而已，而是由大量原子態在 Pauli 原理限制下自然展開的結果。原子越多，分裂後的能階越密，最後形成近似連續的允許能量區間。</p>
+<p>讀圖時要把「允帶」與「禁帶」分開想：允帶內有可被佔據的量子態，禁帶內沒有可用態。電子若要從價帶進入導帶，必須取得至少 $E_g$ 的能量。</p>
+<figure class="figure"><a class="figure-link" href="../../pages/ch03_pages/ch3_page_87_c.png" target="_blank" rel="noopener"><img src="../../pages/ch03_pages/ch3_page_87_c.png" alt="圖 3.3, 3.4" loading="lazy"></a><figcaption>圖 3.3：三個能態分裂成允帶。圖 3.4：(a) 孤立 Si 原子；(b) Si 的 3s/3p 態分裂成價帶和導帶，中間為能隙 $E_g$。</figcaption></figure>
+<div class="callout"><strong>💡 能帶理論是半導體物理的「大統一理論」。</strong>為什麼有些材料導電、有些不導電？答案全在 $E_g$：金屬（$E_g=0$，能帶重疊或部分填充）→導電。絕緣體（$E_g&gt;3$–$5$ eV）→不導電。半導體（$E_g=0.5$–$2$ eV）→可以導電，但需要一些幫助（熱能或摻雜）。第四章的全部公式（$n_i$、$n_0$、$p_0$、Fermi 能階）都建立在這個能帶圖景上。</div>
+<div class="callout-warn"><strong>⚠ 常見誤解</strong> 能帶中的「空白」不是電子還沒填進去的位置，而是晶體中根本不存在可允許的量子態；這也是禁帶不能用普通加速穿越的原因。</div>
+<details class="example"><summary>例題：為什麼矽在 0 K 不導電？</summary><p>0 K 時價帶全滿、導帶全空，滿價帶中每個電子態的速度貢獻會彼此抵消；又沒有電子在導帶中可被電場加速，所以理想本徵矽不導電。</p></details>
+</section>
+
+<section id="s3-1-2"><h2>3.1.2 Kronig-Penney 模型</h2>
+<div>
+<strong>🔑 本節重點</strong> ① Bloch 定理：$\psi(x)=u(x)e^{jkx}$——週期位能中波函數 = 平面波 × 週期調制函數 ② 色散關係：$P\frac{\sin\alpha a}{\alpha a}+\cos\alpha a=\cos ka$——決定允帶/禁帶 ③ $P$ 參數：$P=mV_0ba/\hbar^2$——唯一物理參數，$P\to0$→自由電子，$P\to\infty$→孤立原子 ④ 有限 $P$→有限允帶和禁帶；$P$ 越大→能隙越寬、允帶越窄
+</div>
+<p>能帶的形成可以透過量子力學嚴格證明。Kronig-Penney 模型使用一維週期方阱位能來近似晶格（圖 3.6），然後求解薛丁格方程。</p>
+<figure class="figure"><a class="figure-link" href="../../pages/ch03_pages/ch3_page_89_c.png" target="_blank" rel="noopener"><img src="../../pages/ch03_pages/ch3_page_89_c.png" alt="圖 3.5, 3.6" loading="lazy"></a><figcaption>圖 3.5：孤立原子位能→重疊→一維晶格淨位能。圖 3.6：Kronig-Penney 簡化模型——週期方阱位能。</figcaption></figure>
+<p><strong>Bloch 定理</strong>是關鍵：在週期性位能中，波函數必須具有 $\psi(x) = u(x)e^{jkx}$ 的形式——一個平面波（$e^{jkx}$）乘以一個與晶格同週期的調制函數（$u(x)$）。</p>
+
+<h3>Kronig-Penney 推導步驟詳解</h3>
+<p>Kronig-Penney 模型的位能（圖 3.6）定義為：在區域 I（$0 &lt; x &lt; a$，阱區）$V(x)=0$；在區域 II（$-b &lt; x &lt; 0$，障壁區）$V(x)=V_0$。整個結構以週期 $(a+b)$ 重複——這是固體物理中最簡單的非平庸週期位能。</p>
+
+<p><strong>第一步：代入 Bloch 形式。</strong>將 $\psi(x)=u(x)e^{jkx}$ 代入一維、與時間無關的薛丁格方程：
+$$-\frac{\hbar^2}{2m}\frac{d^2\psi}{dx^2}+V(x)\psi=E\psi$$
+在區域 I（$V=0$），計算 $d^2\psi_1/dx^2 = e^{jkx}[d^2u_1/dx^2 + 2jk\,du_1/dx - k^2 u_1]$，代入後得到 $u_1(x)$ 的微分方程：
+$$\frac{d^2u_1}{dx^2}+2jk\frac{du_1}{dx}-(k^2-\alpha^2)u_1=0 \tag{3.4}$$
+其中 $\alpha^2 \equiv 2mE/\hbar^2$——$\alpha$ 與能量 $E$ 直接相關。在區域 II（$V=V_0$），同理得到 $u_2(x)$ 的方程：
+$$\frac{d^2u_2}{dx^2}+2jk\frac{du_2}{dx}-\left(k^2-\beta^2\right)u_2=0 \tag{3.8}$$
+其中 $\beta^2 \equiv 2m(E-V_0)/\hbar^2$。當 $E &lt; V_0$（束縛態）時 $\beta$ 為虛數，但數學形式保持不變。</p>
+
+<p><strong>第二步：寫出通解。</strong>這兩個是常係數二階線性微分方程，其特徵方程為 $r^2+2jkr-(k^2-\alpha^2)=0$，解得 $r = -jk \pm j\alpha$。因此通解為平面波的疊加：</p>
+<div class="eq">$$u_1(x)=A e^{j(\alpha-k)x}+B e^{-j(\alpha+k)x} \quad (0&lt;x&lt;a) \tag{3.9}$$</div>
+<div class="eq">$$u_2(x)=C e^{j(\beta-k)x}+D e^{-j(\beta+k)x} \quad (-b&lt;x&lt;0) \tag{3.10}$$</div>
+<p>四個未知係數 $A,B,C,D$ 待定——這正是「四個未知數」的由來。</p>
+
+<p><strong>第三步：施加邊界條件——四個方程決定四個未知數。</strong>因為位能處處有限，波函數 $\psi(x)$ 及其一階導數必須處處連續。這給出四個邊界條件：</p>
+<ul>
+<li><strong>$x=0$ 處波函數連續：</strong>$u_1(0)=u_2(0)$ → $A+B-C-D=0$（方程一，(3.12)式）</li>
+<li><strong>$x=0$ 處導數連續：</strong>$du_1/dx|_{x=0}=du_2/dx|_{x=0}$ → $(\alpha-k)A-(\alpha+k)B-(\beta-k)C+(\beta+k)D=0$（方程二，(3.14)式）</li>
+<li><strong>$x=a$ 對應 $x=-b$（週期性）：</strong>$u_1(a)=u_2(-b)$ → $Ae^{j(\alpha-k)a}+Be^{-j(\alpha+k)a}-Ce^{-j(\beta-k)b}-De^{j(\beta+k)b}=0$（方程三，(3.16)式）</li>
+<li><strong>$x=a$ 對應 $x=-b$ 處導數連續：</strong>$du_1/dx|_{x=a}=du_2/dx|_{x=-b}$ → 第四個方程（(3.18)式），結構與方程三類似但係數多了 $(\alpha\pm k)$ 和 $(\beta\pm k)$ 因子</li>
+</ul>
+<p>這構成了一個 $4\times4$ 齊次線性方程組 $\mathbf{M}\cdot[A,B,C,D]^T=0$。有非零解的充要條件是係數行列式為零：$\det(\mathbf{M})=0$。計算這個行列式極其繁複（這就是為什麼課本說「extremely laborious」），但結果極其優美——</p>
+
+<p>經過繁複的邊界條件匹配（四個方程、四個未知係數），得到決定性的<strong>色散關係</strong>：</p>
+<div class="eq">$$\boxed{-\frac{\alpha^2+\beta^2}{2\alpha\beta}\sin(\alpha a)\sin(\beta b)+\cos(\alpha a)\cos(\beta b)=\cos k(a+b)} \tag{3.19}$$</div>
+<p><strong>物理意義——為什麼會出現能帶和能隙？</strong>右邊 $\cos k(a+b)$ 必須在 $[-1,1]$ 範圍內（因為實數 $k$ 的餘弦值域為 $[-1,1]$）。這限制了左邊 $\alpha$ 和 $\beta$ 的取值範圍（$\alpha^2=2mE/\hbar^2$，與能量 $E$ 直接相關）→只有特定的 $E$ 值能使左邊表達式也落在 $[-1,1]$ 內→這些 $E$ 構成<strong>允帶</strong>；其餘 $E$ 值對應左邊 $&gt;1$ 或 $&lt;-1$→無解→<strong>禁帶</strong>。週期性晶格自然導致能帶結構——這不是假設，是薛丁格方程施加於週期邊界條件的直接後果。</p>
+
+<p><strong>化簡為 $P$ 參數形式：</strong>為了得到更易分析物理內涵的結果，取極限 $b\to 0$、$V_0\to\infty$，但保持乘積 $bV_0$ 有限（即障壁變窄變高，但「總強度」不變）。在 $\beta\to j\gamma$（$\gamma$ 為實數，對應 $E&lt;V_0$ 的束縛態）且 $\gamma b\ll 1$ 的條件下，(3.19) 式化簡為傳奇的 Kronig-Penney 色散關係：</p>
+<div class="eq">$$\boxed{P\,\frac{\sin\alpha a}{\alpha a}+\cos\alpha a=\cos ka} \tag{3.24}$$</div>
+<p>其中 $P$ 參數定義為：</p>
+<div class="eq">$$\boxed{P \equiv \frac{m V_0 b a}{\hbar^2}} \tag{3.23}$$</div>
+<p>$P$ 的因次為無因次量——它綜合了位能障壁高度（$V_0$）、障壁寬度（$b$）、晶格常數（$a$）和電子質量（$m$），是 Kronig-Penney 模型中<strong>唯一的物理參數</strong>。整個能帶結構只依賴這一個數字。</p>
+
+<p><strong>$P$ 參數的物理意義——兩個極限：</strong></p>
+<ul>
+<li><strong>$P \to 0$（自由電子極限）：</strong>障壁消失→$\cos\alpha a = \cos ka$→$\alpha=k$→$E=\hbar^2k^2/2m$。這就是自由電子的拋物線色散關係——沒有能隙，能量連續。對應金屬中近乎自由的電子，或半導體導帶底部的電子（有效質量近似）。這與第二章 (2.28) 式的自由電子能量完全一致。</li>
+<li><strong>$P \to \infty$（孤立原子極限）：</strong>障壁無限強→左邊 $P\sin\alpha a/(\alpha a)$ 主導→只有當 $\sin\alpha a \approx 0$ 時才有有限解→$\alpha a = n\pi$→$E_n = n^2\pi^2\hbar^2/(2ma^2)$。這回到孤立原子的離散能階！每個允帶退化為一個離散能階，禁帶無限寬。這就是為什麼固體物理中常說「固體能帶是孤立原子能階的『展寬』」。</li>
+<li><strong>實際晶體（$0 &lt; P &lt; \infty$）：</strong>有限 $P$ 值產生有限寬度的允帶和禁帶。$P$ 越大→能隙越寬、允帶越窄→電子越被「束縛」在原子附近。金屬的 $P$ 較小（能帶寬、可能重疊），絕緣體的 $P$ 較大（能帶窄、能隙寬）。半導體的 $P$ 在中間，產生適中的能隙（約 1–2 eV）。</li>
+</ul>
+
+<p><strong>數值範例——能隙如何隨 $P$ 打開：</strong>考慮 $P=3$ 的具體情況。定義左邊函數 $f(\alpha a)=3\sin(\alpha a)/(\alpha a)+\cos(\alpha a)$。$f(\alpha a)$ 必須落在 $[-1,1]$ 內（因為等於 $\cos ka$）。計算幾個關鍵點：$\alpha a \to 0$ 時，$\sin x/x \to 1$→$f(0)=3\cdot1+1=4&gt;1$→不允許（第一個允帶不是從 $\alpha a=0$ 開始，而是從 $f(\alpha a)=1$ 的第一個解開始）。$\alpha a=\pi$ 時，$\sin\pi=0$→$f(\pi)=0+(-1)=-1$→在邊界上，允帶結束。$\alpha a=2\pi$ 時，$f(2\pi)=0+1=1$→在邊界上，第二個允帶結束。$\alpha a=1.5\pi$ 時，$f(1.5\pi)\approx 3(-1)/(1.5\pi)+0\approx -0.64$→在 $[-1,1]$ 內→允帶。但 $\alpha a=1.2\pi$ 時，$f$ 可能超出範圍。繪製 $f(\alpha a)$ 曲線（課本圖 3.8c）顯示：$f$ 在每個 $\alpha a=n\pi$ 附近劇烈振盪，超出 $[-1,1]$ 的部分對應能隙。$P$ 越大→$f$ 的振幅越大→超出 $[-1,1]$ 的 $\alpha a$ 範圍越寬→能隙越寬。$P=0$→$f=\cos\alpha a$（振幅 $1$）→所有 $\alpha a$ 都在 $[-1,1]$ 內→能隙為零。這就是能隙從 $P$ 參數「長出來」的數學圖像。</p>
+
+<div class="callout"><strong>💡 Kronig-Penney 模型——固體物理的「氫原子」。</strong>就像氫原子是原子物理中最簡單但足以展示所有基本特徵的系統（能階量化、波函數節點、量子數），Kronig-Penney 模型是固體物理中同等重要的原型系統。它用最簡單的一維週期方阱位能，解析地展示了：① Bloch 定理的必要性；② 能帶和能隙如何從薛丁格方程中<strong>自然浮現</strong>（而非人為假設）；③ $E$-$k$ 色散關係的完整結構；④ Brillouin 區邊界處能隙的起源（$k=\pm n\pi/a$ 處 Bragg 反射）；⑤ 自由電子（$P\to0$）和孤立原子（$P\to\infty$）兩個極限之間的連續過渡。所有更複雜的能帶計算方法（如 nearly-free electron model、tight-binding、pseudopotential、DFT）都是 Kronig-Penney 基本思想的延伸和精煉。掌握了這個模型，你就掌握了理解所有固體能帶理論的「第一原理」。</div>
+<div class="callout-warn"><strong>⚠️ 一維模型</strong> Kronig-Penney 展示能帶起源，但真實晶體需三維與多軌域計算。</div>
+<details class="example"><summary>📐 例題 — $P$ 極限</summary><div class="example-body"><p>$P\to0$ 得自由電子拋物線、無能隙；$P\to\infty$ 得孤立原子離散能階。</p></div></details>
+</section>
+
+<section id="s3-1-3"><h2>3.1.3 k 空間圖與能帶結構</h2>
+<div class="section-keypoints">
+<strong>🔑 本節重點</strong> ① Brillouin 區：$-\pi/a\le k\le\pi/a$；邊界 $k=\pm n\pi/a$ 處 Bragg 反射→駐波→能隙 ② $E$–$k$ 圖：斜率 $dE/dk$ = 群速度，曲率 $d^2E/dk^2$ = $1/m^*$ ③ 能帶邊緣拋物線近似：$E=\hbar^2k^2/(2m^*)$——形式與自由電子相同，但 $m\to m^*$ ④ $E$–$k$ 圖是半導體物理的「地圖」——決定有效質量、直接/間接能隙、金屬/半導體分類
+</div>
+<figure class="figure"><a class="figure-link" href="../../pages/ch03_pages/ch3_page_96_c.png" target="_blank" rel="noopener"><img src="../../pages/ch03_pages/ch3_page_96_c.png" alt="圖 3.10" loading="lazy"></a><figcaption>圖 3.10：Brillouin 區邊界的能隙形成——Bragg 反射導致駐波→禁帶。</figcaption></figure>
+<p>由 Kronig-Penney 模型可繪製 $E$ 對 $k$ 的關係圖。$k$ 的範圍（第一 Brillouin 區）為 $-\pi/a \leq k \leq \pi/a$。在每個 Brillouin 區邊界處，$E$–$k$ 曲線不連續→能隙。</p>
+<p><strong>Brillouin 區的物理意義：</strong>$k = \pm\pi/a$ 代表什麼？當 $k = \pi/a$ 時，de Broglie 波長 $\lambda = 2\pi/k = 2a$——正好是晶格常數的兩倍。這個波長的波在晶格中產生 Bragg 反射（相鄰原子散射的波相位差 = $\pi$→完全破壞性干涉）。波無法在晶體中傳播→形成駐波→能隙出現。所以能隙<strong>不是</strong>來自某個神秘的量子效應，而是來自波在週期結構中的 Bragg 反射——這與 X 射線在晶體中的繞射完全相同的物理。</p>
+<figure class="figure"><a class="figure-link" href="../../pages/ch03_pages/ch3_page_95_c.png" target="_blank" rel="noopener"><img src="../../pages/ch03_pages/ch3_page_95_c.png" alt="圖 3.9" loading="lazy"></a><figcaption>圖 3.9：由 Kronig-Penney 模型得出的 $E$–$k$ 圖——允帶（曲線段）被禁帶（水平缺口）分隔。</figcaption></figure>
+<figure class="figure"><a class="figure-link" href="../../pages/ch03_pages/ch3_page_95_c.png" target="_blank" rel="noopener"><img src="../../pages/ch03_pages/ch3_page_95_c.png" alt="圖 3.9 附圖" loading="lazy"></a><figcaption>圖 3.9 附：擴展的 $E$–$k$ 能帶圖——多個 Brillouin 區的能帶結構，注意能隙出現在 $k = \pm n\pi/a$ 處。</figcaption></figure>
+<p><strong>如何讀 $E$–$k$ 圖：</strong></p>
+<ul>
+<li><strong>斜率 $dE/dk = \hbar v$（群速度）：</strong>斜率越大→電子移動越快。$k=0$ 處斜率為零→電子靜止。</li>
+<li><strong>曲率 $d^2E/dk^2 = \hbar^2/m^*$（有效質量）：</strong>向上彎（$d^2E/dk^2 &gt; 0$）→$m^* &gt; 0$（電子）。向下彎→$m^* &lt; 0$（電洞的來源）。</li>
+<li><strong>能隙出現在 $k = \pm n\pi/a$：</strong>Brillouin 區邊界。允帶之間的禁帶寬度取決於晶格散射的強度（$P$ 參數）。</li>
+</ul>
+<p>在能帶邊緣附近（導帶底部或價帶頂部），$E$–$k$ 關係可以用<strong>拋物線近似</strong>：</p>
+<div class="eq">$$E = \frac{\hbar^2 k^2}{2m^*} \tag{3.24}$$</div>
+<p>這和自由電子的 $E=\hbar^2k^2/2m$ 形式完全相同——只是用<strong>有效質量 $m^*$</strong>取代了自由電子質量 $m_0$。晶格的影響全部被吸收進了 $m^*$。</p>
+<div class="callout"><strong>💡 $E$–$k$ 圖是半導體物理的「地圖」。</strong>它決定了：① 有效質量（第三章）→遷移率（第五章）→元件速度。② 直接/間接能隙（Si vs GaAs）→能否發光（LED/雷射）。③ 能帶重疊（金屬 vs 半導體）。學會讀 $E$–$k$ 圖，就像學會讀地圖——之後所有章節的導航都靠它。</div>
+<div class="callout-warn"><strong>⚠ 讀圖警告</strong> $E$–$k$ 圖的水平軸不是實空間位置，而是波向量；不要把能帶曲線誤讀成電子在晶體中的軌跡。</div>
+<details class="example"><summary>例題：Brillouin 區邊界為何容易開能隙？</summary><p>當電子波長與晶格週期滿足 Bragg 反射條件時，向前與向後的波形成駐波；兩種駐波在離子位置的機率密度不同，因此能量分裂，允帶之間出現禁帶。</p></details>
+</section>
+
+<section id="s3-2-1"><h2>3.2.1 能帶與鍵結模型</h2><div class="section-keypoints"><strong>🔑 本節重點</strong> 滿價帶 · 空導帶 · 部分填充能帶 · 鍵結破壞與載子</div>
+<p>固體是否能導電，取決於能帶中是否有可被電子移入的鄰近空態。滿能帶中的電子即使很多，也無法形成淨電流，因為所有可用態都已被填滿。</p>
+<p>在鍵結模型中，共價鍵完整時電子被束縛在價帶；若熱能、光或摻雜讓電子進入導帶，就留下可移動的電洞。</p>
+<p>因此導電不是單純看電子總數，而是看能帶填充狀態與可用量子態。</p>
+<p>金屬有部分填充能帶，所以微小電場即可改變電子分布；半導體則需要先產生電子與電洞。</p>
+<p>這個圖像把第一章的鍵結、第二章的量子態與本章的能帶連成同一條主線。</p>
+<div class="callout"><strong>📌 判讀重點</strong> 滿價帶不導電，空導帶也不導電；導電需要「載子」與「可移入的空態」同時存在。</div>
+<div class="callout-warn"><strong>⚠ 常見誤解</strong> 電子多不一定導電；若能帶完全填滿，對稱的電子運動會互相抵銷。</div>
+<details class="example"><summary>例題：為什麼滿價帶沒有淨電流？</summary><p>滿價帶中每個 $+k$ 態都有對應的 $-k$ 態被佔據，兩者速度相反，總電流相互抵銷。</p></details>
+</section>
+<section id="s3-2-2"><h2>3.2.2 漂移電流</h2><div class="section-keypoints"><strong>🔑 本節重點</strong> 漂移速度 · 遷移率 · 導電率 · 散射時間</div>
+<div>
+<strong>🔑 本節重點</strong> ① 漂移電流密度 $J=en\mu\mathcal{E}$——載子越多（$n$）、跑越快（$\mu$）→電流越大 ② 導電率 $\sigma=en\mu$（單位 (Ω·cm)⁻¹）——Ohm 定律的微觀基礎 ③ 遷移率 $\mu=e\tau/m^*$——由有效質量（晶格結構）和散射時間 $\tau$（缺陷/聲子）決定 ④ 金屬 $n$ 極大→高 $\sigma$；半導體 $n$ 可調控→$\sigma$ 可變
+</div>
+<p>現在把電場加在晶體上。電子受到 $F=-e\mathcal{E}$ 的力。如果導帶中有空的量子態（電子可以移動到更高能的態），電子就會加速→產生<strong>漂移電流</strong>。</p>
+<p>關鍵公式：漂移速度 $v_d = \mu\mathcal{E}$（$\mu$ = 遷移率），電流密度 $J = -env_d$。結合起來：</p>
+<div class="eq">$$\boxed{J = e n \mu \mathcal{E}} \tag{3.31}$$</div>
+<div class="eq">$$\boxed{\sigma = e n \mu} \quad\text{（導電率）} \tag{3.32}$$</div>
+<p><strong>物理圖像：</strong>導電率 $\sigma$ 取決於兩個因素——有多少載子（$n$）以及它們跑多快（$\mu$）。金屬的 $n$ 極大→高導電率。半導體的 $n$ 可透過摻雜調控→導電率可控。遷移率 $\mu = e\tau/m^*$ 取決於有效質量（晶格結構決定）和散射時間 $\tau$（缺陷和聲子決定）。</p>
+<figure class="figure"><a class="figure-link" href="../../pages/ch03_pages/ch3_page_98_c.png" target="_blank" rel="noopener"><img src="../../pages/ch03_pages/ch3_page_98_c.png" alt="圖 3.13" loading="lazy"></a><figcaption>圖 3.13：漂移電流——電子在電場作用下沿導帶移動，每次碰撞後重新加速。</figcaption></figure>
+<p>在微觀圖像中，電子不是一路無阻地加速，而是在兩次散射之間短暫加速，碰到聲子、雜質或缺陷後重新分配動量。因此平均漂移速度通常遠小於熱速度。</p>
+<p>這也讓導電率成為材料品質的指標：同樣的載子濃度下，散射越少、$\tau$ 越長、遷移率越高，電流就越容易流動。</p>
+<div class="callout"><strong>💡 連到元件</strong> MOSFET 的導通電流不只看通道中有多少反轉載子，也看通道遷移率；這就是製程應力、界面粗糙與溫度會改變元件速度的原因。</div>
+<div class="callout-warn"><strong>⚠ 符號提醒</strong> 電子電荷是 $-e$，但工程上常用正的電流密度大小 $J=en\mu\mathcal{E}$；若追蹤向量方向，必須分清電子速度與傳統電流方向相反。</div>
+<details class="example"><summary>例題：載子濃度加倍會怎樣？</summary><p>若遷移率保持不變，$\sigma=en\mu$ 也加倍；但實際重摻雜時雜質散射會降低 $\mu$，所以導電率未必精確加倍。</p></details>
+</section>
+
+<section id="s3-2-3"><h2>3.2.3 電子有效質量 ⭐</h2>
+<div class="section-keypoints">
+<strong>🔑 本節重點</strong> ① $m^*=\hbar^2/(d^2E/dk^2)$——取決於 $E$–$k$ 曲線的曲率 ② 導帶底 $d^2E/dk^2&gt;0$→$m^*&gt;0$（正常加速）；價帶頂 $d^2E/dk^2&lt;0$→$m^*&lt;0$→電洞 ③ GaAs $m^*=0.067m_0$（輕 15 倍）vs Si $m^*=0.98m_0$→GaAs 元件比 Si 快 ④ $m^*$ 將晶格對電子的全部影響吸收進一個等效質量→$F=m^*a$ 形式與牛頓定律相同
+</div>
+<p>這可能是第三章最優雅的概念。電子在真空中的運動遵守 $F=m_0a$。在晶體中呢？</p>
+<p>電子的群速度：$v_g = \frac{1}{\hbar}\frac{dE}{dk}$（波包的移動速度）。施加外力 $F$ 時 $F = dp/dt = \hbar\,dk/dt$。加速度：</p>
+<div class="eq">$$a = \frac{dv_g}{dt} = \frac{1}{\hbar}\frac{d^2E}{dk^2}\frac{dk}{dt} = \frac{1}{\hbar^2}\frac{d^2E}{dk^2}F$$</div>
+<p>與 $F=m^*a$ 比較→</p>
+<div class="eq">$$\boxed{m^* = \frac{\hbar^2}{\dfrac{d^2E}{dk^2}}} \tag{3.34}$$</div>
+<div class="callout-warn"><strong>⚡ 有效質量的物理直覺：</strong>$m^*$ 取決於 $E$–$k$ 曲線的<strong>曲率</strong>。曲率越大→$m^*$ 越小→同樣的力產生更大的加速度→電子「感覺」更輕。<br><br>導帶底部 $d^2E/dk^2&gt;0$→$m^*&gt;0$——電子正常加速。<br>價帶頂部 $d^2E/dk^2&lt;0$→$m^*&lt;0$——電子對電場的反應與正電荷相同！這就是<strong>電洞（hole）</strong>概念的來源：與其追蹤價帶中數十億個電子的複雜集體運動，不如把它們等效為少數幾個帶正電、有正有效質量的「電洞」。<br><br>GaAs 的 $m^*=0.067m_0$——電子在 GaAs 中「感覺」比在真空中輕 15 倍。Si 的 $m^*=0.98m_0$——重了近 15 倍。這就是為什麼 GaAs 元件比 Si 元件快（高頻應用偏好 GaAs）。</div>
+<figure class="figure"><a class="figure-link" href="../../pages/ch03_pages/ch3_page_100_c.png" target="_blank" rel="noopener"><img src="../../pages/ch03_pages/ch3_page_100_c.png" alt="圖 3.15" loading="lazy"></a><figcaption>圖 3.15：$E$–$k$ 曲線——注意導帶底（曲率正）和價帶頂（曲率負）的有效質量符號不同。</figcaption></figure>
+<p>有效質量不是電子真的變胖或變瘦，而是把晶格週期位能造成的複雜反應包進一個可操作的參數。這讓我們可以保留牛頓式的運動語言，同時不必每次重解整個能帶問題。</p>
+<p>只要能帶在極值附近可近似成拋物線，$m^*$ 就可以視為常數；若離開極值太遠，能帶非拋物性變強，有效質量就會依能量與方向改變。</p>
+<div class="callout"><strong>💡 曲率直覺</strong> 能帶曲率大 → 有效質量小、易加速；曲率小 → 質量大、難加速。讀 $E$–$k$ 圖時先找曲率再查表。</div>
+<details class="example"><summary>例題：平坦能帶代表什麼？</summary><p>平坦能帶的曲率很小，所以 $m^*$ 很大；同樣外力下加速度小，載子遷移率通常較低。</p></details>
+</section>
+
+<section id="s3-2-4"><h2>3.2.4 電洞概念</h2><div class="section-keypoints"><strong>🔑 本節重點</strong> 價帶空態 · 正電荷等效 · 正有效質量 · 少數載子</div>
+<div>
+<strong>🔑 本節重點</strong> ① 電洞 = 價帶中一個空的量子態→等效於帶 $+e$、正有效質量 $m_p^*$ 的粒子 ② 劇院類比：滿價帶 = 坐滿人的劇院；空座位移動 = 電洞移動（與電子反向） ③ 材料分類：金屬（能帶部分填充/重疊）vs 半導體（$E_g=0.5$–$2$ eV）vs 絕緣體（$E_g&gt;3$–$5$ eV） ④ Si $E_g=1.12$ eV 在「甜蜜點」——室溫 $n_i$ 低，摻雜可精確控制載子濃度
+</div>
+<p>價帶中一個空的量子態 = <strong>電洞（hole）</strong>。電洞的行為等效於一個帶 $+e$ 電荷、有正有效質量 $m_p^*$ 的粒子。用電洞取代對數十億個價帶電子的描述，是半導體物理最強大的簡化之一。</p>
+<p><strong>為什麼「缺失的電子」像正電荷？</strong>想像一個坐滿人的劇院（= 滿價帶），每個座位代表一個量子態。如果中間有一個空座位，旁邊的人可以移到空座位上→空座位向反方向移動。要追蹤所有人的移動很困難，但追蹤「空座位的移動」很簡單——空座位看起來像一個帶正電的粒子在移動。數學上：$N$ 個電子的總電流 = $-e\sum v_i$。如果其中一個態是空的，總電流改變了 $+ev_k$——等效於一個帶 $+e$ 的粒子以速度 $v_k$ 運動。</p>
+<p><strong>電洞的有效質量：</strong>價帶頂附近的 $E$-$k$ 曲線向下彎（$d^2E/dk^2 &lt; 0$）→$m^* = \hbar^2/(d^2E/dk^2)$ 為負值。但我們定義電洞的有效質量為正：$m_p^* = -m^*$（取絕對值）。電洞的能量方向也反轉——電洞「向上」移動代表能量增加（電子向下填充低能態）。</p>
+<p>在電路語言中，電洞電流方向與傳統電流方向相同，因此用電洞描述 p 型材料會讓符號與物理圖像都更乾淨。這不是偷懶，而是選擇最少自由度的描述方式。</p>
+<p>之後討論 pn 接面時，電洞會像電子一樣擴散、漂移、復合與注入；如果此處的等效粒子概念穩了，後面的二極體圖像會輕鬆很多。</p>
+<div class="callout"><strong>💡 電洞不只是數學便利——它有獨立的物理存在。</strong>p 型半導體中的電流確實由電洞傳導，不是由電子反向傳導。實驗證據：霍爾效應（第五章）可以獨立測量電洞的濃度和遷移率——結果與電洞作為正電荷載子的預測完全一致。在 pn 接面中，p 側的電洞注入 n 側成為少數載子——這個過程只能用電洞的語言來描述。</div>
+<div class="callout-warn"><strong>⚠ 常見誤解</strong> 電洞不是「不存在的東西」，而是滿價帶中缺一個電子後形成的可測量正電載子。</div>
+<details class="example"><summary>例題：電洞電流方向如何判斷？</summary><p>價帶電子往一方向補空位時，空位會往反方向移動；等效上就是正電洞沿電場方向漂移。</p></details>
+</section>
+<section id="s3-2-5"><h2>3.2.5 金屬、絕緣體與半導體</h2><div class="section-keypoints"><strong>🔑 本節重點</strong> 部分填充能帶 · 禁帶寬度 · 本徵載子 · 可控導電率</div>
+<p>材料的導電性完全由能帶填充情況決定：</p>
+<table><caption>表 1：3.2.5 金屬、絕緣體與半導體</caption><thead><tr><th>類型</th><th>能帶結構</th><th>$E_g$</th><th>室溫電阻率</th></tr></thead><tbody>
+<tr><td>金屬</td><td>能帶部分填充或重疊</td><td>0</td><td>∼10⁻⁶ Ω·cm</td></tr>
+<tr><td>半導體</td><td>滿價帶+空導帶，$E_g$ 適中</td><td>0.5–2 eV</td><td>10⁻³–10⁹</td></tr>
+<tr><td>絕緣體</td><td>滿價帶+空導帶，$E_g$ 很大</td><td>&gt;3–5 eV</td><td>&gt;10¹²</td></tr></tbody></table>
+<figure class="figure"><a class="figure-link" href="../../pages/ch03_pages/ch3_page_106_c.png" target="_blank" rel="noopener"><img src="../../pages/ch03_pages/ch3_page_106_c.png" alt="圖 3.19, 3.20" loading="lazy"></a><figcaption>圖 3.19–3.20：金屬、絕緣體、半導體的能帶填充情況對比。</figcaption></figure>
+<figure class="figure"><a class="figure-link" href="../../pages/ch03_pages/ch3_page_106_c.png" target="_blank" rel="noopener"><img src="../../pages/ch03_pages/ch3_page_106_c.png" alt="圖 3.19 附圖" loading="lazy"></a><figcaption>圖 3.19 附：金屬（部分填充或能帶重疊）、半導體（$E_g$ 適中）、絕緣體（$E_g$ 很大）的能帶結構示意。</figcaption></figure>
+<div class="callout"><strong>💡 半導體的獨特之處在於 $E_g$ 的「剛好」大小。</strong>$E_g$ 太小（&lt; 0.5 eV，如 InSb 的 0.17 eV）→室溫下熱激發產生大量載子→本徵載子濃度太高→無法有效摻雜控制。$E_g$ 太大（&gt; 5 eV，如金剛石的 5.5 eV）→室溫下幾乎沒有載子→需要極高溫才能導電。Si 的 1.12 eV 和 GaAs 的 1.42 eV 正好在「甜蜜點」——室溫下本徵載子很少（$n_i \sim 10^{10}$ cm$^{-3}$），摻雜可以輕鬆將載子濃度控制在 $10^{14}$–$10^{20}$ cm$^{-3}$ 的範圍。</div>
+<p>金屬有大量接近 Fermi 能階的可用態，所以小電場就能改變電子佔據並產生電流。絕緣體雖然也有電子，但價帶全滿且禁帶太大，室溫熱能幾乎無法產生自由載子。</p>
+<p>半導體則介於兩者之間：本徵狀態載子不多，但透過摻雜、光照、溫度或電場可以大幅改變載子濃度。這種「可調」正是半導體成為元件材料的核心。</p>
+<p>因此分類時不要只背電阻率範圍，而要回到能帶填充與禁帶寬度。不同材料的電阻率會受溫度與缺陷影響，但能帶圖提供最穩定的判準。</p>
+<p>這一節也為第四章鋪路：一旦知道導帶與價帶的位置，就能用 Fermi–Dirac 統計計算實際佔據數，進而得到 $n_0$ 與 $p_0$。</p>
+<div class="callout-warn"><strong>⚠ 判讀提醒</strong> 「半導體」不是導電性固定在金屬與絕緣體中間，而是導電性可被外部條件或摻雜跨越多個數量級地控制。</div>
+<details class="example"><summary>例題：為什麼寬能隙材料仍可做功率元件？</summary><p>寬能隙材料如 SiC、GaN 在室溫本徵載子少、崩潰電場高；雖然熱激發困難，但透過摻雜與異質結構仍能形成可控制的導電通道。</p></details>
+</section>
+
+<section id="s3-3-overview"><h2>3.3 三維延伸：Si 與 GaAs</h2>
+<div>
+<strong>🔑 本節重點</strong> ① Si（間接能隙 $E_g=1.12$ eV）：導帶底在 $\langle100\rangle$ 方向（$k\neq0$）→躍遷需聲子參與→不發光 ② GaAs（直接能隙 $E_g=1.42$ eV）：導帶底和價帶頂都在 $k=0$（Γ 點）→垂直躍遷→LED/雷射 ③ 態密度有效質量 $m_n^*$（用於 $g(E)$）vs 電導率有效質量 $m_c^*$（用於 $\mu$）——兩者不同 ④ Si 的六個橢球等能面→$m_n^*=1.08m_0$，$m_c^*=0.26m_0$
+</div>
+<p>Si 為間接能隙（導帶底在 $\langle100\rangle$），光學躍遷需聲子；GaAs 為直接能隙（Γ 點），適合 LED/雷射。</p>
+<p>三維 k 空間中等能面常為橢球；Si 有六個等效導帶谷，態密度有效質量 $m_n^*$ 與電導率有效質量 $m_c^*$ 不同。</p>
+<p>光子動量很小，光學躍遷近似垂直；導帶底與價帶頂 k 位置相同時復合效率高。</p>
+<p>材料選擇取決於能隙、有效質量、遷移率與製程成熟度，非單一參數勝負。</p>
+<p>從一維模型走向三維，是把材料差異（發光、速度、崩潰）放回能帶圖的必經步驟。</p>
+<div class="callout"><strong>💡 直接 vs 間接</strong> 決定光電效率，不只決定能隙大小。</div>
+<div class="callout-warn"><strong>⚠️ 勿混用 $m^*$</strong> 態密度用 $m_n^*$，遷移率用 $m_c^*$。</div>
+<details class="example"><summary>📝 自編概念例 — GaAs LED</summary><div class="example-body"><p>Γ 點直接躍遷，無需聲子補動量，輻射復合效率高。</p></div></details>
+</section><section id="s3-3-1"><h2>3.3.1 Si 與 GaAs 的 k 空間圖</h2><div class="section-keypoints"><strong>🔑 本節重點</strong> 三維 k 空間 · Si 間接能隙 · GaAs 直接能隙 · 聲子輔助</div><p>真實晶體是三維的，$E$–$\mathbf{k}$ 關係更複雜：</p>
+<div class="eq">$$E = \frac{\hbar^2}{2}\left(\frac{k_x^2}{m_x^*} + \frac{k_y^2}{m_y^*} + \frac{k_z^2}{m_z^*}\right)$$</div>
+<p><strong>Si（間接能隙，$E_g=1.12$ eV）：</strong>導帶最小值不在 $k=0$，而是在 $\langle100\rangle$ 方向的六個等效點。電子從價帶頂（$k=0$）跳到導帶底需要改變動量→必須有<strong>聲子</strong>參與→躍遷機率低→Si 不適合做發光元件。</p>
+<p><strong>GaAs（直接能隙，$E_g=1.42$ eV）：</strong>導帶底和價帶頂都在 $k=0$（Γ 點）。電子可以「垂直」躍遷（動量守恆不需要聲子）→高發光效率→LED、雷射的理想材料。</p>
+<figure class="figure"><a class="figure-link" href="../../pages/ch03_pages/ch3_page_107_c.png" target="_blank" rel="noopener"><img src="../../pages/ch03_pages/ch3_page_107_c.png" alt="圖 3.21, 3.22" loading="lazy"></a><figcaption>圖 3.21–3.22：Si（間接能隙）和 GaAs（直接能隙）的 $E$–$k$ 能帶結構對比。</figcaption></figure>
+<p>三維 $k$ 空間中的等能面通常不是完美球形，尤其在 Si 這類多能谷材料中，導帶谷沿特定晶向排列。這會讓有效質量、遷移率與態密度都帶有方向性。</p>
+<p>直接與間接能隙的差別不是能隙大小本身，而是導帶最低點與價帶最高點是否位在同一個 $k$。這個差別決定光學躍遷是否容易同時滿足能量與動量守恆。</p>
+<div class="callout"><strong>💡 材料選擇直覺</strong> Si 適合邏輯與大規模製程，GaAs 適合高頻與發光；背後不是單一參數勝負，而是能帶形狀、有效質量與躍遷機率共同決定。</div>
+<div class="callout-warn"><strong>⚠ 常見誤解</strong> 間接能隙材料不是不能發光，而是輻射復合機率低、效率差；在特殊結構或缺陷輔助下仍可能觀察到光，但不適合高效率 LED。</div>
+<details class="example"><summary>例題：為什麼 GaAs LED 效率高？</summary><p>GaAs 的導帶底與價帶頂都在 Γ 點，電子與電洞復合時不必額外找聲子改變動量，因此較容易把能量釋放成光子。</p></details>
+
+</section><section id="s3-3-2"><h2>3.3.2 額外有效質量概念</h2><div class="section-keypoints"><strong>🔑 本節重點</strong> 異向性等能面 · 態密度有效質量 · 電導率有效質量 · 多能谷</div><h3>3.3.2 額外有效質量概念</h3>
+<p>在 3.2.3 節我們定義了基本的電導率有效質量 $m^* = \hbar^2/(d^2E/dk^2)$。但在三維晶體中，導帶底和價帶頂附近的等能面通常是<strong>橢球形</strong>（不是球形），不同方向的有效質量不同。這引出了幾種重要的「組合」有效質量：</p>
+<p><strong>態密度有效質量（Density-of-States Effective Mass）$m_n^*$：</strong>出現在態密度公式 $g_c(E)$ 中的組合量。對於有多個等效能谷的材料（如 Si 的六個橢球），</p>
+<div class="eq">$$m_n^* = (m_l m_t^2)^{1/3} \cdot (\text{等效能谷數})^{2/3}$$</div>
+<p>其中 $m_l$ 是縱向有效質量，$m_t$ 是橫向有效質量。Si 的 $m_n^* = 1.08\,m_0$，GaAs 只有一個球形能谷所以 $m_n^* = 0.067\,m_0$。</p>
+<p><strong>電導率有效質量（Conductivity Effective Mass）$m_c^*$：</strong>出現在遷移率公式 $\mu = e\tau/m_c^*$ 中的組合量：</p>
+<div class="eq">$$\frac{1}{m_c^*} = \frac{1}{3}\left(\frac{1}{m_l} + \frac{2}{m_t}\right)$$</div>
+<p>這是三個方向的平均值（一個縱向 + 兩個橫向）。Si 的 $m_c^* = 0.26\,m_0$。</p>
+<div class="callout"><strong>💡 為什麼需要區分不同有效質量？</strong>因為不同物理量取決於不同方向的平均方式。態密度取決於「k 空間中有多少態」→用幾何平均。遷移率取決於「電場加速電子有多快」→用調和平均。考試時常見陷阱：用錯有效質量的類型。記住：$g(E)$ 用 $m_n^*$，$\mu$ 用 $m_c^*$，兩者數值不同！</div>
+<div class="callout-warn"><strong>⚠ 使用警告</strong> 表格中的 $m^*$ 必須先確認是哪一種有效質量；把態密度有效質量拿去算遷移率，或把電導率有效質量拿去算 $N_c$，都會造成系統性錯誤。</div>
+<details class="example"><summary>例題：Si 的多能谷如何影響 $N_c$？</summary><p>多個等效導帶谷提供更多可佔據態，因此態密度有效質量會包含能谷簡併因子；這也是 Si 的 $m_n^*$ 與單一方向曲率質量不同的原因。</p></details>
+</section>
+
+<section id="s3-4-overview"><h2>3.4 態密度函數 ⭐</h2>
+<div>
+<strong>🔑 本節重點</strong> ① $g_c(E)=\frac{4\pi(2m_n^*)^{3/2}}{h^3}\sqrt{E-E_c}$——每單位體積、每單位能量的量子態數 ② $g(E)\propto\sqrt{E}$ 的根源：3D k 空間球殼面積 $\propto k^2\propto E$，厚度 $dk\propto 1/\sqrt{E}$ ③ 有效態密度 $N_c=2(2\pi m_n^*kT/h^2)^{3/2}$——把整個導帶濃縮成一個等效能階 ④ 不同維度態密度形式不同：1D $\propto 1/\sqrt{E}$，2D 常數，3D $\propto\sqrt{E}$ ⑤ 第四章 $n_0=\int g_c f_F dE$→$n_0=N_c e^{-(E_c-E_F)/kT}$——$N_c$ 已預先做完積分
+</div>
+<p>知道了允帶的能量範圍，下一步問題是：<strong>在能量 $E$ 附近，每單位能量、每單位體積有多少個量子態？</strong>——這就是態密度 $g(E)$。</p>
+
+<p>態密度 $g(E)$ 回答：能量 $E$ 附近每單位能量、每單位體積有多少量子態。</p>
+<p>三維導帶 $g_c(E)\propto\sqrt{E-E_c}$，根源是 k 空間球殼面積與 $E\propto k^2$ 的幾何關係。</p>
+<p>有效態密度 $N_c$、$N_v$ 把積分打包，第 4 章得 $n_0=N_c\exp[-(E_c-E_F)/kT]$。</p>
+<p>態密度是「座位數」，Fermi-Dirac 是「佔座機率」；兩者相乘積分才得載子濃度。</p>
+<p>低維結構（量子井、線、點）會改變 $g(E)$ 形狀，進而改變光學與電性。</p>
+<div class="callout"><strong>💡 停車場類比</strong> $g(E)$ 是車位數，$f_F$ 是佔用機率。</div>
+<div class="callout-warn"><strong>⚠️ 單位一致</strong> 積分時能量單位（eV 或 J）必須統一。</div>
+<details class="example"><summary>📐 例題 — $\sqrt{E}$ 由來</summary><div class="example-body"><p>k 空間球殼體積 $\propto k^2 dk$，而 $E-E_c\propto k^2$ → $g(E)\propto\sqrt{E-E_c}$。</p></div></details>
+</section><section id="s3-4-1"><h2>3.4.1 態密度的數學推導</h2><div class="section-keypoints"><strong>🔑 本節重點</strong> k 空間計數 · 自旋簡併 · 球殼態數 · $g(E)$</div><h3>3.4.1 態密度的數學推導</h3>
+<p>推導從 $k$ 空間計數開始：</p>
+<p><strong>步驟一：k 空間中的態密度。</strong>3D 無限位能井中，$k_x=n_x\pi/a$，$k_y=n_y\pi/a$，$k_z=n_z\pi/a$。每個量子態在 $k$ 空間佔體積 $(\pi/a)^3 = \pi^3/V$（$V=a^3$ 是晶體體積）。考慮自旋簡併（每個 $(k_x,k_y,k_z)$ 可容納兩個電子：自旋↑和↓），$k$ 空間態密度 $= 2V/\pi^3$。</p>
+<p><strong>步驟二：球殼計數。</strong>在 $k$ 空間中，能量 $E$ 以下的所有態佔據一個半徑為 $k = \sqrt{2m^*E}/\hbar$ 的球。在 $k$ 到 $k+dk$ 的球殼中的態數：</p>
+<div class="eq">$$g(k)\,dk = \frac{2V}{\pi^3}\cdot 4\pi k^2\,dk = \frac{8\pi V}{h^3}\,p^2\,dp$$</div>
+<p>其中用了 $k=p/\hbar$，$dk=dp/\hbar$。</p>
+<p><strong>步驟三：轉換到能量空間。</strong>$E = p^2/(2m^*)$→$p = \sqrt{2m^*E}$→$dp = \sqrt{m^*/2E}\,dE$。代入得每單位能量的態數 $g(E)$。再除以體積 $V$ 得到單位體積的態密度：</p>
+<div class="eq">$$\boxed{g_c(E) = \frac{4\pi(2m_n^*)^{3/2}}{h^3}\sqrt{E-E_c}} \quad\text{（導帶）} \tag{3.56}$$</div>
+<div class="eq">$$\boxed{g_v(E) = \frac{4\pi(2m_p^*)^{3/2}}{h^3}\sqrt{E_v-E}} \quad\text{（價帶）} \tag{3.58}$$</div>
+<div class="callout-warn"><strong>⚠ 推導邊界</strong> 這裡的態密度公式假設能帶邊緣可用拋物線近似，且有效質量不隨能量改變；在高能、強非拋物性或低維結構中，$g(E)$ 的形狀會不同。</div>
+<details class="example"><summary>例題：為什麼三維態密度與 $\sqrt{E-E_c}$ 成正比？</summary><p>三維 $k$ 空間中，能量小於某值的態數與球體體積 $k^3$ 成正比；而拋物線能帶給出 $E-E_c\propto k^2$，微分後得到 $g(E)\propto\sqrt{E-E_c}$。</p></details>
+
+<h3>3.4.2 態密度的完整推導——從 $k$ 空間到 $g(E)$ 的每一步代數</h3>
+<p>上面的三步驟摘要涵蓋了推導的主軸，但要真正掌握態密度概念，必須理解<strong>每一步的代數細節</strong>。以下是從「電子在晶體盒子裡」到「$g_c(E)\propto\sqrt{E-E_c}$」的完整推導，每步都展開。</p>
+
+<p><strong>第〇步：物理模型——三維無限位能井。</strong>把半導體晶體建模為邊長 $a$ 的立方體盒子（體積 $V=a^3$），電子被限制在盒子內但可在其中自由運動。位能：$V(x,y,z)=0$（盒子內），$V=\infty$（盒子外）。三維薛丁格方程：
+$$-\frac{\hbar^2}{2m}\left(\frac{\partial^2}{\partial x^2}+\frac{\partial^2}{\partial y^2}+\frac{\partial^2}{\partial z^2}\right)\psi(x,y,z)=E\psi(x,y,z)$$
+用分離變數法 $\psi(x,y,z)=X(x)Y(y)Z(z)$ 求解（與第二章一維無限位能井的推導完全平行），得到駐波解。邊界條件 $\psi=0$ 在盒子壁面→波數被量子化：
+$$k_x=n_x\frac{\pi}{a},\quad k_y=n_y\frac{\pi}{a},\quad k_z=n_z\frac{\pi}{a} \quad (n_x,n_y,n_z=1,2,3,\ldots) \tag{3.60}$$
+注意只有<strong>正整數</strong>給出獨立的量子態（負整數只改變波函數的符號，不改變 $|\psi|^2$ 和能量——負的 $n_x$ 不是一個新態）。</p>
+
+<p><strong>第一步：k 空間中每個量子態佔據的體積。</strong>在 $(k_x,k_y,k_z)$ 坐標系中，相鄰量子態的 $k_x$ 間距為：
+$$\Delta k_x = (n_x+1)\frac{\pi}{a} - n_x\frac{\pi}{a} = \frac{\pi}{a} \tag{3.61}$$
+同理 $\Delta k_y=\Delta k_z=\pi/a$。因此<strong>每個量子態在 k 空間中佔據的體積</strong>為：
+$$V_k^{\text{(per state)}} = \left(\frac{\pi}{a}\right)^3 = \frac{\pi^3}{V} \tag{3.62}$$
+這意味著 k 空間中每單位體積有 $V/\pi^3$ 個量子態——k 空間態密度。</p>
+
+<p><strong>第二步：自旋簡併與正卦限約化。</strong>每個 $(k_x,k_y,k_z)$ 點可以容納<strong>兩個</strong>電子（自旋向上 $\uparrow$ 和自旋向下 $\downarrow$，Pauli 原理允許因為自旋量子數不同）→引入因子 $2$。此外，$k_x$, $k_y$, $k_z$ 取負值給出相同的能量和量子態（不增加新態），所以我們只考慮 k 空間中<strong>正卦限（第一卦限：$k_x,k_y,k_z&gt;0$）</strong>，即完整球體的 $1/8$→引入因子 $1/8$。這是課本圖 3.26(b) 只畫正八分之一球的物理原因。</p>
+
+<p><strong>第三步：球殼中的量子態總數 $g_T(k)dk$。</strong>在 k 空間中，半徑為 $k$、厚度為 $dk$ 的球殼的體積為 $4\pi k^2 dk$。這個球殼中（正卦限內，計入自旋）的量子態總數為：
+$$g_T(k)\,dk = \underbrace{2}_{\text{自旋}} \times \underbrace{\frac{1}{8}}_{\text{正卦限}} \times \frac{4\pi k^2\,dk}{\pi^3/V} = \frac{V k^2\,dk}{\pi^2} \tag{3.64}$$
+分拆理解：分子 $V k^2 dk$ 反映「盒子越大→態越多，球殼越大→態越多」；分母 $\pi^2$ 是量子力學的自然單位。$g_T(k)$ 的物理意義是「波數在 $k$ 到 $k+dk$ 之間的量子態總數」。</p>
+
+<p><strong>第四步：從 k 空間轉換到能量空間——核心代數。</strong>關鍵在於 $E$ 和 $k$ 的函數關係。對於導帶底部的電子（拋物線近似，以有效質量 $m_n^*$ 取代自由電子質量 $m$）：
+$$E-E_c = \frac{\hbar^2 k^2}{2m_n^*} \tag{3.71}$$
+由此解出 $k$ 和 $k^2$：
+$$k = \frac{\sqrt{2m_n^*(E-E_c)}}{\hbar}, \qquad k^2 = \frac{2m_n^*(E-E_c)}{\hbar^2}$$
+微分 $k$ 對 $E$ 的關係，得到 $dk$（這是轉換的關鍵——$dk$ 不是常數，而是隨 $E$ 變化的）：
+$$dk = \frac{1}{\hbar}\sqrt{\frac{m_n^*}{2(E-E_c)}}\,dE \tag{3.66}$$
+現在把 $k^2$ 和 $dk$ 代入 (3.64) 式：
+$$g_T(E)\,dE = \frac{V}{\pi^2} \cdot \left[\frac{2m_n^*(E-E_c)}{\hbar^2}\right] \cdot \left[\frac{1}{\hbar}\sqrt{\frac{m_n^*}{2(E-E_c)}}\,dE\right]$$
+逐步化簡——合併常數和 $E$ 項：
+\begin{align*}
+g_T(E)\,dE &amp;= \frac{V}{\pi^2} \cdot \frac{2m_n^*}{\hbar^2} \cdot \frac{1}{\hbar} \cdot \sqrt{\frac{m_n^*}{2}} \cdot \frac{E-E_c}{\sqrt{E-E_c}}\,dE \\
+&amp;= \frac{V}{\pi^2} \cdot \frac{2m_n^* \cdot m_n^{*1/2}}{\sqrt{2}\,\hbar^3} \cdot \sqrt{E-E_c}\,dE \\
+&amp;= \frac{V}{\pi^2} \cdot \frac{(2m_n^*)^{3/2}}{2\hbar^3} \cdot \sqrt{E-E_c}\,dE \\
+&amp;= \frac{V(2m_n^*)^{3/2}}{2\pi^2\hbar^3}\sqrt{E-E_c}\,dE
+\end{align*}
+注意 $E-E_c$ 除以 $\sqrt{E-E_c}$ 正好得到 $\sqrt{E-E_c}$——這是 $\sqrt{E}$ 依賴關係的數學根源。</p>
+
+<p><strong>第五步：除以體積，以 $h$ 表示——得到最終形式。</strong>$g_T(E)$ 是整個晶體（體積 $V$）中的態數。除以 $V$ 得到<strong>單位體積態密度</strong>，這是半導體物理的標準定義。再使用 $\hbar = h/(2\pi)$→$\hbar^3 = h^3/(8\pi^3)$→$\pi^2\hbar^3 = \pi^2 h^3/(8\pi^3) = h^3/(8\pi)$。代入：
+$$g_c(E) = \frac{g_T(E)}{V} = \frac{(2m_n^*)^{3/2}}{2\pi^2\hbar^3}\sqrt{E-E_c} = \frac{(2m_n^*)^{3/2}}{2\pi^2}\cdot\frac{8\pi}{h^3}\sqrt{E-E_c}$$
+$$= \frac{8\pi(2m_n^*)^{3/2}}{2\pi^2 h^3}\sqrt{E-E_c} = \frac{4\pi(2m_n^*)^{3/2}}{h^3}\sqrt{E-E_c}$$
+$$\boxed{g_c(E) = \frac{4\pi(2m_n^*)^{3/2}}{h^3}\sqrt{E-E_c}} \quad (E \geq E_c) \tag{3.72}$$
+這就是課本的 (3.72) 式。每個因子都有明確的物理來源：$4\pi$ 來自球殼面積 $4\pi k^2$（三維幾何），$(2m_n^*)^{3/2}$ 來自能量-動量關係的轉換（材料特性），$h^3$ 是量子力學的相空間基本體積（每個量子態在相空間中佔據 $h^3$），$\sqrt{E-E_c}$ 反映「離能帶邊緣越遠，k 空間球越大→球殼面積越大→態越多」。</p>
+
+<div class="callout"><strong>💡 為什麼 $g(E)\propto\sqrt{E}$？——從 k 空間球殼面積的物理圖像。</strong>態密度正比於 $\sqrt{E-E_c}$（或 $\sqrt{E_v-E}$ 對價帶），這不是偶然的數學巧合。在 k 空間中，等能面是半徑 $k\propto\sqrt{E}$ 的球面。能量 $E$ 到 $E+dE$ 之間的量子態數正比於球殼的<strong>面積</strong>（$4\pi k^2$）乘以<strong>厚度</strong>（$dk$）。$4\pi k^2 \propto E$（面積正比於能量），而 $dk \propto dE/\sqrt{E}$（厚度隨能量增加而變薄，因為 $E$-$k$ 是拋物線關係——斜率 $dE/dk$ 隨 $k$ 增大）。乘起來：$E \cdot 1/\sqrt{E} = \sqrt{E}$。所以 $\sqrt{E}$ 的根源是<strong>三維空間中球的面積隨半徑平方增長</strong>（$4\pi r^2$），而半徑本身又正比於 $\sqrt{E}$。這張表總結了不同維度下態密度的函數形式：</div>
+
+<table><caption>表 2：3.4.2 態密度的完整推導——從 $k$ 空間到 $g(E)$ 的每一步代數</caption><thead><tr><th>維度</th><th>等能面形狀</th><th>態密度 $g(E)$</th><th>物理來源</th></tr></thead><tbody>
+<tr><td>1D</td><td>兩個點（$\pm k$）</td><td>$g_{1D}(E) \propto \dfrac{1}{\sqrt{E}}$</td><td>等能「面」為零維→$dk$ 項主導</td></tr>
+<tr><td>2D</td><td>圓周（$2\pi k$）</td><td>$g_{2D}(E) \propto \text{const}$</td><td>圓周長 $\propto k$，$dk\propto 1/k$→相乘為常數</td></tr>
+<tr><td>3D</td><td>球面（$4\pi k^2$）</td><td>$g_{3D}(E) \propto \sqrt{E}$</td><td>球面積 $\propto k^2$，$dk\propto 1/k$→相乘 $\propto k\propto\sqrt{E}$</td></tr></tbody></table>
+
+<p>這個 $\sqrt{E}$ 依賴關係在第四章計算電子濃度 $n_0 = \int_{E_c}^{\infty} g_c(E)f_F(E)dE$ 時至關重要——積分 $\int_0^{\infty} \sqrt{x}\,e^{-x}\,dx = \sqrt{\pi}/2$（Gamma 函數 $\Gamma(3/2)$）就是 $N_c$ 公式中 $(kT)^{3/2}$ 因子的直接來源。</p>
+
+</section><section id="s3-4-2"><h2>3.4.2 延伸到半導體</h2><div class="section-keypoints"><strong>🔑 本節重點</strong> 導帶態密度 · 價帶態密度 · 有效態密度 · $N_c$ 與 $N_v$</div><h3>3.4.3 延伸到半導體：有效態密度</h3>
+<p>態密度 $g_c(E)$ 和 $g_v(E)$ 是能量的函數。但在半導體物理中，我們常需要一個「簡化」的數字來描述整個導帶（或價帶）的態密度總量。這就是<strong>有效態密度</strong> $N_c$ 和 $N_v$。</p>
+<p>概念：把導帶中所有量子態「集中」到導帶邊緣 $E_c$ 一個等效能量上。數學上，$N_c$ 定義為：</p>
+<div class="eq">$$\boxed{N_c = 2\left(\frac{2\pi m_n^* kT}{h^2}\right)^{3/2}} \tag{3.47}$$</div>
+<div class="eq">$$\boxed{N_v = 2\left(\frac{2\pi m_p^* kT}{h^2}\right)^{3/2}} \tag{3.48}$$</div>
+<p>在室溫（$T=300$ K）下：Si 的 $N_c = 2.8\times10^{19}$ cm$^{-3}$，$N_v = 1.04\times10^{19}$ cm$^{-3}$。GaAs 的 $N_c = 4.7\times10^{17}$ cm$^{-3}$（因為 $m_n^*$ 很小）。</p>
+<div class="callout"><strong>💡 $N_c$ 和 $N_v$ 是第四章的核心工具。</strong>有了有效態密度，載子濃度的計算變得極其簡單：$n_0 = N_c \exp[-(E_c-E_F)/kT]$，$p_0 = N_v \exp[-(E_F-E_v)/kT]$。不需要每次做態密度積分——$N_c$ 和 $N_v$ 已經幫你做好了。這就像化學中的「簡化平衡常數」——把複雜的積分結果打包成一個方便使用的數字。</div>
+<figure class="figure"><a class="figure-link" href="../../pages/ch03_pages/ch3_page_115_c.png" target="_blank" rel="noopener"><img src="../../pages/ch03_pages/ch3_page_115_c.png" alt="圖 3.27" loading="lazy"></a><figcaption>圖 3.27：態密度 $g(E) \propto \sqrt{E}$——從能帶邊緣開始以拋物線形式增長。</figcaption></figure>
+<div class="callout"><strong>💡 態密度的物理意義：</strong>$g(E)dE$ = 能量在 $E$ 到 $E+dE$ 之間可供電子佔據的「座位數」。$g(E)$ 越大，能容納的電子越多。$g(E)$ 與第四章的 $f_F(E)$ 相乘再積分，就得到載子濃度——這是整個半導體統計的基礎。</div>
+<p>$N_c$ 與 $N_v$ 隨溫度約呈 $T^{3/2}$ 增加，因為溫度越高，可被熱分布有效取樣的能量範圍越寬。這不是能帶中的總態數改變，而是參與熱平衡統計的有效態數增加。</p>
+<p>在使用公式時，也要確認有效質量採用的是態密度有效質量，而不是漂移或電導率有效質量。兩者名稱相近，但對應的物理平均不同。</p>
+<div class="callout-warn"><strong>⚠ 單位提醒</strong> 若 $g(E)$ 用 eV 為能量單位，積分時也要用 eV；若混用 J 與 eV，$N_c$、$N_v$ 會差一個電荷量換算因子。</div>
+<details class="example"><summary>例題：$N_c$ 較小代表什麼？</summary><p>在同樣 $E_c-E_F$ 與溫度下，較小的 $N_c$ 代表導帶附近可有效佔據的態較少，因此電子濃度 $n_0=N_c\exp[-(E_c-E_F)/kT]$ 也較小。</p></details>
+</section>
+
+<section id="s3-5-overview"><h2>3.5 統計力學：Fermi-Dirac 分布 ⭐</h2>
+<div>
+<strong>🔑 本節重點</strong> ① $f_F(E)=1/[1+e^{(E-E_F)/kT}]$——電子是 Fermi 子，遵守 Pauli 原理 ② $E_F$（Fermi 能階）= 佔據機率 50% 的能量；$T=0$ K 時為完美階梯，$T&gt;0$ 時在 $E_F$ 附近模糊化 ③ Boltzmann 近似：$E-E_F\gg kT$ 時 $f_F\approx e^{-(E-E_F)/kT}$——第四章所有公式的基礎 ④ $E_F$ 位置決定半導體類型：n 型→靠近 $E_c$，p 型→靠近 $E_v$，本徵→能隙中央
+</div>
+<p>Fermi-Dirac 分布 $f_F=1/[1+e^{(E-E_F)/kT}]$ 描述電子佔據機率，遵守 Pauli 不相容原理。</p>
+<p>$E_F$ 是佔據機率 50% 的參考能階；0 K 為階梯，有限溫度在 $E_F$ 附近模糊約 $kT$ 寬度。</p>
+<p>Boltzmann 近似 $f_F\approx e^{-(E-E_F)/kT}$ 在 $E-E_F\gg kT$ 成立，是第 4 章公式的基礎。</p>
+<p>$E_F$ 靠近導帶→n 型傾向；靠近價帶→p 型傾向；本徵材料 $E_F$ 近能隙中央。</p>
+<p>熱平衡中整體只有一個 $E_F$；接觸後能帶彎曲使兩側 Fermi 對齊（第 7 章 pn 接面）。</p>
+<div class="callout"><strong>💡 三章銜接</strong> 能帶 → 態密度 → Fermi 分布 → 第 4 章 $n_0$、$p_0$。</div>
+<div class="callout-warn"><strong>⚠️ 重摻雜</strong> $E_F$ 接近能帶邊時 Boltzmann 近似失效。</div>
+<details class="example"><summary>📝 自編概念例 — Boltzmann 條件</summary><div class="example-body"><p>當 $E-E_F\gg kT$，分母中 1 可忽略，得指數近似。</p></div></details>
+</section><section id="s3-5-1"><h2>3.5.1 統計定律</h2><div class="section-keypoints"><strong>🔑 本節重點</strong> 可用態 · 佔據機率 · Pauli 原理 · Fermi 子</div>
+<p>態密度告訴我們有多少「座位」，統計力學則告訴我們每個座位被電子佔據的機率。</p>
+<p>電子是自旋 1/2 的 Fermi 子，必須遵守 Pauli 不相容原理：同一量子態最多只能容納一個電子。</p>
+<p>因此電子的佔據機率不能用古典 Maxwell-Boltzmann 統計完整描述，而要用 Fermi-Dirac 統計。</p>
+<p>在低濃度、能量高於 Fermi 能階很多時，Fermi-Dirac 分布才可近似成 Boltzmann 指數形式。</p>
+<p>這是第三章連到第四章載子濃度公式的關鍵橋樑。</p>
+<div class="callout"><strong>📌 停車場類比</strong> 態密度是車位數，Fermi-Dirac 函數是每個車位被佔用的機率。</div>
+<div class="callout-warn"><strong>⚠ 常見誤解</strong> 不能把電子當作可無限堆疊在同一狀態的古典粒子；Pauli 原理會限制佔據方式。</div>
+<details class="example"><summary>例題：何時可用 Boltzmann 近似？</summary><p>當 $E-E_F$ 比 $kT$ 大很多時，佔據機率很小，Fermi-Dirac 分母中的 1 可忽略，得到指數近似。</p></details>
+</section><section id="s3-5-2"><h2>3.5.2 Fermi–Dirac 機率函數</h2><div class="section-keypoints"><strong>🔑 本節重點</strong> $f_F(E)$ · Fermi 能階 · 0 K 階梯 · 熱模糊</div>
+<p>態密度告訴我們有多少「座位」。現在需要知道這些座位被佔據的機率。電子是<strong>Fermi 子</strong>（自旋 1/2），服從 Pauli 原理→佔據機率由 <strong>Fermi-Dirac 函數</strong>給出：</p>
+<div class="eq">$$\boxed{f_F(E) = \frac{1}{1 + \exp\!\left(\dfrac{E - E_F}{kT}\right)}} \tag{3.63}$$</div>
+<p><strong>$E_F$ = Fermi 能階——系統的電化學勢。</strong>在 $T=0$ K：$f_F=1$（$E<e_f>E_F$），全部空著——像一個完美的階梯。$T&gt;0$ 時，階梯在 $E_F$ 附近「模糊化」，模糊寬度約 $kT$（室溫 0.026 eV）。</e_f></p>
+<p>當 $E=E_F$ 時，無論溫度多少，$f_F(E_F)=1/2$。因此 Fermi 能階可以視為佔據機率由高轉低的中心位置，而不是一定真的有一個能態位在那裡。</p>
+<p>在半導體中，$E_F$ 常落在禁帶內；禁帶內沒有可佔據態，但 Fermi 能階仍然有意義，因為它控制導帶底與價帶頂附近的佔據機率。</p>
+<p>若 $E-E_F$ 比 $kT$ 大很多，指數項主導，Fermi–Dirac 函數會退化為 Boltzmann 近似。這是第四章能寫出簡潔載子濃度公式的關鍵。</p>
+<div class="callout"><strong>💡 讀函數口訣</strong> $E$ 比 $E_F$ 低很多就幾乎填滿；高很多就幾乎空著；只在 $E_F$ 附近幾個 $kT$ 的範圍內需要細看機率變化。</div>
+<div class="callout-warn"><strong>⚠ 常見誤解</strong> Fermi 能階不是「最高電子能量」的固定說法；只有在 0 K 金屬中這個直覺最接近，有限溫度與半導體中要用佔據機率理解。</div>
+<details class="example"><summary>例題：$E=E_F+3kT$ 時佔據機率約多少？</summary><p>$f_F=1/(1+e^3)\approx0.047$，表示該能量態約只有 4.7% 的機率被電子佔據。</p></details>
+</section><section id="s3-5-3"><h2>3.5.3 分布函數與 Fermi 能階</h2><div class="section-keypoints"><strong>🔑 本節重點</strong> Fermi 能階位置 · Boltzmann 近似 · n 型 · p 型 · 簡併</div><p><strong>$E_F$ 在不同材料中的位置：</strong></p>
+<table><caption>表 3：3.5.3 分布函數與 Fermi 能階</caption><thead><tr><th>材料</th><th>$E_F$ 位置</th><th>物理意義</th></tr></thead><tbody>
+<tr><td>金屬</td><td>在能帶內部</td><td>$f_F(E_F) = 0.5$，附近有大量可用態→高導電性</td></tr>
+<tr><td>本徵半導體</td><td>能隙正中央（近似）</td><td>$E_{Fi} \approx (E_c+E_v)/2 + (3/4)kT\ln(m_p^*/m_n^*)$</td></tr>
+<tr><td>n 型半導體</td><td>靠近 $E_c$</td><td>$E_F$ 上移→$f_F(E_c)$ 增大→導帶電子增多</td></tr>
+<tr><td>p 型半導體</td><td>靠近 $E_v$</td><td>$E_F$ 下移→價帶空態增多→電洞增多</td></tr>
+<tr><td>簡併半導體</td><td>進入導帶或價帶</td><td>$E_F$ 在能帶內→行為接近金屬</td></tr></tbody></table>
+<figure class="figure"><a class="figure-link" href="../../pages/ch03_pages/ch3_page_116_c.png" target="_blank" rel="noopener"><img src="../../pages/ch03_pages/ch3_page_116_c.png" alt="圖 3.28" loading="lazy"></a><figcaption>圖 3.28：Fermi-Dirac 函數在不同溫度下的變化——注意 $T&gt;0$ 時在 $E_F$ 附近平滑過渡。</figcaption></figure>
+<p><strong>Boltzmann 近似：</strong>當 $E-E_F \gg kT$（半導體的典型情況，$E_F$ 在能隙中），</p>
+<div class="eq">$$f_F(E) \approx \exp\!\left(-\frac{E-E_F}{kT}\right) \tag{3.68}$$</div>
+<p>這大大簡化了積分→第四章的所有公式（$n_0$, $p_0$, $n_i$）都是基於這個近似。</p>
+<div class="callout-warn"><strong>⚡ Fermi-Dirac 統計是第三章和第四章的核心連結。</strong>態密度 $g(E)$（第三章）+ 佔據機率 $f_F(E)$（第三章）= 載子濃度 $n_0$, $p_0$（第四章）。這就像知道了一個停車場有多少車位（$g$），以及每個車位的佔用機率（$f_F$），就可以算出總共停了多少車（$n_0$）。</div>
+<p>分布函數真正要做的是把「有多少態」與「每個態多可能被佔據」相乘。導帶電子濃度來自 $g_c(E)f_F(E)$ 的積分；價帶電洞濃度則可由 $g_v(E)[1-f_F(E)]$ 積分得到。</p>
+<p>摻雜會透過電荷中性條件移動 $E_F$，而不是直接改變 Fermi–Dirac 函數的形式。n 型讓 $E_F$ 靠近導帶，p 型讓 $E_F$ 靠近價帶。</p>
+<div class="callout"><strong>💡 下一章銜接</strong> 第四章會把本節的統計語言變成可計算公式：只要知道 $E_F$、$N_c$、$N_v$ 與溫度，就能算熱平衡的 $n_0$ 與 $p_0$。</div>
+<details class="example"><summary>例題：何時不能用 Boltzmann 近似？</summary><p>當 $E_F$ 非常接近或進入導帶／價帶時，$E-E_F$ 不再遠大於 $kT$，必須使用完整 Fermi–Dirac 統計；這常見於重摻雜的簡併半導體。</p></details>
+</section>
+
+<section id="summary"><h2>本章摘要</h2>
+<ol>
+<li><strong>能帶形成：</strong>原子靠近→波函數重疊→Pauli 原理→能階分裂成能帶。允帶之間為禁帶。</li>
+<li><strong>Bloch 定理：</strong>$\psi=u(x)e^{jkx}$。Kronig-Penney 模型證明週期位能→能帶結構。</li>
+<li><strong>$E$–$k$ 關係：</strong>能帶邊緣 $E=\hbar^2k^2/(2m^*)$。Brillouin 區邊界處不連續→能隙。</li>
+<li><strong>有效質量：</strong>$m^*=\hbar^2/(d^2E/dk^2)$。導帶底 $m^*&gt;0$；價帶頂 $m^*&lt;0$→電洞。</li>
+<li><strong>漂移電流：</strong>$J=en\mu\mathcal{E}$，$\sigma=en\mu$。遷移率 $\mu=e\tau/m^*$。</li>
+<li><strong>直接 vs 間接能隙：</strong>Si 間接（1.12 eV）→不發光。GaAs 直接（1.42 eV）→LED/雷射。</li>
+<li><strong>態密度：</strong>$g_c(E)\propto\sqrt{E-E_c}$，$g_v(E)\propto\sqrt{E_v-E}$。決定能量區間內可用的量子態數。</li>
+<li><strong>Fermi-Dirac：</strong>$f_F=1/[1+e^{(E-E_F)/kT}]$。$E_F$ = 50% 佔據機率的能量。Boltzmann 近似用於非簡併半導體。</li></ol></section>
+<section id="common-mistakes"><h2>常見誤解與修正</h2>
+<div class="callout-warn"><strong>⚠ 把公式當成孤立記憶</strong><p>固體量子理論 的公式都來自特定物理假設；請先確認適用條件，再代入數字。</p></div>
+<div class="callout-warn"><strong>⚠ 忽略符號與方向</strong><p>電場、電流、濃度梯度與載子流方向常不同，建議先畫圖再判斷正負號。</p></div>
+<div class="callout-warn"><strong>⚠ 忽略近似條件</strong><p>低階注入、空乏近似、非簡併與一維模型都不是永遠成立。</p></div>
+</section>
+<section id="self-check"><h2>自我檢核</h2>
+<details class="example"><summary>我能不能用一句話說出本章主軸？</summary><p>本章主軸是把前面章節的材料物理量放進 固體量子理論 的具體問題中。</p></details>
+<details class="example"><summary>我能不能列出本章最重要的近似？</summary><p>請確認你能指出每個公式背後的平衡、空乏、低階注入或非簡併條件。</p></details>
+<details class="example"><summary>我能不能用圖解釋主要公式？</summary><p>若能畫出能帶、電場、濃度或電荷分布，公式通常就不會變成死背。</p></details>
+</section>
+<section id="extras"><h2>延伸學習與下一步</h2>
+<p>建議把本章公式整理成「物理意義、適用條件、常見錯誤」三欄表。</p>
+<p>若要銜接下一章，請特別注意本章中作為邊界條件或材料參數的量。</p>
+<p>完成後可回到習題頁，用一題數值題檢查量級是否合理。</p>
+<div class="callout"><strong>🔎 建議練習</strong> 選一個代表公式，從文字物理圖像重新推導到符號式。</div>
+</section>
+<section id="derivation-lab" class="derive"><h2>推導、假設與章末診斷</h2><h3>方程式使用契約</h3><ul><li>能帶推導採獨立電子與週期晶格位能；電子–電子作用被平均場化，聲子與缺陷先忽略。</li><li>Born–von Karman 邊界：$\psi(x+L)=\psi(x)$，使 $k=2\pi n/L$ 離散；巨觀晶體極限再視為連續。</li><li>有效質量近似只在能帶極值附近的拋物線區成立：$E\approx E_0+\hbar^2k^2/(2m^*)$。</li><li>Fermi–Dirac 分布假設熱平衡與固定溫度；單一 Fermi 能階適用於平衡態。</li></ul><h3>中間推導：三維態密度</h3><ol><li>每個 $k$ 態占 $k$ 空間體積 $(2\pi/L)^3$，乘自旋簡併 2。</li><li>半徑 $k$ 球內態數 $N=2(V/(2\pi)^3)(4\pi k^3/3)$。</li><li>用 $k=\sqrt{2m^*(E-E_c)}/\hbar$ 並計算 $g(E)=(1/V)dN/dE$。</li><li>得 $g_c(E)=\frac{1}{2\pi^2}(2m_n^*/\hbar^2)^{3/2}\sqrt{E-E_c}$。</li></ol><div class="info-card"><strong>單位／量級：</strong>若能量用 eV，$g(E)$ 應為 cm$^{-3}$eV$^{-1}$；積分 $g(E)f(E)dE$ 才得到 cm$^{-3}$。Si 在 300 K 的 $N_c$ 約 $2.8\times10^{19}$ cm$^{-3}$。</div><h3>章末練習與概念診斷</h3><details><summary>能帶曲率為負時，為何改用電洞描述？</summary><p>$m^*=\hbar^2/(d^2E/dk^2)$ 為負，使電子加速度方向反常；以正電荷、正有效質量的電洞描述滿價帶中的少數空態更直接。</p></details><details><summary>有效質量公式能否用在整條能帶？</summary><p>不能。它是局部二階 Taylor 展開；遠離極值時非拋物性明顯，$m^*$ 會依能量與方向改變。</p></details><h3>延伸計算練習</h3><p>完成上方診斷後，請在不查公式的情況下重建代表推導，並改變一個參數檢查極限行為。更多含數值與解答的題目：<a href="../problems_examples/ch03_problems_zh.html">本章完整習題頁</a>。</p></section>
+</main>
+</body>
+</html>

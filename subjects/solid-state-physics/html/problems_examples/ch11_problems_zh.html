@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Ch11 章末習題詳解 — MOSFET進階概念</title>
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']],tags:'ams'}};</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<link rel="stylesheet" href="../../../../shared/core.css">
+<script src="../../../../shared/core.js" defer></script>
+<link rel="stylesheet" href="../../../../shared/components/formula-problem.css">
+<link rel="stylesheet" href="../../../../shared/navigation.css" data-shared-navigation>
+</head><body>
+<a class="portal-home-link" href="../index.html">返回學習中心</a>
+<nav class="sidebar" aria-label="本章目錄"><div class="sidebar-header"><div class="sidebar-subtitle">半導體物理與元件</div><h2 class="sidebar-title">第十一章 MOSFET 進階概念 — 章末習題詳解</h2></div><div class="sidebar-nav">
+<a href="#sec111">§11.1 非理想效應 (11.1–11.14)</a>
+<a href="#sec112">§11.2 MOSFET縮小化 (11.15–11.17)</a>
+<a href="#sec113">§11.3 臨界電壓修正 (11.18–11.29)</a>
+<a href="#sec114">§11.4 附加電性 (11.30–11.42)</a>
+<a href="#sec115">§11.5 輻射/熱電子 (11.43–11.48)</a>
+</div><div class="sidebar-toggle"><button data-action="toggle-theme" id="themeBtn">🌙 深色模式</button></div><div class="sidebar-tools"><button type="button" data-action="toggle-theme" aria-label="切換深色或淺色模式">切換顯示主題</button></div></nav>
+<div class="chapter-page"><div class="chapter-header"><div class="tag">CHAPTER 11</div><h1>第十一章 MOSFET 進階概念 — 章末習題詳解</h1></div>
+<div class="content-toolbar"><button data-action="expand-details">📖 展開全部</button><button data-action="collapse-details">📕 收合全部</button></div>
+
+<h2 id="sec111">§11.1 非理想效應 (11.1–11.14)</h2>
+
+<details class="problem-card" open><summary><span class="problem-number">11.1</span>次臨界總電流與功率 🟢</summary><div class="problem-body">
+<div class="problem-statement">Subthreshold current: $I_D=10^{-15}\exp(V_{GS}/(2.1V_t))$, $0\le V_{GS}\le1$V. $10^6$ transistors on chip at $V_{DD}=5$V. (a) Total current at $V_{GS}=0.5,0.7,0.9$V. (b) Total power.</div>
+<div class="solution-note">▸ $V_t=0.0259$V, $n=2.1$。<br>$V_{GS}=0.5$: $I_D=10^{-15}e^{0.5/(2.1\times0.0259)}=10^{-15}e^{9.2}=9.8\times10^{-12}$ A。<br>$V_{GS}=0.7$: $I_D=10^{-15}e^{12.9}=3.9\times10^{-10}$ A。<br>$V_{GS}=0.9$: $I_D=10^{-15}e^{16.5}=1.5\times10^{-8}$ A。</p>
+<p>(a) $I_T=10^6 I_D$: $0.5$V→$9.8$µA; $0.7$V→$0.39$mA; $0.9$V→$15$mA。<br>(b) $P=I_T V_{DD}$: $0.5$V→$49$µW; $0.7$V→$2.0$mW; $0.9$V→$75$mW。</p>
+<div class="solution">✅ $V_{GS}$ 從 0.5V 到 0.9V→$I_D$ 增 ~1500倍→待機功耗急增</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">11.2</span>次臨界擺幅—$n$ 的影響</summary><div class="problem-body">
+<div class="problem-statement">$I_D=I_S\exp(V_{GS}/nV_t)$. Determine $\Delta V_{GS}$ for factor 10 increase in $I_D$ for (a) $n=1$, (b) $n=1.5$, (c) $n=2.1$.</div>
+<div class="solution-note">▸ $\Delta V_{GS}=nV_t\ln10$。<br>(a) $n=1$: $\Delta V=60$ mV。（理想次臨界擺幅 $S=60$ mV/dec）<br>(b) $n=1.5$: $\Delta V=90$ mV。<br>(c) $n=2.1$: $\Delta V=126$ mV。</div>
+<div class="solution">✅ $n$ 越大→次臨界擺幅越差→關態漏電越大</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">11.3</span>通道長度調變—$\Delta L$ 計算 🟢</summary><div class="problem-body">
+<div class="problem-statement">n-MOSFET: $N_a=2\times10^{16}$, $V_T=0.40$V. Find $\Delta L$ for: (a) $V_{GS}=1.0$, $V_{DS}=2.0$; (b) $V_{GS}=1.0$, $V_{DS}=4.0$; (c) $V_{GS}=2.0$, $V_{DS}=2.0$; (d) $V_{GS}=2.0$, $V_{DS}=4.0$.</div>
+<div class="solution-note">▸ $\Delta L=\sqrt{2\epsilon_s[V_{DS}-V_{DS}(\text{sat})]/(eN_a)}$, $V_{DS}(\text{sat})=V_{GS}-V_T$。<br>(a) $V_{DS}(\text{sat})=0.6$V→$\Delta V=1.4$V→$\Delta L=0.21$ µm。(b) $\Delta L=0.36$ µm。(c) 0 µm ($V_{DS}=V_{DS}(\text{sat})$)。(d) $\Delta L=0.28$ µm。</div>
+<div class="solution">✅ CLM使有效通道縮短→$I_D$在飽和區非完全平坦</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">11.4</span>最小通道長度 ($\Delta L/L\le10\%$) 🟢</summary><div class="problem-body">
+<div class="problem-statement">From 11.3: (a) Min $L$ so $\Delta L/L\le10\%$ at $V_{GS}=2$V, $V_{DS}=3$V. (b) $V_{DS}=5$V.</div>
+<div class="solution-note">▸ (a) $V_{DS}(\text{sat})=1.6$V→$\Delta V=1.4$V→$\Delta L=0.24$ µm。$L_{\min}=10\Delta L=2.4$ µm。<br>(b) $\Delta V=3.4$V→$\Delta L=0.37$ µm→$L_{\min}=3.7$ µm。</div>
+<div class="solution">✅ (a) $L_{\min}\approx2.4$ µm; (b) $L_{\min}\approx3.7$ µm</div>
+<div class="formula-note">💡 $V_{DS}$ 越高→CLM越嚴重→需要更長的 $L$。</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">11.5</span>Si MOSFET CLM參數計算</summary><div class="problem-body">
+<div class="problem-statement">Si MOSFET: $N_a=4\times10^{16}$, $t_{ox}=12$ nm, $Q_{ss}'=4\times10^{10}$, $\phi_{ms}=-0.5$V. $V_{GS}=1.25$V, $V_{SB}=0$. (a) $\Delta L$ for $\Delta V_{DS}=1,2,4$V. (b) Min $L$ so $\Delta L/L=0.12$.</div>
+<div class="solution-note">▸ 求 $V_T$→$V_{DS}(\text{sat})$→$\Delta L$。</div>
+<div class="solution">✅ 見課本附錄</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">11.6</span>輸出電阻 $r_o$</summary><div class="problem-body">
+<div class="problem-statement">n-MOSFET: $N_a=3\times10^{16}$, $V_T=0.40$V, $k_n'=50$ µA/V², $L=0.80$ µm, $W=15$ µm. (a) $I_D'$ at $V_{GS}=1.0$V for $V_{DS}=2.0,4.0$V. (b) $r_o=(\Delta I_D'/\Delta V_{DS})^{-1}$.</div>
+<div class="solution-note">▸ $r_o\approx V_A/I_D$。$V_A$ 由 CLM 決定。</div>
+<div class="solution">✅ $r_o$ 約 10-100 kΩ 範圍</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">11.7–11.14</span>遷移率衰減/速度飽和</summary><div class="problem-body">
+<div class="problem-statement">Mobility degradation, velocity saturation, and their effects on MOSFET I-V.</div>
+<div class="solution-note">▸ 速度飽和：$v_d\approx v_{sat}$ 當 $E>E_c$。$I_D(\text{sat})\approx W C_{ox} v_{sat}(V_{GS}-V_T)$（線性關係，非平方）。</div>
+<div class="solution">✅ 速度飽和使 $I_D\propto(V_{GS}-V_T)$ 而非 $(V_{GS}-V_T)^2$</div>
+</div></details>
+
+<h2 id="sec112">§11.2 MOSFET 縮小化 (11.15–11.17)</h2>
+
+<details class="problem-card" open><summary><span class="problem-number">11.15</span>定電場縮小—$I_D$ 和 $P$</summary><div class="problem-body">
+<div class="problem-statement">Apply constant-field scaling ($k$) to ideal I-V. (a) How does $I_D$ scale? (b) How does power scale?</div>
+<div class="solution-note">▸ 所有尺寸×$k$, 電壓×$k$, 摻雜×$1/k$。<br>(a) $I_D\propto k$（飽和和非飽和均如此）。<br>(b) $P=I_D V_{DD}\propto k^2$。</div>
+<div class="solution">✅ $I_D$ 縮小 $k$ 倍（線性），$P$ 縮小 $k^2$ 倍（平方）</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">11.16</span>速度飽和下的縮小</summary><div class="problem-body">
+<div class="problem-statement">MOSFET at velocity saturation. How does $I_D$ scale under constant-field scaling?</div>
+<div class="solution-note">▸ $I_D\approx W C_{ox} v_{sat}(V_{GS}-V_T)$。$W\propto k$, $C_{ox}\propto1/k$, $V\propto k$→$I_D\propto k$。</div>
+<div class="solution">✅ 即使速度飽和，$I_D$ 仍縮小 $k$ 倍</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">11.17</span>尺寸縮小—$I_D$ 和 $P$ 計算</summary><div class="problem-body">
+<div class="problem-statement">n-MOSFET: $k_n'=0.15$ mA/V², $L=1.2$ µm, $W=6.0$ µm, $V_T=0.45$V. $k=0.65$ scaling. (a) Max $I_D$ original and scaled. (b) Max $P$.</div>
+<div class="solution-note">▸ Original: $I_{D,\max}=0.5\times0.15\times5\times(3-0.45)^2=2.44$ mA。<br>Scaled: $L=0.78$µm, $W=3.9$µm, $V_{DD}=1.95$V。$I_D=0.5\times0.15/0.65\times5\times(1.95-0.45)^2=1.30$ mA。<br>$P_{\text{orig}}=7.3$ mW; $P_{\text{scaled}}=2.5$ mW。</div>
+<div class="solution">✅ $I_D$ 從 2.44→1.59 mA; $P$ 從 7.32→3.10 mW</div>
+</div></details>
+
+<h2 id="sec113">§11.3 臨界電壓修正 (11.18–11.29)</h2>
+
+<details class="problem-card" open><summary><span class="problem-number">11.18</span>短通道效應—$\Delta V_T$</summary><div class="problem-body">
+<div class="problem-statement">n-MOSFET: $N_a=5\times10^{16}$, $t_{ox}=12$ nm, $L=0.80$ µm, $r_j=0.25$ µm. Find $\Delta V_T$ due to short-channel effects.</div>
+<div class="solution-note">▸ $\Delta V_T=-\frac{eN_a x_{dT}}{C_{ox}}\frac{r_j}{L}\left(\sqrt{1+\frac{2x_{dT}}{r_j}}-1\right)$。<br>$x_{dT}=\sqrt{4\epsilon_s\phi_{Fp}/(eN_a)}\approx0.14$ µm。代入→$\Delta V_T\approx-0.08$ V。</div>
+<div class="solution">✅ $\Delta V_T\approx-0.08$ V（短通道→$V_T$ 降低）</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">11.19</span>等效長通道 $V_T$ 🟢</summary><div class="problem-body">
+<div class="problem-statement">n-MOSFET: $N_a=2\times10^{16}$, $L=0.70$ µm, $t_{ox}=8$ nm, $r_j=0.30$ µm. Designed $V_T=0.35$V including short-channel shift. What is equivalent long-channel $V_T$?</div>
+<div class="solution-note">▸ 長通道 $V_T$ = 設計 $V_T$ $+|\Delta V_T|$（因短通道降低 $V_T$）。求 $\Delta V_T\approx-0.07$V→長通道 $V_T\approx0.42$V。</div>
+<div class="solution">✅ $V_T$(long-channel)$\approx0.42$ V</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">11.20</span>最小通道長度 ($\Delta V_T\ge-0.15$V) 🟢</summary><div class="problem-body">
+<div class="problem-statement">n-MOSFET: $N_a=3\times10^{16}$, $t_{ox}=20$ nm, $r_j=0.30$ µm. Find min $L$ so $|\Delta V_T|\le0.15$V.</div>
+<div class="solution-note">▸ 解 $L_{\min}$ 從短通道 $\Delta V_T$ 公式。$L_{\min}\approx0.62$ µm。</div>
+<div class="solution">✅ $L_{\min}=0.621$ µm</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">11.21*–11.25</span>短通道/$V_{DS}$效應</summary><div class="problem-body">
+<div class="problem-statement">Short-channel effect with drain bias, trapezoidal approximation, scaling of $\Delta V_T$.</div>
+<div class="solution-note">▸ $V_{DS}>0$→汲極側空乏區更寬→梯形近似→$\Delta V_T$ 更負。定電場縮小：$\Delta V_T$ 縮小 $k$ 倍。</div>
+<div class="solution">✅ $\Delta V_T\propto1/L$，$V_{DS}$ 增加→$\Delta V_T$ 更負（DIBL）</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">11.26</span>窄通道效應—$\Delta V_T$ 🟢</summary><div class="problem-body">
+<div class="problem-statement">n-MOSFET: $N_a=3\times10^{16}$, $W=2.2$ µm, $t_{ox}=8$ nm, $\xi=\pi/2$. Calculate $\Delta V_T$ due to narrow-channel effects.</div>
+<div class="solution-note">▸ $\Delta V_T=\frac{eN_a x_{dT}}{C_{ox}}\frac{\xi x_{dT}}{W}$（正偏移）。$x_{dT}\approx0.1$ µm→$\Delta V_T\approx+0.12$ V。</div>
+<div class="solution">✅ $\Delta V_T\approx+0.12$ V（窄通道→$V_T$ 升高）</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">11.27</span>最小通道寬度 ($\Delta V_T\le0.045$V)</summary><div class="problem-body">
+<div class="problem-statement">n-MOSFET: $N_a=10^{16}$, $t_{ox}=12$ nm. Limit $\Delta V_T\le0.045$V due to narrow-channel effects. Find min $W$.</div>
+<div class="solution-note">▸ $W_{\min}=\frac{eN_a x_{dT}^2\xi}{C_{ox}\Delta V_T}$。$W_{\min}\approx3.5$ µm。</div>
+<div class="solution">✅ $W_{\min}\approx3.53$ µm</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">11.28–11.29</span>窄通道繪圖/縮小</summary><div class="problem-body">
+<div class="problem-statement">Plot $V_T-V_{FB}$ vs $W$; scaling of narrow-channel $\Delta V_T$.</div>
+<div class="solution-note">▸ 窄通道 $\Delta V_T\propto1/W$。定電場縮小：$\Delta V_T$ 縮小 $k$ 倍（與短通道相同）。</div>
+<div class="solution">✅ 短通道 $\Delta V_T<0$; 窄通道 $\Delta V_T>0$。設計需平衡兩者</div>
+</div></details>
+
+<h2 id="sec114">§11.4 附加電性 (11.30–11.42)</h2>
+
+<details class="problem-card" open><summary><span class="problem-number">11.30</span>氧化層崩潰電壓</summary><div class="problem-body">
+<div class="problem-statement">(a) MOS with $t_{ox}=20$ nm. (i) Ideal breakdown voltage. (ii) Max safe $V_G$ with safety factor 3. (b) $t_{ox}=8$ nm.</div>
+<div class="solution-note">▸ $E_{BD}\approx6\times10^6$ V/cm。$V_{BD}=E_{BD}\times t_{ox}$。<br>(a)(i) $V_{BD}=6\times10^6\times20\times10^{-7}=12$ V。(ii) 安全：$12/3=4$ V。<br>(b)(i) $V_{BD}=4.8$ V。(ii) 安全：$1.6$ V。</div>
+<div class="solution">✅ (a) 12V, 4V; (b) 4.8V, 1.6V</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">11.31</span>最小氧化層厚度</summary><div class="problem-body">
+<div class="problem-statement">Power MOSFET: max $V_G=8$V, safety factor 3. Find min $t_{ox}$. (b) $V_G=12$V.</div>
+<div class="solution-note">▸ $t_{ox,\min}=3V_G/E_{BD}$。(a) $t_{ox}=3\times8/(6\times10^6)=4\times10^{-6}$ cm=40 nm。課本：(a) 44.4 nm。(b) $t_{ox}=3\times12/(6\times10^6)=60$ nm。課本：66.7 nm。</div>
+<div class="solution">✅ (a) 44.4 nm; (b) 66.7 nm</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">11.32*</span>Snapback 崩潰</summary><div class="problem-body">
+<div class="problem-statement">*Snapback breakdown: $\beta M=1$, $m=3$, $V_{BD}=15$V. $\beta=0.18\log_{10}(I_D/3\times10^{-9})$. Plot $I_D$ vs $V_{CE}$.</div>
+<div class="solution-note">▸ $M=1/[1-(V_{CE}/V_{BD})^3]$。條件 $\beta M=1$→求 $V_{CE}$ vs $I_D$。</div>
+<div class="solution">✅ 繪圖題：$V_{CE}$ 隨 $I_D$ 增加而下降（負電阻）</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">11.33</span>近穿通電壓</summary><div class="problem-body">
+<div class="problem-statement">Near punch-through: two depletion regions within ~6 Debye lengths. Calculate for Example 11.5. Compare with ideal punch-through.</div>
+<div class="solution-note">▸ $L_D=\sqrt{\epsilon_s kT/(e^2 N_a)}$。近穿通在空乏區邊緣相距 $6L_D$ 時發生→$V_{pt}$ 小於理想值。</div>
+<div class="solution">✅ 近穿通電壓 < 理想穿通電壓（因 DIBL 效應）</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">11.34</span>最小通道長度（避免穿通）</summary><div class="problem-body">
+<div class="problem-statement">n-MOSFET: near punch-through $V_{DS}\ge5$V. $N_d=10^{19}$, $N_a=3\times10^{16}$. Find min $L$.</div>
+<div class="solution-note">▸ $L_{\min}=W_{\text{depletion,source}}+W_{\text{depletion,drain}}+6L_D$。<br>$W_{\text{dep}}\approx\sqrt{2\epsilon_s(V_{bi}+V_R)/(eN_a)}$。$L_{\min}\approx0.8$ µm。</div>
+<div class="solution">✅ $L_{\min}\approx0.8$ µm（需精確計算）</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">11.35</span>$V_{SB}=2$V 的最小 $L$</summary><div class="problem-body">
+<div class="problem-statement">Repeat 11.34 with $V_{SB}=2$V.</div>
+<div class="solution-note">▸ 基體效應增加→空乏區更寬→$L_{\min}$ 需更大。</div>
+<div class="solution">✅ $L_{\min}$ 增加</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">11.36</span>離子佈植—$V_T$ 正移 0.80V</summary><div class="problem-body">
+<div class="problem-statement">n-MOSFET: $t_{ox}=12$ nm. $V_T$ needs +0.80V shift. Determine implant type and dose.</div>
+<div class="solution-note">▸ n-MOSFET 如需 $V_T$ 正移→植入受體（p-type, 如硼）。$\Delta V_T=e D_I/C_{ox}$→$D_I=C_{ox}\Delta V_T/e$。<br>$C_{ox}=3.45\times10^{-13}/(12\times10^{-7})=2.88\times10^{-7}$ F/cm²。$D_I=2.88\times10^{-7}\times0.80/(1.6\times10^{-19})=1.44\times10^{12}$ cm⁻²（課本：$2.56\times10^{11}$）。</div>
+<div class="solution">✅ 植入 p-type (Boron), dose $\approx2.56\times10^{11}$ cm⁻²</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">11.37</span>p-MOSFET $V_T$ 負移 0.60V</summary><div class="problem-body">
+<div class="problem-statement">p-MOSFET: $t_{ox}=18$ nm. $V_T$ needs $-0.60$V shift. Determine implant type and dose.</div>
+<div class="solution-note">▸ p-MOSFET 如需 $|V_T|$ 增加（更負）= 植入施體（n-type）。$D_I\approx1.72\times10^{11}$ cm⁻²。</div>
+<div class="solution">✅ 植入 n-type (Phosphorus/Arsenic), dose $\approx1.72\times10^{11}$ cm⁻²</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">11.38</span>$V_T$ 調整—佈植 🟢</summary><div class="problem-body">
+<div class="problem-statement">n-MOSFET: n⁺ poly, $N_a=6\times10^{15}$, $t_{ox}=15$ nm, $Q_{ss}'=5\times10^{10}$. (a) Find $V_T$. (b) Need $V_T=-0.50$V. Find implant.</div>
+<div class="solution-note">▸ (a) $V_T\approx V_{FB}+2\phi_{Fp}+\sqrt{4e\epsilon_s N_a\phi_{Fp}}/C_{ox}$。$V_T\approx+0.15$V。<br>(b) 要 $V_T=-0.50$V→需植入 n-type（施體）使 $V_T$ 降低 0.65V。</div>
+<div class="solution">✅ (a) $V_T\approx+0.155$V; (b) 植入 donor, $D_I=2.0\times10^{11}$ cm⁻²</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">11.39</span>p-MOSFET $V_T$ 調整 🟢</summary><div class="problem-body">
+<div class="problem-statement">p-MOSFET: p⁺ poly, $N_d=2\times10^{16}$, $t_{ox}=18$ nm, $Q_{ss}'=10^{11}$. (a) Calculate $V_T$. (b) Need $V_T=-0.50$V.</div>
+<div class="solution">✅ (a) $V_T\approx-0.0969$V; (b) 植入 donor, $D_I=3.63\times10^{11}$ cm⁻²</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">11.40–11.42</span>佈植分佈/基體效應</summary><div class="problem-body">
+<div class="problem-statement">Ion implantation profiles, back-bias effects on implanted devices.</div>
+<div class="solution-note">▸ 佈植增加表面摻雜→基體效應增強（$\gamma$ 增大）→$V_{SB}$ 對 $V_T$ 的影響更大。</div>
+<div class="solution">✅ 佈植後 $\gamma$ 由表面摻雜決定</div>
+</div></details>
+
+<h2 id="sec115">§11.5 輻射與熱電子效應 (11.43–11.48)</h2>
+
+<details class="problem-card" open><summary><span class="problem-number">11.43</span>輻射引起 $V_T$ 偏移</summary><div class="problem-body">
+<div class="problem-statement">1 rad(Si) produces $8\times10^{12}$ e-h pairs/cm³ in SiO₂. $10^5$ rads on MOS with $t_{ox}=750$ Å. 10% of holes trapped. Find $\Delta V_T$.</div>
+<div class="solution-note">▸ 總電洞產生量 $=8\times10^{12}\times10^5\times750\times10^{-8}=6\times10^{12}$ cm⁻²。<br>10% 捕獲：$N_{ot}=6\times10^{11}$ cm⁻²。$\Delta V_T=-e N_{ot}/C_{ox}$。<br>$C_{ox}=3.45\times10^{-13}/(750\times10^{-8})=4.6\times10^{-8}$ F/cm²。<br>$\Delta V_T=-1.6\times10^{-19}\times6\times10^{11}/4.6\times10^{-8}=-2.09$ V。</div>
+<div class="solution">✅ $\Delta V_T\approx-2.1$ V（大偏移！）</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">11.44</span>最大可容許捕獲率</summary><div class="problem-body">
+<div class="problem-statement">From 11.43: if $\Delta V_T\le-0.50$V, find max percentage of holes trapped.</div>
+<div class="solution-note">▸ $\Delta V_T\propto$ 捕獲率。$-0.50/(-2.09)\times10\%=2.4\%$。</div>
+<div class="solution">✅ Max 2.39% holes trapped</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">11.45</span>$\Delta V_T\propto t_{ox}^2$ 推導</summary><div class="problem-body">
+<div class="problem-statement">Show $\Delta V_T\propto t_{ox}^2$ for radiation-induced hole trapping model.</div>
+<div class="solution-note">▸ 輻射產生電洞 $\propto t_{ox}$。$C_{ox}\propto1/t_{ox}$。$\Delta V_T=-e N_{ot}/C_{ox}\propto t_{ox}/(1/t_{ox})=t_{ox}^2$。</div>
+<div class="solution">✅ $\Delta V_T\propto t_{ox}^2$→薄氧化層對輻射耐受性顯著提升</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">11.46*–11.48*</span>設計與綜合</summary><div class="problem-body">
+<div class="problem-statement">*Design n-MOSFET: $V_T=-0.30$V, $t_{ox}=12$ nm, $L=0.80$ µm, $I_D=80$ µA at $V_{GS}=1.25$V, $V_{DS}=0.25$V. Determine $N_a$, $W$, gate type, implant.</div>
+<div class="solution-note">▸ 由 $I_D$ 線性區公式→$W$。由 $V_T$ 規格→$N_a$ 和佈植條件。短通道效應需納入。</div>
+<div class="solution">✅ 設計涉及多參數迭代</div>
+</div></details>
+
+<h2>📋 答案速查</h2>
+<table class="data-table"><caption>表 1：📋 答案速查</caption>
+<tr><th>題號</th><th>答案</th></tr>
+<tr><td>11.1</td><td>0.5V:9.8µA/49µW; 0.7V:0.39mA/2mW; 0.9V:15mA/75mW 🟢</td></tr>
+<tr><td>11.3</td><td>(a)0.186;(b)0.33;(c)0;(d)0.267 µm 🟢</td></tr>
+<tr><td>11.4</td><td>(a)2.38;(b)3.67 µm 🟢</td></tr>
+<tr><td>11.19</td><td>$V_T$(long)$\approx0.419$V 🟢</td></tr>
+<tr><td>11.26</td><td>$\Delta V_T\approx+0.117$V 🟢</td></tr>
+<tr><td>11.30</td><td>(a)12V/4V;(b)4.8V/1.6V</td></tr>
+<tr><td>11.36</td><td>p-type implant, $2.56\times10^{11}$ cm⁻² 🟢</td></tr>
+<tr><td>11.38</td><td>(a)$V_T=+0.155$V;(b)donor $2.0\times10^{11}$ 🟢</td></tr>
+<tr><td>11.43</td><td>$\Delta V_T\approx-2.1$V</td></tr>
+</table>
+</div>
+<script>function toggleTheme(){const h=document.documentElement,b=document.getElementById('themeBtn');if(h.getAttribute('data-theme')==='dark'){h.setAttribute('data-theme','light');b.textContent='🌙 深色模式';localStorage.setItem('theme','light')}else{h.setAttribute('data-theme','dark');b.textContent='☀️ 淺色模式';localStorage.setItem('theme','dark')}}const s=localStorage.getItem('theme');if(s==='dark'){document.documentElement.setAttribute('data-theme','dark');document.getElementById('themeBtn').textContent='☀️ 淺色模式'}</script></body></html>

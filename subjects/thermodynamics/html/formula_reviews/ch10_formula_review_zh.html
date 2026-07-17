@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>第十章 公式摘要 — 二元相圖（16 條完整版）</title>
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']],tags:'ams'},options:{ignoreHtmlClass:'no-math'}};</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<link rel="stylesheet" href="../../../../shared/core.css">
+<script src="../../../../shared/core.js" defer></script>
+<link rel="stylesheet" href="../../../../shared/navigation.css" data-shared-navigation>
+</head>
+<body>
+<nav class="sidebar" aria-label="本章目錄"><div class="sidebar-header"><div class="sidebar-subtitle">材料熱力學</div><h2 class="sidebar-title">第十章：二元系統相圖</h2></div><div class="sidebar-nav"><ul>
+<li><a href="#s1">10.1–10.4 $G$–$x$ 曲線與標準態</a></li>
+<li><a href="#s2">10.5–10.8 共切線與相圖計算</a></li>
+<li><a href="#cheatsheet">📋 公式速查表（16 條）</a></li>
+</ul></div><div class="sidebar-toggle"><button data-action="toggle-theme">🌓 <span id="tl">深色模式</span></button></div><div class="sidebar-tools"><button type="button" data-action="toggle-theme" aria-label="切換深色或淺色模式">切換顯示主題</button></div></nav>
+<main class="chapter-page">
+<div class="chapter-header"><div class="tag">16 條公式完整版 · 含 Common Tangent + 相穩定性</div><h1>第十章：二元系統相圖</h1><div class="chapter-subtitle">Introduction to the Thermodynamics of Materials · David R. Gaskell · pp. 342–399</div></div>
+<div class="content-toolbar"><button data-action="expand-details">📖 展開全部</button><button data-action="collapse-details">📕 收合全部</button></div>
+
+<div class="content-section" id="s1"><h2>10.1–10.4 $G$–$x$ 曲線與化學位</h2>
+<div class="formula-card"><div class="formula-label">⭐ 化學位從 $G$–$x$ 截距</div><div class="eq">$$\boxed{\mu_A = G - x_B\frac{dG}{dx_B},\quad \mu_B = G + (1-x_B)\frac{dG}{dx_B}}$$</div></div>
+<div class="formula-card"><div class="formula-label">二元系統 $G$（含標準態）</div><div class="eq">$$G = x_A\mu_A^\circ + x_B\mu_B^\circ + RT(x_A\ln a_A + x_B\ln a_B)$$</div></div>
+</div>
+
+<div class="content-section" id="s2"><h2>10.5–10.8 共切線法則與相穩定性</h2>
+<div class="formula-card"><div class="formula-label">⭐ 共切線條件（兩相平衡）</div><div class="eq">$$\boxed{\mu_A^\alpha = \mu_A^\beta,\quad \mu_B^\alpha = \mu_B^\beta}$$</div></div>
+<div class="formula-card"><div class="formula-label">正規溶液 $G$–$x$</div><div class="eq">$$G = x_A G_A^\circ + x_B G_B^\circ + \Omega x_A x_B + RT(x_A\ln x_A + x_B\ln x_B)$$</div></div>
+<div class="formula-card"><div class="formula-label">⭐ 相穩定性判據</div><div class="eq">$$\boxed{\frac{\partial^2 G}{\partial x_B^2} > 0 \quad \text{（穩定）},\quad < 0 \quad \text{（不穩定→分相）}}$$</div></div>
+<div class="formula-card"><div class="formula-label">⭐ 臨界溫度（正規溶液）</div><div class="eq">$$T_c = \frac{\Omega}{2R},\quad x_c = 0.5$$</div></div>
+</div>
+
+<div class="content-section" id="cheatsheet"><h2>公式速查表（關鍵公式）</h2>
+<table><caption>表 1：公式速查表（關鍵公式）</caption><thead><tr><th>Eq</th><th>公式</th><th>備註</th></tr></thead><tbody>
+<tr><td>—</td><td>$\mu_A = G - x_B(dG/dx_B)$</td><td>⭐ 化學位截距法</td></tr>
+<tr><td>—</td><td>$\mu_A^\alpha = \mu_A^\beta$, $\mu_B^\alpha = \mu_B^\beta$</td><td>⭐ 共切線平衡條件</td></tr>
+<tr><td>—</td><td>$G = \sum x_i G_i^\circ + \Omega x_A x_B + RT\sum x_i\ln x_i$</td><td>正規溶液 $G$–$x$</td></tr>
+<tr><td>—</td><td>$\partial^2 G/\partial x^2 > 0$（穩定）</td><td>⭐ 相穩定性判據</td></tr>
+<tr><td>—</td><td>$T_c = \Omega/2R$, $x_c = 0.5$</td><td>⭐ 混溶間隙臨界點</td></tr>
+</tbody></table>
+</div>
+</main>
+<script>
+function toggleTheme(){const h=document.documentElement;const n=h.getAttribute('data-theme')==='light'?'dark':'light';h.setAttribute('data-theme',n);localStorage.setItem('theme',n);document.getElementById('tl').textContent=n==='dark'?'淺色模式':'深色模式';}
+const s=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',s);if(s==='dark')document.getElementById('tl').textContent='淺色模式';
+</script>
+</body>
+</html>

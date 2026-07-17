@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第 4 章 變換與可觀測量 — The Physics of Quantum Mechanics</title>
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$'], ['\\[','\\]']] },
+  options: { ignoreHtmlClass: 'no-mathjax' }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<link rel="stylesheet" href="../../../../shared/core.css">
+<script src="../../../../shared/core.js" defer></script>
+<link rel="stylesheet" href="../../../../shared/navigation.css" data-shared-navigation>
+</head>
+<body>
+
+<nav class="sidebar" id="sidebar" aria-label="本章目錄"><div class="sidebar-header"><div class="sidebar-subtitle">量子力學</div><h2 class="sidebar-title">第 4 章 變換與可觀測量</h2></div><div class="toc">
+    <div class="nsub"><a href="#preview">本章預覽</a></div>
+    <div class="nsub"><a href="#s4-1">4.1 變換 ket</a></div>
+    <div class="nsub"><a href="#s4-2">4.2 運算子的變換</a></div>
+    <div class="nsub"><a href="#s4-3">4.3 對稱性與守恆律</a></div>
+    <div class="nsub"><a href="#s4-4">4.4 海森堡繪景</a></div>
+    <div class="nsub"><a href="#s4-5">4.5 量子力學的本質</a></div>
+    <div class="nsub"><a href="#summary">關鍵概念與公式</a></div>
+    <div class="nsub"><a href="#common-mistakes">常見錯誤</a></div>
+    <div class="nsub"><a href="#self-check">自我檢測</a></div>
+    <div class="nsub"><a href="#extras">延伸資源</a></div>
+  </div>
+<div class="sidebar-tools"><button type="button" data-action="toggle-theme" aria-label="切換深色或淺色模式">切換顯示主題</button></div></nav>
+
+<main class="chapter-page" data-chapter-title="第 4 章 變換與可觀測量" data-prev-href="ch3_harmonic_zh.html" data-prev-label="第 3 章 諧振子與磁場" data-next-href="ch5_step_potentials_zh.html" data-next-label="第 5 章 階梯勢中的運動">
+<!-- ====== 章首 ====== -->
+<header class="chapter-header">
+  <div class="chapter-subtitle">
+    <a href="../../index.html">量子力學</a> &rsaquo; <a href="ch3_harmonic_zh.html">Ch3</a> &rsaquo; Ch4
+  </div>
+  <h1>第 4 章　變換與可觀測量</h1>
+  <div class="chapter-meta">
+    <span>原書章節：Chapter 4, Transformations &amp; Observables</span>
+    <span>原書頁碼：p58–74</span>
+    <span>章長：17 頁 &middot; 5 節 &middot; 12+ 個公式</span>
+  </div>
+</header>
+
+<!-- ====== 本章預覽 ====== -->
+<section class="chapter-preview" id="preview">
+  <h2>本章預覽</h2>
+
+  <div class="core-question">
+    <h3>核心問題</h3>
+    <p>在第 2 章我們把每個可觀測量與一個 Hermitian 運算子聯繫起來，用來計算期望值、本徵值和本徵態。但這些運算子「對 ket 做了什麼」的問題一直懸而未決。本章將回答：<strong>可觀測量的運算子其實是變換的生成元</strong>——動量運算子生成平移，角動量運算子生成旋轉。這個深刻的聯繫不僅賦予運算子真正的物理意義，還揭示了為什麼對稱性必然導致守恆律，以及為什麼量子力學與古典力學共享相同的對易關係。</p>
+  </div>
+
+  <div class="deep-dive">
+    <h3>10 個關鍵概念</h3>
+    <ol>
+      <li><strong>平移運算子</strong>：$U(\mathbf{a}) = e^{-i\mathbf{a}\cdot\mathbf{p}/\hbar}$ 將系統平移 $\mathbf{a}$，動量 $\mathbf{p}$ 是平移的生成元</li>
+      <li><strong>么正變換</strong>：所有守恆歸一化的變換必須是么正的 $U^\dagger U = I$，保證所有振幅不變</li>
+      <li><strong>連續變換與生成元</strong>：$U(\delta\theta) = I - i\delta\theta\,\tau$，Hermitian 生成元 $\tau$ 給出態隨參數變化的速率 $i\partial|\psi\rangle/\partial\theta = \tau|\psi\rangle$</li>
+      <li><strong>旋轉運算子</strong>：$U(\boldsymbol{\alpha}) = e^{-i\boldsymbol{\alpha}\cdot\mathbf{J}}$，角動量運算子 $\mathbf{J}$ 是旋轉的生成元</li>
+      <li><strong>對易關係的幾何根源</strong>：$[x_i, p_j] = i\hbar\delta_{ij}$ 來自平移下 $x$ 的變換；$[J_i, J_j] = i\sum_k \epsilon_{ijk}J_k$ 來自旋轉的非交換性</li>
+      <li><strong>宇稱運算子</strong>：離散變換 $P$ 滿足 $P^2 = I$，本徵值 $\pm 1$；向量運算子與 $P$ 反對易：$\{v, P\} = 0$</li>
+      <li><strong>鏡像運算子</strong>：$\langle x,y|M|\psi\rangle = \langle y,x|\psi\rangle$，$M^2 = I$，也是么正且 Hermitian</li>
+      <li><strong>對稱性 ⇔ 守恆律</strong>：若 $[H, \tau] = 0$，則 $\tau$ 生成的變換是系統的對稱性，且 $\tau$ 的本徵值守恆——量子 Noether 定理</li>
+      <li><strong>海森堡繪景</strong>：$\widetilde{Q}(t) = U^\dagger(t) Q U(t)$，運算子演化而態固定；$i\hbar\,d\widetilde{Q}/dt = [\widetilde{Q}, H]$</li>
+      <li><strong>量子力學的本質</strong>：不在對易關係，而在機率振幅是複數、態存在於 Hilbert 空間、振幅叠加原理</li>
+    </ol>
+  </div>
+
+  <div class="callout-warn">
+    <strong>⚡ 先備知識</strong><br>
+    本章需要你熟悉 Dirac notation、運算子的基本性質（Hermitian、么正）、對易關係、以及 Ch1–Ch3 的內容。尤其是 Ch2 的 Ehrenfest 定理和時間演化運算子 $U(t) = e^{-iHt/\hbar}$ 將在本章反覆出現。如果你對旋轉矩陣和 Levi-Civita 符號 $\epsilon_{ijk}$ 不熟，Appendix B 提供了複習材料。
+  </div>
+
+  <div class="deep-dive">
+    <h3>🧭 本章推理地圖</h3>
+    <ol>
+      <li><strong>運算子「對 ket 做什麼」？</strong>（§4.1）→ 平移 ket 揭示 <strong>$p$ 是平移生成元</strong>（§4.1.1）</li>
+      <li>平移→么正性→無限小變換定義<strong>生成元 $\tau$</strong>（§4.1.2）→ 推廣到旋轉 $U(\boldsymbol{\alpha}) = e^{-i\boldsymbol{\alpha}\cdot\mathbf{J}}$（§4.1.3）</li>
+      <li>離散變換：宇稱 $P$、鏡像 $M$（§4.1.4）→ 討論運算子的變換規則（§4.2）</li>
+      <li>運算子的變換 $U^\dagger x U = x + a$→導出<strong>正則對易關係</strong>（§4.2）</li>
+      <li>旋轉下 $R(\alpha)x = U^\dagger x U$→導出 $[J_i, J_j] = i\sum_k\epsilon_{ijk}J_k$（§4.2）</li>
+      <li><strong>$[H, \tau] = 0$ ⇔ 對稱性 ⇔ 守恆量</strong>（§4.3）→ 平移不變→動量守恆、旋轉不變→角動量守恆</li>
+      <li>海森堡繪景（§4.4）→ 量子力學的本質：<strong>複數振幅 + Hilbert 空間</strong>（§4.5）</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ====== 4.1 變換 ket ====== -->
+<section class="deep-dive" id="s4-1">
+<h2>4.1　變換 ket</h2>
+<div class="section-keypoints">
+  <strong>🔑 本節重點</strong>
+  <span>① 平移運算子 $U(\mathbf{a}) = e^{-i\mathbf{a}\cdot\mathbf{p}/\hbar}$ 將態平移 $\mathbf{a}$</span>
+  <span>② 動量 $p_x$ 是沿 $x$ 方向平移的生成元，給出態隨平移的變化率</span>
+  <span>③ 么正性是歸一化守恆的必要條件，$U^\dagger = U^{-1}$</span>
+  <span>④ 旋轉運算子 $U(\boldsymbol{\alpha}) = e^{-i\boldsymbol{\alpha}\cdot\mathbf{J}}$，$\mathbf{J}$ 是角動量</span>
+  <span>⑤ 宇稱 $P$ 是離散變換，$P^2 = I$，本徵值 $\pm 1$</span>
+</div>
+
+<p>當我們遇到一個不熟悉的物體時，我們會把它拿起來翻轉、移動，觀察它的形狀和性質。在第 1 章我們宣告：系統的所有物理資訊都封裝在它的 ket $|\psi\rangle$ 中。因此，要研究一個量子系統，我們必須學會如何讓 $|\psi\rangle$ 在平移和旋轉下變化。</p>
+
+<p>即使是最簡單的系統也有取向。例如，電子是磁偶極子、$^7$Li 原子核有電四極矩、水分子是 V 形結構——它們都不是球對稱的。描述這些系統的 ket $|\psi\rangle$ 同時包含了位置、動量和取向的資訊。因此，我們用一個標籤 $\mu$ 來代表取向和其他內部性質（如內能），並將系統的態展開為完整的位置本徵態 $|x, \mu\rangle$：</p>
+
+<div class="eq">$$\psi_\mu(x) \equiv \langle x, \mu | \psi \rangle \tag{4.1}$$</div>
+
+<p>這裡 $x$ 是質心的位置向量，$\mu$ 概括了取向等資訊。$\psi_\mu(x)$ 就是在位置 $x$ 處找到系統、且取向為 $\mu$ 的機率振幅。</p>
+
+<h3>平移 ket</h3>
+
+<p>利用 Taylor 定理，我們可以把波函數在 $x - a$ 處的值用 $x$ 處的導數表示：</p>
+
+<div class="eq">$$\psi_\mu(x - a) = \exp\left(-a \cdot \frac{\partial}{\partial x}\right) \psi_\mu(x) = \langle x, \mu | \exp\left(-\frac{i a \cdot p}{\hbar}\right) | \psi \rangle \tag{4.2}$$</div>
+
+<p>這個等式告訴我們：在態 $|\psi\rangle$ 中找到系統在 $x - a$ 處的振幅，等於在另一個態中找到系統在原位置 $x$ 處的振幅。這個新態就是<strong>平移後的態</strong>：</p>
+
+<div class="eq">$$|\psi'\rangle \equiv U(a) |\psi\rangle \quad \text{其中} \quad U(a) \equiv \exp(-i a \cdot p / \hbar) \tag{4.3}$$</div>
+
+<p>方程 (4.2) 變為 $\psi_\mu(x - a) = \langle x, \mu | U(a) | \psi \rangle = \langle x, \mu | \psi' \rangle = \psi'_\mu(x)$。所以 $|\psi'\rangle$ 的波函數正是把原來波函數整個平移了 $a$ 的結果。我們說<strong>平移運算子 $U(a)$ 將 $|\psi\rangle$ 平移了 $a$</strong>——雖然 $|\psi\rangle$ 不是實空間中的物體。</p>
+
+<div class="callout">
+  <strong>💡 動量運算子的物理意義</strong><br>
+  現在我們終於能回答第 2 章留下的問題：「運算子對 ket 做了什麼？」將平移後的態 $|\psi'\rangle$ 對平移向量分量 $a_x$ 取偏導數，並在 $a = 0$ 處計算（此時 $|\psi'\rangle = |\psi\rangle$），得到：
+  $$i\hbar \frac{\partial |\psi\rangle}{\partial a_x} = -i\hbar \frac{\partial |\psi\rangle}{\partial x} = p_x |\psi\rangle \tag{4.5}$$
+  這就是說：<strong>$p_x$ 給出當我們沿 $x$ 軸平移系統時，ket 的變化率。</strong>可觀測量的運算子不再是抽象的「資訊儲存庫」——它直接描述了系統在對應變換下的行為。
+</div>
+
+<p>我們也可以從另一個角度驗證平移運算子的作用。利用位置本徵態在動量表象中的展開（方程 2.78）：</p>
+
+<div class="eq">$$U(a) |x_0, \mu\rangle = \frac{1}{h^{3/2}} \int d^3p\, e^{-i x_0 \cdot p/\hbar} U(a) |p, \mu\rangle = \frac{1}{h^{3/2}} \int d^3p\, e^{-i(x_0 + a) \cdot p/\hbar} |p, \mu\rangle = |x_0 + a, \mu\rangle \tag{4.7}$$</div>
+
+<p>這正是我們期待的結果：平移運算子作用在確定位於 $x_0$ 的態上，產生一個確定位於 $x_0 + a$ 的態。</p>
+
+<div class="callout-warn">
+  <strong>⚡ 主動變換與被動變換</strong><br>
+  本書只討論<strong>主動變換</strong>：物理上移動系統本身。另一種觀點是<strong>被動變換</strong>：系統不動，移動坐標系原點。兩者差一個負號：將坐標原點後移 $\delta a$，等同於將系統前移 $\delta a$。理解這個符號差異很重要——混淆主動與被動變換是初學者的常見錯誤。
+</div>
+
+<h3>連續變換與生成元</h3>
+
+<p>歸一化條件 $\langle \psi | \psi \rangle = 1$ 表達了「當我們測量任何可觀測量時，一定會測到某個值」這個事實。任何對系統做的變換都不能改變這個事實，所以變換運算子 $U$ 必須滿足：對任何態 $|\psi\rangle$，$1 = \langle \psi' | \psi' \rangle = \langle \psi | U^\dagger U | \psi \rangle$。由此推出：</p>
+
+<div class="eq">$$U^\dagger U = I \quad \Rightarrow \quad U^\dagger = U^{-1} \tag{4.8}$$</div>
+
+<p>滿足這個性質的運算子稱為<strong>么正運算子</strong>（unitary operator）。當我們用么正運算子變換所有態時，所有振幅保持不變：$\langle \phi' | \psi' \rangle = \langle \phi | \psi \rangle$。</p>
+
+<p>許多么正運算子有一個參數 $\theta$ 可以縮減到零，使得運算子趨近於單位運算子。在這種情況下，對於小的 $\delta\theta$ 我們可以寫：</p>
+
+<div class="eq">$$U(\delta\theta) = I - i\delta\theta\,\tau + \mathcal{O}(\delta\theta)^2 \tag{4.9}$$</div>
+
+<p>其中 $i$ 是慣例，$\tau$ 是一個運算子。利用 $U$ 的么正性：$I = U^\dagger(\delta\theta)U(\delta\theta) = I + i\delta\theta(\tau^\dagger - \tau) + \mathcal{O}(\delta\theta^2)$，比較 $\delta\theta$ 的係數得到 $\tau^\dagger = \tau$——所以 <strong>$\tau$ 是 Hermitian 的，可能是一個可觀測量</strong>。</p>
+
+<div class="callout">
+  <strong>💡 生成元的定義與意義</strong><br>
+  用方程 (4.9) 計算 $|\psi'\rangle \equiv U(\delta\theta)|\psi\rangle$，兩邊減去 $|\psi\rangle$、除以 $\delta\theta$、取極限 $\delta\theta \to 0$，得到：
+  $$i\frac{\partial |\psi'\rangle}{\partial\theta} = \tau |\psi'\rangle \tag{4.11}$$
+  Hermitian 運算子 $\tau$ 給出當我們增加連續變換的參數 $\theta$ 時，$|\psi\rangle$ 的變化率。因此 $\tau$ 被稱為該變換的<strong>生成元</strong>（generator）。例如，$p/\hbar$ 是平移的生成元。
+</div>
+
+<h3>指數運算子與么正性的保證</h3>
+<p>方程 (4.12) 中的指數 $e^{-i\theta\tau}$ 需要更精確的定義。對於有限維矩陣，指數可以展開為：</p>
+<div class="eq">$$e^{-i\theta\tau} = \sum_{n=0}^{\infty} \frac{(-i\theta)^n}{n!} \tau^n = I - i\theta\tau - \frac{\theta^2}{2}\tau^2 + \frac{i\theta^3}{6}\tau^3 + \cdots \tag{4.12b}$$</div>
+<p>這個級數對任何有限維矩陣都收斂。關鍵在於：當 $\tau$ 是 Hermitian 時，$e^{-i\theta\tau}$ <strong>自動</strong>是么正的。驗證：</p>
+<div class="eq">$$\left(e^{-i\theta\tau}\right)^\dagger = e^{i\theta\tau^\dagger} = e^{i\theta\tau} = \left(e^{-i\theta\tau}\right)^{-1} \tag{4.12c}$$</div>
+<p>其中第二步使用了 $\tau^\dagger = \tau$（Hermitian 性）。這意味著：<strong>任何 Hermitian 運算子都可以作為某個么正變換的生成元</strong>——反之，任何么正變換（只要可以連續地縮減到 $I$）都可以用某個 Hermitian 生成元的指數來表示。這就是為什麼 Hermitian 運算子在量子力學中如此重要：它們既代表可觀測量（本徵值為實數），又生成物理變換（指數為么正）。
+
+<div class="callout">
+  <strong>💡 對稱運算子的基本性質</strong><br>
+  若 $U = e^{-i\theta\tau}$ 是系統的對稱變換（即 $[H, U] = 0$），則等價地 $[H, \tau] = 0$。因此：
+  <ul>
+    <li>$\tau$ 的本徵值守恆（守恆律）</li>
+    <li>$\tau$ 和 $H$ 可以同時對角化——存在一組同時為兩者本徵態的基底</li>
+    <li>$\tau$ 生成的變換不改變系統的能量——這是對稱性的物理意義</li>
+  </ul>
+  反之，若某個 Hermitian 運算子 $Q$ 的本徵值在時間演化下不變，則 $[H, Q] = 0$，$Q$ 生成的變換是對稱性。這個雙向對應是 Noether 定理的核心。
+</div>
+
+
+
+<p>有限變換可以通過重複進行無限小變換來生成。具體來說，如果用 $U(\delta\theta)$ 變換 $N$ 次，$\delta\theta = \theta/N$，則在 $N \to \infty$ 的極限下：</p>
+
+<div class="eq">$$U(\theta) \equiv \lim_{N\to\infty} \left(1 - i\frac{\theta}{N}\tau\right)^N = e^{-i\theta\tau} \tag{4.12}$$</div>
+
+<p>這個關係顯然是平移運算子定義 (4.3) 的推廣。任何連續么正變換都可以寫成 $e^{-i\theta\tau}$ 的形式，其中 Hermitian 生成元 $\tau$ 決定了變換的性質。</p>
+
+<h3>旋轉運算子</h3>
+
+<p>現在考慮旋轉系統的情況。與平移不同的是，旋轉會改變系統的取向。從 §4.1.2 我們知道旋轉運算子將是么正的，並且有 Hermitian 生成元。平移有三個生成元（$p_x/\hbar$、$p_y/\hbar$、$p_z/\hbar$），對應於需要用三個數（向量 $a$ 的三個分量）來指定一個平移。同理，指定一個旋轉需要三個角度：兩個角指定旋轉軸的方向，第三個角指定旋轉的角度。因此：</p>
+
+<div class="eq">$$U(\boldsymbol{\alpha}) = \exp(-i\boldsymbol{\alpha} \cdot \mathbf{J}) \tag{4.13}$$</div>
+
+<p>這裡 $\boldsymbol{\alpha}$ 是一個向量，其方向是旋轉軸 $\hat{\boldsymbol{\alpha}}$，其大小 $|\boldsymbol{\alpha}|$ 是旋轉角度。$\mathbf{J}$ 由三個 Hermitian 運算子 $J_x$、$J_y$、$J_z$ 組成。在本章和第 5 章中將會明確：與 $\mathbf{J}$ 相關的可觀測量就是<strong>角動量</strong>（angular momentum）。因此 $J$ 的分量被稱為角動量運算子。</p>
+
+<p>角動量運算子在旋轉系統中的角色，由方程 (4.11) 的適當替換來表達：</p>
+
+<div class="eq">$$i\frac{\partial |\psi\rangle}{\partial\alpha} = \hat{\boldsymbol{\alpha}} \cdot \mathbf{J} |\psi\rangle \tag{4.14}$$</div>
+
+<p>這告訴我們：$\hat{\boldsymbol{\alpha}} \cdot \mathbf{J}$ 給出當系統繞 $\hat{\boldsymbol{\alpha}}$ 軸旋轉時 ket 的變化率。</p>
+
+<h3>離散變換：宇稱與鏡像</h3>
+
+<p>並非所有變換都是連續的。物理中最著名的離散變換是<strong>宇稱變換</strong> $P$，它將所有空間點的坐標反號：$Px = -x$。注意 $\det P = -1$（旋轉矩陣的 $\det R = +1$），任何行列式為 $-1$ 的線性變換都可以寫成 $P$ 和一個旋轉 $R$ 的乘積。</p>
+
+<p>量子宇稱運算子 $P$ 定義為：</p>
+
+<div class="eq">$$\psi'_\mu(x) \equiv \langle x, \mu | P | \psi \rangle \equiv \psi_\mu(Px) = \psi_\mu(-x) = \langle -x, \mu | \psi \rangle \tag{4.16}$$</div>
+
+<p>新態 $|\psi'\rangle = P|\psi\rangle$ 的波函數在 $x$ 處的值，等於舊波函數在 $-x$ 處的值。系統的取向和內部性質不受 $P$ 影響（這將在 §4.2 中由對易關係推導出來）。</p>
+
+<p>施加宇稱運算子兩次：$|\psi''\rangle = P|\psi'\rangle = P^2|\psi\rangle$，其波函數為 $\psi''_\mu(x) = \langle -x, \mu | \psi' \rangle = \langle x, \mu | \psi \rangle = \psi_\mu(x)$。因此：</p>
+
+<div class="eq">$$P^2 = I \tag{4.17}$$</div>
+
+<p>$P$ 是其自身的逆：$P = P^{-1}$。$P$ 也是 Hermitian 的：$\langle \phi | P | \psi \rangle^* = \langle \psi | P | \phi \rangle$，所以 $P^\dagger = P$。結合 $P^{-1} = P = P^\dagger$，可知 $P$ 是么正的。</p>
+
+<p>若 $|P\rangle$ 是 $P$ 的本徵態，本徵值為 $\lambda$，則 $|P\rangle = P^2|P\rangle = \lambda P|P\rangle = \lambda^2|P\rangle$，所以 $\lambda^2 = 1$。因此 $P$ 的本徵值只能是 $\pm 1$：$|+\rangle = P|+\rangle$ 是<strong>偶宇稱</strong>態，$|-\rangle = -P|-\rangle$ 是<strong>奇宇稱</strong>態。在 §3.1 中我們看到諧振子的定態波函數在量子數 $n$ 為偶數時是 $x$ 的偶函數、為奇數時是奇函數——這些定態恰好就是 $P$ 的本徵態。</p>
+
+<div class="callout">
+  <strong>💡 鏡像運算子</strong><br>
+  考慮一個在二維中運動的粒子。令運算子 $M$ 滿足 $\langle x, y | M | \psi \rangle = \langle y, x | \psi \rangle$——也就是說，在態 $M|\psi\rangle$ 中，粒子出現在 $(x, y)$ 的振幅等於在原態 $|\psi\rangle$ 中出現在 $(y, x)$ 的振幅。如果我們沿直線 $y = x$ 放一面鏡子，$(x, y)$ 和 $(y, x)$ 恰好是物和像的關係。$M$ 是么正的（證明類似 $P$），且 $M^2 = I$，本徵值也為 $\pm 1$。
+</div>
+
+<details class="example">
+  <summary>📝 自編概念例：從平移生成元推導動量運算子的作用</summary>
+  <div class="example-body">
+    <p><strong>題目：</strong>已知平移運算子 $U(a) = e^{-ia p_x/\hbar}$。利用方程 (4.5) 的推導方式，證明在位置表象中 $p_x$ 的作用是 $-i\hbar\,\partial/\partial x$。</p>
+    <p><strong>解：</strong>定義 $|\psi'\rangle = U(a)|\psi\rangle$。對於無窮小平移 $a \to \delta a$：</p>
+    <div class="eq">$$|\psi'\rangle = e^{-i\delta a\,p_x/\hbar} |\psi\rangle \simeq \left(1 - \frac{i\delta a}{\hbar} p_x\right) |\psi\rangle$$</div>
+    <p>另一方面，波函數直接平移給出 $\psi'(x) = \psi(x - \delta a) \simeq \psi(x) - \delta a\,\partial\psi/\partial x$。因為 $\psi'(x) = \langle x | \psi' \rangle$，比較兩個表達式得到：</p>
+    <div class="eq">$$\langle x | \left(1 - \frac{i\delta a}{\hbar} p_x\right) |\psi\rangle = \langle x | \psi\rangle - \delta a \frac{\partial}{\partial x} \langle x | \psi\rangle$$</div>
+    <p><strong>答案與物理意義：</strong>由此推出 $\langle x | p_x | \psi \rangle = -i\hbar\,\partial/\partial x\,\langle x | \psi \rangle$。這正是位置表象中動量運算子的標準形式。關鍵在於：$p_x$ 作為平移生成元的身分直接導致了它在位置表象中的微分運算子形式。</p>
+  </div>
+</details>
+
+<figure class="figure" id="fig-4-1">
+  <svg class="content-diagram" viewBox="0 0 520 260" xmlns="http://www.w3.org/2000/svg">
+    <rect x="0" y="0" width="520" height="260" fill="#f8f9fa" rx="8"/>
+    <text x="260" y="25" font-size="14" fill="#333" text-anchor="middle" font-weight="bold">平移運算子的作用</text>
+    <!-- Original wavefunction -->
+    <path d="M40,130 Q60,70 80,130 Q100,190 120,130 Q140,70 160,130 Q180,190 200,130 Q220,70 240,130" fill="none" stroke="#4a90d9" stroke-width="2"/>
+    <text x="140" y="60" font-size="12" fill="#4a90d9" text-anchor="middle">$\psi(x)$</text>
+    <text x="140" y="210" font-size="12" fill="#555" text-anchor="middle">原波函數</text>
+    <!-- Translated wavefunction -->
+    <path d="M100,130 Q120,70 140,130 Q160,190 180,130 Q200,70 220,130 Q240,190 260,130 Q280,70 300,130" fill="none" stroke="#e74c3c" stroke-width="2" stroke-dasharray="6,3"/>
+    <text x="200" y="60" font-size="12" fill="#e74c3c" text-anchor="middle">$\psi'(x)$</text>
+    <text x="200" y="210" font-size="12" fill="#555" text-anchor="middle">平移後的波函數</text>
+    <!-- Arrow -->
+    <line x1="250" y1="130" x2="320" y2="130" stroke="#333" stroke-width="1.5" marker-end="url(#arrow)"/>
+    <text x="285" y="120" font-size="11" fill="#333" text-anchor="middle">$U(a)$</text>
+    <!-- axis -->
+    <line x1="30" y1="170" x2="480" y2="170" stroke="#999" stroke-width="1"/>
+    <text x="480" y="185" font-size="11" fill="#999" text-anchor="end">$x$</text>
+    <text x="425" y="240" font-size="12" fill="#666" text-anchor="middle">平移距離 $a$</text>
+    <defs><marker id="arrow" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto"><polygon points="0 0, 10 3.5, 0 7" fill="#333"/></marker></defs>
+  </svg>
+  <figcaption><strong>圖 4.1</strong>　平移運算子 $U(a)$ 將波函數整體平移距離 $a$。$|\psi'\rangle = U(a)|\psi\rangle$ 的波函數與 $|\psi\rangle$ 的波函數形狀完全相同，只是向右平移了 $a$。</figcaption>
+</figure>
+</section>
+
+<!-- ====== 4.2 運算子的變換 ====== -->
+<section class="deep-dive" id="s4-2">
+<h2>4.2　運算子的變換</h2>
+<div class="section-keypoints">
+  <strong>🔑 本節重點</strong>
+  <span>① 平移下 $U^\dagger x U = x + a$ 導出 $[x_i, p_j] = i\hbar\delta_{ij}$</span>
+  <span>② 旋轉下 $U^\dagger(\alpha) x U(\alpha) = R(\alpha)x$ 導出 $[J_i, J_j] = i\sum_k \epsilon_{ijk}J_k$</span>
+  <span>③ 向量運算子與宇稱反對易：$\{v, P\} = 0$</span>
+  <span>④ 鏡像運算子交換 $x$ 和 $y$：$xM = My$</span>
+  <span>⑤ 純量運算子與 $J$、$P$ 對易</span>
+</div>
+
+<p>當我們移動一個物體時，我們期望在不同的位置找到它。具體來說，假設在某個態 $|\psi\rangle$ 中位置的期望值為 $\langle\psi|x|\psi\rangle = x_0$。平移後的態 $|\psi'\rangle$ 應該滿足 $\langle\psi'|x|\psi'\rangle = x_0 + a$。但從 §4.1.1 我們知道 $\langle\psi'|x|\psi'\rangle = \langle\psi|U^\dagger(a) x U(a)|\psi\rangle$。因為這對任何初始態都成立，所以：</p>
+
+<div class="eq">$$U^\dagger(a) x U(a) = x + a \tag{4.20}$$</div>
+
+<p>對於無限小平移 $a \to \delta a$，$U(a) \simeq 1 - i a \cdot p/\hbar$。代入方程 (4.20)：</p>
+
+<div class="eq">$$x + \delta a \simeq \left(1 + \frac{i\delta a \cdot p}{\hbar}\right) x \left(1 - \frac{i\delta a \cdot p}{\hbar}\right) = x - \frac{i}{\hbar}[x, \delta a \cdot p] + \mathcal{O}(\delta a)^2 \tag{4.21}$$</div>
+
+<p>這對所有小向量 $\delta a$ 成立，因此 $x$ 和 $p$ 必須滿足：</p>
+
+<div class="eq">$$[x_i, p_j] = i\hbar\delta_{ij} \tag{4.22}$$</div>
+
+<p><strong>這就是正則對易關係——它不再是一個需要記住的公設，而是從 $x$ 在平移下的變換性質自然推導出來的結果。</strong>這個推導揭示了對易關係的深層物理意義：它們反映了空間的幾何結構。</p>
+
+<h3>旋轉下運算子的變換</h3>
+
+<p>類似的邏輯應用於旋轉。古典向量在旋轉下的分量變換為 $v \to R(\alpha)v$。期望值 $\langle\psi|x|\psi\rangle = x_0$ 應該以同樣的方式變換。因此：</p>
+
+<div class="eq">$$R(\alpha) \langle\psi|x|\psi\rangle = \langle\psi'|x|\psi'\rangle = \langle\psi|U^\dagger(\alpha) x U(\alpha)|\psi\rangle \tag{4.25}$$</div>
+
+<p>因為對任何 $|\psi\rangle$ 成立，得到運算子等式：</p>
+
+<div class="eq">$$R(\alpha)x = U^\dagger(\alpha) x U(\alpha) \tag{4.26}$$</div>
+
+<p>對於無限小旋轉 $\alpha \to \delta\alpha$，$R(\alpha)x \simeq x + \delta\alpha \times x$（見 Box 4.3）。比較方程 (4.26) 兩邊的 $\mathcal{O}(\delta\alpha)$ 項，得到：</p>
+
+<div class="eq">$$[J_i, x_j] = i \sum_k \epsilon_{ijk} x_k \tag{4.30}$$</div>
+
+<p>例如 $[J_x, y] = iz$、$[J_z, x] = iy$、而 $[J_x, x] = 0$。更一般地，對於任何其期望值為空間向量的運算子 $v$，都有：</p>
+
+<div class="eq">$$[J_i, v_j] = i \sum_k \epsilon_{ijk} v_k \tag{4.31}$$</div>
+
+<p>這包括了動量運算子 $p$：$[J_i, p_j] = i \sum_k \epsilon_{ijk} p_k$（方程 4.32）。</p>
+
+<div class="callout">
+  <strong>💡 角動量對易關係的幾何根源</strong><br>
+  $\boldsymbol{\alpha} \cdot \mathbf{J}$ 必須在坐標旋轉下不變，因為 $U(\boldsymbol{\alpha}) = e^{-i\boldsymbol{\alpha}\cdot\mathbf{J}}$ 只依賴旋轉軸的方向 $\hat{\boldsymbol{\alpha}}$，而不依賴用來量化那個方向的數字。這意味著 $\mathbf{J}$ 的分量在旋轉下也像向量一樣變換。將 $v$ 替換為 $J$，方程 (4.31) 給出：
+  $$[J_i, J_j] = i \sum_k \epsilon_{ijk} J_k \tag{4.33}$$
+  這是角動量運算子之間的基本對易關係——在 §7.1 中我們將由此推導出角動量的能譜。注意這個關係與古典旋轉矩陣生成元滿足的關係完全相同（見 §4.5）。
+</div>
+
+<p>對於純量運算子 $S$（期望值是純量，不因旋轉而改變），用類似論證可得 $[S, U] = 0$，對無限小旋轉化簡為：</p>
+
+<div class="eq">$$[J, S] = 0 \tag{4.36}$$</div>
+
+<p>因此 $[J, x \cdot x] = [J, p \cdot p] = [J, x \cdot p] = 0$。特別重要的是 $J^2 = J \cdot J$ 與所有 $J_i$ 對易：$[J, J^2] = 0$（方程 4.37）。這意味著我們可以找到 $J^2$ 和任意一個 $J$ 分量（但只能一個）的同時本徵態——這個事實將在角動量理論中扮演核心角色。</p>
+
+<h3>宇稱運算子與運算子的變換</h3>
+
+<p>在宇稱變換下，坐標變為 $x \to Px = -x$，而量子態變為 $|\psi\rangle \to |\psi'\rangle = P|\psi\rangle$。因此：</p>
+
+<div class="eq">$$-\langle\psi|x|\psi\rangle = \langle\psi'|x|\psi'\rangle = \langle\psi|P^\dagger x P|\psi\rangle \tag{4.38}$$</div>
+
+<p>因為 $P$ 是么正的，我們得到：</p>
+
+<div class="eq">$$\{x, P\} \equiv xP + Px = 0 \tag{4.39}$$</div>
+
+<p>這裡 $\{A, B\} = AB + BA$ 稱為<strong>反對易子</strong>（anticommutator）。任何向量運算子 $v$ 都滿足 $\{v, P\} = vP + Pv = 0$（方程 4.40）。</p>
+
+<div class="callout-warn">
+  <strong>⚡ 宇稱對向量期望值的約束</strong><br>
+  若 $|\pm\rangle$ 是具有確定宇稱的態（$P|\pm\rangle = \pm|\pm\rangle$），則 $-\langle\pm|v|\pm\rangle = \langle\pm|P^\dagger v P|\pm\rangle = (\pm)^2\langle\pm|v|\pm\rangle$。因為只有零才等於負的自己，所以<strong>所有向量運算子在確定宇稱的態中的期望值為零</strong>。更一般地，若 $|\phi\rangle$ 和 $|\chi\rangle$ 具有相同的確定宇稱，則 $\langle\phi|v|\chi\rangle = 0$。這個結果將在第 9 章中用到。
+</div>
+
+<h3>Wigner-Eckart 定理的直覺</h3>
+<p>方程 (4.31) $[J_i, v_j] = i\sum_k\epsilon_{ijk}v_k$ 告訴我們向量運算子在旋轉下的行為——它「像向量一樣變換」。這有一個深遠的推論：如果你知道一個向量運算子在某個特定態中的期望值，就可以推斷它在所有相關態中的期望值。</p>
+<p>具體來說，考慮角動量本徵態 $|j, m\rangle$。向量運算子 $v$ 的矩陣元素 $\langle j', m'|v_q|j, m\rangle$（其中 $v_q$ 是 $v$ 的球面分量）可以分解為：</p>
+<div class="eq">$$\langle j', m'|v_q|j, m\rangle = \langle j'||v||j\rangle \times C(j, 1, j'; m, q, m') \tag{4.31b}$$</div>
+<p>其中 $C$ 是 Clebsch-Gordan 係數——它完全由角動量的加法規則決定，與具體的物理系統無關。$\langle j'||v||j\rangle$ 是約化矩陣元素——它編碼了系統的動力學資訊。這就是<strong>Wigner-Eckart 定理</strong>的核心思想：<strong>旋轉對稱性約束了矩陣元素的結構</strong>，使得角度依賴性（由 $C$ 係數描述）與動力學依賴性（由約化矩陣元素描述）完全分離。</p>
+
+<div class="callout-warn">
+  <strong>⚡ 反對易子不是「反對稱的對易子」</strong><br>
+  反對易子 $\{A, B\} = AB + BA$ 和對易子 $[A, B] = AB - BA$ 是兩個獨立的代數結構。初學者常混淆它們。反對易子出現在我們討論<strong>費米子</strong>（自旋半整數的粒子）的量子力學中，而對易子出現在我們討論<strong>玻色子</strong>（自旋整數的粒子）的量子力學中。在本章中，$\{x, P\} = 0$ 和 $\{v, P\} = 0$ 的出現是因為宇稱與空間反轉的特殊幾何關係——不是一般的反對易結構。費米子的反對易關係將在 Ch6（複合系統）中詳細討論。
+</div>
+
+<h3>對易子代數的完整計算範例</h3>
+<p>為了熟練運用 §4.2 的結果，這裡展示一個完整的計算範例，推導角動量運算子 $J_z$ 與位置和動量的對易子。</p>
+<p>利用方程 (4.31) 和 (4.32)，我們有：</p>
+<div class="eq">$$\begin{aligned}
+[J_z, x] &= ix\,\epsilon_{zxy}\cdot y + ix\,\epsilon_{zxz}\cdot z = i(y \cdot 1 - 0) = iy \\
+[J_z, y] &= i(y \cdot \epsilon_{zyy} + x \cdot \epsilon_{zyx}) = i(0 - x) = -ix \\
+[J_z, z] &= 0 \quad \text{(因為 $z$ 沿旋轉軸方向)}
+\end{aligned} \tag{4.34}$$</div>
+<p>這三個結果可以統一寫為 $[J_z, x_\pm] = \pm x_\pm$，其中 $x_\pm = x \pm iy$ 是圓偏振坐標。類似地：</p>
+<div class="eq">$$[J_z, p_x] = ip_y, \quad [J_z, p_y] = -ip_x, \quad [J_z, p_z] = 0 \tag{4.35}$$</div>
+<p>物理意義：$J_z$ 生成繞 $z$ 軸的旋轉。在旋轉下，$x$ 和 $y$ 分量混合（就像轉動坐標軸時 $x$ 和 $y$ 坐標互換），而 $z$ 分量不變。動量分量以完全相同的方式混合。這些對易子在第 7 章推導角動量本徵函數（球諧函數）時會反覆使用。
+
+
+
+<p>當位能 $V(x)$ 是 $x$ 的偶函數時（$V(-x) = V(x)$），我們說位能具有<strong>反射對稱性</strong>。在這種情況下，可以證明宇稱運算子與 Hamiltonian 對易。考慮 $\langle x|PV|\psi\rangle$ 和 $\langle x|VP|\psi\rangle$：</p>
+
+<div class="eq">$$\langle x|PV|\psi\rangle = V(-x)\langle -x|\psi\rangle = V(x)\langle -x|\psi\rangle = \langle x|VP|\psi\rangle \tag{4.43}$$</div>
+
+<p>因為 $x$ 和 $|\psi\rangle$ 都是任意的，所以當 $V$ 是偶函數時 $[P, V] = 0$。又因為動量 $p$ 是向量運算子，$Pp = -pP$，可推得 $[p^2, P] = 0$。因此對於在反射對稱位能中運動的粒子，$[H, P] = 0$——這意味著存在一組完整的具有確定宇稱的定態。諧振子就是這個事實的絕佳範例（Ch3），而在第 5 章我們將利用這個性質大幅簡化計算。</p>
+
+<div class="callout">
+  <strong>💡 角動量是贗向量</strong><br>
+  在古典物理中，向量積 $a \times b$ 是贗向量：在旋轉下像向量一樣變換，但在宇稱下不變（因為 $a$ 和 $b$ 都變號）。我們可以證明 $[P, J_j] = 0$——宇稱運算子與所有三個角動量分量對易。因此 $\langle J \rangle$ 在宇稱變換下不變，$\langle J \rangle$ 確實是一個贗向量。
+</div>
+
+<h3>鏡像運算子與運算子的變換</h3>
+
+<p>對於 §4.1.4 引入的鏡像運算子 $M$（滿足 $\langle x,y|M|\psi\rangle = \langle y,x|\psi\rangle$），我們可以推導它與位置運算子的關係。對於任何態 $|\psi\rangle$，在態 $M|\psi\rangle$ 中 $x$ 的期望值必須等於在原態 $|\psi\rangle$ 中 $y$ 的期望值：</p>
+
+<div class="eq">$$\langle\psi|M^\dagger x M|\psi\rangle = \langle\psi|y|\psi\rangle \quad \Rightarrow \quad M^\dagger x M = y \quad \Rightarrow \quad xM = My \tag{4.50}$$</div>
+
+<p>同理可得 $Mx = yM$、$p_x M = M p_y$、$p_y M = M p_x$。鏡像運算子交換了 $x$ 和 $y$ 的角色——正如一面沿 $y = x$ 放置的鏡子。</p>
+
+<details class="example">
+  <summary>📝 自編概念例：驗證純量與向量運算子的對易性質</summary>
+  <div class="example-body">
+    <p><strong>題目：</strong>利用 (4.31) 驗證 $[J, x \cdot x] = 0$ 和 $[J, x \cdot p] = 0$。</p>
+    <p><strong>解：</strong>$x \cdot x = \sum_k x_k x_k$。利用 $[A, BC] = [A, B]C + B[A, C]$：</p>
+    <div class="eq">$$[J_i, x \cdot x] = \sum_k \left([J_i, x_k]x_k + x_k[J_i, x_k]\right) = \sum_k \left(i\sum_j \epsilon_{ikj} x_j x_k + i\sum_j \epsilon_{ikj} x_k x_j\right)$$</div>
+    <p>重新標記啞指標：第一項 $\sum_{jk} \epsilon_{ikj} x_j x_k$，第二項 $\sum_{jk} \epsilon_{ikj} x_k x_j = \sum_{jk} \epsilon_{ijk} x_j x_k$（交換 $j \leftrightarrow k$）。因為 $\epsilon_{ijk} = -\epsilon_{ikj}$，兩項相消，和為零。</p>
+    <p><strong>物理意義：</strong>旋轉不改變向量的長度，所以 $x \cdot x$（位置向量的長度平方）和 $x \cdot p$（兩個向量的內積）在旋轉下不變——它們是純量，與 $J$ 對易正是這一點的數學表達。</p>
+  </div>
+</details>
+</section>
+
+<!-- ====== 4.3 對稱性與守恆律 ====== -->
+<section class="deep-dive" id="s4-3">
+<h2>4.3　對稱性與守恆律</h2>
+<div class="section-keypoints">
+  <strong>🔑 本節重點</strong>
+  <span>① $[H, \tau] = 0$ ⇔ $\tau$ 生成的變換是系統的對稱性</span>
+  <span>② $[p, H] = 0$ → 平移不變 → 動量守恆（牛頓第一定律）</span>
+  <span>③ $[J_z, H] = 0$ → 繞 $z$ 軸旋轉不變 → 角動量分量守恆</span>
+  <span>④ 孤立系統的 Hamiltonian 是純量 → 總角動量與宇稱守恆</span>
+  <span>⑤ $[H, P] = 0$ 曾一度被認為是普遍定律，直到 1957 年吳健雄實驗</span>
+</div>
+
+<p>時間會改變態：在時間 $t$ 內，系統的自然演化使初始態 $|\psi, 0\rangle$ 演化為 $|\psi, t\rangle$。時間演化運算子為：</p>
+
+<div class="eq">$$U(t) \equiv e^{-iHt/\hbar} \tag{4.52}$$</div>
+
+<p>這顯然是么正的。現在假設某個位移的生成元 $\tau$（平移、旋轉等）與 Hamiltonian 對易。因為這些運算子對易，它們的指數 $U(\theta)$ 和 $U(t)$ 也對易：</p>
+
+<div class="eq">$$U(\theta)U(t)|\psi\rangle = U(t)U(\theta)|\psi\rangle \tag{4.53}$$</div>
+
+<p>左邊是「等待時間 $t$ 然後位移」得到的態，右邊是「先位移再等待」得到的態。<strong>這個等式說的是：系統無論放在哪裡，都以相同的方式演化。</strong></p>
+
+<div class="callout">
+  <strong>💡 量子 Noether 定理</strong><br>
+  每當物理在一個位移下保持不變，就有一個守恆量。這是古典力學中 Noether 定理的量子版本：
+  <ul>
+    <li>$[p_x, H] = 0$ → Hamiltonian 具有<strong>平移不變性</strong>。孤立系統的 Hamiltonian 總是平移不變的（空無一物的空間到處都一樣）→ 動量的任何函數的期望值是守恆量 → 若系統初始處於動量確定態，它將永遠保持在該態——這就是<strong>牛頓第一定律</strong>。</li>
+    <li>$[J_z, H] = 0$ → 繞 $z$ 軸<strong>旋轉不變</strong>。$J_z$ 的任何函數的期望值守恆 → 若初始態是 $J_z$ 的本徵態（本徵值 $m$），它將保持在該態 → $m$ 是<strong>好量子數</strong>。</li>
+  </ul>
+</div>
+
+<p>在古典力學中，系統繞 $z$ 軸的旋轉對稱性與角動量 $z$ 分量的守恆相關——這啟發我們將 $\hbar\mathbf{J}$ 等同於角動量。</p>
+
+<p>更一般地，如果 Hamiltonian 是純量，則 $[H, \mathbf{J}] = 0$、$[H, J^2] = 0$、$[H, P] = 0$——任意軸的角動量守恆、總角動量守恆、宇稱守恆。對於純量 Hamiltonian，我們可以找到 $H$、$P$、$J^2$ 和任意一個 $J$ 分量的同時本徵態。</p>
+
+<div class="callout-warn">
+  <strong>⚡ 宇稱不守恆——物理學的一場革命</strong><br>
+  $[H, P] = 0$ 曾一度被認為是物理學的普遍定律。它意味著：如果你建立一個初始態是某個給定系統的鏡像的系統，它將與原系統以完全相同的方式演化。因此，你無法判斷你正在觀察的系統是被直接觀看還是透過鏡子觀看。<strong>但在 1957 年，吳健雄等人的實驗顯示：你可以在鏡子中看到在真實世界中不可能發生的事情！</strong>也就是說，存在 $[H, P] \neq 0$ 的 Hamiltonian——弱交互作用不遵守宇稱守恆。這是 20 世紀物理學最重大的發現之一。
+</div>
+
+<h3>時間反演</h3>
+<p>除了空間對稱性（平移、旋轉、宇稱），物理學中還有另一個重要的離散對稱性：<strong>時間反演</strong> $T$。時間反演將 $t \to -t$，即讓系統「倒帶」。在古典力學中，這意味著將速度反號：$v \to -v$（位置不變）。</p>
+<p>在量子力學中，時間反演是一個<strong>反么正</strong>（anti-unitary）運算子，與宇稱的么正性質截然不同。反么正意味著：</p>
+<div class="eq">$$T(c_1|\psi_1\rangle + c_2|\psi_2\rangle) = c_1^* T|\psi_1\rangle + c_2^* T|\psi_2\rangle \tag{4.56}$$</div>
+<p>注意複共軛的出現——這是時間反演與其他對稱性的根本差異。在非相對論量子力學中，$T$ 的作用是 $T\psi(x) = \psi^*(x)$（對自旋零粒子）。對於自旋 $1/2$ 的粒子，$T = -i\sigma_y K$，其中 $K$ 是複共軛運算。</p>
+
+<div class="callout">
+  <strong>💡 為什麼時間反演是反么正的？</strong><br>
+  如果 $T$ 是么正的，它將滿足 $[T, H] = 0$ 時能量守恆。但問題在於：么正的 $T$ 會讓動量也守恆（$T^{-1}pT = p$），而時間反演的物理要求是 $T^{-1}pT = -p$（動量反號）。只有反么正的 $T$ 才能同時滿足 $T^{-1}HT = H$（能量守恆）和 $T^{-1}pT = -p$（動量反號）。Wigner 在 1932 年首先證明了這一點。
+</div>
+
+<div class="callout-warn">
+  <strong>⚡ 時間反演不是「倒退著演化」</strong><br>
+  一個常見的誤解是：時間反演就是把 Schrödinger 方程中的 $t$ 換成 $-t$。但 $i\hbar\partial\psi/\partial(-t) = H\psi$ 變成 $-i\hbar\partial\psi/\partial t = H\psi$——這與原方程不同（差一個負號）。正確的理解是：時間反演取 $\psi$ 的複共軛（抵消 $i$ 的變號），然後將速度反號。在大多數系統中（$H$ 為實數），$T$ 確實是對稱性，但這不意味著系統會自動「倒退」——它只意味著對於每個解 $\psi(t)$，存在一個物理上允許的解 $\psi^*(-t)$。
+</div>
+
+
+
+<p>對於一個由 $n$ 個互相作用但不受外力影響的粒子組成的系統，Hamiltonian 為：</p>
+
+<div class="eq">$$H = \sum_{i=1}^n \frac{p_i^2}{2m_i} + \sum_{i<j} V(x_i - x_j) \tag{4.55}$$</div>
+
+<p>位能只依賴粒子的相對位置，因此 Hamiltonian 在所有粒子一起平移（質心坐標的移動）下不變——系統的總動量 $p_{\text{tot}} = \sum_i p_i$ 守恆。這是動量守恆在量子力學中的具體體現。</p>
+
+<details class="example">
+  <summary>📝 自編概念例：對稱性與守恆量子數</summary>
+  <div class="example-body">
+    <p><strong>題目：</strong>某系統的 Hamiltonian 滿足 $[H, J_z] = 0$。系統初始處於 $J_z$ 的本徵態，本徵值為 $2\hbar$。(a) 在時間 $t$ 後，系統是否仍然處於 $J_z$ 的本徵態？(b) 如果 $[H, J_z] \neq 0$ 呢？</p>
+    <p><strong>解：</strong>(a) 由 Ch2 的結果：若 $[H, Q] = 0$ 且初始態 $|\psi\rangle = |q_i\rangle$ 是 $Q$ 的本徵態，則在任何時間 $|\psi, t\rangle = U(t)|q_i\rangle$ 仍然是 $Q$ 的本徵態，且本徵值不變。因為 $U(t)$ 是 $H$ 的函數，與 $Q$ 對易。因此時間 $t$ 後系統仍在 $J_z$ 本徵態，本徵值 $2\hbar$。</p>
+    <p>(b) 若 $[H, J_z] \neq 0$，$U(t)$ 不保留 $J_z$ 的本徵態——系統會演化成不同 $J_z$ 本徵態的疊加。$m = 2$ 不再是好量子數。</p>
+    <p><strong>物理意義：</strong>守恆量子數是好量子數——它們在任何時間都保持不變。識別 Hamiltonian 的對稱性是找出守恆量子數的關鍵策略，這在原子物理和核物理中極其重要。</p>
+  </div>
+</details>
+</section>
+
+<!-- ====== 4.4 海森堡繪景 ====== -->
+<section class="deep-dive" id="s4-4">
+<h2>4.4　海森堡繪景</h2>
+<div class="section-keypoints">
+  <strong>🔑 本節重點</strong>
+  <span>① Schrödinger 繪景：態演化，運算子固定</span>
+  <span>② Heisenberg 繪景：運算子演化 $\widetilde{Q}(t) = U^\dagger(t) Q U(t)$，態固定</span>
+  <span>③ Heisenberg 運動方程：$i\hbar\,d\widetilde{Q}/dt = [\widetilde{Q}, H]$</span>
+  <span>④ 期望值在兩種繪景中相同：$\langle Q\rangle_t = \langle\psi, 0|\widetilde{Q}(t)|\psi, 0\rangle$</span>
+</div>
+
+<p>量子力學的所有物理預測都是透過用 bra 作用在 ket 上提取複數來得到的：我們要麼計算某個事件的振幅 $A = \langle\phi|\psi\rangle$，要麼計算可觀測量的期望值 $\langle Q \rangle = \langle\psi|Q\psi\rangle$。一般來說我們的預測是時間相依的，因為系統的態隨時間演化：</p>
+
+<div class="eq">$$|\psi, t\rangle = U(t)|\psi, 0\rangle \quad \text{其中} \quad U(t) \equiv e^{-iHt/\hbar} \tag{4.52, 4.56}$$</div>
+
+<p>對於每個感興趣的運算子 $Q$，我們可以定義一個新的、時間相依的運算子：</p>
+
+<div class="eq">$$\widetilde{Q}(t) \equiv U^\dagger(t) Q U(t) \tag{4.57}$$</div>
+
+<p>那麼在任何時間 $t$，$Q$ 的期望值可以寫成：</p>
+
+<div class="eq">$$\langle Q\rangle_t = \langle\psi, t|Q|\psi, t\rangle = \langle\psi, 0|U^\dagger(t) Q U(t)|\psi, 0\rangle = \langle\psi, 0|\widetilde{Q}(t)|\psi, 0\rangle \tag{4.58}$$</div>
+
+<p>也就是說，<strong>新運算子 $\widetilde{Q}(t)$ 在 $t = 0$ 時的期望值等於原始物理運算子 $Q$ 在時間 $t$ 時的期望值。</strong>同樣地，由於 $U(t)$ 的么正性，$\langle\phi, t|\psi, t\rangle = \langle\phi, 0|\psi, 0\rangle$。</p>
+
+<p>這個形式體系被稱為<strong>海森堡繪景</strong>（Heisenberg picture），以區別於<strong>Schrödinger 繪景</strong>（態演化，運算子通常不隨時間變化）。在海森堡繪景中，我們需要的唯一態是 $t = 0$ 時的態。</p>
+
+<div class="callout">
+  <strong>💡 海森堡運動方程</strong><br>
+  對方程 (4.57) 求導，利用 $dU/dt = -iHU/\hbar$ 和 $dU^\dagger/dt = iHU^\dagger/\hbar$（因為 $U$ 是 $H$ 的函數所以與 $H$ 對易），得到：
+  $$i\hbar\frac{d\widetilde{Q}}{dt} = -H U^\dagger Q U + U^\dagger Q U H = [\widetilde{Q}, H] \tag{4.62}$$
+  這個結果與 Ehrenfest 定理（方程 2.34）相似——這並非巧合，因為如果用時間無關的態 $|\psi, 0\rangle$ 前後乘以方程 (4.62) 兩邊，就恢復了 Ehrenfest 定理。<strong>在海森堡繪景中，量子力學的核心任務是求解時間相依運算子的運動方程。</strong>這與古典力學求解期望值的運動方程有某種程度的相似性。
+</div>
+
+<p>海森堡繪景在<strong>量子場論</strong>中使用最為廣泛。在量子場論中，基本上只需要一個態——遙遠過去的真空 $|0\rangle$。真空的激發被解釋為粒子，每種激發模式對應不同類型的粒子（光子、電子、上夸克等）。理論關注的是激發真空的運算子的動力學——這些運算子創造粒子，粒子傳播到其他位置，然後被類似的運算子探測（湮滅）。</p>
+
+<p>有時真空的一種激發模式會轉變為一種或多種不同的真空模式，這樣的事件被解釋為一種粒子衰變為其他粒子。任何這類事件序列的振幅都以 $\langle 0|\widetilde{A}_1 \widetilde{A}_2 \dots \widetilde{A}_n|0\rangle$ 的形式獲得，其中運算子 $\widetilde{A}_i$ 是海森堡繪景中相應粒子的創生或湮滅運算子。</p>
+
+<div class="callout-warn">
+  <strong>⚡ 海森堡繪景 vs Schrödinger 繪景——不是不同的物理</strong><br>
+  兩種繪景給出完全相同的物理預測——期望值和振幅在兩種繪景中是一致的。它們只是將時間依賴性放在不同的位置：Schrödinger 繪景放在態中，Heisenberg 繪景放在運算子中。選擇哪種繪景是計算方便性的問題，不是物理內容的問題。
+</div>
+
+<h3>Ehrenfest 定理與 Heisenberg 方程的精確對應</h3>
+<p>我們在 §2.2.1 中推導了 Ehrenfest 定理：$i\hbar\,d\langle Q\rangle/dt = \langle[Q, H]\rangle$。在海森堡繪景中，這只是 Heisenberg 運動方程的期望值版本。讓我們展示這個精確對應。</p>
+<p>從 Heisenberg 方程 (4.62) 出發，取兩邊在 $t=0$ 態中的期望值：</p>
+<div class="eq">$$i\hbar\frac{d}{dt}\langle\psi, 0|\widetilde{Q}(t)|\psi, 0\rangle = \langle\psi, 0|[\widetilde{Q}(t), H]|\psi, 0\rangle \tag{4.63}$$</div>
+<p>左邊就是 $i\hbar\,d\langle Q\rangle_t/dt$。右邊因為 $U^\dagger H U = H$（$H$ 與自身對易），所以 $\widetilde{H}(t) = H$，且：</p>
+<div class="eq">$$\langle\psi, 0|[\widetilde{Q}(t), H]|\psi, 0\rangle = \langle\psi, t|[Q, H]|\psi, t\rangle = \langle[Q, H]\rangle_t \tag{4.64}$$</div>
+<p>這正是 Ehrenfest 定理。因此，<strong>Ehrenfest 定理不是獨立的定理——它是 Heisenberg 方程在期望值語言中的翻譯</strong>。這進一步確認了兩種繪景的等價性。
+
+<div class="callout-warn">
+  <strong>⚡ Heisenberg 方程 ≠ 古典 Hamilton 方程</strong><br>
+  Heisenberg 方程 $i\hbar\,d\widetilde{Q}/dt = [\widetilde{Q}, H]$ 看起來與古典 Hamilton 方程 $\dot{Q} = \{Q, H\}_{\text{PB}}$（Poisson 括號形式）非常相似——只需將 Poisson 括號替換為對易子再除以 $i\hbar$。Dirac 首先注意到這個結構平行性，並將 $[Q, H]/i\hbar$ 稱為「量子 Poisson 括號」。但這個對應不是精確的：Poisson 括號是經典可觀測量（函數）之間的運算，而對易子是運算子之間的運算。當運算子的非交換性可以忽略時（即 $\hbar$ 的效應很小），兩者才趨於一致——這是對應原理的又一個體現。
+</div>
+
+
+
+<details class="example">
+  <summary>📝 自編概念例：兩種繪景中的諧振子</summary>
+  <div class="example-body">
+    <p><strong>題目：</strong>對於一維諧振子 $H = p^2/2m + \frac{1}{2}m\omega^2 x^2$，寫出在 Heisenberg 繪景中 $x$ 和 $p$ 的運動方程。</p>
+    <p><strong>解：</strong>利用方程 (4.62)：</p>
+    <div class="eq">$$\frac{d\widetilde{x}}{dt} = \frac{1}{i\hbar}[\widetilde{x}, H] = \frac{1}{i\hbar}\left[\widetilde{x}, \frac{\widetilde{p}^2}{2m} + \frac{1}{2}m\omega^2 \widetilde{x}^2\right]$$</div>
+    <p>因為 $[\widetilde{x}, \widetilde{x}^2] = 0$，只剩下 $[\widetilde{x}, \widetilde{p}^2]/2m$。利用 $[A, BC] = [A, B]C + B[A, C]$ 和 $[x, p] = i\hbar$：</p>
+    <div class="eq">$$[\widetilde{x}, \widetilde{p}^2] = [\widetilde{x}, \widetilde{p}]\widetilde{p} + \widetilde{p}[\widetilde{x}, \widetilde{p}] = i\hbar\widetilde{p} + \widetilde{p}i\hbar = 2i\hbar\widetilde{p}$$</div>
+    <p>因此 $d\widetilde{x}/dt = \widetilde{p}/m$。類似地 $d\widetilde{p}/dt = -m\omega^2 \widetilde{x}$。</p>
+    <p><strong>物理意義：</strong>這與古典諧振子的運動方程 $\dot{x} = p/m$、$\dot{p} = -m\omega^2 x$ 形式完全相同！海森堡繪景清晰地展示了量子力學與古典力學在結構上的平行性。</p>
+  </div>
+</details>
+</section>
+
+<!-- ====== 4.5 量子力學的本質是什麼？ ====== -->
+<section class="deep-dive" id="s4-5">
+<h2>4.5　量子力學的本質是什麼？</h2>
+<div class="section-keypoints">
+  <strong>🔑 本節重點</strong>
+  <span>① 對易關係並非量子力學獨有——古典旋轉矩陣也滿足相同關係</span>
+  <span>② 古典統計力學中動量和角動量也有 Hermitian 運算子表示</span>
+  <span>③ 量子力學的獨特之處：複數機率振幅 + Hilbert 空間</span>
+  <span>④ 振幅叠加 $A(S\text{ or }T) = A(S) + A(T)$ 是量子力學的核心</span>
+  <span>⑤ 古典統計力學使用機率分布函數，永遠是非負實數——無干涉</span>
+</div>
+
+<p>有時人們說對易關係 $[x_i, p_j] = i\hbar\delta_{ij}$ 和 $[J_i, J_j] = i\sum_k \epsilon_{ijk}J_k$ 是「本質上量子力學的」，但這並不正確。讓我們來看看古典旋轉矩陣。</p>
+
+<p>定義古典旋轉矩陣 $R(\alpha)$ 的生成元 $J_i$ 為 $3 \times 3$ 矩陣，使得：</p>
+
+<div class="eq">$$\exp(-i\boldsymbol{\alpha} \cdot \mathbf{J}) \equiv R(\alpha) \tag{4.63}$$</div>
+
+<p>$R$ 是實正交矩陣，所以 $R^T R = I$。對任意兩個向量 $\alpha$ 和 $\beta$，考慮乘積 $R^T(\alpha)R(\beta)R(\alpha)$——這仍是一個旋轉矩陣，其旋轉軸是 $\beta' \equiv R(-\alpha)\beta$。對於無限小 $\alpha$ 和 $\beta$，展開方程 (4.67) 的兩邊，在 $\mathcal{O}(\alpha\beta)$ 階得到：</p>
+
+<div class="eq">$$\alpha_i \beta_j [J_i, J_j] = i\alpha_i \beta_j \sum_k \epsilon_{ijk} J_k \tag{4.69}$$</div>
+
+<p>這對所有方向 $\alpha$ 和 $\beta$ 成立，因此：</p>
+
+<div class="eq">$$[J_i, J_j] = i \sum_k \epsilon_{ijk} J_k \tag{4.70}$$</div>
+
+<p><strong>這與「量子」對易關係 (4.33) 完全相同！</strong>我們之所以能夠從純古典的考慮重新推導出這些對易關係，是因為它們反映了這樣一個事實：繞兩個不同軸的旋轉順序是有影響的（Problem 4.6）。這是關於空間幾何的陳述——古典力學和量子力學都必須承認。</p>
+
+<p>在古典統計力學中（附錄 D），位置 $x_i$ 和動量 $p_i$ 的每個分量也與作用在相空間函數上的 Hermitian 運算子相關聯。運算子 $\hat{p}_i$ 生成沿 $x_i$ 的平移，而 $\hat{x}_i$ 生成沿 $p_i$ 的平移（boost）。角動量運算子 $\hat{L}_i$ 滿足 $[\hat{L}_x, \hat{L}_y] = i\hbar\hat{L}_z$。</p>
+
+<div class="callout">
+  <strong>💡 那麼量子力學的獨特之處是什麼？</strong><br>
+  量子力學中，系統的完整資訊包含在它的 ket $|\psi\rangle$ 中——別無他物。從 $|\psi\rangle$ 我們可以計算振幅 $\langle x, \mu|\psi\rangle$。在量子力學中，位置運算子 $x$ 的本徵態是系統確定在 $x_0$ 處的態。動量運算子 $p$ 的本徵態是系統確定具有動量 $\hbar k$ 的態。<br><br>
+  在古典統計力學中，我們從一開始就宣稱：一個明確定義的態是對所有可測量具有確定值的態——它有確定的位置、動量、取向等。$\hat{p}$ 或 $\hat{L}$ 的本徵函數不代表具有確定動量或角動量的態，因為我們已經定義了這些態是什麼。<strong>古典統計力學不知道機率振幅——它把 $\hat{p}$ 或 $\hat{L}$ 作用在其上的相空間函數解釋為機率分布。</strong>我們可以將任何這類分布在 $\hat{p}$ 的本徵函數中展開，但展開係數通常是複數——因此不能被解釋為機率。
+</div>
+
+<p>所以，量子力學根本不同的地方在於：<strong>它對複數量子振幅的依賴，以及它通過振幅叠加基本規則 $A(S\text{ or }T) = A(S) + A(T)$（方程 1.11）賦予泛函展開的物理詮釋。</strong>量子力學因此自然地以存在於任意維度的複向量空間（即所謂的 Hilbert 空間）中的態 $|\psi\rangle$ 來表述。這些態總是可以在一組 Hermitian 運算子的完整本徵態集合中展開，而（複數）展開係數具有簡單的物理詮釋。</p>
+
+<p>古典統計力學受限於機率——它們必須是實數、非負數，因此永遠不能作為展開係數。量子力學和古典力學共享相同的對易關係，因為如我們在 §4.2 中所強調的，這些關係來自空間的幾何。從數學家的角度來看，量子力學運算子和古典統計物理運算子的對易關係必須相同，因為兩組運算子都提供了同一個數學群（Lie 群）的「Lie 代數」的表示。</p>
+
+<div class="callout-warn">
+  <strong>⚡ 古典極限不是「$\hbar \to 0$」這麼簡單</strong><br>
+  初學者常以為量子力學與古典力學的差異在於對易關係中有 $\hbar$。但古典統計力學的生成元同樣滿足含 $\hbar$（或一個類似常數）的對易關係。真正的差異在於：量子力學用複數振幅和 Hilbert 空間，而古典統計力學用實數機率和相空間。躍遷到古典世界的關鍵不是 $\hbar \to 0$，而是干涉項平均為零。
+</div>
+
+<details class="example">
+  <summary>📝 自編概念例：比較古典與量子旋轉</summary>
+  <div class="example-body">
+    <p><strong>題目：</strong>繞 $x$ 軸旋轉 $\pi/2$ 後再繞 $y$ 軸旋轉 $\pi/2$，與先繞 $y$ 軸再繞 $x$ 軸旋轉 $\pi/2$——兩種順序的結果是否相同？用 $R_x(\pi/2) R_y(\pi/2) \neq R_y(\pi/2) R_x(\pi/2)$ 來說明旋轉的非交換性。</p>
+    <p><strong>解：</strong>旋轉矩陣為：</p>
+    <div class="eq">$$R_x(\pi/2) = \begin{pmatrix} 1 & 0 & 0 \\ 0 & 0 & -1 \\ 0 & 1 & 0 \end{pmatrix}, \quad R_y(\pi/2) = \begin{pmatrix} 0 & 0 & 1 \\ 0 & 1 & 0 \\ -1 & 0 & 0 \end{pmatrix}$$</div>
+    <p>計算兩種乘積：$R_x R_y \neq R_y R_x$，差異正是非零的對易子 $[R_x, R_y]$。</p>
+    <p><strong>物理意義：</strong>旋轉的非交換性是三維空間的幾何性質。量子力學中 $e^{-iJ_x\pi/2}$ 和 $e^{-iJ_y\pi/2}$ 以同樣的方式非交換——因為 $[J_x, J_y] = iJ_z$（而非零）。這就是為什麼古典和量子共享相同的角動量對易關係。</p>
+  </div>
+</details>
+</section>
+
+<!-- ====== 本章摘要 ====== -->
+<section id="summary">
+  <h2>本章摘要</h2>
+  <p>本章建立了量子力學中「運算子 = 變換生成元」的核心框架，並展示了對稱性如何導致守恆律。以下是關鍵概念和公式的整理：</p>
+  <div class="table-scroll" role="region" aria-label="本章關鍵概念與公式" tabindex="0">
+    <table>
+      <caption>本章關鍵概念、公式、適用條件與用途</caption>
+      <thead>
+        <tr>
+          <th scope="col">概念／公式</th>
+          <th scope="col">符號與單位</th>
+          <th scope="col">適用條件</th>
+          <th scope="col">用途</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">平移運算子 $U(a) = e^{-ia\cdot p/\hbar}$</th>
+          <td>$p$：動量運算子</td>
+          <td>任意量子系統</td>
+          <td>平移系統的態</td>
+        </tr>
+        <tr>
+          <th scope="row">生成元方程 $i\partial|\psi\rangle/\partial\theta = \tau|\psi\rangle$</th>
+          <td>$\tau$：Hermitian 生成元</td>
+          <td>連續么正變換</td>
+          <td>連接連續變換與可觀測量</td>
+        </tr>
+        <tr>
+          <th scope="row">旋轉運算子 $U(\boldsymbol{\alpha}) = e^{-i\boldsymbol{\alpha}\cdot\mathbf{J}}$</th>
+          <td>$\mathbf{J}$：角動量運算子</td>
+          <td>任意量子系統</td>
+          <td>旋轉系統的態</td>
+        </tr>
+        <tr>
+          <th scope="row">正則對易關係 $[x_i, p_j] = i\hbar\delta_{ij}$</th>
+          <td>$\hbar$ 有作用量單位</td>
+          <td>普遍成立</td>
+          <td>量子化條件、不確定性原理</td>
+        </tr>
+        <tr>
+          <th scope="row">角動量對易 $[J_i, J_j] = i\sum_k \epsilon_{ijk}J_k$</th>
+          <td>$\epsilon_{ijk}$：Levi-Civita</td>
+          <td>三維旋轉</td>
+          <td>推導角動量能譜（Ch7）</td>
+        </tr>
+        <tr>
+          <th scope="row">宇稱 $P^2 = I$、本徵值 $\pm 1$</th>
+          <td>$P$：么正且 Hermitian</td>
+          <td>反射對稱位能</td>
+          <td>分類態的宇稱、簡化計算</td>
+        </tr>
+        <tr>
+          <th scope="row">反對易 $\{v, P\} = 0$</th>
+          <td>$v$：任意向量運算子</td>
+          <td>宇稱變換</td>
+          <td>向量期望值在宇稱態中為零</td>
+        </tr>
+        <tr>
+          <th scope="row">時間演化 $U(t) = e^{-iHt/\hbar}$</th>
+          <td>$H$：Hamiltonian</td>
+          <td>保守系統</td>
+          <td>時間平移——Schrödinger 方程</td>
+        </tr>
+        <tr>
+          <th scope="row">Heisenberg 方程 $i\hbar d\widetilde{Q}/dt = [\widetilde{Q}, H]$</th>
+          <td>$\widetilde{Q}(t) = U^\dagger Q U$</td>
+          <td>任何 $Q$</td>
+          <td>海森堡繪景中的運動方程</td>
+        </tr>
+        <tr>
+          <th scope="row">對稱性 ⇔ 守恆律</th>
+          <td>$[H, \tau] = 0$</td>
+          <td>$\tau$ 與 $H$ 對易</td>
+          <td>識別守恆量子數</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ====== 常見錯誤 ====== -->
+<section id="common-mistakes">
+  <h2>初學者常見錯誤</h2>
+  <div class="callout-warn">
+    <strong>⚡ 錯誤一：混淆運算子本身和運算子的變換</strong><br>
+    $U^\dagger x U$ 不是「把運算子 $x$ 變成另一個運算子」的抽象遊戲——它是對同一個物理量在變換前後進行測量的嚴格表述。關鍵等式 $U^\dagger(a) x U(a) = x + a$ 說的是：對平移後的系統測量位置，等於對原系統測量位置再加 $a$。這不是數學巧合，而是物理要求。
+  </div>
+  <div class="callout-warn">
+    <strong>⚡ 錯誤二：以為所有么正變換都有生成元</strong><br>
+    只有<strong>連續</strong>么正變換才能寫成 $e^{-i\theta\tau}$ 的形式並定義生成元。宇稱 $P$ 和鏡像 $M$ 是離散的——它們沒有生成元（雖然 Problem 4.9 顯示 $P$ 可以用一個生成元寫成 $U(\pi)$，但那是人為的）。離散變換滿足 $P^2 = I$ 而不是與某個連續參數相關。
+  </div>
+  <div class="callout-warn">
+    <strong>⚡ 錯誤三：忘記么正性的物理意義</strong><br>
+    $U^\dagger U = I$ 不是一個可以忽略的技術細節——它是歸一化守恆的必然結果。任何破壞么正性的「變換」會導致 $\langle\psi'|\psi'\rangle \neq 1$，意味著測量可能得不到任何結果，這在物理上是荒謬的。每次檢查一個變換運算子時，首先應該問：它是么正的嗎？
+  </div>
+  <div class="callout-warn">
+    <strong>⚡ 錯誤四：認為 $[H, P] = 0$ 是普遍定律</strong><br>
+    直到 1957 年，物理學家普遍相信宇稱守恆是自然界的鐵律。吳健雄的鈷-60 實驗顯示弱交互作用中宇稱不守恆——鏡子中的物理可以與真實世界不同。這個歷史教訓提醒我們：對稱性必須透過實驗驗證，不能僅憑哲學信念。
+  </div>
+</section>
+
+<!-- ====== 自我檢測 ====== -->
+<section id="self-check">
+  <h2>自我檢測</h2>
+  <details class="self-check-item">
+    <summary>1. $U(a) = e^{-ia\cdot p/\hbar}$ 為什麼是么正的？如果 $p$ 不是 Hermitian 會發生什麼？</summary>
+    <div class="self-check-answer">
+      <p>因為 $p$ 是 Hermitian（$p^\dagger = p$），所以 $U^\dagger(a) = e^{ia\cdot p^\dagger/\hbar} = e^{ia\cdot p/\hbar} = U^{-1}(a)$，滿足 $U^\dagger U = I$。如果 $p$ 不是 Hermitian，$U$ 就不是么正的——歸一化將不被保持，機率總和可能不等於 1。這就是為什麼可觀測量必須是 Hermitian 的深層原因：它們作為生成元時必須產生么正變換。</p>
+      <p class="solution-note">正文依據：§4.1.2</p>
+    </div>
+  </details>
+  <details class="self-check-item">
+    <summary>2. 解釋為什麼正則對易關係 $[x_i, p_j] = i\hbar\delta_{ij}$ 可以從平移的幾何性質推導出來，而不需要作為公設。</summary>
+    <div class="self-check-answer">
+      <p>平移後的期望值必須滿足 $\langle\psi'|x|\psi'\rangle = \langle\psi|x|\psi\rangle + a$。但 $|\psi'\rangle = U(a)|\psi\rangle$ 給出 $\langle\psi'|x|\psi'\rangle = \langle\psi|U^\dagger(a) x U(a)|\psi\rangle$。因為這對任何 $|\psi\rangle$ 成立，所以 $U^\dagger x U = x + a$。對無限小平移展開，$\mathcal{O}(\delta a)$ 項的匹配直接給出 $[x_i, p_j] = i\hbar\delta_{ij}$。因此對易關係是位置在平移下的變換性質的推論——它來自空間幾何，不是外加的公設。</p>
+      <p class="solution-note">正文依據：§4.2</p>
+    </div>
+  </details>
+  <details class="self-check-item">
+    <summary>3. $[H, J_z] = 0$ 的物理意義是什麼？如果一個系統的初始態是 $J_z$ 的本徵態，這告訴我們關於時間演化的什麼資訊？</summary>
+    <div class="self-check-answer">
+      <p>$[H, J_z] = 0$ 意味著 Hamiltonian 繞 $z$ 軸旋轉不變——系統的動力學在繞 $z$ 軸的旋轉下是對稱的。如果初始態是 $J_z$ 的本徵態（本徵值 $m$），則在任何時間系統都保持在該本徵態——$m$ 是一個守恆量子數（好量子數）。這直接來自 $U(t) = e^{-iHt/\hbar}$ 與 $J_z$ 對易的事實。</p>
+      <p class="solution-note">正文依據：§4.3</p>
+    </div>
+  </details>
+  <details class="self-check-item">
+    <summary>4. 海森堡繪景和 Schrödinger 繪景在什麼意義上是等價的？為什麼海森堡繪景在量子場論中更受歡迎？</summary>
+    <div class="self-check-answer">
+      <p>兩種繪景給出完全相同的期望值和振幅——$\langle\psi, t|Q|\psi, t\rangle = \langle\psi, 0|\widetilde{Q}(t)|\psi, 0\rangle$。物理預測一致。海森堡繪景在量子場論中更受歡迎，因為量子場論基本上只需要一個態——遙遠過去的真空 $|0\rangle$。所有物理都由創生和湮滅運算子（海森堡繪景中的 $\widetilde{A}_i(t)$）的乘積的真空期望值來描述。這避免了處理無窮多個不同時間的態的需求。</p>
+      <p class="solution-note">正文依據：§4.4–§4.5</p>
+    </div>
+  </details>
+  <details class="self-check-item">
+    <summary>5. 如果對易關係不是量子力學獨有的，那麼量子力學的本質特徵是什麼？</summary>
+    <div class="self-check-answer">
+      <p>量子力學的本質特徵是：<strong>(1) 機率振幅是複數</strong>——這使得疊加原理 $A(S\text{ or }T) = A(S) + A(T)$ 產生干涉項；(2) <strong>態存在於 Hilbert 空間中</strong>——這是一個任意維度的複向量空間；(3) <strong>展開係數的物理詮釋</strong>——在 Hermitian 運算子的本徵態中展開的複數係數直接給出機率振幅。古典統計力學雖然也有運算子和對易關係，但它使用實數、非負的機率分布，永遠不會產生干涉。</p>
+      <p class="solution-note">正文依據：§4.5</p>
+    </div>
+  </details>
+
+
+  <details class="self-check-item">
+    <summary>6. 為什麼連續么正變換必須寫成 $e^{-i\theta\tau}$ 的形式？其中 $i$ 的存在是必要的嗎？</summary>
+    <div class="self-check-answer">
+      <p>從 $U^\dagger U = I$ 和 $U(\delta\theta) = I - i\delta\theta\,\tau$ 出發，我們推導了 $\tau^\dagger = \tau$（Hermitian 性）。$i$ 的存在是<strong>慣例而非必要</strong>——我們可以定義 $U(\delta\theta) = I + \delta\theta\,\tau'$，但此時 $\tau'^\dagger = -\tau'$（反 Hermitian），不方便。用 $i$ 的好處是：生成元直接就是 Hermitian 的，可以對應到可觀測量。這是一個約定，使得物理與數學的對應更為整潔。指數 $e^{-i\theta\tau}$ 的么正性來自 $\tau$ 的 Hermitian 性——這是連續么正變換的數學本質。</p>
+      <p class="solution-note">正文依據：§4.1.2（方程 4.9–4.12）</p>
+    </div>
+  </details>
+  <details class="self-check-item">
+    <summary>7. 宇稱運算子 $P$ 既是 Hermitian 又是么正的。這兩個性質同時成立意味著什麼？這對本徵值有什麼約束？</summary>
+    <div class="self-check-answer">
+      <p>$P^\dagger = P$（Hermitian）且 $P^\dagger P = I$（么正）同時成立，意味著 $P^2 = I$。從 $P^2 = I$ 可知 $P$ 的本徵值滿足 $\lambda^2 = 1$，所以 $\lambda = \pm 1$。Hermitian 性保證本徵值為實數（$\pm 1$ 確實是實數），么正性保證本徵態歸一化不變。因此宇稱的本徵態只有兩種：偶宇稱 $P|+\rangle = +|+\rangle$ 和奇宇稱 $P|-\rangle = -|-\rangle$。任何態都可以分解為這兩種宇稱態的疊加：$|\psi\rangle = |\psi_+\rangle + |\psi_-\rangle$。這個二分法大幅簡化了具有反射對稱性的系統的計算——我們只需要在偶宇稱或奇宇稱子空間中求解 Hamiltonian。</p>
+      <p class="solution-note">正文依據：§4.1.4（方程 4.17–4.18）</p>
+    </div>
+  </details>
+  <details class="self-check-item">
+    <summary>8. 用海森堡繪景計算自由粒子位置運算子的時間演化。結果說明了什麼？</summary>
+    <div class="self-check-answer">
+      <p>自由粒子 $H = p^2/2m$。利用 Heisenberg 方程：</p>
+      <p>$d\widetilde{x}/dt = (1/i\hbar)[\widetilde{x}, H] = (1/i\hbar)[\widetilde{x}, \widetilde{p}^2/2m] = \widetilde{p}/m$</p>
+      <p>$d\widetilde{p}/dt = (1/i\hbar)[\widetilde{p}, H] = 0$（因為 $[p, p^2] = 0$）</p>
+      <p>因此 $\widetilde{p}(t) = p$（動量守恆），$\widetilde{x}(t) = x + pt/m$。這與古典力學中自由粒子的運動方程完全一致：勻速直線運動。海森堡繪景清晰地展示了量子力學與古典力學的結構平行性——在自由粒子的特殊情況下，運算子方程與古典方程形式完全相同。</p>
+      <p class="solution-note">正文依據：§4.4（方程 4.62）、§2.3.3</p>
+    </div>
+  </details>
+
+</section>
+
+<!-- ====== 延伸資源 ====== -->
+<section id="extras">
+  <h2>延伸資源與下一章</h2>
+  <ul class="resource-list">
+    <li><a href="#">本章公式整理</a></li>
+    <li><a href="#">本章例題與練習</a></li>
+  </ul>
+  <div class="further-reading">
+    <strong>下一章預告：階梯位能與散射</strong>
+    <p>本章建立了變換與可觀測量之間的深刻聯繫。在第 5 章中，我們將把這些工具應用到一個具體的物理問題：粒子遇到階梯位能時的散射與束縛態。我們將看到宇稱對稱性如何大幅簡化計算，以及如何在實際問題中使用機率流密度來理解反射與透射現象。</p>
+    <a href="ch5_step_potentials_zh.html">前往下一章 →</a>
+  </div>
+</section>
+
+</main>
+
+</body>
+</html>

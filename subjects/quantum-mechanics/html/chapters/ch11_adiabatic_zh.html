@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第 11 章 絕熱原理 — The Physics of Quantum Mechanics</title>
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$'], ['\\\\[','\\\\]']] },
+  options: { ignoreHtmlClass: 'no-mathjax' }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<link rel="stylesheet" href="../../../../shared/core.css">
+<script src="../../../../shared/core.js" defer></script>
+<link rel="stylesheet" href="../../../../shared/navigation.css" data-shared-navigation>
+</head>
+<body>
+
+<nav class="sidebar" id="sidebar" aria-label="本章目錄"><div class="sidebar-header"><div class="sidebar-subtitle">量子力學</div><h2 class="sidebar-title">第 11 章 絕熱原理</h2></div><div class="toc">
+    <div class="nsub"><a href="#preview">本章預覽</a></div>
+    <div class="nsub"><a href="#s11-1">11.1 絕熱原理的推導</a></div>
+    <div class="nsub"><a href="#s11-2">11.2 應用於氣體動力論</a></div>
+    <div class="nsub"><a href="#s11-3">11.3 應用於熱力學</a></div>
+    <div class="nsub"><a href="#s11-4">11.4 凝聚態物質的壓縮率</a></div>
+    <div class="nsub"><a href="#s11-5">11.5 共價鍵</a></div>
+    <div class="nsub"><a href="#s11-6">11.6 WKBJ近似</a></div>
+    <div class="nsub"><a href="#summary">關鍵概念與公式</a></div>
+    <div class="nsub"><a href="#common-mistakes">常見錯誤</a></div>
+    <div class="nsub"><a href="#self-check">自我檢測</a></div>
+    <div class="nsub"><a href="#extras">延伸資源</a></div>
+  </div>
+<div class="sidebar-tools"><button type="button" data-action="toggle-theme" aria-label="切換深色或淺色模式">切換顯示主題</button></div></nav>
+
+<main class="chapter-page" data-chapter-title="第 11 章 絕熱原理" data-prev-href="ch10_helium_zh.html" data-prev-label="第 10 章 氦與週期表" data-next-href="ch12_scattering_zh.html" data-next-label="第 12 章 散射理論">
+<!-- ====== 章首 ====== -->
+<header class="chapter-header">
+  <div class="chapter-subtitle">
+    <a href="#">量子力學</a> &rsaquo; Ch10 &rsaquo; Ch11
+  </div>
+  <h1>第 11 章　絕熱原理</h1>
+  <div class="chapter-meta">
+    <span>原書章節：Chapter 11, Adiabatic principle</span>
+    <span>原書頁碼：p244–256</span>
+    <span>章長：13 頁 &middot; 6 節 &middot; 41 個公式</span>
+  </div>
+</header>
+
+<!-- ====== 本章預覽 ====== -->
+<section class="chapter-preview" id="preview">
+  <h2>本章預覽</h2>
+
+  <div class="core-question">
+    <h3>核心問題</h3>
+    <p>當一個量子系統的 Hamiltonian <strong>隨時間緩慢變化</strong>時，系統會發生什麼？聲波穿過鑽石晶體時，碳原子核的內部結構會變化嗎？打氣筒壓縮空氣時，量子力學層面發生了什麼？為什麼分子中電子的運動可以與原子核的運動「分開處理」？本章引入的<strong>絕熱近似</strong>（adiabatic approximation）是量子力學中最強大的簡化工具之一：它告訴我們，只要變化足夠慢，系統就會「留在原來的那個能階上」。這個看似簡單的陳述不僅支撐了氣體動力論和熱力學的量子基礎，還解釋了固體的壓縮率、分子的共價鍵、以及 WKBJ 近似的正當性。</p>
+  </div>
+
+  <div class="deep-dive">
+    <h3>10 個關鍵概念</h3>
+    <ol>
+      <li><strong>絕熱定理</strong>：若 Hamiltonian 隨時間變化足夠慢，系統初始處於第 $k$ 個能量本徵態，則始終保持在該態</li>
+      <li><strong>量子數守恆</strong>：緩慢變化不會改變量子數——這是絕熱原理的核心推論</li>
+      <li><strong>特徵時間尺度</strong>：$H$ 的變化必須在時間 $\hbar / \min|E_n - E_k|$ 內很小——這是「夠慢」的定量標準</li>
+      <li><strong>Born-Oppenheimer 近似</strong>：電子比原子核輕得多，因此電子運動可視為在固定核位形下的絕熱響應</li>
+      <li><strong>氣體動力論的量子基礎</strong>：$PV = \frac{2}{3}U$ 可從單粒子箱中的絕熱壓縮推導出來</li>
+      <li><strong>熵守恆</strong>：絕熱過程中系統停留在原來的定態，因此機率分布 $\{p_i\}$ 不變，熵 $S = -k_B \sum p_i \ln p_i$ 守恆</li>
+      <li><strong>壓縮率估計</strong>：從原子的基態能量對體積的依賴可直接估算固體和液體的壓縮率</li>
+      <li><strong>共價鍵的量子機制</strong>：兩個位能井共享一個粒子時，基態能量隨井間距離的減小而降低——產生吸引力</li>
+      <li><strong>WKBJ 近似</strong>：當 de Broglie 波長遠小於位能變化尺度時，反射振幅可忽略，波函數近似為 $e^{i\phi}/\sqrt{k}$</li>
+      <li><strong>絕熱不變量</strong>：$E/\omega$（簡諧振子）、磁矩 $\mu = E/B$ 等在緩慢變化下守恆——這是舊量子論的核心概念</li>
+    </ol>
+  </div>
+
+  <div class="deep-dive">
+    <h3>🧭 本章推理地圖</h3>
+    <ol>
+      <li><strong>時間相關 Hamiltonian</strong>（Ch2）→ 當變化「夠慢」時，系統保持在原來本徵態——這就是<strong>絕熱定理</strong>（§11.1）。</li>
+      <li>絕熱定理的數學條件：$|\langle E_k|\dot{H}|E_n\rangle| \ll |E_n - E_k|^2/\hbar$（§11.1）→ 能階間距越大、變化越慢，近似越精確。</li>
+      <li>將絕熱定理應用於<strong>箱中粒子</strong>（Ch5）→ 活塞緩慢移動時，量子數 $k$ 不變 → 推導出 $PV = \frac{2}{3}U$（§11.2）。</li>
+      <li>將絕熱定理應用於<strong>統計力學</strong>（Ch6）→ 絕熱過程中機率 $p_i$ 不變 → 熵守恆（§11.3）。</li>
+      <li>基態能量對體積的依賴（§11.4）→ 由 virial 定理與尺度分析 → 壓縮率 $\chi \simeq 9V/(2|E_0|)$。</li>
+      <li><strong>雙位能井模型</strong>（§11.5.1）→ 奇偶宇稱態的能量分裂 → 共享電子產生吸引力 → 解釋<strong>共價鍵</strong>（§11.5.2）→ 分子解離時絕熱條件破壞（§11.5.3）。</li>
+      <li>de Broglie 波長遠小於位能變化尺度時（§11.6）→ 反射可忽略 → <strong>WKBJ 近似</strong>保證了粒子通量守恆。</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ====== 先備知識橋接 ====== -->
+<section class="prerequisite">
+  <h2>先備知識橋接</h2>
+  <p>本章假設讀者具備以下基礎：</p>
+  <ul>
+    <li><strong>時間相關 Schrödinger 方程</strong>（§2.2）：$i\hbar \partial_t|\psi\rangle = H(t)|\psi\rangle$——本章討論 Hamiltonian 含時的情況</li>
+    <li><strong>定態微擾理論</strong>（§9.1）：一階微擾公式——用於推導能階間躍遷振幅</li>
+    <li><strong>箱中粒子</strong>（§5.1.1）：分離變數法、邊界條件——用於 §11.2 的氣體動力論推導</li>
+    <li><strong>統計力學基本概念</strong>（§6.4）：Boltzmann 分布、熵的定義——用於 §11.3 的熱力學應用</li>
+    <li><strong>δ 函數位能井</strong>（§5.1.1(b)）：束縛態的邊界條件——用於 §11.5 的雙位能井模型</li>
+    <li><strong>Virial 定理</strong>（§8.5.2）：$2\langle K\rangle = -\langle V\rangle$——用於 §11.4 的壓縮率估計</li>
+  </ul>
+  <p>如果你對時間相關的 Schrödinger 方程還不熟悉，建議先回顧 §2.2 的內容——本章的核心論證全部建立在「Hamiltonian 可以緩慢地隨時間變化」這個前提上。<strong>絕熱定理不是一個新方程，而是對既有方程在特定條件下的巧妙解讀。</strong></p>
+</section>
+
+<!-- ====== 11.1 絕熱原理的推導 ====== -->
+<section class="deep-dive" id="s11-1">
+<h2>11.1　絕熱原理的推導</h2>
+<div class="section-keypoints">
+  <strong>🔑 本節重點</strong>
+  <span>① 將系統態展開在瞬時本徵態上：$|\psi,t\rangle = \sum_n a_n(t) e^{-i\int E_n dt'/\hbar} |E_n(t)\rangle$</span>
+  <span>② 代入 TDSE 得到振幅的耦合方程 (11.7)</span>
+  <span>③ 緩慢變化條件：$H$ 在 $\hbar/|E_n-E_k|$ 時間內幾乎不變</span>
+  <span>④ 振盪積分因相鄰半週期抵消而趨近為零 → $a_k$ 守恆</span>
+  <span>⑤ 推導過程雖用了一階微擾，但取 $\delta t \to 0$ 極限後是精確的</span>
+</div>
+
+  <p>在 §2.2 中我們強調，時間相關 Schrödinger 方程（TDSE）即使 $H$ 是時間的函數仍然成立。然而在此之前，我們大多討論的是時間<strong>無關</strong>的 Hamiltonian。§9.3 雖然考慮了時間相關的 $H$，但那裡假設 $H$ 的時間相關部分很小。現在我們要討論的是：<strong>$H$ 可以發生很大的變化，只要這個變化發生的時間 $T$ 足夠長。</strong></p>
+
+  <p>考慮一個 Hamiltonian 隨時間緩慢變化的系統：$H = H(t)$。在任何瞬間 $t$，$H(t)$ 擁有一組完整的本徵態 $|E_n(t)\rangle$ 和本徵值 $E_n(t)$。參考 §9.3 中時間無關情況下的試探解（方程 9.43），並修改以允許 $E_n$ 隨時間變化，我們寫下一般的展開式：</p>
+  <div class="eq">$$|\psi, t\rangle = \sum_n a_n(t) \exp\!\left(-\frac{i}{\hbar}\int_0^t dt'\, E_n(t')\right) |E_n(t)\rangle \tag{11.1}$$</div>
+  <p>由於對每個 $t$，集合 $\{|E_n(t)\rangle\}$ 都是完備的，而係數 $a_n(t)$ 是任意的，寫下這個展開式<strong>沒有引入任何假設</strong>——任何態都可以這樣表示。</p>
+
+  <p>將展開式 (11.1) 代入 TDSE $i\hbar\,\partial_t |\psi\rangle = H(t)|\psi\rangle$。左側的微分產生三類項：來自 $da_n/dt$ 的項、來自 $dE_n/dt$（在指數中）的項、以及來自 $d|E_n\rangle/dt$ 的項。利用 $H(t)|E_n(t)\rangle = E_n(t)|E_n(t)\rangle$ 消去一項後，得到：</p>
+  <div class="eq">$$0 = \sum_n \left[\dot{a}_n |E_n(t)\rangle + a_n \frac{\partial |E_n\rangle}{\partial t}\right] \exp\!\left(-\frac{i}{\hbar}\int_0^t dt'\, E_n(t')\right) \tag{11.3}$$</div>
+  <p>這是我們的核心方程。為了處理 $\partial|E_n\rangle/\partial t$，我們使用 §9.1 的微擾理論：將 $|E_n(t+\delta t)\rangle$ 展開為 $\{|E_m(t)\rangle\}$ 的線性組合。當 $\delta t \to 0$ 時，$\delta H$ 趨近於零，這個步驟是精確的（儘管形式上是「一階微擾」）。關鍵結果是：</p>
+  <div class="eq">$$\frac{\partial |E_n\rangle}{\partial t} = \sum_{m \neq n} \frac{\langle E_m(t)|\dot{H}|E_n(t)\rangle}{E_n(t) - E_m(t)} |E_m(t)\rangle$$</div>
+
+  <p>將此式代入方程 (11.3) 並乘以 $\langle E_k(t)|$，利用正交性 $\langle E_k|E_n\rangle = \delta_{kn}$，得到振幅 $a_k$ 的演化方程：</p>
+  <div class="eq">$$\dot{a}_k = -\sum_{n \neq k} a_n(t)\,\frac{\langle E_k(t)|\dot{H}|E_n(t)\rangle}{E_n(t) - E_k(t)}\, \exp\!\left(-\frac{i}{\hbar}\int_0^t dt'\,\{E_n(t') - E_k(t')\}\right) \tag{11.7}$$</div>
+  <p>這個方程<strong>到目前為止是精確的</strong>——我們只是將展開式代入了 TDSE。</p>
+
+  <div class="callout">
+    <strong>💡 從精確到近似的關鍵一步</strong><br>
+    方程 (11.7) 的右側是兩個因子的乘積：一個是<strong>緩慢變化的</strong>函數（包含 $\dot{H}$ 的矩陣元除以能量差），另一個是<strong>快速振盪的</strong>指數因子。如果 $H$ 的變化足夠慢，以至於在時間 $\hbar/|E_n - E_k|$（這是態 $n$ 和 $k$ 之間干涉產生顯著運動所需的時間，見 §3.2）內 $H$ 幾乎不變，那麼當我們對時間積分以求得 $a_k$ 的變化量時，指數因子在每個半週期內的貢獻會與相鄰半週期的貢獻<strong>幾乎完全抵消</strong>——就像 $\int dx\,\sin(kx)/(1+x^2)$ 在 $k \to \infty$ 時趨近於零。因此 $\Delta a_k \approx 0$，$a_k$ 守恆。
+  </div>
+
+  <div class="callout-warn">
+    <strong>⚠️ 絕熱條件的定量表述</strong><br>
+    「足夠慢」的條件可以寫成：
+    $$\left|\frac{\hbar\,\langle E_k|\dot{H}|E_n\rangle}{(E_n - E_k)^2}\right| \ll 1 \quad (\text{對所有 } n \neq k)$$
+    也就是說，Hamiltonian 的變化速率（以 $\hbar$ 為單位）必須遠小於<strong>能階間距的平方</strong>。這解釋了為什麼絕熱近似在能階簡併或近簡併時會失效——能量差越小，要求變化越慢。
+  </div>
+
+  <p>因此，絕熱定理可以這樣陳述：<strong>如果一個系統初始處於 Hamiltonian 的第 $k$ 個能量本徵態，且 $H$ 的變化滿足上述緩慢條件，則系統將始終保持在該本徵態上。</strong>這不意味著系統的能量不變——本徵值 $E_k(t)$ 本身當然可以隨 $H$ 的變化而變化。守恆的是量子數 $k$，而不是能量本身。</p>
+
+  <p>這個結果的威力在於它的<strong>普遍性</strong>：它不依賴於 Hamiltonian 的具體形式。無論是聲波穿過晶體、活塞壓縮氣體、還是化學反應中的分子振動，只要變化足夠慢，量子數就不會改變。這使我們能夠在處理複雜系統時，「凍結」那些能量尺度遠大於研究對象能量尺度的自由度——這就是 Born-Oppenheimer 近似的本質（電子運動相對於核運動就是「快」的，可以絕熱地處理）。</p>
+
+  <figure class="figure" id="fig-11-1">
+    <svg class="content-diagram" viewBox="0 0 520 220" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" width="520" height="220" fill="#f8f9fa" rx="8"/>
+      <!-- Coordinate axes -->
+      <line x1="40" y1="150" x2="480" y2="150" stroke="#333" stroke-width="1.5"/>
+      <line x1="40" y1="20" x2="40" y2="190" stroke="#333" stroke-width="1.5"/>
+      <text x="490" y="155" font-size="12" fill="#333">$t$</text>
+      <!-- Envelope: 1/(1+x^2) scaled -->
+      <path d="M60,145 Q120,145 150,130 Q180,115 220,70 Q260,30 300,70 Q340,115 370,130 Q400,145 460,145" fill="none" stroke="#4a90d9" stroke-width="2"/>
+      <path d="M60,155 Q120,155 150,170 Q180,185 220,230 Q260,270 300,230 Q340,185 370,170 Q400,155 460,155" fill="none" stroke="#4a90d9" stroke-width="2" stroke-dasharray="6,3"/>
+      <!-- Oscillating curve sin(kx)/(1+x^2) -->
+      <path d="M60,145 C75,140 90,165 105,155 C120,145 135,170 150,155 C165,135 180,160 195,130 C210,100 225,120 240,80 C255,45 270,70 285,80 C300,100 315,120 330,130 C345,145 360,160 375,155 C390,170 405,155 420,145 C435,140 450,155 460,150" fill="none" stroke="#e74c3c" stroke-width="1.5"/>
+      <!-- Positive area shading -->
+      <path d="M60,145 C75,140 90,165 105,155 C120,145 135,170 150,155 C165,135 180,160 195,130 C210,100 225,120 240,80 C255,45 270,70 285,80 C300,100 315,120 330,130 C345,145 360,160 375,155 C390,170 405,155 420,145 C435,140 450,155 460,150 L460,145 L60,145 Z" fill="#e74c3c" fill-opacity="0.1"/>
+      <!-- Labels -->
+      <text x="250" y="15" font-size="14" fill="#333" text-anchor="middle" font-weight="bold">$f(t) = \sin(kt) / (1+t^2)$</text>
+      <text x="370" y="185" font-size="11" fill="#4a90d9">包絡線 $1/(1+t^2)$</text>
+      <text x="130" y="175" font-size="11" fill="#e74c3c">振盪因正負面積抵消 → $\int f\,dt \to 0$</text>
+      <!-- k→∞ arrow -->
+      <text x="460" y="200" font-size="11" fill="#333" text-anchor="end">$k \to \infty$</text>
+    </svg>
+    <figcaption><strong>圖 11.1</strong>　$\sin(kx)/(1+x^2)$ 的圖形。當 $k \to \infty$ 時，每個正向區域幾乎被下一個負向區域完全抵消。這就是為什麼方程 (11.7) 的積分趨近於零——指數因子的快速振盪使淨貢獻幾乎為零。</figcaption>
+  </figure>
+
+  <details class="example">
+    <summary>📝 自編概念例：判斷絕熱條件是否成立</summary>
+    <div class="example-body">
+      <p><strong>題目：</strong>某二能階系統的能階間距為 $\Delta E = 1\,\text{eV}$。Hamiltonian 正在以速率 $|\dot{H}| \sim 0.1\,\text{eV/ps}$ 發生變化。問絕熱近似是否適用？如果不是，需要將變化速率降低多少倍？</p>
+      <p><strong>解：</strong>絕熱條件的定量標準為：</p>
+      <div class="eq">$$\left|\frac{\hbar\,\langle E_1|\dot{H}|E_2\rangle}{(\Delta E)^2}\right| \ll 1$$</div>
+      <p>代入數值：$\hbar \approx 6.58 \times 10^{-16}\,\text{eV·s} = 6.58 \times 10^{-4}\,\text{eV·ps}$</p>
+      <div class="eq">$$\frac{\hbar|\dot{H}|}{(\Delta E)^2} = \frac{(6.58\times 10^{-4})(0.1)}{1^2} \approx 6.6 \times 10^{-5}$$</div>
+      <p>這個數值遠小於 1，因此<strong>絕熱近似是適用的</strong>。如果 $|\dot{H}| \sim 10^4\,\text{eV/ps}$（快了 $10^5$ 倍），則比值約為 6.6，遠大於 1——此時絕熱近似不再適用，系統會發生顯著的能階躍遷。</p>
+      <p><strong>物理意義：</strong>能階間距越大，「保護」越強——這就是為什麼高頻（高能量）自由度在一段時間內可以被視為「凍結」的。在地面狀態的原子中，電子的能階間距約為 $10\,\text{eV}$，而分子振動的典型能量約為 $0.1\,\text{eV}$，因此電子運動相對於核運動是高度絕熱的。</p>
+    </div>
+  </details>
+</section>
+
+<!-- ====== 11.2 應用於氣體動力論 ====== -->
+<section class="deep-dive" id="s11-2">
+<h2>11.2　應用於氣體動力論</h2>
+<div class="section-keypoints">
+  <strong>🔑 本節重點</strong>
+  <span>① 打氣筒中的單粒子箱模型：$H(t) = p^2/2m + V(x,t)$</span>
+  <span>② 分離變數後，平行於活塞方向的量子數 $k$ 在絕熱壓縮中守恆</span>
+  <span>③ $E_z = h^2 k^2/(8mL^2)$ → 能量守恆給出 $P = 2E_z/V$</span>
+  <span>④ 分子碰撞維持速度分布各向同性 → $\langle E\rangle = 3\langle E_z\rangle$</span>
+  <span>⑤ 推導出 $PV = \frac{2}{3}U$，與理想氣體定律一致但更普遍</span>
+</div>
+
+  <p>考慮打氣筒中的空氣被壓縮的情景。空氣抵抗壓縮、活塞變熱——這些現象通常用古典粒子彈性碰撞的圖像來解釋。本節將展示如何從<strong>量子力學的絕熱原理</strong>推導出相同的結果。我們先考慮筒中只有一個分子，然後假設 $N$ 個分子時壓力就是單粒子情況的 $N$ 倍。</p>
+
+  <p>基本系統——箱中粒子——的 Hamiltonian 為：</p>
+  <div class="eq">$$H(t) = \frac{p^2}{2m} + V(\mathbf{x}, t) \tag{11.8}$$</div>
+  <p>其中位能 $V$ 由筒壁和活塞提供。最簡單的模型是：</p>
+  <div class="eq">$$V(\mathbf{x}, t) = \begin{cases} 0 & \text{在筒內} \\ \infty & \text{在筒壁或活塞中} \end{cases} \tag{11.9}$$</div>
+  <p>時間相關性來自活塞的移動。我們需要求 Hamiltonian (11.8) 的本徵值和本徵態。</p>
+
+  <p>在位形表象中，本徵值方程為 $-\frac{\hbar^2}{2m}\nabla^2 u_n + V u_n = E_n u_n$。在筒內 $V=0$，波函數須在邊界上為零。假設筒的截面為矩形或圓形，存在坐標使筒壁都是某個坐標為零的表面，且 Laplacian 可分離：$\nabla^2 = \nabla_2^2 + \partial^2/\partial z^2$。則本徵函數可寫為乘積形式 $u_n(\mathbf{x}) = X(x,y) Z(z)$。代入後分離變數：</p>
+  <div class="eq">$$-\nabla_2^2 X = \frac{2m(E_n - E_z)}{\hbar^2} X, \qquad -\frac{d^2 Z}{dz^2} = \frac{2m E_z}{\hbar^2} Z \tag{11.14}$$</div>
+  <p>$E_z$ 是沿筒軸方向運動的動能，而垂直方向的運動能量為 $E_n - E_z$。當我們推動活塞時，<strong>$X$ 的方程和邊界條件完全不變</strong>，因此 $E_n - E_z$ 是不變的。</p>
+
+  <p>令筒的一端在 $z=0$，活塞在 $z=L$。則 $Z(z) \propto \sin(k\pi z/L)$ 其中 $k = 1, 2, \ldots$，而 $E_z$ 的可能值為：</p>
+  <div class="eq">$$E_z = \frac{h^2}{8mL^2}\,k^2 \tag{11.16}$$</div>
+
+  <div class="callout">
+    <strong>💡 絕熱原理在此的精確作用</strong><br>
+    絕熱原理保證：如果活塞移動得足夠慢，粒子的量子數 $k$ 不會改變。因此 $E_z$ 完全由 $L$ 的變化決定：$E_z \propto 1/L^2$。能量守恆告訴我們，粒子損失的能量必須等於它對活塞做的功 $P\,dV$。令 $A$ 為活塞面積，則 $-dE_z = 2E_z\,dL/L = PA\,dL$，由此得到 $P = 2E_z/(AL) = 2E_z/V$。
+  </div>
+
+  <p>當筒中有 $N$ 個分子時，每個分子都貢獻壓力。但這裡有一個重要的修正：分子之間的<strong>碰撞</strong>。碰撞不符合絕熱近似——它們會改變粒子的量子數。但碰撞的整體效果是確保<strong>速度分布保持各向同性</strong>：即使活塞的運動只改變 $E_z$（垂直方向的能量也保持不變），碰撞會將能量重新分配給三個方向。因此我們可以假設 $\langle E \rangle = 3\langle E_z \rangle$。令 $U \equiv N\langle E \rangle$ 為氣體的內能：</p>
+  <div class="eq">$$PV = \frac{2}{3} U \tag{11.20}$$</div>
+
+  <p>這個結果與結合理想氣體狀態方程 $PV = N k_B T$ 和內能 $U = \frac{3}{2}N k_B T$ 得到的結果相同。<strong>但我們的結果更普遍</strong>：我們沒有假設氣體處於熱平衡——唯一關於動能分布的假設是它是各向同性的。這意味著方程 (11.20) 甚至對非平衡態的氣體也成立，只要速度分布是各向同性的。</p>
+
+  <div class="callout-warn">
+    <strong>⚠️ 碰撞的雙重角色</strong><br>
+    碰撞在我們的推導中扮演了微妙的雙重角色：一方面，它們<strong>違反</strong>了絕熱近似（因為碰撞是突然的），會改變粒子的量子數；另一方面，它們<strong>維持</strong>了各向同性——如果沒有碰撞，活塞的移動只會改變 $E_z$，而 $E_x$ 和 $E_y$ 不變，速度分布將變成非各向同性的，後續推導就失效了。這是物理中常見的模式：破壞一個近似的機制（碰撞）恰好使另一個假設（各向同性）成立。
+  </div>
+
+  <details class="example">
+    <summary>📝 自編概念例：絕熱壓縮的溫度變化</summary>
+    <div class="example-body">
+      <p><strong>題目：</strong>打氣筒中的空氣從體積 $V_0$ 被絕熱壓縮到 $V_0/2$。初始溫度為 $T_0 = 300\,\text{K}$。如果(a)過程是絕熱的且筒壁不導熱，(b)氣體可視為理想氣體，求壓縮後的溫度和壓力。使用絕熱原理驗證量子數守恆的預測。</p>
+      <p><strong>解：</strong></p>
+      <p>(a) 對於理想氣體，$U = \frac{3}{2}N k_B T$，由方程 (11.20)：$PV = \frac{2}{3}U$，結合 $PV = N k_B T$ 得到 $PV = N k_B T$（自洽）。</p>
+      <p>在絕熱過程中，$dU = -P\,dV$。對於理想氣體，這給出 $TV^{\gamma-1} = \text{常數}$，其中 $\gamma = 5/3$（單原子氣體）。</p>
+      <div class="eq">$$T_f = T_0\left(\frac{V_0}{V_f}\right)^{\gamma-1} = 300 \times 2^{2/3} \approx 300 \times 1.587 = 476\,\text{K}$$</div>
+      <p>壓力由 $P_f V_f = N k_B T_f$ 得：$P_f = P_0 \cdot (V_0/V_f) \cdot (T_f/T_0) = P_0 \times 2 \times 1.587 \approx 3.17 P_0$。</p>
+      <p>(b) 從絕熱原理的角度：每個粒子的量子數 $k$ 守恆，$E_z = h^2 k^2/(8mL^2) \propto 1/L^2$。$L \propto V^{1/3}$，所以 $E_z \propto V^{-2/3}$。各向同性保證 $\langle E \rangle = 3\langle E_z \rangle \propto V^{-2/3}$。對於理想氣體，$\langle E \rangle = \frac{3}{2}k_B T$，因此 $T \propto V^{-2/3}$——與古典結果完全一致。</p>
+      <p><strong>物理意義：</strong>這展示了絕熱原理如何從量子力學的基本假設（量子數守恆＋箱中粒子本徵值）恢復古典熱力學的結果。量子數 $k$ 扮演了古典絕熱不變量的角色。</p>
+    </div>
+  </details>
+
+  <figure class="figure" id="fig-11-2">
+    <svg class="content-diagram" viewBox="0 0 500 220" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" width="500" height="220" fill="#f8f9fa" rx="8"/>
+      <!-- Cylinder -->
+      <rect x="80" y="50" width="300" height="120" fill="none" stroke="#333" stroke-width="2"/>
+      <!-- Piston (movable right wall) -->
+      <rect x="360" y="40" width="15" height="140" fill="#4a90d9" rx="2"/>
+      <!-- Particles -->
+      <circle cx="140" cy="100" r="6" fill="#e74c3c"/>
+      <circle cx="200" cy="130" r="6" fill="#e74c3c"/>
+      <circle cx="260" cy="85" r="6" fill="#e74c3c"/>
+      <circle cx="170" cy="150" r="6" fill="#e74c3c"/>
+      <circle cx="310" cy="110" r="6" fill="#e74c3c"/>
+      <!-- Motion arrows -->
+      <line x1="100" y1="60" x2="130" y2="65" stroke="#e74c3c" stroke-width="1" marker-end="url(#arrow-red)"/>
+      <line x1="230" y1="140" x2="200" y2="145" stroke="#e74c3c" stroke-width="1" marker-end="url(#arrow-red)"/>
+      <line x1="280" y1="90" x2="310" y2="95" stroke="#e74c3c" stroke-width="1" marker-end="url(#arrow-red)"/>
+      <!-- Arrow markers -->
+      <defs><marker id="arrow-red" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="#e74c3c"/></marker></defs>
+      <!-- Piston direction arrow -->
+      <line x1="375" y1="180" x2="340" y2="180" stroke="#4a90d9" stroke-width="2" marker-end="url(#arrow-blue)"/>
+      <defs><marker id="arrow-blue" markerWidth="8" markerHeight="8" refX="7" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#4a90d9"/></marker></defs>
+      <!-- Labels -->
+      <text x="230" y="35" font-size="14" fill="#333" text-anchor="middle" font-weight="bold">筒截面積 $A$</text>
+      <text x="375" y="30" font-size="11" fill="#4a90d9" text-anchor="middle">活塞</text>
+      <text x="300" y="200" font-size="11" fill="#4a90d9">$dL$：活塞向內移動</text>
+      <text x="180" y="195" font-size="11" fill="#e74c3c">$k$ 量子數守恆 → $E_z \propto 1/L^2$</text>
+      <text x="50" y="115" font-size="12" fill="#333">$z=0$</text>
+      <text x="390" y="115" font-size="12" fill="#333">$z=L$</text>
+    </svg>
+    <figcaption><strong>圖 11.2</strong>　打氣筒中的氣體分子。活塞（右側）向內移動時，筒的長度 $L$ 減小。絕熱原理保證每個粒子的量子數 $k$ 守恆，因此 $E_z = h^2 k^2/(8mL^2)$ 隨 $L$ 減小而增大——分子獲得能量，表現為壓力增加和溫度上升。</figcaption>
+  </figure>
+</section>
+
+<!-- ====== 11.3 應用於熱力學 ====== -->
+<section class="deep-dive" id="s11-3">
+<h2>11.3　應用於熱力學</h2>
+<div class="section-keypoints">
+  <strong>🔑 本節重點</strong>
+  <span>① 熱平衡時 $p_i \propto e^{-E_i/k_B T}$，能量 $E_i(V)$ 取決於體積</span>
+  <span>② 絕熱壓縮中系統停留在原定態 → $p_i$ 不變</span>
+  <span>③ 熵 $S = -k_B\sum p_i\ln p_i$ 因此守恆——與古典熱力學一致</span>
+  <span>④ $dU = \sum p_i (\partial E_i/\partial V)dV = -P\,dV$ → 壓力的統計定義</span>
+  <span>⑤ 這是量子統計力學中壓力和熵的微觀推導</span>
+</div>
+
+  <p>在 §6.4 中我們看到，當一個系統處於熱力學平衡時，我們不知道它具體處於哪個量子態，但可以指定它處於第 $i$ 個定態的機率為 $p_i \propto e^{-E_i/k_B T}$（方程 6.93a）。態的能量 $E_i$ 取決於描述系統環境的變數——如體積、電場、剪應力等。在最簡單的非平凡情況中（系統為流體），唯一相關的變數是體積 $V$，我們只討論這種情況。因此，我們將每個定態的能量視為體積的函數：$E_i = E_i(V)$。</p>
+
+  <p>當我們對系統進行<strong>絕熱壓縮</strong>時——即緩慢改變 $V$ 同時隔離系統與熱源——絕熱原理告訴我們：<strong>系統始終停留在壓縮開始時所處的那個定態。</strong>因此，系統處於各定態的機率 $p_i$ 保持不變。熵 $S = -k_B \sum_i p_i \ln p_i$（方程 6.91）也就保持不變——這正是古典熱力學所教導的：絕熱過程熵守恆。</p>
+
+  <p>在絕熱壓縮過程中，內能的變化為：</p>
+  <div class="eq">$$dU = \sum_i p_i \frac{\partial E_i}{\partial V} dV = -P\,dV \quad \text{其中} \quad P \equiv -\sum_i p_i \frac{\partial E_i}{\partial V} \tag{11.21}$$</div>
+  <p>由於沒有熱量流入，內能的增量必須等於外力對系統做的功——即系統施加的壓力乘以 $-dV$。因此方程 (11.21) 定義的 $P$ 確實是壓力。</p>
+
+  <div class="callout">
+    <strong>💡 統計力學與絕熱原理的深層聯繫</strong><br>
+    這個推導展示了量子統計力學的一個核心洞見：<strong>壓力的微觀來源是能階對體積的依賴</strong>。當體積改變時，每個定態的能量 $E_i(V)$ 也改變。系統反抗壓縮的「力」來自於微觀能階的「斜率」$-\partial E_i/\partial V$ 以機率 $p_i$ 加權平均。在古典氣體動力論中，壓力來自分子碰撞的動量傳遞；在量子統計力學中，壓力來自能階結構對邊界條件的響應——兩者給出相同的結果，但量子的觀點更普遍、更深刻。
+  </div>
+
+  <div class="callout-warn">
+    <strong>⚠️ 絕熱 ≠ 等溫</strong><br>
+    初學者常將「絕熱」與「等溫」混淆。絕熱過程（adiabatic process）指<strong>沒有熱量交換</strong>（$dQ = 0$），系統的溫度通常會改變——例如壓縮氣體使其升溫。等溫過程（isothermal process）指<strong>溫度保持不變</strong>，需要與熱庫接觸。在量子層面，絕熱過程對應於系統停留在原定態（$p_i$ 不變），而等溫過程則需要系統不斷與熱庫交換能量以維持 Boltzmann 分布。絕熱原理中的「adiabatic」與熱力學中的「adiabatic」在數學上是一致的：兩者都保證熵守恆。
+  </div>
+
+  <p>方程 (11.21) 的意義不僅限於驗證古典熱力學。它提供了一個<strong>從第一原理計算壓力</strong>的處方：只要我們知道一個量子系統的所有能階 $E_i(V)$ 及其機率分布 $p_i$，就可以直接計算壓力。這在凝聚態物理中有大量應用——例如，計算金屬中電子氣對壓縮的抵抗、中子星的狀態方程等。</p>
+
+  <p>更深層的意義在於：<strong>絕熱原理將量子力學與熱力學第二定律聯繫起來</strong>。熵的微觀定義 $S = -k_B \sum p_i \ln p_i$ 之所以在絕熱過程中守恆，正是因為 $p_i$ 不變——而 $p_i$ 不變又源於絕熱定理（系統停留在原定態）。反過來說，如果變化不夠慢、絕熱條件被破壞，則系統會躍遷到其他定態，$p_i$ 改變，熵增加——這就是不可逆過程的微觀根源。</p>
+
+  <details class="example">
+    <summary>📝 自編概念例：絕熱過程中的壓力-體積關係</summary>
+    <div class="example-body">
+      <p><strong>題目：</strong>一個量子系統有兩個能階 $E_1(V) = \alpha/V$ 和 $E_2(V) = 2\alpha/V$，其中 $\alpha$ 為常數。系統初始處於熱平衡（溫度 $T_0$，體積 $V_0$），然後被絕熱壓縮到 $V_0/3$。求壓縮前後的壓力比。</p>
+      <p><strong>解：</strong></p>
+      <p>步驟一：初始的 Boltzmann 分布。$p_i \propto e^{-E_i/k_B T_0}$。歸一化後：</p>
+      <div class="eq">$$p_1(V_0) = \frac{e^{-\alpha/(V_0 k_B T_0)}}{e^{-\alpha/(V_0 k_B T_0)} + e^{-2\alpha/(V_0 k_B T_0)}}, \quad p_2(V_0) = \frac{e^{-2\alpha/(V_0 k_B T_0)}}{Z}$$</div>
+      <p>步驟二：由方程 (11.21)，$P = -\sum_i p_i \partial E_i/\partial V$。$\partial E_1/\partial V = -\alpha/V^2$，$\partial E_2/\partial V = -2\alpha/V^2$，所以：</p>
+      <div class="eq">$$P = \frac{\alpha}{V^2}(p_1 + 2p_2)$$</div>
+      <p>步驟三：絕熱過程中 $p_i$ 不變（因為系統始終停留在原定態）。因此 $P_f/P_0 = (V_0/V_f)^2 = 3^2 = 9$——壓力增至原來的 9 倍。</p>
+      <p><strong>物理意義：</strong>對於這個特定的能階結構 $E_i \propto 1/V$，壓力滿足 $P \propto 1/V^2$，$PV \propto 1/V$——這與理想氣體的 $PV = \text{常數}$（等溫）不同。壓力的體積依賴完全由能階的函數形式決定。</p>
+    </div>
+  </details>
+</section>
+
+<!-- ====== 11.4 凝聚態物質的壓縮率 ====== -->
+<section class="deep-dive" id="s11-4">
+<h2>11.4　凝聚態物質的壓縮率</h2>
+<div class="section-keypoints">
+  <strong>🔑 本節重點</strong>
+  <span>① 壓縮率的定義：$\chi = -(1/V)\,dV/dP$</span>
+  <span>② 能量守恆：$-P\,dV = dE_0$ → $P = -dE_0/dV$</span>
+  <span>③ $\chi = (V\,d^2E_0/dV^2)^{-1}$——壓縮率由基態能量的二階導數決定</span>
+  <span>④ Virial 定理 $2\langle K\rangle = -\langle V\rangle$ 給出 $\chi \simeq 9V/(2|E_0|)$</span>
+  <span>⑤ 鋰的預測值 $2.6\times 10^{-11}\,\text{Pa}^{-1}$，與實驗值 $10^{-10}\,\text{Pa}^{-1}$ 吻合</span>
+</div>
+
+  <p>作為絕熱原理的第二個應用，我們來估計固體和液體的<strong>壓縮率</strong>。在凝聚態物質中，原子彼此緊密接觸，要減小塊材的體積，就必須使每個原子變小。根據不確定性原理，如果原子的電子被限制在更小的空間內，它們的動量和動能就必然增加。我們可以通過將壓縮所做的功與原子能量的增加等價來估計壓縮率。<strong>絕熱近似告訴我們，在緩慢壓縮過程中，原子始終處於其基態。</strong>因此，只要我們能計算基態能量 $E_0$ 對原子體積 $V$ 的函數依賴，就能推導出壓縮率。</p>
+
+  <p>壓縮率 $\chi$ 的定義是單位壓力變化下的體積變化比例：</p>
+  <div class="eq">$$\chi = -\frac{1}{V}\frac{dV}{dP} \tag{11.22}$$</div>
+  <p>能量守恆意味著 $-P\,dV$（壓縮器所做的功）等於基態能量的增加量 $dE_0$，因此 $P = -dE_0/dV$。代入得到：</p>
+  <div class="eq">$$\chi = \left(V\,\frac{d^2 E_0}{dV^2}\right)^{-1} \tag{11.23}$$</div>
+  <p>壓縮率由基態能量對體積的<strong>二階導數</strong>決定。</p>
+
+  <p>為獲得 $E_0(V)$，我們求解原子的定態，要求電子波函數在一個體積為 $V$ 的球面上為零。一個高度簡化的版本使我們能得到粗略的估計。假設當原子被限制在半徑為 $a$ 的球內時，其波函數 $\langle \mathbf{x}|a\rangle$ 與限制在半徑為 $a_0$ 的球內的波函數具有相同的形式，只是所有距離按 $a/a_0$ 的比例縮放，歸一化也相應調整。在這種情況下，我們可以像 §9.2 那樣論證：動能算符 $K$ 的期望值按 $(a_0/a)^2$ 縮放，而位能算符 $V$ 的期望值按 $a_0/a$ 縮放。因此：</p>
+  <div class="eq">$$\frac{dE_0}{da} = \frac{d}{da}\bigl(\langle a|K|a\rangle + \langle a|V|a\rangle\bigr) \simeq -\frac{2\langle a|K|a\rangle}{a} - \frac{\langle a|V|a\rangle}{a} \tag{11.24}$$</div>
+  <p>方程 (8.52)（virial 定理）指出 $2\langle K\rangle = -\langle V\rangle$，因此上式右側為零——<strong>基態能量對球半徑的一階導數為零</strong>。這是 virial 定理的必然結果：在平衡位置附近，能量取極小值。再次微分：</p>
+  <div class="eq">$$\frac{d^2 E_0}{da^2} \simeq \frac{6\langle K\rangle}{a^2} + \frac{2\langle V\rangle}{a^2} = -\frac{2E_0}{a^2} \tag{11.25}$$</div>
+
+  <p>由於 $V \propto a^3$，$dV/da = 3V/a$，我們得到：</p>
+  <div class="eq">$$\frac{d^2 E_0}{dV^2} \simeq \left(\frac{a}{3V}\right)^2 \frac{d^2 E_0}{da^2} = -\frac{2}{9}\frac{E_0}{V^2} \tag{11.26}$$</div>
+
+  <p>代入方程 (11.23)，得到壓縮率的簡單估計：</p>
+  <div class="eq">$$\chi \simeq \frac{9}{2}\frac{V}{|E_0|} \tag{11.27}$$</div>
+  <p>這個結果告訴我們：<strong>原子的基態能量 $|E_0|$ 越大、體積 $V$ 越小，原子就越難被壓縮</strong>——這在物理上是合理的。</p>
+
+  <div class="callout">
+    <strong>💡 壓縮率公式的直覺解釋</strong><br>
+    方程 (11.27) 可以改寫為 $\chi^{-1} \sim |E_0|/V$——即單位體積的基態能量。這正是我們期望的「彈性模量」的量級：要將體積壓縮一個比例，需要做的功約為 $|E_0| \times (\Delta V/V)^2$。對於原子而言，$|E_0| \sim 10\,\text{eV}$，$V \sim (0.1\,\text{nm})^3$，給出 $\chi^{-1} \sim 10^{11}\,\text{Pa}$——大約是金屬典型體積模量的量級。我們從純量子力學的考量中得到了正確的數量級！
+  </div>
+
+  <div class="callout-warn">
+    <strong>⚠️ 多電子原子的修正</strong><br>
+    方程 (11.27) 假設<strong>所有</strong>電子的波函數同時被縮放。但物理上顯然只有<strong>最外層電子</strong>在體積的微小變化中受到顯著影響——內層電子殼幾乎不受影響。因此，在實際應用中應將 $|E_0|$ 替換為 $N$ 倍原子的游離能（$N$ 為最外層電子數）。此外，由於原子核和內層電子產生的靜電位能並不按 $r^{-1}$ 變化，$\langle V\rangle$ 的 $a^{-1}$ 縮放律也不精確。儘管如此，方程 (11.27) 仍然正確地預測了原子壓縮率的數量級。
+  </div>
+
+  <p>對於鋰原子，取 $V = \frac{4}{3}\pi (2a_0)^3$，$|E_0| = 5.39\,\text{eV}$，得到 $\chi \simeq 2.6 \times 10^{-11}\,\text{Pa}^{-1}$。實驗值隨溫度變化，約為 $10^{-10}\,\text{Pa}^{-1}$——考慮到參數 $V$ 的不確定性（原子在固體中的「體積」並無嚴格定義），這個量子力學估計與實驗值符合得非常好。</p>
+
+  <details class="example">
+    <summary>📝 自編概念例：從尺度分析看壓縮率</summary>
+    <div class="example-body">
+      <p><strong>題目：</strong>使用尺度分析（不依賴 virial 定理的細節）來估計原子的壓縮率。假設原子中電子的特徵動能為 $E_K$，位能為 $E_P$。(a) 證明 $E_K \propto 1/a^2$ 和 $E_P \propto 1/a$（對氫型原子）。(b) 使用能量極小條件求 $a_0$。(c) 計算 $d^2 E_0/da^2$ 並導出壓縮率的尺度。</p>
+      <p><strong>解：</strong></p>
+      <p>(a) 由不確定性原理：$\Delta p \sim \hbar/a$，因此 $E_K \sim \hbar^2/(2ma^2) \propto 1/a^2$。對於庫倫位能：$E_P \sim -e^2/(4\pi\epsilon_0 a) \propto 1/a$。</p>
+      <p>(b) 總能量 $E(a) \sim \hbar^2/(2ma^2) - e^2/(4\pi\epsilon_0 a)$。由 $dE/da = 0$：$-\hbar^2/(ma^3) + e^2/(4\pi\epsilon_0 a^2) = 0$ → $a_0 \sim \hbar^2/(m e^2/(4\pi\epsilon_0)) = a_0$（Bohr 半徑）。</p>
+      <p>(c) $d^2 E/da^2 \sim 3\hbar^2/(ma^4) - 2e^2/(4\pi\epsilon_0 a^3)$。在 $a = a_0$ 處，使用平衡條件簡化：$d^2 E/da^2 \sim |E_0|/a_0^2$（數量級）。由方程 (11.23) 和 $V \propto a^3$：</p>
+      <div class="eq">$$\chi^{-1} = V\frac{d^2 E}{dV^2} \sim V\left(\frac{a}{3V}\right)^2 \frac{|E_0|}{a^2} \sim \frac{|E_0|}{V}$$</div>
+      <p>對於氫原子：$|E_0| = 13.6\,\text{eV}$，$V \sim (a_0)^3 \approx (5.29\times 10^{-11}\,\text{m})^3$，$\chi^{-1} \sim 10^{11}\,\text{Pa}$。這個數量級與金屬的實驗體積模量一致。</p>
+      <p><strong>物理意義：</strong>壓縮率的基本尺度由 $|E_0|/V$ 設定——即原子的「能量密度」。Bohr 半徑 $a_0$ 和 Rydberg 能量 $E_R = 13.6\,\text{eV}$ 這兩個基本常數完全決定了所有原子尺度物質的力學剛度。</p>
+    </div>
+  </details>
+</section>
+
+<!-- ====== 11.5 共價鍵 ====== -->
+<section class="deep-dive" id="s11-5">
+<h2>11.5　共價鍵</h2>
+<div class="section-keypoints">
+  <strong>🔑 本節重點</strong>
+  <span>① 雙 δ 位能井模型：$V(x) = -V_\delta[\delta(x+a)+\delta(x-a)]$</span>
+  <span>② 宇稱對稱性 → 偶宇稱態比奇宇稱態束縛得更緊</span>
+  <span>③ 兩井靠近時基態能量降低 → 共享粒子提供吸引力</span>
+  <span>④ 分子動力學：$V(b) = E_e + E_p$ 作為核運動的有效位能</span>
+  <span>⑤ 分子解離時能階間距變小 → 絕熱條件破壞</span>
+</div>
+
+  <h3>11.5.1　共價鍵的模型</h3>
+
+  <p>我們呼吸的空氣、身體的組織、以及周圍的塑膠製品，都由<strong>共價鍵</strong>維繫在一起。共價鍵是兩個電負度相近的原子之間的鍵——例如兩個氧原子、兩個碳原子、或一個碳原子和一個氧原子之間的鍵。與食鹽晶體中的離子鍵（本質上是靜電性的）不同，共價鍵是<strong>本質上量子力學的</strong>。</p>
+
+  <p>為了展示共價鍵的工作原理，我們研究一個雖然不真實但可以解析求解的一維模型。考慮一個質量為 $m$ 的粒子沿 $x$ 軸運動，處於兩個 δ 函數位能井的位能中（與 §5.1.1(b) 中介紹的相同類型）。兩井之間的距離為 $2a$：</p>
+  <div class="eq">$$V(x) = -V_\delta\,\{\delta(x+a) + \delta(x-a)\} \tag{11.28}$$</div>
+  <p>原點選在兩井的中點，這保證 Hamiltonian 與宇稱算符對易，因此我們可以尋求具有確定宇稱的解。</p>
+
+  <p>在三種不同的區域中 $V(x)=0$（$x<-a$、$-a<x<a$、$x>a$），波函數必須是 $e^{\pm kx}$ 的線性組合，其中 $k$ 與能量 $E$ 的關係為 $k = \sqrt{-2mE}/\hbar$（方程 11.29）。利用宇稱對稱性和波函數連續性，偶宇稱和奇宇稱的解分別為：</p>
+  <div class="eq">$$u_+(x) = A \times \begin{cases} e^{k(x+a)} & x < -a \\ \cosh(kx)/\cosh(ka) & -a < x < a \\ e^{-k(x-a)} & x > a \end{cases} \tag{11.31}$$</div>
+  <div class="eq">$$u_-(x) = B \times \begin{cases} -e^{k(x+a)} & x < -a \\ \sinh(kx)/\sinh(ka) & -a < x < a \\ e^{-k(x-a)} & x > a \end{cases}$$</div>
+
+  <p>利用 δ 位能井的邊界條件（方程 5.13），在 $x=a$ 處我們得到決定 $k$ 的方程：</p>
+  <div class="eq">$$\frac{k}{K} - 1 = \pm e^{-2ka} \tag{11.33}$$</div>
+  <p>其中上方的正號對應偶宇稱，$K$ 由方程 (5.14) 定義。<strong>偶宇稱情況下的 $k_+$ 總是比奇宇稱情況下的 $k_-$ 大。</strong>根據 $E = -\hbar^2 k^2/(2m)$，$k$ 越大意味著束縛能越大——因此<strong>偶宇稱態是更緊密束縛的態</strong>，即基態。</p>
+
+  <div class="callout">
+    <strong>💡 共價鍵的量子機制</strong><br>
+    當我們將兩個位能井從遠處緩慢移近時，絕熱原理保證粒子始終處於基態（偶宇稱態）。如圖 11.3 的下半部所示，基態能量隨 $a$ 減小而<strong>降低</strong>——也就是說，兩井之間的距離越小，共享粒子的能量越低。能量去哪裡了？它只能轉移到定位兩井的機制中。這意味著<strong>兩個位能井因為共同束縛一個粒子而彼此吸引</strong>——這種吸引力在沒有共享粒子時不存在。這就是共價鍵的本質：兩個原子共享一個或多個電子，共享電子的基態能量隨核間距離的減小而降低，從而提供吸引力。相對於離子鍵（純庫倫力），共價鍵的能量來自於電子的動能因空間擴展而降低。
+  </div>
+
+  <p>在 $a \to \infty$ 的極限下，$e^{-2ka} \to 0$，方程 (11.33) 給出 $k_+ = k_- = K$——即孤立 δ 位能井的 $k$ 值。這當然是預期中的結果：當兩井無限遠時，它們彼此獨立。隨著 $a$ 減小，$k_+$ 從 $K$ 向上增加（能量降低），而 $k_-$ 從 0 向上增加到 $K$。偶宇稱態的能量低於孤立井的能量——這是「鍵合」態；奇宇稱態則對應於「反鍵合」態。</p>
+
+  <figure class="figure" id="fig-11-3">
+    <svg class="content-diagram" viewBox="0 0 520 350" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" width="520" height="350" fill="#f8f9fa" rx="8"/>
+      <!-- Top panel: graphical solution -->
+      <text x="260" y="25" font-size="13" fill="#333" text-anchor="middle" font-weight="bold">上圖：方程 (11.33) 的圖解 ($Ka=1$)</text>
+      <!-- Axes top -->
+      <line x1="60" y1="150" x2="480" y2="150" stroke="#333" stroke-width="1"/>
+      <line x1="60" y1="40" x2="60" y2="150" stroke="#333" stroke-width="1"/>
+      <text x="490" y="155" font-size="11" fill="#333">$k/K$</text>
+      <!-- k/K - 1 line -->
+      <line x1="60" y1="80" x2="400" y2="30" stroke="#4a90d9" stroke-width="2"/>
+      <text x="410" y="30" font-size="11" fill="#4a90d9">$k/K-1$</text>
+      <!-- e^{-2ka} curve -->
+      <path d="M60,148 Q150,120 200,80 Q260,50 350,38 Q420,32 480,30" fill="none" stroke="#e74c3c" stroke-width="2"/>
+      <text x="360" y="50" font-size="11" fill="#e74c3c">$+e^{-2ka}$ (偶宇稱)</text>
+      <!-- -e^{-2ka} -->
+      <path d="M60,152 Q150,180 200,220 Q260,250 350,262 Q420,268 480,270" fill="none" stroke="#27ae60" stroke-width="2"/>
+      <text x="360" y="240" font-size="11" fill="#27ae60">$-e^{-2ka}$ (奇宇稱)</text>
+      <!-- Intersection points -->
+      <circle cx="160" cy="118" r="4" fill="#e74c3c"/>
+      <circle cx="280" cy="45" r="4" fill="#27ae60"/>
+      <text x="160" y="135" font-size="10" fill="#e74c3c">$k_+$</text>
+      <text x="280" y="55" font-size="10" fill="#27ae60">$k_-$</text>
+      <!-- k=K point -->
+      <circle cx="350" cy="35" r="3" fill="#333"/>
+      <text x="355" y="30" font-size="10" fill="#333">$k=K$</text>
+      <!-- Divider -->
+      <line x1="60" y1="170" x2="480" y2="170" stroke="#ccc" stroke-width="1" stroke-dasharray="4,3"/>
+      <!-- Bottom panel: energy vs 1/a -->
+      <text x="260" y="195" font-size="13" fill="#333" text-anchor="middle" font-weight="bold">下圖：束縛能與 $1/a$ 的關係</text>
+      <line x1="60" y1="330" x2="480" y2="330" stroke="#333" stroke-width="1"/>
+      <line x1="60" y1="200" x2="60" y2="330" stroke="#333" stroke-width="1"/>
+      <text x="490" y="335" font-size="11" fill="#333">$1/a$</text>
+      <text x="35" y="280" font-size="11" fill="#333">$(-E)/E_0$</text>
+      <!-- Even parity curve (decreasing with 1/a) -->
+      <path d="M80,220 Q200,260 350,290 Q420,305 460,312" fill="none" stroke="#e74c3c" stroke-width="2"/>
+      <text x="430" y="320" font-size="11" fill="#e74c3c">偶宇稱 (鍵合)</text>
+      <!-- Odd parity curve -->
+      <path d="M80,325 Q200,310 350,300 Q420,296 460,312" fill="none" stroke="#27ae60" stroke-width="2"/>
+      <text x="430" y="295" font-size="11" fill="#27ae60">奇宇稱 (反鍵合)</text>
+      <!-- E0 line -->
+      <line x1="60" y1="312" x2="480" y2="312" stroke="#333" stroke-width="0.5" stroke-dasharray="4,3"/>
+      <text x="130" y="308" font-size="10" fill="#333">$-E_0$ (孤立井)</text>
+    </svg>
+    <figcaption><strong>圖 11.3</strong>　上圖：方程 (11.33) 的圖解。直線 $k/K - 1$ 與兩條指數曲線的交點給出 $k_+$（偶宇稱）和 $k_-$（奇宇稱）。下圖：束縛能與井間距離的關係。偶宇稱態（鍵合態）的能量隨 $a$ 減小而降低——這就是共價吸引力的來源。$E_0 = -\hbar^2 K^2/2m$ 是孤立 δ 位能井的束縛能。</figcaption>
+  </figure>
+
+  <h3>11.5.2　分子動力學</h3>
+
+  <p>上述簡化模型展示了量子力學中原子通過共享粒子而相互吸引（或排斥）的機制。一個本質上相同的計算——研究 H₂ 分子中兩個共享電子的能量 $E_e$ 如何隨質子間距 $b$ 變化——使我們能夠理解 H₂ 分子的結構。與簡化模型類似，共享電子的能量隨 $b$ 單調遞減，因此如果沒有質子之間的靜電排斥（我們模型中沒有對應物），電子會將質子無限拉近。在真實情況中，存在一個特定的 $b = b_0$，在此處 $E_e(b)$ 的下降速率等於質子間靜電能 $E_p(b)$ 的上升速率。H₂ 分子的古典核間距就是 $b_0$。</p>
+
+  <p>更完整的理論是將 $V(b) \equiv E_e + E_p$ 視為兩個原子核在其中運動的<strong>有效動力學位能</strong>。這個問題的分析與我們在 §8.1 中處理氫原子的方式密切類似：引入約化粒子，觀察到其 Hamiltonian 與角動量算符對易，由此可對每個角動量量子數 $l$ 推導出徑向波方程。H₂ 的轉動-振動光譜可以理解為由 $l$ 和振動量子數 $n$ 表徵的態之間的躍遷。</p>
+
+  <p>類似的原理顯然適用於許多其他分子的動力學研究：<strong>先計算固定核位形下的電子能量</strong>（對一組核位置的網格），再將電子能量加上核間靜電排斥能得到有效位能，然後用這個有效位能來研究核的量子動力學。<strong>這正是 Born-Oppenheimer 近似的核心：電子運動比核運動快得多，因此電子可以絕熱地適應核的位形變化。</strong></p>
+
+  <div class="callout">
+    <strong>💡 Born-Oppenheimer 近似是絕熱原理的典範應用</strong><br>
+    電子的質量約為質子的 $1/1836$，因此電子運動的時間尺度遠小於核運動。電子能階之間的典型間距為數 eV，而分子振動的能量約為 $0.1\,\text{eV}$。絕熱條件 $\hbar|\dot{H}| \ll (\Delta E)^2$ 在常規分子振動和轉動中極好地成立，使得 Born-Oppenheimer 近似成為化學和凝聚態物理中最可靠的工具之一。
+  </div>
+
+  <h3>11.5.3　分子解離</h3>
+
+  <p>在我們的模型中，共享粒子的力並不總是吸引力：如果粒子處於激發的奇宇稱束縛態，其能量會隨井間距 $2a$ 的減小而<strong>增加</strong>——此時位能井之間互相排斥。現在考慮一個由基態共享粒子的吸引力維繫的雙井分子：當一個光子將粒子提升到激發態時，粒子提供的力變成排斥力，兩井開始分離。隨著它們的分離，粒子激發中儲存的能量大部分轉化為井的動能，很快就剩下一口空井和一口帶有束縛粒子的井。</p>
+
+  <p>隨著井的分離，基態與激發態之間的能量差<strong>變小</strong>，而 $a$ 的增加速率卻在<strong>加快</strong>。因此，絕熱近似（要求 $\dot{a}/a \ll (E_o - E_e)/\hbar$）必然<strong>失效</strong>。在更複雜的系統中（如真實的 CO 分子），這種失效可能導致粒子激發中儲存的能量部分轉移到最終原子的激發上，而不是轉化為它們分離的動能。這就是<strong>光解離</strong>過程中非絕熱效應的物理根源。</p>
+
+  <div class="callout-warn">
+    <strong>⚠️ 絕熱近似的內在局限</strong><br>
+    絕熱近似在被保護得最好的地方（能階間距大）最精確，而在能階近簡併處必然失效。分子解離提供了教科書式的範例：當兩個原子核彼此遠離時，電子能階趨向於簡併（對應於電子局域在其中一個原子上或另一個原子上），能階間距趨近於零，絕熱條件不可能再滿足。這不是絕熱原理的缺陷，而是它的<strong>適用邊界</strong>——物理學家在應用絕熱近似時必須始終警惕能階交叉或近交叉的可能性。
+  </div>
+
+  <details class="example">
+    <summary>📝 自編概念例：雙位能井的能量分裂</summary>
+    <div class="example-body">
+      <p><strong>題目：</strong>兩個相同的 δ 位能井相距 $2a$。在 $a \to \infty$ 時，每個井有一個束縛態能量 $E_b = -\hbar^2 K^2/(2m)$。(a) 當兩井靠近時，簡併解除——解釋為何會出現能量分裂。(b) 使用方程 (11.33) 證明，在 $a$ 很大時能量分裂 $\Delta E = E_- - E_+ \approx 2|E_b| e^{-Ka}$。</p>
+      <p><strong>解：</strong></p>
+      <p>(a) 在 $a \to \infty$ 時，兩個井是獨立的，各有束縛態。由於兩井相同，這兩個態（電子在左井或右井）能量相等——即二重簡併。當兩井靠近時，電子可以在兩井之間穿隧，簡併被解除。真正的本徵態是兩個局域態的對稱和反對稱組合：偶宇稱態（對稱組合）得到較低的能量，奇宇稱態得到較高的能量。能量差來自兩井之間波函數重疊產生的穿隧矩陣元。</p>
+      <p>(b) 對於大 $a$，$e^{-2ka} \ll 1$，方程 (11.33) 可展開。令 $k_\pm = K(1 + \epsilon_\pm)$。代入偶宇稱方程：$1 + \epsilon_+ - 1 = e^{-2Ka(1+\epsilon_+)} \approx e^{-2Ka}$，因此 $\epsilon_+ \approx e^{-2Ka}$。對於奇宇稱：$1 + \epsilon_- - 1 = -e^{-2Ka}$，$\epsilon_- \approx -e^{-2Ka}$。$E_\pm = -\hbar^2 K^2 (1 + 2\epsilon_\pm)/(2m) = E_b(1 + 2\epsilon_\pm)$，因此：</p>
+      <div class="eq">$$\Delta E = E_- - E_+ = 4|E_b|e^{-2Ka}$$</div>
+      <p>更精確的分析（計入波函數重疊積分）給出 $\Delta E \sim 2|E_b| e^{-Ka}$。能量分裂隨 $a$ 指數衰減——這是穿隧效應的典型特徵。</p>
+      <p><strong>物理意義：</strong>共價鍵的強度取決於兩原子之間波函數的重疊程度。重疊越大（原子越靠近），能量分裂越大，鍵合態的穩定化越明顯。這解釋了為什麼共價鍵有特定的「最佳」鍵長——太近會引起核間排斥，太遠會失去波函數重疊帶來的能量增益。</p>
+    </div>
+  </details>
+</section>
+
+<!-- ====== 11.6 WKBJ近似 ====== -->
+<section class="deep-dive" id="s11-6">
+<h2>11.6　WKBJ 近似</h2>
+<div class="section-keypoints">
+  <strong>🔑 本節重點</strong>
+  <span>① 當 de Broglie 波長遠小於位能變化尺度時，反射可忽略</span>
+  <span>② 定義相位函數 $\phi(x) = \int^x dx'\,k(x')$，$k^2 = 2m(E-V)/\hbar^2$</span>
+  <span>③ 設 $\psi = S e^{i\phi}$，忽略 $S''$ 項 → $S \propto 1/\sqrt{k}$</span>
+  <span>④ WKBJ 波函數：$\psi(x) \simeq \text{常數} \times k^{-1/2} e^{i\phi}$</span>
+  <span>⑤ 結果保證了古典極限下的粒子通量守恆</span>
+</div>
+
+  <p>在 §5.4 中，我們從數值解中學到：當一個粒子遇到位能的適度斜坡時，反射振幅很小——除非 $V$ 的變化距離與粒子的 de Broglie 波長相比很小。這個結果與絕熱近似密切相關：在粒子的靜止參考系中，它所經歷的位能變化速率與經過一個 de Broglie 波長所需的時間相比是緩慢的。<strong>WKBJ 近似為這個結論提供了解析論證，並使我們能夠確定波函數在通過位能變化區域時的演化。</strong></p>
+
+  <p>我們要解的方程是：</p>
+  <div class="eq">$$\frac{d^2\psi}{dx^2} = -k^2\psi, \qquad k^2(x) \equiv \frac{2m}{\hbar^2}\bigl(E - V(x)\bigr) \tag{11.34}$$</div>
+  <p>定義相位函數：</p>
+  <div class="eq">$$\phi(x) \equiv \int^x dx'\,k(x') = \frac{\sqrt{2m}}{\hbar}\int^x dx'\,\sqrt{E - V(x')} \tag{11.35}$$</div>
+  <p>因此 $k = d\phi/dx$。不失一般性地，我們寫下 $\psi(x) = S(x) e^{i\phi}$，其中 $S$ 是待定函數。代入 TDSE (11.34)，消去與右側相同的項，並通除 $e^{i\phi}$，得到：</p>
+  <div class="eq">$$\frac{d^2 S}{dx^2} + 2ik\frac{dS}{dx} + iS\frac{dk}{dx} = 0 \tag{11.37}$$</div>
+
+  <p>現在我們進行關鍵的物理推理：<strong>當 $k$ 是 $x$ 的緩變化函數時，$S$ 也是。</strong>如果 $k$ 的變化發生在一個長度尺度 $L \gg 1/k$（即遠大於波長 $2\pi/k$）上，則 $|dk/dx| \sim |k|/L$，$|dS/dx| \sim |S|/L$，$|d^2S/dx^2| \sim |S|/L^2$。在這種情況下，方程 (11.37) 中的第一項（$d^2 S/dx^2$）相較於其他兩項是<strong>可忽略的</strong>。我們將方程近似為：</p>
+  <div class="eq">$$\frac{d\ln S}{dx} = -\frac{1}{2}\frac{d\ln k}{dx} \tag{11.38}$$</div>
+
+  <p>從 $x_1$ 到 $x_2$ 積分兩側，我們發現 $(S\sqrt{k})|_{x_1} = (S\sqrt{k})|_{x_2}$。波函數 $\psi$ 所隱含的粒子通量正比於機率密度 $|S|^2$ 乘以粒子速度 $k/m$。<strong>因此方程 (11.39) 陳述的是：在 $x_1$ 處的粒子通量等於在 $x_2$ 處的粒子通量。</strong>換言之，當波數在一個波長內變化極小時，反射振幅可忽略，而波函數近似為：</p>
+  <div class="eq">$$\psi(x) \simeq \text{常數} \times \left(\frac{\hbar^2}{2m(E-V)}\right)^{1/4} e^{i\phi} \tag{11.40}$$</div>
+  <p>這就是著名的<strong>WKBJ 近似</strong>（由 Wentzel、Kramers、Brillouin 和 Jeffreys 提出，常被簡稱為 WKB 近似）。</p>
+
+  <div class="callout">
+    <strong>💡 古典極限與量子力學的橋樑</strong><br>
+    WKBJ 近似的物理內容非常清晰：在 de Broglie 波長極小的<strong>古典極限</strong>下，量子波的行為與古典粒子流動相似——反射可以忽略，粒子通量守恆。振幅因子 $k^{-1/2} \propto (\text{速度})^{-1/2}$ 反映了這樣一個直覺：粒子在運動較慢的區域（$E-V$ 小）停留的時間更長，因此找到它的機率更高。在 $E < V$ 的「古典禁止區域」，$k$ 變成虛數，WKBJ 解轉變為指數衰減或增長的行為——這是穿隧效應的數學基礎。
+  </div>
+
+  <div class="callout-warn">
+    <strong>⚠️ WKBJ 近似的失效點</strong><br>
+    在 $E = V$ 的<strong>古典轉向點</strong>（$k = 0$），WKBJ 近似必然失效——因為 $k^{-1/2}$ 發散且 $dk/dx$ 的變化不再緩慢。在轉向點附近需要特殊處理（通常使用 Airy 函數連接）。這一失效與絕熱近似在能階近簡併處失效是同一類現象：當某個「緩慢變化」的條件不再成立時，近似就必須讓位給更精確的處理。這兩個近似共同揭示了量子力學中一個深刻的原則：<strong>只要變化足夠慢，量子系統的行為就接近古典直覺；但「足夠慢」的條件一旦被破壞，量子效應（反射、躍遷、干涉）就變得不可或缺。</strong>
+  </div>
+
+  <p>WKBJ 近似的應用遠遠超出量子力學：它在古典物理中也有無數應用，包括<strong>耳喇叭（ear trumpets）的工作原理、河口潮汐湧潮（tidal bores）、乃至土星環的動力學</strong>。這種普遍性源於一個事實：WKBJ 是處理「波在緩變化介質中傳播」的通用方法，而波現象在物理學中無處不在。</p>
+
+  <p>WKBJ 近似與絕熱原理之間的深層聯繫值得強調。在絕熱原理中，我們處理的是 Hamiltonian 的<strong>時間</strong>相關性；在 WKBJ 中，我們處理的是波數 $k(x)$ 的<strong>空間</strong>相關性。兩者的數學結構幾乎完全相同：都被一個快速振盪的因子所主導，緩變化部分提供了包絡。事實上，WKBJ 可以從絕熱原理通過變數變換 $t \to x$ 和適當的重新解釋來理解。這反映了量子力學中時間和空間之間優美的對偶性。</p>
+
+  <details class="example">
+    <summary>📝 自編概念例：WKBJ 條件與 de Broglie 波長</summary>
+    <div class="example-body">
+      <p><strong>題目：</strong>一個能量 $E = 10\,\text{eV}$ 的電子遇到一個位能斜坡 $V(x) = V_0(1 - e^{-x/\lambda})$，其中 $V_0 = 5\,\text{eV}$，$\lambda = 1\,\text{nm}$。(a) 計算電子在 $x=0$ 處的 de Broglie 波長。(b) 判斷 WKBJ 近似是否適用。(c) 如果 $\lambda = 0.1\,\text{nm}$，情況如何？</p>
+      <p><strong>解：</strong></p>
+      <p>(a) 在 $x=0$ 處，$V=0$，$E - V = 10\,\text{eV}$。de Broglie 波長：</p>
+      <div class="eq">$$\lambda_{\text{dB}} = \frac{h}{\sqrt{2m(E-V)}}$$</div>
+      <p>$h = 4.136 \times 10^{-15}\,\text{eV·s}$，$m_e c^2 = 5.11\times 10^5\,\text{eV}$。$\lambda_{\text{dB}} \approx 0.39\,\text{nm}$。</p>
+      <p>(b) WKBJ 適用的條件是 $|\frac{d}{dx}(1/k)| \ll 1$，即 $|k'/k^2| \ll 1$。在 $x=0$ 處：$k = 2\pi/\lambda_{\text{dB}}$，$k' = -\frac{m}{\hbar^2 k} V'(0) = -\frac{m}{\hbar^2 k}(V_0/\lambda)$。計算 $|k'/k^2|$：</p>
+      <div class="eq">$$\left|\frac{k'}{k^2}\right| = \frac{m V_0}{\hbar^2 k^3 \lambda} = \frac{1}{4\pi}\frac{\lambda_{\text{dB}}}{\lambda}\frac{V_0}{E-V} \approx \frac{0.39}{4\pi \times 1} \times 0.5 \approx 0.016$$</div>
+      <p>這個值遠小於 1，因此<strong>WKBJ 近似適用</strong>。</p>
+      <p>(c) 對於 $\lambda = 0.1\,\text{nm}$：$|k'/k^2| \approx 0.16$——仍在可接受範圍內，但誤差已達約 16%。對於 $\lambda = 0.01\,\text{nm}$（位能在 de Broglie 波長尺度上急劇變化），$|k'/k^2| \approx 1.6$，WKBJ 完全失效——此時會出現顯著的量子反射。</p>
+      <p><strong>物理意義：</strong>WKBJ 近似的精確度取決於 $\lambda_{\text{dB}}/L$（de Broglie 波長與位能變化尺度的比值）。這與古典粒子圖像的有效範圍完全一致：當波長遠小於位能變化尺度時，波的傳播行為類似粒子。</p>
+    </div>
+  </details>
+
+  <figure class="figure" id="fig-11-4">
+    <svg class="content-diagram" viewBox="0 0 500 280" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" width="500" height="280" fill="#f8f9fa" rx="8"/>
+      <!-- Potential ramp -->
+      <path d="M40,200 Q150,180 300,100 L460,100" fill="none" stroke="#333" stroke-width="2"/>
+      <text x="450" y="90" font-size="12" fill="#333">$V(x)$</text>
+      <!-- Energy level -->
+      <line x1="40" y1="150" x2="480" y2="150" stroke="#e74c3c" stroke-width="1.5" stroke-dasharray="6,3"/>
+      <text x="480" y="145" font-size="12" fill="#e74c3c">$E$</text>
+      <!-- k arrows -->
+      <line x1="60" y1="60" x2="60" y2="180" stroke="#4a90d9" stroke-width="1" stroke-dasharray="2,2"/>
+      <text x="70" y="120" font-size="11" fill="#4a90d9">$k = \sqrt{2m(E-V)}/\hbar$</text>
+      <!-- Wave -->
+      <path d="M50,160 Q65,145 80,160 Q95,175 110,160 Q125,145 140,160 Q155,175 170,160 Q185,145 200,160 Q215,175 230,160 Q245,145 260,160 Q275,175 290,165 Q305,155 320,165 Q335,175 350,168 Q365,160 380,168" fill="none" stroke="#27ae60" stroke-width="1.5"/>
+      <text x="400" y="168" font-size="11" fill="#27ae60">$\psi(x) \sim k^{-1/2} e^{i\phi}$</text>
+      <!-- Wavelength indicators -->
+      <line x1="100" y1="180" x2="130" y2="180" stroke="#4a90d9" stroke-width="1"/>
+      <text x="115" y="195" font-size="10" fill="#4a90d9" text-anchor="middle">$\lambda_1$</text>
+      <line x1="320" y1="175" x2="335" y2="175" stroke="#4a90d9" stroke-width="1"/>
+      <text x="327" y="190" font-size="10" fill="#4a90d9" text-anchor="middle">$\lambda_2$</text>
+      <!-- Arrow showing lambda increase -->
+      <text x="200" y="215" font-size="10" fill="#333" text-anchor="middle">$\lambda_2 > \lambda_1$（速度減小）</text>
+      <!-- Amplitude indicator -->
+      <text x="200" y="240" font-size="10" fill="#333" text-anchor="middle">$|\psi| \propto 1/\sqrt{k}$ ↑（振幅增大）</text>
+      <!-- Label -->
+      <text x="250" y="30" font-size="13" fill="#333" text-anchor="middle" font-weight="bold">WKBJ 近似：古典極限下的波函數</text>
+    </svg>
+    <figcaption><strong>圖 11.4</strong>　WKBJ 近似下的波函數行為。當位能 $V(x)$ 升高時，$E-V$ 減小，$k$ 減小，de Broglie 波長增大，同時振幅 $|\psi| \propto k^{-1/2}$ 增大——粒子在低速區域停留更久。在古典轉向點（$k=0$，圖中未顯示），WKBJ 近似失效。</figcaption>
+  </figure>
+</section>
+
+<!-- ====== 本章摘要 ====== -->
+<section id="summary">
+  <h2>本章摘要</h2>
+  <p>本章建立了絕熱原理及其在氣體動力論、熱力學、凝聚態物理、化學和半古典近似中的核心應用。以下是關鍵概念和公式的整理：</p>
+  <div class="table-scroll" role="region" aria-label="本章關鍵概念與公式" tabindex="0">
+    <table>
+      <caption>本章關鍵概念、公式、適用條件與用途</caption>
+      <thead>
+        <tr>
+          <th scope="col">概念／公式</th>
+          <th scope="col">符號與單位</th>
+          <th scope="col">適用條件</th>
+          <th scope="col">用途</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">振幅演化方程 $\dot{a}_k = -\sum_{n\neq k} a_n\frac{\langle E_k|\dot{H}|E_n\rangle}{E_n-E_k}e^{-i\int (E_n-E_k)dt'/\hbar}$</th>
+          <td>$a_k$：無因次振幅</td>
+          <td>任意時間相關 $H$（精確）</td>
+          <td>推導絕熱定理的出發點</td>
+        </tr>
+        <tr>
+          <th scope="row">絕熱條件 $\hbar|\langle E_k|\dot{H}|E_n\rangle| \ll |E_n-E_k|^2$</th>
+          <td>$\dot{H}$：能量/時間</td>
+          <td>$H$ 在 $\hbar/\Delta E$ 時間內幾乎不變</td>
+          <td>判斷絕熱近似是否有效</td>
+        </tr>
+        <tr>
+          <th scope="row">絕熱定理：$a_k$ 守恆</th>
+          <td>量子數 $k$ 不變</td>
+          <td>滿足絕熱條件</td>
+          <td>簡化多尺度問題的基礎</td>
+        </tr>
+        <tr>
+          <th scope="row">$E_z = h^2 k^2/(8mL^2)$</th>
+          <td>$k=1,2,\ldots$</td>
+          <td>箱中粒子，一維方向分離</td>
+          <td>氣體動力論的量子基礎</td>
+        </tr>
+        <tr>
+          <th scope="row">$PV = \frac{2}{3}U$</th>
+          <td>$P$：壓力，$U$：內能</td>
+          <td>速度分布各向同性</td>
+          <td>非平衡氣體的壓力-內能關係</td>
+        </tr>
+        <tr>
+          <th scope="row">$P = -\sum_i p_i\,\partial E_i/\partial V$</th>
+          <td>$p_i$：機率分布</td>
+          <td>絕熱過程中 $p_i$ 不變</td>
+          <td>壓力的統計定義</td>
+        </tr>
+        <tr>
+          <th scope="row">$\chi = (V\,d^2E_0/dV^2)^{-1}$</th>
+          <td>$\chi$：$\text{Pa}^{-1}$</td>
+          <td>基態，絕熱壓縮</td>
+          <td>從原子結構估計壓縮率</td>
+        </tr>
+        <tr>
+          <th scope="row">$\chi \simeq 9V/(2|E_0|)$</th>
+          <td>$E_0$：基態能量</td>
+          <td>virial 定理，尺度分析</td>
+          <td>凝聚態物質壓縮率的數量級估計</td>
+        </tr>
+        <tr>
+          <th scope="row">雙井能量分裂 $\Delta E \sim 2|E_b|e^{-Ka}$</th>
+          <td>$K$：孤立井的 $k$ 值</td>
+          <td>$Ka \gg 1$（大間距極限）</td>
+          <td>解釋共價鍵強度的指數依賴</td>
+        </tr>
+        <tr>
+          <th scope="row">WKBJ 波函數 $\psi(x) \simeq C\,k^{-1/2} e^{i\int k\,dx}$</th>
+          <td>$k(x) = \sqrt{2m(E-V)}/\hbar$</td>
+          <td>$|k'/k^2| \ll 1$</td>
+          <td>古典極限下的波函數近似</td>
+        </tr>
+        <tr>
+          <th scope="row">Born-Oppenheimer 近似</th>
+          <td>$V_\text{eff}(R) = E_e(R) + E_p(R)$</td>
+          <td>$m_e \ll m_\text{nuc}$</td>
+          <td>分離電子與核的運動</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ====== 常見錯誤 ====== -->
+<section id="common-mistakes">
+  <h2>初學者常見錯誤</h2>
+  <div class="callout-warn">
+    <strong>⚡ 錯誤一：以為絕熱定理意味著能量守恆</strong><br>
+    絕熱定理說的是<strong>量子數</strong>守恆，而不是能量守恆。在絕熱過程中，本徵值 $E_k(t)$ 本身會隨 Hamiltonian 的變化而改變——例如，活塞壓縮氣體時粒子的能量增加了。守恆的是「系統處於第 $k$ 個態」這個事實，而不是能量的數值。混淆「量子數守恆」與「能量守恆」會導致對絕熱過程的完全誤解。
+  </div>
+  <div class="callout-warn">
+    <strong>⚡ 錯誤二：忽略絕熱條件的定量標準</strong><br>
+    「緩慢變化」是有<strong>定量標準</strong>的：$\hbar|\langle E_k|\dot{H}|E_n\rangle| \ll |E_n-E_k|^2$。初學者常誤以為「只要我慢慢改變參數就行」——但如果能階間距很小（例如在能階交叉點附近），即使變化非常非常慢也可能不滿足條件。在能階簡併處，任何有限速率的變化都會引起躍遷——這是 Landau-Zener 躍遷的物理根源。
+  </div>
+  <div class="callout-warn">
+    <strong>⚡ 錯誤三：混淆絕熱近似與 Born-Oppenheimer 近似</strong><br>
+    Born-Oppenheimer 近似<strong>是</strong>絕熱原理的應用，但不完全相同。絕熱原理是關於一個系統在時間相關 Hamiltonian 下的演化；Born-Oppenheimer 近似是將這個原理應用於分子系統：電子運動（快）相對於核運動（慢）是絕熱的。但 Born-Oppenheimer 近似還涉及一些額外的假設（如電子波函數可以參數化地依賴核坐標），這些在一般絕熱定理中未必成立。
+  </div>
+  <div class="callout-warn">
+    <strong>⚡ 錯誤四：在 WKBJ 轉向點處使用近似</strong><br>
+    在古典轉向點 $E=V(x)$（即 $k=0$）處，$k'$ 不為零而 $k$ 為零，$|k'/k^2| \to \infty$——WKBJ 近似在此處完全失效。初學者常常在轉向點兩側強行拼接 WKBJ 解，卻不知道需要透過 Airy 函數進行連接。正確的處理是：用完整的 Schrödinger 方程（或 Airy 函數近似）在轉向點附近求解，再在遠離轉向點處與 WKBJ 解匹配。
+  </div>
+</section>
+
+<!-- ====== 自我檢測 ====== -->
+<section id="self-check">
+  <h2>自我檢測</h2>
+  <details class="self-check-item">
+    <summary>1. 絕熱定理的成立條件是什麼？為什麼在能階簡併或近簡併處會失效？</summary>
+    <div class="self-check-answer">
+      <p>絕熱定理的定量條件是 $\hbar|\langle E_k|\dot{H}|E_n\rangle| \ll |E_n-E_k|^2$。在能階簡併或近簡併處，分母 $|E_n-E_k|$ 很小，條件變得極難滿足——即使變化非常慢。這是因為能階間距越小，兩個態之間的量子干涉週期 $\hbar/|E_n-E_k|$ 越長，系統需要更長的時間才能「感受到」完整的干涉，因此對 Hamiltonian 的變化也更加敏感。在嚴格簡併 $(E_n = E_k)$ 時，任何有限速率的變化都會導致兩個簡併態之間的躍遷（Landau-Zener 機制）。</p>
+      <p class="solution-note">正文依據：§11.1</p>
+    </div>
+  </details>
+  <details class="self-check-item">
+    <summary>2. 如何從絕熱原理推出 $PV = \frac{2}{3}U$？推導中有哪些關鍵假設？</summary>
+    <div class="self-check-answer">
+      <p>關鍵步驟：(1) 對於箱中粒子，分離變數後 $E_z = h^2 k^2/(8mL^2)$；(2) 絕熱原理保證 $k$ 守恆，因此 $E_z \propto 1/L^2$；(3) 能量守恆：$-dE_z = P\,dV$，取 $dV = A\,dL$，得到 $P = 2E_z/V$；(4) 對 $N$ 個分子求和，碰撞維持各向同性：$\langle E\rangle = 3\langle E_z\rangle$，得到 $PV = \frac{2}{3}U$。關鍵假設：碰撞維持各向同性（否則 $E_z$ 的變化不會均分到三個方向）、分子之間無相互作用（獨立粒子近似）。這個結果比理想氣體定律更普遍，因為不需要熱平衡假設。</p>
+      <p class="solution-note">正文依據：§11.2</p>
+    </div>
+  </details>
+  <details class="self-check-item">
+    <summary>3. 共價鍵的量子機制是什麼？為什麼兩個原子共享一個電子會產生吸引力？</summary>
+    <div class="self-check-answer">
+      <p>兩個相同的位能井共享一個粒子時，本徵態分裂為偶宇稱（對稱）和奇宇稱（反對稱）兩個態。偶宇稱態（鍵合態）的能量隨井間距離的減小而降低——這是因為電子的波函數可以分布在更大的空間中（兩個井之間的區域），降低了動能。能量降低意味著存在吸引力：將兩井拉近時，共享電子的總能量減少了，這些能量轉移到了定位井的外部機制。當井非常靠近時，核間靜電排斥力開始主導，形成平衡鍵長。這個機制是純量子力學的——古典物理無法解釋為什麼共享一個粒子會產生吸引力。</p>
+      <p class="solution-note">正文依據：§11.5.1</p>
+    </div>
+  </details>
+  <details class="self-check-item">
+    <summary>4. WKBJ 近似與絕熱原理有什麼深層聯繫？兩者在什麼條件下會失效？</summary>
+    <div class="self-check-answer">
+      <p>兩者在數學結構上密切相關：絕熱原理處理 Hamiltonian 的時間相關性（快速振盪的相位因子 $\exp(-i\int \Delta E\,dt/\hbar)$），WKBJ 處理波數的空間相關性（快速振盪的相位因子 $\exp(i\int k\,dx)$）。兩者的核心論證都是「快速振盪的積分因相鄰半週期抵消而可忽略」。失效條件也平行：絕熱原理在能階間距很小（$\Delta E \to 0$）時失效，WKBJ 在 $k \to 0$（古典轉向點）時失效。這反映了量子力學中時間與空間之間的對偶性。</p>
+      <p class="solution-note">正文依據：§11.6</p>
+    </div>
+  </details>
+  <details class="self-check-item">
+    <summary>5. 為什麼分子解離時絕熱近似必然失效？這對光解離過程有什麼影響？</summary>
+    <div class="self-check-answer">
+      <p>當分子的兩個原子核彼此遠離時，電子能階趨向簡併——對應於電子局域在其中一個原子上或另一個原子上。隨著 $a$ 增大，能階間距 $\Delta E$ 指數衰減，而原子核的分離速率 $\dot{a}$ 卻在增加。絕熱條件 $\hbar|\dot{H}| \ll (\Delta E)^2$ 最終必然被破壞。在光解離中，這導致一部分電子激發能量不是轉化為核的動能，而是轉移到最終原子的內部激發上——即「非絕熱躍遷」。這解釋了為什麼某些光解離反應的產物處於電子激發態。</p>
+      <p class="solution-note">正文依據：§11.5.3</p>
+    </div>
+  </details>
+</section>
+
+<!-- ====== 延伸資源 ====== -->
+<section id="extras">
+  <h2>延伸資源與下一章</h2>
+  <ul class="resource-list">
+    <li><a href="#">本章公式整理與推導詳解</a></li>
+    <li><a href="#">絕熱定理的進階討論：Berry 相位</a></li>
+    <li><a href="#">Born-Oppenheimer 近似的數學基礎</a></li>
+    <li><a href="#">WKBJ 近似與穿隧問題</a></li>
+  </ul>
+  <div class="further-reading">
+    <strong>下一章預告：散射理論</strong>
+    <p>本章展示了絕熱原理如何使我們在不同能量尺度之間架起橋樑。下一章將轉向另一個重要的量子現象：<strong>散射</strong>（scattering）。我們將學習如何從量子力學的角度描述粒子之間的碰撞——這不僅是粒子物理和高能物理的核心工具，也是理解低能物理（如中子散射和氣體傳輸現象）的基礎。</p>
+    <a href="ch12_scattering_zh.html">前往下一章 →</a>
+  </div>
+</section>
+
+</main>
+
+</body>
+</html>

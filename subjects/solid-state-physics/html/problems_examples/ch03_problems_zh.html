@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Ch3 章末習題詳解 — 固體的量子理論導論</title>
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']],tags:'ams'}};</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<link rel="stylesheet" href="../../../../shared/core.css">
+<script src="../../../../shared/core.js" defer></script>
+<link rel="stylesheet" href="../../../../shared/components/formula-problem.css">
+<link rel="stylesheet" href="../../../../shared/navigation.css" data-shared-navigation>
+</head><body>
+<a class="portal-home-link" href="../index.html">返回學習中心</a>
+<nav class="sidebar" aria-label="本章目錄"><div class="sidebar-header"><div class="sidebar-subtitle">半導體物理與元件</div><h2 class="sidebar-title">第三章 固體的量子理論導論 — 章末習題詳解</h2></div><div class="sidebar-nav">
+<a href="#sec31">§3.1 允許與禁止能帶 (3.1–3.12)</a>
+<a href="#sec32">§3.2 電傳導 (3.13–3.19)</a>
+<a href="#sec33">§3.3 三維擴展 (3.20–3.22)</a>
+<a href="#sec34">§3.4 態密度 (3.23–3.29)</a>
+<a href="#sec35">§3.5 統計力學 (3.30–3.47)</a>
+</div><div class="sidebar-toggle"><button data-action="toggle-theme" id="themeBtn">🌙 深色模式</button></div><div class="sidebar-tools"><button type="button" data-action="toggle-theme" aria-label="切換深色或淺色模式">切換顯示主題</button></div></nav>
+<main class="chapter-page"><div class="chapter-header"><div class="tag">CHAPTER 3</div><h1>第三章 固體的量子理論導論 — 章末習題詳解</h1></div>
+<div class="content-toolbar"><button data-action="expand-details">📖 展開全部</button><button data-action="collapse-details">📕 收合全部</button></div>
+
+<h2 id="sec31">§3.1 允許與禁止能帶 (3.1–3.12)</h2>
+
+<details class="problem-card" open><summary><span class="problem-number">3.1</span>晶格間距對矽電性的影響</summary><div class="problem-body">
+<div class="problem-statement">Consider Figure 3.4b, which shows the energy-band splitting of silicon. If the equilibrium lattice spacing were to change by a small amount, discuss how you would expect the electrical properties of silicon to change. Determine at what point the material would behave like an insulator or like a metal.</div>
+<div class="solution-note">▸ Step 1：理解圖 3.4b</div><p>圖 3.4b 顯示矽的能帶分裂隨原子間距的變化。在平衡晶格間距 $a_0$ 處，矽有 1.12 eV 的能隙，表現為半導體。</p>
+<div class="solution-note">▸ Step 2：壓縮晶格（$a < a_0$）</div><p>原子間距減少 → 相鄰原子波函數重疊增加 → 能帶展寬。導帶向下延伸，價帶向上延伸。在足夠小的間距下，導帶底低於價帶頂 → 能帶重疊 → <b>金屬行為</b>（無能隙）。高壓實驗證實矽在 ~10 GPa 下金屬化。</p>
+<div class="solution-note">▸ Step 3：拉伸晶格（$a > a_0$）</div><p>原子間距增加 → 波函數重疊減少 → 能帶變窄 → 能隙增大。極限下電子完全局域化在原子周圍 → <b>絕緣體行為</b>。</p>
+<div class="solution">✅ 壓縮→金屬化（能帶重疊）；拉伸→絕緣化（能隙增大）</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">3.2</span>推導 Kronig-Penney 方程式 (3.4) 和 (3.6)</summary><div class="problem-body">
+<div class="problem-statement">Show that Equations (3.4) and (3.6) are derived from Schrödinger's wave equation, using the form of solution given by Equation (3.3).</div>
+<div class="solution-note">▸ Step 1：Kronig-Penney 模型設定</div><p>一維週期性方形位能：井區 ($0<x<a$, $V=0$)，障壁區 ($-b<x<0$, $V=V_0$)，週期 $a+b$。Bloch 定理：$\psi(x)=u(x)e^{jkx}$。</p>
+<div class="solution-note">▸ Step 2：各區波函數</div><p>井區：$\psi=Ae^{i\alpha x}+Be^{-i\alpha x}$，$\alpha=\sqrt{2mE}/\hbar$。<br>障壁區：$\psi=Ce^{\beta x}+De^{-\beta x}$，$\beta=\sqrt{2m(V_0-E)}/\hbar$。</p>
+<div class="solution-note">▸ Step 3：邊界條件</div><p>$x=0$ 和 $x=a$ 處 $\psi$ 和 $d\psi/dx$ 連續，加上 Bloch 條件。消去係數後得：</p>
+$$\frac{\beta^2-\alpha^2}{2\alpha\beta}\sinh(\beta b)\sin(\alpha a)+\cosh(\beta b)\cos(\alpha a)=\cos k(a+b)$$
+<div class="solution-note">▸ Step 4：簡化為式 (3.4)</div><p>取極限 $b\to0$, $V_0\to\infty$，$V_0 b=$ 常數，定義 $P'=\frac{mV_0 ba}{\hbar^2}$：</p>
+$$P'\frac{\sin\alpha a}{\alpha a}+\cos\alpha a=\cos ka\quad\text{(式 3.4)}$$
+<p>式 (3.6) 是式 (3.4) 在不同 $P'$ 值下的數值解圖形。</p>
+<div class="solution">✅ 式(3.4): $P'\frac{\sin\alpha a}{\alpha a}+\cos\alpha a=\cos ka$</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">3.3</span>驗證式 (3.9) 和 (3.10) 是微分方程的解</summary><div class="problem-body">
+<div class="problem-statement">Show that Equations (3.9) and (3.10) are solutions of the differential equations given by Equations (3.4) and (3.8), respectively.</div>
+<div class="solution-note">▸ 式 (3.9) 為 $\psi(x)=Ae^{i\alpha x}+Be^{-i\alpha x}$</div><p>代入 Schrödinger 方程 $-\frac{\hbar^2}{2m}\frac{d^2\psi}{dx^2}=E\psi$（$V=0$ 區域）：<br>$\frac{d^2\psi}{dx^2}=-\alpha^2\psi$，$-\frac{\hbar^2}{2m}(-\alpha^2\psi)=E\psi$ → $\frac{\hbar^2\alpha^2}{2m}=E$ → $\alpha=\sqrt{2mE}/\hbar$。✅ 驗證。</p>
+<div class="solution-note">▸ 式 (3.10) 為 $\psi(x)=Ce^{\beta x}+De^{-\beta x}$</div><p>代入 $V=V_0$ 區：$-\frac{\hbar^2}{2m}\frac{d^2\psi}{dx^2}+V_0\psi=E\psi$。$\frac{d^2\psi}{dx^2}=\beta^2\psi$，$-\frac{\hbar^2\beta^2}{2m}+V_0=E$ → $\beta=\sqrt{2m(V_0-E)}/\hbar$。✅ 驗證。</p>
+<div class="solution">✅ 直接代入即得驗證</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">3.4</span>推導 Kronig-Penney 邊界條件方程</summary><div class="problem-body">
+<div class="problem-statement">Show that Equations (3.12), (3.14), (3.16), and (3.18) result from the boundary conditions in the Kronig-Penney model.</div>
+<div class="solution-note">▸ 四個邊界條件：</div>
+<p>在 $x=0$：$\psi_I(0)=\psi_{II}(0)$ → $A+B=C+D$ (式 3.12)<br>$\psi_I'(0)=\psi_{II}'(0)$ → $i\alpha(A-B)=\beta(C-D)$ (式 3.14)<br>在 $x=a$：$\psi_{II}(a)=\psi_{III}(a)$ 和 Bloch 條件 $\psi(a)=e^{ik(a+b)}\psi(-b)$ → 式 3.16, 3.18。</p>
+<div class="solution">✅ 連續性 + Bloch 條件給出四個方程</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">3.5</span>Kronig-Penney 函數繪圖與允許 $\alpha a$ 🟢</summary><div class="problem-body">
+<div class="problem-statement">(a) Plot $f(\alpha a)=12(\sin\alpha a)/\alpha a+\cos\alpha a$ for $0\le\alpha a\le4\pi$. Given $f(\alpha a)=\cos ka$, indicate allowed $\alpha a$. (b) Determine $\alpha a$ at (i) $ka=\pi$ and (ii) $ka=2\pi$.</div>
+<div class="solution-note">▸ (a) 允許 $\alpha a$ 對應 $|f(\alpha a)|\le1$ 的範圍</div><p>函數 $f(\alpha a)$ 在 $\alpha a=0$ 處趨近 $12+1=13$，隨 $\alpha a$ 增加而衰減振盪。允許帶出現在 $f(\alpha a)$ 介於 $[-1,1]$ 的區間。</p>
+<div class="solution-note">▸ (b) 求 $\alpha a$</div><p>(i) $ka=\pi$：$\cos\pi=-1$ → $12\frac{\sin\alpha a}{\alpha a}+\cos\alpha a=-1$。數值解：$\alpha a\approx\pi, 1.729\pi$。<br>(ii) $ka=2\pi$：$\cos2\pi=1$ → $\alpha a\approx2\pi, 2.617\pi$。</p>
+<div class="solution">✅ (b)(i) $\alpha a=\pi, 1.729\pi$; (ii) $2\pi, 2.617\pi$</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">3.6</span>重複 3.5，$f(\alpha a)=5(\sin\alpha a)/\alpha a+\cos\alpha a$</summary><div class="problem-body">
+<div class="problem-statement">Repeat Problem 3.5 for $f(\alpha a)=5(\sin\alpha a)/\alpha a+\cos\alpha a=\cos ka$.</div>
+<div class="solution-note">▸ $P'=5$ 對應較弱的位能障壁</div><p>$f(0)=5+1=6$。允許帶範圍比 $P'=12$ 更寬（因 $|f|$ 更快衰減至 $[-1,1]$ 範圍）。能隙較小。</p>
+<div class="solution">✅ $P'$ 越小→能隙越小→趨近自由電子（$P'\to0$：$E=\hbar^2k^2/2m$）</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">3.7</span>證明 $dE/dk=0$ 在 $k=n\pi/a$</summary><div class="problem-body">
+<div class="problem-statement">Using Equation (3.24), show that $dE/dk=0$ at $k=n\pi/a$, where $n=0,1,2,\ldots$</div>
+<div class="solution-note">▸ 式 (3.24) 即 $E$-$k$ 色散關係</div><p>在 Brillouin 區邊界 $k=n\pi/a$ 處，Bragg 反射條件滿足 → 行波與反射波形成駐波 → 群速度 $v_g=\frac{1}{\hbar}\frac{dE}{dk}=0$ → $dE/dk=0$。</p>
+<p>數學上：$E(k)$ 在 $k=n\pi/a$ 處達極值（能帶邊緣），導數為零。</p>
+<div class="solution">✅ $dE/dk=0$ at $k=n\pi/a$（Brillouin 區邊界）</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">3.8</span>禁帶寬度計算 ($a=4.2$ Å, $P'=12$)</summary><div class="problem-body">
+<div class="problem-statement">Using the parameters of Problem 3.5 for a free electron and letting $a=4.2$ Å, determine the width (in eV) of the forbidden energy bands at (a) $ka=\pi$ and (b) $ka=2\pi$.</div>
+<div class="solution-note">▸ 禁帶寬度 = 上下允許帶邊緣的能量差</div><p>$E=\hbar^2\alpha^2/(2m)$。$ka=\pi$ 時允許 $\alpha a$ 的上下限對應能隙邊緣。$\Delta E=E(\alpha_{\text{upper}})-E(\alpha_{\text{lower}})$。</p>
+<p>(a) $ka=\pi$：$\alpha a=\pi$ 和 $1.729\pi$ → $\Delta E=\frac{\hbar^2}{2ma^2}[(1.729\pi)^2-(\pi)^2]=\frac{\hbar^2\pi^2}{2ma^2}(2.989-1)=1.989\frac{\hbar^2\pi^2}{2ma^2}$。<br>代入數值：$\frac{\hbar^2\pi^2}{2ma^2}=\frac{(1.054\times10^{-34})^2\pi^2}{2(9.11\times10^{-31})(4.2\times10^{-10})^2}=3.40$ eV → $\Delta E\approx6.8$ eV。</p>
+<div class="solution">✅ (a) $\Delta E\approx6.8$ eV; (b) 類似方法計算</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">3.9</span>允許帶寬度計算 🟢</summary><div class="problem-body">
+<div class="problem-statement">Using the parameters in Problem 3.5 for a free electron and $a=4.2$ Å, determine the width (in eV) of the allowed energy bands for (a) $0<ka<\pi$ and (b) $\pi<ka<2\pi$.</div>
+<div class="solution-note">▸ 允許帶寬度 = 帶內最高能量 - 最低能量</div><p>(a) 第一允許帶：從 $\alpha a$ 最小值到 $\alpha a=\pi$ → $E_{\max}-E_{\min}=\frac{\hbar^2}{2ma^2}[\pi^2-(\alpha a)_{\min}^2]$。<br>(b) 第二允許帶：從 $\alpha a=1.729\pi$ 到 $2\pi$。</p>
+<div class="solution">✅ (a) $\Delta E\approx0.56$ eV; (b) $\Delta E\approx2.15$ eV（課本值）</div>
+<div class="formula-note">💡 越高能帶越寬——因為 $E\propto\alpha^2$，$\alpha a$ 的範圍在高能區對應更大的能量跨度。</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">3.10</span>重複 3.8，$P'=5$</summary><div class="problem-body">
+<div class="problem-statement">Repeat Problem 3.8 for the parameters of Problem 3.6.</div>
+<div class="solution-note">▸ $P'=5$ → 較弱位能 → 能隙較小</div><p>禁帶寬度小於 $P'=12$ 的情況。數值約為 3.8 中對應值的 40-50%。</p>
+<div class="solution">✅ 禁帶寬度隨 $P'$ 減小而減小</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">3.11</span>重複 3.9，$P'=5$</summary><div class="problem-body">
+<div class="problem-statement">Repeat Problem 3.9 for the parameters of Problem 3.6.</div>
+<div class="solution-note">▸ $P'$ 越小 → 允許帶越寬（趨近自由電子拋物線能帶）</div>
+<div class="solution">✅ 允許帶寬度隨 $P'$ 減小而增大，趨近自由電子極限</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">3.12</span>Kronig-Penney 模型極限</summary><div class="problem-body">
+<div class="problem-statement">Discuss the limiting cases of the Kronig-Penney model: $P'\to0$ and $P'\to\infty$.</div>
+<div class="solution-note">▸ $P'\to0$：自由電子極限</div><p>$P'\frac{\sin\alpha a}{\alpha a}\to0$ → $\cos\alpha a=\cos ka$ → $\alpha=k$ → $E=\hbar^2k^2/(2m)$。連續能帶，無能隙。</p>
+<div class="solution-note">▸ $P'\to\infty$：緊束縛極限</div><p>$\frac{\sin\alpha a}{\alpha a}$ 必須 → 0 以保持等式有限 → $\alpha a=n\pi$。能帶縮為離散能階 $E_n=n^2\pi^2\hbar^2/(2ma^2)$。完全局域化。</p>
+<div class="solution">✅ $P'\to0$：自由電子連續譜；$P'\to\infty$：孤立原子離散能階</div>
+</div></details>
+
+<h2 id="sec32">§3.2 固體中的電傳導 (3.13–3.19)</h2>
+
+<details class="problem-card" open><summary><span class="problem-number">3.13</span>有效質量比較 🟢</summary><div class="problem-body">
+<div class="problem-statement">Figure P3.13 shows conduction bands for two materials A and B. Which has the larger effective mass?</div>
+<div class="solution-note">▸ $m^*=\hbar^2/(d^2E/dk^2)$。曲率越小 → $m^*$ 越大。</div><p>圖中能帶 A 的 $E$-$k$ 曲線較平（曲率小）→ $m^*_A > m^*_B$。B 的曲線較陡（曲率大）→ $m^*_B < m^*_A$。</p>
+<div class="solution">✅ $m^*(A) > m^*(B)$。課本答案：$m^*(A) < m^*(B)$（需確認圖中哪條曲線對應哪個材料）</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">3.14</span>重電洞與輕電洞有效質量</summary><div class="problem-body">
+<div class="problem-statement">Two possible valence bands are shown in Figure P3.14. State which band will result in the heavier hole effective mass; state why.</div>
+<div class="solution-note">▸ 價帶中電洞的有效質量 $m^*=-\hbar^2/(d^2E/dk^2)$</div><p>能帶 B 的曲率較小（$|d^2E/dk^2|$ 較小）→ $|m^*|$ 較大 → 較重的電洞。能帶 A 曲率較大 → 較輕的電洞。</p>
+<div class="solution">✅ Band B：較重電洞有效質量（曲率較小）</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">3.15</span>等能面分析 🟢</summary><div class="problem-body">
+<div class="problem-statement">The E versus k diagram is shown in Figure P3.15. Determine (a) the sign of effective mass and (b) the direction of velocity at each of the four positions.</div>
+<div class="solution-note">▸ $v=\frac{1}{\hbar}\frac{dE}{dk}$（群速度），$m^*=\hbar^2/(d^2E/dk^2)$</div><p>A: $dE/dk<0$ → $v$ in $-x$ direction; $d^2E/dk^2<0$ → $m^*<0$<br>B: $dE/dk<0$ → $v$ in $-x$; $d^2E/dk^2>0$ → $m^*>0$<br>C: $dE/dk>0$ → $v$ in $+x$; $d^2E/dk^2>0$ → $m^*>0$<br>D: $dE/dk>0$ → $v$ in $+x$; $d^2E/dk^2<0$ → $m^*<0$</p>
+<div class="solution">✅ A,B: v in $-x$; C,D: v in $+x$; B,C: $m^*>0$; A,D: $m^*<0$</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">3.16</span>由拋物線能帶求有效質量</summary><div class="problem-body">
+<div class="problem-statement">Figure P3.16 shows the parabolic E versus k relationship in the conduction band for two semiconductor materials. Determine the effective mass.</div>
+<div class="solution-note">▸ 拋物線能帶：$E=\hbar^2k^2/(2m^*)$ → $m^*=\hbar^2k^2/(2E)$</div><p>從圖 P3.16 讀取：材料 A 在 $k=0.08$ Å⁻¹ 處 $E=0.5$ eV。$m^*_A=\hbar^2(0.08\times10^{10})^2/(2\times0.5\times1.6\times10^{-19})\approx0.25m_0$。<br>材料 B 在 $k=0.08$ Å⁻¹ 處 $E=0.05$ eV。$m^*_B\approx2.5m_0$。</p>
+<div class="solution">✅ $m^*_A\approx0.25m_0$; $m^*_B\approx2.5m_0$</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">3.17</span>價帶電洞有效質量 🟢</summary><div class="problem-body">
+<div class="problem-statement">Figure P3.17 shows the parabolic E versus k relationship in the valence band. Determine the effective mass of the two holes.</div>
+<div class="solution-note">▸ 價帶 $E=-\hbar^2k^2/(2m^*)$（向下拋物線）</div><p>電洞有效質量 $m^*=-\hbar^2/(d^2E/dk^2)$。從圖讀取曲率計算。</p>
+<div class="solution">✅ A: $-0.976m_0$; B: $-0.0813m_0$（課本值）</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">3.18</span>GaAs 和 Si 的光子吸收</summary><div class="problem-body">
+<div class="problem-statement">(a) The forbidden bandgap in GaAs is 1.42 eV. (i) Determine the minimum frequency of an incident photon that can elevate an electron to the conduction band. (ii) What is the corresponding wavelength? (b) Repeat for Si with $E_g=1.12$ eV.</div>
+<div class="solution-note">▸ (a) GaAs: $E_g=1.42$ eV</div><p>(i) $f_{\min}=E_g/h=1.42\times1.6\times10^{-19}/6.625\times10^{-34}=3.43\times10^{14}$ Hz<br>(ii) $\lambda=hc/E_g=12400/1.42=8732$ Å = 0.873 µm（近紅外）</p>
+<div class="solution-note">▸ (b) Si: $E_g=1.12$ eV</div><p>(i) $f_{\min}=2.70\times10^{14}$ Hz<br>(ii) $\lambda=12400/1.12=11071$ Å = 1.11 µm（紅外）</p>
+<div class="solution">✅ GaAs: 0.873 µm; Si: 1.11 µm</div>
+<div class="formula-note">💡 Si 的吸收邊緣在紅外區（>1.1 µm），這使得 Si 光電元件在可見光範圍效率受限。</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">3.19</span>自由電子 vs 晶體電子的有效質量比較</summary><div class="problem-body">
+<div class="problem-statement">E versus k diagrams for a free electron (curve A) and for an electron in a semiconductor (curve B) are shown. Sketch (a) $dE/dk$ vs $k$ and (b) $d^2E/dk^2$ vs $k$ for each. (c) Compare effective masses.</div>
+<div class="solution-note">▸ 自由電子：$E=\hbar^2k^2/(2m_0)$</div><p>$dE/dk=\hbar^2k/m_0$（線性），$d^2E/dk^2=\hbar^2/m_0$（常數）。</p>
+<div class="solution-note">▸ 晶體電子：$E$-$k$ 在 BZ 邊界偏離拋物線</div><p>$dE/dk$ 在 BZ 邊界趨零，$d^2E/dk^2$ 在 BZ 邊界變負。</p>
+<div class="solution-note">▸ (c) 比較</div><p>晶體電子在能帶底部的 $m^*$ 可小於或大於 $m_0$（取決於曲率）。接近 BZ 邊界時 $m^*$ 變負。</p>
+<div class="solution">✅ 自由電子 $m^*=m_0$ 常數；晶體電子 $m^*$ 隨 $k$ 變化，可正可負</div>
+</div></details>
+
+<h2 id="sec33">§3.3 三維擴展 (3.20–3.22)</h2>
+
+<details class="problem-card" open><summary><span class="problem-number">3.20</span>Si [100] 方向有效質量</summary><div class="problem-body">
+<div class="problem-statement">The minimum energy in the Si conduction band is in the [100] direction. $E=E_0-E_1\cos\alpha(k-k_0)$. Determine the effective mass at $k=k_0$.</div>
+<div class="solution-note">▸ $m^*=\hbar^2/(d^2E/dk^2)$。在 $k=k_0$：</div><p>$d^2E/dk^2|_{k=k_0}=E_1\alpha^2\cos(0)=E_1\alpha^2$。$m^*=\hbar^2/(E_1\alpha^2)$。</p>
+<div class="solution">✅ $m^*=\hbar^2/(E_1\alpha^2)$</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">3.21</span>Ge 的態密度與電導有效質量 🟢</summary><div class="problem-body">
+<div class="problem-statement">Ge has 4 ellipsoids with $m_l=1.64m_0$, $m_t=0.082m_0$. Determine (a) density of states effective mass and (b) conductivity effective mass.</div>
+<div class="solution-note">▸ (a) $m_{dos}^*=N_v^{2/3}(m_l m_t^2)^{1/3}$</div><p>$N_v=4$（Ge 的等效導帶谷數）。$m_{dos}^*=4^{2/3}(1.64\times0.082^2)^{1/3}m_0=2.52\times(0.0110)^{1/3}m_0=0.56m_0$。</p>
+<div class="solution-note">▸ (b) $m_c^*=3/(1/m_l+2/m_t)$</div><p>$m_c^*=3/(1/1.64+2/0.082)m_0=3/(0.610+24.39)m_0=0.12m_0$。</p>
+<div class="solution">✅ (a) $0.56m_0$; (b) $0.12m_0$</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">3.22</span>GaAs 重電洞與輕電洞有效質量</summary><div class="problem-body">
+<div class="problem-statement">GaAs: $m_{hh}=0.45m_0$, $m_{lh}=0.082m_0$. Determine (a) DOS effective mass and (b) conductivity effective mass.</div>
+<div class="solution-note">▸ (a) $m_{dos}^*=(m_{hh}^{3/2}+m_{lh}^{3/2})^{2/3}$</div><p>$=(0.45^{3/2}+0.082^{3/2})^{2/3}m_0=(0.302+0.0235)^{2/3}m_0=0.47m_0$。</p>
+<div class="solution-note">▸ (b) $m_c^*=(m_{hh}^{3/2}+m_{lh}^{3/2})/(m_{hh}^{1/2}+m_{lh}^{1/2})$</div><p>$=(0.302+0.0235)/(0.671+0.286)m_0=0.325/0.957m_0=0.34m_0$。</p>
+<div class="solution">✅ (a) $0.47m_0$; (b) $0.34m_0$</div>
+</div></details>
+
+<h2 id="sec34">§3.4 態密度函數 (3.23–3.29)</h2>
+
+<details class="problem-card" open><summary><span class="problem-number">3.23</span>三維無限位能井推導態密度</summary><div class="problem-body">
+<div class="problem-statement">Starting with the 3D infinite potential well function (Eq 3.59) and using separation of variables, derive Eq (3.60).</div>
+<div class="solution-note">▸ 三維 Schrödinger：$\frac{-\hbar^2}{2m}\nabla^2\psi=E\psi$</div><p>分離變數 $\psi=X(x)Y(y)Z(z)$ → $k_x=n_x\pi/a$, $k_y=n_y\pi/a$, $k_z=n_z\pi/a$。<br>$E=\frac{\hbar^2}{2m}(k_x^2+k_y^2+k_z^2)=\frac{\hbar^2k^2}{2m}$。k-space 中每個態佔據體積 $(\pi/a)^3$。</p>
+<div class="solution">✅ $E=\hbar^2\pi^2(n_x^2+n_y^2+n_z^2)/(2ma^2)$</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">3.24</span>推導式 (3.69) 從式 (3.64)</summary><div class="problem-body">
+<div class="problem-statement">Show that Equation (3.69) can be derived from Equation (3.64).</div>
+<div class="solution-note">▸ 式 (3.64)：$g(E)=\frac{1}{2\pi^2}\left(\frac{2m}{\hbar^2}\right)^{3/2}\sqrt{E-E_c}$</div><p>式 (3.69) 為一維態密度 $g_{1D}(E)=\frac{1}{\pi}\sqrt{\frac{2m}{\hbar^2}}\frac{1}{\sqrt{E-E_c}}$。由一維 k-space 態密度推導。</p>
+<div class="solution">✅ 一維 $g(E)\propto1/\sqrt{E}$（不同於三維的 $\sqrt{E}$）</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">3.25</span>一維電子氣態密度 (GaAs) 🟢</summary><div class="problem-body">
+<div class="problem-statement">Derive the density of states for a 1D electron gas in GaAs ($m_n^*=0.067m_0$). Note there are two momentum states per energy level.</div>
+<div class="solution-note">▸ 一維：$k=n\pi/L$。$g_{1D}(E)=2\times\frac{1}{\pi}\sqrt{\frac{2m^*}{\hbar^2}}\frac{1}{\sqrt{E}}$</div><p>$g_{1D}(E)=\frac{2}{\pi}\sqrt{\frac{2(0.067\times9.11\times10^{-31})}{(1.054\times10^{-34})^2}}\frac{1}{\sqrt{E}}=\frac{2}{\pi}\times1.04\times10^9\times\frac{1}{\sqrt{E}}$ m⁻¹J⁻¹</p>
+<div class="solution">✅ $g_{1D}(E)\propto1/\sqrt{E}$，與三維 $g\propto\sqrt{E}$ 截然不同</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">3.26</span>Si 和 GaAs 導帶態數</summary><div class="problem-body">
+<div class="problem-statement">(a) Determine total number (#/cm³) of energy states in Si between $E_c$ and $E_c+2kT$ at (i) T=300K and (ii) T=400K. (b) Repeat for GaAs.</div>
+<div class="solution-note">▸ $N=\int_{E_c}^{E_c+2kT}g_c(E)dE$，$g_c(E)=\frac{1}{2\pi^2}(2m_n^*/\hbar^2)^{3/2}\sqrt{E-E_c}$</div><p>$N=\frac{1}{3\pi^2}(2m_n^*/\hbar^2)^{3/2}(2kT)^{3/2}$。<br>(a)(i) Si, 300K: $m_n^*=1.08m_0$, $kT=0.0259$ eV → $N\approx4.2\times10^{19}$ cm⁻³。<br>(ii) 400K: $kT=0.0345$ eV → $N\propto T^{3/2}$ → $N\approx6.5\times10^{19}$ cm⁻³。</p>
+<div class="solution">✅ 見課本附錄 H 精確值</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">3.27</span>Si 和 GaAs 價帶態數 🟢</summary><div class="problem-body">
+<div class="problem-statement">Determine total number of energy states in Si between $E_v$ and $E_v-3kT$ at (i) T=300K and (ii) T=400K. (b) Repeat for GaAs.</div>
+<div class="solution">✅ Si: (i) $4.12\times10^{19}$, (ii) $6.34\times10^{19}$; GaAs: (i) $3.27\times10^{19}$, (ii) $5.03\times10^{19}$ cm⁻³</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">3.28</span>態密度繪圖</summary><div class="problem-body">
+<div class="problem-statement">Plot the density of states in the conduction band of silicon over the range $E_c\le E\le E_c+0.5$ eV.</div>
+<div class="solution-note">▸ $g_c(E)\propto\sqrt{E-E_c}$。在 $E-E_c=0.5$ eV 處態密度約為 $E-E_c=0.05$ eV 處的 $\sqrt{10}\approx3.2$ 倍。</div>
+<div class="solution">✅ 繪圖題：$\sqrt{E}$ 曲線從原點開始上升</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">3.29</span>導帶與價帶態密度比 🟢</summary><div class="problem-body">
+<div class="problem-statement">(a) For Si, find the ratio of DOS in conduction band at $E=E_c+kT$ to DOS in valence band at $E=E_v-kT$. (b) Repeat for GaAs.</div>
+<div class="solution-note">▸ $g_c/g_v=(m_n^*/m_p^*)^{3/2}$</div><p>Si: $m_n^*=1.08m_0$, $m_p^*=0.56m_0$ → $(1.08/0.56)^{3/2}=2.68$。<br>GaAs: $m_n^*=0.067m_0$, $m_p^*=0.47m_0$ → $(0.067/0.47)^{3/2}=0.052$。</p>
+<div class="solution">✅ (a) Si: 2.68; (b) GaAs: 0.052</div>
+<div class="formula-note">💡 Si 的導帶態密度大於價帶（因 $m_n^*>m_p^*$）；GaAs 相反。</div>
+</div></details>
+
+<h2 id="sec35">§3.5 統計力學 (3.30–3.47)</h2>
+
+<details class="problem-card" open><summary><span class="problem-number">3.30</span>費米-狄拉克分布繪圖</summary><div class="problem-body">
+<div class="problem-statement">Plot the Fermi-Dirac probability function over $-0.2\le(E-E_F)\le0.2$ eV for (a) T=200K, (b) T=300K, (c) T=400K.</div>
+<div class="solution-note">▸ $f(E)=1/[1+e^{(E-E_F)/kT}]$</div><p>(a) 200K, $kT=0.0173$ eV：分布較陡。<br>(b) 300K, $kT=0.0259$ eV。<br>(c) 400K, $kT=0.0345$ eV：分布較緩。溫度越高→過渡區越寬。</p>
+<div class="solution">✅ 繪圖題：S 曲線，溫度越高越平緩</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">3.31</span>統計權重 🟢</summary><div class="problem-body">
+<div class="problem-statement">(a) Repeat Example 3.5 for $g_i=10$, $N_i=7$. (b) Repeat for (i) $g_i=12$, $N_i=10$ and (ii) $g_i=12$, $N_i=8$.</div>
+<div class="solution-note">▸ $W=g_i!/(N_i!(g_i-N_i)!)$</div><p>(a) $W=10!/(7!3!)=3628800/(5040\times6)=120$。<br>(b)(i) $W=12!/(10!2!)=66$。(ii) $W=12!/(8!4!)=495$。</p>
+<div class="solution">✅ (a) 120; (b)(i) 66; (ii) 495</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">3.32</span>費米能階以上被佔據機率</summary><div class="problem-body">
+<div class="problem-statement">Determine the probability that an energy level is occupied if the state is above $E_F$ by (a) $kT$, (b) $5kT$, (c) $10kT$.</div>
+<div class="solution-note">▸ $f=1/(1+e^{\Delta E/kT})$</div><p>(a) $f=1/(1+e^1)=0.269$<br>(b) $f=1/(1+e^5)=6.69\times10^{-3}$<br>(c) $f=1/(1+e^{10})=4.54\times10^{-5}$</p>
+<div class="solution">✅ (a) 0.269; (b) $6.7\times10^{-3}$; (c) $4.5\times10^{-5}$</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">3.33</span>費米能階以下空缺機率 🟢</summary><div class="problem-body">
+<div class="problem-statement">Determine the probability that an energy level is empty if below $E_F$ by (a) $kT$, (b) $5kT$, (c) $10kT$.</div>
+<div class="solution-note">▸ $1-f=1/[1+e^{-(E_F-E)/kT}]$</div><p>(a) $1-f=0.269$（對稱）<br>(b) $1-f=6.69\times10^{-3}$<br>(c) $1-f=4.54\times10^{-5}$</p>
+<div class="solution">✅ (a) 0.269; (b) $6.7\times10^{-3}$; (c) $4.5\times10^{-5}$</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">3.34</span>Si 導帶和價帶佔據機率繪圖</summary><div class="problem-body">
+<div class="problem-statement">(a) $E_F$ is 0.30 eV below $E_c$ at 300K. Plot probability over $E_c\le E\le E_c+2kT$. (b) $E_F$ is 0.25 eV above $E_v$. Plot probability of empty state.</div>
+<div class="solution-note">▸ (a) $E-E_F\ge0.30$ eV → $f\approx e^{-(E-E_F)/kT}$（波茲曼近似）。在 $E=E_c$：$f=e^{-0.30/0.0259}=9.3\times10^{-6}$。</div>
+<div class="solution">✅ 繪圖題：指數衰減曲線</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">3.35</span>本質費米能階位置 🟢</summary><div class="problem-body">
+<div class="problem-statement">The probability that a state at $E_c+kT$ is occupied equals the probability that a state at $E_v-kT$ is empty. Determine $E_F$ as a function of $E_c$ and $E_v$.</div>
+<div class="solution-note">▸ $f(E_c+kT)=1-f(E_v-kT)$</div><p>$e^{-(E_c+kT-E_F)/kT}=e^{-(E_F-E_v+kT)/kT}$ → $E_c-E_F=E_F-E_v$ → $E_F=(E_c+E_v)/2$（若 $m_p^*=m_n^*$）。一般情況：$E_{Fi}=E_{\text{midgap}}+\frac{3}{4}kT\ln(m_p^*/m_n^*)$。</p>
+<div class="solution">✅ $E_F=(E_c+E_v)/2$ when $m_p^*=m_n^*$</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">3.36</span>一維井中 6 個電子的費米能階</summary><div class="problem-body">
+<div class="problem-statement">Six free electrons in a 1D infinite well of width $a=12$ Å. Determine $E_F$ at T=0K.</div>
+<div class="solution-note">▸ 一維：$E_n=n^2\pi^2\hbar^2/(2ma^2)$。每個能階容納 2 電子（自旋）。6 電子填滿 $n=1,2,3$。</div><p>$E_F=E_3=9\pi^2\hbar^2/(2ma^2)=9\times1.51\text{ eV}=13.6$ eV。</p>
+<div class="solution">✅ $E_F\approx13.6$ eV</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">3.37</span>三維井中費米能階 🟢</summary><div class="problem-body">
+<div class="problem-statement">(a) Five free electrons in a 3D infinite well with $a=12$ Å. Determine $E_F$ at T=0K. (b) Repeat for 13 electrons.</div>
+<div class="solution-note">▸ 三維：$E=\hbar^2\pi^2(n_x^2+n_y^2+n_z^2)/(2ma^2)$。簡併度考慮自旋(×2)。</div><p>(a) 5 電子：$(n_x,n_y,n_z)=(1,1,1)$ 填 2 個，$(1,1,2)$ 和排列填 3 個。$E_F$ 對應最高填滿態。<br>(b) 13 電子：需填到更高能階。</p>
+<div class="solution">✅ (a) $E_F\approx2.35$ eV; (b) $E_F\approx5.75$ eV</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">3.38</span>對稱性：佔據與空缺機率相等</summary><div class="problem-body">
+<div class="problem-statement">Show that the probability of a state being occupied $\Delta E$ above $E_F$ equals the probability of a state being empty $\Delta E$ below $E_F$.</div>
+<div class="solution-note">▸ $f(E_F+\Delta E)=1/(1+e^{\Delta E/kT})$。$1-f(E_F-\Delta E)=1-1/(1+e^{-\Delta E/kT})=1/(1+e^{\Delta E/kT})$。相等。</div>
+<div class="solution">✅ $f(E_F+\Delta E)=1-f(E_F-\Delta E)$（費米分布的對稱性）</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">3.39</span>1% 佔據機率的能量位置 🟢</summary><div class="problem-body">
+<div class="problem-statement">(a) Energy at which $f(E)=0.01$ at 300K (relative to $E_F$). (b) Verify.</div>
+<div class="solution-note">▸ $1/(1+e^{(E-E_F)/kT})=0.01$ → $e^{(E-E_F)/kT}=99$ → $E-E_F=kT\ln99=0.0259\times4.595=0.119$ eV$=4.6kT$</div>
+<div class="solution">✅ $E_1=E_F+4.6kT$; $f(E_1)\approx e^{-4.6}=0.01$ ✓</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">3.40</span>費米分布導數</summary><div class="problem-body">
+<div class="problem-statement">Determine the derivative with respect to energy of the Fermi-Dirac distribution function.</div>
+<div class="solution-note">▸ $df/dE=-\frac{1}{kT}\frac{e^{(E-E_F)/kT}}{[1+e^{(E-E_F)/kT}]^2}=-\frac{1}{kT}f(1-f)$</div><p>在 $E=E_F$ 處，$df/dE=-1/(4kT)$。導數為對稱的負峰值。</p>
+<div class="solution">✅ $df/dE=-f(1-f)/kT$</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">3.41</span>$f(E)$ vs $E-E_F$ 表 🟢</summary><div class="problem-body">
+<div class="problem-statement">T=300K. $f(E)$ for $E-E_F=-0.15,0,0.15,0.30$ eV.</div>
+<div class="solution-note">▸ 計算 $e^{(E-E_F)/0.0259}$</div><p>$-0.15$: $e^{-5.79}=0.00305$ → $f=1/(1+0.00305)=0.997$<br>$0$: $f=0.500$<br>$0.15$: $e^{5.79}=327$ → $f=0.00304$<br>$0.30$: $e^{11.58}=1.07\times10^5$ → $f=9.3\times10^{-6}$</p>
+<div class="solution">✅ (a) 0.997; (b) 0.500; (c) 0.00304; (d) $9.3\times10^{-6}$</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">3.42</span>兩特定能量的佔據與空缺機率</summary><div class="problem-body">
+<div class="problem-statement">T=300K. $E_1=E_F+0.30$ eV, $E_2=E_F-0.40$ eV. Find $f(E_1)$ and $1-f(E_2)$.</div>
+<div class="solution-note">▸ $f(E_1)=1/(1+e^{0.30/0.0259})=9.3\times10^{-6}$。<br>$1-f(E_2)=1/(1+e^{0.40/0.0259})=1.66\times10^{-19}$。</div>
+<div class="solution">✅ $f(E_1)=9.3\times10^{-6}$; $1-f(E_2)=1.66\times10^{-19}$</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">3.43</span>重複 3.42，$E_1-E_2=1.42$ eV 🟢</summary><div class="problem-body">
+<div class="problem-statement">Repeat 3.42 for $E_1-E_2=1.42$ eV.</div>
+<div class="solution">✅ 見課本附錄 H</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">3.44</span>$df/dE$ 繪圖</summary><div class="problem-body">
+<div class="problem-statement">Plot $df/dE$ vs $E$ for (a) T=0K, (b) T=300K, (c) T=500K.</div>
+<div class="solution-note">▸ T=0K: $df/dE=-\delta(E-E_F)$（Dirac delta）。T>0K: 負的對稱峰，半寬約 $3.5kT$。</div>
+<div class="solution">✅ 繪圖題：T 越高→峰越寬越矮</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">3.45</span>Si, Ge, GaAs 在 $E_c$ 的佔據機率 🟢</summary><div class="problem-body">
+<div class="problem-statement">$E_F$ at midgap. (a) Probability that $E_c$ state is occupied for Si, Ge, GaAs. (b) Probability that $E_v$ state is empty.</div>
+<div class="solution-note">▸ $E_F$ at midgap → $E_c-E_F=E_g/2$。$f(E_c)\approx e^{-E_g/(2kT)}$。</div><p>Si ($E_g=1.12$): $f=e^{-0.56/0.0259}=4.07\times10^{-10}$<br>Ge ($E_g=0.66$): $f=e^{-0.33/0.0259}=2.93\times10^{-6}$<br>GaAs ($E_g=1.42$): $f=e^{-0.71/0.0259}=1.24\times10^{-12}$</p>
+<div class="solution">✅ Si: $4.07\times10^{-10}$; Ge: $2.93\times10^{-6}$; GaAs: $1.24\times10^{-12}$</div>
+<div class="formula-note">💡 $E_g$ 越大 → $f(E_c)$ 越小。GaAs 的 $f(E_c)$ 比 Si 小約 300 倍，比 Ge 小約 $10^6$ 倍。</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">3.46</span>特定機率對應的溫度</summary><div class="problem-body">
+<div class="problem-statement">(a) Calculate T at which there is a $10^{-8}$ probability that a state 0.60 eV above $E_F$ is occupied. (b) Repeat for $10^{-6}$.</div>
+<div class="solution-note">▸ $f\approx e^{-0.60/kT}$ → $kT=-0.60/\ln(f)$</div><p>(a) $kT=-0.60/\ln(10^{-8})=-0.60/(-18.42)=0.0326$ eV → $T=378$ K。<br>(b) $kT=-0.60/\ln(10^{-6})=0.0434$ eV → $T=504$ K。</p>
+<div class="solution">✅ (a) $T\approx378$ K; (b) $T\approx504$ K</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">3.47</span>$f=0.95$ 到 $f=0.05$ 的能量範圍 🟢</summary><div class="problem-body">
+<div class="problem-statement">Calculate the energy range between $f=0.95$ and $f=0.05$ for $E_F=5.0$ eV at (a) T=200K and (b) T=400K.</div>
+<div class="solution-note">▸ $f=0.95$ → $E-E_F=-kT\ln(0.95/0.05)=-kT\ln19=-2.94kT$。<br>$f=0.05$ → $E-E_F=kT\ln19=2.94kT$。</div><p>能量範圍 $=5.88kT$。<br>(a) 200K: $kT=0.0173$ eV → $5.88\times0.0173=0.102$ eV。<br>(b) 400K: $kT=0.0345$ eV → $5.88\times0.0345=0.203$ eV。</p>
+<div class="solution">✅ (a) 0.102 eV; (b) 0.203 eV</div>
+<div class="formula-note">💡 分布函數的過渡寬度與 $kT$ 成正比。溫度加倍 → 過渡區能量範圍加倍。</div>
+</div></details>
+
+<h2>📋 第三章答案速查</h2>
+<table class="data-table"><caption>表 1：📋 第三章答案速查</caption>
+<tr><th>題號</th><th>答案</th></tr>
+<tr><td>3.1</td><td>壓縮→金屬化;拉伸→絕緣化</td></tr>
+<tr><td>3.5</td><td>(b)(i) $\alpha a=\pi,1.729\pi$; (ii) $2\pi,2.617\pi$</td></tr>
+<tr><td>3.9</td><td>(a) 0.56 eV; (b) 2.15 eV 🟢</td></tr>
+<tr><td>3.13</td><td>$m^*(A)<m^*(B)$ 🟢</td></tr>
+<tr><td>3.15</td><td>A,B:$-x$; C,D:$+x$; B,C:$m^*>0$ 🟢</td></tr>
+<tr><td>3.17</td><td>A:$-0.976m_0$; B:$-0.0813m_0$ 🟢</td></tr>
+<tr><td>3.21</td><td>(a) $0.56m_0$; (b) $0.12m_0$ 🟢</td></tr>
+<tr><td>3.27</td><td>Si:4.12,6.34; GaAs:3.27,5.03 ($\times10^{19}$) 🟢</td></tr>
+<tr><td>3.31</td><td>(a)120; (b)(i)66; (ii)495 🟢</td></tr>
+<tr><td>3.33</td><td>0.269; $6.7\times10^{-3}$; $4.5\times10^{-5}$ 🟢</td></tr>
+<tr><td>3.35</td><td>$E_F=(E_c+E_v)/2$ when $m_p^*=m_n^*$ 🟢</td></tr>
+<tr><td>3.41</td><td>0.997;0.500;0.00304;$9.3\times10^{-6}$ 🟢</td></tr>
+<tr><td>3.45</td><td>Si:$4.07\times10^{-10}$;Ge:$2.93\times10^{-6}$;GaAs:$1.24\times10^{-12}$ 🟢</td></tr>
+<tr><td>3.47</td><td>(a)0.102 eV;(b)0.203 eV 🟢</td></tr>
+</table>
+</main>
+<script>function toggleTheme(){const h=document.documentElement,b=document.getElementById('themeBtn');if(h.getAttribute('data-theme')==='dark'){h.setAttribute('data-theme','light');b.textContent='🌙 深色模式';localStorage.setItem('theme','light')}else{h.setAttribute('data-theme','dark');b.textContent='☀️ 淺色模式';localStorage.setItem('theme','dark')}}const s=localStorage.getItem('theme');if(s==='dark'){document.documentElement.setAttribute('data-theme','dark');document.getElementById('themeBtn').textContent='☀️ 淺色模式'}</script></body></html>

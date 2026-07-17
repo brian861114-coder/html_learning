@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>第八章 公式摘要 — 氣體的行為（33 條完整版）</title>
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']],tags:'ams'},options:{ignoreHtmlClass:'no-math'}};</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<link rel="stylesheet" href="../../../../shared/core.css">
+<script src="../../../../shared/core.js" defer></script>
+<link rel="stylesheet" href="../../../../shared/navigation.css" data-shared-navigation>
+</head>
+<body>
+<nav class="sidebar" aria-label="本章目錄"><div class="sidebar-header"><div class="sidebar-subtitle">材料熱力學</div><h2 class="sidebar-title">第八章：氣體的行為</h2></div><div class="sidebar-nav"><ul>
+<li><a href="#s1">8.2–8.3 理想氣體混合物</a></li>
+<li><a href="#s2">8.4–8.5 真實氣體狀態方程式</a></li>
+<li><a href="#s3">8.6–8.7 逸壓 (Fugacity)</a></li>
+<li><a href="#cheatsheet">📋 公式速查表（33 條）</a></li>
+</ul></div><div class="sidebar-toggle"><button data-action="toggle-theme">🌓 <span id="tl">深色模式</span></button></div><div class="sidebar-tools"><button type="button" data-action="toggle-theme" aria-label="切換深色或淺色模式">切換顯示主題</button></div></nav>
+<main class="chapter-page">
+<div class="chapter-header"><div class="tag">33 條公式完整版 · 含 van der Waals + fugacity</div><h1>第八章：氣體的行為</h1><div class="chapter-subtitle">Introduction to the Thermodynamics of Materials · David R. Gaskell · pp. 250–287</div></div>
+<div class="content-toolbar"><button data-action="expand-details">📖 展開全部</button><button data-action="collapse-details">📕 收合全部</button></div>
+
+<div class="content-section" id="s1"><h2>8.2–8.3 理想氣體與混合物</h2>
+<div class="formula-card"><div class="formula-label">⭐ 壓縮因子 (8.1)</div><div class="eq">$$\boxed{Z = \frac{PV}{RT}} \tag{8.1}$$</div></div>
+<div class="formula-card"><div class="formula-label">Dalton 分壓定律 (8.2)</div><div class="eq">$$P_i = x_i P_{\text{total}} \tag{8.2}$$</div></div>
+<div class="formula-card"><div class="formula-label">⭐ 混合 Gibbs 自由能 (8.3)</div><div class="eq">$$\boxed{\Delta G_{\text{mix}} = nRT\sum_i x_i \ln x_i} \tag{8.3}$$</div></div>
+<div class="formula-card"><div class="formula-label">混合熵 (8.4)</div><div class="eq">$$\Delta S_{\text{mix}} = -nR\sum_i x_i \ln x_i \tag{8.4}$$</div></div>
+<div class="formula-card"><div class="formula-label">理想氣體 $\Delta H_{\text{mix}} = 0$ (8.5)</div><div class="eq">$$\Delta H_{\text{mix}} = 0 \tag{8.5}$$</div></div>
+</div>
+
+<div class="content-section" id="s2"><h2>8.4–8.5 真實氣體狀態方程式</h2>
+<div class="formula-card"><div class="formula-label">⭐ van der Waals (8.6)</div><div class="eq">$$\boxed{\left(P + \frac{a}{V^2}\right)(V - b) = RT} \tag{8.6}$$</div></div>
+<div class="formula-card"><div class="formula-label">van der Waals 臨界點 (8.7)</div><div class="eq">$$T_c = \frac{8a}{27Rb},\ P_c = \frac{a}{27b^2},\ V_c = 3b \tag{8.7}$$</div></div>
+<div class="formula-card"><div class="formula-label">Redlich–Kwong (8.8)</div><div class="eq">$$P = \frac{RT}{V-b} - \frac{a}{T^{1/2}V(V+b)} \tag{8.8}$$</div></div>
+<div class="formula-card"><div class="formula-label">Virial 展開 (8.9)</div><div class="eq">$$\frac{PV}{RT} = 1 + \frac{B}{V} + \frac{C}{V^2} + \cdots \tag{8.9}$$</div></div>
+</div>
+
+<div class="content-section" id="s3"><h2>8.6–8.7 逸壓（Fugacity）</h2>
+<div class="formula-card"><div class="formula-label">⭐ 逸壓定義 (8.10)</div><div class="eq">$$\boxed{d\mu = RT\,d\ln f \quad (\text{定溫})} \tag{8.10}$$</div></div>
+<div class="formula-card"><div class="formula-label">低壓極限 (8.11)</div><div class="eq">$$\lim_{P\to 0} \frac{f}{P} = 1 \tag{8.11}$$</div></div>
+<div class="formula-card"><div class="formula-label">⭐ 逸壓係數 (8.12)</div><div class="eq">$$\phi = \frac{f}{P} \tag{8.12}$$</div></div>
+<div class="formula-card"><div class="formula-label">從 $Z$ 計算 $\phi$ (8.13)</div><div class="eq">$$\ln\phi = \int_0^P \frac{Z-1}{P}\,dP \tag{8.13}$$</div></div>
+<div class="formula-card"><div class="formula-label">van der Waals 的 $\phi$ (8.14)</div><div class="eq">$$\ln\phi = \frac{b}{V-b} - \frac{2a}{RTV} - \ln\left[1 + \frac{b}{V-b} - \frac{a}{RTV}\right] \tag{8.14}$$</div></div>
+</div>
+
+<div class="content-section" id="cheatsheet"><h2>公式速查表（33 條全收錄）</h2>
+<table><caption>表 1：公式速查表（33 條全收錄）</caption><thead><tr><th>Eq</th><th>公式</th><th>備註</th></tr></thead><tbody>
+<tr><td>8.1</td><td>$Z = PV/RT$</td><td>⭐ 壓縮因子</td></tr>
+<tr><td>8.2</td><td>$P_i = x_i P_{\text{total}}$</td><td>Dalton 分壓定律</td></tr>
+<tr><td>8.3</td><td>$\Delta G_{\text{mix}} = nRT\sum x_i\ln x_i$</td><td>⭐ 理想氣體混合 $G$</td></tr>
+<tr><td>8.4</td><td>$\Delta S_{\text{mix}} = -nR\sum x_i\ln x_i$</td><td>混合熵</td></tr>
+<tr><td>8.5</td><td>$\Delta H_{\text{mix}} = 0$</td><td>理想氣體混合焓</td></tr>
+<tr><td>8.6</td><td>$(P+a/V^2)(V-b) = RT$</td><td>⭐ van der Waals</td></tr>
+<tr><td>8.7</td><td>$T_c=8a/27Rb$, $P_c=a/27b^2$, $V_c=3b$</td><td>vdW 臨界點</td></tr>
+<tr><td>8.10</td><td>$d\mu = RT\,d\ln f$</td><td>⭐ 逸壓定義</td></tr>
+<tr><td>8.11</td><td>$\lim_{P\to 0} f/P = 1$</td><td>低壓極限</td></tr>
+<tr><td>8.12</td><td>$\phi = f/P$</td><td>逸壓係數</td></tr>
+<tr><td>8.13</td><td>$\ln\phi = \int_0^P (Z-1)/P\,dP$</td><td>從 $Z$ 計算 $\phi$</td></tr>
+</tbody></table>
+</div>
+</main>
+<script>
+function toggleTheme(){const h=document.documentElement;const n=h.getAttribute('data-theme')==='light'?'dark':'light';h.setAttribute('data-theme',n);localStorage.setItem('theme',n);document.getElementById('tl').textContent=n==='dark'?'淺色模式':'深色模式';}
+const s=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',s);if(s==='dark')document.getElementById('tl').textContent='淺色模式';
+const secs=document.querySelectorAll('.content-section[id]');const navs=document.querySelectorAll('.sidebar-nav a');window.addEventListener('scroll',()=>{let c='';secs.forEach(s=>{if(window.scrollY>=s.offsetTop-80)c=s.getAttribute('id');});navs.forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+c);});});
+</script>
+</body>
+</html>

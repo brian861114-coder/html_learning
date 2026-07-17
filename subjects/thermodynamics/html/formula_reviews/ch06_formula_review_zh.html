@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>第六章 公式摘要 — 熱容量、焓、熵與第三定律（17 條完整版）</title>
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']],tags:'ams'},options:{ignoreHtmlClass:'no-math'}};</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<link rel="stylesheet" href="../../../../shared/core.css">
+<script src="../../../../shared/core.js" defer></script>
+<link rel="stylesheet" href="../../../../shared/navigation.css" data-shared-navigation>
+</head>
+<body>
+<nav class="sidebar" aria-label="本章目錄"><div class="sidebar-header"><div class="sidebar-subtitle">材料熱力學</div><h2 class="sidebar-title">第六章：熱容量、焓、熵與第三定律</h2></div><div class="sidebar-nav"><ul>
+<li><a href="#s1">6.2 熱容理論 (6.1–6.3)</a></li>
+<li><a href="#s2">6.3–6.4 $C_P$ 經驗式與 Kirchhoff (6.4–6.7)</a></li>
+<li><a href="#s3">6.5–6.7 第三定律與壓力效應 (6.8–6.12)</a></li>
+<li><a href="#cheatsheet">📋 公式速查表（17 條）</a></li>
+</ul></div><div class="sidebar-toggle"><button data-action="toggle-theme">🌓 <span id="tl">深色模式</span></button></div><div class="sidebar-tools"><button type="button" data-action="toggle-theme" aria-label="切換深色或淺色模式">切換顯示主題</button></div></nav>
+<main class="chapter-page">
+<div class="chapter-header"><div class="tag">17 條公式完整版 · 含 Einstein/Debye + Kirchhoff + 第三定律</div><h1>第六章：熱容量、焓、熵與第三定律</h1><div class="chapter-subtitle">Introduction to the Thermodynamics of Materials · David R. Gaskell · pp. 176–217</div></div>
+<div class="content-toolbar"><button data-action="expand-details">📖 展開全部</button><button data-action="collapse-details">📕 收合全部</button></div>
+
+<div class="content-section" id="s1"><h2>6.2 熱容量的理論計算</h2>
+<div class="formula-card"><div class="formula-label">⭐ Dulong–Petit 定律</div><div class="eq">$$C_V \approx 3R \approx 25\ \text{J/mol·K}$$</div><div class="formula-note">古典極限——室溫下多數金屬元素接近此值。</div></div>
+<div class="formula-card"><div class="formula-label">愛因斯坦熱容 (6.1)</div><div class="eq">$$C_V = 3R\left(\frac{\Theta_E}{T}\right)^2 \frac{e^{\Theta_E/T}}{(e^{\Theta_E/T} - 1)^2} \tag{6.1}$$</div><div class="formula-note">$\Theta_E = h\nu_E/k_B$（愛因斯坦溫度）。低溫下 $C_V \to 0$ 但下降太快。</div></div>
+<div class="formula-card"><div class="formula-label">德拜熱容 (6.2)</div><div class="eq">$$C_V = 9R\left(\frac{T}{\Theta_D}\right)^3 \int_0^{\Theta_D/T} \frac{x^4 e^x}{(e^x - 1)^2}\,dx \tag{6.2}$$</div></div>
+<div class="formula-card"><div class="formula-label">⭐ 德拜 $T^3$ 定律（低溫）(6.3)</div><div class="eq">$$\boxed{C_V = \frac{12\pi^4}{5}R\left(\frac{T}{\Theta_D}\right)^3} \propto T^3 \tag{6.3}$$</div><div class="formula-note">低溫極限（$T \ll \Theta_D$）。$C_V$ 隨 $T^3$ 趨近於零。</div></div>
+</div>
+
+<div class="content-section" id="s2"><h2>6.3–6.4 $C_P$ 經驗式與 Kirchhoff 定律</h2>
+<div class="formula-card"><div class="formula-label">⭐ $C_P$ 經驗多項式 (6.4)</div><div class="eq">$$\boxed{C_P = a + bT + cT^{-2} + dT^2} \tag{6.4}$$</div></div>
+<div class="formula-card"><div class="formula-label">⭐ Kirchhoff 定律（微分形式）(6.5)</div><div class="eq">$$\boxed{\left(\frac{\partial \Delta H}{\partial T}\right)_P = \Delta C_P} \tag{6.5}$$</div></div>
+<div class="formula-card"><div class="formula-label">⭐ Kirchhoff 定律（積分形式）(6.6)</div><div class="eq">$$\Delta H^\circ(T) = \Delta H^\circ(298) + \int_{298}^{T} \Delta C_P\,dT \tag{6.6}$$</div></div>
+<div class="formula-card"><div class="formula-label">含相變的焓變計算 (6.7)</div><div class="eq">$$\Delta H(T) = \int_{T_1}^{T_{\text{tr}}} C_P^I dT + \Delta H_{\text{tr}} + \int_{T_{\text{tr}}}^{T_2} C_P^{II} dT \tag{6.7}$$</div></div>
+</div>
+
+<div class="content-section" id="s3"><h2>6.5–6.7 第三定律、絕對熵與壓力效應</h2>
+<div class="formula-card"><div class="formula-label">⭐ 第三定律 (6.8)</div><div class="eq">$$\boxed{S(0\ \text{K}) = 0 \quad \text{（完美晶體）}} \tag{6.8}$$</div></div>
+<div class="formula-card"><div class="formula-label">⭐ 絕對熵（不含相變）(6.9)</div><div class="eq">$$S^\circ(T) = \int_0^T \frac{C_P}{T}\,dT \tag{6.9}$$</div></div>
+<div class="formula-card"><div class="formula-label">⭐ 絕對熵（含相變）(6.10)</div><div class="eq">$$\boxed{S^\circ(T) = \int_0^{T_1} \frac{C_P^I}{T}dT + \frac{\Delta H_{\text{tr}}}{T_{\text{tr}}} + \int_{T_{\text{tr}}}^T \frac{C_P^{II}}{T}dT} \tag{6.10}$$</div></div>
+<div class="formula-card"><div class="formula-label">壓力對焓的影響 (6.11)</div><div class="eq">$$\left(\frac{\partial H}{\partial P}\right)_T = V(1 - T\alpha) \tag{6.11}$$</div></div>
+<div class="formula-card"><div class="formula-label">壓力對熵的影響 (6.12)</div><div class="eq">$$\left(\frac{\partial S}{\partial P}\right)_T = -V\alpha \tag{6.12}$$</div><div class="formula-note">$\alpha = (1/V)(\partial V/\partial T)_P$。固體/液體通常可忽略。</div></div>
+</div>
+
+<div class="content-section" id="cheatsheet"><h2>公式速查表（17 條全收錄）</h2>
+<table><caption>表 1：公式速查表（17 條全收錄）</caption><thead><tr><th>Eq</th><th>公式</th><th>備註</th></tr></thead><tbody>
+<tr><td>—</td><td>$C_V \approx 3R$</td><td>Dulong–Petit 定律</td></tr>
+<tr><td>6.1</td><td>$C_V = 3R(\Theta_E/T)^2 e^{\Theta_E/T}/(e^{\Theta_E/T}-1)^2$</td><td>愛因斯坦模型</td></tr>
+<tr><td>6.2</td><td>$C_V = 9R(T/\Theta_D)^3 \int_0^{\Theta_D/T} x^4 e^x/(e^x-1)^2 dx$</td><td>德拜模型</td></tr>
+<tr><td>6.3</td><td>$C_V = \frac{12\pi^4}{5}R(T/\Theta_D)^3 \propto T^3$</td><td>⭐ 德拜 $T^3$ 定律</td></tr>
+<tr><td>6.4</td><td>$C_P = a + bT + cT^{-2} + dT^2$</td><td>⭐ $C_P$ 經驗多項式</td></tr>
+<tr><td>6.5</td><td>$(\partial\Delta H/\partial T)_P = \Delta C_P$</td><td>⭐ Kirchhoff 定律（微分）</td></tr>
+<tr><td>6.6</td><td>$\Delta H^\circ(T) = \Delta H^\circ(298) + \int_{298}^T \Delta C_P dT$</td><td>⭐ Kirchhoff 定律（積分）</td></tr>
+<tr><td>6.7</td><td>$\Delta H = \int C_P^I dT + \Delta H_{\text{tr}} + \int C_P^{II} dT$</td><td>含相變的焓變</td></tr>
+<tr><td>6.8</td><td>$S(0\ \text{K}) = 0$（完美晶體）</td><td>⭐ 第三定律</td></tr>
+<tr><td>6.9</td><td>$S^\circ(T) = \int_0^T C_P/T\,dT$</td><td>絕對熵（無相變）</td></tr>
+<tr><td>6.10</td><td>$S^\circ(T) = \int C_P^I/T\,dT + \Delta H_{\text{tr}}/T_{\text{tr}} + \int C_P^{II}/T\,dT$</td><td>⭐ 絕對熵（含相變）</td></tr>
+<tr><td>—</td><td>$S^\circ_{\text{low}} = \frac{1}{3}C_V(T_{\text{low}})$（德拜外插）</td><td>極低溫外插方法</td></tr>
+<tr><td>6.11</td><td>$(\partial H/\partial P)_T = V(1-T\alpha)$</td><td>壓力對焓的影響</td></tr>
+<tr><td>6.12</td><td>$(\partial S/\partial P)_T = -V\alpha$</td><td>壓力對熵的影響</td></tr>
+</tbody></table>
+</div>
+</main>
+<script>
+function toggleTheme(){const h=document.documentElement;const n=h.getAttribute('data-theme')==='light'?'dark':'light';h.setAttribute('data-theme',n);localStorage.setItem('theme',n);document.getElementById('tl').textContent=n==='dark'?'淺色模式':'深色模式';}
+const s=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',s);if(s==='dark')document.getElementById('tl').textContent='淺色模式';
+const secs=document.querySelectorAll('.content-section[id]');const navs=document.querySelectorAll('.sidebar-nav a');window.addEventListener('scroll',()=>{let c='';secs.forEach(s=>{if(window.scrollY>=s.offsetTop-80)c=s.getAttribute('id');});navs.forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+c);});});
+</script>
+</body>
+</html>

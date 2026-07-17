@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第 10 章例題詳解 — Calculus</title>
+<script>
+MathJax = {
+  tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']], tags: 'ams' },
+  options: { ignoreHtmlClass: 'no-math' }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<link rel="stylesheet" href="../../../../shared/core.css">
+<script src="../../../../shared/core.js" defer></script>
+<link rel="stylesheet" href="../../../../shared/navigation.css" data-shared-navigation>
+</head>
+<body>
+<nav class="sidebar" aria-label="本章目錄"><div class="sidebar-header"><div class="sidebar-subtitle">微積分</div><h2 class="sidebar-title">冪級數</h2></div><ul class="toc"><li class="ns"><a href="#section-1">10.1 冪級數與函數 (Power Series and Functions)</a></li><li class="ns"><a href="#section-2">10.2 冪級數的性質 (Properties of Power Series)</a></li><li class="ns"><a href="#section-3">10.3 泰勒與麥克勞林級數 (Taylor and Maclaurin Series)</a></li><li class="ns"><a href="#section-4">10.4 冪級數的應用 (Working with Taylor Series)</a></li></ul><div class="sidebar-tools"><button type="button" data-action="toggle-theme" aria-label="切換深色或淺色模式">切換顯示主題</button></div></nav>
+
+<main class="chapter-page">
+
+<a class="portal-home-link" href="../../index.html">← 返回學習中心</a>
+
+<a class="portal-home-link" href="index.html">← 例題與習題目錄</a>
+
+<header class="chapter-header">
+  <div class="tag">第 10 章 · Calculus Vol 2, Ch 6</div>
+  <h1>冪級數</h1>
+  <div class="chapter-meta">Power Series · OpenStax Calculus · pp. 461–510 · 共 24 個課本例題</div>
+</header>
+
+<p>以下收錄本章所有課本例題，包含<strong>題目、詳細逐步解題過程與答案</strong>。內容以繁體中文呈現，數學式使用 MathJax 渲染。課本有詳解者翻譯為繁體中文；課本僅提供答案者，補上完整逐步解。</p>
+
+<section id="ss6-1">
+<h2 id="section-1">10.1 冪級數與函數 (Power Series and Functions)</h2>
+<p style="font-size:13px;color:var(--tx2);margin-bottom:16px"><strong>🔑 本節重點：</strong>冪級數定義、收斂區間與半徑、以 x 為中心的冪級數</p>
+
+<div class="example">
+<div class="example-label">📝 例題 10.1</div>
+<div class="example-title">冪級數的收斂半徑（比值檢驗）</div>
+<div class="problem-statement">求 $\sum_{n=0}^{\infty} \frac{x^n}{n!}$ 的收斂半徑與區間。</div>
+<div class="solution"><strong>解：</strong>使用比值檢驗：$\rho = \lim_{n\to\infty} \left|\frac{x^{n+1}}{(n+1)!} \cdot \frac{n!}{x^n}\right| = \lim_{n\to\infty} \frac{|x|}{n+1} = 0$。對所有 $x$，$\rho = 0 < 1$。<br>收斂半徑 $R = \infty$，收斂區間為 $(-\infty, \infty)$。</div>
+<div class="solution">✅ 答案：$R = \infty$，$(-\infty, \infty)$</div>
+
+</div>
+
+<div class="example">
+<div class="example-label">📝 例題 10.2</div>
+<div class="example-title">冪級數的收斂半徑</div>
+<div class="problem-statement">求 $\sum_{n=0}^{\infty} n!\,x^n$ 的收斂半徑。</div>
+<div class="solution"><strong>解：</strong>比值檢驗：$\rho = \lim_{n\to\infty} \left|\frac{(n+1)!x^{n+1}}{n!x^n}\right| = \lim_{n\to\infty} (n+1)|x| = \infty$（當 $x \neq 0$）。<br>僅在 $x=0$ 時收斂，$R = 0$。</div>
+<div class="solution">✅ 答案：$R = 0$，僅 $x=0$</div>
+
+</div>
+
+<div class="example">
+<div class="example-label">📝 例題 10.3</div>
+<div class="example-title">求收斂區間（含端點檢測）</div>
+<div class="problem-statement">求 $\sum_{n=1}^{\infty} \frac{x^n}{n}$ 的收斂區間。</div>
+<div class="solution"><strong>解：</strong>比值檢驗：$\rho = \lim_{n\to\infty} \left|\frac{x^{n+1}}{n+1} \cdot \frac{n}{x^n}\right| = |x|$。$|x| < 1$ 時收斂，$R = 1$。<br>端點 $x=1$：$\sum \frac{1}{n}$（調和級數，發散）。端點 $x=-1$：$\sum \frac{(-1)^n}{n}$（交錯調和，收斂）。<br>收斂區間：$[-1, 1)$。</div>
+<div class="solution">✅ 答案：$R=1$，$[-1, 1)$</div>
+
+</div>
+
+<div class="example">
+<div class="example-label">📝 例題 10.4</div>
+<div class="example-title">幾何冪級數</div>
+<div class="problem-statement">求 $\sum_{n=0}^{\infty} x^n$ 的收斂區間與和函數。</div>
+<div class="solution"><strong>解：</strong>幾何級數，$|x| < 1$ 時收斂，和為 $\frac{1}{1-x}$。收斂區間：$(-1, 1)$。</div>
+<div class="solution">✅ 答案：$R=1$，$(-1, 1)$，和 $= \frac{1}{1-x}$</div>
+
+</div>
+
+<div class="example">
+<div class="example-label">📝 例題 10.5</div>
+<div class="example-title">以 a 為中心的冪級數</div>
+<div class="problem-statement">求 $\sum_{n=0}^{\infty} \frac{(x-2)^n}{3^n}$ 的收斂區間。</div>
+<div class="solution"><strong>解：</strong>$\rho = \lim_{n\to\infty} \left|\frac{(x-2)^{n+1}}{3^{n+1}} \cdot \frac{3^n}{(x-2)^n}\right| = \frac{|x-2|}{3}$。<br>$\frac{|x-2|}{3} < 1$，得 $|x-2| < 3$，收斂半徑 $R=3$。端點 $x=-1, 5$ 均發散。<br>收斂區間：$(-1, 5)$。</div>
+<div class="solution">✅ 答案：$R=3$，$(-1, 5)$</div>
+
+</div>
+
+</section>
+
+<section id="ss6-2">
+<h2 id="section-2">10.2 冪級數的性質 (Properties of Power Series)</h2>
+<p style="font-size:13px;color:var(--tx2);margin-bottom:16px"><strong>🔑 本節重點：</strong>逐項微分、逐項積分、以冪級數表示函數</p>
+
+<div class="example">
+<div class="example-label">📝 例題 10.6</div>
+<div class="example-title">逐項微分</div>
+<div class="problem-statement">利用 $\frac{1}{1-x} = \sum_{n=0}^{\infty} x^n$（$|x|<1$），求 $\sum_{n=1}^{\infty} nx^{n-1}$ 的和。</div>
+<div class="solution"><strong>解：</strong>$\frac{d}{dx}\left(\frac{1}{1-x}\right) = \frac{1}{(1-x)^2}$。另一方面，逐項微分冪級數：$\frac{d}{dx}\sum_{n=0}^{\infty} x^n = \sum_{n=1}^{\infty} nx^{n-1}$。<br>故 $\sum_{n=1}^{\infty} nx^{n-1} = \frac{1}{(1-x)^2}$，$|x|<1$。</div>
+<div class="solution">✅ 答案：$\frac{1}{(1-x)^2}$</div>
+
+</div>
+
+<div class="example">
+<div class="example-label">📝 例題 10.7</div>
+<div class="example-title">逐項積分：ln(1+x) 的級數</div>
+<div class="problem-statement">求 $\ln(1+x)$ 的冪級數表示。</div>
+<div class="solution"><strong>解：</strong>$\frac{1}{1+x} = \sum_{n=0}^{\infty} (-1)^n x^n$，$|x|<1$。逐項積分：<br>$\ln(1+x) = \int_0^x \frac{dt}{1+t} = \sum_{n=0}^{\infty} \frac{(-1)^n x^{n+1}}{n+1} = \sum_{n=1}^{\infty} \frac{(-1)^{n-1} x^n}{n}$，$|x|<1$。（在 $x=1$ 處也收斂。）</div>
+<div class="solution">✅ 答案：$\sum_{n=1}^{\infty} \frac{(-1)^{n-1} x^n}{n}$</div>
+
+</div>
+
+<div class="example">
+<div class="example-label">📝 例題 10.8</div>
+<div class="example-title">arctan x 的級數</div>
+<div class="problem-statement">求 $\arctan x$ 的冪級數表示。</div>
+<div class="solution"><strong>解：</strong>$\frac{1}{1+x^2} = \sum_{n=0}^{\infty} (-1)^n x^{2n}$，$|x|<1$。逐項積分：<br>$\arctan x = \int_0^x \frac{dt}{1+t^2} = \sum_{n=0}^{\infty} \frac{(-1)^n x^{2n+1}}{2n+1}$。</div>
+<div class="solution">✅ 答案：$\sum_{n=0}^{\infty} \frac{(-1)^n x^{2n+1}}{2n+1}$</div>
+
+</div>
+
+</section>
+
+<section id="ss6-3">
+<h2 id="section-3">10.3 泰勒與麥克勞林級數 (Taylor and Maclaurin Series)</h2>
+<p style="font-size:13px;color:var(--tx2);margin-bottom:16px"><strong>🔑 本節重點：</strong>泰勒級數、麥克勞林級數、泰勒多項式、餘項</p>
+
+<div class="example">
+<div class="example-label">📝 例題 10.9</div>
+<div class="example-title">eˣ 的麥克勞林級數</div>
+<div class="problem-statement">求 $f(x) = e^x$ 的麥克勞林級數。</div>
+<div class="solution"><strong>解：</strong>$f^{(n)}(0) = 1$ 對所有 $n$。麥克勞林級數：$e^x = \sum_{n=0}^{\infty} \frac{x^n}{n!} = 1 + x + \frac{x^2}{2!} + \frac{x^3}{3!} + \cdots$。收斂半徑 $R = \infty$。</div>
+<div class="solution">✅ 答案：$\sum_{n=0}^{\infty} \frac{x^n}{n!}$</div>
+
+</div>
+
+<div class="example">
+<div class="example-label">📝 例題 10.10</div>
+<div class="example-title">sin x 的麥克勞林級數</div>
+<div class="problem-statement">求 $f(x) = \sin x$ 的麥克勞林級數。</div>
+<div class="solution"><strong>解：</strong>$f(0)=0$、$f'(0)=1$、$f''(0)=0$、$f'''(0)=-1$，週期 4。麥克勞林級數：<br>$\sin x = \sum_{n=0}^{\infty} \frac{(-1)^n x^{2n+1}}{(2n+1)!} = x - \frac{x^3}{3!} + \frac{x^5}{5!} - \cdots$，$R = \infty$。</div>
+<div class="solution">✅ 答案：$\sum_{n=0}^{\infty} \frac{(-1)^n x^{2n+1}}{(2n+1)!}$</div>
+
+</div>
+
+<div class="example">
+<div class="example-label">📝 例題 10.11</div>
+<div class="example-title">cos x 的麥克勞林級數</div>
+<div class="problem-statement">求 $f(x) = \cos x$ 的麥克勞林級數。</div>
+<div class="solution"><strong>解：</strong>$f(0)=1$、$f'(0)=0$、$f''(0)=-1$、$f'''(0)=0$。麥克勞林級數：<br>$\cos x = \sum_{n=0}^{\infty} \frac{(-1)^n x^{2n}}{(2n)!} = 1 - \frac{x^2}{2!} + \frac{x^4}{4!} - \cdots$，$R = \infty$。</div>
+<div class="solution">✅ 答案：$\sum_{n=0}^{\infty} \frac{(-1)^n x^{2n}}{(2n)!}$</div>
+
+</div>
+
+<div class="example">
+<div class="example-label">📝 例題 10.12</div>
+<div class="example-title">泰勒級數（以 a≠0 為中心）</div>
+<div class="problem-statement">求 $f(x) = \ln x$ 在 $a=1$ 處的泰勒級數。</div>
+<div class="solution"><strong>解：</strong>$f^{(n)}(x) = \frac{(-1)^{n-1}(n-1)!}{x^n}$（$n \geq 1$）。$f^{(n)}(1) = (-1)^{n-1}(n-1)!$。<br>$\ln x = \sum_{n=1}^{\infty} \frac{(-1)^{n-1}}{n}(x-1)^n$，收斂半徑 $R=1$。</div>
+<div class="solution">✅ 答案：$\sum_{n=1}^{\infty} \frac{(-1)^{n-1}}{n}(x-1)^n$</div>
+
+</div>
+
+<div class="example">
+<div class="example-label">📝 例題 10.13</div>
+<div class="example-title">二項式級數</div>
+<div class="problem-statement">求 $f(x) = \sqrt{1+x}$ 的麥克勞林級數（前三項）。</div>
+<div class="solution"><strong>解：</strong>$f(x) = (1+x)^{1/2}$。$f(0)=1$、$f'(0)=1/2$、$f''(0)=-1/4$。<br>$\sqrt{1+x} = 1 + \frac{1}{2}x - \frac{1}{8}x^2 + \frac{1}{16}x^3 - \cdots$，$|x|<1$。</div>
+<div class="solution">✅ 答案：$1 + \frac{1}{2}x - \frac{1}{8}x^2 + \cdots$</div>
+
+</div>
+
+<div class="example">
+<div class="example-label">📝 例題 10.14</div>
+<div class="example-title">泰勒多項式近似</div>
+<div class="problem-statement">使用 $e^x$ 的 3 次泰勒多項式近似 $e^{0.2}$，並估計誤差。</div>
+<div class="solution"><strong>解：</strong>$P_3(x) = 1 + x + \frac{x^2}{2} + \frac{x^3}{6}$。$P_3(0.2) = 1 + 0.2 + 0.02 + 0.00133 = 1.22133$。<br>餘項 $|R_3| \leq \frac{e^{0.2}}{4!}(0.2)^4 \approx \frac{1.2214}{24} \cdot 0.0016 \approx 0.000081$。<br>精確值 $e^{0.2} \approx 1.22140$。</div>
+<div class="solution">✅ 答案：$P_3(0.2) \approx 1.22133$（誤差 $\leq 0.00008$）</div>
+
+</div>
+
+</section>
+
+<section id="ss6-4">
+<h2 id="section-4">10.4 冪級數的應用 (Working with Taylor Series)</h2>
+<p style="font-size:13px;color:var(--tx2);margin-bottom:16px"><strong>🔑 本節重點：</strong>以已知級數求新級數、積分近似、極限計算</p>
+
+<div class="example">
+<div class="example-label">📝 例題 10.15</div>
+<div class="example-title">以級數計算積分</div>
+<div class="problem-statement">使用冪級數計算 $\int_0^{0.5} e^{-x^2}\,dx$（取前 4 項）。</div>
+<div class="solution"><strong>解：</strong>$e^{-x^2} = \sum_{n=0}^{\infty} \frac{(-1)^n x^{2n}}{n!} = 1 - x^2 + \frac{x^4}{2} - \frac{x^6}{6} + \cdots$。<br>$\int_0^{0.5} e^{-x^2}\,dx \approx \left[x - \frac{x^3}{3} + \frac{x^5}{10} - \frac{x^7}{42}\right]_0^{0.5}$<br>$= 0.5 - 0.04167 + 0.003125 - 0.000186 = 0.46127$。</div>
+<div class="solution">✅ 答案：$\approx 0.4613$</div>
+
+</div>
+
+<div class="example">
+<div class="example-label">📝 例題 10.16</div>
+<div class="example-title">級數求極限</div>
+<div class="problem-statement">使用級數求 $\lim_{x\to 0} \frac{\sin x - x}{x^3}$。</div>
+<div class="solution"><strong>解：</strong>$\sin x = x - \frac{x^3}{3!} + \frac{x^5}{5!} - \cdots$。<br>$\frac{\sin x - x}{x^3} = \frac{-x^3/6 + x^5/120 - \cdots}{x^3} = -\frac{1}{6} + \frac{x^2}{120} - \cdots \to -\frac{1}{6}$ 當 $x\to 0$。</div>
+<div class="solution">✅ 答案：$-\frac{1}{6}$</div>
+
+</div>
+
+<div class="example">
+<div class="example-label">📝 例題 10.17</div>
+<div class="example-title">以已知級數構建新級數</div>
+<div class="problem-statement">利用 $\cos x$ 的級數，求 $x\cos(x^2)$ 的麥克勞林級數。</div>
+<div class="solution"><strong>解：</strong>$\cos u = \sum_{n=0}^{\infty} \frac{(-1)^n u^{2n}}{(2n)!}$。代入 $u = x^2$：$\cos(x^2) = \sum_{n=0}^{\infty} \frac{(-1)^n x^{4n}}{(2n)!}$。<br>乘以 $x$：$x\cos(x^2) = \sum_{n=0}^{\infty} \frac{(-1)^n x^{4n+1}}{(2n)!}$。</div>
+<div class="solution">✅ 答案：$\sum_{n=0}^{\infty} \frac{(-1)^n x^{4n+1}}{(2n)!}$</div>
+
+</div>
+
+<div class="example">
+<div class="example-label">📝 例題 10.18</div>
+<div class="example-title">誤差函數 erf(x) 的級數</div>
+<div class="problem-statement">求誤差函數 $\text{erf}(x) = \frac{2}{\sqrt{\pi}}\int_0^x e^{-t^2}\,dt$ 的級數表示。</div>
+<div class="solution"><strong>解：</strong>$e^{-t^2} = \sum_{n=0}^{\infty} \frac{(-1)^n t^{2n}}{n!}$。積分：$\int_0^x e^{-t^2}\,dt = \sum_{n=0}^{\infty} \frac{(-1)^n x^{2n+1}}{n!(2n+1)}$。<br>$\text{erf}(x) = \frac{2}{\sqrt{\pi}}\sum_{n=0}^{\infty} \frac{(-1)^n x^{2n+1}}{n!(2n+1)}$。</div>
+<div class="solution">✅ 答案：$\frac{2}{\sqrt{\pi}}\sum_{n=0}^{\infty} \frac{(-1)^n x^{2n+1}}{n!(2n+1)}$</div>
+
+</div>
+
+<div class="example">
+<div class="example-label">📝 例題 10.19</div>
+<div class="example-title">微分方程以級數求解</div>
+<div class="problem-statement">使用冪級數解 $y' = y$，$y(0) = 1$。</div>
+<div class="solution"><strong>解：</strong>設 $y = \sum_{n=0}^{\infty} a_n x^n$。$y' = \sum_{n=1}^{\infty} n a_n x^{n-1}$。$y' = y$ 給出遞推關係 $a_{n+1} = \frac{a_n}{n+1}$。$y(0)=1$ 得 $a_0=1$。<br>$a_n = \frac{1}{n!}$，故 $y = \sum_{n=0}^{\infty} \frac{x^n}{n!} = e^x$。</div>
+<div class="solution">✅ 答案：$y = e^x$</div>
+
+</div>
+
+<div class="example">
+<div class="example-label">📝 例題 10.20</div>
+<div class="example-title">π 的級數計算</div>
+<div class="problem-statement">使用 $\arctan x$ 的級數，求 $\pi$ 的近似值（取前 5 項）。</div>
+<div class="solution"><strong>解：</strong>$\arctan 1 = \frac{\pi}{4} = 1 - \frac{1}{3} + \frac{1}{5} - \frac{1}{7} + \frac{1}{9} - \cdots$。<br>前 5 項：$1 - 0.3333 + 0.2 - 0.1429 + 0.1111 = 0.8349$。$\pi \approx 4 \times 0.8349 = 3.3397$（收斂緩慢）。</div>
+<div class="solution">✅ 答案：$\pi \approx 3.34$（收斂較慢）</div>
+
+</div>
+
+<div class="example">
+<div class="example-label">📝 例題 10.21</div>
+<div class="example-title">e 的計算</div>
+<div class="problem-statement">使用 $e^x$ 的級數計算 $e$（取前 6 項）。</div>
+<div class="solution"><strong>解：</strong>$e = \sum_{n=0}^{\infty} \frac{1}{n!} = 1 + 1 + \frac{1}{2} + \frac{1}{6} + \frac{1}{24} + \frac{1}{120}$<br>$= 1 + 1 + 0.5 + 0.16667 + 0.04167 + 0.00833 = 2.71667$。（精確值 $e \approx 2.71828$）</div>
+<div class="solution">✅ 答案：$e \approx 2.7167$</div>
+
+</div>
+
+<div class="example">
+<div class="example-label">📝 例題 10.22</div>
+<div class="example-title">∫₀¹ sin(x²) dx 的近似</div>
+<div class="problem-statement">使用級數計算 $\int_0^1 \sin(x^2)\,dx$（取前 3 項）。</div>
+<div class="solution"><strong>解：</strong>$\sin(x^2) = x^2 - \frac{x^6}{6} + \frac{x^{10}}{120} - \cdots$。<br>$\int_0^1 \sin(x^2)\,dx \approx \left[\frac{x^3}{3} - \frac{x^7}{42} + \frac{x^{11}}{1320}\right]_0^1$<br>$= \frac{1}{3} - \frac{1}{42} + \frac{1}{1320} \approx 0.33333 - 0.02381 + 0.00076 = 0.31028$。</div>
+<div class="solution">✅ 答案：$\approx 0.3103$</div>
+
+</div>
+
+<div class="example">
+<div class="example-label">📝 例題 10.23</div>
+<div class="example-title">收斂區間的代數替換</div>
+<div class="problem-statement">利用 $\frac{1}{1-x} = \sum x^n$，求 $\frac{1}{1+x^3}$ 的級數與收斂區間。</div>
+<div class="solution"><strong>解：</strong>代入 $-x^3$ 替換 $x$：$\frac{1}{1+x^3} = \sum_{n=0}^{\infty} (-1)^n x^{3n}$。收斂條件 $|x^3|<1$，即 $|x|<1$。</div>
+<div class="solution">✅ 答案：$\sum_{n=0}^{\infty} (-1)^n x^{3n}$，$|x|<1$</div>
+
+</div>
+
+<div class="example">
+<div class="example-label">📝 例題 10.24</div>
+<div class="example-title">∫₀⁰·² √(1+x³) dx 級數近似</div>
+<div class="problem-statement">使用二項式級數計算 $\int_0^{0.2} \sqrt{1+x^3}\,dx$（取前 2 項）。</div>
+<div class="solution"><strong>解：</strong>$\sqrt{1+u} = 1 + \frac{u}{2} - \frac{u^2}{8} + \cdots$，$u = x^3$。<br>$\sqrt{1+x^3} \approx 1 + \frac{x^3}{2}$。<br>$\int_0^{0.2} (1 + \frac{x^3}{2})dx = \left[x + \frac{x^4}{8}\right]_0^{0.2} = 0.2 + \frac{0.0016}{8} = 0.2002$。</div>
+<div class="solution">✅ 答案：$\approx 0.2002$</div>
+
+</div>
+
+</section>
+
+</main>
+</body>
+</html>

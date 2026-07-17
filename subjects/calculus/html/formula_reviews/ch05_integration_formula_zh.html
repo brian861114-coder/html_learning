@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>第五章 公式摘要 — 積分（46 條公式完整版）</title>
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']],tags:'ams'},options:{ignoreHtmlClass:'no-math'}};</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script defer src="../assets/course-ui.js"></script>
+<link rel="stylesheet" href="../../../../shared/core.css">
+<script src="../../../../shared/core.js" defer></script>
+<link rel="stylesheet" href="../../../../shared/components/formula-problem.css">
+<link rel="stylesheet" href="../../../../shared/navigation.css" data-shared-navigation>
+</head>
+<body>
+<a class="portal-home-link" href="../../index.html">返回學習中心</a>
+<nav class="sidebar" aria-label="本章目錄"><div class="sidebar-header"><div class="sidebar-subtitle">微積分</div><h2 class="sidebar-title">第五章：積分（Integration）</h2></div><div class="toc"><ul>
+<li><a href="#s0">📐 反導數與不定積分</a></li>
+<li class="ns">基本積分</li><li class="nsub"><a href="#s1">基本積分表（14 條）</a></li>
+<li class="ns">微積分基本定理</li><li class="nsub"><a href="#s2">⭐ FTC Part 1 & 2</a></li><li class="nsub"><a href="#s3">⭐ 代換法（Substitution）</a></li>
+<li class="ns">積分應用定理</li><li class="nsub"><a href="#s4">淨變化定理</a></li><li class="nsub"><a href="#s5">定積分的性質</a></li>
+<li class="ns">特殊函數積分</li><li class="nsub"><a href="#s6">指數與對數積分</a></li><li class="nsub"><a href="#s7">反三角積分</a></li>
+<li><a href="#cheatsheet">📋 公式速查表</a></li>
+</ul></div><div class="sidebar-tools"><button type="button" data-action="toggle-theme" aria-label="切換深色或淺色模式">切換顯示主題</button></div></nav>
+<main class="chapter-page">
+<div class="chapter-header"><div class="tag">46 條公式完整版 · 含推導與例題</div><h1>第五章：積分（Integration）</h1><div class="chapter-subtitle">Calculus Vol 1 · OpenStax · Gilbert Strang & Edwin Herman</div></div>
+<div class="content-toolbar"><button data-action="expand-details">📖 展開全部</button><button data-action="collapse-details">📕 收合全部</button></div>
+
+<!-- s0: 反導數與不定積分 -->
+<div class="content-section" id="s0"><h2>反導數與不定積分</h2>
+
+<div class="callout-warn"><div class="formula-label">⚡ 核心概念</div>積分是微分的逆運算。若 $F'(x)=f(x)$，則稱 $F$ 為 $f$ 的<strong>反導數</strong>（antiderivative）。所有反導數差一個常數，故引入積分常數 $C$。</div>
+
+<div class="formula-card"><div class="formula-label">不定積分定義</div><div class="eq">$$\int f(x)\,dx = F(x) + C, \quad \text{其中 } F'(x) = f(x)$$</div><div class="formula-note">$\int$ 為積分符號，$f(x)$ 為被積函數，$dx$ 表示積分變數，$C$ 為積分常數。</div></div>
+
+<div class="formula-card"><div class="formula-label">反導數的非唯一性</div><div class="eq">若 $F'(x) = f(x)$，則 $(F(x)+C)' = f(x)$ 對任意常數 $C$ 成立。</div><div class="formula-note">幾何意義：反導數族是垂直平移的曲線族，彼此差一個常數。</div></div>
+
+<div class="formula-card"><div class="formula-label">定積分定義（Riemann 和極限）</div><div class="eq">$$\int_a^b f(x)\,dx = \lim_{n \to \infty} \sum_{i=1}^{n} f(x_i^*)\,\Delta x$$</div><div class="formula-note">其中 $\Delta x = \frac{b-a}{n}$，$x_i^*$ 為第 $i$ 個子區間中的任一點。定積分代表曲線下面積（帶符號）。</div></div>
+
+<details class="derive" open><summary>🔍 定積分定義的幾何意義</summary><div class="derive-body">
+<div class="step"><span class="step-number">1</span><span class="step-label">分割區間 $[a,b]$</span><div class="step-content">將 $[a,b]$ 分為 $n$ 個等寬子區間，寬度 $\Delta x = \frac{b-a}{n}$。</div></div>
+<div class="step"><span class="step-number">2</span><span class="step-label">建構 Riemann 和</span><div class="step-content">在每個子區間選取樣本點 $x_i^*$，以 $f(x_i^*)$ 為高、$\Delta x$ 為寬的矩形面積之和逼近曲線下面積：<span class="math">$$R_n = \sum_{i=1}^{n} f(x_i^*)\,\Delta x$$</span></div></div>
+<div class="step"><span class="step-number">3</span><span class="step-label">取極限（$n\to\infty$，$\Delta x\to 0$）</span><div class="step-content">矩形逼近越來越精確，極限即為曲線下的精確面積：<span class="math">$$\int_a^b f(x)\,dx = \lim_{n\to\infty} R_n$$</span></div></div>
+</div></details>
+
+<details class="example" open><summary>📐 例題 — 用定義計算 $\int_0^2 x^2\,dx$</summary><div class="example-body">
+取右端點，$x_i^* = \frac{2i}{n}$，$\Delta x = \frac{2}{n}$：<br>
+$R_n = \sum_{i=1}^{n} \left(\frac{2i}{n}\right)^2 \cdot \frac{2}{n} = \frac{8}{n^3}\sum_{i=1}^{n} i^2 = \frac{8}{n^3}\cdot\frac{n(n+1)(2n+1)}{6}$<br>
+$\lim_{n\to\infty} R_n = \frac{8}{6}\cdot 2 = \frac{8}{3}$
+</div></details>
+</div>
+
+<!-- s1: 基本積分表 -->
+<div class="content-section" id="s1"><h2>基本積分表</h2>
+
+<div class="callout-warn"><div class="formula-label">⚡ 以下每一條公式都是對應微分公式的逆運算。記住積分常數 $C$！</div></div>
+
+<div class="formula-card"><div class="formula-label">⭐ 冪法則（Power Rule for Integrals）</div><div class="eq">$$\boxed{\int x^n\,dx = \frac{x^{n+1}}{n+1} + C}, \quad n \neq -1$$</div><div class="formula-note">$n=-1$ 是特殊情況（見 $\ln|x|$）。此公式對任何 $n\neq -1$ 成立，包括分數和負數。</div></div>
+
+<div class="formula-card"><div class="formula-label">$\int x^{-1}\,dx$（即 $\int \frac{1}{x}\,dx$）</div><div class="eq">$$\boxed{\int \frac{1}{x}\,dx = \ln|x| + C}$$</div><div class="formula-note">須用絕對值，因為 $\ln x$ 僅定義在 $x>0$，而 $\frac{1}{x}$ 在 $x<0$ 也有定義。</div></div>
+
+<div class="formula-card"><div class="formula-label">指數函數積分</div><div class="eq">$$\boxed{\int e^x\,dx = e^x + C}$$</div><div class="eq">$$\boxed{\int a^x\,dx = \frac{a^x}{\ln a} + C}, \quad a>0, a\neq 1$$</div></div>
+
+<div class="formula-card"><div class="formula-label">三角函數積分</div><div class="eq">$$\begin{aligned}
+\int \sin x\,dx &= -\cos x + C \\
+\int \cos x\,dx &= \sin x + C \\
+\int \sec^2 x\,dx &= \tan x + C \\
+\int \csc^2 x\,dx &= -\cot x + C \\
+\int \sec x \tan x\,dx &= \sec x + C \\
+\int \csc x \cot x\,dx &= -\csc x + C
+\end{aligned}$$</div></div>
+
+<div class="formula-card"><div class="formula-label">基本反三角積分</div><div class="eq">$$\begin{aligned}
+\int \frac{1}{\sqrt{1-x^2}}\,dx &= \arcsin x + C \quad \text{或} \quad -\arccos x + C \\
+\int \frac{1}{1+x^2}\,dx &= \arctan x + C \quad \text{或} \quad -\operatorname{arccot} x + C
+\end{aligned}$$</div></div>
+
+<details class="derive" open><summary>🔍 基本積分公式的驗證</summary><div class="derive-body">
+<div class="step"><span class="step-number">1</span><span class="step-label">驗證冪法則</span><div class="step-content"><span class="math">$$\frac{d}{dx}\!\left[\frac{x^{n+1}}{n+1}+C\right] = \frac{(n+1)x^n}{n+1} = x^n \quad\checkmark$$</span></div></div>
+<div class="step"><span class="step-number">2</span><span class="step-label">驗證 $\int\frac{1}{x}dx$</span><div class="step-content">$x>0$：$\frac{d}{dx}[\ln x]=\frac{1}{x}$；$x<0$：$\frac{d}{dx}[\ln(-x)]=\frac{1}{-x}\cdot(-1)=\frac{1}{x}$<br>因此 $\frac{d}{dx}[\ln|x|]=\frac{1}{x}$ 對所有 $x\neq0$。$\checkmark$</div></div>
+<div class="step"><span class="step-number">3</span><span class="step-label">驗證 $\int\sin x\,dx$</span><div class="step-content"><span class="math">$$\frac{d}{dx}[-\cos x + C] = -(-\sin x) = \sin x \quad\checkmark$$</span></div></div>
+</div></details>
+
+<details class="example" open><summary>📐 例題 — $\int (3x^4 - 2x + \frac{5}{x})\,dx$</summary><div class="example-body">
+$\int 3x^4 dx = 3\cdot\frac{x^5}{5} = \frac{3}{5}x^5$<br>
+$\int (-2x)\,dx = -x^2$<br>
+$\int \frac{5}{x}\,dx = 5\ln|x|$<br>
+∴ $\int (3x^4 - 2x + \frac{5}{x})\,dx = \frac{3}{5}x^5 - x^2 + 5\ln|x| + C$
+</div></details>
+</div>
+
+<!-- s2: FTC Part 1 & 2 -->
+<div class="content-section" id="s2"><h2>⭐ 微積分基本定理（FTC）</h2>
+
+<div class="callout-warn"><div class="formula-label">⚡ FTC 是微積分最重要的定理，將微分與積分連結為互逆運算。</div></div>
+
+<div class="formula-card"><div class="formula-label">⭐ FTC Part 1 — 積分的微分</div><div class="eq">$$\boxed{\frac{d}{dx}\int_a^x f(t)\,dt = f(x)}$$</div><div class="formula-note">若 $f$ 在 $[a,b]$ 上連續，則函數 $g(x)=\int_a^x f(t)dt$ 在 $[a,b]$ 上可微，且 $g'(x)=f(x)$。<br>更一般：$\frac{d}{dx}\int_a^{u(x)} f(t)\,dt = f(u(x)) \cdot u'(x)$（連鎖律）。</div></div>
+
+<div class="formula-card"><div class="formula-label">⭐ FTC Part 2 — 定積分的計算</div><div class="eq">$$\boxed{\int_a^b f(x)\,dx = F(b) - F(a)}$$</div><div class="formula-note">其中 $F$ 是 $f$ 的任意一個反導數（$F'=f$）。這提供了計算定積分的實用方法：先求反導數，再代入上下限相減。</div></div>
+
+<details class="derive" open><summary>🔍 FTC Part 2 推導</summary><div class="derive-body">
+<div class="step"><span class="step-number">1</span><span class="step-label">設 $g(x)=\int_a^x f(t)dt$</span><div class="step-content">由 FTC Part 1，$g'(x)=f(x)$，即 $g$ 是 $f$ 的反導數。</div></div>
+<div class="step"><span class="step-number">2</span><span class="step-label">對任意反導數 $F$（$F'=f$）</span><div class="step-content">$F(x) = g(x) + C$（反導數家族差常數）。</div></div>
+<div class="step"><span class="step-number">3</span><span class="step-label">計算定積分</span><div class="step-content">$\int_a^b f(x)dx = g(b) = g(b) - g(a)$（因為 $g(a)=\int_a^a f=0$）<br>$= [F(b)-C] - [F(a)-C] = F(b)-F(a)$<span class="math">$$\therefore \int_a^b f(x)\,dx = F(b) - F(a) = \Big[F(x)\Big]_a^b$$</span></div></div>
+</div></details>
+
+<details class="example" open><summary>📐 例題 1 — FTC Part 1：$\frac{d}{dx}\int_0^{x^2} \sin t\,dt$</summary><div class="example-body">
+由 FTC Part 1 + 連鎖律：$\frac{d}{dx}\int_0^{x^2} \sin t\,dt = \sin(x^2) \cdot 2x = 2x\sin(x^2)$
+</div></details>
+
+<details class="example" open><summary>📐 例題 2 — FTC Part 2：$\int_1^4 (2x+3)\,dx$</summary><div class="example-body">
+$F(x) = x^2 + 3x$（因 $F'(x)=2x+3$）<br>
+$\int_1^4 (2x+3)\,dx = [x^2+3x]_1^4 = (16+12)-(1+3) = 28-4 = 24$
+</div></details>
+</div>
+
+<!-- s3: 代換法 -->
+<div class="content-section" id="s3"><h2>⭐ 代換法（Substitution Method）</h2>
+
+<div class="callout-warn"><div class="formula-label">⚡ 積分的連鎖律。當被積函數形如 $f(g(x))\cdot g'(x)$ 時使用。</div></div>
+
+<div class="formula-card"><div class="formula-label">⭐ 代換法公式（不定積分）</div><div class="eq">$$\boxed{\int f(g(x)) \cdot g'(x)\,dx = \int f(u)\,du \quad \text{其中 } u = g(x),\; du = g'(x)dx}$$</div></div>
+
+<div class="formula-card"><div class="formula-label">定積分代換</div><div class="eq">$$\boxed{\int_a^b f(g(x)) \cdot g'(x)\,dx = \int_{g(a)}^{g(b)} f(u)\,du}$$</div><div class="formula-note">注意定積分代換時<strong>必須同時改變積分上下限</strong>！</div></div>
+
+<details class="derive" open><summary>🔍 代換法推導（來自連鎖律）</summary><div class="derive-body">
+<div class="step"><span class="step-number">1</span><span class="step-label">設 $F'(u) = f(u)$</span><div class="step-content">由連鎖律：$\frac{d}{dx}F(g(x)) = F'(g(x))\cdot g'(x) = f(g(x))\cdot g'(x)$</div></div>
+<div class="step"><span class="step-number">2</span><span class="step-label">積分兩邊</span><div class="step-content"><span class="math">$$\int f(g(x))\cdot g'(x)\,dx = F(g(x)) + C$$</span>而 $\int f(u)du = F(u) + C$，令 $u=g(x)$，兩者一致。</div></div>
+</div></details>
+
+<details class="example" open><summary>📐 例題 1 — $\int 2x\cos(x^2)\,dx$</summary><div class="example-body">
+令 $u = x^2$，則 $du = 2x\,dx$<br>
+$\int 2x\cos(x^2)\,dx = \int \cos u\,du = \sin u + C = \sin(x^2) + C$
+</div></details>
+
+<details class="example" open><summary>📐 例題 2 — $\int_0^1 x\sqrt{1+x^2}\,dx$（定積分代換）</summary><div class="example-body">
+令 $u = 1+x^2$，$du = 2x\,dx$，即 $x\,dx = \frac{1}{2}du$<br>
+上下限：$x=0 \to u=1$，$x=1 \to u=2$<br>
+$\int_0^1 x\sqrt{1+x^2}\,dx = \frac{1}{2}\int_1^2 \sqrt{u}\,du = \frac{1}{2}\cdot\frac{2}{3}[u^{3/2}]_1^2 = \frac{1}{3}(2\sqrt{2}-1)$
+</div></details>
+</div>
+
+<!-- s4: 淨變化定理 -->
+<div class="content-section" id="s4"><h2>淨變化定理（Net Change Theorem）</h2>
+
+<div class="formula-card"><div class="formula-label">⭐ 淨變化定理</div><div class="eq">$$\boxed{\int_a^b F'(x)\,dx = F(b) - F(a)}$$</div><div class="formula-note">量的總變化 = 變化率的積分。這是 FTC Part 2 的重新表述，強調物理意義。</div></div>
+
+<div class="formula-card"><div class="formula-label">常見應用</div><table><caption>表 1：淨變化定理（Net Change Theorem）</caption><thead><tr><th>若 $F'(x)$ 是…</th><th>則 $\int_a^b F'(x)dx$ 是…</th></tr></thead><tbody>
+<tr><td>速度 $v(t)$</td><td>位移（displacement）</td></tr>
+<tr><td>速率 $|v(t)|$</td><td>總路程（total distance）</td></tr>
+<tr><td>加速度 $a(t)$</td><td>速度的變化 $\Delta v$</td></tr>
+<tr><td>邊際成本 $C'(x)$</td><td>總成本的變化</td></tr>
+<tr><td>人口增長率</td><td>人口的淨變化</td></tr>
+<tr><td>流速（體積/時間）</td><td>累積流量</td></tr>
+</tbody></table></div>
+
+<details class="example" open><summary>📐 例題 — 粒子速度 $v(t)=3t^2-12t+9$（m/s），求 $t=0$ 到 $t=5$ 的位移與總路程</summary><div class="example-body">
+位移：$\int_0^5 (3t^2-12t+9)\,dt = [t^3-6t^2+9t]_0^5 = (125-150+45)-0 = 20$ m<br>
+總路程需分段：$v(t)=3(t-1)(t-3)=0$ 在 $t=1,3$<br>
+$[0,1]$: $v\geq0$，$\int_0^1 v = [t^3-6t^2+9t]_0^1 = 4$<br>
+$[1,3]$: $v\leq0$，$\int_1^3 |v| = -\int_1^3 v = -[t^3-6t^2+9t]_1^3 = -(0-4) = 4$<br>
+$[3,5]$: $v\geq0$，$\int_3^5 v = [t^3-6t^2+9t]_3^5 = 20-0 = 20$<br>
+總路程 $=4+4+20=28$ m
+</div></details>
+</div>
+
+<!-- s5: 定積分的性質 -->
+<div class="content-section" id="s5"><h2>定積分的性質</h2>
+
+<div class="formula-card"><div class="formula-label">基本運算性質</div><div class="eq">$$\begin{aligned}
+\int_a^b [f(x) \pm g(x)]\,dx &= \int_a^b f(x)\,dx \pm \int_a^b g(x)\,dx \\
+\int_a^b c \cdot f(x)\,dx &= c \int_a^b f(x)\,dx \\
+\int_a^b f(x)\,dx &= \int_a^c f(x)\,dx + \int_c^b f(x)\,dx
+\end{aligned}$$</div></div>
+
+<div class="formula-card"><div class="formula-label">對稱性積分（偶函數與奇函數）</div><div class="eq">$$\boxed{\int_{-a}^{a} f(x)\,dx = \begin{cases}
+2\displaystyle\int_0^a f(x)\,dx, & \text{若 } f \text{ 為偶函數 } (f(-x)=f(x)) \\[8pt]
+0, & \text{若 } f \text{ 為奇函數 } (f(-x)=-f(x))
+\end{cases}}$$</div><div class="formula-note">這大大簡化了對稱區間上的積分計算。</div></div>
+
+<div class="formula-card"><div class="formula-label">比較性質</div><div class="eq">若 $f(x) \geq g(x)$ 在 $[a,b]$ 上，則 $\int_a^b f(x)\,dx \geq \int_a^b g(x)\,dx$</div></div>
+
+<details class="example" open><summary>📐 例題 — $\int_{-2}^{2} (x^3 + 3x^2)\,dx$</summary><div class="example-body">
+$x^3$ 是奇函數 ⇒ $\int_{-2}^{2} x^3 dx = 0$<br>
+$3x^2$ 是偶函數 ⇒ $\int_{-2}^{2} 3x^2 dx = 2\int_0^2 3x^2 dx = 2[x^3]_0^2 = 2 \cdot 8 = 16$<br>
+∴ $\int_{-2}^{2} (x^3+3x^2)dx = 0 + 16 = 16$
+</div></details>
+</div>
+
+<!-- s6: 指數與對數積分 -->
+<div class="content-section" id="s6"><h2>指數函數與對數函數的積分</h2>
+
+<div class="formula-card"><div class="formula-label">基本指數積分</div><div class="eq">$$\boxed{\int e^{ax}\,dx = \frac{1}{a}e^{ax} + C}$$</div><div class="eq">$$\boxed{\int a^x\,dx = \frac{a^x}{\ln a} + C}$$</div></div>
+
+<div class="formula-card"><div class="formula-label">⭐ 對數函數積分</div><div class="eq">$$\boxed{\int \ln x\,dx = x\ln x - x + C}$$</div><div class="formula-note">此公式可藉由分部積分法（Integration by Parts）推導，或直接微分驗證：$\frac{d}{dx}[x\ln x - x] = \ln x + 1 - 1 = \ln x$。</div></div>
+
+<div class="formula-card"><div class="formula-label">一般指數積分（含線性指數）</div><div class="eq">$$\boxed{\int e^{ax+b}\,dx = \frac{1}{a}e^{ax+b} + C}$$</div></div>
+
+<details class="derive" open><summary>🔍 $\int\ln x\,dx$ 推導（分部積分預覽）</summary><div class="derive-body">
+<div class="step"><span class="step-number">1</span><span class="step-label">寫成 $\int 1 \cdot \ln x\,dx$</span><div class="step-content">令 $u = \ln x$，$dv = dx$，則 $du = \frac{1}{x}dx$，$v = x$。</div></div>
+<div class="step"><span class="step-number">2</span><span class="step-label">分部積分公式 $\int u\,dv = uv - \int v\,du$</span><div class="step-content"><span class="math">$$\int \ln x\,dx = x\ln x - \int x\cdot\frac{1}{x}\,dx = x\ln x - \int 1\,dx = x\ln x - x + C$$</span></div></div>
+</div></details>
+
+<details class="example" open><summary>📐 例題 — $\int x e^{x^2}\,dx$</summary><div class="example-body">
+令 $u = x^2$，$du = 2x\,dx$，即 $x\,dx = \frac{1}{2}du$<br>
+$\int x e^{x^2}\,dx = \frac{1}{2}\int e^u\,du = \frac{1}{2}e^u + C = \frac{1}{2}e^{x^2} + C$
+</div></details>
+</div>
+
+<!-- s7: 反三角積分 -->
+<div class="content-section" id="s7"><h2>反三角函數積分</h2>
+
+<div class="callout-warn"><div class="formula-label">⚡ 這些積分在涉及 $\sqrt{a^2 \pm x^2}$ 和 $a^2+x^2$ 的代換中頻繁出現。</div></div>
+
+<div class="formula-card"><div class="formula-label">⭐ arcsin 相關積分</div><div class="eq">$$\boxed{\int \frac{1}{\sqrt{a^2 - x^2}}\,dx = \arcsin\!\left(\frac{x}{a}\right) + C}, \quad a > 0$$</div><div class="formula-note">可經由代換 $x = a\sin\theta$ 推導。</div></div>
+
+<div class="formula-card"><div class="formula-label">⭐ arctan 相關積分</div><div class="eq">$$\boxed{\int \frac{1}{a^2 + x^2}\,dx = \frac{1}{a}\arctan\!\left(\frac{x}{a}\right) + C}$$</div><div class="formula-note">可經由代換 $x = a\tan\theta$ 推導。</div></div>
+
+<div class="formula-card"><div class="formula-label">arcsec 相關積分</div><div class="eq">$$\boxed{\int \frac{1}{x\sqrt{x^2 - a^2}}\,dx = \frac{1}{a}\operatorname{arcsec}\!\left(\frac{|x|}{a}\right) + C}$$</div></div>
+
+<details class="derive" open><summary>🔍 $\int\frac{1}{\sqrt{a^2-x^2}}dx$ 推導（三角代換）</summary><div class="derive-body">
+<div class="step"><span class="step-number">1</span><span class="step-label">代換 $x = a\sin\theta$</span><div class="step-content">$dx = a\cos\theta\,d\theta$，$\sqrt{a^2-x^2} = \sqrt{a^2(1-\sin^2\theta)} = a\cos\theta$（假設 $\cos\theta\geq0$）。</div></div>
+<div class="step"><span class="step-number">2</span><span class="step-label">代入積分</span><div class="step-content"><span class="math">$$\int \frac{a\cos\theta}{a\cos\theta}\,d\theta = \int 1\,d\theta = \theta + C = \arcsin\!\left(\frac{x}{a}\right) + C$$</span></div></div>
+</div></details>
+
+<details class="derive" open><summary>🔍 $\int\frac{1}{a^2+x^2}dx$ 推導</summary><div class="derive-body">
+<div class="step"><span class="step-number">1</span><span class="step-label">代換 $x = a\tan\theta$</span><div class="step-content">$dx = a\sec^2\theta\,d\theta$，$a^2+x^2 = a^2(1+\tan^2\theta) = a^2\sec^2\theta$。</div></div>
+<div class="step"><span class="step-number">2</span><span class="step-label">代入積分</span><div class="step-content"><span class="math">$$\int \frac{a\sec^2\theta}{a^2\sec^2\theta}\,d\theta = \int \frac{1}{a}\,d\theta = \frac{\theta}{a} + C = \frac{1}{a}\arctan\!\left(\frac{x}{a}\right) + C$$</span></div></div>
+</div></details>
+
+<details class="example" open><summary>📐 例題 1 — $\int \frac{1}{\sqrt{9-x^2}}\,dx$</summary><div class="example-body">
+$a=3$：$\int \frac{1}{\sqrt{9-x^2}}\,dx = \arcsin(x/3) + C$
+</div></details>
+
+<details class="example" open><summary>📐 例題 2 — $\int \frac{1}{4+x^2}\,dx$</summary><div class="example-body">
+$a=2$：$\int \frac{1}{4+x^2}\,dx = \frac{1}{2}\arctan(x/2) + C$
+</div></details>
+
+<details class="example" open><summary>📐 例題 3 — 代換法 + 反三角：$\int \frac{1}{\sqrt{4-9x^2}}\,dx$</summary><div class="example-body">
+先改寫：$\sqrt{4-9x^2} = 2\sqrt{1-(3x/2)^2}$<br>
+令 $u = \frac{3x}{2}$，$du = \frac{3}{2}dx$，$dx = \frac{2}{3}du$<br>
+$\int \frac{1}{\sqrt{4-9x^2}}dx = \int \frac{1}{2\sqrt{1-u^2}} \cdot \frac{2}{3}du = \frac{1}{3}\int \frac{1}{\sqrt{1-u^2}}du = \frac{1}{3}\arcsin u + C = \frac{1}{3}\arcsin\!\left(\frac{3x}{2}\right) + C$
+</div></details>
+</div>
+
+<!-- CHEATSHEET -->
+<div class="content-section" id="cheatsheet"><h2>公式速查表（46 條收錄）</h2>
+<table><caption>表 2：公式速查表（46 條收錄）</caption><thead><tr><th>類別</th><th>公式</th><th>備註</th></tr></thead><tbody>
+<tr><td>不定積分</td><td>$\int f(x)dx = F(x) + C$，$F'=f$</td><td>含積分常數 $C$</td></tr>
+<tr><td>定積分</td><td>$\int_a^b f(x)dx = \lim_{n\to\infty}\sum f(x_i^*)\Delta x$</td><td>Riemann 和極限</td></tr>
+<tr><td>冪法則</td><td>$\int x^n dx = \frac{x^{n+1}}{n+1}+C$</td><td>⭐ $n\neq -1$</td></tr>
+<tr><td>$1/x$</td><td>$\int \frac{1}{x}dx = \ln|x|+C$</td><td>⭐ 需絕對值</td></tr>
+<tr><td>$e^x$</td><td>$\int e^x dx = e^x + C$</td><td>⭐</td></tr>
+<tr><td>$a^x$</td><td>$\int a^x dx = \frac{a^x}{\ln a}+C$</td><td>$a>0, a\neq 1$</td></tr>
+<tr><td>$\sin x$</td><td>$\int \sin x\,dx = -\cos x + C$</td><td>⭐ 注意負號</td></tr>
+<tr><td>$\cos x$</td><td>$\int \cos x\,dx = \sin x + C$</td><td>⭐</td></tr>
+<tr><td>$\sec^2 x$</td><td>$\int \sec^2 x\,dx = \tan x + C$</td><td></td></tr>
+<tr><td>$\csc^2 x$</td><td>$\int \csc^2 x\,dx = -\cot x + C$</td><td></td></tr>
+<tr><td>$\sec x\tan x$</td><td>$\int \sec x\tan x\,dx = \sec x + C$</td><td></td></tr>
+<tr><td>$\csc x\cot x$</td><td>$\int \csc x\cot x\,dx = -\csc x + C$</td><td></td></tr>
+<tr><td>FTC 1</td><td>$\frac{d}{dx}\int_a^x f(t)dt = f(x)$</td><td>⭐ 積分的導數</td></tr>
+<tr><td>FTC 2</td><td>$\int_a^b f(x)dx = F(b)-F(a)$</td><td>⭐ 定積分計算</td></tr>
+<tr><td>代換法</td><td>$\int f(g(x))g'(x)dx = \int f(u)du$</td><td>⭐ $u=g(x)$</td></tr>
+<tr><td>定積分代換</td><td>$\int_a^b f(g(x))g'(x)dx = \int_{g(a)}^{g(b)} f(u)du$</td><td>⭐ 需改變上下限</td></tr>
+<tr><td>淨變化</td><td>$\int_a^b F'(x)dx = F(b)-F(a)$</td><td>⭐ 變化率積分=總變化</td></tr>
+<tr><td>線性</td><td>$\int (f\pm g) = \int f \pm \int g$</td><td></td></tr>
+<tr><td>常數倍</td><td>$\int cf = c\int f$</td><td></td></tr>
+<tr><td>區間加法</td><td>$\int_a^b f = \int_a^c f + \int_c^b f$</td><td></td></tr>
+<tr><td>偶函數</td><td>$\int_{-a}^a f(x)dx = 2\int_0^a f(x)dx$</td><td>$f(-x)=f(x)$</td></tr>
+<tr><td>奇函數</td><td>$\int_{-a}^a f(x)dx = 0$</td><td>$f(-x)=-f(x)$</td></tr>
+<tr><td>$e^{ax}$</td><td>$\int e^{ax}dx = \frac{1}{a}e^{ax}+C$</td><td></td></tr>
+<tr><td>$\ln x$</td><td>$\int \ln x\,dx = x\ln x - x + C$</td><td>⭐ 分部積分法</td></tr>
+<tr><td>$1/\sqrt{a^2-x^2}$</td><td>$\int \frac{dx}{\sqrt{a^2-x^2}} = \arcsin(x/a)+C$</td><td>⭐ 三角代換</td></tr>
+<tr><td>$1/(a^2+x^2)$</td><td>$\int \frac{dx}{a^2+x^2} = \frac{1}{a}\arctan(x/a)+C$</td><td>⭐ 三角代換</td></tr>
+<tr><td>$1/(x\sqrt{x^2-a^2})$</td><td>$\int \frac{dx}{x\sqrt{x^2-a^2}} = \frac{1}{a}\operatorname{arcsec}(|x|/a)+C$</td><td></td></tr>
+</tbody></table></div>
+</main>
+<script>
+function toggleTheme(){const h=document.documentElement;const n=h.getAttribute('data-theme')==='light'?'dark':'light';h.setAttribute('data-theme',n);localStorage.setItem('theme',n);document.getElementById('tl').textContent=n==='dark'?'淺色模式':'深色模式';}
+const s=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',s);if(s==='dark')document.getElementById('tl').textContent='淺色模式';
+const secs=document.querySelectorAll('.content-section[id]');const navs=document.querySelectorAll('.sn a');
+window.addEventListener('scroll',()=>{let c='';secs.forEach(s=>{if(window.scrollY>=s.offsetTop-80)c=s.getAttribute('id');});navs.forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+c);});});
+</script>
+</body>
+</html>

@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>第五章 公式摘要 — 載子傳輸現象（69 條完整版）</title>
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']],tags:'ams'},options:{ignoreHtmlClass:'no-math'}};</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script defer src="../assets/course-ui.js"></script>
+<link rel="stylesheet" href="../../../../shared/core.css">
+<script src="../../../../shared/core.js" defer></script>
+<link rel="stylesheet" href="../../../../shared/components/formula-problem.css">
+<link rel="stylesheet" href="../../../../shared/navigation.css" data-shared-navigation>
+</head>
+<body>
+<a class="portal-home-link" href="../index.html">返回學習中心</a>
+<nav class="sidebar" aria-label="本章目錄"><div class="sidebar-header"><div class="sidebar-subtitle">半導體物理與元件</div><h2 class="sidebar-title">第五章：載子傳輸現象</h2></div><div class="toc"><ul>
+<li><a href="#constants">🔢 常用常數</a></li>
+<li class="ns">5.1 漂移</li><li class="nsub"><a href="#s1">5.1.1 漂移電流 (5.1–5.9)</a></li><li class="nsub"><a href="#s2">5.1.2 遷移率 (5.10–5.16)</a></li><li class="nsub"><a href="#s3">5.1.3 導電率 (5.17–5.26)</a></li><li class="nsub"><a href="#s4">5.1.4 速度飽和 (5.27–5.34)</a></li>
+<li class="ns">5.2 擴散</li><li class="nsub"><a href="#s5">5.2 擴散+總電流 (5.35–5.45)</a></li>
+<li class="ns">5.3–5.4</li><li class="nsub"><a href="#s6">5.3 Einstein (5.46–5.51)</a></li><li class="nsub"><a href="#s7">5.4 霍爾效應 (5.52–5.60)</a></li>
+<li><a href="#cheatsheet">📋 公式速查表</a></li>
+</ul></div><div class="sidebar-tools"><button type="button" data-action="toggle-theme" aria-label="切換深色或淺色模式">切換顯示主題</button></div></nav>
+<main class="chapter-page">
+<div class="chapter-header"><div class="tag">69 條公式·含 8 例題+5 TYU</div><h1>第五章：載子傳輸現象</h1><div class="chapter-subtitle">Semiconductor Physics & Devices, 4th Ed.·Donald A. Neamen·pp.156–191</div></div>
+<div class="content-toolbar"><button data-action="expand-details">📖 展開全部</button><button data-action="collapse-details">📕 收合全部</button></div>
+
+<div class="content-section" id="constants"><h2>常用物理常數</h2><div class="constants">
+<dt>$e$（電子電荷）</dt><dd>$1.6\times10^{-19}$ C</dd>
+<dt>$k$（波茲曼常數）</dt><dd>$8.617\times10^{-5}$ eV/K</dd>
+<dt>$kT/e$（室溫熱電壓）</dt><dd>$0.0259$ V</dd>
+<dt>Si $\mu_n$（室溫低摻雜）</dt><dd>∼1350 cm²/V·s</dd>
+<dt>Si $\mu_p$（室溫低摻雜）</dt><dd>∼480 cm²/V·s</dd>
+<dt>GaAs $\mu_n$</dt><dd>∼8500 cm²/V·s</dd>
+<dt>$v_{\text{sat}}$（Si, GaAs）</dt><dd>∼10⁷ cm/s</dd>
+</div></div>
+
+<!-- 5.1.1: Eq 5.1-5.9 -->
+<div class="content-section" id="s1"><h2>5.1.1 漂移電流密度 (5.1–5.9)</h2>
+<details class="derive" open><summary>🔍 完整推導——從單一載子受力到總漂移電流（9 條公式）</summary><div class="derive-body">
+<div class="step"><span class="step-number">1</span><span class="step-label">一般定義 (5.1a, 5.1b)</span><div class="step-content"><span class="math">$$J_{\text{drf}} = \rho\,v_d \tag{5.1a}$$</span>$\rho$ = 電荷密度 (C/cm³)，$v_d$ = 平均漂移速度 (cm/s)。單位驗證：$J$ = (C/cm³)(cm/s) = A/cm² (5.1b)。</div></div>
+<div class="step"><span class="step-number">2</span><span class="step-label">電洞漂移電流 (5.2–5.5)</span><div class="step-content">電洞電荷密度 $\rho = ep$：<span class="math">$$J_p = (ep)v_{dp} \tag{5.2}$$</span>電洞運動方程 $F = m^*_{cp}a = eE$：<span class="math">$$F = m^*_{cp}\,a = eE \tag{5.3}$$</span>碰撞後平均漂移速度 $\propto E$：<span class="math">$$v_{dp} = \mu_p E \tag{5.4}$$</span>代入得電洞漂移電流：<span class="math">$$J_p = e\mu_p\,p\,E \tag{5.5}$$</span></div></div>
+<div class="step"><span class="step-number">3</span><span class="step-label">電子漂移電流 (5.6–5.8)</span><div class="step-content">電子電荷密度 $\rho = -en$：<span class="math">$$J_n = (-en)v_{dn} \tag{5.6}$$</span>電子帶負電，漂移方向與電場相反：<span class="math">$$v_{dn} = -\mu_n E \tag{5.7}$$</span>代入得（負負得正，電流與電場同向）：<span class="math">$$J_n = (-en)(-\mu_n E) = e\mu_n\,n\,E \tag{5.8}$$</span></div></div>
+<div class="step"><span class="step-number">4</span><span class="step-label">⭐ 總漂移電流密度 (5.9)</span><div class="step-content"><span class="math">$$\boxed{J_{\text{drf}} = e(\mu_n n + \mu_p p)E} \tag{5.9}$$</span></div></div>
+</div></details>
+<details class="example" open><summary>📐 例題 5.1 — GaAs 漂移電流</summary><div class="example-body">n 型 GaAs，$N_d=10^{16}$ cm⁻³，$E=10$ V/cm，$\mu_n=8500$ cm²/V·s。<br>$n_0\approx N_d=10^{16}$ cm⁻³，$p_0=n_i^2/n_0\approx3.2\times10^{-4}$ cm⁻³（可忽略）。<br>$J_{\text{drf}}\approx e\mu_n N_d E = (1.6\times10^{-19})(8500)(10^{16})(10)=136$ A/cm²。<br>極小的電場（10 V/cm）就能在半導體中產生可觀的電流密度。</div></details>
+</div>
+
+<!-- 5.1.2: Eq 5.10-5.16 -->
+<div class="content-section" id="s2"><h2>5.1.2 遷移率效應 (5.10–5.16)</h2>
+<details class="derive" open><summary>🔍 完整推導——散射、平均自由時間、Matthiessen 規則（7 條公式）</summary><div class="derive-body">
+<div class="step"><span class="step-number">1</span><span class="step-label">受力與加速 (5.10–5.11)</span><div class="step-content"><span class="math">$$F = m^*_{cp}\frac{dv}{dt} = eE \tag{5.10}$$</span>設 $E$ 和 $m^*_{cp}$ 為常數，積分（初始 $v=0$）：<span class="math">$$v = \frac{eEt}{m^*_{cp}} \tag{5.11}$$</span></div></div>
+<div class="step"><span class="step-number">2</span><span class="step-label">平均漂移速度 (5.12a, 5.12b)</span><div class="step-content">碰撞之間的平均自由時間 $\tau_{cp}$。峰值速度在 $t=\tau_{cp}$：<span class="math">$$v_{d,\text{peak}} = \frac{eE\tau_{cp}}{m^*_{cp}} \tag{5.12a}$$</span>統計平均（均勻分布在 $0$ 到 $\tau_{cp}$）：<span class="math">$$\langle v_d \rangle = \frac{1}{2}\frac{eE\tau_{cp}}{m^*_{cp}} \tag{5.12b}$$</span>較精確的統計分析給出 $\langle v_d \rangle = eE\tau_{cp}/m^*_{cp}$（無 1/2 因子）。</div></div>
+<div class="step"><span class="step-number">3</span><span class="step-label">遷移率與散射 (5.13–5.15)</span><div class="step-content">由 $\mu = v_d/E$ 和 $v_d = eE\tau/m^*$：$\mu = e\tau/m^*$。<br>散射率相加（Matthiessen 規則）：<span class="math">$$\frac{1}{\mu} = \frac{1}{\mu_L} + \frac{1}{\mu_I} \tag{5.13}$$</span>晶格散射（聲子）：<span class="math">$$\mu_L \propto T^{-3/2} \tag{5.14}$$</span>雜質散射（游離雜質）：<span class="math">$$\mu_I \propto \frac{T^{3/2}}{N_I} \tag{5.15}$$</span>其中 $N_I = N_d^+ + N_a^-$ 為總游離雜質濃度。</div></div>
+<div class="step"><span class="step-number">4</span><span class="step-label">經驗公式 (5.16)</span><div class="step-content">結合晶格和雜質散射的經驗擬合公式 (5.16) 用於實際計算。</div></div>
+</div></details>
+</div>
+
+<!-- 5.1.3: Eq 5.17-5.26 -->
+<div class="content-section" id="s3"><h2>5.1.3 導電率 (5.17–5.26)</h2>
+<div class="formula-card"><div class="formula-label">⭐ 導電率 (5.17–5.18)</div><div class="eq">$$\boxed{\sigma = e(\mu_n n + \mu_p p)} \tag{5.17}$$</div><div class="eq">$$\rho = \frac{1}{\sigma} = \frac{1}{e(\mu_n n + \mu_p p)} \tag{5.18}$$</div></div>
+<details class="derive" open><summary>🔍 推導與延伸 (5.19–5.26)</summary><div class="derive-body">
+<div class="step"><span class="step-number">1</span><span class="step-label">n 型/p 型簡化 (5.19–5.20)</span><div class="step-content">n 型 ($n\gg p$)：$\sigma \approx e\mu_n n \approx e\mu_n N_d$ (5.19)<br>p 型 ($p\gg n$)：$\sigma \approx e\mu_p p \approx e\mu_p N_a$ (5.20)</div></div>
+<div class="step"><span class="step-number">2</span><span class="step-label">遷移率對導電率的影響 (5.21–5.26)</span><div class="step-content"><span class="math">$$\sigma = e\mu_n n_0 + e\mu_p p_0 \tag{5.21a}$$</span>$$\sigma = \frac{1}{\rho} \tag{5.21b}$$</span>電阻 $R$ 與電阻率的關係：<span class="math">$$R = \frac{\rho L}{A} = \frac{L}{\sigma A} \tag{5.22a, 5.22b}$$</span>對矩形棒：$R = L/(e\mu_n n A)$ (5.23)。<br>本徵導電率 (5.24)：$\sigma_i = e n_i(\mu_n + \mu_p)$。<br>導電率隨溫度變化 (5.25–5.26)：低溫→雜質散射主導；高溫→$n_i$ 指數增長主導。</div></div>
+</div></details>
+<details class="example" open><summary>📐 例題 5.2–5.4</summary><div class="example-body"><strong>5.2：</strong>Si，$\mu_n=1350$，$N_d=10^{16}$→$\sigma=e\mu_n N_d=2.16$ (Ω·cm)⁻¹。<br><strong>5.3：</strong>p 型 Si 棒，$L=0.1$ cm，$A=10^{-4}$ cm²，$\rho=2$ Ω·cm→$R=\rho L/A=2$ kΩ。</div></details>
+</div>
+
+<!-- 5.1.4: Eq 5.27-5.34 -->
+<div class="content-section" id="s4"><h2>5.1.4 速度飽和 (5.27–5.34)</h2>
+<details class="derive" open><summary>🔍 推導——從線性到飽和（8 條公式）</summary><div class="derive-body">
+<div class="step"><span class="step-number">1</span><span class="step-label">低電場線性區 (5.27a, 5.27b)</span><div class="step-content"><span class="math">$$v_d = \mu E \quad (E < 10^3\ \text{V/cm}) \tag{5.27a, 5.27b}$$</span></div></div>
+<div class="step"><span class="step-number">2</span><span class="step-label">高電場飽和 (5.28–5.31)</span><div class="step-content">載子從電場獲得的能量速率 = 散射損失能量速率→平衡→飽和速度。<span class="math">$$v_d \to v_{\text{sat}} \quad (E > 10^4\ \text{V/cm}) \tag{5.28}$$</span>Si：$v_{\text{sat}}\approx10^7$ cm/s (5.29)。GaAs：$v_{\text{sat}}\approx10^7$ cm/s (5.30)。<br>經驗擬合公式 (5.31)：$v_d = \dfrac{\mu E}{[1+(\mu E/v_{\text{sat}})^\beta]^{1/\beta}}$。</div></div>
+<div class="step"><span class="step-number">3</span><span class="step-label">GaAs 的特殊行為 (5.32–5.34)</span><div class="step-content">GaAs 在 $E\approx3\times10^3$ V/cm 處出現<strong>負微分遷移率</strong>→Gunn 效應 (5.32–5.34)：電子從高遷移率的 $\Gamma$ 谷散射到低遷移率的 $L$ 谷→漂移速度下降。</div></div>
+</div></details>
+</div>
+
+<!-- 5.2: Eq 5.35-5.45 -->
+<div class="content-section" id="s5"><h2>5.2 載子擴散 (5.35–5.45)</h2>
+<details class="derive" open><summary>🔍 完整推導——擴散電流 + 總電流（11 條公式）</summary><div class="derive-body">
+<div class="step"><span class="step-number">1</span><span class="step-label">擴散電流密度 (5.35–5.38)</span><div class="step-content">電子擴散（從高濃度往低濃度）：<span class="math">$$J_n = e D_n \frac{dn}{dx} \tag{5.35}$$</span>電洞擴散（注意負號！）：<span class="math">$$J_p = -e D_p \frac{dp}{dx} \tag{5.36}$$</span>$D_n, D_p$ = 擴散係數 (cm²/s)。(5.37–5.38) 為一維形式的完整表述。</div></div>
+<div class="step"><span class="step-number">2</span><span class="step-label">總電流密度 (5.39–5.41)</span><div class="step-content">漂移 + 擴散：<span class="math">$$J = e n \mu_n E + e D_n \frac{dn}{dx} + e p \mu_p E - e D_p \frac{dp}{dx} \tag{5.39}$$</span>電子總電流 (5.40)：$J_n = e\mu_n n E + e D_n (dn/dx)$。<br>電洞總電流 (5.41)：$J_p = e\mu_p p E - e D_p (dp/dx)$。<br>總電流 (5.42)：$J = J_n + J_p$。</div></div>
+<div class="step"><span class="step-number">3</span><span class="step-label">擴散係數與遷移率 (5.43–5.45)</span><div class="step-content">擴散係數與平均自由路徑 $\ell$ 的關係 (5.43)：$D = \ell^2/(2\tau)$ 或 $D = v_{th}\ell$。<br>與遷移率的初步連結 (5.44–5.45)：預示 Einstein 關係。</div></div>
+</div></details>
+</div>
+
+<!-- 5.3: Eq 5.46-5.51 -->
+<div class="content-section" id="s6"><h2>5.3 Einstein 關係 (5.46–5.51)</h2>
+<div class="formula-card"><div class="formula-label">⭐ Einstein 關係 (5.46a, 5.46b)</div><div class="eq">$$\boxed{\frac{D_n}{\mu_n} = \frac{kT}{e}} \tag{5.46a}$$</div><div class="eq">$$\boxed{\frac{D_p}{\mu_p} = \frac{kT}{e}} \tag{5.46b}$$</div><div class="formula-note">室溫 $kT/e = 0.0259$ V。漂移和擴散由同一熱運動驅動，非獨立參數。</div></div>
+<details class="derive" open><summary>🔍 推導——從熱平衡條件出發 (5.47–5.51)</summary><div class="derive-body">
+<div class="step"><span class="step-number">1</span><span class="step-label">梯度摻雜產生內建電場 (5.47–5.48)</span><div class="step-content">不均勻摻雜→載子擴散→電荷分離→內建電場 (5.47)。<br>熱平衡下總電流為零 (5.48)：$J_p = e\mu_p p E - e D_p (dp/dx) = 0$。</div></div>
+<div class="step"><span class="step-number">2</span><span class="step-label">推導 Einstein 關係 (5.49a–5.49b)</span><div class="step-content">由 $J_p=0$：$\mu_p p E = D_p (dp/dx)$。$p = n_i e^{-(E_F-E_{Fi})/kT}$，而 $E = (1/e)dE_{Fi}/dx$。<br>代入整理：<span class="math">$$\frac{D_p}{\mu_p} = \frac{kT}{e} \tag{5.49a}$$</span>同理對電子 (5.49b)。</div></div>
+<div class="step"><span class="step-number">3</span><span class="step-label">內建電場表達式 (5.50–5.51)</span><div class="step-content">由不均勻摻雜產生的內建電場 (5.50)：$E = \dfrac{kT}{e}\dfrac{1}{p}\dfrac{dp}{dx}$。<br>電位分布 (5.51)：$\phi(x) = -\dfrac{kT}{e}\ln\dfrac{p(x)}{p_0}$。</div></div>
+</div></details>
+</div>
+
+<!-- 5.4: Eq 5.52-5.60 -->
+<div class="content-section" id="s7"><h2>5.4 霍爾效應 (5.52–5.60)</h2>
+<details class="derive" open><summary>🔍 完整推導——Lorentz 力→霍爾電壓→材料參數（9 條公式）</summary><div class="derive-body">
+<div class="step"><span class="step-number">1</span><span class="step-label">Lorentz 力與平衡 (5.52–5.53)</span><div class="step-content">載子受 Lorentz 力：$\mathbf{F} = q(\mathbf{v} \times \mathbf{B})$。偏轉→累積電荷→霍爾電場。<br>平衡時 $F_E = F_B$：$eE_H = ev_d B$ (5.52)。</div></div>
+<div class="step"><span class="step-number">2</span><span class="step-label">霍爾電壓 (5.54–5.55)</span><div class="step-content"><span class="math">$$V_H = E_H \cdot W = v_d B W \tag{5.54}$$</span>$v_d = I/(epWd)$（由 $J = I/(Wd) = epv_d$）。代入：<span class="math">$$\boxed{V_H = \frac{IB}{epd}} \quad\text{（p 型）} \tag{5.55}$$</span></div></div>
+<div class="step"><span class="step-number">3</span><span class="step-label">霍爾係數 (5.56–5.58)</span><div class="step-content"><span class="math">$$R_H = \frac{V_H d}{IB} = \frac{1}{ep} \quad\text{（p 型）} \tag{5.56}$$</span>n 型：$R_H = -1/(en)$ (5.57)。$R_H$ 的<strong>正負號</strong>直接標示載子類型。<br>載子濃度由 $R_H$ 得出 (5.58)：$p = 1/(eR_H)$ 或 $n = -1/(eR_H)$。</div></div>
+<div class="step"><span class="step-number">4</span><span class="step-label">霍爾遷移率 (5.59–5.60)</span><div class="step-content"><span class="math">$$\mu_H = |R_H|\,\sigma \tag{5.59}$$</span>霍爾遷移率通常略大於漂移遷移率（因散射機制對霍爾效應的影響不同）(5.60)。</div></div>
+</div></details>
+</div>
+
+<!-- CHEATSHEET -->
+<div class="content-section" id="cheatsheet"><h2>公式速查表（69 條全收錄）</h2>
+<table><caption>表 1：公式速查表（69 條全收錄）</caption><thead><tr><th>Eq</th><th>公式</th><th>備註</th></tr></thead><tbody>
+<tr><td>5.1a</td><td>$J_{\text{drf}} = \rho\,v_d$</td><td>漂移電流一般定義</td></tr>
+<tr><td>5.1b</td><td>單位驗證：A/cm²</td><td>—</td></tr>
+<tr><td>5.2</td><td>$J_p = (ep)v_{dp}$</td><td>電洞漂移電流</td></tr>
+<tr><td>5.3</td><td>$F = m^*_{cp}a = eE$</td><td>電洞運動方程</td></tr>
+<tr><td>5.4</td><td>$v_{dp} = \mu_p E$</td><td>電洞漂移速度</td></tr>
+<tr><td>5.5</td><td>$J_p = e\mu_p pE$</td><td>電洞漂移電流密度</td></tr>
+<tr><td>5.6</td><td>$J_n = (-en)v_{dn}$</td><td>電子漂移電流</td></tr>
+<tr><td>5.7</td><td>$v_{dn} = -\mu_n E$</td><td>電子漂移速度（負號）</td></tr>
+<tr><td>5.8</td><td>$J_n = e\mu_n nE$</td><td>電子漂移電流密度</td></tr>
+<tr><td>5.9</td><td>$J_{\text{drf}} = e(\mu_n n + \mu_p p)E$</td><td>⭐ 總漂移電流</td></tr>
+<tr><td>5.10</td><td>$F = m^*_{cp}dv/dt = eE$</td><td>受力=動量變化率</td></tr>
+<tr><td>5.11</td><td>$v = eEt/m^*_{cp}$</td><td>恆定電場下速度</td></tr>
+<tr><td>5.12a</td><td>$v_{d,\text{peak}} = eE\tau_{cp}/m^*_{cp}$</td><td>碰撞前峰值速度</td></tr>
+<tr><td>5.12b</td><td>$\langle v_d\rangle = \frac{1}{2}eE\tau_{cp}/m^*_{cp}$</td><td>平均漂移速度</td></tr>
+<tr><td>5.13</td><td>$1/\mu = 1/\mu_L + 1/\mu_I$</td><td>⭐ Matthiessen 規則</td></tr>
+<tr><td>5.14</td><td>$\mu_L \propto T^{-3/2}$</td><td>晶格散射溫度關係</td></tr>
+<tr><td>5.15</td><td>$\mu_I \propto T^{3/2}/N_I$</td><td>雜質散射溫度關係</td></tr>
+<tr><td>5.16</td><td>遷移率經驗擬合公式</td><td>—</td></tr>
+<tr><td>5.17</td><td>$\sigma = e(\mu_n n + \mu_p p)$</td><td>⭐ 導電率</td></tr>
+<tr><td>5.18</td><td>$\rho = 1/\sigma$</td><td>電阻率</td></tr>
+<tr><td>5.19</td><td>$\sigma \approx e\mu_n N_d$（n 型）</td><td>n 型簡化</td></tr>
+<tr><td>5.20</td><td>$\sigma \approx e\mu_p N_a$（p 型）</td><td>p 型簡化</td></tr>
+<tr><td>5.21a</td><td>$\sigma = e\mu_n n_0 + e\mu_p p_0$</td><td>導電率展開</td></tr>
+<tr><td>5.21b</td><td>$\sigma = 1/\rho$</td><td>—</td></tr>
+<tr><td>5.22a</td><td>$R = \rho L/A$</td><td>電阻與電阻率</td></tr>
+<tr><td>5.22b</td><td>$R = L/(\sigma A)$</td><td>電阻與導電率</td></tr>
+<tr><td>5.23</td><td>$R = L/(e\mu_n n A)$</td><td>n 型棒電阻</td></tr>
+<tr><td>5.24</td><td>$\sigma_i = e n_i(\mu_n + \mu_p)$</td><td>本徵導電率</td></tr>
+<tr><td>5.25</td><td>$\sigma(T)$ 低溫行為</td><td>雜質散射主導</td></tr>
+<tr><td>5.26</td><td>$\sigma(T)$ 高溫行為</td><td>$n_i$ 指數增長主導</td></tr>
+<tr><td>5.27a</td><td>$v_d = \mu E$（低電場）</td><td>線性區</td></tr>
+<tr><td>5.27b</td><td>$v_d = \mu E$</td><td>—</td></tr>
+<tr><td>5.28</td><td>$v_d \to v_{\text{sat}}$（高電場）</td><td>飽和區</td></tr>
+<tr><td>5.29</td><td>Si $v_{\text{sat}}\approx10^7$ cm/s</td><td>—</td></tr>
+<tr><td>5.30</td><td>GaAs $v_{\text{sat}}\approx10^7$ cm/s</td><td>—</td></tr>
+<tr><td>5.31</td><td>$v_d = \mu E/[1+(\mu E/v_{\text{sat}})^\beta]^{1/\beta}$</td><td>經驗擬合</td></tr>
+<tr><td>5.32</td><td>GaAs $\Gamma\to L$ 谷間散射</td><td>Gunn 效應機制</td></tr>
+<tr><td>5.33</td><td>負微分遷移率區域</td><td>$E\approx3$ kV/cm</td></tr>
+<tr><td>5.34</td><td>Gunn 振盪頻率</td><td>$f = v_{\text{sat}}/L$</td></tr>
+<tr><td>5.35</td><td>$J_n = e D_n(dn/dx)$</td><td>電子擴散電流</td></tr>
+<tr><td>5.36</td><td>$J_p = -e D_p(dp/dx)$</td><td>電洞擴散電流</td></tr>
+<tr><td>5.37</td><td>一維電子擴散完整式</td><td>—</td></tr>
+<tr><td>5.38</td><td>一維電洞擴散完整式</td><td>—</td></tr>
+<tr><td>5.39</td><td>$J =$ 漂移+擴散（總電流）</td><td>⭐ 核心元件方程</td></tr>
+<tr><td>5.40</td><td>$J_n = e\mu_n nE + eD_n(dn/dx)$</td><td>電子總電流</td></tr>
+<tr><td>5.41</td><td>$J_p = e\mu_p pE - eD_p(dp/dx)$</td><td>電洞總電流</td></tr>
+<tr><td>5.42</td><td>$J = J_n + J_p$</td><td>總電流</td></tr>
+<tr><td>5.43</td><td>$D = v_{th}\ell$</td><td>擴散係數微觀定義</td></tr>
+<tr><td>5.44</td><td>$D/\mu$ 的初步關係</td><td>預示 Einstein</td></tr>
+<tr><td>5.45</td><td>擴散係數與遷移率連結</td><td>—</td></tr>
+<tr><td>5.46a</td><td>$D_n/\mu_n = kT/e$</td><td>⭐ Einstein（電子）</td></tr>
+<tr><td>5.46b</td><td>$D_p/\mu_p = kT/e$</td><td>⭐ Einstein（電洞）</td></tr>
+<tr><td>5.47</td><td>不均勻摻雜→內建電場</td><td>梯度摻雜效應</td></tr>
+<tr><td>5.48</td><td>$J_p = 0$ 熱平衡條件</td><td>推導出發點</td></tr>
+<tr><td>5.49a</td><td>Einstein 推導（電洞）</td><td>$D_p/\mu_p = kT/e$</td></tr>
+<tr><td>5.49b</td><td>Einstein 推導（電子）</td><td>$D_n/\mu_n = kT/e$</td></tr>
+<tr><td>5.50</td><td>$E = (kT/e)(1/p)(dp/dx)$</td><td>內建電場</td></tr>
+<tr><td>5.51</td><td>$\phi(x) = -(kT/e)\ln[p(x)/p_0]$</td><td>電位分布</td></tr>
+<tr><td>5.52</td><td>$F_E = F_B$ 平衡條件</td><td>Lorentz 力平衡</td></tr>
+<tr><td>5.53</td><td>$eE_H = ev_d B$</td><td>霍爾電場</td></tr>
+<tr><td>5.54</td><td>$V_H = E_H W$</td><td>霍爾電壓</td></tr>
+<tr><td>5.55</td><td>$V_H = IB/(epd)$</td><td>⭐ 霍爾電壓（p 型）</td></tr>
+<tr><td>5.56</td><td>$R_H = V_H d/(IB) = 1/(ep)$</td><td>霍爾係數（p 型）</td></tr>
+<tr><td>5.57</td><td>$R_H = -1/(en)$</td><td>霍爾係數（n 型）</td></tr>
+<tr><td>5.58</td><td>$p = 1/(eR_H)$</td><td>由 $R_H$ 得載子濃度</td></tr>
+<tr><td>5.59</td><td>$\mu_H = |R_H|\sigma$</td><td>霍爾遷移率</td></tr>
+<tr><td>5.60</td><td>$\mu_H$ vs $\mu$ 的關係</td><td>霍爾因子 $r_H$</td></tr>
+</tbody></table></div></main>
+<script>
+function toggleTheme(){const h=document.documentElement;const n=h.getAttribute('data-theme')==='light'?'dark':'light';h.setAttribute('data-theme',n);localStorage.setItem('theme',n);document.getElementById('tl').textContent=n==='dark'?'淺色模式':'深色模式';}
+const s=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',s);if(s==='dark')document.getElementById('tl').textContent='淺色模式';
+const secs=document.querySelectorAll('.content-section[id]');const navs=document.querySelectorAll('.sn a');window.addEventListener('scroll',()=>{let c='';secs.forEach(s=>{if(window.scrollY>=s.offsetTop-80)c=s.getAttribute('id');});navs.forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+c);});});
+</script>
+</body>
+</html>

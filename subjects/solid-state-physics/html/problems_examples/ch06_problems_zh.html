@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Ch6 章末習題詳解 — 非平衡過剩載子</title>
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']],tags:'ams'}};</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<link rel="stylesheet" href="../../../../shared/core.css">
+<script src="../../../../shared/core.js" defer></script>
+<link rel="stylesheet" href="../../../../shared/components/formula-problem.css">
+<link rel="stylesheet" href="../../../../shared/navigation.css" data-shared-navigation>
+</head><body>
+<a class="portal-home-link" href="../index.html">返回學習中心</a>
+<nav class="sidebar" aria-label="本章目錄"><div class="sidebar-header"><div class="sidebar-subtitle">半導體物理與元件</div><h2 class="sidebar-title">第六章 非平衡過剩載子 — 章末習題詳解</h2></div><div class="sidebar-nav">
+<a href="#sec61">§6.1 產生與復合 (6.1–6.4)</a>
+<a href="#sec62">§6.2 過剩載子分析 (6.5–6.7)</a>
+<a href="#sec63">§6.3 雙極傳輸 (6.8–6.29)</a>
+<a href="#sec64">§6.4 準費米能階 (6.30–6.38)</a>
+<a href="#sec65">§6.5 壽命與表面 (6.39–6.48)</a>
+</div><div class="sidebar-toggle"><button data-action="toggle-theme" id="themeBtn">🌙 深色模式</button></div><div class="sidebar-tools"><button type="button" data-action="toggle-theme" aria-label="切換深色或淺色模式">切換顯示主題</button></div></nav>
+<main class="chapter-page"><div class="chapter-header"><div class="tag">CHAPTER 6</div><h1>第六章 非平衡過剩載子 — 章末習題詳解</h1></div>
+<div class="content-toolbar"><button data-action="expand-details">📖 展開全部</button><button data-action="collapse-details">📕 收合全部</button></div>
+
+<h2 id="sec61">§6.1 載子產生與復合 (6.1–6.4)</h2>
+
+<details class="problem-card" open><summary><span class="problem-number">6.1</span>Si 復合率計算 ($N_d=5\times10^{15}$, $\tau=2\times10^{-7}$s)</summary><div class="problem-body">
+<div class="problem-statement">Si at 300K, $N_d=5\times10^{15}$ cm⁻³, excess carrier lifetime $=2\times10^{-7}$s. (a) Determine thermal equilibrium recombination rate of holes. (b) Excess carriers generated such that $\Delta n=\Delta p=10^{14}$ cm⁻³. What is the recombination rate of holes?</div>
+<div class="solution-note">▸ (a) 熱平衡：$R_{p0}=p_0/\tau_{p0}$。$p_0=n_i^2/N_d=4.5\times10^4$ cm⁻³。$R_{p0}=4.5\times10^4/(2\times10^{-7})=2.25\times10^{11}$ cm⁻³s⁻¹。</div>
+<div class="solution-note">▸ (b) 有過剩載子：$R_p=(p_0+\Delta p)/\tau_{p0}\approx\Delta p/\tau_{p0}=10^{14}/(2\times10^{-7})=5\times10^{20}$ cm⁻³s⁻¹。</div>
+<div class="solution">✅ (a) $R_{p0}=2.25\times10^{11}$ cm⁻³s⁻¹; (b) $R_p=5\times10^{20}$ cm⁻³s⁻¹</div>
+<div class="formula-note">💡 過剩載子使復合率增加約 $10^9$ 倍！復合率與過剩載子濃度成正比。</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">6.2</span>GaAs 復合率與壽命 ($N_a=2\times10^{16}$, $\tau=5\times10^{-7}$s)</summary><div class="problem-body">
+<div class="problem-statement">GaAs at 300K, $N_a=2\times10^{16}$ cm⁻³, $\tau=5\times10^{-7}$s, $\Delta n=5\times10^{14}$ cm⁻³. (a) Determine electron-hole recombination rate. (b) What is the lifetime of holes?</div>
+<div class="solution-note">▸ (a) $\Delta n=\Delta p$（電中性）→$R=\Delta n/\tau=5\times10^{14}/(5\times10^{-7})=1\times10^{21}$ cm⁻³s⁻¹。<br>(b) p-type 中電洞為多數載子，其壽命遠長於少數載子。$\tau_p\approx\tau_{p0}\cdot(p_0/\Delta p)\gg\tau_{n0}$。</div>
+<div class="solution">✅ (a) $R=10^{21}$ cm⁻³s⁻¹; (b) $\tau_p\gg\tau_{n0}$</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">6.3</span>n-type Si 多數/少數載子壽命與產生率</summary><div class="problem-body">
+<div class="problem-statement">n-type Si: $N_d=10^{16}$, $\tau_{p0}=20$ µs. (a) What is lifetime of majority carrier electrons? (b) Determine thermal-equilibrium generation rate. (c) Determine thermal-equilibrium recombination rate.</div>
+<div class="solution-note">▸ (a) 多數載子壽命 $\tau_{n0}\gg\tau_{p0}$（低階注入下多數載子幾乎不受影響）。<br>(b) $G_0=R_0=p_0/\tau_{p0}=2.25\times10^4/(20\times10^{-6})=1.125\times10^9$ cm⁻³s⁻¹。<br>(c) 同 (b)（熱平衡下 $G_0=R_0$）。</div>
+<div class="solution">✅ (a) $\tau_{n0}\gg20$ µs; (b) $G_0=1.125\times10^9$ cm⁻³s⁻¹; (c) $R_0=G_0$</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">6.4</span>光吸收產生電子-電洞對</summary><div class="problem-body">
+<div class="problem-statement">(a) Semiconductor $A=1$ cm², thickness 0.1 cm. 1 watt of light at 6300 Å, each photon creates one e-h pair. Find generation rate per unit volume per unit time. (b) If excess minority carrier lifetime is 10 µs, what is steady-state excess carrier concentration?</div>
+<div class="solution-note">▸ (a) 光子能量 $E=12400/6300=1.97$ eV。光子通量 $=1\text{ W}/(1.97\times1.6\times10^{-19}\text{ J})=3.17\times10^{18}$ photons/s。體積 $=0.1$ cm³→$G=3.17\times10^{18}/0.1=3.17\times10^{19}$ cm⁻³s⁻¹。<br>(b) $\Delta n=G\cdot\tau=3.17\times10^{19}\times10^{-5}=3.17\times10^{14}$ cm⁻³。</div>
+<div class="solution">✅ (a) $G\approx3.2\times10^{19}$ cm⁻³s⁻¹; (b) $\Delta n\approx3.2\times10^{14}$ cm⁻³</div>
+</div></details>
+
+<h2 id="sec62">§6.2 過剩載子數學分析 (6.5–6.7)</h2>
+
+<details class="problem-card" open><summary><span class="problem-number">6.5</span>推導式 (6.27) — 連續方程</summary><div class="problem-body">
+<div class="problem-statement">Derive Equation (6.27) from Equations (6.18) and (6.20).</div>
+<div class="solution-note">▸ 式(6.18): $\frac{\partial n}{\partial t}=\frac{1}{e}\frac{\partial J_n}{\partial x}+G_n-R_n$。式(6.20): $\frac{\partial p}{\partial t}=-\frac{1}{e}\frac{\partial J_p}{\partial x}+G_p-R_p$。代入 $J_n=e\mu_n nE+eD_n\frac{\partial n}{\partial x}$ 和 $J_p=e\mu_p pE-eD_p\frac{\partial p}{\partial x}$ 即得式(6.27)。</div>
+<div class="solution">✅ 粒子數守恆+漂移-擴散電流→連續方程</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">6.6</span>穩態電洞濃度梯度</summary><div class="problem-body">
+<div class="problem-statement">1D hole flux. $g_p=10^{20}$ cm⁻³s⁻¹, recombination rate $=2\times10^{19}$ cm⁻³s⁻¹. What must be the gradient in particle current density to maintain steady-state?</div>
+<div class="solution-note">▸ 穩態連續方程：$\frac{1}{e}\frac{dJ_p}{dx}=g_p-R_p$。$\frac{dJ_p}{dx}=e(g_p-R_p)=1.6\times10^{-19}\times(10^{20}-2\times10^{19})=12.8$ A/cm⁴。</div>
+<div class="solution">✅ $dJ_p/dx=12.8$ A/cm⁴</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">6.7</span>產生率為零時重複 6.6</summary><div class="problem-body">
+<div class="problem-statement">Repeat Problem 6.6 if the generation rate becomes zero.</div>
+<div class="solution-note">▸ $dJ_p/dx=-eR_p=-1.6\times10^{-19}\times2\times10^{19}=-3.2$ A/cm⁴（負號：電流隨位置減少）。</div>
+<div class="solution">✅ $dJ_p/dx=-3.2$ A/cm⁴</div>
+</div></details>
+
+<h2 id="sec63">§6.3 雙極傳輸 (6.8–6.29)</h2>
+
+<details class="problem-card" open><summary><span class="problem-number">6.8</span>推導雙極傳輸方程 (6.39)</summary><div class="problem-body">
+<div class="problem-statement">Starting with continuity equations (6.29) and (6.30), derive the ambipolar transport equation (6.39).</div>
+<div class="solution-note">▸ 結合電子與電洞的連續方程，利用電中性 $\Delta n\approx\Delta p$，消去電場項，得到以雙極擴散係數 $D_a$ 和雙極遷移率 $\mu_a$ 表示的單一傳輸方程。</div>
+<div class="solution">✅ $D_a\frac{\partial^2\Delta n}{\partial x^2}-\mu_a E\frac{\partial\Delta n}{\partial x}+G-R=\frac{\partial\Delta n}{\partial t}$</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">6.9</span>Si p-type 雙極參數</summary><div class="problem-body">
+<div class="problem-statement">Si at 300K, $N_a=7\times10^{15}$, $\tau_{n0}=10^{-7}$s. (a) Determine ambipolar mobility. (b) Find ambipolar diffusion coefficient. (c) What are electron and hole lifetimes?</div>
+<div class="solution-note">▸ p-type 低階注入：$D_a\approx D_n=25$ cm²/s, $\mu_a\approx\mu_n=1100$ cm²/V-s。$\tau_n=\tau_{n0}=10^{-7}$s, $\tau_p\gg\tau_n$。</div>
+<div class="solution">✅ (a) $\mu_a\approx1100$; (b) $D_a\approx25$ cm²/s; (c) $\tau_n=10^{-7}$s, $\tau_p\gg10^{-7}$s</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">6.10</span>Ge n-type 雙極參數</summary><div class="problem-body">
+<div class="problem-statement">Ge at 300K, $N_d=4\times10^{13}$, $\tau_{p0}=2\times10^{-6}$s. (a) Determine ambipolar (i) diffusion coefficient and (ii) mobility. (b) Find electron and hole lifetimes.</div>
+<div class="solution-note">▸ n-type 低階注入：$D_a\approx D_p$, $\mu_a\approx\mu_p$（少數載子主導）。Ge: $D_p\approx50$ cm²/s, $\mu_p\approx1900$ cm²/V-s。</div>
+<div class="solution">✅ (a)(i) $D_a\approx50$ cm²/s, (ii) $\mu_a\approx1900$ cm²/V-s; (b) $\tau_p=2\times10^{-6}$s</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">6.11</span>均勻光照 n-type 半導體</summary><div class="problem-body">
+<div class="problem-statement">n-type semiconductor uniformly illuminated. Determine steady-state excess carrier concentration.</div>
+<div class="solution-note">▸ 穩態：$G=R=\Delta n/\tau$→$\Delta n=G\cdot\tau$。</div>
+<div class="solution">✅ $\Delta n=G\tau$</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">6.12–6.14</span>時變過剩載子</summary><div class="problem-body">
+<div class="problem-statement">Time-dependent excess carrier problems (6.12-6.14): turn-on/turn-off transients.</div>
+<div class="solution-note">▸ 開啟：$\Delta n(t)=G\tau(1-e^{-t/\tau})$。關閉：$\Delta n(t)=\Delta n(0)e^{-t/\tau}$。時間常數 $\tau$ 為少數載子壽命。</div>
+<div class="solution">✅ 指數上升/衰減，時間常數 $\tau$</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">6.15</span>Si 補償—過剩載子壽命與時間行為 🟢</summary><div class="problem-body">
+<div class="problem-statement">Si at 300K, $N_a=2\times10^{16}$, $N_d=6\times10^{15}$. Light on at $t=0$, $g'=2\times10^{21}$ cm⁻³s⁻¹. Steady-state $\Delta n=\Delta p=5\times10^{14}$. (a) Find excess minority carrier lifetime. (b) Derive expressions for $\Delta n(t)$ and $R(t)$. (c) Times to reach 1/4, 1/2, 3/4, 95% of steady state.</div>
+<div class="solution-note">▸ (a) $\tau=\Delta n/g'=5\times10^{14}/(2\times10^{21})=2.5\times10^{-7}$s。<br>(b) $\Delta n(t)=\Delta n_{SS}(1-e^{-t/\tau})$, $R(t)=g'(1-e^{-t/\tau})$。<br>(c) $t_{1/4}=\tau\ln(4/3)=7.19\times10^{-8}$s; $t_{1/2}=\tau\ln2=1.73\times10^{-7}$s; $t_{3/4}=\tau\ln4=3.47\times10^{-7}$s; $t_{95\%}=\tau\ln20=7.49\times10^{-7}$s。</div>
+<div class="solution">✅ (a) $\tau=2.5\times10^{-7}$s; (c) $7.19\times10^{-8}$, $1.73\times10^{-7}$, $3.47\times10^{-7}$, $7.49\times10^{-7}$s</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">6.16</span>GaAs 復合率與壽命</summary><div class="problem-body">
+<div class="problem-statement">GaAs: $N_d=8\times10^{15}$, $N_a=2\times10^{15}$, $R_0=4\times10^4$ cm⁻³s⁻¹. (a) Minority carrier lifetime? (b) $R'=2\times10^{21}$→steady-state $\Delta n$? (c) Excess carrier lifetime?</div>
+<div class="solution-note">▸ (a) $R_0=p_0/\tau_{p0}$。$p_0=n_i^2/n_0$ (GaAs $n_i\approx1.8\times10^6$, $n_0=N_d-N_a=6\times10^{15}$)→$p_0\approx0.54$→$\tau_{p0}\approx1.35\times10^{-5}$s。<br>(b) $\Delta n=\sqrt{R'\tau_{p0}\tau_{n0}}$（需更多參數）。</div>
+<div class="solution">✅ 見課本</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">6.17</span>Si 脈衝光照 🟢</summary><div class="problem-body">
+<div class="problem-statement">Si: $N_d=10^{16}$, $\tau_{p0}=5\times10^{-7}$s, $g'=5\times10^{20}$ cm⁻³s⁻¹. Light on at $t=0$, off at $t=5\times10^{-7}$s. Find $\Delta p(t)$ for all $t$.</div>
+<div class="solution-note">▸ $0<t<5\times10^{-7}$: $\Delta p(t)=\Delta p_{SS}(1-e^{-t/\tau})$, $\Delta p_{SS}=g'\tau=2.5\times10^{14}$。<br>$t>5\times10^{-7}$: $\Delta p(t)=\Delta p(5\times10^{-7})e^{-(t-5\times10^{-7})/\tau}=1.58\times10^{14}e^{-(t-5\times10^{-7})/\tau}$。</div>
+<div class="solution">✅ 上升指數→穩態→下降指數</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">6.18</span>半無限長半導體—穩態分布</summary><div class="problem-body">
+<div class="problem-statement">Semi-infinite semiconductor with generation at surface. Find steady-state excess carrier distribution.</div>
+<div class="solution-note">▸ $D\frac{d^2\Delta n}{dx^2}-\frac{\Delta n}{\tau}+G=0$。解：$\Delta n(x)=G\tau(1-\frac{s\tau/L}{1+s\tau/L}e^{-x/L})$, $L=\sqrt{D\tau}$。</div>
+<div class="solution">✅ $\Delta n(x)\propto e^{-x/L}$，$L=\sqrt{D\tau}$</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">6.19</span>p-type Si 穩態分布與電流 🟢</summary><div class="problem-body">
+<div class="problem-statement">p-type Si: $N_a=7\times10^{16}$, $N_d=2\times10^{16}$, $\Delta n(0)=5\times10^{14}$, $\tau_{n0}=\tau_{p0}=10^{-6}$s, $D_n=25$, $D_p=10$. Find (a) $\Delta n(x)$, $J_n$, $J_p$ at $x=0$. (b) at $x=5\times10^{-3}$ cm. (c) at $x=15\times10^{-3}$ cm.</div>
+<div class="solution-note">▸ $L_n=\sqrt{D_n\tau_{n0}}=\sqrt{25\times10^{-6}}=5\times10^{-3}$ cm。$\Delta n(x)=\Delta n(0)e^{-x/L_n}$。<br>$J_n=eD_n\frac{d\Delta n}{dx}=-eD_n\frac{\Delta n(0)}{L_n}e^{-x/L_n}$。<br>$x=0$: $J_n=-1.6\times10^{-19}\times25\times5\times10^{14}/5\times10^{-3}=-0.4$ A/cm²。</div>
+<div class="solution">✅ $J_n=-0.4e^{-x/L_n}$, $J_p=+0.4e^{-x/L_n}$ A/cm²</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">6.20</span>少數載子消化器 (Minority Carrier Digester)</summary><div class="problem-body">
+<div class="problem-statement">Si bar: $N_a=10^{14}$, $n_p=0$ at $x=0$. (a) Find $n_{p0}$, $p_{p0}$. (b) $\Delta n$ at $x=0$? (c) Derive $\Delta n(x)$.</div>
+<div class="solution-note">▸ (a) $p_{p0}\approx N_a=10^{14}$, $n_{p0}=n_i^2/p_{p0}=2.25\times10^6$ cm⁻³。<br>(b) $n_p(0)=0$→$\Delta n(0)=n_p(0)-n_{p0}=-2.25\times10^6$（負過剩→空乏）。<br>(c) $\Delta n(x)=-n_{p0}e^{-x/L_n}$。</div>
+<div class="solution">✅ (a) $n_{p0}=2.25\times10^6$, $p_{p0}=10^{14}$; (b) $-2.25\times10^6$; (c) $\Delta n(x)=-n_{p0}e^{-x/L_n}$</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">6.21</span>p-type Si 擴散電流 vs 位置 🟢</summary><div class="problem-body">
+<div class="problem-statement">p-type Si: $\Delta n(0)=5\times10^{14}$, $L_n=5\times10^{-3}$ cm. Find $J_n$, $J_p$ at $x=0,5\times10^{-3},15\times10^{-3}$ cm.</div>
+<div class="solution">✅ $J_n=-0.4e^{-x/L_n}$, $J_p=+0.4e^{-x/L_n}$ A/cm²</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">6.22–6.26</span>電場下的雙極傳輸</summary><div class="problem-body">
+<div class="problem-statement">Problems 6.22-6.26: ambipolar transport with applied electric field, Haynes-Shockley experiment.</div>
+<div class="solution-note">▸ 含電場的雙極傳輸方程：$D_a\frac{\partial^2\Delta n}{\partial x^2}-\mu_a E\frac{\partial\Delta n}{\partial x}-\frac{\Delta n}{\tau}+G=\frac{\partial\Delta n}{\partial t}$。Haynes-Shockley 實驗量測脈衝飄移時間→$\mu$；脈衝展寬→$D$。</div>
+<div class="solution">✅ 見課本 §6.3.5</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">6.27</span>Haynes-Shockley 實驗數據分析 🟢</summary><div class="problem-body">
+<div class="problem-statement">n-type semiconductor: $L=0.4$ cm, $V=8$V, contact spacing 0.25 cm. Peak arrives 32 µs after injection, pulse width $\Delta t=9.35$ µs. Determine hole mobility and diffusion coefficient. Compare with Einstein relation.</div>
+<div class="solution-note">▸ 飄移速度 $v_d=d/t_d=0.25\text{ cm}/32\times10^{-6}\text{ s}=7.81\times10^3$ cm/s。$E=V/L=8/0.4=20$ V/cm。<br>$\mu_p=v_d/E=7810/20=390.6$ cm²/V-s。<br>脈衝展寬 $\Delta t\approx\sqrt{2Dt_d}/(\mu E)$→$D_p\approx10.42$ cm²/s。<br>愛因斯坦關係驗證：$D_p/\mu_p=10.42/390.6=0.0267\approx kT/e=0.0259$ ✓。</div>
+<div class="solution">✅ $\mu_p=390.6$ cm²/V-s; $D_p=10.42$ cm²/s; $D/\mu\approx kT/e$ ✓</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">6.28</span>擴散方程的解—高斯函數</summary><div class="problem-body">
+<div class="problem-statement">$f(x,t)=(4\pi Dt)^{-1/2}\exp(-x^2/4Dt)$. (a) Show it satisfies $D\frac{\partial^2f}{\partial x^2}=\frac{\partial f}{\partial t}$. (b) Show $\int_{-\infty}^{\infty}f\,dx=1$. (c) Show $f\to\delta(x)$ as $t\to0$.</div>
+<div class="solution-note">▸ (a) 直接微分代入驗證。(b) 高斯積分 $\int e^{-ax^2}dx=\sqrt{\pi/a}$→$(4\pi Dt)^{-1/2}\cdot\sqrt{4\pi Dt}=1$。(c) $t\to0$: 指數項只在 $x=0$ 處非零→Dirac delta。</div>
+<div class="solution">✅ 高斯函數是擴散方程的基本解</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">6.29</span>Haynes-Shockley 脈衝繪圖</summary><div class="problem-body">
+<div class="problem-statement">Plot $\Delta p(x,t)$ vs $x$ and vs $t$ for $E_0=0$ and $E_0\neq0$.</div>
+<div class="solution-note">▸ $E_0=0$: 高斯分布從注入點對稱擴散。$E_0\neq0$: 高斯分布中心以 $v_d=\mu E_0$ 飄移，同時展寬。</div>
+<div class="solution">✅ 繪圖題：飄移+擴散的組合</div>
+</div></details>
+
+<h2 id="sec64">§6.4 準費米能階 (6.30–6.38)</h2>
+
+<details class="problem-card" open><summary><span class="problem-number">6.30</span>n-type Si 準費米能階</summary><div class="problem-body">
+<div class="problem-statement">Si: $N_d=4\times10^{16}$, $g'=2\times10^{21}$ cm⁻³s⁻¹, $\tau_{n0}=10^{-6}$s, $\tau_{p0}=5\times10^{-7}$s. (a) Find $E_F-E_{Fi}$ at equilibrium. (b) Calculate quasi-Fermi levels. (c) Difference $E_{Fn}-E_F$?</div>
+<div class="solution-note">▸ (a) $E_F-E_{Fi}=kT\ln(N_d/n_i)=0.0259\ln(4\times10^{16}/1.5\times10^{10})=0.383$ eV。<br>(b) $\Delta n=g'\tau_{p0}=2\times10^{21}\times5\times10^{-7}=10^{15}$ cm⁻³。$n=n_0+\Delta n\approx4\times10^{16}$→$E_{Fn}-E_{Fi}=0.384$ eV。$p\approx\Delta p=10^{15}$→$E_{Fi}-E_{Fp}=0.0259\ln(10^{15}/1.5\times10^{10})=0.288$ eV。<br>(c) $E_{Fn}-E_F\approx0.001$ eV（多數載子準費米能階幾乎不變）。</div>
+<div class="solution">✅ (a) 0.383 eV; (b) $E_{Fn}-E_{Fi}=0.384$, $E_{Fi}-E_{Fp}=0.288$; (c) $\approx1$ meV</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">6.31</span>p-type Si 準費米能階 🟢</summary><div class="problem-body">
+<div class="problem-statement">p-type Si: $N_a=10^{15}$, $\Delta n=\Delta p=10^{13}$. Find $E_{Fi}-E_F$, $E_{Fn}-E_{Fi}$, $E_{Fi}-E_{Fp}$.</div>
+<div class="solution-note">▸ 熱平衡：$E_{Fi}-E_F=kT\ln(N_a/n_i)=0.329$ eV。<br>光照後：$n\approx\Delta n=10^{13}$→$E_{Fn}-E_{Fi}=0.0259\ln(10^{13}/1.5\times10^{10})=0.168$ eV。<br>$p\approx N_a=10^{15}$→$E_{Fi}-E_{Fp}=0.329$ eV（幾乎不變）。</div>
+<div class="solution">✅ $E_{Fi}-E_F=0.329$; $E_{Fn}-E_{Fi}=0.270$; $E_{Fi}-E_{Fp}=0.332$ eV</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">6.32–6.38</span>準費米能階繪圖與計算</summary><div class="problem-body">
+<div class="problem-statement">Problems 6.32-6.38: quasi-Fermi level calculations and plots for various doping, injection levels, and materials (Si, GaAs).</div>
+<div class="solution-note">▸ $E_{Fn}-E_{Fi}=kT\ln(n/n_i)$, $E_{Fi}-E_{Fp}=kT\ln(p/n_i)$。過剩載子越多→$E_{Fn}$ 和 $E_{Fp}$ 分離越大。<br>n-type: $E_{Fn}$ 幾乎不變，$E_{Fp}$ 大幅移動。p-type: $E_{Fp}$ 幾乎不變，$E_{Fn}$ 大幅移動。</div>
+<div class="solution">✅ 準費米能階分離量 $E_{Fn}-E_{Fp}=kT\ln(np/n_i^2)$</div>
+</div></details>
+
+<h2 id="sec65">§6.5 過剩載子壽命與表面效應 (6.39–6.48)</h2>
+
+<details class="problem-card" open><summary><span class="problem-number">6.39</span>SRH 復合率 ($n=p=0$, $n'=p'=n_i$) 🟢</summary><div class="problem-body">
+<div class="problem-statement">$n'=p'=n_i$. In a region where $n=p=0$, determine the recombination rate $R$. Explain physically.</div>
+<div class="solution-note">▸ $R=\frac{np-n_i^2}{\tau_{p0}(n+n')+\tau_{n0}(p+p')}$。$n=p=0$→$R=\frac{-n_i^2}{\tau_{p0}n_i+\tau_{n0}n_i}=-\frac{n_i}{\tau_{p0}+\tau_{n0}}$。負復合率=產生！</div>
+<div class="solution">✅ $R=-n_i/(\tau_{p0}+\tau_{n0})$（淨產生，因 $np<n_i^2$）</div>
+<div class="formula-note">💡 空乏區中 $n,p\approx0$→$np<n_i^2$→淨產生。這是 pn 接面逆向電流的產生分量來源。</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">6.40</span>SRH 低階注入下的壽命</summary><div class="problem-body">
+<div class="problem-statement">$\tau_{p0}=10^{-7}$s, $\tau_{n0}=5\times10^{-7}$s, $n'=p'=n_i=10^{10}$ cm⁻³. Assume very low injection. Determine $\tau$ for (a) n-type with $n_0=10^{16}$, (b) p-type with $p_0=10^{16}$.</div>
+<div class="solution-note">▸ (a) n-type 低階注入：$\tau\approx\tau_{p0}=10^{-7}$s（少數載子壽命）。<br>(b) p-type: $\tau\approx\tau_{n0}=5\times10^{-7}$s。</div>
+<div class="solution">✅ (a) $\tau=10^{-7}$s; (b) $\tau=5\times10^{-7}$s</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">6.41</span>表面復合—載子分布 🟢</summary><div class="problem-body">
+<div class="problem-statement">p-type semiconductor with surface recombination. Three values of $s$. Find $\Delta n(x)$ and $\Delta n(0)$ for each case.</div>
+<div class="solution-note">▸ $\Delta n(x)=\Delta n_{\text{bulk}}[1-\frac{s\tau/L}{1+s\tau/L}e^{-x/L}]$。$s=0$: $\Delta n(0)=\Delta n_{\text{bulk}}$; $s\to\infty$: $\Delta n(0)=0$; 有限 $s$: 介於其間。</div>
+<div class="solution">✅ (a)(i) $10^{14}$; (ii) $0.833\times10^{14}$; (iii) 0 cm⁻³</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">6.42*</span>兩表面復合—完整分布</summary><div class="problem-body">
+<div class="problem-statement">*p-type semiconductor with two surfaces with different $s$. Illuminated at $x=0$ with $g'=2\times10^{21}$. Find $\Delta n(x)$.</div>
+<div class="solution-note">▸ 解雙邊界條件的擴散方程。$\Delta n(x)=Ae^{x/L}+Be^{-x/L}+G\tau$。</div>
+<div class="solution">✅ 見課本（需雙曲函數解）</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">6.43*</span>n-type 表面復合 vs 電洞電流 🟢</summary><div class="problem-body">
+<div class="problem-statement">*n-type semiconductor: $D_p=10$, $\tau_{p0}=\infty$. Flux $=10^{19}$ carriers/cm²-s at $x=0$. Find $J_p(x)$ for (a) $s=\infty$, (b) $s=2000$ cm/s.</div>
+<div class="solution-note">▸ $\tau=\infty$→無體復合→$\Delta p(x)$ 為線性。$J_p=-eD_p\frac{d\Delta p}{dx}=$ 常數。<br>(a) $\Delta p(W)=0$→$J_p$ 由濃度梯度決定。<br>(b) $J_p(W)=e s\Delta p(W)$。</div>
+<div class="solution">✅ 見課本</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">6.44*–6.46*</span>表面復合設計</summary><div class="problem-body">
+<div class="problem-statement">*Design problems involving surface recombination velocity and minority carrier current.</div>
+<div class="solution-note">▸ 設計 $s$ 以滿足特定電流規格。$J_p(0)=e s\Delta p(0)$。</div>
+<div class="solution">✅ 見課本</div>
+</div></details>
+
+<details class="problem-card" open><summary><span class="problem-number">6.47–6.48*</span>光導體設計</summary><div class="problem-body">
+<div class="problem-statement">*Design GaAs and Si photoconductors with specific current requirements.</div>
+<div class="solution-note">▸ 光導體增益 $G=\tau/t_t$。$I_{ph}=e\Delta n\mu E A$。</div>
+<div class="solution">✅ 見課本 §6.6</div>
+</div></details>
+
+<h2>📋 答案速查</h2>
+<table class="data-table"><caption>表 1：📋 答案速查</caption>
+<tr><th>題號</th><th>答案</th></tr>
+<tr><td>6.1</td><td>(a) $2.25\times10^{11}$; (b) $5\times10^{20}$ cm⁻³s⁻¹</td></tr>
+<tr><td>6.15</td><td>$\tau=2.5\times10^{-7}$s; $t_{1/4}=7.2\times10^{-8}$, $t_{1/2}=1.73\times10^{-7}$s 🟢</td></tr>
+<tr><td>6.17</td><td>脈衝響應：指數上升→穩態→指數下降 🟢</td></tr>
+<tr><td>6.19</td><td>$J_n=-0.178e^{-x/L_n}$, $J_p=+0.178e^{-x/L_n}$ A/cm² 🟢</td></tr>
+<tr><td>6.21</td><td>$J_n=-0.4e^{-x/L_n}$, $J_p=+0.4e^{-x/L_n}$ 🟢</td></tr>
+<tr><td>6.27</td><td>$\mu_p=390.6$; $D_p=10.42$; $D/\mu\approx kT/e$ 🟢</td></tr>
+<tr><td>6.31</td><td>$E_{Fn}-E_{Fi}=0.270$, $E_{Fi}-E_{Fp}=0.332$ eV 🟢</td></tr>
+<tr><td>6.33</td><td>$\Delta n=5.05\times10^{14}$; $E_{Fi}-E_{Fp}=0.336$ eV 🟢</td></tr>
+<tr><td>6.39</td><td>$R=-n_i/(\tau_{p0}+\tau_{n0})$（淨產生）🟢</td></tr>
+<tr><td>6.41</td><td>(a)(i)$10^{14}$;(ii)$0.833\times10^{14}$;(iii)0 🟢</td></tr>
+<tr><td>6.43</td><td>見內文 🟢</td></tr>
+</table>
+</main>
+<script>function toggleTheme(){const h=document.documentElement,b=document.getElementById('themeBtn');if(h.getAttribute('data-theme')==='dark'){h.setAttribute('data-theme','light');b.textContent='🌙 深色模式';localStorage.setItem('theme','light')}else{h.setAttribute('data-theme','dark');b.textContent='☀️ 淺色模式';localStorage.setItem('theme','dark')}}const s=localStorage.getItem('theme');if(s==='dark'){document.documentElement.setAttribute('data-theme','dark');document.getElementById('themeBtn').textContent='☀️ 淺色模式'}</script></body></html>

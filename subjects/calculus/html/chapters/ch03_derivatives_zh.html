@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light" data-reading-width="wide">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第 3 章 — Calculus 學習教材</title>
+<script>
+MathJax = {
+  tex: { inlineMath: [['$', '$']], displayMath: [['$$', '$$']], tags: 'ams' },
+  options: { ignoreHtmlClass: 'no-math' }
+};
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<link rel="stylesheet" href="../../../../shared/core.css">
+<script src="../../../../shared/core.js" defer></script>
+<link rel="stylesheet" href="../../../../shared/models/model-host.css">
+<script defer src="../../../../shared/models/model-runtime.js"></script>
+<link rel="stylesheet" href="../../../../shared/components/calculus-ch03-model.css">
+<link rel="stylesheet" href="../../../../shared/navigation.css" data-shared-navigation>
+</head>
+<body>
+
+<a class="portal-home-link" href="../../index.html">← 返回學習中心</a>
+<nav class="sidebar" aria-label="本章目錄"><div class="sidebar-header"><div class="sidebar-subtitle">微積分</div><h2 class="sidebar-title">導數</h2></div><ul class="toc">
+    <li class="ns">本章預覽</li>
+    <li class="nsub"><a href="#preview">學習目標與概念地圖</a></li>
+    <li class="ns">3.1 導數的定義</li>
+    <li class="nsub"><a href="#s3-1">切線問題與差商極限</a></li>
+    <li class="ns">3.2 導數作為函數</li>
+    <li class="nsub"><a href="#s3-2">導函數與可微性</a></li>
+    <li class="ns">3.3 微分法則</li>
+    <li class="nsub"><a href="#s3-3">冪法則、積法則、商法則</a></li>
+    <li class="ns">3.4 導數作為變化率</li>
+    <li class="nsub"><a href="#s3-4">瞬時速度與邊際分析</a></li>
+    <li class="ns">3.5 三角函數的導數</li>
+    <li class="nsub"><a href="#s3-5">sin, cos, tan 的導數</a></li>
+    <li class="ns">3.6 連鎖律</li>
+    <li class="nsub"><a href="#s3-6">合成函數的微分</a></li>
+    <li class="ns">3.7 反函數的導數</li>
+    <li class="nsub"><a href="#s3-7">反三角函數的導數</a></li>
+    <li class="ns">3.8 隱函數微分</li>
+    <li class="nsub"><a href="#s3-8">無法顯式解出 y 時的微分</a></li>
+    <li class="ns">3.9 指數與對數的導數</li>
+    <li class="nsub"><a href="#s3-9">e^x, ln x, 對數微分法</a></li>
+    <li class="ns">本章摘要</li>
+    <li class="nsub"><a href="#summary">關鍵公式與概念</a></li>
+    <li class="nsub"><a href="#common-mistakes">初學者常見錯誤</a></li>
+  </ul>
+  <div class="sidebar-tools"><button type="button" data-action="toggle-theme" aria-label="切換深色或淺色模式">切換顯示主題</button></div></nav>
+
+<main class="chapter-page" data-chapter-title="導數" data-prev-href="ch02_limits_zh.html" data-prev-label="第 2 章 極限 Limits" data-next-href="ch04_applications_derivatives_zh.html" data-next-label="導數的應用">
+
+<header class="chapter-header">
+  <div class="tag">第 3 章 · OpenStax Calculus Vol 1, Ch 3</div>
+  <h1>導數</h1>
+  <div class="chapter-meta">OpenStax · Calculus Volume 1 · Derivatives · pp.195–302</div>
+</header>
+
+<section id="preview">
+<div class="chapter-preview">
+<h2>📌 核心問題</h3>
+<p>如何精確描述一個函數在某一點的<strong>瞬時變化率</strong>？第 2 章的極限為這個問題提供了數學語言——導數（derivative）就是把「變化率」用極限嚴格定義的產物。本章從切線問題出發，建立完整的微分法則體系。</p>
+
+<h3>🔑 關鍵概念</h3>
+<ol>
+  <li><strong>導數定義</strong>：$f'(a) = \lim_{h \to 0} \frac{f(a+h)-f(a)}{h}$</li>
+  <li><strong>切線斜率</strong>：導數的幾何意義——曲線在該點的切線斜率</li>
+  <li><strong>可微 ⇒ 連續</strong>：反過來不成立（$|x|$ 在 $x=0$）</li>
+  <li><strong>冪法則</strong>：$\frac{d}{dx}x^n = nx^{n-1}$</li>
+  <li><strong>積法則 vs 連鎖律</strong>：乘法用積法則，合成用連鎖律——搞混是致命錯誤</li>
+  <li><strong>連鎖律</strong>：$\frac{d}{dx}f(g(x)) = f'(g(x)) \cdot g'(x)$——「外導 × 內導」</li>
+  <li><strong>隱函數微分</strong>：方程兩邊同時對 $x$ 微分，遇到 $y$ 就乘上 $y'$</li>
+  <li><strong>$\frac{d}{dx}e^x = e^x$</strong>：自然指數函數的導數就是它自己</li>
+  <li><strong>$\frac{d}{dx}\ln x = \frac{1}{x}$</strong>：自然對數的導數</li>
+</ol>
+
+  <h3>🧭 本章推理地圖</h3>
+<p><strong>極限定義切線斜率</strong>（§3.1–§3.2） → 建立導數的幾何與物理意義 → <strong>微分法則</strong>（§3.3–§3.5）提供系統性計算工具 → <strong>連鎖律</strong>（§3.6）解鎖合成函數的微分 → <strong>隱函數與反函數微分</strong>（§3.7–§3.9）擴展到非顯式關係 → 導數是第 4 章應用（Ch4）與整個微積分體系的核心引擎</p>
+
+  
+
+<div class="callout-warn"><strong>⚡ 本章是 Calculus I 的核心</strong>——後面所有的應用（極值、最佳化、相關變率、積分）都建立在微分技巧之上。把這章的微分法則練到「肌肉記憶」的程度，後面的章節就會很輕鬆。</div>
+</div>
+</section>
+
+<!-- ====== 3.1 ====== -->
+<section id="s3-1">
+<h2>3.1 導數的定義（Defining the Derivative）</h2>
+
+<div style="margin-bottom:14px;font-size:12px;color:var(--tx2);line-height:1.8"><strong style="color:var(--tx)">🔑 本節重點</strong> ①導數=差商極限 $f'(a)=\lim_{h\to 0}\frac{f(a+h)-f(a)}{h}$ ②幾何意義=切線斜率 ③可微則連續，反之不成立 ④$f'(a)>0$ 遞增、$<0$ 遞減、$=0$ 水平切線</div>
+
+<p>導數的概念源自兩個幾何問題的交匯
+
+<p>回顧第 2 章：給定函數 $f$，通過 $(a, f(a))$ 和 $(x, f(x))$ 的割線（secant line）斜率是 $\frac{f(x)-f(a)}{x-a}$。當 $x$ 趨近於 $a$ 時，割線趨近於切線，因此：</p>
+
+<div class="formula-card">
+  <div class="formula-label">導數的定義（Definition of the Derivative）</div>
+  <div class="eq">$$f'(a) = \lim_{h \to 0} \frac{f(a+h) - f(a)}{h} = \lim_{x \to a} \frac{f(x) - f(a)}{x - a}$$</div>
+  <div class="formula-note">兩種寫法等價：第一種令 $h = x-a$，第二種直接使用極限變數 $x$。選擇哪一種取決於代數操作的便利性。</div>
+</div>
+
+<p>這個極限如果存在，我們說 $f$ 在 $x=a$ 處<strong>可微（differentiable）</strong>。$f'(a)$ 這個數值就是 $f$ 在 $x=a$ 處的<strong>瞬時變化率</strong>，也是切線的斜率。導數的記號有多種：$f'(a)$（Lagrange）、$\frac{dy}{dx}\big|_{x=a}$（Leibniz）、$\dot{y}$（Newton——物理常用）。</p>
+
+<div class="callout"><strong>💡 導數 = 局部線性近似的斜率</strong><br>如果你用顯微鏡不斷放大曲線上的一點，你會發現曲線看起來越來越像一條直線。那條直線就是切線，它的斜率就是導數。這是微積分最深刻的直覺之一：<strong>可微函數在微觀尺度上是線性的</strong>。</div>
+
+<details class="example"><summary>📝 範例</summary><strong>📝 範例：用定義求導數</strong><br>求 $f(x)=x^2$ 在 $x=3$ 處的導數。<br><br><strong>解：</strong>$$f'(3) = \lim_{h \to 0} \frac{(3+h)^2 - 3^2}{h} = \lim_{h \to 0} \frac{9+6h+h^2-9}{h} = \lim_{h \to 0} \frac{6h+h^2}{h} = \lim_{h \to 0} (6+h) = 6$$<br>所以 $f'(3)=6$，這表示在 $x=3$ 處，$y=x^2$ 的曲線以斜率 6 上升。</details>
+
+<h3>導數不存在的完整分類</h3>
+<p>函數在一點處不可微的可能原因（附圖示）：</p>
+<ul>
+  <li><strong>角點（Corner）：</strong>左右導數存在但不相等——如 $f(x)=|x|$ 在 $x=0$</li>
+  <li><strong>尖點（Cusp）：</strong>切線斜率趨於 $\pm\infty$——如 $f(x)=x^{2/3}$ 在 $x=0$</li>
+  <li><strong>不連續點：</strong>函數本身不連續——如階梯函數的跳躍點</li>
+  <li><strong>垂直切線：</strong>斜率趨於無窮大——如 $f(x)=\sqrt[3]{x}$ 在 $x=0$</li>
+</ul>
+<p>記住：可微性是比連續性更強的條件。一個函數可以處處連續但處處不可微——歷史上 Weierstrass 函數就是著名的反例。</p>
+
+<p>如果 $f'(a) > 0$，函數在 $a$ 處<strong>遞增</strong>（切線向右上方傾斜）。如果 $f'(a) < 0$，函數在 $a$ 處<strong>遞減</strong>。如果 $f'(a) = 0$，函數在 $a$ 處有<strong>水平切線</strong>——這通常是局部極值點（local extremum）的候選位置（第 4 章會詳細討論）。</p>
+
+<div class="callout-warn"><strong>⚡ 導數不存在的情況</strong><br>以下四種情況導數不存在：(1) 函數中有<strong>尖點（corner）</strong>——如 $f(x)=|x|$ 在 $x=0$；(2) <strong>不連續點</strong>——不連續就不可微；(3) <strong>垂直切線</strong>——斜率趨於無窮大，如 $f(x)=\sqrt[3]{x}$ 在 $x=0$；(4) <strong>震盪</strong>——如 $f(x)=x\sin(1/x)$ 在 $x=0$ 附近劇烈震盪。</div>
+
+</section>
+
+<!-- ====== 3.2 ====== -->
+<section id="s3-2">
+<h2>3.2 導數作為函數（The Derivative as a Function）</h2>
+
+<div style="margin-bottom:14px;font-size:12px;color:var(--tx2);line-height:1.8"><strong style="color:var(--tx)">🔑 本節重點</strong> ①導函數將導數概念從特定點推廣到整個函數 ②可微必定連續但連續不一定可微 ③熟悉 Lagrange、Leibniz、Newton 等不同記號 ④高階導數描述加速度與曲線凹性</div>
+
+<p>上一節我們計算了 $f$ 在
+
+<div class="eq">$$f'(x) = \lim_{h \to 0} \frac{f(x+h) - f(x)}{h}$$</div>
+
+<p>$f'$ 是一個<strong>從函數產生另一個函數</strong>的運算。給定 $f(x)=x^2$，它的導函數是 $f'(x)=2x$——一個全新的函數，在每個點 $x$ 處給出原函數在該點的斜率。</p>
+
+<div class="callout"><strong>💡 導函數的意義</strong><br>$f'(x)$ 的圖形告訴我們 $f(x)$ 的<strong>斜率如何隨 $x$ 變化</strong>。例如 $f'(x)=2x$ 的圖形是一條通過原點的直線——這表示 $f(x)=x^2$ 的斜率從負值（$x<0$ 時曲線下降）經過零（原點處是谷底）變成正值（$x>0$ 時曲線上升）。</div>
+
+<details class="derive model-host" style="margin:20px 0" data-model-host="derivative">
+<summary>🎮 互動模型：f(x) 與 f'(x) 聯動探索</summary>
+<div style="padding:8px 0">
+<p style="font-size:13px;color:var(--tx2);margin-bottom:12px">拖動 x 滑桿，觀察上方 f(x) 的切線斜率如何對應下方 f'(x) 的值。點擊「自動移動」觀看動態對應。</p>
+<div data-derivative-model data-model-mount></div>
+</div>
+</details>
+
+<h3>可微性與連續性</h3>
+
+<p><strong>定理：若 $f$ 在 $a$ 處可微，則 $f$ 在 $a$ 處連續。</strong>證明很簡單：$\lim_{x \to a}[f(x)-f(a)] = \lim_{x \to a}\frac{f(x)-f(a)}{x-a} \cdot (x-a) = f'(a) \cdot 0 = 0$。</p>
+
+<p>但<strong>反過來不成立</strong>：連續不一定可微。最經典的反例是 $f(x)=|x|$，在 $x=0$ 處連續（$\lim_{x \to 0}|x| = 0 = |0|$），但不可微（左右導數分別為 $-1$ 和 $+1$，不相等）。</p>
+
+<h3>其他記號</h3>
+<p>除了 $f'(x)$（Lagrange 記號）和 $\frac{dy}{dx}$（Leibniz 記號），還有 <strong>Newton 記號</strong> $\dot{y}$（物理學常用，表示對時間的導數）和 <strong>Euler 記號</strong> $D_x f$（強調微分是一個運算子）。Leibniz 記號的最大優點是明確顯示了「對哪個變數微分」——這在連鎖律和隱函數微分中特別有用。</p>
+
+<h3>高階導數</h3>
+<p>導函數 $f'$ 本身也是一個函數，可以對它再微分，得到<strong>二階導數</strong> $f''(x) = \frac{d^2y}{dx^2}$。繼續微分得到三階 $f'''(x)$、四階 $f^{(4)}(x)$ 等。二階導數在物理中代表<strong>加速度</strong>（速度的變化率），在幾何中描述曲線的<strong>凹性（concavity）</strong>——這將是第 4 章的核心主題。</p>
+
+<details class="example"><summary>📝 範例</summary><strong>📝 範例：求導函數</strong><br>求 $f(x) = \sqrt{x}$ 的導函數 $f'(x)$。<br><br><strong>解：</strong>$$f'(x) = \lim_{h \to 0} \frac{\sqrt{x+h} - \sqrt{x}}{h}$$分子有理化：$= \lim_{h \to 0} \frac{(x+h)-x}{h(\sqrt{x+h}+\sqrt{x})} = \lim_{h \to 0} \frac{1}{\sqrt{x+h}+\sqrt{x}} = \frac{1}{2\sqrt{x}}$（$x>0$）。<br>注意定義域：$f(x)=\sqrt{x}$ 定義在 $[0,\infty)$，但 $f'(x)=\frac{1}{2\sqrt{x}}$ 只定義在 $(0,\infty)$——在 $x=0$ 處切線是垂直的（斜率無窮大），導數不存在。</details>
+
+<div class="figure">
+  <img src="../../pages/v1c3_pages/v1c3_page_198_c.png" alt="導函數和原函數的關係示意" loading="lazy">
+  <figcaption>圖 3.4：原函數 $f(x)$（上）和它的導函數 $f'(x)$（下）的對照——注意 $f$ 的增減對應 $f'$ 的正負</figcaption>
+</div>
+
+
+<div class="callout-warn"><strong>⚡ 可微 ⇒ 連續，但反之不成立</strong><br>
+每個可微函數都是連續的，但連續函數不一定可微。經典反例：$f(x)=|x|$ 在 $x=0$ 連續但不可微（左右導數不相等，圖形有轉角）。
+更極端的例子：Weierstrass 函數處處連續但處處不可微——不要以為「看起來平滑」就等於可微。</div>
+</section>
+
+<!-- ====== 3.3 ====== -->
+<section id="s3-3">
+<h2>3.3 微分法則（Differentiation Rules）</h2>
+
+<div style="margin-bottom:14px;font-size:12px;color:var(--tx2);line-height:1.8"><strong style="color:var(--tx)">🔑 本節重點</strong> ①掌握常數、冪、和差法則快速求多項式導數 ②積法則 f'g+fg' 不可逐項微分後相乘 ③商法則分子順序為「上導下不導減上不導下導」 ④連鎖律處理合成函數，為後續微分技巧鋪墊</div>
+
+<p>用極限定義每次計算導數太慢了。
+
+<div class="formula-card">
+  <div class="formula-label">基本微分法則</div>
+  <p><strong>常數法則：</strong>$\frac{d}{dx}[c] = 0$</p>
+  <p><strong>冪法則：</strong>$\frac{d}{dx}[x^n] = nx^{n-1}$（對任何實數 $n$）</p>
+  <p><strong>常數倍法則：</strong>$\frac{d}{dx}[cf(x)] = c f'(x)$</p>
+  <p><strong>和差法則：</strong>$\frac{d}{dx}[f(x) \pm g(x)] = f'(x) \pm g'(x)$</p>
+  <div class="formula-note">這些法則讓多項式的微分變得極其簡單：逐項降冪即可</div>
+</div>
+
+<h3>積法則（Product Rule）</h3>
+
+<div class="formula-card">
+  <div class="formula-label">⚠️ 積法則——不能逐項微分再相乘！</div>
+  <div class="eq">$$\frac{d}{dx}[f(x)g(x)] = f'(x)g(x) + f(x)g'(x)$$</div>
+  <div class="formula-note">記憶口訣：「第一項的導數乘第二項，加第一項乘第二項的導數」</div>
+</div>
+
+<div class="callout-warn"><strong>⚡ 最常見的微分錯誤</strong><br>$\frac{d}{dx}[f(x)g(x)] \neq f'(x)g'(x)$。積法則不能像和的法則那樣「各別微分再相乘」。這可能是整個微積分中最常出現的錯誤——每次看到兩個函數相乘，一定要使用積法則。</div>
+
+<h3>商法則（Quotient Rule）</h3>
+
+<div class="formula-card">
+  <div class="formula-label">商法則</div>
+  <div class="eq">$$\frac{d}{dx}\left[\frac{f(x)}{g(x)}\right] = \frac{f'(x)g(x) - f(x)g'(x)}{[g(x)]^2}$$</div>
+  <div class="formula-note">記憶口訣：「lo d hi minus hi d lo, over lo lo」（lo = 分母，hi = 分子，d = 微分）</div>
+</div>
+
+<details class="example"><summary>📝 範例</summary><strong>📝 範例：使用積法則</strong><br>求 $\frac{d}{dx}[(x^2+1)(x^3-3x)]$。<br><br><strong>解：</strong>令 $f(x)=x^2+1$, $g(x)=x^3-3x$。<br>$f'(x)=2x$, $g'(x)=3x^2-3$。<br>$\frac{d}{dx}[f(x)g(x)] = (2x)(x^3-3x) + (x^2+1)(3x^2-3)$<br>$= 2x^4-6x^2 + 3x^4-3x^2+3x^2-3 = 5x^4-6x^2-3$。<br>（驗算：直接展開 $f(x)g(x)=x^5-3x^3+x^3-3x=x^5-2x^3-3x$，微分得 $5x^4-6x^2-3$ ✓）</details>
+
+<h3>延伸：微分法則的推導</h3>
+<p>積法則可以從導數定義推導：令 $P(x)=f(x)g(x)$，則 $P'(x) = \lim_{h\to 0}\frac{f(x+h)g(x+h)-f(x)g(x)}{h}$。加入並減去 $f(x)g(x+h)$：$= \lim_{h\to 0}\left[g(x+h)\frac{f(x+h)-f(x)}{h} + f(x)\frac{g(x+h)-g(x)}{h}\right]$。由於可微函數連續，$\lim_{h\to 0}g(x+h)=g(x)$，因此 $P'(x)=g(x)f'(x)+f(x)g'(x)$。</p>
+
+</section>
+
+<!-- ====== 3.4 ====== -->
+<section id="s3-4">
+<h2>3.4 導數作為變化率（Derivatives as Rates of Change）</h2>
+
+<div style="margin-bottom:14px;font-size:12px;color:var(--tx2);line-height:1.8"><strong style="color:var(--tx)">🔑 本節重點</strong> ①導數代表瞬時變化率：速度、加速度、邊際成本 ②位置→速度→加速度的微分鏈 ③統一物理、經濟、生物等領域的數學語言 ④平均變化率與瞬時變化率的區別</div>
+
+<p>除了幾何意義（切線斜率），導數有一個
+
+<p>在經濟學中，$C(x)$ 是生產 $x$ 件商品的總成本，$C'(x)$ 就是<strong>邊際成本（marginal cost）</strong>——多生產一件約需增加的成本。同樣地，人口函數 $P(t)$ 的導數就是<strong>人口增長率</strong>。</p>
+
+<h3>變化率的具體應用</h3>
+<p>導數作為變化率在以下領域有直接應用：</p>
+<ul>
+  <li><strong>物理：</strong>$s(t)$ 位置 → $v(t)=s'(t)$ 速度 → $a(t)=v'(t)=s''(t)$ 加速度</li>
+  <li><strong>化學：</strong>$[A](t)$ 反應物濃度 → $[A]'(t)$ 反應速率</li>
+  <li><strong>生物：</strong>$P(t)$ 種群數量 → $P'(t)$ 種群增長率</li>
+  <li><strong>經濟：</strong>$R(x)$ 收益函數 → $R'(x)$ 邊際收益（多賣一件多賺多少）</li>
+</ul>
+
+<details class="example"><summary>📝 範例</summary><strong>📝 範例：物理應用</strong><br>一顆球從高塔自由落下，位置函數為 $s(t) = 4.9t^2$（公尺，$t$ 為秒）。求 $t=3$ 秒時的速度。<br><br><strong>解：</strong>$v(t) = s'(t) = 9.8t$。$v(3) = 9.8 \times 3 = 29.4$ 公尺/秒。加速度 $a(t) = v'(t) = 9.8$ 公尺/秒²（等於重力加速度）。</details>
+
+<div class="callout"><strong>💡 導數的統一視角</strong><br>無論是物理、經濟、生物還是工程，只要有一個量隨另一個量變化，它的導數就描述「變化有多快」。導數把不同領域的問題統一在同一種數學語言之下——這是微積分最強大的抽象能力。</div>
+
+
+<div class="callout-warn"><strong>⚡ 單位至關重要</strong><br>
+導數的單位是「輸出單位／輸入單位」。如果 $s(t)$ 的單位是公尺、$t$ 的單位是秒，則 $s'(t)$ 的單位是公尺/秒，$s''(t)$ 的單位是公尺/秒²。
+做應用題時，務必追蹤單位——如果答案的單位不對（例如加速度結果是公尺/秒而非公尺/秒²），表示某處出錯。</div>
+
+<p><strong>瞬時變化率的直覺：</strong>想像你在高速公路開車。你的速度表顯示的不是過去一小時的平均速度，而是<strong>這一瞬間</strong>的速度——這就是導數。數學上，瞬時速度 $v(t) = \lim_{\Delta t \to 0} \frac{s(t+\Delta t) - s(t)}{\Delta t} = s'(t)$。極限過程將「平均」精煉為「瞬時」。</p>
+
+<p><strong>變化率思維跨越學科：</strong>生物學家用 $P'(t)$ 描述種群增長速率、化學家用 $[A]'(t)$ 追蹤反應物消耗速率、經濟學家用 $C'(x)$ 計算邊際成本。導數作為變化率的統一視角，使微積分成為所有量化科學的通用語言。</p>
+</section>
+
+<!-- ====== 3.5 ====== -->
+<section id="s3-5">
+<h2>3.5 三角函數的導數（Derivatives of Trigonometric Functions）</h2>
+
+<div style="margin-bottom:14px;font-size:12px;color:var(--tx2);line-height:1.8"><strong style="color:var(--tx)">🔑 本節重點</strong> ①牢記 sinθ/θ→1 與 (cosθ-1)/θ→0 兩個關鍵極限 ②sin 導數為 cos，cos 導數為 -sin（務必注意負號） ③微分四次完成循環回到原函數 ④必須使用弧度制，度數制下公式不成立</div>
+
+<p>三角函數的導數需要用極限定義配合重要的三角極限來推導。兩個最關鍵的極限是：</p>
+
+<div class="formula-card">
+  <div class="formula-label">關鍵三角極限（弧度制！）</div>
+  <div class="eq">$$\lim_{\theta \to 0} \frac{\sin\theta}{\theta} = 1 \qquad \lim_{\theta \to 0} \frac{\cos\theta - 1}{\theta} = 0$$</div>
+  <div class="formula-note">這兩個極限<strong>只在弧度制下成立</strong>——這是為什麼微積分必須使用弧度的根本原因</div>
+</div>
+
+<p>利用這兩個極限和三角恆等式 $\sin(\theta+h) = \sin\theta\cos h + \cos\theta\sin h$，可以推導出：</p>
+
+<div class="formula-card">
+  <div class="formula-label">三角函數的導數</div>
+  <p>$\frac{d}{dx}[\sin x] = \cos x$</p>
+  <p>$\frac{d}{dx}[\cos x] = -\sin x$</p>
+  <p>$\frac{d}{dx}[\tan x] = \sec^2 x$</p>
+  <p>$\frac{d}{dx}[\csc x] = -\csc x \cot x$</p>
+  <p>$\frac{d}{dx}[\sec x] = \sec x \tan x$</p>
+  <p>$\frac{d}{dx}[\cot x] = -\csc^2 x$</p>
+  <div class="formula-note">注意 $\cos x$ 的導數前面有負號——微分一次後會相位偏移 $\pi/2$，微分四次後回到自己</div>
+</div>
+
+<div class="callout"><strong>💡 循環模式</strong><br>$\sin x \xrightarrow{d/dx} \cos x \xrightarrow{d/dx} -\sin x \xrightarrow{d/dx} -\cos x \xrightarrow{d/dx} \sin x$。微分四次完成一個循環——這個性質使三角函數成為微分方程中的自然基底。</div>
+
+<h3>推導 $\frac{d}{dx}\sin x = \cos x$</h3>
+<p>使用極限定義：$\frac{d}{dx}\sin x = \lim_{h \to 0} \frac{\sin(x+h)-\sin x}{h}$。利用三角恆等式 $\sin(x+h) = \sin x\cos h + \cos x\sin h$：</p>
+<div class="eq">$$\lim_{h \to 0} \frac{\sin x\cos h + \cos x\sin h - \sin x}{h} = \lim_{h \to 0} \left[\sin x \cdot \frac{\cos h - 1}{h} + \cos x \cdot \frac{\sin h}{h}\right]$$</div>
+<p>代入兩個關鍵極限 $\lim_{h \to 0}\frac{\sin h}{h}=1$ 和 $\lim_{h \to 0}\frac{\cos h - 1}{h}=0$：</p>
+<div class="eq">$$\frac{d}{dx}\sin x = \sin x \cdot 0 + \cos x \cdot 1 = \cos x$$</div>
+<p>$\cos x$ 的導數可以用類似方法推導，或用 $\cos x = \sin(x + \pi/2)$ 配合連鎖律。這兩個推導是微積分中最經典的極限應用之一。</p>
+
+<div class="figure">
+  <img src="../../pages/v1c3_pages/v1c3_page_250_c.png" alt="sin和cos的導數循環關係" loading="lazy">
+  <figcaption>圖 3.18：$\sin x$ 和 $\cos x$ 的導數關係——藍色為原函數，紅色為導數</figcaption>
+</div>
+
+
+<div class="callout-warn"><strong>⚡ cos 的導數有負號！</strong><br>
+$\frac{d}{dx}\cos x = -\sin x$——負號是最常被遺忘的細節。記憶口訣：sin → cos（無負號），cos → -sin（變號）。
+完整循環：sin → cos → -sin → -cos → sin（四次微分回到原函數）。這個「微分循環」是三角函數的獨特性質。</div>
+
+<details class="example">
+<summary>📝 範例：三角函數導數的應用</summary>
+<div class="example-body">
+<p><strong>題目：</strong>求 $f(x) = x\sin x + \cos x$ 的導數，並求在 $x = \pi$ 處的切線斜率。</p>
+<p><strong>解：</strong></p>
+<p>使用積法則微分 $x\sin x$：$(x)(\cos x) + (1)(\sin x) = x\cos x + \sin x$。$\cos x$ 的導數為 $-\sin x$。</p>
+<p>因此 $f'(x) = x\cos x + \sin x - \sin x = x\cos x$（sin x 項對消）。</p>
+<p>在 $x = \pi$ 處：$f'(\pi) = \pi \cdot \cos(\pi) = \pi \cdot (-1) = -\pi$。切線斜率為 $-\pi$。</p>
+<p><strong>答案：</strong>$f'(x) = x\cos x$，在 $x=\pi$ 處切線斜率為 $-\pi \approx -3.14$。</p>
+</div>
+</details>
+</section>
+
+<!-- ====== 3.6 ====== -->
+<section id="s3-6">
+<h2>3.6 連鎖律（The Chain Rule）</h2>
+
+<div style="margin-bottom:14px;font-size:12px;color:var(--tx2);line-height:1.8"><strong style="color:var(--tx)">🔑 本節重點</strong> ①連鎖律：外層導數乘內層導數 dy/dx=dy/du·du/dx ②廣義冪法則是使用頻率最高的微分公式 ③多層合成從外到內逐層微分再全部相乘 ④區分連鎖律（合成）與積法則（相乘）的使用時機</div>
+
+<p>連鎖律是微分法則中<strong>最強大也最容易出錯</strong>
+
+<div class="formula-card">
+  <div class="formula-label">連鎖律（Chain Rule）</div>
+  <div class="eq">$$\frac{d}{dx}[f(g(x))] = f'(g(x)) \cdot g'(x)$$</div>
+  <div class="formula-note">「外層函數的導數（保持內層不變），乘上內層函數的導數」——簡稱「外導 × 內導」</div>
+</div>
+
+<p>用 Leibniz 記號更直覺：若 $y = f(u)$ 且 $u = g(x)$，則 $\frac{dy}{dx} = \frac{dy}{du} \cdot \frac{du}{dx}$。彷彿 $du$ 可以「約掉」——雖然這不是嚴格的數學推理，但提供了極強的記憶輔助。</p>
+
+<details class="example"><summary>📝 範例</summary><strong>📝 範例：連鎖律</strong><br>求 $\frac{d}{dx}[\sin(x^2)]$。<br><br><strong>解：</strong>外層 $f(u)=\sin u$，內層 $u=g(x)=x^2$。<br>$f'(u)=\cos u$，$g'(x)=2x$。<br>$\frac{d}{dx}[\sin(x^2)] = \cos(x^2) \cdot 2x = 2x\cos(x^2)$。</details>
+
+<div class="callout-warn"><strong>⚡ 連鎖律 vs 積法則——何時用哪個？</strong><br>$\sin(x^2)$ 是 $\sin$ <strong>作用在</strong> $x^2$ 上 → 這是合成 → 用連鎖律。<br>$x^2\sin x$ 是 $x^2$ <strong>乘以</strong> $\sin x$ → 這是乘積 → 用積法則。<br>判斷方法：問自己「最外層的運算是什麼？」如果是函數作用（$\sin(\cdots)$、$e^{(\cdots)}$、$(\cdots)^n$），用連鎖律；如果是乘法，用積法則。</div>
+
+<h3>廣義冪法則</h3>
+
+<p>連鎖律與冪法則結合得到<strong>廣義冪法則</strong>：$\frac{d}{dx}[(g(x))^n] = n(g(x))^{n-1} \cdot g'(x)$。這個公式可能是整個微積分中使用頻率最高的公式。</p>
+
+<details class="example"><summary>📝 範例</summary><strong>📝 範例：廣義冪法則</strong><br>求 $\frac{d}{dx}[(x^3+2x)^{10}]$。<br><br><strong>解：</strong>$f(u)=u^{10}$，$u=g(x)=x^3+2x$。$f'(u)=10u^9$，$g'(x)=3x^2+2$。答案：$10(x^3+2x)^9(3x^2+2)$。這就是廣義冪法則的典型應用——外層冪函數，內層多項式。</details>
+
+<div class="callout-warn"><strong>⚡ 多重連鎖律</strong><br>對於三層以上的合成（如 $\sin(e^{x^2})$），連鎖律可以重複應用：$\frac{d}{dx}\sin(e^{x^2}) = \cos(e^{x^2}) \cdot e^{x^2} \cdot 2x$。原則是「從外到內，逐層微分，全部相乘」。</div>
+
+
+<p><strong>連鎖律的直覺：</strong>想像一個俄羅斯套娃——要改變最外層的娃娃，你必須先打開外層才能碰到內層。連鎖律正是這個過程的數學表達：外層函數的變化率 × 內層函數的變化率。如果 $y$ 隨 $u$ 變化的速率是 3，$u$ 隨 $x$ 變化的速率是 2，則 $y$ 隨 $x$ 變化的速率是 $3 \times 2 = 6$。</p>
+
+<p><strong>Leibniz 記號的優勢：</strong>$\frac{dy}{dx} = \frac{dy}{du} \cdot \frac{du}{dx}$ 讓連鎖律看起來像是「分數的約分」——$du$ 被「約掉」了。雖然這不是嚴格的數學理由（$dy/du$ 不是真正的分數），但這個直覺在大多數情況下是正確的，也是記憶連鎖律最有效的方式。</p>
+</section>
+
+<!-- ====== 3.7 ====== -->
+<section id="s3-7">
+<h2>3.7 反函數的導數（Derivatives of Inverse Functions）</h2>
+
+<div style="margin-bottom:14px;font-size:12px;color:var(--tx2);line-height:1.8"><strong style="color:var(--tx)">🔑 本節重點</strong> ①反函數導數為原函數導數的倒數 (f⁻¹)'(x)=1/f'(f⁻¹(x)) ②掌握 arcsin、arccos、arctan 的導數公式 ③推導依賴隱函數微分與三角恆等式 ④注意反三角函數導數的定義域限制</div>
+
+<p>如果 $f$ 和 $g$ 互為反函數（即 $g(f(x)) = x$），對兩邊微分得到：</p>
+
+<div class="formula-card">
+  <div class="formula-label">反函數的導數</div>
+  <div class="eq">$$g'(x) = \frac{1}{f'(g(x))} \quad \text{或等價地} \quad (f^{-1})'(x) = \frac{1}{f'(f^{-1}(x))}$$</div>
+  <div class="formula-note">直覺：反函數在某點的斜率 = 原函數在對應點的斜率的倒數</div>
+</div>
+
+<p>應用這個公式可以求出反三角函數的導數：</p>
+
+<div class="formula-card">
+  <div class="formula-label">反三角函數的導數</div>
+  <p>$\frac{d}{dx}[\arcsin x] = \frac{1}{\sqrt{1-x^2}}$</p>
+  <p>$\frac{d}{dx}[\arccos x] = -\frac{1}{\sqrt{1-x^2}}$</p>
+  <p>$\frac{d}{dx}[\arctan x] = \frac{1}{1+x^2}$</p>
+</div>
+
+<h3>推導 $\frac{d}{dx}\arcsin x$</h3>
+<p>令 $y = \arcsin x$，則 $\sin y = x$（$y \in [-\pi/2, \pi/2]$）。對兩邊隱函數微分：$\cos y \cdot y' = 1$ → $y' = \frac{1}{\cos y}$。需要把 $\cos y$ 用 $x$ 表示：由於 $\sin^2 y + \cos^2 y = 1$ 且 $\sin y = x$，所以 $\cos y = \sqrt{1-x^2}$（在 $y \in [-\pi/2, \pi/2]$ 時 $\cos y \geq 0$）。因此 $\frac{d}{dx}\arcsin x = \frac{1}{\sqrt{1-x^2}}$。</p>
+
+<details class="example"><summary>📝 範例</summary><strong>📝 範例：反三角函數導數</strong><br>求 $\frac{d}{dx}[\arcsin(x^2)]$。<br><br><strong>解：</strong>使用連鎖律：外層導數 $\frac{1}{\sqrt{1-u^2}}$（$u=x^2$），內層導數 $2x$。答案：$\frac{2x}{\sqrt{1-x^4}}$。</details>
+
+
+<div class="callout-warn"><strong>⚡ 反三角函數導數的定義域</strong><br>
+$\frac{d}{dx}\arcsin x = \frac{1}{\sqrt{1-x^2}}$ 只定義在 $|x| < 1$（導數在 $x=\pm 1$ 處發散）。
+務必檢查原函數與導數的定義域是否一致——arcsin 本身定義在 $[-1,1]$，但其導數公式只在 $(-1,1)$ 有效。</div>
+
+<div class="callout"><strong>💡 反函數導數的對稱性</strong><br>
+反函數的導數公式 $(f^{-1})'(x) = 1/f'(f^{-1}(x))$ 有一個美妙的幾何解釋：$y=f(x)$ 和 $y=f^{-1}(x)$ 的圖形關於直線 $y=x$ 對稱，因此在對應點處，兩者的切線斜率互為倒數。
+換句話說：如果原函數在某點很陡（導數大），反函數在對應點就很平（導數小）。</div>
+</section>
+
+<!-- ====== 3.8 ====== -->
+<section id="s3-8">
+<h2>3.8 隱函數微分（Implicit Differentiation）</h2>
+
+<div style="margin-bottom:14px;font-size:12px;color:var(--tx2);line-height:1.8"><strong style="color:var(--tx)">🔑 本節重點</strong> ①對方程兩邊微分，遇到 y 時用連鎖律補上 y' ②圓方程式 x²+y²=25 得切線斜率 dy/dx=-x/y ③為相關變率與反函數導數推導奠定基礎 ④微分含 y 項時務必補 y'，此為最常見錯誤</div>
+
+<p>很多方程式不能（或不方便）解成 $y = f(x)$ 的形式
+
+<details class="example"><summary>📝 範例</summary><strong>📝 範例：隱函數微分</strong><br>求 $x^2 + y^2 = 25$ 中 $\frac{dy}{dx}$ 的表達式。<br><br><strong>解：</strong>對兩邊微分：$\frac{d}{dx}[x^2] + \frac{d}{dx}[y^2] = \frac{d}{dx}[25]$。<br>$2x + 2y \cdot y' = 0$（注意 $y^2$ 微分時用了連鎖律：$\frac{d}{dx}[y^2] = 2y \cdot y'$）<br>因此 $y' = -\frac{x}{y}$。這告訴我們圓上任一點的切線斜率。</details>
+
+<div class="callout"><strong>💡 隱函數微分的應用</strong><br>隱函數微分不僅用於幾何（求曲線切線），在<strong>相關變率問題</strong>（4.1 節）和<strong>反函數導數推導</strong>中也扮演關鍵角色。它是連鎖律最自然的延伸。</div>
+
+<h3>進階範例</h3>
+
+<details class="example"><summary>📝 範例</summary><strong>📝 範例：笛卡兒葉形線</strong><br>求方程式 $x^3 + y^3 = 6xy$ 上點 $(3,3)$ 處的切線斜率。<br><br><strong>解：</strong>對兩邊隱函數微分：$3x^2 + 3y^2 \cdot y' = 6y + 6x \cdot y'$（右邊用了積法則）。整理含 $y'$ 的項：$3y^2 y' - 6x y' = 6y - 3x^2$ → $y'(3y^2 - 6x) = 6y - 3x^2$ → $y' = \frac{6y-3x^2}{3y^2-6x}$。代入 $(3,3)$：$y' = \frac{18-27}{27-18} = \frac{-9}{9} = -1$。</details>
+
+<div class="callout-warn"><strong>⚡ 隱函數微分的關鍵：何時對 $y$ 用連鎖律</strong><br>微分 $\frac{d}{dx}[y^3]$ 時，把它當成 $(y(x))^3$——外層是 $u^3$，微分得 $3u^2$；內層是 $y(x)$，微分得 $y'$。所以 $\frac{d}{dx}[y^3] = 3y^2 \cdot y'$。每次微分含有 $y$ 的項時，<strong>永遠要補上 $y'$</strong>。忘記這一步是隱函數微分最常見的錯誤。</div>
+
+<div class="figure">
+  <img src="../../pages/v1c3_pages/v1c3_page_278_c.png" alt="隱函數曲線的切線" loading="lazy">
+  <figcaption>圖 3.32：隱函數定義的曲線——即使沒有 $y=f(x)$ 的顯式表達，仍可求出任一點的切線斜率</figcaption>
+</div>
+
+
+<p>很多方程式不能（或不方便）解成 $y = f(x)$ 的形式。例如 $x^2 + y^2 = 25$ 定義了一個圓——它不是函數（一個 $x$ 對應兩個 $y$），但我們仍然想求曲線上某點的切線斜率。隱函數微分正是為此而生。</p>
+
+<p><strong>關鍵技巧：</strong>對方程式兩邊同時對 $x$ 微分，遇到 $y$ 時使用連鎖律補上 $y'$（或 $\frac{dy}{dx}$）。微分完後，將含 $y'$ 的項集中到一邊，解出 $y'$。最終結果 $y'$ 的表達式通常同時含有 $x$ 和 $y$——這沒關係，只要代入具體點座標就能得到數值斜率。</p>
+
+<p><strong>隱函數微分的威力：</strong>這個方法還能處理更複雜的關係，例如 $e^{xy} + \sin(x+y) = 1$。即使無法解出 $y$，我們仍能求出 $dy/dx$。隱函數微分也是推導反三角函數導數公式和處理相關變率問題的核心工具。</p>
+
+<p><strong>顯式 vs 隱式：</strong>比較 $y = \sqrt{25 - x^2}$（顯式，只給上半圓）和 $x^2 + y^2 = 25$（隱式，包含整個圓）。顯式微分得 $y' = -x/\sqrt{25-x^2}$，隱式微分得 $y' = -x/y$。兩者等價（代入 $y = \sqrt{25-x^2}$ 即得前式），但隱式形式更簡潔，且不需要在微分前解出 $y$。這正是隱函數微分的價值所在。</p>
+</section>
+
+<!-- ====== 3.9 ====== -->
+<section id="s3-9">
+<h2>3.9 指數與對數函數的導數（Derivatives of Exponential and Logarithmic Functions）</h2>
+
+<div style="margin-bottom:14px;font-size:12px;color:var(--tx2);line-height:1.8"><strong style="color:var(--tx)">🔑 本節重點</strong> ①eˣ 是唯一導數等於自身的函數 ②ln x 導數為 1/x 填補冪法則 n=-1 的空缺 ③對數微分法處理底與指數皆含變數的複雜函數 ④aˣ 導數為 aˣ ln a，須與冪法則區分清楚</div>
+
+<p>這是微積分中最優雅的結果之一。利用
+
+<div class="formula-card">
+  <div class="formula-label">指數與對數的導數</div>
+  <p>$\frac{d}{dx}[e^x] = e^x$</p>
+  <p>$\frac{d}{dx}[a^x] = a^x \ln a$（對任意 $a>0$）</p>
+  <p>$\frac{d}{dx}[\ln x] = \frac{1}{x}$（$x>0$）</p>
+  <p>$\frac{d}{dx}[\log_a x] = \frac{1}{x \ln a}$</p>
+  <div class="formula-note">$e^x$ 是唯一一個導數等於自己的函數（不考慮常數倍）。這就是為什麼 $e$ 被稱為「自然」底數</div>
+</div>
+
+<h3>對數微分法（Logarithmic Differentiation）</h3>
+
+<p>對於形如 $y = [f(x)]^{g(x)}$ 的函數（底和指數都是 $x$ 的函數），或者包含大量乘積、冪次的複雜函數，<strong>先取 $\ln$ 再微分</strong>往往能大幅簡化計算：</p>
+
+<p>步驟：(1) 對兩邊取 $\ln$：$\ln y = \ln[f(x)]$；(2) 利用對數性質展開右邊；(3) 對兩邊隱函數微分：$\frac{y'}{y} = \cdots$；(4) 解出 $y' = y \cdot (\cdots)$。</p>
+
+<details class="example"><summary>📝 範例</summary><strong>📝 範例：對數微分法</strong><br>求 $\frac{d}{dx}[x^x]$。<br><br><strong>解：</strong>令 $y = x^x$。取 $\ln$：$\ln y = x \ln x$。微分：$\frac{y'}{y} = \ln x + x \cdot \frac{1}{x} = \ln x + 1$。因此 $y' = x^x(\ln x + 1)$。</details>
+
+
+<div class="callout-warn"><strong>⚡ 區分指數函數與冪函數的微分</strong><br>
+$\frac{d}{dx}[x^n] = nx^{n-1}$（變數在底，常數在指數）vs $\frac{d}{dx}[a^x] = a^x \ln a$（常數在底，變數在指數）。
+兩者公式<strong>完全不同</strong>——判斷關鍵：變數 $x$ 在哪裡？在底數 → 冪法則；在指數 → 指數法則。$x^x$ 兩者都不是，需用對數微分法。</div>
+
+<div class="callout"><strong>💡 $e^x$ 是微積分的「不動點」</strong><br>
+$e^x$ 是唯一一個導數等於自身的函數（不計 $f(x)=0$）。這使它成為微分方程 $y' = y$ 的解，也是自然界中「變化率與當前值成正比」現象（如人口增長、放射性衰變、複利）的數學基礎。
+這個性質使 $e$ 而非 10 成為微積分的「自然」底數——用 $e$ 寫公式最簡潔。</div>
+</section>
+
+<!-- ====== Key Concepts ====== -->
+<section id="key-concepts">
+<h2>📋 關鍵概念回顧（Key Concepts）</h2>
+<ol>
+  <li><strong>導數的定義</strong>：\(f'(x)=\lim_{h\to 0}\frac{f(x+h)-f(x)}{h}\)，表示函數在 x 處的瞬時變化率，也是切線斜率。</li>
+  <li><strong>導數的幾何意義</strong>：\(f'(a)\) 是曲線 \(y=f(x)\) 在點 \((a,f(a))\) 處切線的斜率。</li>
+  <li><strong>可微性與連續性</strong>：可微 ⇒ 連續，但連續不一定可微（如尖點、轉折點、鉛直切線處）。</li>
+  <li><strong>導數記號</strong>：\(f'(x)\)、\(\frac{dy}{dx}\)、\(\frac{d}{dx}f(x)\)、\(y'\)、\(D_x f\)，皆表示對 x 的導數。</li>
+  <li><strong>冪法則</strong>：\(\frac{d}{dx}x^n=nx^{n-1}\)，適用於任意實數指數 n。</li>
+  <li><strong>和差法則與常數倍法則</strong>：導數是線性運算，\((f\pm g)'=f'\pm g'\)，\((cf)'=cf'\)。</li>
+  <li><strong>積法則</strong>：\((fg)'=f'g+fg'\)，不可簡單地將導數相乘。</li>
+  <li><strong>商法則</strong>：\(\left(\frac{f}{g}
+\right)'=\frac{f'g-fg'}{g^2}\)。</li>
+  <li><strong>連鎖律</strong>：\(\frac{d}{dx}f(g(x))=f'(g(x))\cdot g'(x)\)，是處理合成函數微分的核心工具。</li>
+  <li><strong>隱函數微分</strong>：對方程兩邊同時對 x 微分，將 y 視為 x 的函數處理，解出 \(\frac{dy}{dx}\)。</li>
+  <li><strong>指數函數的導數</strong>：\(\frac{d}{dx}e^x=e^x\)；\(\frac{d}{dx}b^x=b^x\ln b\)。</li>
+  <li><strong>對數函數的導數</strong>：\(\frac{d}{dx}\ln x=\frac{1}{x}\)；\(\frac{d}{dx}\log_b x=\frac{1}{x\ln b}\)。</li>
+  <li><strong>三角函數的導數</strong>：\(\frac{d}{dx}\sin x=\cos x\)、\(\frac{d}{dx}\cos x=-\sin x\)、\(\frac{d}{dx}\tan x=\sec^2 x\)。</li>
+  <li><strong>反三角函數的導數</strong>：\(\frac{d}{dx}\arcsin x=\frac{1}{\sqrt{1-x^2}}\)、\(\frac{d}{dx}\arctan x=\frac{1}{1+x^2}\)。</li>
+  <li><strong>高階導數</strong>：二階導數 \(f''\) 是導數的導數，表示變化率的變化率（加速度）。</li>
+  <li><strong>對數微分</strong>：對 \(y=f(x)\) 兩邊取自然對數後再微分，適合處理複雜乘積或指數型函數。</li>
+</ol>
+</section>
+
+<section id="key-equations">
+<h2>📐 關鍵公式（Key Equations）</h2>
+<table><caption>表 1：📐 關鍵公式（Key Equations）</caption>
+  <thead><tr><th>公式</th><th>說明</th></tr></thead>
+  <tbody>
+    <tr><td>$$f'(x)=\lim_{h\to 0}\frac{f(x+h)-f(x)}{h}$$</td><td>導數的極限定義</td></tr>
+    <tr><td>$$f'(a)=\lim_{x\to a}\frac{f(x)-f(a)}{x-a}$$</td><td>導數的差分商定義（點 a）</td></tr>
+    <tr><td>$$\frac{d}{dx}x^n=nx^{n-1}$$</td><td>冪法則</td></tr>
+    <tr><td>$$\frac{d}{dx}[f(x)+g(x)]=f'(x)+g'(x)$$</td><td>和法則</td></tr>
+    <tr><td>$$\frac{d}{dx}[cf(x)]=cf'(x)$$</td><td>常數倍法則</td></tr>
+    <tr><td>$$\frac{d}{dx}[f(x)g(x)]=f'(x)g(x)+f(x)g'(x)$$</td><td>積法則</td></tr>
+    <tr><td>$$\frac{d}{dx}\!\left[\frac{f(x)}{g(x)}
+\right]=\frac{f'(x)g(x)-f(x)g'(x)}{[g(x)]^2}$$</td><td>商法則</td></tr>
+    <tr><td>$$\frac{d}{dx}f(g(x))=f'(g(x))\cdot g'(x)$$</td><td>連鎖律</td></tr>
+    <tr><td>$$\frac{d}{dx}e^x=e^x$$</td><td>自然指數函數的導數</td></tr>
+    <tr><td>$$\frac{d}{dx}b^x=b^x\ln b$$</td><td>一般指數函數的導數</td></tr>
+    <tr><td>$$\frac{d}{dx}\ln x=\frac{1}{x}$$</td><td>自然對數函數的導數</td></tr>
+    <tr><td>$$\frac{d}{dx}\log_b x=\frac{1}{x\ln b}$$</td><td>一般對數函數的導數</td></tr>
+    <tr><td>$$\frac{d}{dx}\sin x=\cos x$$</td><td>正弦函數的導數</td></tr>
+    <tr><td>$$\frac{d}{dx}\cos x=-\sin x$$</td><td>餘弦函數的導數</td></tr>
+    <tr><td>$$\frac{d}{dx}\tan x=\sec^2 x$$</td><td>正切函數的導數</td></tr>
+    <tr><td>$$\frac{d}{dx}\arcsin x=\frac{1}{\sqrt{1-x^2}}$$</td><td>反正弦函數的導數</td></tr>
+    <tr><td>$$\frac{d}{dx}\arctan x=\frac{1}{1+x^2}$$</td><td>反正切函數的導數</td></tr>
+    <tr><td>$$\frac{d}{dx}\left(\ln y
+\right)=\frac{y'}{y}$$</td><td>對數微分的核心關係</td></tr>
+  </tbody>
+</table>
+</section>
+
+<!-- ====== Summary ====== -->
+<section id="summary">
+<h2>本章摘要：微分法則速查表</h2>
+
+<table><caption>表 2：本章摘要：微分法則速查表</caption>
+  <thead><tr><th>函數</th><th>導數</th><th>備註</th></tr></thead>
+  <tbody>
+    <tr><td>$c$（常數）</td><td>$0$</td><td></td></tr>
+    <tr><td>$x^n$</td><td>$nx^{n-1}$</td><td>冪法則</td></tr>
+    <tr><td>$e^x$</td><td>$e^x$</td><td>導數 = 自己！</td></tr>
+    <tr><td>$a^x$</td><td>$a^x \ln a$</td><td></td></tr>
+    <tr><td>$\ln x$</td><td>$1/x$</td><td>$x>0$</td></tr>
+    <tr><td>$\sin x$</td><td>$\cos x$</td><td></td></tr>
+    <tr><td>$\cos x$</td><td>$-\sin x$</td><td>注意負號！</td></tr>
+    <tr><td>$\tan x$</td><td>$\sec^2 x$</td><td></td></tr>
+    <tr><td>$\arcsin x$</td><td>$1/\sqrt{1-x^2}$</td><td></td></tr>
+    <tr><td>$\arctan x$</td><td>$1/(1+x^2)$</td><td></td></tr>
+    <tr><td>$f(x)g(x)$</td><td>$f'g + fg'$</td><td>積法則</td></tr>
+    <tr><td>$f(x)/g(x)$</td><td>$(f'g - fg')/g^2$</td><td>商法則</td></tr>
+    <tr><td>$f(g(x))$</td><td>$f'(g(x)) \cdot g'(x)$</td><td>連鎖律</td></tr>
+  </tbody>
+</table>
+</section>
+
+<!-- ====== Common Mistakes ====== -->
+<section id="common-mistakes">
+<h2>⚠️ 初學者常見錯誤</h2>
+
+<div class="callout-warn"><strong>❌ 錯誤 1：積法則誤用——$\frac{d}{dx}[f \cdot g] \neq f' \cdot g'$</strong><br>
+這可能是全微積分最頻繁的錯誤。兩個函數的乘積的導數<strong>不是</strong>各自導數的乘積。例如 $\frac{d}{dx}[x \cdot \sin x] \neq 1 \cdot \cos x$。正確答案是 $1 \cdot \sin x + x \cdot \cos x = \sin x + x\cos x$。養成習慣：看到乘法就想到積法則。</div>
+
+<div class="callout-warn"><strong>❌ 錯誤 2：忘記連鎖律的「尾巴」——$\frac{d}{dx}[\sin(x^2)] \neq \cos(x^2)$</strong><br>
+微分 $\sin(x^2)$ 時，很多人只記得 $\frac{d}{dx}\sin = \cos$，卻忘記乘上內層導數 $2x$。正確答案是 $\cos(x^2) \cdot 2x$。任何時候看到一個函數<strong>包住</strong>另一個函數，就要啟動連鎖律。</div>
+
+<div class="callout-warn"><strong>❌ 錯誤 3：$\frac{d}{dx}[e^{x}]$ 寫成 $xe^{x-1}$（把指數函數當成冪函數）</strong><br>
+$e^x$ 的導數是 $e^x$，不是 $xe^{x-1}$。冪法則 $\frac{d}{dx}[x^n] = nx^{n-1}$ 的變數在<strong>底數</strong>——當變數在<strong>指數</strong>位置時（如 $e^x$、$2^x$），冪法則完全不適用。這是初學者最常見的混淆。</div>
+
+<div class="callout-warn"><strong>❌ 錯誤 4：商法則的分子順序搞反</strong><br>
+$\frac{d}{dx}[\frac{f}{g}] = \frac{f'g - fg'}{g^2}$，分子是「(分子的導數 × 分母) − (分子 × 分母的導數)」。很多人寫成 $fg' - f'g$——順序顛倒會導致符號錯誤。口訣：「lo d hi minus hi d lo」可以幫助記憶。</div>
+
+<div class="callout-warn"><strong>❌ 錯誤 5：忘記 $\cos x$ 的導數有負號</strong><br>
+$\frac{d}{dx}[\cos x] = -\sin x$（有負號），不是 $+\sin x$。這個負號在往後的積分中會不斷回來困擾你——最好現在就記牢。</div>
+</section>
+
+<!-- ====== Self-Check ====== -->
+<section id="self-check">
+<h2>✅ 自我檢測（Self-Check）</h2>
+<p>完成以下題目檢驗你對本章核心概念的掌握程度。點擊展開查看答案。</p>
+
+<details class="derive">
+<summary>題 1：若 $f$ 在 $x=a$ 可導，$f$ 在 $x=a$ 是否必定連續？</summary>
+<p><strong>答案：</strong>是。可導性 ⇒ 連續性（反過來則不成立）。經典反例：$f(x)=|x|$ 在 $x=0$ 連續但不可導（有尖角）。</p>
+</details>
+
+<details class="derive">
+<summary>題 2：判斷對錯：「$\frac{d}{dx}[f(x)g(x)] = f'(x)g'(x)$」</summary>
+<p><strong>答案：</strong>錯。正確的積法則為 $\frac{d}{dx}[f(x)g(x)] = f'(x)g(x) + f(x)g'(x)$。例如 $\frac{d}{dx}[x \cdot \sin x] \neq 1 \cdot \cos x$，正確答案是 $\sin x + x\cos x$。</p>
+</details>
+
+<details class="derive">
+<summary>題 3：使用導數定義計算 $f'(2)$，其中 $f(x)=\frac{1}{x+1}$。</summary>
+<p><strong>答案：</strong>$-\frac{1}{9}$。使用定義 $f'(2)=\lim_{h\to 0}\frac{f(2+h)-f(2)}{h}=\lim_{h\to 0}\frac{\frac{1}{3+h}-\frac{1}{3}}{h}=\lim_{h\to 0}\frac{\frac{3-(3+h)}{3(3+h)}}{h}=\lim_{h\to 0}\frac{-1}{3(3+h)}=-\frac{1}{9}$。</p>
+</details>
+
+<details class="derive">
+<summary>題 4：用隱函數微分求 $\frac{dy}{dx}$，其中 $x^2 + y^2 = 25$。</summary>
+<p><strong>答案：</strong>$\frac{dy}{dx} = -\frac{x}{y}$。對兩邊同時對 $x$ 微分：$2x + 2y\frac{dy}{dx} = 0$，解出 $\frac{dy}{dx} = -\frac{x}{y}$。此結果在圓上任意點（除 $y=0$ 外）給出切線斜率。</p>
+</details>
+
+<details class="derive">
+<summary>題 5：使用連鎖律求 $\frac{d}{dx}\sin(e^{2x})$。</summary>
+<p><strong>答案：</strong>$2e^{2x}\cos(e^{2x})$。外層：$\sin u$ 導數為 $\cos u$，$u=e^{2x}$；內層：$e^v$ 導數為 $e^v$，$v=2x$；最內層：$2x$ 導數為 $2$。相乘：$\cos(e^{2x}) \cdot e^{2x} \cdot 2 = 2e^{2x}\cos(e^{2x})$。</p>
+</details>
+</section>
+
+<section id="extras">
+<h2>📚 延伸資源</h2>
+<ul>
+  <li><strong>3Blue1Brown — Essence of Calculus, Ch3</strong>：視覺化解釋導數的幾何意義</li>
+  <li><strong>Paul's Online Notes — Derivatives</strong>：大量練習題與詳細解答</li>
+  <li>下一章預告：<strong>第 4 章 — 導數的應用</strong>將使用本章的微分技巧解決最佳化、相關變率、繪圖等實際問題</li>
+</ul>
+</section>
+
+</main>
+
+<script>
+(function(){
+  const navs = document.querySelectorAll('.sn a, .nsub a');
+  const sections = [];
+  navs.forEach(a => {
+    const id = a.getAttribute('href');
+    if (id && id.startsWith('#')) {
+      const el = document.getElementById(id.substring(1));
+      if (el) sections.push({a, el});
+    }
+  });
+  function onScroll(){
+    let current = sections[0];
+    for (const s of sections) {
+      if (s.el.offsetTop <= window.scrollY + 120) current = s;
+    }
+    navs.forEach(a => a.classList.remove('active'));
+    if (current) current.a.classList.add('active');
+  }
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+})();
+
+function toggleTheme(){ if(window.toggleTheme) window.toggleTheme(); } catch(e){}
+}
+(function(){
+  try {
+    const saved = localStorage.getItem('learning-portal-reading-preferences');
+    if (saved === 'dark') {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      document.getElementById('themeBtn').textContent = '☀️ 淺色模式';
+    }
+  } catch(e){}
+})();
+
+</script>
+<script defer src="../assets/course-ui.js"></script>
+<script defer src="../assets/derivative-explorer-model.js"></script>
+</body>
+</html>

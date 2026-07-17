@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>第 12 章 散射理論 — The Physics of Quantum Mechanics</title>
+<script>
+window.MathJax = {
+  tex: { inlineMath: [['$','$'], ['\\(','\\)']], displayMath: [['$$','$$'], ['\\[','\\]']] },
+  options: { ignoreHtmlClass: 'no-mathjax' }
+};
+</script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+<link rel="stylesheet" href="../../../../shared/core.css">
+<script src="../../../../shared/core.js" defer></script>
+<link rel="stylesheet" href="../../../../shared/navigation.css" data-shared-navigation>
+</head>
+<body>
+
+<nav class="sidebar" id="sidebar" aria-label="本章目錄"><div class="sidebar-header"><div class="sidebar-subtitle">量子力學</div><h2 class="sidebar-title">第 12 章 散射理論</h2></div><div class="toc">
+    <div class="nsub"><a href="#preview">本章預覽</a></div>
+    <div class="nsub"><a href="#s12-1">12.1 散射算子</a></div>
+    <div class="nsub"><a href="#s12-2">12.2 S-矩陣</a></div>
+    <div class="nsub"><a href="#s12-3">12.3 截面與散射實驗</a></div>
+    <div class="nsub"><a href="#s12-4">12.4 電子被氫原子散射</a></div>
+    <div class="nsub"><a href="#s12-5">12.5 分波展開</a></div>
+    <div class="nsub"><a href="#s12-6">12.6 共振散射</a></div>
+    <div class="nsub"><a href="#summary">關鍵概念與公式</a></div>
+    <div class="nsub"><a href="#common-mistakes">常見錯誤</a></div>
+    <div class="nsub"><a href="#self-check">自我檢測</a></div>
+    <div class="nsub"><a href="#extras">延伸資源</a></div>
+  </div>
+<div class="sidebar-tools"><button type="button" data-action="toggle-theme" aria-label="切換深色或淺色模式">切換顯示主題</button></div></nav>
+
+<main class="chapter-page" data-chapter-title="第 12 章 散射理論" data-prev-href="ch11_adiabatic_zh.html" data-prev-label="第 11 章 絕熱原理" data-next-href="../../index.html" data-next-label="回到科目首頁">
+
+<header class="chapter-header">
+  <div class="chapter-subtitle">
+    <a href="#">量子力學</a> &rsaquo; <a href="ch11_adiabatic_zh.html">Ch11</a> &rsaquo; Ch12
+  </div>
+  <h1>第 12 章　散射理論</h1>
+  <div class="chapter-meta">
+    <span>原書章節：Chapter 12, Scattering Theory</span>
+    <span>原書頁碼：p257–282</span>
+    <span>章長：20 頁 &middot; 6 節 &middot; 30+ 公式</span>
+  </div>
+</header>
+
+<!-- ====== 本章預覽 ====== -->
+<section class="chapter-preview" id="preview">
+  <h2>本章預覽</h2>
+
+  <div class="core-question">
+    <h3>核心問題</h3>
+    <p>自由粒子接近一個勢能區域，被偏折後朝新的方向離去——這就是散射。不同的勢能導致粒子被散射到特定方向的機率不同。<strong>散射理論的任務是：在支配量子態演化的 Hamiltonian 與實驗室實際測量的截面（cross-section）和分支比（branching ratio）之間，搭建一座橋樑。</strong>我們如何從量子力學的基本原理出發，計算出可以在實驗中驗證的散射截面？當我們無法知道完整的 Hamiltonian 本徵態時，如何仍然做出精確的預測？</p>
+  </div>
+
+  <div class="deep-dive">
+    <h3>10 個關鍵概念</h3>
+    <ol>
+      <li><strong>散射算子 $S$</strong>：將自由粒子態從遙遠過去演化至遙遠未來，再與自由態匹配的么正算子</li>
+      <li><strong>Møller 波算子 $\Omega_\pm$</strong>：將自由態映射到具有相同漸近行為的真實散射態</li>
+      <li><strong>躍遷算子 $T = S - 1$</strong>：隔離真正散射過程的部分，$|\langle \lambda | T | \phi \rangle|^2$ 給出躍遷機率</li>
+      <li><strong>Born 近似</strong>：以 $V$ 的冪次展開 $S$，取最低階非零項——弱勢能的微擾處理</li>
+      <li><strong>$i\epsilon$ 處方</strong>：為能量本徵態附加小虛部，使散射計算在數學上自洽</li>
+      <li><strong>散射振幅 $f(\mathbf{p} \to \mathbf{p}')$</strong>：向外球面波的振幅，其模平方給出微分截面</li>
+      <li><strong>微分截面 $d\sigma/d\Omega$</strong>：粒子被散射到特定立體角方向的機率密度——散射實驗的核心可測量</li>
+      <li><strong>光學定理</strong>：$\sigma_{\text{tot}} = \frac{4\pi\hbar}{p}\,\mathrm{Im}\,f(\mathbf{p}\to\mathbf{p})$——總截面與正向散射振幅虛部的關係</li>
+      <li><strong>分波展開與相移 $\delta_l(E)$</strong>：在球對稱勢下，散射完全由一組實數相移決定</li>
+      <li><strong>Breit-Wigner 共振</strong>：散射截面在特定能量處的尖峰——對應準束縛態的形成</li>
+    </ol>
+  </div>
+
+  <div class="deep-dive">
+    <h3>🧭 本章推理地圖</h3>
+    <ol>
+      <li><strong>散射實驗的物理圖像</strong>：自由粒子入射 → 與勢能交互作用 → 向外散射（§12.1）</li>
+      <li>定義<strong>散射算子 $S$ 與 Møller 算子 $\Omega_\pm$</strong>：避免使用未知的完整 Hamiltonian 本徵態（§12.1）→ 僅作用於自由態</li>
+      <li>$S$ 難以直接計算 → 導出 <strong>$V$ 的冪級數展開</strong>（§12.1.1）→ <strong>Born 近似</strong>取最低階</li>
+      <li>能量本徵態的數學困難 → <strong>$i\epsilon$ 處方</strong>使散射計算自洽（§12.2.1）</li>
+      <li>$S$-矩陣在動量表象中展開 → <strong>Feynman 圖</strong>提供直觀的圖像化計算規則（§12.2.2）</li>
+      <li>散射振幅 $f$ 的定義（§12.2.3）→ 遠場波函數 = 入射平面波 + 向外球面波 $\times f$</li>
+      <li>$f$ 連結實驗：<strong>$d\sigma/d\Omega = |f|^2$</strong>（§12.3）→ <strong>光學定理</strong>給出總截面（§12.3.1）</li>
+      <li>Born 近似應用：<strong>電子被氫原子散射</strong>——驗證 Born 近似的適用條件（§12.4）</li>
+      <li>球對稱勢的另一種處理：<strong>分波展開</strong>（§12.5）→ 散射由<strong>相移 $\delta_l(E)$</strong>完全決定</li>
+      <li>低能散射由 $l=0$（s-波）主導（§12.5.1）</li>
+      <li>特定能量下相移急劇變化 → <strong>Breit-Wigner 共振</strong>（§12.6）→ 與放射性衰變的聯繫</li>
+    </ol>
+  </div>
+</section>
+
+<!-- ====== 先備知識橋接 ====== -->
+<section class="prerequisite">
+  <h2>先備知識橋接</h2>
+  <p>本章假設讀者已具備以下基礎：</p>
+  <ul>
+    <li><strong>時間演化算子</strong>：$U(t) = e^{-iHt/\hbar}$ 及自由演化算子 $U_K(t) = e^{-iH_K t/\hbar}$（Ch4）</li>
+    <li><strong>一維散射</strong>：§5.3 中反射與透射係數的概念，以及相移如何決定散射結果</li>
+    <li><strong>角動量理論</strong>：$L^2$、$L_z$ 的本徵態 $|l,m\rangle$，球諧函數 $Y_l^m(\theta,\phi)$（Ch7）</li>
+    <li><strong>氫原子波函數</strong>：基態 $|1,0,0\rangle$ 的徑向分佈（Ch8）</li>
+    <li><strong>微擾理論</strong>：§9.1 中以小參數展開的基本思想</li>
+    <li><strong>Fourier 變換</strong>：動量空間與位置空間的轉換</li>
+    <li><strong>Dirac notation</strong>：$\langle x|p\rangle = (2\pi\hbar)^{-3/2} e^{i\mathbf{p}\cdot\mathbf{x}/\hbar}$（Ch2）</li>
+  </ul>
+  <div class="callout-warn">
+    <strong>⚠️ 三維散射與一維散射的根本差異</strong><br>
+    在一維散射中，粒子只能向前或向後；在三維中，粒子可以被散射到空間中的任何方向。這使得<strong>角動量</strong>成為核心角色——球對稱勢下的散射過程守恆角動量，這是分波展開的物理基礎。此外，三維中需要定義<strong>立體角</strong>相關的截面概念。
+  </div>
+</section>
+
+<!-- ====== 12.1 散射算子 ====== -->
+<section class="deep-dive" id="s12-1">
+<h2>12.1　散射算子</h2>
+<div class="section-keypoints">
+  <strong>🔑 本節重點</strong>
+  <span>① 散射算子 $S \equiv \Omega_-^\dagger \Omega_+$ 將自由態從過去演化至未來</span>
+  <span>② Møller 算子 $\Omega_\pm \equiv \lim_{t\to\mp\infty} U^\dagger(t) U_K(t)$ 匹配自由態與散射態</span>
+  <span>③ 躍遷算子 $T = S - 1$ 隔離真正散射過程</span>
+  <span>④ 微擾展開：以 $V$ 的冪次展開 $S$，每階對應不同次數的交互作用</span>
+  <span>⑤ Born 近似：僅保留 $V$ 的一階項，適用於弱勢能</span>
+</div>
+
+  <p>散射理論的核心洞察是：<strong>在散射實驗中，粒子在遠離交互作用區域之前和之後，都近似為自由粒子。</strong>這使我們可以避免直接處理完整的 Hamiltonian $H = H_K + V$ 的本徵態——這些本徵態通常是未知且難以計算的。取而代之，我們建立自由態之間的映射關係。</p>
+
+  <p>令 $|\psi\rangle$ 為散射實驗中粒子的真實態。其演化由含時 Schrödinger 方程 $i\hbar\,\partial_t|\psi\rangle = H|\psi\rangle$ 支配，即 $|\psi; t\rangle = U(t)|\psi; 0\rangle$，其中 $U(t) = e^{-iHt/\hbar}$。將 Hamiltonian 拆分為動能部分 $H_K = \mathbf{p}^2/2m$ 和造成散射的勢能 $V$：$H = H_K + V$。</p>
+
+  <p>在漸近過去（$t \to -\infty$），粒子遠離交互作用區域，其行為近似於某個自由態 $|\phi\rangle$。在漸近未來（$t \to +\infty$），散射後的粒子再次近似自由，對應另一個自由態 $|\phi'\rangle$。這兩個條件可寫為：</p>
+  <div class="eq">$$\lim_{t\to -\infty} U(t)|\psi; 0\rangle = \lim_{t\to -\infty} U_K(t)|\phi; 0\rangle, \quad \lim_{t\to +\infty} U(t)|\psi; 0\rangle = \lim_{t\to +\infty} U_K(t)|\phi'; 0\rangle \tag{12.2}$$</div>
+
+  <p>這兩個條件使我們可以將真實態 $|\psi\rangle$ 與自由態 $|\phi\rangle$、$|\phi'\rangle$ 在「現在」（$t = 0$）關聯起來。引入<strong>Møller 波算子</strong>：</p>
+  <div class="eq">$$\Omega_\pm \equiv \lim_{t \to \mp\infty} U^\dagger(t) U_K(t) \tag{12.4}$$</div>
+
+  <p>由此可得 $|\psi; 0\rangle = \Omega_+ |\phi; 0\rangle = \Omega_- |\phi'; 0\rangle$。$\Omega_+$ 將自由態映射到與其具有相同漸近過去行為的真實態；$\Omega_-$ 則對應漸近未來。利用這兩個算子，定義<strong>散射算子</strong>：</p>
+  <div class="eq">$$S \equiv \Omega_-^\dagger \Omega_+ \tag{12.5}$$</div>
+
+  <div class="callout">
+    <strong>💡 $S$ 算子的物理運作方式</strong><br>
+    $S$ 將一個自由粒子態先演化回遙遠的過去，在那裡將它匹配到具有相同過去漸近行為的真實態；然後將這個真實態向前演化，穿過整個散射過程到達遙遠的未來；最後再將它匹配回自由態，並演化回現在。若入射自由態為 $|\phi\rangle$、出射自由態為 $|\lambda\rangle$，則躍遷振幅為 $\langle \lambda | S | \phi \rangle$，躍遷機率為 $|\langle \lambda | S | \phi \rangle|^2$。<strong>$S$ 算子永遠作用於自由態——因此我們不需要知道完整 Hamiltonian 的本徵態。</strong>
+  </div>
+
+  <p>當 $V = 0$ 時沒有散射，$S$ 必須等於單位算子 $1$。為隔離真正的散射過程，定義<strong>躍遷算子</strong>：</p>
+  <div class="eq">$$T \equiv S - 1 \tag{12.6}$$</div>
+  <p>真正的躍遷機率為 $P(|\phi\rangle \to |\lambda\rangle) = |\langle \lambda | T | \phi \rangle|^2 = |\langle \lambda | S | \phi \rangle - \langle \lambda | \phi \rangle|^2$。由於 $S$ 是么正的，$S^\dagger S = 1$，代入 $S = 1 + T$ 可得：</p>
+  <div class="eq">$$1 = S^\dagger S = 1 + T^\dagger + T + T^\dagger T \tag{12.8}$$</div>
+  <p>將此式夾在 $\langle \phi|$ 和 $|\phi\rangle$ 之間，得到一個重要關係：</p>
+  <div class="eq">$$-2\,\mathrm{Re}\big(\langle \phi | T | \phi \rangle\big) = \langle \phi | T^\dagger T | \phi \rangle = \sum_{|\psi_i\rangle \neq |\phi\rangle} |\langle \psi_i | T | \phi \rangle|^2 \tag{12.9, 12.11}$$</div>
+  <p>這個等式左邊關乎粒子<strong>留在原態</strong>的機率損耗，右邊則是粒子<strong>躍遷到所有其他態</strong>的機率之和——它是後續光學定理的雛形。</p>
+
+  <p>雖然 $S \equiv \Omega_-^\dagger \Omega_+$ 的定義在概念上很清晰，但在實際計算中極其不便，因為真實 Hamiltonian $H$ 深深嵌入其中。為了取得 $H$，我們需要一個微擾處理方案。</p>
+
+  <h3>散射算子的微擾處理</h3>
+  <p>定義 $\Omega(t) \equiv U^\dagger(t) U_K(t)$。對 $t$ 微分並利用 Schrödinger 方程：</p>
+  <div class="eq">$$\frac{d}{dt}\Omega(t) = \frac{i}{\hbar} e^{iHt/\hbar}(H - H_K)e^{-iH_K t/\hbar} = \frac{i}{\hbar} e^{iHt/\hbar} V e^{-iH_K t/\hbar} \tag{12.12}$$</div>
+  <p>重新積分並反覆代入 $\Omega^\dagger(\tau)$ 自身的表達式，可以將 $\Omega^\dagger(t)$ 展開為 $V$ 的冪級數。在 $t \to \infty$、$t' \to -\infty$ 的極限下，乘以 $\Omega(t')$ 後得到 $S$ 的級數展開：</p>
+  <div class="eq">$$S = 1 - \frac{i}{\hbar}\int_{-\infty}^{\infty} d\tau\, U_K^\dagger(\tau) V U_K(\tau) - \frac{1}{\hbar^2}\int_{-\infty}^{\infty} d\tau \int_{-\infty}^{\tau} d\tau'\, U_K^\dagger(\tau) V U_K(\tau - \tau') V U_K(\tau') + \cdots \tag{12.16}$$</div>
+
+  <p>這個展開的物理意義極其直觀：<strong>零階項</strong> $1$ 對應「沒有散射」；<strong>一階項</strong> $S^{(1)}$ 的矩陣元 $\langle \lambda | S^{(1)} | \phi \rangle$ 正比於 $\int d\tau\, \langle \lambda; \tau | V | \phi; \tau \rangle$——粒子在時刻 $\tau$ 被勢能 $V$ 偏折一次，從 $|\phi\rangle$ 躍遷到 $|\lambda\rangle$，由於我們不知道交互作用何時發生，所以對所有 $\tau$ 積分；<strong>二階項</strong> $S^{(2)}$ 描述粒子被 $V$ 偏折兩次，中間自由傳播一段時間；更高階項依此類推。</p>
+
+  <div class="callout-warn">
+    <strong>⚠️ Born 近似的適用條件</strong><br>
+    若勢能 $V$ 足夠弱，我們可以截斷級數，只保留至一階：$S \simeq 1 - \frac{i}{\hbar}\int_{-\infty}^{\infty} d\tau\, U_K^\dagger(\tau) V U_K(\tau)$。這就是<strong>Born 近似</strong>。但它不是永遠有效的——必須通過估算二階項的大小來檢驗。一個常見的檢驗標準是：粒子通過勢能區域期間，$V$ 對量子態造成的相對變化 $|V|\Delta t/\hbar$ 遠小於 1。
+  </div>
+
+  <details class="example">
+    <summary>📝 自編概念例：$S$ 的么正性與機率守恆</summary>
+    <div class="example-body">
+      <p><strong>題目：</strong>驗證從 $S^\dagger S = 1$ 可推出躍遷機率守恆。設初始態為 $|\phi\rangle$，$\{|n\rangle\}$ 為一組完備的自由態基底。求證：$\sum_n |\langle n | S | \phi \rangle|^2 = 1$。</p>
+      <p><strong>解：</strong>插入完備性關係 $\sum_n |n\rangle\langle n| = 1$：</p>
+      <div class="eq">$$\sum_n |\langle n | S | \phi \rangle|^2 = \sum_n \langle \phi | S^\dagger | n \rangle \langle n | S | \phi \rangle = \langle \phi | S^\dagger S | \phi \rangle = \langle \phi | \phi \rangle = 1$$</div>
+      <p>最後一步使用了 $S^\dagger S = 1$ 以及 $|\phi\rangle$ 的歸一化。</p>
+      <p><strong>物理意義：</strong>$S$ 的么正性保證了總機率守恆——入射粒子要麼留在原態、要麼躍遷到某個其他態，所有可能結果的機率之和為 1。這是一切散射計算的自洽性基礎。</p>
+    </div>
+  </details>
+
+  <figure class="figure" id="fig-12-1-scattering">
+    <svg class="content-diagram" viewBox="0 0 520 280" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" width="520" height="280" fill="#f8f9fa" rx="8"/>
+      <!-- Incoming -->
+      <text x="20" y="145" font-size="11" fill="#4a90d9">$|\phi\rangle$入射</text>
+      <line x1="80" y1="140" x2="170" y2="140" stroke="#4a90d9" stroke-width="2" marker-end="url(#arrowBlue)"/>
+      <defs><marker id="arrowBlue" markerWidth="8" markerHeight="8" refX="8" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 Z" fill="#4a90d9"/></marker></defs>
+      <!-- Scattering region -->
+      <circle cx="250" cy="140" r="30" fill="#ffdddd" stroke="#cc0000" stroke-width="2" stroke-dasharray="6,3"/>
+      <text x="250" y="145" font-size="12" fill="#cc0000" text-anchor="middle" font-weight="bold">V(x)</text>
+      <!-- Outgoing -->
+      <line x1="280" y1="140" x2="380" y2="80" stroke="#e74c3c" stroke-width="2"/>
+      <line x1="280" y1="140" x2="380" y2="140" stroke="#e74c3c" stroke-width="2"/>
+      <line x1="280" y1="140" x2="380" y2="200" stroke="#e74c3c" stroke-width="2"/>
+      <text x="390" y="75" font-size="11" fill="#e74c3c">$|\lambda_1\rangle$</text>
+      <text x="390" y="135" font-size="11" fill="#e74c3c">$|\lambda_2\rangle$</text>
+      <text x="390" y="205" font-size="11" fill="#e74c3c">$|\lambda_3\rangle$</text>
+      <!-- Timeline -->
+      <text x="40" y="250" font-size="11" fill="#666">$t=-\infty$</text>
+      <text x="200" y="250" font-size="11" fill="#666" text-anchor="middle">$t=0$</text>
+      <text x="400" y="250" font-size="11" fill="#666" text-anchor="end">$t=+\infty$</text>
+      <line x1="40" y1="260" x2="430" y2="260" stroke="#999" stroke-width="1"/>
+      <!-- Labels -->
+      <text x="260" y="250" font-size="10" fill="#888" text-anchor="middle">$S|\phi\rangle$：自由→散射→自由</text>
+    </svg>
+    <figcaption><strong>圖 12.1</strong>　散射算子 $S$ 的物理圖像。入射自由態 $|\phi\rangle$（$t \to -\infty$）接近勢能區域 $V(\mathbf{x})$，經過交互作用後，在 $t \to +\infty$ 變成出射自由態的疊加。$S$ 算子直接將入射自由態映射到出射自由態。</figcaption>
+  </figure>
+</section>
+
+<!-- ====== 12.2 S-矩陣 ====== -->
+<section class="deep-dive" id="s12-2">
+<h2>12.2　S-矩陣</h2>
+<div class="section-keypoints">
+  <strong>🔑 本節重點</strong>
+  <span>① 能量本徵態在散射理論中的困境：它們不隨時間移動</span>
+  <span>② $i\epsilon$ 處方：能量附加小虛部 ±iϵ，使散射態非定態</span>
+  <span>③ $S$-矩陣 $S(\mathbf{p}, \mathbf{p}') = \langle \mathbf{p}' | S | \mathbf{p} \rangle$ 在動量表象中展開</span>
+  <span>④ 散射振幅 $f(\mathbf{p}\to\mathbf{p}')$ 是向外球面波的振幅</span>
+  <span>⑤ Feynman 圖提供微擾級數的圖像化記帳系統</span>
+</div>
+
+  <h3>$i\epsilon$ 處方</h3>
+  <p>一個關鍵的物理事實是：<strong>不可能將任何真實粒子放入純能量本徵態</strong>——因為能量本徵態在時間上是均勻的，不會「移動」。但在計算中使用能量本徵態極其方便。這造成了散射理論中的一個特殊困境。</p>
+
+  <p>問題的核心在於：從方程 (12.20) 可證明 $H\Omega_\pm = \Omega_\pm H_K$。如果入射態 $|\phi\rangle$ 是 $H_K$ 的本徵態 $|E;\text{free}\rangle$，則散射態 $|\psi\rangle = \Omega_+|E;\text{free}\rangle$ 必須滿足 $H|\psi\rangle = E|\psi\rangle$——它也是 $H$ 的本徵態！但能量本徵態在所有時間看起來都一樣，因此「入射」和「出射」的區別消失了。這只有在 $V=0$（沒有散射）時才有意義。</p>
+
+  <p>解決方案是引入一個微小的收斂因子 $e^{-\epsilon|\tau|/\hbar}$（$\epsilon > 0$）到 $\Omega_\pm$ 的積分表達式中。對於真實的散射態（非平凡的能量疊加），這個因子在 $\epsilon \to 0^+$ 時不產生任何影響。但對於能量本徵態，它帶來了關鍵的改變：</p>
+  <div class="eq">$$H\widetilde{\Omega}_\pm = \widetilde{\Omega}_\pm(H_K \pm i\epsilon) \mp i\epsilon \tag{12.24}$$</div>
+  <p>因此，從 $H_K$ 的本徵態 $|E\rangle$ 構造的「交互作用態」$|\psi\rangle = \widetilde{\Omega}_\pm|E\rangle$ 不再是 $H$ 的本徵態，可以用於描述散射。這就是<strong>$i\epsilon$ 處方</strong>（$i\epsilon$ prescription）。</p>
+
+  <div class="callout">
+    <strong>💡 $i\epsilon$ 處方的實用規則</strong><br>
+    在實際計算中，我們無需顯式寫出收斂因子。只需假裝自由 Hamiltonian 的本徵態滿足：<br>
+    入射態（與 $\Omega_+$ 作用）：$H_K|E\rangle = (E + i\epsilon)|E\rangle$<br>
+    出射態（與 $\Omega_-$ 作用）：$H_K|E'\rangle = (E' - i\epsilon)|E'\rangle$<br>
+    伴隨態則取相反的虛部符號。$H_K$ 當然仍是 Hermitian 算子——這些只是使散射計算自洽的「有用的虛構」。
+  </div>
+
+  <h3>展開 $S$-矩陣</h3>
+  <p>由於入射和出射態都是自由態，且動量算子與 $H_K$ 對易，在動量表象中處理散射最為方便。定義<strong>$S$-矩陣</strong>：</p>
+  <div class="eq">$$S(\mathbf{p}, \mathbf{p}') \equiv \langle \mathbf{p}' | S | \mathbf{p} \rangle \tag{12.28}$$</div>
+  <p>使用 Born 近似（一階項）並代入 $i\epsilon$ 處方：</p>
+  <div class="eq">$$\langle \mathbf{p}' | S^{(1)} | \mathbf{p} \rangle = -\frac{i}{\hbar} \langle \mathbf{p}' | V | \mathbf{p} \rangle \int_{-\infty}^{\infty} d\tau\, e^{-i(E_p - E_{p'})\tau/\hbar} = -\frac{2\pi i}{(2\pi\hbar)^3} \delta(E_p - E_{p'}) \int d^3x\, e^{-i\mathbf{q}\cdot\mathbf{x}/\hbar} V(\mathbf{x}) \tag{12.29, 12.32}$$</div>
+  <p>其中 $\mathbf{q} \equiv \mathbf{p}' - \mathbf{p}$ 是<strong>動量轉移</strong>（momentum transfer）。Born 近似下的 $S$-矩陣直接依賴於勢能的 Fourier 變換——<strong>變化劇烈的勢能導致大動量轉移的散射振幅較大</strong>。這正是 Rutherford 從 $\alpha$ 粒子的大角度背向散射推斷出原子核存在的邏輯基礎。</p>
+
+  <p>二階項的處理引入了<strong>傳播子</strong>（propagator）的概念：</p>
+  <div class="eq">$$S^{(2)}(\mathbf{p}', \mathbf{p}) = -2\pi i\,\delta(E_p - E_{p'}) \lim_{\epsilon\to 0^+} \int d^3k\, \frac{\langle \mathbf{p}' | V | \mathbf{k} \rangle \langle \mathbf{k} | V | \mathbf{p} \rangle}{E_p - E_k + i\epsilon} \tag{12.36}$$</div>
+  <p>分母 $(E_p - E_k + i\epsilon)^{-1}$ 來自粒子在兩次交互作用之間的自由傳播，因此被稱為<strong>傳播子</strong>。分子是粒子從 $|\mathbf{p}\rangle$ 散射到 $|\mathbf{k}\rangle$，再從 $|\mathbf{k}\rangle$ 散射到 $|\mathbf{p}'\rangle$ 的振幅乘積。由於中間態 $|\mathbf{k}\rangle$ 不被測量，我們對所有可能的 $\mathbf{k}$ 積分（疊加振幅）。</p>
+
+  <div class="callout-warn">
+    <strong>⚠️ $S$-矩陣的精確形式：能量守恆的 $\delta$ 函數</strong><br>
+    可以證明 $[S, H_K] = 0$（方程 12.37），因此 $\langle \mathbf{p}'|[S, H_K]|\mathbf{p}\rangle = (E_p - E_{p'})S(\mathbf{p}, \mathbf{p}') = 0$。這意味著<strong>精確的 $S$-矩陣必定正比於 $\delta(E_p - E_{p'})$</strong>——散射過程守恆能量，這不是 Born 近似的偶然結果。
+  </div>
+
+  <h3>散射振幅</h3>
+  <p>基於 $S \propto \delta(E_p - E_{p'})$ 的事實，定義<strong>散射振幅</strong> $f(\mathbf{p} \to \mathbf{p}')$：</p>
+  <div class="eq">$$\langle \mathbf{p}' | T | \mathbf{p} \rangle = \frac{i}{2\pi\hbar m}\,\delta(E_p - E_{p'})\,f(\mathbf{p} \to \mathbf{p}') \tag{12.39}$$</div>
+  <p>由於 $\delta$ 函數的存在，$f$ 僅通過 $\mathbf{p}'$ 的<strong>方向</strong> $\hat{\mathbf{p}}'$ 依賴於 $\mathbf{p}'$——能量守恆固定了 $|\mathbf{p}'| = |\mathbf{p}|$（彈性散射）。</p>
+
+  <p>要理解 $f$ 的物理意義，計算散射後在遠距離處（$r \to \infty$）的波函數。對於一個初始動量本徵態 $|\mathbf{p}\rangle$，出射波函數在 $r \to \infty$ 時為：</p>
+  <div class="eq">$$\lim_{r\to\infty} \langle \mathbf{r} | \phi \rangle = \frac{1}{(2\pi\hbar)^{3/2}} \left[ e^{i\mathbf{p}\cdot\mathbf{r}/\hbar} + \frac{e^{ipr/\hbar}}{r} f(\mathbf{p} \to p\hat{\mathbf{r}}) \right] \tag{12.45}$$</div>
+  <p>這是散射理論中<strong>最重要的公式之一</strong>：出射波函數 = <strong>入射平面波</strong> $e^{i\mathbf{p}\cdot\mathbf{r}/\hbar}$（無散射部分）+ <strong>向外球面波</strong> $\frac{e^{ipr/\hbar}}{r} f(\mathbf{p} \to p\hat{\mathbf{r}})$（散射部分）。散射振幅 $f$ 正是這個向外球面波的振幅，它完全決定了散射的角分佈。</p>
+
+  <figure class="figure" id="fig-12-2-feynman">
+    <svg class="content-diagram" viewBox="0 0 500 220" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" width="500" height="220" fill="#f8f9fa" rx="8"/>
+      <!-- Diagram (a) zeroth order -->
+      <text x="70" y="25" font-size="11" fill="#333" text-anchor="middle">(a) $S^{(0)} = 1$</text>
+      <line x1="30" y1="40" x2="110" y2="40" stroke="#4a90d9" stroke-width="2"/>
+      <text x="70" y="55" font-size="10" fill="#666" text-anchor="middle">無散射</text>
+      <!-- Diagram (b) first order -->
+      <text x="220" y="25" font-size="11" fill="#333" text-anchor="middle">(b) $S^{(1)}$</text>
+      <line x1="180" y1="40" x2="220" y2="40" stroke="#4a90d9" stroke-width="2"/>
+      <circle cx="220" cy="40" r="5" fill="#cc0000"/>
+      <line x1="225" y1="40" x2="260" y2="40" stroke="#4a90d9" stroke-width="2"/>
+      <text x="220" y="55" font-size="10" fill="#666" text-anchor="middle">一次交互作用 $V$</text>
+      <!-- Diagram (c) second order -->
+      <text x="380" y="25" font-size="11" fill="#333" text-anchor="middle">(c) $S^{(2)}$</text>
+      <line x1="330" y1="40" x2="355" y2="40" stroke="#4a90d9" stroke-width="2"/>
+      <circle cx="355" cy="40" r="5" fill="#cc0000"/>
+      <line x1="360" y1="40" x2="385" y2="40" stroke="#4a90d9" stroke-width="2" stroke-dasharray="4,3"/>
+      <circle cx="385" cy="40" r="5" fill="#cc0000"/>
+      <line x1="390" y1="40" x2="415" y2="40" stroke="#4a90d9" stroke-width="2"/>
+      <text x="370" y="28" font-size="9" fill="#888">$\mathbf{k}$</text>
+      <text x="380" y="55" font-size="10" fill="#666" text-anchor="middle">兩次交互作用+傳播子</text>
+      <!-- Legend -->
+      <text x="250" y="100" font-size="10" fill="#666" text-anchor="middle">Feynman 圖規則：(i) 每個頂點 = $V$；(ii) 每條內線 = 傳播子 $(E_p - E_k + i\epsilon)^{-1}$</text>
+      <text x="250" y="120" font-size="10" fill="#666" text-anchor="middle">(iii) 整體前置因子 $-2\pi i\,\delta(E_p - E_{p'})$</text>
+      <!-- Wavefunction -->
+      <text x="250" y="160" font-size="12" fill="#333" text-anchor="middle" font-weight="bold">遠場波函數：$\psi(\mathbf{r}) \sim e^{i\mathbf{p}\cdot\mathbf{r}/\hbar} + \frac{e^{ipr/\hbar}}{r} f(\theta, \phi)$</text>
+      <text x="250" y="185" font-size="10" fill="#888" text-anchor="middle">入射平面波 + 向外球面波（散射）</text>
+      <text x="250" y="205" font-size="10" fill="#888" text-anchor="middle">$\frac{d\sigma}{d\Omega} = |f|^2$　　$f(\mathbf{p}\to\mathbf{p}') \propto \int d^3x\, e^{-i\mathbf{q}\cdot\mathbf{x}/\hbar} V(\mathbf{x})$ (Born)</text>
+    </svg>
+    <figcaption><strong>圖 12.2</strong>　$S$-矩陣微擾級數的 Feynman 圖表示。(a) 零階：無散射；(b) 一階（Born 近似）：一次交互作用；(c) 二階：兩次交互作用，中間有自由傳播子。散射振幅 $f$ 連結了微擾計算與可測量的截面。</figcaption>
+  </figure>
+
+  <details class="example">
+    <summary>📝 自編概念例：Born 近似下的 Yukawa 勢散射</summary>
+    <div class="example-body">
+      <p><strong>題目：</strong>考慮 Yukawa 勢 $V(r) = \frac{g}{r}e^{-\mu r}$。求 Born 近似下的散射振幅 $f(\mathbf{p}\to\mathbf{p}')$ 和微分截面。</p>
+      <p><strong>解：</strong>首先計算 $V(r)$ 的 Fourier 變換（利用球對稱性）：</p>
+      <div class="eq">$$\int d^3x\, e^{-i\mathbf{q}\cdot\mathbf{x}/\hbar} V(r) = \frac{4\pi\hbar}{q} \int_0^\infty dr\, r\sin(qr/\hbar)\, \frac{g}{r}e^{-\mu r} = \frac{4\pi g\hbar}{q^2/\hbar^2 + \mu^2}$$</div>
+      <p>Born 近似下 $f = -\frac{m}{2\pi\hbar^2} \int d^3x\, e^{-i\mathbf{q}\cdot\mathbf{x}/\hbar} V(\mathbf{x})$（改寫自 eq. 12.61），因此：</p>
+      <div class="eq">$$f(\mathbf{p}\to\mathbf{p}') = -\frac{2mg}{\hbar^2} \frac{1}{q^2/\hbar^2 + \mu^2} = -\frac{2mg}{q^2 + \hbar^2\mu^2}$$</div>
+      <div class="eq">$$\frac{d\sigma}{d\Omega} = |f|^2 = \frac{4m^2 g^2}{(q^2 + \hbar^2\mu^2)^2}$$</div>
+      <p>其中 $q = |\mathbf{p}' - \mathbf{p}| = 2p\sin(\theta/2)$。</p>
+      <p><strong>物理意義：</strong>當 $\mu \to 0$ 時，Yukawa 勢還原為 Coulomb 勢 $V = g/r$，此時 $d\sigma/d\Omega \propto 1/q^4 \propto 1/\sin^4(\theta/2)$——這就是著名的 Rutherford 散射公式。$\mu^{-1}$ 代表勢能的力程（range）；動量轉移 $q$ 越小（即 $\theta$ 越小），截面越大。</p>
+    </div>
+  </details>
+</section>
+
+<!-- ====== 12.3 截面與散射實驗 ====== -->
+<section class="deep-dive" id="s12-3">
+<h2>12.3　截面與散射實驗</h2>
+<div class="section-keypoints">
+  <strong>🔑 本節重點</strong>
+  <span>① 微分截面 $d\sigma/d\Omega = |f(\mathbf{p}\to\mathbf{p}')|^2$ 是理論與實驗的核心紐帶</span>
+  <span>② 散射實驗以準直粒子束撞擊靶，測量各角度的出射粒子數</span>
+  <span>③ 光學定理：$\sigma_{\text{tot}} = \frac{4\pi\hbar}{p}\,\mathrm{Im}\,f(\mathbf{p}\to\mathbf{p})$</span>
+  <span>④ 正向繞射峰的寬度隨能量增加而縮小</span>
+  <span>⑤ Born 近似下 $d\sigma/d\Omega \propto |\widetilde{V}(\mathbf{q})|^2$——截面反映勢能的功率譜</span>
+</div>
+
+  <p>散射實驗是探索物質微觀結構最強大的工具之一。Rutherford 通過研究 $\alpha$ 粒子被金箔散射的分佈，發現了原子核；現今的高能加速器通過散射極高速的電子或質子來研究物質的次原子結構。本節建立散射理論計算與實驗可測量之間的正式連結。</p>
+
+  <p>想像孩子們向遠處的岩石投擲石子。如果 $N_{\text{in}}$ 個石子被均勻地投向單位面積，其中 $N_{\text{sc}}$ 個擊中岩石，則岩石的截面積約為 $A = N_{\text{sc}}/N_{\text{in}}$。更精細地，我們可以測量石子被偏折的角度——定義<strong>微分截面</strong> $\delta\sigma$ 為將石子偏折到小立體角 $\delta\Omega$ 內的靶面積：</p>
+  <div class="eq">$$\frac{\delta\sigma}{\delta\Omega} = \frac{N(\theta,\phi)}{N_{\text{in}}} \tag{12.48}$$</div>
+  <p><strong>總截面</strong>則是微分截面對所有方向的積分：$\sigma_{\text{tot}} = \int d\Omega\, d\sigma/d\Omega$。</p>
+
+  <p>在量子散射中，我們以一束包含 $N_b$ 個粒子的準直束撞擊靶，探測器測量散射到每個立體角元 $\delta\Omega$ 中的粒子數。對於高度準直的束流，入射粒子在束截面上的數密度 $n_{\text{in}}$ 近似均勻。利用散射波函數在遠距離處的表達式 (12.45)，經過仔細的推導（包括對束流動量分佈的穩相近似），可得：</p>
+  <div class="eq">$$\frac{d\sigma}{d\Omega} = |f(\mathbf{p} \to \mathbf{p}')|^2 \tag{12.59}$$</div>
+  <div class="eq">$$\sigma_{\text{tot}} = \int d\Omega\, |f(\mathbf{p} \to \mathbf{p}')|^2 \tag{12.60}$$</div>
+
+  <p>這兩個簡單而優美的公式是<strong>散射理論最重要的結果之一</strong>——它們將抽象的散射振幅 $f$ 直接連結到實驗可測量的截面。在 Born 近似有效的條件下，$f(\mathbf{p} \to \mathbf{p}') \propto \int d^3x\, e^{-i\mathbf{q}\cdot\mathbf{x}/\hbar} V(\mathbf{x})$，因此：</p>
+  <div class="eq">$$\frac{d\sigma}{d\Omega} = \frac{m^2}{4\pi^2\hbar^4}\,|\widetilde{V}(\mathbf{q})|^2 = \frac{m^2}{4\pi^2\hbar^4}\,P(\mathbf{q}) \tag{12.62}$$</div>
+  <p>其中 $P(\mathbf{q}) = |\widetilde{V}(\mathbf{q})|^2$ 是勢能的<strong>功率譜</strong>（power spectrum）。因此，<strong>通過測量散射到各方向的粒子數，我們可以直接測定交互作用勢能的功率譜。</strong></p>
+
+  <div class="callout">
+    <strong>💡 為什麼散射實驗如此強大</strong><br>
+    散射實驗測量的是勢能的<strong>功率譜</strong>（$|\widetilde{V}|^2$），而非完整的 Fourier 變換（包含相位資訊）。雖然原則上若能測量相位，就可以重建 $V(\mathbf{x})$（類似全像術的原理），但在高能加速器中，量子態的純度不足以觀察到入射波和散射波之間的干涉。此外，在實際情況下，勢能 $V$ 會隨時間漲落（例如原子中電子的快速運動），這使 $\widetilde{V}(\mathbf{q})$ 的相位快速變化但功率譜相對穩定。因此，散射實驗恰好揭示了我們最感興趣的結構資訊——電子和原子核的數量和空間分佈。
+  </div>
+
+  <h3>光學定理</h3>
+  <p>Born 近似並非永遠有效。有沒有不依賴於 Born 近似的散射截面的一般關係？從方程 (12.8)：$T + T^\dagger = -T^\dagger T$ 出發，夾在動量本徵態之間並利用散射振幅的定義，可以推導出一個精確的關係：</p>
+  <div class="eq">$$\sigma_{\text{tot}}(p) = \frac{4\pi\hbar}{p}\,\mathrm{Im}\,f(\mathbf{p} \to \mathbf{p}) \tag{12.67}$$</div>
+
+  <p>這就是<strong>光學定理</strong>（optical theorem）。它將總截面與<strong>正向散射振幅的虛部</strong>聯繫起來。物理上，正向散射決定了有多少粒子從原束中被移除（因為干涉），而這正好對應於粒子被散射到所有其他方向的總機率。</p>
+
+  <p>光學定理解釋了中子-質子散射實驗中的一個顯著現象：<strong>正向繞射峰</strong>（diffraction peak）。實驗顯示微分截面在 $\theta = 0$（正向）處有一個尖峰；隨著入射能量增加，這個峰變得更高更窄。光學定理說明了這一點：當 $p \to \infty$ 時，總截面趨於常數，因此 $\mathrm{Im}\,f(\mathbf{p}\to\mathbf{p})$ 必須大致正比於 $p$ 增長，從而 $d\sigma/d\Omega|_{\theta=0} = |f|^2$ 至少以 $p^2$ 增長。同時，峰的半高全寬（FWHM）受以下不等式約束：</p>
+  <div class="eq">$$\Delta\Omega \leq \frac{32\pi^2}{p^2\sigma_{\text{tot}}} \tag{12.69}$$</div>
+  <p>因此正向峰的寬度隨 $p^{-2}$ 縮小——這與光學中頻率越高繞射峰越窄的現象完全類似。</p>
+
+  <details class="example">
+    <summary>📝 自編概念例：光學定理的驗證</summary>
+    <div class="example-body">
+      <p><strong>題目：</strong>利用分波展開的結果（§12.5），驗證光學定理 $\sigma_{\text{tot}} = \frac{4\pi\hbar}{p}\,\mathrm{Im}\,f(\mathbf{p}\to\mathbf{p})$ 在分波形式下自動成立。</p>
+      <p><strong>解：</strong>從方程 (12.91ab)：$f(\mathbf{p}\to\mathbf{p}') = \sum_l (2l+1) P_l(\cos\vartheta') f_l(E)$，其中 $f_l(E) = \frac{\hbar}{p} e^{i\delta_l}\sin\delta_l$。計算正向散射振幅（$\vartheta' = 0$，$P_l(1) = 1$）：</p>
+      <div class="eq">$$f(\mathbf{p}\to\mathbf{p}) = \sum_l (2l+1) \frac{\hbar}{p} e^{i\delta_l}\sin\delta_l$$</div>
+      <p>取虛部：</p>
+      <div class="eq">$$\mathrm{Im}\,f(\mathbf{p}\to\mathbf{p}) = \frac{\hbar}{p} \sum_l (2l+1) \sin^2\delta_l$$</div>
+      <p>而總截面由方程 (12.92) 給出：</p>
+      <div class="eq">$$\sigma_{\text{tot}} = \frac{4\pi\hbar^2}{p^2} \sum_l (2l+1) \sin^2\delta_l = \frac{4\pi\hbar}{p}\,\mathrm{Im}\,f(\mathbf{p}\to\mathbf{p})$$</div>
+      <p><strong>物理意義：</strong>光學定理在分波展開中自動成立——這源自角動量守恆：每個分波獨立地守恆機率，而總截面是各分波貢獻之和。光學定理本質上是機率守恆（$S^\dagger S = 1$）在散射振幅語言中的表達。</p>
+    </div>
+  </details>
+
+  <figure class="figure" id="fig-12-3-optical">
+    <svg class="content-diagram" viewBox="0 0 500 240" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" width="500" height="240" fill="#f8f9fa" rx="8"/>
+      <!-- Beam -->
+      <line x1="20" y1="120" x2="150" y2="120" stroke="#4a90d9" stroke-width="3"/>
+      <text x="80" y="110" font-size="10" fill="#4a90d9" text-anchor="middle">入射束 $|\mathbf{p}\rangle$</text>
+      <!-- Target -->
+      <circle cx="170" cy="120" r="25" fill="#ffdddd" stroke="#cc0000" stroke-width="2"/>
+      <text x="170" y="125" font-size="10" fill="#cc0000" text-anchor="middle" font-weight="bold">靶</text>
+      <!-- Forward peak -->
+      <path d="M195,120 Q240,90 250,120" fill="none" stroke="#e74c3c" stroke-width="2"/>
+      <path d="M195,120 Q235,130 250,120" fill="none" stroke="#e74c3c" stroke-width="2"/>
+      <path d="M195,120 Q245,100 260,120" fill="none" stroke="#e74c3c" stroke-width="1.5"/>
+      <path d="M195,120 Q240,135 260,120" fill="none" stroke="#e74c3c" stroke-width="1.5"/>
+      <text x="260" y="100" font-size="10" fill="#e74c3c">繞射峰</text>
+      <!-- Wide angle -->
+      <line x1="195" y1="120" x2="290" y2="50" stroke="#e74c3c" stroke-width="1" stroke-dasharray="3,2"/>
+      <line x1="195" y1="120" x2="290" y2="190" stroke="#e74c3c" stroke-width="1" stroke-dasharray="3,2"/>
+      <!-- Formula -->
+      <text x="360" y="60" font-size="12" fill="#333" font-weight="bold">光學定理：</text>
+      <text x="360" y="85" font-size="13" fill="#333">$\sigma_{\text{tot}} = \frac{4\pi\hbar}{p}\,\mathrm{Im}\,f(0)$</text>
+      <text x="360" y="110" font-size="10" fill="#666">正向散射振幅的虛部</text>
+      <text x="360" y="130" font-size="10" fill="#666">決定總截面</text>
+      <!-- Diagram of removal -->
+      <text x="360" y="160" font-size="10" fill="#888">物理：正向散射的干涉</text>
+      <text x="360" y="180" font-size="10" fill="#888">使粒子從入射束中移除</text>
+      <text x="360" y="200" font-size="10" fill="#888">→ 等於散射到所有方向的總和</text>
+    </svg>
+    <figcaption><strong>圖 12.3</strong>　光學定理的物理圖像。正向散射振幅的虛部與粒子從入射束中被移除的機率相關——這正對應於總散射截面。在高能散射中，正向出現尖銳的繞射峰，其寬度隨能量增加而縮小。</figcaption>
+  </figure>
+</section>
+
+<!-- ====== 12.4 電子被氫原子散射 ====== -->
+<section class="deep-dive" id="s12-4">
+<h2>12.4　電子被氫原子散射</h2>
+<div class="section-keypoints">
+  <strong>🔑 本節重點</strong>
+  <span>① 氫原子基態電子雲屏蔽質子的 $1/r$ Coulomb 勢</span>
+  <span>② Born 近似給出解析的微分截面公式</span>
+  <span>③ 正向散射截面 $\left.d\sigma/d\Omega\right|_{\theta=0} = a_0^2$，與入射能量無關</span>
+  <span>④ Born 近似的有效性條件：電子動能 $\gg R/4 \sim 3.4$ eV</span>
+  <span>⑤ 實驗數據驗證：高能時 Born 近似精確，低能時嚴重偏離</span>
+</div>
+
+  <p>現在將散射理論應用於一個具體的物理問題：電子被處於基態的氫原子散射。將質子視為位於原子中心的點粒子，原子的電荷分佈為：</p>
+  <div class="eq">$$\rho(\mathbf{r}) = e\,\delta^3(\mathbf{r}) - e\,|\langle \mathbf{r} | 1,0,0 \rangle|^2 \tag{12.70}$$</div>
+  <p>其中基態電子機率密度為 $|\langle \mathbf{r} | 1,0,0 \rangle|^2 = e^{-2r/a_0}/\pi a_0^3$（§8.1.2），$a_0$ 為 Bohr 半徑。</p>
+
+  <p>原子產生的靜電勢 $\Phi(\mathbf{r})$ 可以通過積分 Poisson 方程求得。經過類似 Box 10.1 的計算，得到：</p>
+  <div class="eq">$$\Phi(r) = \frac{e}{4\pi\epsilon_0}\left(\frac{1}{r} + \frac{1}{a_0}\right) e^{-2r/a_0} \tag{12.72}$$</div>
+
+  <p><strong>注意基態電子如何屏蔽質子的裸 Coulomb 勢</strong>：當 $r \ll a_0$ 時，$\Phi \approx e/4\pi\epsilon_0 r$（質子主導）；當 $r \gg a_0$ 時，$\Phi$ 以指數衰減——電子雲完全屏蔽了核電荷。一個通過的帶電粒子（如另一個電子）感受到的勢能為 $V(r) = -e\Phi(r)$。</p>
+
+  <p>利用 Born 近似公式 (12.61) 和球對稱勢的 Fourier 變換技巧，經過直接積分可得：</p>
+  <div class="eq">$$\frac{d\sigma}{d\Omega} = 4a_0^2 \left[ \frac{8 + (qa_0/\hbar)^2}{(4 + (qa_0/\hbar)^2)^2} \right]^2 \tag{12.75}$$</div>
+  <p>其中 $q = |\mathbf{p}' - \mathbf{p}| = 2p\sin(\theta/2)$（見圖 12.3 的等腰三角形）。</p>
+
+  <p>在正向（$\theta = 0$，$q = 0$）：</p>
+  <div class="eq">$$\left.\frac{d\sigma}{d\Omega}\right|_{\theta=0} = a_0^2 \tag{12.76}$$</div>
+  <p>這個結果<strong>與入射電子的能量無關</strong>——正向散射截面僅由原子的幾何大小決定。當電子動量很大時，截面隨偏離正向而急劇下降，與光學定理的預測定性一致。</p>
+
+  <div class="callout">
+    <strong>💡 Born 近似的有效性檢驗</strong><br>
+    勢能 (12.72) 的特徵範圍約為 $a_0$。動量約為 $\bar{p}$ 的電子在此範圍內停留的時間約為 $\delta t \approx a_0 m/\bar{p}$。在此期間感受到的平均勢能約為 $\langle V \rangle \approx -e^2/8\pi\epsilon_0 a_0 = -R$（$R \approx 13.6$ eV 為 Rydberg 常數）。從含時 Schrödinger 方程，勢能對態造成的相對變化約為 $|\langle V \rangle|\delta t/\hbar \approx \sqrt{R m_e/2}/\bar{p}$。Born 近似要求這個量遠小於 1，即：
+    <div class="eq">$$\frac{\bar{p}^2}{2m_e} \gg \frac{1}{4}R \approx 3.4\,\text{eV} \tag{12.79}$$</div>
+    由於電子的靜止能量 $m_e c^2 \approx 511$ keV，存在一個寬廣的能量範圍——既高到使 Born 近似有效，又低到使電子仍為非相對論性的。
+  </div>
+
+  <div class="callout-warn">
+    <strong>⚠️ Born 近似的實驗驗證</strong><br>
+    圖 12.4 比較了三個電子動能（4.9、30 和 680 eV）下的實驗數據與 Born 近似預測。在 4.9 eV（最低能量），Born 近似完全無效；在 30 eV（$\sim 2R$），對背向散射的預測尚可，但嚴重低估正向散射截面；在 680 eV（$\sim 50R$），Born 近似在所有散射角都與實驗吻合良好。這說明：<strong>在使用 Born 近似前，必須檢驗其有效性條件。</strong>
+  </div>
+
+  <details class="example">
+    <summary>📝 自編概念例：計算氫原子散射的動量轉移</summary>
+    <div class="example-body">
+      <p><strong>題目：</strong>一個動能為 100 eV 的電子被氫原子彈性散射，散射角為 $\theta = 60^\circ$。計算：(a) 動量轉移 $q$；(b) $qa_0/\hbar$ 的值；(c) 微分截面相對於正向的衰減因子。</p>
+      <p><strong>解：</strong></p>
+      <p>(a) 電子動量 $p = \sqrt{2m_e E} = \sqrt{2 \times 9.11\times 10^{-31} \times 100 \times 1.602\times 10^{-19}} \approx 5.40 \times 10^{-24}$ kg·m/s。</p>
+      <p>$q = 2p\sin(\theta/2) = 2p\sin(30^\circ) = p = 5.40 \times 10^{-24}$ kg·m/s。</p>
+      <p>(b) $a_0 = 5.29 \times 10^{-11}$ m，$\hbar = 1.055 \times 10^{-34}$ J·s：</p>
+      <div class="eq">$$\frac{qa_0}{\hbar} = \frac{5.40\times 10^{-24} \times 5.29\times 10^{-11}}{1.055\times 10^{-34}} \approx 2.71$$</div>
+      <p>(c) 計算截面公式中的因子：</p>
+      <div class="eq">$$\left.\frac{d\sigma}{d\Omega}\right|_{\theta=60^\circ} = 4a_0^2 \left[\frac{8 + 2.71^2}{(4 + 2.71^2)^2}\right]^2 = 4a_0^2 \left[\frac{15.34}{(11.34)^2}\right]^2 \approx 0.073\,a_0^2$$</div>
+      <p>相對於正向截面 $a_0^2$，衰減因子約為 $0.073$——即 $60^\circ$ 散射的截面僅為正向的約 7%。</p>
+      <p><strong>物理意義：</strong>截面隨角度（動量轉移）增大而快速衰減，反映了氫原子中電子分佈的空間尺度——大的動量轉移對應於探測更小的空間結構。</p>
+    </div>
+  </details>
+</section>
+
+<!-- ====== 12.5 分波展開 ====== -->
+<section class="deep-dive" id="s12-5">
+<h2>12.5　分波展開</h2>
+<div class="section-keypoints">
+  <strong>🔑 本節重點</strong>
+  <span>① 球對稱勢下 $S$ 在 $|E,l,m\rangle$ 基底中對角化：$\langle l'm'|S|lm\rangle = \delta_{l'l}\delta_{m'm}e^{2i\delta_l(E)}$</span>
+  <span>② 相移 $\delta_l(E)$ 完全決定散射——$S$ 的么正性要求 $|e^{2i\delta_l}| = 1$</span>
+  <span>③ 散射振幅的分波展開：$f(\theta) = \sum_l (2l+1)P_l(\cos\theta)f_l(E)$</span>
+  <span>④ 總截面：$\sigma_{\text{tot}} = \frac{4\pi\hbar^2}{p^2}\sum_l (2l+1)\sin^2\delta_l$</span>
+  <span>⑤ 低能散射由 $l=0$（s-波）主導</span>
+</div>
+
+  <p>在 §12.2 中，我們通過將 $S$ 夾在動量本徵態 $|\mathbf{p}\rangle$ 之間來研究 $S$-矩陣——這是因為 $\{|\mathbf{p}\rangle\}$ 構成 $H_K$ 的完備本徵態集。但在 §7.2.5 中我們看到，具有確定角動量的態 $|E, l, m\rangle$ 同樣構成 $H_K$ 的完備本徵態集。對於球對稱勢，角動量基底具有巨大的優勢。</p>
+
+  <p>從方程 (12.37)：$[H_K, S] = 0$ 可知 $S$ 在能量上是對角的。對於球對稱勢 $V(r)$，還可以證明 $[L^2, S] = 0$、$[L_z, S] = 0$ 以及 $[L_\pm, S] = 0$。這些對易關係意味著 $S$ 在 $|E, l, m\rangle$ 基底中<strong>完全對角化</strong>：</p>
+  <div class="eq">$$\langle E', l', m' | S | E, l, m \rangle = \delta(E - E')\,\delta_{l'l}\,\delta_{m'm}\,e^{2i\delta_l(E)} \tag{12.83}$$</div>
+  <p>由於 $S$ 是么正的，對角元必須是單位模的複數，因此可以寫為 $e^{2i\delta_l(E)}$，其中 $\delta_l(E)$ 是<strong>實數</strong>——稱為<strong>相移</strong>（phase shift）。所有的散射資訊都被編碼在這一組實數相移中！</p>
+
+  <div class="callout">
+    <strong>💡 相移的物理意義</strong><br>
+    方程 (12.84)：$S|E,l,m\rangle = e^{2i\delta_l(E)}|E,l,m\rangle$ 告訴我們：如果粒子在散射前處於確定的角動量態，它從散射區域出來後<strong>仍是同一個態</strong>——只是獲得了一個額外的相位 $2\delta_l(E)$。這與 §5.3 中一維散射由偶宇稱和奇宇稱解的相移完全決定的發現完全平行——$|E,l,m\rangle$ 就是一維散射中確定宇稱態的三維類比。球對稱勢不能改變粒子的角動量，只能改變出射波的相位。
+  </div>
+
+  <p>將 $S$-矩陣在角動量基底中的簡潔形式轉化為散射振幅 $f$，需要計算 $\langle \mathbf{p} | E, l, m \rangle$——即確定角動量的自由粒子在動量空間中的波函數。Box 12.1 給出了結果：</p>
+  <div class="eq">$$\langle \mathbf{p} | E, l, m \rangle = (Mp)^{-1/2}\,\delta(E - E_p)\,Y_l^{m*}(\vartheta, \phi) \tag{12.86}$$</div>
+  <p>其中 $(\vartheta, \phi)$ 是 $\mathbf{p}$ 的極座標。</p>
+
+  <p>如果將 $z$ 軸對齊束流方向，初始態在繞 $z$ 軸旋轉下不變，因此 $m = 0$。經過代數運算後，散射振幅的<strong>分波展開</strong>（partial-wave expansion）為：</p>
+  <div class="eq">$$f(\mathbf{p} \to \mathbf{p}') = \sum_{l=0}^{\infty} (2l+1)\,P_l(\cos\vartheta')\,f_l(E) \tag{12.91a}$$</div>
+  <div class="eq">$$f_l(E) \equiv \frac{\hbar}{p}\,e^{i\delta_l(E)}\sin\delta_l(E) \tag{12.91b}$$</div>
+  <p>其中 $\vartheta'$ 是 $\mathbf{p}$ 和 $\mathbf{p}'$ 之間的夾角，$P_l$ 是 Legendre 多項式。</p>
+
+  <p>微分截面 $d\sigma/d\Omega = |f|^2$，利用球諧函數的正交歸一性，總截面簡化為各分波的獨立貢獻之和：</p>
+  <div class="eq">$$\sigma_{\text{tot}} = \frac{4\pi\hbar^2}{p^2} \sum_{l=0}^{\infty} (2l+1)\,\sin^2\delta_l(E) \equiv \sum_{l=0}^{\infty} \sigma_l \tag{12.92, 12.93}$$</div>
+
+  <p>每個分波截面 $\sigma_l$ 的上限為 $4\pi\hbar^2(2l+1)/p^2$——當 $\delta_l = \pi/2$（模 $\pi$）時達到最大。$\delta_l = n\pi$ 時該分波完全不散射。</p>
+
+  <h3>低能散射</h3>
+  <p>在低能量下，$p$ 很小，對於 $l > 0$ 的經典碰撞參數 $b = L/p = \hbar\sqrt{l(l+1)}/p$ 變得很大。因此我們預期低能散射由 $l = 0$ 的分波（s-波）主導。</p>
+
+  <p>這個直覺可以從量子力學得到證實。自由態的徑向波函數滿足：</p>
+  <div class="eq">$$\frac{1}{r^2}\frac{\partial}{\partial r}\left(r^2\frac{\partial}{\partial r}\langle \mathbf{r}|E,l,m\rangle\right) = \left[\frac{l(l+1)}{r^2} - \frac{2mE}{\hbar^2}\right]\langle \mathbf{r}|E,l,m\rangle \tag{12.96}$$</div>
+  <p>當 $l \neq 0$ 時，角動量項（離心勢壘）在靠近原點處主導右側，使得 $\langle \mathbf{r}|E,l,m\rangle \sim r^l$（$r \to 0$）。因此<strong>高角動量的粒子在原點附近的機率極小</strong>。如果散射勢的特徵範圍為 $R$，且 $R \ll l\hbar/p$，則第 $l$ 個分波幾乎不受勢能影響，$\delta_l \approx 0$。只有滿足 $l\hbar \lesssim pR$ 的分波才有顯著的相移——在低能極限下，這只包含 $l = 0$。</p>
+
+  <div class="callout-warn">
+    <strong>⚠️ 分波展開的收斂性</strong><br>
+    分波展開在實際計算中需要在某個 $l_{\text{max}}$ 處截斷。一個實用準則是 $l_{\text{max}} \approx pR/\hbar$——超過這個值的分波對截面的貢獻可忽略。對於低能散射（$pR/\hbar < 1$），s-波散射（$l=0$）是壓倒性的主導項；此時微分截面是<strong>各向同性的</strong>（因為 $P_0(\cos\theta) = 1$），$\sigma_{\text{tot}} = \frac{4\pi\hbar^2}{p^2}\sin^2\delta_0$。
+  </div>
+
+  <details class="example">
+    <summary>📝 自編概念例：僅含 s-波的低能散射</summary>
+    <div class="example-body">
+      <p><strong>題目：</strong>在極低能量下，只有 s-波（$l=0$）對散射有貢獻。設 $\delta_0 = 0.5$ 弧度，入射動量 $p = 0.1\,\hbar/a_0$（$a_0$ 為 Bohr 半徑）。求：(a) 散射振幅；(b) 微分截面；(c) 總截面。</p>
+      <p><strong>解：</strong></p>
+      <p>(a) s-波散射振幅：$f(\theta) = f_0 = \frac{\hbar}{p}e^{i\delta_0}\sin\delta_0$。代入數值：</p>
+      <div class="eq">$$f_0 = \frac{\hbar}{0.1\hbar/a_0} e^{i\cdot 0.5}\sin(0.5) = 10a_0 \times e^{0.5i} \times 0.479 \approx 4.79a_0\,e^{0.5i}$$</div>
+      <p>散射振幅與角度無關（各向同性散射）。</p>
+      <p>(b) 微分截面：</p>
+      <div class="eq">$$\frac{d\sigma}{d\Omega} = |f_0|^2 = (4.79a_0)^2 \approx 23.0\,a_0^2$$</div>
+      <p>(c) 總截面：</p>
+      <div class="eq">$$\sigma_{\text{tot}} = 4\pi|f_0|^2 = 4\pi \times 23.0\,a_0^2 \approx 289\,a_0^2$$</div>
+      <p><strong>物理意義：</strong>s-波散射給出各向同性的角分佈——在所有方向探測到散射粒子的機率相同。總截面 $\sigma_{\text{tot}} = \frac{4\pi\hbar^2}{p^2}\sin^2\delta_0$ 在 $\delta_0 = \pi/2$ 時達到最大，對應於共振散射（見 §12.6）。</p>
+    </div>
+  </details>
+</section>
+
+<!-- ====== 12.6 共振散射 ====== -->
+<section class="deep-dive" id="s12-6">
+<h2>12.6　共振散射</h2>
+<div class="section-keypoints">
+  <strong>🔑 本節重點</strong>
+  <span>① 當 $\delta_l(E)$ 快速穿過 $\pi/2$ 時出現共振——散射截面急劇增強</span>
+  <span>② Breit-Wigner 公式描述共振附近的截面形狀</span>
+  <span>③ 共振對應於準束縛態（quasi-bound state）的形成</span>
+  <span>④ 共振寬度 $\Gamma$ 與準束縛態的壽命 $\tau$ 滿足 $\Gamma\tau \sim \hbar$</span>
+  <span>⑤ 共振散射與放射性衰變有深刻的數學聯繫</span>
+</div>
+
+  <p>在前一節中我們看到，球對稱勢下的散射完全由一組相移 $\delta_l(E)$ 決定。當能量變化時，相移通常平滑地改變。但在某些特殊情況下，某個分波的相移會<strong>急劇地穿過 $\pi/2$</strong>——此時 $\sin^2\delta_l = 1$，該分波的截面達到其最大可能值。這種現象稱為<strong>共振散射</strong>（resonant scattering）。</p>
+
+  <p>假設在能量 $E = E_R$ 附近，第 $l$ 個分波的相移急劇變化。將 $\cot\delta_l(E)$ 在 $E_R$ 附近做 Taylor 展開：</p>
+  <div class="eq">$$\cot\delta_l(E) \approx \cot\delta_l(E_R) + (E - E_R)\left.\frac{d\cot\delta_l}{dE}\right|_{E_R} + \cdots$$</div>
+  <p>在共振處 $\delta_l(E_R) = \pi/2$（模 $\pi$），因此 $\cot\delta_l(E_R) = 0$。定義共振<strong>寬度</strong> $\Gamma$ 為：</p>
+  <div class="eq">$$\Gamma \equiv -2\left(\left.\frac{d\cot\delta_l}{dE}\right|_{E_R}\right)^{-1} \tag{參考 Breit-Wigner 參數化}$$</div>
+
+  <p>在此參數化下，$\cot\delta_l \approx -\frac{2}{\Gamma}(E - E_R)$。利用 $\sin^2\delta_l = \frac{1}{1 + \cot^2\delta_l}$，得分波截面 $\sigma_l$ 的<strong>Breit-Wigner 公式</strong>：</p>
+  <div class="eq">$$\sigma_l(E) = \frac{4\pi\hbar^2}{p^2}(2l+1)\,\frac{(\Gamma/2)^2}{(E - E_R)^2 + (\Gamma/2)^2} \tag{12.BW}$$</div>
+
+  <p>這是一個<strong>Lorentzian 線形</strong>：在 $E = E_R$ 處截面達到最大值 $\sigma_l^{\text{max}} = \frac{4\pi\hbar^2}{p^2}(2l+1)$；當 $|E - E_R| = \Gamma/2$ 時，截面降至最大值的一半。$\Gamma$ 因此被稱為共振的<strong>全寬半高</strong>（FWHM）。</p>
+
+  <div class="callout">
+    <strong>💡 共振散射的物理機制——準束縛態</strong><br>
+    共振發生的物理原因是：在特定能量 $E_R$ 處，入射粒子與靶形成了一個<strong>準束縛態</strong>（quasi-bound state）——粒子在勢能區域內被暫時捕獲，然後以一定的機率逃逸。這個暫時的捕獲使波函數在交互作用區域內大幅增強，從而大大增加了散射截面。Breit-Wigner 公式中的寬度 $\Gamma$ 刻畫了準束縛態衰變的速率：<strong>$\Gamma$ 越小，態的壽命越長，共振峰越尖銳。</strong>
+  </div>
+
+  <h3>與放射性衰變的聯繫</h3>
+  <p>共振散射的數學結構與放射性衰變有深刻的相似之處。考慮一個不穩定的量子態 $|\psi(t)\rangle$，其隨時間的存活振幅為 $\langle \psi(0) | \psi(t) \rangle$。如果此態以速率 $\Gamma/\hbar$ 指數衰變，則：</p>
+  <div class="eq">$$|\langle \psi(0) | \psi(t) \rangle|^2 = e^{-\Gamma t/\hbar} \tag{12.decay}$$</div>
+  <p>態的<strong>平均壽命</strong>為 $\tau = \hbar/\Gamma$。對存活振幅做 Fourier 變換得到能量分佈——這正是一個寬度為 $\Gamma$ 的 Lorentzian 函數。因此，Breit-Wigner 共振的寬度 $\Gamma$ 與對應準束縛態的衰變寬度有相同的物理起源——<strong>$\Gamma\tau \sim \hbar$，即能量-時間不確定性原理的體現。</strong></p>
+
+  <p>這個聯繫不僅是形式上的：在核物理和粒子物理中，共振態（如 $\Delta^{++}$ 重子）正是通過其 Breit-Wigner 共振峰被發現的。測量共振峰的位置 $E_R$ 給出準束縛態的質量（通過 $E = mc^2$），測量其寬度 $\Gamma$ 則給出態的壽命 $\tau = \hbar/\Gamma$。</p>
+
+  <div class="callout-warn">
+    <strong>⚠️ 共振與束縛態的區別</strong><br>
+    真正的束縛態對應於 $E < 0$（在勢能為零的參考下），波函數在無窮遠處指數衰減為零。共振（準束縛態）對應於 $E > 0$——粒子有足夠的能量逃逸到無窮遠，但勢能障壁或离心勢壘使它在交互作用區域內暫時停留。共振的相移特徵是 $\delta_l$ 快速穿過 $\pi/2$（以正斜率），而 Levinson 定理將 $\delta_l(0) - \delta_l(\infty)$ 與真正束縛態的數量聯繫起來。
+  </div>
+
+  <details class="example">
+    <summary>📝 自編概念例：Breit-Wigner 共振參數的估算</summary>
+    <div class="example-body">
+      <p><strong>題目：</strong>某散射實驗在 $E_R = 50$ eV 處觀測到一個 s-波共振峰，其半高全寬 $\Gamma = 2$ eV。(a) 求對應準束縛態的平均壽命；(b) 在共振峰值處截面是多少？(c) 在 $E = E_R \pm \Gamma$ 處截面降至多少？(d) 若入射能量為 $E_R$，動量 $p$ 對應的 de Broglie 波長與 $\Gamma$ 的關係為何？</p>
+      <p><strong>解：</strong></p>
+      <p>(a) $\tau = \hbar/\Gamma = 6.58\times 10^{-16}\,\text{eV·s} / 2\,\text{eV} \approx 3.3 \times 10^{-16}$ s（約 0.33 飛秒）。</p>
+      <p>(b) 峰值截面（s-波，$l=0$）：$\sigma_0^{\text{max}} = \frac{4\pi\hbar^2}{p^2}$。$p = \sqrt{2m_eE_R} \approx \sqrt{2 \times 0.511\times 10^6 \times 50} \approx 7.15 \times 10^3$ eV/c。使用 $\hbar c = 197$ eV·nm：</p>
+      <div class="eq">$$\sigma_0^{\text{max}} = \frac{4\pi(\hbar c)^2}{(pc)^2} \approx \frac{4\pi \times (197)^2}{(7150)^2} \approx 0.0095\,\text{nm}^2 \approx 9.5 \times 10^{-20}\,\text{m}^2$$</div>
+      <p>(c) 在 $E = E_R \pm \Gamma$ 處：$\sigma = \sigma_0^{\text{max}}/2 \approx 4.75 \times 10^{-20}$ m²。</p>
+      <p>(d) $\lambda = h/p = 2\pi\hbar/p \approx 2\pi \times 197 / 7150 \approx 0.17$ nm。$\Gamma/E_R = 2/50 = 0.04$——共振相對寬度為 4%。</p>
+      <p><strong>物理意義：</strong>窄共振（$\Gamma \ll E_R$）對應於長壽命的準束縛態——粒子在被散射前在勢能區域內「徘徊」了很長時間。Breit-Wigner 公式使我們能從散射截面中提取準束縛態的能量和壽命。</p>
+    </div>
+  </details>
+
+  <figure class="figure" id="fig-12-4-breit-wigner">
+    <svg class="content-diagram" viewBox="0 0 500 260" xmlns="http://www.w3.org/2000/svg">
+      <rect x="0" y="0" width="500" height="260" fill="#f8f9fa" rx="8"/>
+      <!-- Axes -->
+      <line x1="60" y1="30" x2="60" y2="220" stroke="#333" stroke-width="1.5"/>
+      <line x1="60" y1="190" x2="460" y2="190" stroke="#333" stroke-width="1.5"/>
+      <!-- Labels -->
+      <text x="250" y="250" font-size="11" fill="#333" text-anchor="middle">能量 $E$</text>
+      <text x="15" y="130" font-size="11" fill="#333" text-anchor="middle" transform="rotate(-90,15,130)">截面 $\sigma_l$</text>
+      <!-- E_R marker -->
+      <line x1="250" y1="190" x2="250" y2="195" stroke="#333" stroke-width="1"/>
+      <text x="250" y="212" font-size="10" fill="#333" text-anchor="middle">$E_R$</text>
+      <!-- Breit-Wigner curve -->
+      <path d="M80,188 Q120,185 160,170 Q200,120 250,50 Q300,120 340,170 Q380,185 420,188" fill="none" stroke="#cc0000" stroke-width="2.5"/>
+      <!-- Max -->
+      <text x="260" y="40" font-size="10" fill="#cc0000">$\sigma_l^{\text{max}} = \frac{4\pi\hbar^2}{p^2}(2l+1)$</text>
+      <!-- Half-max line -->
+      <line x1="60" y1="120" x2="450" y2="120" stroke="#888" stroke-width="1" stroke-dasharray="5,3"/>
+      <text x="435" y="115" font-size="9" fill="#888" text-anchor="end">$\sigma_l^{\text{max}}/2$</text>
+      <!-- Width markers -->
+      <line x1="215" y1="120" x2="215" y2="195" stroke="#888" stroke-width="0.8" stroke-dasharray="3,2"/>
+      <line x1="285" y1="120" x2="285" y2="195" stroke="#888" stroke-width="0.8" stroke-dasharray="3,2"/>
+      <text x="250" y="230" font-size="10" fill="#888" text-anchor="middle">$\Gamma$（全寬半高）</text>
+      <!-- Phase shift inset -->
+      <text x="370" y="40" font-size="10" fill="#4a90d9">$\delta_l(E)$</text>
+      <path d="M320,188 Q340,185 360,170 Q380,130 400,100 Q420,80 440,70" fill="none" stroke="#4a90d9" stroke-width="1.5" stroke-dasharray="5,3"/>
+      <text x="445" y="65" font-size="9" fill="#4a90d9">$\pi$</text>
+      <text x="380" y="150" font-size="9" fill="#4a90d9">$\pi/2$</text>
+      <!-- Formula -->
+      <text x="80" y="50" font-size="10" fill="#333">Breit-Wigner:</text>
+      <text x="80" y="70" font-size="10" fill="#333">$\sigma_l(E) = \sigma_l^{\text{max}} \frac{(\Gamma/2)^2}{(E-E_R)^2+(\Gamma/2)^2}$</text>
+      <text x="80" y="95" font-size="9" fill="#666">$\tau = \hbar/\Gamma$（準束縛態壽命）</text>
+      <text x="80" y="115" font-size="9" fill="#666">共振 ↔ 相移急劇穿過 $\pi/2$</text>
+    </svg>
+    <figcaption><strong>圖 12.4</strong>　Breit-Wigner 共振。在 $E = E_R$ 處截面達到最大值，寬度 $\Gamma$ 決定了共振峰的尖銳程度。插圖顯示對應的相移 $\delta_l(E)$ 在共振處急劇穿過 $\pi/2$，這是共振的標誌性特徵。</figcaption>
+  </figure>
+</section>
+
+<!-- ====== 本章摘要 ====== -->
+<section id="summary">
+  <h2>本章摘要</h2>
+  <p>散射理論是量子力學中連結理論計算與實驗觀測的核心框架。以下是本章的關鍵概念和公式整理：</p>
+  <div class="table-scroll" role="region" aria-label="本章關鍵概念與公式" tabindex="0">
+    <table>
+      <caption>第 12 章關鍵概念、公式、適用條件與用途</caption>
+      <thead>
+        <tr>
+          <th scope="col">概念／公式</th>
+          <th scope="col">符號與單位</th>
+          <th scope="col">適用條件</th>
+          <th scope="col">用途</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">散射算子 $S = \Omega_-^\dagger\Omega_+$</th>
+          <td>$S$：么正算子</td>
+          <td>任意散射過程</td>
+          <td>從入射自由態到出射自由態的完整映射</td>
+        </tr>
+        <tr>
+          <th scope="row">躍遷算子 $T = S - 1$</th>
+          <td>$P = |\langle\lambda|T|\phi\rangle|^2$</td>
+          <td>彈性／非彈性散射</td>
+          <td>計算特定躍遷的機率</td>
+        </tr>
+        <tr>
+          <th scope="row">Born 近似 $S \approx 1 - \frac{i}{\hbar}\int d\tau U_K^\dagger V U_K$</th>
+          <td>$V$：勢能算子</td>
+          <td>$|V|\Delta t/\hbar \ll 1$（弱勢能）</td>
+          <td>一階微擾散射計算</td>
+        </tr>
+        <tr>
+          <th scope="row">散射振幅 $f(\mathbf{p}\to\mathbf{p}')$</th>
+          <td>$f$：長度因次</td>
+          <td>彈性散射，遠場 $r\to\infty$</td>
+          <td>$\psi \sim e^{i\mathbf{p}\cdot\mathbf{r}/\hbar} + \frac{e^{ipr/\hbar}}{r}f$</td>
+        </tr>
+        <tr>
+          <th scope="row">微分截面 $\frac{d\sigma}{d\Omega} = |f|^2$</th>
+          <td>$\sigma$：面積因次</td>
+          <td>任意散射，遠場探測</td>
+          <td>連結散射振幅與實驗可測量</td>
+        </tr>
+        <tr>
+          <th scope="row">光學定理 $\sigma_{\text{tot}} = \frac{4\pi\hbar}{p}\mathrm{Im}f(0)$</th>
+          <td>$p = |\mathbf{p}|$：入射動量</td>
+          <td>精確關係（不依賴 Born 近似）</td>
+          <td>從正向散射振幅求總截面</td>
+        </tr>
+        <tr>
+          <th scope="row">分波展開 $f(\theta) = \sum_l (2l+1)P_l(\cos\theta)f_l$</th>
+          <td>$f_l = \frac{\hbar}{p}e^{i\delta_l}\sin\delta_l$</td>
+          <td>球對稱勢</td>
+          <td>散射的角動量分解</td>
+        </tr>
+        <tr>
+          <th scope="row">相移 $\delta_l(E)$</th>
+          <td>實數，弧度</td>
+          <td>球對稱勢 + 角動量守恆</td>
+          <td>完全決定散射過程</td>
+        </tr>
+        <tr>
+          <th scope="row">總截面（分波）$\sigma_{\text{tot}} = \frac{4\pi\hbar^2}{p^2}\sum_l(2l+1)\sin^2\delta_l$</th>
+          <td>$\sigma_l \leq 4\pi\hbar^2(2l+1)/p^2$</td>
+          <td>球對稱勢</td>
+          <td>各分波的獨立貢獻之和</td>
+        </tr>
+        <tr>
+          <th scope="row">Breit-Wigner 公式 $\sigma_l = \sigma_l^{\text{max}}\frac{(\Gamma/2)^2}{(E-E_R)^2+(\Gamma/2)^2}$</th>
+          <td>$\Gamma$：能量寬度（eV）</td>
+          <td>$\delta_l$ 急劇穿過 $\pi/2$</td>
+          <td>共振散射截面的 Lorentzian 線形</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- ====== 常見錯誤 ====== -->
+<section id="common-mistakes">
+  <h2>初學者常見錯誤</h2>
+  <div class="callout-warn">
+    <strong>⚡ 錯誤一：混淆 $S$ 算子和時間演化算子</strong><br>
+    $U(t) = e^{-iHt/\hbar}$ 是時間演化算子，它將 $t=0$ 的態演化到時刻 $t$。$S$ 則是<strong>散射算子</strong>——它將漸近過去的自由態映射到漸近未來的自由態。$S$ 不依賴於時間（它是 $U(t)$ 在特定極限下的組合），而且 $S$ 只作用於自由態。常見錯誤是試圖用 $U(t)$ 直接替代 $S$。
+  </div>
+  <div class="callout-warn">
+    <strong>⚡ 錯誤二：忽略 $i\epsilon$ 處方中的符號</strong><br>
+    $i\epsilon$ 處方的符號至關重要：入射態（$\Omega_+$）對應 $+i\epsilon$，出射態（$\Omega_-$）對應 $-i\epsilon$。如果搞反了符號，出射球面波會變成入射球面波——物理上完全錯誤。這個符號正是 $\Omega_\pm$ 算子下標的由來。
+  </div>
+  <div class="callout-warn">
+    <strong>⚡ 錯誤三：認為 Born 近似永遠有效</strong><br>
+    Born 近似是微擾展開的一階截斷，只在勢能足夠弱或能量足夠高時有效。§12.4 的電子-氫原子散射清楚地顯示：在低能（4.9 eV）時 Born 近似完全失效。使用 Born 近似前，必須通過估算 $|V|\Delta t/\hbar$（或下一階項的大小）來檢驗其有效性。
+  </div>
+  <div class="callout-warn">
+    <strong>⚡ 錯誤四：認為 $\frac{d\sigma}{d\Omega} = |f|^2$ 依賴於 Born 近似</strong><br>
+    $d\sigma/d\Omega = |f|^2$ 是一個<strong>精確關係</strong>，不依賴於 Born 近似或任何微擾展開。它直接來自散射振幅的定義 (12.39) 以及對束流和散射波函數的穩相近似處理。Born 近似只是給出了計算 $f$ 的一種方法；$f$ 本身是精確定義的。
+  </div>
+  <div class="callout-warn">
+    <strong>⚡ 錯誤五：將分波展開的 $l$ 與 Bohr 模型的軌道角動量混淆</strong><br>
+    在分波展開中，$l$ 是入射粒子相對於散射中心的<strong>總軌道角動量量子數</strong>，不是靶的內部量子數。$l$ 大的分波對應於大碰撞參數的「擦邊」碰撞。在低能散射中 $l=0$ 主導——這是因為粒子的 de Broglie 波長大，無法「分辨」勢能的細節結構，而不是因為靶的角動量為零。
+  </div>
+</section>
+
+<!-- ====== 自我檢測 ====== -->
+<section id="self-check">
+  <h2>自我檢測</h2>
+  <details class="self-check-item">
+    <summary>1. 為什麼散射理論需要引入 $S$ 算子和 $\Omega_\pm$ 算子，而不是直接使用完整的 Hamiltonian $H$ 來計算躍遷機率？</summary>
+    <div class="self-check-answer">
+      <p>因為當 $V \neq 0$ 時，我們通常不知道完整 Hamiltonian $H = H_K + V$ 的本徵態，而且找到它們可能極其困難。$\Omega_\pm$ 算子將問題轉化為：將自由態匹配到具有相同漸近行為的真實散射態，然後 $S$ 算子直接在自由態之間建立映射。這樣我們就可以完全在自由態的基底中進行計算——自由態的本徵態（如動量本徵態 $|\mathbf{p}\rangle$）是已知的。</p>
+      <p class="solution-note">正文依據：§12.1</p>
+    </div>
+  </details>
+  <details class="self-check-item">
+    <summary>2. 解釋 $i\epsilon$ 處方的物理必要性。為什麼不能直接用能量本徵態來計算散射？</summary>
+    <div class="self-check-answer">
+      <p>能量本徵態在時間上是均勻的——它們不會「移動」。散射理論的核心前提是粒子在漸近過去是入射的、在漸近未來是出射的。如果入射態是 $H_K$ 的能量本徵態，方程 (12.21) 顯示散射態也必須是 $H$ 的能量本徵態，這意味著粒子在所有時間看起來都一樣——沒有「入射」和「出射」的區別。$i\epsilon$ 處方通過為能量附加小虛部，使從能量本徵態構造的交互作用態不再是 $H$ 的本徵態，從而可以描述散射。對於任何物理上真實的波包（能量疊加態），這個處方不產生任何實際影響。</p>
+      <p class="solution-note">正文依據：§12.2.1</p>
+    </div>
+  </details>
+  <details class="self-check-item">
+    <summary>3. 光學定理 $\sigma_{\text{tot}} = \frac{4\pi\hbar}{p}\mathrm{Im}f(\mathbf{p}\to\mathbf{p})$ 的物理含義是什麼？為什麼總截面與<strong>正向</strong>散射振幅的虛部有關？</summary>
+    <div class="self-check-answer">
+      <p>光學定理本質上是機率守恆（$S^\dagger S = 1$）的直接推論。物理上，正向散射振幅描述的是入射波和散射波在<strong>入射方向</strong>上的干涉。這個干涉導致粒子從入射束中被移除（類似於光通過介質時的衰減），而移除的總機率恰好等於粒子被散射到所有其他方向的機率之和——即總截面。在分波展開中，$\mathrm{Im}f(\mathbf{p}\to\mathbf{p}) = \frac{\hbar}{p}\sum_l(2l+1)\sin^2\delta_l$，而 $\sigma_{\text{tot}} = \frac{4\pi\hbar^2}{p^2}\sum_l(2l+1)\sin^2\delta_l$——光學定理自動滿足。</p>
+      <p class="solution-note">正文依據：§12.3.1</p>
+    </div>
+  </details>
+  <details class="self-check-item">
+    <summary>4. 為什麼在球對稱勢下，散射過程可以完全由一組實數相移 $\delta_l(E)$ 來描述？$\delta_l = 0$、$\delta_l = \pi/2$ 和 $\delta_l = \pi$ 分別對應什麼物理情況？</summary>
+    <div class="self-check-answer">
+      <p>球對稱勢下 $[L^2, S] = 0$ 和 $[L_z, S] = 0$，意味著 $S$ 在角動量基底 $|E,l,m\rangle$ 中對角化。$S$ 的么正性要求每個對角元為單位模複數，因此可寫為 $e^{2i\delta_l(E)}$——散射的所有資訊被壓縮為一組實數相移。$\delta_l = 0$（模 $\pi$）：該分波完全不受勢能影響，不參與散射（$\sin\delta_l = 0$，$\sigma_l = 0$）。$\delta_l = \pi/2$：該分波的截面達到最大可能值（$\sin\delta_l = 1$）——這發生在共振處。$\delta_l = \pi$：與 $\delta_l = 0$ 物理上等價（$e^{2i\pi} = 1$），該分波也不散射；這與 Levinson 定理中束縛態的計數有關。</p>
+      <p class="solution-note">正文依據：§12.5</p>
+    </div>
+  </details>
+  <details class="self-check-item">
+    <summary>5. Breit-Wigner 共振公式中的寬度 $\Gamma$ 與不確定性原理有何關係？為什麼窄共振對應於長壽命的準束縛態？</summary>
+    <div class="self-check-answer">
+      <p>Breit-Wigner 公式描述的能量分佈寬度 $\Gamma$ 與準束縛態的壽命 $\tau$ 滿足 $\tau \sim \hbar/\Gamma$——這是能量-時間不確定性原理 $\Delta E\,\Delta t \sim \hbar$ 的直接體現。窄共振（$\Gamma$ 小）意味著態的能量是精確定義的，因此根據不確定性原理，態必須有長的壽命（$\tau$ 大）。物理上，窄共振對應於粒子在勢能區域內被高效捕獲——離心勢壘或勢能障壁使粒子難以逃逸，因此準束縛態持續很長時間才衰變。在散射實驗中，這表現為一個尖銳的截面峰。</p>
+      <p class="solution-note">正文依據：§12.6</p>
+    </div>
+  </details>
+</section>
+
+<!-- ====== 延伸資源 ====== -->
+<section id="extras">
+  <h2>延伸資源</h2>
+  <ul class="resource-list">
+    <li><span>本章公式整理（待建立）</span></li>
+    <li><span>本章例題與練習（含原書 Problems 12.1–12.8）</span></li>
+    <li><span>Feynman 圖進階：從非相對論散射到 QED（參見量子場論教材）</span></li>
+    <li><span>Rutherford 散射的歷史：E. Rutherford, Phil. Mag. 21, 669 (1911)</span></li>
+  </ul>
+  <div class="further-reading">
+    <strong>📘 本書終章</strong>
+    <p>第 12 章是《The Physics of Quantum Mechanics》的最後一章。散射理論將本書所學的幾乎所有量子力學工具——從 Dirac notation（Ch1）、時間演化（Ch4）、角動量理論（Ch7）、氫原子（Ch8）到微擾理論（Ch9）——整合為一個強大而統一的框架，用於理解和預測微觀世界的交互作用。</p>
+    <p>回顧本書的旅程：我們從機率振幅出發，學會了用抽象的態向量和算子來描述量子世界，發現了測量的奇異本質，掌握了角動量和自旋的代數結構，並最終能夠計算出與實驗精確吻合的散射截面。<strong>量子力學不僅是一個理論——它是我們理解物質終極結構的語言。</strong></p>
+  </div>
+</section>
+
+</main>
+
+</body>
+</html>

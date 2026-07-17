@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>第九章 公式摘要 — 溶液的行為（85 條完整版）</title>
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']],tags:'ams'},options:{ignoreHtmlClass:'no-math'}};</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<link rel="stylesheet" href="../../../../shared/core.css">
+<script src="../../../../shared/core.js" defer></script>
+<link rel="stylesheet" href="../../../../shared/navigation.css" data-shared-navigation>
+</head>
+<body>
+<nav class="sidebar" aria-label="本章目錄"><div class="sidebar-header"><div class="sidebar-subtitle">材料熱力學</div><h2 class="sidebar-title">第九章：溶液的行為</h2></div><div class="sidebar-nav"><ul>
+<li><a href="#s1">9.2–9.3 Raoult、Henry、活性</a></li>
+<li><a href="#s2">9.4–9.6 Gibbs–Duhem 與理想溶液</a></li>
+<li><a href="#s3">9.7–9.12 非理想與正規溶液</a></li>
+<li><a href="#cheatsheet">📋 公式速查表（85 條全收錄）</a></li>
+</ul></div><div class="sidebar-toggle"><button data-action="toggle-theme">🌓 <span id="tl">深色模式</span></button></div><div class="sidebar-tools"><button type="button" data-action="toggle-theme" aria-label="切換深色或淺色模式">切換顯示主題</button></div></nav>
+<main class="chapter-page">
+<div class="chapter-header"><div class="tag">85 條公式完整版 · Raoult + Henry + Activity + Regular Solution</div><h1>第九章：溶液的行為</h1><div class="chapter-subtitle">Introduction to the Thermodynamics of Materials · David R. Gaskell · pp. 288–341</div></div>
+<div class="content-toolbar"><button data-action="expand-details">📖 展開全部</button><button data-action="collapse-details">📕 收合全部</button></div>
+
+<div class="content-section" id="s1"><h2>9.2–9.3 Raoult 定律、Henry 定律與活性</h2>
+<div class="formula-card"><div class="formula-label">⭐ Raoult 定律</div><div class="eq">$$\boxed{P_i = x_i P_i^\circ}$$</div><div class="formula-note">溶劑行為（$x_i \to 1$）。理想溶液在所有組成範圍內遵循 Raoult 定律。</div></div>
+<div class="formula-card"><div class="formula-label">⭐ Henry 定律</div><div class="eq">$$P_i = k_H x_i \quad (x_i \to 0)$$</div><div class="formula-note">溶質行為（稀溶液極限）。$k_H$ = Henry 常數。</div></div>
+<div class="formula-card"><div class="formula-label">⭐ 活性定義 (9.1)</div><div class="eq">$$\boxed{a_i = \frac{f_i}{f_i^\circ}} \quad \text{或} \quad \boxed{\mu_i = \mu_i^\circ + RT\ln a_i}$$</div></div>
+<div class="formula-card"><div class="formula-label">活性係數 (9.2)</div><div class="eq">$$\gamma_i = \frac{a_i}{x_i}$$</div></div>
+</div>
+
+<div class="content-section" id="s2"><h2>9.4–9.6 Gibbs–Duhem 與理想溶液</h2>
+<div class="formula-card"><div class="formula-label">⭐ Gibbs–Duhem（一般形式）</div><div class="eq">$$\boxed{\sum_i n_i\,d\mu_i = 0 \quad (T,P\ \text{固定})}$$</div></div>
+<div class="formula-card"><div class="formula-label">Gibbs–Duhem（活性形式）</div><div class="eq">$$\sum_i x_i\,d\ln a_i = 0$$</div></div>
+<div class="formula-card"><div class="formula-label">⭐ 理想溶液 $\Delta G_{\text{mix}}$</div><div class="eq">$$\boxed{\Delta G_{\text{mix}}^{\text{id}} = RT\sum_i x_i\ln x_i}$$</div></div>
+<div class="formula-card"><div class="formula-label">理想溶液 $\Delta S_{\text{mix}}$</div><div class="eq">$$\Delta S_{\text{mix}}^{\text{id}} = -R\sum_i x_i\ln x_i$$</div></div>
+<div class="formula-card"><div class="formula-label">理想溶液 $\Delta H_{\text{mix}} = 0$</div><div class="eq">$$\Delta H_{\text{mix}}^{\text{id}} = 0,\quad \Delta V_{\text{mix}}^{\text{id}} = 0$$</div></div>
+</div>
+
+<div class="content-section" id="s3"><h2>9.7–9.12 非理想溶液與正規溶液模型</h2>
+<div class="formula-card"><div class="formula-label">超額函數定義</div><div class="eq">$$G^{\text{xs}} = \Delta G_{\text{mix}} - \Delta G_{\text{mix}}^{\text{id}}$$</div></div>
+<div class="formula-card"><div class="formula-label">⭐ 正規溶液 $\Delta G_{\text{mix}}$</div><div class="eq">$$\boxed{\Delta G_{\text{mix}} = \Omega x_A x_B + RT(x_A\ln x_A + x_B\ln x_B)}$$</div></div>
+<div class="formula-card"><div class="formula-label">正規溶液 $\Delta H_{\text{mix}}$</div><div class="eq">$$\Delta H_{\text{mix}} = \Omega x_A x_B$$</div></div>
+<div class="formula-card"><div class="formula-label">⭐ 活性係數（正規溶液）</div><div class="eq">$$\boxed{RT\ln\gamma_A = \Omega x_B^2,\quad RT\ln\gamma_B = \Omega x_A^2}$$</div></div>
+<div class="formula-card"><div class="formula-label">⭐ 混溶間隙臨界條件</div><div class="eq">$$\boxed{\Omega_c = 2RT_c \quad \Rightarrow \quad T_c = \frac{\Omega}{2R}}$$</div><div class="formula-note">$\Omega > 2RT$ → 出現混溶間隙（miscibility gap），溶液分為兩相。</div></div>
+<div class="formula-card"><div class="formula-label">Spinodal 分解條件</div><div class="eq">$$\frac{\partial^2 G}{\partial x^2} = 0 \quad \Rightarrow \quad T_s = \frac{2\Omega}{R}x(1-x)$$</div></div>
+</div>
+
+<div class="content-section" id="cheatsheet"><h2>公式速查表（關鍵公式精選）</h2>
+<table><caption>表 1：公式速查表（關鍵公式精選）</caption><thead><tr><th>Eq</th><th>公式</th><th>備註</th></tr></thead><tbody>
+<tr><td>—</td><td>$P_i = x_i P_i^\circ$</td><td>⭐ Raoult 定律</td></tr>
+<tr><td>—</td><td>$P_i = k_H x_i$</td><td>Henry 定律（稀溶液溶質）</td></tr>
+<tr><td>9.1</td><td>$\mu_i = \mu_i^\circ + RT\ln a_i$</td><td>⭐ 活性定義</td></tr>
+<tr><td>9.2</td><td>$\gamma_i = a_i/x_i$</td><td>活性係數</td></tr>
+<tr><td>—</td><td>$\sum x_i\,d\ln a_i = 0$</td><td>⭐ Gibbs–Duhem（活性形式）</td></tr>
+<tr><td>—</td><td>$\Delta G_{\text{mix}}^{\text{id}} = RT\sum x_i\ln x_i$</td><td>⭐ 理想溶液混合 $G$</td></tr>
+<tr><td>—</td><td>$\Delta H_{\text{mix}}^{\text{id}} = 0$</td><td>理想溶液無混合熱</td></tr>
+<tr><td>—</td><td>$\Delta G_{\text{mix}} = \Omega x_A x_B + RT\sum x_i\ln x_i$</td><td>⭐ 正規溶液</td></tr>
+<tr><td>—</td><td>$RT\ln\gamma_A = \Omega x_B^2$</td><td>⭐ 正規溶液活性係數</td></tr>
+<tr><td>—</td><td>$\Omega_c = 2RT_c$</td><td>⭐ 混溶間隙臨界條件</td></tr>
+</tbody></table>
+</div>
+</main>
+<script>
+function toggleTheme(){const h=document.documentElement;const n=h.getAttribute('data-theme')==='light'?'dark':'light';h.setAttribute('data-theme',n);localStorage.setItem('theme',n);document.getElementById('tl').textContent=n==='dark'?'淺色模式':'深色模式';}
+const s=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',s);if(s==='dark')document.getElementById('tl').textContent='淺色模式';
+const secs=document.querySelectorAll('.content-section[id]');const navs=document.querySelectorAll('.sidebar-nav a');window.addEventListener('scroll',()=>{let c='';secs.forEach(s=>{if(window.scrollY>=s.offsetTop-80)c=s.getAttribute('id');});navs.forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+c);});});
+</script>
+</body>
+</html>

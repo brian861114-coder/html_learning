@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>第五章 公式摘要 — 基本方程式與關係（47 條完整版）</title>
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']],tags:'ams'},options:{ignoreHtmlClass:'no-math'}};</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<link rel="stylesheet" href="../../../../shared/core.css">
+<script src="../../../../shared/core.js" defer></script>
+<link rel="stylesheet" href="../../../../shared/navigation.css" data-shared-navigation>
+</head>
+<body>
+<nav class="sidebar" aria-label="本章目錄"><div class="sidebar-header"><div class="sidebar-subtitle">材料熱力學</div><h2 class="sidebar-title">第五章：基本方程式與其關係</h2></div><div class="sidebar-nav"><ul>
+<li><a href="#s1">5.1–5.7 基本方程式與化學位 (5.1–5.7)</a></li>
+<li><a href="#s2">5.8–5.9 Maxwell 關係 (5.8–5.9)</a></li>
+<li><a href="#s3">5.10 Maxwell 關係應用 (5.10–5.11)</a></li>
+<li><a href="#s4">5.11–5.12 熵全微分與 Gibbs–Helmholtz (5.12–5.17)</a></li>
+<li><a href="#cheatsheet">📋 公式速查表（47 條）</a></li>
+</ul></div><div class="sidebar-toggle"><button data-action="toggle-theme">🌓 <span id="tl">深色模式</span></button></div><div class="sidebar-tools"><button type="button" data-action="toggle-theme" aria-label="切換深色或淺色模式">切換顯示主題</button></div></nav>
+<main class="chapter-page">
+<div class="chapter-header"><div class="tag">47 條公式完整版 · 含 Maxwell 關係 + Gibbs–Helmholtz</div><h1>第五章：基本方程式與其關係</h1><div class="chapter-subtitle">Introduction to the Thermodynamics of Materials · David R. Gaskell · pp. 142–175</div></div>
+<div class="content-toolbar"><button data-action="expand-details">📖 展開全部</button><button data-action="collapse-details">📕 收合全部</button></div>
+
+<div class="content-section" id="s1"><h2>5.1–5.7 基本方程式與化學位</h2>
+<div class="formula-card"><div class="formula-label">⭐ 含化學位的 $dU$ (5.1)</div><div class="eq">$$\boxed{dU = T\,dS - P\,dV + \sum_i \mu_i\,dn_i} \tag{5.1}$$</div></div>
+<div class="formula-card"><div class="formula-label">⭐ 含化學位的 $dH$ (5.2)</div><div class="eq">$$\boxed{dH = T\,dS + V\,dP + \sum_i \mu_i\,dn_i} \tag{5.2}$$</div></div>
+<div class="formula-card"><div class="formula-label">含化學位的 $dA$ (5.3)</div><div class="eq">$$dA = -S\,dT - P\,dV + \sum_i \mu_i\,dn_i \tag{5.3}$$</div></div>
+<div class="formula-card"><div class="formula-label">⭐ 含化學位的 $dG$ (5.4)</div><div class="eq">$$\boxed{dG = -S\,dT + V\,dP + \sum_i \mu_i\,dn_i} \tag{5.4}$$</div></div>
+<div class="formula-card"><div class="formula-label">⭐ 化學位的四個等價定義 (5.5)</div><div class="eq">$$\mu_i = \left(\frac{\partial U}{\partial n_i}\right)_{S,V} = \left(\frac{\partial H}{\partial n_i}\right)_{S,P} = \left(\frac{\partial A}{\partial n_i}\right)_{T,V} = \left(\frac{\partial G}{\partial n_i}\right)_{T,P} \tag{5.5}$$</div></div>
+<div class="formula-card"><div class="formula-label">係數關係 — 從 $dU$ (5.6a)</div><div class="eq">$$T = \left(\frac{\partial U}{\partial S}\right)_V, \quad -P = \left(\frac{\partial U}{\partial V}\right)_S \tag{5.6a}$$</div></div>
+<div class="formula-card"><div class="formula-label">係數關係 — 從 $dG$ (5.6b)</div><div class="eq">$$-S = \left(\frac{\partial G}{\partial T}\right)_P, \quad V = \left(\frac{\partial G}{\partial P}\right)_T \tag{5.6b}$$</div></div>
+<div class="formula-card"><div class="formula-label">$\mu_i$ 的 $G$ 定義 (5.7)</div><div class="eq">$$\mu_i = \left(\frac{\partial G}{\partial n_i}\right)_{T,P,n_{j\neq i}} \tag{5.7}$$</div></div>
+</div>
+
+<div class="content-section" id="s2"><h2>5.8–5.9 Maxwell 關係式</h2>
+<div class="formula-card"><div class="formula-label">⭐ Maxwell 1 — 從 $dU$ (5.8)</div><div class="eq">$$\boxed{\left(\frac{\partial T}{\partial V}\right)_S = -\left(\frac{\partial P}{\partial S}\right)_V} \tag{5.8}$$</div></div>
+<div class="formula-card"><div class="formula-label">⭐ Maxwell 2 — 從 $dH$ (5.9)</div><div class="eq">$$\boxed{\left(\frac{\partial T}{\partial P}\right)_S = \left(\frac{\partial V}{\partial S}\right)_P} \tag{5.9}$$</div></div>
+<div class="formula-card"><div class="formula-label">Maxwell 3 — 從 $dA$ (5.10a)</div><div class="eq">$$\left(\frac{\partial S}{\partial V}\right)_T = \left(\frac{\partial P}{\partial T}\right)_V \tag{5.10a}$$</div></div>
+<div class="formula-card"><div class="formula-label">⭐ Maxwell 4 — 從 $dG$（最常用！）(5.11a)</div><div class="eq">$$\boxed{\left(\frac{\partial S}{\partial P}\right)_T = -\left(\frac{\partial V}{\partial T}\right)_P} \tag{5.11a}$$</div></div>
+<div class="callout-warn"><div class="formula-label">⚡ Maxwell 關係記憶法 — 熱力學方塊</div>
+$$ \begin{array}{c} S \quad U \quad V \\ H \quad A \quad G \\ P \quad T \quad - \end{array} $$
+對角變數的偏導數，箭頭方向決定正負號。從 $U$ 到 $G$ 經過 $A$ 帶來負號。
+</div>
+</div>
+
+<div class="content-section" id="s3"><h2>5.10 Maxwell 關係的應用</h2>
+<div class="formula-card"><div class="formula-label">⭐ $C_P - C_V$ 一般關係 (5.12)</div><div class="eq">$$\boxed{C_P - C_V = \frac{TV\alpha^2}{\beta}} \tag{5.12}$$</div><div class="formula-note">$\alpha = (1/V)(\partial V/\partial T)_P$（熱膨脹係數），$\beta = -(1/V)(\partial V/\partial P)_T$（壓縮係數）。</div></div>
+<div class="formula-card"><div class="formula-label">內能的體積依賴 (5.13)</div><div class="eq">$$\left(\frac{\partial U}{\partial V}\right)_T = T\left(\frac{\partial P}{\partial T}\right)_V - P \tag{5.13}$$</div><div class="formula-note">理想氣體：$= 0$。真實氣體：$\neq 0$。</div></div>
+<div class="formula-card"><div class="formula-label">焓的壓力依賴 (5.14)</div><div class="eq">$$\left(\frac{\partial H}{\partial P}\right)_T = V - T\left(\frac{\partial V}{\partial T}\right)_P \tag{5.14}$$</div></div>
+</div>
+
+<div class="content-section" id="s4"><h2>5.11–5.12 熵的全微分與 Gibbs–Helmholtz</h2>
+<div class="formula-card"><div class="formula-label">⭐ 熵的全微分 (5.15)</div><div class="eq">$$\boxed{dS = \frac{C_P}{T}\,dT - \left(\frac{\partial V}{\partial T}\right)_P dP} \tag{5.15}$$</div></div>
+<div class="formula-card"><div class="formula-label">⭐ Gibbs–Helmholtz (5.16)</div><div class="eq">$$\boxed{\left(\frac{\partial (G/T)}{\partial T}\right)_P = -\frac{H}{T^2}} \tag{5.16}$$</div></div>
+<div class="formula-card"><div class="formula-label">⭐ Gibbs–Helmholtz — $\Delta$ 形式 (5.17)</div><div class="eq">$$\boxed{\left(\frac{\partial (\Delta G/T)}{\partial T}\right)_P = -\frac{\Delta H}{T^2}} \tag{5.17}$$</div></div>
+</div>
+
+<div class="content-section" id="cheatsheet"><h2>公式速查表（47 條全收錄）</h2>
+<table><caption>表 1：公式速查表（47 條全收錄）</caption><thead><tr><th>Eq</th><th>公式</th><th>備註</th></tr></thead><tbody>
+<tr><td>5.1</td><td>$dU = T\,dS - P\,dV + \sum\mu_i dn_i$</td><td>⭐ 含化學位的基本方程式 ($U$)</td></tr>
+<tr><td>5.2</td><td>$dH = T\,dS + V\,dP + \sum\mu_i dn_i$</td><td>⭐ 含化學位 ($H$)</td></tr>
+<tr><td>5.3</td><td>$dA = -S\,dT - P\,dV + \sum\mu_i dn_i$</td><td>含化學位 ($A$)</td></tr>
+<tr><td>5.4</td><td>$dG = -S\,dT + V\,dP + \sum\mu_i dn_i$</td><td>⭐ 含化學位 ($G$)</td></tr>
+<tr><td>5.5</td><td>$\mu_i = (\partial U/\partial n_i)_{S,V} = \cdots = (\partial G/\partial n_i)_{T,P}$</td><td>⭐ 化學位四個等價定義</td></tr>
+<tr><td>5.6a</td><td>$T = (\partial U/\partial S)_V$, $-P = (\partial U/\partial V)_S$</td><td>從 $dU$ 的係數關係</td></tr>
+<tr><td>5.6b</td><td>$-S = (\partial G/\partial T)_P$, $V = (\partial G/\partial P)_T$</td><td>從 $dG$ 的係數關係</td></tr>
+<tr><td>5.8</td><td>$(\partial T/\partial V)_S = -(\partial P/\partial S)_V$</td><td>⭐ Maxwell 1（從 $dU$）</td></tr>
+<tr><td>5.9</td><td>$(\partial T/\partial P)_S = (\partial V/\partial S)_P$</td><td>⭐ Maxwell 2（從 $dH$）</td></tr>
+<tr><td>5.10a</td><td>$(\partial S/\partial V)_T = (\partial P/\partial T)_V$</td><td>Maxwell 3（從 $dA$）</td></tr>
+<tr><td>5.11a</td><td>$(\partial S/\partial P)_T = -(\partial V/\partial T)_P$</td><td>⭐ Maxwell 4（從 $dG$，最常用）</td></tr>
+<tr><td>5.12</td><td>$C_P - C_V = TV\alpha^2/\beta$</td><td>⭐ 熱容量差一般關係</td></tr>
+<tr><td>5.13</td><td>$(\partial U/\partial V)_T = T(\partial P/\partial T)_V - P$</td><td>內能–體積關係</td></tr>
+<tr><td>5.14</td><td>$(\partial H/\partial P)_T = V - T(\partial V/\partial T)_P$</td><td>焓–壓力關係</td></tr>
+<tr><td>5.15</td><td>$dS = (C_P/T)dT - (\partial V/\partial T)_P dP$</td><td>⭐ 熵的全微分</td></tr>
+<tr><td>5.16</td><td>$(\partial(G/T)/\partial T)_P = -H/T^2$</td><td>⭐ Gibbs–Helmholtz</td></tr>
+<tr><td>5.17</td><td>$(\partial(\Delta G/T)/\partial T)_P = -\Delta H/T^2$</td><td>⭐ Gibbs–Helmholtz ($\Delta$ 形式)</td></tr>
+</tbody></table>
+</div>
+</main>
+<script>
+function toggleTheme(){const h=document.documentElement;const n=h.getAttribute('data-theme')==='light'?'dark':'light';h.setAttribute('data-theme',n);localStorage.setItem('theme',n);document.getElementById('tl').textContent=n==='dark'?'淺色模式':'深色模式';}
+const s=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',s);if(s==='dark')document.getElementById('tl').textContent='淺色模式';
+const secs=document.querySelectorAll('.content-section[id]');const navs=document.querySelectorAll('.sidebar-nav a');window.addEventListener('scroll',()=>{let c='';secs.forEach(s=>{if(window.scrollY>=s.offsetTop-80)c=s.getAttribute('id');});navs.forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+c);});});
+</script>
+</body>
+</html>

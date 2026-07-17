@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light" data-reading-width="wide">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>第 13 章 JFET / MESFET / HEMT - 半導體物理與元件</title>
+<script src="../assets/mathjax-config.js"></script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<link rel="stylesheet" href="../assets/chapter-base.css">
+<script defer src="../assets/course-ui.js"></script>
+
+<link rel="prev" href="ch12_bjt_zh.html">
+<link rel="next" href="ch14_optical_devices_zh.html">
+<link rel="stylesheet" href="../../../../shared/core.css">
+<script src="../../../../shared/core.js" defer></script>
+<link rel="stylesheet" href="../../../../shared/navigation.css" data-shared-navigation>
+</head>
+<body>
+<a class="portal-home-link" href="../index.html">返回學習中心</a>
+<nav class="sidebar" aria-label="本章目錄"><div class="sidebar-header"><div class="sidebar-subtitle">半導體物理與元件</div><h2 class="sidebar-title">JFET / MESFET / HEMT</h2></div><div class="toc"><ul>
+<li><a href="#preview">📋 13.0 預覽</a></li>
+<li class="ns">13.1 基本操作</li><li class="nsub"><a href="#s13-1-1">13.1.1 pn JFET</a></li><li class="nsub"><a href="#s13-1-2">13.1.2 MESFET</a></li>
+<li class="ns">13.2 元件特性</li><li class="nsub"><a href="#s13-2-1">13.2.1 夾止電壓</a></li><li class="nsub"><a href="#s13-2-2">13.2.2 理想 DC I–V</a></li><li class="nsub"><a href="#s13-2-3">13.2.3 跨導</a></li><li class="nsub"><a href="#s13-2-4">13.2.4 MESFET</a></li>
+<li class="ns">13.3 非理想效應</li><li class="nsub"><a href="#s13-3-1">13.3.1 通道長度調變</a></li><li class="nsub"><a href="#s13-3-2">13.3.2 速度飽和</a></li><li class="nsub"><a href="#s13-3-3">13.3.3 次閾值與閘極電流</a></li>
+<li class="ns">13.4 小訊號與高頻</li><li class="nsub"><a href="#s13-4-1">13.4.1 等效電路</a></li><li class="nsub"><a href="#s13-4-2">13.4.2 頻率限制</a></li>
+<li class="ns">13.5 HEMT</li><li class="nsub"><a href="#s13-5-1">13.5.1 量子井</a></li><li class="nsub"><a href="#s13-5-2">13.5.2 元件性能</a></li>
+<li><a href="#summary">📋 本章總結</a></li><li><a href="#common-mistakes">常見錯誤</a></li><li><a href="#self-check">自我檢核</a></li><li><a href="#extras">延伸學習</a></li><li><a href="#derivation-lab">🧪 推導與假設</a></li>
+</ul></div><div class="sidebar-tools"><button type="button" data-action="toggle-theme" aria-label="切換深色或淺色模式">切換顯示主題</button></div></nav>
+<main class="chapter-page" id="main-content" data-chapter-title="JFET / MESFET / HEMT" data-prev-href="ch12_bjt_zh.html" data-prev-label="雙極性接面電晶體（BJT）—完整章" data-next-href="ch14_optical_devices_zh.html" data-next-label="Optical Devices —— 光電元件">
+<header class="chapter-header"><div class="tag">Chapter 13</div><h1>JFET / MESFET / HEMT</h1><div class="chapter-meta">對應原書 The Junction Field-Effect Transistor · 第 571–617 頁</div></header>
+
+<section id="preview"><h2>13.0 本章預覽</h2><div class="callout"><strong>為什麼學 JFET？場效控制的「另一條路」</strong>
+<p>在前面四章中，我們深入探討了 MOSFET——從 MOS 電容（Ch10）到 MOSFET 的基本操作與縮小（Ch11–12）。MOSFET 的核心機制是<strong>反轉層</strong>：藉由 gate 電壓在半導體表面建立一層導電通道。這條路是「從無到有」——enhancement-mode 元件在 $V_{GS}=0$ 時沒有通道，需要施加電壓來<strong>創造</strong>通道。</p>
+<p>本章介紹的接面場效電晶體（JFET）走的卻是<strong>完全相反的路</strong>。JFET 假設通道<strong>本來就存在</strong>——由預先摻雜的半導體區域提供。Gate 的功能不是創造通道，而是用一個反偏的 pn 接面（或蕭特基接面）產生的空乏區，把通道<strong>掐窄</strong>。當空乏區完全填滿通道截面時，元件「夾止」（pinch-off），電流被截止。這就是 depletion-mode（空乏型）元件的基本哲學：「常開」的開關，需要電壓來<strong>關閉</strong>它。</p>
+<p>這個看似簡單的差異——「掐窄」vs「建立」——決定了 JFET/MESFET 的物理直覺、I-V 推導方式、以及高頻應用定位。本章吃的是 Ch5 輸運（遷移率、漂移）、Ch7 pn 接面靜電學（空乏區寬度、內建電位）、和 Ch9 蕭特基能障的物理。你若不懂空乏區怎麼長、通道截面如何影響電導，這章就只剩曲線背誦。</p>
+<p>JFET 也被稱為<strong>單極性電晶體</strong>（unipolar transistor），因為它的操作只涉及一種載子——多數載子。n-channel JFET 中只有電子參與導電，沒有少數載子的注入、儲存、和復合。這使得 JFET 本質上比 BJT（涉及少數載子）更快，也為高頻應用鋪平了道路。</p>
+<p>從歷史角度看，場效現象是固態電晶體最早被構想的概念——1920–30 年代的 Lilienfeld 專利已經描述了用垂直電場調變半導體電導的原理。但當時沒有好的半導體材料和製程技術，直到 1950 年代才被認真實現。今天，JFET/MESFET/HEMT 構成了 RF、微波、和高速數位電路的核心元件家族。</p>
+<a class="portal-home-link" href="../combined/semiconductor_book_structure_map_zh.html">回總地圖</a></div>
+<div class="section-keypoints">
+<div class="reasoning-map" aria-labelledby="reasoning-map-title"><h3 id="reasoning-map-title">🧭 本章推理地圖</h3><ol class="reasoning-path"><li>反偏接面擴張空乏區，掐窄既有通道（§13.1）</li><li>通道幾何導出夾止、平方律與跨導（§13.2）</li><li>高場、漏電與通道縮短修正理想模型（§13.3）</li><li>小訊號參數與寄生電容決定高頻上限（§13.4）</li><li>異質接面量子井把載子與雜質分離，形成 HEMT（§13.5）</li></ol></div>
+<figure class="figure"><a class="figure-link" href="../../pages/ch13_pages/ch13_page_517_c.png" target="_blank" rel="noopener"><img src="../../pages/ch13_pages/ch13_page_517_c.png" alt="chapter 13 preview" loading="lazy"></a><figcaption>Chapter 13 的入口圖像。主題不是少數載子注入，而是場效控制通道導電——gate 電壓透過空乏區來掐窄已經存在的導電通道。</figcaption></figure>
+
+<section id="s13-1-overview"><h2>13.1 補充：JFET 與 MESFET 的共通骨架</h2>
+<div class="section-keypoints"><strong>🔑 本節重點</strong> ① JFET 是 depletion-mode（常開）：$V_{GS}=0$ 時通道導通，負閘極電壓掐窄通道 ② pinchoff（夾止）發生在空乏區填滿通道截面時——是電流飽和的觸發，不是電流的終止 ③ MESFET 用蕭特基閘極取代 pn 接面→適合 GaAs 高頻，半絕緣基板大幅降低寄生電容 ④ 增強型 MESFET：零偏壓時已夾止，需順向偏壓開啟——輸出電壓擺幅小但簡化電路設計
+</div>
+
+<h3>13.1.1 基本 pn JFET 操作</h3>
+<p>圖 13.2 展示了一個對稱型 n-channel pn JFET 的截面。兩個 p⁺ 閘極區域夾著一個 n 型通道。源極（source）是載子進入通道的端點，汲極（drain）是載子離開的端點，閘極（gate）是控制端。因為只有多數載子電子參與導電，這是一個<strong>多數載子元件</strong>。</p>
+
+<figure class="figure"><a class="figure-link" href="../../pages/ch13_pages/ch13_page_597_c.png" target="_blank" rel="noopener"><img src="../../pages/ch13_pages/ch13_page_597_c.png" alt="Fig 13.2" loading="lazy"></a><figcaption>圖 13.2：對稱型 n-channel pn JFET 截面。兩個 p⁺ 閘極區域夾著 n 型通道，源極與汲極分別位於通道兩端。</figcaption></figure>
+
+<p>圖 13.3 總結了 JFET 操作的三種基本狀態。當 $V_{GS}=0$ 且施加一個小的正汲極電壓 $V_{DS}$ 時，n 通道本質上是一個電阻——$I_D$ 對 $V_{DS}$ 在小 $V_{DS}$ 下近似線性（圖 13.3a）。</p>
+<p>當施加負的閘極電壓（對 n-channel 而言），gate-to-channel 的 p⁺n 接面進入<strong>反偏</strong>。空乏區開始從兩側向通道中央擴張，通道的有效截面積減小，電阻增大。$I_D$–$V_{DS}$ 曲線在小 $V_{DS}$ 下的斜率下降——如圖 13.3b 所示。這就是<strong>通道電導調變</strong>（channel conductance modulation）——場效現象的核心。閘極每增加 1 V 反偏，空乏區向通道內推進的距離由 $h \\propto \\sqrt{V_{bi} - V_{GS}}$ 決定。</p>
+<p>如果負閘極電壓夠大，兩側的空乏區在通道中央相遇——整條通道被空乏區填滿。這個條件稱為<strong>夾止</strong>（pinchoff），如圖 13.3c。此時源極和汲極被空乏區隔離，$I_D \\approx 0$。注意：pinchoff 發生在 $V_{DS} \\approx 0$ 時——這是<strong>閘極單獨造成的夾止</strong>。</p>
+
+<figure class="figure"><a class="figure-link" href="../../pages/ch13_pages/ch13_page_599_c.png" target="_blank" rel="noopener"><img src="../../pages/ch13_pages/ch13_page_599_c.png" alt="Fig 13.3" loading="lazy"></a><figcaption>圖 13.3：JFET 操作的三種基本狀態：(a) $V_{GS}=0$ 時通道完全導通，$I_D$–$V_{DS}$ 呈線性；(b) 施加負 $V_{GS}$ 後空乏區擴張，通道變窄，曲線斜率下降；(c) $V_{GS}$ 達到夾止電壓 $V_p$ 時空乏區填滿通道，$I_D \\approx 0$。</figcaption></figure>
+
+<div class="callout"><strong>💡 耗盡型 vs 增強型——根本差異</strong><br>
+JFET 是 <strong>normally-on</strong>（常開）元件：$V_{GS}=0$ 時通道導通，需要施加反向閘極偏壓來關閉它。這就是 depletion-mode（空乏型）。MOSFET 則通常是 normally-off（常關）：$V_{GS}=0$ 時沒有通道，需要施加閘極電壓來建立反轉層。這兩種物理圖像不要混淆：JFET 是「掐窄」，MOSFET 是「建立」。</div>
+
+<p>圖 13.4 展示了 $V_{GS}=0$ 但 $V_{DS}$ 變化的情況。當 $V_{DS}$ 增大時，通道中的電壓降使得 gate-to-channel 的接面在靠近汲極端受到更大的反偏——空乏區在汲極端比源極端更寬。通道變成一個<strong>漸窄的電阻</strong>，有效電阻沿通道長度變化。$I_D$–$V_{DS}$ 曲線從線性逐漸彎曲，斜率持續下降。</p>
+<p>當 $V_{DS}$ 增大到使汲極端的空乏區剛好觸及通道的另一側時——這就是<strong>汲極端的夾止</strong>。對應的汲極電壓記為 $V_{DS}(\text{sat})$。對於 $V_{DS} \ge V_{DS}(\text{sat})$，元件進入<strong>飽和區</strong>（saturation region）。理想情況下，進一步增加 $V_{DS}$ 不會增加 $I_D$——元件表現得像一個恆流源。</p>
+
+<figure class="figure"><a class="figure-link" href="../../pages/ch13_pages/ch13_page_600_c.png" target="_blank" rel="noopener"><img src="../../pages/ch13_pages/ch13_page_600_c.png" alt="Fig 13.4" loading="lazy"></a><figcaption>圖 13.4：$V_{GS}=0$ 時隨 $V_{DS}$ 增加，通道夾止的漸進過程。空乏區在汲極端比源極端更寬——通道截面沿長度方向漸窄，$I_D$–$V_{DS}$ 曲線從線性過渡到飽和。</figcaption></figure>
+
+<p>為什麼夾止後電流不降為零？圖 13.5 提供了答案。在夾止點，通道和汲極之間被一段長度為 $\Delta L$ 的空乏區隔開。電子從源極穿過 n 通道，然後被<strong>注入</strong>空乏區，在空乏區的強電場下被<strong>掃入</strong>汲極。只要 $\Delta L \ll L$，通道區的電場分布基本不變，$I_D$ 維持在 $V_{DS}(\text{sat})$ 時的值。載子一旦進入汲極區，$I_D$ 就與 $V_{DS}$ 無關——這就是恆流行為的物理圖像。</p>
+
+<figure class="figure"><a class="figure-link" href="../../pages/ch13_pages/ch13_page_601_c.png" target="_blank" rel="noopener"><img src="../../pages/ch13_pages/ch13_page_601_c.png" alt="Fig 13.5" loading="lazy"></a><figcaption>圖 13.5：夾止點附近汲極端的放大視圖。空乏區長度 $\Delta L$ 將通道與汲極隔開，電子以漂移方式穿過強電場空乏區到達汲極——夾止是飽和的觸發條件，不是電流的終止。</figcaption></figure>
+
+<div class="callout-warn"><strong>⚡ 注意：pinchoff ≠ 通道完全斷路</strong><br>
+「夾止」（pinchoff）這個詞容易讓人誤以為通道物理上被切斷了。實際上，夾止指的是空乏區在某一點將通道截面擠壓到幾乎為零——但電流仍然可以通過。載子不是「擠過」夾止點，而是在夾止點之前就被電場加速，以漂移方式穿過空乏區到達汲極。夾止是電流<strong>飽和</strong>的觸發條件，不是電流的終止。</div>
+
+<h3>13.1.2 基本 MESFET 操作</h3>
+<p>MESFET（MEtal-Semiconductor Field-Effect Transistor）用<strong>蕭特基能障</strong>取代 pn 接面作為閘極。雖然 MESFET 也可以在矽上製造，但它通常與 GaAs 或其他化合物半導體聯繫在一起。圖 13.6 展示了一個 GaAs MESFET 的截面：一層薄薄的磊晶 GaAs 作為主動區，下面是<strong>半絕緣</strong>（semi-insulating）GaAs 基板——透過摻鉻（Cr）達到 $\sim 10^9\ \Omega\text{-cm}$ 的電阻率。</p>
+
+<figure class="figure"><a class="figure-link" href="../../pages/ch13_pages/ch13_page_601_c.png" target="_blank" rel="noopener"><img src="../../pages/ch13_pages/ch13_page_601_c.png" alt="Fig 13.6" loading="lazy"></a><figcaption>圖 13.6：GaAs MESFET 截面。金屬閘極在 n-GaAs 通道上形成蕭特基接觸，源極/汲極則為歐姆接觸。半絕緣 GaAs 基板提供電氣隔離，大幅降低寄生電容。</figcaption></figure>
+
+<p>MESFET 的優勢來自三個方面：① GaAs 的電子遷移率遠高於 Si（$\sim 8500$ vs $\sim 1350$ cm²/V-s），通道傳輸時間更短，速度更快；② 半絕緣基板大幅減少了寄生電容；③ 相較於需要形成 pn 接面的 JFET，MESFET 的製程更簡單。</p>
+<p>在圖 13.6 的 MESFET 中，反偏的 gate-to-source 電壓在金屬閘極下方感應出空乏區，調變通道電導——機制與 pn JFET 完全相同。當空乏區延伸到基板時，同樣發生 pinchoff。這也是一個<strong>耗盡型</strong>元件。</p>
+<p>如果我們把半絕緣基板視為本質材料，圖 13.7 展示了 substrate–channel–metal 結構在零偏壓下的能帶圖。通道和基板之間、通道和金屬之間都存在位能障壁——多數載子電子被<strong>侷限</strong>在通道區內。這種由能帶不連續形成的自然載子侷限，使 GaAs MESFET 的通道傳輸效率遠高於同尺寸的 Si JFET。</p>
+
+<figure class="figure"><a class="figure-link" href="../../pages/ch13_pages/ch13_page_602_c.png" target="_blank" rel="noopener"><img src="../../pages/ch13_pages/ch13_page_602_c.png" alt="Fig 13.7" loading="lazy"></a><figcaption>圖 13.7：MESFET 在零偏壓下的能帶圖。基板-通道-金屬結構中，兩側的位能障壁將多數載子電子侷限在通道區內——這是 MESFET 高遷移率傳輸的能帶基礎。</figcaption></figure>
+
+<h3>增強型 MESFET</h3>
+<p>圖 13.8 展示了另一種重要的 MESFET 變體——<strong>增強型</strong>（enhancement mode）MESFET。在 $V_{GS}=0$ 時，通道厚度小於零偏壓空乏區寬度——通道在零偏壓下<strong>已經被夾止</strong>。要打開通道，必須施加<strong>順向偏壓</strong>來縮小空乏區。這和 depletion-mode 剛好相反：增強型是 normally-off，需要正閘極電壓來開啟。</p>
+<p>增強型 n-channel MESFET 的閾值電壓 $V_T$ 為正（對比 depletion-mode 的負 $V_p$）。由於順向偏壓不能太大（否則會有顯著的閘極電流），增強型 MESFET 的輸出電壓擺幅很小——但它的優勢是閘極和汲極可以使用相同極性的電壓，簡化電路設計。</p>
+
+<figure class="figure"><a class="figure-link" href="../../pages/ch13_pages/ch13_page_602_c.png" target="_blank" rel="noopener"><img src="../../pages/ch13_pages/ch13_page_602_c.png" alt="Fig 13.8" loading="lazy"></a><figcaption>圖 13.8：增強型 MESFET。在 $V_{GS}=0$ 時通道已被零偏壓空乏區完全夾止（normally-off）。需要施加順向閘極偏壓來縮小空乏區、建立導電通道。</figcaption></figure>
+
+<table><caption>JFET、MESFET 與 MOSFET 的控制機制比較</caption><thead><tr><th scope="col">元件</th><th scope="col">閘極機制</th><th scope="col">通道來源</th><th scope="col">$V_{GS}=0$ 狀態</th><th scope="col">典型優勢</th></tr></thead><tbody>
+<tr><td>pn JFET</td><td>pn 接面反偏</td><td>預先摻雜的導電通道</td><td>導通（耗盡型）</td><td>模型乾淨、低雜訊</td></tr>
+<tr><td>MESFET</td><td>金屬-半導體勢壘（蕭特基）</td><td>預先存在的高遷移率通道</td><td>導通或截止</td><td>適合 III-V 高頻元件</td></tr>
+<tr><td>MOSFET</td><td>MOS 電容與反轉層</td><td>由閘極建立通道</td><td>通常截止（增強型）</td><td>超大規模整合</td></tr>
+</tbody></table>
+
+<div class="callout-warn"><strong>⚡ 關鍵差異——三種場效電晶體的比較</strong><br>
+JFET 和 MESFET 共享同一個物理骨架：閘極透過空乏區來「掐窄」已存在的通道。MOSFET 則透過反轉層來「建立」通道。在推導 I-V 關係時，JFET/MESFET 的起點是「通道截面積隨位置變化」，MOSFET 的起點是「反轉層電荷密度隨位置變化」。這兩條推導路徑雖然最終都給出 $I_D \propto (V_{GS}-V_T)^2$，但它們背後的物理假設完全不同。</div>
+<details class="example"><summary>📝 自編概念例 — JFET vs MOSFET</summary><div class="example-body"><p>JFET/MESFET 在 $V_{GS}=0$ 已有通道（耗盡型）；增強型 MOSFET 則需閘壓建立反轉層。兩者 I–V 形式相似，物理起點不同。</p></div></details>
+</section>
+
+<section id="s13-2-overview"><h2>13.2 補充：pinch-off、I–V 與 transconductance</h2>
+<div class="section-keypoints"><strong>🔑 本節重點</strong> ① V_{p0}=e a² N_d/(2ε_s)——內部夾止電壓（正量），由通道厚度和摻雜決定 ② V_p=V_{bi}−V_{p0}→n-channel depletion-mode的V_p為負 ③ V_{DS}(sat)=V_{p0}−(V_{bi}−V_{GS})——汲極端達到夾止的條件 ④ I_D=I_{DSS}(1−V_{GS}/V_P)²——平方律，全章最重要的公式 ⑤ g_m=g_{m0}(1−V_{GS}/V_P)，g_{m0}=2I_{DSS}/|V_P|——跨導線性下降</div>
+
+<h3>13.2.1 內部夾止電壓</h3>
+<p>要定量描述 JFET，第一個關鍵參數是<strong>內部夾止電壓</strong> $V_{p0}$。考慮圖 13.10 的單側 n-channel pn JFET：通道的金屬學厚度為 $a$，空乏區寬度為 $h$。假設 $V_{DS}=0$，使用突變空乏近似（這個近似直接沿用 Ch7 的 pn 接面理論）：</p>
+<figure class="figure"><a class="figure-link" href="../../pages/ch13_pages/ch13_page_604_c.png" target="_blank" rel="noopener"><img src="../../pages/ch13_pages/ch13_page_604_c.png" alt="Fig 13.10" loading="lazy"></a><figcaption>圖 13.10：單側 n-channel JFET 的幾何結構。通道厚度 $a$、空乏區寬度 $h$、通道長度 $L$、寬度 $W$——這些幾何參數是 I-V 推導的出發點。</figcaption></figure>
+
+<div class="eq">$$h = \sqrt{\frac{2\epsilon_s(V_{bi} - V_{GS})}{eN_d}} \qquad (13.1)$$</div>
+<p>其中 $V_{GS}$ 是閘極-源極電壓（對 n-channel 反偏為負），$V_{bi}$ 是內建電位。當 $h = a$ 時達到夾止——空乏區填滿整個通道。此時跨接面的總電位定義為<strong>內部夾止電壓</strong> $V_{p0}$：</p>
+<div class="eq">$$a = \sqrt{\frac{2\epsilon_s V_{p0}}{eN_d}} \quad \Rightarrow \quad \boxed{V_{p0} = \frac{e a^2 N_d}{2\epsilon_s}} \qquad (13.2, 13.3)$$</div>
+<p>$V_{p0}$ 定義為<strong>正量</strong>——它代表達到夾止所需的總接面電位（內建電位 + 外加反偏）。注意 $V_{p0}$ <strong>不是</strong>閘極電壓本身。實際的夾止電壓 $V_p$（閘極-源極電壓以達到夾止）由下式給出：</p>
+<div class="eq">$$V_{bi} - V_p = V_{p0} \quad \Rightarrow \quad \boxed{V_p = V_{bi} - V_{p0}} \qquad (13.4)$$</div>
+<p>對於 n-channel depletion-mode JFET，$V_{p0} &gt; V_{bi}$，因此 $V_p$ 為<strong>負</strong>——直覺上合理：需要施加負的閘極電壓來反偏接面以達到夾止。</p>
+
+<div class="callout"><strong>💡 數值範例——Si n-channel JFET 的 $V_p$ 計算</strong><br>
+假設 Si n-channel JFET，$T=300$ K：$N_a = 10^{18}$ cm⁻³，$N_d = 10^{16}$ cm⁻³，$a = 0.75$ μm。<br>
+<strong>Step 1:</strong> $V_{bi} = V_t \ln(N_a N_d / n_i^2) = 0.0259 \ln(10^{18}\cdot 10^{16} / (1.5\times 10^{10})^2) = 0.814$ V<br>
+<strong>Step 2:</strong> $V_{p0} = \frac{e a^2 N_d}{2\epsilon_s} = \frac{(1.6\times 10^{-19})(0.75\times 10^{-4})^2(10^{16})}{2(11.7)(8.85\times 10^{-14})} = 4.35$ V<br>
+<strong>Step 3:</strong> $V_p = V_{bi} - V_{p0} = 0.814 - 4.35 = -3.54$ V<br>
+這表示要在閘極施加至少 $-3.54$ V 才能完全夾止這個 JFET 的通道。</div>
+
+<p>對於 p-channel JFET（圖 13.10b），空乏區寬度公式變為 $h = \sqrt{2\epsilon_s(V_{bi} + V_{GS})/(eN_a)}$（$V_{GS}$ 對反偏為正），$V_{p0} = e a^2 N_a / (2\epsilon_s)$，而 $V_p = V_{p0} - V_{bi}$（正量）。p-channel 元件的頻率通常低於 n-channel，因為電洞遷移率較低。</p>
+
+<p>圖 13.11 展示了 $V_{DS} \neq 0$ 時通道的幾何形狀。通道中的電位 $V(x)$ 隨位置變化，因此空乏區寬度也沿通道變化。在源極端（$x=0$），空乏區寬度 $h_1$ 僅由 $V_{GS}$ 決定；在汲極端（$x=L$），額外的通道電位 $V_{DS}$ 使反偏增強：</p>
+<div class="eq">$$h_2 = \sqrt{\frac{2\epsilon_s(V_{bi} + V_{DS} - V_{GS})}{eN_d}} \qquad (13.9)$$</div>
+
+<figure class="figure"><a class="figure-link" href="../../pages/ch13_pages/ch13_page_607_c.png" target="_blank" rel="noopener"><img src="../../pages/ch13_pages/ch13_page_607_c.png" alt="Fig 13.11" loading="lazy"></a><figcaption>圖 13.11：$V_{DS} \neq 0$ 時的通道幾何。空乏區寬度沿通道漸增——源極端 $h_1$ 最小，汲極端 $h_2$ 最大。當 $h_2 = a$ 時汲極端達到夾止。</figcaption></figure>
+
+<p>在汲極端達到夾止的條件是 $h_2 = a$。此時 $V_{DS} = V_{DS}(\text{sat})$：</p>
+<div class="eq">$$V_{bi} + V_{DS}(\text{sat}) - V_{GS} = V_{p0} \quad \Rightarrow \quad \boxed{V_{DS}(\text{sat}) = V_{p0} - (V_{bi} - V_{GS})} \qquad (13.12)$$</div>
+<p>$V_{DS}(\text{sat})$ 隨著反偏閘極電壓的增大（$|V_{GS}|$ 增大）而<strong>減小</strong>——因為閘極反偏已經先將空乏區向通道推進了，所以只需要較小的汲極電壓就能在汲極端達到夾止。</p>
+
+<h3>13.2.2 理想 DC 電流-電壓關係——耗盡型 JFET</h3>
+
+<p>JFET 的 I-V 推導起點是<strong>歐姆定律</strong>。考慮圖 13.11 中通道在位置 $x$ 處的微分電阻：</p>
+<div class="eq">$$dR = \frac{\rho\,dx}{A(x)} = \frac{dx}{e\mu_n N_d [a - h(x)] W} \qquad (13.15-13.18)$$</div>
+<p>其中 $W$ 是通道寬度，$h(x)$ 是位置 $x$ 處的空乏區寬度。通道中各處的電流 $I_{D1}$ 守恆，所以微分壓降為 $dV(x) = I_{D1}\,dR$。空乏區寬度 $h(x)$ 與通道電位 $V(x)$ 的關係來自 pn 接面公式：</p>
+<div class="eq">$$h(x) = \sqrt{\frac{2\epsilon_s[V(x) + V_{bi} - V_{GS}]}{eN_d}} \qquad (13.21)$$</div>
+<p>將 $V(x)$ 用 $h(x)$ 表示並微分：$dV = (eN_d h / \epsilon_s)\, dh$。代入歐姆定律並從源極端（$x=0$，$h=h_1$）積分到汲極端（$x=L$，$h=h_2$）：</p>
+<div class="eq">$$I_{D1} = \frac{\mu_n (eN_d)^2 W}{\epsilon_s L} \left[ \frac{a}{2}(h_2^2 - h_1^2) - \frac{1}{3}(h_2^3 - h_1^3) \right] \qquad (13.25)$$</div>
+<p>利用 $h_1^2 = 2\epsilon_s(V_{bi}-V_{GS})/(eN_d)$ 和 $h_2^2 = 2\epsilon_s(V_{DS}+V_{bi}-V_{GS})/(eN_d)$，以及 $V_{p0} = e a^2 N_d/(2\epsilon_s)$，定義<strong>夾止電流</strong> $I_{P1}$：</p>
+<div class="eq">$$I_{P1} \equiv \frac{\mu_n (eN_d)^2 W a^3}{6\epsilon_s L} \qquad (13.28)$$</div>
+<p>最終得到非飽和區的 I-V 關係：</p>
+<div class="eq">$$\boxed{I_{D1} = I_{P1} \left[ 3\frac{V_{DS}}{V_{p0}} - 2\left(\frac{V_{DS} + V_{bi} - V_{GS}}{V_{p0}}\right)^{3/2} + 2\left(\frac{V_{bi} - V_{GS}}{V_{p0}}\right)^{3/2} \right]} \qquad (13.29)$$</div>
+<p>在飽和區，將 $V_{DS} = V_{DS}(\text{sat}) = V_{p0} - (V_{bi} - V_{GS})$ 代入上式，得到：</p>
+<div class="eq">$$I_{D1}(\text{sat}) = I_{P1} \left[ 1 - 3\left(\frac{V_{bi} - V_{GS}}{V_{p0}}\right) + 2\left(\frac{V_{bi} - V_{GS}}{V_{p0}}\right)^{3/2} \right] \qquad (13.35)$$</div>
+
+<p>Eq. (13.29) 和 (13.35) 雖然精確，但在手算中過於繁瑣。一個極佳的近似（廣泛用於 JFET 電路設計）是<strong>平方律</strong>：</p>
+<div class="eq">$$\boxed{I_D = I_{DSS}\left(1 - \frac{V_{GS}}{V_p}\right)^2} \qquad (13.14)$$</div>
+<p>其中 $I_{DSS}$ 是 $V_{GS}=0$ 時的飽和電流。圖 13.13 比較了精確解（Eq. 13.35）和平方律近似（Eq. 13.14）——兩者在整個 $V_{GS}$ 範圍內吻合得非常好。這個簡潔的平方律是 JFET 設計者最重要的工具。</p>
+
+<figure class="figure"><a class="figure-link" href="../../pages/ch13_pages/ch13_page_612_c.png" target="_blank" rel="noopener"><img src="../../pages/ch13_pages/ch13_page_612_c.png" alt="Fig 13.13" loading="lazy"></a><figcaption>圖 13.13：精確 I-V 關係（Eq. 13.35）與平方律近似（Eq. 13.14）的比較。兩者在 $V_{GS}$ 從 0 到 $V_p$ 的整個範圍內高度吻合，驗證了平方律作為設計工具的可靠性。</figcaption></figure>
+
+<div class="callout"><strong>💡 平方律的物理口語版</strong><br>
+「當 $V_{GS}=0$ 時，通道最寬，電流最大（$=I_{DSS}$）。當你施加負的 $V_{GS}$，空乏區從兩側擠壓通道，有效寬度以 $(1 - V_{GS}/V_p)$ 的比例縮小。電流正比於通道截面積的平方（寬度 × 厚度都受影響），所以呈現 $(1 - V_{GS}/V_p)^2$ 的關係。當 $V_{GS}=V_p$（負值），通道被完全夾止，$I_D=0$。」</div>
+
+<h3>13.2.3 跨導（Transconductance）</h3>
+<p>跨導 $g_m$ 是 JFET 的電晶體增益——它衡量閘極電壓對汲極電流的控制能力：</p>
+<div class="eq">$$g_m \equiv \frac{\partial I_D}{\partial V_{GS}} \qquad (13.37)$$</div>
+<p>使用平方律近似（Eq. 13.14）求導：</p>
+<div class="eq">$$\boxed{g_m = \frac{2I_{DSS}}{|V_p|}\left(1 - \frac{V_{GS}}{V_p}\right) = g_{m0}\left(1 - \frac{V_{GS}}{V_p}\right)} \qquad (13.41b)$$</div>
+<p>其中 $g_{m0} = 2I_{DSS}/|V_p|$ 是 $V_{GS}=0$ 時的最大跨導。$g_m$ 隨 $V_{GS}$ 變得更負而線性下降——當 $V_{GS} \to V_p$ 時 $g_m \to 0$。使用精確表達式，飽和區的跨導為：</p>
+<div class="eq">$$g_{ms} = \frac{3I_{P1}}{V_{p0}} \left[ 1 - \sqrt{\frac{V_{bi} - V_{GS}}{V_{p0}}} \right] \qquad (13.41a)$$</div>
+
+<div class="callout"><strong>💡 數值範例——最大跨導</strong><br>
+使用前述 Si JFET 參數：$I_{P1} = 0.522$ mA，$V_{bi}=0.814$ V，$V_{p0}=4.35$ V。在 $V_{GS}=0$ 時：<br>
+$g_{ms}(\text{max}) = \frac{3(0.522)}{4.35} \left[ 1 - \sqrt{\frac{0.814}{4.35}} \right] = 0.204$ mA/V<br>
+這個值規一化為 mS/mm 是 RF 元件的常用指標。對於 $W=30$ μm：$g_{ms}/W = 6.8$ mS/mm。</div>
+
+<h3>13.2.4 MESFET 的特性——增強型與閾值電壓</h3>
+<p>MESFET 的基本 I-V 架構與 pn JFET 相同——差別只在於閘極是蕭特基接面。對於 n-channel MESFET，內部夾止電壓 $V_{p0} = e a^2 N_d/(2\epsilon_s)$ 的定義不變。但內建電位 $V_{bi}$ 不再是 pn 接面的 $V_t\ln(N_a N_d/n_i^2)$，而是蕭特基能障高度 $\phi_{Bn}$ 減去 $\phi_n = V_t\ln(N_c/N_d)$：$V_{bi} = \phi_{Bn} - \phi_n$。</p>
+<p>在討論 MESFET（尤其是增強型）時，通常使用<strong>閾值電壓</strong> $V_T$ 代替夾止電壓 $V_p$：</p>
+<div class="eq">$$V_{bi} - V_T = V_{p0} \quad \Rightarrow \quad \boxed{V_T = V_{bi} - V_{p0}} \qquad (13.42)$$</div>
+<p>對於 n-channel 耗盡型：$V_T &lt; 0$（負閾值，等同於 $V_p$）；對於增強型：$V_T &gt; 0$（正閾值——需要順向偏壓來建立通道）。</p>
+<p>增強型元件的飽和電流可寫成類似 MOSFET 的形式。當 $V_{GS} \gtrsim V_T$（剛開啟時），$(V_{GS}-V_T) \ll V_{p0}$，可以做泰勒展開：</p>
+<div class="eq">$$I_{D1}(\text{sat}) \approx I_{P1} \cdot \frac{3}{4}\left(\frac{V_{GS} - V_T}{V_{p0}}\right)^2 = \frac{\mu_n \epsilon_s W}{2aL}(V_{GS} - V_T)^2 \qquad (13.45, 13.46)$$</div>
+<p>因此可以寫成與 MOSFET 相同的形式：</p>
+<div class="eq">$$\boxed{I_{D1}(\text{sat}) = k_n (V_{GS} - V_T)^2}, \quad k_n = \frac{\mu_n \epsilon_s W}{2aL} \qquad (13.47, 13.48)$$</div>
+<p>其中 $k_n$ 稱為<strong>傳導參數</strong>。跨導為 $g_{ms} = 2k_n(V_{GS} - V_T)$——同樣與 MOSFET 的形式一致。</p>
+
+<div class="callout-warn"><strong>⚡ GaAs MESFET 數值範例——閾值電壓設計</strong><br>
+n-channel GaAs MESFET，$\phi_{Bn}=0.89$ V（金接觸），$N_d = 2\times 10^{15}$ cm⁻³，目標 $V_T = +0.25$ V。<br>
+$\phi_n = 0.0259 \ln(4.7\times 10^{17}/2\times 10^{15}) = 0.141$ V<br>
+$V_{bi} = 0.89 - 0.141 = 0.749$ V<br>
+$V_{p0} = V_{bi} - V_T = 0.749 - 0.25 = 0.499$ V<br>
+$a = \sqrt{\frac{2\epsilon_s V_{p0}}{eN_d}} = \sqrt{\frac{2(13.1)(8.85\times 10^{-14})(0.499)}{(1.6\times 10^{-19})(2\times 10^{15})}} = 0.601$ μm<br>
+增強型 MESFET 需要窄通道和低摻雜——這對製程精度要求很高。</div>
+<details class="example"><summary>📐 例題 — Shockley 平方律</summary><div class="example-body"><p>$I_{DSS}=8$ mA、$V_P=-4$ V、$V_{GS}=-2$ V → $I_D=8(1-(-2)/(-4))^2=8\times0.25=2$ mA。</p></div></details>
+</section>
+
+<section id="s13-3-4-overview"><h2>13.3–13.4 補充：非理想、小訊號與頻率限制</h2>
+<div class="section-keypoints"><strong>🔑 本節重點</strong> ① 通道長度調變：ΔL使L_eff縮短→I_D'≈I_D(1+λV_{DS})，r_{ds}有限 ② 速度飽和：高場→v→v_{sat}→V_{DS}(sat)與I_D(sat)均下降，GaAs尤其重要 ③ 小訊號模型：i_{ds}=g_m v_{gs}，g_m'=g_m/(1+g_m r_s)（源極串聯電阻衰減有效增益）④ f_T=g_m/(2πC_G)∝μ_n a²/L²——縮小L最有效（平方關係）⑤ GaAs MESFET f_T可達∼100 GHz，Si JFET僅∼數GHz</div>
+
+<h3>13.3.1 通道長度調變</h3>
+<p>在理想 JFET 的飽和區中，$I_D$ 與 $V_{DS}$ 無關。實際上，當 $V_{DS} &gt; V_{DS}(\text{sat})$ 時，夾止點向源極方向移動——有效通道長度從 $L$ 縮短為 $L' = L - \frac{1}{2}\Delta L$（見圖 13.5）。因為 $I_D \propto 1/L$，通道變短使得電流隨 $V_{DS}$ 增大而上升——這就是<strong>通道長度調變</strong>。</p>
+<div class="eq">$$\Delta L \approx \sqrt{\frac{2\epsilon_s(V_{DS} - V_{DS}(\text{sat}))}{eN_d}} \qquad (13.54)$$</div>
+<p>修正後的汲極電流可寫成：</p>
+<div class="eq">$$I_D' = I_D \cdot \frac{L}{L - \frac{1}{2}\Delta L} \approx I_{D}(\text{sat})(1 + \lambda V_{DS}) \qquad (13.52, 13.53)$$</div>
+<p>其中 $\lambda$ 是通道長度調變參數——與 MOSFET 的 Early 效應完全類比。由此可定義汲極輸出電阻：</p>
+<div class="eq">$$r_{ds} \equiv \left(\frac{\partial I_D'}{\partial V_{DS}}\right)^{-1} \approx \frac{V_{DS}}{I_D'} \qquad (13.55)$$</div>
+
+<div class="callout"><strong>💡 數值直覺——$r_{ds}$ 的量級</strong><br>
+Si JFET：$L=10$ μm，$N_d=3\times 10^{15}$ cm⁻³，$I_D=4.0$ mA。當 $V_{DS}$ 從 $V_{DS}(\text{sat})+2.0$ V 增加到 $V_{DS}(\text{sat})+2.5$ V：$\Delta L$ 從 0.929 μm 增加到 1.04 μm。$I_D$ 從 $4.0\times(10/9.54)=4.19$ mA 增加到 $4.0\times(10/9.48)=4.22$ mA。$r_{ds} = 0.5/(0.03\text{ mA}) \approx 18.9$ kΩ——遠小於理想的無限大。</div>
+
+<p>對於短通道元件（$L \sim 1$ μm 的 GaAs MESFET），通道長度調變的相對影響更大——$\Delta L$ 和 $L$ 變得可比。這是短通道元件飽和區斜率變大的主要原因。</p>
+
+<h3>13.3.2 速度飽和效應（Velocity Saturation）</h3>
+<p>Ch5 中我們學到，載子漂移速度在高電場下會飽和。在短通道 JFET 中，靠近汲極端的通道極窄——根據電流連續性，載子速度必須增大。當電場超過臨界值（Si: $\sim 10^4$ V/cm，GaAs: $\sim 3\times 10^3$ V/cm），載子達到飽和速度 $v_{\text{sat}}$。</p>
+<p>當速度飽和發生時，通道在汲極端有一個<strong>飽和空乏區厚度</strong> $h_{\text{sat}}$，飽和電流變為：</p>
+<div class="eq">$$I_{D1}(\text{sat}) = e N_d v_{\text{sat}} (a - h_{\text{sat}}) W \qquad (13.56)$$</div>
+<p>速度飽和的後果：① $V_{DS}(\text{sat})$ 比無速度飽和時更小；② $I_D(\text{sat})$ 也更小；③ $g_m$ 下降。對於 GaAs MESFET，速度飽和尤其重要——GaAs 的 $v_{\text{sat}} \sim 1\times 10^7$ cm/s，且其速度-電場曲線有負微分遷移率區，進一步複雜化了短通道行為。</p>
+
+<h3>13.3.3 次閾值與閘極電流效應</h3>
+<p>當閘極電壓低於夾止/閾值時，JFET 中仍然存在微小的汲極電流——稱為<strong>次閾值電流</strong>（subthreshold current）。GaAs MESFET 的三個操作區域清楚地說明了這個過渡：</p>
+<p>① <strong>正常通道閘控區</strong>（$V_{GS} &gt; V_T$）：$I_D$ 隨 $V_{GS}$ 二次方變化（平方律）。② <strong>次閾值區</strong>（$V_{GS}$ 略低於 $V_T$）：$I_D$ 隨 $V_{GS}$ 指數衰減——這是因為靠近夾止時，突變空乏近似不再準確；空乏區邊緣不是銳利的，而是有一個過渡區，允許微小的電流穿過。③ <strong>閘極漏電區</strong>（$V_{GS}$ 遠低於 $V_T$）：$I_D$ 達到最小值後緩慢上升——這是反偏閘極接面的漏電流，來自空乏區內的產生電流（SRH 機制，Ch6/Ch8）。</p>
+<p>次閾值電流在低功率電路中必須被考慮——它設定了元件可以被「關閉」到什麼程度。</p>
+
+<h3>13.4.1 小訊號等效電路</h3>
+<p>圖 13.16 展示了 JFET 的完整小訊號等效電路。在中低頻下，可以簡化為理想形式——汲極電流的小訊號分量僅由 $g_m v_{gs}$ 決定：</p>
+<div class="eq">$$i_{ds} = g_m v_{gs} \qquad (13.57)$$</div>
+
+<figure class="figure"><a class="figure-link" href="../../pages/ch13_pages/ch13_page_622_c.png" target="_blank" rel="noopener"><img src="../../pages/ch13_pages/ch13_page_622_c.png" alt="Fig 13.16" loading="lazy"></a><figcaption>圖 13.16：JFET 的小訊號等效電路。(a) 無速度飽和時的元件參數；(b) 速度飽和對 $g_m$ 與輸出電導的影響——$g_m$ 在飽和區下降，輸出電導增大。</figcaption></figure>
+
+<p>其中 $g_m$ 由 DC 偏壓點決定。當考慮源極串聯電阻 $r_s$ 時，有效跨導會<strong>衰減</strong>：</p>
+<div class="eq">$$v_{gs} = v_{g's'} + (g_m v_{g's'}) r_s = (1 + g_m r_s) v_{g's'}$$</div>
+<div class="eq">$$\boxed{i_{ds} = \frac{g_m}{1 + g_m r_s} v_{gs} \equiv g_m' v_{gs}} \qquad (13.60)$$</div>
+<p>$r_s$ 來自源極區域的半導體電阻和接觸電阻。對於薄通道元件（$a \sim 1$ μm），源極串聯電阻可以很大（∼kΩ），顯著降低有效增益。</p>
+
+<div class="callout"><strong>💡 小訊號參數的物理意義</strong><br>
+• <strong>$g_m$（跨導）：</strong>閘極控制汲極電流的能力。$g_m \propto \sqrt{I_D}$（平方律區）。<br>
+• <strong>$r_{ds}$（汲極輸出電阻）：</strong>飽和區中 $I_D$ 對 $V_{DS}$ 的敏感度，來自通道長度調變。<br>
+• <strong>$C_{gs}$（閘-源電容）：</strong>反偏接面的空乏區電容。$C_{gs} \propto 1/\sqrt{V_{bi} - V_{GS}}$。<br>
+• <strong>$C_{gd}$（閘-汲電容）：</strong>汲極端的接面電容，通常小於 $C_{gs}$。在高頻時透過 Miller 效應影響輸入阻抗。<br>
+• <strong>$r_{gs}$（閘-源電阻）：</strong>反偏接面的微分電阻——通常極大（∼GΩ），在等效電路中經常被忽略。</div>
+
+<h3>13.4.2 頻率限制因素與截止頻率 $f_T$</h3>
+<p>JFET 的速度受兩個物理因素限制。第一個是<strong>通道傳輸時間</strong>：載子從源極到汲極所需的時間。對 $L=1$ μm 且載子以飽和速度 $v_s \approx 10^7$ cm/s 行進：</p>
+<div class="eq">$$\tau_t = \frac{L}{v_s} \approx \frac{1\times 10^{-4}}{1\times 10^7} = 10 \text{ ps} \qquad (13.61)$$</div>
+<p>這個時間通常不是瓶頸——除非在非常高頻（$&gt;100$ GHz）的元件中。</p>
+<p>第二個限制因素——通常是主導因素——是<strong>電容充電時間</strong>。輸入電流 $I_i$ 必須對 $C_{gs}$ 和 $C_{gd}$ 充電。定義 $C_G = C_{gs} + C_{gd}$，當輸入電流的幅值等於理想輸出電流 $g_m V_{gs}$ 時，達到<strong>截止頻率</strong> $f_T$：</p>
+<div class="eq">$$|I_i| = 2\pi f_T C_G V_{gs} = g_m V_{gs} \quad \Rightarrow \quad \boxed{f_T = \frac{g_m}{2\pi C_G}} \qquad (13.63, 13.64)$$</div>
+
+<figure class="figure"><a class="figure-link" href="../../pages/ch13_pages/ch13_page_623_c.png" target="_blank" rel="noopener"><img src="../../pages/ch13_pages/ch13_page_623_c.png" alt="Fig 13.18" loading="lazy"></a><figcaption>圖 13.18：電流增益的頻率相依性。在低頻區電流增益為 $g_m/(\omega C_G)$，隨頻率以 −20 dB/decade 下降。截止頻率 $f_T$ 對應於電流增益 = 1（0 dB）的頻率。</figcaption></figure>
+
+<p>使用最大可能跨導 $g_m(\text{max}) = e\mu_n N_d W a / L$ 和最小閘極電容 $C_G(\text{min}) = \epsilon_s W L / a$，得到 $f_T$ 的物理表達式：</p>
+<div class="eq">$$\boxed{f_T = \frac{e\mu_n N_d a^2}{2\pi \epsilon_s L^2}} \qquad (13.67)$$</div>
+
+<div class="callout"><strong>💡 數值範例——Si JFET 的 $f_T$</strong><br>
+Si JFET：$\mu_n = 1000$ cm²/V-s，$N_d = 10^{16}$ cm⁻³，$a = 0.6$ μm，$L = 5$ μm：<br>
+$f_T = \frac{(1.6\times 10^{-19})(1000)(10^{16})(0.6\times 10^{-4})^2}{2\pi(11.7)(8.85\times 10^{-14})(5\times 10^{-4})^2} = 3.54$ GHz<br><br>
+<strong>GaAs 的對比：</strong>$\mu_n = 6500$ cm²/V-s，$N_d = 3\times 10^{15}$ cm⁻³，$a = 0.5$ μm，$L = 1$ μm：<br>
+$f_T \approx 107$ GHz——GaAs 的高遷移率和短通道使 $f_T$ 提高近 30 倍！<br>
+這就是為什麼 GaAs MESFET 主宰了微波和毫米波應用。</div>
+
+<div class="callout-warn"><strong>⚡ $f_T$ 公式的物理洞察</strong><br>
+$f_T \propto \mu_n a^2 / L^2$。要提升 $f_T$：① 使用高遷移率材料（GaAs &gt; Si，InGaAs &gt; GaAs）；② 減小通道長度 $L$（平方關係——縮小一半，$f_T$ 提高四倍）；③ 增大通道厚度 $a$（但要注意 $V_p$ 也會增大，所以有取捨）。HEMT（下節）將這三項同時優化——高遷移率通道 + 極短閘極 + 最佳化的能帶工程。</div>
+<details class="example"><summary>📐 例題 — 估算 $f_T$</summary><div class="example-body"><p>$g_m=10$ mS、$C_{gs}+C_{gd}=200$ fF → $f_T\approx g_m/(2\pi C)\approx8$ GHz。</p></div></details>
+</section>
+
+<section id="s13-5-overview"><h2>13.5 補充：HEMT 與高遷移率通道</h2>
+<div class="section-keypoints"><strong>🔑 本節重點</strong> ① 異質接面+調變摻雜→載子與摻雜離子空間分離→離子化雜質散射大幅降低 ② 2DEG：電子在z方向量子化、xy平面自由移動→二維狀態密度+高遷移率 ③ 電荷控制模型：n_s∝(V_g−V_{off})/(d+Δd)——閘極調變2DEG濃度 ④ g_m∼250 mS/mm（300K），f_T&gt;100 GHz（L=0.25µm）⑤ 間隔層(spacer)增加分離距離→遷移率↑但n_s略降→設計取捨</div>
+
+<h3>13.5.1 量子井結構與二維電子氣</h3>
+<p>當頻率需求、功率容量、和低雜訊性能不斷提升時，GaAs MESFET 被推到了設計極限。傳統元件中，通道區的載子和摻雜離子<strong>共存於同一區域</strong>——這導致離子化雜質散射（ionized impurity scattering），降低遷移率，劣化元件性能。</p>
+
+<figure class="figure"><a class="figure-link" href="../../pages/ch13_pages/ch13_page_625_c.png" target="_blank" rel="noopener"><img src="../../pages/ch13_pages/ch13_page_625_c.png" alt="Fig 13.22" loading="lazy"></a><figcaption>圖 13.22：HEMT 的量子井結構與能帶圖。N-AlGaAs 與 intrinsic GaAs 之間的異質接面在導帶形成位能井——電子從寬能隙側流入，被侷限在 GaAs 側的窄量子井中形成 2DEG。</figcaption></figure>
+
+<p>在熱平衡下，電子從寬能隙的 N-AlGaAs 流向 GaAs，落入導帶的位能井中，被侷限在一個極薄的層（約 80 Å）內。這些電子在垂直於界面的方向（$z$ 方向）被<strong>量子化</strong>——只能佔據分立的次能帶 $E_0, E_1, \ldots$。但在平行於界面的方向（$x$–$y$ 平面），電子完全自由移動——這就是<strong>二維電子氣</strong>（2DEG, Two-Dimensional Electron Gas）。</p>
+
+<div class="callout"><strong>💡 為什麼「二維」這麼重要？</strong><br>
+在 3D 塊材中，電子可以自由地在三個方向運動，散射機制複雜。在 2DEG 中，電子在 $z$ 方向的運動被凍結——只剩下 $x$–$y$ 平面內的二維運動。這意味著：① 狀態密度變為階梯函數（而非 3D 的拋物線狀），改變了散射機率；② 雜質離子在 AlGaAs 層中，與 GaAs 通道中的電子空間分離——庫侖散射大幅降低。結果：300 K 下遷移率可達 8500–9000 cm²/V-s，遠高於相似摻雜濃度的 GaAs MESFET（$&lt;5000$ cm²/V-s）。</div>
+
+<p>為了進一步減少雜質散射，可以在摻雜 AlGaAs 和未摻雜 GaAs 之間插入一層<strong>未摻雜的 AlGaAs 間隔層</strong>（spacer layer）。圖 13.24 展示了增加間隔層後對能帶彎曲和 2DEG 濃度的影響——間隔層增加載子-離子分離距離，遷移率提高，但位能井中的電子濃度會略為下降。</p>
+
+<figure class="figure"><a class="figure-link" href="../../pages/ch13_pages/ch13_page_628_c.png" target="_blank" rel="noopener"><img src="../../pages/ch13_pages/ch13_page_628_c.png" alt="Fig 13.24" loading="lazy"></a><figcaption>圖 13.24：HEMT 的導帶邊緣與 2DEG 形成。間隔層（spacer layer）將摻雜離子與 2DEG 空間分離，降低庫侖散射。導帶的量子井將電子侷限在 ∼80 Å 的薄層內，形成高遷移率的二維傳輸通道。</figcaption></figure>
+
+<p>透過分子束磊晶（MBE）技術，可以精確控制各層的厚度和摻雜——甚至可以堆疊多個通道層（多層調變摻雜異質結構），等效於增加通道電子密度，提升電流能力。</p>
+
+<h3>13.5.2 HEMT 的電晶體性能</h3>
+<p>典型的「正常」AlGaAs-GaAs HEMT 結構中，N-AlGaAs 層透過未摻雜 AlGaAs 間隔層與未摻雜 GaAs 分離。蕭特基接觸做在 N-AlGaAs 上形成閘極。源極和汲極的歐姆接觸穿過 AlGaAs 直接連到 2DEG 通道。</p>
+<p>閘極電壓透過蕭特基空乏區控制 2DEG 的濃度：$V_G=0$ 時，GaAs 中的導帶邊緣低於費米能階——2DEG 濃度高，元件導通。當施加負閘極電壓時，能帶被拉高——GaAs 的導帶邊緣移到費米能階之上——2DEG 幾乎消失，元件截止。</p>
+<p>使用<strong>電荷控制模型</strong>（charge control model），2DEG 的薄片載子濃度 $n_s$ 可以表示為：</p>
+<div class="eq">$$n_s = \frac{\epsilon_N}{q(d + \Delta d)}(V_g - V_{\text{off}}) \qquad (13.68)$$</div>
+<p>其中 $d = d_d + d_i$ 是摻雜層 + 間隔層的總厚度，$\Delta d \approx 80$ Å 是修正因子，$V_{\text{off}}$ 是截止電壓：</p>
+<div class="eq">$$V_{\text{off}} = \phi_B - \frac{\Delta E_c}{q} - V_{p2}, \quad V_{p2} = \frac{qN_d d_d^2}{2\epsilon_N} \qquad (13.70, 13.71)$$</div>
+<p>使用漸進通道近似，HEMT 的 I-V 特性與 JFET/MESFET 非常相似。在低 $V_{DS}$ 的非飽和區：</p>
+<div class="eq">$$I_D = \frac{\epsilon_N \mu W}{2L(d + \Delta d)} \left[ 2(V_g - V_{\text{off}})V_{DS} - V_{DS}^2 \right] \qquad (13.74)$$</div>
+<p>當載子達到速度飽和時：</p>
+<div class="eq">$$I_D(\text{sat}) = \frac{\epsilon_N W}{(d + \Delta d)}(V_g - V_{\text{off}} - V_0) v_{\text{sat}} \qquad (13.75)$$</div>
+<p>HEMT 的跨導通常以 mS/mm 規一化。300 K 下的典型值為 250 mS/mm——遠大於 pn JFET 或 MESFET。增強型 HEMT 的計算與實驗 I-V 曲線顯示電流可達 25 mA 以上。</p>
+
+<div class="callout"><strong>💡 HEMT 數值範例——2DEG 濃度計算</strong><br>
+N-Al₀.₃Ga₀.₇As / intrinsic GaAs 異質接面：$N_d = 10^{18}$ cm⁻³，摻雜層厚度 $d_d = 500$ Å，間隔層 $d_i = 20$ Å，$\phi_B = 0.85$ V，$\Delta E_c/q = 0.22$ V。<br>
+$V_{p2} = \frac{(1.6\times 10^{-19})(10^{18})(500\times 10^{-8})^2}{2(12.2)(8.85\times 10^{-14})} = 1.85$ V<br>
+$V_{\text{off}} = 0.85 - 0.22 - 1.85 = -1.22$ V（負值→耗盡型 MODFET）<br>
+$n_s(V_g=0) = \frac{(12.2)(8.85\times 10^{-14})}{(1.6\times 10^{-19})(500+20+80)\times 10^{-8}}[0 - (-1.22)] = 1.37 \times 10^{12}$ cm⁻²<br>
+這是一個典型的 2DEG 濃度——約為 Si MOSFET 反轉層的 10 倍。</div>
+
+<div class="callout-warn"><strong>⚡ HEMT 的工程取捨與限制</strong><br>
+<strong>優勢：</strong>極高的遷移率和速度（$f_T &gt; 100$ GHz 在 $L=0.25$ μm）、低雜訊（在 35 GHz 仍保持合理增益）、低功耗（比 ECL 邏輯低三個數量級）。<br>
+<strong>限制：</strong>① 異質接面製程複雜，需要 MBE 或 MOCVD 技術；② 當正閘極電壓過大時，AlGaAs 的導帶會降到費米能階以下，形成<strong>平行導通路徑</strong>（bypass），閘極失去對 2DEG 的控制；③ 多通道 HEMT 中各通道的閾值電壓不同，跨導不會線性放大。<br>
+<strong>應用：</strong>5.5 GHz 正反器、35 GHz 低雜訊放大器、毫米波通訊、衛星接收器。HEMT 代表了場效電晶體的巔峰——速度、功耗、雜訊的同時最優化。</div>
+<details class="example"><summary>📝 自編概念例 — spacer 取捨</summary><div class="example-body"><p>未摻雜 spacer 拉開 2DEG 與施體 → 遷移率↑、片電荷密度略↓；HEMT 設計在兩者間折衷。</p></div></details>
+</section>
+
+<section id="s13-1-1"><h2>13.1.1 基本 pn JFET 操作</h2><div class="section-keypoints"><strong>🔑 本節重點</strong> ① 反偏閘極控制空乏區 ② 零閘壓已有通道 ③ 負閘壓縮窄 n 通道 ④ pinch-off 使電流飽和</div>
+<p>n 通道 JFET 以 n 型半導體形成源汲通道，p+ 閘極與通道構成反偏 pn 接面。</p><p>反偏閘極接面幾乎不取直流電流，但空乏寬度會隨閘極與局部通道電位改變。</p><p>更負 $V_{GS}$ 會擴大空乏區，減少可導電通道截面。</p><p>沿汲極方向通道電位升高，使汲端最先達到 pinch-off。</p><p>pinch-off 後電流近似飽和，而不是通道整段消失。</p><div class="callout"><strong>💡 場效控制：</strong>閘極以空乏區幾何改變通道電導。</div><div class="callout-warn"><strong>⚠️ JFET 通常是 depletion-mode。</strong></div><details class="example"><summary>📝 自編概念例：負閘壓</summary><div class="example-body"><p><strong>題目：</strong>n 通道 JFET 的 $V_{GS}$ 更負。</p><p><strong>解：</strong>反偏增加。</p><p><strong>答案：</strong>空乏區變寬，電流下降。</p></div></details></section>
+<section id="s13-1-2"><h2>13.1.2 基本 MESFET 操作</h2><div class="section-keypoints"><strong>🔑 本節重點</strong> ① 蕭特基閘極取代 pn 接面 ② 多數載子通道 ③ 閘壓調變空乏深度 ④ 半絕緣基板降低寄生</div>
+<p>MESFET 以金屬–半導體蕭特基接面作閘極，常製作於 GaAs。</p><p>反偏蕭特基閘極形成空乏區並調整 n 型通道有效厚度。</p><p>傳輸由多數載子主導，沒有大量少數載子儲存。</p><p>半絕緣基板可降低基板漏電與寄生電容。</p><p>蕭特基閘極的順向導通與反向漏電限制可用閘壓範圍。</p><div class="callout"><strong>💡 統一圖像：</strong>JFET 與 MESFET 都以閘極空乏區控制通道。</div><div class="callout-warn"><strong>⚠️ 蕭特基閘極不是理想絕緣閘極。</strong></div><details class="example"><summary>📝 自編概念例：閘極比較</summary><div class="example-body"><p><strong>題目：</strong>兩者主要差異？</p><p><strong>解：</strong>JFET 用 pn，MESFET 用蕭特基。</p><p><strong>答案：</strong>兩者皆以反偏耗盡控制。</p></div></details></section>
+<section id="s13-2-1"><h2>13.2.1 夾止電壓</h2><div class="section-keypoints"><strong>🔑 本節重點</strong> ① 空乏區填滿通道 ② 電壓取決厚度與摻雜 ③ 汲端先達夾止 ④ 內建電位需納入</div>
+<p>空乏寬度隨閘極–通道反偏增加，直到填滿通道厚度。</p><p>一維近似給出 $V_{p0}\propto qN_Da^2/(2\epsilon_s)$。</p><p>通道越厚或摻雜越高，所需反偏越大。</p><p>局部通道電位沿源汲方向不同，所以汲端通常先夾止。</p><p>實際端點夾止電壓還要結合內建電位與符號定義。</p><div class="callout"><strong>💡 平方尺度：</strong>夾止電壓對厚度呈平方依賴。</div><div class="callout-warn"><strong>⚠️ $V_P$ 可能定義成正幅值或負端電壓。</strong></div><details class="example"><summary>📝 自編概念例：厚度加倍</summary><div class="example-body"><p><strong>題目：</strong>$a$ 加倍。</p><p><strong>解：</strong>$V_{p0}\propto a^2$。</p><p><strong>答案：</strong>尺度增為四倍。</p></div></details></section>
+<section id="s13-2-2"><h2>13.2.2 理想 DC I–V</h2><div class="section-keypoints"><strong>🔑 本節重點</strong> ① 線性區像閘控電阻 ② 汲端夾止觸發飽和 ③ Shockley 式為平方關係 ④ 僅適用理想飽和區</div>
+<p>小 $V_{DS}$ 時通道全長存在，電流近似線性增加。</p><p>提高 $V_{DS}$ 使汲端有效通道變窄。</p><p>夾止後理想飽和式為 $I_D=I_{DSS}(1-V_{GS}/V_P)^2$。</p><p>$I_{DSS}$ 是零閘壓飽和電流。</p><p>此式忽略通道長度調變、速度飽和與串聯電阻。</p><div class="callout"><strong>💡 平方律來自空乏幾何對通道電導的控制。</strong></div><div class="callout-warn"><strong>⚠️ 此式不是線性區完整方程。</strong></div><details class="example"><summary>📝 自編概念例：半夾止閘壓</summary><div class="example-body"><p><strong>題目：</strong>$V_{GS}/V_P=0.5$。</p><p><strong>解：</strong>$(1-0.5)^2$。</p><p><strong>答案：</strong>$0.25I_{DSS}$。</p></div></details></section>
+<section id="s13-2-3"><h2>13.2.3 跨導</h2><div class="section-keypoints"><strong>🔑 本節重點</strong> ① 跨導是閘壓斜率 ② $g_{m0}=2I_{DSS}/|V_P|$ ③ 接近截止時下降 ④ 決定放大能力</div>
+<p>跨導定義為 $g_m=\partial I_D/\partial V_{GS}$。</p><p>Shockley 式給出 $g_m=g_{m0}(1-V_{GS}/V_P)$。</p><p>零偏跨導為 $g_{m0}=2I_{DSS}/|V_P|$。</p><p>$g_m$ 隨電流降低而下降。</p><p>跨導與負載共同決定小訊號增益。</p><div class="callout"><strong>💡 $g_m$ 必須連同工作點報告。</strong></div><div class="callout-warn"><strong>⚠️ 小心 n 通道負 $V_P$ 的符號。</strong></div><details class="example"><summary>📝 自編概念例</summary><div class="example-body"><p><strong>題目：</strong>$I_{DSS}=8$ mA、$|V_P|=4$ V。</p><p><strong>解：</strong>$2I_{DSS}/|V_P|$。</p><p><strong>答案：</strong>4 mS。</p></div></details></section>
+<section id="s13-2-4"><h2>13.2.4 MESFET</h2><div class="section-keypoints"><strong>🔑 本節重點</strong> ① 內建電位改變夾止 ② 可為耗盡或增強型 ③ GaAs 利於高頻 ④ 閘壓受蕭特基限制</div>
+<p>MESFET 的電荷控制類似 JFET，但閘極邊界由蕭特基能障決定。</p><p>內建電位必須納入閾值與空乏寬度。</p><p>零偏保留通道者為耗盡型，零偏耗盡者呈增強型。</p><p>GaAs 高電子遷移率有利於微波操作。</p><p>過大正閘壓會使蕭特基接面導通。</p><div class="callout"><strong>💡 模式由零偏空乏深度與通道厚度決定。</strong></div><div class="callout-warn"><strong>⚠️ MESFET 不是 MOSFET。</strong></div><details class="example"><summary>📝 自編概念例</summary><div class="example-body"><p><strong>題目：</strong>零偏已完全耗盡。</p><p><strong>解：</strong>無通道。</p><p><strong>答案：</strong>呈增強型行為。</p></div></details></section>
+<section id="s13-3-1"><h2>13.3.1 通道長度調變</h2><div class="section-keypoints"><strong>🔑 本節重點</strong> ① 夾止點隨汲壓移動 ② 有效通道縮短 ③ 飽和電流仍增加 ④ 形成有限輸出電阻</div>
+<p>理想模型假設夾止後電流完全飽和。</p><p>實際提高 $V_{DS}$ 會使夾止區向源極延伸。</p><p>有效導電通道縮短，電流因而略增。</p><p>一階可寫成 $I_D\approx I_{D,sat}(1+\lambda V_{DS})$。</p><p>有限輸出電阻會限制放大器電壓增益。</p><div class="callout"><strong>💡 這與 MOSFET channel-length modulation 具有相同幾何本質。</strong></div><div class="callout-warn"><strong>⚠️ 接近崩潰時一階 $\lambda$ 模型失效。</strong></div><details class="example"><summary>📝 自編概念例</summary><div class="example-body"><p><strong>題目：</strong>$I_D=2$ mA、$\lambda=0.05$ V$^{-1}$。</p><p><strong>解：</strong>$r_o=1/(\lambda I_D)$。</p><p><strong>答案：</strong>10 kΩ。</p></div></details></section>
+<section id="s13-3-2"><h2>13.3.2 速度飽和效應</h2><div class="section-keypoints"><strong>🔑 本節重點</strong> ① 高場下速度不再線性 ② 電流低於常數遷移率預測 ③ 飽和提前 ④ 高頻性能受材料速度限制</div>
+<p>低場時漂移速度近似 $\mu E$。</p><p>高橫向場下聲子散射使速度趨近 $v_{sat}$。</p><p>通道電流因此低於常數遷移率模型。</p><p>電流飽和可能在幾何夾止前由速度限制觸發。</p><p>GaAs 等材料的速度–電場關係還可能呈非單調行為。</p><div class="callout"><strong>💡 高場模型需把空乏幾何與速度限制同時納入。</strong></div><div class="callout-warn"><strong>⚠️ 不能把低場遷移率外推到任意高電場。</strong></div><details class="example"><summary>📝 自編概念例</summary><div class="example-body"><p><strong>題目：</strong>$E$ 超過 $v_{sat}/\mu$。</p><p><strong>解：</strong>$v=\mu E$ 失效。</p><p><strong>答案：</strong>須使用速度飽和模型。</p></div></details></section>
+<section id="s13-3-3"><h2>13.3.3 次閾值與閘極電流效應</h2><div class="section-keypoints"><strong>🔑 本節重點</strong> ① 截止附近仍有殘餘通道 ② 熱與缺陷造成漏電 ③ 閘接面反偏也有漏電 ④ 正偏會限制輸入擺幅</div>
+<p>接近夾止時通道電流不會理想地突然歸零。</p><p>熱激發、局部未耗盡區與表面態可造成次閾值導電。</p><p>pn 或蕭特基閘極在反偏時仍有產生與表面漏電。</p><p>反偏過大可能進入崩潰，正偏過大則使閘極明顯導通。</p><p>這些電流決定關閉功耗、輸入阻抗與允許閘壓範圍。</p><div class="callout"><strong>💡 接面閘極的高輸入阻抗是近似，不是無限大。</strong></div><div class="callout-warn"><strong>⚠️ MESFET 閘極漏電常對溫度與界面品質很敏感。</strong></div><details class="example"><summary>📝 自編概念例</summary><div class="example-body"><p><strong>題目：</strong>閘極由反偏轉為明顯順偏。</p><p><strong>解：</strong>接面開始注入載子。</p><p><strong>答案：</strong>輸入電流上升並失去高阻特性。</p></div></details></section>
+<section id="s13-4-1"><h2>13.4.1 小訊號等效電路</h2><div class="section-keypoints"><strong>🔑 本節重點</strong> ① $g_mv_{gs}$ 表示控制電流 ② $r_o$ 表示非理想飽和 ③ 接面電容連結各端 ④ 串聯電阻降低有效跨導</div>
+<p>在直流工作點附近，JFET/MESFET 可用跨導受控電流源線性化。</p><p>$g_mv_{gs}$ 表示閘極小訊號對汲極電流的控制。</p><p>$r_o$ 描述通道長度調變造成的有限輸出電阻。</p><p>$C_{gs}$、$C_{gd}$ 與接面寄生決定頻率響應。</p><p>源汲接觸與通道串聯電阻會降低外部量得的有效跨導。</p><div class="callout"><strong>💡 模型參數必須對應指定偏壓與頻率。</strong></div><div class="callout-warn"><strong>⚠️ 靜態 $V/I$ 不等於小訊號微分電阻。</strong></div><details class="example"><summary>📝 自編概念例</summary><div class="example-body"><p><strong>題目：</strong>$g_m=5$ mS、$v_{gs}=10$ mV。</p><p><strong>解：</strong>$i_d=g_mv_{gs}$。</p><p><strong>答案：</strong>50 µA。</p></div></details></section>
+<section id="s13-4-2"><h2>13.4.2 頻率限制因素</h2><div class="section-keypoints"><strong>🔑 本節重點</strong> ① 閘極電容需要充放 ② $f_T$ 由跨導電容比決定 ③ Miller 效應放大 $C_{gd}$ ④ 接觸電阻造成 RC 損失</div>
+<p>高頻下輸入電流主要用來充放閘極相關電容。</p><p>簡化截止頻率近似 $f_T\approx g_m/[2\pi(C_{gs}+C_{gd})]$。</p><p>跨接輸入輸出的 $C_{gd}$ 會因電壓增益產生 Miller 效應。</p><p>閘極、源極與汲極電阻和寄生電容形成額外時間常數。</p><p>縮短閘長可提高 $g_m/C_g$，但高場與短通道非理想會限制改善。</p><div class="callout"><strong>💡 提高速度需同時提高跨導並降低總充電負擔。</strong></div><div class="callout-warn"><strong>⚠️ $f_T$ 不等於功率增益仍大於 1 的最高頻率。</strong></div><details class="example"><summary>📝 自編概念例</summary><div class="example-body"><p><strong>題目：</strong>$g_m=10$ mS、總電容 200 fF。</p><p><strong>解：</strong>$f_T=g_m/(2\pi C)$。</p><p><strong>答案：</strong>約 8 GHz。</p></div></details></section>
+<section id="s13-5-1"><h2>13.5.1 量子井結構</h2><div class="section-keypoints"><strong>🔑 本節重點</strong> ① 異質接面導帶偏移形成量子井 ② 電子垂直方向量子化 ③ 平面方向自由移動 ④ 調變摻雜分離載子與雜質</div>
+<p>HEMT 利用寬能隙與窄能隙材料的導帶偏移形成界面量子井。</p><p>電子在垂直方向被侷限成離散子能帶。</p><p>電子仍可沿界面平面自由移動，形成二維電子氣。</p><p>調變摻雜把施體留在障壁層，電子轉移到未摻雜通道。</p><p>空間分離降低離化雜質散射並提高遷移率。</p><div class="callout"><strong>💡 HEMT 高遷移率的關鍵是散射中心與通道分離。</strong></div><div class="callout-warn"><strong>⚠️ 量子井片電荷需考慮 band offset 與量子化，不能只用均勻通道公式。</strong></div><details class="example"><summary>📝 自編概念例</summary><div class="example-body"><p><strong>題目：</strong>加入未摻雜 spacer。</p><p><strong>解：</strong>增加電子與施體距離。</p><p><strong>答案：</strong>散射降低但面密度可能下降。</p></div></details></section>
+<section id="s13-5-2"><h2>13.5.2 HEMT 電晶體性能</h2><div class="section-keypoints"><strong>🔑 本節重點</strong> ① 閘極控制 2DEG 面密度 ② 高遷移率提高跨導 ③ 低雜訊適合微波 ④ 寄生與速度飽和仍限制性能</div>
+<p>HEMT 閘極改變量子井與 2DEG 面密度，控制源汲電流。</p><p>高遷移率與高片電荷可提供大的跨導和截止頻率。</p><p>低離化雜質散射也有利於低雜訊放大。</p><p>短閘長、低接觸電阻與低閘極電容是高頻設計重點。</p><p>速度飽和、閘極漏電、崩潰與自熱仍限制功率和可靠度。</p><div class="callout"><strong>💡 HEMT 優勢是量子井電荷控制與低散射通道的組合。</strong></div><div class="callout-warn"><strong>⚠️ 高遷移率不會自動消除接觸與寄生限制。</strong></div><details class="example"><summary>📝 自編概念例</summary><div class="example-body"><p><strong>題目：</strong>相同電容下 $g_m$ 加倍。</p><p><strong>解：</strong>$f_T\propto g_m/C$。</p><p><strong>答案：</strong>理想 $f_T$ 約加倍。</p></div></details></section>
+<section id="summary"><h2>本章總結——JFET/MESFET/HEMT 的物理全景</h2>
+<ol>
+<li><strong>基本操作哲學：</strong>JFET/MESFET 是 depletion-mode 場效元件——閘極不是創造通道，而是用反偏接面的空乏區<strong>掐窄</strong>已存在的通道。這是與 MOSFET（反轉層建立通道）的根本差異。</li>
+<li><strong>內部夾止電壓 $V_{p0}$ 與夾止電壓 $V_p$：</strong>$V_{p0} = e a^2 N_d / (2\epsilon_s)$ 是夾止時的總接面電位（正量）。$V_p = V_{bi} - V_{p0}$ 是閘極需施加的電壓（n-channel depletion-mode 為負）。這兩個公式直接來自 Ch7 的 pn 接面空乏區理論——$h = \sqrt{2\epsilon_s(V_{bi}-V_{GS})/(eN_d)}$。</li>
+<li><strong>飽和電壓 $V_{DS}(\text{sat})$：</strong>$V_{DS}(\text{sat}) = V_{p0} - (V_{bi} - V_{GS})$。在汲極端達到夾止後元件進入飽和——電流不再隨 $V_{DS}$ 增大（理想情況）。</li>
+<li><strong>I-V 平方律：</strong>$I_D = I_{DSS}(1 - V_{GS}/V_p)^2$。這是全章最重要的公式——精確推導過程從歐姆定律出發，積分通道中的微分壓降，最終得到 $(1 - V_{GS}/V_p)^2$ 的簡潔形式。背後物理：通道截面積隨閘極偏壓二次方縮小。</li>
+<li><strong>跨導 $g_m$：</strong>$g_m = g_{m0}(1 - V_{GS}/V_p)$，線性下降。最大跨導 $g_{m0} = 2I_{DSS}/|V_p|$。跨導是 JFET 作為放大器的核心指標。</li>
+<li><strong>增強型 MESFET：</strong>$V_T = V_{bi} - V_{p0}$。當 $V_{p0} &lt; V_{bi}$ 時 $V_T &gt; 0$——normally-off 元件。$I_D \approx k_n(V_{GS} - V_T)^2$，形式與 MOSFET 完全相同。</li>
+<li><strong>通道長度調變：</strong>$I_D' \approx I_D(1 + \lambda V_{DS})$——$\Delta L$ 使有效通道長度縮短，電流上升。$r_{ds}$ 有限（∼kΩ 量級），在短通道元件中更顯著。</li>
+<li><strong>速度飽和：</strong>高電場下 $v \to v_{\text{sat}}$——$V_{DS}(\text{sat})$ 和 $I_D(\text{sat})$ 都變小，$g_m$ 下降。GaAs 元件中尤其重要。</li>
+<li><strong>小訊號等效電路：</strong>$i_{ds} = g_m v_{gs}$，$g_m' = g_m/(1 + g_m r_s)$。寄生電容 $C_{gs}$, $C_{gd}$ 限制高頻響應。</li>
+<li><strong>截止頻率 $f_T$：</strong>$f_T = g_m/(2\pi C_G) \propto \mu_n a^2 / L^2$。縮小 $L$ 是提升 $f_T$ 最有效的手段（平方關係）。GaAs MESFET 可達 ∼100 GHz。</li>
+<li><strong>HEMT（高電子遷移率電晶體）：</strong>異質接面將載子（2DEG）與摻雜離子空間分離→離子化雜質散射最小化→遷移率大幅提升。$n_s$ 由電荷控制模型描述：$n_s \propto (V_g - V_{\text{off}})/(d + \Delta d)$。300 K 下 $g_m \sim 250$ mS/mm，$f_T &gt; 100$ GHz。HEMT 是場效元件速度與雜訊性能的巔峰。</li>
+</ol>
+
+<div class="callout"><strong>💡 JFET 與 MOSFET —— 兩條路，同一個終點</strong><br>
+JFET 和 MOSFET 雖然物理機制不同（空乏區掐窄 vs 反轉層建立），但它們的飽和區 I-V 關係最終都收斂到平方律：$I_D \propto (V_{GS} - V_T)^2$。這不是巧合——它反映了場效控制的本質：橫向電場調變縱向電流的通道截面積。無論是空乏區還是反轉層，截面積都與 $(V_{GS} - V_T)$ 成正比，而電流正比於截面積 × 橫向電場——這就產生了平方律。理解這個統一性，你就真正掌握了場效電晶體的物理本質。</div>
+<table><caption>第 13 章模型、控制量與適用邊界</caption><thead><tr><th scope="col">主題</th><th scope="col">核心關係</th><th scope="col">主要用途</th><th scope="col">失效邊界</th></tr></thead><tbody><tr><td>JFET 夾止</td><td>$V_{p0}\propto N_Da^2/\epsilon_s$</td><td>由幾何與摻雜估算控制電壓</td><td>非均勻摻雜、二維邊緣場</td></tr><tr><td>理想飽和電流</td><td>$I_D=I_{DSS}(1-V_{GS}/V_P)^2$</td><td>偏壓與跨導估算</td><td>線性區、高場與強通道長度調變</td></tr><tr><td>高頻響應</td><td>$f_T\approx g_m/[2\pi(C_{gs}+C_{gd})]$</td><td>估算電流增益截止頻率</td><td>未含接觸、互連與功率增益限制</td></tr><tr><td>HEMT</td><td>閘極控制 2DEG 面電荷</td><td>高頻、低雜訊與高速傳輸</td><td>量子化、自熱、速度飽和與漏電</td></tr></tbody></table>
+</section>
+<section id="common-mistakes"><h2>常見錯誤</h2><div class="callout-warn"><strong>⚠️ 把 pinch-off 當成汲極電流歸零。</strong>汲端局部夾止後，載子仍被高電場掃入汲極，電流進入飽和。</div><div class="callout-warn"><strong>⚠️ 混用 $V_{p0}$、$V_P$ 與 $V_T$ 的符號。</strong>先確認教材採正幅值或帶符號端電壓，再代入公式。</div><div class="callout-warn"><strong>⚠️ 把 MESFET 當作絕緣閘 MOSFET。</strong>蕭特基閘極有順向導通與反向漏電限制。</div><div class="callout-warn"><strong>⚠️ 只用材料遷移率解釋 HEMT。</strong>調變摻雜造成的載子—雜質空間分離同樣關鍵。</div></section>
+<section id="self-check"><h2>自我檢核</h2><details><summary>為何 n 通道 JFET 的汲端通常先夾止？</summary><p>通道電位朝汲端升高，使閘極—局部通道接面的反偏最大，空乏區因而最寬。</p></details><details><summary>為何夾止後仍有汲極電流？</summary><p>夾止只出現在汲端附近；載子穿過通道後由夾止區的強電場掃入汲極。</p></details><details><summary>跨導為何隨 JFET 接近截止而下降？</summary><p>通道已被空乏區大幅壓縮，閘壓的微小改變能調變的有效導電電荷變少。</p></details><details><summary>HEMT 的 spacer 層有何取捨？</summary><p>加大載子與離化施體距離可減少散射，但也可能降低轉移到量子井的面電荷密度。</p></details></section>
+<section id="extras"><h2>延伸學習</h2><p><a href="../problems_examples/ch13_problems_zh.html">第 13 章計算練習</a> · <a href="../problems_examples/examples_in_chapter_zh.html#ch13">章內例題索引</a>。下一章將進入<a href="ch14_optical_devices_zh.html">光電元件</a>。</p></section>
+<section id="learning-resources"><h2>本章學習資源</h2><p><a href="../problems_examples/ch13_problems_zh.html">JFET／MESFET／HEMT 可驗算補充習題</a> · <a href="../problems_examples/examples_in_chapter_zh.html#ch13">章內例題</a></p></section>
+<section id="derivation-lab" class="derive"><h2>推導、假設與章末診斷</h2><h3>方程式使用契約</h3><ul><li>JFET/MESFET 平方律採一維 depletion approximation、漸變通道、均勻摻雜、常數遷移率與低場漂移。</li><li>閘極接面維持反偏且漏電忽略；MESFET 需以 Schottky 內建電位決定空乏寬度。</li><li>Shockley 式 $I_D=I_{DSS}(1-V_{GS}/V_P)^2$ 主要描述飽和區，不適用線性區、崩潰或強通道長度調變。</li><li>HEMT 的 2DEG 片電荷由異質接面能帶、極化與量子井共同決定，不能直接套均勻摻雜 JFET 通道。</li></ul><h3>中間推導：平方律來源</h3><ol><li>反偏接面空乏寬度 $w(y)\propto\sqrt{V_{bi}-V_G+V(y)}$，有效通道厚度隨汲極方向變窄。</li><li>局部電導與有效厚度成正比，$dV/dy=I/[q\mu N_DW a_{eff}(y)]$。</li><li>沿通道積分並在汲極端滿足 pinch-off 條件，得到飽和電流對閘極超額偏壓的平方關係。</li><li>以 $V_{GS}=0$ 的電流定義 $I_{DSS}$，化為 Shockley 式。</li></ol><div class="info-card"><strong>單位／量級：</strong>$g_m=dI_D/dV_{GS}$ 單位為 A/V = S；$I_{DSS}=8$ mA、$V_P=-4$ V 時 $g_{m0}=2I_{DSS}/|V_P|=4$ mS。</div><h3>章末練習與概念診斷</h3><details><summary>pinch-off 後通道是否在整段消失？</summary><p>否，只在汲極端附近夾止；載子仍被高場掃向汲極，電流進入飽和。</p></details><details><summary>HEMT 高遷移率只因 GaAs 本身較快嗎？</summary><p>不只如此；調變摻雜讓 2DEG 與離化雜質空間分離，大幅降低離化雜質散射。</p></details><h3>延伸計算練習</h3><p>完成上方診斷後，請在不查公式的情況下重建代表推導，並改變一個參數檢查極限行為。更多含數值與解答的題目：<a href="../problems_examples/ch13_problems_zh.html">本章完整習題頁</a>。</p></section>
+
+</div></section></main></body>
+</html>

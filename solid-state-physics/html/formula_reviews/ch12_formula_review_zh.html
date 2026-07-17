@@ -1,108 +1,14 @@
-<!DOCTYPE html>
-<html lang="zh-TW" data-theme="light">
+<!doctype html>
+<html lang="zh-Hant">
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>第十二章 公式摘要 — MOSFET 進階概念（23 條完整版）</title>
-<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']],tags:'ams'},options:{ignoreHtmlClass:'no-math'}};</script>
-<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-<style>
-:root{--bg:#fff;--b2:#F5F5F7;--b3:#E8F0FE;--tx:#1D1D1F;--t2:#1D1D1F;--ac:#007AFF;--bd:#D2D2D7;--sh:0 2px 8px rgba(0,0,0,.08);--fbg:#FAFBFC;--fbd:#E5E5EA;--dbg:#E8F0FE;--dac:#007AFF;--wbg:#FFF9F0;--wbd:#FFB340;--wtx:#B8700A;--hv:#F0F4FF;--nw:240px}
-[data-theme="dark"]{--bg:#1C1C1E;--b2:#2C2C2E;--b3:#1A2332;--tx:#F5F5F7;--t2:#A1A1A6;--ac:#0A84FF;--bd:#48484A;--fbg:#252528;--fbd:#3A3A3C;--dbg:#1A2332;--dac:#0A84FF;--wbg:#2C2416;--wbd:#8B6914;--wtx:#FFB340;--hv:#1E2A3A}
-*{box-sizing:border-box;margin:0;padding:0}html{scroll-behavior:smooth;scroll-padding-top:16px}
-body{font-family:-apple-system,BlinkMacSystemFont,'Noto Sans TC','Microsoft JhengHei',sans-serif;background:var(--b2);color:var(--tx);line-height:1.75;display:flex;min-height:100vh}
-.sidebar{position:fixed;top:0;left:0;width:var(--nw);height:100vh;background:var(--bg);border-right:1px solid var(--bd);overflow-y:auto;z-index:100;padding:20px 16px;display:flex;flex-direction:column}
-.sh{margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--fbd)}.sh h2{font-size:14px;font-weight:600;color:var(--ac)}.sh .bk{font-size:11px;color:var(--t2)}
-.sn{flex:1}.sn ul{list-style:none}.sn a{display:block;padding:3px 10px;font-size:10.5px;color:var(--t2);text-decoration:none;border-radius:5px;transition:.12s;line-height:1.3}.sn a:hover{background:var(--b3);color:var(--ac)}.sn a.active{background:var(--b3);color:var(--ac);font-weight:500}.sn .ns{font-weight:600;font-size:11.5px;color:var(--tx);margin-top:8px;padding:2px 10px}.sn .nsub a{padding-left:18px;font-size:10px}
-.st{margin-top:auto;padding-top:12px;border-top:1px solid var(--fbd)}.st button{width:100%;padding:6px;border:1px solid var(--bd);border-radius:6px;background:var(--b2);color:var(--tx);cursor:pointer;font-size:12px}
-.main{margin-left:var(--nw);flex:1;max-width:1100px;padding:32px 40px 80px}
-.header{margin-bottom:24px;padding-bottom:20px;border-bottom:2px solid var(--ac)}.header .tag{font-size:12px;font-weight:600;color:var(--ac);letter-spacing:1px}.header h1{font-size:26px;font-weight:700;margin:6px 0}.header .sub{font-size:13px;color:var(--t2)}
-.tbar{display:flex;gap:8px;margin-bottom:20px}.tbar button{padding:5px 16px;font-size:12px;border:1px solid var(--ac);border-radius:20px;background:var(--bg);color:var(--ac);cursor:pointer;font-weight:500;transition:.15s}.tbar button:hover{background:var(--ac);color:#fff}
-.section{margin-bottom:44px}.section h2{font-size:19px;font-weight:700;color:var(--ac);margin-bottom:4px;padding-bottom:6px;border-bottom:1px solid var(--bd)}
-.fcard{background:var(--bg);border:1px solid var(--fbd);border-radius:10px;padding:16px 20px;margin:14px 0;box-shadow:var(--sh)}.fcard .lbl{font-size:11px;font-weight:700;color:var(--ac);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}.fcard .eq{text-align:center;padding:8px 0;font-size:15px}.fcard .note{font-size:12px;color:var(--t2);margin-top:6px;padding-top:6px;border-top:1px solid var(--fbd);line-height:1.6}
-details.derive{background:var(--dbg);border-left:4px solid var(--dac);border-radius:0 10px 10px 0;margin:16px 0;transition:.2s}details.derive[open]{background:var(--bg)}
-details.derive>summary{padding:14px 18px;cursor:pointer;list-style:none;display:flex;align-items:center;gap:8px;font-weight:700;color:var(--ac);font-size:13px;letter-spacing:.3px;user-select:none}details.derive>summary::-webkit-details-marker{display:none}details.derive>summary::before{content:'▸';display:inline-block;font-size:11px;transition:transform .2s;width:14px;text-align:center}details.derive[open]>summary::before{transform:rotate(90deg)}details.derive>summary:hover{background:var(--hv);border-radius:0 10px 0 0}
-details.derive .dbo{padding:0 18px 16px 18px}details.derive .step{margin:8px 0;padding:6px 0}details.derive .snb{display:inline-block;background:var(--ac);color:#fff;width:22px;height:22px;border-radius:50%;text-align:center;font-size:11px;font-weight:700;line-height:22px;margin-right:8px}details.derive .sl{font-weight:700;font-size:13px;color:var(--tx)}details.derive .sc{margin:4px 0 4px 30px;font-size:13px;color:var(--t2)}details.derive .sc .math{display:block;text-align:center;padding:6px 0}
-table{width:100%;border-collapse:collapse;margin:12px 0;font-size:12px}thead th{background:var(--b3);padding:8px 12px;font-size:12px;font-weight:600;border-bottom:2px solid var(--bd)}tbody td{padding:6px 10px;border-bottom:1px solid var(--fbd);font-size:11px}
-.warn-box{background:var(--wbg);border:1px solid var(--wbd);border-radius:10px;padding:14px 18px;margin:16px 0;font-size:14px}.warn-box .wt{font-weight:700;color:var(--wtx);font-size:12px;margin-bottom:6px}
-@media(max-width:768px){.sidebar{transform:translateX(-100%);transition:.3s}.sidebar.open{transform:translateX(0)}.main{margin-left:0;padding:20px 16px 60px}}
-@media print{.sidebar,.tbar{display:none}details.derive{display:block!important}.main{margin-left:0;max-width:100%;padding:0}}
-</style>
-<script src="../../../reading-preferences.js" defer></script></head>
-<body><a class="portal-home-link" href="../../../index.html">返回學習中心</a><style id="portal-home-link-style">.portal-home-link{position:fixed;top:16px;right:16px;z-index:1000;display:inline-flex;align-items:center;min-height:36px;padding:7px 11px;border:1px solid #cbd5e1;border-radius:8px;background:#fff;color:#1d4ed8;font:600 13px/1.2 -apple-system,BlinkMacSystemFont,"Noto Sans TC","Microsoft JhengHei",sans-serif;text-decoration:none;box-shadow:0 2px 10px rgba(15,23,42,.08)}.portal-home-link:hover{background:#eff6ff}.portal-home-link:focus-visible{outline:3px solid rgba(37,99,235,.35);outline-offset:2px}@media(max-width:768px){.portal-home-link{top:10px;right:10px;min-height:34px;padding:7px 9px;font-size:12px}}</style>
-<nav class="sidebar"><div class="sh"><div class="bk">半導體物理與元件·第四版</div><h2>第十二章 公式摘要</h2></div><div class="sn"><ul>
-<li class="ns">12.1 縮小法則</li><li class="nsub"><a href="#s1">12.1 定電場縮小 (12.1–12.2)</a></li>
-<li class="ns">12.2 非理想效應</li><li class="nsub"><a href="#s2">12.2.1 遷移率退化</a></li><li class="nsub"><a href="#s3">12.2.2 速度飽和 (12.14–12.15)</a></li><li class="ns">12.3–12.5</li><li class="nsub"><a href="#s4">12.3 熱載子·DIBL·次臨界</a></li><li class="nsub"><a href="#s5">12.4–12.5 短通道 $V_T$·穿通</a></li><li><a href="#cheatsheet">📋 公式速查表</a></li>
-</ul></div><div class="st"><button onclick="toggleTheme()">🌓 <span id="tl">深色模式</span></button></div></nav>
-<main class="main">
-<div class="header"><div class="tag">23 條公式·全部收錄</div><h1>第十二章：MOSFET 進階概念</h1><div class="sub">Semiconductor Physics & Devices, 4th Ed.·Donald A. Neamen·pp.446–504</div></div>
-<div class="tbar"><button onclick="document.querySelectorAll('details').forEach(d=>d.open=true)">📖 展開全部</button><button onclick="document.querySelectorAll('details').forEach(d=>d.open=false)">📕 收合全部</button></div>
-
-<div class="section" id="s1"><h2>12.1 定電場縮小法則 (12.1–12.2)</h2>
-<details class="derive" open><summary>🔍 完整推導——Dennard 縮小法則的全部參數關係</summary><div class="dbo">
-<div class="step"><span class="snb">1</span><span class="sl">基本縮小因子 $\kappa$ (12.1)</span><div class="sc">所有尺寸乘以 $1/\kappa$：$L'=L/\kappa$, $W'=W/\kappa$, $t_{ox}'=t_{ox}/\kappa$, $x_j'=x_j/\kappa$。<br>所有電壓乘以 $1/\kappa$：$V_{DD}'=V_{DD}/\kappa$, $V_T'=V_T/\kappa$。<br>基板摻雜乘以 $\kappa$：$N_a'=\kappa N_a$（保持空乏層寬度同步縮小）。</div></div>
-<div class="step"><span class="snb">2</span><span class="sl">電場保持不變 (12.2)</span><div class="sc">$E'=V'/L'=(V/\kappa)/(L/\kappa)=V/L=E$。內部電場完全不受縮小影響→可靠性保持。</div></div>
-<div class="step"><span class="snb">3</span><span class="sl">氧化層電容</span><div class="sc">$C_{ox}'=\epsilon_{ox}/t_{ox}'=\kappa C_{ox}$（單位面積電容增加 $\kappa$ 倍）。</div></div>
-<div class="step"><span class="snb">4</span><span class="sl">電流·延遲·功耗</span><div class="sc">$I_D'\propto(W'/L')C_{ox}'(V')^2=(W/L)\kappa C_{ox}(V/\kappa)^2=I_D/\kappa$。<br>延遲 $\tau'=C'V'/I'\propto(1/\kappa)(1/\kappa)/(1/\kappa)=\tau/\kappa$。<br>功耗 $P'=I'V'=(1/\kappa)(1/\kappa)=P/\kappa^2$。功率-延遲積 $P'\tau'=P\tau/\kappa^3$。</div></div>
-</div></details>
-<div class="fcard"><div class="lbl">⭐ 定電場縮小效益總表</div><table><thead><tr><th>參數</th><th>因子</th><th>效益</th></tr></thead><tbody>
-<tr><td>$L, W, t_{ox}$</td><td>$1/\kappa$</td><td>尺寸縮小</td></tr>
-<tr><td>$V_{DD}, V_T$</td><td>$1/\kappa$</td><td>電壓降低</td></tr>
-<tr><td>$N_a$</td><td>$\kappa$</td><td>摻雜增加</td></tr>
-<tr><td>$I_D$</td><td>$1/\kappa$</td><td>每單位寬度不變</td></tr>
-<tr><td>延遲 $\tau$</td><td>$1/\kappa$</td><td>速度提升</td></tr>
-<tr><td>功耗 $P$</td><td>$1/\kappa^2$</td><td>⭐ 功耗急降</td></tr>
-<tr><td>$P\times\tau$</td><td>$1/\kappa^3$</td><td>⭐ 綜合指標</td></tr>
-<tr><td>密度</td><td>$\kappa^2$</td><td>平方增長</td></tr></tbody></table></div>
-</div>
-
-<div class="section" id="s2"><h2>12.2.1 遷移率退化 (12.14–12.15)</h2>
-<div class="fcard"><div class="lbl">⭐ 遷移率退化公式 (12.14a, 12.14b)</div><div class="eq">$$\boxed{\mu_{\text{eff}} = \frac{\mu_0}{1 + \theta(V_{GS}-V_T)}} \tag{12.14a}$$</div><div class="eq">$$\theta = \frac{1}{t_{ox}}\sqrt{\frac{\epsilon_{ox}}{\epsilon_s}}\cdot\frac{\hbar^2}{2m^* kT} \tag{12.14b}$$</div><div class="note">$\theta$ 的物理來源：垂直電場 $\propto (V_{GS}-V_T)/t_{ox}$→載子被壓向 Si/SiO₂ 界面→表面粗糙度散射 + 量子侷限→$\mu$ 下降。</div></div>
-<div class="fcard"><div class="lbl">速度飽和修正後的 $I_D$ (12.15a, 12.15b)</div><div class="eq">$$I_D(\text{sat}) = \frac{W C_{ox}(V_{GS}-V_T)^2}{2\left[1 + \dfrac{\mu_n(V_{GS}-V_T)}{2v_{\text{sat}}L}\right]} \tag{12.15a}$$</div><div class="note">長通道極限 ($L\to\infty$)：回復平方律 $I_D=\frac{1}{2}\mu_n C_{ox}(W/L)(V_{GS}-V_T)^2$。<br>短通道極限 ($L\to0$)：$I_D=W C_{ox}(V_{GS}-V_T)v_{\text{sat}}$——線性律。(12.15b)</div></div>
-</div>
-
-<div class="section" id="s3"><h2>12.2.2 速度飽和效應的完整分析</h2>
-<details class="derive" open><summary>🔍 速度飽和對 $I_D$, $g_m$, 飽和電壓的全面影響</summary><div class="dbo">
-<div class="step"><span class="snb">1</span><span class="sl">速度飽和下的跨導</span><div class="sc">從 (12.15a) 微分：$g_m = \partial I_D/\partial V_{GS}$。短通道極限：$g_m = W C_{ox} v_{\text{sat}}$（常數！）。</div></div>
-<div class="step"><span class="snb">2</span><span class="sl">速度飽和下的飽和電壓</span><div class="sc">長通道：$V_{DS,\text{sat}} = V_{GS}-V_T$（夾止條件）。速度飽和：$V_{DS,\text{sat}} < V_{GS}-V_T$（載子在通道中途已達 $v_{\text{sat}}$→提前夾止）。</div></div>
-<div class="step"><span class="snb">3</span><span class="sl">速度飽和對輸出電阻的影響</span><div class="sc">提前夾止→夾止點距離汲極更遠→通道長度調變更劇烈→$r_o$ 降低。</div></div>
-</div></details>
-</div>
-
-<div class="section" id="s4"><h2>12.3 熱載子效應·DIBL·次臨界特性</h2>
-<div class="fcard"><div class="lbl">熱載子注入機率</div><div class="eq">$$P_{\text{inj}} \propto \exp\!\left(-\frac{\phi_B}{e\lambda E_m}\right) \tag{12.35a}$$</div><div class="note">$\phi_B$ = Si/SiO₂ 能障（∼3.1 eV）。$\lambda$ = 熱載子平均自由路徑。$E_m$ = 汲極端峰值電場。注入機率對 $E_m$ 有極強的超線性依賴。</div></div>
-<div class="fcard"><div class="lbl">DIBL（汲極引發能障降低）</div><div class="eq">$$V_T = V_{T0} - \delta\,V_{DS} \tag{12.36a}$$</div><div class="note">$\delta$ = DIBL 係數。短通道時汲極電場穿透到源極側→降低源極端能障→$V_T$ 下降。</div></div>
-<div class="fcard"><div class="lbl">次臨界斜率 (12.37)</div><div class="eq">$$\boxed{S = \frac{kT}{e}\ln10\left(1 + \frac{C_d}{C_{ox}}\right) \approx 60\left(1 + \frac{C_d}{C_{ox}}\right)\ \text{mV/dec}} \tag{12.37}$$</div></div>
-</div>
-
-<div class="section" id="s5"><h2>12.4–12.5 短通道臨界電壓·穿通效應</h2>
-<div class="fcard"><div class="lbl">短通道 $V_T$ 模型 (12.77)</div><div class="eq">$$\Delta V_T \propto -\exp\!\left(-\frac{L}{2l}\right) \tag{12.77}$$</div><div class="note">$l$ = 特徵長度（取決於 $t_{ox}$, $x_j$, $x_d$）。$L$ 越小→$\Delta V_T$ 負得越多→$V_T$ roll-off。這是 $L$ 不能無限縮小的根本原因。</div></div>
-<div class="fcard"><div class="lbl">穿通效應 (Punch-through)</div><div class="eq">源極和汲極空乏區在通道下方相遇→形成直接穿通電流路徑→$I_D$ 不再由閘極控制。</div></div>
-<div class="fcard"><div class="lbl">閘極漏電流——Fowler-Nordheim 穿隧 (12.87–12.88)</div><div class="eq">$$J_G = A\,E_{ox}^2\,\exp\!\left(-\frac{B}{E_{ox}}\right) \tag{12.87}$$</div><div class="note">$E_{ox}=V_{ox}/t_{ox}$。$t_{ox}$ 越小→$E_{ox}$ 越大→$J_G$ 指數增長。high-κ 材料降低 $E_{ox}$（較厚物理厚度）。</div></div>
-<div class="fcard"><div class="lbl">等效氧化層厚度 (12.97)</div><div class="eq">$$t_{ox,\text{eq}} = \frac{\kappa_{\text{SiO}_2}}{\kappa_{\text{high-}\kappa}}\,t_{\text{high-}\kappa} \tag{12.97}$$</div></div>
-<div class="fcard"><div class="lbl">量子力學 $V_T$ 偏移 (12.99)</div><div class="eq">$$\Delta V_T^{QM} = \frac{\Delta E_0}{e} \tag{12.99}$$</div><div class="note">$\Delta E_0$ = 反轉層中最低次能帶的能量（來自垂直方向的量子侷限）。使 $V_T$ 增加 ∼0.1–0.2 V。</div></div>
-</div>
-
-<div class="section" id="cheatsheet"><h2>公式速查表（23 條全收錄）</h2>
-<table><thead><tr><th>Eq</th><th>公式</th><th>備註</th></tr></thead><tbody>
-<tr><td>12.1</td><td>$L'=L/\kappa$, $V'=V/\kappa$, $N_a'=\kappa N_a$</td><td>⭐ 定電場縮小</td></tr>
-<tr><td>12.2</td><td>$E'=V'/L'=E$（不變）</td><td>電場守恆</td></tr>
-<tr><td>12.14a</td><td>$\mu_{\text{eff}}=\mu_0/[1+\theta(V_{GS}-V_T)]$</td><td>⭐ 遷移率退化</td></tr>
-<tr><td>12.14b</td><td>$\theta$ 表達式</td><td>垂直電場起源</td></tr>
-<tr><td>12.15a</td><td>$I_D=WC_{ox}(V_{GS}-V_T)^2/\{2[1+\mu_n(V_{GS}-V_T)/(2v_{\text{sat}}L)]\}$</td><td>⭐ 含速度飽和的 $I_D$</td></tr>
-<tr><td>12.15b</td><td>$I_D=W C_{ox}(V_{GS}-V_T)v_{\text{sat}}$</td><td>短通道極限</td></tr>
-<tr><td>12.35a</td><td>$P_{\text{inj}}\propto\exp(-\phi_B/(e\lambda E_m))$</td><td>熱載子注入機率</td></tr>
-<tr><td>12.36a</td><td>$V_T=V_{T0}-\delta V_{DS}$</td><td>DIBL</td></tr>
-<tr><td>12.37</td><td>$S=60(1+C_d/C_{ox})$ mV/dec</td><td>⭐ 次臨界斜率</td></tr>
-<tr><td>12.77</td><td>$\Delta V_T\propto-\exp(-L/(2l))$</td><td>短通道 $V_T$ roll-off</td></tr>
-<tr><td>12.87</td><td>$J_G=A E_{ox}^2\exp(-B/E_{ox})$</td><td>Fowler-Nordheim 穿隧</td></tr>
-<tr><td>12.88</td><td>直接穿隧 $J_G$</td><td>$t_{ox}<3$ nm 主導</td></tr>
-<tr><td>12.97</td><td>$t_{ox,\text{eq}}=(\kappa_{\text{SiO}_2}/\kappa)t_{\text{high-}\kappa}$</td><td>⭐ 等效氧化層厚度</td></tr>
-<tr><td>12.99</td><td>$\Delta V_T^{QM}=\Delta E_0/e$</td><td>量子侷限 $V_T$ 偏移</td></tr>
-</tbody></table></div></main>
-<script>
-function toggleTheme(){const h=document.documentElement;const n=h.getAttribute('data-theme')==='light'?'dark':'light';h.setAttribute('data-theme',n);localStorage.setItem('theme',n);document.getElementById('tl').textContent=n==='dark'?'淺色模式':'深色模式';}
-const s=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',s);if(s==='dark')document.getElementById('tl').textContent='淺色模式';
-const secs=document.querySelectorAll('.section[id]');const navs=document.querySelectorAll('.sn a');window.addEventListener('scroll',()=>{let c='';secs.forEach(s=>{if(window.scrollY>=s.offsetTop-80)c=s.getAttribute('id');});navs.forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+c);});});
-</script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="refresh" content="0; url=../../../subjects/solid-state-physics/html/formula_reviews/ch11_mosfet_advanced_formula_review_zh.html">
+  <link rel="canonical" href="../../../subjects/solid-state-physics/html/formula_reviews/ch11_mosfet_advanced_formula_review_zh.html">
+  <title>頁面已移動</title>
+  <script src="../../../assets/legacy-redirect.js" data-legacy-target="../../../subjects/solid-state-physics/html/formula_reviews/ch11_mosfet_advanced_formula_review_zh.html" defer></script>
+</head>
+<body>
+  <p>頁面已移動至<a href="../../../subjects/solid-state-physics/html/formula_reviews/ch11_mosfet_advanced_formula_review_zh.html">新的教材位置</a>。</p>
 </body>
 </html>

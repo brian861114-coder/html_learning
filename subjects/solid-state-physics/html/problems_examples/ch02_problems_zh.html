@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>第2章 章末習題詳解 — 半導體物理與元件</title>
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']],tags:'ams'}};</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<link rel="stylesheet" href="../../../../shared/core.css">
+<script src="../../../../shared/core.js" defer></script>
+<link rel="stylesheet" href="../../../../shared/components/formula-problem.css">
+<link rel="stylesheet" href="../../../../shared/navigation.css" data-shared-navigation>
+</head><body>
+<a class="portal-home-link" href="../index.html">返回學習中心</a>
+<nav class="sidebar" aria-label="本章目錄"><div class="sidebar-header"><div class="sidebar-subtitle">半導體物理與元件</div><h2 class="sidebar-title">第二章 量子力學導論 — 章末習題詳解</h2></div><div class="sidebar-nav"><a href="#p2-1">2.1 傳輸線波動</a><a href="#p2-5">2.5 功函數</a><a href="#p2-7">2.7 德布羅意波長</a><a href="#p2-9">2.9 光子/電子波長</a><a href="#p2-11">2.11 X射線加速電壓</a><a href="#p2-13">2.13 不確定性原理</a><a href="#p2-15">2.15 能量-時間不確定性</a><a href="#p2-17">2.17 歸一化常數</a><a href="#p2-19">2.19 機率計算</a><a href="#p2-21">2.21 機率 sin波函數</a><a href="#p2-23">2.23 平面波</a><a href="#p2-25">2.25 無限位能井</a><a href="#p2-27">2.27 巨觀粒子</a><a href="#p2-29">2.29 非對稱井波函數</a><a href="#p2-31">2.31 二維井</a><a href="#p2-33">2.33 階梯位能 T/R</a><a href="#p2-35">2.35 穿隧係數</a><a href="#p2-37">2.37 質子穿隧</a><a href="#p2-39">2.39 穿透係數推導</a><a href="#p2-41">2.41 氫原子能階</a></div><div class="sidebar-toggle"><button data-action="toggle-theme" id="themeBtn">🌙 深色模式</button></div><div class="sidebar-tools"><button type="button" data-action="toggle-theme" aria-label="切換深色或淺色模式">切換顯示主題</button></div></nav>
+<main class="chapter-page"><div class="chapter-header"><div class="tag">CHAPTER 2 · PROBLEMS</div><h1>第二章 量子力學導論 — 章末習題詳解</h1></div>
+<div class="content-toolbar"><button data-action="expand-details">📖 展開全部</button><button data-action="collapse-details">📕 收合全部</button></div>
+<h2>§2.1 量子力學原理</h2>
+<details class="problem-card" open id="p2-5"><summary><span class="problem-number">2.5</span>金與銫的光電效應最大波長 🟢</summary><div class="problem-body">
+<div class="problem-statement">Work function Au=4.90 eV, Cs=1.90 eV. Calculate the maximum wavelength of light for photoelectric emission.</div>
+<div class="solution-note">▸ 光電效應：$E_{\text{photon}} = h\nu = hc/\lambda \ge \Phi$。最大波長對應最小能量。</div>
+<p>$\lambda_{\text{max}} = hc/\Phi$。使用 $hc = 12400$ eV·Å：</p>
+<p>Au: $\lambda = 12400/4.90 = 2531$ Å = <b>0.254 µm</b>（紫外光）<br>
+Cs: $\lambda = 12400/1.90 = 6526$ Å = <b>0.654 µm</b>（可見紅光）</p>
+<div class="solution">✅ Au: 0.254 µm; Cs: 0.654 µm</div>
+<div class="formula-note">💡 金的功函數高 → 需要紫外光；銫的功函數低 → 紅光即可。這解釋了為什麼 Cs 常用於光電倍增管。</div>
+</div></details>
+
+<details class="problem-card" open id="p2-7"><summary><span class="problem-number">2.7</span>德布羅意波長（電子與氫原子）🟢</summary><div class="problem-body">
+<div class="problem-statement">De Broglie wavelength for (a) electron at (i) 1.2, (ii) 12, (iii) 120 eV; (b) H atom at 1.2 eV.</div>
+<div class="solution-note">▸ 電子專用公式：$\lambda(\text{Å}) = 12.26/\sqrt{E(\text{eV})}$</div>
+<p>(a)(i) $\lambda = 12.26/\sqrt{1.2} = \mathbf{11.2}$ Å<br>
+(ii) $\lambda = 12.26/\sqrt{12} = \mathbf{3.54}$ Å<br>
+(iii) $\lambda = 12.26/\sqrt{120} = \mathbf{1.12}$ Å</p>
+<div class="solution-note">▸ (b) 氫原子 ($m_H = 1.674\times10^{-27}$ kg)</div>
+<p>$\lambda = h/\sqrt{2m_H E} = (6.625\times10^{-34})/\sqrt{2(1.674\times10^{-27})(1.2\times1.6\times10^{-19})} = \mathbf{0.262}$ Å</p>
+<div class="solution">✅ (a)(i) 11.2, (ii) 3.54, (iii) 1.12 Å; (b) 0.262 Å</div>
+<div class="formula-note">💡 相同動能下，質量越大→波長越短。氫原子質量是電子的 1836 倍，波長短 $\sqrt{1836}\approx43$ 倍。</div>
+</div></details>
+
+<details class="problem-card" open id="p2-9"><summary><span class="problem-number">2.9</span>電子與光子同能量、波長差 10 倍 🟢</summary><div class="problem-body">
+<div class="problem-statement">Electron and photon same energy. At what energy (eV) will $\lambda_\gamma = 10\lambda_e$?</div>
+<div class="solution-note">▸ 解法</div>
+<p>$\lambda_\gamma = hc/E$, $\lambda_e = h/\sqrt{2mE}$。條件：$hc/E = 10h/\sqrt{2mE}$</p>
+$$c\sqrt{2m} = 10\sqrt{E} \Rightarrow E = \frac{c^2 \cdot 2m}{100} = \frac{(3\times10^8)^2 \cdot 2(9.11\times10^{-31})}{100} = 1.64\times10^{-15}\text{ J}$$
+$$E = \frac{1.64\times10^{-15}}{1.6\times10^{-19}} = \mathbf{10.3\text{ keV}}$$
+<div class="solution">✅ 10.3 keV</div>
+</div></details>
+
+<details class="problem-card" open id="p2-11"><summary><span class="problem-number">2.11</span>產生 1 Å X 射線所需加速電壓 🟢</summary><div class="problem-body">
+<div class="problem-statement">X-ray $\lambda=1$ Å. (a) Acceleration voltage? (b) Electron de Broglie wavelength before hitting target?</div>
+<div class="solution-note">▸ (a)</div>
+<p>$eV = hc/\lambda \Rightarrow V = 12400/1 = \mathbf{12.4\text{ kV}}$</p>
+<div class="solution-note">▸ (b) $\lambda_e = 12.26/\sqrt{12400} = \mathbf{0.11}$ Å</div>
+<div class="solution">✅ (a) 12.4 kV; (b) 0.11 Å</div>
+<div class="formula-note">💡 電子的德布羅意波長 (0.11 Å) 比產生的 X 射線波長 (1 Å) 還短——這是電子顯微鏡可達到原子級解析度的原因。</div>
+</div></details>
+
+<details class="problem-card" open id="p2-13"><summary><span class="problem-number">2.13</span>不確定性原理計算 🟢</summary><div class="problem-body">
+<div class="problem-statement">$\Delta x=12$ Å. (a) $m=9\times10^{-31}$ kg, $E=16$ eV → $\Delta p$, $\Delta E$. (b) $m=5\times10^{-28}$ kg.</div>
+<div class="solution-note">▸ (a) $\Delta p = \hbar/\Delta x = 1.054\times10^{-34}/(1.2\times10^{-9}) = 8.78\times10^{-26}$ kg·m/s</div>
+<p>$p = \sqrt{2mE} = 2.16\times10^{-24}$ kg·m/s。$v = p/m$。<br>
+$\Delta E = \Delta p \cdot v = (8.78\times10^{-26})(2.37\times10^6) = 2.08\times10^{-19}$ J = <b>1.31 eV</b></p>
+<div class="solution-note">▸ (b) $\Delta p$ 同 (a)。$v = p/m = 4.32\times10^3$ m/s → $\Delta E = 3.79\times10^{-22}$ J = <b>$5.55\times10^{-2}$ eV</b></div>
+<div class="solution">✅ (a)(i) $8.78\times10^{-26}$ kg·m/s, (ii) 1.31 eV; (b)(i) same, (ii) $5.55\times10^{-2}$ eV</div>
+</div></details>
+
+<details class="problem-card" open id="p2-15"><summary><span class="problem-number">2.15</span>能量-時間與位置-動量不確定性 🟢</summary><div class="problem-body">
+<div class="problem-statement">(a) $\Delta E \le 0.8$ eV → $\Delta t$ min. (b) $\Delta x \le 1.5$ Å → $\Delta p$ min.</div>
+<div class="solution-note">▸ (a) $\Delta E\Delta t \ge \hbar$ → $\Delta t = \hbar/\Delta E$</div>
+<p>$\Delta t = (6.582\times10^{-16}\text{ eV·s})/0.8 = \mathbf{8.23\times10^{-16}\text{ s}}$</p>
+<div class="solution-note">▸ (b) $\Delta p = \hbar/\Delta x = 1.054\times10^{-34}/(1.5\times10^{-10}) = \mathbf{7.03\times10^{-25}\text{ kg·m/s}}$</div>
+<div class="solution">✅ (a) $8.23\times10^{-16}$ s; (b) $7.03\times10^{-25}$ kg·m/s</div>
+</div></details>
+
+<h2>§2.2–2.3 薛丁格方程應用</h2>
+
+<details class="problem-card" open id="p2-17"><summary><span class="problem-number">2.17</span>歸一化常數 A 🟢</summary><div class="problem-body">
+<div class="problem-statement">$\Psi(x,t)=A\cos(\pi x/2)e^{-j\omega t}$, $-1\le x\le+3$. Find A so $\int|\Psi|^2dx=1$.</div>
+<div class="solution-note">▸ 解法</div>
+<p>$\int_{-1}^{3} A^2\cos^2(\pi x/2)dx = A^2\int_{-1}^{3}\frac{1+\cos(\pi x)}{2}dx = A^2 \cdot 2 = 1$</p>
+$$|A| = \mathbf{\frac{1}{\sqrt{2}}}$$
+<div class="solution">✅ $|A| = 1/\sqrt{2}$</div>
+</div></details>
+
+<details class="problem-card" open id="p2-19"><summary><span class="problem-number">2.19</span>機率計算 $\psi=\sqrt{2/a_0}\,e^{-x/a_0}$ 🟢</summary><div class="problem-body">
+<div class="problem-statement">$\psi(x)=\sqrt{2/a_0}\,e^{-x/a_0}$. Probability in (a) $0\le x\le a_0/4$, (b) $a_0/4\le x\le a_0/2$, (c) $0\le x\le a_0$.</div>
+<div class="solution-note">▸ $P(a,b) = \int_a^b |\psi|^2dx = [-e^{-2x/a_0}]_a^b$</div>
+<p>(a) $P = 1 - e^{-0.5} = \mathbf{0.393}$<br>
+(b) $P = e^{-0.5} - e^{-1} = \mathbf{0.239}$<br>
+(c) $P = 1 - e^{-2} = \mathbf{0.865}$</p>
+<div class="solution">✅ (a) 0.393; (b) 0.239; (c) 0.865</div>
+<div class="formula-note">💡 注意總機率不為 1（僅 0.865）——因為波函數延伸到 $x>a_0$ 的區域仍有非零值。</div>
+</div></details>
+
+<details class="problem-card" open id="p2-21"><summary><span class="problem-number">2.21</span>機率計算 $\psi=\sqrt{2/a}\sin(2\pi x/a)$ 🟢</summary><div class="problem-body">
+<div class="problem-statement">Repeat 2.20 for $\psi=\sqrt{2/a}\sin(2\pi x/a)$.</div>
+<div class="solution-note">▸ sin² 在半週期內對稱</div>
+<p>(a) $\int_0^{a/4}(2/a)\sin^2(2\pi x/a)dx = 0.25$<br>
+(b) $\int_{a/4}^{a/2} \cdots = 0.25$<br>
+(c) $\int_{-a/2}^{a/2} \cdots = 1$</p>
+<div class="solution">✅ (a) 0.25; (b) 0.25; (c) 1</div>
+</div></details>
+
+<details class="problem-card" open id="p2-23"><summary><span class="problem-number">2.23</span>電子平面波 ($E_k=0.025$ eV, 向左) 🟢</summary><div class="problem-body">
+<div class="problem-statement">Electron traveling $-x$ with $E_k=0.025$ eV. (a) Plane wave equation. (b) $k$, $\lambda$, $\omega$.</div>
+<div class="solution-note">▸ $k = \sqrt{2mE}/\hbar = 8.097\times10^8$ m⁻¹</div>
+<p>$\lambda = 2\pi/k = 7.76\times10^{-9}$ m = 77.6 Å<br>
+$\omega = E/\hbar = 0.025\times1.6\times10^{-19}/1.054\times10^{-34} = 3.80\times10^{13}$ rad/s</p>
+<p>(a) $\Psi(x,t) = A\exp[-j(kx+\omega t)]$（向左傳播）</p>
+<div class="solution">✅ (a) $\Psi=Ae^{-j(kx+\omega t)}$; (b) $k=8.097\times10^8$ m⁻¹, $\lambda=7.76\times10^{-9}$ m, $\omega=7.586\times10^{13}$ rad/s</div>
+</div></details>
+
+<details class="problem-card" open id="p2-25"><summary><span class="problem-number">2.25</span>75 Å 無限位能井能階 🟢</summary><div class="problem-body">
+<div class="problem-statement">Infinite well width 75 Å. Electron energy levels $n=1,2,3$ (eV).</div>
+<div class="solution-note">▸ $E_n = n^2\pi^2\hbar^2/(2ma^2)$</div>
+<p>$E_n = n^2 \cdot 1.07\times10^{-21}$ J $= n^2 \cdot 6.69\times10^{-3}$ eV</p>
+$$E_1 = 6.69\text{ meV},\quad E_2 = 26.7\text{ meV},\quad E_3 = 60.2\text{ meV}$$
+<div class="solution">✅ $E_1=6.69\times10^{-3}$, $E_2=2.67\times10^{-2}$, $E_3=6.02\times10^{-2}$ eV</div>
+<div class="formula-note">💡 75 Å 井的能階在 meV 量級，與室溫 $kT\approx26$ meV 相當。對比 5 Å 井（例題 2.3）的 $E_1=1.51$ eV，井寬放大 15 倍→能階降低 $15^2=225$ 倍。</div>
+</div></details>
+
+<details class="problem-card" open id="p2-27"><summary><span class="problem-number">2.27</span>巨觀粒子在井中 ($m=15$ mg) 🟢</summary><div class="problem-body">
+<div class="problem-statement">Particle $m=15$ mg in well 1.2 cm. (a) $E=15$ mJ → $n$? (b) $E_{n+1}$? (c) Quantum effects observable?</div>
+<div class="solution-note">▸ (a) $n = \sqrt{2ma^2E}/(\pi\hbar) = 7.688\times10^{29}$</div>
+<p>(b) $E_{n+1} \approx E_n(1+2/n) \approx 15$ mJ（差距極小）<br>
+(c) <b>No</b>。$n$ 極大→能階連續。$\Delta E \approx 3.9\times10^{-32}$ J——完全無法觀測。</p>
+<div class="solution">✅ (a) $n=7.688\times10^{29}$; (b) $\approx15$ mJ; (c) No</div>
+</div></details>
+
+<details class="problem-card" open id="p2-29"><summary><span class="problem-number">2.29</span>非對稱無限井波函數 🟢</summary><div class="problem-body">
+<div class="problem-statement">Particle in well Fig P2.29. Derive and sketch wave functions for 4 lowest levels.</div>
+<div class="solution-note">▸ 此井從 $x=-a/2$ 到 $x=+a/2$（對稱井），波函數有明確的奇偶性</div>
+<p>偶函數（cosine 型）：$\psi_1 = A\cos(\pi x/a)$, $\psi_3 = C\cos(3\pi x/a)$<br>
+奇函數（sine 型）：$\psi_2 = B\sin(2\pi x/a)$, $\psi_4 = D\sin(4\pi x/a)$</p>
+<div class="solution">✅ $\psi_1=A\cos(\pi x/a)$, $\psi_2=B\sin(2\pi x/a)$, $\psi_3=C\cos(3\pi x/a)$, $\psi_4=D\sin(4\pi x/a)$</div>
+</div></details>
+
+<details class="problem-card" open id="p2-31"><summary><span class="problem-number">2.31</span>二維無限井 (40 Å × 20 Å) 🟢</summary><div class="problem-body">
+<div class="problem-statement">2D infinite well: $0\le x\le40$ Å, $0\le y\le20$ Å. (a) Energy expression. (b) Compare with 1D.</div>
+<div class="solution-note">▸ (a) 能量表達式</div>
+$$E_{n_x,n_y} = \frac{h^2}{2m}\left(\frac{n_x^2}{a^2} + \frac{n_y^2}{b^2}\right)$$
+<p>(b) <b>相似點：</b>能量量子化。<b>不同點：</b>2D 有能階簡併——不同 $(n_x,n_y)$ 組合可得相同能量。</p>
+<div class="solution">✅ $E_{n_x,n_y} = \frac{h^2}{2m}(\frac{n_x^2}{a^2} + \frac{n_y^2}{b^2})$</div>
+</div></details>
+
+<details class="problem-card" open id="p2-33"><summary><span class="problem-number">2.33</span>階梯位能 ($E>V_0$) 穿透與反射係數 🟢</summary><div class="problem-body">
+<div class="problem-statement">Step potential $E>V_0$, particles from $+x$ toward $-x$. Wave solutions and $T$, $R$.</div>
+<div class="solution-note">▸ 波函數</div>
+<p>I ($x>0$, $V=0$): $\psi_I = Ae^{-jk_1x} + Be^{+jk_1x}$<br>
+II ($x<0$, $V=V_0$): $\psi_{II} = Ce^{-jk_2x}$</p>
+<p>$k_1=\sqrt{2mE}/\hbar$, $k_2=\sqrt{2m(E-V_0)}/\hbar$</p>
+<div class="solution-note">▸ 穿透係數</div>
+$$T = \frac{4k_1k_3}{(k_1+k_3)^2},\quad R = 1-T$$
+<div class="solution">✅ 推導見內文。$T$ 取決於 $E$ 與 $V_0$ 的比值。</div>
+</div></details>
+
+<details class="problem-card" open id="p2-35"><summary><span class="problem-number">2.35</span>穿隧係數與穿隧電流 🟢</summary><div class="problem-body">
+<div class="problem-statement">$E=0.1$ eV, $V_0=1.0$ eV. (a) $a=4$ Å → $T$? (b) $a=12$ Å → $T$? (c) $J=1.2$ mA/cm² → incident flux?</div>
+<div class="solution-note">▸ $k_2 = \sqrt{2m(V_0-E)}/\hbar = 4.86\times10^9$ m⁻¹</div>
+<p>(a) $T = 16(0.1)(0.9)e^{-2k_2a} = 1.44e^{-3.888} = \mathbf{0.0295}$<br>
+(b) $T = 1.44e^{-11.66} = \mathbf{1.24\times10^{-5}}$</p>
+<div class="solution-note">▸ (c) $N_i = J/(eT) = 1.2\times10^{-3}/(1.6\times10^{-19}\times0.0295) = \mathbf{2.54\times10^{17}}$ cm⁻²·s⁻¹</div>
+<div class="solution">✅ (a) 0.0295; (b) $1.24\times10^{-5}$; (c) $2.54\times10^{17}$ cm⁻²·s⁻¹</div>
+<div class="formula-note">💡 障壁寬度從 4 Å 增至 12 Å（3 倍），穿隧機率從 ~3% 驟降至 ~0.001%——下降超過 2000 倍！</div>
+</div></details>
+
+<details class="problem-card" open id="p2-37"><summary><span class="problem-number">2.37</span>質子穿隧 (1 MeV vs 12 MeV 障壁) 🟢</summary><div class="problem-body">
+<div class="problem-statement">Proton $E=1$ MeV, $V_0=12$ MeV, width $10^{-14}$ m. (a) $T$? (b) Width for $T\times10$?</div>
+<div class="solution-note">▸ (a) $k_2 = \sqrt{2m_p(V_0-E)}/\hbar = 7.28\times10^{14}$ m⁻¹</div>
+<p>$T \approx 16(E/V_0)(1-E/V_0)e^{-2k_2a} = 16(1/12)(11/12)e^{-14.56} = \mathbf{5.875\times10^{-7}}$</p>
+<div class="solution-note">▸ (b) $a' = a - \ln10/(2k_2) = 10^{-14} - 1.58\times10^{-15} = \mathbf{0.842\times10^{-14}\text{ m}}$</div>
+<div class="solution">✅ (a) $5.875\times10^{-7}$; (b) $0.842\times10^{-14}$ m</div>
+</div></details>
+
+<details class="problem-card" open id="p2-39"><summary><span class="problem-number">2.39</span>穿透係數推導結果 🟢</summary><div class="problem-body">
+<div class="problem-statement">Transmission coefficient result: $T = \frac{4k_1k_3}{(k_1+k_3)^2}$</div>
+<div class="solution">✅ $T = 4k_1k_3/(k_1+k_3)^2$</div>
+</div></details>
+
+<details class="problem-card" open id="p2-41"><summary><span class="problem-number">2.41</span>氫原子能階 🟢</summary><div class="problem-body">
+<div class="problem-statement">One-electron atom energy levels. $E_1$ to $E_4$.</div>
+<div class="solution-note">▸ $E_n = -13.58/n^2$ eV</div>
+$$E_1 = -13.58,\ E_2 = -3.395,\ E_3 = -1.51,\ E_4 = -0.849\text{ eV}$$
+<div class="solution">✅ $E_1=-13.58$, $E_2=-3.395$, $E_3=-1.51$, $E_4=-0.849$ eV</div>
+</div></details>
+
+
+<details class="problem-card" id="p2-1"><summary><span class="problem-number">2.1</span>傳輸線波動方程繪圖 — 駐波分析</summary><div class="problem-body">
+<div class="problem-statement">The classical wave equation for a two-wire transmission line: $\partial^2V/\partial x^2=LC\cdot\partial^2V/\partial t^2$. Solution $V(x,t)=(\sin Kx)(\sin\omega t)$ with $K=n\pi/a$, $\omega=K/\sqrt{LC}$. Sketch for $n=1$, $0\le x\le a$ at (i)$\omega t=0$,(ii)$\pi/2$,(iii)$\pi$,(iv)$3\pi/2$,(v)$2\pi$.</div>
+<div class="solution-note">▸ Step 1：分析函數形式</div>
+<p>$V(x,t)=(\sin\frac{\pi x}{a})(\sin\omega t)$ 是駐波（standing wave）—空間部分和時間部分分離。節點（node）在 $\sin(\pi x/a)=0$ 處，即 $x=0$ 和 $x=a$。</p>
+<div class="solution-note">▸ Step 2：逐個時間點計算</div>
+<p>(i) $\omega t=0$：$\sin(0)=0$ → $V(x,0)=0$（全線為零）<br>
+(ii) $\omega t=\pi/2$：$\sin(\pi/2)=1$ → $V(x)=\sin(\pi x/a)$（最大正振幅，半個正弦波）<br>
+(iii) $\omega t=\pi$：$\sin(\pi)=0$ → $V=0$<br>
+(iv) $\omega t=3\pi/2$：$\sin(3\pi/2)=-1$ → $V(x)=-\sin(\pi x/a)$（反相最大振幅）<br>
+(v) $\omega t=2\pi$：$\sin(2\pi)=0$ → $V=0$（回到初始）</p>
+<div class="solution-note">▸ Step 3：繪圖</div>
+<p>所有曲線在 $x=0,a$ 處為零（邊界條件）。$\omega t=\pi/2$ 時為正半波；$\omega t=3\pi/2$ 時為負半波。波形不移動→駐波。</p>
+<div class="solution">✅ 駐波：振幅隨時間正弦振盪，節點固定</div>
+<div class="formula-note">💡 這是兩端固定的弦振動的電學類比。$n=1$ 為基模，$n=2,3,...$ 為高次諧波。節點數 = $n+1$。</div>
+</div></details>
+
+<details class="problem-card" id="p2-2"><summary><span class="problem-number">2.2</span>行波函數繪圖 — $V=\cos(2\pi x/\lambda-\omega t)$</summary><div class="problem-body">
+<div class="problem-statement">$V(x,t)=\cos(2\pi x/\lambda-\omega t)$ is a solution to the classical wave equation. Sketch $V(x,t)$ for $0\le x\le3\lambda$ at (i)$\omega t=0$,(ii)$0.25\pi$,(iii)$0.5\pi$,(iv)$0.75\pi$,(v)$\pi$.</div>
+<div class="solution-note">▸ Step 1：分析行波特性</div>
+<p>$V(x,t)=\cos(kx-\omega t)$, $k=2\pi/\lambda$。這是向右傳播的行波。相位速度 $v_p=\omega/k$。當 $t$ 增加時，波形向右平移 $\Delta x = v_p\Delta t$。</p>
+<div class="solution-note">▸ Step 2：逐個時間點</div>
+<p>(i) $\omega t=0$: $V=\cos(2\pi x/\lambda)$——從 $x=0$ 處的峰值開始<br>
+(ii) $\omega t=0.25\pi$: 波形向右平移 $\lambda/8$<br>
+(iii) $\omega t=0.5\pi$: 向右平移 $\lambda/4$<br>
+(iv) $\omega t=0.75\pi$: 向右平移 $3\lambda/8$<br>
+(v) $\omega t=\pi$: 向右平移 $\lambda/2$——與 (i) 反相</p>
+<div class="solution">✅ 繪圖題：向右傳播的餘弦波，波速 $v_p=\omega\lambda/2\pi$</div>
+<div class="formula-note">💡 行波與駐波的關鍵區別：行波的波形隨時間平移（能量傳播），駐波的節點固定（能量不傳播）。</div>
+</div></details>
+
+<details class="problem-card" id="p2-3"><summary><span class="problem-number">2.3</span>行波 $V=\cos(2\pi x/\lambda+\omega t)$</summary><div class="problem-body">
+<div class="problem-statement">Repeat Problem 2.2 for $V(x,t)=\cos(2\pi x/\lambda+\omega t)$.</div>
+<div class="solution-note">▸ $+\omega t$表示向左傳播的行波。其餘與2.2對稱。</div>
+<div class="solution">✅ 繪圖題：向左傳播的餘弦波</div>
+</div></details>
+
+<details class="problem-card" id="p2-4"><summary><span class="problem-number">2.4</span>相速度</summary><div class="problem-body">
+<div class="problem-statement">Determine phase velocities of traveling waves in Problems 2.2 and 2.3.</div>
+<div class="solution-note">▸ $v_p=\omega/k$。2.2: $v_p=+\omega\lambda/2\pi$（向右）；2.3: $v_p=-\omega\lambda/2\pi$（向左）</div>
+<div class="solution">✅ $|v_p|=\omega\lambda/2\pi$</div>
+</div></details>
+
+<details class="problem-card" id="p2-6"><summary><span class="problem-number">2.6</span>電子波長與光子動量比較</summary><div class="problem-body">
+<div class="problem-statement">(a) Green light $\lambda=550$ nm=5500 Å. If an electron has the same wavelength, determine electron velocity and momentum. (b) Repeat for red light $\lambda=440$ nm. (c) Is photon momentum equal to electron momentum?</div>
+<div class="solution-note">▸ Step 1：德布羅意關係 $\lambda=h/p$</div>
+<p>電子動量：$p_e = h/\lambda$。電子速度：$v = p_e/m_e$。</p>
+<div class="solution-note">▸ Step 2：(a) 綠光 $\lambda=550$ nm = $5.5\times10^{-7}$ m</div>
+$$p_e = \frac{6.625\times10^{-34}}{5.5\times10^{-7}} = 1.20 \times 10^{-27}\ \text{kg·m/s}$$
+$$v = \frac{1.20\times10^{-27}}{9.11\times10^{-31}} = 1.32 \times 10^3\ \text{m/s} = 1.32 \times 10^5\ \text{cm/s}$$
+
+<div class="solution-note">▸ Step 3：(b) 紅光 $\lambda=440$ nm = $4.4\times10^{-7}$ m</div>
+$$p_e = \frac{6.625\times10^{-34}}{4.4\times10^{-7}} = 1.51 \times 10^{-27}\ \text{kg·m/s}$$
+$$v = \frac{1.51\times10^{-27}}{9.11\times10^{-31}} = 1.66 \times 10^3\ \text{m/s}$$
+
+<div class="solution-note">▸ Step 4：(c) 比較</div>
+<p>光子動量：$p_\gamma = h/\lambda$——與電子德布羅意動量公式相同！因此當波長相同時，$p_e = p_\gamma$。<b>是的，動量相等。</b>但動能不同：電子 $E_e=p^2/2m$，光子 $E_\gamma=pc$。</p>
+<div class="solution">✅ (a) $p=1.20\times10^{-27}$ kg·m/s, $v=1.32\times10^3$ m/s; (b) $p=1.51\times10^{-27}$ kg·m/s, $v=1.66\times10^3$ m/s; (c) 動量相同</div>
+</div></details>
+
+<details class="problem-card" id="p2-8"><summary><span class="problem-number">2.8</span>電子氣體平均能量、動量與德布羅意波長 (T=300 K)</summary><div class="problem-body">
+<div class="problem-statement">According to classical physics, average energy of an electron in an electron gas at thermal equilibrium is $3kT/2$. Determine for T=300 K: average electron energy (eV), average electron momentum, and de Broglie wavelength.</div>
+<div class="solution-note">▸ Step 1：平均能量</div>
+$$E_{\text{avg}} = \frac{3}{2}kT = \frac{3}{2}(1.38\times10^{-23})(300) = 6.21 \times 10^{-21}\ \text{J}$$
+$$E_{\text{avg}} = \frac{6.21\times10^{-21}}{1.6\times10^{-19}} = 0.0388\ \text{eV}$$
+
+<div class="solution-note">▸ Step 2：平均動量</div>
+$$p = \sqrt{2mE} = \sqrt{2(9.11\times10^{-31})(6.21\times10^{-21})} = 1.06 \times 10^{-25}\ \text{kg·m/s}$$
+
+<div class="solution-note">▸ Step 3：德布羅意波長</div>
+$$\lambda = \frac{h}{p} = \frac{6.625\times10^{-34}}{1.06\times10^{-25}} = 6.25 \times 10^{-9}\ \text{m} = 62.5\ \text{Å}$$
+
+<div class="solution">✅ $E=0.0388$ eV; $p=1.06\times10^{-25}$ kg·m/s; $\lambda=62.5$ Å</div>
+<div class="formula-note">💡 室溫下電子的德布羅意波長約 60 Å，遠大於晶格常數（~5 Å），說明室溫電子在晶體中表現出顯著的波動性。</div>
+</div></details>
+
+<details class="problem-card" id="p2-10"><summary><span class="problem-number">2.10</span>電子德布羅意波長雙向計算</summary><div class="problem-body">
+<div class="problem-statement">(a) de Broglie wavelength of an electron is 85 Å. Determine electron energy (eV), momentum, and velocity. (b) An electron moves at $v=8\times10^5$ cm/s. Determine electron energy (eV), momentum, and de Broglie wavelength (Å).</div>
+<div class="solution-note">▸ (a) 由 $\lambda=85$ Å = $8.5\times10^{-9}$ m 求其他參數</div>
+$$p = \frac{h}{\lambda} = \frac{6.625\times10^{-34}}{8.5\times10^{-9}} = 7.79 \times 10^{-26}\ \text{kg·m/s}$$
+$$E = \frac{p^2}{2m} = \frac{(7.79\times10^{-26})^2}{2(9.11\times10^{-31})} = 3.33 \times 10^{-21}\ \text{J} = 0.0208\ \text{eV}$$
+$$v = \frac{p}{m} = \frac{7.79\times10^{-26}}{9.11\times10^{-31}} = 8.56 \times 10^4\ \text{m/s}$$
+
+<div class="solution-note">▸ (b) 由 $v=8\times10^5$ cm/s = $8\times10^3$ m/s 求其他參數</div>
+$$p = mv = (9.11\times10^{-31})(8\times10^3) = 7.29 \times 10^{-27}\ \text{kg·m/s}$$
+$$E = \frac{p^2}{2m} = \frac{(7.29\times10^{-27})^2}{2(9.11\times10^{-31})} = 2.92 \times 10^{-23}\ \text{J} = 1.82 \times 10^{-4}\ \text{eV}$$
+$$\lambda = \frac{h}{p} = \frac{6.625\times10^{-34}}{7.29\times10^{-27}} = 9.09 \times 10^{-8}\ \text{m} = 90.9\ \text{Å}$$
+
+<div class="solution">✅ (a) $E=0.0208$ eV, $p=7.79\times10^{-26}$ kg·m/s, $v=8.56\times10^4$ m/s; (b) $E=1.82\times10^{-4}$ eV, $p=7.29\times10^{-27}$, $\lambda=90.9$ Å</div>
+</div></details>
+
+<details class="problem-card" id="p2-12"><summary><span class="problem-number">2.12</span>光子動量不確定性 ($\lambda=1$ µm)</summary><div class="problem-body">
+<div class="problem-statement">When the uncertainty principle is considered, it is not possible to locate a photon in space more precisely than about one wavelength. Consider a photon with $\lambda=1$ µm. What is the uncertainty in the photon's momentum?</div>
+<div class="solution-note">▸ Step 1：不確定性原理</div>
+<p>$\Delta x \cdot \Delta p \ge \hbar/2$（精確形式）或 $\Delta x \cdot \Delta p \ge \hbar$（常用估計）。此處 $\Delta x \approx \lambda = 10^{-6}$ m。</p>
+<div class="solution-note">▸ Step 2：計算最小動量不確定性</div>
+<p>使用 $\Delta x \Delta p \ge \hbar$：</p>
+$$\Delta p_{\min} = \frac{\hbar}{\Delta x} = \frac{1.054\times10^{-34}}{10^{-6}} = 1.05 \times 10^{-28}\ \text{kg·m/s}$$
+<p>若使用 $\Delta x\Delta p \ge \hbar/2$：$\Delta p_{\min}=5.27\times10^{-29}$ kg·m/s。</p>
+<div class="solution-note">▸ Step 3：與光子動量比較</div>
+<p>光子動量：$p_\gamma = h/\lambda = 6.63\times10^{-28}$ kg·m/s。不確定性 $\Delta p \approx 0.16p_\gamma$——相當顯著！</p>
+<div class="solution">✅ $\Delta p_{\min} \approx 1.1 \times 10^{-28}$ kg·m/s（約為光子動量的 16%）</div>
+<div class="formula-note">💡 光子的位置不確定性約一個波長時，動量不確定性不可忽略。這限制了光學顯微鏡的解析度——無法同時精確知道光子的位置和動量。</div>
+</div></details>
+
+<details class="problem-card" id="p2-14"><summary><span class="problem-number">2.14</span>汽車速度不確定性</summary><div class="problem-body">
+<div class="problem-statement">Car 1500 kg, $\Delta x\le1$ cm. Find $\Delta v$ in mph.</div>
+<div class="solution-note">▸ $\Delta p=\hbar/(2\Delta x)=5.27\times10^{-33}$ kg·m/s; $\Delta v=\Delta p/m=3.51\times10^{-36}$ m/s≈$7.85\times10^{-36}$ mph——巨觀物體不確定性完全可忽略。</div>
+<div class="solution">✅ $\Delta v\approx3.5\times10^{-36}$ m/s（可忽略）</div>
+</div></details>
+
+<details class="problem-card" id="p2-16"><summary><span class="problem-number">2.16</span>波函數疊加 — 線性疊加原理</summary><div class="problem-body">
+<div class="problem-statement">Assume $\Psi_1(x,t)$ and $\Psi_2(x,t)$ are solutions of the one-dimensional time-dependent Schrödinger equation. (a) Show that $\Psi_1+\Psi_2$ is a solution. (b) Is $\Psi_1\cdot\Psi_2$ a solution in general? Why or why not?</div>
+<div class="solution-note">▸ (a) 線性疊加</div>
+<p>TDSE：$i\hbar\frac{\partial\Psi}{\partial t} = -\frac{\hbar^2}{2m}\frac{\partial^2\Psi}{\partial x^2} + V(x)\Psi$。</p>
+<p>若 $\Psi_1$ 和 $\Psi_2$ 各自滿足 TDSE，則：</p>
+$$i\hbar\frac{\partial(\Psi_1+\Psi_2)}{\partial t} = i\hbar\frac{\partial\Psi_1}{\partial t} + i\hbar\frac{\partial\Psi_2}{\partial t}$$
+$$= \left[-\frac{\hbar^2}{2m}\frac{\partial^2\Psi_1}{\partial x^2}+V\Psi_1\right] + \left[-\frac{\hbar^2}{2m}\frac{\partial^2\Psi_2}{\partial x^2}+V\Psi_2\right]$$
+$$= -\frac{\hbar^2}{2m}\frac{\partial^2(\Psi_1+\Psi_2)}{\partial x^2} + V(\Psi_1+\Psi_2)$$
+<p>→ $\Psi_1+\Psi_2$ 也滿足 TDSE。<b>是的，線性組合是解。</b>這是量子力學疊加原理的數學基礎。</p>
+<div class="solution-note">▸ (b) 乘積是否為解？</div>
+<p>代入 $\Psi_1\Psi_2$ 到 TDSE：</p>
+$$i\hbar\frac{\partial(\Psi_1\Psi_2)}{\partial t} = i\hbar\left(\frac{\partial\Psi_1}{\partial t}\Psi_2 + \Psi_1\frac{\partial\Psi_2}{\partial t}\right)$$
+<p>右側的空間導數項則為：</p>
+$$-\frac{\hbar^2}{2m}\frac{\partial^2(\Psi_1\Psi_2)}{\partial x^2}+V\Psi_1\Psi_2$$
+<p>展開後含交叉項 $\frac{\partial\Psi_1}{\partial x}\frac{\partial\Psi_2}{\partial x}$，一般無法抵消。<b>乘積通常不是解</b>——因為 TDSE 不是非線性方程。</p>
+<div class="solution">✅ (a) Yes（線性疊加原理）；(b) No（TDSE 是線性方程，乘積不滿足）</div>
+</div></details>
+
+<details class="problem-card" id="p2-18"><summary><span class="problem-number">2.18</span>歸一化 ($\cos n\pi x$)</summary><div class="problem-body">
+<div class="problem-statement">$\Psi=A(\cos n\pi x)e^{-j\omega t}$, $-1/2\le x\le+1/2$. Find A.</div>
+<div class="solution-note">▸ $\int_{-1/2}^{1/2}A^2\cos^2(n\pi x)dx=A^2/2=1$→$A=\sqrt{2}$</div>
+<div class="solution">✅ $A=\sqrt{2}$</div>
+</div></details>
+
+<details class="problem-card" id="p2-20"><summary><span class="problem-number">2.20</span>機率計算 — $\psi=\sqrt{2/a}\cos(\pi x/a)$</summary><div class="problem-body">
+<div class="problem-statement">An electron is described by $\psi(x)=\sqrt{2/a}\cos(\pi x/a)$ for $-a/2\le x\le a/2$, zero elsewhere. Calculate probability of finding electron between (a)$0\le x\le a/4$,(b)$a/4\le x\le a/2$,(c)$-a/2\le x\le a/2$.</div>
+<div class="solution-note">▸ 機率密度：$|\psi|^2 = \frac{2}{a}\cos^2(\pi x/a)$</div>
+<div class="solution-note">▸ (a) $P = \int_0^{a/4}\frac{2}{a}\cos^2\frac{\pi x}{a}dx = \frac{2}{a}\int_0^{a/4}\frac{1+\cos(2\pi x/a)}{2}dx$</div>
+$$= \frac{1}{a}\left[x + \frac{a}{2\pi}\sin\frac{2\pi x}{a}\right]_0^{a/4} = \frac{1}{a}\left[\frac{a}{4} + \frac{a}{2\pi}\sin\frac{\pi}{2} - 0\right] = \frac{1}{4} + \frac{1}{2\pi} = 0.409$$
+<div class="solution-note">▸ (b) 由對稱性，$\cos^2$ 在 $[0,a/2]$ 對稱</div>
+$$P = \int_{a/4}^{a/2} \cdots = \frac{1}{4} - \frac{1}{2\pi} = 0.091$$
+<div class="solution-note">▸ (c) 全區間（歸一化）</div>
+$$P = \int_{-a/2}^{a/2}|\psi|^2dx = 1$$
+<div class="solution">✅ (a) 0.409; (b) 0.091; (c) 1</div>
+<div class="formula-note">💡 電子在中心附近（$x\approx0$）的機率最高，因為 $\cos^2$ 在原點取最大值。這是基態波函數的特徵。</div>
+</div></details>
+
+<details class="problem-card" id="p2-22"><summary><span class="problem-number">2.22</span>自由空間平面波 — 波參數計算</summary><div class="problem-body">
+<div class="problem-statement">(a) Electron in free space: $\Psi(x,t)=Ae^{j(kx-\omega t)}$ with $k=8\times10^8$ m⁻¹, $\omega=8\times10^{12}$ rad/s. Find (i) phase velocity and wavelength, (ii) momentum and kinetic energy (eV). (b) Repeat for $k=-1.5\times10^9$ m⁻¹, $\omega=1.5\times10^{13}$ rad/s.</div>
+<div class="solution-note">▸ (a) $k=8\times10^8$ m⁻¹, $\omega=8\times10^{12}$ rad/s</div>
+<p>(i) $v_p = \omega/k = 8\times10^{12}/(8\times10^8) = 1\times10^4$ m/s<br>
+$\lambda = 2\pi/k = 2\pi/(8\times10^8) = 7.85\times10^{-9}$ m = 7.85 nm</p>
+<p>(ii) $p = \hbar k = (1.054\times10^{-34})(8\times10^8) = 8.43\times10^{-26}$ kg·m/s<br>
+$E = p^2/(2m) = (8.43\times10^{-26})^2/(2\times9.11\times10^{-31}) = 3.90\times10^{-21}$ J = 0.0244 eV</p>
+<div class="solution-note">▸ (b) $k=-1.5\times10^9$ m⁻¹（負號表示向左傳播）</div>
+<p>$v_p = 1.5\times10^{13}/(1.5\times10^9) = 1\times10^4$ m/s（速度大小相同，方向相反）<br>
+$\lambda = 2\pi/(1.5\times10^9) = 4.19\times10^{-9}$ m = 4.19 nm<br>
+$p = 1.054\times10^{-34}\times1.5\times10^9 = 1.58\times10^{-25}$ kg·m/s<br>
+$E = (1.58\times10^{-25})^2/(2\times9.11\times10^{-31}) = 1.37\times10^{-20}$ J = 0.0856 eV</p>
+<div class="solution">✅ (a) $v_p=10^4$ m/s, $\lambda=7.85$ nm, $E=0.0244$ eV; (b) $\lambda=4.19$ nm, $E=0.0856$ eV</div>
+</div></details>
+
+<details class="problem-card" id="p2-24"><summary><span class="problem-number">2.24</span>不同速度電子的波參數</summary><div class="problem-body">
+<div class="problem-statement">Electron in free space:(a)$v=5\times10^6$ cm/s,(b)$v=10^8$ cm/s. Find $k,\lambda,\omega,T$.</div>
+<div class="solution-note">▸ (a)$p=mv=4.56\times10^{-27}$→$k=p/\hbar=4.32\times10^7$ m⁻¹;$\lambda=2\pi/k=1.45\times10^{-7}$ m;$\omega=E/\hbar=1.08\times10^{13}$ rad/s<br>(b)$v$接近光速→需考慮相對論修正</div>
+<div class="solution">✅ (a)$k=4.32\times10^7$ m⁻¹,$\lambda=145$ nm;(b)需相對論修正</div>
+</div></details>
+
+<details class="problem-card" id="p2-26"><summary><span class="problem-number">2.26</span>10 Å 無限位能井能階與躍遷波長</summary><div class="problem-body">
+<div class="problem-statement">An electron is bound in a one-dimensional infinite potential well with a width of 10 Å. (a) Calculate the first three energy levels. (b) If the electron drops from the third to the second energy level, what is the wavelength of a photon that might be emitted?</div>
+<div class="solution-note">▸ (a) 能階公式：$E_n = \frac{n^2\pi^2\hbar^2}{2ma^2}$</div>
+<p>$a = 10$ Å = $10^{-9}$ m。代入數值：</p>
+$$E_n = \frac{n^2\pi^2(1.054\times10^{-34})^2}{2(9.11\times10^{-31})(10^{-9})^2} = n^2 \times 6.02 \times 10^{-20}\ \text{J}$$
+$$E_n = n^2 \times \frac{6.02\times10^{-20}}{1.6\times10^{-19}} = n^2 \times 0.376\ \text{eV}$$
+$$E_1 = 0.376\ \text{eV},\quad E_2 = 1.504\ \text{eV},\quad E_3 = 3.384\ \text{eV}$$
+
+<div class="solution-note">▸ (b) $3\to2$ 躍遷波長</div>
+$$\Delta E = E_3 - E_2 = 3.384 - 1.504 = 1.880\ \text{eV}$$
+$$\lambda = \frac{hc}{\Delta E} = \frac{12400\ \text{eV·Å}}{1.880\ \text{eV}} = 6596\ \text{Å} = 660\ \text{nm}$$
+
+<div class="solution">✅ (a) $E_1=0.376$, $E_2=1.504$, $E_3=3.384$ eV; (b) $\lambda=660$ nm（紅光）</div>
+<div class="formula-note">💡 10 Å 井的能階在 eV 量級，躍遷發射紅光。這與量子點的行為類似——井越小，能階越高，發射波長越短。</div>
+</div></details>
+
+<details class="problem-card" id="p2-28"><summary><span class="problem-number">2.28</span>中子與電子在原子核尺度井中的最低能階</summary><div class="problem-body">
+<div class="problem-statement">Calculate the lowest energy level for a neutron in a nucleus, treating it as if it were in an infinite potential well of width $10^{-14}$ m. Compare with the lowest energy level for an electron in the same infinite potential well.</div>
+<div class="solution-note">▸ 能階公式：$E_1 = \frac{\pi^2\hbar^2}{2ma^2}$，$a=10^{-14}$ m</div>
+<div class="solution-note">▸ 中子（$m_n = 1.675\times10^{-27}$ kg）</div>
+$$E_1^{(n)} = \frac{\pi^2(1.054\times10^{-34})^2}{2(1.675\times10^{-27})(10^{-14})^2} = \frac{1.096\times10^{-67}}{3.35\times10^{-55}} = 3.27 \times 10^{-13}\ \text{J}$$
+$$E_1^{(n)} = \frac{3.27\times10^{-13}}{1.6\times10^{-19}} = 2.05 \times 10^6\ \text{eV} = 2.05\ \text{MeV}$$
+
+<div class="solution-note">▸ 電子（$m_e = 9.11\times10^{-31}$ kg）</div>
+$$E_1^{(e)} = \frac{\pi^2(1.054\times10^{-34})^2}{2(9.11\times10^{-31})(10^{-14})^2} = \frac{1.096\times10^{-67}}{1.822\times10^{-58}} = 6.02 \times 10^{-10}\ \text{J}$$
+$$E_1^{(e)} = 3.76 \times 10^9\ \text{eV} = 3.76\ \text{GeV}$$
+
+<div class="solution-note">▸ 比較</div>
+<p>$E_1^{(e)}/E_1^{(n)} = m_n/m_e \approx 1836$。電子能階是中子的 1836 倍——電子更難被束縛在原子核尺度。</p>
+<div class="solution">✅ 中子: $E_1=2.05$ MeV; 電子: $E_1=3.76$ GeV（約 1836 倍）</div>
+<div class="formula-note">💡 這解釋了為什麼原子核中不存在電子（中子衰變除外）——電子在核尺度的零點能遠大於核力束縛能。這也是為什麼原子核由質子和中子組成。</div>
+</div></details>
+
+<details class="problem-card" id="p2-30"><summary><span class="problem-number">2.30*</span>三維無限位能井</summary><div class="problem-body">
+<div class="problem-statement">3D infinite well $a\times a\times a$. Show $E_{n_x,n_y,n_z}=\frac{\hbar^2\pi^2}{2ma^2}(n_x^2+n_y^2+n_z^2)$.</div>
+<div class="solution-note">▸ 分離變數法：$\psi=X(x)Y(y)Z(z)$，各方向獨立滿足一維井方程。總能量=三個方向能量之和。</div>
+<div class="solution">✅ $E=\frac{\hbar^2\pi^2}{2ma^2}(n_x^2+n_y^2+n_z^2)$, $n_i=1,2,3,\ldots$</div>
+</div></details>
+
+<details class="problem-card" id="p2-32"><summary><span class="problem-number">2.32</span>質子在無限井中</summary><div class="problem-body">
+<div class="problem-statement">Proton in 1D infinite well.(a)Energy expression.(b)$\Delta E_{2\to1}$ for(i)$a=4$ Å,(ii)$a=0.5$ cm.</div>
+<div class="solution-note">▸ (a)$E_n=n^2\pi^2\hbar^2/(2m_p a^2)$<br>(b)(i)$a=4$Å:$\Delta E=3\pi^2\hbar^2/(2m_p a^2)=0.0256$ eV<br>(ii)$a=0.5$cm:$\Delta E=1.64\times10^{-18}$ eV——極小，古典極限</div>
+<div class="solution">✅ (a)$E_n=n^2\pi^2\hbar^2/(2m_p a^2)$;(b)(i)0.0256 eV;(ii)$1.6\times10^{-18}$ eV</div>
+</div></details>
+
+<details class="problem-card" id="p2-34"><summary><span class="problem-number">2.34</span>階梯障壁穿透深度 ($E=2.8$, $V_0=3.5$ eV)</summary><div class="problem-body">
+<div class="problem-statement">$E=2.8$ eV,$V_0=3.5$ eV. Relative probability at (a)5,(b)15,(c)40 Å beyond barrier.</div>
+<div class="solution-note">▸ $k_2=\sqrt{2m(V_0-E)}/\hbar=4.28\times10^9$ m⁻¹=0.428 Å⁻¹<br>$P/P_0=e^{-2k_2x}$:(a)$e^{-4.28}=1.38\times10^{-2}$;(b)$e^{-12.84}=2.65\times10^{-6}$;(c)$e^{-34.24}\approx1.4\times10^{-15}$</div>
+<div class="solution">✅ (a)$1.38\times10^{-2}$;(b)$2.65\times10^{-6}$;(c)$\sim1.4\times10^{-15}$</div>
+</div></details>
+
+<details class="problem-card" id="p2-36"><summary><span class="problem-number">2.36</span>不同有效質量對穿隧機率的影響</summary><div class="problem-body">
+<div class="problem-statement">Estimate tunneling probability of a particle with effective mass (a) $m^*=0.067m_0$ (electron in GaAs), (b) $m^*=1.08m_0$ (electron in Si), tunneling through a rectangular barrier of height $V_0=0.8$ eV, width 15 Å. Particle kinetic energy is 0.20 eV.</div>
+<div class="solution-note">▸ Step 1：衰減常數 $k_2 = \sqrt{2m^*(V_0-E)}/\hbar$</div>
+<p>$V_0-E = 0.8-0.2 = 0.6$ eV $= 9.6\times10^{-20}$ J</p>
+<div class="solution-note">▸ (a) GaAs ($m^*=0.067m_0 = 6.10\times10^{-32}$ kg)</div>
+$$k_2 = \frac{\sqrt{2(6.10\times10^{-32})(9.6\times10^{-20})}}{1.054\times10^{-34}} = 1.03 \times 10^9\ \text{m}^{-1}$$
+$$T \approx 16\left(\frac{0.2}{0.8}\right)\left(1-\frac{0.2}{0.8}\right)e^{-2k_2a} = 16(0.25)(0.75)e^{-2(1.03\times10^9)(15\times10^{-10})}$$
+$$= 3.0 \cdot e^{-3.09} = 0.137$$
+<div class="solution-note">▸ (b) Si ($m^*=1.08m_0 = 9.84\times10^{-31}$ kg)</div>
+$$k_2 = \frac{\sqrt{2(9.84\times10^{-31})(9.6\times10^{-20})}}{1.054\times10^{-34}} = 4.12 \times 10^9\ \text{m}^{-1}$$
+$$T \approx 3.0 \cdot e^{-2(4.12\times10^9)(15\times10^{-10})} = 3.0 \cdot e^{-12.36} = 1.3 \times 10^{-5}$$
+<div class="solution">✅ (a) GaAs: $T\approx0.14$ (14%); (b) Si: $T\approx1.3\times10^{-5}$ (0.0013%)</div>
+<div class="formula-note">💡 有效質量越小→$k_2$越小→穿隧機率越大。GaAs 的 $m^*$ 僅為 Si 的 1/16，穿隧機率高出 10,000 倍！這影響了 MOSFET 閘極漏電流和 Esaki 二極體設計。</div>
+</div></details>
+
+<details class="problem-card" id="p2-38"><summary><span class="problem-number">2.38*</span>矩形位能障壁 — 波函數與穿透係數推導</summary><div class="problem-body">
+<div class="problem-statement">An electron with energy $E$ is incident on a rectangular potential barrier of width $a$ and height $V_0>E$. (a) Write the form of wave function in each of the three regions. (b) Determine which coefficient is zero. (c) Derive the expression for the transmission coefficient.</div>
+<div class="solution-note">▸ (a) 三區波函數</div>
+<p>定義 $k_1=\sqrt{2mE}/\hbar$（區域 I, III），$k_2=\sqrt{2m(V_0-E)}/\hbar$（區域 II）。</p>
+<p>I ($x<0$, $V=0$): $\psi_I = Ae^{jk_1x} + Be^{-jk_1x}$（入射+反射）<br>
+II ($0<x<a$, $V=V_0$): $\psi_{II} = Ce^{k_2x} + De^{-k_2x}$（指數衰減+增長）<br>
+III ($x>a$, $V=0$): $\psi_{III} = Fe^{jk_1x}$（僅穿透波，無反射）</p>
+<div class="solution-note">▸ (b) 哪個係數為零？</div>
+<p>$D=0$？實際上 $D\neq0$，因為區域 II 中兩個指數項都存在。但若障壁很寬，$D$ 項可忽略。正確答案是：區域 III 中無向左傳播的波→無 $Ge^{-jk_1x}$ 項。</p>
+<div class="solution-note">▸ (c) 穿透係數推導</div>
+<p>邊界條件（$x=0$ 和 $x=a$ 處 $\psi$ 和 $d\psi/dx$ 連續）給出 4 個方程。聯立求解得：</p>
+$$T = \frac{|F|^2}{|A|^2} = \frac{1}{1 + \frac{V_0^2\sinh^2(k_2a)}{4E(V_0-E)}}$$
+<p>當 $k_2a\gg1$（寬障壁）：$T \approx 16\frac{E}{V_0}\left(1-\frac{E}{V_0}\right)e^{-2k_2a}$。</p>
+<div class="solution">✅ $T = \left[1 + \frac{V_0^2\sinh^2(k_2a)}{4E(V_0-E)}\right]^{-1}$; 寬障壁近似：$T\approx16(E/V_0)(1-E/V_0)e^{-2k_2a}$</div>
+</div></details>
+
+<details class="problem-card" id="p2-40"><summary><span class="problem-number">2.40</span>有限位能井</summary><div class="problem-body">
+<div class="problem-statement">Electron in finite potential well (課本延伸題).</div>
+<div class="solution-note">▸ 有限井中波函數可穿透進入障壁區域→能階略低於同寬度無限井。需解超越方程求$E_n$。</div>
+<div class="solution">✅ 見課本§2.3延伸討論</div>
+</div></details>
+
+<h2>📋 第二章答案速查</h2>
+<table class="data-table"><caption>表 1：📋 第二章答案速查</caption>
+<tr><th>題號</th><th>答案</th></tr>
+<tr><td>2.5</td><td>Au: 0.254 µm; Cs: 0.654 µm</td></tr>
+<tr><td>2.7</td><td>(a)(i) 11.2, (ii) 3.54, (iii) 1.12 Å; (b) 0.262 Å</td></tr>
+<tr><td>2.9</td><td>10.3 keV</td></tr>
+<tr><td>2.11</td><td>(a) 12.4 kV; (b) 0.11 Å</td></tr>
+<tr><td>2.13</td><td>(a)(i) $8.78\times10^{-26}$ kg·m/s, (ii) 1.31 eV; (b)(ii) $5.55\times10^{-2}$ eV</td></tr>
+<tr><td>2.15</td><td>(a) $8.23\times10^{-16}$ s; (b) $7.03\times10^{-25}$ kg·m/s</td></tr>
+<tr><td>2.17</td><td>$|A|=1/\sqrt{2}$</td></tr>
+<tr><td>2.19</td><td>(a) 0.393; (b) 0.239; (c) 0.865</td></tr>
+<tr><td>2.21</td><td>(a) 0.25; (b) 0.25; (c) 1</td></tr>
+<tr><td>2.23</td><td>$k=8.097\times10^8$ m⁻¹, $\lambda=7.76\times10^{-9}$ m</td></tr>
+<tr><td>2.25</td><td>$E_1=6.69\times10^{-3}$, $E_2=2.67\times10^{-2}$, $E_3=6.02\times10^{-2}$ eV</td></tr>
+<tr><td>2.27</td><td>(a) $n=7.688\times10^{29}$; (b) $\approx15$ mJ; (c) No</td></tr>
+<tr><td>2.29</td><td>$\psi_1=A\cos(\pi x/a)$, $\psi_2=B\sin(2\pi x/a)$, …</td></tr>
+<tr><td>2.31</td><td>$E_{n_x,n_y}=\frac{h^2}{2m}(\frac{n_x^2}{a^2}+\frac{n_y^2}{b^2})$</td></tr>
+<tr><td>2.33</td><td>$T=4k_1k_3/(k_1+k_3)^2$</td></tr>
+<tr><td>2.35</td><td>(a) 0.0295; (b) $1.24\times10^{-5}$; (c) $2.54\times10^{17}$ cm⁻²·s⁻¹</td></tr>
+<tr><td>2.37</td><td>(a) $5.875\times10^{-7}$; (b) $0.842\times10^{-14}$ m</td></tr>
+<tr><td>2.39</td><td>$T=4k_1k_3/(k_1+k_3)^2$</td></tr>
+<tr><td>2.41</td><td>$E_1=-13.58$, $E_2=-3.395$, $E_3=-1.51$, $E_4=-0.849$ eV</td></tr>
+</table></main>
+<script>function toggleTheme(){const h=document.documentElement,b=document.getElementById('themeBtn');if(h.getAttribute('data-theme')==='dark'){h.setAttribute('data-theme','light');b.textContent='🌙 深色模式';localStorage.setItem('theme','light')}else{h.setAttribute('data-theme','dark');b.textContent='☀️ 淺色模式';localStorage.setItem('theme','dark')}}
+const s=localStorage.getItem('theme');if(s==='dark'){document.documentElement.setAttribute('data-theme','dark');document.getElementById('themeBtn').textContent='☀️ 浅色模式'}
+</script></body></html>

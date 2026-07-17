@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="light" data-reading-width="wide">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>第十一章：涉及氣體的反應 — 材料熱力學</title>
+<script>MathJax={tex:{inlineMath:[['$','$']],displayMath:[['$$','$$']],tags:'ams'},options:{ignoreHtmlClass:'no-math'}};</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<link rel="stylesheet" href="../../../../shared/core.css">
+<script src="../../../../shared/core.js" defer></script>
+<link rel="stylesheet" href="../../../../shared/navigation.css" data-shared-navigation>
+</head>
+<body>
+<nav class="sidebar" aria-label="本章目錄"><div class="sidebar-header"><div class="sidebar-subtitle">材料熱力學</div><h2 class="sidebar-title">涉及氣體的反應</h2></div><div class="toc"><ul>
+<li><a href="#preview">📋 11.0 本章預覽</a></li>
+<li class="ns">11.1–11.2 反應平衡基礎</li><li class="nsub"><a href="#s11-1">11.1 導論</a></li><li class="nsub"><a href="#s11-2">11.2 反應平衡與平衡常數</a></li>
+<li class="ns">11.3–11.5 $T$ 與 $P$ 的影響</li><li class="nsub"><a href="#s11-3">11.3 溫度對平衡常數的影響</a></li><li class="nsub"><a href="#s11-4">11.4 壓力對平衡的影響</a></li><li class="nsub"><a href="#s11-5">11.5 反應平衡：焓與熵的妥協</a></li>
+<li class="ns">11.6–11.7 應用</li><li class="nsub"><a href="#s11-6">11.6–11.7 SO₂/SO₃ 與 H₂O/H₂/CO₂/CO</a></li>
+<li><a href="#common-mistakes">⚠️ 常見錯誤</a></li>
+<li><a href="#self-check">🧪 自我檢核</a></li>
+<li><a href="#extras">🔭 延伸學習</a></li>
+<li><a href="#summary">📋 本章摘要</a></li>
+</ul></div><div class="sidebar-tools"><button type="button" data-action="toggle-theme" aria-label="切換深色或淺色模式">切換顯示主題</button></div></nav>
+<main class="chapter-page" data-chapter-title="涉及氣體的反應" data-prev-href="ch10_binary_phase_diagrams_zh.html" data-prev-label="吉布斯自由能–組成圖與二元系統相圖" data-next-href="ch12_ellingham_zh.html" data-next-label="純凝態相與氣相的反應">
+<header class="chapter-header"><div class="tag">第十一章</div><h1>涉及氣體的反應</h1><div class="chapter-meta">David R. Gaskell·《Introduction to the Thermodynamics of Materials》·第 402–433 頁</div></header>
+
+<section id="preview"><div class="callout"><strong>📋 11.0 本章預覽</strong>
+<p>前六章建立了完整的熱力學工具包——從第一定律到 Maxwell 關係、從 $C_P$ 積分到第三定律絕對熵。第十一章將這些工具應用於熱力學最核心的實際問題：<strong>化學反應平衡</strong>。本章聚焦於氣相反應，核心公式 $\Delta G^\circ = -RT\ln K$ 是化學熱力學中最重要的單一方程式——它將熱力學數據表（$\Delta H^\circ$、$S^\circ$）與實際的化學反應產率和操作條件連接起來。</p>
+<div class="callout-warn"><strong>⚡ 從熱力學數據到化學工廠——本章的實際意義：</strong>如果你正在設計一個 Haber 法合成氨的反應器，你需要知道：在什麼溫度和壓力下平衡產率最高？增加壓力是否有幫助（Le Chatelier）？升高溫度使 $K$ 增大還是減小（van't Hoff）？產物在出口混合物中的莫耳分率是多少？本章給出回答所有這些問題的方法。</div>
+<p><strong>在本章中，我們將學習：</strong></p>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px">
+<li>平衡常數的定義：$K_P$（以壓力）、$K_f$（以逸壓）——以及為什麼高壓下必須使用後者</li>
+<li>$\Delta G^\circ = -RT\ln K$——連接熱力學數據與化學平衡的橋樑</li>
+<li>van't Hoff 方程式——$K$ 的溫度依賴，以及它如何反映 $\Delta H^\circ$</li>
+<li>Le Chatelier 原理的定量形式——壓力、惰性氣體對平衡組成的影響</li>
+<li>典型工業反應的熱力學分析：SO₂ 氧化、水煤氣反應、H₂/CO 混合物</li>
+</ul>
+<h2>🧭 本章推理地圖</h3>
+<ol style="font-size:14px;color:var(--t2);margin-left:18px">
+<li>熱力學資料：由 $\Delta H^\circ$、$S^\circ$、$C_P(T)$ 建立 $\Delta G^\circ(T)$。</li>
+<li>平衡常數：用 $\Delta G^\circ=-RT\ln K$ 把表格資料轉為 $K$。</li>
+<li>操作條件：用 $Q$、總壓、$\Delta\nu$、逸壓修正求平衡組成。</li>
+<li>製程判斷：套用於 Haber、SO₂/SO₃、水煤氣、Boudouard 與 Ellingham 前置分析。</li>
+</ol></div></section>
+
+<section id="s11-1"><h2>11.1 導論（Introduction）</h2>
+<div class="section-keypoints"><strong>本節關鍵：</strong>
+<ul>
+<li>反應平衡是在定溫定壓下使總 $G$ 最小的組成。</li>
+<li>$\Delta G=\Delta G^\circ+RT\ln Q$ 同時包含物質本質與當下組成。</li>
+<li>平衡時 $\Delta G=0$，所以 $\Delta G^\circ=-RT\ln K$。</li>
+</ul></div>
+<p>化學反應平衡是熱力學第二定律最華麗的應用之一。對於一個氣相反應 $aA + bB \rightleftharpoons cC + dD$，平衡不是靜止的——正向和反向反應仍然在微觀尺度持續進行，但速率相等，因此宏觀組成不再變化。熱力學告訴我們這個平衡組成是什麼，而不需要知道反應的動力學細節。</p>
+<p>反應平衡的驅動力是<strong>吉布斯自由能的極小化</strong>。在定溫定壓下，反應會自發進行直到系統的 $G$ 達到最小值——此時 $\Delta G = 0$。$\Delta G$ 可以分解為標準反應自由能（$\Delta G^\circ$——只取決於反應物和產物的本質）和組成相關項（$RT\ln Q$——取決於實際分壓）：</p>
+<div class="eq">$$\Delta G = \Delta G^\circ + RT\ln Q$$</div>
+
+<h3>從 ΔG 推導平衡條件</h3>
+<p>考慮一般氣相反應 $aA + bB \rightleftharpoons cC + dD$。對於每種氣體 $i$，其化學勢 $\mu_i$ 表達為：</p>
+<div class="eq">$$\mu_i = \mu_i^\circ + RT\ln\!\left(\frac{P_i}{P^\circ}\right)$$</div>
+<p>其中 $\mu_i^\circ$ 是標準化學勢（$P_i = P^\circ = 1$ bar 時的化學勢）。反應的總吉布斯自由能變化為：</p>
+<div class="eq">$$\Delta G = \sum_i \nu_i \mu_i = \sum_i \nu_i\left[\mu_i^\circ + RT\ln\!\left(\frac{P_i}{P^\circ}\right)\right]$$</div>
+<div class="eq">$$\Delta G = \underbrace{\sum_i \nu_i \mu_i^\circ}_{\Delta G^\circ} + RT\ln\!\left[\prod_i \left(\frac{P_i}{P^\circ}\right)^{\nu_i}\right]$$</div>
+<p>將反應商數定義為 $Q_P \equiv \prod_i (P_i/P^\circ)^{\nu_i}$，上式簡化為：</p>
+<div class="eq">$$\Delta G = \Delta G^\circ + RT\ln Q_P \tag{11.0}$$</div>
+<p><strong>平衡條件：</strong>當 $\Delta G = 0$，反應商數 $Q_P$ 等於平衡常數 $K_P$。因此：</p>
+<div class="eq">$$\boxed{0 = \Delta G^\circ + RT\ln K_P \quad\Longrightarrow\quad \Delta G^\circ = -RT\ln K_P} \tag{11.2}$$</div>
+<p>這是化學熱力學中最重要的關係式。它將可由熱力學數據表計算的 $\Delta G^\circ$ 與可直接測量的平衡常數 $K$ 聯繫起來。</p>
+
+<div class="figure">
+  <img src="../../pages/ch11_pages/ch11_page_405_c.png" alt="圖 11.1 反應平衡示意圖：吉布斯自由能與反應進度的關係" loading="lazy">
+  <figcaption><strong>圖 11.1</strong> 反應進度與吉布斯自由能的關係。在給定 $T$ 和 $P$ 下，$\Delta G = (\partial G/\partial \xi)_{T,P}$ 是 $G$ 對反應進度 $\xi$ 的斜率。當斜率為零時達到平衡（$G$ 最小值）。a 點為純反應物（$\xi=0$），b 點為純產物（$\xi=1$）。</figcaption>
+</div>
+
+<div class="callout"><strong>💡 $\Delta G^\circ$ 是反應的「指紋」——</strong>它告訴你反應在標準態下是否自發（$\Delta G^\circ < 0$ 表示 $K > 1$——平衡傾向產物）。但不要混淆 $\Delta G^\circ$（標準態）和 $\Delta G$（實際條件）。一個 $\Delta G^\circ > 0$ 的反應仍可能自發進行——如果產物被不斷移走（$Q \ll K$）。這就是為什麼許多工業反應在非標準條件下操作。</div>
+<div class="callout-warn"><strong>⚠️ 標準態不是實際狀態：</strong>$\Delta G^\circ$ 只描述所有氣體都在標準壓力時的反應自由能；實際反應方向必須看 $\Delta G=\Delta G^\circ+RT\ln Q$。把 $\Delta G^\circ<0$ 直接讀成「任何組成都會向右反應」是本章最常見錯誤。</div>
+
+<h3>從 Gibbs–Helmholtz 到 van't Hoff——跨章節預覽</h3>
+<p>第五章導出了 Gibbs–Helmholtz 方程式：</p>
+<div class="eq">$$\left[\frac{\partial (G/T)}{\partial T}\right]_P = -\frac{H}{T^2} \tag{參見 Ch5}$$</div>
+<p>將其應用於 $\Delta G^\circ/T$ 與 $\Delta H^\circ$，我們將在第 11.3 節推導出 van't Hoff 方程式。這是將溫度依賴性納入平衡分析的關鍵橋樑。</p>
+<details class="example"><summary>微型例題：由 $\Delta G^\circ$ 判斷 $K$ 的量級</summary>
+<p>若某反應在 1000 K 時 $\Delta G^\circ=-19.1\ \text{kJ/mol}$，則 $\ln K=-\Delta G^\circ/RT=19100/(8.314\times1000)=2.30$，所以 $K\approx10$。這表示標準態下平衡偏向產物，但若實際 $Q>10$，反應仍會向左調整。</p>
+</details>
+</section>
+
+<section id="s11-2"><h2>11.2 反應平衡與平衡常數</h2>
+<div class="section-keypoints"><strong>本節關鍵：</strong>
+<ul>
+<li>$K_P$ 必須寫成無因次壓力比 $(P_i/P^\circ)$ 的乘積。</li>
+<li>理想氣體可用分壓，非理想高壓氣體應改用逸壓。</li>
+<li>$K$ 只由溫度決定；組成與壓力決定的是反應商 $Q$。</li>
+</ul></div>
+<p>對於氣相反應 $aA + bB \rightleftharpoons cC + dD$，以分壓表示的平衡常數為：</p>
+<div class="eq">$$\boxed{K_P = \frac{(P_C/P^\circ)^c (P_D/P^\circ)^d}{(P_A/P^\circ)^a (P_B/P^\circ)^b}} \tag{11.1}$$</div>
+<p>$P^\circ = 1\ \text{bar}$（或 1 atm，取決於標準態選擇）使 $K_P$ 成為無因次量。核心關係：</p>
+<div class="eq">$$\boxed{\Delta G^\circ = -RT\ln K} \tag{11.2}$$</div>
+<p>這條方程式的重要性再怎麼強調都不過分。給定 $\Delta G^\circ$，你可以計算 $K$。$\Delta G^\circ$ 本身可從標準生成自由能計算：</p>
+<div class="eq">$$\Delta G^\circ = \sum_i \nu_i \Delta G_f^\circ(i) \tag{11.3}$$</div>
+<p>或者從 $\Delta H^\circ$ 和 $\Delta S^\circ$ 計算（使用第六章的方法）：</p>
+<div class="eq">$$\Delta G^\circ(T) = \Delta H^\circ(T) - T\Delta S^\circ(T)$$</div>
+<p>其中 $\Delta H^\circ(T)$ 通過 Kirchhoff 定律（第六章）從 298 K 的值積分得到，$\Delta S^\circ(T)$ 通過第三定律積分（第六章）得到。</p>
+
+<h3>$K_P$ 與 $K_f$——逸壓修正的完整推導</h3>
+<p>在高壓下，真實氣體的行為偏離理想氣體狀態方程式。化學勢的正確表達使用逸壓 $f_i$（第八章）：</p>
+<div class="eq">$$\mu_i = \mu_i^\circ + RT\ln\!\left(\frac{f_i}{P^\circ}\right)$$</div>
+<p>其中 $f_i = \phi_i P_i$，$\phi_i$ 為逸壓係數（fugacity coefficient）。代入 $\Delta G$ 的表達式：</p>
+<div class="eq">$$\Delta G = \sum_i \nu_i \mu_i^\circ + RT\ln\!\left[\prod_i \left(\frac{f_i}{P^\circ}\right)^{\nu_i}\right]$$</div>
+<p>在平衡時 $\Delta G = 0$，定義<strong>熱力學平衡常數</strong> $K_f$：</p>
+<div class="eq">$$\boxed{K_f = \prod_i \left(\frac{f_i}{P^\circ}\right)^{\nu_i}} \tag{11.4}$$</div>
+<p>$K_f$ 是真正的熱力學平衡常數——它<strong>只</strong>取決於溫度，與壓力無關。將 $f_i = \phi_i P_i$ 代入：</p>
+<div class="eq">$$K_f = \prod_i \left(\frac{\phi_i P_i}{P^\circ}\right)^{\nu_i} = \left[\prod_i \phi_i^{\nu_i}\right] \cdot \left[\prod_i \left(\frac{P_i}{P^\circ}\right)^{\nu_i}\right]$$</div>
+<div class="eq">$$\boxed{K_f = K_\phi \cdot K_P} \tag{11.5}$$</div>
+<p>其中 $K_\phi \equiv \prod_i \phi_i^{\nu_i}$ 是逸壓係數的乘積。在理想氣體極限（$P \to 0$）下，$\phi_i \to 1$，因此 $K_\phi \to 1$ 且 $K_f \to K_P$。</p>
+<p>逸壓係數 $\phi_i$ 可從<strong>對比狀態原理</strong>（第八章）或實驗數據獲得。對於常見氣體混合物，可使用 Lewis–Randall 規則近似：$\phi_i(T, P) \approx \phi_i^{\text{pure}}(T, P)$。</p>
+
+<h3>$K_P$ 與總壓的關係——$K = K_P P^{\Delta\nu}$</h3>
+<p>將分壓 $P_i = y_i P$（$y_i$ 為莫耳分率，$P$ 為總壓）代入 $K_P$ 的定義：</p>
+<div class="eq">$$K_P = \prod_i \left(\frac{y_i P}{P^\circ}\right)^{\nu_i} = \left(\prod_i y_i^{\nu_i}\right) \left(\frac{P}{P^\circ}\right)^{\sum_i \nu_i}$$</div>
+<p>定義 $\Delta\nu \equiv \sum_i \nu_i$（產物係數和減反應物係數和），則：</p>
+<div class="eq">$$\boxed{K_P = K_y \cdot \left(\frac{P}{P^\circ}\right)^{\Delta\nu}} \tag{11.5b}$$</div>
+<p>其中 $K_y \equiv \prod_i y_i^{\nu_i}$。這個關係在分析壓力對平衡組成的影響時至關重要——我們將在 11.4 節中利用它定量討論 Le Chatelier 原理。</p>
+
+<div class="callout-warn"><strong>⚡ Haber 法合成氨的逸壓修正：</strong>$N_2 + 3H_2 \rightleftharpoons 2NH_3$。在 300 atm 和 450°C 的典型操作條件下，$K_\phi \approx 0.7$——逸壓修正使實際平衡產率比理想氣體計算低約 30%。忽略這個修正會導致反應器設計嚴重偏離實際性能。</div>
+<div class="callout"><strong>💡 反應商是平衡的導航儀：</strong>若 $Q<K$，則 $\Delta G<0$，反應向產物方向進行；若 $Q>K$，則 $\Delta G>0$，反應向反應物方向進行。這個判準比單純背 Le Chatelier 原理更可計算。</div>
+<details class="example"><summary>微型例題：寫出氨合成的 $K_P$</summary>
+<p>對 $\text{N}_2+3\text{H}_2\rightleftharpoons2\text{NH}_3$，$K_P=(P_{NH_3}/P^\circ)^2/[(P_{N_2}/P^\circ)(P_{H_2}/P^\circ)^3]$，且 $\Delta\nu=2-1-3=-2$。因此增壓會使平衡莫耳分率組合偏向氣體莫耳數較少的氨側。</p>
+</details>
+</section>
+
+<section id="s11-3"><h2>11.3 溫度對平衡常數的影響——van't Hoff 方程式</h2>
+<div class="section-keypoints"><strong>本節關鍵：</strong>
+<ul>
+<li>van't Hoff 方程式來自 Gibbs–Helmholtz 關係。</li>
+<li>吸熱反應升溫使 $K$ 增大；放熱反應升溫使 $K$ 減小。</li>
+<li>$\ln K$ 對 $1/T$ 的斜率可用來估算 $\Delta H^\circ$。</li>
+</ul></div>
+
+<h3>van't Hoff 方程式的完整推導</h3>
+<p>從 Gibbs–Helmholtz 方程式出發（參見第五章）：</p>
+<div class="eq">$$\left[\frac{\partial (G/T)}{\partial T}\right]_P = -\frac{H}{T^2}$$</div>
+<p>將其應用於反應的標準狀態：</p>
+<div class="eq">$$\frac{d(\Delta G^\circ/T)}{dT} = -\frac{\Delta H^\circ}{T^2}$$</div>
+<p>由 $\Delta G^\circ = -RT\ln K$，兩邊除以 $T$：</p>
+<div class="eq">$$\frac{\Delta G^\circ}{T} = -R\ln K$$</div>
+<p>對 $T$ 求導：</p>
+<div class="eq">$$\frac{d(\Delta G^\circ/T)}{dT} = -R\,\frac{d\ln K}{dT}$$</div>
+<p>代入 Gibbs–Helmholtz 結果：</p>
+<div class="eq">$$-R\,\frac{d\ln K}{dT} = -\frac{\Delta H^\circ}{T^2}$$</div>
+<p>整理即得<strong>van't Hoff 方程式</strong>：</p>
+<div class="eq">$$\boxed{\frac{d\ln K}{dT} = \frac{\Delta H^\circ}{RT^2}} \tag{11.6}$$</div>
+<p>這個推導說明了 van't Hoff 方程式實際上是 Gibbs–Helmholtz 關係式的直接推論。</p>
+
+<div class="figure">
+  <img src="../../pages/ch11_pages/ch11_page_410_c.png" alt="圖 11.2 van't Hoff 圖：ln K vs 1/T" loading="lazy">
+  <figcaption><strong>圖 11.2</strong> van't Hoff 圖（$\ln K$ 對 $1/T$ 作圖）。斜率 $= -\Delta H^\circ/R$，截距 $= \Delta S^\circ/R$。吸熱反應（紅色）斜率為負——升溫 $K$ 增大；放熱反應（藍色）斜率為正——升溫 $K$ 減小。</figcaption>
+</div>
+
+<p>van't Hoff 方程式的物理意義極其清晰：</p>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li><strong>吸熱反應（$\Delta H^\circ > 0$）：</strong>$d\ln K/dT > 0$——升溫使 $K$ 增大。高溫有利於產物。</li>
+<li><strong>放熱反應（$\Delta H^\circ < 0$）：</strong>$d\ln K/dT < 0$——升溫使 $K$ 減小。低溫有利於產物。</li>
+</ul>
+
+<h3>積分形式與應用</h3>
+<p><strong>情況一：$\Delta H^\circ$ 為常數（或溫度範圍小，$\Delta C_P \approx 0$）</strong></p>
+<p>直接積分 van't Hoff 方程式：</p>
+<div class="eq">$$\int_{K_1}^{K_2} d\ln K = \int_{T_1}^{T_2} \frac{\Delta H^\circ}{RT^2}\,dT$$</div>
+<div class="eq">$$\boxed{\ln\frac{K_2}{K_1} = -\frac{\Delta H^\circ}{R}\left(\frac{1}{T_2} - \frac{1}{T_1}\right)} \tag{11.7}$$</div>
+<p>這與 Clausius–Clapeyron 方程式（第七章）的數學形式完全相同——不是巧合，而是因為蒸氣壓也是平衡常數的一種形式（液–氣平衡）。</p>
+
+<p><strong>情況二：$\Delta H^\circ$ 隨溫度變化——使用 Kirchhoff 定律</strong></p>
+<p>首先通過 Kirchhoff 定律（第六章）計算 $\Delta H^\circ(T)$：</p>
+<div class="eq">$$\Delta H^\circ(T) = \Delta H^\circ_{298} + \int_{298}^T \Delta C_P\,dT \tag{參見 Ch6}$$</div>
+<p>然後代入 van't Hoff 方程式積分：</p>
+<div class="eq">$$\ln K(T) = \ln K(298) + \int_{298}^T \frac{\Delta H^\circ(T)}{RT^2}\,dT \tag{11.8}$$</div>
+<p>當 $\Delta C_P$ 為常數時，可以得到解析結果：$\ln K(T) = \ln K_{298} + \frac{\Delta H^\circ_{298}}{R}\!\left(\frac{1}{298} - \frac{1}{T}\right) + \frac{\Delta C_P}{R}\!\left(\ln\frac{T}{298} + \frac{298}{T} - 1\right)$。</p>
+
+<h3>完整範例：吸熱 vs 放熱反應的定量對比</h3>
+
+<p><strong>範例 A——吸熱反應：水煤氣反應</strong></p>
+<div class="eq">$$\text{C}(s) + \text{H}_2\text{O}(g) \rightleftharpoons \text{CO}(g) + \text{H}_2(g)$$</div>
+<p>已知：$\Delta H^\circ = +131\ \text{kJ/mol}$，$\Delta S^\circ = +134\ \text{J/mol·K}$。在 298 K：$\Delta G^\circ = 131 - 298 \times 0.134 = +91\ \text{kJ/mol}$，因此 $K_{298} = \exp(-91,\!000/(8.314 \times 298)) \approx 1.1 \times 10^{-16}$——基本沒有反應。</p>
+<p>在 1200 K，假設 $\Delta H^\circ$ 近似常數：</p>
+<div class="eq">$$\ln\frac{K_{1200}}{K_{298}} = -\frac{131,\!000}{8.314}\left(\frac{1}{1200} - \frac{1}{298}\right) \approx 33.2$$</div>
+<div class="eq">$$K_{1200} \approx 1.1 \times 10^{-16} \times e^{33.2} \approx 4.5 \times 10^{-2}$$</div>
+<p>雖然 $K$ 仍然小於 1，但相比 298 K 已是天文數字般的增長（增加約 $2.7 \times 10^{14}$ 倍）。在更高的 1500 K，$K \approx 200$——反應幾乎完全向右進行。這就是為什麼煤氣化需要高溫操作。</p>
+
+<p><strong>範例 B——放熱反應：SO₂ 氧化</strong></p>
+<div class="eq">$$\text{SO}_2(g) + \tfrac{1}{2}\text{O}_2(g) \rightleftharpoons \text{SO}_3(g)$$</div>
+<p>$\Delta H^\circ = -99\ \text{kJ/mol}$。在 298 K：$\Delta G^\circ = -70\ \text{kJ/mol}$，$K_{298} \approx 1.7 \times 10^{12}$——反應極其完全。</p>
+<p>在 700 K（~427°C，工業操作溫度下限）：</p>
+<div class="eq">$$\ln\frac{K_{700}}{K_{298}} = -\frac{(-99,\!000)}{8.314}\left(\frac{1}{700} - \frac{1}{298}\right) \approx -23.0$$</div>
+<div class="eq">$$K_{700} \approx 1.7 \times 10^{12} \times e^{-23.0} \approx 1.4 \times 10^2$$</div>
+<p>從 $10^{12}$ 降至 $10^2$——溫度升高使平衡常數下降了十個數量級。然而 $K \approx 140$ 仍然足夠大，在合適的進料比下可實現接近完全轉化。工業上選擇 400–600°C 是為了解決動力學限制：溫度再低則反應速率太慢。</p>
+
+<p><strong>範例 C——van't Hoff 圖的應用：測量 $\Delta H^\circ$</strong></p>
+<p>假設以下實驗數據來自 SO₂ 氧化反應：</p>
+<table>
+  <caption>SO₂ 氧化反應的 van't Hoff 作圖資料</caption>
+  <thead><tr><th scope="col">$T$ (K)</th><th scope="col">$K$</th><th scope="col">$\ln K$</th><th scope="col">$1/T$ (K$^{-1}$)</th></tr></thead>
+  <tbody>
+    <tr><td>700</td><td>$1.4 \times 10^2$</td><td>4.94</td><td>$1.43 \times 10^{-3}$</td></tr>
+    <tr><td>800</td><td>$1.5 \times 10^1$</td><td>2.71</td><td>$1.25 \times 10^{-3}$</td></tr>
+    <tr><td>900</td><td>$3.0 \times 10^0$</td><td>1.10</td><td>$1.11 \times 10^{-3}$</td></tr>
+    <tr><td>1000</td><td>$8.5 \times 10^{-1}$</td><td>-0.16</td><td>$1.00 \times 10^{-3}$</td></tr>
+  </tbody>
+</table>
+<p>繪製 $\ln K$ 對 $1/T$ 的圖，斜率 $\approx 1.19 \times 10^4$ K。由 $\text{斜率} = -\Delta H^\circ/R$：</p>
+<div class="eq">$$\Delta H^\circ = -R \times \text{斜率} = -8.314 \times 1.19 \times 10^4 \approx -99,\!000\ \text{J/mol}$$</div>
+<p>與已知值 $-99\ \text{kJ/mol}$ 吻合。這是 van't Hoff 圖法最強大的應用——不需要熱卡計即可測量反應熱。</p>
+
+<div class="callout"><strong>💡 van't Hoff 圖——最簡單的反應熱測量方法：</strong>測量不同溫度下的 $K$，繪製 $\ln K$ vs $1/T$。斜率 $= -\Delta H^\circ/R$，截距 $= \Delta S^\circ/R$。不需要熱卡計——只要一個可以分析平衡組成的裝置。對於許多反應，這是最方便的 $\Delta H^\circ$ 和 $\Delta S^\circ$ 測量方法。</div>
+<div class="callout-warn"><strong>⚠️ 不要過度外插：</strong>若 $\Delta C_P$ 明顯不為零，van't Hoff 直線只在有限溫度範圍內近似成立。把 700–1000 K 的線性擬合直接外推到 1800 K，可能會錯估冶金反應的平衡氧勢。</div>
+
+<h3>跨章節鏈接：Kirchhoff 定律的精確處理</h3>
+<p>當 $\Delta C_P$ 不可忽略時，必須通過 Kirchhoff 定律（第六章）將 $\Delta H^\circ(T)$ 的溫度依賴納入考慮：</p>
+<div class="eq">$$\Delta H^\circ(T) = \Delta H^\circ_{298} + \int_{298}^T \Delta C_P\,dT = \Delta H^\circ_{298} + \Delta a\,(T-298) + \tfrac{1}{2}\Delta b\,(T^2-298^2) - \Delta c\!\left(\frac{1}{T} - \frac{1}{298}\right)$$</div>
+<p>其中 $\Delta C_P = \Delta a + \Delta b\,T + \Delta c/T^2$ 的形式來自熱容數據擬合。將此 $\Delta H^\circ(T)$ 代入式 (11.8) 進行數值積分，即可得到任意溫度下的精確 $K(T)$。Gaskell 附錄中的 $C_P$ 表達式為此提供了標準數據。</p>
+<details class="example"><summary>微型例題：判斷升溫方向</summary>
+<p>若反應 $\Delta H^\circ=+80\ \text{kJ/mol}$，則 $d\ln K/dT>0$，升溫會增加 $K$。若反應 $\Delta H^\circ=-80\ \text{kJ/mol}$，則升溫會降低 $K$。先看 $\Delta H^\circ$ 的正負，再討論動力學速度，邏輯會清楚很多。</p>
+</details>
+</section>
+
+<section id="s11-4"><h2>11.4 壓力對平衡的影響——Le Chatelier 原理</h2>
+<div class="section-keypoints"><strong>本節關鍵：</strong>
+<ul>
+<li>$K$ 固定時，壓力透過 $K_y(P/P^\circ)^{\Delta\nu}$ 改變平衡組成。</li>
+<li>$\Delta\nu<0$ 時增壓有利莫耳數較少的一側。</li>
+<li>$\Delta\nu=0$ 的理想氣體反應，總壓不改變平衡組成。</li>
+</ul></div>
+
+<h3>定量推導：從 $K = K_y P^{\Delta\nu}$ 出發</h3>
+<p>雖然 $K_f$ 與壓力無關（只取決於溫度），但平衡<strong>組成</strong>會隨壓力改變——因為 $K_P$ 的定義中包含分壓，而總壓變化會改變各成分的分壓比例。</p>
+<p>由 11.2 節的關係式 (11.5b)：</p>
+<div class="eq">$$K_P = K_y \left(\frac{P}{P^\circ}\right)^{\Delta\nu} \quad\Longrightarrow\quad K_y = \frac{K_P}{(P/P^\circ)^{\Delta\nu}}$$</div>
+<p>在固定溫度下 $K_P$ 為常數，因此：</p>
+<div class="eq">$$\frac{\partial \ln K_y}{\partial \ln P} = -\Delta\nu \tag{11.9}$$</div>
+<p>這就是<strong>壓力作用下的 Le Chatelier 原理的定量形式</strong>。若 $\Delta\nu < 0$（莫耳數減少），$\partial \ln K_y / \partial \ln P > 0$——增加壓力使 $K_y$ 增大，即平衡向產物（莫耳數少的一方）移動。</p>
+
+<div class="figure">
+  <img src="../../pages/ch11_pages/ch11_page_413_c.png" alt="圖 11.3 Le Chatelier 原理示意圖" loading="lazy">
+  <figcaption><strong>圖 11.3</strong> 壓力對平衡組成的影響。對於 $N_2 + 3H_2 \rightleftharpoons 2NH_3$（$\Delta\nu = -2$），增加總壓使 NH$_3$ 的平衡莫耳分率顯著增大。$K_P$ 保持不變，但 $K_y$ 隨壓力變化。</figcaption>
+</div>
+
+<p>具體來說：</p>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li>$\Delta\nu < 0$（莫耳數減少，如 $N_2 + 3H_2 \to 2NH_3$，$\Delta\nu = -2$）：增加壓力 → 平衡向產物方向移動（莫耳數少的方向）。</li>
+<li>$\Delta\nu > 0$（莫耳數增加，如 $C + H_2O \to CO + H_2$，$\Delta\nu = +1$）：增加壓力 → 平衡向反應物方向移動。</li>
+<li>$\Delta\nu = 0$：壓力不影響平衡組成（除非在高壓下 $K_\phi$ 效應顯著）。</li>
+</ul>
+
+<h3>數值範例：壓力對氨合成平衡組成的影響</h3>
+<p>考慮 $N_2(g) + 3H_2(g) \rightleftharpoons 2NH_3(g)$（$\Delta\nu = -2$）。在 673 K 下，$K_P \approx 1.6 \times 10^{-4}$（來自 van't Hoff 積分）。設起始進料為化學計量比（$N_2:H_2 = 1:3$），無 $NH_3$。定義反應進度 $\xi$（莫耳數）：</p>
+<table>
+  <caption>氨合成反應進度與莫耳分率</caption>
+  <thead><tr><th scope="col">成分</th><th scope="col">起始 (mol)</th><th scope="col">平衡 (mol)</th><th scope="col">莫耳分率 $y_i$</th></tr></thead>
+  <tbody>
+    <tr><td>$N_2$</td><td>1</td><td>$1 - \xi$</td><td>$(1-\xi)/(4-2\xi)$</td></tr>
+    <tr><td>$H_2$</td><td>3</td><td>$3 - 3\xi$</td><td>$(3-3\xi)/(4-2\xi)$</td></tr>
+    <tr><td>$NH_3$</td><td>0</td><td>$2\xi$</td><td>$2\xi/(4-2\xi)$</td></tr>
+    <tr><td><strong>總計</strong></td><td>4</td><td>$4 - 2\xi$</td><td>1</td></tr>
+  </tbody>
+</table>
+<p>代入 $K_P$ 表達式：</p>
+<div class="eq">$$K_P = \frac{(y_{NH_3}P)^2}{(y_{N_2}P)(y_{H_2}P)^3} = \frac{y_{NH_3}^2}{y_{N_2}\,y_{H_2}^3} \cdot \frac{1}{P^2} = \frac{16\,\xi^2\,(4-2\xi)^2}{(1-\xi)(3-3\xi)^3\,P^2}$$</div>
+<p>在 $P = 1$ bar 下求解 $\xi$ 得 $\xi \approx 0.024$——NH$_3$ 莫耳分率僅 $2\xi/(4-2\xi) \approx 1.2\%$。</p>
+<p>在 $P = 300$ bar 下：因 $K_P$ 包含 $P^{-2}$ 因子，平衡轉化率大幅提升，求解得 $\xi \approx 0.57$——NH$_3$ 莫耳分率 $\approx 40\%$。</p>
+<div class="eq">$$\frac{y_{NH_3}(300\ \text{bar})}{y_{NH_3}(1\ \text{bar})} \approx \frac{40\%}{1.2\%} \approx 33$$</div>
+<p>這就是 Haber 法為何在 150–300 atm 高壓下操作的熱力學原因——壓力使平衡產率提高了一個數量級以上。</p>
+
+<h3>惰性氣體的影響</h3>
+<p>惰性氣體（不參與反應的氣體）的加入會稀釋反應混合物。在恒壓下加入惰性氣體，等效於降低所有反應物的分壓，使平衡向 $\Delta\nu \neq 0$ 的方向移動：</p>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li>若 $\Delta\nu > 0$（莫耳數增加）：加入惰性氣體有利於產物（稀釋效應等於降壓）。</li>
+<li>若 $\Delta\nu < 0$（莫耳數減少）：加入惰性氣體不利於產物。因此在氨合成中，進料氣必須經過純化去除 Ar 和 CH$_4$ 等惰性雜質。</li>
+</ul>
+
+<div class="callout-warn"><strong>⚡ Le Chatelier 原理不是定量的——它只告訴你方向。</strong>要知道壓力（或溫度）變化 10 倍時產率改變多少，你必須實際求解平衡方程式。但 Le Chatelier 原理告訴你往哪個方向調整操作條件——這在製程故障排除中極其有用。</div>
+<div class="callout"><strong>💡 固壓加惰性氣體等效於稀釋：</strong>若保持總壓不變而加入 Ar，反應氣體的分壓會下降；若保持體積不變而加入 Ar，反應氣體分壓可近似不變。討論惰性氣體前必須先說清楚操作約束。</div>
+<details class="example"><summary>微型例題：判斷壓力對平衡的方向</summary>
+<p>對 $\text{CO}+\text{H}_2\text{O}\rightleftharpoons\text{CO}_2+\text{H}_2$，$\Delta\nu=0$，理想氣體下改變總壓不會改變平衡組成。對 $\text{SO}_2+\tfrac12\text{O}_2\rightleftharpoons\text{SO}_3$，$\Delta\nu=-0.5$，增壓有利於 $\text{SO}_3$。</p>
+</details>
+</section>
+
+<section id="s11-5"><h2>11.5 反應平衡作為焓與熵的妥協</h2>
+<div class="section-keypoints"><strong>本節關鍵：</strong>
+<ul>
+<li>$\Delta G^\circ=\Delta H^\circ-T\Delta S^\circ$ 決定反應在標準態下的平衡傾向。</li>
+<li>低溫常由焓項主導，高溫常由熵項放大。</li>
+<li>冶金反應常利用高溫讓熵增反應變得有利。</li>
+</ul></div>
+<p>$\Delta G^\circ = \Delta H^\circ - T\Delta S^\circ$ 揭示了反應平衡的本質是<strong>焓和熵之間的競爭</strong>：</p>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li><strong>低溫：</strong>$T\Delta S^\circ$ 項很小 → $\Delta G^\circ \approx \Delta H^\circ$。放熱反應（$\Delta H^\circ < 0$）有利。</li>
+<li><strong>高溫：</strong>$T\Delta S^\circ$ 項變得重要。熵增反應（$\Delta S^\circ > 0$，氣體莫耳數增加的反應）在高溫下變得有利。</li>
+</ul>
+<p>這種競爭解釋了為什麼某些反應在低溫下自發但高溫下不自發（或相反）。</p>
+
+<div class="figure">
+  <img src="../../pages/ch11_pages/ch11_page_414_c.png" alt="圖 11.4 平衡組成與溫度的關係" loading="lazy">
+  <figcaption><strong>圖 11.4</strong> 平衡組成隨溫度的變化。放熱反應（左側）低溫有利產物；吸熱反應（右側）高溫有利產物。曲線形狀反映 $\Delta H^\circ$ 與 $T\Delta S^\circ$ 的競爭。</figcaption>
+</div>
+
+<h3>範例 1——水煤氣反應（已討論）</h3>
+<p>$\Delta H^\circ = +131\ \text{kJ/mol}$，$\Delta S^\circ = +134\ \text{J/mol·K}$。在 298 K：$\Delta G^\circ = +91\ \text{kJ/mol}$——不自發。在 1200 K：$\Delta G^\circ \approx 131 - 1200 \times 0.134 = -30\ \text{kJ/mol}$——高度自發。這個反應是高溫煤氣化製程的核心。</p>
+
+<h3>範例 2——氨合成（Haber 法）</h3>
+<div class="eq">$$N_2(g) + 3H_2(g) \rightleftharpoons 2NH_3(g)$$</div>
+<p>$\Delta H^\circ = -92\ \text{kJ/mol}$（強放熱），$\Delta S^\circ = -198\ \text{J/mol·K}$（4 mol 氣體 → 2 mol 氣體，熵大減）。</p>
+<table>
+  <caption>Haber 法氨合成中焓項與熵項的競爭</caption>
+  <thead><tr><th scope="col">$T$ (K)</th><th scope="col">$\Delta H^\circ$ (kJ/mol)</th><th scope="col">$T\Delta S^\circ$ (kJ/mol)</th><th scope="col">$\Delta G^\circ$ (kJ/mol)</th><th scope="col">$K$</th></tr></thead>
+  <tbody>
+    <tr><td>298</td><td>-92</td><td>-59</td><td>-33</td><td>$6.8 \times 10^5$</td></tr>
+    <tr><td>500</td><td>-92</td><td>-99</td><td>+7</td><td>$1.8 \times 10^{-1}$</td></tr>
+    <tr><td>700</td><td>-92</td><td>-139</td><td>+47</td><td>$3.2 \times 10^{-4}$</td></tr>
+    <tr><td>1000</td><td>-92</td><td>-198</td><td>+106</td><td>$2.9 \times 10^{-6}$</td></tr>
+  </tbody>
+</table>
+<p>注意 $T\Delta S^\circ$ 項隨溫度線性增長。在 298 K，$|\Delta H^\circ| > |T\Delta S^\circ|$ → $\Delta G^\circ < 0$。但 $T\Delta S^\circ$ 項的符號與 $\Delta H^\circ$ 相同（均為負），因此 $\Delta G^\circ$ 隨溫度升高從負變正——這是「放熱+熵減」反應的典型特徵。低溫有利於氨合成，但動力學太慢；工業上在 400–500°C 和 150–300 atm 下操作是對熱力學和動力學的折衷。</p>
+
+<h3>範例 3——Boudouard 反應</h3>
+<div class="eq">$$\text{C}(s) + \text{CO}_2(g) \rightleftharpoons 2\text{CO}(g)$$</div>
+<p>$\Delta H^\circ = +172\ \text{kJ/mol}$（強吸熱），$\Delta S^\circ = +176\ \text{J/mol·K}$（1 mol 氣體 → 2 mol 氣體，熵增）。這是一個在冶金熱力學中極其重要的反應——它在高爐和高溫氣化爐中控制著 CO/CO$_2$ 的比例。</p>
+<p>計算不同溫度下的 $\Delta G^\circ$：</p>
+<table>
+  <caption>Boudouard 反應中高溫熵項對 $\Delta G^\circ$ 的影響</caption>
+  <thead><tr><th scope="col">$T$ (K)</th><th scope="col">$\Delta H^\circ$ (kJ/mol)</th><th scope="col">$T\Delta S^\circ$ (kJ/mol)</th><th scope="col">$\Delta G^\circ$ (kJ/mol)</th><th scope="col">$K = P_{\text{CO}}^2/(P^\circ P_{\text{CO}_2})$</th></tr></thead>
+  <tbody>
+    <tr><td>298</td><td>+172</td><td>+52</td><td>+120</td><td>$8.8 \times 10^{-22}$</td></tr>
+    <tr><td>800</td><td>+172</td><td>+141</td><td>+31</td><td>$9.3 \times 10^{-3}$</td></tr>
+    <tr><td>1000</td><td>+172</td><td>+176</td><td>-4</td><td>1.6</td></tr>
+    <tr><td>1200</td><td>+172</td><td>+211</td><td>-39</td><td>$5.0 \times 10^1$</td></tr>
+  </tbody>
+</table>
+<p>在低於 ~975 K 時，$\Delta G^\circ > 0$——CO$_2$ 是穩定物種，碳不會與 CO$_2$ 反應。在高於 ~975 K 時，$\Delta G^\circ < 0$——CO 成為主要氣相物種。這個轉折溫度（$T_{\text{轉換}} = \Delta H^\circ/\Delta S^\circ \approx 172,\!000/176 \approx 977$ K）是高爐操作的核心：在高爐下部（$T > 1000$ K），CO 還原鐵礦石；在高爐上部（$T < 700$ K），CO 相對 CO$_2$ 不穩定，CO 傾向於歧化回 C 和 CO$_2$。</p>
+
+<h3>範例 4——金屬氧化物的還原</h3>
+<p>許多金屬氧化物被 CO 還原的反應（如 $FeO + CO \rightleftharpoons Fe + CO_2$）同樣體現了焓–熵妥協。第十二章（Ellingham 圖）將這些關係以圖形方式呈現，其中 $\Delta G^\circ$ 對 $T$ 的斜率直接反映了 $\Delta S^\circ$。</p>
+
+<div class="callout"><strong>💡 「焓–熵妥協」是理解所有高溫化學製程的鑰匙。</strong>煉鐵高爐中，CO 還原鐵礦石（$\text{Fe}_2\text{O}_3 + 3\text{CO} \to 2\text{Fe} + 3\text{CO}_2$）在低溫下熱力學極有利（$\Delta H^\circ \ll 0$），但動力學太慢——所以我們在高溫操作，犧牲一些熱力學驅動力來換取速度。這是化學工程中無所不在的取捨。第十二章的 Ellingham 圖將為您提供一個直觀的 $\Delta G^\circ$-$T$ 圖解，快速比較不同反應的熱力學。</div>
+<div class="callout-warn"><strong>⚠️ 轉折溫度不是製程溫度：</strong>$T=\Delta H^\circ/\Delta S^\circ$ 只是 $\Delta G^\circ=0$ 的標準態估算。實際爐內還要看氣體比例、總壓、活度、傳熱與反應速率，不能把它直接等同於最佳操作溫度。</div>
+
+<h3>跨章節鏈接：Ellingham 圖（第十二章）</h3>
+<p>第 12 章將介紹 Ellingham 圖——$\Delta G^\circ$ 對 $T$ 的作圖，其中每條直線的斜率 $= -\Delta S^\circ$。當兩個反應的 Ellingham 線交叉時，就對應於主導反應的轉變。Boudouard 反應與金屬氧化反應的 Ellingham 線交叉點決定了金屬還原所需的最低溫度。這是高爐、直接還原鐵（DRI）和許多高溫冶金製程的理論基礎。</p>
+<details class="example"><summary>微型例題：估算反應的轉折溫度</summary>
+<p>若某反應 $\Delta H^\circ=120\ \text{kJ/mol}$、$\Delta S^\circ=100\ \text{J/mol·K}$，則 $\Delta G^\circ=0$ 的估算溫度為 $T=120000/100=1200\ \text{K}$。低於此溫度時 $\Delta G^\circ>0$，高於此溫度時 $\Delta G^\circ<0$，但實際平衡還需再納入反應商 $Q$。</p>
+</details>
+</section>
+
+<section id="s11-6"><h2>11.6–11.7 應用：SO₂/SO₃ 與 H₂O/H₂/CO₂/CO 系統</h2>
+<div class="section-keypoints"><strong>本節關鍵：</strong>
+<ul>
+<li>工業反應設計要同時滿足熱力學平衡與足夠快的動力學。</li>
+<li>SO₂ 氧化是放熱且氣體莫耳數減少的反應，低溫與增壓有利平衡。</li>
+<li>水煤氣位移反應 $\Delta\nu=0$，壓力效應小，進料比與溫度更關鍵。</li>
+</ul></div>
+
+<h3>SO₂ 氧化——接觸法製硫酸</h3>
+<div class="eq">$$\text{SO}_2(g) + \tfrac{1}{2}\text{O}_2(g) \rightleftharpoons \text{SO}_3(g)$$</div>
+<p>$\Delta H^\circ = -99\ \text{kJ/mol}$（放熱），$\Delta \nu_g = -1/2$（莫耳數減少）。因此：</p>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px;margin-bottom:12px">
+<li>低溫和高壓都有利於產物（$\Delta H^\circ < 0$ → 低溫 $K$ 大；$\Delta \nu_g < 0$ → 高壓產率高）</li>
+<li>但太低溫→反應太慢。工業操作溫度：400–600°C（使用 V₂O₅ 催化劑）</li>
+<li>操作壓力：1–2 atm（因為低溫下 $K$ 已經很大，不需要極高壓）</li>
+</ul>
+
+<div class="figure">
+  <img src="../../pages/ch11_pages/ch11_page_426_c.png" alt="圖 11.5 SO₂/SO₃ 平衡組成隨溫度與壓力的變化" loading="lazy">
+  <figcaption><strong>圖 11.5</strong> SO₂ 氧化反應的平衡組成。曲線顯示 SO₃ 平衡產率隨溫度升高而降低（放熱反應的特徵）。在低溫下接近 100% 轉化，但需要催化劑來克服動力學障礙。</figcaption>
+</div>
+
+<h3>完整工作例題：SO₂ 氧化——從 K 到平衡組成的計算</h3>
+<p><strong>問題：</strong>在 $T = 700$ K 和 $P = 1$ bar 下，SO₂ 氧化的平衡常數 $K_P \approx 140$。若起始混合物為 2 mol SO₂、1 mol O₂ 和 2 mol N₂（惰性），求平衡時 SO₃ 的莫耳分率和 SO₂ 的轉化率。</p>
+
+<p><strong>解答：</strong></p>
+<p><strong>步驟 1：建立反應進度表</strong></p>
+<table>
+  <caption>SO₂ 氧化反應進度與平衡莫耳分率</caption>
+  <thead><tr><th scope="col">成分</th><th scope="col">起始 (mol)</th><th scope="col">平衡 (mol)</th><th scope="col">莫耳分率 $y_i$</th></tr></thead>
+  <tbody>
+    <tr><td>SO₂</td><td>2</td><td>$2 - \xi$</td><td>$(2-\xi)/(5 - 0.5\xi)$</td></tr>
+    <tr><td>O₂</td><td>1</td><td>$1 - 0.5\xi$</td><td>$(1-0.5\xi)/(5 - 0.5\xi)$</td></tr>
+    <tr><td>SO₃</td><td>0</td><td>$\xi$</td><td>$\xi/(5 - 0.5\xi)$</td></tr>
+    <tr><td>N₂</td><td>2</td><td>2</td><td>$2/(5 - 0.5\xi)$</td></tr>
+    <tr><td><strong>總計</strong></td><td>5</td><td>$5 - 0.5\xi$</td><td>1</td></tr>
+  </tbody>
+</table>
+<p>注意 $\Delta\nu = 1 - 1 - 0.5 = -0.5$，因此總莫耳數由 5 減至 $5 - 0.5\xi$。</p>
+
+<p><strong>步驟 2：寫出 $K_P$ 表達式</strong></p>
+<div class="eq">$$K_P = \frac{(y_{SO_3}P)^1}{(y_{SO_2}P)^1 (y_{O_2}P)^{0.5}} = \frac{y_{SO_3}}{y_{SO_2}\,y_{O_2}^{0.5}} \cdot \frac{1}{P^{0.5}}$$</div>
+<p>代入 $P = 1$ bar：</p>
+<div class="eq">$$140 = \frac{\xi/(5 - 0.5\xi)}{[(2-\xi)/(5 - 0.5\xi)] \cdot [(1-0.5\xi)/(5 - 0.5\xi)]^{0.5}}$$</div>
+<p>簡化：</p>
+<div class="eq">$$140 = \frac{\xi}{(2-\xi)} \cdot \frac{(5 - 0.5\xi)^{0.5}}{(1-0.5\xi)^{0.5}}$$</div>
+
+<p><strong>步驟 3：數值求解</strong></p>
+<p>嘗試 $\xi = 1.8$ mol：$140\ \text{vs}\ \frac{1.8}{0.2} \cdot \frac{\sqrt{5 - 0.9}}{\sqrt{1 - 0.9}} = 9 \cdot \frac{\sqrt{4.1}}{\sqrt{0.1}} = 9 \times \frac{2.025}{0.316} = 57.7$（偏小）。</p>
+<p>嘗試 $\xi = 1.9$ mol：$140\ \text{vs}\ \frac{1.9}{0.1} \cdot \frac{\sqrt{5 - 0.95}}{\sqrt{1 - 0.95}} = 19 \cdot \frac{\sqrt{4.05}}{\sqrt{0.05}} = 19 \times \frac{2.012}{0.224} = 170.7$（偏大）。</p>
+<p>迭代得 $\xi \approx 1.87$ mol。</p>
+
+<p><strong>步驟 4：計算結果</strong></p>
+<p>平衡莫耳分率：</p>
+<div class="eq">$$y_{SO_3} = \frac{1.87}{5 - 0.5 \times 1.87} = \frac{1.87}{4.065} \approx 0.460\ (46.0\%)$$</div>
+<div class="eq">$$y_{SO_2} = \frac{2 - 1.87}{4.065} \approx 0.032\ (3.2\%)$$</div>
+<div class="eq">$$y_{O_2} = \frac{1 - 0.5 \times 1.87}{4.065} \approx 0.016\ (1.6\%)$$</div>
+<div class="eq">$$y_{N_2} = \frac{2}{4.065} \approx 0.492\ (49.2\%)$$</div>
+<p>SO₂ 轉化率：$\displaystyle \frac{1.87}{2} \times 100\% \approx 93.5\%$。</p>
+
+<p><strong>步驟 5：討論</strong></p>
+<p>在 700 K 和 1 bar 下，即使有惰性 N₂ 稀釋（實際硫酸廠使用的空氣就是 21% O₂ + 79% N₂），SO₂ 轉化率仍高達 93.5%。實際工業操作使用兩個催化床：第一床在較高溫度（≈600°C）達到約 90–95% 轉化率，然後氣體降溫進入第二床在更低溫度（≈420°C）進一步轉化至 99%+。這是利用放熱反應在低溫下 $K$ 更大的原理。</p>
+
+<div class="callout"><strong>💡 多段轉化：優化熱力學與動力學的折衷。</strong>接觸法製硫酸使用 3–4 個催化床，每個床層之間設置熱交換器。第一床在高溫高轉化率（動力學快但熱力學受限），後續床在低溫高轉化率（熱力學有利但動力學慢——需要前面的中間產物支撐）。這是熱力學與動力學結合的經典工程範例。</div>
+<div class="callout-warn"><strong>⚠️ 催化劑不改變平衡常數：</strong>V₂O₅ 讓 SO₂/SO₃ 更快接近平衡，但不會提高 $K$。若熱力學平衡產率已低，換催化劑只能縮短到達平衡的時間，不能突破平衡限制。</div>
+
+<h3>水煤氣位移反應（Water–Gas Shift Reaction）</h3>
+<div class="eq">$$\text{CO}(g) + \text{H}_2\text{O}(g) \rightleftharpoons \text{CO}_2(g) + \text{H}_2(g)$$</div>
+<p>$\Delta H^\circ = -41\ \text{kJ/mol}$，$\Delta \nu_g = 0$。這個反應在製氫工業中至關重要——它將 CO 轉化為 CO₂，同時產生更多的 H₂。$\Delta \nu_g = 0$ 意味著壓力不影響平衡，只需調整溫度和進料比（通常使用過量蒸汽來推動平衡向右）。</p>
+
+<h3>完整工作例題：水煤氣位移反應</h3>
+<p><strong>問題：</strong>水煤氣位移反應在 600 K 的 $K_P = 20$。若起始混合物為 1 mol CO、2 mol H₂O、0.5 mol CO₂ 和 0.5 mol H₂（模擬部分轉化的合成氣），求平衡時的氣體組成。</p>
+
+<p><strong>解答：</strong></p>
+<p><strong>步驟 1：反應進度表</strong></p>
+<table>
+  <caption>水煤氣位移反應進度表</caption>
+  <thead><tr><th scope="col">成分</th><th scope="col">起始 (mol)</th><th scope="col">平衡 (mol)</th></tr></thead>
+  <tbody>
+    <tr><td>CO</td><td>1</td><td>$1 - \xi$</td></tr>
+    <tr><td>H₂O</td><td>2</td><td>$2 - \xi$</td></tr>
+    <tr><td>CO₂</td><td>0.5</td><td>$0.5 + \xi$</td></tr>
+    <tr><td>H₂</td><td>0.5</td><td>$0.5 + \xi$</td></tr>
+    <tr><td><strong>總計</strong></td><td>4</td><td>4（$\Delta\nu = 0$）</td></tr>
+  </tbody>
+</table>
+<p>由於 $\Delta\nu = 0$，總莫耳數保持 4 mol 不變，莫耳分率 $y_i = n_i/4$。</p>
+
+<p><strong>步驟 2：$K_P$ 表達式</strong></p>
+<div class="eq">$$K_P = \frac{(y_{CO_2}P)^1 (y_{H_2}P)^1}{(y_{CO}P)^1 (y_{H_2O}P)^1} = \frac{y_{CO_2} y_{H_2}}{y_{CO} y_{H_2O}} = \frac{n_{CO_2} n_{H_2}}{n_{CO} n_{H_2O}}$$</div>
+<p>注意 $\Delta\nu = 0$ 時 $P$ 完全消去——壓力不影響平衡。代入數值：</p>
+<div class="eq">$$20 = \frac{(0.5 + \xi)(0.5 + \xi)}{(1 - \xi)(2 - \xi)}$$</div>
+
+<p><strong>步驟 3：求解 $\xi$</strong></p>
+<div class="eq">$$20(1 - \xi)(2 - \xi) = (0.5 + \xi)^2$$</div>
+<div class="eq">$$20(2 - 3\xi + \xi^2) = 0.25 + \xi + \xi^2$$</div>
+<div class="eq">$$40 - 60\xi + 20\xi^2 = 0.25 + \xi + \xi^2$$</div>
+<div class="eq">$$19\xi^2 - 61\xi + 39.75 = 0$$</div>
+<p>解二次方程式得 $\xi \approx 0.93$ mol（另一根無物理意義）。</p>
+
+<p><strong>步驟 4：平衡組成</strong></p>
+<div class="eq">$$n_{CO} = 0.07\ \text{mol},\quad n_{H_2O} = 1.07\ \text{mol},\quad n_{CO_2} = 1.43\ \text{mol},\quad n_{H_2} = 1.43\ \text{mol}$$</div>
+<p>CO 轉化率：$0.93/1 \times 100\% = 93\%$。過量蒸汽（2:1 H₂O:CO 而非化學計量比 1:1）使轉化率從約 80% 提升至 93%。</p>
+
+<div class="callout"><strong>💡 這兩個反應展示了熱力學分析在工業中的直接應用。</strong>接觸法選擇 400–600°C 不是偶然——它是熱力學（低溫 → 高 $K$）和動力學（高溫 → 快反應）之間的最佳折衷。水煤氣位移反應使用過量蒸汽來提高 CO 轉化率——這是 Le Chatelier 原理在工業中的直接應用（增加反應物濃度 → 平衡向產物方向移動）。</div>
+
+<h3>跨章節鏈接：Ellingham 圖與高溫氣體平衡（第十二章）</h3>
+<p>本章分析的 Boudouard 反應（$C + CO_2 \rightleftharpoons 2CO$）和金屬氧化反應將在第 12 章的 Ellingham 圖中以圖形方式綜合呈現。Ellingham 圖繪製 $\Delta G^\circ$ 對 $T$ 的關係，每條線的斜率反映 $\Delta S^\circ$。Boudouard 線與金屬–金屬氧化物線的交叉點直接給出了在給定 CO/CO$_2$ 比例下金屬的還原溫度。這是冶金熱力學中最強大的圖解工具。</p>
+<details class="example"><summary>微型例題：為什麼水煤氣位移反應常用過量蒸汽？</summary>
+<p>水煤氣位移反應的 $K=(P_{CO_2}P_{H_2})/(P_{CO}P_{H_2O})$。增加 $H_2O$ 會讓反應商 $Q$ 變小；若 $Q<K$，反應向右進行，消耗更多 CO 並生成更多 H₂。這是用進料比推動平衡的典型做法。</p>
+</details>
+</section>
+
+<section id="common-mistakes"><h2>常見錯誤</h2>
+<div class="callout-warn"><strong>⚠️ 混淆 $\Delta G$ 與 $\Delta G^\circ$：</strong>$\Delta G^\circ$ 決定 $K$，但實際反應方向由 $\Delta G=\Delta G^\circ+RT\ln Q$ 決定。只看 $\Delta G^\circ$ 無法判斷任意組成下的瞬時方向。</div>
+<div class="callout-warn"><strong>⚠️ 高壓仍使用理想氣體 $K_P$：</strong>Haber 法、合成氣反應等高壓系統常需逸壓修正。若 $\phi_i$ 明顯偏離 1，應使用 $K_f$ 與逸壓係數。</div>
+<div class="callout-warn"><strong>⚠️ 把 Le Chatelier 當成定量答案：</strong>Le Chatelier 只提供方向，不能告訴你轉化率是多少。真正的產率必須由 $K$、反應進度與質量守恆方程共同求解。</div>
+<div class="callout-warn"><strong>⚠️ 忽略 $\Delta C_P$：</strong>大溫差下 $\Delta H^\circ$ 與 $\Delta S^\circ$ 都會隨溫度變化；只用 298 K 數據線性外推會讓高溫冶金判斷失準。</div>
+<div class="callout-warn"><strong>⚠️ 混用 bar、atm 與標準態：</strong>$K$ 必須無因次。寫 $K_P$ 時要使用 $(P_i/P^\circ)$，不要把有單位的分壓直接塞進平衡常數。</div>
+</section>
+
+<section id="self-check"><h2>自我檢核</h2>
+<details class="example"><summary>1. 已知 $\Delta G^\circ=+20\ \text{kJ/mol}$、$T=1000\ \text{K}$，$K$ 大約是多少？</summary>
+<p>$\ln K=-\Delta G^\circ/RT=-20000/(8.314\times1000)=-2.41$，所以 $K\approx0.09$。標準態下反應偏向反應物。</p>
+</details>
+<details class="example"><summary>2. 為什麼放熱反應升溫通常使 $K$ 下降？</summary>
+<p>由 van't Hoff 方程式 $d\ln K/dT=\Delta H^\circ/(RT^2)$，放熱反應 $\Delta H^\circ<0$，因此 $d\ln K/dT<0$，升溫會降低 $\ln K$ 與 $K$。</p>
+</details>
+<details class="example"><summary>3. 對 $\text{SO}_2+\tfrac12\text{O}_2\rightleftharpoons\text{SO}_3$，增壓有利哪一側？</summary>
+<p>$\Delta\nu=1-1-0.5=-0.5$，增壓有利氣體莫耳數較少的產物側，因此有利 $\text{SO}_3$。</p>
+</details>
+<details class="example"><summary>4. 催化劑是否能提高平衡常數？</summary>
+<p>不能。催化劑降低活化能並加快正、逆反應達到平衡的速率，但不改變 $\Delta G^\circ$，所以不改變 $K$。</p>
+</details>
+</section>
+
+<section id="extras"><h2>延伸學習</h2>
+<ul style="font-size:14px;color:var(--t2);margin-left:18px">
+<li><strong>Ellingham 圖：</strong>把 $\Delta G^\circ(T)$ 視覺化，用於判斷氧化物還原條件與 CO/CO₂ 氣氛。</li>
+<li><strong>製程設計：</strong>比較 Haber 法、接觸法與水煤氣位移反應如何在平衡與動力學之間折衷。</li>
+<li><strong>逸壓與真實氣體：</strong>延伸到 Peng-Robinson 或 virial 方程式，修正高壓反應平衡。</li>
+<li><strong>平衡求解器：</strong>將反應進度、元素守恆與 $K$ 方程組合成數值求解問題，處理多反應系統。</li>
+</ul>
+</section>
+
+<section id="summary"><h2>本章摘要</h2>
+<ol style="font-size:14px;color:var(--t2);margin-left:18px">
+<li><strong>平衡常數：</strong>$\Delta G^\circ = -RT\ln K$。$K_P = \prod (P_i/P^\circ)^{\nu_i}$。$K_f$ 使用逸壓（高壓修正）。$K_P = K_y (P/P^\circ)^{\Delta\nu}$。</li>
+<li><strong>van't Hoff 方程式：</strong>$d\ln K/dT = \Delta H^\circ/RT^2$。吸熱反應→升溫 $K$ 增大；放熱反應→升溫 $K$ 減小。積分形式 $\ln(K_2/K_1) = -(\Delta H^\circ/R)(1/T_2 - 1/T_1)$。</li>
+<li><strong>Le Chatelier（壓力）：</strong>$\partial \ln K_y / \partial \ln P = -\Delta\nu$。$\Delta\nu < 0$→增壓有利產物；$\Delta\nu > 0$→減壓有利產物；$\Delta\nu = 0$→壓力無影響。</li>
+<li><strong>焓–熵妥協：</strong>低溫 $\Delta H^\circ$ 主導；高溫 $T\Delta S^\circ$ 主導。轉折溫度 $T_{\text{轉換}} = \Delta H^\circ/\Delta S^\circ$ 決定主導機制。</li>
+<li><strong>工業應用：</strong>SO₂ 氧化（放熱+莫耳數減少→低溫高壓有利，但動力學限制→400–600°C + V₂O₅ 催化劑）。水煤氣反應（$\Delta\nu=0$→壓力不影響，調整溫度和進料比）。Boudouard 反應（吸熱+熵增→>$T_{轉換}$ 後 CO 成為主導）。</li>
+<li><strong>跨章節工具：</strong>Gibbs–Helmholtz 方程式（Ch5）→ van't Hoff；Kirchhoff 定律（Ch6）→ $\Delta H^\circ(T)$ 積分；逸壓係數（Ch8）→ 高壓 $K_f$ 修正；Ellingham 圖（Ch12）→ $\Delta G^\circ$-$T$ 圖解比較。</li>
+</ol></section>
+</main>
+<script>
+function toggleTheme(){const h=document.documentElement;const n=h.getAttribute('data-theme')==='light'?'dark':'light';h.setAttribute('data-theme',n);localStorage.setItem('theme',n);document.getElementById('tl').textContent=n==='dark'?'淺色模式':'深色模式';}
+const s=localStorage.getItem('theme')||'light';document.documentElement.setAttribute('data-theme',s);if(s==='dark')document.getElementById('tl').textContent='淺色模式';
+document.querySelector('[data-action="toggle-theme"]').addEventListener('click',toggleTheme);
+const secs=document.querySelectorAll('section[id]');const navs=document.querySelectorAll('.sn a');window.addEventListener('scroll',()=>{let c='';secs.forEach(s=>{if(window.scrollY>=s.offsetTop-80)c=s.getAttribute('id');});navs.forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+c);});});
+document.querySelectorAll('.figure img').forEach(i=>i.addEventListener('click',()=>window.open(i.src,'_blank')));
+</script>
+</body>
+</html>
